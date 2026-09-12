@@ -1,0 +1,60 @@
+from __future__ import annotations
+
+import argparse
+from pathlib import Path
+
+from .baseline import build_baseline
+from .io import read_json, write_json
+from .timetable import export_timetable
+from .validation import validate_schedule
+
+
+def _parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(prog="caa-scheduler")
+    subcommands = parser.add_subparsers(dest="command", required=True)
+
+    baseline = subcommands.add_parser("baseline", help="Build and verify a golden baseline")
+    baseline.add_argument("--config", type=Path, required=True)
+    baseline.add_argument("--repo-root", type=Path, default=Path.cwd())
+
+    validate = subcommands.add_parser("validate", help="Validate a canonical schedule")
+    validate.add_argument("canonical", type=Path)
+    validate.add_argument("--output", type=Path)
+
+    timetable = subcommands.add_parser("export-timetable", help="Export timetable JSON")
+    timetable.add_argument("canonical", type=Path)
+    timetable.add_argument("output", type=Path)
+    return parser
+
+
+def main(argv: list[str] | None = None) -> int:
+    args = _parser().parse_args(argv)
+    if args.command == "baseline":
+        result = build_baseline(args.config, args.repo_root.resolve())
+        validation = result["validation"]
+        print(f"Canonical schedule: {result['canonicalPath']}")
+        print(f"Validation: {validation['status']} ({validation['summary']['passed']}/{validation['summary']['checks']} checks)")
+        print(f"Timetable parity: {'PASS' if result['timetableParity'] else 'FAIL'}")
+        print(f"Timetable byte parity: {'PASS' if result['timetableByteParity'] else 'FAIL'}")
+        return 0 if validation["status"] == "pass" and result["timetableParity"] and result["timetableByteParity"] else 1
+
+    canonical = read_json(args.canonical)
+    if args.command == "validate":
+        report = validate_schedule(canonical)
+        if args.output:
+            write_json(args.output, report)
+        print(f"Validation: {report['status']} ({report['summary']['passed']}/{report['summary']['checks']} checks)")
+        for check in report["checks"]:
+            print(f"  {check['status'].upper():4} {check['id']}: {check['message']}")
+        return 0 if report["status"] == "pass" else 1
+
+    if args.command == "export-timetable":
+        write_json(
+            args.output,
+            export_timetable(canonical),
+            indent=1,
+            trailing_newline=False,
+        )
+        print(f"Wrote {args.output}")
+        return 0
+    return 2
