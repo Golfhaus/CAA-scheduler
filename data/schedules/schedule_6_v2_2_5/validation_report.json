@@ -2,8 +2,8 @@
   "scheduleId": "schedule_6_v2_2_5",
   "status": "pass",
   "summary": {
-    "checks": 12,
-    "passed": 12,
+    "checks": 15,
+    "passed": 15,
     "failed": 0
   },
   "metrics": {
@@ -50,6 +50,16 @@
       "message": "Every departure and arrival uses 24-hour HH:MM"
     },
     {
+      "id": "operational_times",
+      "status": "pass",
+      "message": "Every leg has an ordered operational minute interval"
+    },
+    {
+      "id": "city_source_order",
+      "status": "pass",
+      "message": "City source order is complete and unique"
+    },
+    {
       "id": "route_identity",
       "status": "pass",
       "message": "Each route maps to exactly one line, fleet, and day"
@@ -73,6 +83,11 @@
       "id": "connection_window",
       "status": "pass",
       "message": "Connection window is 30-240 minutes"
+    },
+    {
+      "id": "gate_plan_cities",
+      "status": "pass",
+      "message": "Every forced stand split references a known city"
     }
   ]
 }

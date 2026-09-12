@@ -77,6 +77,37 @@ def validate_schedule(canonical: dict[str, Any]) -> dict[str, Any]:
         else f"Invalid times on legs: {bad_times[:20]}",
     )
 
+    bad_operational_times = [
+        leg.get("id")
+        for leg in legs
+        if not isinstance(leg.get("departureMinute"), (int, float))
+        or not isinstance(leg.get("arrivalMinute"), (int, float))
+        or not 0 <= leg["departureMinute"] < 1440
+        or not leg["departureMinute"] < leg["arrivalMinute"] < 2880
+    ]
+    _check(
+        checks,
+        "operational_times",
+        not bad_operational_times,
+        "Every leg has an ordered operational minute interval"
+        if not bad_operational_times
+        else f"Invalid operational times on legs: {bad_operational_times[:20]}",
+    )
+
+    source_orders = [city.get("sourceOrder") for city in cities]
+    duplicate_source_orders = _duplicates(source_orders)
+    valid_source_order = not duplicate_source_orders and all(
+        isinstance(value, int) and value >= 0 for value in source_orders
+    )
+    _check(
+        checks,
+        "city_source_order",
+        valid_source_order,
+        "City source order is complete and unique"
+        if valid_source_order
+        else f"Invalid or duplicate city source positions: {duplicate_source_orders[:20]}",
+    )
+
     route_attributes: defaultdict[int, set[tuple[Any, Any, Any]]] = defaultdict(set)
     route_legs: defaultdict[int, list[dict[str, Any]]] = defaultdict(list)
     for leg in legs:
@@ -153,6 +184,17 @@ def validate_schedule(canonical: dict[str, Any]) -> dict[str, Any]:
         f"Connection window is {minimum}-{maximum} minutes"
         if valid_window
         else "Connection window must contain nonnegative integer bounds with minimum <= maximum",
+    )
+
+    forced_splits = canonical.get("gatePlan", {}).get("forcedStandSplits", {})
+    unknown_gate_cities = sorted(set(forced_splits) - set(city_codes))
+    _check(
+        checks,
+        "gate_plan_cities",
+        not unknown_gate_cities,
+        "Every forced stand split references a known city"
+        if not unknown_gate_cities
+        else f"Unknown gate-plan cities: {unknown_gate_cities}",
     )
 
     passed = sum(check["status"] == "pass" for check in checks)

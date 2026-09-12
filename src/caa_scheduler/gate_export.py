@@ -1,0 +1,72 @@
+from __future__ import annotations
+
+from typing import Any
+
+from .gates import (
+    apply_forced_stand_splits,
+    assign_gates,
+    build_claims,
+    peak_demand,
+    serialize_assignments,
+)
+
+
+FLEET_COLORS = {
+    "MAX9": "#e3b3a3",
+    "CRJ900": "#aec4dc",
+    "CRJ700": "#a9cdb2",
+    "CRJ200": "#e8cd93",
+}
+
+DEFAULT_CAPACITY = {
+    "hub": (16, 8),
+    "focus_city": (6, 4),
+    "destination": (2, 2),
+    "unknown": (2, 2),
+}
+
+
+def _capacity(city: dict[str, Any]) -> tuple[int, int]:
+    default_gates, default_stands = DEFAULT_CAPACITY[city["role"]]
+    return (
+        city["gateAllocationOverride"]
+        if city["gateAllocationOverride"] is not None
+        else default_gates,
+        city["standAllocationOverride"]
+        if city["standAllocationOverride"] is not None
+        else default_stands,
+    )
+
+
+def export_gate_schedule(canonical: dict[str, Any]) -> dict[str, Any]:
+    gate_plan = canonical["gatePlan"]
+    forced = {
+        code: set(labels)
+        for code, labels in gate_plan.get("forcedStandSplits", {}).items()
+    }
+    cities = []
+    for city in sorted(canonical["cities"], key=lambda item: item["sourceOrder"]):
+        if not city["active"]:
+            continue
+        gates, stands = _capacity(city)
+        claims = build_claims(canonical["legs"], city["code"])
+        if city["code"] in forced:
+            claims = apply_forced_stand_splits(claims, forced[city["code"]])
+        assignments = assign_gates(claims, n_gates=gates)
+        cities.append(
+            {
+                "code": city["code"],
+                "name": city["displayName"],
+                "isHub": city["role"] == "hub",
+                "isFocusCity": city["role"] == "focus_city",
+                "nGates": gates,
+                "nStands": stands,
+                "peakUsed": peak_demand(claims),
+                "claims": serialize_assignments(assignments, gates),
+            }
+        )
+    return {
+        "label": gate_plan["label"],
+        "fleetColors": FLEET_COLORS,
+        "cities": cities,
+    }

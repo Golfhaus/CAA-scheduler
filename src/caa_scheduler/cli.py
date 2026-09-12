@@ -4,6 +4,7 @@ import argparse
 from pathlib import Path
 
 from .baseline import build_baseline
+from .gate_export import export_gate_schedule
 from .io import read_json, write_json
 from .timetable import export_timetable
 from .validation import validate_schedule
@@ -24,6 +25,10 @@ def _parser() -> argparse.ArgumentParser:
     timetable = subcommands.add_parser("export-timetable", help="Export timetable JSON")
     timetable.add_argument("canonical", type=Path)
     timetable.add_argument("output", type=Path)
+
+    gates = subcommands.add_parser("export-gates", help="Export gate JSON")
+    gates.add_argument("canonical", type=Path)
+    gates.add_argument("output", type=Path)
     return parser
 
 
@@ -36,7 +41,15 @@ def main(argv: list[str] | None = None) -> int:
         print(f"Validation: {validation['status']} ({validation['summary']['passed']}/{validation['summary']['checks']} checks)")
         print(f"Timetable parity: {'PASS' if result['timetableParity'] else 'FAIL'}")
         print(f"Timetable byte parity: {'PASS' if result['timetableByteParity'] else 'FAIL'}")
-        return 0 if validation["status"] == "pass" and result["timetableParity"] and result["timetableByteParity"] else 1
+        print(f"Gate parity: {'PASS' if result['gateParity'] else 'FAIL'}")
+        print(f"Gate byte parity: {'PASS' if result['gateByteParity'] else 'FAIL'}")
+        return 0 if (
+            validation["status"] == "pass"
+            and result["timetableParity"]
+            and result["timetableByteParity"]
+            and result["gateParity"]
+            and result["gateByteParity"]
+        ) else 1
 
     canonical = read_json(args.canonical)
     if args.command == "validate":
@@ -52,6 +65,15 @@ def main(argv: list[str] | None = None) -> int:
         write_json(
             args.output,
             export_timetable(canonical),
+            indent=1,
+            trailing_newline=False,
+        )
+        print(f"Wrote {args.output}")
+        return 0
+    if args.command == "export-gates":
+        write_json(
+            args.output,
+            export_gate_schedule(canonical),
             indent=1,
             trailing_newline=False,
         )
