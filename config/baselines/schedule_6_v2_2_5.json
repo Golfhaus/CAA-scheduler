@@ -10,10 +10,17 @@
     "minimum": 30,
     "maximum": 240
   },
+  "gatePlan": {
+    "label": "Schedule 6, Version 2.2.5",
+    "forcedStandSplits": {
+      "BHM": ["103 -> 103"]
+    }
+  },
   "inputs": {
     "workbook": "tests/fixtures/schedule_6_v2_2_5/source/Schedule_6__Version_2_2_5.xlsx",
     "cityInformation": "tests/fixtures/schedule_6_v2_2_5/source/city_information_v2.csv",
-    "expectedTimetable": "tests/fixtures/schedule_6_v2_2_5/expected/schedule_6_v2_2_5.json"
+    "expectedTimetable": "tests/fixtures/schedule_6_v2_2_5/expected/schedule_6_v2_2_5.json",
+    "expectedGate": "tests/fixtures/schedule_6_v2_2_5/expected/gate_sked6_v2_2_5.json"
   },
   "outputs": {
     "directory": "data/schedules/schedule_6_v2_2_5"

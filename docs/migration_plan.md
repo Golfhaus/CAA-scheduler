@@ -2,6 +2,8 @@
 
 ## 0.1 — Golden schedule foundation
 
+Status: complete.
+
 - Import Schedule 6 v2.2.5 from the `Routings` worksheet.
 - Pin the corresponding city-information snapshot.
 - Generate canonical schedule JSON.
@@ -10,6 +12,8 @@
 - Run the complete pipeline in GitHub Actions.
 
 ## 0.2 — Gate-engine consolidation
+
+Status: complete.
 
 - Move `build_claims`, cyclical overlap handling, waypoint splitting, and gate assignment into one module.
 - Remove the duplicated implementations in the current chart and JSON scripts.

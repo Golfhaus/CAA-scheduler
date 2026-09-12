@@ -3,7 +3,7 @@
   "$id": "https://coastal-american.example/schemas/canonical_schedule.schema.json",
   "title": "Coastal American Airways canonical schedule",
   "type": "object",
-  "required": ["schemaVersion", "schedule", "provenance", "cities", "legs"],
+  "required": ["schemaVersion", "schedule", "provenance", "gatePlan", "cities", "legs"],
   "properties": {
     "schemaVersion": { "const": "1.0.0" },
     "schedule": {
@@ -33,7 +33,24 @@
       "required": ["workbook", "cityInformation"],
       "properties": {
         "workbook": { "$ref": "#/$defs/workbookSource" },
-        "cityInformation": { "$ref": "#/$defs/fileSource" }
+        "cityInformation": { "$ref": "#/$defs/fileSource" },
+        "gateTimingBaseline": { "$ref": "#/$defs/fileSource" }
+      }
+    },
+    "gatePlan": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["label", "forcedStandSplits"],
+      "properties": {
+        "label": { "type": "string", "minLength": 1 },
+        "forcedStandSplits": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": { "type": "string", "minLength": 1 },
+            "uniqueItems": true
+          }
+        }
       }
     },
     "cities": {
@@ -75,7 +92,7 @@
       "type": "object",
       "additionalProperties": false,
       "required": [
-        "code", "name", "group", "role", "active", "timezone",
+        "code", "name", "displayName", "sourceOrder", "group", "role", "active", "timezone",
         "hubAssignments", "maintenanceBase", "gateAllocationOverride",
         "standAllocationOverride", "latitude", "longitude",
         "runwayLengthFeet", "elevationFeet"
@@ -83,6 +100,8 @@
       "properties": {
         "code": { "type": "string", "pattern": "^[A-Z0-9]{3,4}$" },
         "name": { "type": "string", "minLength": 1 },
+        "displayName": { "type": "string", "minLength": 1 },
+        "sourceOrder": { "type": "integer", "minimum": 0 },
         "group": { "$ref": "#/$defs/nullableString" },
         "role": { "enum": ["hub", "focus_city", "destination", "unknown"] },
         "active": { "type": "boolean" },
@@ -106,7 +125,8 @@
       "additionalProperties": false,
       "required": [
         "id", "route", "line", "fleet", "day", "sequenceWithinRoute",
-        "pairing", "flight", "origin", "destination", "departure", "arrival"
+        "pairing", "flight", "origin", "destination", "departure", "arrival",
+        "departureMinute", "arrivalMinute"
       ],
       "properties": {
         "id": { "type": "string", "minLength": 1 },
@@ -120,7 +140,9 @@
         "origin": { "type": "string", "pattern": "^[A-Z0-9]{3,4}$" },
         "destination": { "type": "string", "pattern": "^[A-Z0-9]{3,4}$" },
         "departure": { "$ref": "#/$defs/time" },
-        "arrival": { "$ref": "#/$defs/time" }
+        "arrival": { "$ref": "#/$defs/time" },
+        "departureMinute": { "type": "number", "minimum": 0, "exclusiveMaximum": 1440 },
+        "arrivalMinute": { "type": "number", "minimum": 0, "exclusiveMaximum": 2880 }
       }
     }
   },

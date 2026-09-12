@@ -2,9 +2,9 @@
 
 CAA Scheduler is the migration target for Coastal American Airways schedule construction. It moves the durable schedule state and deterministic processing out of an LLM conversation and into version-controlled code and data.
 
-## Milestone 0.1
+## Milestone 0.2
 
-The first milestone freezes Schedule 6 v2.2.5 as a golden baseline and proves this pipeline:
+The migration baseline now proves this pipeline:
 
 ```text
 v2.2.5 workbook + pinned city data
@@ -12,6 +12,8 @@ v2.2.5 workbook + pinned city data
     -> validation report
     -> timetable JSON
     -> exact comparison with the published v2.2.5 timetable data
+    -> gate assignment JSON
+    -> exact comparison with the published v2.2.5 gate data
 ```
 
 The workbook remains a source for this one-time migration and will later become an export. The canonical JSON is the authoritative schedule representation going forward.
@@ -29,6 +31,7 @@ This writes:
 
 - `data/schedules/schedule_6_v2_2_5/canonical_schedule.json`
 - `data/schedules/schedule_6_v2_2_5/timetable.json`
+- `data/schedules/schedule_6_v2_2_5/gates.json`
 - `data/schedules/schedule_6_v2_2_5/validation_report.json`
 
 Run the regression tests with:
@@ -37,9 +40,18 @@ Run the regression tests with:
 python -m unittest discover -s tests -v
 ```
 
+Either consumer file can also be rebuilt directly from canonical JSON:
+
+```bash
+python -m caa_scheduler export-timetable \
+  data/schedules/schedule_6_v2_2_5/canonical_schedule.json timetable.json
+python -m caa_scheduler export-gates \
+  data/schedules/schedule_6_v2_2_5/canonical_schedule.json gates.json
+```
+
 ## Current boundary
 
-Milestone 0.1 validates the canonical structure, city coverage, identifier integrity, time formatting, and route continuity. The complete operating-rule validator, gate export parity, schedule construction engine, and web console follow in later milestones.
+Milestone 0.2 consolidates the formerly duplicated gate implementations into one tested engine and reproduces the published v2.2.5 timetable and gate files byte for byte. The complete operating-rule validator, schedule construction engine, and web console follow in later milestones.
 
 ## Repository visibility
 
