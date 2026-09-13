@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#092a53">
+    <meta name="description" content="Coastal American Airways schedule operations console">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="styles.css">
+    <title>CAA Scheduler</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#workspace">Skip to schedule data</a>
+    <header class="topbar">
+      <a class="brand" href="#overview" aria-label="CAA Scheduler overview">
+        <span class="brand-mark" aria-hidden="true">CAA</span>
+        <span>
+          <strong>Schedule Control</strong>
+          <small>Coastal American Airways</small>
+        </span>
+      </a>
+      <div class="schedule-control">
+        <label for="schedule-select">Schedule</label>
+        <select id="schedule-select" disabled>
+          <option>Loading…</option>
+        </select>
+      </div>
+    </header>
+
+    <nav class="tabbar" aria-label="Schedule views">
+      <button class="tab is-active" type="button" data-tab="overview" aria-selected="true">Overview</button>
+      <button class="tab" type="button" data-tab="routings" aria-selected="false">Routings</button>
+      <button class="tab" type="button" data-tab="validation" aria-selected="false">
+        Validation <span class="tab-count" id="validation-count">—</span>
+      </button>
+      <button class="tab" type="button" data-tab="timetable" aria-selected="false">Timetable</button>
+      <button class="tab" type="button" data-tab="gates" aria-selected="false">Gates</button>
+    </nav>
+
+    <main id="workspace" tabindex="-1">
+      <section class="loading-state" id="loading-state" aria-live="polite">
+        <span class="loading-mark" aria-hidden="true"></span>
+        <p>Loading the pinned schedule…</p>
+      </section>
+
+      <section class="error-state" id="error-state" hidden>
+        <p class="eyebrow">Data unavailable</p>
+        <h1>The schedule console could not load.</h1>
+        <p id="error-message"></p>
+        <button type="button" id="retry-button">Try again</button>
+      </section>
+
+      <div id="app" hidden>
+        <section class="view is-active" id="view-overview" data-view="overview" aria-labelledby="overview-title">
+          <div class="page-heading">
+            <div>
+              <p class="eyebrow">Migration baseline</p>
+              <h1 id="overview-title"><span id="schedule-title">Schedule</span></h1>
+              <p class="page-note" id="schedule-note"></p>
+            </div>
+            <span class="status-pill" id="schedule-status"></span>
+          </div>
+          <div class="metric-grid" id="overview-metrics"></div>
+          <div class="overview-layout">
+            <section class="panel fleet-panel" aria-labelledby="fleet-title">
+              <div class="panel-heading">
+                <div>
+                  <p class="eyebrow">Selected for this schedule</p>
+                  <h2 id="fleet-title">Fleet plan</h2>
+                </div>
+                <span class="panel-meta">Aircraft-days used</span>
+              </div>
+              <div id="fleet-list"></div>
+            </section>
+            <section class="panel validation-snapshot" aria-labelledby="snapshot-title">
+              <div class="panel-heading">
+                <div>
+                  <p class="eyebrow">Current policy</p>
+                  <h2 id="snapshot-title">Validation snapshot</h2>
+                </div>
+                <button class="text-button" type="button" data-open-tab="validation">Review findings</button>
+              </div>
+              <div id="validation-snapshot"></div>
+            </section>
+          </div>
+          <section class="panel attention-panel" aria-labelledby="attention-title">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">Prioritized review</p>
+                <h2 id="attention-title">What needs attention</h2>
+              </div>
+            </div>
+            <div class="attention-list" id="attention-list"></div>
+          </section>
+        </section>
+
+        <section class="view" id="view-routings" data-view="routings" aria-labelledby="routings-title" hidden>
+          <div class="page-heading compact">
+            <div>
+              <p class="eyebrow">Canonical construction data</p>
+              <h1 id="routings-title">Routings</h1>
+              <p class="page-note">Line, day, route, pairing and sequence remain intact.</p>
+            </div>
+            <span class="result-count" id="routing-result-count"></span>
+          </div>
+          <div class="filter-bar">
+            <label class="search-field">
+              <span>Search routings</span>
+              <input id="routing-search" type="search" placeholder="Flight, airport, route or line" autocomplete="off">
+            </label>
+            <label>
+              <span>Fleet</span>
+              <select id="routing-fleet"><option value="">All fleets</option></select>
+            </label>
+          </div>
+          <div class="table-shell">
+            <table>
+              <thead><tr><th>Route</th><th>Line / day</th><th>Seq.</th><th>Flight</th><th>Market</th><th>Time</th><th>Fleet</th></tr></thead>
+              <tbody id="routing-rows"></tbody>
+            </table>
+          </div>
+          <div class="pagination" id="routing-pagination"></div>
+        </section>
+
+        <section class="view" id="view-validation" data-view="validation" aria-labelledby="validation-title" hidden>
+          <div class="page-heading compact">
+            <div>
+              <p class="eyebrow">Deterministic rule report</p>
+              <h1 id="validation-title">Validation</h1>
+              <p class="page-note">Historical fidelity and current-policy compliance are shown separately.</p>
+            </div>
+          </div>
+          <div class="validation-banner" id="structural-banner"></div>
+          <div class="filter-bar">
+            <label class="search-field">
+              <span>Search checks and findings</span>
+              <input id="validation-search" type="search" placeholder="City, flight, rule or message" autocomplete="off">
+            </label>
+            <label>
+              <span>Status</span>
+              <select id="validation-status">
+                <option value="">All statuses</option>
+                <option value="fail">Blocking</option>
+                <option value="warning">Warning</option>
+                <option value="not_evaluated">Not evaluated</option>
+                <option value="pass">Passing</option>
+                <option value="overridden">Overridden</option>
+              </select>
+            </label>
+          </div>
+          <div class="check-list" id="check-list"></div>
+        </section>
+
+        <section class="view" id="view-timetable" data-view="timetable" aria-labelledby="timetable-title" hidden>
+          <div class="page-heading compact">
+            <div>
+              <p class="eyebrow">Published passenger view</p>
+              <h1 id="timetable-title">Timetable</h1>
+              <p class="page-note" id="connection-window"></p>
+            </div>
+            <span class="result-count" id="timetable-result-count"></span>
+          </div>
+          <div class="filter-bar timetable-filters">
+            <label class="search-field">
+              <span>Search timetable</span>
+              <input id="timetable-search" type="search" placeholder="Flight or airport" autocomplete="off">
+            </label>
+            <label><span>Origin</span><select id="timetable-origin"><option value="">Any origin</option></select></label>
+            <label><span>Destination</span><select id="timetable-destination"><option value="">Any destination</option></select></label>
+            <label><span>Fleet</span><select id="timetable-fleet"><option value="">All fleets</option></select></label>
+          </div>
+          <div class="table-shell">
+            <table>
+              <thead><tr><th>Flight</th><th>Origin</th><th>Departs</th><th>Destination</th><th>Arrives</th><th>Fleet</th></tr></thead>
+              <tbody id="timetable-rows"></tbody>
+            </table>
+          </div>
+          <div class="pagination" id="timetable-pagination"></div>
+        </section>
+
+        <section class="view" id="view-gates" data-view="gates" aria-labelledby="gates-title" hidden>
+          <div class="page-heading compact gate-heading">
+            <div>
+              <p class="eyebrow">Physical assignment</p>
+              <h1 id="gates-title">Gate utilization</h1>
+              <p class="page-note">A 24-hour view of the selected airport’s gates and stands.</p>
+            </div>
+            <label class="airport-picker"><span>Airport</span><select id="gate-airport"></select></label>
+          </div>
+          <div class="metric-grid gate-metrics" id="gate-metrics"></div>
+          <section class="panel gate-panel">
+            <div class="timeline-key" id="timeline-key"></div>
+            <div class="gate-timeline" id="gate-timeline"></div>
+          </section>
+        </section>
+      </div>
+    </main>
+
+    <script type="module" src="app.mjs"></script>
+  </body>
+</html>

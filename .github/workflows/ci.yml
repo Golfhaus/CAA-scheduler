@@ -8,8 +8,8 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
           cache: pip
@@ -19,3 +19,7 @@ jobs:
         run: python -m caa_scheduler baseline --config config/baselines/schedule_6_v2_2_5.json
       - name: Confirm generated baseline is committed
         run: git diff --exit-code -- data/schedules/schedule_6_v2_2_5
+      - name: Build web console
+        run: python -m caa_scheduler build-web --output dist
+      - name: Test web console helpers
+        run: node --test tests/test_web_console.mjs

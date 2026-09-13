@@ -9,6 +9,7 @@ from .io import read_json, write_json
 from .operating_validation import validate_operating_rules
 from .timetable import export_timetable
 from .validation import validate_schedule
+from .web_build import build_web_console
 
 
 def _parser() -> argparse.ArgumentParser:
@@ -36,11 +37,30 @@ def _parser() -> argparse.ArgumentParser:
     )
     operating.add_argument("canonical", type=Path)
     operating.add_argument("--output", type=Path)
+
+    web = subcommands.add_parser(
+        "build-web", help="Assemble the static GitHub Pages console"
+    )
+    web.add_argument("--manifest", type=Path, default=Path("web/schedules.json"))
+    web.add_argument("--output", type=Path, default=Path("dist"))
+    web.add_argument("--repo-root", type=Path, default=Path.cwd())
     return parser
 
 
 def main(argv: list[str] | None = None) -> int:
     args = _parser().parse_args(argv)
+    if args.command == "build-web":
+        result = build_web_console(
+            args.manifest,
+            args.repo_root,
+            args.output,
+        )
+        print(
+            f"Web console: {result['outputDirectory']} "
+            f"({result['scheduleCount']} schedule, "
+            f"{result['dataFileCount']} data files)"
+        )
+        return 0
     if args.command == "baseline":
         result = build_baseline(args.config, args.repo_root.resolve())
         validation = result["validation"]

@@ -2,7 +2,7 @@
 
 CAA Scheduler is the migration target for Coastal American Airways schedule construction. It moves the durable schedule state and deterministic processing out of an LLM conversation and into version-controlled code and data.
 
-## Milestone 0.3
+## Milestone 0.4
 
 The migration baseline now proves this pipeline:
 
@@ -15,6 +15,7 @@ v2.2.5 workbook + pinned city data
     -> gate assignment JSON
     -> exact comparison with the published v2.2.5 gate data
     -> operating-rule validation with evidence and explicit overrides
+    -> read-only GitHub Pages operating console
 ```
 
 The workbook remains a source for this one-time migration and will later become an export. The canonical JSON is the authoritative schedule representation going forward.
@@ -40,7 +41,17 @@ Run the regression tests with:
 
 ```bash
 python -m unittest discover -s tests -v
+node --test tests/test_web_console.mjs
 ```
+
+## Build the web console
+
+```bash
+python -m caa_scheduler build-web --output dist
+python -m http.server --directory dist 8000
+```
+
+The site loads the pinned canonical schedule and its generated reports directly. Its schedule manifest makes additional versions additive rather than requiring UI code changes. After Milestone 0.4 is merged, GitHub Actions publishes the console to [Golfhaus.github.io/CAA-scheduler](https://golfhaus.github.io/CAA-scheduler/).
 
 Either consumer file can also be rebuilt directly from canonical JSON:
 
@@ -58,9 +69,9 @@ python -m caa_scheduler validate-operating \
 
 ## Current boundary
 
-Milestone 0.3 expresses the current operating policy as pinned JSON and evaluates schedule-specific fleet counts, hard-stop curfews, routing/RON continuity, turn times, §2.6, frequency, point-to-point share, numbering, and gate/stand constraints. It also implements runway, percentile-tier, and bank checks that report `not_evaluated` until their missing inputs are present. See [Operating-rule validation](docs/operating_validation.md).
+Milestone 0.4 adds a responsive, read-only operating console with Overview, Routings, Validation, Timetable, and Gate Utilization views. Findings link to the relevant flight, route, line, or airport when that context exists. See [Web console](docs/web_console.md).
 
-The v2.2.5 golden schedule is intentionally **not** declared operating-rule clean. Exact historical preservation and current-policy compliance are separate questions. The report captures the known baseline findings without silently waiving them; the next read-only web-console milestone will make those findings navigable.
+The v2.2.5 golden schedule is intentionally **not** declared operating-rule clean. Exact historical preservation and current-policy compliance remain separate questions. The console makes the known baseline findings visible without silently waiving them.
 
 ## Repository visibility
 
