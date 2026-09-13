@@ -1,4 +1,6 @@
-const PAGE_SIZE = 50;
+const DEFAULT_PAGE_SIZE = 50;
+const CONNECTIONS_HUB_OVERRIDE = new Set(["BHM"]);
+const TIMEZONE_OFFSETS = { Eastern: -300, Central: -360, Mountain: -420 };
 
 const state = {
   manifest: null,
@@ -9,7 +11,9 @@ const state = {
   timetable: null,
   gates: null,
   routingPage: 1,
+  routingPageSize: DEFAULT_PAGE_SIZE,
   timetablePage: 1,
+  itineraryCache: new Map(),
 };
 
 const $ = (selector) => document.querySelector(selector);
@@ -33,6 +37,116 @@ export function formatMinute(value) {
   return `${displayHour}:${String(minutes).padStart(2, "0")} ${suffix}`;
 }
 
+export function toMinutes(value) {
+  const [hours, minutes] = String(value).split(":").map(Number);
+  return hours * 60 + minutes;
+}
+
+export function waitMinutes(arrival, departure) {
+  return (toMinutes(departure) - toMinutes(arrival) + 1440) % 1440;
+}
+
+export function sortFlightsByDeparture(flights) {
+  return [...flights].sort(
+    (a, b) => toMinutes(a.dep) - toMinutes(b.dep) || Number(a.flight) - Number(b.flight)
+  );
+}
+
+function flightDurationMinutes(flight, timezoneByCode) {
+  const originOffset = TIMEZONE_OFFSETS[timezoneByCode[flight.origin]] ?? 0;
+  const destinationOffset = TIMEZONE_OFFSETS[timezoneByCode[flight.dest]] ?? 0;
+  const departureUtc = toMinutes(flight.dep) - originOffset;
+  const arrivalUtc = toMinutes(flight.arr) - destinationOffset;
+  return (arrivalUtc - departureUtc + 1440) % 1440;
+}
+
+function itineraryKey(legs) {
+  return legs.map((leg) => leg.flight).join("-");
+}
+
+export function buildItineraries(timetable, origin, hubCodes, timezoneByCode = {}) {
+  const flightsByOrigin = new Map();
+  timetable.flights.forEach((flight) => {
+    if (!flightsByOrigin.has(flight.origin)) flightsByOrigin.set(flight.origin, []);
+    flightsByOrigin.get(flight.origin).push(flight);
+  });
+  const minConnect = timetable.minConnect ?? 30;
+  const maxConnect = timetable.maxConnect ?? 240;
+  const itineraries = [];
+  const seen = new Set();
+  const add = (legs, waits = []) => {
+    const key = itineraryKey(legs);
+    if (seen.has(key)) return;
+    seen.add(key);
+    itineraries.push({
+      legs,
+      waits,
+      stops: legs.length - 1,
+      dest: legs.at(-1).dest,
+      departureMinute: toMinutes(legs[0].dep),
+      totalMinutes: legs.reduce(
+        (total, leg) => total + flightDurationMinutes(leg, timezoneByCode),
+        waits.reduce((total, wait) => total + wait, 0)
+      ),
+    });
+  };
+
+  const firstLegs = flightsByOrigin.get(origin) || [];
+  firstLegs.forEach((leg) => add([leg]));
+  for (const first of firstLegs) {
+    if (!hubCodes.has(first.dest)) continue;
+    for (const second of flightsByOrigin.get(first.dest) || []) {
+      if (second.dest === origin) continue;
+      const firstWait = waitMinutes(first.arr, second.dep);
+      if (firstWait < minConnect || firstWait > maxConnect) continue;
+      add([first, second], [firstWait]);
+      if (!hubCodes.has(second.dest) || second.dest === first.dest) continue;
+      for (const third of flightsByOrigin.get(second.dest) || []) {
+        if ([origin, first.dest].includes(third.dest)) continue;
+        const secondWait = waitMinutes(second.arr, third.dep);
+        if (secondWait < minConnect || secondWait > maxConnect) continue;
+        add([first, second, third], [firstWait, secondWait]);
+      }
+    }
+  }
+  return itineraries;
+}
+
+export function selectItineraries(itineraries, connectionFilter = "all") {
+  const byDestination = new Map();
+  itineraries.forEach((itinerary) => {
+    if (!byDestination.has(itinerary.dest)) byDestination.set(itinerary.dest, []);
+    byDestination.get(itinerary.dest).push(itinerary);
+  });
+  const selected = [];
+  for (const list of byDestination.values()) {
+    const nonstops = list.filter((item) => item.stops === 0);
+    const oneStops = list
+      .filter((item) => item.stops === 1)
+      .sort((a, b) => a.totalMinutes - b.totalMinutes)
+      .slice(0, 6);
+    selected.push(...nonstops);
+    if (connectionFilter === "nonstop") continue;
+    selected.push(...oneStops);
+    if (connectionFilter === "max1") continue;
+    const remaining = Math.max(0, 6 - nonstops.length - oneStops.length);
+    selected.push(
+      ...list
+        .filter((item) => item.stops === 2)
+        .sort((a, b) => a.totalMinutes - b.totalMinutes)
+        .slice(0, remaining)
+    );
+  }
+  return selected.sort(
+    (a, b) => a.dest.localeCompare(b.dest) || a.departureMinute - b.departureMinute || a.totalMinutes - b.totalMinutes
+  );
+}
+
+export function passengerStandFindings(operatingReport, cityCode) {
+  const check = operatingReport.checks.find((item) => item.id === "passenger_touch_on_stand");
+  return (check?.findings || []).filter((finding) => finding.evidence?.city === cityCode);
+}
+
 export function scheduleMetrics(canonical) {
   const legs = canonical.legs;
   return {
@@ -53,8 +167,12 @@ export function fleetUsage(canonical) {
   return Object.fromEntries([...usage].map(([fleet, days]) => [fleet, days.size]));
 }
 
-export function legMatches(leg, query, fleet = "") {
-  if (fleet && leg.fleet !== fleet) return false;
+export function legMatches(leg, query, filters = {}) {
+  if (typeof filters === "string") filters = { fleet: filters };
+  if (filters.fleet && leg.fleet !== filters.fleet) return false;
+  if (filters.line && leg.line !== filters.line) return false;
+  if (filters.origin && leg.origin !== filters.origin) return false;
+  if (filters.destination && leg.destination !== filters.destination) return false;
   const needle = query.trim().toLowerCase();
   if (!needle) return true;
   const exact = needle.match(/^(flight|route|line):\s*(.+)$/);
@@ -180,6 +298,7 @@ async function loadSchedule(scheduleId) {
     gates: data.gates,
     routingPage: 1,
     timetablePage: 1,
+    itineraryCache: new Map(),
   });
   renderAll();
 }
@@ -277,7 +396,11 @@ function populateSelect(select, values, firstLabel) {
 function populateFilters() {
   const fleets = [...new Set(state.canonical.legs.map((leg) => leg.fleet))].sort();
   const cities = state.canonical.cities.filter((city) => city.active).map((city) => city.code).sort();
+  const lines = [...new Set(state.canonical.legs.map((leg) => leg.line))].sort();
   populateSelect($("#routing-fleet"), fleets, "All fleets");
+  populateSelect($("#routing-line"), lines, "All lines");
+  populateSelect($("#routing-origin"), cities, "Any airport");
+  populateSelect($("#routing-destination"), cities, "Any airport");
   populateSelect($("#timetable-fleet"), fleets, "All fleets");
   populateSelect($("#timetable-origin"), cities, "Any origin");
   populateSelect($("#timetable-destination"), cities, "Any destination");
@@ -295,33 +418,44 @@ function populateFilters() {
   gateSelect.value = previous && ordered.some((city) => city.code === previous) ? previous : "PHF";
 }
 
-function paginate(items, page) {
-  const pageCount = Math.max(1, Math.ceil(items.length / PAGE_SIZE));
+export function paginate(items, page, pageSize = DEFAULT_PAGE_SIZE) {
+  const size = pageSize === "all" ? Math.max(1, items.length) : Number(pageSize);
+  const pageCount = Math.max(1, Math.ceil(items.length / size));
   const safePage = Math.min(Math.max(1, page), pageCount);
   return {
     page: safePage,
     pageCount,
-    rows: items.slice((safePage - 1) * PAGE_SIZE, safePage * PAGE_SIZE),
+    pageSize,
+    rows: items.slice((safePage - 1) * size, safePage * size),
   };
 }
 
-function renderPagination(container, context, total, page, pageCount) {
-  const start = total ? (page - 1) * PAGE_SIZE + 1 : 0;
-  const end = Math.min(total, page * PAGE_SIZE);
-  container.innerHTML = `<span>Showing ${start.toLocaleString()}–${end.toLocaleString()} of ${total.toLocaleString()}</span><div class="pagination-buttons"><button type="button" data-page-context="${context}" data-page="${page - 1}" ${page <= 1 ? "disabled" : ""}>Previous</button><button type="button" data-page-context="${context}" data-page="${page + 1}" ${page >= pageCount ? "disabled" : ""}>Next</button></div>`;
+function renderPagination(container, context, total, page, pageCount, pageSize = DEFAULT_PAGE_SIZE) {
+  const size = pageSize === "all" ? Math.max(1, total) : Number(pageSize);
+  const start = total ? (page - 1) * size + 1 : 0;
+  const end = Math.min(total, page * size);
+  const summary = pageSize === "all"
+    ? `Showing all ${total.toLocaleString()}`
+    : `Showing ${start.toLocaleString()}–${end.toLocaleString()} of ${total.toLocaleString()}`;
+  container.innerHTML = `<span>${summary}</span><div class="pagination-buttons"><button type="button" data-page-context="${context}" data-page="${page - 1}" ${page <= 1 ? "disabled" : ""}>Previous</button><button type="button" data-page-context="${context}" data-page="${page + 1}" ${page >= pageCount ? "disabled" : ""}>Next</button></div>`;
 }
 
 function renderRoutings() {
   const query = $("#routing-search").value;
-  const fleet = $("#routing-fleet").value;
-  const filtered = state.canonical.legs.filter((leg) => legMatches(leg, query, fleet));
-  const paged = paginate(filtered, state.routingPage);
+  const filters = {
+    fleet: $("#routing-fleet").value,
+    line: $("#routing-line").value,
+    origin: $("#routing-origin").value,
+    destination: $("#routing-destination").value,
+  };
+  const filtered = state.canonical.legs.filter((leg) => legMatches(leg, query, filters));
+  const paged = paginate(filtered, state.routingPage, state.routingPageSize);
   state.routingPage = paged.page;
   $("#routing-result-count").textContent = `${filtered.length.toLocaleString()} flights`;
   $("#routing-rows").innerHTML = paged.rows.length
     ? paged.rows.map((leg) => `<tr id="flight-${leg.flight}"><td class="route-number">${leg.route}</td><td><strong>${escapeHtml(leg.line)}</strong> / ${leg.day}</td><td>${leg.sequenceWithinRoute}</td><td class="flight-number">${leg.flight}</td><td><strong>${escapeHtml(leg.origin)}</strong><span class="market-arrow">→</span><strong>${escapeHtml(leg.destination)}</strong></td><td>${escapeHtml(leg.departure)}–${escapeHtml(leg.arrival)}</td><td><span class="fleet-badge">${escapeHtml(leg.fleet)}</span></td></tr>`).join("")
     : `<tr class="empty-row"><td colspan="7">No routings match these filters.</td></tr>`;
-  renderPagination($("#routing-pagination"), "routing", filtered.length, paged.page, paged.pageCount);
+  renderPagination($("#routing-pagination"), "routing", filtered.length, paged.page, paged.pageCount, state.routingPageSize);
 }
 
 function timetableMatches(flight) {
@@ -332,12 +466,99 @@ function timetableMatches(flight) {
     && (!$("#timetable-fleet").value || flight.fleet === $("#timetable-fleet").value);
 }
 
+function formatDuration(minutes) {
+  const hours = Math.floor(minutes / 60);
+  const remainder = minutes % 60;
+  return `${hours ? `${hours}h ` : ""}${remainder}m`;
+}
+
+function cityName(code) {
+  const city = state.timetable.cities.find((item) => item.code === code);
+  return city ? city.name : code;
+}
+
+function itinerariesFrom(origin) {
+  if (!state.itineraryCache.has(origin)) {
+    const hubCodes = new Set(
+      state.canonical.cities
+        .filter((city) => city.role === "hub")
+        .map((city) => city.code)
+    );
+    CONNECTIONS_HUB_OVERRIDE.forEach((code) => hubCodes.add(code));
+    const timezoneByCode = Object.fromEntries(
+      state.canonical.cities.map((city) => [city.code, city.timezone])
+    );
+    state.itineraryCache.set(
+      origin,
+      buildItineraries(state.timetable, origin, hubCodes, timezoneByCode)
+    );
+  }
+  return state.itineraryCache.get(origin);
+}
+
+function itineraryMatchesFilters(itinerary) {
+  const destination = $("#timetable-destination").value;
+  const fleet = $("#timetable-fleet").value;
+  const query = $("#timetable-search").value.trim().toLowerCase();
+  if (destination && itinerary.dest !== destination) return false;
+  if (fleet && !itinerary.legs.some((leg) => leg.fleet === fleet)) return false;
+  if (!query) return true;
+  return [itinerary.dest, cityName(itinerary.dest), ...itinerary.legs.flatMap((leg) => [leg.flight, leg.origin, leg.dest, leg.fleet])]
+    .some((value) => String(value).toLowerCase().includes(query));
+}
+
+function renderItinerary(itinerary) {
+  const stopLabel = itinerary.stops === 0 ? "Non-stop" : `${itinerary.stops} stop${itinerary.stops === 1 ? "" : "s"}`;
+  const variant = itinerary.stops === 0 ? "is-nonstop" : itinerary.stops === 2 ? "is-two-stop" : "";
+  const legs = itinerary.legs.map((leg, index) => {
+    const connection = index > 0
+      ? `<span class="connection-note">Connect at ${escapeHtml(leg.origin)} · ${formatDuration(itinerary.waits[index - 1])}</span>`
+      : "";
+    return `${connection}<div class="itinerary-leg"><span class="flight-number">${leg.flight}</span><span><strong>${escapeHtml(leg.origin)}</strong><span class="market-arrow">→</span><strong>${escapeHtml(leg.dest)}</strong></span><span class="itinerary-time">${escapeHtml(leg.dep)}–${escapeHtml(leg.arr)}</span><span class="fleet-badge">${escapeHtml(leg.fleet)}</span></div>`;
+  }).join("");
+  return `<article class="itinerary-card ${variant}"><div class="itinerary-summary"><strong>${stopLabel}</strong><span>${escapeHtml(itinerary.legs[0].dep)} departure · ${formatDuration(itinerary.totalMinutes)} total travel</span></div><div class="itinerary-legs">${legs}</div></article>`;
+}
+
+function renderItineraryResults(itineraries) {
+  if (!itineraries.length) {
+    return `<div class="itinerary-empty">No itineraries match these filters and the ${state.timetable.minConnect}–${state.timetable.maxConnect} minute connection window.</div>`;
+  }
+  const grouped = new Map();
+  itineraries.forEach((itinerary) => {
+    if (!grouped.has(itinerary.dest)) grouped.set(itinerary.dest, []);
+    grouped.get(itinerary.dest).push(itinerary);
+  });
+  return [...grouped]
+    .sort(([a], [b]) => cityName(a).localeCompare(cityName(b)))
+    .map(([destination, options]) => `<section class="itinerary-destination"><div class="itinerary-heading"><h2>${escapeHtml(cityName(destination))} <span>${escapeHtml(destination)}</span></h2><span>${options.length} option${options.length === 1 ? "" : "s"}</span></div><div class="itinerary-list">${options.map(renderItinerary).join("")}</div></section>`)
+    .join("");
+}
+
 function renderTimetable() {
-  const filtered = state.timetable.flights.filter(timetableMatches);
+  const origin = $("#timetable-origin").value;
+  const connectionFilter = $("#timetable-connections").value;
+  $("#connection-window").textContent = `${state.timetable.minConnect}–${state.timetable.maxConnect} minute connection window`;
+  $("#timetable-connections").disabled = !origin;
+  if (origin) {
+    const itineraries = selectItineraries(itinerariesFrom(origin), connectionFilter)
+      .filter(itineraryMatchesFilters);
+    $("#timetable-result-count").textContent = `${itineraries.length.toLocaleString()} itineraries`;
+    $("#timetable-mode-note").textContent = `Showing travel options from ${cityName(origin)} (${origin}). Non-stops are always included; up to six shortest one-stop options are shown per destination.`;
+    $("#itinerary-results").innerHTML = renderItineraryResults(itineraries);
+    $("#itinerary-results").hidden = false;
+    $("#timetable-flight-shell").hidden = true;
+    $("#timetable-pagination").hidden = true;
+    return;
+  }
+
+  const filtered = sortFlightsByDeparture(state.timetable.flights.filter(timetableMatches));
   const paged = paginate(filtered, state.timetablePage);
   state.timetablePage = paged.page;
-  $("#connection-window").textContent = `${state.timetable.minConnect}–${state.timetable.maxConnect} minute connection window`;
+  $("#timetable-mode-note").textContent = "Select an origin to view connecting itineraries. With no origin selected, the complete flight list is sorted by departure time.";
   $("#timetable-result-count").textContent = `${filtered.length.toLocaleString()} flights`;
+  $("#itinerary-results").hidden = true;
+  $("#timetable-flight-shell").hidden = false;
+  $("#timetable-pagination").hidden = false;
   $("#timetable-rows").innerHTML = paged.rows.length
     ? paged.rows.map((flight) => `<tr><td class="flight-number">${flight.flight}</td><td><strong>${escapeHtml(flight.origin)}</strong></td><td>${escapeHtml(flight.dep)}</td><td><strong>${escapeHtml(flight.dest)}</strong></td><td>${escapeHtml(flight.arr)}</td><td><span class="fleet-badge">${escapeHtml(flight.fleet)}</span></td></tr>`).join("")
     : `<tr class="empty-row"><td colspan="6">No timetable flights match these filters.</td></tr>`;
@@ -391,11 +612,19 @@ function renderGates() {
   if (!city) return;
   const gateClaims = city.claims.filter((claim) => claim.rowType === "gate");
   const standClaims = city.claims.filter((claim) => claim.rowType === "stand");
+  const passengerStandClaims = passengerStandFindings(state.operating, city.code);
   $("#gate-metrics").innerHTML = [
     metricCard("Airport", city.code, city.name),
     metricCard("Peak use", city.peakUsed, "Simultaneous aircraft", city.peakUsed > city.nGates + city.nStands ? "is-danger" : ""),
     metricCard("Gates", city.nGates, `${gateClaims.length} assigned claim pieces`),
-    metricCard("Stands", city.nStands, `${standClaims.length} assigned claim pieces`),
+    metricCard(
+      "Stands",
+      city.nStands,
+      passengerStandClaims.length
+        ? `${passengerStandClaims.length} passenger-handling conflict${passengerStandClaims.length === 1 ? "" : "s"}`
+        : `${standClaims.length} assigned claim pieces · no passenger handling`,
+      passengerStandClaims.length ? "is-danger" : ""
+    ),
   ].join("");
   const colors = state.gates.fleetColors;
   $("#timeline-key").innerHTML = Object.entries(colors).map(([fleet, color]) => `<span class="legend-item"><i class="legend-swatch" style="background:${escapeHtml(color)}"></i>${escapeHtml(fleet)}</span>`).join("");
@@ -425,6 +654,9 @@ function handleReference(button) {
     activateTab("gates");
     return;
   }
+  $("#routing-line").value = "";
+  $("#routing-origin").value = "";
+  $("#routing-destination").value = "";
   if (type === "fleet") {
     $("#routing-search").value = "";
     $("#routing-fleet").value = value;
@@ -478,10 +710,17 @@ function bindEvents() {
   });
 
   $("#routing-search").addEventListener("input", () => { state.routingPage = 1; renderRoutings(); });
-  $("#routing-fleet").addEventListener("change", () => { state.routingPage = 1; renderRoutings(); });
+  ["#routing-fleet", "#routing-line", "#routing-origin", "#routing-destination"].forEach((selector) => {
+    $(selector).addEventListener("change", () => { state.routingPage = 1; renderRoutings(); });
+  });
+  $("#routing-page-size").addEventListener("change", (event) => {
+    state.routingPageSize = event.target.value === "all" ? "all" : Number(event.target.value);
+    state.routingPage = 1;
+    renderRoutings();
+  });
   $("#validation-search").addEventListener("input", () => renderValidation());
   $("#validation-status").addEventListener("change", () => renderValidation());
-  ["#timetable-search", "#timetable-origin", "#timetable-destination", "#timetable-fleet"].forEach((selector) => {
+  ["#timetable-search", "#timetable-origin", "#timetable-destination", "#timetable-fleet", "#timetable-connections"].forEach((selector) => {
     $(selector).addEventListener(selector === "#timetable-search" ? "input" : "change", () => { state.timetablePage = 1; renderTimetable(); });
   });
   $("#gate-airport").addEventListener("change", renderGates);

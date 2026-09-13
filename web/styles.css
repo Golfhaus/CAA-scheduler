@@ -79,24 +79,17 @@ button:focus-visible, input:focus-visible, select:focus-visible, a:focus-visible
   text-decoration: none;
 }
 
-.brand-mark {
-  display: grid;
-  width: 3.1rem;
-  height: 3.1rem;
-  place-items: center;
-  border: 2px solid rgba(255, 255, 255, 0.75);
-  border-radius: 50% 50% 46% 54%;
-  color: white;
-  font-size: 0.8rem;
-  font-weight: 900;
-  letter-spacing: 0.08em;
-  transform: rotate(-4deg);
-  box-shadow: inset -0.35rem -0.3rem 0 var(--orange);
+.brand-logo-wrap {
+  display: flex;
+  align-items: center;
+  border-radius: 0.55rem;
+  padding: 0.22rem 0.45rem;
+  background: white;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.18);
 }
 
-.brand strong, .brand small { display: block; }
-.brand strong { font-size: 1.12rem; letter-spacing: 0.01em; }
-.brand small { margin-top: 0.1rem; color: #b9cbe0; font-size: 0.78rem; }
+.brand-logo { display: block; width: clamp(11rem, 21vw, 15rem); height: 3.1rem; object-fit: contain; }
+.brand-context { color: #d6e3f0; font-size: 0.78rem; font-weight: 800; letter-spacing: 0.09em; text-transform: uppercase; }
 
 .schedule-control, .airport-picker {
   display: flex;
@@ -269,7 +262,7 @@ main {
 .metric-card strong { display: block; margin-top: 0.35rem; font-size: 1.75rem; line-height: 1; }
 .metric-card span { color: var(--muted); font-size: 0.82rem; font-weight: 700; }
 .metric-card small { display: block; margin-top: 0.65rem; color: var(--muted); font-size: 0.76rem; }
-.metric-card.is-danger { border-top-color: var(--danger); }
+.metric-card.is-danger { border-color: #efb5af; border-top-color: var(--danger); background: var(--danger-soft); }
 .metric-card.is-warning { border-top-color: #e09a17; }
 .metric-card.is-success { border-top-color: var(--success); }
 
@@ -340,6 +333,7 @@ main {
 
 .filter-bar {
   display: flex;
+  flex-wrap: wrap;
   align-items: end;
   gap: 0.75rem;
   margin-bottom: 0.9rem;
@@ -361,7 +355,9 @@ main {
   color: var(--ink);
 }
 .filter-bar .search-field { flex: 1 1 24rem; }
-.timetable-filters { display: grid; grid-template-columns: minmax(15rem, 1fr) repeat(3, minmax(9rem, 0.45fr)); }
+.routing-filters label:not(.search-field) { flex: 1 1 9rem; }
+.timetable-filters { display: grid; grid-template-columns: minmax(15rem, 1fr) repeat(4, minmax(9rem, 0.45fr)); }
+.mode-note { margin: -0.15rem 0 0.9rem; color: var(--muted); font-size: 0.8rem; line-height: 1.45; }
 
 .table-shell {
   overflow: auto;
@@ -384,6 +380,25 @@ tbody tr:hover { background: #f6f9fc; }
 .pagination button { border: 1px solid #bdcada; border-radius: 0.45rem; padding: 0.48rem 0.7rem; background: white; color: var(--navy-900); font-weight: 750; }
 .pagination button:disabled { cursor: default; opacity: 0.45; }
 .empty-row td { padding: 2.5rem 1rem; color: var(--muted); text-align: center; }
+
+.itinerary-results { display: grid; gap: 1rem; }
+.itinerary-destination { overflow: hidden; border: 1px solid var(--line); border-radius: 0.8rem; background: white; box-shadow: var(--shadow); }
+.itinerary-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; padding: 0.8rem 1rem; border-bottom: 2px solid var(--blue-700); background: #f8fafc; }
+.itinerary-heading h2 { margin: 0; color: var(--navy-900); font-size: 1.05rem; }
+.itinerary-heading span { color: var(--muted); font-size: 0.76rem; font-weight: 750; }
+.itinerary-list { display: grid; gap: 0; }
+.itinerary-card { padding: 0.85rem 1rem; border-left: 4px solid var(--blue-700); border-bottom: 1px solid #e7ecf2; }
+.itinerary-card:last-child { border-bottom: 0; }
+.itinerary-card.is-nonstop { border-left-color: var(--success); }
+.itinerary-card.is-two-stop { border-left-color: var(--orange); }
+.itinerary-summary { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.45rem 1rem; margin-bottom: 0.5rem; }
+.itinerary-summary strong { color: var(--navy-900); font-size: 0.88rem; }
+.itinerary-summary span { color: var(--muted); font-size: 0.75rem; font-weight: 700; }
+.itinerary-legs { display: grid; gap: 0.35rem; }
+.itinerary-leg { display: grid; grid-template-columns: 4rem minmax(11rem, 1fr) 8rem 5rem; align-items: center; gap: 0.65rem; font-size: 0.8rem; }
+.itinerary-leg:not(:first-child) { padding-top: 0.35rem; border-top: 1px dashed var(--line); }
+.connection-note { margin: -0.15rem 0 0 4.65rem; color: var(--muted); font-size: 0.72rem; }
+.itinerary-empty { padding: 2.5rem 1rem; border: 1px dashed #bdcada; border-radius: 0.8rem; background: white; color: var(--muted); text-align: center; }
 
 .validation-banner { display: flex; justify-content: space-between; gap: 1rem; margin-bottom: 0.9rem; padding: 0.9rem 1rem; border: 1px solid #b9e2cf; border-radius: 0.7rem; background: var(--success-soft); }
 .validation-banner strong { color: var(--success); }
@@ -447,8 +462,9 @@ tbody tr:hover { background: #f6f9fc; }
 }
 
 @media (max-width: 48rem) {
-  .topbar { align-items: flex-start; padding: 0.8rem 1rem; }
-  .brand small { display: none; }
+  .topbar { align-items: flex-start; flex-wrap: wrap; gap: 0.75rem; padding: 0.8rem 1rem; }
+  .brand-context { display: none; }
+  .brand-logo { width: 10rem; height: 2.75rem; }
   .schedule-control { align-items: flex-end; flex-direction: column; gap: 0.2rem; }
   .schedule-control select { min-width: 10.5rem; max-width: 48vw; }
   .tabbar { padding: 0 0.5rem; }
@@ -468,11 +484,13 @@ tbody tr:hover { background: #f6f9fc; }
   .airport-picker select { width: 100%; min-width: 0; }
   .gate-panel { overflow-x: auto; padding: 0.75rem; }
   .timeline-key { margin-left: 0; }
+  .itinerary-leg { grid-template-columns: 3.5rem minmax(8rem, 1fr); }
+  .itinerary-leg .itinerary-time, .itinerary-leg .fleet-badge { grid-column: 2; }
+  .connection-note { margin-left: 4.15rem; }
 }
 
 @media (max-width: 25rem) {
-  .brand strong { font-size: 0.96rem; }
-  .brand-mark { width: 2.7rem; height: 2.7rem; }
+  .brand-logo { width: 8.5rem; height: 2.45rem; }
   .schedule-control label { display: none; }
   .metric-grid, .gate-metrics { grid-template-columns: 1fr; }
   .snapshot-grid { grid-template-columns: 1fr; }

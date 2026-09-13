@@ -13,11 +13,8 @@
     <a class="skip-link" href="#workspace">Skip to schedule data</a>
     <header class="topbar">
       <a class="brand" href="#overview" aria-label="CAA Scheduler overview">
-        <span class="brand-mark" aria-hidden="true">CAA</span>
-        <span>
-          <strong>Schedule Control</strong>
-          <small>Coastal American Airways</small>
-        </span>
+        <span class="brand-logo-wrap"><img class="brand-logo" src="coastal-american-logo.png" alt="Coastal American"></span>
+        <span class="brand-context">Schedule Control</span>
       </a>
       <div class="schedule-control">
         <label for="schedule-select">Schedule</label>
@@ -103,14 +100,35 @@
             </div>
             <span class="result-count" id="routing-result-count"></span>
           </div>
-          <div class="filter-bar">
+          <div class="filter-bar routing-filters">
             <label class="search-field">
               <span>Search routings</span>
-              <input id="routing-search" type="search" placeholder="Flight, airport, route or line" autocomplete="off">
+              <input id="routing-search" type="search" placeholder="Flight, route or pairing" autocomplete="off">
             </label>
             <label>
               <span>Fleet</span>
               <select id="routing-fleet"><option value="">All fleets</option></select>
+            </label>
+            <label>
+              <span>Line</span>
+              <select id="routing-line"><option value="">All lines</option></select>
+            </label>
+            <label>
+              <span>Departure airport</span>
+              <select id="routing-origin"><option value="">Any airport</option></select>
+            </label>
+            <label>
+              <span>Arrival airport</span>
+              <select id="routing-destination"><option value="">Any airport</option></select>
+            </label>
+            <label>
+              <span>Rows</span>
+              <select id="routing-page-size">
+                <option value="50" selected>50</option>
+                <option value="250">250</option>
+                <option value="500">500</option>
+                <option value="all">All</option>
+              </select>
             </label>
           </div>
           <div class="table-shell">
@@ -168,8 +186,11 @@
             <label><span>Origin</span><select id="timetable-origin"><option value="">Any origin</option></select></label>
             <label><span>Destination</span><select id="timetable-destination"><option value="">Any destination</option></select></label>
             <label><span>Fleet</span><select id="timetable-fleet"><option value="">All fleets</option></select></label>
+            <label><span>Connections</span><select id="timetable-connections" disabled><option value="all" selected>All</option><option value="max1">Max 1-stop</option><option value="nonstop">Non-stop only</option></select></label>
           </div>
-          <div class="table-shell">
+          <p class="mode-note" id="timetable-mode-note">Select an origin to view connecting itineraries. With no origin selected, the complete flight list is shown.</p>
+          <div class="itinerary-results" id="itinerary-results" hidden></div>
+          <div class="table-shell" id="timetable-flight-shell">
             <table>
               <thead><tr><th>Flight</th><th>Origin</th><th>Departs</th><th>Destination</th><th>Arrives</th><th>Fleet</th></tr></thead>
               <tbody id="timetable-rows"></tbody>

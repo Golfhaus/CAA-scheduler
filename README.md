@@ -2,7 +2,7 @@
 
 CAA Scheduler is the migration target for Coastal American Airways schedule construction. It moves the durable schedule state and deterministic processing out of an LLM conversation and into version-controlled code and data.
 
-## Milestone 0.4
+## Milestone 0.4.1
 
 The migration baseline now proves this pipeline:
 
@@ -51,7 +51,7 @@ python -m caa_scheduler build-web --output dist
 python -m http.server --directory dist 8000
 ```
 
-The site loads the pinned canonical schedule and its generated reports directly. Its schedule manifest makes additional versions additive rather than requiring UI code changes. After Milestone 0.4 is merged, GitHub Actions publishes the console to [Golfhaus.github.io/CAA-scheduler](https://golfhaus.github.io/CAA-scheduler/).
+The site loads the pinned canonical schedule and its generated reports directly. Its schedule manifest makes additional versions additive rather than requiring UI code changes. GitHub Actions publishes the console to [Golfhaus.github.io/CAA-scheduler](https://golfhaus.github.io/CAA-scheduler/).
 
 Either consumer file can also be rebuilt directly from canonical JSON:
 
@@ -69,7 +69,7 @@ python -m caa_scheduler validate-operating \
 
 ## Current boundary
 
-Milestone 0.4 adds a responsive, read-only operating console with Overview, Routings, Validation, Timetable, and Gate Utilization views. Findings link to the relevant flight, route, line, or airport when that context exists. See [Web console](docs/web_console.md).
+Milestone 0.4.1 refines the responsive, read-only operating console with the Coastal American wordmark, denser routing filters, schedule-based itinerary search, and visible stand passenger-handling conflicts. Findings link to the relevant flight, route, line, or airport when that context exists. See [Web console](docs/web_console.md).
 
 The v2.2.5 golden schedule is intentionally **not** declared operating-rule clean. Exact historical preservation and current-policy compliance remain separate questions. The console makes the known baseline findings visible without silently waiving them.
 

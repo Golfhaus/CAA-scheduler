@@ -7,7 +7,13 @@ from typing import Any
 from .io import read_json, write_json
 
 
-WEB_ASSETS = ("index.html", "styles.css", "app.mjs", "favicon.svg")
+WEB_ASSETS = (
+    "index.html",
+    "styles.css",
+    "app.mjs",
+    "favicon.svg",
+    "coastal-american-logo.png",
+)
 
 
 def build_web_console(
