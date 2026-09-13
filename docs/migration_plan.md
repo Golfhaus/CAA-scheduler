@@ -33,6 +33,8 @@ Status: complete.
 
 ## 0.4 — Read-only web console
 
+Status: complete.
+
 - Load a canonical schedule in GitHub Pages.
 - Show overview, routings, validation, timetable, and gate-utilization views.
 - Link every validation failure to the affected flights or station.
