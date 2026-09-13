@@ -204,13 +204,22 @@
             <div>
               <p class="eyebrow">Physical assignment</p>
               <h1 id="gates-title">Gate utilization</h1>
-              <p class="page-note">A 24-hour view of the selected airport’s gates and stands.</p>
+              <p class="page-note">A 03:00–03:00 view of the selected airport’s gates and stands. Tap or click a claim to see its details.</p>
             </div>
             <label class="airport-picker"><span>Airport</span><select id="gate-airport"></select></label>
           </div>
           <div class="metric-grid gate-metrics" id="gate-metrics"></div>
           <section class="panel gate-panel">
             <div class="timeline-key" id="timeline-key"></div>
+            <div class="claim-tooltip" id="claim-tooltip" role="status" aria-live="polite" hidden>
+              <div class="claim-tooltip-copy">
+                <strong id="claim-tooltip-title"></strong>
+                <span id="claim-tooltip-summary"></span>
+                <span id="claim-tooltip-movement"></span>
+                <span class="claim-tooltip-warning" id="claim-tooltip-warning" hidden></span>
+              </div>
+              <button type="button" class="claim-tooltip-close" id="claim-tooltip-close" aria-label="Close claim details">×</button>
+            </div>
             <div class="gate-timeline" id="gate-timeline"></div>
           </section>
         </section>

@@ -4,9 +4,11 @@ import test from "node:test";
 
 import {
   buildItineraries,
+  claimMatchesPassengerStandFinding,
   extractReferences,
   fleetUsage,
   formatMinute,
+  formatMinute24,
   legMatches,
   paginate,
   passengerStandFindings,
@@ -29,6 +31,15 @@ const operatingReport = JSON.parse(
   await readFile(
     new URL(
       "../data/schedules/schedule_6_v2_2_5/operating_validation_report.json",
+      import.meta.url,
+    ),
+    "utf8",
+  ),
+);
+const gates = JSON.parse(
+  await readFile(
+    new URL(
+      "../data/schedules/schedule_6_v2_2_5/gates.json",
       import.meta.url,
     ),
     "utf8",
@@ -157,10 +168,26 @@ test("every blocking baseline finding has a console destination", () => {
 
 test("gate claims split cleanly across midnight", () => {
   assert.deepEqual(splitClaimSegments(1380, 1500), [
-    { start: 1380, duration: 60 },
     { start: 0, duration: 60 },
+    { start: 1380, duration: 60 },
   ]);
   assert.equal(formatMinute(1500), "1:00 AM");
+});
+
+test("gate claims map into the 03:00–03:00 operating window", () => {
+  assert.deepEqual(splitClaimSegments(0, 60, 180), [
+    { start: 1260, duration: 60 },
+  ]);
+  assert.deepEqual(splitClaimSegments(1680, 1740, 180), [
+    { start: 60, duration: 60 },
+  ]);
+  assert.deepEqual(splitClaimSegments(1085, 1948, 180), [
+    { start: 0, duration: 328 },
+    { start: 905, duration: 535 },
+  ]);
+  assert.equal(formatMinute24(180), "03:00");
+  assert.equal(formatMinute24(1380), "23:00");
+  assert.equal(formatMinute24(1620), "03:00");
 });
 
 test("stand passenger-handling counts come from the authoritative operating report", () => {
@@ -171,4 +198,16 @@ test("stand passenger-handling counts come from the authoritative operating repo
     operatingReport.checks.find((item) => item.id === "passenger_touch_on_stand").findings.length,
     35,
   );
+});
+
+test("only passenger-handling edges of a stand RON are highlighted", () => {
+  const city = gates.cities.find((item) => item.code === "ALB");
+  const claims = city.claims.filter((claim) => claim.rowType === "stand" && claim.label === "358 -> 359");
+  const findings = passengerStandFindings(operatingReport, "ALB");
+  const arrival = claims.find((claim) => claim.start === 1396 && claim.end === 1441);
+  const overnight = claims.find((claim) => claim.start === 1441 && claim.end === 1680);
+  const departure = claims.find((claim) => claim.start === 1680 && claim.end === 1740);
+  assert.equal(claimMatchesPassengerStandFinding("ALB", arrival, findings), true);
+  assert.equal(claimMatchesPassengerStandFinding("ALB", overnight, findings), false);
+  assert.equal(claimMatchesPassengerStandFinding("ALB", departure, findings), true);
 });

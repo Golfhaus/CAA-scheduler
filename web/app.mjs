@@ -1,4 +1,5 @@
 const DEFAULT_PAGE_SIZE = 50;
+const GATE_WINDOW_START = 180;
 const CONNECTIONS_HUB_OVERRIDE = new Set(["BHM"]);
 const TIMEZONE_OFFSETS = { Eastern: -300, Central: -360, Mountain: -420 };
 
@@ -35,6 +36,13 @@ export function formatMinute(value) {
   const suffix = hours >= 12 ? "PM" : "AM";
   const displayHour = hours % 12 || 12;
   return `${displayHour}:${String(minutes).padStart(2, "0")} ${suffix}`;
+}
+
+export function formatMinute24(value) {
+  const normalized = ((Math.round(Number(value)) % 1440) + 1440) % 1440;
+  const hours = Math.floor(normalized / 60);
+  const minutes = normalized % 60;
+  return `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}`;
 }
 
 export function toMinutes(value) {
@@ -147,6 +155,18 @@ export function passengerStandFindings(operatingReport, cityCode) {
   return (check?.findings || []).filter((finding) => finding.evidence?.city === cityCode);
 }
 
+export function claimMatchesPassengerStandFinding(cityCode, claim, findings) {
+  if (claim.rowType !== "stand") return false;
+  return findings.some((finding) => {
+    const evidence = finding.evidence || {};
+    return evidence.city === cityCode
+      && evidence.label === claim.label
+      && evidence.kind === claim.kind
+      && Number(evidence.start) === Number(claim.start)
+      && Number(evidence.end) === Number(claim.end);
+  });
+}
+
 export function scheduleMetrics(canonical) {
   const legs = canonical.legs;
   return {
@@ -235,15 +255,28 @@ export function extractReferences(evidence) {
   );
 }
 
-export function splitClaimSegments(start, end) {
-  const duration = Math.max(0, Number(end) - Number(start));
+export function splitClaimSegments(start, end, windowStart = 0) {
+  const numericStart = Number(start);
+  const numericEnd = Number(end);
+  const duration = Math.max(0, numericEnd - numericStart);
   if (duration >= 1440) return [{ start: 0, duration: 1440 }];
-  const normalized = ((Number(start) % 1440) + 1440) % 1440;
-  if (normalized + duration <= 1440) return [{ start: normalized, duration }];
-  return [
-    { start: normalized, duration: 1440 - normalized },
-    { start: 0, duration: normalized + duration - 1440 },
-  ];
+  const windowEnd = Number(windowStart) + 1440;
+  const segments = [];
+  const firstShift = Math.floor((Number(windowStart) - numericEnd) / 1440);
+  const lastShift = Math.ceil((windowEnd - numericStart) / 1440);
+  for (let shift = firstShift; shift <= lastShift; shift += 1) {
+    const shiftedStart = numericStart + shift * 1440;
+    const shiftedEnd = numericEnd + shift * 1440;
+    const overlapStart = Math.max(Number(windowStart), shiftedStart);
+    const overlapEnd = Math.min(windowEnd, shiftedEnd);
+    if (overlapEnd > overlapStart) {
+      segments.push({
+        start: overlapStart - Number(windowStart),
+        duration: overlapEnd - overlapStart,
+      });
+    }
+  }
+  return segments.sort((a, b) => a.start - b.start);
 }
 
 function metricCard(label, value, note, variant = "") {
@@ -607,6 +640,7 @@ function renderCheck(check, query, forceOpen) {
 }
 
 function renderGates() {
+  closeGateClaimDetails();
   const code = $("#gate-airport").value;
   const city = state.gates.cities.find((item) => item.code === code) || state.gates.cities[0];
   if (!city) return;
@@ -627,7 +661,7 @@ function renderGates() {
     ),
   ].join("");
   const colors = state.gates.fleetColors;
-  $("#timeline-key").innerHTML = Object.entries(colors).map(([fleet, color]) => `<span class="legend-item"><i class="legend-swatch" style="background:${escapeHtml(color)}"></i>${escapeHtml(fleet)}</span>`).join("");
+  $("#timeline-key").innerHTML = `${Object.entries(colors).map(([fleet, color]) => `<span class="legend-item"><i class="legend-swatch" style="background:${escapeHtml(color)}"></i>${escapeHtml(fleet)}</span>`).join("")}<span class="legend-item legend-warning"><i class="legend-swatch"></i>Passenger handling on stand</span>`;
 
   const maximumGateRow = Math.max(city.nGates, ...gateClaims.map((claim) => claim.row));
   const maximumStandRow = Math.max(city.nStands, ...standClaims.map((claim) => claim.row));
@@ -635,14 +669,51 @@ function renderGates() {
     ...Array.from({ length: maximumGateRow }, (_, index) => ({ type: "gate", row: index + 1 })),
     ...Array.from({ length: maximumStandRow }, (_, index) => ({ type: "stand", row: index + 1 })),
   ];
-  const axis = [0, 240, 480, 720, 960, 1200, 1440];
-  $("#gate-timeline").innerHTML = `<div class="time-axis"><span></span><div class="axis-track">${axis.map((minute) => `<span class="axis-label" style="left:${(minute / 1440) * 100}%">${formatMinute(minute)}</span>`).join("")}</div></div>${lanes.map((lane) => renderLane(city, lane, colors)).join("")}`;
+  const axis = Array.from({ length: 7 }, (_, index) => GATE_WINDOW_START + index * 240);
+  $("#gate-timeline").innerHTML = `<div class="time-axis"><span></span><div class="axis-track">${axis.map((minute) => `<span class="axis-label" style="left:${((minute - GATE_WINDOW_START) / 1440) * 100}%">${formatMinute24(minute)}</span>`).join("")}</div></div>${lanes.map((lane) => renderLane(city, lane, colors, passengerStandClaims)).join("")}`;
 }
 
-function renderLane(city, lane, colors) {
+function renderLane(city, lane, colors, passengerStandClaims) {
   const claims = city.claims.filter((claim) => claim.rowType === lane.type && claim.row === lane.row);
-  const bars = claims.flatMap((claim) => splitClaimSegments(claim.start, claim.end).map((segment) => `<span class="claim-bar kind-${lane.type}" title="${escapeHtml(`${claim.label} · ${claim.fleet} · ${claim.kind} · ${formatMinute(claim.start)}–${formatMinute(claim.end)}`)}" style="left:${(segment.start / 1440) * 100}%;width:${Math.max(0.12, (segment.duration / 1440) * 100)}%;background:${escapeHtml(colors[claim.fleet] || "#cbd5e1")}">${escapeHtml(claim.label)}</span>`)).join("");
+  const bars = claims.flatMap((claim) => {
+    const passengerHandling = claimMatchesPassengerStandFinding(city.code, claim, passengerStandClaims);
+    const fleetColor = colors[claim.fleet] || "#cbd5e1";
+    const timeLabel = `${formatMinute24(claim.start)}–${formatMinute24(claim.end)}`;
+    const accessibleLabel = `${claim.label}, ${claim.fleet}, ${claim.kind}, ${timeLabel}${passengerHandling ? ", passenger handling on a stand" : ""}`;
+    return splitClaimSegments(claim.start, claim.end, GATE_WINDOW_START).map((segment) => `<button type="button" class="claim-bar kind-${lane.type}${passengerHandling ? " is-passenger-handling" : ""}" title="${escapeHtml(accessibleLabel)}" aria-label="${escapeHtml(accessibleLabel)}" aria-controls="claim-tooltip" aria-expanded="false" data-gate-claim data-claim-label="${escapeHtml(claim.label)}" data-claim-fleet="${escapeHtml(claim.fleet)}" data-claim-kind="${escapeHtml(claim.kind)}" data-claim-start="${escapeHtml(claim.start)}" data-claim-end="${escapeHtml(claim.end)}" data-claim-row-type="${escapeHtml(claim.rowType)}" data-claim-row="${escapeHtml(claim.row)}" data-claim-arrival-city="${escapeHtml(claim.arrivalCity || "")}" data-claim-departure-city="${escapeHtml(claim.departureCity || "")}" data-claim-passenger-handling="${passengerHandling}" style="--fleet-color:${escapeHtml(fleetColor)};left:${(segment.start / 1440) * 100}%;width:${Math.max(0.12, (segment.duration / 1440) * 100)}%;background:${escapeHtml(fleetColor)}">${escapeHtml(claim.label)}</button>`);
+  }).join("");
   return `<div class="timeline-row"><span class="lane-label">${lane.type === "gate" ? "Gate" : "Stand"} ${lane.row}</span><div class="lane-track">${bars}</div></div>`;
+}
+
+function closeGateClaimDetails() {
+  const tooltip = $("#claim-tooltip");
+  if (!tooltip) return;
+  $$('[data-gate-claim][aria-expanded="true"]').forEach((button) => button.setAttribute("aria-expanded", "false"));
+  tooltip.hidden = true;
+  tooltip.classList.remove("is-warning");
+}
+
+function toggleGateClaimDetails(button) {
+  const tooltip = $("#claim-tooltip");
+  const wasOpen = button.getAttribute("aria-expanded") === "true" && !tooltip.hidden;
+  closeGateClaimDetails();
+  if (wasOpen) return;
+
+  const passengerHandling = button.dataset.claimPassengerHandling === "true";
+  const position = `${button.dataset.claimRowType === "gate" ? "Gate" : "Stand"} ${button.dataset.claimRow}`;
+  const movement = [button.dataset.claimArrivalCity, button.dataset.claimDepartureCity]
+    .filter(Boolean)
+    .join(` → ${$("#gate-airport").value} → `);
+  $("#claim-tooltip-title").textContent = button.dataset.claimLabel;
+  $("#claim-tooltip-summary").textContent = `${button.dataset.claimFleet} · ${button.dataset.claimKind.toUpperCase()} · ${formatMinute24(button.dataset.claimStart)}–${formatMinute24(button.dataset.claimEnd)} · ${position}`;
+  $("#claim-tooltip-movement").textContent = movement;
+  $("#claim-tooltip-warning").textContent = passengerHandling
+    ? "Passenger handling occurs on this stand segment; a gate is required."
+    : "";
+  $("#claim-tooltip-warning").hidden = !passengerHandling;
+  tooltip.classList.toggle("is-warning", passengerHandling);
+  tooltip.hidden = false;
+  button.setAttribute("aria-expanded", "true");
 }
 
 function handleReference(button) {
@@ -671,6 +742,16 @@ function handleReference(button) {
 
 function bindEvents() {
   document.addEventListener("click", (event) => {
+    const closeClaim = event.target.closest("#claim-tooltip-close");
+    if (closeClaim) {
+      closeGateClaimDetails();
+      return;
+    }
+    const gateClaim = event.target.closest("[data-gate-claim]");
+    if (gateClaim) {
+      toggleGateClaimDetails(gateClaim);
+      return;
+    }
     const tab = event.target.closest("[data-tab]");
     if (tab) activateTab(tab.dataset.tab);
     const openTab = event.target.closest("[data-open-tab]");
