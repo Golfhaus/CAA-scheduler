@@ -439,6 +439,16 @@ tbody tr:hover { background: #f6f9fc; }
 .timeline-key { display: flex; flex-wrap: wrap; gap: 0.8rem; margin: 0 0 0.8rem 6.5rem; color: var(--muted); font-size: 0.72rem; }
 .legend-item { display: flex; align-items: center; gap: 0.3rem; }
 .legend-swatch { width: 0.65rem; height: 0.65rem; border-radius: 0.15rem; }
+.legend-warning { color: var(--danger); font-weight: 800; }
+.legend-warning .legend-swatch { border: 2px solid var(--orange); background: white; box-shadow: 0 0 0 1px var(--danger); }
+.claim-tooltip { position: sticky; left: 0; z-index: 5; display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; width: min(100%, 42rem); margin: 0 0 0.9rem 6.5rem; border: 1px solid #a9bdd5; border-left: 4px solid var(--blue-700); border-radius: 0.65rem; padding: 0.75rem 0.8rem; background: #f5f9fe; box-shadow: 0 8px 22px rgba(8, 34, 67, 0.12); }
+.claim-tooltip.is-warning { border-color: #f0a5a0; border-left-color: var(--danger); background: var(--danger-soft); }
+.claim-tooltip-copy { display: grid; gap: 0.16rem; min-width: 0; }
+.claim-tooltip-copy strong { font-size: 0.9rem; }
+.claim-tooltip-copy span { color: var(--muted); font-size: 0.78rem; line-height: 1.35; }
+.claim-tooltip-copy .claim-tooltip-warning { margin-top: 0.18rem; color: var(--danger); font-weight: 850; }
+.claim-tooltip-close { flex: 0 0 auto; width: 2.25rem; height: 2.25rem; display: grid; place-items: center; border: 0; border-radius: 50%; background: transparent; color: var(--navy-900); font-size: 1.35rem; line-height: 1; }
+.claim-tooltip-close:hover { background: rgba(9, 42, 83, 0.08); }
 .gate-timeline { min-width: 54rem; overflow-x: auto; }
 .time-axis, .timeline-row { display: grid; grid-template-columns: 5.7rem minmax(45rem, 1fr); gap: 0.65rem; }
 .time-axis { margin-bottom: 0.35rem; color: var(--muted); font-size: 0.7rem; }
@@ -448,9 +458,12 @@ tbody tr:hover { background: #f6f9fc; }
 .axis-label:last-child { transform: translateX(-100%); }
 .timeline-row { align-items: center; min-height: 2rem; }
 .lane-label { color: var(--muted); font-size: 0.72rem; font-weight: 750; text-align: right; }
-.lane-track { position: relative; height: 1.45rem; border-bottom: 1px solid #e4eaf1; background: repeating-linear-gradient(90deg, transparent 0, transparent calc(12.5% - 1px), #edf1f5 calc(12.5% - 1px), #edf1f5 12.5%); }
-.claim-bar { position: absolute; top: 0.16rem; height: 1.12rem; overflow: hidden; border: 1px solid rgba(6, 26, 51, 0.18); border-radius: 0.23rem; padding: 0.05rem 0.2rem; color: #10223a; font-size: 0.63rem; font-weight: 750; white-space: nowrap; text-overflow: ellipsis; }
+.lane-track { position: relative; height: 1.45rem; border-bottom: 1px solid #e4eaf1; background: repeating-linear-gradient(90deg, transparent 0, transparent calc(16.6667% - 1px), #edf1f5 calc(16.6667% - 1px), #edf1f5 16.6667%); }
+.claim-bar { position: absolute; top: 0.16rem; height: 1.12rem; overflow: hidden; appearance: none; border: 1px solid rgba(6, 26, 51, 0.18); border-radius: 0.23rem; padding: 0.05rem 0.2rem; color: #10223a; font-size: 0.63rem; font-weight: 750; line-height: 1; text-align: left; white-space: nowrap; text-overflow: ellipsis; touch-action: manipulation; }
 .claim-bar.kind-stand { border-style: dashed; }
+.claim-bar[aria-expanded="true"] { z-index: 3; outline: 3px solid rgba(245, 130, 32, 0.62); outline-offset: 2px; }
+.claim-bar.is-passenger-handling { z-index: 2; top: 0.1rem; height: 1.24rem; border: 2px solid var(--fleet-color); background: color-mix(in srgb, var(--fleet-color) 23%, white) !important; box-shadow: 0 0 0 1px white, 0 0 0 3px var(--fleet-color); color: var(--danger); font-weight: 900; }
+.claim-bar.kind-stand.is-passenger-handling { border-style: solid; }
 
 @media (max-width: 74rem) {
   .metric-grid { grid-template-columns: repeat(3, 1fr); }
@@ -484,6 +497,7 @@ tbody tr:hover { background: #f6f9fc; }
   .airport-picker select { width: 100%; min-width: 0; }
   .gate-panel { overflow-x: auto; padding: 0.75rem; }
   .timeline-key { margin-left: 0; }
+  .claim-tooltip { margin-left: 0; }
   .itinerary-leg { grid-template-columns: 3.5rem minmax(8rem, 1fr); }
   .itinerary-leg .itinerary-time, .itinerary-leg .fleet-badge { grid-column: 2; }
   .connection-note { margin-left: 4.15rem; }
