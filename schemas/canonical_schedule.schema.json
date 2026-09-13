@@ -3,19 +3,24 @@
   "$id": "https://coastal-american.example/schemas/canonical_schedule.schema.json",
   "title": "Coastal American Airways canonical schedule",
   "type": "object",
-  "required": ["schemaVersion", "schedule", "provenance", "gatePlan", "cities", "legs"],
+  "required": ["schemaVersion", "schedule", "provenance", "gatePlan", "operatingPolicy", "cities", "legs"],
   "properties": {
     "schemaVersion": { "const": "1.0.0" },
     "schedule": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["id", "number", "version", "label", "status", "connectionWindowMinutes"],
+      "required": ["id", "number", "version", "label", "status", "fleetCounts", "connectionWindowMinutes"],
       "properties": {
         "id": { "type": "string", "minLength": 1 },
         "number": { "type": "integer", "minimum": 1 },
         "version": { "type": "string", "minLength": 1 },
         "label": { "type": "string", "minLength": 1 },
         "status": { "enum": ["draft", "in_progress", "final"] },
+        "fleetCounts": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": { "type": "integer", "minimum": 0 }
+        },
         "connectionWindowMinutes": {
           "type": "object",
           "additionalProperties": false,
@@ -30,11 +35,12 @@
     "provenance": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["workbook", "cityInformation"],
+      "required": ["workbook", "cityInformation", "operatingPolicy"],
       "properties": {
         "workbook": { "$ref": "#/$defs/workbookSource" },
         "cityInformation": { "$ref": "#/$defs/fileSource" },
-        "gateTimingBaseline": { "$ref": "#/$defs/fileSource" }
+        "gateTimingBaseline": { "$ref": "#/$defs/fileSource" },
+        "operatingPolicy": { "$ref": "#/$defs/fileSource" }
       }
     },
     "gatePlan": {
@@ -52,6 +58,15 @@
           }
         }
       }
+    },
+    "operatingPolicy": { "$ref": "#/$defs/operatingPolicy" },
+    "hubBanks": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/hubBank" }
+    },
+    "bankAssignments": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/bankAssignment" }
     },
     "cities": {
       "type": "array",
@@ -88,6 +103,71 @@
         "sheet": { "type": "string", "minLength": 1 }
       }
     },
+    "operatingPolicy": {
+      "type": "object",
+      "required": [
+        "id", "source", "hubs", "focusCities",
+        "departureWindows", "turns", "section26", "pointToPointMaximumShare",
+        "marketMaximumDailyDeparturesPerDirection", "runwayScreeningFeet",
+        "ronTargetCities", "destinationRonExemptions", "rollingRonWindowDays",
+        "rollingRonGraceDays", "hubBankCounts", "hubBankWindowMinutes", "overrides"
+      ],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "source": { "type": "string", "minLength": 1 },
+        "hubs": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+        "focusCities": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+        "departureWindows": { "type": "object" },
+        "turns": { "type": "object" },
+        "section26": { "type": "object" },
+        "pointToPointMaximumShare": { "type": "number", "minimum": 0, "maximum": 1 },
+        "marketMaximumDailyDeparturesPerDirection": { "type": "integer", "minimum": 1 },
+        "runwayScreeningFeet": { "type": "object", "additionalProperties": { "type": "integer", "minimum": 1 } },
+        "ronTargetCities": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+        "destinationRonExemptions": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+        "rollingRonWindowDays": { "type": "integer", "minimum": 1 },
+        "rollingRonGraceDays": { "type": "integer", "minimum": 0 },
+        "hubBankCounts": { "type": "object", "additionalProperties": { "type": "integer", "minimum": 1 } },
+        "hubBankWindowMinutes": { "type": "integer", "minimum": 1 },
+        "overrides": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["checkId", "findingId", "reason"],
+            "properties": {
+              "checkId": { "type": "string", "minLength": 1 },
+              "findingId": { "type": "string", "minLength": 1 },
+              "reason": { "type": "string", "minLength": 1 },
+              "approvedBy": { "type": "string" },
+              "expiresAfterSchedule": { "type": ["integer", "null"] }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "hubBank": {
+      "type": "object",
+      "required": ["id", "hub", "startMinute", "endMinute"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "hub": { "type": "string", "minLength": 3 },
+        "startMinute": { "type": "number", "minimum": 0, "exclusiveMaximum": 1440 },
+        "endMinute": { "type": "number", "minimum": 0, "exclusiveMaximum": 1440 }
+      },
+      "additionalProperties": false
+    },
+    "bankAssignment": {
+      "type": "object",
+      "required": ["legId", "operation", "bankId"],
+      "properties": {
+        "legId": { "type": "string", "minLength": 1 },
+        "operation": { "enum": ["arrival", "departure"] },
+        "bankId": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    },
     "city": {
       "type": "object",
       "additionalProperties": false,
@@ -117,7 +197,8 @@
         "latitude": { "$ref": "#/$defs/nullableNumber" },
         "longitude": { "$ref": "#/$defs/nullableNumber" },
         "runwayLengthFeet": { "$ref": "#/$defs/nullableInteger" },
-        "elevationFeet": { "$ref": "#/$defs/nullableInteger" }
+        "elevationFeet": { "$ref": "#/$defs/nullableInteger" },
+        "demandPercentile": { "type": "number", "minimum": 0, "maximum": 100 }
       }
     },
     "leg": {

@@ -22,7 +22,9 @@ Status: complete.
 
 ## 0.3 — Operating-rule validator
 
-- Add fleet capacity and aircraft-day checks.
+Status: complete.
+
+- Add per-schedule fleet-plan and aircraft-day checks.
 - Add curfews and allowed operating windows.
 - Add turn-duration and routing/RON rules.
 - Implement the current two-part Section 2.6 policy without the obsolete hub multiplier.

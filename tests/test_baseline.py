@@ -16,6 +16,7 @@ from caa_scheduler.gate_export import export_gate_schedule
 from caa_scheduler.gates import GateClaim, overlaps
 from caa_scheduler.importer import import_canonical_schedule
 from caa_scheduler.io import read_json
+from caa_scheduler.operating_validation import validate_operating_rules
 from caa_scheduler.timetable import export_timetable
 from caa_scheduler.validation import validate_schedule
 
@@ -25,12 +26,19 @@ WORKBOOK = FIXTURE_ROOT / "source" / "Schedule_6__Version_2_2_5.xlsx"
 CITY_INFORMATION = FIXTURE_ROOT / "source" / "city_information_v2.csv"
 EXPECTED_TIMETABLE = FIXTURE_ROOT / "expected" / "schedule_6_v2_2_5.json"
 EXPECTED_GATE = FIXTURE_ROOT / "expected" / "gate_sked6_v2_2_5.json"
+OPERATING_POLICY = REPO_ROOT / "config" / "policies" / "operating_rules_v2_0.json"
 SCHEDULE = {
     "id": "schedule_6_v2_2_5",
     "number": 6,
     "version": "2.2.5",
     "label": "Schedule 6, Version 2.2.5 (in progress -- not yet Finalized)",
     "status": "in_progress",
+    "fleetCounts": {
+        "MAX9": 35,
+        "CRJ900": 45,
+        "CRJ700": 65,
+        "CRJ200": 80,
+    },
 }
 CONNECTION_WINDOW = {"minimum": 30, "maximum": 240}
 GATE_PLAN = {
@@ -49,6 +57,7 @@ class ScheduleSixBaselineTests(unittest.TestCase):
             connection_window=CONNECTION_WINDOW,
             gate_plan=GATE_PLAN,
             gate_baseline_path=EXPECTED_GATE,
+            operating_policy_path=OPERATING_POLICY,
         )
 
     def test_import_preserves_golden_counts(self) -> None:
@@ -89,6 +98,97 @@ class ScheduleSixBaselineTests(unittest.TestCase):
         self.assertTrue(overlaps(late, early))
         self.assertFalse(overlaps(late, separate))
 
+    def test_operating_validator_exposes_known_baseline_findings(self) -> None:
+        report = validate_operating_rules(self.canonical)
+        self.assertEqual(report["status"], "fail")
+        self.assertEqual(
+            report["summary"],
+            {
+                "checks": 24,
+                "passed": 10,
+                "failed": 7,
+                "warnings": 4,
+                "notEvaluated": 3,
+                "overridden": 0,
+                "effectiveErrorFindings": 55,
+                "effectiveWarningFindings": 156,
+            },
+        )
+        checks = {check["id"]: check for check in report["checks"]}
+        self.assertEqual(checks["fleet_capacity"]["status"], "pass")
+        self.assertEqual(checks["departure_windows"]["status"], "pass")
+        self.assertEqual(checks["point_to_point_share"]["status"], "pass")
+        self.assertEqual(checks["minimum_turn_time"]["status"], "fail")
+        self.assertEqual(
+            checks["section_26_service_gap_policy_consistency"]["status"],
+            "warning",
+        )
+        self.assertEqual(checks["departure_windows"]["hardStop"], True)
+        self.assertEqual(
+            checks["section_26_city_departure_gap"]["status"], "warning"
+        )
+        self.assertEqual(checks["runway_screening"]["status"], "not_evaluated")
+        self.assertEqual(checks["hub_bank_alignment"]["status"], "not_evaluated")
+        self.assertEqual(len(checks["market_frequency_ceiling"]["findings"]), 3)
+        self.assertEqual(len(checks["passenger_touch_on_stand"]["findings"]), 35)
+
+    def test_fleet_counts_are_schedule_specific(self) -> None:
+        candidate = copy.deepcopy(self.canonical)
+        self.assertNotIn("fleetCapacity", candidate["operatingPolicy"])
+        candidate["schedule"]["fleetCounts"]["MAX9"] = 34
+        report = validate_operating_rules(candidate)
+        check = next(item for item in report["checks"] if item["id"] == "fleet_capacity")
+        self.assertEqual(check["status"], "fail")
+        self.assertEqual(check["findings"][0]["evidence"]["capacity"], 34)
+
+    def test_curfew_violation_is_a_hard_stop(self) -> None:
+        candidate = copy.deepcopy(self.canonical)
+        candidate["legs"][0]["departureMinute"] = 200
+        candidate["legs"][0]["arrivalMinute"] = 260
+        first = validate_operating_rules(candidate)
+        first_check = next(
+            item for item in first["checks"] if item["id"] == "departure_windows"
+        )
+        candidate["operatingPolicy"]["overrides"] = [
+            {
+                "checkId": "departure_windows",
+                "findingId": first_check["findings"][0]["id"],
+                "reason": "Hard stops must ignore this attempted override",
+            }
+        ]
+        report = validate_operating_rules(candidate)
+        check = next(item for item in report["checks"] if item["id"] == "departure_windows")
+        self.assertEqual(check["status"], "fail")
+        self.assertTrue(check["hardStop"])
+        self.assertNotIn("override", check["findings"][0])
+
+    def test_hub_bank_validator_requires_definition_and_touch_assignments(self) -> None:
+        candidate = copy.deepcopy(self.canonical)
+        candidate["hubBanks"] = []
+        candidate["bankAssignments"] = []
+        report = validate_operating_rules(candidate)
+        check = next(item for item in report["checks"] if item["id"] == "hub_bank_alignment")
+        self.assertEqual(check["status"], "fail")
+        self.assertGreater(len(check["findings"]), 5)
+
+    def test_operating_override_requires_exact_finding_id(self) -> None:
+        broken = copy.deepcopy(self.canonical)
+        first = validate_operating_rules(broken)
+        check = next(item for item in first["checks"] if item["id"] == "minimum_turn_time")
+        finding = check["findings"][0]
+        broken["operatingPolicy"]["overrides"] = [
+            {
+                "checkId": "minimum_turn_time",
+                "findingId": finding["id"],
+                "reason": "Regression-test approval only",
+                "approvedBy": "test",
+            }
+        ]
+        second = validate_operating_rules(broken)
+        updated = next(item for item in second["checks"] if item["id"] == "minimum_turn_time")
+        self.assertIn("override", updated["findings"][0])
+        self.assertEqual(updated["metrics"]["overriddenFindingCount"], 1)
+
     def test_baseline_validator_passes(self) -> None:
         report = validate_schedule(self.canonical)
         self.assertEqual(report["status"], "pass", report)
@@ -118,6 +218,7 @@ class ScheduleSixBaselineTests(unittest.TestCase):
             connection_window=CONNECTION_WINDOW,
             gate_plan=GATE_PLAN,
             gate_baseline_path=EXPECTED_GATE,
+            operating_policy_path=OPERATING_POLICY,
         )
         self.assertEqual(
             json.dumps(self.canonical, sort_keys=True),
@@ -136,6 +237,7 @@ class ScheduleSixBaselineTests(unittest.TestCase):
                     "cityInformation": str(CITY_INFORMATION),
                     "expectedTimetable": str(EXPECTED_TIMETABLE),
                     "expectedGate": str(EXPECTED_GATE),
+                    "operatingPolicy": str(OPERATING_POLICY),
                 },
                 "outputs": {"directory": str(temp_root / "out")},
             }
@@ -151,6 +253,7 @@ class ScheduleSixBaselineTests(unittest.TestCase):
             self.assertTrue(result["timetablePath"].exists())
             self.assertTrue(result["gatePath"].exists())
             self.assertTrue(result["validationPath"].exists())
+            self.assertTrue(result["operatingValidationPath"].exists())
             self.assertEqual(
                 result["timetablePath"].read_bytes(),
                 EXPECTED_TIMETABLE.read_bytes(),

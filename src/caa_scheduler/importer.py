@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import csv
 import datetime as dt
+import json
 import re
 from collections import defaultdict
 from pathlib import Path
@@ -286,14 +287,13 @@ def import_canonical_schedule(
     city_information_path: Path,
     schedule: dict[str, Any],
     connection_window: dict[str, int],
+    operating_policy_path: Path,
     gate_plan: dict[str, Any] | None = None,
     gate_baseline_path: Path | None = None,
 ) -> dict[str, Any]:
     cities = load_city_information(city_information_path)
     legs = load_routings(workbook_path)
     if gate_baseline_path is not None:
-        import json
-
         gate_baseline = json.loads(gate_baseline_path.read_text(encoding="utf-8"))
         apply_gate_timing_baseline(legs, gate_baseline)
     provenance: dict[str, Any] = {
@@ -312,6 +312,13 @@ def import_canonical_schedule(
             "filename": gate_baseline_path.name,
             "sha256": sha256_file(gate_baseline_path),
         }
+    operating_policy = json.loads(
+        operating_policy_path.read_text(encoding="utf-8")
+    )
+    provenance["operatingPolicy"] = {
+        "filename": operating_policy_path.name,
+        "sha256": sha256_file(operating_policy_path),
+    }
     return {
         "schemaVersion": "1.0.0",
         "schedule": {
@@ -320,6 +327,10 @@ def import_canonical_schedule(
             "version": str(schedule["version"]),
             "label": schedule["label"],
             "status": schedule["status"],
+            "fleetCounts": {
+                str(fleet): int(count)
+                for fleet, count in schedule["fleetCounts"].items()
+            },
             "connectionWindowMinutes": {
                 "minimum": int(connection_window["minimum"]),
                 "maximum": int(connection_window["maximum"]),
@@ -331,6 +342,7 @@ def import_canonical_schedule(
             "label": schedule["label"],
             "forcedStandSplits": {},
         },
+        "operatingPolicy": operating_policy,
         "cities": cities,
         "legs": legs,
     }
