@@ -26,4 +26,6 @@ Adding another schedule requires a manifest entry and its generated data files; 
 
 The Pages workflow builds the static directory on every push to `main`, uploads the supported Pages artifact, and deploys it to the `github-pages` environment. CI separately rebuilds the site and runs Python and JavaScript helper tests on pull requests.
 
+The repository must be configured once under **Settings → Pages → Build and deployment** with **GitHub Actions** selected as the source. The workflow deliberately does not carry a personal access token or attempt to change repository settings.
+
 The console remains read-only through Milestone 0.4. Construction, repairs, draft storage, and workflow kickoff belong to later milestones.
