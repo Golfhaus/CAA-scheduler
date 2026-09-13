@@ -5,10 +5,10 @@ Milestone 0.4 moves schedule inspection into a responsive GitHub Pages applicati
 ## Views
 
 - **Overview** shows network counts, per-schedule fleet utilization, structural fidelity, curfew state, and the largest blocking rule groups.
-- **Routings** searches the full canonical construction record by flight, airport, route, line, pairing, day, or fleet.
+- **Routings** searches the full canonical construction record and filters by fleet, line, departure airport, or arrival airport. Results can show 50, 250, 500, or all rows.
 - **Validation** separates structural fidelity from operating-policy compliance. It filters by status or text, expands exact evidence, and links findings to affected routings or airports.
-- **Timetable** presents the published passenger-facing flight view with origin, destination, fleet, and text filters.
-- **Gates** renders each airport's gates and stands across a cyclic 24-hour timeline, including claims that cross midnight.
+- **Timetable** sorts the complete flight list by departure time. Selecting an origin switches to itinerary mode: all non-stops and up to six shortest one-stop options per destination are shown, with shortest two-stop options filling any remaining space up to six. Connections occur only over configured hubs, with BHM treated as a connection hub. The filter can limit results to non-stops or a maximum of one stop.
+- **Gates** renders each airport's gates and stands across a cyclic 24-hour timeline, including claims that cross midnight. The Stands card is red when the operating report identifies a turn or a RON/ROD passenger-handling edge on a stand.
 
 The interface uses the airline's navy, blue, and orange palette, remains usable on phone-sized screens, provides visible keyboard focus, honors reduced-motion preferences, and keeps status meaning in text rather than color alone.
 
