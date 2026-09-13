@@ -6,6 +6,7 @@ from pathlib import Path
 from .baseline import build_baseline
 from .gate_export import export_gate_schedule
 from .io import read_json, write_json
+from .operating_validation import validate_operating_rules
 from .timetable import export_timetable
 from .validation import validate_schedule
 
@@ -29,6 +30,12 @@ def _parser() -> argparse.ArgumentParser:
     gates = subcommands.add_parser("export-gates", help="Export gate JSON")
     gates.add_argument("canonical", type=Path)
     gates.add_argument("output", type=Path)
+
+    operating = subcommands.add_parser(
+        "validate-operating", help="Validate operating rules and constraints"
+    )
+    operating.add_argument("canonical", type=Path)
+    operating.add_argument("--output", type=Path)
     return parser
 
 
@@ -43,6 +50,14 @@ def main(argv: list[str] | None = None) -> int:
         print(f"Timetable byte parity: {'PASS' if result['timetableByteParity'] else 'FAIL'}")
         print(f"Gate parity: {'PASS' if result['gateParity'] else 'FAIL'}")
         print(f"Gate byte parity: {'PASS' if result['gateByteParity'] else 'FAIL'}")
+        operating = result["operatingValidation"]
+        print(
+            "Operating rules: "
+            f"{operating['status'].upper()} "
+            f"({operating['summary']['effectiveErrorFindings']} errors, "
+            f"{operating['summary']['effectiveWarningFindings']} warnings, "
+            f"{operating['summary']['notEvaluated']} not evaluated)"
+        )
         return 0 if (
             validation["status"] == "pass"
             and result["timetableParity"]
@@ -79,4 +94,17 @@ def main(argv: list[str] | None = None) -> int:
         )
         print(f"Wrote {args.output}")
         return 0
+    if args.command == "validate-operating":
+        report = validate_operating_rules(canonical)
+        if args.output:
+            write_json(args.output, report)
+        print(
+            f"Operating validation: {report['status'].upper()} "
+            f"({report['summary']['effectiveErrorFindings']} errors, "
+            f"{report['summary']['effectiveWarningFindings']} warnings, "
+            f"{report['summary']['notEvaluated']} not evaluated)"
+        )
+        for check in report["checks"]:
+            print(f"  {check['status'].upper():13} {check['id']}: {check['message']}")
+        return 0 if report["status"] != "fail" else 1
     return 2

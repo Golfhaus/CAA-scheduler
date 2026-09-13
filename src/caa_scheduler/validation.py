@@ -15,6 +15,42 @@ def validate_schedule(canonical: dict[str, Any]) -> dict[str, Any]:
 
     _check(checks, "schema_version", canonical.get("schemaVersion") == "1.0.0", "Canonical schema version is 1.0.0")
     _check(checks, "has_legs", bool(legs), f"Schedule contains {len(legs)} legs")
+    policy = canonical.get("operatingPolicy")
+    policy_source = canonical.get("provenance", {}).get("operatingPolicy", {})
+    policy_pinned = (
+        isinstance(policy, dict)
+        and bool(policy.get("id"))
+        and isinstance(policy_source.get("sha256"), str)
+        and len(policy_source["sha256"]) == 64
+    )
+    _check(
+        checks,
+        "operating_policy_pinned",
+        policy_pinned,
+        f"Operating policy {policy.get('id')} is embedded and pinned"
+        if policy_pinned
+        else "Canonical schedule must embed a versioned operating policy with SHA-256 provenance",
+    )
+
+    fleet_counts = canonical.get("schedule", {}).get("fleetCounts", {})
+    scheduled_fleets = {leg.get("fleet") for leg in legs}
+    fleet_plan_valid = (
+        isinstance(fleet_counts, dict)
+        and bool(fleet_counts)
+        and scheduled_fleets <= set(fleet_counts)
+        and all(
+            isinstance(count, int) and not isinstance(count, bool) and count >= 0
+            for count in fleet_counts.values()
+        )
+    )
+    _check(
+        checks,
+        "schedule_fleet_plan",
+        fleet_plan_valid,
+        "Fleet counts are pinned as a schedule-specific build input"
+        if fleet_plan_valid
+        else "Every scheduled fleet needs a nonnegative count in schedule.fleetCounts",
+    )
 
     city_codes = [city.get("code") for city in cities]
     duplicate_cities = _duplicates(city_codes)

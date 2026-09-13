@@ -1,0 +1,54 @@
+{
+  "id": "caa-operating-rules-v2.0-plus-hard-stop",
+  "source": "CAA Build Instructions v2.0 plus BUILD_INSTRUCTIONS_ADDITION.md",
+  "hubs": ["PHF", "SYR", "DAY", "MCI", "JAX"],
+  "focusCities": ["BHM"],
+  "departureWindows": {
+    "earliestMinute": 270,
+    "destinationLatestMinute": 1260,
+    "hubOrFocusLatestMinute": 1410,
+    "redEyeLatestMinute": 60,
+    "redEyeArrivalMinimumMinute": 270,
+    "redEyeArrivalMaximumMinute": 390
+  },
+  "turns": {
+    "minimumMinutes": 40,
+    "holdThresholdMinutes": 150
+  },
+  "section26": {
+    "hardFloorMinutes": 30,
+    "pairingTargetMaximumMinutes": 240,
+    "maximumCityDepartureGapMinutes": 240,
+    "numeratorMinutes": 480,
+    "stationReferenceDepartures": 4,
+    "stationFactorMinimum": 0.7,
+    "stationFactorMaximum": 1.8,
+    "nearTargetTolerance": 0.9,
+    "oneExceptionMinimumFrequency": 4,
+    "includeOvernightWrapForCityDepartureGap": true
+  },
+  "pointToPointMaximumShare": 0.1,
+  "marketMaximumDailyDeparturesPerDirection": 6,
+  "runwayScreeningFeet": {
+    "MAX9": 6000,
+    "CRJ900": 5500,
+    "CRJ700": 5000,
+    "CRJ200": 4500
+  },
+  "ronTargetCities": [
+    "PHF", "SYR", "DAY", "MCI", "JAX", "BHM",
+    "SFB", "RFD", "FLL", "DAL", "PIE", "BNA"
+  ],
+  "destinationRonExemptions": [],
+  "rollingRonWindowDays": 10,
+  "rollingRonGraceDays": 1,
+  "hubBankCounts": {
+    "JAX": 6,
+    "DAY": 5,
+    "MCI": 5,
+    "SYR": 4,
+    "PHF": 4
+  },
+  "hubBankWindowMinutes": 60,
+  "overrides": []
+}

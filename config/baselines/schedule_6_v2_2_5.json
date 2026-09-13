@@ -4,7 +4,13 @@
     "number": 6,
     "version": "2.2.5",
     "label": "Schedule 6, Version 2.2.5 (in progress -- not yet Finalized)",
-    "status": "in_progress"
+    "status": "in_progress",
+    "fleetCounts": {
+      "MAX9": 35,
+      "CRJ900": 45,
+      "CRJ700": 65,
+      "CRJ200": 80
+    }
   },
   "connectionWindowMinutes": {
     "minimum": 30,
@@ -19,6 +25,7 @@
   "inputs": {
     "workbook": "tests/fixtures/schedule_6_v2_2_5/source/Schedule_6__Version_2_2_5.xlsx",
     "cityInformation": "tests/fixtures/schedule_6_v2_2_5/source/city_information_v2.csv",
+    "operatingPolicy": "config/policies/operating_rules_v2_0.json",
     "expectedTimetable": "tests/fixtures/schedule_6_v2_2_5/expected/schedule_6_v2_2_5.json",
     "expectedGate": "tests/fixtures/schedule_6_v2_2_5/expected/gate_sked6_v2_2_5.json"
   },

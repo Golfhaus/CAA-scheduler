@@ -2,8 +2,8 @@
   "scheduleId": "schedule_6_v2_2_5",
   "status": "pass",
   "summary": {
-    "checks": 15,
-    "passed": 15,
+    "checks": 17,
+    "passed": 17,
     "failed": 0
   },
   "metrics": {
@@ -23,6 +23,16 @@
       "id": "has_legs",
       "status": "pass",
       "message": "Schedule contains 1383 legs"
+    },
+    {
+      "id": "operating_policy_pinned",
+      "status": "pass",
+      "message": "Operating policy caa-operating-rules-v2.0-plus-hard-stop is embedded and pinned"
+    },
+    {
+      "id": "schedule_fleet_plan",
+      "status": "pass",
+      "message": "Fleet counts are pinned as a schedule-specific build input"
     },
     {
       "id": "unique_city_codes",

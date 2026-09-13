@@ -1,0 +1,5191 @@
+{
+  "scheduleId": "schedule_6_v2_2_5",
+  "policyId": "caa-operating-rules-v2.0-plus-hard-stop",
+  "status": "fail",
+  "summary": {
+    "checks": 24,
+    "passed": 10,
+    "failed": 7,
+    "warnings": 4,
+    "notEvaluated": 3,
+    "overridden": 0,
+    "effectiveErrorFindings": 55,
+    "effectiveWarningFindings": 156
+  },
+  "checks": [
+    {
+      "id": "destination_coverage",
+      "title": "Active-city coverage",
+      "section": "§1.8",
+      "severity": "error",
+      "hardStop": false,
+      "status": "pass",
+      "message": "Every active city has scheduled service",
+      "metrics": {
+        "activeCities": 105,
+        "servedActiveCities": 105,
+        "findingCount": 0,
+        "effectiveFindingCount": 0,
+        "overriddenFindingCount": 0
+      },
+      "findings": []
+    },
+    {
+      "id": "fleet_capacity",
+      "title": "Fleet aircraft-day capacity",
+      "section": "§1.4 / §1.6a",
+      "severity": "error",
+      "hardStop": false,
+      "status": "pass",
+      "message": "Every fleet is within its aircraft-day cap",
+      "metrics": {
+        "MAX9": {
+          "used": 35,
+          "capacity": 35
+        },
+        "CRJ900": {
+          "used": 45,
+          "capacity": 45
+        },
+        "CRJ700": {
+          "used": 65,
+          "capacity": 65
+        },
+        "CRJ200": {
+          "used": 80,
+          "capacity": 80
+        },
+        "findingCount": 0,
+        "effectiveFindingCount": 0,
+        "overriddenFindingCount": 0
+      },
+      "findings": []
+    },
+    {
+      "id": "departure_windows",
+      "title": "Departure windows and curfews",
+      "section": "§2.5 / Lesson 32",
+      "severity": "error",
+      "hardStop": true,
+      "status": "pass",
+      "message": "Every departure is inside a normal window or valid red-eye window",
+      "metrics": {
+        "redEyes": 0,
+        "findingCount": 0,
+        "effectiveFindingCount": 0,
+        "overriddenFindingCount": 0
+      },
+      "findings": []
+    },
+    {
+      "id": "line_day_continuity",
+      "title": "Line continuity across operating days",
+      "section": "§2.8 / Lesson 29",
+      "severity": "error",
+      "hardStop": false,
+      "status": "pass",
+      "message": "Every line closes continuously across days, including wraparound",
+      "metrics": {
+        "findingCount": 0,
+        "effectiveFindingCount": 0,
+        "overriddenFindingCount": 0
+      },
+      "findings": []
+    },
+    {
+      "id": "minimum_turn_time",
+      "title": "Minimum same-day turn time",
+      "section": "§2.5",
+      "severity": "error",
+      "hardStop": false,
+      "status": "fail",
+      "message": "4 finding(s)",
+      "metrics": {
+        "findingCount": 4,
+        "effectiveFindingCount": 4,
+        "overriddenFindingCount": 0
+      },
+      "findings": [
+        {
+          "id": "M-7-1573-2437",
+          "message": "Turn at CAE is 0 minutes",
+          "evidence": {
+            "line": "M",
+            "day": 7,
+            "city": "CAE",
+            "arrivalFlight": 1573,
+            "departureFlight": 2437,
+            "minutes": 0
+          }
+        },
+        {
+          "id": "M-17-1630-1631",
+          "message": "Turn at BHM is 39 minutes",
+          "evidence": {
+            "line": "M",
+            "day": 17,
+            "city": "BHM",
+            "arrivalFlight": 1630,
+            "departureFlight": 1631,
+            "minutes": 39
+          }
+        },
+        {
+          "id": "H-21-2191-2192",
+          "message": "Turn at EYW is 39 minutes",
+          "evidence": {
+            "line": "H",
+            "day": 21,
+            "city": "EYW",
+            "arrivalFlight": 2191,
+            "departureFlight": 2192,
+            "minutes": 39
+          }
+        },
+        {
+          "id": "H-21-2192-2193",
+          "message": "Turn at BHM is 39 minutes",
+          "evidence": {
+            "line": "H",
+            "day": 21,
+            "city": "BHM",
+            "arrivalFlight": 2192,
+            "departureFlight": 2193,
+            "minutes": 39
+          }
+        }
+      ]
+    },
+    {
+      "id": "long_hold_review",
+      "title": "Long same-day holds",
+      "section": "§1.6a / §2.5",
+      "severity": "warning",
+      "hardStop": false,
+      "status": "warning",
+      "message": "32 finding(s)",
+      "metrics": {
+        "findingCount": 32,
+        "effectiveFindingCount": 32,
+        "overriddenFindingCount": 0
+      },
+      "findings": [
+        {
+          "id": "S-1-1014-1015",
+          "message": "Hold at DAL is 175 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "S",
+            "day": 1,
+            "city": "DAL",
+            "arrivalFlight": 1014,
+            "departureFlight": 1015,
+            "minutes": 175
+          }
+        },
+        {
+          "id": "U-12-2469-1114",
+          "message": "Hold at MCI is 325.771 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "U",
+            "day": 12,
+            "city": "MCI",
+            "arrivalFlight": 2469,
+            "departureFlight": 1114,
+            "minutes": 325.77099999999996
+          }
+        },
+        {
+          "id": "V-6-2471-1167",
+          "message": "Hold at SAT is 299.179 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "V",
+            "day": 6,
+            "city": "SAT",
+            "arrivalFlight": 2471,
+            "departureFlight": 1167,
+            "minutes": 299.179
+          }
+        },
+        {
+          "id": "V-8-2472-2473",
+          "message": "Hold at JAX is 233 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "V",
+            "day": 8,
+            "city": "JAX",
+            "arrivalFlight": 2472,
+            "departureFlight": 2473,
+            "minutes": 233.0
+          }
+        },
+        {
+          "id": "V-12-1195-1196",
+          "message": "Hold at BHM is 217 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "V",
+            "day": 12,
+            "city": "BHM",
+            "arrivalFlight": 1195,
+            "departureFlight": 1196,
+            "minutes": 217
+          }
+        },
+        {
+          "id": "W-7-2480-2481",
+          "message": "Hold at PHF is 175.4 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "W",
+            "day": 7,
+            "city": "PHF",
+            "arrivalFlight": 2480,
+            "departureFlight": 2481,
+            "minutes": 175.39999999999998
+          }
+        },
+        {
+          "id": "W-12-1283-2485",
+          "message": "Hold at ILM is 222 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "W",
+            "day": 12,
+            "city": "ILM",
+            "arrivalFlight": 1283,
+            "departureFlight": 2485,
+            "minutes": 222
+          }
+        },
+        {
+          "id": "X-1-1287-1288",
+          "message": "Hold at HRL is 225 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "X",
+            "day": 1,
+            "city": "HRL",
+            "arrivalFlight": 1287,
+            "departureFlight": 1288,
+            "minutes": 225
+          }
+        },
+        {
+          "id": "X-2-1294-1295",
+          "message": "Hold at PHF is 239 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "X",
+            "day": 2,
+            "city": "PHF",
+            "arrivalFlight": 1294,
+            "departureFlight": 1295,
+            "minutes": 239
+          }
+        },
+        {
+          "id": "X-4-1300-1301",
+          "message": "Hold at PHF is 230 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "X",
+            "day": 4,
+            "city": "PHF",
+            "arrivalFlight": 1300,
+            "departureFlight": 1301,
+            "minutes": 230
+          }
+        },
+        {
+          "id": "X-10-1346-1347",
+          "message": "Hold at JAN is 332 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "X",
+            "day": 10,
+            "city": "JAN",
+            "arrivalFlight": 1346,
+            "departureFlight": 1347,
+            "minutes": 332
+          }
+        },
+        {
+          "id": "X-12-2486-1363",
+          "message": "Hold at MCN is 278.968 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "X",
+            "day": 12,
+            "city": "MCN",
+            "arrivalFlight": 2486,
+            "departureFlight": 1363,
+            "minutes": 278.96799999999996
+          }
+        },
+        {
+          "id": "Y-2-1384-1385",
+          "message": "Hold at DAY is 193 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "Y",
+            "day": 2,
+            "city": "DAY",
+            "arrivalFlight": 1384,
+            "departureFlight": 1385,
+            "minutes": 193
+          }
+        },
+        {
+          "id": "Z-1-2492-1461",
+          "message": "Hold at MCI is 222.015 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "Z",
+            "day": 1,
+            "city": "MCI",
+            "arrivalFlight": 2492,
+            "departureFlight": 1461,
+            "minutes": 222.015
+          }
+        },
+        {
+          "id": "Z-3-1472-2493",
+          "message": "Hold at SYR is 176 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "Z",
+            "day": 3,
+            "city": "SYR",
+            "arrivalFlight": 1472,
+            "departureFlight": 2493,
+            "minutes": 176
+          }
+        },
+        {
+          "id": "N-6-1682-1683",
+          "message": "Hold at SYR is 290 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "N",
+            "day": 6,
+            "city": "SYR",
+            "arrivalFlight": 1682,
+            "departureFlight": 1683,
+            "minutes": 290
+          }
+        },
+        {
+          "id": "N-12-1725-2451",
+          "message": "Hold at SRQ is 170 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "N",
+            "day": 12,
+            "city": "SRQ",
+            "arrivalFlight": 1725,
+            "departureFlight": 2451,
+            "minutes": 170
+          }
+        },
+        {
+          "id": "G-1-1960-1961",
+          "message": "Hold at MCI is 159 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "G",
+            "day": 1,
+            "city": "MCI",
+            "arrivalFlight": 1960,
+            "departureFlight": 1961,
+            "minutes": 159
+          }
+        },
+        {
+          "id": "G-7-2002-2003",
+          "message": "Hold at MCI is 195 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "G",
+            "day": 7,
+            "city": "MCI",
+            "arrivalFlight": 2002,
+            "departureFlight": 2003,
+            "minutes": 195
+          }
+        },
+        {
+          "id": "G-15-2414-2053",
+          "message": "Hold at JAX is 220.701 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "G",
+            "day": 15,
+            "city": "JAX",
+            "arrivalFlight": 2414,
+            "departureFlight": 2053,
+            "minutes": 220.70100000000002
+          }
+        },
+        {
+          "id": "G-16-2415-2057",
+          "message": "Hold at JAX is 339 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "G",
+            "day": 16,
+            "city": "JAX",
+            "arrivalFlight": 2415,
+            "departureFlight": 2057,
+            "minutes": 339.0
+          }
+        },
+        {
+          "id": "H-11-2132-2133",
+          "message": "Hold at SYR is 160 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "H",
+            "day": 11,
+            "city": "SYR",
+            "arrivalFlight": 2132,
+            "departureFlight": 2133,
+            "minutes": 160
+          }
+        },
+        {
+          "id": "H-13-2144-2145",
+          "message": "Hold at PHF is 205 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "H",
+            "day": 13,
+            "city": "PHF",
+            "arrivalFlight": 2144,
+            "departureFlight": 2145,
+            "minutes": 205
+          }
+        },
+        {
+          "id": "H-18-2172-2173",
+          "message": "Hold at JAX is 210 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "H",
+            "day": 18,
+            "city": "JAX",
+            "arrivalFlight": 2172,
+            "departureFlight": 2173,
+            "minutes": 210
+          }
+        },
+        {
+          "id": "H-19-2430-2431",
+          "message": "Hold at JAX is 244 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "H",
+            "day": 19,
+            "city": "JAX",
+            "arrivalFlight": 2430,
+            "departureFlight": 2431,
+            "minutes": 244.0
+          }
+        },
+        {
+          "id": "J-1-2210-2211",
+          "message": "Hold at FLL is 340 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "J",
+            "day": 1,
+            "city": "FLL",
+            "arrivalFlight": 2210,
+            "departureFlight": 2211,
+            "minutes": 340
+          }
+        },
+        {
+          "id": "A-2-2234-2235",
+          "message": "Hold at CHS is 199 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "A",
+            "day": 2,
+            "city": "CHS",
+            "arrivalFlight": 2234,
+            "departureFlight": 2235,
+            "minutes": 199
+          }
+        },
+        {
+          "id": "A-11-2273-2274",
+          "message": "Hold at FLL is 206 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "A",
+            "day": 11,
+            "city": "FLL",
+            "arrivalFlight": 2273,
+            "departureFlight": 2274,
+            "minutes": 206
+          }
+        },
+        {
+          "id": "A-12-2278-2279",
+          "message": "Hold at MCI is 180 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "A",
+            "day": 12,
+            "city": "MCI",
+            "arrivalFlight": 2278,
+            "departureFlight": 2279,
+            "minutes": 180
+          }
+        },
+        {
+          "id": "A-25-2336-2337",
+          "message": "Hold at SYR is 208 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "A",
+            "day": 25,
+            "city": "SYR",
+            "arrivalFlight": 2336,
+            "departureFlight": 2337,
+            "minutes": 208
+          }
+        },
+        {
+          "id": "A-31-2365-2366",
+          "message": "Hold at MCI is 344 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "A",
+            "day": 31,
+            "city": "MCI",
+            "arrivalFlight": 2365,
+            "departureFlight": 2366,
+            "minutes": 344
+          }
+        },
+        {
+          "id": "A-33-2379-2380",
+          "message": "Hold at SYR is 377 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "A",
+            "day": 33,
+            "city": "SYR",
+            "arrivalFlight": 2379,
+            "departureFlight": 2380,
+            "minutes": 377
+          }
+        }
+      ]
+    },
+    {
+      "id": "line_route_count",
+      "title": "Routes per line",
+      "section": "§2.8",
+      "severity": "warning",
+      "hardStop": false,
+      "status": "warning",
+      "message": "18 finding(s)",
+      "metrics": {
+        "findingCount": 18,
+        "effectiveFindingCount": 18,
+        "overriddenFindingCount": 0
+      },
+      "findings": [
+        {
+          "id": "A",
+          "message": "Line A contains 35 routes; the standing guideline is 9–12",
+          "evidence": {
+            "line": "A",
+            "routes": 35,
+            "guideline": [
+              9,
+              12
+            ]
+          }
+        },
+        {
+          "id": "G",
+          "message": "Line G contains 19 routes; the standing guideline is 9–12",
+          "evidence": {
+            "line": "G",
+            "routes": 19,
+            "guideline": [
+              9,
+              12
+            ]
+          }
+        },
+        {
+          "id": "H",
+          "message": "Line H contains 22 routes; the standing guideline is 9–12",
+          "evidence": {
+            "line": "H",
+            "routes": 22,
+            "guideline": [
+              9,
+              12
+            ]
+          }
+        },
+        {
+          "id": "I",
+          "message": "Line I contains 1 routes; the standing guideline is 9–12",
+          "evidence": {
+            "line": "I",
+            "routes": 1,
+            "guideline": [
+              9,
+              12
+            ]
+          }
+        },
+        {
+          "id": "J",
+          "message": "Line J contains 1 routes; the standing guideline is 9–12",
+          "evidence": {
+            "line": "J",
+            "routes": 1,
+            "guideline": [
+              9,
+              12
+            ]
+          }
+        },
+        {
+          "id": "K",
+          "message": "Line K contains 1 routes; the standing guideline is 9–12",
+          "evidence": {
+            "line": "K",
+            "routes": 1,
+            "guideline": [
+              9,
+              12
+            ]
+          }
+        },
+        {
+          "id": "L",
+          "message": "Line L contains 1 routes; the standing guideline is 9–12",
+          "evidence": {
+            "line": "L",
+            "routes": 1,
+            "guideline": [
+              9,
+              12
+            ]
+          }
+        },
+        {
+          "id": "M",
+          "message": "Line M contains 22 routes; the standing guideline is 9–12",
+          "evidence": {
+            "line": "M",
+            "routes": 22,
+            "guideline": [
+              9,
+              12
+            ]
+          }
+        },
+        {
+          "id": "N",
+          "message": "Line N contains 16 routes; the standing guideline is 9–12",
+          "evidence": {
+            "line": "N",
+            "routes": 16,
+            "guideline": [
+              9,
+              12
+            ]
+          }
+        },
+        {
+          "id": "O",
+          "message": "Line O contains 14 routes; the standing guideline is 9–12",
+          "evidence": {
+            "line": "O",
+            "routes": 14,
+            "guideline": [
+              9,
+              12
+            ]
+          }
+        },
+        {
+          "id": "P",
+          "message": "Line P contains 13 routes; the standing guideline is 9–12",
+          "evidence": {
+            "line": "P",
+            "routes": 13,
+            "guideline": [
+              9,
+              12
+            ]
+          }
+        },
+        {
+          "id": "Q",
+          "message": "Line Q contains 1 routes; the standing guideline is 9–12",
+          "evidence": {
+            "line": "Q",
+            "routes": 1,
+            "guideline": [
+              9,
+              12
+            ]
+          }
+        },
+        {
+          "id": "R",
+          "message": "Line R contains 1 routes; the standing guideline is 9–12",
+          "evidence": {
+            "line": "R",
+            "routes": 1,
+            "guideline": [
+              9,
+              12
+            ]
+          }
+        },
+        {
+          "id": "S",
+          "message": "Line S contains 1 routes; the standing guideline is 9–12",
+          "evidence": {
+            "line": "S",
+            "routes": 1,
+            "guideline": [
+              9,
+              12
+            ]
+          }
+        },
+        {
+          "id": "U",
+          "message": "Line U contains 13 routes; the standing guideline is 9–12",
+          "evidence": {
+            "line": "U",
+            "routes": 13,
+            "guideline": [
+              9,
+              12
+            ]
+          }
+        },
+        {
+          "id": "V",
+          "message": "Line V contains 13 routes; the standing guideline is 9–12",
+          "evidence": {
+            "line": "V",
+            "routes": 13,
+            "guideline": [
+              9,
+              12
+            ]
+          }
+        },
+        {
+          "id": "X",
+          "message": "Line X contains 14 routes; the standing guideline is 9–12",
+          "evidence": {
+            "line": "X",
+            "routes": 14,
+            "guideline": [
+              9,
+              12
+            ]
+          }
+        },
+        {
+          "id": "Y",
+          "message": "Line Y contains 13 routes; the standing guideline is 9–12",
+          "evidence": {
+            "line": "Y",
+            "routes": 13,
+            "guideline": [
+              9,
+              12
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "rolling_ron_window",
+      "title": "Rolling target-city RON window",
+      "section": "§2.1 / Lesson 31",
+      "severity": "error",
+      "hardStop": false,
+      "status": "pass",
+      "message": "Every line reaches a target RON within 11 days",
+      "metrics": {
+        "findingCount": 0,
+        "effectiveFindingCount": 0,
+        "overriddenFindingCount": 0
+      },
+      "findings": []
+    },
+    {
+      "id": "rolling_ron_grace",
+      "title": "Rolling RON grace usage",
+      "section": "Lesson 31",
+      "severity": "warning",
+      "hardStop": false,
+      "status": "pass",
+      "message": "No line uses the standing one-day grace",
+      "metrics": {
+        "findingCount": 0,
+        "effectiveFindingCount": 0,
+        "overriddenFindingCount": 0
+      },
+      "findings": []
+    },
+    {
+      "id": "destination_ron_coverage",
+      "title": "Destination RON coverage",
+      "section": "§1.6a / §2.3",
+      "severity": "error",
+      "hardStop": false,
+      "status": "fail",
+      "message": "8 finding(s)",
+      "metrics": {
+        "findingCount": 8,
+        "effectiveFindingCount": 8,
+        "overriddenFindingCount": 0
+      },
+      "findings": [
+        {
+          "id": "COU",
+          "message": "Destination COU has no terminating route",
+          "evidence": {
+            "city": "COU",
+            "terminators": 0
+          }
+        },
+        {
+          "id": "ERI",
+          "message": "Destination ERI has no terminating route",
+          "evidence": {
+            "city": "ERI",
+            "terminators": 0
+          }
+        },
+        {
+          "id": "EYW",
+          "message": "Destination EYW has no terminating route",
+          "evidence": {
+            "city": "EYW",
+            "terminators": 0
+          }
+        },
+        {
+          "id": "MAF",
+          "message": "Destination MAF has no terminating route",
+          "evidence": {
+            "city": "MAF",
+            "terminators": 0
+          }
+        },
+        {
+          "id": "MCN",
+          "message": "Destination MCN has no terminating route",
+          "evidence": {
+            "city": "MCN",
+            "terminators": 0
+          }
+        },
+        {
+          "id": "MOB",
+          "message": "Destination MOB has no terminating route",
+          "evidence": {
+            "city": "MOB",
+            "terminators": 0
+          }
+        },
+        {
+          "id": "ORH",
+          "message": "Destination ORH has no terminating route",
+          "evidence": {
+            "city": "ORH",
+            "terminators": 0
+          }
+        },
+        {
+          "id": "TOL",
+          "message": "Destination TOL has no terminating route",
+          "evidence": {
+            "city": "TOL",
+            "terminators": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "point_to_point_share",
+      "title": "Point-to-point flight share",
+      "section": "§2.4",
+      "severity": "error",
+      "hardStop": false,
+      "status": "pass",
+      "message": "Point-to-point flying is within the 10% cap",
+      "metrics": {
+        "flights": 132,
+        "totalFlights": 1383,
+        "share": 0.09544468546637744,
+        "findingCount": 0,
+        "effectiveFindingCount": 0,
+        "overriddenFindingCount": 0
+      },
+      "findings": []
+    },
+    {
+      "id": "market_frequency_ceiling",
+      "title": "Per-direction market frequency ceiling",
+      "section": "§2.7",
+      "severity": "error",
+      "hardStop": false,
+      "status": "fail",
+      "message": "3 finding(s)",
+      "metrics": {
+        "findingCount": 3,
+        "effectiveFindingCount": 3,
+        "overriddenFindingCount": 0
+      },
+      "findings": [
+        {
+          "id": "BDL-SYR",
+          "message": "BDL–SYR has 7 daily departures against a cap of 6",
+          "evidence": {
+            "origin": "BDL",
+            "destination": "SYR",
+            "departures": 7,
+            "cap": 6
+          }
+        },
+        {
+          "id": "IND-DAY",
+          "message": "IND–DAY has 7 daily departures against a cap of 6",
+          "evidence": {
+            "origin": "IND",
+            "destination": "DAY",
+            "departures": 7,
+            "cap": 6
+          }
+        },
+        {
+          "id": "SYR-BDL",
+          "message": "SYR–BDL has 7 daily departures against a cap of 6",
+          "evidence": {
+            "origin": "SYR",
+            "destination": "BDL",
+            "departures": 7,
+            "cap": 6
+          }
+        }
+      ]
+    },
+    {
+      "id": "section_26_pairing_spacing",
+      "title": "Section 2.6 Check A — same-pairing spacing",
+      "section": "§2.6 Check A",
+      "severity": "error",
+      "hardStop": false,
+      "status": "fail",
+      "message": "1 finding(s)",
+      "metrics": {
+        "findingCount": 1,
+        "effectiveFindingCount": 1,
+        "overriddenFindingCount": 0
+      },
+      "findings": [
+        {
+          "id": "BHM-FLL",
+          "message": "BHM–FLL fails same-pairing spacing",
+          "evidence": {
+            "origin": "BHM",
+            "destination": "FLL",
+            "departures": [
+              666,
+              744
+            ],
+            "gaps": [
+              {
+                "from": 666,
+                "to": 744,
+                "minutes": 78
+              },
+              {
+                "from": 744,
+                "to": 666,
+                "minutes": 1362
+              }
+            ],
+            "targetMinutes": 168.0,
+            "allowedExceptions": 0,
+            "hubBound": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "section_26_city_departure_gap",
+      "title": "Section 2.6 Check B — maximum city departure service gap",
+      "section": "§2.6 Check B",
+      "severity": "warning",
+      "hardStop": false,
+      "status": "warning",
+      "message": "105 finding(s)",
+      "metrics": {
+        "findingCount": 105,
+        "effectiveFindingCount": 105,
+        "overriddenFindingCount": 0
+      },
+      "findings": [
+        {
+          "id": "ABE",
+          "message": "ABE has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "ABE",
+            "departures": [
+              270,
+              270.0,
+              453,
+              670,
+              763.0,
+              1037.0,
+              1067
+            ],
+            "excessiveGaps": [
+              {
+                "from": 763.0,
+                "to": 1037.0,
+                "minutes": 274.0
+              },
+              {
+                "from": 1067,
+                "to": 270,
+                "minutes": 643
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "ACY",
+          "message": "ACY has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "ACY",
+            "departures": [
+              300,
+              637,
+              946
+            ],
+            "excessiveGaps": [
+              {
+                "from": 300,
+                "to": 637,
+                "minutes": 337
+              },
+              {
+                "from": 637,
+                "to": 946,
+                "minutes": 309
+              },
+              {
+                "from": 946,
+                "to": 300,
+                "minutes": 794
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "AGS",
+          "message": "AGS has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "AGS",
+            "departures": [
+              270,
+              751,
+              1212
+            ],
+            "excessiveGaps": [
+              {
+                "from": 270,
+                "to": 751,
+                "minutes": 481
+              },
+              {
+                "from": 751,
+                "to": 1212,
+                "minutes": 461
+              },
+              {
+                "from": 1212,
+                "to": 270,
+                "minutes": 498
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "ALB",
+          "message": "ALB has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "ALB",
+            "departures": [
+              270,
+              270,
+              300,
+              340,
+              450,
+              617,
+              1167
+            ],
+            "excessiveGaps": [
+              {
+                "from": 617,
+                "to": 1167,
+                "minutes": 550
+              },
+              {
+                "from": 1167,
+                "to": 270,
+                "minutes": 543
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "ATW",
+          "message": "ATW has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "ATW",
+            "departures": [
+              270,
+              280,
+              534,
+              1010,
+              1070,
+              1248
+            ],
+            "excessiveGaps": [
+              {
+                "from": 280,
+                "to": 534,
+                "minutes": 254
+              },
+              {
+                "from": 534,
+                "to": 1010,
+                "minutes": 476
+              },
+              {
+                "from": 1248,
+                "to": 270,
+                "minutes": 462
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "AUS",
+          "message": "AUS has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "AUS",
+            "departures": [
+              270,
+              270,
+              270,
+              461,
+              515,
+              561,
+              640,
+              672,
+              904,
+              954,
+              1221
+            ],
+            "excessiveGaps": [
+              {
+                "from": 954,
+                "to": 1221,
+                "minutes": 267
+              },
+              {
+                "from": 1221,
+                "to": 270,
+                "minutes": 489
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "AVL",
+          "message": "AVL has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "AVL",
+            "departures": [
+              410,
+              683,
+              904,
+              1121
+            ],
+            "excessiveGaps": [
+              {
+                "from": 410,
+                "to": 683,
+                "minutes": 273
+              },
+              {
+                "from": 1121,
+                "to": 410,
+                "minutes": 729
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "AVP",
+          "message": "AVP has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "AVP",
+            "departures": [
+              270,
+              563,
+              676
+            ],
+            "excessiveGaps": [
+              {
+                "from": 270,
+                "to": 563,
+                "minutes": 293
+              },
+              {
+                "from": 676,
+                "to": 270,
+                "minutes": 1034
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "BDL",
+          "message": "BDL has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "BDL",
+            "departures": [
+              270,
+              270,
+              355,
+              468,
+              520,
+              544,
+              711,
+              736.0,
+              767,
+              857,
+              902,
+              1113
+            ],
+            "excessiveGaps": [
+              {
+                "from": 1113,
+                "to": 270,
+                "minutes": 597
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "BGR",
+          "message": "BGR has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "BGR",
+            "departures": [
+              270,
+              510,
+              750
+            ],
+            "excessiveGaps": [
+              {
+                "from": 750,
+                "to": 270,
+                "minutes": 960
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "BHM",
+          "message": "BHM has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "BHM",
+            "departures": [
+              270,
+              270,
+              270,
+              270,
+              431,
+              450,
+              460,
+              460,
+              460,
+              532,
+              553,
+              561,
+              639,
+              666,
+              711,
+              744,
+              748,
+              752,
+              762,
+              773,
+              785,
+              796,
+              801,
+              803,
+              839,
+              849,
+              863,
+              875,
+              876,
+              902,
+              918,
+              948,
+              992,
+              1001,
+              1020,
+              1032,
+              1043,
+              1067,
+              1115,
+              1120,
+              1154,
+              1160,
+              1174,
+              1181,
+              1210,
+              1256
+            ],
+            "excessiveGaps": [
+              {
+                "from": 1256,
+                "to": 270,
+                "minutes": 454
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "BLV",
+          "message": "BLV has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "BLV",
+            "departures": [
+              290,
+              528,
+              741,
+              758,
+              894,
+              1001,
+              1072,
+              1146,
+              1223
+            ],
+            "excessiveGaps": [
+              {
+                "from": 1223,
+                "to": 290,
+                "minutes": 507
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "BNA",
+          "message": "BNA has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "BNA",
+            "departures": [
+              270,
+              359,
+              366,
+              405,
+              412,
+              451,
+              463,
+              632,
+              670,
+              712,
+              738,
+              794,
+              922,
+              922,
+              975,
+              989,
+              1030.0,
+              1053,
+              1124,
+              1186,
+              1227.0
+            ],
+            "excessiveGaps": [
+              {
+                "from": 1227.0,
+                "to": 270,
+                "minutes": 483.0
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "BTR",
+          "message": "BTR has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "BTR",
+            "departures": [
+              285,
+              1036
+            ],
+            "excessiveGaps": [
+              {
+                "from": 285,
+                "to": 1036,
+                "minutes": 751
+              },
+              {
+                "from": 1036,
+                "to": 285,
+                "minutes": 689
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "BTV",
+          "message": "BTV has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "BTV",
+            "departures": [
+              390,
+              462,
+              568,
+              752,
+              1257
+            ],
+            "excessiveGaps": [
+              {
+                "from": 752,
+                "to": 1257,
+                "minutes": 505
+              },
+              {
+                "from": 1257,
+                "to": 390,
+                "minutes": 573
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "BUF",
+          "message": "BUF has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "BUF",
+            "departures": [
+              270,
+              365,
+              498,
+              636,
+              638,
+              711,
+              810,
+              846,
+              984,
+              1051
+            ],
+            "excessiveGaps": [
+              {
+                "from": 1051,
+                "to": 270,
+                "minutes": 659
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "BWI",
+          "message": "BWI has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "BWI",
+            "departures": [
+              270,
+              270,
+              330,
+              447,
+              460,
+              582,
+              611,
+              656,
+              791,
+              835,
+              945
+            ],
+            "excessiveGaps": [
+              {
+                "from": 945,
+                "to": 270,
+                "minutes": 765
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "CAE",
+          "message": "CAE has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "CAE",
+            "departures": [
+              270,
+              300,
+              561,
+              664,
+              844,
+              847,
+              1033,
+              1140,
+              1203,
+              1252.8
+            ],
+            "excessiveGaps": [
+              {
+                "from": 300,
+                "to": 561,
+                "minutes": 261
+              },
+              {
+                "from": 1252.8,
+                "to": 270,
+                "minutes": 457.20000000000005
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "CAK",
+          "message": "CAK has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "CAK",
+            "departures": [
+              270,
+              305,
+              442,
+              506,
+              623,
+              748,
+              871,
+              939,
+              1094,
+              1202
+            ],
+            "excessiveGaps": [
+              {
+                "from": 1202,
+                "to": 270,
+                "minutes": 508
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "CHA",
+          "message": "CHA has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "CHA",
+            "departures": [
+              280,
+              896
+            ],
+            "excessiveGaps": [
+              {
+                "from": 280,
+                "to": 896,
+                "minutes": 616
+              },
+              {
+                "from": 896,
+                "to": 280,
+                "minutes": 824
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "CHS",
+          "message": "CHS has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "CHS",
+            "departures": [
+              270,
+              270,
+              310,
+              507,
+              548,
+              662,
+              681,
+              821,
+              1001,
+              1064
+            ],
+            "excessiveGaps": [
+              {
+                "from": 1064,
+                "to": 270,
+                "minutes": 646
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "CID",
+          "message": "CID has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "CID",
+            "departures": [
+              270,
+              371,
+              445,
+              572,
+              773
+            ],
+            "excessiveGaps": [
+              {
+                "from": 773,
+                "to": 270,
+                "minutes": 937
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "CLT",
+          "message": "CLT has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "CLT",
+            "departures": [
+              442,
+              501,
+              637,
+              769,
+              825,
+              900,
+              953,
+              991,
+              1005.0,
+              1096,
+              1136,
+              1155,
+              1204,
+              1257
+            ],
+            "excessiveGaps": [
+              {
+                "from": 1257,
+                "to": 442,
+                "minutes": 625
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "CMH",
+          "message": "CMH has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "CMH",
+            "departures": [
+              270,
+              479,
+              564,
+              753,
+              910,
+              988,
+              1018,
+              1134
+            ],
+            "excessiveGaps": [
+              {
+                "from": 1134,
+                "to": 270,
+                "minutes": 576
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "COU",
+          "message": "COU has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "COU",
+            "departures": [
+              1023,
+              1196
+            ],
+            "excessiveGaps": [
+              {
+                "from": 1196,
+                "to": 1023,
+                "minutes": 1267
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "CRP",
+          "message": "CRP has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "CRP",
+            "departures": [
+              435,
+              794,
+              1153
+            ],
+            "excessiveGaps": [
+              {
+                "from": 435,
+                "to": 794,
+                "minutes": 359
+              },
+              {
+                "from": 794,
+                "to": 1153,
+                "minutes": 359
+              },
+              {
+                "from": 1153,
+                "to": 435,
+                "minutes": 722
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "CRW",
+          "message": "CRW has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "CRW",
+            "departures": [
+              315,
+              499
+            ],
+            "excessiveGaps": [
+              {
+                "from": 499,
+                "to": 315,
+                "minutes": 1256
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "DAB",
+          "message": "DAB has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "DAB",
+            "departures": [
+              270,
+              351,
+              538.0,
+              728,
+              769,
+              955,
+              1046,
+              1205
+            ],
+            "excessiveGaps": [
+              {
+                "from": 1205,
+                "to": 270,
+                "minutes": 505
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "DAL",
+          "message": "DAL has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "DAL",
+            "departures": [
+              270,
+              270,
+              363,
+              365,
+              378,
+              378,
+              390,
+              411,
+              411,
+              505,
+              522,
+              726,
+              874,
+              906.0,
+              916,
+              986,
+              1002,
+              1135,
+              1218
+            ],
+            "excessiveGaps": [
+              {
+                "from": 1218,
+                "to": 270,
+                "minutes": 492
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "DAY",
+          "message": "DAY has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "DAY",
+            "departures": [
+              270,
+              270,
+              270,
+              270,
+              270,
+              275,
+              295,
+              351,
+              361,
+              369,
+              379,
+              384,
+              396,
+              397,
+              398,
+              400,
+              407,
+              412,
+              413,
+              415,
+              415,
+              429,
+              434,
+              483,
+              485,
+              503,
+              509,
+              521,
+              529,
+              533,
+              536,
+              541,
+              547,
+              563,
+              591,
+              597,
+              612,
+              614,
+              616,
+              621,
+              630,
+              631,
+              654,
+              654,
+              658,
+              672,
+              681,
+              694,
+              713,
+              714,
+              724,
+              766,
+              787,
+              796,
+              798,
+              803,
+              824,
+              828,
+              833,
+              840,
+              848,
+              868,
+              870,
+              891,
+              902,
+              904,
+              909,
+              926,
+              936,
+              951,
+              960,
+              961,
+              977,
+              980,
+              1003,
+              1005,
+              1020,
+              1020,
+              1040,
+              1042,
+              1056,
+              1067,
+              1093,
+              1098,
+              1129,
+              1166,
+              1173,
+              1185,
+              1187,
+              1206,
+              1246,
+              1293,
+              1343,
+              1351,
+              1353,
+              1393,
+              1407,
+              1409
+            ],
+            "excessiveGaps": [
+              {
+                "from": 1409,
+                "to": 270,
+                "minutes": 301
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "DLH",
+          "message": "DLH has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "DLH",
+            "departures": [
+              450,
+              733
+            ],
+            "excessiveGaps": [
+              {
+                "from": 450,
+                "to": 733,
+                "minutes": 283
+              },
+              {
+                "from": 733,
+                "to": 450,
+                "minutes": 1157
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "DSM",
+          "message": "DSM has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "DSM",
+            "departures": [
+              270,
+              459,
+              656,
+              837,
+              925,
+              1093
+            ],
+            "excessiveGaps": [
+              {
+                "from": 1093,
+                "to": 270,
+                "minutes": 617
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "ECP",
+          "message": "ECP has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "ECP",
+            "departures": [
+              365,
+              865,
+              901,
+              1102
+            ],
+            "excessiveGaps": [
+              {
+                "from": 365,
+                "to": 865,
+                "minutes": 500
+              },
+              {
+                "from": 1102,
+                "to": 365,
+                "minutes": 703
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "ELP",
+          "message": "ELP has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "ELP",
+            "departures": [
+              270,
+              425,
+              553,
+              591,
+              650,
+              663,
+              856,
+              992,
+              1247,
+              1253
+            ],
+            "excessiveGaps": [
+              {
+                "from": 992,
+                "to": 1247,
+                "minutes": 255
+              },
+              {
+                "from": 1253,
+                "to": 270,
+                "minutes": 457
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "ERI",
+          "message": "ERI has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "ERI",
+            "departures": [
+              694,
+              901
+            ],
+            "excessiveGaps": [
+              {
+                "from": 901,
+                "to": 694,
+                "minutes": 1233
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "EYW",
+          "message": "EYW has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "EYW",
+            "departures": [
+              359,
+              587,
+              608,
+              1028,
+              1259
+            ],
+            "excessiveGaps": [
+              {
+                "from": 608,
+                "to": 1028,
+                "minutes": 420
+              },
+              {
+                "from": 1259,
+                "to": 359,
+                "minutes": 540
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "FAR",
+          "message": "FAR has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "FAR",
+            "departures": [
+              270,
+              270,
+              553,
+              588,
+              844.0,
+              1167
+            ],
+            "excessiveGaps": [
+              {
+                "from": 270,
+                "to": 553,
+                "minutes": 283
+              },
+              {
+                "from": 588,
+                "to": 844.0,
+                "minutes": 256.0
+              },
+              {
+                "from": 844.0,
+                "to": 1167,
+                "minutes": 323.0
+              },
+              {
+                "from": 1167,
+                "to": 270,
+                "minutes": 543
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "FLL",
+          "message": "FLL has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "FLL",
+            "departures": [
+              270,
+              270,
+              270,
+              355,
+              367,
+              430,
+              448,
+              463,
+              556,
+              663,
+              691,
+              856,
+              857,
+              983.6,
+              1008,
+              1054,
+              1086,
+              1097,
+              1193,
+              1209,
+              1224,
+              1240.0
+            ],
+            "excessiveGaps": [
+              {
+                "from": 1240.0,
+                "to": 270,
+                "minutes": 470.0
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "FSD",
+          "message": "FSD has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "FSD",
+            "departures": [
+              270,
+              471,
+              512,
+              693,
+              915
+            ],
+            "excessiveGaps": [
+              {
+                "from": 915,
+                "to": 270,
+                "minutes": 795
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "FWA",
+          "message": "FWA has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "FWA",
+            "departures": [
+              270,
+              460,
+              601,
+              739,
+              904,
+              1013
+            ],
+            "excessiveGaps": [
+              {
+                "from": 1013,
+                "to": 270,
+                "minutes": 697
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "GNV",
+          "message": "GNV has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "GNV",
+            "departures": [
+              270,
+              570,
+              1108
+            ],
+            "excessiveGaps": [
+              {
+                "from": 270,
+                "to": 570,
+                "minutes": 300
+              },
+              {
+                "from": 570,
+                "to": 1108,
+                "minutes": 538
+              },
+              {
+                "from": 1108,
+                "to": 270,
+                "minutes": 602
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "GPT",
+          "message": "GPT has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "GPT",
+            "departures": [
+              270,
+              558,
+              927
+            ],
+            "excessiveGaps": [
+              {
+                "from": 270,
+                "to": 558,
+                "minutes": 288
+              },
+              {
+                "from": 558,
+                "to": 927,
+                "minutes": 369
+              },
+              {
+                "from": 927,
+                "to": 270,
+                "minutes": 783
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "GRR",
+          "message": "GRR has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "GRR",
+            "departures": [
+              270,
+              270,
+              373,
+              405,
+              527,
+              751,
+              811
+            ],
+            "excessiveGaps": [
+              {
+                "from": 811,
+                "to": 270,
+                "minutes": 899
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "GSO",
+          "message": "GSO has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "GSO",
+            "departures": [
+              270,
+              393,
+              611.0,
+              757,
+              835,
+              851,
+              1210,
+              1256
+            ],
+            "excessiveGaps": [
+              {
+                "from": 851,
+                "to": 1210,
+                "minutes": 359
+              },
+              {
+                "from": 1256,
+                "to": 270,
+                "minutes": 454
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "GSP",
+          "message": "GSP has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "GSP",
+            "departures": [
+              411,
+              514,
+              536,
+              602,
+              607,
+              830,
+              874,
+              950,
+              1064,
+              1065,
+              1157,
+              1158,
+              1234,
+              1254
+            ],
+            "excessiveGaps": [
+              {
+                "from": 1254,
+                "to": 411,
+                "minutes": 597
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "HOU",
+          "message": "HOU has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "HOU",
+            "departures": [
+              270,
+              396,
+              445,
+              606,
+              656,
+              710.0,
+              737,
+              814,
+              855,
+              899,
+              980,
+              1034,
+              1202,
+              1220
+            ],
+            "excessiveGaps": [
+              {
+                "from": 1220,
+                "to": 270,
+                "minutes": 490
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "HPN",
+          "message": "HPN has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "HPN",
+            "departures": [
+              270,
+              576,
+              634,
+              795,
+              982,
+              1055,
+              1069,
+              1127
+            ],
+            "excessiveGaps": [
+              {
+                "from": 270,
+                "to": 576,
+                "minutes": 306
+              },
+              {
+                "from": 1127,
+                "to": 270,
+                "minutes": 583
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "HRL",
+          "message": "HRL has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "HRL",
+            "departures": [
+              270,
+              477,
+              567,
+              850,
+              855,
+              1223
+            ],
+            "excessiveGaps": [
+              {
+                "from": 567,
+                "to": 850,
+                "minutes": 283
+              },
+              {
+                "from": 855,
+                "to": 1223,
+                "minutes": 368
+              },
+              {
+                "from": 1223,
+                "to": 270,
+                "minutes": 487
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "HSV",
+          "message": "HSV has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "HSV",
+            "departures": [
+              330,
+              345,
+              494,
+              710,
+              990
+            ],
+            "excessiveGaps": [
+              {
+                "from": 710,
+                "to": 990,
+                "minutes": 280
+              },
+              {
+                "from": 990,
+                "to": 330,
+                "minutes": 780
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "HVN",
+          "message": "HVN has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "HVN",
+            "departures": [
+              385,
+              475,
+              572,
+              667,
+              837,
+              1157
+            ],
+            "excessiveGaps": [
+              {
+                "from": 837,
+                "to": 1157,
+                "minutes": 320
+              },
+              {
+                "from": 1157,
+                "to": 385,
+                "minutes": 668
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "ICT",
+          "message": "ICT has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "ICT",
+            "departures": [
+              270,
+              457,
+              643,
+              770,
+              998
+            ],
+            "excessiveGaps": [
+              {
+                "from": 998,
+                "to": 270,
+                "minutes": 712
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "ILM",
+          "message": "ILM has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "ILM",
+            "departures": [
+              294,
+              648,
+              698,
+              864,
+              1119,
+              1182
+            ],
+            "excessiveGaps": [
+              {
+                "from": 294,
+                "to": 648,
+                "minutes": 354
+              },
+              {
+                "from": 864,
+                "to": 1119,
+                "minutes": 255
+              },
+              {
+                "from": 1182,
+                "to": 294,
+                "minutes": 552
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "IND",
+          "message": "IND has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "IND",
+            "departures": [
+              270,
+              270,
+              350,
+              415,
+              445,
+              477,
+              544,
+              582,
+              621,
+              718,
+              851,
+              881,
+              918,
+              930,
+              1032,
+              1259
+            ],
+            "excessiveGaps": [
+              {
+                "from": 1259,
+                "to": 270,
+                "minutes": 451
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "ISP",
+          "message": "ISP has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "ISP",
+            "departures": [
+              395,
+              537,
+              634,
+              756,
+              855
+            ],
+            "excessiveGaps": [
+              {
+                "from": 855,
+                "to": 395,
+                "minutes": 980
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "JAN",
+          "message": "JAN has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "JAN",
+            "departures": [
+              270,
+              350,
+              651,
+              868
+            ],
+            "excessiveGaps": [
+              {
+                "from": 350,
+                "to": 651,
+                "minutes": 301
+              },
+              {
+                "from": 868,
+                "to": 270,
+                "minutes": 842
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "JAX",
+          "message": "JAX has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "JAX",
+            "departures": [
+              270,
+              270,
+              270,
+              270,
+              270,
+              270,
+              270,
+              270,
+              270,
+              270,
+              270,
+              275,
+              333,
+              347,
+              360,
+              365,
+              371,
+              375,
+              377,
+              380,
+              390,
+              391,
+              395,
+              399,
+              402,
+              404,
+              405,
+              405,
+              412,
+              413,
+              421,
+              430,
+              446,
+              449,
+              449,
+              452,
+              452,
+              455,
+              456,
+              457,
+              466,
+              469,
+              478,
+              480,
+              490,
+              491,
+              493,
+              502,
+              509,
+              513,
+              513,
+              514,
+              520,
+              522,
+              524,
+              547,
+              565,
+              566,
+              567,
+              568,
+              569,
+              569,
+              577,
+              578,
+              580,
+              587,
+              591,
+              591,
+              592,
+              609,
+              609,
+              610,
+              618,
+              623,
+              625,
+              632,
+              647,
+              647,
+              656,
+              666,
+              668,
+              669,
+              677,
+              681,
+              684,
+              687,
+              693,
+              698,
+              704,
+              707,
+              709,
+              712,
+              713,
+              714,
+              719,
+              723,
+              727,
+              730.0,
+              744,
+              746,
+              755,
+              756,
+              758,
+              763,
+              763,
+              764,
+              775,
+              775,
+              780,
+              789,
+              791,
+              798,
+              807,
+              808,
+              810,
+              810,
+              830,
+              832,
+              835,
+              846,
+              848,
+              857,
+              866,
+              868,
+              868,
+              880,
+              882,
+              890,
+              890,
+              904,
+              905,
+              906,
+              917,
+              925,
+              926,
+              927,
+              932,
+              935,
+              935,
+              941,
+              946,
+              955,
+              966,
+              970,
+              970,
+              973,
+              979,
+              980,
+              985,
+              1001,
+              1005,
+              1005,
+              1016,
+              1016,
+              1019,
+              1029,
+              1034,
+              1038,
+              1039,
+              1046,
+              1051,
+              1054,
+              1055,
+              1075,
+              1083,
+              1086,
+              1095,
+              1097,
+              1101,
+              1102,
+              1110,
+              1115,
+              1122,
+              1125,
+              1125,
+              1133,
+              1145,
+              1146,
+              1150,
+              1152,
+              1154,
+              1162,
+              1175,
+              1181,
+              1184,
+              1186,
+              1192,
+              1199,
+              1202,
+              1203,
+              1207,
+              1210,
+              1231,
+              1236,
+              1240,
+              1243,
+              1248,
+              1265,
+              1269,
+              1276,
+              1287,
+              1296,
+              1299,
+              1307,
+              1310,
+              1317,
+              1323,
+              1332,
+              1336,
+              1340,
+              1342,
+              1353.7,
+              1357,
+              1363,
+              1376,
+              1377,
+              1386,
+              1388,
+              1389,
+              1400,
+              1401,
+              1406
+            ],
+            "excessiveGaps": [
+              {
+                "from": 1406,
+                "to": 270,
+                "minutes": 304
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "LBB",
+          "message": "LBB has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "LBB",
+            "departures": [
+              270,
+              270,
+              486,
+              747,
+              828,
+              843,
+              1037
+            ],
+            "excessiveGaps": [
+              {
+                "from": 486,
+                "to": 747,
+                "minutes": 261
+              },
+              {
+                "from": 1037,
+                "to": 270,
+                "minutes": 673
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "LEX",
+          "message": "LEX has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "LEX",
+            "departures": [
+              270,
+              612,
+              761,
+              1258
+            ],
+            "excessiveGaps": [
+              {
+                "from": 270,
+                "to": 612,
+                "minutes": 342
+              },
+              {
+                "from": 761,
+                "to": 1258,
+                "minutes": 497
+              },
+              {
+                "from": 1258,
+                "to": 270,
+                "minutes": 452
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "LIT",
+          "message": "LIT has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "LIT",
+            "departures": [
+              270,
+              485,
+              713,
+              901,
+              1131
+            ],
+            "excessiveGaps": [
+              {
+                "from": 1131,
+                "to": 270,
+                "minutes": 579
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "MAF",
+          "message": "MAF has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "MAF",
+            "departures": [
+              510,
+              815,
+              902,
+              1116,
+              1170
+            ],
+            "excessiveGaps": [
+              {
+                "from": 510,
+                "to": 815,
+                "minutes": 305
+              },
+              {
+                "from": 1170,
+                "to": 510,
+                "minutes": 780
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "MCI",
+          "message": "MCI has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "MCI",
+            "departures": [
+              270,
+              270,
+              270,
+              360,
+              360,
+              361,
+              363,
+              369,
+              377,
+              385,
+              390,
+              390,
+              394,
+              394,
+              396,
+              400,
+              403,
+              408,
+              412,
+              424,
+              440,
+              455,
+              471,
+              473,
+              481,
+              511,
+              522,
+              540,
+              545,
+              550,
+              563,
+              566,
+              566,
+              580,
+              582,
+              590,
+              592,
+              593,
+              599,
+              608,
+              614,
+              615,
+              622,
+              623,
+              624,
+              630,
+              637,
+              644,
+              651,
+              654,
+              660,
+              668,
+              670,
+              672,
+              672,
+              695,
+              696,
+              710,
+              716,
+              726,
+              736,
+              737,
+              746,
+              759,
+              760,
+              767,
+              786,
+              803,
+              804,
+              817,
+              827,
+              834,
+              870,
+              873,
+              875,
+              881,
+              893,
+              897,
+              904,
+              906,
+              907,
+              927,
+              936,
+              945,
+              973,
+              984,
+              992,
+              993,
+              995,
+              1000,
+              1001,
+              1015,
+              1016,
+              1020,
+              1025,
+              1031,
+              1034,
+              1042,
+              1042,
+              1043,
+              1046,
+              1053,
+              1063,
+              1071,
+              1087,
+              1090,
+              1091,
+              1105,
+              1110,
+              1122,
+              1125,
+              1135,
+              1189,
+              1193,
+              1209,
+              1232,
+              1235,
+              1246,
+              1283,
+              1285,
+              1309,
+              1310,
+              1310,
+              1318,
+              1323,
+              1324,
+              1327,
+              1329,
+              1332,
+              1372,
+              1373,
+              1380,
+              1386,
+              1386,
+              1402,
+              1406
+            ],
+            "excessiveGaps": [
+              {
+                "from": 1406,
+                "to": 270,
+                "minutes": 304
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "MCN",
+          "message": "MCN has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "MCN",
+            "departures": [
+              493,
+              1179
+            ],
+            "excessiveGaps": [
+              {
+                "from": 493,
+                "to": 1179,
+                "minutes": 686
+              },
+              {
+                "from": 1179,
+                "to": 493,
+                "minutes": 754
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "MDT",
+          "message": "MDT has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "MDT",
+            "departures": [
+              380,
+              500,
+              837,
+              913,
+              1258
+            ],
+            "excessiveGaps": [
+              {
+                "from": 500,
+                "to": 837,
+                "minutes": 337
+              },
+              {
+                "from": 913,
+                "to": 1258,
+                "minutes": 345
+              },
+              {
+                "from": 1258,
+                "to": 380,
+                "minutes": 562
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "MEM",
+          "message": "MEM has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "MEM",
+            "departures": [
+              270,
+              270,
+              461,
+              510,
+              685,
+              750
+            ],
+            "excessiveGaps": [
+              {
+                "from": 750,
+                "to": 270,
+                "minutes": 960
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "MFE",
+          "message": "MFE has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "MFE",
+            "departures": [
+              270,
+              270,
+              534,
+              1168,
+              1182
+            ],
+            "excessiveGaps": [
+              {
+                "from": 270,
+                "to": 534,
+                "minutes": 264
+              },
+              {
+                "from": 534,
+                "to": 1168,
+                "minutes": 634
+              },
+              {
+                "from": 1182,
+                "to": 270,
+                "minutes": 528
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "MHT",
+          "message": "MHT has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "MHT",
+            "departures": [
+              270,
+              606,
+              663,
+              864,
+              1065
+            ],
+            "excessiveGaps": [
+              {
+                "from": 270,
+                "to": 606,
+                "minutes": 336
+              },
+              {
+                "from": 1065,
+                "to": 270,
+                "minutes": 645
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "MKE",
+          "message": "MKE has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "MKE",
+            "departures": [
+              270,
+              270,
+              410,
+              430,
+              653,
+              718,
+              830,
+              864,
+              902,
+              1067
+            ],
+            "excessiveGaps": [
+              {
+                "from": 1067,
+                "to": 270,
+                "minutes": 643
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "MLB",
+          "message": "MLB has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "MLB",
+            "departures": [
+              1005
+            ],
+            "excessiveGaps": [
+              {
+                "from": 1005,
+                "to": 1005,
+                "minutes": 1440
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "MOB",
+          "message": "MOB has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "MOB",
+            "departures": [
+              534,
+              1026
+            ],
+            "excessiveGaps": [
+              {
+                "from": 534,
+                "to": 1026,
+                "minutes": 492
+              },
+              {
+                "from": 1026,
+                "to": 534,
+                "minutes": 948
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "MSN",
+          "message": "MSN has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "MSN",
+            "departures": [
+              270,
+              300,
+              384,
+              769,
+              772,
+              816,
+              1256
+            ],
+            "excessiveGaps": [
+              {
+                "from": 384,
+                "to": 769,
+                "minutes": 385
+              },
+              {
+                "from": 816,
+                "to": 1256,
+                "minutes": 440
+              },
+              {
+                "from": 1256,
+                "to": 270,
+                "minutes": 454
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "MSY",
+          "message": "MSY has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "MSY",
+            "departures": [
+              500,
+              655,
+              724,
+              821,
+              958,
+              990,
+              1144,
+              1255
+            ],
+            "excessiveGaps": [
+              {
+                "from": 1255,
+                "to": 500,
+                "minutes": 685
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "MYR",
+          "message": "MYR has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "MYR",
+            "departures": [
+              270,
+              475,
+              480,
+              626,
+              820,
+              850,
+              900.0,
+              934,
+              1192,
+              1233
+            ],
+            "excessiveGaps": [
+              {
+                "from": 934,
+                "to": 1192,
+                "minutes": 258
+              },
+              {
+                "from": 1233,
+                "to": 270,
+                "minutes": 477
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "OKC",
+          "message": "OKC has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "OKC",
+            "departures": [
+              270,
+              270,
+              457,
+              649,
+              980,
+              1200
+            ],
+            "excessiveGaps": [
+              {
+                "from": 649,
+                "to": 980,
+                "minutes": 331
+              },
+              {
+                "from": 1200,
+                "to": 270,
+                "minutes": 510
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "OMA",
+          "message": "OMA has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "OMA",
+            "departures": [
+              270,
+              400,
+              450,
+              541,
+              670,
+              849,
+              906,
+              998
+            ],
+            "excessiveGaps": [
+              {
+                "from": 998,
+                "to": 270,
+                "minutes": 712
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "ORH",
+          "message": "ORH has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "ORH",
+            "departures": [
+              969,
+              1166
+            ],
+            "excessiveGaps": [
+              {
+                "from": 1166,
+                "to": 969,
+                "minutes": 1243
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "PGD",
+          "message": "PGD has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "PGD",
+            "departures": [
+              270,
+              430,
+              597,
+              623,
+              770,
+              770,
+              876,
+              921,
+              933,
+              982,
+              1015,
+              1080,
+              1150,
+              1185,
+              1235,
+              1256
+            ],
+            "excessiveGaps": [
+              {
+                "from": 1256,
+                "to": 270,
+                "minutes": 454
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "PHF",
+          "message": "PHF has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "PHF",
+            "departures": [
+              270,
+              285,
+              318.0,
+              359,
+              370,
+              399,
+              413,
+              420,
+              433,
+              447,
+              455,
+              497,
+              518,
+              537,
+              547,
+              568,
+              570,
+              573,
+              580,
+              587,
+              632,
+              668,
+              671,
+              708,
+              712,
+              771,
+              784,
+              851,
+              897,
+              933,
+              938,
+              956,
+              964,
+              993,
+              994,
+              1010,
+              1047,
+              1055,
+              1070,
+              1084,
+              1220,
+              1272,
+              1294,
+              1303,
+              1378,
+              1391
+            ],
+            "excessiveGaps": [
+              {
+                "from": 1391,
+                "to": 270,
+                "minutes": 319
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "PIA",
+          "message": "PIA has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "PIA",
+            "departures": [
+              270,
+              483,
+              696
+            ],
+            "excessiveGaps": [
+              {
+                "from": 696,
+                "to": 270,
+                "minutes": 1014
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "PIE",
+          "message": "PIE has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "PIE",
+            "departures": [
+              270,
+              270,
+              270,
+              350,
+              356,
+              364,
+              401,
+              463,
+              528,
+              544,
+              580.0,
+              622,
+              700,
+              851,
+              1006,
+              1145,
+              1199
+            ],
+            "excessiveGaps": [
+              {
+                "from": 1199,
+                "to": 270,
+                "minutes": 511
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "PIT",
+          "message": "PIT has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "PIT",
+            "departures": [
+              270,
+              510,
+              570,
+              575,
+              627,
+              730,
+              767,
+              878,
+              922,
+              1210
+            ],
+            "excessiveGaps": [
+              {
+                "from": 922,
+                "to": 1210,
+                "minutes": 288
+              },
+              {
+                "from": 1210,
+                "to": 270,
+                "minutes": 500
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "PNS",
+          "message": "PNS has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "PNS",
+            "departures": [
+              513,
+              591,
+              737,
+              960,
+              1149
+            ],
+            "excessiveGaps": [
+              {
+                "from": 1149,
+                "to": 513,
+                "minutes": 804
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "PVD",
+          "message": "PVD has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "PVD",
+            "departures": [
+              320,
+              405,
+              508,
+              638,
+              713,
+              863,
+              906,
+              1179
+            ],
+            "excessiveGaps": [
+              {
+                "from": 906,
+                "to": 1179,
+                "minutes": 273
+              },
+              {
+                "from": 1179,
+                "to": 320,
+                "minutes": 581
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "PWM",
+          "message": "PWM has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "PWM",
+            "departures": [
+              270,
+              355,
+              702,
+              1136,
+              1256
+            ],
+            "excessiveGaps": [
+              {
+                "from": 355,
+                "to": 702,
+                "minutes": 347
+              },
+              {
+                "from": 702,
+                "to": 1136,
+                "minutes": 434
+              },
+              {
+                "from": 1256,
+                "to": 270,
+                "minutes": 454
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "RDU",
+          "message": "RDU has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "RDU",
+            "departures": [
+              270,
+              270,
+              310,
+              377,
+              455,
+              564,
+              574,
+              727,
+              797,
+              827,
+              945,
+              1026,
+              1031
+            ],
+            "excessiveGaps": [
+              {
+                "from": 1031,
+                "to": 270,
+                "minutes": 679
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "RFD",
+          "message": "RFD has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "RFD",
+            "departures": [
+              270,
+              270,
+              280,
+              300,
+              350,
+              357,
+              369,
+              391,
+              404,
+              462,
+              486,
+              506,
+              604,
+              631,
+              648,
+              683,
+              722,
+              723,
+              743,
+              757,
+              764.0,
+              785,
+              814,
+              875,
+              893,
+              894,
+              895,
+              1068,
+              1077,
+              1098,
+              1127,
+              1131,
+              1194,
+              1212,
+              1220,
+              1234,
+              1243
+            ],
+            "excessiveGaps": [
+              {
+                "from": 1243,
+                "to": 270,
+                "minutes": 467
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "ROA",
+          "message": "ROA has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "ROA",
+            "departures": [
+              270,
+              624,
+              1189
+            ],
+            "excessiveGaps": [
+              {
+                "from": 270,
+                "to": 624,
+                "minutes": 354
+              },
+              {
+                "from": 624,
+                "to": 1189,
+                "minutes": 565
+              },
+              {
+                "from": 1189,
+                "to": 270,
+                "minutes": 521
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "ROC",
+          "message": "ROC has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "ROC",
+            "departures": [
+              270,
+              743,
+              750,
+              836,
+              1083,
+              1189,
+              1231
+            ],
+            "excessiveGaps": [
+              {
+                "from": 270,
+                "to": 743,
+                "minutes": 473
+              },
+              {
+                "from": 836,
+                "to": 1083,
+                "minutes": 247
+              },
+              {
+                "from": 1231,
+                "to": 270,
+                "minutes": 479
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "SAT",
+          "message": "SAT has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "SAT",
+            "departures": [
+              270,
+              270,
+              564,
+              676,
+              708,
+              775,
+              810,
+              896,
+              1134,
+              1180,
+              1220
+            ],
+            "excessiveGaps": [
+              {
+                "from": 270,
+                "to": 564,
+                "minutes": 294
+              },
+              {
+                "from": 1220,
+                "to": 270,
+                "minutes": 490
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "SAV",
+          "message": "SAV has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "SAV",
+            "departures": [
+              270,
+              270,
+              270,
+              320,
+              354,
+              415,
+              431,
+              469,
+              857,
+              943,
+              1026,
+              1210
+            ],
+            "excessiveGaps": [
+              {
+                "from": 469,
+                "to": 857,
+                "minutes": 388
+              },
+              {
+                "from": 1210,
+                "to": 270,
+                "minutes": 500
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "SBN",
+          "message": "SBN has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "SBN",
+            "departures": [
+              270,
+              305,
+              450,
+              707,
+              749,
+              930
+            ],
+            "excessiveGaps": [
+              {
+                "from": 450,
+                "to": 707,
+                "minutes": 257
+              },
+              {
+                "from": 930,
+                "to": 270,
+                "minutes": 780
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "SDF",
+          "message": "SDF has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "SDF",
+            "departures": [
+              270,
+              270,
+              500,
+              746,
+              851,
+              1188,
+              1254
+            ],
+            "excessiveGaps": [
+              {
+                "from": 500,
+                "to": 746,
+                "minutes": 246
+              },
+              {
+                "from": 851,
+                "to": 1188,
+                "minutes": 337
+              },
+              {
+                "from": 1254,
+                "to": 270,
+                "minutes": 456
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "SFB",
+          "message": "SFB has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "SFB",
+            "departures": [
+              270,
+              366,
+              370,
+              377,
+              399,
+              419,
+              430,
+              442,
+              453.0,
+              540.0,
+              563,
+              587,
+              595,
+              614,
+              625,
+              693,
+              700,
+              712,
+              825,
+              858,
+              879,
+              880.0,
+              891,
+              911,
+              929,
+              929,
+              993,
+              1087,
+              1089.0,
+              1105,
+              1251
+            ],
+            "excessiveGaps": [
+              {
+                "from": 1251,
+                "to": 270,
+                "minutes": 459
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "SGF",
+          "message": "SGF has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "SGF",
+            "departures": [
+              270,
+              635,
+              820,
+              963,
+              1035,
+              1142
+            ],
+            "excessiveGaps": [
+              {
+                "from": 270,
+                "to": 635,
+                "minutes": 365
+              },
+              {
+                "from": 1142,
+                "to": 270,
+                "minutes": 568
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "SHV",
+          "message": "SHV has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "SHV",
+            "departures": [
+              270,
+              536,
+              803
+            ],
+            "excessiveGaps": [
+              {
+                "from": 270,
+                "to": 536,
+                "minutes": 266
+              },
+              {
+                "from": 536,
+                "to": 803,
+                "minutes": 267
+              },
+              {
+                "from": 803,
+                "to": 270,
+                "minutes": 907
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "SRQ",
+          "message": "SRQ has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "SRQ",
+            "departures": [
+              270,
+              615,
+              719,
+              792,
+              805,
+              982,
+              1016,
+              1208,
+              1228
+            ],
+            "excessiveGaps": [
+              {
+                "from": 270,
+                "to": 615,
+                "minutes": 345
+              },
+              {
+                "from": 1228,
+                "to": 270,
+                "minutes": 482
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "SWF",
+          "message": "SWF has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "SWF",
+            "departures": [
+              270,
+              447
+            ],
+            "excessiveGaps": [
+              {
+                "from": 447,
+                "to": 270,
+                "minutes": 1263
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "SYR",
+          "message": "SYR has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "SYR",
+            "departures": [
+              270,
+              295,
+              359,
+              362,
+              364,
+              370,
+              374,
+              378,
+              390,
+              404,
+              405,
+              423,
+              426,
+              435,
+              439,
+              446,
+              449,
+              450,
+              475,
+              478,
+              482,
+              493,
+              528,
+              533,
+              533,
+              535,
+              536,
+              545,
+              552,
+              563,
+              569,
+              571,
+              581,
+              611,
+              616,
+              630,
+              660,
+              668,
+              670,
+              671,
+              678,
+              686,
+              701,
+              726,
+              730,
+              740,
+              741,
+              760,
+              763,
+              764,
+              765,
+              788,
+              807,
+              809,
+              816,
+              817,
+              827,
+              840,
+              842,
+              861,
+              870,
+              888,
+              914,
+              918,
+              933,
+              935,
+              961,
+              964,
+              965,
+              975,
+              975,
+              997,
+              1000,
+              1008,
+              1009,
+              1032,
+              1033,
+              1062.0,
+              1067,
+              1075,
+              1082,
+              1149,
+              1165,
+              1205,
+              1221,
+              1252,
+              1264,
+              1295,
+              1299,
+              1302,
+              1320,
+              1349,
+              1350,
+              1351,
+              1351,
+              1354,
+              1365,
+              1392,
+              1393,
+              1395,
+              1400
+            ],
+            "excessiveGaps": [
+              {
+                "from": 1400,
+                "to": 270,
+                "minutes": 310
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "TLH",
+          "message": "TLH has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "TLH",
+            "departures": [
+              400,
+              776,
+              1109
+            ],
+            "excessiveGaps": [
+              {
+                "from": 400,
+                "to": 776,
+                "minutes": 376
+              },
+              {
+                "from": 776,
+                "to": 1109,
+                "minutes": 333
+              },
+              {
+                "from": 1109,
+                "to": 400,
+                "minutes": 731
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "TOL",
+          "message": "TOL has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "TOL",
+            "departures": [
+              1089,
+              1257
+            ],
+            "excessiveGaps": [
+              {
+                "from": 1257,
+                "to": 1089,
+                "minutes": 1272
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "TRI",
+          "message": "TRI has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "TRI",
+            "departures": [
+              350,
+              551,
+              767
+            ],
+            "excessiveGaps": [
+              {
+                "from": 767,
+                "to": 350,
+                "minutes": 1023
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "TTN",
+          "message": "TTN has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "TTN",
+            "departures": [
+              270,
+              470,
+              671
+            ],
+            "excessiveGaps": [
+              {
+                "from": 671,
+                "to": 270,
+                "minutes": 1039
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "TUL",
+          "message": "TUL has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "TUL",
+            "departures": [
+              270,
+              270,
+              467,
+              522,
+              538,
+              664,
+              735,
+              902
+            ],
+            "excessiveGaps": [
+              {
+                "from": 902,
+                "to": 270,
+                "minutes": 808
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "TYS",
+          "message": "TYS has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "TYS",
+            "departures": [
+              392,
+              769,
+              900,
+              1079,
+              1178,
+              1210
+            ],
+            "excessiveGaps": [
+              {
+                "from": 392,
+                "to": 769,
+                "minutes": 377
+              },
+              {
+                "from": 1210,
+                "to": 392,
+                "minutes": 622
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "VPS",
+          "message": "VPS has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "VPS",
+            "departures": [
+              270,
+              814,
+              894,
+              1112,
+              1123,
+              1257
+            ],
+            "excessiveGaps": [
+              {
+                "from": 270,
+                "to": 814,
+                "minutes": 544
+              },
+              {
+                "from": 1257,
+                "to": 270,
+                "minutes": 453
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        },
+        {
+          "id": "XNA",
+          "message": "XNA has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "XNA",
+            "departures": [
+              270,
+              496,
+              619,
+              689,
+              757,
+              1112
+            ],
+            "excessiveGaps": [
+              {
+                "from": 757,
+                "to": 1112,
+                "minutes": 355
+              },
+              {
+                "from": 1112,
+                "to": 270,
+                "minutes": 598
+              }
+            ],
+            "includesOvernightWrap": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "section_26_service_gap_policy_consistency",
+      "title": "Section 2.6 service-gap policy consistency",
+      "section": "§2.5 / §2.6 Check B",
+      "severity": "warning",
+      "hardStop": false,
+      "status": "warning",
+      "message": "1 finding(s)",
+      "metrics": {
+        "findingCount": 1,
+        "effectiveFindingCount": 1,
+        "overriddenFindingCount": 0
+      },
+      "findings": [
+        {
+          "id": "overnight-wrap",
+          "message": "The literal cyclic city departure-gap ceiling is incompatible with the permitted departure window",
+          "evidence": {
+            "shortestPossibleOvernightGap": 300,
+            "cityDepartureGapCeiling": 240,
+            "earliestDeparture": 270,
+            "latestDeparture": 1410
+          }
+        }
+      ]
+    },
+    {
+      "id": "numbering_conventions",
+      "title": "Route and flight numbering conventions",
+      "section": "§2.8 / Lesson 33",
+      "severity": "error",
+      "hardStop": false,
+      "status": "pass",
+      "message": "Route blocks and flight-number ranges follow the standing convention",
+      "metrics": {
+        "findingCount": 0,
+        "effectiveFindingCount": 0,
+        "overriddenFindingCount": 0
+      },
+      "findings": []
+    },
+    {
+      "id": "gate_assignment_conflicts",
+      "title": "Physical gate/stand double-booking",
+      "section": "§1.7 / §2.2",
+      "severity": "error",
+      "hardStop": false,
+      "status": "pass",
+      "message": "No assigned physical slot is double-booked cyclically",
+      "metrics": {
+        "findingCount": 0,
+        "effectiveFindingCount": 0,
+        "overriddenFindingCount": 0
+      },
+      "findings": []
+    },
+    {
+      "id": "passenger_touch_on_stand",
+      "title": "Passenger handling on stands",
+      "section": "§1.7 hard-stop addition",
+      "severity": "error",
+      "hardStop": false,
+      "status": "fail",
+      "message": "35 finding(s)",
+      "metrics": {
+        "findingCount": 35,
+        "effectiveFindingCount": 35,
+        "overriddenFindingCount": 0
+      },
+      "findings": [
+        {
+          "id": "JAX-180 -> 169-1062-1107",
+          "message": "JAX claim 180 -> 169 requires passenger handling on stand 4",
+          "evidence": {
+            "city": "JAX",
+            "label": "180 -> 169",
+            "kind": "ron",
+            "start": 1062,
+            "end": 1107,
+            "stand": 4
+          }
+        },
+        {
+          "id": "ALB-358 -> 359-1396-1441",
+          "message": "ALB claim 358 -> 359 requires passenger handling on stand 1",
+          "evidence": {
+            "city": "ALB",
+            "label": "358 -> 359",
+            "kind": "ron",
+            "start": 1396,
+            "end": 1441,
+            "stand": 1
+          }
+        },
+        {
+          "id": "ALB-358 -> 359-1680-1740",
+          "message": "ALB claim 358 -> 359 requires passenger handling on stand 1",
+          "evidence": {
+            "city": "ALB",
+            "label": "358 -> 359",
+            "kind": "ron",
+            "start": 1680,
+            "end": 1740,
+            "stand": 1
+          }
+        },
+        {
+          "id": "ALB-355 -> 356-1528-1573",
+          "message": "ALB claim 355 -> 356 requires passenger handling on stand 2",
+          "evidence": {
+            "city": "ALB",
+            "label": "355 -> 356",
+            "kind": "ron",
+            "start": 1528,
+            "end": 1573,
+            "stand": 2
+          }
+        },
+        {
+          "id": "ALB-355 -> 356-1650-1710",
+          "message": "ALB claim 355 -> 356 requires passenger handling on stand 2",
+          "evidence": {
+            "city": "ALB",
+            "label": "355 -> 356",
+            "kind": "ron",
+            "start": 1650,
+            "end": 1710,
+            "stand": 2
+          }
+        },
+        {
+          "id": "BDL-339 -> 340-1353-1398",
+          "message": "BDL claim 339 -> 340 requires passenger handling on stand 1",
+          "evidence": {
+            "city": "BDL",
+            "label": "339 -> 340",
+            "kind": "ron",
+            "start": 1353,
+            "end": 1398,
+            "stand": 1
+          }
+        },
+        {
+          "id": "BDL-339 -> 340-1650-1710",
+          "message": "BDL claim 339 -> 340 requires passenger handling on stand 1",
+          "evidence": {
+            "city": "BDL",
+            "label": "339 -> 340",
+            "kind": "ron",
+            "start": 1650,
+            "end": 1710,
+            "stand": 1
+          }
+        },
+        {
+          "id": "BDL-509 -> 510-1455-1500",
+          "message": "BDL claim 509 -> 510 requires passenger handling on stand 2",
+          "evidence": {
+            "city": "BDL",
+            "label": "509 -> 510",
+            "kind": "ron",
+            "start": 1455,
+            "end": 1500,
+            "stand": 2
+          }
+        },
+        {
+          "id": "BHM-102 -> 102-1016-1061",
+          "message": "BHM claim 102 -> 102 requires passenger handling on stand 1",
+          "evidence": {
+            "city": "BHM",
+            "label": "102 -> 102",
+            "kind": "ron",
+            "start": 1016,
+            "end": 1061,
+            "stand": 1
+          }
+        },
+        {
+          "id": "BHM-102 -> 102-1650-1710",
+          "message": "BHM claim 102 -> 102 requires passenger handling on stand 1",
+          "evidence": {
+            "city": "BHM",
+            "label": "102 -> 102",
+            "kind": "ron",
+            "start": 1650,
+            "end": 1710,
+            "stand": 1
+          }
+        },
+        {
+          "id": "BNA-726 -> 727-980.0-1025.0",
+          "message": "BNA claim 726 -> 727 requires passenger handling on stand 1",
+          "evidence": {
+            "city": "BNA",
+            "label": "726 -> 727",
+            "kind": "ron",
+            "start": 980.0,
+            "end": 1025.0,
+            "stand": 1
+          }
+        },
+        {
+          "id": "BWI-517 -> 518-1460-1505",
+          "message": "BWI claim 517 -> 518 requires passenger handling on stand 1",
+          "evidence": {
+            "city": "BWI",
+            "label": "517 -> 518",
+            "kind": "ron",
+            "start": 1460,
+            "end": 1505,
+            "stand": 1
+          }
+        },
+        {
+          "id": "BWI-517 -> 518-1650-1710",
+          "message": "BWI claim 517 -> 518 requires passenger handling on stand 1",
+          "evidence": {
+            "city": "BWI",
+            "label": "517 -> 518",
+            "kind": "ron",
+            "start": 1650,
+            "end": 1710,
+            "stand": 1
+          }
+        },
+        {
+          "id": "BWI-532 -> 533-1517-1562",
+          "message": "BWI claim 532 -> 533 requires passenger handling on stand 2",
+          "evidence": {
+            "city": "BWI",
+            "label": "532 -> 533",
+            "kind": "ron",
+            "start": 1517,
+            "end": 1562,
+            "stand": 2
+          }
+        },
+        {
+          "id": "BWI-532 -> 533-1650-1710",
+          "message": "BWI claim 532 -> 533 requires passenger handling on stand 2",
+          "evidence": {
+            "city": "BWI",
+            "label": "532 -> 533",
+            "kind": "ron",
+            "start": 1650,
+            "end": 1710,
+            "stand": 2
+          }
+        },
+        {
+          "id": "DAL-701 -> 702-1770-1830",
+          "message": "DAL claim 701 -> 702 requires passenger handling on stand 1",
+          "evidence": {
+            "city": "DAL",
+            "label": "701 -> 702",
+            "kind": "ron",
+            "start": 1770,
+            "end": 1830,
+            "stand": 1
+          }
+        },
+        {
+          "id": "FLL-717 -> 718-941-986",
+          "message": "FLL claim 717 -> 718 requires passenger handling on stand 1",
+          "evidence": {
+            "city": "FLL",
+            "label": "717 -> 718",
+            "kind": "ron",
+            "start": 941,
+            "end": 986,
+            "stand": 1
+          }
+        },
+        {
+          "id": "GRR-331 -> 332-1518-1563",
+          "message": "GRR claim 331 -> 332 requires passenger handling on stand 1",
+          "evidence": {
+            "city": "GRR",
+            "label": "331 -> 332",
+            "kind": "ron",
+            "start": 1518,
+            "end": 1563,
+            "stand": 1
+          }
+        },
+        {
+          "id": "GRR-331 -> 332-1650-1710",
+          "message": "GRR claim 331 -> 332 requires passenger handling on stand 1",
+          "evidence": {
+            "city": "GRR",
+            "label": "331 -> 332",
+            "kind": "ron",
+            "start": 1650,
+            "end": 1710,
+            "stand": 1
+          }
+        },
+        {
+          "id": "HSV-137 -> 138-1407-1452",
+          "message": "HSV claim 137 -> 138 requires passenger handling on stand 1",
+          "evidence": {
+            "city": "HSV",
+            "label": "137 -> 138",
+            "kind": "ron",
+            "start": 1407,
+            "end": 1452,
+            "stand": 1
+          }
+        },
+        {
+          "id": "IND-518 -> 519-1230-1275",
+          "message": "IND claim 518 -> 519 requires passenger handling on stand 1",
+          "evidence": {
+            "city": "IND",
+            "label": "518 -> 519",
+            "kind": "ron",
+            "start": 1230,
+            "end": 1275,
+            "stand": 1
+          }
+        },
+        {
+          "id": "IND-518 -> 519-1650-1710",
+          "message": "IND claim 518 -> 519 requires passenger handling on stand 1",
+          "evidence": {
+            "city": "IND",
+            "label": "518 -> 519",
+            "kind": "ron",
+            "start": 1650,
+            "end": 1710,
+            "stand": 1
+          }
+        },
+        {
+          "id": "IND-105 -> 106-1462-1507",
+          "message": "IND claim 105 -> 106 requires passenger handling on stand 2",
+          "evidence": {
+            "city": "IND",
+            "label": "105 -> 106",
+            "kind": "ron",
+            "start": 1462,
+            "end": 1507,
+            "stand": 2
+          }
+        },
+        {
+          "id": "IND-105 -> 106-1650-1710",
+          "message": "IND claim 105 -> 106 requires passenger handling on stand 2",
+          "evidence": {
+            "city": "IND",
+            "label": "105 -> 106",
+            "kind": "ron",
+            "start": 1650,
+            "end": 1710,
+            "stand": 2
+          }
+        },
+        {
+          "id": "LBB-154 -> 155-1578-1623",
+          "message": "LBB claim 154 -> 155 requires passenger handling on stand 1",
+          "evidence": {
+            "city": "LBB",
+            "label": "154 -> 155",
+            "kind": "ron",
+            "start": 1578,
+            "end": 1623,
+            "stand": 1
+          }
+        },
+        {
+          "id": "MFE-128 -> 129-1166-1211",
+          "message": "MFE claim 128 -> 129 requires passenger handling on stand 1",
+          "evidence": {
+            "city": "MFE",
+            "label": "128 -> 129",
+            "kind": "ron",
+            "start": 1166,
+            "end": 1211,
+            "stand": 1
+          }
+        },
+        {
+          "id": "MKE-537 -> 538-1542-1587",
+          "message": "MKE claim 537 -> 538 requires passenger handling on stand 1",
+          "evidence": {
+            "city": "MKE",
+            "label": "537 -> 538",
+            "kind": "ron",
+            "start": 1542,
+            "end": 1587,
+            "stand": 1
+          }
+        },
+        {
+          "id": "MKE-537 -> 538-1650-1710",
+          "message": "MKE claim 537 -> 538 requires passenger handling on stand 1",
+          "evidence": {
+            "city": "MKE",
+            "label": "537 -> 538",
+            "kind": "ron",
+            "start": 1650,
+            "end": 1710,
+            "stand": 1
+          }
+        },
+        {
+          "id": "MYR-157 -> 158-1485-1530",
+          "message": "MYR claim 157 -> 158 requires passenger handling on stand 1",
+          "evidence": {
+            "city": "MYR",
+            "label": "157 -> 158",
+            "kind": "ron",
+            "start": 1485,
+            "end": 1530,
+            "stand": 1
+          }
+        },
+        {
+          "id": "MYR-157 -> 158-1855-1915",
+          "message": "MYR claim 157 -> 158 requires passenger handling on stand 1",
+          "evidence": {
+            "city": "MYR",
+            "label": "157 -> 158",
+            "kind": "ron",
+            "start": 1855,
+            "end": 1915,
+            "stand": 1
+          }
+        },
+        {
+          "id": "SAV-158 -> 159-1481-1526",
+          "message": "SAV claim 158 -> 159 requires passenger handling on stand 2",
+          "evidence": {
+            "city": "SAV",
+            "label": "158 -> 159",
+            "kind": "ron",
+            "start": 1481,
+            "end": 1526,
+            "stand": 2
+          }
+        },
+        {
+          "id": "SAV-158 -> 159-1650-1710",
+          "message": "SAV claim 158 -> 159 requires passenger handling on stand 2",
+          "evidence": {
+            "city": "SAV",
+            "label": "158 -> 159",
+            "kind": "ron",
+            "start": 1650,
+            "end": 1710,
+            "stand": 2
+          }
+        },
+        {
+          "id": "SAV-349 -> 350-1511-1556",
+          "message": "SAV claim 349 -> 350 requires passenger handling on stand 3",
+          "evidence": {
+            "city": "SAV",
+            "label": "349 -> 350",
+            "kind": "ron",
+            "start": 1511,
+            "end": 1556,
+            "stand": 3
+          }
+        },
+        {
+          "id": "SAV-349 -> 350-1700-1760",
+          "message": "SAV claim 349 -> 350 requires passenger handling on stand 3",
+          "evidence": {
+            "city": "SAV",
+            "label": "349 -> 350",
+            "kind": "ron",
+            "start": 1700,
+            "end": 1760,
+            "stand": 3
+          }
+        },
+        {
+          "id": "SFB-712 -> 713-1810-1870",
+          "message": "SFB claim 712 -> 713 requires passenger handling on stand 1",
+          "evidence": {
+            "city": "SFB",
+            "label": "712 -> 713",
+            "kind": "ron",
+            "start": 1810,
+            "end": 1870,
+            "stand": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "stand_capacity",
+      "title": "Configured hard-stand capacity",
+      "section": "§2.2",
+      "severity": "error",
+      "hardStop": false,
+      "status": "fail",
+      "message": "2 finding(s)",
+      "metrics": {
+        "findingCount": 2,
+        "effectiveFindingCount": 2,
+        "overriddenFindingCount": 0
+      },
+      "findings": [
+        {
+          "id": "RFD",
+          "message": "RFD needs stand 4 but has 2 configured stands",
+          "evidence": {
+            "city": "RFD",
+            "requiredStands": 4,
+            "configuredStands": 2
+          }
+        },
+        {
+          "id": "SAV",
+          "message": "SAV needs stand 3 but has 2 configured stands",
+          "evidence": {
+            "city": "SAV",
+            "requiredStands": 3,
+            "configuredStands": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "combined_capacity_peak",
+      "title": "One-minute combined capacity",
+      "section": "§1.7 / §2.2",
+      "severity": "error",
+      "hardStop": false,
+      "status": "fail",
+      "message": "2 finding(s)",
+      "metrics": {
+        "findingCount": 2,
+        "effectiveFindingCount": 2,
+        "overriddenFindingCount": 0
+      },
+      "findings": [
+        {
+          "id": "RFD",
+          "message": "RFD peaks at 8 aircraft against combined capacity 6",
+          "evidence": {
+            "city": "RFD",
+            "peak": 8,
+            "peakMinute": 1203,
+            "combinedCapacity": 6
+          }
+        },
+        {
+          "id": "SAV",
+          "message": "SAV peaks at 5 aircraft against combined capacity 4",
+          "evidence": {
+            "city": "SAV",
+            "peak": 5,
+            "peakMinute": 71,
+            "combinedCapacity": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": "runway_screening",
+      "title": "Fleet/runway screening",
+      "section": "§2.12",
+      "severity": "warning",
+      "hardStop": false,
+      "status": "not_evaluated",
+      "message": "No active city has runway length populated in the pinned city snapshot",
+      "metrics": {
+        "missingInputs": [
+          "cities[].runwayLengthFeet"
+        ],
+        "findingCount": 0,
+        "effectiveFindingCount": 0,
+        "overriddenFindingCount": 0
+      },
+      "findings": []
+    },
+    {
+      "id": "tiered_service_minimums",
+      "title": "Percentile-tier service minimums",
+      "section": "§2.3",
+      "severity": "warning",
+      "hardStop": false,
+      "status": "not_evaluated",
+      "message": "Demand percentiles were not preserved in the v2.2.5 workbook or city snapshot",
+      "metrics": {
+        "missingInputs": [
+          "cities[].demandPercentile"
+        ],
+        "findingCount": 0,
+        "effectiveFindingCount": 0,
+        "overriddenFindingCount": 0
+      },
+      "findings": []
+    },
+    {
+      "id": "hub_bank_alignment",
+      "title": "Hub-bank count and alignment",
+      "section": "§1.6a",
+      "severity": "warning",
+      "hardStop": false,
+      "status": "not_evaluated",
+      "message": "The legacy workbook does not record bank definitions or per-leg bank assignments",
+      "metrics": {
+        "missingInputs": [
+          "hubBanks",
+          "bankAssignments"
+        ],
+        "findingCount": 0,
+        "effectiveFindingCount": 0,
+        "overriddenFindingCount": 0
+      },
+      "findings": []
+    },
+    {
+      "id": "unused_overrides",
+      "title": "Override integrity",
+      "section": "§1.11",
+      "severity": "warning",
+      "hardStop": false,
+      "status": "pass",
+      "message": "Every configured override matches a current finding",
+      "metrics": {},
+      "findings": []
+    }
+  ]
+}
