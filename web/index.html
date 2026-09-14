@@ -26,6 +26,7 @@
 
     <nav class="tabbar" aria-label="Schedule views">
       <button class="tab is-active" type="button" data-tab="overview" aria-selected="true">Overview</button>
+      <button class="tab" type="button" data-tab="setup" aria-selected="false">Schedule Setup</button>
       <button class="tab" type="button" data-tab="routings" aria-selected="false">Routings</button>
       <button class="tab" type="button" data-tab="validation" aria-selected="false">
         Validation <span class="tab-count" id="validation-count">—</span>
@@ -90,6 +91,95 @@
             </div>
             <div class="attention-list" id="attention-list"></div>
           </section>
+        </section>
+
+        <section class="view" id="view-setup" data-view="setup" aria-labelledby="setup-title" hidden>
+          <div class="page-heading compact">
+            <div>
+              <p class="eyebrow">Milestone 0.5</p>
+              <h1 id="setup-title">Schedule setup</h1>
+              <p class="page-note">Define a complete, portable build configuration before construction begins. Drafts stay in this browser until you export them.</p>
+            </div>
+            <span class="status-pill" id="setup-status" aria-live="polite">Draft</span>
+          </div>
+
+          <div class="setup-notice">
+            <strong>No schedule is being constructed yet.</strong>
+            <span>Preflight validates setup inputs. Curfews remain hard stops when the construction engine is connected in Milestone 0.6.</span>
+          </div>
+
+          <form id="setup-form" class="setup-layout" autocomplete="off">
+            <section class="panel setup-panel" aria-labelledby="setup-identity-title">
+              <div class="panel-heading">
+                <div><p class="eyebrow">Build identity</p><h2 id="setup-identity-title">New schedule</h2></div>
+              </div>
+              <div class="setup-fields">
+                <label><span>Schedule number</span><input id="setup-number" type="number" min="1" step="1" required></label>
+                <label><span>Version</span><input id="setup-version" type="text" required></label>
+                <label class="wide-field"><span>Label</span><input id="setup-label" type="text" required></label>
+                <label><span>Build mode</span><select id="setup-mode"><option value="mainline">Mainline</option><option value="skunkworks">Skunkworks</option></select></label>
+                <label><span>Starting point</span><select id="setup-start-kind"><option value="previous_schedule">Previous schedule</option><option value="blank">Blank plan</option></select></label>
+                <label class="wide-field"><span>Baseline schedule</span><select id="setup-baseline"></select></label>
+              </div>
+            </section>
+
+            <section class="panel setup-panel" aria-labelledby="setup-fleet-title">
+              <div class="panel-heading">
+                <div><p class="eyebrow">Variable every schedule</p><h2 id="setup-fleet-title">Fleet composition</h2></div>
+                <button class="text-button" id="setup-add-fleet" type="button">Add fleet type</button>
+              </div>
+              <div class="setup-list" id="setup-fleet-rows"></div>
+              <p class="setup-help">Every type and aircraft count is written into this build configuration. Values are copied only as editable starting suggestions.</p>
+            </section>
+
+            <section class="panel setup-panel" aria-labelledby="setup-inputs-title">
+              <div class="panel-heading">
+                <div><p class="eyebrow">Reproducible inputs</p><h2 id="setup-inputs-title">Policy and data pins</h2></div>
+                <a class="source-link" id="setup-schema-link" href="schemas/build_config.schema.json" target="_blank" rel="noreferrer">JSON schema</a>
+              </div>
+              <div class="setup-fields">
+                <label><span>Minimum connection (minutes)</span><input id="setup-connect-min" type="number" min="0" step="1"></label>
+                <label><span>Maximum connection (minutes)</span><input id="setup-connect-max" type="number" min="1" step="1"></label>
+                <label class="wide-field"><span>Instruction version</span><input id="setup-instruction-version" type="text"></label>
+                <label class="wide-field"><span>Instruction source</span><input id="setup-instruction-source" type="text"></label>
+                <label class="wide-field"><span>City information file</span><input id="setup-city-file" type="text"></label>
+                <label class="wide-field"><span>City information SHA-256</span><input id="setup-city-sha" class="mono-input" type="text" spellcheck="false"></label>
+                <label class="wide-field"><span>Operating policy file</span><input id="setup-policy-file" type="text"></label>
+                <label class="wide-field"><span>Operating policy SHA-256</span><input id="setup-policy-sha" class="mono-input" type="text" spellcheck="false"></label>
+                <label class="wide-field"><span>Demand-data version</span><input id="setup-demand-version" type="text" placeholder="Required, e.g. BTS DB1C 2026-09"></label>
+              </div>
+            </section>
+
+            <section class="panel setup-panel" aria-labelledby="setup-network-title">
+              <div class="panel-heading">
+                <div><p class="eyebrow">Proposed network</p><h2 id="setup-network-title">Airport changes</h2></div>
+                <button class="text-button" id="setup-add-network" type="button">Add change</button>
+              </div>
+              <div class="setup-list" id="setup-network-rows"></div>
+              <p class="setup-help">Airport additions trigger metadata, demand, and runway-screening review before construction.</p>
+            </section>
+
+            <section class="panel setup-panel setup-notes-panel" aria-labelledby="setup-notes-title">
+              <div class="panel-heading"><div><p class="eyebrow">Build brief</p><h2 id="setup-notes-title">Notes and decisions</h2></div></div>
+              <label class="setup-textarea"><span>Anything the build must preserve or investigate</span><textarea id="setup-notes" rows="7"></textarea></label>
+            </section>
+
+            <section class="panel setup-panel preflight-panel" aria-labelledby="preflight-title">
+              <div class="panel-heading">
+                <div><p class="eyebrow">Deterministic review</p><h2 id="preflight-title">Preflight</h2></div>
+                <span class="result-count" id="preflight-summary"></span>
+              </div>
+              <div class="preflight-list" id="preflight-list" aria-live="polite"></div>
+            </section>
+          </form>
+
+          <div class="setup-actions">
+            <button class="page-button" id="setup-save" type="button">Save browser draft</button>
+            <button class="secondary-button" id="setup-export" type="button">Export build_config.json</button>
+            <button class="secondary-button" id="setup-import" type="button">Import JSON</button>
+            <input id="setup-import-file" type="file" accept="application/json,.json" hidden>
+            <button class="danger-button" id="setup-reset" type="button">Reset draft</button>
+          </div>
         </section>
 
         <section class="view" id="view-routings" data-view="routings" aria-labelledby="routings-title" hidden>
