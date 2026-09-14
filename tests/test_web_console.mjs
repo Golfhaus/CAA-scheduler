@@ -12,6 +12,7 @@ import {
   instructionId,
   instructionReferenceTokens,
   legMatches,
+  marketMatches,
   paginate,
   passengerStandFindings,
   scheduleMetrics,
@@ -81,6 +82,14 @@ test("routing pagination supports requested row counts and all rows", () => {
   assert.equal(paginate(values, 2, 250).rows.length, 250);
   assert.equal(paginate(values, 1, 500).rows.length, 500);
   assert.deepEqual(paginate(values, 4, "all").rows, values);
+});
+
+test("planning market filters preserve explicit fleet and direction", () => {
+  const row = { fleet: "CRJ700", origin: "BHM", destination: "JAX", legs: 3 };
+  assert.equal(marketMatches(row, { fleet: "CRJ700", origin: "BHM" }), true);
+  assert.equal(marketMatches(row, { destination: "JAX" }), true);
+  assert.equal(marketMatches(row, { fleet: "MAX9" }), false);
+  assert.equal(marketMatches(row, { destination: "BHM" }), false);
 });
 
 test("published flights default to departure-time order", () => {

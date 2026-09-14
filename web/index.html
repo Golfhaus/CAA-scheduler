@@ -27,6 +27,7 @@
     <nav class="tabbar" aria-label="Schedule views">
       <button class="tab is-active" type="button" data-tab="overview" aria-selected="true">Overview</button>
       <button class="tab" type="button" data-tab="setup" aria-selected="false">Schedule Setup</button>
+      <button class="tab" type="button" data-tab="planning" aria-selected="false">Planning</button>
       <button class="tab" type="button" data-tab="routings" aria-selected="false">Routings</button>
       <button class="tab" type="button" data-tab="validation" aria-selected="false">
         Validation <span class="tab-count" id="validation-count">—</span>
@@ -181,6 +182,47 @@
             <button class="danger-button" id="setup-reset" type="button">Reset draft</button>
           </div>
           <p class="mode-note">To compile this draft today, export the JSON, add it to a working GitHub branch, and run the repository’s <strong>Build candidate schedule</strong> action. Direct kickoff from this page remains a later authenticated workflow.</p>
+        </section>
+
+        <section class="view" id="view-planning" data-view="planning" aria-labelledby="planning-title" hidden>
+          <div class="page-heading compact">
+            <div>
+              <p class="eyebrow">Milestone 0.7 planning foundation</p>
+              <h1 id="planning-title">Network and fleet plan</h1>
+              <p class="page-note">A deterministic reconstruction of the plan represented by the canonical schedule. It replaces temporary pickle and station-total files without treating scheduled frequencies as raw demand.</p>
+            </div>
+            <span class="status-pill" id="planning-status"></span>
+          </div>
+          <div class="metric-grid" id="planning-metrics"></div>
+          <section class="panel planning-fleet-panel" aria-labelledby="planning-fleet-title">
+            <div class="panel-heading">
+              <div><p class="eyebrow">Schedule-specific capacity</p><h2 id="planning-fleet-title">Fleet work plan</h2></div>
+              <span class="panel-meta">Aircraft-minutes include minimum turns</span>
+            </div>
+            <div class="table-shell planning-table-shell">
+              <table>
+                <thead><tr><th>Fleet</th><th>Aircraft</th><th>Aircraft-days used</th><th>Legs</th><th>Block time</th><th>Minimum turns</th><th>Required aircraft time</th></tr></thead>
+                <tbody id="planning-fleet-rows"></tbody>
+              </table>
+            </div>
+          </section>
+          <section class="planning-limitations" id="planning-limitations" aria-label="Planning data limitations"></section>
+          <div class="page-heading compact planning-market-heading">
+            <div><p class="eyebrow">Directional frequency allocation</p><h2>Market plan</h2></div>
+            <span class="result-count" id="planning-market-count"></span>
+          </div>
+          <div class="filter-bar planning-filters">
+            <label><span>Fleet</span><select id="planning-fleet"><option value="">All fleets</option></select></label>
+            <label><span>Departure airport</span><select id="planning-origin"><option value="">Any airport</option></select></label>
+            <label><span>Arrival airport</span><select id="planning-destination"><option value="">Any airport</option></select></label>
+          </div>
+          <div class="table-shell">
+            <table>
+              <thead><tr><th>Fleet</th><th>Departure</th><th>Arrival</th><th>Scheduled legs</th></tr></thead>
+              <tbody id="planning-market-rows"></tbody>
+            </table>
+          </div>
+          <div class="pagination" id="planning-pagination"></div>
         </section>
 
         <section class="view" id="view-routings" data-view="routings" aria-labelledby="routings-title" hidden>

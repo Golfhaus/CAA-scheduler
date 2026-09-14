@@ -17,6 +17,8 @@ const state = {
   canonical: null,
   structural: null,
   operating: null,
+  planning: null,
+  planningValidation: null,
   timetable: null,
   gates: null,
   instructions: null,
@@ -24,6 +26,7 @@ const state = {
   buildConfig: null,
   buildPreflight: null,
   routingPage: 1,
+  planningPage: 1,
   routingPageSize: DEFAULT_PAGE_SIZE,
   timetablePage: 1,
   itineraryCache: new Map(),
@@ -233,6 +236,12 @@ export function legMatches(leg, query, filters = {}) {
   ].some((value) => String(value).toLowerCase().includes(needle));
 }
 
+export function marketMatches(market, filters = {}) {
+  return (!filters.fleet || market.fleet === filters.fleet)
+    && (!filters.origin || market.origin === filters.origin)
+    && (!filters.destination || market.destination === filters.destination);
+}
+
 export function extractReferences(evidence) {
   const references = {
     flights: new Set(),
@@ -316,7 +325,7 @@ function statusLabel(status) {
 }
 
 function activateTab(tab, updateHash = true) {
-  const valid = ["overview", "setup", "routings", "validation", "instructions", "timetable", "gates"];
+  const valid = ["overview", "setup", "planning", "routings", "validation", "instructions", "timetable", "gates"];
   if (!valid.includes(tab)) tab = "overview";
   $$("[data-tab]").forEach((button) => {
     const active = button.dataset.tab === tab;
@@ -349,9 +358,12 @@ async function loadSchedule(scheduleId) {
     canonical: data.canonical,
     structural: data.structuralValidation,
     operating: data.operatingValidation,
+    planning: data.planning,
+    planningValidation: data.planningValidation,
     timetable: data.timetable,
     gates: data.gates,
     routingPage: 1,
+    planningPage: 1,
     timetablePage: 1,
     itineraryCache: new Map(),
     buildConfig: null,
@@ -386,6 +398,7 @@ function renderAll() {
   renderOverview();
   renderSetup();
   populateFilters();
+  renderPlanning();
   renderRoutings();
   renderValidation();
   renderInstructions();
@@ -465,6 +478,9 @@ function populateFilters() {
   populateSelect($("#timetable-fleet"), fleets, "All fleets");
   populateSelect($("#timetable-origin"), cities, "Any origin");
   populateSelect($("#timetable-destination"), cities, "Any destination");
+  populateSelect($("#planning-fleet"), Object.keys(state.planning.fleetPlan).sort(), "All fleets");
+  populateSelect($("#planning-origin"), cities, "Any airport");
+  populateSelect($("#planning-destination"), cities, "Any airport");
 
   const gateSelect = $("#gate-airport");
   const previous = gateSelect.value;
@@ -477,6 +493,41 @@ function populateFilters() {
     .map((city) => `<option value="${escapeHtml(city.code)}">${escapeHtml(city.code)} · ${escapeHtml(city.name)}</option>`)
     .join("");
   gateSelect.value = previous && ordered.some((city) => city.code === previous) ? previous : "PHF";
+}
+
+function renderPlanning() {
+  const plan = state.planning;
+  const validation = state.planningValidation;
+  $("#planning-status").textContent = validation.status === "pass" ? "Snapshot verified" : "Snapshot failed";
+  $("#planning-status").classList.toggle("is-danger", validation.status !== "pass");
+  $("#planning-metrics").innerHTML = [
+    metricCard("Scheduled legs", plan.summary.legCount.toLocaleString(), "Reconstructed from canonical routings"),
+    metricCard("Market rows", plan.summary.marketRows.toLocaleString(), "Fleet + direction combinations"),
+    metricCard("Stations", plan.summary.stationCount, "Departure totals represented"),
+    metricCard("Planning checks", `${validation.summary.passed}/${validation.summary.checks}`, "Snapshot consistency", validation.status === "pass" ? "is-success" : "is-danger"),
+  ].join("");
+
+  $("#planning-fleet-rows").innerHTML = Object.entries(plan.fleetPlan)
+    .sort(([a], [b]) => a.localeCompare(b))
+    .map(([fleet, row]) => `<tr><td><span class="fleet-badge">${escapeHtml(fleet)}</span></td><td>${row.aircraftCount}</td><td>${row.aircraftDaysUsed}</td><td>${row.legCount.toLocaleString()}</td><td>${formatDuration(row.blockMinutes)}</td><td>${formatDuration(row.minimumTurnMinutes)}</td><td><strong>${formatDuration(row.requiredAircraftMinutes)}</strong></td></tr>`)
+    .join("");
+  $("#planning-limitations").innerHTML = plan.limitations
+    .map((item) => `<article><strong>Known boundary</strong><span>${escapeHtml(item)}</span></article>`)
+    .join("");
+
+  const filters = {
+    fleet: $("#planning-fleet").value,
+    origin: $("#planning-origin").value,
+    destination: $("#planning-destination").value,
+  };
+  const rows = plan.markets.filter((market) => marketMatches(market, filters));
+  const paged = paginate(rows, state.planningPage);
+  state.planningPage = paged.page;
+  $("#planning-market-count").textContent = `${rows.length.toLocaleString()} rows`;
+  $("#planning-market-rows").innerHTML = paged.rows.length
+    ? paged.rows.map((market) => `<tr><td><span class="fleet-badge">${escapeHtml(market.fleet)}</span></td><td><strong>${escapeHtml(market.origin)}</strong></td><td><strong>${escapeHtml(market.destination)}</strong></td><td>${market.legs}</td></tr>`).join("")
+    : `<tr class="empty-row"><td colspan="4">No planning rows match these filters.</td></tr>`;
+  renderPagination($("#planning-pagination"), "planning", rows.length, paged.page, paged.pageCount);
 }
 
 export function paginate(items, page, pageSize = DEFAULT_PAGE_SIZE) {
@@ -1095,6 +1146,9 @@ function bindEvents() {
       if (page.dataset.pageContext === "routing") {
         state.routingPage = value;
         renderRoutings();
+      } else if (page.dataset.pageContext === "planning") {
+        state.planningPage = value;
+        renderPlanning();
       } else {
         state.timetablePage = value;
         renderTimetable();
@@ -1140,6 +1194,9 @@ function bindEvents() {
     state.routingPageSize = event.target.value === "all" ? "all" : Number(event.target.value);
     state.routingPage = 1;
     renderRoutings();
+  });
+  ["#planning-fleet", "#planning-origin", "#planning-destination"].forEach((selector) => {
+    $(selector).addEventListener("change", () => { state.planningPage = 1; renderPlanning(); });
   });
   $("#validation-search").addEventListener("input", () => renderValidation());
   $("#validation-status").addEventListener("change", () => renderValidation());

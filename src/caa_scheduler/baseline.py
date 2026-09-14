@@ -7,6 +7,7 @@ from .importer import import_canonical_schedule
 from .gate_export import export_gate_schedule
 from .io import read_json, resolve_from_repo, write_json
 from .operating_validation import validate_operating_rules
+from .planning import reconstruct_planning_snapshot, validate_planning_snapshot
 from .timetable import export_timetable
 from .validation import validate_schedule
 
@@ -28,6 +29,11 @@ def build_baseline(config_path: Path, repo_root: Path) -> dict[str, Any]:
     gate_schedule = export_gate_schedule(canonical)
     validation = validate_schedule(canonical)
     operating_validation = validate_operating_rules(canonical)
+    planning = reconstruct_planning_snapshot(
+        canonical,
+        demand_data_version=inputs.get("demandData", {}).get("version"),
+    )
+    planning_validation = validate_planning_snapshot(planning, canonical)
     expected = read_json(resolve_from_repo(repo_root, inputs["expectedTimetable"]))
     parity = timetable == expected
     expected_gate_path = resolve_from_repo(repo_root, inputs["expectedGate"])
@@ -52,6 +58,11 @@ def build_baseline(config_path: Path, repo_root: Path) -> dict[str, Any]:
         output_directory / "operating_validation_report.json",
         operating_validation,
     )
+    write_json(output_directory / "planning_snapshot.json", planning)
+    write_json(
+        output_directory / "planning_validation_report.json",
+        planning_validation,
+    )
     expected_bytes = resolve_from_repo(repo_root, inputs["expectedTimetable"]).read_bytes()
     generated_bytes = (output_directory / "timetable.json").read_bytes()
     expected_gate_bytes = expected_gate_path.read_bytes()
@@ -63,8 +74,11 @@ def build_baseline(config_path: Path, repo_root: Path) -> dict[str, Any]:
         "gatePath": output_directory / "gates.json",
         "validationPath": output_directory / "validation_report.json",
         "operatingValidationPath": output_directory / "operating_validation_report.json",
+        "planningPath": output_directory / "planning_snapshot.json",
+        "planningValidationPath": output_directory / "planning_validation_report.json",
         "validation": validation,
         "operatingValidation": operating_validation,
+        "planningValidation": planning_validation,
         "timetableParity": parity,
         "timetableByteParity": generated_bytes == expected_bytes,
         "gateParity": gate_parity,

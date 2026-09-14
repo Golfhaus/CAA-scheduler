@@ -8,6 +8,7 @@ from .build_config import validate_build_config
 from .gate_export import export_gate_schedule
 from .io import read_json, resolve_from_repo, write_json
 from .operating_validation import validate_operating_rules
+from .planning import reconstruct_planning_snapshot, validate_planning_snapshot
 from .timetable import export_timetable
 from .validation import validate_schedule
 
@@ -18,6 +19,8 @@ GENERATED_FILENAMES = (
     "canonical_schedule.json",
     "validation_report.json",
     "operating_validation_report.json",
+    "planning_snapshot.json",
+    "planning_validation_report.json",
     "timetable.json",
     "gates.json",
 )
@@ -147,6 +150,11 @@ def compile_candidate(
 
     structural = validate_schedule(candidate)
     operating = validate_operating_rules(candidate)
+    planning = reconstruct_planning_snapshot(
+        candidate,
+        demand_data_version=config["inputs"]["demandData"]["version"],
+    )
+    planning_validation = validate_planning_snapshot(planning, candidate)
     hard_stops = [
         {
             "checkId": check["id"],
@@ -169,6 +177,8 @@ def compile_candidate(
             ),
             "structuralValidation": structural,
             "operatingValidation": operating,
+            "planningSnapshot": planning,
+            "planningValidation": planning_validation,
             "hardStops": hard_stops,
             "publicationReady": (
                 not hard_stops
@@ -225,10 +235,17 @@ def build_candidate(
         destination / "operating_validation_report.json",
         report["operatingValidation"],
     )
+    write_json(destination / "planning_snapshot.json", report["planningSnapshot"])
+    write_json(
+        destination / "planning_validation_report.json",
+        report["planningValidation"],
+    )
     report["outputs"].update(
         {
             "structuralValidation": "validation_report.json",
             "operatingValidation": "operating_validation_report.json",
+            "planning": "planning_snapshot.json",
+            "planningValidation": "planning_validation_report.json",
         }
     )
 

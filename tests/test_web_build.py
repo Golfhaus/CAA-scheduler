@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import re
 import sys
 import tempfile
 import unittest
@@ -14,6 +15,14 @@ from caa_scheduler.web_build import build_web_console
 
 
 class WebBuildTests(unittest.TestCase):
+    def test_static_console_defines_every_direct_id_selector(self) -> None:
+        html = (REPO_ROOT / "web" / "index.html").read_text()
+        script = (REPO_ROOT / "web" / "app.mjs").read_text()
+        ids = re.findall(r'\bid="([^"]+)"', html)
+        selectors = set(re.findall(r'\$\("#([^"]+)"\)', script))
+        self.assertEqual(len(ids), len(set(ids)), "index.html contains duplicate IDs")
+        self.assertEqual(selectors - set(ids), set())
+
     def test_build_copies_console_and_pinned_schedule_data(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             output = Path(directory) / "site"
@@ -21,7 +30,7 @@ class WebBuildTests(unittest.TestCase):
                 REPO_ROOT / "web" / "schedules.json", REPO_ROOT, output
             )
             self.assertEqual(result["scheduleCount"], 1)
-            self.assertEqual(result["dataFileCount"], 5)
+            self.assertEqual(result["dataFileCount"], 7)
             self.assertGreater(result["instructionEntryCount"], 40)
             self.assertTrue((output / "index.html").is_file())
             self.assertTrue((output / "favicon.svg").is_file())
@@ -32,6 +41,7 @@ class WebBuildTests(unittest.TestCase):
             files = manifest["schedules"][0]["files"]
             self.assertTrue((output / files["canonical"]).is_file())
             self.assertTrue((output / files["gates"]).is_file())
+            self.assertTrue((output / files["planning"]).is_file())
             instruction_catalog = json.loads(
                 (output / manifest["instructions"]["catalog"]).read_text()
             )

@@ -381,6 +381,16 @@ tbody tr:hover { background: #f6f9fc; }
 .pagination button:disabled { cursor: default; opacity: 0.45; }
 .empty-row td { padding: 2.5rem 1rem; color: var(--muted); text-align: center; }
 
+.planning-fleet-panel { margin-bottom: 1rem; }
+.planning-table-shell { border: 0; border-radius: 0; box-shadow: none; }
+.planning-limitations { display: grid; gap: 0.55rem; margin-bottom: 1rem; }
+.planning-limitations article { display: flex; align-items: baseline; gap: 0.7rem 1rem; padding: 0.78rem 0.9rem; border: 1px solid #efd5ad; border-left: 4px solid var(--orange); border-radius: 0.6rem; background: #fffaf3; }
+.planning-limitations strong { flex: 0 0 auto; color: #9c560b; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.04em; }
+.planning-limitations span { color: var(--muted); font-size: 0.8rem; line-height: 1.45; }
+.planning-market-heading { margin-top: 1.15rem; }
+.planning-market-heading h2 { margin: 0; color: var(--navy-900); font-size: 1.3rem; }
+.planning-filters label { flex: 1 1 12rem; }
+
 .itinerary-results { display: grid; gap: 1rem; }
 .itinerary-destination { overflow: hidden; border: 1px solid var(--line); border-radius: 0.8rem; background: white; box-shadow: var(--shadow); }
 .itinerary-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; padding: 0.8rem 1rem; border-bottom: 2px solid var(--blue-700); background: #f8fafc; }
