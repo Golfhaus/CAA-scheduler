@@ -12,6 +12,7 @@ WEB_ASSETS = (
     "index.html",
     "styles.css",
     "app.mjs",
+    "build-config.mjs",
     "favicon.svg",
     "coastal-american-logo.png",
 )
@@ -76,6 +77,19 @@ def build_web_console(
         instruction_config["version"],
     )
     write_json(catalog_destination, catalog)
+
+    build_setup = manifest.get("buildSetup", {})
+    build_schema_path = build_setup.get("schema")
+    if not build_schema_path:
+        raise ValueError("Web manifest buildSetup.schema is required")
+    build_schema_source = (repo_root / build_schema_path).resolve()
+    if repo_root not in build_schema_source.parents or not build_schema_source.is_file():
+        raise ValueError(f"Build configuration schema is invalid: {build_schema_path}")
+    build_schema_destination = (output_directory / build_schema_path).resolve()
+    if output_directory not in build_schema_destination.parents:
+        raise ValueError("Build configuration schema destination is invalid")
+    build_schema_destination.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copy2(build_schema_source, build_schema_destination)
 
     write_json(output_directory / "schedules.json", manifest)
     return {
