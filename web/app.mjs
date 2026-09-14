@@ -1,3 +1,11 @@
+import {
+  buildConfigFilename,
+  createBuildConfig,
+  normalizeBuildConfig,
+  serializeBuildConfig,
+  validateBuildConfig,
+} from "./build-config.mjs";
+
 const DEFAULT_PAGE_SIZE = 50;
 const GATE_WINDOW_START = 180;
 const CONNECTIONS_HUB_OVERRIDE = new Set(["BHM"]);
@@ -13,6 +21,8 @@ const state = {
   gates: null,
   instructions: null,
   instructionId: "section-1-1",
+  buildConfig: null,
+  buildPreflight: null,
   routingPage: 1,
   routingPageSize: DEFAULT_PAGE_SIZE,
   timetablePage: 1,
@@ -306,7 +316,7 @@ function statusLabel(status) {
 }
 
 function activateTab(tab, updateHash = true) {
-  const valid = ["overview", "routings", "validation", "instructions", "timetable", "gates"];
+  const valid = ["overview", "setup", "routings", "validation", "instructions", "timetable", "gates"];
   if (!valid.includes(tab)) tab = "overview";
   $$("[data-tab]").forEach((button) => {
     const active = button.dataset.tab === tab;
@@ -344,6 +354,8 @@ async function loadSchedule(scheduleId) {
     routingPage: 1,
     timetablePage: 1,
     itineraryCache: new Map(),
+    buildConfig: null,
+    buildPreflight: null,
   });
   renderAll();
 }
@@ -370,7 +382,9 @@ async function initialize() {
 }
 
 function renderAll() {
+  ensureBuildConfig();
   renderOverview();
+  renderSetup();
   populateFilters();
   renderRoutings();
   renderValidation();
@@ -786,6 +800,222 @@ function toggleGateClaimDetails(button) {
   button.setAttribute("aria-expanded", "true");
 }
 
+function setupStorageKey() {
+  return `caa-scheduler:build-config:v1:${state.canonical.schedule.id}`;
+}
+
+function saveSetupDraft(message = "Saved in this browser") {
+  try {
+    localStorage.setItem(setupStorageKey(), serializeBuildConfig(state.buildConfig));
+    $("#setup-status").textContent = message;
+  } catch {
+    $("#setup-status").textContent = "Local save unavailable";
+  }
+}
+
+function ensureBuildConfig() {
+  if (state.buildConfig) return;
+  let loaded = null;
+  try {
+    const value = localStorage.getItem(setupStorageKey());
+    if (value) loaded = normalizeBuildConfig(JSON.parse(value));
+  } catch {
+    loaded = null;
+  }
+  state.buildConfig = loaded || createBuildConfig(state.canonical, state.manifest);
+  state.buildPreflight = validateBuildConfig(state.buildConfig, state.canonical);
+}
+
+function renderSetup() {
+  const config = state.buildConfig;
+  const values = {
+    "#setup-number": config.schedule.number,
+    "#setup-version": config.schedule.version,
+    "#setup-label": config.schedule.label,
+    "#setup-mode": config.schedule.mode,
+    "#setup-start-kind": config.startingPoint.kind,
+    "#setup-connect-min": config.connectionWindowMinutes.minimum,
+    "#setup-connect-max": config.connectionWindowMinutes.maximum,
+    "#setup-instruction-version": config.inputs.instructions.version,
+    "#setup-instruction-source": config.inputs.instructions.source,
+    "#setup-city-file": config.inputs.cityInformation.filename,
+    "#setup-city-sha": config.inputs.cityInformation.sha256,
+    "#setup-policy-file": config.inputs.operatingPolicy.filename,
+    "#setup-policy-sha": config.inputs.operatingPolicy.sha256,
+    "#setup-demand-version": config.inputs.demandData.version,
+    "#setup-notes": config.notes,
+  };
+  Object.entries(values).forEach(([selector, value]) => { $(selector).value = value ?? ""; });
+
+  $("#setup-baseline").innerHTML = state.manifest.schedules
+    .map((entry) => `<option value="${escapeHtml(entry.id)}">${escapeHtml(entry.label)}</option>`)
+    .join("");
+  $("#setup-baseline").value = config.startingPoint.scheduleId || state.canonical.schedule.id;
+  $("#setup-baseline").disabled = config.startingPoint.kind === "blank";
+
+  $("#setup-fleet-rows").innerHTML = Object.entries(config.fleetCounts)
+    .map(([fleet, count], index) => `<div class="setup-row fleet-setup-row" data-setup-fleet-row>
+      <label><span>Fleet type</span><input type="text" value="${escapeHtml(fleet)}" data-setup-fleet-name aria-label="Fleet type ${index + 1}"></label>
+      <label><span>Aircraft</span><input type="number" min="0" step="1" value="${escapeHtml(count)}" data-setup-fleet-count aria-label="${escapeHtml(fleet)} aircraft count"></label>
+      <button class="row-remove" type="button" data-remove-fleet="${index}" aria-label="Remove ${escapeHtml(fleet)}">Remove</button>
+    </div>`)
+    .join("");
+
+  $("#setup-network-rows").innerHTML = config.networkChanges.length
+    ? config.networkChanges.map((change, index) => `<div class="setup-row network-setup-row" data-setup-network-row>
+        <label><span>Airport</span><input type="text" maxlength="4" value="${escapeHtml(change.airport)}" data-network-airport aria-label="Airport code for change ${index + 1}"></label>
+        <label><span>Action</span><select data-network-action aria-label="Action for ${escapeHtml(change.airport || `change ${index + 1}`)}">
+          <option value="add" ${change.action === "add" ? "selected" : ""}>Add</option>
+          <option value="remove" ${change.action === "remove" ? "selected" : ""}>Remove</option>
+          <option value="status_change" ${change.action === "status_change" ? "selected" : ""}>Change status</option>
+        </select></label>
+        <label><span>Target status</span><select data-network-status aria-label="Target status for ${escapeHtml(change.airport || `change ${index + 1}`)}">
+          <option value="">Not applicable</option>
+          <option value="destination" ${change.targetStatus === "destination" ? "selected" : ""}>Destination</option>
+          <option value="focus_city" ${change.targetStatus === "focus_city" ? "selected" : ""}>Focus city</option>
+          <option value="hub" ${change.targetStatus === "hub" ? "selected" : ""}>Hub</option>
+          <option value="inactive" ${change.targetStatus === "inactive" ? "selected" : ""}>Inactive</option>
+        </select></label>
+        <label class="network-note"><span>Reason / notes</span><input type="text" value="${escapeHtml(change.notes)}" data-network-notes></label>
+        <button class="row-remove" type="button" data-remove-network="${index}" aria-label="Remove airport change ${index + 1}">Remove</button>
+      </div>`).join("")
+    : '<p class="setup-empty">No network changes. The baseline city roster remains unchanged.</p>';
+
+  renderSetupPreflight();
+}
+
+function readSetupForm() {
+  const fleetCounts = {};
+  $("[data-setup-fleet-row]").forEach((row) => {
+    const fleet = row.querySelector("[data-setup-fleet-name]").value.trim().toUpperCase();
+    if (fleet) fleetCounts[fleet] = Number(row.querySelector("[data-setup-fleet-count]").value);
+  });
+  const kind = $("#setup-start-kind").value;
+  const value = {
+    ...state.buildConfig,
+    schedule: {
+      number: Number($("#setup-number").value),
+      version: $("#setup-version").value,
+      label: $("#setup-label").value,
+      mode: $("#setup-mode").value,
+      status: "draft",
+    },
+    startingPoint: {
+      kind,
+      scheduleId: kind === "blank" ? null : $("#setup-baseline").value,
+    },
+    fleetCounts,
+    connectionWindowMinutes: {
+      minimum: Number($("#setup-connect-min").value),
+      maximum: Number($("#setup-connect-max").value),
+    },
+    inputs: {
+      instructions: {
+        version: $("#setup-instruction-version").value,
+        source: $("#setup-instruction-source").value,
+      },
+      cityInformation: {
+        filename: $("#setup-city-file").value,
+        sha256: $("#setup-city-sha").value,
+      },
+      operatingPolicy: {
+        filename: $("#setup-policy-file").value,
+        sha256: $("#setup-policy-sha").value,
+      },
+      demandData: {
+        version: $("#setup-demand-version").value,
+      },
+    },
+    networkChanges: $("[data-setup-network-row]").map((row) => ({
+      airport: row.querySelector("[data-network-airport]").value,
+      action: row.querySelector("[data-network-action]").value,
+      targetStatus: row.querySelector("[data-network-status]").value,
+      notes: row.querySelector("[data-network-notes]").value,
+    })),
+    notes: $("#setup-notes").value,
+  };
+  state.buildConfig = normalizeBuildConfig(value);
+  state.buildPreflight = validateBuildConfig(state.buildConfig, state.canonical);
+}
+
+function updateSetupDraft(message = "Draft saved") {
+  readSetupForm();
+  $("#setup-baseline").disabled = state.buildConfig.startingPoint.kind === "blank";
+  saveSetupDraft(message);
+  renderSetupPreflight();
+}
+
+function renderSetupPreflight() {
+  const report = state.buildPreflight || validateBuildConfig(state.buildConfig, state.canonical);
+  state.buildPreflight = report;
+  $("#preflight-summary").textContent = report.status === "pass"
+    ? `Ready · ${report.summary.warnings} warning${report.summary.warnings === 1 ? "" : "s"}`
+    : `${report.summary.blocking} blocking`;
+  $("#preflight-summary").classList.toggle("is-blocking", report.status === "fail");
+  $("#preflight-list").innerHTML = report.checks.map((item) => `<article class="preflight-item status-${escapeHtml(item.status)}">
+    <span class="preflight-mark" aria-hidden="true">${item.status === "pass" ? "✓" : item.status === "warning" ? "!" : "×"}</span>
+    <div><strong>${escapeHtml(item.title)}</strong><p>${escapeHtml(item.message)}</p></div>
+    <span class="preflight-status">${escapeHtml(statusLabel(item.status))}</span>
+  </article>`).join("");
+}
+
+function addFleetType() {
+  readSetupForm();
+  let candidate = "NEW_TYPE";
+  let suffix = 2;
+  while (Object.hasOwn(state.buildConfig.fleetCounts, candidate)) {
+    candidate = `NEW_TYPE_${suffix}`;
+    suffix += 1;
+  }
+  state.buildConfig.fleetCounts[candidate] = 0;
+  state.buildPreflight = validateBuildConfig(state.buildConfig, state.canonical);
+  saveSetupDraft();
+  renderSetup();
+  const inputs = $("[data-setup-fleet-name]");
+  inputs.at(-1)?.select();
+}
+
+function addNetworkChange() {
+  readSetupForm();
+  state.buildConfig.networkChanges.push({
+    airport: "",
+    action: "add",
+    targetStatus: "destination",
+    notes: "",
+  });
+  state.buildPreflight = validateBuildConfig(state.buildConfig, state.canonical);
+  saveSetupDraft();
+  renderSetup();
+  $("[data-network-airport]").at(-1)?.focus();
+}
+
+function exportSetupConfig() {
+  updateSetupDraft("Draft exported");
+  const blob = new Blob([serializeBuildConfig(state.buildConfig)], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const anchor = document.createElement("a");
+  anchor.href = url;
+  anchor.download = buildConfigFilename(state.buildConfig);
+  anchor.click();
+  URL.revokeObjectURL(url);
+}
+
+async function importSetupConfig(file) {
+  if (!file) return;
+  try {
+    const imported = normalizeBuildConfig(JSON.parse(await file.text()));
+    state.buildConfig = imported;
+    state.buildPreflight = validateBuildConfig(imported, state.canonical);
+    saveSetupDraft("Imported and saved");
+    renderSetup();
+  } catch (error) {
+    $("#setup-status").textContent = "Import failed";
+    window.alert(`Could not import build configuration: ${error.message}`);
+  } finally {
+    $("#setup-import-file").value = "";
+  }
+}
+
 function handleReference(button) {
   const type = button.dataset.refType;
   const value = button.dataset.ref;
@@ -812,6 +1042,25 @@ function handleReference(button) {
 
 function bindEvents() {
   document.addEventListener("click", (event) => {
+    const removeFleet = event.target.closest("[data-remove-fleet]");
+    if (removeFleet) {
+      readSetupForm();
+      const fleet = Object.keys(state.buildConfig.fleetCounts)[Number(removeFleet.dataset.removeFleet)];
+      delete state.buildConfig.fleetCounts[fleet];
+      state.buildPreflight = validateBuildConfig(state.buildConfig, state.canonical);
+      saveSetupDraft();
+      renderSetup();
+      return;
+    }
+    const removeNetwork = event.target.closest("[data-remove-network]");
+    if (removeNetwork) {
+      readSetupForm();
+      state.buildConfig.networkChanges.splice(Number(removeNetwork.dataset.removeNetwork), 1);
+      state.buildPreflight = validateBuildConfig(state.buildConfig, state.canonical);
+      saveSetupDraft();
+      renderSetup();
+      return;
+    }
     const instruction = event.target.closest("[data-instruction-id]");
     if (instruction) {
       event.preventDefault();
@@ -865,6 +1114,22 @@ function bindEvents() {
       $("#error-message").textContent = error.message;
       $("#error-state").hidden = false;
     }
+  });
+
+  $("#setup-form").addEventListener("input", () => updateSetupDraft());
+  $("#setup-form").addEventListener("change", () => updateSetupDraft());
+  $("#setup-add-fleet").addEventListener("click", addFleetType);
+  $("#setup-add-network").addEventListener("click", addNetworkChange);
+  $("#setup-save").addEventListener("click", () => updateSetupDraft("Saved in this browser"));
+  $("#setup-export").addEventListener("click", exportSetupConfig);
+  $("#setup-import").addEventListener("click", () => $("#setup-import-file").click());
+  $("#setup-import-file").addEventListener("change", (event) => importSetupConfig(event.target.files[0]));
+  $("#setup-reset").addEventListener("click", () => {
+    if (!window.confirm("Reset this browser draft to a new configuration copied from the selected baseline?")) return;
+    state.buildConfig = createBuildConfig(state.canonical, state.manifest);
+    state.buildPreflight = validateBuildConfig(state.buildConfig, state.canonical);
+    saveSetupDraft("Draft reset");
+    renderSetup();
   });
 
   $("#routing-search").addEventListener("input", () => { state.routingPage = 1; renderRoutings(); });

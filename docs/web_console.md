@@ -1,8 +1,10 @@
-# Read-only web console
+# Web console
 
-Milestone 0.4 moves schedule inspection into a responsive GitHub Pages application. It is intentionally static: the browser reads version-controlled JSON, and no token, database, server process, or LLM is required.
+Milestone 0.5 extends the responsive GitHub Pages application with local schedule setup. Published schedule inspection remains static, and draft configurations stay entirely in the browser unless the user exports a JSON file. No token, database, server process, or LLM is required.
 
 ## Views
+
+- **Schedule Setup** creates an explicit build configuration for the next schedule. It captures schedule identity, Mainline/Skunkworks mode, previous-schedule or blank starting point, schedule-specific fleet composition, connection limits, pinned instructions/reference inputs, proposed airport changes, and notes. Preflight runs on every change and classifies blockers and warnings. Drafts persist in browser storage and can be exported/imported as portable JSON.
 
 - **Overview** shows network counts, per-schedule fleet utilization, structural fidelity, curfew state, and the largest blocking rule groups.
 - **Routings** searches the full canonical construction record and filters by fleet, line, departure airport, or arrival airport. Results can show 50, 250, 500, or all rows.
@@ -29,4 +31,12 @@ The Pages workflow builds the static directory on every push to `main`, uploads 
 
 The repository must be configured once under **Settings → Pages → Build and deployment** with **GitHub Actions** selected as the source. The workflow deliberately does not carry a personal access token or attempt to change repository settings.
 
-The console remains read-only through Milestone 0.4. Instruction changes currently use the normal GitHub/ChatGPT workflow: edit the Markdown source, review the diff, and deploy the regenerated catalog. In-app instruction editing can later write the same Markdown through the secure build/publish service rather than introducing a second storage format. Construction, repairs, draft storage, and workflow kickoff belong to later milestones.
+Published schedules and instructions remain read-only. Schedule Setup writes only to browser-local storage and user-downloaded JSON; it cannot alter the repository or launch construction. Instruction changes continue through the normal GitHub/ChatGPT review workflow. Milestone 0.6 will connect an approved `build_config.json` to the deterministic Python construction engine; secure workflow kickoff and shared draft storage remain later work.
+
+## Schedule Setup contract
+
+The authoritative portable format is defined by `schemas/build_config.schema.json`. Fleet counts are required fields in every configuration and are not hard-coded in the UI or engine. Selecting a previous schedule copies its counts only as editable starting values.
+
+Preflight currently verifies schedule identity, mode, baseline selection, fleet counts, connection limits, pinned instruction/city/policy/demand inputs, and the structural validity of airport changes. Airport additions receive a warning until metadata, demand, and runway screening are completed. Curfew compliance cannot be evaluated before flights exist, but the operating-policy pin is mandatory and curfew violations remain hard stops once construction runs.
+
+Browser storage is intentionally a convenience layer, not an authoritative database. Export the JSON to move or review a draft; importing and re-exporting produces the same normalized document.

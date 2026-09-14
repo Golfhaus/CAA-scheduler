@@ -2,7 +2,7 @@
 
 CAA Scheduler is the migration target for Coastal American Airways schedule construction. It moves the durable schedule state and deterministic processing out of an LLM conversation and into version-controlled code and data.
 
-## Milestone 0.4.3
+## Milestone 0.5
 
 The migration baseline now proves this pipeline:
 
@@ -16,7 +16,9 @@ v2.2.5 workbook + pinned city data
     -> exact comparison with the published v2.2.5 gate data
     -> operating-rule validation with evidence and explicit overrides
     -> build-instruction catalog generated from editable Markdown
-    -> read-only GitHub Pages operating console
+    -> GitHub Pages operating console
+    -> schedule-specific setup + deterministic preflight
+    -> portable build_config.json
 ```
 
 The workbook remains a source for this one-time migration and will later become an export. The canonical JSON is the authoritative schedule representation going forward.
@@ -70,9 +72,9 @@ python -m caa_scheduler validate-operating \
 
 ## Current boundary
 
-Milestone 0.4.3 adds an Instructions view generated from the authoritative Markdown build instructions. Every `§` and `Lesson` citation in Validation links to its exact text, including the separately addressable §2.6 checks and turn-on-stand addition. The Markdown remains the editable source of truth; the browser catalog is rebuilt during deployment. See [Web console](docs/web_console.md) and [Build-instruction sources](instructions/README.md).
+Milestone 0.5 adds a Schedule Setup workspace. Each draft records its own schedule identity, Mainline/Skunkworks mode, starting point, complete fleet composition, connection window, pinned instruction/city/policy/demand inputs, airport changes, and build notes. Fleet size is never supplied by an application constant: a previous schedule may seed editable values, but the exported `build_config.json` owns every count. Browser drafts remain local and can be exported/imported without a service or credential. Deterministic preflight blocks incomplete inputs and confirms that the pinned operating policy will enforce curfews as hard stops during construction. See [Web console](docs/web_console.md) and [`build_config` schema](schemas/build_config.schema.json).
 
-The v2.2.5 golden schedule is intentionally **not** declared operating-rule clean. Exact historical preservation and current-policy compliance remain separate questions. The console makes the known baseline findings visible without silently waiving them.
+Schedule Setup deliberately stops before construction; Milestone 0.6 will make the Python engine consume the approved build configuration. The v2.2.5 golden schedule is intentionally **not** declared operating-rule clean. Exact historical preservation and current-policy compliance remain separate questions. The console makes the known baseline findings visible without silently waiving them.
 
 ## Repository visibility
 
