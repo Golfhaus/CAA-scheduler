@@ -27,7 +27,8 @@
     "cityInformation": "tests/fixtures/schedule_6_v2_2_5/source/city_information_v2.csv",
     "operatingPolicy": "config/policies/operating_rules_v2_0.json",
     "demandData": {
-      "version": "unavailable-in-migration-baseline"
+      "version": "bts-db1c-6mo-jul2025-apr2026-v1",
+      "manifest": "config/demand_data/bts_db1c_6mo_v1.json"
     },
     "expectedTimetable": "tests/fixtures/schedule_6_v2_2_5/expected/schedule_6_v2_2_5.json",
     "expectedGate": "tests/fixtures/schedule_6_v2_2_5/expected/gate_sked6_v2_2_5.json"

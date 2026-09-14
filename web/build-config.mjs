@@ -51,7 +51,7 @@ export function createBuildConfig(canonical, manifest) {
       cityInformation: clone(canonical.provenance?.cityInformation || { filename: "", sha256: "" }),
       operatingPolicy: clone(canonical.provenance?.operatingPolicy || { filename: "", sha256: "" }),
       demandData: {
-        version: "",
+        version: cleanString(manifest?.buildSetup?.demandData?.version),
       },
     },
     networkChanges: [],

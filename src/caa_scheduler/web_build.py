@@ -5,7 +5,7 @@ from pathlib import Path
 from typing import Any
 
 from .instructions import build_instruction_catalog
-from .io import read_json, write_json
+from .io import read_json, sha256_file, write_json
 
 
 WEB_ASSETS = (
@@ -90,6 +90,38 @@ def build_web_console(
         raise ValueError("Build configuration schema destination is invalid")
     build_schema_destination.parent.mkdir(parents=True, exist_ok=True)
     shutil.copy2(build_schema_source, build_schema_destination)
+
+    demand_setup = build_setup.get("demandData", {})
+    demand_manifest_path = demand_setup.get("manifest")
+    if not demand_manifest_path:
+        raise ValueError("Web manifest buildSetup.demandData.manifest is required")
+    demand_manifest_source = (repo_root / demand_manifest_path).resolve()
+    if repo_root not in demand_manifest_source.parents or not demand_manifest_source.is_file():
+        raise ValueError(f"Demand-data manifest is invalid: {demand_manifest_path}")
+    demand_manifest = read_json(demand_manifest_source)
+    if demand_manifest.get("id") != demand_setup.get("version"):
+        raise ValueError("Web demand-data version does not match its manifest")
+    for source_spec in demand_manifest["sources"].values():
+        source_path = (repo_root / source_spec["filename"]).resolve()
+        if not source_path.is_file() or sha256_file(source_path) != source_spec["sha256"]:
+            raise ValueError(
+                f"Web demand-data fingerprint mismatch: {source_spec['filename']}"
+            )
+    demand_paths = [
+        demand_manifest_path,
+        *(
+            source["filename"]
+            for source in demand_manifest["sources"].values()
+        ),
+    ]
+    for relative_path in demand_paths:
+        source = (repo_root / relative_path).resolve()
+        if repo_root not in source.parents or not source.is_file():
+            raise ValueError(f"Web demand-data source is invalid: {relative_path}")
+        destination = output_directory / relative_path
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(source, destination)
+        copied_data.add(relative_path)
 
     write_json(output_directory / "schedules.json", manifest)
     return {

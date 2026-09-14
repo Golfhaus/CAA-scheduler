@@ -47,7 +47,7 @@ Curfews are different: the configured departure windows are enforced as hard-sto
 The unavailable checks are also deliberate evidence:
 
 - runway lengths are blank throughout the pinned city snapshot;
-- demand percentiles are absent from both the workbook and city snapshot;
+- demand percentiles are absent from the canonical workbook/city snapshot and therefore remain separate in `demand_plan.json` until the operating validator accepts planning context;
 - the workbook does not preserve hub-bank definitions or per-leg bank assignments.
 
 Future builds should supply these fields directly. A missing input must not be mistaken for a passed rule.
@@ -60,4 +60,4 @@ python -m caa_scheduler validate-operating \
   --output operating_validation_report.json
 ```
 
-This command exits with status 1 when effective hard findings remain. The `baseline` command still exits based on reproducibility—structural validation and byte parity—so the frozen historical schedule can remain a valid golden fixture while its current-policy deviations stay visible.
+This command exits with status 1 when effective hard findings remain. The `baseline` command exits based on reproducibility, planning-snapshot consistency, demand-input validity, and golden export parity—not current-policy cleanliness—so the frozen historical schedule can remain a valid fixture while its current-policy deviations stay visible.

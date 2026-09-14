@@ -117,10 +117,10 @@ def compute_multihub_assignments(
             )
             details.append(
                 {
-                    "hub": hub,
-                    "rank": threshold["rank"],
-                    "servablePassengersPerDay": servable[hub],
-                    "distanceRatio": ratio,
+                "hub": hub,
+                "rank": threshold["rank"],
+                "servablePassengersPerDay": servable[hub],
+                "distanceRatio": round(ratio, 6),
                     "qualified": qualifies,
                 }
             )
@@ -132,8 +132,8 @@ def compute_multihub_assignments(
             {
                 "group": group,
                 "centroid": {
-                    "latitude": centroids[group][0],
-                    "longitude": centroids[group][1],
+                    "latitude": round(centroids[group][0], 6),
+                    "longitude": round(centroids[group][1], 6),
                 },
                 "qualifiedHubs": qualified,
                 "rankings": details,
@@ -165,8 +165,8 @@ def compute_multihub_assignments(
             {
                 "code": city["code"],
                 "group": group,
-                "marketSize": float(market_sizes.get(city["code"], 0)),
-                "percentile": percentile,
+                "marketSize": round(float(market_sizes.get(city["code"], 0)), 6),
+                "percentile": round(percentile, 6),
                 "maximumHubs": cap,
                 "hubAssignments": qualified_by_group[group][:cap],
             }
@@ -252,8 +252,8 @@ def reconstruct_planning_snapshot(
             sorted(canonical["operatingPolicy"]["hubBankCounts"].items())
         ),
         "limitations": [
-            "Final scheduled frequencies are reconstructed from canonical legs; raw demand allocation is not available in the migration baseline.",
-            "Hub assignments are preserved from canonical city metadata; recomputation requires pinned airport O-D and intergroup-demand inputs.",
+            "Final scheduled frequencies are reconstructed from canonical legs; they are not yet a newly allocated output from the pinned demand data.",
+            "Hub assignments are preserved in canonical city metadata and independently reproduced from the pinned airport O-D and intergroup-demand inputs.",
             "Hub-bank counts are policy requirements; the legacy workbook does not contain bank windows or per-leg assignments.",
         ],
     }

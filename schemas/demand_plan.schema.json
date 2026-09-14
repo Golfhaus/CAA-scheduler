@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://coastal-american.example/schemas/demand_plan.schema.json",
+  "title": "Coastal American Airways demand plan",
+  "type": "object",
+  "required": [
+    "schemaVersion", "demandDataVersion", "status", "provenance", "matrix",
+    "summary", "checks", "marketSizes", "multiHubAssignments", "assignmentParity"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "demandDataVersion": { "type": "string", "minLength": 1 },
+    "status": { "enum": ["pass", "fail"] },
+    "provenance": { "type": "object" },
+    "matrix": {
+      "type": "object",
+      "required": ["title", "description", "airportCount", "directionalCellCount", "directionalPassengersPerDay"]
+    },
+    "summary": {
+      "type": "object",
+      "required": ["checks", "passed", "failed"]
+    },
+    "checks": { "type": "array" },
+    "marketSizes": {
+      "type": "object",
+      "additionalProperties": { "type": "number", "minimum": 0 }
+    },
+    "multiHubAssignments": { "type": ["object", "null"] },
+    "assignmentParity": { "type": ["object", "null"] }
+  }
+}

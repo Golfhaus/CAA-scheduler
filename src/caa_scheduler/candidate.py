@@ -5,6 +5,7 @@ from pathlib import Path
 from typing import Any
 
 from .build_config import validate_build_config
+from .demand import build_demand_plan_from_manifest, resolve_demand_manifest
 from .gate_export import export_gate_schedule
 from .io import read_json, resolve_from_repo, write_json
 from .operating_validation import validate_operating_rules
@@ -21,6 +22,7 @@ GENERATED_FILENAMES = (
     "operating_validation_report.json",
     "planning_snapshot.json",
     "planning_validation_report.json",
+    "demand_plan.json",
     "timetable.json",
     "gates.json",
 )
@@ -230,6 +232,34 @@ def build_candidate(
         write_json(destination / "build_report.json", report)
         return report
 
+    try:
+        demand_manifest = resolve_demand_manifest(
+            repo_root, config["inputs"]["demandData"]["version"]
+        )
+        demand_plan = build_demand_plan_from_manifest(
+            demand_manifest,
+            repo_root,
+            candidate["cities"],
+            expected_hub_assignments={
+                city["code"]: city["hubAssignments"]
+                for city in candidate["cities"]
+                if city["role"] != "hub"
+            },
+        )
+        report["demandPlan"] = demand_plan
+        if demand_plan["status"] == "fail":
+            if report["status"] != "blocked_hard_stop":
+                report["status"] = "blocked_planning_input"
+            report["publicationReady"] = False
+            report["blockers"].append(
+                "The pinned demand plan does not cover the candidate network"
+            )
+    except ValueError as error:
+        if report["status"] != "blocked_hard_stop":
+            report["status"] = "blocked_planning_input"
+        report["publicationReady"] = False
+        report["blockers"].append(str(error))
+
     write_json(destination / "validation_report.json", report["structuralValidation"])
     write_json(
         destination / "operating_validation_report.json",
@@ -240,6 +270,8 @@ def build_candidate(
         destination / "planning_validation_report.json",
         report["planningValidation"],
     )
+    if "demandPlan" in report:
+        write_json(destination / "demand_plan.json", report["demandPlan"])
     report["outputs"].update(
         {
             "structuralValidation": "validation_report.json",
@@ -248,8 +280,10 @@ def build_candidate(
             "planningValidation": "planning_validation_report.json",
         }
     )
+    if "demandPlan" in report:
+        report["outputs"]["demandPlan"] = "demand_plan.json"
 
-    if report["status"] != "blocked_hard_stop":
+    if report["status"] in {"candidate_ready", "candidate_review_required"}:
         write_json(destination / "canonical_schedule.json", candidate)
         write_json(
             destination / "timetable.json",
