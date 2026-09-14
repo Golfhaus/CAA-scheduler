@@ -21,7 +21,7 @@ WEB_ASSETS = (
 def build_web_console(
     manifest_path: Path, repo_root: Path, output_directory: Path
 ) -> dict[str, Any]:
-    """Assemble a static, deployable copy of the read-only web console."""
+    """Assemble a static, deployable copy of the browser-based web console."""
     repo_root = repo_root.resolve()
     manifest_path = manifest_path.resolve()
     output_directory = output_directory.resolve()
