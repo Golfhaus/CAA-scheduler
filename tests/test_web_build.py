@@ -26,7 +26,9 @@ class WebBuildTests(unittest.TestCase):
             self.assertTrue((output / "index.html").is_file())
             self.assertTrue((output / "favicon.svg").is_file())
             self.assertTrue((output / "coastal-american-logo.png").is_file())
+            self.assertTrue((output / "build-config.mjs").is_file())
             manifest = json.loads((output / "schedules.json").read_text())
+            self.assertTrue((output / manifest["buildSetup"]["schema"]).is_file())
             files = manifest["schedules"][0]["files"]
             self.assertTrue((output / files["canonical"]).is_file())
             self.assertTrue((output / files["gates"]).is_file())
