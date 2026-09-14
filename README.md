@@ -22,6 +22,8 @@ v2.2.5 workbook + pinned city data
     -> Python candidate compiler + repeated preflight
     -> structural and operating reports
     -> durable planning snapshot + planning validation
+    -> pinned six-month airport O-D demand plan
+    -> exact 100/100 multi-hub assignment reproduction
     -> timetable/gate candidate exports only after hard stops pass
 ```
 
@@ -45,6 +47,7 @@ This writes:
 - `data/schedules/schedule_6_v2_2_5/operating_validation_report.json`
 - `data/schedules/schedule_6_v2_2_5/planning_snapshot.json`
 - `data/schedules/schedule_6_v2_2_5/planning_validation_report.json`
+- `data/schedules/schedule_6_v2_2_5/demand_plan.json`
 
 Run the regression tests with:
 
@@ -76,10 +79,14 @@ python -m caa_scheduler reconstruct-plan \
   data/schedules/schedule_6_v2_2_5/canonical_schedule.json \
   planning_snapshot.json \
   --validation-output planning_validation_report.json \
-  --demand-version unavailable-in-migration-baseline
+  --demand-version bts-db1c-6mo-jul2025-apr2026-v1
+python -m caa_scheduler build-demand-plan \
+  data/schedules/schedule_6_v2_2_5/canonical_schedule.json \
+  config/demand_data/bts_db1c_6mo_v1.json \
+  demand_plan.json
 ```
 
-`baseline` verifies reproducibility and therefore succeeds when structural validation and both golden exports match. `validate-operating` is the enforcement command: it exits nonzero while unoverridden hard findings remain.
+`baseline` verifies reproducibility and therefore succeeds when structural/planning validation, demand-plan parity, and both golden exports match. `validate-operating` is the enforcement command: it exits nonzero while unoverridden hard findings remain.
 
 ## Compile a candidate schedule
 
@@ -89,15 +96,15 @@ Export an approved configuration from **Schedule Setup**, add it to a working br
 python -m caa_scheduler build-candidate path/to/build_config.json
 ```
 
-For a previous-schedule start, the compiler resolves the pinned canonical baseline from `data/schedules/<scheduleId>/canonical_schedule.json`. It writes an isolated package under `builds/<buildId>/` containing a copy of the approved input, build report, structural/operating/planning validation reports, the planning snapshot, canonical candidate, timetable, and gate data. The manually dispatched **Build candidate schedule** GitHub Action runs the same command and retains the package as an artifact for 30 days.
+For a previous-schedule start, the compiler resolves the pinned canonical baseline from `data/schedules/<scheduleId>/canonical_schedule.json`. It writes an isolated package under `builds/<buildId>/` containing a copy of the approved input, build report, structural/operating/planning validation reports, demand and planning snapshots, canonical candidate, timetable, and gate data. The manually dispatched **Build candidate schedule** GitHub Action runs the same command and retains the package as an artifact for 30 days.
 
 If Python preflight fails, blank-start planning is requested, or an airport addition lacks the future planning stage, no candidate is emitted. If any non-waivable hard-stop check fails—including curfew enforcement—the diagnostic reports are written but the canonical, timetable, and gate outputs are suppressed. Other operating findings produce a review-required candidate rather than being silently waived.
 
 ## Current boundary
 
-Milestone 0.7 has begun with a deterministic planning boundary. Python now reconstructs the final directional market/fleet plan, station totals, preserved hub assignments, hub-bank requirements, and an aircraft-minute lower bound directly from canonical JSON. This replaces the missing `fleet_routes.pkl` and stale standalone station totals for migration purposes. Fleet capacity still comes only from the schedule-specific build configuration, and curfews remain non-waivable hard stops. The Planning tab exposes this snapshot in the Pages console. See [Planning engine](docs/planning_engine.md), [Candidate compiler](docs/candidate_engine.md), [Web console](docs/web_console.md), and [`planning_snapshot` schema](schemas/planning_snapshot.schema.json).
+Milestone 0.7 now has a deterministic planning and demand boundary. Python reconstructs the final directional market/fleet plan, station totals, preserved hub assignments, hub-bank requirements, and an aircraft-minute lower bound directly from canonical JSON. The complete 105-city six-month airport O-D matrix, intergroup demand, and planning rules are pinned through a fingerprinted manifest; together they reproduce all 100 non-hub assignments in v2.2.5. Fleet capacity still comes only from the schedule-specific build configuration, and curfews remain non-waivable hard stops. The Planning tab exposes both the reconstructed schedule plan and independently computed demand/hub results. See [Planning engine](docs/planning_engine.md), [Candidate compiler](docs/candidate_engine.md), [Web console](docs/web_console.md), and the planning/demand schemas under `schemas/`.
 
-This remains a seed-and-validate compiler, not yet the full demand-to-routing optimizer. The v2.2.5 market plan is explicitly marked as a canonical reconstruction: its scheduled frequencies are not mislabeled as raw demand allocation. Blank starts, airport additions, fresh demand allocation, bank placement, route construction, and automated repair remain blocked until those deterministic stages and their pinned inputs are reconnected. The v2.2.5 golden schedule is intentionally **not** declared operating-rule clean. Exact historical preservation and current-policy compliance remain separate questions.
+This remains a seed-and-validate compiler, not yet the full demand-to-routing optimizer. The v2.2.5 scheduled-frequency plan is explicitly marked as a canonical reconstruction: raw demand is now available, but it has not yet been transformed into a newly allocated frequency/fleet plan. Blank starts, airport additions, fresh frequency allocation, bank placement, route construction, and automated repair remain blocked until those deterministic stages are reconnected. The v2.2.5 golden schedule is intentionally **not** declared operating-rule clean. Exact historical preservation and current-policy compliance remain separate questions.
 
 ## Repository visibility
 

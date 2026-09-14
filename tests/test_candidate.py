@@ -57,7 +57,7 @@ def _config(baseline: dict) -> dict:
             "operatingPolicy": copy.deepcopy(
                 baseline["provenance"]["operatingPolicy"]
             ),
-            "demandData": {"version": "test-demand-snapshot"},
+            "demandData": {"version": "bts-db1c-6mo-jul2025-apr2026-v1"},
         },
         "networkChanges": [],
         "notes": "Regression candidate",
@@ -112,13 +112,18 @@ class CandidateBuildTests(unittest.TestCase):
                 "operating_validation_report.json",
                 "planning_snapshot.json",
                 "planning_validation_report.json",
+                "demand_plan.json",
                 "timetable.json",
                 "gates.json",
             ):
                 self.assertTrue((output / filename).is_file(), filename)
             planning = json.loads((output / "planning_snapshot.json").read_text())
-            self.assertEqual(planning["demandDataVersion"], "test-demand-snapshot")
+            self.assertEqual(
+                planning["demandDataVersion"],
+                "bts-db1c-6mo-jul2025-apr2026-v1",
+            )
             self.assertEqual(report["planningValidation"]["status"], "pass")
+            self.assertEqual(report["demandPlan"]["assignmentParity"]["matched"], 100)
 
     def test_missing_demand_pin_blocks_before_compilation(self) -> None:
         config = _config(self.baseline)
@@ -185,6 +190,26 @@ class CandidateBuildTests(unittest.TestCase):
             self.assertFalse((output / "timetable.json").exists())
             self.assertTrue((output / "operating_validation_report.json").is_file())
             self.assertTrue((output / "planning_snapshot.json").is_file())
+            self.assertTrue((output / "demand_plan.json").is_file())
+
+    def test_unknown_demand_version_suppresses_candidate_outputs(self) -> None:
+        config = _config(self.baseline)
+        config["inputs"]["demandData"]["version"] = "unknown-demand-version"
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            config_path = root / "build_config.json"
+            output = root / "candidate"
+            config_path.write_text(json.dumps(config))
+            report = build_candidate(
+                config_path,
+                REPO_ROOT,
+                baseline_path=CANONICAL_PATH,
+                output_directory=output,
+            )
+            self.assertEqual(report["status"], "blocked_planning_input")
+            self.assertFalse((output / "canonical_schedule.json").exists())
+            self.assertFalse((output / "timetable.json").exists())
+            self.assertFalse((output / "gates.json").exists())
 
 
 if __name__ == "__main__":

@@ -238,7 +238,10 @@ class ScheduleSixBaselineTests(unittest.TestCase):
                     "expectedTimetable": str(EXPECTED_TIMETABLE),
                     "expectedGate": str(EXPECTED_GATE),
                     "operatingPolicy": str(OPERATING_POLICY),
-                    "demandData": {"version": "test-unavailable"},
+                    "demandData": {
+                        "version": "bts-db1c-6mo-jul2025-apr2026-v1",
+                        "manifest": "config/demand_data/bts_db1c_6mo_v1.json",
+                    },
                 },
                 "outputs": {"directory": str(temp_root / "out")},
             }
@@ -257,7 +260,10 @@ class ScheduleSixBaselineTests(unittest.TestCase):
             self.assertTrue(result["operatingValidationPath"].exists())
             self.assertTrue(result["planningPath"].exists())
             self.assertTrue(result["planningValidationPath"].exists())
+            self.assertTrue(result["demandPlanPath"].exists())
             self.assertEqual(result["planningValidation"]["status"], "pass")
+            self.assertEqual(result["demandPlan"]["status"], "pass")
+            self.assertEqual(result["demandPlan"]["assignmentParity"]["matched"], 100)
             self.assertEqual(
                 result["timetablePath"].read_bytes(),
                 EXPECTED_TIMETABLE.read_bytes(),

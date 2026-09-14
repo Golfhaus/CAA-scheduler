@@ -3,6 +3,7 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Any
 
+from .demand import build_demand_plan_from_manifest
 from .importer import import_canonical_schedule
 from .gate_export import export_gate_schedule
 from .io import read_json, resolve_from_repo, write_json
@@ -34,6 +35,19 @@ def build_baseline(config_path: Path, repo_root: Path) -> dict[str, Any]:
         demand_data_version=inputs.get("demandData", {}).get("version"),
     )
     planning_validation = validate_planning_snapshot(planning, canonical)
+    demand_input = inputs["demandData"]
+    demand_plan = build_demand_plan_from_manifest(
+        Path(demand_input["manifest"]),
+        repo_root,
+        canonical["cities"],
+        expected_hub_assignments={
+            city["code"]: city["hubAssignments"]
+            for city in canonical["cities"]
+            if city["role"] != "hub"
+        },
+    )
+    if demand_plan["demandDataVersion"] != demand_input["version"]:
+        raise ValueError("Baseline demand-data version does not match its manifest")
     expected = read_json(resolve_from_repo(repo_root, inputs["expectedTimetable"]))
     parity = timetable == expected
     expected_gate_path = resolve_from_repo(repo_root, inputs["expectedGate"])
@@ -63,6 +77,7 @@ def build_baseline(config_path: Path, repo_root: Path) -> dict[str, Any]:
         output_directory / "planning_validation_report.json",
         planning_validation,
     )
+    write_json(output_directory / "demand_plan.json", demand_plan)
     expected_bytes = resolve_from_repo(repo_root, inputs["expectedTimetable"]).read_bytes()
     generated_bytes = (output_directory / "timetable.json").read_bytes()
     expected_gate_bytes = expected_gate_path.read_bytes()
@@ -76,9 +91,11 @@ def build_baseline(config_path: Path, repo_root: Path) -> dict[str, Any]:
         "operatingValidationPath": output_directory / "operating_validation_report.json",
         "planningPath": output_directory / "planning_snapshot.json",
         "planningValidationPath": output_directory / "planning_validation_report.json",
+        "demandPlanPath": output_directory / "demand_plan.json",
         "validation": validation,
         "operatingValidation": operating_validation,
         "planningValidation": planning_validation,
+        "demandPlan": demand_plan,
         "timetableParity": parity,
         "timetableByteParity": generated_bytes == expected_bytes,
         "gateParity": gate_parity,

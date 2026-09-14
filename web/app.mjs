@@ -19,6 +19,7 @@ const state = {
   operating: null,
   planning: null,
   planningValidation: null,
+  demandPlan: null,
   timetable: null,
   gates: null,
   instructions: null,
@@ -360,6 +361,7 @@ async function loadSchedule(scheduleId) {
     operating: data.operatingValidation,
     planning: data.planning,
     planningValidation: data.planningValidation,
+    demandPlan: data.demandPlan,
     timetable: data.timetable,
     gates: data.gates,
     routingPage: 1,
@@ -498,12 +500,15 @@ function populateFilters() {
 function renderPlanning() {
   const plan = state.planning;
   const validation = state.planningValidation;
-  $("#planning-status").textContent = validation.status === "pass" ? "Snapshot verified" : "Snapshot failed";
-  $("#planning-status").classList.toggle("is-danger", validation.status !== "pass");
+  const demand = state.demandPlan;
+  const ready = validation.status === "pass" && demand.status === "pass";
+  $("#planning-status").textContent = ready ? "Inputs verified" : "Planning blocked";
+  $("#planning-status").classList.toggle("is-danger", !ready);
   $("#planning-metrics").innerHTML = [
     metricCard("Scheduled legs", plan.summary.legCount.toLocaleString(), "Reconstructed from canonical routings"),
     metricCard("Market rows", plan.summary.marketRows.toLocaleString(), "Fleet + direction combinations"),
-    metricCard("Stations", plan.summary.stationCount, "Departure totals represented"),
+    metricCard("Demand coverage", `${demand.matrix.airportCount}/${state.canonical.cities.filter((city) => city.active).length}`, "Active airport O-D roster", demand.status === "pass" ? "is-success" : "is-danger"),
+    metricCard("Hub assignment parity", `${demand.assignmentParity.matched}/${demand.assignmentParity.compared}`, "Golden multi-hub result", demand.assignmentParity.differences.length ? "is-danger" : "is-success"),
     metricCard("Planning checks", `${validation.summary.passed}/${validation.summary.checks}`, "Snapshot consistency", validation.status === "pass" ? "is-success" : "is-danger"),
   ].join("");
 
@@ -513,6 +518,12 @@ function renderPlanning() {
     .join("");
   $("#planning-limitations").innerHTML = plan.limitations
     .map((item) => `<article><strong>Known boundary</strong><span>${escapeHtml(item)}</span></article>`)
+    .join("");
+
+  const demandCities = [...demand.multiHubAssignments.cities]
+    .sort((a, b) => b.marketSize - a.marketSize || a.code.localeCompare(b.code));
+  $("#demand-city-rows").innerHTML = demandCities
+    .map((city) => `<tr><td><strong>${escapeHtml(city.code)}</strong></td><td>${city.marketSize.toLocaleString(undefined, { maximumFractionDigits: 1 })}</td><td>${city.percentile.toFixed(1)}</td><td>${city.maximumHubs}</td><td>${city.hubAssignments.map(escapeHtml).join(" / ")}</td><td><span class="parity-badge ${city.matchesExpected ? "is-match" : "is-difference"}">${city.matchesExpected ? "Match" : "Different"}</span></td></tr>`)
     .join("");
 
   const filters = {

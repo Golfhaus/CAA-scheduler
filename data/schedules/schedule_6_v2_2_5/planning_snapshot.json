@@ -2,7 +2,7 @@
   "schemaVersion": "1.0.0",
   "scheduleId": "schedule_6_v2_2_5",
   "sourceKind": "canonical_reconstruction",
-  "demandDataVersion": "unavailable-in-migration-baseline",
+  "demandDataVersion": "bts-db1c-6mo-jul2025-apr2026-v1",
   "summary": {
     "legCount": 1383,
     "marketRows": 928,
@@ -6377,8 +6377,8 @@
     "SYR": 4
   },
   "limitations": [
-    "Final scheduled frequencies are reconstructed from canonical legs; raw demand allocation is not available in the migration baseline.",
-    "Hub assignments are preserved from canonical city metadata; recomputation requires pinned airport O-D and intergroup-demand inputs.",
+    "Final scheduled frequencies are reconstructed from canonical legs; they are not yet a newly allocated output from the pinned demand data.",
+    "Hub assignments are preserved in canonical city metadata and independently reproduced from the pinned airport O-D and intergroup-demand inputs.",
     "Hub-bank counts are policy requirements; the legacy workbook does not contain bank windows or per-leg assignments."
   ]
 }

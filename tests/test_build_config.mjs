@@ -28,16 +28,17 @@ test("new setup is explicit and schedule-specific", () => {
   canonical.schedule.fleetCounts.MAX9 = 999;
   assert.equal(config.fleetCounts.MAX9, 35);
   canonical.schedule.fleetCounts.MAX9 = 35;
-  assert.equal(config.inputs.demandData.version, "");
+  assert.equal(config.inputs.demandData.version, "bts-db1c-6mo-jul2025-apr2026-v1");
 });
 
 test("preflight blocks an unpinned demand snapshot", () => {
   const config = createBuildConfig(canonical, manifest);
+  config.inputs.demandData.version = "";
   const report = validateBuildConfig(config, canonical);
   assert.equal(report.status, "fail");
   assert.equal(report.checks.find((item) => item.id === "input_pins").status, "fail");
 
-  config.inputs.demandData.version = "BTS DB1C 2026-09";
+  config.inputs.demandData.version = manifest.buildSetup.demandData.version;
   const ready = validateBuildConfig(config, canonical);
   assert.equal(ready.status, "pass");
   assert.equal(ready.checks.find((item) => item.id === "curfew_enforcement").status, "pass");

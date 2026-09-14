@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://coastal-american.example/schemas/demand_data_manifest.schema.json",
+  "title": "Coastal American Airways demand-data manifest",
+  "type": "object",
+  "required": ["schemaVersion", "id", "description", "sourceMonths", "sources"],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "id": { "type": "string", "minLength": 1 },
+    "description": { "type": "string", "minLength": 1 },
+    "sourceMonths": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}$" }
+    },
+    "sources": {
+      "type": "object",
+      "required": ["airportOdMatrix", "intergroupDemand", "planningRules"],
+      "additionalProperties": false,
+      "properties": {
+        "airportOdMatrix": { "$ref": "#/$defs/fileSource" },
+        "intergroupDemand": { "$ref": "#/$defs/fileSource" },
+        "planningRules": { "$ref": "#/$defs/fileSource" }
+      }
+    }
+  },
+  "$defs": {
+    "fileSource": {
+      "type": "object",
+      "required": ["filename", "sha256"],
+      "additionalProperties": false,
+      "properties": {
+        "filename": { "type": "string", "minLength": 1 },
+        "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+      }
+    }
+  }
+}

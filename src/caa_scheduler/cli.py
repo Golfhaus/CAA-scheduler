@@ -5,6 +5,7 @@ from pathlib import Path
 
 from .baseline import build_baseline
 from .candidate import build_candidate
+from .demand import build_demand_plan_from_manifest
 from .gate_export import export_gate_schedule
 from .io import read_json, write_json
 from .operating_validation import validate_operating_rules
@@ -57,6 +58,15 @@ def _parser() -> argparse.ArgumentParser:
     planning.add_argument("output", type=Path)
     planning.add_argument("--validation-output", type=Path)
     planning.add_argument("--demand-version")
+
+    demand = subcommands.add_parser(
+        "build-demand-plan",
+        help="Validate pinned demand inputs and compute multi-hub assignments",
+    )
+    demand.add_argument("canonical", type=Path)
+    demand.add_argument("manifest", type=Path)
+    demand.add_argument("output", type=Path)
+    demand.add_argument("--repo-root", type=Path, default=Path.cwd())
 
     web = subcommands.add_parser(
         "build-web", help="Assemble the static GitHub Pages console"
@@ -124,12 +134,22 @@ def main(argv: list[str] | None = None) -> int:
             f"{planning['status'].upper()} "
             f"({planning['summary']['passed']}/{planning['summary']['checks']} checks)"
         )
+        demand = result["demandPlan"]
+        parity = demand["assignmentParity"]
+        print(
+            "Demand plan: "
+            f"{demand['status'].upper()} "
+            f"({demand['matrix']['airportCount']} cities, "
+            f"{parity['matched']}/{parity['compared']} hub assignments matched)"
+        )
         return 0 if (
             validation["status"] == "pass"
             and result["timetableParity"]
             and result["timetableByteParity"]
             and result["gateParity"]
             and result["gateByteParity"]
+            and result["planningValidation"]["status"] == "pass"
+            and result["demandPlan"]["status"] == "pass"
         ) else 1
 
     canonical = read_json(args.canonical)
@@ -188,4 +208,25 @@ def main(argv: list[str] | None = None) -> int:
         )
         print(f"Wrote {args.output}")
         return 0 if report["status"] == "pass" else 1
+    if args.command == "build-demand-plan":
+        expected = {
+            city["code"]: city["hubAssignments"]
+            for city in canonical["cities"]
+            if city["role"] != "hub"
+        }
+        plan = build_demand_plan_from_manifest(
+            args.manifest,
+            args.repo_root.resolve(),
+            canonical["cities"],
+            expected_hub_assignments=expected,
+        )
+        write_json(args.output, plan)
+        parity = plan["assignmentParity"]
+        print(
+            f"Demand plan: {plan['status'].upper()} "
+            f"({plan['matrix']['airportCount']} cities, "
+            f"{parity['matched']}/{parity['compared']} hub assignments matched)"
+        )
+        print(f"Wrote {args.output}")
+        return 0 if plan["status"] == "pass" else 1
     return 2

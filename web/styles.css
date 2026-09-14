@@ -382,7 +382,12 @@ tbody tr:hover { background: #f6f9fc; }
 .empty-row td { padding: 2.5rem 1rem; color: var(--muted); text-align: center; }
 
 .planning-fleet-panel { margin-bottom: 1rem; }
+.planning-demand-panel { margin-bottom: 1rem; }
 .planning-table-shell { border: 0; border-radius: 0; box-shadow: none; }
+.demand-table-shell { max-height: 30rem; overflow: auto; }
+.parity-badge { display: inline-block; border-radius: 999px; padding: 0.24rem 0.45rem; font-size: 0.7rem; font-weight: 850; text-transform: uppercase; letter-spacing: 0.04em; }
+.parity-badge.is-match { background: var(--success-soft); color: var(--success); }
+.parity-badge.is-difference { background: var(--danger-soft); color: var(--danger); }
 .planning-limitations { display: grid; gap: 0.55rem; margin-bottom: 1rem; }
 .planning-limitations article { display: flex; align-items: baseline; gap: 0.7rem 1rem; padding: 0.78rem 0.9rem; border: 1px solid #efd5ad; border-left: 4px solid var(--orange); border-radius: 0.6rem; background: #fffaf3; }
 .planning-limitations strong { flex: 0 0 auto; color: #9c560b; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.04em; }
