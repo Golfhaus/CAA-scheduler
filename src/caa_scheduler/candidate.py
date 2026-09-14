@@ -1,0 +1,258 @@
+from __future__ import annotations
+
+import copy
+from pathlib import Path
+from typing import Any
+
+from .build_config import validate_build_config
+from .gate_export import export_gate_schedule
+from .io import read_json, resolve_from_repo, write_json
+from .operating_validation import validate_operating_rules
+from .timetable import export_timetable
+from .validation import validate_schedule
+
+
+GENERATED_FILENAMES = (
+    "build_config.json",
+    "build_report.json",
+    "canonical_schedule.json",
+    "validation_report.json",
+    "operating_validation_report.json",
+    "timetable.json",
+    "gates.json",
+)
+
+
+def baseline_path_for(config: dict[str, Any], repo_root: Path) -> Path | None:
+    starting_point = config.get("startingPoint", {})
+    if starting_point.get("kind") != "previous_schedule":
+        return None
+    schedule_id = starting_point.get("scheduleId")
+    if not schedule_id:
+        return None
+    return repo_root / "data" / "schedules" / schedule_id / "canonical_schedule.json"
+
+
+def _apply_network_changes(
+    candidate: dict[str, Any], changes: list[dict[str, Any]]
+) -> list[str]:
+    blockers = []
+    city_by_code = {city["code"]: city for city in candidate["cities"]}
+    removed: set[str] = set()
+    for change in changes:
+        airport = change["airport"].upper()
+        action = change["action"]
+        if action == "add":
+            blockers.append(
+                f"{airport}: airport additions require the network-planning and metadata stage"
+            )
+            continue
+        city = city_by_code[airport]
+        if action == "remove":
+            if city["role"] in {"hub", "focus_city"}:
+                blockers.append(
+                    f"{airport}: removing a hub or focus city requires a revised operating-policy pin"
+                )
+                continue
+            city["active"] = False
+            city["role"] = "destination"
+            removed.add(airport)
+        elif action == "status_change":
+            target = change["targetStatus"]
+            if (
+                target != "inactive"
+                and target != city["role"]
+                and ({target, city["role"]} & {"hub", "focus_city"})
+            ):
+                blockers.append(
+                    f"{airport}: hub or focus-city role changes require a revised operating-policy pin"
+                )
+                continue
+            if target == "inactive" and city["role"] in {"hub", "focus_city"}:
+                blockers.append(
+                    f"{airport}: deactivating a hub or focus city requires a revised operating-policy pin"
+                )
+                continue
+            city["active"] = target != "inactive"
+            if target != "inactive":
+                city["role"] = target
+            else:
+                removed.add(airport)
+
+    if removed:
+        candidate["legs"] = [
+            leg
+            for leg in candidate["legs"]
+            if leg["origin"] not in removed and leg["destination"] not in removed
+        ]
+        remaining_leg_ids = {leg["id"] for leg in candidate["legs"]}
+        candidate["bankAssignments"] = [
+            assignment
+            for assignment in candidate.get("bankAssignments", [])
+            if assignment["legId"] in remaining_leg_ids
+        ]
+        for airport in removed:
+            candidate.get("gatePlan", {}).get("forcedStandSplits", {}).pop(
+                airport, None
+            )
+    return blockers
+
+
+def compile_candidate(
+    config: dict[str, Any], baseline: dict[str, Any]
+) -> tuple[dict[str, Any] | None, dict[str, Any]]:
+    """Compile a candidate from an explicit prior-schedule seed."""
+    preflight = validate_build_config(config, baseline)
+    report: dict[str, Any] = {
+        "schemaVersion": "1.0.0",
+        "buildId": config.get("buildId"),
+        "sourceScheduleId": baseline.get("schedule", {}).get("id"),
+        "status": "blocked_preflight" if preflight["status"] == "fail" else "compiling",
+        "preflight": preflight,
+        "blockers": [],
+        "outputs": {},
+    }
+    if preflight["status"] == "fail":
+        return None, report
+    if config["startingPoint"]["kind"] == "blank":
+        report["status"] = "blocked_planning_input"
+        report["blockers"].append(
+            "Blank-start construction requires the demand, network-planning, and routing stages"
+        )
+        return None, report
+
+    candidate = copy.deepcopy(baseline)
+    schedule = candidate["schedule"]
+    schedule.update(
+        {
+            "id": config["buildId"],
+            "number": config["schedule"]["number"],
+            "version": config["schedule"]["version"],
+            "label": config["schedule"]["label"],
+            "status": "draft",
+            "fleetCounts": copy.deepcopy(config["fleetCounts"]),
+            "connectionWindowMinutes": copy.deepcopy(
+                config["connectionWindowMinutes"]
+            ),
+        }
+    )
+    candidate["gatePlan"]["label"] = config["schedule"]["label"]
+    planning_blockers = _apply_network_changes(
+        candidate, config.get("networkChanges", [])
+    )
+    if planning_blockers:
+        report["status"] = "blocked_planning_input"
+        report["blockers"].extend(planning_blockers)
+        return None, report
+
+    structural = validate_schedule(candidate)
+    operating = validate_operating_rules(candidate)
+    hard_stops = [
+        {
+            "checkId": check["id"],
+            "title": check["title"],
+            "findingCount": check["metrics"].get("effectiveFindingCount", 0),
+            "message": check["message"],
+        }
+        for check in operating["checks"]
+        if check.get("hardStop") and check["status"] == "fail"
+    ]
+    report.update(
+        {
+            "status": "blocked_hard_stop"
+            if hard_stops
+            else (
+                "candidate_ready"
+                if structural["status"] == "pass"
+                and operating["summary"]["effectiveErrorFindings"] == 0
+                else "candidate_review_required"
+            ),
+            "structuralValidation": structural,
+            "operatingValidation": operating,
+            "hardStops": hard_stops,
+            "publicationReady": (
+                not hard_stops
+                and structural["status"] == "pass"
+                and operating["summary"]["effectiveErrorFindings"] == 0
+            ),
+        }
+    )
+    return candidate, report
+
+
+def build_candidate(
+    config_path: Path,
+    repo_root: Path,
+    *,
+    baseline_path: Path | None = None,
+    output_directory: Path | None = None,
+) -> dict[str, Any]:
+    repo_root = repo_root.resolve()
+    config_source = resolve_from_repo(repo_root, str(config_path)).resolve()
+    config = read_json(config_source)
+    baseline_source = baseline_path or baseline_path_for(config, repo_root)
+    if baseline_source is None:
+        baseline: dict[str, Any] = {
+            "schedule": {},
+            "cities": [],
+            "provenance": {},
+        }
+    else:
+        baseline = read_json(resolve_from_repo(repo_root, str(baseline_source)))
+
+    destination = (
+        resolve_from_repo(repo_root, str(output_directory)).resolve()
+        if output_directory is not None
+        else repo_root / "builds" / str(config.get("buildId", "invalid-build"))
+    )
+    candidate, report = compile_candidate(config, baseline)
+    destination.mkdir(parents=True, exist_ok=True)
+    for filename in GENERATED_FILENAMES:
+        (destination / filename).unlink(missing_ok=True)
+    report["outputDirectory"] = str(destination)
+    report["outputs"] = {
+        "buildConfig": "build_config.json",
+        "buildReport": "build_report.json",
+    }
+    write_json(destination / "build_config.json", config)
+
+    if candidate is None:
+        write_json(destination / "build_report.json", report)
+        return report
+
+    write_json(destination / "validation_report.json", report["structuralValidation"])
+    write_json(
+        destination / "operating_validation_report.json",
+        report["operatingValidation"],
+    )
+    report["outputs"].update(
+        {
+            "structuralValidation": "validation_report.json",
+            "operatingValidation": "operating_validation_report.json",
+        }
+    )
+
+    if report["status"] != "blocked_hard_stop":
+        write_json(destination / "canonical_schedule.json", candidate)
+        write_json(
+            destination / "timetable.json",
+            export_timetable(candidate),
+            indent=1,
+            trailing_newline=False,
+        )
+        write_json(
+            destination / "gates.json",
+            export_gate_schedule(candidate),
+            indent=1,
+            trailing_newline=False,
+        )
+        report["outputs"].update(
+            {
+                "canonical": "canonical_schedule.json",
+                "timetable": "timetable.json",
+                "gates": "gates.json",
+            }
+        )
+
+    write_json(destination / "build_report.json", report)
+    return report

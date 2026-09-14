@@ -31,7 +31,7 @@ The Pages workflow builds the static directory on every push to `main`, uploads 
 
 The repository must be configured once under **Settings → Pages → Build and deployment** with **GitHub Actions** selected as the source. The workflow deliberately does not carry a personal access token or attempt to change repository settings.
 
-Published schedules and instructions remain read-only. Schedule Setup writes only to browser-local storage and user-downloaded JSON; it cannot alter the repository or launch construction. Instruction changes continue through the normal GitHub/ChatGPT review workflow. Milestone 0.6 will connect an approved `build_config.json` to the deterministic Python construction engine; secure workflow kickoff and shared draft storage remain later work.
+Published schedules and instructions remain read-only. Schedule Setup writes only to browser-local storage and user-downloaded JSON; it cannot alter the repository or launch construction. Instruction changes continue through the normal GitHub/ChatGPT review workflow. Milestone 0.6 consumes an approved `build_config.json` through the Python candidate compiler and a manually dispatched GitHub Action. Secure kickoff directly from Pages and shared draft storage remain later work.
 
 ## Schedule Setup contract
 

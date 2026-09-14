@@ -2,7 +2,7 @@
 
 CAA Scheduler is the migration target for Coastal American Airways schedule construction. It moves the durable schedule state and deterministic processing out of an LLM conversation and into version-controlled code and data.
 
-## Milestone 0.5
+## Milestone 0.6
 
 The migration baseline now proves this pipeline:
 
@@ -19,6 +19,9 @@ v2.2.5 workbook + pinned city data
     -> GitHub Pages operating console
     -> schedule-specific setup + deterministic preflight
     -> portable build_config.json
+    -> Python candidate compiler + repeated preflight
+    -> structural and operating reports
+    -> timetable/gate candidate exports only after hard stops pass
 ```
 
 The workbook remains a source for this one-time migration and will later become an export. The canonical JSON is the authoritative schedule representation going forward.
@@ -44,7 +47,7 @@ Run the regression tests with:
 
 ```bash
 python -m unittest discover -s tests -v
-node --test tests/test_web_console.mjs
+node --test tests/*.mjs
 ```
 
 ## Build the web console
@@ -70,11 +73,23 @@ python -m caa_scheduler validate-operating \
 
 `baseline` verifies reproducibility and therefore succeeds when structural validation and both golden exports match. `validate-operating` is the enforcement command: it exits nonzero while unoverridden hard findings remain.
 
+## Compile a candidate schedule
+
+Export an approved configuration from **Schedule Setup**, add it to a working branch, and run:
+
+```bash
+python -m caa_scheduler build-candidate path/to/build_config.json
+```
+
+For a previous-schedule start, the compiler resolves the pinned canonical baseline from `data/schedules/<scheduleId>/canonical_schedule.json`. It writes an isolated package under `builds/<buildId>/` containing a copy of the approved input, build report, both validation reports, canonical candidate, timetable, and gate data. The manually dispatched **Build candidate schedule** GitHub Action runs the same command and retains the package as an artifact for 30 days.
+
+If Python preflight fails, blank-start planning is requested, or an airport addition lacks the future planning stage, no candidate is emitted. If any non-waivable hard-stop check fails—including curfew enforcement—the diagnostic reports are written but the canonical, timetable, and gate outputs are suppressed. Other operating findings produce a review-required candidate rather than being silently waived.
+
 ## Current boundary
 
-Milestone 0.5 adds a Schedule Setup workspace. Each draft records its own schedule identity, Mainline/Skunkworks mode, starting point, complete fleet composition, connection window, pinned instruction/city/policy/demand inputs, airport changes, and build notes. Fleet size is never supplied by an application constant: a previous schedule may seed editable values, but the exported `build_config.json` owns every count. Browser drafts remain local and can be exported/imported without a service or credential. Deterministic preflight blocks incomplete inputs and confirms that the pinned operating policy will enforce curfews as hard stops during construction. See [Web console](docs/web_console.md) and [`build_config` schema](schemas/build_config.schema.json).
+Milestone 0.6 establishes the engine boundary: Python consumes the same `build_config.json` created in the browser, repeats deterministic preflight, and compiles a candidate from an explicitly selected prior schedule. Fleet capacity comes only from that configuration. Candidate publication is suppressed when curfews or another non-waivable hard stop fails. See [Candidate compiler](docs/candidate_engine.md), [Web console](docs/web_console.md), and [`build_config` schema](schemas/build_config.schema.json).
 
-Schedule Setup deliberately stops before construction; Milestone 0.6 will make the Python engine consume the approved build configuration. The v2.2.5 golden schedule is intentionally **not** declared operating-rule clean. Exact historical preservation and current-policy compliance remain separate questions. The console makes the known baseline findings visible without silently waiving them.
+This is deliberately a seed-and-validate compiler, not yet the full demand-to-routing optimizer. Blank starts, airport additions, demand allocation, bank placement, route construction, and automated repair remain blocked until their deterministic stages are reconnected. The v2.2.5 golden schedule is intentionally **not** declared operating-rule clean. Exact historical preservation and current-policy compliance remain separate questions.
 
 ## Repository visibility
 

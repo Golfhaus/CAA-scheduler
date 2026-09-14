@@ -105,7 +105,7 @@
 
           <div class="setup-notice">
             <strong>No schedule is being constructed yet.</strong>
-            <span>Preflight validates setup inputs. Curfews remain hard stops when the construction engine is connected in Milestone 0.6.</span>
+            <span>Preflight validates setup inputs. The Milestone 0.6 candidate compiler repeats these checks and enforces curfews as hard stops before producing timetable or gate outputs.</span>
           </div>
 
           <form id="setup-form" class="setup-layout" autocomplete="off">
@@ -180,6 +180,7 @@
             <input id="setup-import-file" type="file" accept="application/json,.json" hidden>
             <button class="danger-button" id="setup-reset" type="button">Reset draft</button>
           </div>
+          <p class="mode-note">To compile this draft today, export the JSON, add it to a working GitHub branch, and run the repository’s <strong>Build candidate schedule</strong> action. Direct kickoff from this page remains a later authenticated workflow.</p>
         </section>
 
         <section class="view" id="view-routings" data-view="routings" aria-labelledby="routings-title" hidden>
