@@ -4,6 +4,7 @@ import argparse
 from pathlib import Path
 
 from .baseline import build_baseline
+from .candidate import build_candidate
 from .gate_export import export_gate_schedule
 from .io import read_json, write_json
 from .operating_validation import validate_operating_rules
@@ -19,6 +20,15 @@ def _parser() -> argparse.ArgumentParser:
     baseline = subcommands.add_parser("baseline", help="Build and verify a golden baseline")
     baseline.add_argument("--config", type=Path, required=True)
     baseline.add_argument("--repo-root", type=Path, default=Path.cwd())
+
+    candidate = subcommands.add_parser(
+        "build-candidate",
+        help="Compile an approved build configuration into a candidate package",
+    )
+    candidate.add_argument("config", type=Path)
+    candidate.add_argument("--baseline", type=Path)
+    candidate.add_argument("--output", type=Path)
+    candidate.add_argument("--repo-root", type=Path, default=Path.cwd())
 
     validate = subcommands.add_parser("validate", help="Validate a canonical schedule")
     validate.add_argument("canonical", type=Path)
@@ -49,6 +59,26 @@ def _parser() -> argparse.ArgumentParser:
 
 def main(argv: list[str] | None = None) -> int:
     args = _parser().parse_args(argv)
+    if args.command == "build-candidate":
+        report = build_candidate(
+            args.config,
+            args.repo_root,
+            baseline_path=args.baseline,
+            output_directory=args.output,
+        )
+        print(f"Candidate build: {report['status']}")
+        print(f"Output: {report['outputDirectory']}")
+        for blocker in report.get("blockers", []):
+            print(f"  BLOCKED: {blocker}")
+        for hard_stop in report.get("hardStops", []):
+            print(
+                f"  HARD STOP: {hard_stop['title']} "
+                f"({hard_stop['findingCount']} findings)"
+            )
+        return 0 if report["status"] in {
+            "candidate_ready",
+            "candidate_review_required",
+        } else 1
     if args.command == "build-web":
         result = build_web_console(
             args.manifest,
