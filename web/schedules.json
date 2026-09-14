@@ -1,6 +1,15 @@
 {
   "schemaVersion": "1.0.0",
   "defaultScheduleId": "schedule_6_v2_2_5",
+  "repositoryUrl": "https://github.com/Golfhaus/CAA-scheduler",
+  "instructions": {
+    "version": "2.0 with turn-on-stand hard-stop addition",
+    "source": "instructions/CAA_Build_Instructions_TEMPLATE_v2_0.md",
+    "additions": [
+      "instructions/additions/BUILD_INSTRUCTIONS_ADDITION.md"
+    ],
+    "catalog": "data/instructions/build_instructions_v2_0.json"
+  },
   "schedules": [
     {
       "id": "schedule_6_v2_2_5",

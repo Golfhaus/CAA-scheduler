@@ -4,6 +4,7 @@ import shutil
 from pathlib import Path
 from typing import Any
 
+from .instructions import build_instruction_catalog
 from .io import read_json, write_json
 
 
@@ -55,9 +56,31 @@ def build_web_console(
             shutil.copy2(source, destination)
             copied_data.add(relative_path)
 
+    instruction_config = manifest["instructions"]
+    primary_instruction = (repo_root / instruction_config["source"]).resolve()
+    addition_paths = [
+        (repo_root / relative_path).resolve()
+        for relative_path in instruction_config.get("additions", [])
+    ]
+    for source in [primary_instruction, *addition_paths]:
+        if repo_root not in source.parents or not source.is_file():
+            raise ValueError(f"Instruction source is invalid: {source}")
+    catalog_relative_path = instruction_config["catalog"]
+    catalog_destination = (output_directory / catalog_relative_path).resolve()
+    if output_directory not in catalog_destination.parents:
+        raise ValueError("Instruction catalog destination is invalid")
+    catalog = build_instruction_catalog(
+        primary_instruction,
+        addition_paths,
+        repo_root,
+        instruction_config["version"],
+    )
+    write_json(catalog_destination, catalog)
+
     write_json(output_directory / "schedules.json", manifest)
     return {
         "outputDirectory": output_directory,
         "scheduleCount": len(schedule_ids),
         "dataFileCount": len(copied_data),
+        "instructionEntryCount": len(catalog["entries"]),
     }
