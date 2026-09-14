@@ -62,9 +62,26 @@ Status: complete.
 
 ## 0.7 — Deterministic construction planner
 
+Status: in progress; planning foundation complete.
+
 - Replace hardcoded paths, pickle files, import-time data loading, and mutable module globals.
 - Reconnect demand, multi-hub assignment, fleet allocation, bank placement, routing, and repair logic behind one callable build command.
 - Add golden tests before changing optimization behavior.
+
+Completed foundation:
+
+- Reconstruct the exact final fleet/market plan and station totals from canonical JSON instead of relying on `fleet_routes.pkl` or a stale standalone total file.
+- Make multi-hub qualification a pure function with versioned thresholds and tier caps.
+- Record the aircraft count from each schedule configuration and measure planned work in aircraft-minutes rather than a flat flights-per-day proxy.
+- Emit and validate a schema-backed planning snapshot from baseline and candidate builds.
+- Expose fleet work and directional market rows in a read-only Planning tab.
+
+Remaining in 0.7:
+
+- Pin and normalize the complete airport O-D dataset (the embedded intergroup-demand table is now versioned JSON).
+- Generate fresh demand allocation and fleet assignment from those inputs.
+- Reconnect bank placement, aircraft routing, and deterministic repair.
+- Add golden comparisons for each stage before enabling blank-start construction or airport additions.
 
 ## 1.0 — Schedule Builder
 

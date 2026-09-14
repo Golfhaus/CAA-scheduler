@@ -18,13 +18,14 @@ Each run replaces only the compiler's known files in that output directory. This
 2. Repeat server-side preflight, including exact city/policy fingerprint comparison.
 3. Deep-copy the baseline so the frozen source cannot be mutated.
 4. Apply the new schedule identity, fleet counts, connection window, and supported network changes.
-5. Run structural and operating validation.
-6. Stop consumer export if a hard-stop check fails.
-7. Otherwise write the canonical candidate, timetable, gates, and both validation reports.
+5. Reconstruct and validate the candidate's durable planning snapshot.
+6. Run structural and operating validation.
+7. Stop consumer export if a hard-stop check fails.
+8. Otherwise write the canonical candidate, timetable, and gates. Planning and diagnostic reports are retained in either case.
 
 Fleet counts have no engine default. The compiler copies `fleetCounts` directly from the build configuration, and the operating validator measures aircraft-day use against those values.
 
-Curfew enforcement comes from the pinned operating policy. The departure-window check is marked `hardStop`; it cannot be waived. A curfew failure leaves diagnostic validation and build reports but suppresses `canonical_schedule.json`, `timetable.json`, and `gates.json`.
+Curfew enforcement comes from the pinned operating policy. The departure-window check is marked `hardStop`; it cannot be waived. A curfew failure leaves the planning snapshot plus diagnostic validation and build reports but suppresses `canonical_schedule.json`, `timetable.json`, and `gates.json`.
 
 ## Candidate states
 
@@ -44,4 +45,4 @@ The **Build candidate schedule** workflow accepts a repository path to an approv
 
 ## Deliberate boundary
 
-This milestone compiles and evaluates a seed candidate. It does not claim that copying a prior routing is new schedule construction. Milestone 0.7 will reconnect demand allocation, multi-hub qualification, fleet assignment, bank placement, aircraft routing, and repair logic behind this same contract. Blank starts and airport additions remain explicit blockers until those inputs can be materialized deterministically.
+This compiler still evaluates a seed candidate. It does not claim that copying a prior routing is new schedule construction. Milestone 0.7 has added the schema-backed planning contract and a pure multi-hub qualification function; fresh demand allocation, fleet assignment, bank placement, aircraft routing, and repair remain to be reconnected behind it. Blank starts and airport additions remain explicit blockers until those inputs can be materialized deterministically.

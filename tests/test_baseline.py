@@ -238,6 +238,7 @@ class ScheduleSixBaselineTests(unittest.TestCase):
                     "expectedTimetable": str(EXPECTED_TIMETABLE),
                     "expectedGate": str(EXPECTED_GATE),
                     "operatingPolicy": str(OPERATING_POLICY),
+                    "demandData": {"version": "test-unavailable"},
                 },
                 "outputs": {"directory": str(temp_root / "out")},
             }
@@ -254,6 +255,9 @@ class ScheduleSixBaselineTests(unittest.TestCase):
             self.assertTrue(result["gatePath"].exists())
             self.assertTrue(result["validationPath"].exists())
             self.assertTrue(result["operatingValidationPath"].exists())
+            self.assertTrue(result["planningPath"].exists())
+            self.assertTrue(result["planningValidationPath"].exists())
+            self.assertEqual(result["planningValidation"]["status"], "pass")
             self.assertEqual(
                 result["timetablePath"].read_bytes(),
                 EXPECTED_TIMETABLE.read_bytes(),

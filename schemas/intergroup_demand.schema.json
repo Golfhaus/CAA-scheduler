@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://coastal-american.example/schemas/intergroup_demand.schema.json",
+  "title": "Coastal American Airways intergroup demand",
+  "type": "object",
+  "required": ["schemaVersion", "id", "sourceDescription", "records"],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "id": { "type": "string", "minLength": 1 },
+    "sourceDescription": { "type": "string", "minLength": 1 },
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["groups", "rating", "qualifiedHubs", "passengersPerDay"],
+        "additionalProperties": false,
+        "properties": {
+          "groups": {
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 2,
+            "uniqueItems": true,
+            "items": { "type": "string", "pattern": "^[A-Z0-9]{2,4}$" }
+          },
+          "rating": { "type": "integer", "minimum": 1, "maximum": 5 },
+          "qualifiedHubs": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": { "type": "string", "pattern": "^[A-Z0-9]{3,4}$" }
+          },
+          "passengersPerDay": { "type": "integer", "minimum": 0 }
+        }
+      }
+    }
+  }
+}

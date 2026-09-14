@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://coastal-american.example/schemas/planning_snapshot.schema.json",
+  "title": "Coastal American Airways planning snapshot",
+  "type": "object",
+  "required": [
+    "schemaVersion", "scheduleId", "sourceKind", "demandDataVersion",
+    "summary", "fleetPlan", "markets", "stationTotals", "hubAssignments",
+    "hubBankRequirements", "limitations"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "scheduleId": { "type": "string", "minLength": 1 },
+    "sourceKind": { "enum": ["canonical_reconstruction", "demand_allocation"] },
+    "demandDataVersion": { "type": ["string", "null"] },
+    "summary": {
+      "type": "object",
+      "required": ["legCount", "marketRows", "stationCount", "fleetTypes"],
+      "additionalProperties": { "type": "integer", "minimum": 0 }
+    },
+    "fleetPlan": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": [
+          "aircraftCount", "aircraftDaysUsed", "legCount", "blockMinutes",
+          "minimumTurnMinutes", "requiredAircraftMinutes"
+        ]
+      }
+    },
+    "markets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["fleet", "origin", "destination", "legs"],
+        "additionalProperties": false,
+        "properties": {
+          "fleet": { "type": "string", "minLength": 1 },
+          "origin": { "type": "string", "pattern": "^[A-Z0-9]{3,4}$" },
+          "destination": { "type": "string", "pattern": "^[A-Z0-9]{3,4}$" },
+          "legs": { "type": "integer", "minimum": 1 }
+        }
+      }
+    },
+    "stationTotals": {
+      "type": "object",
+      "additionalProperties": { "type": "integer", "minimum": 0 }
+    },
+    "hubAssignments": { "type": "array" },
+    "hubBankRequirements": {
+      "type": "object",
+      "additionalProperties": { "type": "integer", "minimum": 1 }
+    },
+    "limitations": { "type": "array", "items": { "type": "string" } }
+  },
+  "additionalProperties": false
+}

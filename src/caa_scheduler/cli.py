@@ -8,6 +8,7 @@ from .candidate import build_candidate
 from .gate_export import export_gate_schedule
 from .io import read_json, write_json
 from .operating_validation import validate_operating_rules
+from .planning import reconstruct_planning_snapshot, validate_planning_snapshot
 from .timetable import export_timetable
 from .validation import validate_schedule
 from .web_build import build_web_console
@@ -47,6 +48,15 @@ def _parser() -> argparse.ArgumentParser:
     )
     operating.add_argument("canonical", type=Path)
     operating.add_argument("--output", type=Path)
+
+    planning = subcommands.add_parser(
+        "reconstruct-plan",
+        help="Reconstruct and validate a durable planning snapshot from canonical JSON",
+    )
+    planning.add_argument("canonical", type=Path)
+    planning.add_argument("output", type=Path)
+    planning.add_argument("--validation-output", type=Path)
+    planning.add_argument("--demand-version")
 
     web = subcommands.add_parser(
         "build-web", help="Assemble the static GitHub Pages console"
@@ -108,6 +118,12 @@ def main(argv: list[str] | None = None) -> int:
             f"{operating['summary']['effectiveWarningFindings']} warnings, "
             f"{operating['summary']['notEvaluated']} not evaluated)"
         )
+        planning = result["planningValidation"]
+        print(
+            "Planning snapshot: "
+            f"{planning['status'].upper()} "
+            f"({planning['summary']['passed']}/{planning['summary']['checks']} checks)"
+        )
         return 0 if (
             validation["status"] == "pass"
             and result["timetableParity"]
@@ -157,4 +173,19 @@ def main(argv: list[str] | None = None) -> int:
         for check in report["checks"]:
             print(f"  {check['status'].upper():13} {check['id']}: {check['message']}")
         return 0 if report["status"] != "fail" else 1
+    if args.command == "reconstruct-plan":
+        snapshot = reconstruct_planning_snapshot(
+            canonical,
+            demand_data_version=args.demand_version,
+        )
+        report = validate_planning_snapshot(snapshot, canonical)
+        write_json(args.output, snapshot)
+        if args.validation_output:
+            write_json(args.validation_output, report)
+        print(
+            f"Planning snapshot: {report['status'].upper()} "
+            f"({report['summary']['passed']}/{report['summary']['checks']} checks)"
+        )
+        print(f"Wrote {args.output}")
+        return 0 if report["status"] == "pass" else 1
     return 2

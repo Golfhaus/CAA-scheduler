@@ -110,10 +110,15 @@ class CandidateBuildTests(unittest.TestCase):
                 "canonical_schedule.json",
                 "validation_report.json",
                 "operating_validation_report.json",
+                "planning_snapshot.json",
+                "planning_validation_report.json",
                 "timetable.json",
                 "gates.json",
             ):
                 self.assertTrue((output / filename).is_file(), filename)
+            planning = json.loads((output / "planning_snapshot.json").read_text())
+            self.assertEqual(planning["demandDataVersion"], "test-demand-snapshot")
+            self.assertEqual(report["planningValidation"]["status"], "pass")
 
     def test_missing_demand_pin_blocks_before_compilation(self) -> None:
         config = _config(self.baseline)
@@ -179,6 +184,7 @@ class CandidateBuildTests(unittest.TestCase):
             self.assertFalse((output / "canonical_schedule.json").exists())
             self.assertFalse((output / "timetable.json").exists())
             self.assertTrue((output / "operating_validation_report.json").is_file())
+            self.assertTrue((output / "planning_snapshot.json").is_file())
 
 
 if __name__ == "__main__":
