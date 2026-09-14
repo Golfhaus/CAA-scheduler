@@ -61,7 +61,7 @@ test("airport additions produce a runway-screening warning", () => {
   const config = createBuildConfig(canonical, manifest);
   config.inputs.demandData.version = "BTS DB1C 2026-09";
   config.networkChanges.push({
-    airport: "RIC",
+    airport: "ZZZ",
     action: "add",
     targetStatus: "destination",
     notes: "Candidate addition",
