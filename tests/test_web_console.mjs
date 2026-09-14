@@ -9,6 +9,8 @@ import {
   fleetUsage,
   formatMinute,
   formatMinute24,
+  instructionId,
+  instructionReferenceTokens,
   legMatches,
   paginate,
   passengerStandFindings,
@@ -153,6 +155,14 @@ test("validation evidence produces navigation references", () => {
     cities: ["BHM"],
     fleets: ["CRJ900"],
   });
+});
+
+test("validation instruction references preserve sections, checks, additions, and lessons", () => {
+  assert.deepEqual(instructionReferenceTokens("§2.5 / Lesson 32"), ["§2.5", "Lesson 32"]);
+  assert.deepEqual(instructionReferenceTokens("§2.6 Check B"), ["§2.6 Check B"]);
+  assert.deepEqual(instructionReferenceTokens("§1.7 hard-stop addition"), ["§1.7 hard-stop addition"]);
+  assert.equal(instructionId("§1.6a"), "section-1-6a");
+  assert.equal(instructionId("Lesson 31"), "lesson-31");
 });
 
 test("every blocking baseline finding has a console destination", () => {

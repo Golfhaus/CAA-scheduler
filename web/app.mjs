@@ -11,6 +11,8 @@ const state = {
   operating: null,
   timetable: null,
   gates: null,
+  instructions: null,
+  instructionId: "section-1-1",
   routingPage: 1,
   routingPageSize: DEFAULT_PAGE_SIZE,
   timetablePage: 1,
@@ -155,6 +157,16 @@ export function passengerStandFindings(operatingReport, cityCode) {
   return (check?.findings || []).filter((finding) => finding.evidence?.city === cityCode);
 }
 
+export function instructionId(reference) {
+  return String(reference).trim().toLowerCase().replace("§", "section-")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+}
+
+export function instructionReferenceTokens(value) {
+  return String(value).match(/§\d+(?:\.\d+)?[a-z]?(?:\s+Check\s+[A-Z]|\s+hard-stop addition)?|Lesson\s+\d+[a-z]?/gi) || [];
+}
+
 export function claimMatchesPassengerStandFinding(cityCode, claim, findings) {
   if (claim.rowType !== "stand") return false;
   return findings.some((finding) => {
@@ -294,7 +306,7 @@ function statusLabel(status) {
 }
 
 function activateTab(tab, updateHash = true) {
-  const valid = ["overview", "routings", "validation", "timetable", "gates"];
+  const valid = ["overview", "routings", "validation", "instructions", "timetable", "gates"];
   if (!valid.includes(tab)) tab = "overview";
   $$("[data-tab]").forEach((button) => {
     const active = button.dataset.tab === tab;
@@ -339,6 +351,7 @@ async function loadSchedule(scheduleId) {
 async function initialize() {
   try {
     state.manifest = await fetchJson("schedules.json");
+    state.instructions = await fetchJson(state.manifest.instructions.catalog);
     const select = $("#schedule-select");
     select.innerHTML = state.manifest.schedules
       .map((entry) => `<option value="${escapeHtml(entry.id)}">${escapeHtml(entry.label)}</option>`)
@@ -361,6 +374,7 @@ function renderAll() {
   populateFilters();
   renderRoutings();
   renderValidation();
+  renderInstructions();
   renderTimetable();
   renderGates();
 }
@@ -609,6 +623,62 @@ function findingLinks(finding) {
   return links.length ? `<div class="finding-links">${links.join("")}</div>` : "";
 }
 
+function renderInstructionReferences(value) {
+  const tokens = instructionReferenceTokens(value);
+  if (!tokens.length) return escapeHtml(value);
+  let rendered = "";
+  let cursor = 0;
+  tokens.forEach((token) => {
+    const index = value.indexOf(token, cursor);
+    rendered += escapeHtml(value.slice(cursor, index));
+    const id = instructionId(token);
+    const exists = state.instructions.entries.some((entry) => entry.id === id);
+    rendered += exists
+      ? `<button class="instruction-reference" type="button" data-instruction-id="${escapeHtml(id)}">${escapeHtml(token)}</button>`
+      : `<span class="instruction-reference is-missing" title="Instruction text is not indexed">${escapeHtml(token)}</span>`;
+    cursor = index + token.length;
+  });
+  return rendered + escapeHtml(value.slice(cursor));
+}
+
+function instructionKindLabel(kind) {
+  return {
+    section: "Section",
+    lesson: "Standing lesson",
+    check: "Section check",
+    addition: "Instruction addition",
+  }[kind] || kind;
+}
+
+function renderInstructions(requestedId = state.instructionId) {
+  const query = $("#instruction-search").value.trim().toLowerCase();
+  const kind = $("#instruction-kind").value;
+  const entries = state.instructions.entries;
+  const selected = entries.find((entry) => entry.id === requestedId)
+    || entries.find((entry) => entry.id === state.instructionId)
+    || entries[0];
+  state.instructionId = selected.id;
+  const filtered = entries.filter((entry) => {
+    if (kind && entry.kind !== kind) return false;
+    return !query || [entry.reference, entry.title, entry.text].join(" ").toLowerCase().includes(query);
+  });
+  $("#instruction-version").textContent = state.instructions.version;
+  $("#instruction-result-count").textContent = `${filtered.length} reference${filtered.length === 1 ? "" : "s"}`;
+  $("#instruction-list").innerHTML = filtered.length
+    ? filtered.map((entry) => `<button type="button" class="instruction-list-item${entry.id === selected.id ? " is-active" : ""}" data-instruction-id="${escapeHtml(entry.id)}"><span>${escapeHtml(entry.reference)}</span><strong>${escapeHtml(entry.title)}</strong></button>`).join("")
+    : `<p class="instruction-empty">No instruction references match this search.</p>`;
+  $("#instruction-document").innerHTML = `<header class="instruction-document-heading"><div><p class="eyebrow">${escapeHtml(instructionKindLabel(selected.kind))}</p><h2>${escapeHtml(selected.reference)} · ${escapeHtml(selected.title)}</h2></div><a class="source-link" href="${escapeHtml(`${state.manifest.repositoryUrl}/blob/main/${selected.sourcePath}`)}" target="_blank" rel="noreferrer">Open Markdown source</a></header><pre class="instruction-text">${escapeHtml(selected.text)}</pre>`;
+}
+
+function openInstruction(instructionReferenceId) {
+  state.instructionId = instructionReferenceId;
+  $("#instruction-search").value = "";
+  $("#instruction-kind").value = "";
+  renderInstructions(instructionReferenceId);
+  activateTab("instructions");
+  $("#instruction-document").scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
 function renderValidation(openCheckId = "") {
   const query = $("#validation-search").value.trim().toLowerCase();
   const status = $("#validation-status").value;
@@ -636,7 +706,7 @@ function renderCheck(check, query, forceOpen) {
   const findings = visible.length
     ? `<div class="finding-list">${visible.map((finding) => `<article class="finding-item"><p>${escapeHtml(finding.message)}</p>${findingLinks(finding)}<details><summary class="finding-more">Evidence</summary><pre>${escapeHtml(JSON.stringify(finding.evidence, null, 2))}</pre></details></article>`).join("")}</div>${matching.length > visible.length ? `<p class="finding-more">Showing 25 of ${matching.length} findings. Use search to narrow the list.</p>` : ""}`
     : "";
-  return `<details class="check-card status-${check.status}" id="check-${escapeHtml(check.id)}" ${forceOpen ? "open" : ""}><summary><span class="check-title"><strong>${escapeHtml(check.title)}</strong><span>${escapeHtml(check.section)} · ${effectiveCount} effective findings</span></span><span class="check-badges">${check.hardStop ? '<span class="hard-stop-badge">Hard stop</span>' : ""}<span class="check-status">${escapeHtml(statusLabel(check.status))}</span></span></summary><div class="check-body"><p class="check-message">${escapeHtml(check.message)}</p>${findings}</div></details>`;
+  return `<details class="check-card status-${check.status}" id="check-${escapeHtml(check.id)}" ${forceOpen ? "open" : ""}><summary><span class="check-title"><strong>${escapeHtml(check.title)}</strong><span>${renderInstructionReferences(check.section)} · ${effectiveCount} effective findings</span></span><span class="check-badges">${check.hardStop ? '<span class="hard-stop-badge">Hard stop</span>' : ""}<span class="check-status">${escapeHtml(statusLabel(check.status))}</span></span></summary><div class="check-body"><p class="check-message">${escapeHtml(check.message)}</p>${findings}</div></details>`;
 }
 
 function renderGates() {
@@ -742,6 +812,13 @@ function handleReference(button) {
 
 function bindEvents() {
   document.addEventListener("click", (event) => {
+    const instruction = event.target.closest("[data-instruction-id]");
+    if (instruction) {
+      event.preventDefault();
+      event.stopPropagation();
+      openInstruction(instruction.dataset.instructionId);
+      return;
+    }
     const closeClaim = event.target.closest("#claim-tooltip-close");
     if (closeClaim) {
       closeGateClaimDetails();
@@ -801,6 +878,8 @@ function bindEvents() {
   });
   $("#validation-search").addEventListener("input", () => renderValidation());
   $("#validation-status").addEventListener("change", () => renderValidation());
+  $("#instruction-search").addEventListener("input", () => renderInstructions());
+  $("#instruction-kind").addEventListener("change", () => renderInstructions());
   ["#timetable-search", "#timetable-origin", "#timetable-destination", "#timetable-fleet", "#timetable-connections"].forEach((selector) => {
     $(selector).addEventListener(selector === "#timetable-search" ? "input" : "change", () => { state.timetablePage = 1; renderTimetable(); });
   });

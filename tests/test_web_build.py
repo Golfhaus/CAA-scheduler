@@ -22,6 +22,7 @@ class WebBuildTests(unittest.TestCase):
             )
             self.assertEqual(result["scheduleCount"], 1)
             self.assertEqual(result["dataFileCount"], 5)
+            self.assertGreater(result["instructionEntryCount"], 40)
             self.assertTrue((output / "index.html").is_file())
             self.assertTrue((output / "favicon.svg").is_file())
             self.assertTrue((output / "coastal-american-logo.png").is_file())
@@ -29,6 +30,15 @@ class WebBuildTests(unittest.TestCase):
             files = manifest["schedules"][0]["files"]
             self.assertTrue((output / files["canonical"]).is_file())
             self.assertTrue((output / files["gates"]).is_file())
+            instruction_catalog = json.loads(
+                (output / manifest["instructions"]["catalog"]).read_text()
+            )
+            self.assertTrue(
+                any(
+                    entry["id"] == "lesson-31"
+                    for entry in instruction_catalog["entries"]
+                )
+            )
 
 
 if __name__ == "__main__":

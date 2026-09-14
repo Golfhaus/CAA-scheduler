@@ -2,7 +2,7 @@
 
 CAA Scheduler is the migration target for Coastal American Airways schedule construction. It moves the durable schedule state and deterministic processing out of an LLM conversation and into version-controlled code and data.
 
-## Milestone 0.4.2
+## Milestone 0.4.3
 
 The migration baseline now proves this pipeline:
 
@@ -15,6 +15,7 @@ v2.2.5 workbook + pinned city data
     -> gate assignment JSON
     -> exact comparison with the published v2.2.5 gate data
     -> operating-rule validation with evidence and explicit overrides
+    -> build-instruction catalog generated from editable Markdown
     -> read-only GitHub Pages operating console
 ```
 
@@ -69,7 +70,7 @@ python -m caa_scheduler validate-operating \
 
 ## Current boundary
 
-Milestone 0.4.2 refines the responsive, read-only operating console with the Coastal American wordmark, denser routing filters, schedule-based itinerary search, and an accessible gate timeline. Gate claims can be opened by touch or keyboard, use a 03:00–03:00 operating window with 24-hour labels, and highlight only the passenger-handling segments that validation identifies on stands. Findings link to the relevant flight, route, line, or airport when that context exists. See [Web console](docs/web_console.md).
+Milestone 0.4.3 adds an Instructions view generated from the authoritative Markdown build instructions. Every `§` and `Lesson` citation in Validation links to its exact text, including the separately addressable §2.6 checks and turn-on-stand addition. The Markdown remains the editable source of truth; the browser catalog is rebuilt during deployment. See [Web console](docs/web_console.md) and [Build-instruction sources](instructions/README.md).
 
 The v2.2.5 golden schedule is intentionally **not** declared operating-rule clean. Exact historical preservation and current-policy compliance remain separate questions. The console makes the known baseline findings visible without silently waiving them.
 

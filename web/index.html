@@ -30,6 +30,7 @@
       <button class="tab" type="button" data-tab="validation" aria-selected="false">
         Validation <span class="tab-count" id="validation-count">—</span>
       </button>
+      <button class="tab" type="button" data-tab="instructions" aria-selected="false">Instructions</button>
       <button class="tab" type="button" data-tab="timetable" aria-selected="false">Timetable</button>
       <button class="tab" type="button" data-tab="gates" aria-selected="false">Gates</button>
     </nav>
@@ -167,6 +168,38 @@
             </label>
           </div>
           <div class="check-list" id="check-list"></div>
+        </section>
+
+        <section class="view" id="view-instructions" data-view="instructions" aria-labelledby="instructions-title" hidden>
+          <div class="page-heading compact">
+            <div>
+              <p class="eyebrow">Authoritative operating guidance</p>
+              <h1 id="instructions-title">Build instructions</h1>
+              <p class="page-note">Validation links open their exact section or standing lesson here. This catalog is generated from editable Markdown source during deployment.</p>
+            </div>
+            <span class="status-pill" id="instruction-version"></span>
+          </div>
+          <div class="filter-bar instruction-filters">
+            <label class="search-field">
+              <span>Search instructions</span>
+              <input id="instruction-search" type="search" placeholder="Section, lesson or instruction text" autocomplete="off">
+            </label>
+            <label>
+              <span>Reference type</span>
+              <select id="instruction-kind">
+                <option value="">All references</option>
+                <option value="section">Sections</option>
+                <option value="lesson">Standing lessons</option>
+                <option value="check">Section checks</option>
+                <option value="addition">Additions</option>
+              </select>
+            </label>
+            <span class="result-count" id="instruction-result-count"></span>
+          </div>
+          <div class="instruction-layout">
+            <nav class="panel instruction-list" id="instruction-list" aria-label="Build instruction references"></nav>
+            <article class="panel instruction-document" id="instruction-document"></article>
+          </div>
         </section>
 
         <section class="view" id="view-timetable" data-view="timetable" aria-labelledby="timetable-title" hidden>
