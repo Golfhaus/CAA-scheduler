@@ -1,0 +1,83 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "caa-planning-rules-v3",
+  "multiHubQualification": {
+    "rankThresholds": [
+      {
+        "rank": "secondary",
+        "minimumServablePassengersPerDay": 443,
+        "maximumDistanceRatio": 2.75
+      },
+      {
+        "rank": "tertiary",
+        "minimumServablePassengersPerDay": 1356,
+        "maximumDistanceRatio": 1.75
+      },
+      {
+        "rank": "quaternary",
+        "minimumServablePassengersPerDay": 2173,
+        "maximumDistanceRatio": 1.3
+      }
+    ],
+    "cityPercentileHubCaps": [
+      { "maximumPercentile": 25, "maximumHubs": 1 },
+      { "maximumPercentile": 70, "maximumHubs": 2 },
+      { "maximumPercentile": 89, "maximumHubs": 3 },
+      { "maximumPercentile": 100, "maximumHubs": 4 }
+    ]
+  },
+  "frequencyAllocation": {
+    "productiveMinutesPerAircraftDay": 900,
+    "marketFrequencyCeilingRoundTrips": 6,
+    "pointToPointMaximumShare": 0.1,
+    "serviceMinimumFlightLegs": [
+      { "maximumPercentile": 25, "minimumFlightLegs": 3 },
+      { "maximumPercentile": 70, "minimumFlightLegs": 6 },
+      { "maximumPercentile": 89, "minimumFlightLegs": 8 },
+      { "maximumPercentile": 100, "minimumFlightLegs": 8 }
+    ],
+    "fleetProfiles": [
+      {
+        "fleet": "MAX9",
+        "sizeRank": 4,
+        "blockMinutesPerNauticalMile": 0.1293,
+        "blockMinutesIntercept": 34.1
+      },
+      {
+        "fleet": "CRJ900",
+        "sizeRank": 3,
+        "blockMinutesPerNauticalMile": 0.1364,
+        "blockMinutesIntercept": 31.94
+      },
+      {
+        "fleet": "CRJ700",
+        "sizeRank": 2,
+        "blockMinutesPerNauticalMile": 0.1467,
+        "blockMinutesIntercept": 29.96
+      },
+      {
+        "fleet": "CRJ200",
+        "sizeRank": 1,
+        "blockMinutesPerNauticalMile": 0.1581,
+        "blockMinutesIntercept": 27.82
+      }
+    ]
+  },
+  "bankPlacement": {
+    "phaseCandidateEarliestMinute": 270,
+    "phaseCandidateLatestMinute": 450,
+    "phaseStepMinutes": 5,
+    "cadenceMinutesByBankCount": {
+      "4": 240,
+      "5": 200,
+      "6": 165
+    },
+    "spokeArrivalOffsetMinutes": 10,
+    "hubDepartureOffsetMinutes": 50,
+    "interHubSearchStepMinutes": 1
+  },
+  "routing": {
+    "rollingRonWindowDays": 10,
+    "maximumRoundTripsPerPairingPerDay": 6
+  }
+}

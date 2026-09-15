@@ -21,6 +21,7 @@ const state = {
   planningValidation: null,
   demandPlan: null,
   frequencyFleetPlan: null,
+  hubBankPlan: null,
   timetable: null,
   gates: null,
   instructions: null,
@@ -376,6 +377,7 @@ async function loadSchedule(scheduleId) {
     planningValidation: data.planningValidation,
     demandPlan: data.demandPlan,
     frequencyFleetPlan: data.frequencyFleetPlan,
+    hubBankPlan: data.hubBankPlan,
     timetable: data.timetable,
     gates: data.gates,
     routingPage: 1,
@@ -516,8 +518,9 @@ function renderPlanning() {
   const validation = state.planningValidation;
   const demand = state.demandPlan;
   const allocation = state.frequencyFleetPlan;
-  const ready = validation.status === "pass" && demand.status === "pass" && allocation.status === "pass";
-  $("#planning-status").textContent = ready ? "Proposal verified" : "Planning blocked";
+  const bankPlan = state.hubBankPlan;
+  const ready = validation.status === "pass" && demand.status === "pass" && allocation.status === "pass" && bankPlan.status === "pass";
+  $("#planning-status").textContent = ready ? "Bank plan verified" : "Planning blocked";
   $("#planning-status").classList.toggle("is-danger", !ready);
   $("#planning-metrics").innerHTML = [
     metricCard("Proposed legs", allocation.summary.plannedLegs.toLocaleString(), `${allocation.summary.optionalRoundTrips.toLocaleString()} demand-allocated round trips above minimums`),
@@ -525,17 +528,23 @@ function renderPlanning() {
     metricCard("Point-to-point", `${(allocation.summary.pointToPointShare * 100).toFixed(1)}%`, `${allocation.summary.pointToPointLegs.toLocaleString()} proposed legs`, allocation.summary.pointToPointShare <= 0.1 ? "is-success" : "is-danger"),
     metricCard("Demand coverage", `${demand.matrix.airportCount}/${state.canonical.cities.filter((city) => city.active).length}`, "Active airport O-D roster", demand.status === "pass" ? "is-success" : "is-danger"),
     metricCard("Hub assignment parity", `${demand.assignmentParity.matched}/${demand.assignmentParity.compared}`, "Golden multi-hub result", demand.assignmentParity.differences.length ? "is-danger" : "is-success"),
-    metricCard("Allocation checks", `${allocation.summary.passed}/${allocation.summary.checks}`, "Frequency, service, P2P and fleet capacity", allocation.status === "pass" ? "is-success" : "is-danger"),
+    metricCard("Banked hub legs", `${bankPlan.summary.placedLegs.toLocaleString()}/${bankPlan.summary.hubMarketLegs.toLocaleString()}`, `${bankPlan.summary.banks} banks · ${bankPlan.summary.curfewViolations} curfew violations`, bankPlan.status === "pass" ? "is-success" : "is-danger"),
   ].join("");
   $("#allocation-checks").innerHTML = allocation.checks
     .map((check) => `<article class="${check.status === "pass" ? "is-pass" : "is-fail"}"><strong>${check.status === "pass" ? "Pass" : "Blocked"}</strong><span>${escapeHtml(check.message)}</span></article>`)
+    .join("");
+  $("#bank-placement-checks").innerHTML = bankPlan.checks
+    .map((check) => `<article class="${check.status === "pass" ? "is-pass" : "is-fail"}"><strong>${check.status === "pass" ? "Pass" : check.hardStop ? "Hard stop" : "Blocked"}</strong><span>${escapeHtml(check.message)}</span></article>`)
+    .join("");
+  $("#hub-bank-rows").innerHTML = flattenBankWindows(bankPlan)
+    .map((bank) => `<tr><td><strong>${escapeHtml(bank.hub)}</strong></td><td>${escapeHtml(bank.id)}</td><td>${formatMinute24(bank.startMinute)}–${formatMinute24(bank.endMinute)}</td><td>${formatMinute24(bank.arrivalTargetMinute)}</td><td>${formatMinute24(bank.departureTargetMinute)}</td><td>${bank.arrivalCount}</td><td>${bank.departureCount}</td></tr>`)
     .join("");
 
   $("#planning-fleet-rows").innerHTML = Object.entries(allocation.fleetPlan)
     .sort(([a], [b]) => a.localeCompare(b))
     .map(([fleet, row]) => `<tr><td><span class="fleet-badge">${escapeHtml(fleet)}</span></td><td>${row.aircraftCount}</td><td>${row.marketCount}</td><td>${row.legCount.toLocaleString()}</td><td>${formatDuration(row.plannedAircraftMinutes)}</td><td>${formatDuration(row.availableAircraftMinutes)}</td><td><strong>${(row.utilization * 100).toFixed(1)}%</strong></td></tr>`)
     .join("");
-  $("#planning-limitations").innerHTML = allocation.limitations
+  $("#planning-limitations").innerHTML = [...allocation.limitations, ...bankPlan.limitations]
     .map((item) => `<article><strong>Known boundary</strong><span>${escapeHtml(item)}</span></article>`)
     .join("");
 
@@ -559,6 +568,10 @@ function renderPlanning() {
     ? paged.rows.map((market) => `<tr><td><span class="fleet-badge">${escapeHtml(market.fleet)}</span></td><td><strong>${escapeHtml(market.origin)}</strong></td><td><strong>${escapeHtml(market.destination)}</strong></td><td>${escapeHtml(market.classification.replaceAll("_", " "))}</td><td>${market.twoWayDemand.toLocaleString(undefined, { maximumFractionDigits: 1 })}</td><td>${market.roundTrips}</td><td><strong>${market.legCount}</strong></td><td>${market.historicalLegs}</td></tr>`).join("")
     : `<tr class="empty-row"><td colspan="8">No planning rows match these filters.</td></tr>`;
   renderPagination($("#planning-pagination"), "planning", rows.length, paged.page, paged.pageCount);
+}
+
+export function flattenBankWindows(plan) {
+  return plan.hubs.flatMap((hub) => hub.banks.map((bank) => ({ hub: hub.hub, ...bank })));
 }
 
 export function paginate(items, page, pageSize = DEFAULT_PAGE_SIZE) {

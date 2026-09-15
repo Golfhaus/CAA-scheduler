@@ -187,14 +187,27 @@
         <section class="view" id="view-planning" data-view="planning" aria-labelledby="planning-title" hidden>
           <div class="page-heading compact">
             <div>
-              <p class="eyebrow">Milestone 0.7 demand allocation</p>
+              <p class="eyebrow">Milestone 0.7 network construction</p>
               <h1 id="planning-title">Network and fleet plan</h1>
-              <p class="page-note">A fresh frequency and fleet proposal calculated from pinned demand, tier minimums, and the aircraft quantities selected for this schedule. Historical v2.2.5 service remains visible for comparison.</p>
+              <p class="page-note">A fresh frequency and fleet proposal plus generated hub-bank windows. Hub flying receives curfew-safe local clock placements; historical v2.2.5 service remains visible for comparison.</p>
             </div>
             <span class="status-pill" id="planning-status"></span>
           </div>
           <div class="metric-grid" id="planning-metrics"></div>
           <section class="planning-checks" id="allocation-checks" aria-label="Frequency and fleet allocation checks"></section>
+          <section class="planning-checks" id="bank-placement-checks" aria-label="Hub-bank placement checks"></section>
+          <section class="panel planning-bank-panel" aria-labelledby="planning-bank-title">
+            <div class="panel-heading">
+              <div><p class="eyebrow">Generated clock plan</p><h2 id="planning-bank-title">Hub-bank windows</h2></div>
+              <span class="panel-meta">60-minute cores · local 24-hour time · arrivals target +10 · departures target +50</span>
+            </div>
+            <div class="table-shell planning-table-shell">
+              <table>
+                <thead><tr><th>Hub</th><th>Bank</th><th>Core window</th><th>Arrival target</th><th>Departure target</th><th>Arrivals</th><th>Departures</th></tr></thead>
+                <tbody id="hub-bank-rows"></tbody>
+              </table>
+            </div>
+          </section>
           <section class="panel planning-fleet-panel" aria-labelledby="planning-fleet-title">
             <div class="panel-heading">
               <div><p class="eyebrow">Schedule-specific capacity</p><h2 id="planning-fleet-title">Proposed fleet work</h2></div>

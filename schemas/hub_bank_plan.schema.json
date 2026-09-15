@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://coastal-american.example/schemas/hub_bank_plan.schema.json",
+  "title": "Coastal American Airways hub-bank placement plan",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "scheduleId",
+    "sourceKind",
+    "planningRulesId",
+    "operatingPolicyId",
+    "status",
+    "summary",
+    "checks",
+    "hubs",
+    "placements",
+    "unplaced",
+    "limitations"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "scheduleId": { "type": "string", "minLength": 1 },
+    "sourceKind": { "const": "frequency_fleet_bank_placement" },
+    "planningRulesId": { "type": "string", "minLength": 1 },
+    "operatingPolicyId": { "type": "string", "minLength": 1 },
+    "status": { "enum": ["pass", "fail"] },
+    "summary": { "type": "object" },
+    "checks": { "type": "array" },
+    "hubs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["hub", "phaseMinute", "bankCount", "banks"]
+      }
+    },
+    "placements": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id", "market", "classification", "fleet", "roundTripOrdinal",
+          "direction", "origin", "destination", "departureMinute",
+          "arrivalMinute", "blockMinutes", "bankTouches", "curfewStatus"
+        ]
+      }
+    },
+    "unplaced": { "type": "array" },
+    "limitations": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  }
+}

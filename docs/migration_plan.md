@@ -62,7 +62,7 @@ Status: complete.
 
 ## 0.7 — Deterministic construction planner
 
-Status: in progress; planning foundation complete.
+Status: in progress; frequency/fleet and bank-placement stages complete.
 
 - Replace hardcoded paths, pickle files, import-time data loading, and mutable module globals.
 - Reconnect demand, multi-hub assignment, fleet allocation, bank placement, routing, and repair logic behind one callable build command.
@@ -77,11 +77,13 @@ Completed foundation:
 - Record the aircraft count from each schedule configuration and measure planned work in aircraft-minutes rather than a flat flights-per-day proxy.
 - Emit and validate a schema-backed planning snapshot from baseline and candidate builds.
 - Generate a fresh, square-root-damped frequency and fleet proposal within tier, market, point-to-point, and aircraft-minute limits.
+- Generate all 24 policy-required hub-bank cores and place every proposed hub-touching leg with hard curfew enforcement.
 - Expose proposed fleet work and market rows, with historical comparisons, in a read-only Planning tab.
+- Expose bank windows, target times, directional loads, and placement checks in the Planning tab.
 
 Remaining in 0.7:
 
-- Reconnect bank placement, aircraft routing, and deterministic repair.
+- Reconnect aircraft routing and deterministic repair.
 - Add golden comparisons for each stage before enabling blank-start construction or airport additions.
 
 ## 1.0 — Schedule Builder
