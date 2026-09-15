@@ -385,6 +385,12 @@ tbody tr:hover { background: #f6f9fc; }
 .planning-demand-panel { margin-bottom: 1rem; }
 .planning-table-shell { border: 0; border-radius: 0; box-shadow: none; }
 .demand-table-shell { max-height: 30rem; overflow: auto; }
+.planning-checks { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: 0.55rem; margin-bottom: 1rem; }
+.planning-checks article { display: flex; align-items: baseline; gap: 0.65rem; padding: 0.7rem 0.8rem; border: 1px solid var(--line); border-left: 4px solid var(--success); border-radius: 0.6rem; background: white; }
+.planning-checks article.is-fail { border-left-color: var(--danger); background: var(--danger-soft); }
+.planning-checks strong { flex: 0 0 auto; color: var(--success); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.04em; }
+.planning-checks article.is-fail strong { color: var(--danger); }
+.planning-checks span { color: var(--muted); font-size: 0.8rem; line-height: 1.4; }
 .parity-badge { display: inline-block; border-radius: 999px; padding: 0.24rem 0.45rem; font-size: 0.7rem; font-weight: 850; text-transform: uppercase; letter-spacing: 0.04em; }
 .parity-badge.is-match { background: var(--success-soft); color: var(--success); }
 .parity-badge.is-difference { background: var(--danger-soft); color: var(--danger); }

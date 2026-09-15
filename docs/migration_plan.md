@@ -76,11 +76,11 @@ Completed foundation:
 - Reproduce all 100 v2.2.5 non-hub assignments from the real O-D and intergroup inputs.
 - Record the aircraft count from each schedule configuration and measure planned work in aircraft-minutes rather than a flat flights-per-day proxy.
 - Emit and validate a schema-backed planning snapshot from baseline and candidate builds.
-- Expose fleet work and directional market rows in a read-only Planning tab.
+- Generate a fresh, square-root-damped frequency and fleet proposal within tier, market, point-to-point, and aircraft-minute limits.
+- Expose proposed fleet work and market rows, with historical comparisons, in a read-only Planning tab.
 
 Remaining in 0.7:
 
-- Generate fresh frequency allocation and fleet assignment from the pinned demand inputs.
 - Reconnect bank placement, aircraft routing, and deterministic repair.
 - Add golden comparisons for each stage before enabling blank-start construction or airport additions.
 

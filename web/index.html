@@ -187,21 +187,22 @@
         <section class="view" id="view-planning" data-view="planning" aria-labelledby="planning-title" hidden>
           <div class="page-heading compact">
             <div>
-              <p class="eyebrow">Milestone 0.7 planning foundation</p>
+              <p class="eyebrow">Milestone 0.7 demand allocation</p>
               <h1 id="planning-title">Network and fleet plan</h1>
-              <p class="page-note">A deterministic reconstruction of the plan represented by the canonical schedule. It replaces temporary pickle and station-total files without treating scheduled frequencies as raw demand.</p>
+              <p class="page-note">A fresh frequency and fleet proposal calculated from pinned demand, tier minimums, and the aircraft quantities selected for this schedule. Historical v2.2.5 service remains visible for comparison.</p>
             </div>
             <span class="status-pill" id="planning-status"></span>
           </div>
           <div class="metric-grid" id="planning-metrics"></div>
+          <section class="planning-checks" id="allocation-checks" aria-label="Frequency and fleet allocation checks"></section>
           <section class="panel planning-fleet-panel" aria-labelledby="planning-fleet-title">
             <div class="panel-heading">
-              <div><p class="eyebrow">Schedule-specific capacity</p><h2 id="planning-fleet-title">Fleet work plan</h2></div>
-              <span class="panel-meta">Aircraft-minutes include minimum turns</span>
+              <div><p class="eyebrow">Schedule-specific capacity</p><h2 id="planning-fleet-title">Proposed fleet work</h2></div>
+              <span class="panel-meta">Planning minutes include block time and minimum turns</span>
             </div>
             <div class="table-shell planning-table-shell">
               <table>
-                <thead><tr><th>Fleet</th><th>Aircraft</th><th>Aircraft-days used</th><th>Legs</th><th>Block time</th><th>Minimum turns</th><th>Required aircraft time</th></tr></thead>
+                <thead><tr><th>Fleet</th><th>Aircraft</th><th>Markets</th><th>Legs</th><th>Planned time</th><th>Planning capacity</th><th>Use</th></tr></thead>
                 <tbody id="planning-fleet-rows"></tbody>
               </table>
             </div>
@@ -220,17 +221,17 @@
             </div>
           </section>
           <div class="page-heading compact planning-market-heading">
-            <div><p class="eyebrow">Directional frequency allocation</p><h2>Market plan</h2></div>
+            <div><p class="eyebrow">Fresh demand allocation</p><h2>Proposed market plan</h2></div>
             <span class="result-count" id="planning-market-count"></span>
           </div>
           <div class="filter-bar planning-filters">
             <label><span>Fleet</span><select id="planning-fleet"><option value="">All fleets</option></select></label>
-            <label><span>Departure airport</span><select id="planning-origin"><option value="">Any airport</option></select></label>
-            <label><span>Arrival airport</span><select id="planning-destination"><option value="">Any airport</option></select></label>
+            <label><span>Airport</span><select id="planning-origin"><option value="">Any airport</option></select></label>
+            <label><span>Paired with</span><select id="planning-destination"><option value="">Any airport</option></select></label>
           </div>
           <div class="table-shell">
             <table>
-              <thead><tr><th>Fleet</th><th>Departure</th><th>Arrival</th><th>Scheduled legs</th></tr></thead>
+              <thead><tr><th>Fleet</th><th>Airport A</th><th>Airport B</th><th>Class</th><th>Two-way demand</th><th>Round trips</th><th>Proposed legs</th><th>Historical legs</th></tr></thead>
               <tbody id="planning-market-rows"></tbody>
             </table>
           </div>

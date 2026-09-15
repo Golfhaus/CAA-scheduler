@@ -20,9 +20,10 @@ Each run replaces only the compiler's known files in that output directory. This
 4. Apply the new schedule identity, fleet counts, connection window, and supported network changes.
 5. Reconstruct and validate the candidate's durable planning snapshot.
 6. Resolve the exact demand-data version to one manifest, verify all source fingerprints, and recompute the demand/hub plan.
-7. Run structural and operating validation.
-8. Stop consumer export if a hard-stop or planning-input check fails.
-9. Otherwise write the canonical candidate, timetable, and gates. Planning and diagnostic reports are retained in either case.
+7. Allocate a fresh frequency and fleet proposal against the schedule-specific aircraft counts.
+8. Run structural and operating validation against the timed seed candidate.
+9. Stop consumer export if a hard-stop or planning-input check fails.
+10. Otherwise write the canonical candidate, timetable, and gates. Planning and diagnostic reports are retained in either case.
 
 Fleet counts have no engine default. The compiler copies `fleetCounts` directly from the build configuration, and the operating validator measures aircraft-day use against those values.
 
@@ -46,4 +47,4 @@ The **Build candidate schedule** workflow accepts a repository path to an approv
 
 ## Deliberate boundary
 
-This compiler still evaluates a seed candidate. It does not claim that copying a prior routing is new schedule construction. Milestone 0.7 has added the schema-backed planning contract and verified multi-hub qualification against the complete pinned O-D input; fresh frequency allocation, fleet assignment, bank placement, aircraft routing, and repair remain to be reconnected behind it. Blank starts and airport additions remain explicit blockers until those stages can be materialized deterministically.
+This compiler still evaluates a seed candidate. It now emits a fresh demand-derived frequency and fleet proposal, but does not substitute that proposal into canonical legs before bank placement and routing exist. Bank placement, aircraft routing, and repair remain to be reconnected behind it. Blank starts and airport additions remain explicit blockers until those stages can be materialized deterministically.

@@ -4,6 +4,7 @@ import copy
 from pathlib import Path
 from typing import Any
 
+from .allocation import build_frequency_fleet_plan_from_manifest
 from .build_config import validate_build_config
 from .demand import build_demand_plan_from_manifest, resolve_demand_manifest
 from .gate_export import export_gate_schedule
@@ -23,6 +24,7 @@ GENERATED_FILENAMES = (
     "planning_snapshot.json",
     "planning_validation_report.json",
     "demand_plan.json",
+    "frequency_fleet_plan.json",
     "timetable.json",
     "gates.json",
 )
@@ -254,6 +256,21 @@ def build_candidate(
             report["blockers"].append(
                 "The pinned demand plan does not cover the candidate network"
             )
+        else:
+            frequency_fleet_plan = build_frequency_fleet_plan_from_manifest(
+                candidate,
+                demand_plan,
+                demand_manifest,
+                repo_root,
+            )
+            report["frequencyFleetPlan"] = frequency_fleet_plan
+            if frequency_fleet_plan["status"] == "fail":
+                if report["status"] != "blocked_hard_stop":
+                    report["status"] = "blocked_planning_input"
+                report["publicationReady"] = False
+                report["blockers"].append(
+                    "The frequency and fleet plan does not satisfy planning constraints"
+                )
     except ValueError as error:
         if report["status"] != "blocked_hard_stop":
             report["status"] = "blocked_planning_input"
@@ -272,6 +289,11 @@ def build_candidate(
     )
     if "demandPlan" in report:
         write_json(destination / "demand_plan.json", report["demandPlan"])
+    if "frequencyFleetPlan" in report:
+        write_json(
+            destination / "frequency_fleet_plan.json",
+            report["frequencyFleetPlan"],
+        )
     report["outputs"].update(
         {
             "structuralValidation": "validation_report.json",
@@ -282,6 +304,8 @@ def build_candidate(
     )
     if "demandPlan" in report:
         report["outputs"]["demandPlan"] = "demand_plan.json"
+    if "frequencyFleetPlan" in report:
+        report["outputs"]["frequencyFleetPlan"] = "frequency_fleet_plan.json"
 
     if report["status"] in {"candidate_ready", "candidate_review_required"}:
         write_json(destination / "canonical_schedule.json", candidate)
