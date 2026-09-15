@@ -13,6 +13,7 @@ from .io import read_json, resolve_from_repo, write_json
 from .operating_validation import validate_operating_rules
 from .planning import reconstruct_planning_snapshot, validate_planning_snapshot
 from .routing import build_aircraft_route_plan_from_manifest
+from .routing_repair import build_routing_repair_plan_from_manifest
 from .timetable import export_timetable
 from .validation import validate_schedule
 
@@ -29,6 +30,7 @@ GENERATED_FILENAMES = (
     "frequency_fleet_plan.json",
     "hub_bank_plan.json",
     "aircraft_route_plan.json",
+    "routing_repair_plan.json",
     "timetable.json",
     "gates.json",
 )
@@ -314,10 +316,18 @@ def build_candidate(
                         repo_root,
                     )
                     report["aircraftRoutePlan"] = aircraft_route_plan
-                    if aircraft_route_plan["status"] == "fail":
+                    routing_repair_plan = build_routing_repair_plan_from_manifest(
+                        candidate,
+                        frequency_fleet_plan,
+                        hub_bank_plan,
+                        demand_manifest,
+                        repo_root,
+                    )
+                    report["routingRepairPlan"] = routing_repair_plan
+                    if routing_repair_plan["status"] == "fail":
                         curfew_check = next(
                             check
-                            for check in aircraft_route_plan["checks"]
+                            for check in routing_repair_plan["checks"]
                             if check["id"] == "curfew_enforcement"
                         )
                         if curfew_check["status"] == "fail":
@@ -326,7 +336,7 @@ def build_candidate(
                                 {
                                     "checkId": "routing_curfew_enforcement",
                                     "title": "Aircraft-routing curfew enforcement",
-                                    "findingCount": aircraft_route_plan["summary"][
+                                    "findingCount": routing_repair_plan["summary"][
                                         "curfewViolations"
                                     ],
                                     "message": curfew_check["message"],
@@ -336,8 +346,16 @@ def build_candidate(
                             report["status"] = "blocked_planning_input"
                         report["publicationReady"] = False
                         report["blockers"].append(
-                            "The aircraft route plan does not fit the selected fleet "
-                            "and RON constraints"
+                            "The topology repair does not fit the selected fleet, "
+                            "curfew, and RON constraints"
+                        )
+                    else:
+                        if report["status"] != "blocked_hard_stop":
+                            report["status"] = "blocked_planning_input"
+                        report["publicationReady"] = False
+                        report["blockers"].append(
+                            "The repaired topology is feasible, but hub-bank timing "
+                            "and canonical Line/Day/Route materialization are pending"
                         )
     except ValueError as error:
         if report["status"] != "blocked_hard_stop":
@@ -369,6 +387,12 @@ def build_candidate(
             destination / "aircraft_route_plan.json",
             report["aircraftRoutePlan"],
         )
+    if "routingRepairPlan" in report:
+        write_json(
+            destination / "routing_repair_plan.json",
+            report["routingRepairPlan"],
+            indent=None,
+        )
     report["outputs"].update(
         {
             "structuralValidation": "validation_report.json",
@@ -385,6 +409,8 @@ def build_candidate(
         report["outputs"]["hubBankPlan"] = "hub_bank_plan.json"
     if "aircraftRoutePlan" in report:
         report["outputs"]["aircraftRoutePlan"] = "aircraft_route_plan.json"
+    if "routingRepairPlan" in report:
+        report["outputs"]["routingRepairPlan"] = "routing_repair_plan.json"
 
     if report["status"] in {"candidate_ready", "candidate_review_required"}:
         write_json(destination / "canonical_schedule.json", candidate)

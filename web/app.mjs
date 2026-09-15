@@ -23,6 +23,7 @@ const state = {
   frequencyFleetPlan: null,
   hubBankPlan: null,
   aircraftRoutePlan: null,
+  routingRepairPlan: null,
   timetable: null,
   gates: null,
   instructions: null,
@@ -380,6 +381,7 @@ async function loadSchedule(scheduleId) {
     frequencyFleetPlan: data.frequencyFleetPlan,
     hubBankPlan: data.hubBankPlan,
     aircraftRoutePlan: data.aircraftRoutePlan,
+    routingRepairPlan: data.routingRepairPlan,
     timetable: data.timetable,
     gates: data.gates,
     routingPage: 1,
@@ -522,9 +524,11 @@ function renderPlanning() {
   const allocation = state.frequencyFleetPlan;
   const bankPlan = state.hubBankPlan;
   const routing = state.aircraftRoutePlan;
-  const ready = validation.status === "pass" && demand.status === "pass" && allocation.status === "pass" && bankPlan.status === "pass" && routing.status === "pass";
-  $("#planning-status").textContent = ready ? "Routing feasible" : "Routing repair required";
-  $("#planning-status").classList.toggle("is-danger", !ready);
+  const repair = state.routingRepairPlan;
+  const topologyReady = validation.status === "pass" && demand.status === "pass" && allocation.status === "pass" && bankPlan.status === "pass" && repair.status === "pass";
+  const ready = topologyReady && repair.materializationStatus === "complete";
+  $("#planning-status").textContent = ready ? "Routing feasible" : topologyReady ? "Topology feasible · bank timing pending" : "Routing repair required";
+  $("#planning-status").classList.toggle("is-danger", !topologyReady);
   $("#planning-metrics").innerHTML = [
     metricCard("Proposed legs", allocation.summary.plannedLegs.toLocaleString(), `${allocation.summary.optionalRoundTrips.toLocaleString()} demand-allocated round trips above minimums`),
     metricCard("Candidate markets", allocation.summary.candidateMarkets.toLocaleString(), `${allocation.summary.newRequiredHubMarkets} required hub markets added; ${plan.summary.legCount.toLocaleString()} historical legs retained for comparison`),
@@ -532,8 +536,9 @@ function renderPlanning() {
     metricCard("Demand coverage", `${demand.matrix.airportCount}/${state.canonical.cities.filter((city) => city.active).length}`, "Active airport O-D roster", demand.status === "pass" ? "is-success" : "is-danger"),
     metricCard("Hub assignment parity", `${demand.assignmentParity.matched}/${demand.assignmentParity.compared}`, "Golden multi-hub result", demand.assignmentParity.differences.length ? "is-danger" : "is-success"),
     metricCard("Banked hub legs", `${bankPlan.summary.placedLegs.toLocaleString()}/${bankPlan.summary.hubMarketLegs.toLocaleString()}`, `${bankPlan.summary.banks} banks · ${bankPlan.summary.curfewViolations} curfew violations`, bankPlan.status === "pass" ? "is-success" : "is-danger"),
-    metricCard("Routed legs", `${routing.summary.routedLegs.toLocaleString()}/${routing.summary.plannedLegs.toLocaleString()}`, `${routing.summary.cycles} cycles · ${routing.summary.curfewViolations} curfew violations`, routing.summary.routedLegs === routing.summary.plannedLegs && !routing.summary.curfewViolations ? "is-success" : "is-danger"),
-    metricCard("Aircraft fit", `${routing.summary.requiredAircraft}/${routing.summary.configuredAircraft}`, `${routing.summary.aircraftShortfall} aircraft above the selected fleet`, routing.summary.aircraftShortfall ? "is-danger" : "is-success"),
+    metricCard("Routed legs", `${repair.summary.routedLegs.toLocaleString()}/${repair.summary.plannedLegs.toLocaleString()}`, `${repair.summary.curfewViolations} curfew violations · ${repair.summary.destinationsWithoutRon} RON gaps`, repair.status === "pass" ? "is-success" : "is-danger"),
+    metricCard("First-pass timing", `${routing.summary.requiredAircraft}/${routing.summary.configuredAircraft}`, `${routing.summary.aircraftShortfall} aircraft above the selected fleet`, "is-danger"),
+    metricCard("Repaired fleet fit", `${repair.summary.requiredAircraft}/${repair.summary.configuredAircraft}`, `${repair.summary.remainingAircraft} schedule-selected aircraft remain`, repair.summary.aircraftShortfall ? "is-danger" : "is-success"),
   ].join("");
   $("#allocation-checks").innerHTML = allocation.checks
     .map((check) => `<article class="${check.status === "pass" ? "is-pass" : "is-fail"}"><strong>${check.status === "pass" ? "Pass" : "Blocked"}</strong><span>${escapeHtml(check.message)}</span></article>`)
@@ -541,9 +546,9 @@ function renderPlanning() {
   $("#bank-placement-checks").innerHTML = bankPlan.checks
     .map((check) => `<article class="${check.status === "pass" ? "is-pass" : "is-fail"}"><strong>${check.status === "pass" ? "Pass" : check.hardStop ? "Hard stop" : "Blocked"}</strong><span>${escapeHtml(check.message)}</span></article>`)
     .join("");
-  $("#aircraft-routing-checks").innerHTML = routing.checks
+  $("#aircraft-routing-checks").innerHTML = repair.checks
     .map((check) => `<article class="${check.status === "pass" ? "is-pass" : "is-fail"}"><strong>${check.status === "pass" ? "Pass" : check.hardStop ? "Hard stop" : "Blocked"}</strong><span>${escapeHtml(check.message)}</span></article>`)
-    .join("");
+    .join("") + `<article class="is-pending"><strong>Next step</strong><span>${escapeHtml(repair.materialization.message)}</span></article>`;
   $("#hub-bank-rows").innerHTML = flattenBankWindows(bankPlan)
     .map((bank) => `<tr><td><strong>${escapeHtml(bank.hub)}</strong></td><td>${escapeHtml(bank.id)}</td><td>${formatMinute24(bank.startMinute)}–${formatMinute24(bank.endMinute)}</td><td>${formatMinute24(bank.arrivalTargetMinute)}</td><td>${formatMinute24(bank.departureTargetMinute)}</td><td>${bank.arrivalCount}</td><td>${bank.departureCount}</td></tr>`)
     .join("");
@@ -552,11 +557,11 @@ function renderPlanning() {
     .sort(([a], [b]) => a.localeCompare(b))
     .map(([fleet, row]) => `<tr><td><span class="fleet-badge">${escapeHtml(fleet)}</span></td><td>${row.aircraftCount}</td><td>${row.marketCount}</td><td>${row.legCount.toLocaleString()}</td><td>${formatDuration(row.plannedAircraftMinutes)}</td><td>${formatDuration(row.availableAircraftMinutes)}</td><td><strong>${(row.utilization * 100).toFixed(1)}%</strong></td></tr>`)
     .join("");
-  $("#routing-fleet-rows").innerHTML = Object.entries(routing.fleetPlan)
+  $("#routing-fleet-rows").innerHTML = Object.entries(repair.fleetPlan)
     .sort(([a], [b]) => a.localeCompare(b))
-    .map(([fleet, row]) => `<tr><td><span class="fleet-badge">${escapeHtml(fleet)}</span></td><td>${row.configuredAircraft}</td><td>${row.requiredAircraft}</td><td><strong class="${row.shortfall ? "danger-text" : ""}">${row.shortfall}</strong></td><td>${row.cycles}</td><td>${row.routedLegs.toLocaleString()}</td></tr>`)
+    .map(([fleet, row]) => `<tr><td><span class="fleet-badge">${escapeHtml(fleet)}</span></td><td>${row.configuredAircraft}</td><td>${routing.fleetPlan[fleet]?.requiredAircraft ?? "—"}</td><td><strong class="${row.shortfall ? "danger-text" : ""}">${row.requiredAircraft}</strong></td><td>${row.remainingAircraft}</td><td>${row.routes}</td><td>${row.routedLegs.toLocaleString()}</td></tr>`)
     .join("");
-  $("#planning-limitations").innerHTML = [...allocation.limitations, ...bankPlan.limitations, ...routing.limitations]
+  $("#planning-limitations").innerHTML = [...allocation.limitations, ...bankPlan.limitations, ...routing.limitations, ...repair.limitations]
     .map((item) => `<article><strong>Known boundary</strong><span>${escapeHtml(item)}</span></article>`)
     .join("");
 

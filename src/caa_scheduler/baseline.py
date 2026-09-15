@@ -12,6 +12,7 @@ from .io import read_json, resolve_from_repo, write_json
 from .operating_validation import validate_operating_rules
 from .planning import reconstruct_planning_snapshot, validate_planning_snapshot
 from .routing import build_aircraft_route_plan_from_manifest
+from .routing_repair import build_routing_repair_plan_from_manifest
 from .timetable import export_timetable
 from .validation import validate_schedule
 
@@ -70,6 +71,13 @@ def build_baseline(config_path: Path, repo_root: Path) -> dict[str, Any]:
         Path(demand_input["manifest"]),
         repo_root,
     )
+    routing_repair_plan = build_routing_repair_plan_from_manifest(
+        canonical,
+        frequency_fleet_plan,
+        hub_bank_plan,
+        Path(demand_input["manifest"]),
+        repo_root,
+    )
     expected = read_json(resolve_from_repo(repo_root, inputs["expectedTimetable"]))
     parity = timetable == expected
     expected_gate_path = resolve_from_repo(repo_root, inputs["expectedGate"])
@@ -106,6 +114,11 @@ def build_baseline(config_path: Path, repo_root: Path) -> dict[str, Any]:
     )
     write_json(output_directory / "hub_bank_plan.json", hub_bank_plan)
     write_json(output_directory / "aircraft_route_plan.json", aircraft_route_plan)
+    write_json(
+        output_directory / "routing_repair_plan.json",
+        routing_repair_plan,
+        indent=None,
+    )
     expected_bytes = resolve_from_repo(repo_root, inputs["expectedTimetable"]).read_bytes()
     generated_bytes = (output_directory / "timetable.json").read_bytes()
     expected_gate_bytes = expected_gate_path.read_bytes()
@@ -123,6 +136,7 @@ def build_baseline(config_path: Path, repo_root: Path) -> dict[str, Any]:
         "frequencyFleetPlanPath": output_directory / "frequency_fleet_plan.json",
         "hubBankPlanPath": output_directory / "hub_bank_plan.json",
         "aircraftRoutePlanPath": output_directory / "aircraft_route_plan.json",
+        "routingRepairPlanPath": output_directory / "routing_repair_plan.json",
         "validation": validation,
         "operatingValidation": operating_validation,
         "planningValidation": planning_validation,
@@ -130,6 +144,7 @@ def build_baseline(config_path: Path, repo_root: Path) -> dict[str, Any]:
         "frequencyFleetPlan": frequency_fleet_plan,
         "hubBankPlan": hub_bank_plan,
         "aircraftRoutePlan": aircraft_route_plan,
+        "routingRepairPlan": routing_repair_plan,
         "timetableParity": parity,
         "timetableByteParity": generated_bytes == expected_bytes,
         "gateParity": gate_parity,

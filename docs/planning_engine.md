@@ -60,6 +60,14 @@ This stage never changes `schedule.fleetCounts`. It reports `configuredAircraft`
 
 For the current Schedule 6 planning proposal, all 1,430 proposed legs enter continuous cycles, every destination receives an overnight, and no departure violates a curfew. The independent bank placements are not yet fleet-feasible: the first-pass cycles require 409 aircraft versus 225 configured, and one cycle misses the rolling target-RON cadence. This is a preserved diagnostic, not a suggested fleet order. Candidate publication remains blocked until deterministic repair retimes or reassigns the work within the selected fleet.
 
+## Topology repair
+
+`routing_repair_plan.json` is defined by [`schemas/routing_repair_plan.schema.json`](../schemas/routing_repair_plan.schema.json). It keeps the first-pass bank-cycle artifact intact, rebuilds the balanced directed fleet graph, searches deterministic Euler orderings, partitions each fleet into curfew-safe 03:00–03:00 route days, and uses available route-day endpoints to satisfy destination and rolling target-city RON requirements. Search bounds affect ordering only; every aircraft limit is read from `schedule.fleetCounts`.
+
+On the v2.2.5 planning proposal, the repair retains all 1,430 legs in 209 route days against 225 configured aircraft: MAX9 29/35, CRJ900 39/45, CRJ700 62/65, and CRJ200 79/80. All seven topology checks pass, including the non-waivable curfew check, destination RON coverage, and the rolling target-RON window.
+
+This is a feasibility witness, not published schedule timing. It intentionally reports `pending_bank_alignment`: 309 of 1,190 hub-touching legs currently fall in the approved cores. The next materializer must jointly retime those legs within the generated bank windows while preserving the proved route order, fleet limits, turns, curfews, and RONs. No canonical flight numbers or Line/Day/Route identifiers are assigned before that check passes.
+
 ## Multi-hub qualification
 
 `compute_multihub_assignments()` is a pure function. It accepts city metadata, an explicit intergroup-demand dataset, city market sizes, and versioned planning rules. It has no hardcoded filesystem paths, import-time data loading, pandas dependency, pickle input, or mutable global state.
@@ -117,13 +125,24 @@ python -m caa_scheduler build-route-plan \
   aircraft_route_plan.json
 ```
 
+Build the deterministic topology repair with:
+
+```bash
+python -m caa_scheduler build-routing-repair \
+  canonical_schedule.json \
+  frequency_fleet_plan.json \
+  hub_bank_plan.json \
+  config/demand_data/bts_db1c_6mo_v3.json \
+  routing_repair_plan.json
+```
+
 The golden-baseline and candidate commands generate these planning artifacts automatically. Candidate construction resolves the demand version to exactly one manifest and verifies every source fingerprint; an unknown version or mismatch blocks publishable output. If a candidate violates a hard stop such as a curfew, its canonical, timetable, and gate outputs remain suppressed. The demand/planning snapshots and diagnostic validation reports are retained so the failed build can be investigated.
 
 ## Next construction stages
 
 The remaining Milestone 0.7 work is intentionally staged:
 
-1. repair bank phases, individual placements, and fleet allocations until the complete proposal fits the schedule-selected fleet and rolling RON policy; and
+1. materialize the passing topology into the approved bank cores without exceeding its schedule-selected fleet or relaxing curfews; and
 2. assign canonical lines, days, routes, pairings, and flight numbers, followed by full structural, operating, gate, and curfew validation.
 
 Each stage needs a golden comparison before the subsequent stage is permitted to write a publishable candidate.

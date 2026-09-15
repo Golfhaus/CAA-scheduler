@@ -15,7 +15,7 @@ def write_json(
     path: Path,
     value: Any,
     *,
-    indent: int = 2,
+    indent: int | None = 2,
     trailing_newline: bool = True,
 ) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)

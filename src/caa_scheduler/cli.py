@@ -13,6 +13,7 @@ from .io import read_json, write_json
 from .operating_validation import validate_operating_rules
 from .planning import reconstruct_planning_snapshot, validate_planning_snapshot
 from .routing import build_aircraft_route_plan_from_manifest
+from .routing_repair import build_routing_repair_plan_from_manifest
 from .timetable import export_timetable
 from .validation import validate_schedule
 from .web_build import build_web_console
@@ -101,6 +102,17 @@ def _parser() -> argparse.ArgumentParser:
     routes.add_argument("manifest", type=Path)
     routes.add_argument("output", type=Path)
     routes.add_argument("--repo-root", type=Path, default=Path.cwd())
+
+    repair = subcommands.add_parser(
+        "build-routing-repair",
+        help="Build a fleet-feasible, curfew-safe topology and RON repair plan",
+    )
+    repair.add_argument("canonical", type=Path)
+    repair.add_argument("frequency_plan", type=Path)
+    repair.add_argument("bank_plan", type=Path)
+    repair.add_argument("manifest", type=Path)
+    repair.add_argument("output", type=Path)
+    repair.add_argument("--repo-root", type=Path, default=Path.cwd())
 
     web = subcommands.add_parser(
         "build-web", help="Assemble the static GitHub Pages console"
@@ -199,6 +211,16 @@ def main(argv: list[str] | None = None) -> int:
             f"{route_plan['summary']['plannedLegs']} legs routed, "
             f"{route_plan['summary']['aircraftShortfall']} aircraft short)"
         )
+        repair_plan = result["routingRepairPlan"]
+        print(
+            "Routing repair: "
+            f"{repair_plan['status'].upper()} "
+            f"({repair_plan['summary']['routedLegs']}/"
+            f"{repair_plan['summary']['plannedLegs']} legs, "
+            f"{repair_plan['summary']['requiredAircraft']}/"
+            f"{repair_plan['summary']['configuredAircraft']} aircraft; "
+            f"{repair_plan['materializationStatus']})"
+        )
         return 0 if (
             validation["status"] == "pass"
             and result["timetableParity"]
@@ -209,6 +231,7 @@ def main(argv: list[str] | None = None) -> int:
             and result["demandPlan"]["status"] == "pass"
             and result["frequencyFleetPlan"]["status"] == "pass"
             and result["hubBankPlan"]["status"] == "pass"
+            and result["routingRepairPlan"]["status"] == "pass"
         ) else 1
 
     canonical = read_json(args.canonical)
@@ -338,6 +361,27 @@ def main(argv: list[str] | None = None) -> int:
             f"{plan['summary']['plannedLegs']} legs routed, "
             f"{plan['summary']['aircraftShortfall']} aircraft short)"
         )
+        print(f"Wrote {args.output}")
+        return 0 if plan["status"] == "pass" else 1
+    if args.command == "build-routing-repair":
+        frequency_plan = read_json(args.frequency_plan)
+        bank_plan = read_json(args.bank_plan)
+        plan = build_routing_repair_plan_from_manifest(
+            canonical,
+            frequency_plan,
+            bank_plan,
+            args.manifest,
+            args.repo_root.resolve(),
+        )
+        write_json(args.output, plan, indent=None)
+        print(
+            f"Routing repair: {plan['status'].upper()} "
+            f"({plan['summary']['routedLegs']}/"
+            f"{plan['summary']['plannedLegs']} legs, "
+            f"{plan['summary']['requiredAircraft']}/"
+            f"{plan['summary']['configuredAircraft']} aircraft)"
+        )
+        print(f"Materialization: {plan['materializationStatus']}")
         print(f"Wrote {args.output}")
         return 0 if plan["status"] == "pass" else 1
     return 2

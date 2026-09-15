@@ -1,0 +1,121 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://coastal-american.example/schemas/routing_repair_plan.schema.json",
+  "title": "Coastal American Airways routing repair plan",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "scheduleId",
+    "sourceKind",
+    "planningRulesId",
+    "operatingPolicyId",
+    "status",
+    "materializationStatus",
+    "summary",
+    "checks",
+    "fleetPlan",
+    "routes",
+    "legs",
+    "diagnostics",
+    "materialization",
+    "limitations"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "scheduleId": { "type": "string", "minLength": 1 },
+    "sourceKind": { "const": "curfew_safe_topology_repair" },
+    "planningRulesId": { "type": "string", "minLength": 1 },
+    "operatingPolicyId": { "type": "string", "minLength": 1 },
+    "status": { "enum": ["pass", "fail"] },
+    "materializationStatus": { "const": "pending_bank_alignment" },
+    "summary": {
+      "type": "object",
+      "required": [
+        "plannedLegs",
+        "routedLegs",
+        "configuredAircraft",
+        "requiredAircraft",
+        "remainingAircraft",
+        "aircraftShortfall",
+        "curfewViolations",
+        "destinationsWithoutRon",
+        "rollingRonViolations",
+        "bankTouchLegs",
+        "bankAlignedLegs"
+      ]
+    },
+    "checks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "status", "message"]
+      }
+    },
+    "fleetPlan": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": [
+          "configuredAircraft",
+          "requiredAircraft",
+          "shortfall",
+          "remainingAircraft",
+          "routes",
+          "routedLegs",
+          "maximumDaysWithoutTargetRon"
+        ]
+      }
+    },
+    "routes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "fleet",
+          "legCount",
+          "startStation",
+          "ronStation",
+          "legIds"
+        ]
+      }
+    },
+    "legs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "source",
+          "fleet",
+          "origin",
+          "destination",
+          "departureMinute",
+          "arrivalMinute",
+          "departureUtcMinute",
+          "arrivalUtcMinute",
+          "blockMinutes",
+          "curfewStatus",
+          "routeId",
+          "sequence"
+        ]
+      }
+    },
+    "diagnostics": { "type": "object" },
+    "materialization": {
+      "type": "object",
+      "required": [
+        "status",
+        "checkId",
+        "message",
+        "bankTouchLegs",
+        "currentlyAlignedLegs"
+      ]
+    },
+    "limitations": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  }
+}
