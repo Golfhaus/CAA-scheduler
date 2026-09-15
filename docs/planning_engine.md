@@ -52,6 +52,14 @@ Spoke arrivals target ten minutes into a core and hub departures target fifty mi
 
 For the Schedule 6 planning inputs, the generated plan defines all 24 required banks and places all 1,190 proposed hub-touching legs with 1,224 bank-touch assignments and zero curfew violations. The remaining 240 focus-city/point-to-point legs intentionally remain untimed until aircraft routing can place them around the banked work.
 
+## Aircraft-cycle and RON feasibility
+
+`aircraft_route_plan.json` is defined by [`schemas/aircraft_route_plan.schema.json`](../schemas/aircraft_route_plan.schema.json). The route planner minimum-cost matches every banked arrival to a same-fleet departure at the same station, inserts non-hub round trips into compatible layovers, and creates curfew-safe standalone cycles when no existing layover can hold a trip. It then evaluates service coverage, route continuity, the 40-minute turn floor, schedule-specific fleet capacity, curfews, destination RON coverage, and the rolling target-city RON window.
+
+This stage never changes `schedule.fleetCounts`. It reports `configuredAircraft`, `requiredAircraft`, and `shortfall` separately for every fleet. Curfew enforcement is a hard stop at both bank placement and routing.
+
+For the current Schedule 6 planning proposal, all 1,430 proposed legs enter continuous cycles, every destination receives an overnight, and no departure violates a curfew. The independent bank placements are not yet fleet-feasible: the first-pass cycles require 409 aircraft versus 225 configured, and one cycle misses the rolling target-RON cadence. This is a preserved diagnostic, not a suggested fleet order. Candidate publication remains blocked until deterministic repair retimes or reassigns the work within the selected fleet.
+
 ## Multi-hub qualification
 
 `compute_multihub_assignments()` is a pure function. It accepts city metadata, an explicit intergroup-demand dataset, city market sizes, and versioned planning rules. It has no hardcoded filesystem paths, import-time data loading, pandas dependency, pickle input, or mutable global state.
@@ -98,13 +106,24 @@ python -m caa_scheduler build-bank-plan \
   hub_bank_plan.json
 ```
 
+Construct aircraft cycles and evaluate fleet/RON feasibility with:
+
+```bash
+python -m caa_scheduler build-route-plan \
+  canonical_schedule.json \
+  frequency_fleet_plan.json \
+  hub_bank_plan.json \
+  config/demand_data/bts_db1c_6mo_v3.json \
+  aircraft_route_plan.json
+```
+
 The golden-baseline and candidate commands generate these planning artifacts automatically. Candidate construction resolves the demand version to exactly one manifest and verifies every source fingerprint; an unknown version or mismatch blocks publishable output. If a candidate violates a hard stop such as a curfew, its canonical, timetable, and gate outputs remain suppressed. The demand/planning snapshots and diagnostic validation reports are retained so the failed build can be investigated.
 
 ## Next construction stages
 
 The remaining Milestone 0.7 work is intentionally staged:
 
-1. construct aircraft lines, days, routes, and RONs around the banked work without global state; and
-2. add deterministic repair candidates followed by full structural, operating, gate, and curfew validation.
+1. repair bank phases, individual placements, and fleet allocations until the complete proposal fits the schedule-selected fleet and rolling RON policy; and
+2. assign canonical lines, days, routes, pairings, and flight numbers, followed by full structural, operating, gate, and curfew validation.
 
 Each stage needs a golden comparison before the subsequent stage is permitted to write a publishable candidate.

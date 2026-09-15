@@ -90,7 +90,7 @@ class CandidateBuildTests(unittest.TestCase):
         self.assertTrue(departure_check["hardStop"])
         self.assertEqual(departure_check["status"], "pass")
 
-    def test_build_writes_candidate_package_after_hard_stops_pass(self) -> None:
+    def test_build_retains_routing_diagnostics_when_fleet_fit_blocks(self) -> None:
         config = _config(self.baseline)
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
@@ -103,11 +103,10 @@ class CandidateBuildTests(unittest.TestCase):
                 baseline_path=CANONICAL_PATH,
                 output_directory=output,
             )
-            self.assertEqual(report["status"], "candidate_review_required")
+            self.assertEqual(report["status"], "blocked_planning_input")
             for filename in (
                 "build_config.json",
                 "build_report.json",
-                "canonical_schedule.json",
                 "validation_report.json",
                 "operating_validation_report.json",
                 "planning_snapshot.json",
@@ -115,8 +114,7 @@ class CandidateBuildTests(unittest.TestCase):
                 "demand_plan.json",
                 "frequency_fleet_plan.json",
                 "hub_bank_plan.json",
-                "timetable.json",
-                "gates.json",
+                "aircraft_route_plan.json",
             ):
                 self.assertTrue((output / filename).is_file(), filename)
             planning = json.loads((output / "planning_snapshot.json").read_text())
@@ -133,6 +131,19 @@ class CandidateBuildTests(unittest.TestCase):
             )
             self.assertEqual(report["hubBankPlan"]["status"], "pass")
             self.assertEqual(report["hubBankPlan"]["summary"]["curfewViolations"], 0)
+            route_plan = report["aircraftRoutePlan"]
+            self.assertEqual(
+                route_plan["summary"]["routedLegs"],
+                report["frequencyFleetPlan"]["summary"]["plannedLegs"],
+            )
+            self.assertEqual(route_plan["summary"]["curfewViolations"], 0)
+            self.assertEqual(
+                route_plan["fleetPlan"]["MAX9"]["configuredAircraft"],
+                config["fleetCounts"]["MAX9"],
+            )
+            self.assertFalse((output / "canonical_schedule.json").exists())
+            self.assertFalse((output / "timetable.json").exists())
+            self.assertFalse((output / "gates.json").exists())
 
     def test_missing_demand_pin_blocks_before_compilation(self) -> None:
         config = _config(self.baseline)
@@ -177,8 +188,10 @@ class CandidateBuildTests(unittest.TestCase):
                 baseline_path=baseline_path,
                 output_directory=output,
             )
-            self.assertEqual(first["status"], "candidate_review_required")
-            self.assertTrue((output / "canonical_schedule.json").exists())
+            self.assertEqual(first["status"], "blocked_planning_input")
+            (output / "canonical_schedule.json").write_text("stale")
+            (output / "timetable.json").write_text("stale")
+            (output / "gates.json").write_text("stale")
 
             leg = baseline["legs"][0]
             leg["departure"] = "02:00"
@@ -202,6 +215,7 @@ class CandidateBuildTests(unittest.TestCase):
             self.assertTrue((output / "demand_plan.json").is_file())
             self.assertTrue((output / "frequency_fleet_plan.json").is_file())
             self.assertTrue((output / "hub_bank_plan.json").is_file())
+            self.assertTrue((output / "aircraft_route_plan.json").is_file())
 
     def test_unknown_demand_version_suppresses_candidate_outputs(self) -> None:
         config = _config(self.baseline)

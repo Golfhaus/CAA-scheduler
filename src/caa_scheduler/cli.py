@@ -12,6 +12,7 @@ from .gate_export import export_gate_schedule
 from .io import read_json, write_json
 from .operating_validation import validate_operating_rules
 from .planning import reconstruct_planning_snapshot, validate_planning_snapshot
+from .routing import build_aircraft_route_plan_from_manifest
 from .timetable import export_timetable
 from .validation import validate_schedule
 from .web_build import build_web_console
@@ -89,6 +90,17 @@ def _parser() -> argparse.ArgumentParser:
     banks.add_argument("manifest", type=Path)
     banks.add_argument("output", type=Path)
     banks.add_argument("--repo-root", type=Path, default=Path.cwd())
+
+    routes = subcommands.add_parser(
+        "build-route-plan",
+        help="Construct aircraft cycles and evaluate fleet and RON feasibility",
+    )
+    routes.add_argument("canonical", type=Path)
+    routes.add_argument("frequency_plan", type=Path)
+    routes.add_argument("bank_plan", type=Path)
+    routes.add_argument("manifest", type=Path)
+    routes.add_argument("output", type=Path)
+    routes.add_argument("--repo-root", type=Path, default=Path.cwd())
 
     web = subcommands.add_parser(
         "build-web", help="Assemble the static GitHub Pages console"
@@ -178,6 +190,14 @@ def main(argv: list[str] | None = None) -> int:
             f"({bank_plan['summary']['placedLegs']}/"
             f"{bank_plan['summary']['hubMarketLegs']} hub legs placed, "
             f"{bank_plan['summary']['curfewViolations']} curfew violations)"
+        )
+        route_plan = result["aircraftRoutePlan"]
+        print(
+            "Aircraft route plan: "
+            f"{route_plan['status'].upper()} "
+            f"({route_plan['summary']['routedLegs']}/"
+            f"{route_plan['summary']['plannedLegs']} legs routed, "
+            f"{route_plan['summary']['aircraftShortfall']} aircraft short)"
         )
         return 0 if (
             validation["status"] == "pass"
@@ -298,6 +318,25 @@ def main(argv: list[str] | None = None) -> int:
             f"({plan['summary']['placedLegs']}/"
             f"{plan['summary']['hubMarketLegs']} hub legs placed, "
             f"{plan['summary']['curfewViolations']} curfew violations)"
+        )
+        print(f"Wrote {args.output}")
+        return 0 if plan["status"] == "pass" else 1
+    if args.command == "build-route-plan":
+        frequency_plan = read_json(args.frequency_plan)
+        bank_plan = read_json(args.bank_plan)
+        plan = build_aircraft_route_plan_from_manifest(
+            canonical,
+            frequency_plan,
+            bank_plan,
+            args.manifest,
+            args.repo_root.resolve(),
+        )
+        write_json(args.output, plan)
+        print(
+            f"Aircraft route plan: {plan['status'].upper()} "
+            f"({plan['summary']['routedLegs']}/"
+            f"{plan['summary']['plannedLegs']} legs routed, "
+            f"{plan['summary']['aircraftShortfall']} aircraft short)"
         )
         print(f"Wrote {args.output}")
         return 0 if plan["status"] == "pass" else 1

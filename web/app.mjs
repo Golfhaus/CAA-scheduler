@@ -22,6 +22,7 @@ const state = {
   demandPlan: null,
   frequencyFleetPlan: null,
   hubBankPlan: null,
+  aircraftRoutePlan: null,
   timetable: null,
   gates: null,
   instructions: null,
@@ -378,6 +379,7 @@ async function loadSchedule(scheduleId) {
     demandPlan: data.demandPlan,
     frequencyFleetPlan: data.frequencyFleetPlan,
     hubBankPlan: data.hubBankPlan,
+    aircraftRoutePlan: data.aircraftRoutePlan,
     timetable: data.timetable,
     gates: data.gates,
     routingPage: 1,
@@ -519,8 +521,9 @@ function renderPlanning() {
   const demand = state.demandPlan;
   const allocation = state.frequencyFleetPlan;
   const bankPlan = state.hubBankPlan;
-  const ready = validation.status === "pass" && demand.status === "pass" && allocation.status === "pass" && bankPlan.status === "pass";
-  $("#planning-status").textContent = ready ? "Bank plan verified" : "Planning blocked";
+  const routing = state.aircraftRoutePlan;
+  const ready = validation.status === "pass" && demand.status === "pass" && allocation.status === "pass" && bankPlan.status === "pass" && routing.status === "pass";
+  $("#planning-status").textContent = ready ? "Routing feasible" : "Routing repair required";
   $("#planning-status").classList.toggle("is-danger", !ready);
   $("#planning-metrics").innerHTML = [
     metricCard("Proposed legs", allocation.summary.plannedLegs.toLocaleString(), `${allocation.summary.optionalRoundTrips.toLocaleString()} demand-allocated round trips above minimums`),
@@ -529,11 +532,16 @@ function renderPlanning() {
     metricCard("Demand coverage", `${demand.matrix.airportCount}/${state.canonical.cities.filter((city) => city.active).length}`, "Active airport O-D roster", demand.status === "pass" ? "is-success" : "is-danger"),
     metricCard("Hub assignment parity", `${demand.assignmentParity.matched}/${demand.assignmentParity.compared}`, "Golden multi-hub result", demand.assignmentParity.differences.length ? "is-danger" : "is-success"),
     metricCard("Banked hub legs", `${bankPlan.summary.placedLegs.toLocaleString()}/${bankPlan.summary.hubMarketLegs.toLocaleString()}`, `${bankPlan.summary.banks} banks · ${bankPlan.summary.curfewViolations} curfew violations`, bankPlan.status === "pass" ? "is-success" : "is-danger"),
+    metricCard("Routed legs", `${routing.summary.routedLegs.toLocaleString()}/${routing.summary.plannedLegs.toLocaleString()}`, `${routing.summary.cycles} cycles · ${routing.summary.curfewViolations} curfew violations`, routing.summary.routedLegs === routing.summary.plannedLegs && !routing.summary.curfewViolations ? "is-success" : "is-danger"),
+    metricCard("Aircraft fit", `${routing.summary.requiredAircraft}/${routing.summary.configuredAircraft}`, `${routing.summary.aircraftShortfall} aircraft above the selected fleet`, routing.summary.aircraftShortfall ? "is-danger" : "is-success"),
   ].join("");
   $("#allocation-checks").innerHTML = allocation.checks
     .map((check) => `<article class="${check.status === "pass" ? "is-pass" : "is-fail"}"><strong>${check.status === "pass" ? "Pass" : "Blocked"}</strong><span>${escapeHtml(check.message)}</span></article>`)
     .join("");
   $("#bank-placement-checks").innerHTML = bankPlan.checks
+    .map((check) => `<article class="${check.status === "pass" ? "is-pass" : "is-fail"}"><strong>${check.status === "pass" ? "Pass" : check.hardStop ? "Hard stop" : "Blocked"}</strong><span>${escapeHtml(check.message)}</span></article>`)
+    .join("");
+  $("#aircraft-routing-checks").innerHTML = routing.checks
     .map((check) => `<article class="${check.status === "pass" ? "is-pass" : "is-fail"}"><strong>${check.status === "pass" ? "Pass" : check.hardStop ? "Hard stop" : "Blocked"}</strong><span>${escapeHtml(check.message)}</span></article>`)
     .join("");
   $("#hub-bank-rows").innerHTML = flattenBankWindows(bankPlan)
@@ -544,7 +552,11 @@ function renderPlanning() {
     .sort(([a], [b]) => a.localeCompare(b))
     .map(([fleet, row]) => `<tr><td><span class="fleet-badge">${escapeHtml(fleet)}</span></td><td>${row.aircraftCount}</td><td>${row.marketCount}</td><td>${row.legCount.toLocaleString()}</td><td>${formatDuration(row.plannedAircraftMinutes)}</td><td>${formatDuration(row.availableAircraftMinutes)}</td><td><strong>${(row.utilization * 100).toFixed(1)}%</strong></td></tr>`)
     .join("");
-  $("#planning-limitations").innerHTML = [...allocation.limitations, ...bankPlan.limitations]
+  $("#routing-fleet-rows").innerHTML = Object.entries(routing.fleetPlan)
+    .sort(([a], [b]) => a.localeCompare(b))
+    .map(([fleet, row]) => `<tr><td><span class="fleet-badge">${escapeHtml(fleet)}</span></td><td>${row.configuredAircraft}</td><td>${row.requiredAircraft}</td><td><strong class="${row.shortfall ? "danger-text" : ""}">${row.shortfall}</strong></td><td>${row.cycles}</td><td>${row.routedLegs.toLocaleString()}</td></tr>`)
+    .join("");
+  $("#planning-limitations").innerHTML = [...allocation.limitations, ...bankPlan.limitations, ...routing.limitations]
     .map((item) => `<article><strong>Known boundary</strong><span>${escapeHtml(item)}</span></article>`)
     .join("");
 

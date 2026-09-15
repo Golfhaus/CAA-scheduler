@@ -12,6 +12,7 @@ from .gate_export import export_gate_schedule
 from .io import read_json, resolve_from_repo, write_json
 from .operating_validation import validate_operating_rules
 from .planning import reconstruct_planning_snapshot, validate_planning_snapshot
+from .routing import build_aircraft_route_plan_from_manifest
 from .timetable import export_timetable
 from .validation import validate_schedule
 
@@ -27,6 +28,7 @@ GENERATED_FILENAMES = (
     "demand_plan.json",
     "frequency_fleet_plan.json",
     "hub_bank_plan.json",
+    "aircraft_route_plan.json",
     "timetable.json",
     "gates.json",
 )
@@ -303,6 +305,40 @@ def build_candidate(
                     report["blockers"].append(
                         "The hub-bank plan cannot place every proposed hub flight"
                     )
+                else:
+                    aircraft_route_plan = build_aircraft_route_plan_from_manifest(
+                        candidate,
+                        frequency_fleet_plan,
+                        hub_bank_plan,
+                        demand_manifest,
+                        repo_root,
+                    )
+                    report["aircraftRoutePlan"] = aircraft_route_plan
+                    if aircraft_route_plan["status"] == "fail":
+                        curfew_check = next(
+                            check
+                            for check in aircraft_route_plan["checks"]
+                            if check["id"] == "curfew_enforcement"
+                        )
+                        if curfew_check["status"] == "fail":
+                            report["status"] = "blocked_hard_stop"
+                            report["hardStops"].append(
+                                {
+                                    "checkId": "routing_curfew_enforcement",
+                                    "title": "Aircraft-routing curfew enforcement",
+                                    "findingCount": aircraft_route_plan["summary"][
+                                        "curfewViolations"
+                                    ],
+                                    "message": curfew_check["message"],
+                                }
+                            )
+                        elif report["status"] != "blocked_hard_stop":
+                            report["status"] = "blocked_planning_input"
+                        report["publicationReady"] = False
+                        report["blockers"].append(
+                            "The aircraft route plan does not fit the selected fleet "
+                            "and RON constraints"
+                        )
     except ValueError as error:
         if report["status"] != "blocked_hard_stop":
             report["status"] = "blocked_planning_input"
@@ -328,6 +364,11 @@ def build_candidate(
         )
     if "hubBankPlan" in report:
         write_json(destination / "hub_bank_plan.json", report["hubBankPlan"])
+    if "aircraftRoutePlan" in report:
+        write_json(
+            destination / "aircraft_route_plan.json",
+            report["aircraftRoutePlan"],
+        )
     report["outputs"].update(
         {
             "structuralValidation": "validation_report.json",
@@ -342,6 +383,8 @@ def build_candidate(
         report["outputs"]["frequencyFleetPlan"] = "frequency_fleet_plan.json"
     if "hubBankPlan" in report:
         report["outputs"]["hubBankPlan"] = "hub_bank_plan.json"
+    if "aircraftRoutePlan" in report:
+        report["outputs"]["aircraftRoutePlan"] = "aircraft_route_plan.json"
 
     if report["status"] in {"candidate_ready", "candidate_review_required"}:
         write_json(destination / "canonical_schedule.json", candidate)

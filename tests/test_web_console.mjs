@@ -68,6 +68,15 @@ const hubBankPlan = JSON.parse(
     "utf8",
   ),
 );
+const aircraftRoutePlan = JSON.parse(
+  await readFile(
+    new URL(
+      "../data/schedules/schedule_6_v2_2_5/aircraft_route_plan.json",
+      import.meta.url,
+    ),
+    "utf8",
+  ),
+);
 
 test("overview metrics reflect the frozen schedule", () => {
   assert.deepEqual(scheduleMetrics(canonical), {
@@ -128,6 +137,14 @@ test("hub-bank windows flatten into the 24 policy-required rows", () => {
   assert.deepEqual(new Set(rows.map((row) => row.hub)), new Set(["DAY", "JAX", "MCI", "PHF", "SYR"]));
   assert.equal(rows.every((row) => row.endMinute - row.startMinute === 60), true);
   assert.equal(rows.every((row) => row.arrivalCount > 0 && row.departureCount > 0), true);
+});
+
+test("aircraft route plan exposes the complete, curfew-safe feasibility result", () => {
+  assert.equal(aircraftRoutePlan.summary.routedLegs, 1430);
+  assert.equal(aircraftRoutePlan.summary.unplacedRoundTrips, 0);
+  assert.equal(aircraftRoutePlan.summary.configuredAircraft, 225);
+  assert.equal(aircraftRoutePlan.summary.requiredAircraft, 409);
+  assert.equal(aircraftRoutePlan.summary.curfewViolations, 0);
 });
 
 test("published flights default to departure-time order", () => {

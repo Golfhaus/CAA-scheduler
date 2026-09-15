@@ -30,7 +30,7 @@ class WebBuildTests(unittest.TestCase):
                 REPO_ROOT / "web" / "schedules.json", REPO_ROOT, output
             )
             self.assertEqual(result["scheduleCount"], 1)
-            self.assertEqual(result["dataFileCount"], 14)
+            self.assertEqual(result["dataFileCount"], 15)
             self.assertGreater(result["instructionEntryCount"], 40)
             self.assertTrue((output / "index.html").is_file())
             self.assertTrue((output / "favicon.svg").is_file())
@@ -45,6 +45,7 @@ class WebBuildTests(unittest.TestCase):
             self.assertTrue((output / files["demandPlan"]).is_file())
             self.assertTrue((output / files["frequencyFleetPlan"]).is_file())
             self.assertTrue((output / files["hubBankPlan"]).is_file())
+            self.assertTrue((output / files["aircraftRoutePlan"]).is_file())
             demand_setup = manifest["buildSetup"]["demandData"]
             demand_manifest_path = output / demand_setup["manifest"]
             self.assertTrue(demand_manifest_path.is_file())
