@@ -6,6 +6,7 @@ from typing import Any
 
 from .allocation import build_frequency_fleet_plan_from_manifest
 from .bank_placement import build_hub_bank_plan_from_manifest
+from .bank_materialization import build_bank_materialization_diagnostic_from_manifest
 from .build_config import validate_build_config
 from .demand import build_demand_plan_from_manifest, resolve_demand_manifest
 from .gate_export import export_gate_schedule
@@ -31,6 +32,7 @@ GENERATED_FILENAMES = (
     "hub_bank_plan.json",
     "aircraft_route_plan.json",
     "routing_repair_plan.json",
+    "bank_materialization_diagnostic.json",
     "timetable.json",
     "gates.json",
 )
@@ -350,12 +352,19 @@ def build_candidate(
                             "curfew, and RON constraints"
                         )
                     else:
+                        materialization = build_bank_materialization_diagnostic_from_manifest(
+                            candidate,
+                            frequency_fleet_plan,
+                            hub_bank_plan,
+                            demand_manifest,
+                            repo_root,
+                        )
+                        report["bankMaterializationDiagnostic"] = materialization
                         if report["status"] != "blocked_hard_stop":
                             report["status"] = "blocked_planning_input"
                         report["publicationReady"] = False
                         report["blockers"].append(
-                            "The repaired topology is feasible, but hub-bank timing "
-                            "and canonical Line/Day/Route materialization are pending"
+                            materialization["nextRepair"]["message"]
                         )
     except ValueError as error:
         if report["status"] != "blocked_hard_stop":
@@ -393,6 +402,11 @@ def build_candidate(
             report["routingRepairPlan"],
             indent=None,
         )
+    if "bankMaterializationDiagnostic" in report:
+        write_json(
+            destination / "bank_materialization_diagnostic.json",
+            report["bankMaterializationDiagnostic"],
+        )
     report["outputs"].update(
         {
             "structuralValidation": "validation_report.json",
@@ -411,6 +425,10 @@ def build_candidate(
         report["outputs"]["aircraftRoutePlan"] = "aircraft_route_plan.json"
     if "routingRepairPlan" in report:
         report["outputs"]["routingRepairPlan"] = "routing_repair_plan.json"
+    if "bankMaterializationDiagnostic" in report:
+        report["outputs"]["bankMaterializationDiagnostic"] = (
+            "bank_materialization_diagnostic.json"
+        )
 
     if report["status"] in {"candidate_ready", "candidate_review_required"}:
         write_json(destination / "canonical_schedule.json", candidate)
