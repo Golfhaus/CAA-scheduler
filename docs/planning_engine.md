@@ -1,6 +1,6 @@
 # Planning engine
 
-Milestone 0.7 introduces a deterministic planning layer between schedule setup and aircraft routing. It preserves a reconstruction of Schedule 6 v2.2.5, independently processes the pinned raw-demand inputs, and now produces a fresh frequency and fleet proposal without mutating the historical schedule.
+Milestone 0.7 introduces a deterministic planning layer between schedule setup and aircraft routing. It preserves a reconstruction of Schedule 6 v2.2.5, independently processes the pinned raw-demand inputs, produces a fresh frequency and fleet proposal, and places proposed hub flying into generated bank windows without mutating the historical schedule.
 
 ## Durable planning snapshot
 
@@ -44,11 +44,19 @@ For the Schedule 6 v2.2.5 inputs, the proposal passes all six planning checks wi
 
 Aircraft-minute allocation is not timed routing. Filling the planning envelope does not waive or pre-approve curfews, banks, gate capacity, RON placement, turn feasibility, or routing continuity. Those constraints remain authoritative when the proposal is materialized into canonical legs.
 
+## Hub-bank generation and placement
+
+`hub_bank_plan.json` is defined by [`schemas/hub_bank_plan.schema.json`](../schemas/hub_bank_plan.schema.json). The bank placer reads each hub's bank count and 60-minute core width from the pinned operating policy. It searches versioned five-minute phase candidates against the actual inter-hub fleet/block-time proposal; exact bank clock times are generated outputs, never fixed schedule constants.
+
+Spoke arrivals target ten minutes into a core and hub departures target fifty minutes into it, preserving the 40-minute minimum turn. Inter-hub legs are placed only when the same local-time flight fits a departure bank at its origin and an arrival bank at its destination. Every proposed origin departure is checked against the normal/red-eye rules during placement. A violation is never accepted or waived: unplaceable service blocks the plan, while an actual curfew violation is marked as a hard stop.
+
+For the Schedule 6 planning inputs, the generated plan defines all 24 required banks and places all 1,190 proposed hub-touching legs with 1,224 bank-touch assignments and zero curfew violations. The remaining 240 focus-city/point-to-point legs intentionally remain untimed until aircraft routing can place them around the banked work.
+
 ## Multi-hub qualification
 
 `compute_multihub_assignments()` is a pure function. It accepts city metadata, an explicit intergroup-demand dataset, city market sizes, and versioned planning rules. It has no hardcoded filesystem paths, import-time data loading, pandas dependency, pickle input, or mutable global state.
 
-The preserved legacy thresholds and city-percentile caps remain in [`config/policies/planning_rules_v1.json`](../config/policies/planning_rules_v1.json); [`planning_rules_v2.json`](../config/policies/planning_rules_v2.json) adds frequency and fleet policy without changing the pinned v1 file. The formerly embedded post-BHM-annotation table is normalized as [`data/reference/intergroup_demand_v2.json`](../data/reference/intergroup_demand_v2.json). The updated 105-city six-month airport matrix is stored as `data/reference/airport_od_matrix_consolidated_v2.csv`. Fingerprinted v1 and v2 manifests preserve both input combinations. The calculation covers every active city and reproduces all 100 non-hub assignments in v2.2.5, including CHS at JAX/PHF/DAY and BTR at JAX.
+The preserved legacy thresholds and city-percentile caps remain in [`config/policies/planning_rules_v1.json`](../config/policies/planning_rules_v1.json); [`planning_rules_v2.json`](../config/policies/planning_rules_v2.json) adds frequency and fleet policy, and [`planning_rules_v3.json`](../config/policies/planning_rules_v3.json) adds bank-phase search without modifying either prior pin. The formerly embedded post-BHM-annotation table is normalized as [`data/reference/intergroup_demand_v2.json`](../data/reference/intergroup_demand_v2.json). The updated 105-city six-month airport matrix is stored as `data/reference/airport_od_matrix_consolidated_v2.csv`. Fingerprinted v1, v2, and v3 manifests preserve all three input combinations. The calculation covers every active city and reproduces all 100 non-hub assignments in v2.2.5, including CHS at JAX/PHF/DAY and BTR at JAX.
 
 ## Commands and build integration
 
@@ -66,7 +74,7 @@ Validate and reproduce the demand-driven hub plan with:
 ```bash
 python -m caa_scheduler build-demand-plan \
   canonical_schedule.json \
-  config/demand_data/bts_db1c_6mo_v2.json \
+  config/demand_data/bts_db1c_6mo_v3.json \
   demand_plan.json
 ```
 
@@ -76,8 +84,18 @@ Create the fresh frequency and fleet proposal with:
 python -m caa_scheduler build-frequency-plan \
   canonical_schedule.json \
   demand_plan.json \
-  config/demand_data/bts_db1c_6mo_v2.json \
+  config/demand_data/bts_db1c_6mo_v3.json \
   frequency_fleet_plan.json
+```
+
+Generate bank windows and place the proposed hub flying with:
+
+```bash
+python -m caa_scheduler build-bank-plan \
+  canonical_schedule.json \
+  frequency_fleet_plan.json \
+  config/demand_data/bts_db1c_6mo_v3.json \
+  hub_bank_plan.json
 ```
 
 The golden-baseline and candidate commands generate these planning artifacts automatically. Candidate construction resolves the demand version to exactly one manifest and verifies every source fingerprint; an unknown version or mismatch blocks publishable output. If a candidate violates a hard stop such as a curfew, its canonical, timetable, and gate outputs remain suppressed. The demand/planning snapshots and diagnostic validation reports are retained so the failed build can be investigated.
@@ -86,8 +104,7 @@ The golden-baseline and candidate commands generate these planning artifacts aut
 
 The remaining Milestone 0.7 work is intentionally staged:
 
-1. define and place hub-bank windows;
-2. construct aircraft lines, days, routes, and RONs without global state; and
-3. add deterministic repair candidates followed by full structural, operating, gate, and curfew validation.
+1. construct aircraft lines, days, routes, and RONs around the banked work without global state; and
+2. add deterministic repair candidates followed by full structural, operating, gate, and curfew validation.
 
 Each stage needs a golden comparison before the subsequent stage is permitted to write a publishable candidate.

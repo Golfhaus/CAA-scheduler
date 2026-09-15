@@ -5,6 +5,7 @@ from pathlib import Path
 from typing import Any
 
 from .allocation import build_frequency_fleet_plan_from_manifest
+from .bank_placement import build_hub_bank_plan_from_manifest
 from .build_config import validate_build_config
 from .demand import build_demand_plan_from_manifest, resolve_demand_manifest
 from .gate_export import export_gate_schedule
@@ -25,6 +26,7 @@ GENERATED_FILENAMES = (
     "planning_validation_report.json",
     "demand_plan.json",
     "frequency_fleet_plan.json",
+    "hub_bank_plan.json",
     "timetable.json",
     "gates.json",
 )
@@ -271,6 +273,36 @@ def build_candidate(
                 report["blockers"].append(
                     "The frequency and fleet plan does not satisfy planning constraints"
                 )
+            else:
+                hub_bank_plan = build_hub_bank_plan_from_manifest(
+                    candidate,
+                    frequency_fleet_plan,
+                    demand_manifest,
+                    repo_root,
+                )
+                report["hubBankPlan"] = hub_bank_plan
+                if hub_bank_plan["status"] == "fail":
+                    curfew_check = next(
+                        check
+                        for check in hub_bank_plan["checks"]
+                        if check["id"] == "curfew_enforcement"
+                    )
+                    if curfew_check["status"] == "fail":
+                        report["status"] = "blocked_hard_stop"
+                        report["hardStops"].append(
+                            {
+                                "checkId": "bank_curfew_enforcement",
+                                "title": "Bank placement curfew enforcement",
+                                "findingCount": hub_bank_plan["summary"]["curfewViolations"],
+                                "message": curfew_check["message"],
+                            }
+                        )
+                    elif report["status"] != "blocked_hard_stop":
+                        report["status"] = "blocked_planning_input"
+                    report["publicationReady"] = False
+                    report["blockers"].append(
+                        "The hub-bank plan cannot place every proposed hub flight"
+                    )
     except ValueError as error:
         if report["status"] != "blocked_hard_stop":
             report["status"] = "blocked_planning_input"
@@ -294,6 +326,8 @@ def build_candidate(
             destination / "frequency_fleet_plan.json",
             report["frequencyFleetPlan"],
         )
+    if "hubBankPlan" in report:
+        write_json(destination / "hub_bank_plan.json", report["hubBankPlan"])
     report["outputs"].update(
         {
             "structuralValidation": "validation_report.json",
@@ -306,6 +340,8 @@ def build_candidate(
         report["outputs"]["demandPlan"] = "demand_plan.json"
     if "frequencyFleetPlan" in report:
         report["outputs"]["frequencyFleetPlan"] = "frequency_fleet_plan.json"
+    if "hubBankPlan" in report:
+        report["outputs"]["hubBankPlan"] = "hub_bank_plan.json"
 
     if report["status"] in {"candidate_ready", "candidate_review_required"}:
         write_json(destination / "canonical_schedule.json", candidate)

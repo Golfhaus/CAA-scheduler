@@ -14,7 +14,7 @@ from caa_scheduler.allocation import build_frequency_fleet_plan_from_manifest
 
 
 SCHEDULE_DIRECTORY = REPO_ROOT / "data" / "schedules" / "schedule_6_v2_2_5"
-MANIFEST_PATH = REPO_ROOT / "config" / "demand_data" / "bts_db1c_6mo_v2.json"
+MANIFEST_PATH = REPO_ROOT / "config" / "demand_data" / "bts_db1c_6mo_v3.json"
 
 
 class FrequencyFleetPlanTests(unittest.TestCase):

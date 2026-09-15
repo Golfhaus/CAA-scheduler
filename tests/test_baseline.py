@@ -239,8 +239,8 @@ class ScheduleSixBaselineTests(unittest.TestCase):
                     "expectedGate": str(EXPECTED_GATE),
                     "operatingPolicy": str(OPERATING_POLICY),
                     "demandData": {
-                        "version": "bts-db1c-6mo-jul2025-apr2026-v2",
-                        "manifest": "config/demand_data/bts_db1c_6mo_v2.json",
+                        "version": "bts-db1c-6mo-jul2025-apr2026-v3",
+                        "manifest": "config/demand_data/bts_db1c_6mo_v3.json",
                     },
                 },
                 "outputs": {"directory": str(temp_root / "out")},
@@ -262,6 +262,7 @@ class ScheduleSixBaselineTests(unittest.TestCase):
             self.assertTrue(result["planningValidationPath"].exists())
             self.assertTrue(result["demandPlanPath"].exists())
             self.assertTrue(result["frequencyFleetPlanPath"].exists())
+            self.assertTrue(result["hubBankPlanPath"].exists())
             self.assertEqual(result["planningValidation"]["status"], "pass")
             self.assertEqual(result["demandPlan"]["status"], "pass")
             self.assertEqual(result["demandPlan"]["assignmentParity"]["matched"], 100)
@@ -269,6 +270,8 @@ class ScheduleSixBaselineTests(unittest.TestCase):
             self.assertEqual(
                 result["frequencyFleetPlan"]["summary"]["plannedLegs"], 1430
             )
+            self.assertEqual(result["hubBankPlan"]["status"], "pass")
+            self.assertEqual(result["hubBankPlan"]["summary"]["placedLegs"], 1190)
             self.assertEqual(
                 result["timetablePath"].read_bytes(),
                 EXPECTED_TIMETABLE.read_bytes(),

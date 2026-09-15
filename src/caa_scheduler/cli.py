@@ -4,6 +4,7 @@ import argparse
 from pathlib import Path
 
 from .allocation import build_frequency_fleet_plan_from_manifest
+from .bank_placement import build_hub_bank_plan_from_manifest
 from .baseline import build_baseline
 from .candidate import build_candidate
 from .demand import build_demand_plan_from_manifest
@@ -78,6 +79,16 @@ def _parser() -> argparse.ArgumentParser:
     allocation.add_argument("manifest", type=Path)
     allocation.add_argument("output", type=Path)
     allocation.add_argument("--repo-root", type=Path, default=Path.cwd())
+
+    banks = subcommands.add_parser(
+        "build-bank-plan",
+        help="Generate curfew-safe hub-bank windows and place proposed hub flying",
+    )
+    banks.add_argument("canonical", type=Path)
+    banks.add_argument("frequency_plan", type=Path)
+    banks.add_argument("manifest", type=Path)
+    banks.add_argument("output", type=Path)
+    banks.add_argument("--repo-root", type=Path, default=Path.cwd())
 
     web = subcommands.add_parser(
         "build-web", help="Assemble the static GitHub Pages console"
@@ -160,6 +171,14 @@ def main(argv: list[str] | None = None) -> int:
             f"({allocation['summary']['plannedLegs']} legs, "
             f"{allocation['summary']['candidateMarkets']} markets)"
         )
+        bank_plan = result["hubBankPlan"]
+        print(
+            "Hub-bank plan: "
+            f"{bank_plan['status'].upper()} "
+            f"({bank_plan['summary']['placedLegs']}/"
+            f"{bank_plan['summary']['hubMarketLegs']} hub legs placed, "
+            f"{bank_plan['summary']['curfewViolations']} curfew violations)"
+        )
         return 0 if (
             validation["status"] == "pass"
             and result["timetableParity"]
@@ -169,6 +188,7 @@ def main(argv: list[str] | None = None) -> int:
             and result["planningValidation"]["status"] == "pass"
             and result["demandPlan"]["status"] == "pass"
             and result["frequencyFleetPlan"]["status"] == "pass"
+            and result["hubBankPlan"]["status"] == "pass"
         ) else 1
 
     canonical = read_json(args.canonical)
@@ -261,6 +281,23 @@ def main(argv: list[str] | None = None) -> int:
             f"Frequency/fleet plan: {plan['status'].upper()} "
             f"({plan['summary']['plannedLegs']} legs, "
             f"{plan['summary']['candidateMarkets']} markets)"
+        )
+        print(f"Wrote {args.output}")
+        return 0 if plan["status"] == "pass" else 1
+    if args.command == "build-bank-plan":
+        frequency_plan = read_json(args.frequency_plan)
+        plan = build_hub_bank_plan_from_manifest(
+            canonical,
+            frequency_plan,
+            args.manifest,
+            args.repo_root.resolve(),
+        )
+        write_json(args.output, plan)
+        print(
+            f"Hub-bank plan: {plan['status'].upper()} "
+            f"({plan['summary']['placedLegs']}/"
+            f"{plan['summary']['hubMarketLegs']} hub legs placed, "
+            f"{plan['summary']['curfewViolations']} curfew violations)"
         )
         print(f"Wrote {args.output}")
         return 0 if plan["status"] == "pass" else 1

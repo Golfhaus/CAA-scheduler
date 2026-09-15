@@ -6,6 +6,7 @@ import {
   buildItineraries,
   claimMatchesPassengerStandFinding,
   extractReferences,
+  flattenBankWindows,
   flattenFrequencyMarkets,
   fleetUsage,
   formatMinute,
@@ -53,6 +54,15 @@ const frequencyFleetPlan = JSON.parse(
   await readFile(
     new URL(
       "../data/schedules/schedule_6_v2_2_5/frequency_fleet_plan.json",
+      import.meta.url,
+    ),
+    "utf8",
+  ),
+);
+const hubBankPlan = JSON.parse(
+  await readFile(
+    new URL(
+      "../data/schedules/schedule_6_v2_2_5/hub_bank_plan.json",
       import.meta.url,
     ),
     "utf8",
@@ -110,6 +120,14 @@ test("fresh frequency markets flatten into filterable fleet rows", () => {
   assert.equal(rows.reduce((total, row) => total + row.legCount, 0), 1430);
   assert.equal(rows.some((row) => row.origin === "CHS" && row.destination === "PHF"), true);
   assert.equal(rows.every((row) => row.fleet && row.roundTrips > 0), true);
+});
+
+test("hub-bank windows flatten into the 24 policy-required rows", () => {
+  const rows = flattenBankWindows(hubBankPlan);
+  assert.equal(rows.length, 24);
+  assert.deepEqual(new Set(rows.map((row) => row.hub)), new Set(["DAY", "JAX", "MCI", "PHF", "SYR"]));
+  assert.equal(rows.every((row) => row.endMinute - row.startMinute === 60), true);
+  assert.equal(rows.every((row) => row.arrivalCount > 0 && row.departureCount > 0), true);
 });
 
 test("published flights default to departure-time order", () => {

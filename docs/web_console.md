@@ -7,7 +7,7 @@ Milestone 0.5 extends the responsive GitHub Pages application with local schedul
 - **Schedule Setup** creates an explicit build configuration for the next schedule. It captures schedule identity, Mainline/Skunkworks mode, previous-schedule or blank starting point, schedule-specific fleet composition, connection limits, pinned instructions/reference inputs, proposed airport changes, and notes. Preflight runs on every change and classifies blockers and warnings. Drafts persist in browser storage and can be exported/imported as portable JSON.
 
 - **Overview** shows network counts, per-schedule fleet utilization, structural fidelity, curfew state, and the largest blocking rule groups.
-- **Planning** exposes the fresh demand-derived proposal: schedule-specific fleet counts and aircraft-minute budgets, proposed market frequencies and fleet assignments, historical leg comparisons, the complete city demand ranking, computed hub qualifications, and explicit remaining construction boundaries.
+- **Planning** exposes the fresh demand-derived proposal: schedule-specific fleet counts and aircraft-minute budgets, proposed market frequencies and fleet assignments, generated hub-bank windows and directional loads, bank-placement/curfew checks, historical leg comparisons, the complete city demand ranking, computed hub qualifications, and explicit remaining construction boundaries.
 - **Routings** searches the full canonical construction record and filters by fleet, line, departure airport, or arrival airport. Results can show 50, 250, 500, or all rows.
 - **Validation** separates structural fidelity from operating-policy compliance. It filters by status or text, expands exact evidence, and links findings to affected routings or airports.
 - **Instructions** displays the build-instruction sections, §2.6 checks, standing lessons, and additions generated from the repository's Markdown sources. Every `§` and `Lesson` reference in Validation opens the exact catalog entry. The source link exposes the underlying Markdown for the current GitHub/ChatGPT editing workflow and provides the foundation for later in-app editing.
@@ -18,7 +18,7 @@ The interface uses the airline's navy, blue, and orange palette, remains usable 
 
 ## Data flow
 
-`web/schedules.json` lists each published schedule and its nine source files: canonical schedule, structural report, operating report, planning snapshot, planning validation, demand plan, frequency/fleet plan, timetable, and gate plan. It also pins the primary build-instruction Markdown, any additions, the demand-data manifest, and the generated catalog destination. The build command verifies and copies the demand manifest and all three fingerprinted sources, then rebuilds the instruction catalog directly from its Markdown sources.
+`web/schedules.json` lists each published schedule and its ten source files: canonical schedule, structural report, operating report, planning snapshot, planning validation, demand plan, frequency/fleet plan, hub-bank plan, timetable, and gate plan. It also pins the primary build-instruction Markdown, any additions, the demand-data manifest, and the generated catalog destination. The build command verifies and copies the demand manifest and all three fingerprinted sources, then rebuilds the instruction catalog directly from its Markdown sources.
 
 ```bash
 python -m caa_scheduler build-web --output dist
