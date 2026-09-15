@@ -24,6 +24,7 @@ const state = {
   hubBankPlan: null,
   aircraftRoutePlan: null,
   routingRepairPlan: null,
+  bankMaterializationDiagnostic: null,
   timetable: null,
   gates: null,
   instructions: null,
@@ -382,6 +383,7 @@ async function loadSchedule(scheduleId) {
     hubBankPlan: data.hubBankPlan,
     aircraftRoutePlan: data.aircraftRoutePlan,
     routingRepairPlan: data.routingRepairPlan,
+    bankMaterializationDiagnostic: data.bankMaterializationDiagnostic,
     timetable: data.timetable,
     gates: data.gates,
     routingPage: 1,
@@ -525,10 +527,11 @@ function renderPlanning() {
   const bankPlan = state.hubBankPlan;
   const routing = state.aircraftRoutePlan;
   const repair = state.routingRepairPlan;
+  const materialization = state.bankMaterializationDiagnostic;
   const topologyReady = validation.status === "pass" && demand.status === "pass" && allocation.status === "pass" && bankPlan.status === "pass" && repair.status === "pass";
-  const ready = topologyReady && repair.materializationStatus === "complete";
-  $("#planning-status").textContent = ready ? "Routing feasible" : topologyReady ? "Topology feasible · bank timing pending" : "Routing repair required";
-  $("#planning-status").classList.toggle("is-danger", !topologyReady);
+  const ready = topologyReady && materialization.materializationStatus === "complete";
+  $("#planning-status").textContent = ready ? "Routing feasible" : materialization.materializationStatus === "blocked" ? "Bank materialization blocked" : topologyReady ? "Bank-window lower bound passes · non-hub pending" : "Routing repair required";
+  $("#planning-status").classList.toggle("is-danger", !topologyReady || materialization.materializationStatus === "blocked");
   $("#planning-metrics").innerHTML = [
     metricCard("Proposed legs", allocation.summary.plannedLegs.toLocaleString(), `${allocation.summary.optionalRoundTrips.toLocaleString()} demand-allocated round trips above minimums`),
     metricCard("Candidate markets", allocation.summary.candidateMarkets.toLocaleString(), `${allocation.summary.newRequiredHubMarkets} required hub markets added; ${plan.summary.legCount.toLocaleString()} historical legs retained for comparison`),
@@ -539,6 +542,7 @@ function renderPlanning() {
     metricCard("Routed legs", `${repair.summary.routedLegs.toLocaleString()}/${repair.summary.plannedLegs.toLocaleString()}`, `${repair.summary.curfewViolations} curfew violations · ${repair.summary.destinationsWithoutRon} RON gaps`, repair.status === "pass" ? "is-success" : "is-danger"),
     metricCard("First-pass timing", `${routing.summary.requiredAircraft}/${routing.summary.configuredAircraft}`, `${routing.summary.aircraftShortfall} aircraft above the selected fleet`, "is-danger"),
     metricCard("Repaired fleet fit", `${repair.summary.requiredAircraft}/${repair.summary.configuredAircraft}`, `${repair.summary.remainingAircraft} schedule-selected aircraft remain`, repair.summary.aircraftShortfall ? "is-danger" : "is-success"),
+    metricCard("Bank + RON lower bound", `${materialization.summary.bankAndRonMinimumAircraft}/${materialization.summary.configuredAircraft}`, `${materialization.summary.bankWindowLowerBoundHeadroom} lower-bound headroom · ${materialization.summary.nonHubLegs} non-hub legs still pending`, materialization.summary.fleetAllocationShortfall ? "is-danger" : "is-success"),
   ].join("");
   $("#allocation-checks").innerHTML = allocation.checks
     .map((check) => `<article class="${check.status === "pass" ? "is-pass" : "is-fail"}"><strong>${check.status === "pass" ? "Pass" : "Blocked"}</strong><span>${escapeHtml(check.message)}</span></article>`)
@@ -546,9 +550,9 @@ function renderPlanning() {
   $("#bank-placement-checks").innerHTML = bankPlan.checks
     .map((check) => `<article class="${check.status === "pass" ? "is-pass" : "is-fail"}"><strong>${check.status === "pass" ? "Pass" : check.hardStop ? "Hard stop" : "Blocked"}</strong><span>${escapeHtml(check.message)}</span></article>`)
     .join("");
-  $("#aircraft-routing-checks").innerHTML = repair.checks
-    .map((check) => `<article class="${check.status === "pass" ? "is-pass" : "is-fail"}"><strong>${check.status === "pass" ? "Pass" : check.hardStop ? "Hard stop" : "Blocked"}</strong><span>${escapeHtml(check.message)}</span></article>`)
-    .join("") + `<article class="is-pending"><strong>Next step</strong><span>${escapeHtml(repair.materialization.message)}</span></article>`;
+  $("#aircraft-routing-checks").innerHTML = [...repair.checks, ...materialization.checks]
+    .map((check) => `<article class="${check.status === "pass" ? "is-pass" : check.status === "pending" ? "is-pending" : "is-fail"}"><strong>${check.status === "pass" ? "Pass" : check.status === "pending" ? "Pending" : check.hardStop ? "Hard stop" : "Blocked"}</strong><span>${escapeHtml(check.message)}</span></article>`)
+    .join("") + `<article class="is-pending"><strong>Next repair</strong><span>${escapeHtml(materialization.nextRepair.message)}</span></article>`;
   $("#hub-bank-rows").innerHTML = flattenBankWindows(bankPlan)
     .map((bank) => `<tr><td><strong>${escapeHtml(bank.hub)}</strong></td><td>${escapeHtml(bank.id)}</td><td>${formatMinute24(bank.startMinute)}–${formatMinute24(bank.endMinute)}</td><td>${formatMinute24(bank.arrivalTargetMinute)}</td><td>${formatMinute24(bank.departureTargetMinute)}</td><td>${bank.arrivalCount}</td><td>${bank.departureCount}</td></tr>`)
     .join("");
@@ -559,9 +563,9 @@ function renderPlanning() {
     .join("");
   $("#routing-fleet-rows").innerHTML = Object.entries(repair.fleetPlan)
     .sort(([a], [b]) => a.localeCompare(b))
-    .map(([fleet, row]) => `<tr><td><span class="fleet-badge">${escapeHtml(fleet)}</span></td><td>${row.configuredAircraft}</td><td>${routing.fleetPlan[fleet]?.requiredAircraft ?? "—"}</td><td><strong class="${row.shortfall ? "danger-text" : ""}">${row.requiredAircraft}</strong></td><td>${row.remainingAircraft}</td><td>${row.routes}</td><td>${row.routedLegs.toLocaleString()}</td></tr>`)
+    .map(([fleet, row]) => { const bankRow = materialization.fleetPlan[fleet]; return `<tr><td><span class="fleet-badge">${escapeHtml(fleet)}</span></td><td>${row.configuredAircraft}</td><td>${routing.fleetPlan[fleet]?.requiredAircraft ?? "—"}</td><td>${row.requiredAircraft}</td><td><strong class="${bankRow.shortfall ? "danger-text" : ""}">${bankRow.bankAndRonMinimumAircraft}</strong></td><td><strong class="${bankRow.shortfall ? "danger-text" : ""}">${bankRow.shortfall ? `+${bankRow.shortfall}` : `−${bankRow.headroom}`}</strong></td><td>${row.routes}</td><td>${row.routedLegs.toLocaleString()}</td></tr>`; })
     .join("");
-  $("#planning-limitations").innerHTML = [...allocation.limitations, ...bankPlan.limitations, ...routing.limitations, ...repair.limitations]
+  $("#planning-limitations").innerHTML = [...allocation.limitations, ...bankPlan.limitations, ...routing.limitations, ...repair.limitations, ...materialization.limitations]
     .map((item) => `<article><strong>Known boundary</strong><span>${escapeHtml(item)}</span></article>`)
     .join("");
 

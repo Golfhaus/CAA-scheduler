@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://coastal-american.example/schemas/bank_materialization_diagnostic.schema.json",
+  "title": "Coastal American Airways bank materialization diagnostic",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "scheduleId",
+    "sourceKind",
+    "planningRulesId",
+    "operatingPolicyId",
+    "directionalBankAssignment",
+    "bankWindowTiming",
+    "status",
+    "materializationStatus",
+    "summary",
+    "checks",
+    "fleetPlan",
+    "lowerBounds",
+    "nextRepair",
+    "limitations"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "scheduleId": { "type": "string", "minLength": 1 },
+    "sourceKind": { "const": "independent_direction_bank_flow_lower_bound" },
+    "planningRulesId": { "type": "string", "minLength": 1 },
+    "operatingPolicyId": { "type": "string", "minLength": 1 },
+    "directionalBankAssignment": { "const": "independent" },
+    "bankWindowTiming": { "const": "full_core_five_minute_options" },
+    "status": {
+      "enum": ["blocked_fleet_allocation", "pending_nonhub_integration"]
+    },
+    "materializationStatus": { "enum": ["blocked", "pending"] },
+    "summary": {
+      "type": "object",
+      "required": [
+        "bankedLegs",
+        "nonHubLegs",
+        "configuredAircraft",
+        "bankAndRonMinimumAircraft",
+        "fleetAllocationShortfall",
+        "bankWindowLowerBoundHeadroom",
+        "curfewViolations",
+        "requiredDestinationRons"
+      ]
+    },
+    "checks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "status", "message"]
+      }
+    },
+    "fleetPlan": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": [
+          "configuredAircraft",
+          "bankOnlyMinimumAircraft",
+          "bankAndRonMinimumAircraft",
+          "minimumAircraftDays",
+          "minimumAircraftMinutes",
+          "shortfall",
+          "headroom"
+        ]
+      }
+    },
+    "lowerBounds": {
+      "type": "object",
+      "required": ["withoutDestinationRon", "withDestinationRon"]
+    },
+    "nextRepair": {
+      "type": "object",
+      "required": ["status", "action", "message"]
+    },
+    "limitations": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  }
+}

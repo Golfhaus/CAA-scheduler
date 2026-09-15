@@ -23,9 +23,10 @@ Each run replaces only the compiler's known files in that output directory. This
 7. Allocate a fresh frequency and fleet proposal against the schedule-specific aircraft counts.
 8. Generate hub-bank windows and place all proposed hub-touching flying without accepting a curfew violation.
 9. Construct complete aircraft cycles, insert non-hub flying, and evaluate fleet, continuity, turn, curfew, and RON feasibility.
-10. Run structural and operating validation against the timed seed candidate.
-11. Stop consumer export if a hard-stop or planning-input check fails.
-12. Otherwise write the canonical candidate, timetable, and gates. Planning and diagnostic reports are retained in either case.
+10. Independently assign directional frequencies to bank cores and solve a continuous time-flow lower bound with hard curfews and destination RONs.
+11. Run structural and operating validation against the timed seed candidate.
+12. Stop consumer export if a hard-stop or planning-input check fails.
+13. Otherwise write the canonical candidate, timetable, and gates. Planning and diagnostic reports are retained in either case.
 
 Fleet counts have no engine default. The compiler copies `fleetCounts` directly from the build configuration, and the operating validator measures aircraft-day use against those values.
 
@@ -41,7 +42,7 @@ Curfew enforcement comes from the pinned operating policy. The departure-window 
 | `candidate_review_required` | Hard stops passed, but other structural/operating findings need repair | Yes |
 | `candidate_ready` | All evaluated structural and error-level operating checks passed | Yes |
 
-The current fresh planning proposal produces `blocked_planning_input`. The first-pass route artifact retains the 409-aircraft/184-aircraft-short diagnostic, while the repair artifact proves that all 1,430 legs fit in 209 of the 225 selected aircraft with zero curfew or RON failures. Consumer outputs remain suppressed because the repaired feasibility times have not yet been jointly materialized into the approved hub-bank cores.
+The current fresh planning proposal produces `blocked_planning_input`. The first-pass route artifact retains the 409-aircraft/184-aircraft-short diagnostic, while the repair artifact proves that all 1,430 legs fit in 209 of the 225 selected aircraft with zero curfew or RON failures. The bank-flow diagnostic removes the accidental same-bank direction pairing and uses the full 60-minute cores required by §1.6a. Its relaxed bank/turn/RON lower bound fits every configured fleet at 169 whole-aircraft equivalents in aggregate. The remaining work is non-hub integration and exact whole-flight cycle materialization—not a larger or rebalanced schedule fleet.
 
 ## GitHub Actions
 
@@ -49,4 +50,4 @@ The **Build candidate schedule** workflow accepts a repository path to an approv
 
 ## Deliberate boundary
 
-This compiler still evaluates a seed candidate. It now emits a fresh demand-derived frequency/fleet proposal, a complete timed bank plan, the preserved first-pass aircraft-cycle diagnostic, and a passing fleet/curfew/RON topology repair. It does not substitute proposed legs into canonical JSON until repaired route order and bank timing are materialized together. Blank starts and airport additions remain explicit blockers until that stage is deterministic.
+This compiler still evaluates a seed candidate. It now emits a fresh demand-derived frequency/fleet proposal, a complete timed bank plan, the preserved first-pass aircraft-cycle diagnostic, a passing fleet/curfew/RON topology repair, and a mathematical full-window materialization lower bound. It does not substitute proposed legs into canonical JSON until non-hub integration, route order, and exact bank timing are materialized together. Blank starts and airport additions remain explicit blockers until that stage is deterministic.

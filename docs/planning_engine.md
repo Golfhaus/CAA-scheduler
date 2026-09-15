@@ -68,6 +68,14 @@ On the v2.2.5 planning proposal, the repair retains all 1,430 legs in 209 route 
 
 This is a feasibility witness, not published schedule timing. It intentionally reports `pending_bank_alignment`: 309 of 1,190 hub-touching legs currently fall in the approved cores. The next materializer must jointly retime those legs within the generated bank windows while preserving the proved route order, fleet limits, turns, curfews, and RONs. No canonical flight numbers or Line/Day/Route identifiers are assigned before that check passes.
 
+## Bank-materialization lower bound
+
+`bank_materialization_diagnostic.json` is defined by [`schemas/bank_materialization_diagnostic.schema.json`](../schemas/bank_materialization_diagnostic.schema.json). It corrects an important ambiguity in the first bank plan: the two directions of a daily market frequency are independently assigned to bank cores. A round-trip frequency guarantees service in both directions; it does not require both directions to use the same numbered bank or the same aircraft.
+
+The diagnostic builds every curfew-safe bank-window option for all 1,190 hub-touching legs and solves a continuous aggregate time-flow relaxation. It enforces the 40-minute turn floor and reserves a RON-capable connection at all 99 required destinations. Because the same flight may use different five-minute points inside its window for different relaxed connections, the result is a lower bound: exceeding a configured fleet would prove infeasibility, while fitting does not yet prove an exact integer routing.
+
+For the current proposal, the relaxed bank/turn/RON lower bound fits every configured fleet: MAX9 22/35, CRJ900 32/45, CRJ700 48/65, and CRJ200 67/80, or 169/225 in aggregate. This retracts the provisional target-time-only CRJ200 shortfall: §1.6a requires events to land inside a bank core, not at the generated +10/+50 targets. The next repair must integrate all 240 non-hub legs and select one exact time for every whole flight and connection without adding aircraft, reducing service, or waiving curfews.
+
 ## Multi-hub qualification
 
 `compute_multihub_assignments()` is a pure function. It accepts city metadata, an explicit intergroup-demand dataset, city market sizes, and versioned planning rules. It has no hardcoded filesystem paths, import-time data loading, pandas dependency, pickle input, or mutable global state.
@@ -136,13 +144,25 @@ python -m caa_scheduler build-routing-repair \
   routing_repair_plan.json
 ```
 
+Prove the independent-direction bank-flow lower bound with:
+
+```bash
+python -m caa_scheduler diagnose-bank-materialization \
+  canonical_schedule.json \
+  frequency_fleet_plan.json \
+  hub_bank_plan.json \
+  config/demand_data/bts_db1c_6mo_v3.json \
+  bank_materialization_diagnostic.json
+```
+
 The golden-baseline and candidate commands generate these planning artifacts automatically. Candidate construction resolves the demand version to exactly one manifest and verifies every source fingerprint; an unknown version or mismatch blocks publishable output. If a candidate violates a hard stop such as a curfew, its canonical, timetable, and gate outputs remain suppressed. The demand/planning snapshots and diagnostic validation reports are retained so the failed build can be investigated.
 
 ## Next construction stages
 
 The remaining Milestone 0.7 work is intentionally staged:
 
-1. materialize the passing topology into the approved bank cores without exceeding its schedule-selected fleet or relaxing curfews; and
-2. assign canonical lines, days, routes, pairings, and flight numbers, followed by full structural, operating, gate, and curfew validation.
+1. integrate non-hub flying and solve exact integer banked route cycles inside the unchanged schedule fleet;
+2. assign one five-minute point inside every selected bank window while preserving turns, curfews, and RONs; and
+3. assign canonical lines, days, routes, pairings, and flight numbers, followed by full structural, operating, gate, and curfew validation.
 
 Each stage needs a golden comparison before the subsequent stage is permitted to write a publishable candidate.

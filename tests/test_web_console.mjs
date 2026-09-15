@@ -86,6 +86,15 @@ const routingRepairPlan = JSON.parse(
     "utf8",
   ),
 );
+const bankMaterializationDiagnostic = JSON.parse(
+  await readFile(
+    new URL(
+      "../data/schedules/schedule_6_v2_2_5/bank_materialization_diagnostic.json",
+      import.meta.url,
+    ),
+    "utf8",
+  ),
+);
 
 test("overview metrics reflect the frozen schedule", () => {
   assert.deepEqual(scheduleMetrics(canonical), {
@@ -166,6 +175,17 @@ test("routing repair fits the selected fleet while retaining materialization gua
   assert.equal(routingRepairPlan.summary.destinationsWithoutRon, 0);
   assert.equal(routingRepairPlan.summary.rollingRonViolations, 0);
   assert.equal(routingRepairPlan.materializationStatus, "pending_bank_alignment");
+});
+
+test("bank-window lower bound fits each fleet before non-hub integration", () => {
+  assert.equal(bankMaterializationDiagnostic.directionalBankAssignment, "independent");
+  assert.equal(bankMaterializationDiagnostic.bankWindowTiming, "full_core_five_minute_options");
+  assert.equal(bankMaterializationDiagnostic.status, "pending_nonhub_integration");
+  assert.equal(bankMaterializationDiagnostic.summary.bankedLegs, 1190);
+  assert.equal(bankMaterializationDiagnostic.summary.nonHubLegs, 240);
+  assert.equal(bankMaterializationDiagnostic.summary.fleetAllocationShortfall, 0);
+  assert.equal(bankMaterializationDiagnostic.fleetPlan.CRJ200.bankAndRonMinimumAircraft, 67);
+  assert.equal(bankMaterializationDiagnostic.fleetPlan.CRJ200.configuredAircraft, 80);
 });
 
 test("published flights default to departure-time order", () => {

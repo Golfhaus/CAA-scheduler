@@ -5,6 +5,7 @@ from pathlib import Path
 
 from .allocation import build_frequency_fleet_plan_from_manifest
 from .bank_placement import build_hub_bank_plan_from_manifest
+from .bank_materialization import build_bank_materialization_diagnostic_from_manifest
 from .baseline import build_baseline
 from .candidate import build_candidate
 from .demand import build_demand_plan_from_manifest
@@ -114,6 +115,17 @@ def _parser() -> argparse.ArgumentParser:
     repair.add_argument("output", type=Path)
     repair.add_argument("--repo-root", type=Path, default=Path.cwd())
 
+    materialization = subcommands.add_parser(
+        "diagnose-bank-materialization",
+        help="Prove the fleet lower bound for independent directional bank assignment",
+    )
+    materialization.add_argument("canonical", type=Path)
+    materialization.add_argument("frequency_plan", type=Path)
+    materialization.add_argument("bank_plan", type=Path)
+    materialization.add_argument("manifest", type=Path)
+    materialization.add_argument("output", type=Path)
+    materialization.add_argument("--repo-root", type=Path, default=Path.cwd())
+
     web = subcommands.add_parser(
         "build-web", help="Assemble the static GitHub Pages console"
     )
@@ -220,6 +232,14 @@ def main(argv: list[str] | None = None) -> int:
             f"{repair_plan['summary']['requiredAircraft']}/"
             f"{repair_plan['summary']['configuredAircraft']} aircraft; "
             f"{repair_plan['materializationStatus']})"
+        )
+        materialization = result["bankMaterializationDiagnostic"]
+        print(
+            "Bank materialization: "
+            f"{materialization['status'].upper()} "
+            f"({materialization['summary']['bankAndRonMinimumAircraft']}/"
+            f"{materialization['summary']['configuredAircraft']} aggregate lower bound; "
+            f"{materialization['summary']['fleetAllocationShortfall']} fleet-specific shortfall)"
         )
         return 0 if (
             validation["status"] == "pass"
@@ -384,4 +404,22 @@ def main(argv: list[str] | None = None) -> int:
         print(f"Materialization: {plan['materializationStatus']}")
         print(f"Wrote {args.output}")
         return 0 if plan["status"] == "pass" else 1
+    if args.command == "diagnose-bank-materialization":
+        frequency_plan = read_json(args.frequency_plan)
+        bank_plan = read_json(args.bank_plan)
+        diagnostic = build_bank_materialization_diagnostic_from_manifest(
+            canonical,
+            frequency_plan,
+            bank_plan,
+            args.manifest,
+            args.repo_root.resolve(),
+        )
+        write_json(args.output, diagnostic)
+        print(
+            f"Bank materialization: {diagnostic['status'].upper()} "
+            f"({diagnostic['summary']['fleetAllocationShortfall']} "
+            "fleet-specific aircraft short)"
+        )
+        print(f"Wrote {args.output}")
+        return 0 if diagnostic["materializationStatus"] != "blocked" else 1
     return 2

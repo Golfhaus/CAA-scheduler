@@ -116,6 +116,7 @@ class CandidateBuildTests(unittest.TestCase):
                 "hub_bank_plan.json",
                 "aircraft_route_plan.json",
                 "routing_repair_plan.json",
+                "bank_materialization_diagnostic.json",
             ):
                 self.assertTrue((output / filename).is_file(), filename)
             planning = json.loads((output / "planning_snapshot.json").read_text())
@@ -147,6 +148,13 @@ class CandidateBuildTests(unittest.TestCase):
             self.assertEqual(repair["summary"]["aircraftShortfall"], 0)
             self.assertEqual(repair["summary"]["curfewViolations"], 0)
             self.assertEqual(repair["materializationStatus"], "pending_bank_alignment")
+            materialization = report["bankMaterializationDiagnostic"]
+            self.assertEqual(
+                materialization["status"], "pending_nonhub_integration"
+            )
+            self.assertEqual(
+                materialization["fleetPlan"]["CRJ200"]["shortfall"], 0
+            )
             self.assertFalse((output / "canonical_schedule.json").exists())
             self.assertFalse((output / "timetable.json").exists())
             self.assertFalse((output / "gates.json").exists())
