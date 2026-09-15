@@ -387,6 +387,7 @@ tbody tr:hover { background: #f6f9fc; }
 .demand-table-shell { max-height: 30rem; overflow: auto; }
 .planning-checks { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: 0.55rem; margin-bottom: 1rem; }
 .planning-checks article { display: flex; align-items: baseline; gap: 0.65rem; padding: 0.7rem 0.8rem; border: 1px solid var(--line); border-left: 4px solid var(--success); border-radius: 0.6rem; background: white; }
+.planning-checks article.is-pending { border-left-color: var(--orange-500, #f26a21); background: #fff8f1; }
 .planning-checks article.is-fail { border-left-color: var(--danger); background: var(--danger-soft); }
 .planning-checks strong { flex: 0 0 auto; color: var(--success); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.04em; }
 .planning-checks article.is-fail strong { color: var(--danger); }

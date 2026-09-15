@@ -62,7 +62,7 @@ Status: complete.
 
 ## 0.7 — Deterministic construction planner
 
-Status: in progress; first-pass aircraft routing and RON feasibility complete.
+Status: in progress; Milestone 0.7.5 topology repair complete.
 
 - Replace hardcoded paths, pickle files, import-time data loading, and mutable module globals.
 - Reconnect demand, multi-hub assignment, fleet allocation, bank placement, routing, and repair logic behind one callable build command.
@@ -83,10 +83,13 @@ Completed foundation:
 - Construct continuous same-fleet cycles for all 1,430 proposed legs, including the 240 non-hub legs.
 - Evaluate minimum turns, schedule-specific fleet fit, curfews, destination RON coverage, and rolling target-city RON cadence without adding aircraft or waiving a curfew.
 - Retain failed route diagnostics and suppress candidate consumer outputs when the proposal is infeasible.
+- Retain all 1,430 proposed legs in a deterministic curfew-safe topology using 209 of 225 schedule-selected aircraft.
+- Repair destination and rolling target-city RON endpoints without hardcoded fleet quantities.
+- Preserve the independent 409-aircraft bank-placement diagnostic alongside the passing topology repair.
 
 Remaining in 0.7:
 
-- Add deterministic retiming and fleet-assignment repair for the first-pass capacity and RON failures.
+- Materialize the fleet-feasible topology into the approved hub-bank cores.
 - Materialize a repaired plan as canonical lines, days, routes, pairings, and flight numbers.
 - Add golden comparisons for each stage before enabling blank-start construction or airport additions.
 

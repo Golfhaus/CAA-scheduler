@@ -41,7 +41,7 @@ Curfew enforcement comes from the pinned operating policy. The departure-window 
 | `candidate_review_required` | Hard stops passed, but other structural/operating findings need repair | Yes |
 | `candidate_ready` | All evaluated structural and error-level operating checks passed | Yes |
 
-The current fresh planning proposal produces `blocked_planning_input`: all 1,430 legs are routed without a curfew violation, but the independent bank placements exceed the schedule-selected fleet and one cycle misses its rolling target-RON window. The route artifact and exact shortfalls are retained for deterministic repair; consumer outputs are not published from an infeasible proposal.
+The current fresh planning proposal produces `blocked_planning_input`. The first-pass route artifact retains the 409-aircraft/184-aircraft-short diagnostic, while the repair artifact proves that all 1,430 legs fit in 209 of the 225 selected aircraft with zero curfew or RON failures. Consumer outputs remain suppressed because the repaired feasibility times have not yet been jointly materialized into the approved hub-bank cores.
 
 ## GitHub Actions
 
@@ -49,4 +49,4 @@ The **Build candidate schedule** workflow accepts a repository path to an approv
 
 ## Deliberate boundary
 
-This compiler still evaluates a seed candidate. It now emits a fresh demand-derived frequency/fleet proposal, a complete timed bank plan, and an evidence-bearing aircraft-cycle/RON feasibility plan. It does not substitute the proposed legs into canonical JSON until deterministic repair makes the route plan feasible within the selected fleet. Blank starts and airport additions remain explicit blockers until that stage can be materialized deterministically.
+This compiler still evaluates a seed candidate. It now emits a fresh demand-derived frequency/fleet proposal, a complete timed bank plan, the preserved first-pass aircraft-cycle diagnostic, and a passing fleet/curfew/RON topology repair. It does not substitute proposed legs into canonical JSON until repaired route order and bank timing are materialized together. Blank starts and airport additions remain explicit blockers until that stage is deterministic.

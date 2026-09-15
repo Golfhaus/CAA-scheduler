@@ -27,6 +27,7 @@ v2.2.5 workbook + pinned city data
     -> fresh frequency + fleet proposal within schedule-specific aircraft-minutes
     -> curfew-safe bank placement for all proposed hub flying
     -> complete aircraft-cycle and RON feasibility report
+    -> deterministic curfew-safe topology repair inside the selected fleet
     -> timetable/gate candidate exports only after hard stops pass
 ```
 
@@ -54,6 +55,7 @@ This writes:
 - `data/schedules/schedule_6_v2_2_5/frequency_fleet_plan.json`
 - `data/schedules/schedule_6_v2_2_5/hub_bank_plan.json`
 - `data/schedules/schedule_6_v2_2_5/aircraft_route_plan.json`
+- `data/schedules/schedule_6_v2_2_5/routing_repair_plan.json`
 
 Run the regression tests with:
 
@@ -106,9 +108,15 @@ python -m caa_scheduler build-route-plan \
   data/schedules/schedule_6_v2_2_5/hub_bank_plan.json \
   config/demand_data/bts_db1c_6mo_v3.json \
   aircraft_route_plan.json
+python -m caa_scheduler build-routing-repair \
+  data/schedules/schedule_6_v2_2_5/canonical_schedule.json \
+  data/schedules/schedule_6_v2_2_5/frequency_fleet_plan.json \
+  data/schedules/schedule_6_v2_2_5/hub_bank_plan.json \
+  config/demand_data/bts_db1c_6mo_v3.json \
+  routing_repair_plan.json
 ```
 
-`baseline` verifies reproducibility and therefore succeeds when structural/planning validation, demand-plan parity, and both golden exports match. `validate-operating` is the enforcement command: it exits nonzero while unoverridden hard findings remain.
+`baseline` verifies reproducibility and therefore succeeds when structural/planning validation, demand-plan parity, topology repair, and both golden exports match. `validate-operating` is the enforcement command: it exits nonzero while unoverridden hard findings remain.
 
 ## Compile a candidate schedule
 
@@ -118,15 +126,15 @@ Export an approved configuration from **Schedule Setup**, add it to a working br
 python -m caa_scheduler build-candidate path/to/build_config.json
 ```
 
-For a previous-schedule start, the compiler resolves the pinned canonical baseline from `data/schedules/<scheduleId>/canonical_schedule.json`. It writes an isolated package under `builds/<buildId>/` containing a copy of the approved input, validation reports, demand plan, fresh frequency/fleet proposal, generated hub-bank plan, and aircraft-route feasibility plan. Canonical, timetable, and gate outputs are added only after every construction gate passes. The manually dispatched **Build candidate schedule** GitHub Action runs the same command and retains the package as an artifact for 30 days.
+For a previous-schedule start, the compiler resolves the pinned canonical baseline from `data/schedules/<scheduleId>/canonical_schedule.json`. It writes an isolated package under `builds/<buildId>/` containing a copy of the approved input, validation reports, demand plan, fresh frequency/fleet proposal, generated hub-bank plan, the first-pass aircraft-route diagnostic, and the topology repair plan. Canonical, timetable, and gate outputs are added only after every construction gate passes. The manually dispatched **Build candidate schedule** GitHub Action runs the same command and retains the package as an artifact for 30 days.
 
 If Python preflight fails, blank-start planning is requested, or an airport addition lacks the future planning stage, no candidate is emitted. If any non-waivable hard-stop check fails—including curfew enforcement—the diagnostic reports are written but the canonical, timetable, and gate outputs are suppressed. Other operating findings produce a review-required candidate rather than being silently waived.
 
 ## Current boundary
 
-Milestone 0.7 now has a deterministic planning, demand, bank, and aircraft-cycle boundary. Python reconstructs the historical plan, processes the complete pinned 105-city demand data, reproduces all 100 non-hub assignments, generates a fresh frequency/fleet proposal, defines all 24 hub banks, places all 1,190 proposed hub-touching legs, inserts the remaining 240 non-hub legs, and maps all 1,430 legs into continuous fleet-homogeneous cycles. Aircraft quantities come only from each schedule's build configuration. Curfews remain non-waivable hard stops, and the route plan records zero violations.
+Milestone 0.7.5 now has a deterministic planning, demand, bank, aircraft-cycle, and topology-repair boundary. Python reconstructs the historical plan, processes the complete pinned 105-city demand data, reproduces all 100 non-hub assignments, generates a fresh frequency/fleet proposal, defines all 24 hub banks, and preserves the original independent-placement diagnostic. A separate repair search then retains all 1,430 legs in continuous fleet-homogeneous route days using 209 of the 225 aircraft selected for this schedule. It produces zero curfew violations, covers every non-exempt destination with a RON endpoint, and passes the rolling target-RON window. Aircraft quantities still come only from each schedule's build configuration; no fleet count is inferred from policy or added by repair.
 
-The first routing pass is intentionally diagnostic rather than self-repairing. Its independent minimum-wait matching proves full service coverage, continuity, turns, destination RON coverage, and curfew compliance, but the current bank placements imply 409 aircraft against the selected 225—a 184-aircraft shortfall—and one target-RON cadence failure. Candidate publication is therefore blocked. The next construction step will retime and reassign proposed work deterministically to fit the selected fleet; it will not add aircraft implicitly or relax a curfew. Blank starts and airport additions remain blocked until that repair stage can produce a feasible canonical schedule.
+The first routing pass remains an intentional diagnostic: its independent bank placements imply 409 aircraft against the selected 225 and one target-RON cadence failure. `routing_repair_plan.json` now proves that the topology itself fits with 16 aircraft remaining, without dropping service or relaxing a curfew. It is not yet canonical timing: only 309 of 1,190 hub-touching feasibility legs happen to sit in the approved bank cores. Candidate publication therefore remains blocked while the next construction step jointly materializes the repaired route order and bank timing, then assigns canonical Line/Day/Route, pairing, and flight identifiers. Blank starts and airport additions remain blocked until that materialization is complete.
 
 ## Repository visibility
 

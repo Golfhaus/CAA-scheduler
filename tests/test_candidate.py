@@ -115,6 +115,7 @@ class CandidateBuildTests(unittest.TestCase):
                 "frequency_fleet_plan.json",
                 "hub_bank_plan.json",
                 "aircraft_route_plan.json",
+                "routing_repair_plan.json",
             ):
                 self.assertTrue((output / filename).is_file(), filename)
             planning = json.loads((output / "planning_snapshot.json").read_text())
@@ -141,6 +142,11 @@ class CandidateBuildTests(unittest.TestCase):
                 route_plan["fleetPlan"]["MAX9"]["configuredAircraft"],
                 config["fleetCounts"]["MAX9"],
             )
+            repair = report["routingRepairPlan"]
+            self.assertEqual(repair["status"], "pass")
+            self.assertEqual(repair["summary"]["aircraftShortfall"], 0)
+            self.assertEqual(repair["summary"]["curfewViolations"], 0)
+            self.assertEqual(repair["materializationStatus"], "pending_bank_alignment")
             self.assertFalse((output / "canonical_schedule.json").exists())
             self.assertFalse((output / "timetable.json").exists())
             self.assertFalse((output / "gates.json").exists())
@@ -216,6 +222,7 @@ class CandidateBuildTests(unittest.TestCase):
             self.assertTrue((output / "frequency_fleet_plan.json").is_file())
             self.assertTrue((output / "hub_bank_plan.json").is_file())
             self.assertTrue((output / "aircraft_route_plan.json").is_file())
+            self.assertTrue((output / "routing_repair_plan.json").is_file())
 
     def test_unknown_demand_version_suppresses_candidate_outputs(self) -> None:
         config = _config(self.baseline)

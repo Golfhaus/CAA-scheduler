@@ -77,6 +77,15 @@ const aircraftRoutePlan = JSON.parse(
     "utf8",
   ),
 );
+const routingRepairPlan = JSON.parse(
+  await readFile(
+    new URL(
+      "../data/schedules/schedule_6_v2_2_5/routing_repair_plan.json",
+      import.meta.url,
+    ),
+    "utf8",
+  ),
+);
 
 test("overview metrics reflect the frozen schedule", () => {
   assert.deepEqual(scheduleMetrics(canonical), {
@@ -145,6 +154,18 @@ test("aircraft route plan exposes the complete, curfew-safe feasibility result",
   assert.equal(aircraftRoutePlan.summary.configuredAircraft, 225);
   assert.equal(aircraftRoutePlan.summary.requiredAircraft, 409);
   assert.equal(aircraftRoutePlan.summary.curfewViolations, 0);
+});
+
+test("routing repair fits the selected fleet while retaining materialization guard", () => {
+  assert.equal(routingRepairPlan.status, "pass");
+  assert.equal(routingRepairPlan.summary.routedLegs, 1430);
+  assert.equal(routingRepairPlan.summary.configuredAircraft, 225);
+  assert.equal(routingRepairPlan.summary.requiredAircraft, 209);
+  assert.equal(routingRepairPlan.summary.aircraftShortfall, 0);
+  assert.equal(routingRepairPlan.summary.curfewViolations, 0);
+  assert.equal(routingRepairPlan.summary.destinationsWithoutRon, 0);
+  assert.equal(routingRepairPlan.summary.rollingRonViolations, 0);
+  assert.equal(routingRepairPlan.materializationStatus, "pending_bank_alignment");
 });
 
 test("published flights default to departure-time order", () => {
