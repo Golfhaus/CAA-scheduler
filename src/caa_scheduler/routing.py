@@ -512,6 +512,23 @@ def _cycles(
     return cycles
 
 
+def _artifact_leg(leg: dict[str, Any]) -> dict[str, Any]:
+    """Keep the route artifact self-contained without duplicating planning detail."""
+    keys = (
+        "id",
+        "source",
+        "fleet",
+        "origin",
+        "destination",
+        "departureMinute",
+        "arrivalMinute",
+        "departureUtcMinute",
+        "blockMinutes",
+        "curfewStatus",
+    )
+    return {key: leg[key] for key in keys}
+
+
 def build_aircraft_route_plan(
     canonical: dict[str, Any],
     frequency_plan: dict[str, Any],
@@ -693,7 +710,10 @@ def build_aircraft_route_plan(
         },
         "checks": checks,
         "fleetPlan": fleet_plan,
-        "legs": sorted(legs.values(), key=lambda row: row["id"]),
+        "legs": [
+            _artifact_leg(row)
+            for row in sorted(legs.values(), key=lambda row: row["id"])
+        ],
         "cycles": cycles,
         "unplaced": unplaced,
         "diagnostics": {
