@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://coastal-american.example/schemas/aircraft_route_plan.schema.json",
+  "title": "Coastal American Airways aircraft route and RON plan",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "scheduleId",
+    "sourceKind",
+    "planningRulesId",
+    "operatingPolicyId",
+    "status",
+    "summary",
+    "checks",
+    "fleetPlan",
+    "legs",
+    "cycles",
+    "unplaced",
+    "diagnostics",
+    "limitations"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "scheduleId": { "type": "string", "minLength": 1 },
+    "sourceKind": { "const": "banked_aircraft_cycle_plan" },
+    "planningRulesId": { "type": "string", "minLength": 1 },
+    "operatingPolicyId": { "type": "string", "minLength": 1 },
+    "status": { "enum": ["pass", "fail"] },
+    "summary": {
+      "type": "object",
+      "required": [
+        "plannedLegs",
+        "routedLegs",
+        "configuredAircraft",
+        "requiredAircraft",
+        "aircraftShortfall",
+        "curfewViolations",
+        "destinationsWithoutRon",
+        "rollingRonViolations"
+      ]
+    },
+    "checks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "status", "message"]
+      }
+    },
+    "fleetPlan": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": [
+          "configuredAircraft",
+          "requiredAircraft",
+          "shortfall",
+          "remainingAircraft",
+          "cycles",
+          "routedLegs"
+        ]
+      }
+    },
+    "legs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "source",
+          "fleet",
+          "origin",
+          "destination",
+          "departureMinute",
+          "arrivalMinute",
+          "departureUtcMinute",
+          "blockMinutes",
+          "curfewStatus"
+        ]
+      }
+    },
+    "cycles": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "fleet",
+          "legCount",
+          "durationMinutes",
+          "aircraftRequired",
+          "maximumDaysWithoutTargetRon",
+          "legIds",
+          "ronStops"
+        ]
+      }
+    },
+    "unplaced": { "type": "array" },
+    "diagnostics": { "type": "object" },
+    "limitations": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  }
+}
