@@ -219,6 +219,26 @@ def build_demand_plan_from_manifest(
     *,
     expected_hub_assignments: dict[str, list[str]] | None = None,
 ) -> dict[str, Any]:
+    loaded = load_demand_sources_from_manifest(manifest_path, repo_root)
+    manifest = loaded["manifest"]
+    plan = build_demand_plan(
+        loaded["airportOdMatrixText"],
+        cities,
+        loaded["intergroupDemand"],
+        loaded["planningRules"],
+        demand_version=manifest["id"],
+        matrix_filename=manifest["sources"]["airportOdMatrix"]["filename"],
+        expected_hub_assignments=expected_hub_assignments,
+    )
+    plan["provenance"]["manifest"] = loaded["manifestLabel"]
+    plan["provenance"]["manifestSchemaVersion"] = manifest["schemaVersion"]
+    return plan
+
+
+def load_demand_sources_from_manifest(
+    manifest_path: Path, repo_root: Path
+) -> dict[str, Any]:
+    """Load every fingerprinted demand source behind one exact manifest."""
     resolved_manifest = resolve_from_repo(repo_root, str(manifest_path)).resolve()
     manifest = read_json(resolved_manifest)
     sources = manifest["sources"]
@@ -233,20 +253,17 @@ def build_demand_plan_from_manifest(
             )
         loaded[key] = (path, source)
 
-    matrix_path = loaded["airportOdMatrix"][0]
-    plan = build_demand_plan(
-        matrix_path.read_text(encoding="utf-8"),
-        cities,
-        read_json(loaded["intergroupDemand"][0]),
-        read_json(loaded["planningRules"][0]),
-        demand_version=manifest["id"],
-        matrix_filename=loaded["airportOdMatrix"][1]["filename"],
-        expected_hub_assignments=expected_hub_assignments,
-    )
     try:
         manifest_label = resolved_manifest.relative_to(repo_root.resolve()).as_posix()
     except ValueError:
         manifest_label = str(resolved_manifest)
-    plan["provenance"]["manifest"] = manifest_label
-    plan["provenance"]["manifestSchemaVersion"] = manifest["schemaVersion"]
-    return plan
+    matrix_path = loaded["airportOdMatrix"][0]
+    return {
+        "manifest": manifest,
+        "manifestPath": resolved_manifest,
+        "manifestLabel": manifest_label,
+        "airportOdMatrixPath": matrix_path,
+        "airportOdMatrixText": matrix_path.read_text(encoding="utf-8"),
+        "intergroupDemand": read_json(loaded["intergroupDemand"][0]),
+        "planningRules": read_json(loaded["planningRules"][0]),
+    }

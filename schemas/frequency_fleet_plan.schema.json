@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://coastal-american.example/schemas/frequency_fleet_plan.schema.json",
+  "title": "Coastal American Airways frequency and fleet plan",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "scheduleId",
+    "sourceKind",
+    "demandDataVersion",
+    "planningRulesId",
+    "status",
+    "summary",
+    "checks",
+    "fleetPlan",
+    "markets",
+    "cityService",
+    "limitations"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "scheduleId": { "type": "string", "minLength": 1 },
+    "sourceKind": { "const": "fresh_demand_allocation" },
+    "demandDataVersion": { "type": "string", "minLength": 1 },
+    "planningRulesId": { "type": "string", "minLength": 1 },
+    "status": { "enum": ["pass", "fail"] },
+    "summary": { "type": "object" },
+    "checks": { "type": "array" },
+    "fleetPlan": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": [
+          "aircraftCount",
+          "availableAircraftMinutes",
+          "plannedAircraftMinutes",
+          "remainingAircraftMinutes",
+          "utilization",
+          "marketCount",
+          "roundTrips",
+          "legCount"
+        ]
+      }
+    },
+    "markets": { "type": "array" },
+    "cityService": { "type": "array" },
+    "limitations": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  }
+}

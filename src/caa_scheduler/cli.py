@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 
+from .allocation import build_frequency_fleet_plan_from_manifest
 from .baseline import build_baseline
 from .candidate import build_candidate
 from .demand import build_demand_plan_from_manifest
@@ -67,6 +68,16 @@ def _parser() -> argparse.ArgumentParser:
     demand.add_argument("manifest", type=Path)
     demand.add_argument("output", type=Path)
     demand.add_argument("--repo-root", type=Path, default=Path.cwd())
+
+    allocation = subcommands.add_parser(
+        "build-frequency-plan",
+        help="Allocate fresh frequencies and fleets from pinned demand inputs",
+    )
+    allocation.add_argument("canonical", type=Path)
+    allocation.add_argument("demand_plan", type=Path)
+    allocation.add_argument("manifest", type=Path)
+    allocation.add_argument("output", type=Path)
+    allocation.add_argument("--repo-root", type=Path, default=Path.cwd())
 
     web = subcommands.add_parser(
         "build-web", help="Assemble the static GitHub Pages console"
@@ -142,6 +153,13 @@ def main(argv: list[str] | None = None) -> int:
             f"({demand['matrix']['airportCount']} cities, "
             f"{parity['matched']}/{parity['compared']} hub assignments matched)"
         )
+        allocation = result["frequencyFleetPlan"]
+        print(
+            "Frequency/fleet plan: "
+            f"{allocation['status'].upper()} "
+            f"({allocation['summary']['plannedLegs']} legs, "
+            f"{allocation['summary']['candidateMarkets']} markets)"
+        )
         return 0 if (
             validation["status"] == "pass"
             and result["timetableParity"]
@@ -150,6 +168,7 @@ def main(argv: list[str] | None = None) -> int:
             and result["gateByteParity"]
             and result["planningValidation"]["status"] == "pass"
             and result["demandPlan"]["status"] == "pass"
+            and result["frequencyFleetPlan"]["status"] == "pass"
         ) else 1
 
     canonical = read_json(args.canonical)
@@ -226,6 +245,22 @@ def main(argv: list[str] | None = None) -> int:
             f"Demand plan: {plan['status'].upper()} "
             f"({plan['matrix']['airportCount']} cities, "
             f"{parity['matched']}/{parity['compared']} hub assignments matched)"
+        )
+        print(f"Wrote {args.output}")
+        return 0 if plan["status"] == "pass" else 1
+    if args.command == "build-frequency-plan":
+        demand_plan = read_json(args.demand_plan)
+        plan = build_frequency_fleet_plan_from_manifest(
+            canonical,
+            demand_plan,
+            args.manifest,
+            args.repo_root.resolve(),
+        )
+        write_json(args.output, plan)
+        print(
+            f"Frequency/fleet plan: {plan['status'].upper()} "
+            f"({plan['summary']['plannedLegs']} legs, "
+            f"{plan['summary']['candidateMarkets']} markets)"
         )
         print(f"Wrote {args.output}")
         return 0 if plan["status"] == "pass" else 1

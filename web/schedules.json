@@ -21,6 +21,7 @@
         "planning": "data/schedules/schedule_6_v2_2_5/planning_snapshot.json",
         "planningValidation": "data/schedules/schedule_6_v2_2_5/planning_validation_report.json",
         "demandPlan": "data/schedules/schedule_6_v2_2_5/demand_plan.json",
+        "frequencyFleetPlan": "data/schedules/schedule_6_v2_2_5/frequency_fleet_plan.json",
         "timetable": "data/schedules/schedule_6_v2_2_5/timetable.json",
         "gates": "data/schedules/schedule_6_v2_2_5/gates.json"
       }
@@ -30,8 +31,8 @@
     "schema": "schemas/build_config.schema.json",
     "storage": "browser-local",
     "demandData": {
-      "version": "bts-db1c-6mo-jul2025-apr2026-v1",
-      "manifest": "config/demand_data/bts_db1c_6mo_v1.json"
+      "version": "bts-db1c-6mo-jul2025-apr2026-v2",
+      "manifest": "config/demand_data/bts_db1c_6mo_v2.json"
     }
   }
 }

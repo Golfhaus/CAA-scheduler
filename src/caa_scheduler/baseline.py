@@ -3,6 +3,7 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Any
 
+from .allocation import build_frequency_fleet_plan_from_manifest
 from .demand import build_demand_plan_from_manifest
 from .importer import import_canonical_schedule
 from .gate_export import export_gate_schedule
@@ -48,6 +49,12 @@ def build_baseline(config_path: Path, repo_root: Path) -> dict[str, Any]:
     )
     if demand_plan["demandDataVersion"] != demand_input["version"]:
         raise ValueError("Baseline demand-data version does not match its manifest")
+    frequency_fleet_plan = build_frequency_fleet_plan_from_manifest(
+        canonical,
+        demand_plan,
+        Path(demand_input["manifest"]),
+        repo_root,
+    )
     expected = read_json(resolve_from_repo(repo_root, inputs["expectedTimetable"]))
     parity = timetable == expected
     expected_gate_path = resolve_from_repo(repo_root, inputs["expectedGate"])
@@ -78,6 +85,10 @@ def build_baseline(config_path: Path, repo_root: Path) -> dict[str, Any]:
         planning_validation,
     )
     write_json(output_directory / "demand_plan.json", demand_plan)
+    write_json(
+        output_directory / "frequency_fleet_plan.json",
+        frequency_fleet_plan,
+    )
     expected_bytes = resolve_from_repo(repo_root, inputs["expectedTimetable"]).read_bytes()
     generated_bytes = (output_directory / "timetable.json").read_bytes()
     expected_gate_bytes = expected_gate_path.read_bytes()
@@ -92,10 +103,12 @@ def build_baseline(config_path: Path, repo_root: Path) -> dict[str, Any]:
         "planningPath": output_directory / "planning_snapshot.json",
         "planningValidationPath": output_directory / "planning_validation_report.json",
         "demandPlanPath": output_directory / "demand_plan.json",
+        "frequencyFleetPlanPath": output_directory / "frequency_fleet_plan.json",
         "validation": validation,
         "operatingValidation": operating_validation,
         "planningValidation": planning_validation,
         "demandPlan": demand_plan,
+        "frequencyFleetPlan": frequency_fleet_plan,
         "timetableParity": parity,
         "timetableByteParity": generated_bytes == expected_bytes,
         "gateParity": gate_parity,

@@ -47,7 +47,7 @@ Curfews are different: the configured departure windows are enforced as hard-sto
 The unavailable checks are also deliberate evidence:
 
 - runway lengths are blank throughout the pinned city snapshot;
-- demand percentiles are absent from the canonical workbook/city snapshot and therefore remain separate in `demand_plan.json` until the operating validator accepts planning context;
+- demand percentiles and proposed tier service remain separate in `demand_plan.json` and `frequency_fleet_plan.json` until timed canonical legs can be constructed from the proposal;
 - the workbook does not preserve hub-bank definitions or per-leg bank assignments.
 
 Future builds should supply these fields directly. A missing input must not be mistaken for a passed rule.

@@ -6,6 +6,7 @@ import {
   buildItineraries,
   claimMatchesPassengerStandFinding,
   extractReferences,
+  flattenFrequencyMarkets,
   fleetUsage,
   formatMinute,
   formatMinute24,
@@ -48,6 +49,15 @@ const gates = JSON.parse(
     "utf8",
   ),
 );
+const frequencyFleetPlan = JSON.parse(
+  await readFile(
+    new URL(
+      "../data/schedules/schedule_6_v2_2_5/frequency_fleet_plan.json",
+      import.meta.url,
+    ),
+    "utf8",
+  ),
+);
 
 test("overview metrics reflect the frozen schedule", () => {
   assert.deepEqual(scheduleMetrics(canonical), {
@@ -84,12 +94,22 @@ test("routing pagination supports requested row counts and all rows", () => {
   assert.deepEqual(paginate(values, 4, "all").rows, values);
 });
 
-test("planning market filters preserve explicit fleet and direction", () => {
+test("planning market filters preserve fleet and match either market endpoint", () => {
   const row = { fleet: "CRJ700", origin: "BHM", destination: "JAX", legs: 3 };
   assert.equal(marketMatches(row, { fleet: "CRJ700", origin: "BHM" }), true);
   assert.equal(marketMatches(row, { destination: "JAX" }), true);
   assert.equal(marketMatches(row, { fleet: "MAX9" }), false);
-  assert.equal(marketMatches(row, { destination: "BHM" }), false);
+  assert.equal(marketMatches(row, { destination: "BHM" }), true);
+  assert.equal(marketMatches(row, { origin: "BHM", destination: "JAX" }), true);
+  assert.equal(marketMatches(row, { origin: "BHM", destination: "BHM" }), false);
+});
+
+test("fresh frequency markets flatten into filterable fleet rows", () => {
+  const rows = flattenFrequencyMarkets(frequencyFleetPlan);
+  assert.equal(rows.length, 370);
+  assert.equal(rows.reduce((total, row) => total + row.legCount, 0), 1430);
+  assert.equal(rows.some((row) => row.origin === "CHS" && row.destination === "PHF"), true);
+  assert.equal(rows.every((row) => row.fleet && row.roundTrips > 0), true);
 });
 
 test("published flights default to departure-time order", () => {

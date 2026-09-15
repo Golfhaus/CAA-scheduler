@@ -57,7 +57,7 @@ def _config(baseline: dict) -> dict:
             "operatingPolicy": copy.deepcopy(
                 baseline["provenance"]["operatingPolicy"]
             ),
-            "demandData": {"version": "bts-db1c-6mo-jul2025-apr2026-v1"},
+            "demandData": {"version": "bts-db1c-6mo-jul2025-apr2026-v2"},
         },
         "networkChanges": [],
         "notes": "Regression candidate",
@@ -113,6 +113,7 @@ class CandidateBuildTests(unittest.TestCase):
                 "planning_snapshot.json",
                 "planning_validation_report.json",
                 "demand_plan.json",
+                "frequency_fleet_plan.json",
                 "timetable.json",
                 "gates.json",
             ):
@@ -120,10 +121,15 @@ class CandidateBuildTests(unittest.TestCase):
             planning = json.loads((output / "planning_snapshot.json").read_text())
             self.assertEqual(
                 planning["demandDataVersion"],
-                "bts-db1c-6mo-jul2025-apr2026-v1",
+                "bts-db1c-6mo-jul2025-apr2026-v2",
             )
             self.assertEqual(report["planningValidation"]["status"], "pass")
             self.assertEqual(report["demandPlan"]["assignmentParity"]["matched"], 100)
+            self.assertEqual(report["frequencyFleetPlan"]["status"], "pass")
+            self.assertEqual(
+                report["frequencyFleetPlan"]["fleetPlan"]["MAX9"]["aircraftCount"],
+                config["fleetCounts"]["MAX9"],
+            )
 
     def test_missing_demand_pin_blocks_before_compilation(self) -> None:
         config = _config(self.baseline)
@@ -191,6 +197,7 @@ class CandidateBuildTests(unittest.TestCase):
             self.assertTrue((output / "operating_validation_report.json").is_file())
             self.assertTrue((output / "planning_snapshot.json").is_file())
             self.assertTrue((output / "demand_plan.json").is_file())
+            self.assertTrue((output / "frequency_fleet_plan.json").is_file())
 
     def test_unknown_demand_version_suppresses_candidate_outputs(self) -> None:
         config = _config(self.baseline)
