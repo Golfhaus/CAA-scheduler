@@ -15,6 +15,50 @@ def validate_schedule(canonical: dict[str, Any]) -> dict[str, Any]:
 
     _check(checks, "schema_version", canonical.get("schemaVersion") == "1.0.0", "Canonical schema version is 1.0.0")
     _check(checks, "has_legs", bool(legs), f"Schedule contains {len(legs)} legs")
+    provenance = canonical.get("provenance", {})
+    workbook = provenance.get("workbook")
+    construction = provenance.get("construction")
+    file_pins = [
+        provenance.get("cityInformation"),
+        provenance.get("operatingPolicy"),
+    ]
+    imported = isinstance(workbook, dict) and construction is None
+    generated = (
+        isinstance(construction, dict)
+        and workbook is None
+        and construction.get("sourceKind") == "deterministic_planner"
+        and bool(construction.get("sourceScheduleId"))
+        and all(
+            isinstance(construction.get(key), dict)
+            and len(str(construction[key].get("sha256", ""))) == 64
+            for key in (
+                "buildConfig",
+                "demandData",
+                "planningRules",
+                "exactMaterialization",
+            )
+        )
+    )
+    provenance_valid = (
+        imported or generated
+    ) and all(
+        isinstance(pin, dict) and len(str(pin.get("sha256", ""))) == 64
+        for pin in file_pins
+    )
+    _check(
+        checks,
+        "canonical_provenance",
+        provenance_valid,
+        (
+            "Canonical schedule has exclusive imported-workbook provenance"
+            if imported and provenance_valid
+            else (
+                "Canonical schedule has exclusive deterministic-construction provenance"
+                if generated and provenance_valid
+                else "Canonical schedule must pin exactly one imported or generated source chain"
+            )
+        ),
+    )
     policy = canonical.get("operatingPolicy")
     policy_source = canonical.get("provenance", {}).get("operatingPolicy", {})
     policy_pinned = (

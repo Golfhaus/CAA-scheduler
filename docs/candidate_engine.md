@@ -10,6 +10,8 @@ python -m caa_scheduler build-candidate path/to/build_config.json
 
 The compiler resolves a `previous_schedule` starting point from `data/schedules/<scheduleId>/canonical_schedule.json`. `--baseline` can select an explicit canonical file for testing, and `--output` can override the default `builds/<buildId>` directory.
 
+The accepted Schedule 7 v0.1.0 configuration is stored at `config/candidates/schedule_7_v0_1_0.json`. Its schedule-specific fleet selection is MAX9 35, CRJ900 45, CRJ700 65, and CRJ200 80.
+
 Each run replaces only the compiler's known files in that output directory. This prevents a newly blocked build from leaving an older canonical/timetable/gate candidate behind and making it look publishable.
 
 ## Processing order
@@ -27,7 +29,9 @@ Each run replaces only the compiler's known files in that output directory. This
 11. Select exact five-minute times, integrate non-hub flying, construct integer aircraft cycles, and verify hard curfews and RON cadence.
 12. Run structural and operating validation against the timed seed candidate.
 13. Stop consumer export if a hard-stop or planning-input check fails.
-14. Otherwise write the canonical candidate, timetable, and gates. Planning and diagnostic reports are retained in either case.
+14. Assign canonical lines, 03:00 operating days, fleet-blocked routes, pairings, and demand-ranked flight numbers from a passing exact plan.
+15. Replace workbook provenance with a fingerprinted deterministic-construction chain and rerun full structural and operating validation.
+16. Write the reviewable canonical candidate, canonicalization report, timetable, and gates unless structural validation or a non-waivable hard stop blocks them. Planning and diagnostic reports are retained in either case.
 
 Fleet counts have no engine default. The compiler copies `fleetCounts` directly from the build configuration, and the operating validator measures aircraft-day use against those values.
 
@@ -43,7 +47,9 @@ Curfew enforcement comes from the pinned operating policy. The departure-window 
 | `candidate_review_required` | Hard stops passed, but other structural/operating findings need repair | Yes |
 | `candidate_ready` | All evaluated structural and error-level operating checks passed | Yes |
 
-The current fresh planning proposal produces `blocked_planning_input`. The first-pass route artifact retains the 409-aircraft/184-aircraft-short diagnostic. The bank-flow relaxation fits at 169/225, and exact materialization now schedules all 1,430 legs—including 240 non-hub legs—in 208/225 aircraft. All hub events align to approved bank cores, all 99 required destinations receive a routed RON, the rolling target-RON check passes, and curfew violations remain zero. The remaining work is canonical identifier assignment followed by full operating and gate validation—not a larger or rebalanced schedule fleet.
+The current fresh planning proposal advances through canonicalization as `candidate_review_required`. The first-pass route artifact retains the 409-aircraft/184-aircraft-short diagnostic. The bank-flow relaxation fits at 169/225, and exact materialization schedules all 1,430 legs—including 240 non-hub legs—in 208/225 aircraft. Canonicalization produces 23 lines, 208 routes, 736 directed pairings, flights 1001–2430, and all 1,224 bank-touch assignments. Curfews, minimum turns, numbering, bank alignment, and structural validation pass.
+
+Full validation now identifies the next construction work rather than masking it: 222 same-pairing spacing findings, 45 percentile-tier hub-count findings caused by preserved historical extra-hub markets, and gate/stand findings at 13 stations, including 419 passenger touches assigned to stands. These are review failures, not permission to expand the fleet or waive curfews.
 
 If a bounded exact solve does not return a feasible incumbent, the candidate build still writes `exact_materialization_plan.json` with `materializationStatus: blocked`, the solver failure in `diagnostics.solverFailure`, and `nextStep.action: retry_exact_materialization`. A missing artifact is never used to represent solver exhaustion. Blocked exact output cannot advance to canonical identifiers or publication.
 
@@ -53,4 +59,4 @@ The **Build candidate schedule** workflow accepts a repository path to an approv
 
 ## Deliberate boundary
 
-This compiler still evaluates a seed candidate. It now emits a fresh demand-derived frequency/fleet proposal, bank plan, preserved first-pass diagnostic, topology repair, mathematical lower bound, and passing exact-cycle plan. It does not substitute proposed legs into canonical JSON until Line/Day/Route, pairing, and flight identifiers are assigned and the materialized schedule passes full validation. Blank starts and airport additions remain explicit blockers until that final canonicalization path is deterministic.
+This compiler still evaluates a seed candidate. It now emits a fresh demand-derived frequency/fleet proposal, bank plan, preserved first-pass diagnostic, topology repair, mathematical lower bound, passing exact-cycle plan, canonicalization report, and fully validated review candidate. Blank starts and airport additions remain explicit blockers until the newly exposed spacing, tier-cap, and gate/stand repair path is deterministic.

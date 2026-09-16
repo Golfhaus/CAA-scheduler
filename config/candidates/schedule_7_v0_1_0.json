@@ -1,0 +1,44 @@
+{
+  "schemaVersion": "1.0.0",
+  "buildId": "schedule_7_v0_1_0",
+  "schedule": {
+    "number": 7,
+    "version": "0.1.0",
+    "label": "Schedule 7, Version 0.1.0 (draft)",
+    "mode": "mainline",
+    "status": "draft"
+  },
+  "startingPoint": {
+    "kind": "previous_schedule",
+    "scheduleId": "schedule_6_v2_2_5"
+  },
+  "fleetCounts": {
+    "MAX9": 35,
+    "CRJ900": 45,
+    "CRJ700": 65,
+    "CRJ200": 80
+  },
+  "connectionWindowMinutes": {
+    "minimum": 30,
+    "maximum": 240
+  },
+  "inputs": {
+    "instructions": {
+      "version": "2.0 with turn-on-stand hard-stop addition",
+      "source": "instructions/CAA_Build_Instructions_TEMPLATE_v2_0.md"
+    },
+    "cityInformation": {
+      "filename": "city_information_v2.csv",
+      "sha256": "53691e4b04fcd6774864fe1a7e988da8cb6876f6977d16e4c422b7e473fe704c"
+    },
+    "operatingPolicy": {
+      "filename": "operating_rules_v2_0.json",
+      "sha256": "14359a87e0399f545f05a416c10d75538675fb59a93e4b0442b202e55de9dd39"
+    },
+    "demandData": {
+      "version": "bts-db1c-6mo-jul2025-apr2026-v3"
+    }
+  },
+  "networkChanges": [],
+  "notes": "Accepted Schedule 7 v0.1.0 fleet selection: MAX9 35; CRJ900 45; CRJ700 65; CRJ200 80."
+}

@@ -5,7 +5,7 @@ The canonical schedule is the authoritative representation of a Coastal American
 ## Design choices
 
 - `schedule` records the identity, lifecycle status, and connection-window settings for the build.
-- `provenance` pins the exact source files by filename and SHA-256 digest. A build never silently changes because a newer reference file appeared. For v2.2.5 it also records the gate artifact used to recover operational sub-minute timing lost by the workbook export.
+- `provenance` pins one exclusive source chain by filename and SHA-256 digest. Imported baselines record their workbook; generated candidates instead record the approved build configuration, demand manifest, planning rules, and exact-materialization artifact. A generated schedule never inherits a workbook claim. For imported v2.2.5, provenance also records the gate artifact used to recover operational sub-minute timing lost by the workbook export.
 - `gatePlan` records version-specific ground-handling decisions, including the viewer label and deliberate long-hold stand splits.
 - `operatingPolicy` embeds the exact versioned rule values used for validation; its source file and SHA-256 digest are pinned in `provenance`.
 - `cities` is the schedule's operational city snapshot. It contains the metadata needed by downstream validators and exporters while retaining the source-file digest for full traceability.
@@ -23,7 +23,7 @@ This adapter is migration-only. Future schedules will create operational minute 
 
 ## Identifiers
 
-For the v2.2.5 baseline, Flight numbers are unique, so each leg receives an ID such as `flight-1001`. Future construction code should create a stable leg ID before assigning a public Flight number if draft legs need to exist without one.
+For the v2.2.5 baseline, Flight numbers are unique, so each leg receives an ID such as `flight-1001`. Deterministic construction creates a stable inventory leg ID before public numbering and retains that ID through exact timing and canonicalization. Pairing numbers are reused for historical directed markets and assigned above the historical range for new markets; four-digit Flight numbers are then assigned from 1001 in two-way-demand order with deterministic operational tie-breakers.
 
 ## Derived products
 

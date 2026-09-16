@@ -35,9 +35,14 @@
     "provenance": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["workbook", "cityInformation", "operatingPolicy"],
+      "required": ["cityInformation", "operatingPolicy"],
+      "oneOf": [
+        { "required": ["workbook"], "not": { "required": ["construction"] } },
+        { "required": ["construction"], "not": { "required": ["workbook"] } }
+      ],
       "properties": {
         "workbook": { "$ref": "#/$defs/workbookSource" },
+        "construction": { "$ref": "#/$defs/constructionSource" },
         "cityInformation": { "$ref": "#/$defs/fileSource" },
         "gateTimingBaseline": { "$ref": "#/$defs/fileSource" },
         "operatingPolicy": { "$ref": "#/$defs/fileSource" }
@@ -101,6 +106,32 @@
         "filename": { "type": "string", "minLength": 1 },
         "sha256": { "$ref": "#/$defs/sha256" },
         "sheet": { "type": "string", "minLength": 1 }
+      }
+    },
+    "identifiedFileSource": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "filename", "sha256"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "filename": { "type": "string", "minLength": 1 },
+        "sha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "constructionSource": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sourceKind", "sourceScheduleId", "buildConfig", "demandData",
+        "planningRules", "exactMaterialization"
+      ],
+      "properties": {
+        "sourceKind": { "const": "deterministic_planner" },
+        "sourceScheduleId": { "type": "string", "minLength": 1 },
+        "buildConfig": { "$ref": "#/$defs/fileSource" },
+        "demandData": { "$ref": "#/$defs/identifiedFileSource" },
+        "planningRules": { "$ref": "#/$defs/identifiedFileSource" },
+        "exactMaterialization": { "$ref": "#/$defs/fileSource" }
       }
     },
     "operatingPolicy": {
