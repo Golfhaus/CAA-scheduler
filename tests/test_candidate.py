@@ -90,7 +90,7 @@ class CandidateBuildTests(unittest.TestCase):
         self.assertTrue(departure_check["hardStop"])
         self.assertEqual(departure_check["status"], "pass")
 
-    def test_build_retains_routing_diagnostics_when_fleet_fit_blocks(self) -> None:
+    def test_build_retains_exact_diagnostics_before_canonical_ids(self) -> None:
         config = _config(self.baseline)
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
@@ -117,6 +117,7 @@ class CandidateBuildTests(unittest.TestCase):
                 "aircraft_route_plan.json",
                 "routing_repair_plan.json",
                 "bank_materialization_diagnostic.json",
+                "exact_materialization_plan.json",
             ):
                 self.assertTrue((output / filename).is_file(), filename)
             planning = json.loads((output / "planning_snapshot.json").read_text())
@@ -155,6 +156,17 @@ class CandidateBuildTests(unittest.TestCase):
             self.assertEqual(
                 materialization["fleetPlan"]["CRJ200"]["shortfall"], 0
             )
+            exact = report["exactMaterializationPlan"]
+            self.assertEqual(exact["status"], "pass")
+            self.assertEqual(
+                exact["summary"]["routedLegs"],
+                report["frequencyFleetPlan"]["summary"]["plannedLegs"],
+            )
+            self.assertEqual(
+                exact["summary"]["nonHubIntegratedLegs"],
+                exact["summary"]["nonHubLegs"],
+            )
+            self.assertEqual(exact["summary"]["curfewViolations"], 0)
             self.assertFalse((output / "canonical_schedule.json").exists())
             self.assertFalse((output / "timetable.json").exists())
             self.assertFalse((output / "gates.json").exists())
@@ -196,13 +208,7 @@ class CandidateBuildTests(unittest.TestCase):
             output = root / "candidate"
             baseline_path.write_text(json.dumps(self.baseline))
             config_path.write_text(json.dumps(config))
-            first = build_candidate(
-                config_path,
-                REPO_ROOT,
-                baseline_path=baseline_path,
-                output_directory=output,
-            )
-            self.assertEqual(first["status"], "blocked_planning_input")
+            output.mkdir()
             (output / "canonical_schedule.json").write_text("stale")
             (output / "timetable.json").write_text("stale")
             (output / "gates.json").write_text("stale")
@@ -231,6 +237,7 @@ class CandidateBuildTests(unittest.TestCase):
             self.assertTrue((output / "hub_bank_plan.json").is_file())
             self.assertTrue((output / "aircraft_route_plan.json").is_file())
             self.assertTrue((output / "routing_repair_plan.json").is_file())
+            self.assertFalse((output / "exact_materialization_plan.json").exists())
 
     def test_unknown_demand_version_suppresses_candidate_outputs(self) -> None:
         config = _config(self.baseline)

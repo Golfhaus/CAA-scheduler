@@ -62,7 +62,7 @@ Status: complete.
 
 ## 0.7 — Deterministic construction planner
 
-Status: in progress; Milestone 0.7.6 full-window materialization lower bound complete.
+Status: in progress; Milestone 0.7.7 exact cycle materialization complete.
 
 - Replace hardcoded paths, pickle files, import-time data loading, and mutable module globals.
 - Reconnect demand, multi-hub assignment, fleet allocation, bank placement, routing, and repair logic behind one callable build command.
@@ -88,10 +88,11 @@ Completed foundation:
 - Preserve the independent 409-aircraft bank-placement diagnostic alongside the passing topology repair.
 - Assign opposite market directions to bank cores independently rather than forcing every frequency into a destination overnight.
 - Prove bank/turn/RON fleet lower bounds across the complete 60-minute cores before canonical timing; every current fleet remains inside its configured count in the relaxed model.
+- Select exact five-minute times for all 1,430 legs, integrate all 240 non-hub legs, and construct fleet-continuous cycles inside 208 of 225 configured aircraft.
+- Cover all 99 required destination RONs and repair rolling target-RON cadence with deterministic same-station successor swaps.
 
 Remaining in 0.7:
 
-- Integrate the 240 non-hub legs and materialize the relaxed bank-window flow as exact whole-flight cycles.
 - Materialize a repaired plan as canonical lines, days, routes, pairings, and flight numbers.
 - Add golden comparisons for each stage before enabling blank-start construction or airport additions.
 

@@ -9,6 +9,7 @@ from .bank_materialization import build_bank_materialization_diagnostic_from_man
 from .baseline import build_baseline
 from .candidate import build_candidate
 from .demand import build_demand_plan_from_manifest
+from .exact_materialization import build_exact_materialization_plan_from_manifest
 from .gate_export import export_gate_schedule
 from .io import read_json, write_json
 from .operating_validation import validate_operating_rules
@@ -126,6 +127,18 @@ def _parser() -> argparse.ArgumentParser:
     materialization.add_argument("output", type=Path)
     materialization.add_argument("--repo-root", type=Path, default=Path.cwd())
 
+    exact = subcommands.add_parser(
+        "build-exact-materialization",
+        help="Integrate every leg into exact banked aircraft cycles",
+    )
+    exact.add_argument("canonical", type=Path)
+    exact.add_argument("frequency_plan", type=Path)
+    exact.add_argument("bank_plan", type=Path)
+    exact.add_argument("repair_plan", type=Path)
+    exact.add_argument("manifest", type=Path)
+    exact.add_argument("output", type=Path)
+    exact.add_argument("--repo-root", type=Path, default=Path.cwd())
+
     web = subcommands.add_parser(
         "build-web", help="Assemble the static GitHub Pages console"
     )
@@ -241,6 +254,16 @@ def main(argv: list[str] | None = None) -> int:
             f"{materialization['summary']['configuredAircraft']} aggregate lower bound; "
             f"{materialization['summary']['fleetAllocationShortfall']} fleet-specific shortfall)"
         )
+        exact = result["exactMaterializationPlan"]
+        print(
+            "Exact materialization: "
+            f"{exact['status'].upper()} "
+            f"({exact['summary']['routedLegs']}/"
+            f"{exact['summary']['plannedLegs']} legs, "
+            f"{exact['summary']['requiredAircraft']}/"
+            f"{exact['summary']['configuredAircraft']} aircraft, "
+            f"{exact['summary']['curfewViolations']} curfew violations)"
+        )
         return 0 if (
             validation["status"] == "pass"
             and result["timetableParity"]
@@ -252,6 +275,7 @@ def main(argv: list[str] | None = None) -> int:
             and result["frequencyFleetPlan"]["status"] == "pass"
             and result["hubBankPlan"]["status"] == "pass"
             and result["routingRepairPlan"]["status"] == "pass"
+            and result["exactMaterializationPlan"]["status"] == "pass"
         ) else 1
 
     canonical = read_json(args.canonical)
@@ -422,4 +446,26 @@ def main(argv: list[str] | None = None) -> int:
         )
         print(f"Wrote {args.output}")
         return 0 if diagnostic["materializationStatus"] != "blocked" else 1
+    if args.command == "build-exact-materialization":
+        frequency_plan = read_json(args.frequency_plan)
+        bank_plan = read_json(args.bank_plan)
+        repair_plan = read_json(args.repair_plan)
+        plan = build_exact_materialization_plan_from_manifest(
+            canonical,
+            frequency_plan,
+            bank_plan,
+            repair_plan,
+            args.manifest,
+            args.repo_root.resolve(),
+        )
+        write_json(args.output, plan, indent=None)
+        print(
+            f"Exact materialization: {plan['status'].upper()} "
+            f"({plan['summary']['routedLegs']}/"
+            f"{plan['summary']['plannedLegs']} legs, "
+            f"{plan['summary']['requiredAircraft']}/"
+            f"{plan['summary']['configuredAircraft']} aircraft)"
+        )
+        print(f"Wrote {args.output}")
+        return 0 if plan["status"] == "pass" else 1
     return 2

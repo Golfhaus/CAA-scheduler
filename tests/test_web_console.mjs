@@ -95,6 +95,15 @@ const bankMaterializationDiagnostic = JSON.parse(
     "utf8",
   ),
 );
+const exactMaterializationPlan = JSON.parse(
+  await readFile(
+    new URL(
+      "../data/schedules/schedule_6_v2_2_5/exact_materialization_plan.json",
+      import.meta.url,
+    ),
+    "utf8",
+  ),
+);
 
 test("overview metrics reflect the frozen schedule", () => {
   assert.deepEqual(scheduleMetrics(canonical), {
@@ -186,6 +195,18 @@ test("bank-window lower bound fits each fleet before non-hub integration", () =>
   assert.equal(bankMaterializationDiagnostic.summary.fleetAllocationShortfall, 0);
   assert.equal(bankMaterializationDiagnostic.fleetPlan.CRJ200.bankAndRonMinimumAircraft, 67);
   assert.equal(bankMaterializationDiagnostic.fleetPlan.CRJ200.configuredAircraft, 80);
+});
+
+test("exact materialization integrates every leg inside the selected fleet", () => {
+  assert.equal(exactMaterializationPlan.status, "pass");
+  assert.equal(exactMaterializationPlan.materializationStatus, "complete");
+  assert.equal(exactMaterializationPlan.summary.routedLegs, 1430);
+  assert.equal(exactMaterializationPlan.summary.bankAlignedLegs, 1190);
+  assert.equal(exactMaterializationPlan.summary.nonHubIntegratedLegs, 240);
+  assert.equal(exactMaterializationPlan.summary.requiredAircraft, 208);
+  assert.equal(exactMaterializationPlan.summary.curfewViolations, 0);
+  assert.equal(exactMaterializationPlan.summary.destinationsWithoutRon, 0);
+  assert.equal(exactMaterializationPlan.summary.rollingRonViolations, 0);
 });
 
 test("published flights default to departure-time order", () => {

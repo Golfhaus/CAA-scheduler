@@ -9,6 +9,7 @@ from .bank_placement import build_hub_bank_plan_from_manifest
 from .bank_materialization import build_bank_materialization_diagnostic_from_manifest
 from .build_config import validate_build_config
 from .demand import build_demand_plan_from_manifest, resolve_demand_manifest
+from .exact_materialization import build_exact_materialization_plan_from_manifest
 from .gate_export import export_gate_schedule
 from .io import read_json, resolve_from_repo, write_json
 from .operating_validation import validate_operating_rules
@@ -33,6 +34,7 @@ GENERATED_FILENAMES = (
     "aircraft_route_plan.json",
     "routing_repair_plan.json",
     "bank_materialization_diagnostic.json",
+    "exact_materialization_plan.json",
     "timetable.json",
     "gates.json",
 )
@@ -360,12 +362,27 @@ def build_candidate(
                             repo_root,
                         )
                         report["bankMaterializationDiagnostic"] = materialization
-                        if report["status"] != "blocked_hard_stop":
+                        if report["status"] == "blocked_hard_stop":
+                            report["blockers"].append(
+                                "Exact materialization is suppressed until the candidate's hard stops are cleared"
+                            )
+                        else:
+                            exact_materialization = (
+                                build_exact_materialization_plan_from_manifest(
+                                    candidate,
+                                    frequency_fleet_plan,
+                                    hub_bank_plan,
+                                    routing_repair_plan,
+                                    demand_manifest,
+                                    repo_root,
+                                )
+                            )
+                            report["exactMaterializationPlan"] = exact_materialization
                             report["status"] = "blocked_planning_input"
+                            report["blockers"].append(
+                                exact_materialization["nextStep"]["message"]
+                            )
                         report["publicationReady"] = False
-                        report["blockers"].append(
-                            materialization["nextRepair"]["message"]
-                        )
     except ValueError as error:
         if report["status"] != "blocked_hard_stop":
             report["status"] = "blocked_planning_input"
@@ -407,6 +424,12 @@ def build_candidate(
             destination / "bank_materialization_diagnostic.json",
             report["bankMaterializationDiagnostic"],
         )
+    if "exactMaterializationPlan" in report:
+        write_json(
+            destination / "exact_materialization_plan.json",
+            report["exactMaterializationPlan"],
+            indent=None,
+        )
     report["outputs"].update(
         {
             "structuralValidation": "validation_report.json",
@@ -428,6 +451,10 @@ def build_candidate(
     if "bankMaterializationDiagnostic" in report:
         report["outputs"]["bankMaterializationDiagnostic"] = (
             "bank_materialization_diagnostic.json"
+        )
+    if "exactMaterializationPlan" in report:
+        report["outputs"]["exactMaterializationPlan"] = (
+            "exact_materialization_plan.json"
         )
 
     if report["status"] in {"candidate_ready", "candidate_review_required"}:

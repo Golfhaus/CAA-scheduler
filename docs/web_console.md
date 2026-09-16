@@ -18,7 +18,7 @@ The interface uses the airline's navy, blue, and orange palette, remains usable 
 
 ## Data flow
 
-`web/schedules.json` lists each published schedule and its thirteen source files: canonical schedule, structural report, operating report, planning snapshot, planning validation, demand plan, frequency/fleet plan, hub-bank plan, aircraft-route plan, routing repair, bank-materialization diagnostic, timetable, and gate plan. It also pins the primary build-instruction Markdown, any additions, the demand-data manifest, and the generated catalog destination. The build command verifies and copies the demand manifest and all three fingerprinted sources, then rebuilds the instruction catalog directly from its Markdown sources.
+`web/schedules.json` lists each published schedule and its fourteen source files: canonical schedule, structural report, operating report, planning snapshot, planning validation, demand plan, frequency/fleet plan, hub-bank plan, aircraft-route plan, routing repair, bank-materialization diagnostic, exact materialization plan, timetable, and gate plan. It also pins the primary build-instruction Markdown, any additions, the demand-data manifest, and the generated catalog destination. The build command verifies and copies the demand manifest and all three fingerprinted sources, then rebuilds the instruction catalog directly from its Markdown sources.
 
 ```bash
 python -m caa_scheduler build-web --output dist
