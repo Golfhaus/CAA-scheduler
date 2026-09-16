@@ -567,7 +567,7 @@ function renderPlanning() {
     .join("");
   $("#routing-fleet-rows").innerHTML = Object.entries(repair.fleetPlan)
     .sort(([a], [b]) => a.localeCompare(b))
-    .map(([fleet, row]) => { const bankRow = materialization.fleetPlan[fleet]; const exactRow = exact.fleetPlan[fleet]; return `<tr><td><span class="fleet-badge">${escapeHtml(fleet)}</span></td><td>${row.configuredAircraft}</td><td>${routing.fleetPlan[fleet]?.requiredAircraft ?? "—"}</td><td>${row.requiredAircraft}</td><td>${bankRow.bankAndRonMinimumAircraft}</td><td><strong class="${exactRow.shortfall ? "danger-text" : ""}">${exactRow.requiredAircraft}</strong></td><td><strong class="${exactRow.shortfall ? "danger-text" : ""}">${exactRow.shortfall ? `+${exactRow.shortfall}` : `−${exactRow.remainingAircraft}`}</strong></td><td>${exactRow.cycles}</td><td>${exactRow.routedLegs.toLocaleString()}</td></tr>`; })
+    .map(([fleet, row]) => { const bankRow = materialization.fleetPlan[fleet]; const exactRow = exact.fleetPlan[fleet]; return `<tr><td><span class="fleet-badge">${escapeHtml(fleet)}</span></td><td>${row.configuredAircraft}</td><td>${routing.fleetPlan[fleet]?.requiredAircraft ?? "—"}</td><td>${row.requiredAircraft}</td><td>${bankRow.bankAndRonMinimumAircraft}</td><td><strong class="${exactRow.shortfall ? "danger-text" : ""}">${exactRow.requiredAircraft}</strong></td><td><strong class="${exactRow.shortfall ? "danger-text" : ""}">${formatRemainingAircraft(exactRow)}</strong></td><td>${exactRow.cycles}</td><td>${exactRow.routedLegs.toLocaleString()}</td></tr>`; })
     .join("");
   $("#planning-limitations").innerHTML = [...allocation.limitations, ...bankPlan.limitations, ...routing.limitations, ...repair.limitations, ...materialization.limitations, ...exact.limitations]
     .map((item) => `<article><strong>Known boundary</strong><span>${escapeHtml(item)}</span></article>`)
@@ -597,6 +597,10 @@ function renderPlanning() {
 
 export function flattenBankWindows(plan) {
   return plan.hubs.flatMap((hub) => hub.banks.map((bank) => ({ hub: hub.hub, ...bank })));
+}
+
+export function formatRemainingAircraft(row) {
+  return row.shortfall ? `Short ${row.shortfall}` : String(row.remainingAircraft);
 }
 
 export function paginate(items, page, pageSize = DEFAULT_PAGE_SIZE) {
