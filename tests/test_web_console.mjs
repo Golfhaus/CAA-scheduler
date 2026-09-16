@@ -9,6 +9,7 @@ import {
   flattenBankWindows,
   flattenFrequencyMarkets,
   fleetUsage,
+  formatRemainingAircraft,
   formatMinute,
   formatMinute24,
   instructionId,
@@ -207,6 +208,11 @@ test("exact materialization integrates every leg inside the selected fleet", () 
   assert.equal(exactMaterializationPlan.summary.curfewViolations, 0);
   assert.equal(exactMaterializationPlan.summary.destinationsWithoutRon, 0);
   assert.equal(exactMaterializationPlan.summary.rollingRonViolations, 0);
+});
+
+test("exact fleet headroom is displayed as positive remaining aircraft", () => {
+  assert.equal(formatRemainingAircraft({shortfall: 0, remainingAircraft: 7}), "7");
+  assert.equal(formatRemainingAircraft({shortfall: 2, remainingAircraft: 0}), "Short 2");
 });
 
 test("published flights default to departure-time order", () => {
