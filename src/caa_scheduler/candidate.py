@@ -8,13 +8,17 @@ from .allocation import build_frequency_fleet_plan_from_manifest
 from .bank_placement import build_hub_bank_plan_from_manifest
 from .bank_materialization import build_bank_materialization_diagnostic_from_manifest
 from .build_config import validate_build_config
+from .canonicalization import (
+    build_canonical_schedule_from_exact_plan,
+    sha256_json,
+)
 from .demand import build_demand_plan_from_manifest, resolve_demand_manifest
 from .exact_materialization import (
     blocked_exact_materialization_plan,
     build_exact_materialization_plan_from_manifest,
 )
 from .gate_export import export_gate_schedule
-from .io import read_json, resolve_from_repo, write_json
+from .io import read_json, resolve_from_repo, sha256_file, write_json
 from .operating_validation import validate_operating_rules
 from .planning import reconstruct_planning_snapshot, validate_planning_snapshot
 from .routing import build_aircraft_route_plan_from_manifest
@@ -38,6 +42,7 @@ GENERATED_FILENAMES = (
     "routing_repair_plan.json",
     "bank_materialization_diagnostic.json",
     "exact_materialization_plan.json",
+    "canonicalization_report.json",
     "timetable.json",
     "gates.json",
 )
@@ -387,11 +392,105 @@ def build_candidate(
                                     str(error),
                                 )
                             report["exactMaterializationPlan"] = exact_materialization
-                            report["status"] = "blocked_planning_input"
-                            report["blockers"].append(
-                                exact_materialization["nextStep"]["message"]
-                            )
-                        report["publicationReady"] = False
+                            if exact_materialization["status"] != "pass":
+                                report["status"] = "blocked_planning_input"
+                                report["blockers"].append(
+                                    exact_materialization["nextStep"]["message"]
+                                )
+                                report["publicationReady"] = False
+                            else:
+                                demand_manifest_document = read_json(demand_manifest)
+                                planning_rules_source = demand_manifest_document[
+                                    "sources"
+                                ]["planningRules"]
+                                construction_provenance = {
+                                    "sourceKind": "deterministic_planner",
+                                    "sourceScheduleId": baseline["schedule"]["id"],
+                                    "buildConfig": {
+                                        "filename": "build_config.json",
+                                        "sha256": sha256_json(config, indent=2),
+                                    },
+                                    "demandData": {
+                                        "id": demand_manifest_document["id"],
+                                        "filename": str(
+                                            demand_manifest.relative_to(repo_root)
+                                        ),
+                                        "sha256": sha256_file(demand_manifest),
+                                    },
+                                    "planningRules": {
+                                        "id": exact_materialization[
+                                            "planningRulesId"
+                                        ],
+                                        "filename": planning_rules_source["filename"],
+                                        "sha256": planning_rules_source["sha256"],
+                                    },
+                                    "exactMaterialization": {
+                                        "filename": "exact_materialization_plan.json",
+                                        "sha256": sha256_json(
+                                            exact_materialization, indent=None
+                                        ),
+                                    },
+                                }
+                                generated_candidate, canonicalization = (
+                                    build_canonical_schedule_from_exact_plan(
+                                        candidate,
+                                        demand_plan,
+                                        frequency_fleet_plan,
+                                        hub_bank_plan,
+                                        exact_materialization,
+                                        construction_provenance,
+                                    )
+                                )
+                                report["canonicalization"] = canonicalization
+                                report["seedStructuralValidation"] = report[
+                                    "structuralValidation"
+                                ]
+                                report["seedOperatingValidation"] = report[
+                                    "operatingValidation"
+                                ]
+                                candidate = generated_candidate
+                                structural = validate_schedule(candidate)
+                                operating = validate_operating_rules(candidate)
+                                report["structuralValidation"] = structural
+                                report["operatingValidation"] = operating
+                                hard_stops = [
+                                    {
+                                        "checkId": check["id"],
+                                        "title": check["title"],
+                                        "findingCount": check["metrics"].get(
+                                            "effectiveFindingCount", 0
+                                        ),
+                                        "message": check["message"],
+                                    }
+                                    for check in operating["checks"]
+                                    if check.get("hardStop")
+                                    and check["status"] == "fail"
+                                ]
+                                report["hardStops"] = hard_stops
+                                if structural["status"] != "pass":
+                                    report["status"] = "blocked_planning_input"
+                                    report["blockers"].append(
+                                        "Canonical identifier assignment failed structural validation"
+                                    )
+                                elif hard_stops:
+                                    report["status"] = "blocked_hard_stop"
+                                    report["blockers"].append(
+                                        "The materialized canonical schedule violates a non-waivable hard stop"
+                                    )
+                                elif operating["summary"][
+                                    "effectiveErrorFindings"
+                                ]:
+                                    report["status"] = "candidate_review_required"
+                                else:
+                                    report["status"] = "candidate_ready"
+                                report["publicationReady"] = (
+                                    structural["status"] == "pass"
+                                    and not hard_stops
+                                    and operating["summary"][
+                                        "effectiveErrorFindings"
+                                    ]
+                                    == 0
+                                )
     except ValueError as error:
         if report["status"] != "blocked_hard_stop":
             report["status"] = "blocked_planning_input"
@@ -439,6 +538,11 @@ def build_candidate(
             report["exactMaterializationPlan"],
             indent=None,
         )
+    if "canonicalization" in report:
+        write_json(
+            destination / "canonicalization_report.json",
+            report["canonicalization"],
+        )
     report["outputs"].update(
         {
             "structuralValidation": "validation_report.json",
@@ -465,6 +569,8 @@ def build_candidate(
         report["outputs"]["exactMaterializationPlan"] = (
             "exact_materialization_plan.json"
         )
+    if "canonicalization" in report:
+        report["outputs"]["canonicalization"] = "canonicalization_report.json"
 
     if report["status"] in {"candidate_ready", "candidate_review_required"}:
         write_json(destination / "canonical_schedule.json", candidate)

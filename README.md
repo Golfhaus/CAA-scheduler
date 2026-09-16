@@ -30,6 +30,8 @@ v2.2.5 workbook + pinned city data
     -> deterministic curfew-safe topology repair inside the selected fleet
     -> independent-direction full-bank-window lower bound
     -> exact five-minute aircraft cycles with all non-hub flying integrated
+    -> canonical Line/Day/Route, pairing, and flight identifiers
+    -> generated-source provenance + full structural/operating/gate validation
     -> timetable/gate candidate exports only after hard stops pass
 ```
 
@@ -143,17 +145,21 @@ Export an approved configuration from **Schedule Setup**, add it to a working br
 python -m caa_scheduler build-candidate path/to/build_config.json
 ```
 
-For a previous-schedule start, the compiler resolves the pinned canonical baseline from `data/schedules/<scheduleId>/canonical_schedule.json`. It writes an isolated package under `builds/<buildId>/` containing a copy of the approved input, validation reports, demand plan, fresh frequency/fleet proposal, generated hub-bank plan, the first-pass aircraft-route diagnostic, topology repair, bank-materialization lower bound, and exact-cycle plan. Canonical, timetable, and gate outputs are added only after canonical identifiers and every remaining construction gate pass. The manually dispatched **Build candidate schedule** GitHub Action runs the same command and retains the package as an artifact for 30 days.
+The accepted Schedule 7 v0.1.0 starting configuration is pinned at `config/candidates/schedule_7_v0_1_0.json` with fleet counts MAX9 35, CRJ900 45, CRJ700 65, and CRJ200 80.
+
+For a previous-schedule start, the compiler resolves the pinned canonical baseline from `data/schedules/<scheduleId>/canonical_schedule.json`. It writes an isolated package under `builds/<buildId>/` containing a copy of the approved input, validation reports, demand plan, fresh frequency/fleet proposal, generated hub-bank plan, the first-pass aircraft-route diagnostic, topology repair, bank-materialization lower bound, exact-cycle plan, and canonicalization report. A passing exact plan receives canonical identifiers and an exclusive generated-source provenance chain before full validation is rerun. Reviewable canonical, timetable, and gate outputs are written unless structural validation or a non-waivable hard stop blocks them. The manually dispatched **Build candidate schedule** GitHub Action runs the same command and retains the package as an artifact for 30 days.
 
 If Python preflight fails, blank-start planning is requested, or an airport addition lacks the future planning stage, no candidate is emitted. If any non-waivable hard-stop check fails—including curfew enforcement—the diagnostic reports are written but the canonical, timetable, and gate outputs are suppressed. Other operating findings produce a review-required candidate rather than being silently waived.
 
 ## Current boundary
 
-Milestone 0.7.7 now has a deterministic planning, demand, bank, topology-repair, lower-bound, and exact-materialization boundary. Python reconstructs the historical plan, processes the complete pinned 105-city demand data, reproduces all 100 non-hub assignments, generates a fresh frequency/fleet proposal, and defines all 24 hub banks. Aircraft quantities still come only from each schedule's build configuration; no fleet count is inferred from policy or silently added by repair.
+Milestone 0.7.8 now has a deterministic planning, demand, bank, topology-repair, exact-materialization, and canonicalization boundary. Python reconstructs the historical plan, processes the complete pinned 105-city demand data, reproduces all 100 non-hub assignments, generates a fresh frequency/fleet proposal, and defines all 24 hub banks. Aircraft quantities still come only from each schedule's build configuration; no fleet count is inferred from policy or silently added by repair.
 
 The exact optimizer's numerical stack is pinned in `pyproject.toml`. SciPy/HiGHS releases can materially change bounded mixed-integer solve behavior, so changing the SciPy or NumPy versions is an explicit engine change that must regenerate and revalidate the golden artifacts.
 
-The first routing pass remains an intentional diagnostic: its paired same-bank directions imply 409 aircraft against the selected 225. The lower-bound diagnostic applies the approved independent-direction interpretation and the full 60-minute cores required by §1.6a, fitting at 169/225. `exact_materialization_plan.json` now selects one five-minute time for all 1,430 legs, aligns all 1,190 hub-touching legs, integrates all 240 non-hub legs, and produces real aircraft cycles using 208/225 aircraft. All 99 required destinations receive routed overnights, every cycle meets the 11-day target-RON window, and curfew violations remain zero. Candidate publication remains blocked only while canonical Line/Day/Route, pairing, and flight identifiers are assigned and the newly timed schedule passes full operating and gate validation.
+The first routing pass remains an intentional diagnostic: its paired same-bank directions imply 409 aircraft against the selected 225. The lower-bound diagnostic applies the approved independent-direction interpretation and the full 60-minute cores required by §1.6a, fitting at 169/225. `exact_materialization_plan.json` selects one five-minute time for all 1,430 legs, aligns all 1,190 hub-touching legs, integrates all 240 non-hub legs, and produces real aircraft cycles using 208/225 aircraft. Canonicalization turns those cycles into 23 lines, 208 operating-day routes, 736 directed pairings, and flights 1001–2430 while preserving all 1,224 bank touches and replacing legacy workbook provenance with generated-source fingerprints.
+
+Full validation now passes structure, curfews, minimum turns, numbering, and bank alignment. The proposal remains review-required because the inventory-focused exact solve has 222 same-pairing spacing findings, preserved historical markets put 45 cities above current tier hub-count caps, and 13 stations exceed gate/stand constraints. Those findings define the next deterministic repair milestone; they do not authorize extra aircraft or curfew waivers.
 
 ## Repository visibility
 

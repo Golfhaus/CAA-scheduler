@@ -284,7 +284,13 @@ def validate_operating_rules(canonical: dict[str, Any]) -> dict[str, Any]:
     hold_threshold = policy["turns"]["holdThresholdMinutes"]
     for (line, day), route_legs in routes.items():
         for arriving, departing in zip(route_legs, route_legs[1:]):
-            duration = departing["departureMinute"] - arriving["arrivalMinute"]
+            # Canonical clock minutes are local to the station and a valid
+            # 03:00-to-03:00 route day can cross midnight.  Both touches are
+            # at the same station, so the cyclic local-clock gap is the
+            # authoritative turn duration.
+            duration = (
+                departing["departureMinute"] - arriving["arrivalMinute"]
+            ) % 1440
             details = {
                 "line": line,
                 "day": day,

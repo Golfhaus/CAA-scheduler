@@ -62,7 +62,7 @@ Status: complete.
 
 ## 0.7 — Deterministic construction planner
 
-Status: in progress; Milestone 0.7.7 exact cycle materialization complete.
+Status: in progress; Milestone 0.7.8 canonical identifier assignment complete.
 
 - Replace hardcoded paths, pickle files, import-time data loading, and mutable module globals.
 - Reconnect demand, multi-hub assignment, fleet allocation, bank placement, routing, and repair logic behind one callable build command.
@@ -90,10 +90,15 @@ Completed foundation:
 - Prove bank/turn/RON fleet lower bounds across the complete 60-minute cores before canonical timing; every current fleet remains inside its configured count in the relaxed model.
 - Select exact five-minute times for all 1,430 legs, integrate all 240 non-hub legs, and construct fleet-continuous cycles inside 208 of 225 configured aircraft.
 - Cover all 99 required destination RONs and repair rolling target-RON cadence with deterministic same-station successor swaps.
+- Partition every passing exact cycle into contiguous 03:00-to-03:00 operating days and assign canonical Line, Day, Route, sequence, Pairing, and Flight identifiers.
+- Preserve all 1,224 exact hub-bank touches and carry demand percentiles into the generated canonical candidate.
+- Reuse all 634 historical directed-market pairing numbers and assign 102 new pairings deterministically.
+- Replace inherited workbook provenance with an exclusive, fingerprinted deterministic-construction chain.
+- Rerun structural, operating, bank, gate, stand, tier, and spacing validation on the materialized canonical candidate.
 
 Remaining in 0.7:
 
-- Materialize a repaired plan as canonical lines, days, routes, pairings, and flight numbers.
+- Repair the full-validation failures now exposed by canonical timing: same-pairing departure clustering, historical extra-hub markets beyond current tier caps, and gate/stand peaks.
 - Add golden comparisons for each stage before enabling blank-start construction or airport additions.
 
 ## 1.0 — Schedule Builder

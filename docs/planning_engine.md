@@ -173,9 +173,12 @@ The golden-baseline and candidate commands generate these planning artifacts aut
 
 ## Next construction stages
 
-The remaining Milestone 0.7 work is intentionally staged:
+Milestone 0.7.8 now assigns canonical identifiers from every passing exact plan. It rotates each successor cycle to a deterministic 03:00 operating-day boundary, numbers MAX9 lines A–Z and CRJ lines from AA, assigns fleet-blocked routes, preserves historical directed-market pairings where possible, assigns demand-ranked four-digit flight numbers, and records an exclusive generated-source provenance chain. Candidate builds then run the complete structural and operating validators and write `canonicalization_report.json` alongside reviewable canonical, timetable, and gate outputs.
 
-1. assign canonical lines, days, routes, pairings, and flight numbers from the passing exact cycles; and
-2. run full structural, operating, gate, stand, and curfew validation against the resulting canonical candidate.
+The first full validation of the current 1,430-leg proposal is intentionally not publication-ready. Curfews, minimum turns, numbering, bank alignment, and structural validation pass. The remaining Milestone 0.7 work is now explicit:
 
-Each stage needs a golden comparison before the subsequent stage is permitted to write a publishable candidate.
+1. repair same-pairing departure clustering introduced by the inventory-focused exact solve;
+2. reconcile preserved historical hub markets with the current percentile-tier hub-count caps; and
+3. add gate/stand feasibility to construction or a deterministic repair stage.
+
+Golden comparisons remain required before blank-start construction or airport additions are enabled.

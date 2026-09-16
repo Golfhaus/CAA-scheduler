@@ -533,7 +533,7 @@ function renderPlanning() {
   const exact = state.exactMaterializationPlan;
   const topologyReady = validation.status === "pass" && demand.status === "pass" && allocation.status === "pass" && bankPlan.status === "pass" && repair.status === "pass";
   const ready = topologyReady && exact.materializationStatus === "complete";
-  $("#planning-status").textContent = ready ? "Exact cycles pass · canonical IDs pending" : exact.materializationStatus === "blocked" ? "Exact materialization blocked" : materialization.materializationStatus === "blocked" ? "Bank materialization blocked" : topologyReady ? "Bank-window lower bound passes · exact cycles pending" : "Routing repair required";
+  $("#planning-status").textContent = ready ? "Exact cycles pass · candidate canonicalization enabled" : exact.materializationStatus === "blocked" ? "Exact materialization blocked" : materialization.materializationStatus === "blocked" ? "Bank materialization blocked" : topologyReady ? "Bank-window lower bound passes · exact cycles pending" : "Routing repair required";
   $("#planning-status").classList.toggle("is-danger", !topologyReady || materialization.materializationStatus === "blocked" || exact.materializationStatus === "blocked");
   $("#planning-metrics").innerHTML = [
     metricCard("Proposed legs", allocation.summary.plannedLegs.toLocaleString(), `${allocation.summary.optionalRoundTrips.toLocaleString()} demand-allocated round trips above minimums`),

@@ -41,10 +41,10 @@ def _config(baseline: dict) -> dict:
             "scheduleId": baseline["schedule"]["id"],
         },
         "fleetCounts": {
-            "MAX9": 36,
-            "CRJ900": 46,
-            "CRJ700": 66,
-            "CRJ200": 81,
+            "MAX9": 35,
+            "CRJ900": 45,
+            "CRJ700": 65,
+            "CRJ200": 80,
         },
         "connectionWindowMinutes": {"minimum": 30, "maximum": 240},
         "inputs": {
@@ -74,6 +74,22 @@ class CandidateBuildTests(unittest.TestCase):
         report = validate_build_config(_config(self.baseline), self.baseline)
         self.assertEqual(report["status"], "pass")
         self.assertEqual(report["summary"]["failed"], 0)
+
+    def test_accepted_schedule_seven_configuration_is_pinned(self) -> None:
+        config = json.loads(
+            (
+                REPO_ROOT
+                / "config"
+                / "candidates"
+                / "schedule_7_v0_1_0.json"
+            ).read_text()
+        )
+        report = validate_build_config(config, self.baseline)
+        self.assertEqual(report["status"], "pass")
+        self.assertEqual(
+            config["fleetCounts"],
+            {"MAX9": 35, "CRJ900": 45, "CRJ700": 65, "CRJ200": 80},
+        )
 
     def test_candidate_uses_only_configuration_fleet_counts(self) -> None:
         config = _config(self.baseline)
@@ -177,6 +193,59 @@ class CandidateBuildTests(unittest.TestCase):
             self.assertFalse((output / "canonical_schedule.json").exists())
             self.assertFalse((output / "timetable.json").exists())
             self.assertFalse((output / "gates.json").exists())
+
+    def test_passing_exact_plan_advances_to_reviewable_canonical_outputs(self) -> None:
+        config = _config(self.baseline)
+        exact = json.loads(
+            (
+                REPO_ROOT
+                / "data"
+                / "schedules"
+                / "schedule_6_v2_2_5"
+                / "exact_materialization_plan.json"
+            ).read_text()
+        )
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            config_path = root / "build_config.json"
+            output = root / "candidate"
+            config_path.write_text(json.dumps(config))
+            with patch(
+                "caa_scheduler.candidate.build_exact_materialization_plan_from_manifest",
+                return_value=exact,
+            ):
+                report = build_candidate(
+                    config_path,
+                    REPO_ROOT,
+                    baseline_path=CANONICAL_PATH,
+                    output_directory=output,
+                )
+            self.assertEqual(report["status"], "candidate_review_required")
+            self.assertFalse(report["publicationReady"])
+            self.assertEqual(report["canonicalization"]["status"], "pass")
+            self.assertEqual(
+                report["canonicalization"]["summary"]["routes"], 208
+            )
+            self.assertEqual(report["structuralValidation"]["status"], "pass")
+            self.assertTrue((output / "canonical_schedule.json").is_file())
+            self.assertTrue((output / "canonicalization_report.json").is_file())
+            self.assertTrue((output / "timetable.json").is_file())
+            self.assertTrue((output / "gates.json").is_file())
+            canonical = json.loads((output / "canonical_schedule.json").read_text())
+            self.assertNotIn("workbook", canonical["provenance"])
+            self.assertEqual(
+                canonical["provenance"]["construction"]["sourceScheduleId"],
+                self.baseline["schedule"]["id"],
+            )
+            checks = {
+                check["id"]: check
+                for check in report["operatingValidation"]["checks"]
+            }
+            self.assertEqual(checks["departure_windows"]["status"], "pass")
+            self.assertEqual(checks["hub_bank_alignment"]["status"], "pass")
+            self.assertEqual(
+                checks["section_26_pairing_spacing"]["status"], "fail"
+            )
 
     def test_missing_demand_pin_blocks_before_compilation(self) -> None:
         config = _config(self.baseline)
