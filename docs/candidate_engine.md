@@ -24,9 +24,10 @@ Each run replaces only the compiler's known files in that output directory. This
 8. Generate hub-bank windows and place all proposed hub-touching flying without accepting a curfew violation.
 9. Construct complete aircraft cycles, insert non-hub flying, and evaluate fleet, continuity, turn, curfew, and RON feasibility.
 10. Independently assign directional frequencies to bank cores and solve a continuous time-flow lower bound with hard curfews and destination RONs.
-11. Run structural and operating validation against the timed seed candidate.
-12. Stop consumer export if a hard-stop or planning-input check fails.
-13. Otherwise write the canonical candidate, timetable, and gates. Planning and diagnostic reports are retained in either case.
+11. Select exact five-minute times, integrate non-hub flying, construct integer aircraft cycles, and verify hard curfews and RON cadence.
+12. Run structural and operating validation against the timed seed candidate.
+13. Stop consumer export if a hard-stop or planning-input check fails.
+14. Otherwise write the canonical candidate, timetable, and gates. Planning and diagnostic reports are retained in either case.
 
 Fleet counts have no engine default. The compiler copies `fleetCounts` directly from the build configuration, and the operating validator measures aircraft-day use against those values.
 
@@ -42,7 +43,9 @@ Curfew enforcement comes from the pinned operating policy. The departure-window 
 | `candidate_review_required` | Hard stops passed, but other structural/operating findings need repair | Yes |
 | `candidate_ready` | All evaluated structural and error-level operating checks passed | Yes |
 
-The current fresh planning proposal produces `blocked_planning_input`. The first-pass route artifact retains the 409-aircraft/184-aircraft-short diagnostic, while the repair artifact proves that all 1,430 legs fit in 209 of the 225 selected aircraft with zero curfew or RON failures. The bank-flow diagnostic removes the accidental same-bank direction pairing and uses the full 60-minute cores required by §1.6a. Its relaxed bank/turn/RON lower bound fits every configured fleet at 169 whole-aircraft equivalents in aggregate. The remaining work is non-hub integration and exact whole-flight cycle materialization—not a larger or rebalanced schedule fleet.
+The current fresh planning proposal produces `blocked_planning_input`. The first-pass route artifact retains the 409-aircraft/184-aircraft-short diagnostic. The bank-flow relaxation fits at 169/225, and exact materialization now schedules all 1,430 legs—including 240 non-hub legs—in 208/225 aircraft. All hub events align to approved bank cores, all 99 required destinations receive a routed RON, the rolling target-RON check passes, and curfew violations remain zero. The remaining work is canonical identifier assignment followed by full operating and gate validation—not a larger or rebalanced schedule fleet.
+
+If a bounded exact solve does not return a feasible incumbent, the candidate build still writes `exact_materialization_plan.json` with `materializationStatus: blocked`, the solver failure in `diagnostics.solverFailure`, and `nextStep.action: retry_exact_materialization`. A missing artifact is never used to represent solver exhaustion. Blocked exact output cannot advance to canonical identifiers or publication.
 
 ## GitHub Actions
 
@@ -50,4 +53,4 @@ The **Build candidate schedule** workflow accepts a repository path to an approv
 
 ## Deliberate boundary
 
-This compiler still evaluates a seed candidate. It now emits a fresh demand-derived frequency/fleet proposal, a complete timed bank plan, the preserved first-pass aircraft-cycle diagnostic, a passing fleet/curfew/RON topology repair, and a mathematical full-window materialization lower bound. It does not substitute proposed legs into canonical JSON until non-hub integration, route order, and exact bank timing are materialized together. Blank starts and airport additions remain explicit blockers until that stage is deterministic.
+This compiler still evaluates a seed candidate. It now emits a fresh demand-derived frequency/fleet proposal, bank plan, preserved first-pass diagnostic, topology repair, mathematical lower bound, and passing exact-cycle plan. It does not substitute proposed legs into canonical JSON until Line/Day/Route, pairing, and flight identifiers are assigned and the materialized schedule passes full validation. Blank starts and airport additions remain explicit blockers until that final canonicalization path is deterministic.

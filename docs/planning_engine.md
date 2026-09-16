@@ -74,7 +74,13 @@ This is a feasibility witness, not published schedule timing. It intentionally r
 
 The diagnostic builds every curfew-safe bank-window option for all 1,190 hub-touching legs and solves a continuous aggregate time-flow relaxation. It enforces the 40-minute turn floor and reserves a RON-capable connection at all 99 required destinations. Because the same flight may use different five-minute points inside its window for different relaxed connections, the result is a lower bound: exceeding a configured fleet would prove infeasibility, while fitting does not yet prove an exact integer routing.
 
-For the current proposal, the relaxed bank/turn/RON lower bound fits every configured fleet: MAX9 22/35, CRJ900 32/45, CRJ700 48/65, and CRJ200 67/80, or 169/225 in aggregate. This retracts the provisional target-time-only CRJ200 shortfall: §1.6a requires events to land inside a bank core, not at the generated +10/+50 targets. The next repair must integrate all 240 non-hub legs and select one exact time for every whole flight and connection without adding aircraft, reducing service, or waiving curfews.
+For the current proposal, the relaxed bank/turn/RON lower bound fits every configured fleet: MAX9 22/35, CRJ900 32/45, CRJ700 48/65, and CRJ200 67/80, or 169/225 in aggregate. This retracts the provisional target-time-only CRJ200 shortfall: §1.6a requires events to land inside a bank core, not at the generated +10/+50 targets. That result clears the lower-bound gate for the exact materialization stage below.
+
+## Exact cycle materialization
+
+`exact_materialization_plan.json` is defined by [`schemas/exact_materialization_plan.schema.json`](../schemas/exact_materialization_plan.schema.json). A time-expanded integer model chooses one five-minute departure time for every proposed leg. Aircraft inventory is conserved at every station, the 40-minute turn floor is enforced before an arrival becomes available again, every hub event remains inside an approved core, and fleet capacity comes directly from the schedule configuration.
+
+The current exact plan schedules all 1,430 legs, including all 240 non-hub legs, in 208 of 225 configured aircraft: MAX9 30/35, CRJ900 42/45, CRJ700 58/65, and CRJ200 78/80. The resulting successor cycles provide a real overnight at all 99 required destinations. One deterministic same-station successor swap clears the initial rolling target-RON failure without changing any flight time, service, fleet allocation, or curfew result.
 
 ## Multi-hub qualification
 
@@ -153,6 +159,14 @@ python -m caa_scheduler diagnose-bank-materialization \
   hub_bank_plan.json \
   config/demand_data/bts_db1c_6mo_v3.json \
   bank_materialization_diagnostic.json
+
+python -m caa_scheduler build-exact-materialization \
+  canonical_schedule.json \
+  frequency_fleet_plan.json \
+  hub_bank_plan.json \
+  routing_repair_plan.json \
+  config/demand_data/bts_db1c_6mo_v3.json \
+  exact_materialization_plan.json
 ```
 
 The golden-baseline and candidate commands generate these planning artifacts automatically. Candidate construction resolves the demand version to exactly one manifest and verifies every source fingerprint; an unknown version or mismatch blocks publishable output. If a candidate violates a hard stop such as a curfew, its canonical, timetable, and gate outputs remain suppressed. The demand/planning snapshots and diagnostic validation reports are retained so the failed build can be investigated.
@@ -161,8 +175,7 @@ The golden-baseline and candidate commands generate these planning artifacts aut
 
 The remaining Milestone 0.7 work is intentionally staged:
 
-1. integrate non-hub flying and solve exact integer banked route cycles inside the unchanged schedule fleet;
-2. assign one five-minute point inside every selected bank window while preserving turns, curfews, and RONs; and
-3. assign canonical lines, days, routes, pairings, and flight numbers, followed by full structural, operating, gate, and curfew validation.
+1. assign canonical lines, days, routes, pairings, and flight numbers from the passing exact cycles; and
+2. run full structural, operating, gate, stand, and curfew validation against the resulting canonical candidate.
 
 Each stage needs a golden comparison before the subsequent stage is permitted to write a publishable candidate.

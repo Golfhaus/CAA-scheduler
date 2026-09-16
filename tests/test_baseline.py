@@ -266,6 +266,7 @@ class ScheduleSixBaselineTests(unittest.TestCase):
             self.assertTrue(result["aircraftRoutePlanPath"].exists())
             self.assertTrue(result["routingRepairPlanPath"].exists())
             self.assertTrue(result["bankMaterializationDiagnosticPath"].exists())
+            self.assertTrue(result["exactMaterializationPlanPath"].exists())
             self.assertEqual(result["planningValidation"]["status"], "pass")
             self.assertEqual(result["demandPlan"]["status"], "pass")
             self.assertEqual(result["demandPlan"]["assignmentParity"]["matched"], 100)
@@ -294,6 +295,15 @@ class ScheduleSixBaselineTests(unittest.TestCase):
                     "bankAndRonMinimumAircraft"
                 ],
                 67,
+            )
+            self.assertEqual(result["exactMaterializationPlan"]["status"], "pass")
+            self.assertEqual(
+                result["exactMaterializationPlan"]["summary"]["requiredAircraft"],
+                208,
+            )
+            self.assertEqual(
+                result["exactMaterializationPlan"]["summary"]["nonHubIntegratedLegs"],
+                240,
             )
             self.assertEqual(
                 result["timetablePath"].read_bytes(),

@@ -1,0 +1,102 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://coastal-american.example/schemas/exact_materialization_plan.schema.json",
+  "title": "Coastal American Airways exact materialization plan",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "scheduleId",
+    "sourceKind",
+    "planningRulesId",
+    "operatingPolicyId",
+    "status",
+    "materializationStatus",
+    "timeStepMinutes",
+    "summary",
+    "checks",
+    "fleetPlan",
+    "ronAssignments",
+    "solver",
+    "cycles",
+    "legs",
+    "diagnostics",
+    "nextStep",
+    "limitations"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "scheduleId": { "type": "string", "minLength": 1 },
+    "sourceKind": { "const": "exact_time_expanded_materialization" },
+    "planningRulesId": { "type": "string", "minLength": 1 },
+    "operatingPolicyId": { "type": "string", "minLength": 1 },
+    "status": { "enum": ["pass", "fail"] },
+    "materializationStatus": { "enum": ["complete", "blocked"] },
+    "timeStepMinutes": { "const": 5 },
+    "summary": {
+      "type": "object",
+      "required": [
+        "checks",
+        "passed",
+        "failed",
+        "plannedLegs",
+        "routedLegs",
+        "bankTouchLegs",
+        "bankAlignedLegs",
+        "nonHubLegs",
+        "nonHubIntegratedLegs",
+        "configuredAircraft",
+        "requiredAircraft",
+        "remainingAircraft",
+        "cycles",
+        "curfewViolations",
+        "destinationsWithoutRon",
+        "rollingRonViolations",
+        "successorSwaps"
+      ]
+    },
+    "checks": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "status", "message"]
+      }
+    },
+    "fleetPlan": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": [
+          "configuredAircraft",
+          "requiredAircraft",
+          "shortfall",
+          "remainingAircraft",
+          "cycles",
+          "routedLegs",
+          "assignedDestinationRons",
+          "solverMipGap"
+        ]
+      }
+    },
+    "ronAssignments": {
+      "type": "object",
+      "additionalProperties": { "type": "string" }
+    },
+    "solver": {
+      "type": "object",
+      "required": ["name", "relativeGap", "timeLimitSecondsPerFleet", "fleets"]
+    },
+    "cycles": { "type": "array" },
+    "legs": { "type": "array" },
+    "diagnostics": { "type": "object" },
+    "nextStep": {
+      "type": "object",
+      "required": ["status", "action", "message"]
+    },
+    "limitations": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  }
+}

@@ -6,6 +6,7 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -90,19 +91,25 @@ class CandidateBuildTests(unittest.TestCase):
         self.assertTrue(departure_check["hardStop"])
         self.assertEqual(departure_check["status"], "pass")
 
-    def test_build_retains_routing_diagnostics_when_fleet_fit_blocks(self) -> None:
+    def test_build_retains_exact_diagnostics_before_canonical_ids(self) -> None:
         config = _config(self.baseline)
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             config_path = root / "build_config.json"
             output = root / "candidate"
             config_path.write_text(json.dumps(config))
-            report = build_candidate(
-                config_path,
-                REPO_ROOT,
-                baseline_path=CANONICAL_PATH,
-                output_directory=output,
-            )
+            with patch(
+                "caa_scheduler.candidate.build_exact_materialization_plan_from_manifest",
+                side_effect=ValueError(
+                    "Exact CRJ200 materialization failed: time limit reached"
+                ),
+            ):
+                report = build_candidate(
+                    config_path,
+                    REPO_ROOT,
+                    baseline_path=CANONICAL_PATH,
+                    output_directory=output,
+                )
             self.assertEqual(report["status"], "blocked_planning_input")
             for filename in (
                 "build_config.json",
@@ -117,6 +124,7 @@ class CandidateBuildTests(unittest.TestCase):
                 "aircraft_route_plan.json",
                 "routing_repair_plan.json",
                 "bank_materialization_diagnostic.json",
+                "exact_materialization_plan.json",
             ):
                 self.assertTrue((output / filename).is_file(), filename)
             planning = json.loads((output / "planning_snapshot.json").read_text())
@@ -155,6 +163,17 @@ class CandidateBuildTests(unittest.TestCase):
             self.assertEqual(
                 materialization["fleetPlan"]["CRJ200"]["shortfall"], 0
             )
+            exact = report["exactMaterializationPlan"]
+            self.assertEqual(exact["status"], "fail")
+            self.assertEqual(
+                exact["summary"]["plannedLegs"],
+                report["frequencyFleetPlan"]["summary"]["plannedLegs"],
+            )
+            self.assertEqual(exact["materializationStatus"], "blocked")
+            self.assertEqual(
+                exact["nextStep"]["action"], "retry_exact_materialization"
+            )
+            self.assertIn("time limit", exact["diagnostics"]["solverFailure"])
             self.assertFalse((output / "canonical_schedule.json").exists())
             self.assertFalse((output / "timetable.json").exists())
             self.assertFalse((output / "gates.json").exists())
@@ -196,13 +215,7 @@ class CandidateBuildTests(unittest.TestCase):
             output = root / "candidate"
             baseline_path.write_text(json.dumps(self.baseline))
             config_path.write_text(json.dumps(config))
-            first = build_candidate(
-                config_path,
-                REPO_ROOT,
-                baseline_path=baseline_path,
-                output_directory=output,
-            )
-            self.assertEqual(first["status"], "blocked_planning_input")
+            output.mkdir()
             (output / "canonical_schedule.json").write_text("stale")
             (output / "timetable.json").write_text("stale")
             (output / "gates.json").write_text("stale")
@@ -231,6 +244,7 @@ class CandidateBuildTests(unittest.TestCase):
             self.assertTrue((output / "hub_bank_plan.json").is_file())
             self.assertTrue((output / "aircraft_route_plan.json").is_file())
             self.assertTrue((output / "routing_repair_plan.json").is_file())
+            self.assertFalse((output / "exact_materialization_plan.json").exists())
 
     def test_unknown_demand_version_suppresses_candidate_outputs(self) -> None:
         config = _config(self.baseline)
