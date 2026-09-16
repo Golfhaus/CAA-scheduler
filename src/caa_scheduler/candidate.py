@@ -9,7 +9,10 @@ from .bank_placement import build_hub_bank_plan_from_manifest
 from .bank_materialization import build_bank_materialization_diagnostic_from_manifest
 from .build_config import validate_build_config
 from .demand import build_demand_plan_from_manifest, resolve_demand_manifest
-from .exact_materialization import build_exact_materialization_plan_from_manifest
+from .exact_materialization import (
+    blocked_exact_materialization_plan,
+    build_exact_materialization_plan_from_manifest,
+)
 from .gate_export import export_gate_schedule
 from .io import read_json, resolve_from_repo, write_json
 from .operating_validation import validate_operating_rules
@@ -367,8 +370,8 @@ def build_candidate(
                                 "Exact materialization is suppressed until the candidate's hard stops are cleared"
                             )
                         else:
-                            exact_materialization = (
-                                build_exact_materialization_plan_from_manifest(
+                            try:
+                                exact_materialization = build_exact_materialization_plan_from_manifest(
                                     candidate,
                                     frequency_fleet_plan,
                                     hub_bank_plan,
@@ -376,7 +379,13 @@ def build_candidate(
                                     demand_manifest,
                                     repo_root,
                                 )
-                            )
+                            except ValueError as error:
+                                exact_materialization = blocked_exact_materialization_plan(
+                                    candidate,
+                                    frequency_fleet_plan,
+                                    hub_bank_plan["planningRulesId"],
+                                    str(error),
+                                )
                             report["exactMaterializationPlan"] = exact_materialization
                             report["status"] = "blocked_planning_input"
                             report["blockers"].append(

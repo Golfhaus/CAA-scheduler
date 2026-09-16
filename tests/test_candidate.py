@@ -6,6 +6,7 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -97,12 +98,18 @@ class CandidateBuildTests(unittest.TestCase):
             config_path = root / "build_config.json"
             output = root / "candidate"
             config_path.write_text(json.dumps(config))
-            report = build_candidate(
-                config_path,
-                REPO_ROOT,
-                baseline_path=CANONICAL_PATH,
-                output_directory=output,
-            )
+            with patch(
+                "caa_scheduler.candidate.build_exact_materialization_plan_from_manifest",
+                side_effect=ValueError(
+                    "Exact CRJ200 materialization failed: time limit reached"
+                ),
+            ):
+                report = build_candidate(
+                    config_path,
+                    REPO_ROOT,
+                    baseline_path=CANONICAL_PATH,
+                    output_directory=output,
+                )
             self.assertEqual(report["status"], "blocked_planning_input")
             for filename in (
                 "build_config.json",
@@ -157,16 +164,16 @@ class CandidateBuildTests(unittest.TestCase):
                 materialization["fleetPlan"]["CRJ200"]["shortfall"], 0
             )
             exact = report["exactMaterializationPlan"]
-            self.assertEqual(exact["status"], "pass")
+            self.assertEqual(exact["status"], "fail")
             self.assertEqual(
-                exact["summary"]["routedLegs"],
+                exact["summary"]["plannedLegs"],
                 report["frequencyFleetPlan"]["summary"]["plannedLegs"],
             )
+            self.assertEqual(exact["materializationStatus"], "blocked")
             self.assertEqual(
-                exact["summary"]["nonHubIntegratedLegs"],
-                exact["summary"]["nonHubLegs"],
+                exact["nextStep"]["action"], "retry_exact_materialization"
             )
-            self.assertEqual(exact["summary"]["curfewViolations"], 0)
+            self.assertIn("time limit", exact["diagnostics"]["solverFailure"])
             self.assertFalse((output / "canonical_schedule.json").exists())
             self.assertFalse((output / "timetable.json").exists())
             self.assertFalse((output / "gates.json").exists())

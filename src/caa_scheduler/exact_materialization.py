@@ -26,6 +26,74 @@ MIP_RELATIVE_GAP = 0.01
 MIP_TIME_LIMIT_SECONDS = 120
 
 
+def blocked_exact_materialization_plan(
+    canonical: dict[str, Any],
+    frequency_plan: dict[str, Any],
+    planning_rules_id: str,
+    message: str,
+) -> dict[str, Any]:
+    """Return a durable diagnostic when a bounded exact solve has no incumbent."""
+    configured_aircraft = sum(
+        int(value) for value in canonical["schedule"]["fleetCounts"].values()
+    )
+    planned_legs = int(frequency_plan["summary"]["plannedLegs"])
+    return {
+        "schemaVersion": "1.0.0",
+        "scheduleId": canonical["schedule"]["id"],
+        "sourceKind": "exact_time_expanded_materialization",
+        "planningRulesId": planning_rules_id,
+        "operatingPolicyId": canonical["operatingPolicy"]["id"],
+        "status": "fail",
+        "materializationStatus": "blocked",
+        "timeStepMinutes": TIME_STEP_MINUTES,
+        "summary": {
+            "checks": 1,
+            "passed": 0,
+            "failed": 1,
+            "plannedLegs": planned_legs,
+            "routedLegs": 0,
+            "bankTouchLegs": 0,
+            "bankAlignedLegs": 0,
+            "nonHubLegs": 0,
+            "nonHubIntegratedLegs": 0,
+            "configuredAircraft": configured_aircraft,
+            "requiredAircraft": 0,
+            "remainingAircraft": 0,
+            "cycles": 0,
+            "curfewViolations": 0,
+            "destinationsWithoutRon": 0,
+            "rollingRonViolations": 0,
+            "successorSwaps": 0,
+        },
+        "checks": [
+            {"id": "solver_completion", "status": "fail", "message": message}
+        ],
+        "fleetPlan": {},
+        "ronAssignments": {},
+        "solver": {
+            "name": "scipy-highs-time-expanded-milp",
+            "relativeGap": MIP_RELATIVE_GAP,
+            "timeLimitSecondsPerFleet": MIP_TIME_LIMIT_SECONDS,
+            "fleets": {},
+        },
+        "cycles": [],
+        "legs": [],
+        "diagnostics": {"solverFailure": message},
+        "nextStep": {
+            "status": "blocked",
+            "action": "retry_exact_materialization",
+            "message": (
+                "Exact materialization did not produce a complete feasible incumbent; "
+                "review the solver diagnostic and retry before assigning canonical identifiers."
+            ),
+        },
+        "limitations": [
+            "No canonical identifiers or publishable consumer exports may be generated from a blocked exact solve.",
+            "A bounded solve can require more computation for a changed network or fleet configuration.",
+        ],
+    }
+
+
 def _inside_windows(value: int, windows: list[dict[str, Any]]) -> bool:
     return any(
         int(window["startMinute"]) <= value < int(window["endMinute"])

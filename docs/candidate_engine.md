@@ -45,6 +45,8 @@ Curfew enforcement comes from the pinned operating policy. The departure-window 
 
 The current fresh planning proposal produces `blocked_planning_input`. The first-pass route artifact retains the 409-aircraft/184-aircraft-short diagnostic. The bank-flow relaxation fits at 169/225, and exact materialization now schedules all 1,430 legs—including 240 non-hub legs—in 208/225 aircraft. All hub events align to approved bank cores, all 99 required destinations receive a routed RON, the rolling target-RON check passes, and curfew violations remain zero. The remaining work is canonical identifier assignment followed by full operating and gate validation—not a larger or rebalanced schedule fleet.
 
+If a bounded exact solve does not return a feasible incumbent, the candidate build still writes `exact_materialization_plan.json` with `materializationStatus: blocked`, the solver failure in `diagnostics.solverFailure`, and `nextStep.action: retry_exact_materialization`. A missing artifact is never used to represent solver exhaustion. Blocked exact output cannot advance to canonical identifiers or publication.
+
 ## GitHub Actions
 
 The **Build candidate schedule** workflow accepts a repository path to an approved configuration and uploads the isolated package as a 30-day artifact. It uses read-only repository permissions and does not commit or publish a candidate automatically.
