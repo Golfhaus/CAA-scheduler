@@ -2,8 +2,8 @@
   "scheduleId": "schedule_6_v2_2_5",
   "status": "pass",
   "summary": {
-    "checks": 17,
-    "passed": 17,
+    "checks": 18,
+    "passed": 18,
     "failed": 0
   },
   "metrics": {
@@ -23,6 +23,11 @@
       "id": "has_legs",
       "status": "pass",
       "message": "Schedule contains 1383 legs"
+    },
+    {
+      "id": "canonical_provenance",
+      "status": "pass",
+      "message": "Canonical schedule has exclusive imported-workbook provenance"
     },
     {
       "id": "operating_policy_pinned",
