@@ -151,6 +151,8 @@ If Python preflight fails, blank-start planning is requested, or an airport addi
 
 Milestone 0.7.7 now has a deterministic planning, demand, bank, topology-repair, lower-bound, and exact-materialization boundary. Python reconstructs the historical plan, processes the complete pinned 105-city demand data, reproduces all 100 non-hub assignments, generates a fresh frequency/fleet proposal, and defines all 24 hub banks. Aircraft quantities still come only from each schedule's build configuration; no fleet count is inferred from policy or silently added by repair.
 
+The exact optimizer's numerical stack is pinned in `pyproject.toml`. SciPy/HiGHS releases can materially change bounded mixed-integer solve behavior, so changing the SciPy or NumPy versions is an explicit engine change that must regenerate and revalidate the golden artifacts.
+
 The first routing pass remains an intentional diagnostic: its paired same-bank directions imply 409 aircraft against the selected 225. The lower-bound diagnostic applies the approved independent-direction interpretation and the full 60-minute cores required by §1.6a, fitting at 169/225. `exact_materialization_plan.json` now selects one five-minute time for all 1,430 legs, aligns all 1,190 hub-touching legs, integrates all 240 non-hub legs, and produces real aircraft cycles using 208/225 aircraft. All 99 required destinations receive routed overnights, every cycle meets the 11-day target-RON window, and curfew violations remain zero. Candidate publication remains blocked only while canonical Line/Day/Route, pairing, and flight identifiers are assigned and the newly timed schedule passes full operating and gate validation.
 
 ## Repository visibility
