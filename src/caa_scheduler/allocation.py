@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import copy
 import math
 from collections import Counter, defaultdict
 from pathlib import Path
@@ -46,6 +47,116 @@ def _market_classification(
     if "focus_city" in {origin_role, destination_role}:
         return "focus_city"
     return "point_to_point"
+
+
+def _reconcile_service_assignments(
+    active_cities: dict[str, dict[str, Any]],
+    assignment_rows: list[dict[str, Any]],
+    existing_pairs: set[Market],
+    planning_rules: dict[str, Any],
+) -> tuple[dict[str, list[str]], dict[str, Any]]:
+    """Apply the versioned network boundary before allocating frequencies.
+
+    Earlier migration stages deliberately retained every historical market.  In
+    strict mode, a non-hub city's qualified hubs are the complete service
+    boundary, except that a documented focus-city market may occupy one of the
+    city's tier slots.  A focus-city substitution replaces the lowest-ranked
+    qualified hub; it never increases the tier cap.
+    """
+    qualified = {
+        row["code"]: list(row["hubAssignments"])
+        for row in assignment_rows
+        if row["code"] in active_cities
+    }
+    network_rules = planning_rules.get("networkReconciliation")
+    if not network_rules:
+        return qualified, {
+            "mode": "preserve_historical_markets",
+            "cityDecisions": [],
+            "removedHistoricalServiceMarkets": [],
+        }
+
+    if network_rules.get("mode") != "strict_tier_caps":
+        raise ValueError(
+            "Unsupported network-reconciliation mode: "
+            + str(network_rules.get("mode"))
+        )
+
+    substitutions = network_rules.get("focusCitySubstitutions", [])
+    if len(substitutions) > 1:
+        raise ValueError("Only one focus-city substitution policy is supported")
+    substitution = substitutions[0] if substitutions else None
+    focus_code = substitution.get("code") if substitution else None
+    eligible_groups = set(substitution.get("eligibleGroups", [])) if substitution else set()
+    maximum_slots = int(substitution.get("maximumSlots", 0)) if substitution else 0
+    if maximum_slots not in {0, 1}:
+        raise ValueError("Focus-city substitution maximumSlots must be zero or one")
+    if focus_code and active_cities.get(focus_code, {}).get("role") != "focus_city":
+        raise ValueError(f"Configured focus-city substitution {focus_code} is not active")
+
+    by_code = {row["code"]: row for row in assignment_rows}
+    effective: dict[str, list[str]] = {}
+    city_decisions = []
+    for code in sorted(qualified):
+        row = by_code[code]
+        cap = int(row["maximumHubs"])
+        assignments = list(qualified[code][:cap])
+        substitution_used = False
+        if (
+            maximum_slots
+            and focus_code
+            and code != focus_code
+            and active_cities[code].get("group") in eligible_groups
+            and _market(code, focus_code) in existing_pairs
+        ):
+            assignments = assignments[: max(0, cap - 1)] + [focus_code]
+            substitution_used = True
+        effective[code] = assignments
+        city_decisions.append(
+            {
+                "code": code,
+                "group": active_cities[code].get("group"),
+                "percentile": row["percentile"],
+                "hubCountCap": cap,
+                "qualifiedHubs": list(qualified[code]),
+                "serviceAssignments": assignments,
+                "focusCitySubstitutionUsed": substitution_used,
+            }
+        )
+
+    retained_service_pairs = {
+        _market(code, endpoint)
+        for code, endpoints in effective.items()
+        for endpoint in endpoints
+    }
+    service_codes = {
+        code
+        for code, city in active_cities.items()
+        if city["role"] in {"hub", "focus_city"}
+    }
+    removed_rows = []
+    for market in sorted(existing_pairs):
+        origin, destination = market
+        if origin not in service_codes and destination not in service_codes:
+            continue
+        if active_cities[origin]["role"] == active_cities[destination]["role"] == "hub":
+            continue
+        if market in retained_service_pairs:
+            continue
+        removed_rows.append(
+            {
+                "origin": origin,
+                "destination": destination,
+                "reason": "outside_effective_tier_service_assignments",
+            }
+        )
+
+    return effective, {
+        "mode": "strict_tier_caps",
+        "focusCitySubstitution": copy.deepcopy(substitution),
+        "cityDecisions": city_decisions,
+        "removedHistoricalServiceMarkets": removed_rows,
+    }
 
 
 def _round_trip_minutes(
@@ -157,11 +268,6 @@ def build_frequency_fleet_plan(
     hub_codes = sorted(code for code, role in roles.items() if role == "hub")
 
     assignment_rows = demand_plan["multiHubAssignments"]["cities"]
-    assigned_hubs = {
-        row["code"]: list(row["hubAssignments"])
-        for row in assignment_rows
-        if row["code"] in active_cities
-    }
     demand_city = {
         row["code"]: row
         for row in assignment_rows
@@ -179,6 +285,26 @@ def build_frequency_fleet_plan(
         historical_legs[market] += 1
         historical_fleets[market][leg["fleet"]] += 1
 
+    assigned_hubs, network_reconciliation = _reconcile_service_assignments(
+        active_cities,
+        assignment_rows,
+        existing_pairs,
+        planning_rules,
+    )
+
+    retained_existing_pairs = set(existing_pairs)
+    removed_historical_pairs = {
+        _market(row["origin"], row["destination"])
+        for row in network_reconciliation["removedHistoricalServiceMarkets"]
+    }
+    for row in network_reconciliation["removedHistoricalServiceMarkets"]:
+        market = _market(row["origin"], row["destination"])
+        row["historicalLegs"] = historical_legs[market]
+        row["historicalFleetLegs"] = dict(
+            sorted(historical_fleets[market].items())
+        )
+    retained_existing_pairs -= removed_historical_pairs
+
     required_pairs = {
         _market(code, hub)
         for code, hubs in assigned_hubs.items()
@@ -189,7 +315,7 @@ def build_frequency_fleet_plan(
         for index, origin in enumerate(hub_codes)
         for destination in hub_codes[index + 1 :]
     }
-    candidate_pairs = existing_pairs | required_pairs | inter_hub_pairs
+    candidate_pairs = retained_existing_pairs | required_pairs | inter_hub_pairs
     matrix_values = matrix["values"]
     demand = {
         market: round(
@@ -250,7 +376,18 @@ def build_frequency_fleet_plan(
 
     if not allocation["unassigned"]:
         blocked: set[Market] = set()
+        maximum_planned_legs = allocation_rules.get("maximumPlannedLegs")
+        maximum_round_trips = (
+            int(maximum_planned_legs) // 2
+            if maximum_planned_legs is not None
+            else None
+        )
         while True:
+            if (
+                maximum_round_trips is not None
+                and sum(frequencies.values()) >= maximum_round_trips
+            ):
+                break
             eligible = [
                 market
                 for market in candidate_pairs
@@ -318,6 +455,20 @@ def build_frequency_fleet_plan(
             {
                 "code": code,
                 "percentile": row["percentile"],
+                **(
+                    {
+                        "hubCountCap": row["maximumHubs"],
+                        "qualifiedHubs": list(row["hubAssignments"]),
+                        "serviceAssignments": list(hubs),
+                        "focusCitySubstitutionUsed": any(
+                            decision["code"] == code
+                            and decision["focusCitySubstitutionUsed"]
+                            for decision in network_reconciliation["cityDecisions"]
+                        ),
+                    }
+                    if network_reconciliation["mode"] == "strict_tier_caps"
+                    else {}
+                ),
                 "minimumFlightLegs": minimum_legs,
                 "plannedHubFlightLegs": planned_hub_legs,
                 "plannedFlightLegs": planned_total_legs,
@@ -465,13 +616,38 @@ def build_frequency_fleet_plan(
             "plannedLegs": planned_legs,
             "pointToPointLegs": point_to_point_legs,
             "pointToPointShare": round(point_to_point_share, 6),
+            **(
+                {
+                    "maximumPlannedLegs": allocation_rules.get(
+                        "maximumPlannedLegs"
+                    ),
+                    "removedHistoricalServiceMarkets": len(
+                        removed_historical_pairs
+                    ),
+                    "focusCitySubstitutions": sum(
+                        row["focusCitySubstitutionUsed"]
+                        for row in network_reconciliation["cityDecisions"]
+                    ),
+                }
+                if network_reconciliation["mode"] == "strict_tier_caps"
+                else {}
+            ),
         },
         "checks": checks,
         "fleetPlan": fleet_plan,
         "markets": market_rows,
         "cityService": city_service,
+        **(
+            {"networkReconciliation": network_reconciliation}
+            if network_reconciliation["mode"] == "strict_tier_caps"
+            else {}
+        ),
         "limitations": [
-            "The existing canonical market set is retained as a seed; newly assigned hub markets are added, but entirely new point-to-point markets are not selected yet.",
+            (
+                "Historical point-to-point markets are retained, but historical hub/focus markets outside each city's effective tier assignments are removed before allocation."
+                if network_reconciliation["mode"] == "strict_tier_caps"
+                else "The existing canonical market set is retained as a seed; newly assigned hub markets are added, but entirely new point-to-point markets are not selected yet."
+            ),
             "Aircraft-minute allocation is a planning envelope, not a timed routing proof. Curfews, banks, gates, turns, RONs, and routing continuity remain mandatory downstream checks.",
             "Optional point-to-point frequency is deliberately withheld; the preserved point-to-point market set must remain within the 10% schedule cap.",
         ],

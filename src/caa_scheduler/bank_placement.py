@@ -128,32 +128,28 @@ def _has_interhub_candidate(
     block: int,
     windows: dict[str, list[dict[str, Any]]],
     cities: dict[str, dict[str, Any]],
+    step: int,
 ) -> bool:
-    origin_offset = TIMEZONE_OFFSETS[cities[origin]["timezone"]]
-    destination_offset = TIMEZONE_OFFSETS[cities[destination]["timezone"]]
-    shift = block + destination_offset - origin_offset
-    for origin_bank in windows[origin]:
-        for destination_bank in windows[destination]:
-            for day_shift in (-1440, 0, 1440):
-                arrival_start_as_departure = (
-                    destination_bank["startMinute"] + day_shift - shift
-                )
-                arrival_end_as_departure = (
-                    destination_bank["endMinute"] + day_shift - shift
-                )
-                if max(
-                    origin_bank["startMinute"], arrival_start_as_departure
-                ) < min(origin_bank["endMinute"], arrival_end_as_departure):
-                    return True
-    return False
+    return bool(
+        _interhub_candidates(
+            origin,
+            destination,
+            block,
+            windows,
+            cities,
+            step,
+        )
+    )
 
 
 def _optimize_phases(
     hubs: list[str],
-    services: list[dict[str, Any]],
+    interhub_services: list[dict[str, Any]],
+    spoke_services: list[dict[str, Any]],
     bank_counts: dict[str, int],
     bank_rules: dict[str, Any],
     cities: dict[str, dict[str, Any]],
+    policy: dict[str, Any],
 ) -> dict[str, int]:
     earliest = int(bank_rules["phaseCandidateEarliestMinute"])
     latest = int(bank_rules["phaseCandidateLatestMinute"])
@@ -177,21 +173,68 @@ def _optimize_phases(
             for hub in hubs
         }
 
-    def score(phase: dict[str, int]) -> int:
+    def score(phase: dict[str, int]) -> tuple[int, int]:
         windows = windows_for(phase)
-        return sum(
+        directional_banks = 0
+        if bank_rules.get("requireDirectionalPhaseCoverage", False):
+            for hub in hubs:
+                hub_services = [
+                    service for service in spoke_services if service["hub"] == hub
+                ]
+                for bank in windows[hub]:
+                    arrival_target = (
+                        bank["startMinute"]
+                        + int(bank_rules["spokeArrivalOffsetMinutes"])
+                    )
+                    departure_target = (
+                        bank["startMinute"]
+                        + int(bank_rules["hubDepartureOffsetMinutes"])
+                    )
+                    if any(
+                        _curfew_status(
+                            service["spoke"],
+                            _local_departure(
+                                arrival_target,
+                                service["blockMinutes"],
+                                service["spoke"],
+                                hub,
+                                cities,
+                            ),
+                            arrival_target,
+                            policy,
+                        )
+                        == "pass"
+                        and _curfew_status(
+                            hub,
+                            departure_target,
+                            _local_arrival(
+                                departure_target,
+                                service["blockMinutes"],
+                                hub,
+                                service["spoke"],
+                                cities,
+                            ),
+                            policy,
+                        )
+                        == "pass"
+                        for service in hub_services
+                    ):
+                        directional_banks += 1
+        interhub_score = sum(
             service["weight"]
-            for service in services
+            for service in interhub_services
             if _has_interhub_candidate(
                 service["origin"],
                 service["destination"],
                 service["blockMinutes"],
                 windows,
                 cities,
+                int(bank_rules["interHubSearchStepMinutes"]),
             )
         )
+        return directional_banks, interhub_score
 
-    best: tuple[int, tuple[int, ...], dict[str, int]] | None = None
+    best: tuple[tuple[int, int], tuple[int, ...], dict[str, int]] | None = None
     for seed in candidates:
         phase = {hub: seed for hub in hubs}
         for _ in range(10):
@@ -201,7 +244,7 @@ def _optimize_phases(
                 choices = []
                 for value in candidates:
                     phase[hub] = value
-                    choices.append((score(phase), -abs(value - prior), -value, value))
+                    choices.append((*score(phase), -abs(value - prior), -value, value))
                 chosen = max(choices)[-1]
                 phase[hub] = chosen
                 changed = changed or chosen != prior
@@ -249,14 +292,36 @@ def build_hub_bank_plan(
     }
 
     interhub_services = []
+    spoke_services = []
     for market in frequency_plan["markets"]:
-        if market["origin"] not in hub_set or market["destination"] not in hub_set:
+        market_hubs = [
+            code
+            for code in (market["origin"], market["destination"])
+            if code in hub_set
+        ]
+        if not market_hubs:
             continue
         for allocation in market["allocations"]:
             block = _block_minutes(
                 market["origin"], market["destination"],
                 profiles[allocation["fleet"]], cities,
             )
+            if len(market_hubs) == 1:
+                hub = market_hubs[0]
+                spoke = (
+                    market["destination"]
+                    if market["origin"] == hub
+                    else market["origin"]
+                )
+                spoke_services.append(
+                    {
+                        "hub": hub,
+                        "spoke": spoke,
+                        "blockMinutes": block,
+                        "weight": allocation["roundTrips"],
+                    }
+                )
+                continue
             for origin, destination in (
                 (market["origin"], market["destination"]),
                 (market["destination"], market["origin"]),
@@ -272,7 +337,13 @@ def build_hub_bank_plan(
                 )
 
     phase = _optimize_phases(
-        hubs, interhub_services, bank_counts, bank_rules, cities
+        hubs,
+        interhub_services,
+        spoke_services,
+        bank_counts,
+        bank_rules,
+        cities,
+        policy,
     )
     windows: dict[str, list[dict[str, Any]]] = {}
     for hub in hubs:

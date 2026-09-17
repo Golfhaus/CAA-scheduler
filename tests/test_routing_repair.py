@@ -10,7 +10,10 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO_ROOT / "src"))
 
-from caa_scheduler.routing_repair import build_routing_repair_plan_from_manifest
+from caa_scheduler.routing_repair import (
+    _euler_circuits,
+    build_routing_repair_plan_from_manifest,
+)
 
 
 SCHEDULE_DIRECTORY = REPO_ROOT / "data" / "schedules" / "schedule_6_v2_2_5"
@@ -81,6 +84,20 @@ class RoutingRepairPlanTests(unittest.TestCase):
         self.assertLess(
             self.plan["summary"]["bankAlignedLegs"],
             self.plan["summary"]["bankTouchLegs"],
+        )
+
+    def test_disconnected_balanced_inventory_builds_separate_circuits(self) -> None:
+        legs = [
+            {"id": "A-B", "origin": "A", "destination": "B"},
+            {"id": "B-A", "origin": "B", "destination": "A"},
+            {"id": "C-D", "origin": "C", "destination": "D"},
+            {"id": "D-C", "origin": "D", "destination": "C"},
+        ]
+        circuits = _euler_circuits(legs, 0)
+        self.assertEqual(len(circuits), 2)
+        self.assertCountEqual(
+            [leg["id"] for circuit in circuits for leg in circuit],
+            [leg["id"] for leg in legs],
         )
 
 

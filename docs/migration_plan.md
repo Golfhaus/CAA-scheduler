@@ -62,7 +62,7 @@ Status: complete.
 
 ## 0.7 — Deterministic construction planner
 
-Status: in progress; Milestone 0.7.8 canonical identifier assignment complete.
+Status: in progress; Milestone 0.7.9 tier-cap network reconciliation complete.
 
 - Replace hardcoded paths, pickle files, import-time data loading, and mutable module globals.
 - Reconnect demand, multi-hub assignment, fleet allocation, bank placement, routing, and repair logic behind one callable build command.
@@ -88,17 +88,19 @@ Completed foundation:
 - Preserve the independent 409-aircraft bank-placement diagnostic alongside the passing topology repair.
 - Assign opposite market directions to bank cores independently rather than forcing every frequency into a destination overnight.
 - Prove bank/turn/RON fleet lower bounds across the complete 60-minute cores before canonical timing; every current fleet remains inside its configured count in the relaxed model.
-- Select exact five-minute times for all 1,430 legs, integrate all 240 non-hub legs, and construct fleet-continuous cycles inside 208 of 225 configured aircraft.
+- Select exact five-minute times for all 1,430 legs, integrate all 304 non-hub legs, and construct fleet-continuous cycles inside 211 of 225 configured aircraft.
 - Cover all 99 required destination RONs and repair rolling target-RON cadence with deterministic same-station successor swaps.
 - Partition every passing exact cycle into contiguous 03:00-to-03:00 operating days and assign canonical Line, Day, Route, sequence, Pairing, and Flight identifiers.
-- Preserve all 1,224 exact hub-bank touches and carry demand percentiles into the generated canonical candidate.
+- Preserve all 1,232 exact hub-bank touches and carry demand percentiles plus effective service assignments into the generated canonical candidate.
 - Reuse all 634 historical directed-market pairing numbers and assign 102 new pairings deterministically.
 - Replace inherited workbook provenance with an exclusive, fingerprinted deterministic-construction chain.
 - Rerun structural, operating, bank, gate, stand, tier, and spacing validation on the materialized canonical candidate.
 
 Remaining in 0.7:
 
-- Repair the full-validation failures now exposed by canonical timing: same-pairing departure clustering, historical extra-hub markets beyond current tier caps, and gate/stand peaks.
+- Enforce the v4 strict service boundary: retain historical point-to-point markets, remove historical hub/focus markets outside effective tier assignments, and allow documented BHM substitutions to occupy no more than one tier slot.
+- Keep Schedule 7 at the accepted 1,430-leg proposal ceiling while reallocating the corrected network.
+- Repair the remaining full-validation failures: same-pairing departure clustering and gate/stand peaks.
 - Add golden comparisons for each stage before enabling blank-start construction or airport additions.
 
 ## 1.0 — Schedule Builder

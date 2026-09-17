@@ -59,7 +59,9 @@ def _leg_inventory(
     return dict(by_fleet)
 
 
-def _euler_circuit(legs: list[dict[str, Any]], seed: int) -> list[dict[str, Any]]:
+def _euler_circuits(
+    legs: list[dict[str, Any]], seed: int
+) -> list[list[dict[str, Any]]]:
     adjacency: defaultdict[str, list[dict[str, Any]]] = defaultdict(list)
     for leg in sorted(legs, key=lambda row: row["id"]):
         adjacency[leg["origin"]].append(leg)
@@ -67,21 +69,29 @@ def _euler_circuit(legs: list[dict[str, Any]], seed: int) -> list[dict[str, Any]
     for station in sorted(adjacency):
         randomizer.shuffle(adjacency[station])
 
-    stack: list[tuple[str, dict[str, Any] | None]] = [(min(adjacency), None)]
-    circuit: list[dict[str, Any]] = []
-    while stack:
-        station, incoming = stack[-1]
-        if adjacency[station]:
-            leg = adjacency[station].pop()
-            stack.append((leg["destination"], leg))
-        else:
-            stack.pop()
-            if incoming is not None:
-                circuit.append(incoming)
-    circuit.reverse()
-    if len(circuit) != len(legs):
-        raise ValueError("Routing repair inventory is not one connected fleet circuit")
-    return circuit
+    circuits = []
+    while True:
+        remaining = sorted(
+            station for station, station_legs in adjacency.items() if station_legs
+        )
+        if not remaining:
+            break
+        stack: list[tuple[str, dict[str, Any] | None]] = [(remaining[0], None)]
+        circuit: list[dict[str, Any]] = []
+        while stack:
+            station, incoming = stack[-1]
+            if adjacency[station]:
+                leg = adjacency[station].pop()
+                stack.append((leg["destination"], leg))
+            else:
+                stack.pop()
+                if incoming is not None:
+                    circuit.append(incoming)
+        circuit.reverse()
+        circuits.append(circuit)
+    if sum(len(circuit) for circuit in circuits) != len(legs):
+        raise ValueError("Routing repair did not consume the complete fleet inventory")
+    return circuits
 
 
 def _schedule_prefix(
@@ -151,6 +161,18 @@ def _maximum_non_target_gap(routes: list[dict[str, Any]], targets: set[str]) -> 
     return min(maximum, len(routes))
 
 
+def _maximum_component_gap(
+    routes: list[dict[str, Any]], targets: set[str]
+) -> int:
+    components: defaultdict[int, list[dict[str, Any]]] = defaultdict(list)
+    for route in routes:
+        components[int(route.get("componentIndex", 0))].append(route)
+    return max(
+        (_maximum_non_target_gap(component, targets) for component in components.values()),
+        default=0,
+    )
+
+
 def _partition(
     circuit: list[dict[str, Any]],
     lookback: int,
@@ -203,7 +225,7 @@ def _candidate_score(
     covered = {route["ronStation"] for route in routes} & destinations
     return (
         len(covered),
-        -_maximum_non_target_gap(routes, targets),
+        -_maximum_component_gap(routes, targets),
         -len(routes),
     )
 
@@ -219,17 +241,25 @@ def _fleet_candidates(
 ) -> list[dict[str, Any]]:
     candidates = []
     for seed in range(SEARCH_SEEDS):
-        circuit = _euler_circuit(legs, seed)
+        circuits = _euler_circuits(legs, seed)
         for lookback in ENDPOINT_LOOKBACKS:
-            routes = _partition(
-                circuit,
-                lookback,
-                cities,
-                policy,
-                destinations,
-                targets,
-                priority_destinations,
-            )
+            routes = []
+            for component_index, circuit in enumerate(circuits):
+                routes.extend(
+                    {
+                        **route,
+                        "componentIndex": component_index,
+                    }
+                    for route in _partition(
+                        circuit,
+                        lookback,
+                        cities,
+                        policy,
+                        destinations,
+                        targets,
+                        priority_destinations,
+                    )
+                )
             if len(routes) > configured_aircraft:
                 continue
             candidates.append(
@@ -318,7 +348,7 @@ def _select_candidates(
                         )
                         & destinations
                     ),
-                    -_maximum_non_target_gap(candidate["routes"], targets),
+                    -_maximum_component_gap(candidate["routes"], targets),
                     -len(candidate["routes"]),
                     candidate["score"][0],
                     -candidate["seed"],
@@ -360,11 +390,13 @@ def _split_route(
             "fleet": route["fleet"],
             "legs": first,
             "ronStation": first[-1]["destination"],
+            "componentIndex": route.get("componentIndex", 0),
         },
         {
             "fleet": route["fleet"],
             "legs": second,
             "ronStation": second[-1]["destination"],
+            "componentIndex": route.get("componentIndex", 0),
         },
     ]
 
@@ -421,7 +453,7 @@ def _repair_target_cadence(
 ) -> list[str]:
     failures = []
     for fleet, routes in routes_by_fleet.items():
-        while _maximum_non_target_gap(routes, targets) > limit:
+        while _maximum_component_gap(routes, targets) > limit:
             if len(routes) >= int(fleet_counts[fleet]):
                 failures.append(fleet)
                 break
@@ -435,16 +467,18 @@ def _repair_target_cadence(
                             "fleet": fleet,
                             "legs": route["legs"][:cut],
                             "ronStation": route["legs"][cut - 1]["destination"],
+                            "componentIndex": route.get("componentIndex", 0),
                         },
                         {
                             "fleet": fleet,
                             "legs": route["legs"][cut:],
                             "ronStation": route["ronStation"],
+                            "componentIndex": route.get("componentIndex", 0),
                         },
                     ] + routes[route_index + 1 :]
                     options.append(
                         (
-                            _maximum_non_target_gap(simulated, targets),
+                            _maximum_component_gap(simulated, targets),
                             route_index,
                             cut,
                         )
@@ -590,6 +624,15 @@ def build_routing_repair_plan(
 
     routes = []
     legs = []
+    component_counts = {
+        fleet: len(
+            {
+                int(route.get("componentIndex", 0))
+                for route in fleet_routes
+            }
+        )
+        for fleet, fleet_routes in routes_by_fleet.items()
+    }
     for fleet in sorted(routes_by_fleet):
         for ordinal, route in enumerate(routes_by_fleet[fleet], 1):
             route_id = f"REPAIR-{fleet}-{ordinal:03d}"
@@ -598,16 +641,19 @@ def build_routing_repair_plan(
                 artifact_leg = {**leg, "routeId": route_id, "sequence": sequence}
                 legs.append(artifact_leg)
                 route_legs.append(leg["id"])
-            routes.append(
-                {
-                    "id": route_id,
-                    "fleet": fleet,
-                    "legCount": len(route_legs),
-                    "startStation": route["legs"][0]["origin"],
-                    "ronStation": route["ronStation"],
-                    "legIds": route_legs,
-                }
-            )
+            artifact_route = {
+                "id": route_id,
+                "fleet": fleet,
+                "legCount": len(route_legs),
+                "startStation": route["legs"][0]["origin"],
+                "ronStation": route["ronStation"],
+                "legIds": route_legs,
+            }
+            if component_counts[fleet] > 1:
+                artifact_route["componentIndex"] = route.get(
+                    "componentIndex", 0
+                )
+            routes.append(artifact_route)
 
     windows = {
         hub["hub"]: [
@@ -638,13 +684,17 @@ def build_routing_repair_plan(
                 turn_violations.append([current["id"], following["id"], wait])
     for fleet in sorted(routes_by_fleet):
         fleet_routes = routes_by_fleet[fleet]
-        for current, following in zip(
-            fleet_routes, fleet_routes[1:] + fleet_routes[:1]
-        ):
-            if current["ronStation"] != following["legs"][0]["origin"]:
-                continuity_violations.append(
-                    [current["legs"][-1]["id"], following["legs"][0]["id"]]
-                )
+        components: defaultdict[int, list[dict[str, Any]]] = defaultdict(list)
+        for route in fleet_routes:
+            components[int(route.get("componentIndex", 0))].append(route)
+        for component_routes in components.values():
+            for current, following in zip(
+                component_routes, component_routes[1:] + component_routes[:1]
+            ):
+                if current["ronStation"] != following["legs"][0]["origin"]:
+                    continuity_violations.append(
+                        [current["legs"][-1]["id"], following["legs"][0]["id"]]
+                    )
 
     fleet_plan = {}
     for fleet, configured in fleet_counts.items():
@@ -659,7 +709,7 @@ def build_routing_repair_plan(
             "routedLegs": sum(route["legCount"] for route in fleet_routes),
             "searchSeed": selected.get(fleet, {}).get("seed"),
             "endpointLookback": selected.get(fleet, {}).get("lookback"),
-            "maximumDaysWithoutTargetRon": _maximum_non_target_gap(
+            "maximumDaysWithoutTargetRon": _maximum_component_gap(
                 fleet_routes, targets
             ),
         }

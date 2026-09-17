@@ -481,8 +481,15 @@ def _repair_successor_cycles(
     required_destinations: set[str],
     fleet_counts: dict[str, int],
     rolling_limit: int,
+    single_target_full_gap: bool,
 ) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
-    cycles = _cycles(legs, successors, policy, cities)
+    cycles = _cycles(
+        legs,
+        successors,
+        policy,
+        cities,
+        single_target_full_gap=single_target_full_gap,
+    )
     swaps = []
     arrivals_by_station: defaultdict[tuple[str, str], list[str]] = defaultdict(list)
     for identifier, leg in legs.items():
@@ -512,7 +519,13 @@ def _repair_successor_cycles(
                         successors[second],
                         successors[first],
                     )
-                    candidate_cycles = _cycles(legs, successors, policy, cities)
+                    candidate_cycles = _cycles(
+                        legs,
+                        successors,
+                        policy,
+                        cities,
+                        single_target_full_gap=single_target_full_gap,
+                    )
                     candidate_score = _cycle_score(
                         candidate_cycles,
                         required_destinations,
@@ -638,6 +651,11 @@ def build_exact_materialization_plan(
         required_destinations,
         fleet_counts,
         rolling_limit,
+        bool(
+            planning_rules["routing"].get(
+                "singleTargetUsesFullCycleGap", False
+            )
+        ),
     )
 
     hubs = set(policy["hubs"])

@@ -45,6 +45,23 @@
     },
     "markets": { "type": "array" },
     "cityService": { "type": "array" },
+    "networkReconciliation": {
+      "type": "object",
+      "required": [
+        "mode",
+        "cityDecisions",
+        "removedHistoricalServiceMarkets"
+      ],
+      "properties": {
+        "mode": {
+          "enum": ["preserve_historical_markets", "strict_tier_caps"]
+        },
+        "focusCitySubstitution": { "type": ["object", "null"] },
+        "cityDecisions": { "type": "array" },
+        "removedHistoricalServiceMarkets": { "type": "array" }
+      },
+      "additionalProperties": false
+    },
     "limitations": {
       "type": "array",
       "items": { "type": "string" }

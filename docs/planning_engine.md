@@ -27,7 +27,7 @@ The baseline has 1,383 legs, 928 directional fleet/market rows, 105 station tota
 
 ## Fresh frequency and fleet allocation
 
-`frequency_fleet_plan.json` is defined by [`schemas/frequency_fleet_plan.schema.json`](../schemas/frequency_fleet_plan.schema.json). The allocator starts with the existing canonical market set, adds every market required by the recomputed hub assignments, and guarantees inter-hub coverage. This seeded market boundary preserves deliberate point-to-point and focus-city choices while frequencies are recalculated from demand.
+`frequency_fleet_plan.json` is defined by [`schemas/frequency_fleet_plan.schema.json`](../schemas/frequency_fleet_plan.schema.json). Legacy v1–v3 plans start with the existing canonical market set. The v4 network boundary instead retains historical point-to-point markets, guarantees inter-hub coverage, and keeps only the effective hub/focus assignments permitted by each city's percentile tier. Its reconciliation section records every city decision and every removed historical service market.
 
 The calculation applies the standing rules directly:
 
@@ -40,7 +40,7 @@ The calculation applies the standing rules directly:
 
 The four fleet performance profiles and the 900-minute planning envelope live in the fingerprinted planning policy. Aircraft quantities do not: they are read exclusively from the schedule configuration. An unknown configured fleet requires a policy profile before allocation can proceed.
 
-For the Schedule 6 v2.2.5 inputs, the proposal passes all six planning checks with 368 candidate markets, 715 round trips, 1,430 legs, and 8.8% point-to-point flying. It adds hub markets required by the current multi-hub rules that were absent from the historical schedule, so this is intentionally a new proposal rather than a parity reproduction.
+For the accepted Schedule 7 inputs, the v4 proposal passes all six planning checks with 235 candidate markets, 715 round trips, 1,430 legs, and 8.8% point-to-point flying. It removes 131 historical hub/focus markets outside the effective tier boundary and uses an existing BHM market as one permitted slot for 20 cities in the documented FLP, GCP, OZK, and TEX groups. The 1,430-leg ceiling prevents a network-policy repair from silently expanding the accepted proposal.
 
 Aircraft-minute allocation is not timed routing. Filling the planning envelope does not waive or pre-approve curfews, banks, gate capacity, RON placement, turn feasibility, or routing continuity. Those constraints remain authoritative when the proposal is materialized into canonical legs.
 
@@ -62,7 +62,7 @@ For the current Schedule 6 planning proposal, all 1,430 proposed legs enter cont
 
 ## Topology repair
 
-`routing_repair_plan.json` is defined by [`schemas/routing_repair_plan.schema.json`](../schemas/routing_repair_plan.schema.json). It keeps the first-pass bank-cycle artifact intact, rebuilds the balanced directed fleet graph, searches deterministic Euler orderings, partitions each fleet into curfew-safe 03:00–03:00 route days, and uses available route-day endpoints to satisfy destination and rolling target-city RON requirements. Search bounds affect ordering only; every aircraft limit is read from `schedule.fleetCounts`.
+`routing_repair_plan.json` is defined by [`schemas/routing_repair_plan.schema.json`](../schemas/routing_repair_plan.schema.json). It keeps the first-pass bank-cycle artifact intact, rebuilds each balanced directed fleet graph, searches deterministic Euler orderings for every connected component, partitions them into curfew-safe 03:00–03:00 route days, and uses available route-day endpoints to satisfy destination and rolling target-city RON requirements. Search bounds affect ordering only; every aircraft limit is read from `schedule.fleetCounts`.
 
 On the v2.2.5 planning proposal, the repair retains all 1,430 legs in 209 route days against 225 configured aircraft: MAX9 29/35, CRJ900 39/45, CRJ700 62/65, and CRJ200 79/80. All seven topology checks pass, including the non-waivable curfew check, destination RON coverage, and the rolling target-RON window.
 
@@ -80,13 +80,13 @@ For the current proposal, the relaxed bank/turn/RON lower bound fits every confi
 
 `exact_materialization_plan.json` is defined by [`schemas/exact_materialization_plan.schema.json`](../schemas/exact_materialization_plan.schema.json). A time-expanded integer model chooses one five-minute departure time for every proposed leg. Aircraft inventory is conserved at every station, the 40-minute turn floor is enforced before an arrival becomes available again, every hub event remains inside an approved core, and fleet capacity comes directly from the schedule configuration.
 
-The current exact plan schedules all 1,430 legs, including all 240 non-hub legs, in 208 of 225 configured aircraft: MAX9 30/35, CRJ900 42/45, CRJ700 58/65, and CRJ200 78/80. The resulting successor cycles provide a real overnight at all 99 required destinations. One deterministic same-station successor swap clears the initial rolling target-RON failure without changing any flight time, service, fleet allocation, or curfew result.
+The current v4 exact plan schedules all 1,430 legs, including all 304 non-hub legs, in 211 of 225 configured aircraft: MAX9 33/35, CRJ900 45/45, CRJ700 65/65, and CRJ200 68/80. The resulting successor cycles provide a real overnight at all 99 required destinations. Three deterministic same-station successor swaps clear the rolling target-RON failures without changing flight times, service, fleet allocation, or curfew results. A single target-city overnight is measured against the full circular cycle rather than being treated as a one-day gap.
 
 ## Multi-hub qualification
 
 `compute_multihub_assignments()` is a pure function. It accepts city metadata, an explicit intergroup-demand dataset, city market sizes, and versioned planning rules. It has no hardcoded filesystem paths, import-time data loading, pandas dependency, pickle input, or mutable global state.
 
-The preserved legacy thresholds and city-percentile caps remain in [`config/policies/planning_rules_v1.json`](../config/policies/planning_rules_v1.json); [`planning_rules_v2.json`](../config/policies/planning_rules_v2.json) adds frequency and fleet policy, and [`planning_rules_v3.json`](../config/policies/planning_rules_v3.json) adds bank-phase search without modifying either prior pin. The formerly embedded post-BHM-annotation table is normalized as [`data/reference/intergroup_demand_v2.json`](../data/reference/intergroup_demand_v2.json). The updated 105-city six-month airport matrix is stored as `data/reference/airport_od_matrix_consolidated_v2.csv`. Fingerprinted v1, v2, and v3 manifests preserve all three input combinations. The calculation covers every active city and reproduces all 100 non-hub assignments in v2.2.5, including CHS at JAX/PHF/DAY and BTR at JAX.
+The preserved legacy thresholds and city-percentile caps remain in [`config/policies/planning_rules_v1.json`](../config/policies/planning_rules_v1.json); [`planning_rules_v2.json`](../config/policies/planning_rules_v2.json) adds frequency and fleet policy, [`planning_rules_v3.json`](../config/policies/planning_rules_v3.json) adds bank-phase search, and [`planning_rules_v4.json`](../config/policies/planning_rules_v4.json) adds strict tier reconciliation, the documented BHM substitution groups, the Schedule 7 proposal ceiling, and exact-grid inter-hub placement. The formerly embedded post-BHM-annotation table is normalized as [`data/reference/intergroup_demand_v2.json`](../data/reference/intergroup_demand_v2.json). The updated 105-city six-month airport matrix is stored as `data/reference/airport_od_matrix_consolidated_v2.csv`. Fingerprinted v1–v4 manifests preserve every input combination. The calculation covers every active city and reproduces all 100 non-hub qualifications in v2.2.5, including CHS at JAX/PHF/DAY and BTR at JAX.
 
 ## Commands and build integration
 
@@ -173,12 +173,11 @@ The golden-baseline and candidate commands generate these planning artifacts aut
 
 ## Next construction stages
 
-Milestone 0.7.8 now assigns canonical identifiers from every passing exact plan. It rotates each successor cycle to a deterministic 03:00 operating-day boundary, numbers MAX9 lines A–Z and CRJ lines from AA, assigns fleet-blocked routes, preserves historical directed-market pairings where possible, assigns demand-ranked four-digit flight numbers, and records an exclusive generated-source provenance chain. Candidate builds then run the complete structural and operating validators and write `canonicalization_report.json` alongside reviewable canonical, timetable, and gate outputs.
+Milestone 0.7.9 reconciles the market boundary before allocation, proves directional bank use on the exact five-minute grid, supports disconnected balanced fleet components, and corrects the single-target circular RON-gap calculation. Canonicalization still rotates each successor cycle to a deterministic 03:00 operating-day boundary, numbers MAX9 lines A–Z and CRJ lines from AA, assigns fleet-blocked routes, preserves historical directed-market pairings where possible, assigns demand-ranked four-digit flight numbers, and records an exclusive generated-source provenance chain.
 
-The first full validation of the current 1,430-leg proposal is intentionally not publication-ready. Curfews, minimum turns, numbering, bank alignment, and structural validation pass. The remaining Milestone 0.7 work is now explicit:
+The current 1,430-leg proposal remains intentionally review-required. Curfews, minimum turns, numbering, bank alignment, structural validation, rolling target-city RON cadence, and every tier service envelope pass. The remaining Milestone 0.7 work is now explicit:
 
 1. repair same-pairing departure clustering introduced by the inventory-focused exact solve;
-2. reconcile preserved historical hub markets with the current percentile-tier hub-count caps; and
-3. add gate/stand feasibility to construction or a deterministic repair stage.
+2. add gate/stand feasibility to construction or a deterministic repair stage.
 
 Golden comparisons remain required before blank-start construction or airport additions are enabled.

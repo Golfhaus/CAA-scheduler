@@ -15,6 +15,9 @@ from caa_scheduler.allocation import build_frequency_fleet_plan_from_manifest
 
 SCHEDULE_DIRECTORY = REPO_ROOT / "data" / "schedules" / "schedule_6_v2_2_5"
 MANIFEST_PATH = REPO_ROOT / "config" / "demand_data" / "bts_db1c_6mo_v3.json"
+STRICT_MANIFEST_PATH = (
+    REPO_ROOT / "config" / "demand_data" / "bts_db1c_6mo_v4.json"
+)
 
 
 class FrequencyFleetPlanTests(unittest.TestCase):
@@ -59,6 +62,35 @@ class FrequencyFleetPlanTests(unittest.TestCase):
         self.assertGreaterEqual(chs_phf["plannedRoundTrips"], 1)
         self.assertFalse(chs_day["existingMarket"])
         self.assertTrue(chs_day["requiredByHubPlan"])
+
+    def test_strict_tier_boundary_removes_stale_service_markets(self) -> None:
+        demand = copy.deepcopy(self.demand_plan)
+        demand["demandDataVersion"] = "bts-db1c-6mo-jul2025-apr2026-v4"
+        plan = build_frequency_fleet_plan_from_manifest(
+            self.canonical,
+            demand,
+            STRICT_MANIFEST_PATH,
+            REPO_ROOT,
+        )
+        self.assertEqual(plan["status"], "pass")
+        self.assertEqual(plan["summary"]["candidateMarkets"], 235)
+        self.assertEqual(plan["summary"]["plannedLegs"], 1430)
+        self.assertEqual(plan["summary"]["removedHistoricalServiceMarkets"], 131)
+        self.assertEqual(plan["summary"]["focusCitySubstitutions"], 20)
+        service = {row["code"]: row for row in plan["cityService"]}
+        self.assertEqual(
+            service["AUS"]["serviceAssignments"],
+            ["MCI", "JAX", "DAY", "BHM"],
+        )
+        self.assertEqual(service["FWA"]["serviceAssignments"], ["DAY"])
+        removed = {
+            (row["origin"], row["destination"])
+            for row in plan["networkReconciliation"][
+                "removedHistoricalServiceMarkets"
+            ]
+        }
+        self.assertIn(("BHM", "FWA"), removed)
+        self.assertIn(("ABE", "JAX"), removed)
 
     def test_fleet_counts_come_from_the_schedule(self) -> None:
         changed = copy.deepcopy(self.canonical)
