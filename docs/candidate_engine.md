@@ -22,11 +22,11 @@ Each run replaces only the compiler's known files in that output directory. This
 4. Apply the new schedule identity, fleet counts, connection window, and supported network changes.
 5. Reconstruct and validate the candidate's durable planning snapshot.
 6. Resolve the exact demand-data version to one manifest, verify all source fingerprints, and recompute the demand/hub plan.
-7. Allocate a fresh frequency and fleet proposal against the schedule-specific aircraft counts.
-8. Generate hub-bank windows and place all proposed hub-touching flying without accepting a curfew violation.
+7. Allocate a fresh frequency and fleet proposal against the schedule-specific aircraft counts, including any versioned routing reserve and single-fleet market requirement.
+8. Generate hub-bank windows, prove required inter-hub spacing capacity, and place all proposed hub-touching flying without accepting a curfew violation.
 9. Construct complete aircraft cycles, insert non-hub flying, and evaluate fleet, continuity, turn, curfew, and RON feasibility.
 10. Independently assign directional frequencies to bank cores and solve a continuous time-flow lower bound with hard curfews and destination RONs.
-11. Select exact five-minute times, integrate non-hub flying, construct integer aircraft cycles, and verify hard curfews and RON cadence.
+11. Select exact five-minute times, enforce Section 2.6 pairing spacing, integrate non-hub flying, construct integer aircraft cycles, and verify hard curfews and RON cadence.
 12. Run structural and operating validation against the timed seed candidate.
 13. Stop consumer export if a hard-stop or planning-input check fails.
 14. Assign canonical lines, 03:00 operating days, fleet-blocked routes, pairings, and demand-ranked flight numbers from a passing exact plan.
@@ -47,9 +47,11 @@ Curfew enforcement comes from the pinned operating policy. The departure-window 
 | `candidate_review_required` | Hard stops passed, but other structural/operating findings need repair | Yes |
 | `candidate_ready` | All evaluated structural and error-level operating checks passed | Yes |
 
-The current fresh planning proposal advances through canonicalization as `candidate_review_required`. Exact materialization schedules all 1,430 legs—including 304 non-hub legs—in 211/225 aircraft. Canonicalization produces 33 lines, 211 routes, 470 directed pairings, flights 1001–2430, and all 1,232 bank-touch assignments. Curfews, minimum turns, numbering, bank alignment, rolling target-city RON cadence, tier service, and structural validation pass.
+The current fresh planning proposal advances through canonicalization as `candidate_review_required`. Exact materialization schedules all 1,406 legs—including 306 non-hub legs—in 221/225 aircraft. Canonicalization produces 40 lines, 221 routes, 470 directed pairings, and all 1,160 bank-touch assignments. Curfews, minimum turns, numbering, bank alignment, rolling target-city RON cadence, tier service, Section 2.6 pairing spacing, and structural validation pass.
 
-Full validation now confirms that the strict v4 boundary eliminates all 45 percentile-tier hub-count findings. It identifies the remaining construction work rather than masking it: 236 same-pairing spacing findings and gate/stand findings touching 55 stations, including 17 physical assignment conflicts and 495 passenger touches assigned to stands. These are review failures, not permission to expand the fleet, gates, stands, or waive curfews.
+The strict v5 boundary retains the v4 tier reconciliation and eliminates all 45 percentile-tier hub-count findings. It reserves 12 optional round trips below the unchanged 1,430-leg ceiling, because a full 1,430-leg allocation cannot satisfy the selected fleet counts after spacing takes priority over utilization. No mandatory or tier service is removed. Construction-time spacing eliminates all 236 former same-pairing findings, using one permitted PHF–SAV short-gap exception above the 30-minute hard floor.
+
+Gate assignment no longer double-books the slot reserved by a rescued passenger touch, eliminating all 26 physical assignment conflicts in this candidate. The remaining review failures are genuine capacity constraints: 260 passenger touches on stands, seven stand-capacity overflows, and five combined-capacity peaks across 17 stations. They require construction-time gate/stand repair and are not permission to expand the fleet, gates, stands, or waive curfews.
 
 If a bounded exact solve does not return a feasible incumbent, the candidate build still writes `exact_materialization_plan.json` with `materializationStatus: blocked`, the solver failure in `diagnostics.solverFailure`, and `nextStep.action: retry_exact_materialization`. A missing artifact is never used to represent solver exhaustion. Blocked exact output cannot advance to canonical identifiers or publication.
 
@@ -59,4 +61,4 @@ The **Build candidate schedule** workflow accepts a repository path to an approv
 
 ## Deliberate boundary
 
-This compiler still evaluates a seed candidate. It now emits a fresh demand-derived frequency/fleet proposal with a complete network-reconciliation audit, bank plan, preserved first-pass diagnostic, topology repair, mathematical lower bound, passing exact-cycle plan, canonicalization report, and fully validated review candidate. Blank starts and airport additions remain explicit blockers until the remaining spacing and gate/stand repair path is deterministic.
+This compiler still evaluates a seed candidate. It now emits a fresh demand-derived frequency/fleet proposal with a complete network-reconciliation audit, bank plan, preserved first-pass diagnostic, topology repair, mathematical lower bound, spacing-constrained exact-cycle plan, canonicalization report, and fully validated review candidate. Blank starts and airport additions remain explicit blockers until the remaining gate/stand repair path is deterministic.

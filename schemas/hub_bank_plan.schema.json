@@ -34,6 +34,19 @@
         "required": ["hub", "phaseMinute", "bankCount", "banks"]
       }
     },
+    "interHubSpacingCapacity": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "origin",
+          "destination",
+          "requiredDepartures",
+          "spacedCandidateCapacity",
+          "shortfall"
+        ]
+      }
+    },
     "placements": {
       "type": "array",
       "items": {

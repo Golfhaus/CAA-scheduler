@@ -230,21 +230,22 @@ def assign_gates(
     }
 
     def place_touch(piece: GateClaim, preferred_slot: int, short: GateClaim) -> None:
+        def slot_is_available(slot: int) -> bool:
+            return not (
+                slot == preferred_slot and overlaps(piece, short)
+            ) and not any(overlaps(piece, existing) for existing in slots[slot])
+
         if overlaps(piece, short) or any(
             overlaps(piece, existing)
             for existing in slots[preferred_slot]
             if existing is not short
         ):
             piece_slot = 1
-            while piece_slot <= n_gates and any(
-                overlaps(piece, existing) for existing in slots[piece_slot]
-            ):
+            while piece_slot <= n_gates and not slot_is_available(piece_slot):
                 piece_slot += 1
             if piece_slot > n_gates:
                 piece_slot = n_gates + 1
-                while any(
-                    overlaps(piece, existing) for existing in slots[piece_slot]
-                ):
+                while not slot_is_available(piece_slot):
                     piece_slot += 1
         else:
             piece_slot = preferred_slot

@@ -179,7 +179,7 @@ def _assign_frequencies(
     profiles: list[dict[str, Any]],
     fleet_counts: dict[str, int],
     round_trip_costs: dict[tuple[Market, str], float],
-    productive_minutes: int,
+    productive_minutes: dict[str, int],
 ) -> dict[str, Any]:
     units = [
         (market, ordinal)
@@ -188,7 +188,10 @@ def _assign_frequencies(
     ]
     units.sort(key=lambda row: (-demand[row[0]], row[0], row[1]))
     remaining = {
-        profile["fleet"]: float(fleet_counts[profile["fleet"]] * productive_minutes)
+        profile["fleet"]: float(
+            fleet_counts[profile["fleet"]]
+            * productive_minutes[profile["fleet"]]
+        )
         for profile in profiles
     }
     assignments: defaultdict[Market, Counter[str]] = defaultdict(Counter)
@@ -212,6 +215,62 @@ def _assign_frequencies(
         "remaining": remaining,
         "unassigned": unassigned,
     }
+
+
+def _consolidate_market_fleets(
+    allocation: dict[str, Any],
+    profiles: list[dict[str, Any]],
+    round_trip_costs: dict[tuple[Market, str], float],
+) -> list[Market]:
+    """Move every market onto one fleet when the routing policy requires it."""
+    assignments: defaultdict[Market, Counter[str]] = allocation["assignments"]
+    remaining: dict[str, float] = allocation["remaining"]
+    work: Counter[str] = allocation["work"]
+    fleet_order = [profile["fleet"] for profile in profiles]
+    split_markets = sorted(
+        market for market, rows in assignments.items() if len(rows) > 1
+    )
+    unconsolidated = []
+    for market in split_markets:
+        rows = assignments[market]
+        total = sum(rows.values())
+        existing = sorted(
+            rows,
+            key=lambda fleet: (-rows[fleet], fleet_order.index(fleet)),
+        )
+        candidates = existing + [
+            fleet
+            for fleet in reversed(fleet_order)
+            if fleet not in rows
+        ]
+        target = next(
+            (
+                fleet
+                for fleet in candidates
+                if (
+                    total * round_trip_costs[(market, fleet)]
+                    - rows.get(fleet, 0) * round_trip_costs[(market, fleet)]
+                )
+                <= remaining[fleet] + 1e-9
+            ),
+            None,
+        )
+        if target is None:
+            unconsolidated.append(market)
+            continue
+        for fleet, count in list(rows.items()):
+            if fleet == target:
+                continue
+            refunded = count * round_trip_costs[(market, fleet)]
+            remaining[fleet] += refunded
+            work[fleet] -= refunded
+            del rows[fleet]
+        current = rows.get(target, 0)
+        added = (total - current) * round_trip_costs[(market, target)]
+        remaining[target] -= added
+        work[target] += added
+        rows[target] = total
+    return unconsolidated
 
 
 def build_frequency_fleet_plan(
@@ -356,8 +415,34 @@ def build_frequency_fleet_plan(
 
     mandatory_frequencies = dict(frequencies)
     turn_minutes = int(canonical["operatingPolicy"]["turns"]["minimumMinutes"])
-    productive_minutes = int(allocation_rules["productiveMinutesPerAircraftDay"])
+    default_productive_minutes = int(
+        allocation_rules["productiveMinutesPerAircraftDay"]
+    )
+    configured_productive_minutes = allocation_rules.get(
+        "productiveMinutesPerAircraftDayByFleet", {}
+    )
+    productive_minutes = {
+        fleet: int(
+            configured_productive_minutes.get(
+                fleet, default_productive_minutes
+            )
+        )
+        for fleet in fleet_counts
+    }
     ceiling = int(allocation_rules["marketFrequencyCeilingRoundTrips"])
+    interhub_ceiling = int(
+        allocation_rules.get(
+            "interHubMarketFrequencyCeilingRoundTrips", ceiling
+        )
+    )
+
+    def market_ceiling(market: Market) -> int:
+        return (
+            interhub_ceiling
+            if classifications[market] == "inter_hub"
+            else ceiling
+        )
+
     round_trip_costs = {
         (market, profile["fleet"]): _round_trip_minutes(
             market, profile, coordinates, turn_minutes
@@ -378,7 +463,11 @@ def build_frequency_fleet_plan(
         blocked: set[Market] = set()
         maximum_planned_legs = allocation_rules.get("maximumPlannedLegs")
         maximum_round_trips = (
-            int(maximum_planned_legs) // 2
+            max(
+                0,
+                int(maximum_planned_legs) // 2
+                - int(allocation_rules.get("routingReserveRoundTrips", 0)),
+            )
             if maximum_planned_legs is not None
             else None
         )
@@ -392,7 +481,7 @@ def build_frequency_fleet_plan(
                 market
                 for market in candidate_pairs
                 if market not in blocked
-                and frequencies[market] < ceiling
+                and frequencies[market] < market_ceiling(market)
                 and classifications[market] != "point_to_point"
             ]
             eligible.sort(
@@ -422,6 +511,11 @@ def build_frequency_fleet_plan(
                 break
 
     assigned_counts: defaultdict[Market, Counter[str]] = allocation["assignments"]
+    unconsolidated_markets = (
+        _consolidate_market_fleets(allocation, profiles, round_trip_costs)
+        if allocation_rules.get("requireSingleFleetPerMarket", False)
+        else []
+    )
     planned_frequency = {
         market: sum(assigned_counts[market].values()) for market in candidate_pairs
     }
@@ -479,7 +573,7 @@ def build_frequency_fleet_plan(
 
     fleet_plan = {}
     for fleet, aircraft_count in fleet_counts.items():
-        available = aircraft_count * productive_minutes
+        available = aircraft_count * productive_minutes[fleet]
         planned = round(float(allocation["work"].get(fleet, 0.0)), 3)
         fleet_markets = {
             market
@@ -491,6 +585,11 @@ def build_frequency_fleet_plan(
         )
         fleet_plan[fleet] = {
             "aircraftCount": aircraft_count,
+            **(
+                {"productiveMinutesPerAircraftDay": productive_minutes[fleet]}
+                if configured_productive_minutes
+                else {}
+            ),
             "availableAircraftMinutes": available,
             "plannedAircraftMinutes": planned,
             "remainingAircraftMinutes": round(available - planned, 3),
@@ -532,6 +631,12 @@ def build_frequency_fleet_plan(
                 "plannedLegs": 2 * planned_frequency[market],
                 "historicalLegs": historical_legs.get(market, 0),
                 "historicalFleetLegs": dict(sorted(historical_fleets[market].items())),
+                **(
+                    {"frequencyCeilingRoundTrips": market_ceiling(market)}
+                    if "interHubMarketFrequencyCeilingRoundTrips"
+                    in allocation_rules
+                    else {}
+                ),
                 "allocations": allocations,
             }
         )
@@ -573,8 +678,21 @@ def build_frequency_fleet_plan(
         },
         {
             "id": "market_frequency_ceiling",
-            "status": "pass" if all(value <= ceiling for value in planned_frequency.values()) else "fail",
-            "message": f"Every market is at or below {ceiling} round trips",
+            "status": "pass"
+            if all(
+                value <= market_ceiling(market)
+                for market, value in planned_frequency.items()
+            )
+            else "fail",
+            "message": (
+                f"Every market is at or below {ceiling} round trips"
+                if "interHubMarketFrequencyCeilingRoundTrips"
+                not in allocation_rules
+                else (
+                    "Every market is at or below its applicable ceiling "
+                    f"({interhub_ceiling} inter-hub; {ceiling} otherwise)"
+                )
+            ),
         },
         {
             "id": "point_to_point_share",
@@ -593,6 +711,19 @@ def build_frequency_fleet_plan(
             "message": "Every fleet remains within its schedule-specific aircraft-minute budget",
         },
     ]
+    if allocation_rules.get("requireSingleFleetPerMarket", False):
+        checks.append(
+            {
+                "id": "single_fleet_per_market",
+                "status": "pass" if not unconsolidated_markets else "fail",
+                "message": (
+                    "Every market uses one fleet, so pairing-spacing slots are solved without cross-fleet reservations"
+                    if not unconsolidated_markets
+                    else "Markets split across fleets: "
+                    + ", ".join("-".join(market) for market in unconsolidated_markets)
+                ),
+            }
+        )
     failed = sum(check["status"] == "fail" for check in checks)
     return {
         "schemaVersion": "1.0.0",
@@ -617,9 +748,36 @@ def build_frequency_fleet_plan(
             "pointToPointLegs": point_to_point_legs,
             "pointToPointShare": round(point_to_point_share, 6),
             **(
+                {"mixedFleetMarkets": len(unconsolidated_markets)}
+                if allocation_rules.get("requireSingleFleetPerMarket", False)
+                else {}
+            ),
+            **(
                 {
                     "maximumPlannedLegs": allocation_rules.get(
                         "maximumPlannedLegs"
+                    ),
+                    **(
+                        {
+                            "routingReserveRoundTrips": int(
+                                allocation_rules["routingReserveRoundTrips"]
+                            ),
+                            "effectivePlannedLegLimit": 2
+                            * max(
+                                0,
+                                int(
+                                    allocation_rules["maximumPlannedLegs"]
+                                )
+                                // 2
+                                - int(
+                                    allocation_rules[
+                                        "routingReserveRoundTrips"
+                                    ]
+                                ),
+                            ),
+                        }
+                        if allocation_rules.get("routingReserveRoundTrips")
+                        else {}
                     ),
                     "removedHistoricalServiceMarkets": len(
                         removed_historical_pairs

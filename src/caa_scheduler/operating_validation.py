@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import math
 from collections import Counter, defaultdict
 from typing import Any, Iterable
 
@@ -12,6 +11,7 @@ from .gates import (
     build_claims,
     overlaps,
 )
+from .spacing import pairing_spacing_rule
 
 
 def _finding(
@@ -495,30 +495,29 @@ def validate_operating_rules(canonical: dict[str, Any]) -> dict[str, Any]:
         if len(departures) < 2:
             continue
         gaps = _cyclic_gaps(departures)
-        if destination in hubs:
-            target = section26["hardFloorMinutes"]
-            allowed = 0
-            violations = [gap for gap in gaps if gap["minutes"] < target]
-        else:
-            station_factor = math.sqrt(
-                section26["stationReferenceDepartures"] / station_departures[origin]
-            )
-            station_factor = min(
-                max(station_factor, section26["stationFactorMinimum"]),
-                section26["stationFactorMaximum"],
-            )
-            target = min(
-                max(
-                    section26["numeratorMinutes"] / len(departures) * station_factor,
-                    section26["hardFloorMinutes"],
-                ),
-                section26["pairingTargetMaximumMinutes"],
-            )
-            tolerance = target * section26["nearTargetTolerance"]
-            allowed = 1 if len(departures) >= section26["oneExceptionMinimumFrequency"] else 0
-            hard = [gap for gap in gaps if gap["minutes"] < section26["hardFloorMinutes"]]
-            below_tolerance = [gap for gap in gaps if gap["minutes"] < tolerance]
-            violations = hard or (below_tolerance if len(below_tolerance) > allowed else [])
+        rule = pairing_spacing_rule(
+            origin,
+            destination,
+            len(departures),
+            station_departures[origin],
+            hubs,
+            section26,
+        )
+        target = rule["targetMinutes"]
+        allowed = rule["allowedExceptions"]
+        hard = [
+            gap
+            for gap in gaps
+            if gap["minutes"] < rule["hardFloorMinutes"]
+        ]
+        below_tolerance = [
+            gap
+            for gap in gaps
+            if gap["minutes"] < rule["minimumGapMinutes"]
+        ]
+        violations = hard or (
+            below_tolerance if len(below_tolerance) > allowed else []
+        )
         if violations:
             spacing_findings.append(
                 _finding(
@@ -530,7 +529,7 @@ def validate_operating_rules(canonical: dict[str, Any]) -> dict[str, Any]:
                     gaps=gaps,
                     targetMinutes=target,
                     allowedExceptions=allowed,
-                    hubBound=destination in hubs,
+                    hubBound=rule["hubBound"],
                 )
             )
     checks.append(

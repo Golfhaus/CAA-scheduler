@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from collections import Counter
+from collections import Counter, defaultdict
 from pathlib import Path
 from typing import Any
 
@@ -142,6 +142,66 @@ def _has_interhub_candidate(
     )
 
 
+def _maximum_spaced_departures(
+    departures: set[int], minimum_gap: int
+) -> int:
+    """Return the maximum cyclic selection at or above ``minimum_gap``."""
+    if not departures:
+        return 0
+    best = 0
+    for first in sorted(departures):
+        offsets = sorted((minute - first) % 1440 for minute in departures)
+        selected: list[int] = []
+        for offset in offsets:
+            if not selected or offset - selected[-1] >= minimum_gap:
+                selected.append(offset)
+        while (
+            len(selected) > 1
+            and 1440 - selected[-1] + selected[0] < minimum_gap
+        ):
+            selected.pop()
+        best = max(best, len(selected))
+    return best
+
+
+def _interhub_spacing_capacity(
+    services: list[dict[str, Any]],
+    windows: dict[str, list[dict[str, Any]]],
+    cities: dict[str, dict[str, Any]],
+    step: int,
+    minimum_gap: int,
+) -> list[dict[str, Any]]:
+    grouped: defaultdict[tuple[str, str], list[dict[str, Any]]] = defaultdict(list)
+    for service in services:
+        grouped[(service["origin"], service["destination"])].append(service)
+    rows = []
+    for (origin, destination), pairing_services in sorted(grouped.items()):
+        departures = {
+            candidate[2]
+            for service in pairing_services
+            for candidate in _interhub_candidates(
+                origin,
+                destination,
+                service["blockMinutes"],
+                windows,
+                cities,
+                step,
+            )
+        }
+        required = sum(int(service["weight"]) for service in pairing_services)
+        capacity = _maximum_spaced_departures(departures, minimum_gap)
+        rows.append(
+            {
+                "origin": origin,
+                "destination": destination,
+                "requiredDepartures": required,
+                "spacedCandidateCapacity": capacity,
+                "shortfall": max(0, required - capacity),
+            }
+        )
+    return rows
+
+
 def _optimize_phases(
     hubs: list[str],
     interhub_services: list[dict[str, Any]],
@@ -173,7 +233,7 @@ def _optimize_phases(
             for hub in hubs
         }
 
-    def score(phase: dict[str, int]) -> tuple[int, int]:
+    def score(phase: dict[str, int]) -> tuple[int, ...]:
         windows = windows_for(phase)
         directional_banks = 0
         if bank_rules.get("requireDirectionalPhaseCoverage", False):
@@ -220,6 +280,20 @@ def _optimize_phases(
                         for service in hub_services
                     ):
                         directional_banks += 1
+        if bank_rules.get("requireInterhubSpacingCapacity", False):
+            capacity_rows = _interhub_spacing_capacity(
+                interhub_services,
+                windows,
+                cities,
+                int(bank_rules["interHubSearchStepMinutes"]),
+                int(policy["section26"]["hardFloorMinutes"]),
+            )
+            shortfall = sum(row["shortfall"] for row in capacity_rows)
+            covered = sum(
+                min(row["requiredDepartures"], row["spacedCandidateCapacity"])
+                for row in capacity_rows
+            )
+            return directional_banks, -shortfall, covered
         interhub_score = sum(
             service["weight"]
             for service in interhub_services
@@ -234,7 +308,7 @@ def _optimize_phases(
         )
         return directional_banks, interhub_score
 
-    best: tuple[tuple[int, int], tuple[int, ...], dict[str, int]] | None = None
+    best: tuple[tuple[int, ...], tuple[int, ...], dict[str, int]] | None = None
     for seed in candidates:
         phase = {hub: seed for hub in hubs}
         for _ in range(10):
@@ -586,6 +660,20 @@ def build_hub_bank_plan(
         int(bank_rules["hubDepartureOffsetMinutes"])
         - int(bank_rules["spokeArrivalOffsetMinutes"])
     )
+    interhub_capacity = (
+        _interhub_spacing_capacity(
+            interhub_services,
+            windows,
+            cities,
+            int(bank_rules["interHubSearchStepMinutes"]),
+            int(policy["section26"]["hardFloorMinutes"]),
+        )
+        if bank_rules.get("requireInterhubSpacingCapacity", False)
+        else []
+    )
+    interhub_capacity_shortfall = sum(
+        row["shortfall"] for row in interhub_capacity
+    )
     checks = [
         {
             "id": "bank_window_definition",
@@ -637,6 +725,18 @@ def build_hub_bank_plan(
             ),
         },
     ]
+    if bank_rules.get("requireInterhubSpacingCapacity", False):
+        checks.append(
+            {
+                "id": "interhub_spacing_capacity",
+                "status": "pass" if not interhub_capacity_shortfall else "fail",
+                "message": (
+                    "Every directed inter-hub frequency fits distinct Section 2.6-compliant exact-grid slots"
+                    if not interhub_capacity_shortfall
+                    else f"Inter-hub bank overlap is short {interhub_capacity_shortfall} spaced departure slots"
+                ),
+            }
+        )
     failed = sum(check["status"] == "fail" for check in checks)
     return {
         "schemaVersion": "1.0.0",
@@ -659,11 +759,23 @@ def build_hub_bank_plan(
                 frequency_plan["summary"]["plannedLegs"] - expected_hub_legs
             ),
             "curfewViolations": len(curfew_violations),
+            **(
+                {
+                    "interHubSpacingCapacityShortfall": interhub_capacity_shortfall
+                }
+                if bank_rules.get("requireInterhubSpacingCapacity", False)
+                else {}
+            ),
         },
         "checks": checks,
         "hubs": bank_rows,
         "placements": placements,
         "unplaced": unplaced,
+        **(
+            {"interHubSpacingCapacity": interhub_capacity}
+            if bank_rules.get("requireInterhubSpacingCapacity", False)
+            else {}
+        ),
         "limitations": [
             "Bank placement assigns local clock times to proposed hub service but "
             "does not yet join those legs into aircraft routes.",
