@@ -62,7 +62,7 @@ Status: complete.
 
 ## 0.7 — Deterministic construction planner
 
-Status: in progress; Milestone 0.7.9 tier-cap network reconciliation complete.
+Status: in progress; Milestone 0.7.10 construction-time pairing spacing complete.
 
 - Replace hardcoded paths, pickle files, import-time data loading, and mutable module globals.
 - Reconnect demand, multi-hub assignment, fleet allocation, bank placement, routing, and repair logic behind one callable build command.
@@ -95,12 +95,14 @@ Completed foundation:
 - Reuse all 634 historical directed-market pairing numbers and assign 102 new pairings deterministically.
 - Replace inherited workbook provenance with an exclusive, fingerprinted deterministic-construction chain.
 - Rerun structural, operating, bank, gate, stand, tier, and spacing validation on the materialized canonical candidate.
+- Enforce the Section 2.6 hard floor and near-target pairing gap during exact five-minute timing, with only the policy's one mathematically necessary exception.
+- Reserve 12 lowest-priority optional round trips below the unchanged 1,430-leg ceiling so the spacing-constrained result fits the accepted 225-aircraft fleet.
+- Keep every market on one fleet and prove inter-hub spacing capacity during bank-phase selection.
+- Prevent gate rescue from placing a split passenger-touch piece back into the slot reserved for the rescued claim.
 
 Remaining in 0.7:
 
-- Enforce the v4 strict service boundary: retain historical point-to-point markets, remove historical hub/focus markets outside effective tier assignments, and allow documented BHM substitutions to occupy no more than one tier slot.
-- Keep Schedule 7 at the accepted 1,430-leg proposal ceiling while reallocating the corrected network.
-- Repair the remaining full-validation failures: same-pairing departure clustering and gate/stand peaks.
+- Add gate/stand capacity to construction or a deterministic repair stage; the current candidate has 260 passenger touches on stands, seven stand-capacity overflows, and five combined-capacity peaks.
 - Add golden comparisons for each stage before enabling blank-start construction or airport additions.
 
 ## 1.0 — Schedule Builder

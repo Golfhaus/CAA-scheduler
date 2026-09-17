@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from collections import defaultdict
+from collections import Counter, defaultdict
 from pathlib import Path
 from typing import Any
 
@@ -8,7 +8,7 @@ import numpy as np
 from scipy.optimize import Bounds, LinearConstraint, milp
 from scipy.sparse import coo_matrix
 
-from .bank_placement import _curfew_status
+from .bank_placement import _curfew_status, _maximum_spaced_departures
 from .demand import load_demand_sources_from_manifest
 from .routing import (
     _connection_wait,
@@ -18,12 +18,14 @@ from .routing import (
     _utc_minute,
 )
 from .routing_repair import _leg_inventory
+from .spacing import pairing_spacing_rule
 
 
 TIME_STEP_MINUTES = 5
 AIRCRAFT_OBJECTIVE_WEIGHT = 1_000_000.0
 MIP_RELATIVE_GAP = 0.01
 MIP_TIME_LIMIT_SECONDS = 120
+SPACING_EXCEPTION_OBJECTIVE_WEIGHT = 10_000.0
 
 
 def blocked_exact_materialization_plan(
@@ -181,6 +183,12 @@ def _solve_fleet(
     policy: dict[str, Any],
     windows: dict[str, list[dict[str, Any]]],
     targets: dict[str, dict[str, list[int]]],
+    pairing_departure_counts: Counter[tuple[str, str]],
+    station_departure_counts: Counter[str],
+    reserved_pair_departures: dict[tuple[str, str], list[int]],
+    enforce_pairing_spacing: bool,
+    allow_pairing_spacing_exceptions: bool,
+    time_limit_seconds: int,
 ) -> tuple[dict[str, dict[str, Any]], dict[str, Any]]:
     minimum_turn = int(policy["turns"]["minimumMinutes"])
     grouped: defaultdict[tuple[Any, ...], list[dict[str, Any]]] = defaultdict(list)
@@ -199,6 +207,9 @@ def _solve_fleet(
     y_by_type: defaultdict[int, list[int]] = defaultdict(list)
     arrivals: defaultdict[tuple[str, int], list[int]] = defaultdict(list)
     departures: defaultdict[tuple[str, int], list[int]] = defaultdict(list)
+    pairing_departures: defaultdict[
+        tuple[str, str], defaultdict[int, list[int]]
+    ] = defaultdict(lambda: defaultdict(list))
     station_events: defaultdict[str, set[int]] = defaultdict(set)
     objective: list[float] = []
     upper_bounds: list[float] = []
@@ -238,6 +249,7 @@ def _solve_fleet(
             )
             y_by_type[type_index].append(index)
             departures[(origin, departure_utc)].append(index)
+            pairing_departures[(origin, destination)][departure_utc].append(index)
             arrivals[(destination, ready_utc)].append(index)
             station_events[origin].add(departure_utc)
             station_events[destination].add(ready_utc)
@@ -272,6 +284,134 @@ def _solve_fleet(
         rows.append({index: 1.0 for index in y_by_type[type_index]})
         lower_bounds.append(float(len(legs)))
         row_upper_bounds.append(float(len(legs)))
+
+    spacing_constraints = 0
+    spacing_reserved_rejections = 0
+    spacing_exception_variables = 0
+    spacing_policy_exception_capacity = 0
+    if enforce_pairing_spacing:
+        hubs = set(policy["hubs"])
+        section26 = policy["section26"]
+        for pairing, departures_by_minute in sorted(pairing_departures.items()):
+            total_departures = int(pairing_departure_counts[pairing])
+            if total_departures < 2:
+                continue
+            origin, destination = pairing
+            rule = pairing_spacing_rule(
+                origin,
+                destination,
+                total_departures,
+                int(station_departure_counts[origin]),
+                hubs,
+                section26,
+            )
+            minimum_gap = float(rule["minimumGapMinutes"])
+            hard_floor = float(rule["hardFloorMinutes"])
+            reserved = reserved_pair_departures.get(pairing, [])
+            for minute, indices in departures_by_minute.items():
+                if any(
+                    _circular_distance(minute, other) < hard_floor
+                    for other in reserved
+                ):
+                    for index in indices:
+                        if upper_bounds[index] != 0.0:
+                            upper_bounds[index] = 0.0
+                            spacing_reserved_rejections += 1
+
+            seen_windows: set[tuple[int, ...]] = set()
+            minutes = sorted(departures_by_minute)
+            policy_exception_required = (
+                allow_pairing_spacing_exceptions
+                and int(rule["allowedExceptions"]) > 0
+                and _maximum_spaced_departures(
+                    set(minutes), int(np.ceil(minimum_gap))
+                )
+                < total_departures
+            )
+            constraint_gap = (
+                hard_floor if policy_exception_required else minimum_gap
+            )
+            for anchor in minutes:
+                indices = tuple(
+                    sorted(
+                        index
+                        for minute in minutes
+                        if (minute - anchor) % 1440 < constraint_gap
+                        for index in departures_by_minute[minute]
+                    )
+                )
+                if not indices or indices in seen_windows:
+                    continue
+                seen_windows.add(indices)
+                rows.append({index: 1.0 for index in indices})
+                lower_bounds.append(0.0)
+                row_upper_bounds.append(1.0)
+                spacing_constraints += 1
+
+            if not policy_exception_required:
+                continue
+
+            allowed_exceptions = int(rule["allowedExceptions"])
+            spacing_policy_exception_capacity += allowed_exceptions
+            reserved_exception_pairs = sum(
+                1
+                for position, first in enumerate(reserved)
+                for second in reserved[position + 1 :]
+                if hard_floor
+                <= _circular_distance(first, second)
+                < minimum_gap
+            )
+            remaining_exceptions = allowed_exceptions - reserved_exception_pairs
+            if remaining_exceptions < 0:
+                raise ValueError(
+                    f"Reserved {origin}-{destination} times already exceed the "
+                    "Section 2.6 exception allowance"
+                )
+
+            exception_budget: dict[int, float] = {}
+            for minute, indices in departures_by_minute.items():
+                reserved_conflicts = sum(
+                    1
+                    for other in reserved
+                    if hard_floor
+                    <= _circular_distance(minute, other)
+                    < minimum_gap
+                )
+                if reserved_conflicts:
+                    for index in indices:
+                        exception_budget[index] = (
+                            exception_budget.get(index, 0.0)
+                            + reserved_conflicts
+                        )
+
+            for position, first in enumerate(minutes):
+                for second in minutes[position + 1 :]:
+                    distance = _circular_distance(first, second)
+                    if not hard_floor <= distance < minimum_gap:
+                        continue
+                    exception_index = len(objective)
+                    objective.append(SPACING_EXCEPTION_OBJECTIVE_WEIGHT)
+                    upper_bounds.append(1.0)
+                    spacing_exception_variables += 1
+                    row = {
+                        index: 1.0
+                        for index in (
+                            departures_by_minute[first]
+                            + departures_by_minute[second]
+                        )
+                    }
+                    row[exception_index] = -1.0
+                    rows.append(row)
+                    lower_bounds.append(-np.inf)
+                    row_upper_bounds.append(1.0)
+                    spacing_constraints += 1
+                    exception_budget[exception_index] = 1.0
+
+            if exception_budget:
+                rows.append(exception_budget)
+                lower_bounds.append(0.0)
+                row_upper_bounds.append(float(remaining_exceptions))
+                spacing_constraints += 1
 
     for station in sorted(station_events):
         events = sorted(station_events[station])
@@ -351,7 +491,7 @@ def _solve_fleet(
             np.asarray(row_upper_bounds),
         ),
         options={
-            "time_limit": MIP_TIME_LIMIT_SECONDS,
+            "time_limit": time_limit_seconds,
             "mip_rel_gap": MIP_RELATIVE_GAP,
         },
     )
@@ -422,6 +562,16 @@ def _solve_fleet(
         "constraints": len(rows),
         "aircraftRequiredAtReference": int(aircraft_required),
         "assignedDestinationRons": len(assigned_rons),
+        **(
+            {
+                "section26SpacingConstraints": spacing_constraints,
+                "section26ReservedTimeRejections": spacing_reserved_rejections,
+                "section26ExceptionVariables": spacing_exception_variables,
+                "section26PolicyExceptionCapacity": spacing_policy_exception_capacity,
+            }
+            if enforce_pairing_spacing
+            else {}
+        ),
     }
 
 
@@ -618,6 +768,36 @@ def build_exact_materialization_plan(
     ron_assignments = _assign_destination_rons(
         repair_plan, required_destinations, fleet_counts
     )
+    exact_options = planning_rules.get("exactMaterialization", {})
+    spacing_options = exact_options.get("pairingSpacing", {})
+    enforce_pairing_spacing = (
+        spacing_options.get("mode")
+        in {
+            "section26_conservative_no_exception",
+            "section26_policy_exception",
+        }
+    )
+    allow_pairing_spacing_exceptions = (
+        spacing_options.get("mode") == "section26_policy_exception"
+    )
+    time_limit_seconds = int(
+        exact_options.get(
+            "timeLimitSecondsPerFleet", MIP_TIME_LIMIT_SECONDS
+        )
+    )
+    all_inventory_legs = [
+        leg for fleet_legs in inventory.values() for leg in fleet_legs
+    ]
+    pairing_departure_counts = Counter(
+        (str(leg["origin"]), str(leg["destination"]))
+        for leg in all_inventory_legs
+    )
+    station_departure_counts = Counter(
+        str(leg["origin"]) for leg in all_inventory_legs
+    )
+    reserved_pair_departures: defaultdict[
+        tuple[str, str], list[int]
+    ] = defaultdict(list)
     assigned_by_fleet: defaultdict[str, list[str]] = defaultdict(list)
     for destination, fleet in ron_assignments.items():
         assigned_by_fleet[fleet].append(destination)
@@ -634,9 +814,19 @@ def build_exact_materialization_plan(
             policy,
             windows,
             targets,
+            pairing_departure_counts,
+            station_departure_counts,
+            reserved_pair_departures,
+            enforce_pairing_spacing,
+            allow_pairing_spacing_exceptions,
+            time_limit_seconds,
         )
         materialized.update(fleet_legs)
         solver_fleets[fleet] = solver
+        for leg in fleet_legs.values():
+            reserved_pair_departures[
+                (str(leg["origin"]), str(leg["destination"]))
+            ].append(int(leg["departureUtcMinute"]))
 
     minimum_turn = int(policy["turns"]["minimumMinutes"])
     successors, _ = _match_station_successors(materialized, minimum_turn)
@@ -724,6 +914,61 @@ def build_exact_materialization_plan(
         for cycle in cycles
         if int(cycle["maximumDaysWithoutTargetRon"]) > rolling_limit
     ]
+    spacing_violations = []
+    spacing_exceptions = []
+    if enforce_pairing_spacing:
+        hubs = set(policy["hubs"])
+        section26 = policy["section26"]
+        pair_departures: defaultdict[tuple[str, str], list[int]] = defaultdict(list)
+        for leg in legs:
+            pair_departures[(leg["origin"], leg["destination"])].append(
+                int(leg["departureMinute"]) % 1440
+            )
+        for pairing, departures in sorted(pair_departures.items()):
+            if len(departures) < 2:
+                continue
+            origin, destination = pairing
+            rule = pairing_spacing_rule(
+                origin,
+                destination,
+                len(departures),
+                int(station_departure_counts[origin]),
+                hubs,
+                section26,
+            )
+            ordered = sorted(departures)
+            gaps = [
+                (ordered[(index + 1) % len(ordered)] - minute) % 1440
+                for index, minute in enumerate(ordered)
+            ]
+            hard_gaps = [gap for gap in gaps if gap < rule["hardFloorMinutes"]]
+            short_gaps = [gap for gap in gaps if gap < rule["minimumGapMinutes"]]
+            allowed_exceptions = (
+                int(rule["allowedExceptions"])
+                if allow_pairing_spacing_exceptions
+                else 0
+            )
+            if hard_gaps or len(short_gaps) > allowed_exceptions:
+                spacing_violations.append(
+                    {
+                        "origin": origin,
+                        "destination": destination,
+                        "departures": ordered,
+                        "gaps": gaps,
+                        "minimumGapMinutes": rule["minimumGapMinutes"],
+                        "allowedExceptions": allowed_exceptions,
+                    }
+                )
+            elif short_gaps:
+                spacing_exceptions.append(
+                    {
+                        "origin": origin,
+                        "destination": destination,
+                        "departures": ordered,
+                        "shortGaps": short_gaps,
+                        "minimumGapMinutes": rule["minimumGapMinutes"],
+                    }
+                )
     fleet_plan = {}
     for fleet, configured in fleet_counts.items():
         fleet_cycles = [cycle for cycle in cycles if cycle["fleet"] == fleet]
@@ -822,6 +1067,22 @@ def build_exact_materialization_plan(
             ),
         },
     ]
+    if enforce_pairing_spacing:
+        checks.append(
+            {
+                "id": "section_26_pairing_spacing",
+                "status": "pass" if not spacing_violations else "fail",
+                "message": (
+                    (
+                        f"Every exact directed pairing satisfies Section 2.6 spacing; {len(spacing_exceptions)} use the permitted one-gap exception"
+                        if allow_pairing_spacing_exceptions
+                        else "Every exact directed pairing clears the Section 2.6 spacing threshold without using its optional exception"
+                    )
+                    if not spacing_violations
+                    else f"{len(spacing_violations)} exact directed pairings miss the Section 2.6 spacing threshold"
+                ),
+            }
+        )
     failed = sum(check["status"] == "fail" for check in checks)
     required_aircraft = sum(
         int(row["requiredAircraft"]) for row in fleet_plan.values()
@@ -854,6 +1115,11 @@ def build_exact_materialization_plan(
             "destinationsWithoutRon": len(missing_rons),
             "rollingRonViolations": len(rolling_violations),
             "successorSwaps": len(swaps),
+            **(
+                {"spacingViolations": len(spacing_violations)}
+                if enforce_pairing_spacing
+                else {}
+            ),
         },
         "checks": checks,
         "fleetPlan": fleet_plan,
@@ -864,8 +1130,16 @@ def build_exact_materialization_plan(
         "solver": {
             "name": "scipy-highs-time-expanded-milp",
             "relativeGap": MIP_RELATIVE_GAP,
-            "timeLimitSecondsPerFleet": MIP_TIME_LIMIT_SECONDS,
+            "timeLimitSecondsPerFleet": time_limit_seconds,
             "fleets": solver_fleets,
+            **(
+                {
+                    "pairingSpacingMode": spacing_options["mode"],
+                    "pairingSpacingPolicyExceptionsUsed": len(spacing_exceptions),
+                }
+                if enforce_pairing_spacing
+                else {}
+            ),
         },
         "cycles": cycles,
         "legs": legs,
@@ -877,6 +1151,14 @@ def build_exact_materialization_plan(
             "curfewViolations": curfew_violations,
             "missingDestinationRons": missing_rons,
             "rollingRonViolations": rolling_violations,
+            **(
+                {
+                    "spacingViolations": spacing_violations,
+                    "spacingExceptions": spacing_exceptions,
+                }
+                if enforce_pairing_spacing
+                else {}
+            ),
         },
         "nextStep": {
             "status": "ready" if not failed else "blocked",

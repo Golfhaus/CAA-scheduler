@@ -18,6 +18,9 @@ MANIFEST_PATH = REPO_ROOT / "config" / "demand_data" / "bts_db1c_6mo_v3.json"
 STRICT_MANIFEST_PATH = (
     REPO_ROOT / "config" / "demand_data" / "bts_db1c_6mo_v4.json"
 )
+SPACING_MANIFEST_PATH = (
+    REPO_ROOT / "config" / "demand_data" / "bts_db1c_6mo_v5.json"
+)
 
 
 class FrequencyFleetPlanTests(unittest.TestCase):
@@ -91,6 +94,24 @@ class FrequencyFleetPlanTests(unittest.TestCase):
         }
         self.assertIn(("BHM", "FWA"), removed)
         self.assertIn(("ABE", "JAX"), removed)
+
+    def test_spacing_policy_reserves_routing_capacity_and_one_fleet_per_market(self) -> None:
+        demand = copy.deepcopy(self.demand_plan)
+        demand["demandDataVersion"] = "bts-db1c-6mo-jul2025-apr2026-v5"
+        plan = build_frequency_fleet_plan_from_manifest(
+            self.canonical,
+            demand,
+            SPACING_MANIFEST_PATH,
+            REPO_ROOT,
+        )
+        self.assertEqual(plan["status"], "pass")
+        self.assertEqual(plan["summary"]["plannedLegs"], 1406)
+        self.assertEqual(plan["summary"]["maximumPlannedLegs"], 1430)
+        self.assertEqual(plan["summary"]["routingReserveRoundTrips"], 12)
+        self.assertEqual(plan["summary"]["mixedFleetMarkets"], 0)
+        self.assertTrue(
+            all(len(market["allocations"]) == 1 for market in plan["markets"])
+        )
 
     def test_fleet_counts_come_from_the_schedule(self) -> None:
         changed = copy.deepcopy(self.canonical)

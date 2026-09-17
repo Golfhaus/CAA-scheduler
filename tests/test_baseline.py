@@ -13,7 +13,7 @@ sys.path.insert(0, str(REPO_ROOT / "src"))
 
 from caa_scheduler.baseline import build_baseline
 from caa_scheduler.gate_export import export_gate_schedule
-from caa_scheduler.gates import GateClaim, overlaps
+from caa_scheduler.gates import GateClaim, assign_gates, overlaps
 from caa_scheduler.importer import import_canonical_schedule
 from caa_scheduler.io import read_json
 from caa_scheduler.operating_validation import validate_operating_rules
@@ -97,6 +97,27 @@ class ScheduleSixBaselineTests(unittest.TestCase):
         separate = GateClaim(120, 180, "separate", "CRJ200", "turn", None, None)
         self.assertTrue(overlaps(late, early))
         self.assertFalse(overlaps(late, separate))
+
+    def test_gate_rescue_does_not_reuse_reserved_touch_slot(self) -> None:
+        claims = [
+            GateClaim(1050, 1170, "0", "CRJ200", "turn", "A", "B"),
+            GateClaim(180, 780, "1", "CRJ200", "turn", "A", "B"),
+            GateClaim(180, 270, "2", "CRJ200", "turn", "A", "B"),
+            GateClaim(210, 255, "3", "CRJ200", "turn", "A", "B"),
+            GateClaim(90, 210, "4", "CRJ200", "turn", "A", "B"),
+        ]
+        assignments = assign_gates(claims, 1)
+        by_slot: dict[int, list[GateClaim]] = {}
+        for claim, slot in assignments:
+            by_slot.setdefault(slot, []).append(claim)
+        conflicts = [
+            (first.label, second.label)
+            for slot_claims in by_slot.values()
+            for index, first in enumerate(slot_claims)
+            for second in slot_claims[index + 1 :]
+            if overlaps(first, second)
+        ]
+        self.assertEqual(conflicts, [])
 
     def test_operating_validator_exposes_known_baseline_findings(self) -> None:
         report = validate_operating_rules(self.canonical)
