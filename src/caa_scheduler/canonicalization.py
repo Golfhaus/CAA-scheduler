@@ -266,11 +266,20 @@ def build_canonical_schedule_from_exact_plan(
         row["code"]: row
         for row in demand_plan["multiHubAssignments"]["cities"]
     }
+    service_assignments = {
+        row["code"]: row["serviceAssignments"]
+        for row in frequency_plan.get("cityService", [])
+        if "serviceAssignments" in row
+    }
     for city in cities:
         demand_city = demand_cities.get(city["code"])
         if demand_city is not None:
             city["demandPercentile"] = float(demand_city["percentile"])
-            city["hubAssignments"] = list(demand_city["hubAssignments"])
+            city["hubAssignments"] = list(
+                service_assignments.get(
+                    city["code"], demand_city["hubAssignments"]
+                )
+            )
 
     hub_banks = [
         {

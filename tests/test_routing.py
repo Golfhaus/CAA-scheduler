@@ -10,7 +10,7 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO_ROOT / "src"))
 
-from caa_scheduler.routing import build_aircraft_route_plan_from_manifest
+from caa_scheduler.routing import _cycles, build_aircraft_route_plan_from_manifest
 
 
 SCHEDULE_DIRECTORY = REPO_ROOT / "data" / "schedules" / "schedule_6_v2_2_5"
@@ -110,6 +110,35 @@ class AircraftRoutePlanTests(unittest.TestCase):
         self.assertEqual(self.plan["summary"]["destinationsWithoutRon"], 0)
         self.assertEqual(self.plan["summary"]["rollingRonViolations"], 1)
         self.assertEqual(self.plan, self.build())
+
+    def test_single_target_ron_uses_the_full_circular_gap(self) -> None:
+        legs = {
+            "A-B": {
+                "id": "A-B",
+                "fleet": "CRJ200",
+                "origin": "A",
+                "destination": "B",
+                "departureUtcMinute": 0,
+                "blockMinutes": 60,
+            },
+            "B-A": {
+                "id": "B-A",
+                "fleet": "CRJ200",
+                "origin": "B",
+                "destination": "A",
+                "departureUtcMinute": 0,
+                "blockMinutes": 60,
+            },
+        }
+        cycles = _cycles(
+            legs,
+            {"A-B": "B-A", "B-A": "A-B"},
+            {"turns": {"minimumMinutes": 40}, "ronTargetCities": ["A"]},
+            {"A": {"timezone": "Eastern"}, "B": {"timezone": "Eastern"}},
+            single_target_full_gap=True,
+        )
+        self.assertEqual(cycles[0]["aircraftRequired"], 2)
+        self.assertEqual(cycles[0]["maximumDaysWithoutTargetRon"], 2)
 
 
 if __name__ == "__main__":

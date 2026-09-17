@@ -47,9 +47,9 @@ Curfew enforcement comes from the pinned operating policy. The departure-window 
 | `candidate_review_required` | Hard stops passed, but other structural/operating findings need repair | Yes |
 | `candidate_ready` | All evaluated structural and error-level operating checks passed | Yes |
 
-The current fresh planning proposal advances through canonicalization as `candidate_review_required`. The first-pass route artifact retains the 409-aircraft/184-aircraft-short diagnostic. The bank-flow relaxation fits at 169/225, and exact materialization schedules all 1,430 legs—including 240 non-hub legs—in 208/225 aircraft. Canonicalization produces 23 lines, 208 routes, 736 directed pairings, flights 1001–2430, and all 1,224 bank-touch assignments. Curfews, minimum turns, numbering, bank alignment, and structural validation pass.
+The current fresh planning proposal advances through canonicalization as `candidate_review_required`. Exact materialization schedules all 1,430 legs—including 304 non-hub legs—in 211/225 aircraft. Canonicalization produces 33 lines, 211 routes, 470 directed pairings, flights 1001–2430, and all 1,232 bank-touch assignments. Curfews, minimum turns, numbering, bank alignment, rolling target-city RON cadence, tier service, and structural validation pass.
 
-Full validation now identifies the next construction work rather than masking it: 222 same-pairing spacing findings, 45 percentile-tier hub-count findings caused by preserved historical extra-hub markets, and gate/stand findings at 13 stations, including 419 passenger touches assigned to stands. These are review failures, not permission to expand the fleet or waive curfews.
+Full validation now confirms that the strict v4 boundary eliminates all 45 percentile-tier hub-count findings. It identifies the remaining construction work rather than masking it: 236 same-pairing spacing findings and gate/stand findings touching 55 stations, including 17 physical assignment conflicts and 495 passenger touches assigned to stands. These are review failures, not permission to expand the fleet, gates, stands, or waive curfews.
 
 If a bounded exact solve does not return a feasible incumbent, the candidate build still writes `exact_materialization_plan.json` with `materializationStatus: blocked`, the solver failure in `diagnostics.solverFailure`, and `nextStep.action: retry_exact_materialization`. A missing artifact is never used to represent solver exhaustion. Blocked exact output cannot advance to canonical identifiers or publication.
 
@@ -59,4 +59,4 @@ The **Build candidate schedule** workflow accepts a repository path to an approv
 
 ## Deliberate boundary
 
-This compiler still evaluates a seed candidate. It now emits a fresh demand-derived frequency/fleet proposal, bank plan, preserved first-pass diagnostic, topology repair, mathematical lower bound, passing exact-cycle plan, canonicalization report, and fully validated review candidate. Blank starts and airport additions remain explicit blockers until the newly exposed spacing, tier-cap, and gate/stand repair path is deterministic.
+This compiler still evaluates a seed candidate. It now emits a fresh demand-derived frequency/fleet proposal with a complete network-reconciliation audit, bank plan, preserved first-pass diagnostic, topology repair, mathematical lower bound, passing exact-cycle plan, canonicalization report, and fully validated review candidate. Blank starts and airport additions remain explicit blockers until the remaining spacing and gate/stand repair path is deterministic.

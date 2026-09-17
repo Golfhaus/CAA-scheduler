@@ -435,6 +435,8 @@ def _cycles(
     successors: dict[str, str],
     policy: dict[str, Any],
     cities: dict[str, dict[str, Any]],
+    *,
+    single_target_full_gap: bool = False,
 ) -> list[dict[str, Any]]:
     minimum_turn = int(policy["turns"]["minimumMinutes"])
     target_cities = set(policy["ronTargetCities"])
@@ -492,10 +494,14 @@ def _cycles(
             maximum_target_gap = cycle_days
         else:
             positions = sorted(position % duration for position in target_positions)
-            gaps = [
-                (positions[(index + 1) % len(positions)] - position) % duration
-                for index, position in enumerate(positions)
-            ]
+            if len(positions) == 1 and not single_target_full_gap:
+                gaps = [0]
+            else:
+                gaps = [
+                    following - position
+                    for position, following in zip(positions, positions[1:])
+                ]
+                gaps.append(duration - positions[-1] + positions[0])
             maximum_target_gap = max(1, math.ceil(max(gaps) / 1440))
         cycles.append(
             {
