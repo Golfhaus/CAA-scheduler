@@ -50,6 +50,32 @@ class ExactSeedStageComplete(RuntimeError):
         )
 
 
+class ExactGlobalRepairIncomplete(RuntimeError):
+    """Signal that an improved global incumbent still exceeds bank capacity."""
+
+    def __init__(
+        self,
+        bank_overflow: dict[str, float],
+        solver_message: str,
+    ):
+        self.bank_overflow = bank_overflow
+        total_overflow = sum(bank_overflow.values())
+        maximum_overflow = max(bank_overflow.values())
+        largest_overflows = ", ".join(
+            f"{key}={value:.0f}"
+            for key, value in sorted(
+                bank_overflow.items(),
+                key=lambda item: (-item[1], item[0]),
+            )[:8]
+        )
+        super().__init__(
+            "Exact global repair checkpoint retained "
+            f"{total_overflow:.3f} bank touches of feasibility overflow "
+            f"(maximum wave overage {maximum_overflow:.3f}; "
+            f"largest rows: {largest_overflows}) after: {solver_message}"
+        )
+
+
 def _exact_seed_fingerprint(
     canonical: dict[str, Any],
     frequency_plan: dict[str, Any],
@@ -1633,22 +1659,6 @@ def _solve_all_fleets_with_pairing_patterns(
         sum(bank_overflow.values()),
         time.monotonic() - global_started,
     )
-    if bank_overflow:
-        total_overflow = sum(bank_overflow.values())
-        maximum_overflow = max(bank_overflow.values())
-        largest_overflows = ", ".join(
-            f"{key}={value:.0f}"
-            for key, value in sorted(
-                bank_overflow.items(),
-                key=lambda item: (-item[1], item[0]),
-            )[:8]
-        )
-        raise ValueError(
-            "Exact global pairing-pattern materialization retained "
-            f"{total_overflow:.3f} bank touches of feasibility overflow "
-            f"(maximum wave overage {maximum_overflow:.3f}; "
-            f"largest rows: {largest_overflows}) after: {result.message}"
-        )
     maximum_fraction = max(abs(value - round(value)) for value in result.x)
     if maximum_fraction > 1e-6:
         raise ValueError(
@@ -1742,14 +1752,19 @@ def _solve_all_fleets_with_pairing_patterns(
             ),
         }
     joint_solver = {
-        "status": "optimal_within_gap" if result.success else "feasible_time_limit",
+        "status": (
+            "repair_incomplete_time_limit"
+            if bank_overflow
+            else "optimal_within_gap" if result.success else "feasible_time_limit"
+        ),
         "message": str(result.message),
         "mipGap": round(float(getattr(result, "mip_gap", 0.0) or 0.0), 9),
         "timeVariables": len(choices),
         "inventoryVariables": len(q_by_event),
         "constraints": len(rows),
         "bankCapacityConstraints": bank_capacity_constraints,
-        "bankFeasibilityOverflow": 0,
+        "bankFeasibilityOverflow": sum(bank_overflow.values()),
+        "bankOverflowRows": bank_overflow,
         "constructiveSeed": seed_materialized is not None,
         "seedOverloadedBankRows": len(seed_overflow_keys),
         "seedFlexibleLegTypes": len(flexible_seed_types),
@@ -2776,6 +2791,42 @@ def build_exact_materialization_plan(
                 joint_solver["seedCheckpointReusedFleets"] = (
                     seed_reused_fleets
                 )
+                if float(joint_solver["bankFeasibilityOverflow"]) > 0:
+                    if seed_checkpoint_path is not None:
+                        repair_seed_order = sorted(
+                            fleet_counts,
+                            key=lambda fleet: (
+                                -len(inventory.get(fleet, [])),
+                                fleet,
+                            ),
+                        )
+                        improved_by_fleet: dict[
+                            str, dict[str, dict[str, Any]]
+                        ] = {fleet: {} for fleet in repair_seed_order}
+                        for leg_id, leg in materialized.items():
+                            improved_by_fleet[str(leg["fleet"])][leg_id] = leg
+                        _write_exact_seed_checkpoint(
+                            seed_checkpoint_path,
+                            _exact_seed_fingerprint(
+                                canonical,
+                                frequency_plan,
+                                bank_plan,
+                                repair_plan,
+                                planning_rules,
+                            ),
+                            repair_seed_order,
+                            improved_by_fleet,
+                            solver_fleets,
+                        )
+                    raise ExactGlobalRepairIncomplete(
+                        {
+                            str(key): float(value)
+                            for key, value in joint_solver[
+                                "bankOverflowRows"
+                            ].items()
+                        },
+                        str(joint_solver["message"]),
+                    )
         for leg in materialized.values():
             if leg["originBankId"] is not None:
                 remaining_bank_capacity[

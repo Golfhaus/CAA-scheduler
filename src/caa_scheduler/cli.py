@@ -11,6 +11,7 @@ from .baseline import build_baseline
 from .candidate import build_candidate
 from .demand import build_demand_plan_from_manifest
 from .exact_materialization import (
+    ExactGlobalRepairIncomplete,
     ExactSeedStageComplete,
     build_exact_materialization_plan_from_manifest,
 )
@@ -473,6 +474,9 @@ def main(argv: list[str] | None = None) -> int:
         except ExactSeedStageComplete as result:
             print(str(result))
             return 0
+        except ExactGlobalRepairIncomplete as result:
+            print(str(result))
+            return 1
         write_json(args.output, plan, indent=None)
         print(
             f"Exact materialization: {plan['status'].upper()} "
