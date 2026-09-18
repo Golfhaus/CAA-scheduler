@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import hashlib
+import json
 from collections import Counter, defaultdict
 from pathlib import Path
 from types import SimpleNamespace
@@ -12,6 +14,7 @@ from scipy.sparse import coo_matrix
 from .bank_placement import _curfew_status, _maximum_spaced_departures
 from .demand import load_demand_sources_from_manifest
 from .gate_export import _capacity
+from .io import read_json, write_json
 from .routing import (
     _connection_wait,
     _cycles,
@@ -30,6 +33,95 @@ MIP_TIME_LIMIT_SECONDS = 120
 SPACING_EXCEPTION_OBJECTIVE_WEIGHT = 10_000.0
 BANK_OVERFLOW_OBJECTIVE_WEIGHT = 1_000_000_000.0
 SEED_DEVIATION_OBJECTIVE_WEIGHT = 1_000_000.0
+EXACT_SEED_MODEL_VERSION = "1.0.0"
+
+
+def _exact_seed_fingerprint(
+    canonical: dict[str, Any],
+    frequency_plan: dict[str, Any],
+    bank_plan: dict[str, Any],
+    repair_plan: dict[str, Any],
+    planning_rules: dict[str, Any],
+) -> str:
+    """Fingerprint every input that can affect an independent fleet seed."""
+    payload = json.dumps(
+        {
+            "seedModelVersion": EXACT_SEED_MODEL_VERSION,
+            "canonical": canonical,
+            "frequencyPlan": frequency_plan,
+            "bankPlan": bank_plan,
+            "repairPlan": repair_plan,
+            "planningRules": planning_rules,
+        },
+        ensure_ascii=False,
+        separators=(",", ":"),
+        sort_keys=True,
+    ).encode("utf-8")
+    return hashlib.sha256(payload).hexdigest()
+
+
+def _read_exact_seed_checkpoint(
+    path: Path,
+    fingerprint: str,
+    seed_order: list[str],
+) -> tuple[
+    dict[str, dict[str, dict[str, Any]]],
+    dict[str, dict[str, Any]],
+]:
+    if not path.exists():
+        return {}, {}
+    checkpoint = read_json(path)
+    if checkpoint.get("schemaVersion") != "1.0.0":
+        raise ValueError(f"Unsupported exact seed checkpoint schema: {path}")
+    if checkpoint.get("seedModelVersion") != EXACT_SEED_MODEL_VERSION:
+        raise ValueError(f"Unsupported exact seed model checkpoint: {path}")
+    if checkpoint.get("fingerprint") != fingerprint:
+        raise ValueError(
+            f"Exact seed checkpoint does not match the current build inputs: {path}"
+        )
+    if checkpoint.get("seedOrder") != seed_order:
+        raise ValueError(
+            f"Exact seed checkpoint fleet order does not match the current build: {path}"
+        )
+    materialized_by_fleet = checkpoint.get("materializedByFleet", {})
+    solver_fleets = checkpoint.get("solverFleets", {})
+    if not isinstance(materialized_by_fleet, dict) or not isinstance(
+        solver_fleets, dict
+    ):
+        raise ValueError(f"Malformed exact seed checkpoint: {path}")
+    completed = set(checkpoint.get("completedFleets", []))
+    if completed != set(materialized_by_fleet) or completed != set(solver_fleets):
+        raise ValueError(f"Incomplete exact seed checkpoint indexes: {path}")
+    if not completed.issubset(seed_order):
+        raise ValueError(f"Exact seed checkpoint contains unknown fleets: {path}")
+    return materialized_by_fleet, solver_fleets
+
+
+def _write_exact_seed_checkpoint(
+    path: Path,
+    fingerprint: str,
+    seed_order: list[str],
+    materialized_by_fleet: dict[str, dict[str, dict[str, Any]]],
+    solver_fleets: dict[str, dict[str, Any]],
+) -> None:
+    completed = [fleet for fleet in seed_order if fleet in materialized_by_fleet]
+    temporary = path.with_name(path.name + ".tmp")
+    write_json(
+        temporary,
+        {
+            "schemaVersion": "1.0.0",
+            "seedModelVersion": EXACT_SEED_MODEL_VERSION,
+            "fingerprint": fingerprint,
+            "seedOrder": seed_order,
+            "completedFleets": completed,
+            "materializedByFleet": {
+                fleet: materialized_by_fleet[fleet] for fleet in completed
+            },
+            "solverFleets": {fleet: solver_fleets[fleet] for fleet in completed},
+        },
+        indent=None,
+    )
+    temporary.replace(path)
 
 
 def _milp_with_start(
@@ -2247,6 +2339,7 @@ def build_exact_materialization_plan(
     bank_plan: dict[str, Any],
     repair_plan: dict[str, Any],
     planning_rules: dict[str, Any],
+    seed_checkpoint_path: Path | None = None,
 ) -> dict[str, Any]:
     if any(
         artifact.get("status") != "pass"
@@ -2430,6 +2523,7 @@ def build_exact_materialization_plan(
         seed_materialized = None
         seed_solver_fleets: dict[str, dict[str, Any]] = {}
         seed_overflow: dict[tuple[str, str], int] = {}
+        seed_reused_fleets: list[str] = []
         if constructive_seed_mode == "independent_fleets":
             seed_materialized = {}
             seed_order = sorted(
@@ -2439,7 +2533,37 @@ def build_exact_materialization_plan(
                     fleet,
                 ),
             )
+            seed_materialized_by_fleet: dict[
+                str, dict[str, dict[str, Any]]
+            ] = {}
+            seed_checkpoint_fingerprint = None
+            if seed_checkpoint_path is not None:
+                seed_checkpoint_fingerprint = _exact_seed_fingerprint(
+                    canonical,
+                    frequency_plan,
+                    bank_plan,
+                    repair_plan,
+                    planning_rules,
+                )
+                (
+                    seed_materialized_by_fleet,
+                    seed_solver_fleets,
+                ) = _read_exact_seed_checkpoint(
+                    seed_checkpoint_path,
+                    seed_checkpoint_fingerprint,
+                    seed_order,
+                )
+                seed_reused_fleets = [
+                    fleet
+                    for fleet in seed_order
+                    if fleet in seed_materialized_by_fleet
+                ]
             for fleet in seed_order:
+                if fleet in seed_materialized_by_fleet:
+                    seed_materialized.update(
+                        seed_materialized_by_fleet[fleet]
+                    )
+                    continue
                 seed_pairing_model = seed_pairing_model_by_fleet.get(
                     fleet, "compiled_patterns"
                 )
@@ -2490,7 +2614,19 @@ def build_exact_materialization_plan(
                         fleet_time_limit,
                     )
                 seed_materialized.update(fleet_legs)
+                seed_materialized_by_fleet[fleet] = fleet_legs
                 seed_solver_fleets[fleet] = fleet_solver
+                if (
+                    seed_checkpoint_path is not None
+                    and seed_checkpoint_fingerprint is not None
+                ):
+                    _write_exact_seed_checkpoint(
+                        seed_checkpoint_path,
+                        seed_checkpoint_fingerprint,
+                        seed_order,
+                        seed_materialized_by_fleet,
+                        seed_solver_fleets,
+                    )
             seed_usage: Counter[tuple[str, str]] = Counter()
             for leg in seed_materialized.values():
                 if leg["originBankId"] is not None:
@@ -2516,6 +2652,7 @@ def build_exact_materialization_plan(
                 ),
                 "bankFeasibilityOverflow": 0,
                 "constructiveSeed": True,
+                "seedCheckpointReusedFleets": seed_reused_fleets,
                 "seedOverloadedBankRows": 0,
                 "timeLimitSeconds": global_time_limit_seconds,
             }
@@ -2548,6 +2685,9 @@ def build_exact_materialization_plan(
             if joint_solver is not None:
                 joint_solver["seedTotalBankOverage"] = sum(
                     seed_overflow.values()
+                )
+                joint_solver["seedCheckpointReusedFleets"] = (
+                    seed_reused_fleets
                 )
         for leg in materialized.values():
             if leg["originBankId"] is not None:
@@ -3019,6 +3159,7 @@ def build_exact_materialization_plan_from_manifest(
     repair_plan: dict[str, Any],
     manifest_path: Path,
     repo_root: Path,
+    seed_checkpoint_path: Path | None = None,
 ) -> dict[str, Any]:
     loaded = load_demand_sources_from_manifest(manifest_path, repo_root)
     if loaded["manifest"]["id"] != frequency_plan["demandDataVersion"]:
@@ -3039,4 +3180,5 @@ def build_exact_materialization_plan_from_manifest(
         bank_plan,
         repair_plan,
         loaded["planningRules"],
+        seed_checkpoint_path,
     )

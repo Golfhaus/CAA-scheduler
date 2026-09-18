@@ -138,6 +138,7 @@ def _parser() -> argparse.ArgumentParser:
     exact.add_argument("manifest", type=Path)
     exact.add_argument("output", type=Path)
     exact.add_argument("--repo-root", type=Path, default=Path.cwd())
+    exact.add_argument("--seed-checkpoint", type=Path)
 
     web = subcommands.add_parser(
         "build-web", help="Assemble the static GitHub Pages console"
@@ -362,6 +363,7 @@ def main(argv: list[str] | None = None) -> int:
             demand_plan,
             args.manifest,
             args.repo_root.resolve(),
+            args.seed_checkpoint,
         )
         write_json(args.output, plan)
         print(

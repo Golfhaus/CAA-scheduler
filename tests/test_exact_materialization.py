@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -11,8 +12,10 @@ sys.path.insert(0, str(REPO_ROOT / "src"))
 
 from caa_scheduler.exact_materialization import (
     _apply_assigned_bank_waves,
+    _read_exact_seed_checkpoint,
     _expand_flexible_seed_types_to_markets,
     _pairing_patterns,
+    _write_exact_seed_checkpoint,
     blocked_exact_materialization_plan,
 )
 
@@ -180,6 +183,41 @@ class ExactMaterializationPlanTests(unittest.TestCase):
         )
 
         self.assertEqual(expanded, {outbound, inbound})
+
+    def test_exact_seed_checkpoint_round_trip_and_input_guard(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "seed.json"
+            materialized = {
+                "CRJ700": {
+                    "AAA-HUB-01": {
+                        "id": "AAA-HUB-01",
+                        "fleet": "CRJ700",
+                        "departureUtcMinute": 600,
+                    }
+                }
+            }
+            solvers = {"CRJ700": {"status": "feasible_time_limit"}}
+            _write_exact_seed_checkpoint(
+                path,
+                "matching-fingerprint",
+                ["CRJ700", "CRJ200"],
+                materialized,
+                solvers,
+            )
+
+            loaded_materialized, loaded_solvers = _read_exact_seed_checkpoint(
+                path,
+                "matching-fingerprint",
+                ["CRJ700", "CRJ200"],
+            )
+            self.assertEqual(loaded_materialized, materialized)
+            self.assertEqual(loaded_solvers, solvers)
+            with self.assertRaisesRegex(ValueError, "does not match"):
+                _read_exact_seed_checkpoint(
+                    path,
+                    "changed-input-fingerprint",
+                    ["CRJ700", "CRJ200"],
+                )
 
 
 if __name__ == "__main__":
