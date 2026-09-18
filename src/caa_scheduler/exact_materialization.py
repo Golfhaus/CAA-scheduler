@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from collections import Counter, defaultdict
 from pathlib import Path
+from types import SimpleNamespace
 from typing import Any
 
 import numpy as np
@@ -29,6 +30,77 @@ MIP_TIME_LIMIT_SECONDS = 120
 SPACING_EXCEPTION_OBJECTIVE_WEIGHT = 10_000.0
 BANK_OVERFLOW_OBJECTIVE_WEIGHT = 1_000_000_000.0
 SEED_DEVIATION_OBJECTIVE_WEIGHT = 1_000_000.0
+
+
+def _milp_with_start(
+    objective: np.ndarray,
+    integrality: np.ndarray,
+    lower: np.ndarray,
+    upper: np.ndarray,
+    matrix: Any,
+    row_lower: np.ndarray,
+    row_upper: np.ndarray,
+    mip_start: np.ndarray,
+    time_limit_seconds: int,
+) -> SimpleNamespace:
+    """Run bundled HiGHS with a complete incumbent supplied as a MIP start."""
+    from scipy.optimize._highspy._core import (  # type: ignore[attr-defined]
+        HighsLp,
+        HighsModelStatus,
+        HighsSolution,
+        HighsSparseMatrix,
+        HighsVarType,
+        MatrixFormat,
+        _Highs,
+    )
+
+    column_matrix = matrix.tocsc()
+    sparse_matrix = HighsSparseMatrix()
+    sparse_matrix.num_col_ = int(column_matrix.shape[1])
+    sparse_matrix.num_row_ = int(column_matrix.shape[0])
+    sparse_matrix.format_ = MatrixFormat.kColwise
+    sparse_matrix.start_ = column_matrix.indptr.astype(np.int32)
+    sparse_matrix.index_ = column_matrix.indices.astype(np.int32)
+    sparse_matrix.value_ = column_matrix.data.astype(np.float64)
+    sparse_matrix.p_end_ = np.asarray([], dtype=np.int32)
+
+    linear_program = HighsLp()
+    linear_program.num_col_ = int(column_matrix.shape[1])
+    linear_program.num_row_ = int(column_matrix.shape[0])
+    linear_program.col_cost_ = objective.astype(np.float64)
+    linear_program.col_lower_ = lower.astype(np.float64)
+    linear_program.col_upper_ = upper.astype(np.float64)
+    linear_program.row_lower_ = row_lower.astype(np.float64)
+    linear_program.row_upper_ = row_upper.astype(np.float64)
+    linear_program.integrality_ = [
+        HighsVarType.kInteger if value else HighsVarType.kContinuous
+        for value in integrality
+    ]
+    linear_program.a_matrix_ = sparse_matrix
+
+    solver = _Highs()
+    solver.setOptionValue("output_flag", False)
+    solver.setOptionValue("time_limit", float(time_limit_seconds))
+    solver.setOptionValue("mip_rel_gap", MIP_RELATIVE_GAP)
+    solver.passModel(linear_program)
+    solution = HighsSolution()
+    solution.col_value = mip_start.astype(np.float64)
+    solution.value_valid = True
+    solver.setSolution(solution)
+    solver.run()
+    model_status = solver.getModelStatus()
+    solved = solver.getSolution()
+    info = solver.getInfo()
+    return SimpleNamespace(
+        x=(
+            np.asarray(solved.col_value, dtype=np.float64)
+            if solved.value_valid
+            else None
+        ),
+        success=model_status == HighsModelStatus.kOptimal,
+        message=solver.modelStatusToString(model_status),
+        mip_gap=float(info.mip_gap),
+    )
 
 
 def blocked_exact_materialization_plan(
@@ -943,6 +1015,7 @@ def _solve_all_fleets_with_pairing_patterns(
     choices: list[dict[str, Any]] = []
     choices_by_type: defaultdict[int, list[int]] = defaultdict(list)
     choices_by_fleet: defaultdict[str, list[int]] = defaultdict(list)
+    seed_choice_by_type: dict[int, int] = {}
     types_by_fleet: Counter[str] = Counter()
     pattern_counts_by_fleet: defaultdict[str, list[int]] = defaultdict(list)
     spacing_capacity_by_fleet: Counter[str] = Counter()
@@ -1115,6 +1188,8 @@ def _solve_all_fleets_with_pairing_patterns(
             )
             choices_by_type[type_index].append(index)
             choices_by_fleet[fleet].append(index)
+            if seed_materialized is not None and pattern_times == seed_times:
+                seed_choice_by_type[type_index] = index
 
     arrivals: defaultdict[
         tuple[str, str, int], dict[int, float]
@@ -1286,20 +1361,93 @@ def _solve_all_fleets_with_pairing_patterns(
         integrality[
             q_by_event[(fleet, station, min(station_events[(fleet, station)]))]
         ] = 1.0
-    result = milp(
-        c=np.asarray(objective),
-        integrality=integrality,
-        bounds=Bounds(np.zeros(len(objective)), np.asarray(upper_bounds)),
-        constraints=LinearConstraint(
+    objective_array = np.asarray(objective)
+    lower_array = np.zeros(len(objective))
+    upper_array = np.asarray(upper_bounds)
+    row_lower_array = np.asarray(lower_bounds)
+    row_upper_array = np.asarray(row_upper_bounds)
+    if seed_materialized is not None:
+        if len(seed_choice_by_type) != len(group_items):
+            raise ValueError(
+                "Constructive seed does not select every directional leg type"
+            )
+        mip_start = np.zeros(len(objective))
+        selected_choice_indices = set(seed_choice_by_type.values())
+        for index in selected_choice_indices:
+            mip_start[index] = 1.0
+        event_deltas: Counter[tuple[str, str, int]] = Counter()
+        for index in selected_choice_indices:
+            fleet = str(choices[index]["fleet"])
+            for event in choices[index]["events"]:
+                event_deltas[
+                    (fleet, str(event["origin"]), int(event["departureUtcMinute"]))
+                ] -= 1
+                event_deltas[
+                    (fleet, str(event["destination"]), int(event["readyUtcMinute"]))
+                ] += 1
+        for fleet, station in station_events:
+            events = sorted(station_events[(fleet, station)])
+            values = {events[0]: 0.0}
+            for minute in events[1:]:
+                previous = events[events.index(minute) - 1]
+                values[minute] = values[previous] + float(
+                    event_deltas[(fleet, station, minute)]
+                )
+            shift = max(0.0, -min(values.values()))
+            for minute, value in values.items():
+                mip_start[q_by_event[(fleet, station, minute)]] = value + shift
+        for key, overflow_index in bank_overflow_variables.items():
+            touches = sum(
+                value
+                for index, value in bank_touches.get(key, {}).items()
+                if index in selected_choice_indices
+            )
+            mip_start[overflow_index] = max(
+                0.0, touches - float(bank_touch_limits[key])
+            )
+        row_values = np.asarray(matrix @ mip_start).reshape(-1)
+        lower_violation = np.max(
+            np.maximum(row_lower_array - row_values, 0.0), initial=0.0
+        )
+        upper_violation = np.max(
+            np.maximum(row_values - row_upper_array, 0.0), initial=0.0
+        )
+        bound_violation = max(
+            float(np.max(np.maximum(lower_array - mip_start, 0.0), initial=0.0)),
+            float(np.max(np.maximum(mip_start - upper_array, 0.0), initial=0.0)),
+        )
+        if max(lower_violation, upper_violation, bound_violation) > 1e-6:
+            raise ValueError(
+                "Constructive MIP start is invalid: "
+                f"row lower {lower_violation:.6f}, row upper {upper_violation:.6f}, "
+                f"bound {bound_violation:.6f}"
+            )
+        result = _milp_with_start(
+            objective_array,
+            integrality,
+            lower_array,
+            upper_array,
             matrix,
-            np.asarray(lower_bounds),
-            np.asarray(row_upper_bounds),
-        ),
-        options={
-            "time_limit": time_limit_seconds,
-            "mip_rel_gap": MIP_RELATIVE_GAP,
-        },
-    )
+            row_lower_array,
+            row_upper_array,
+            mip_start,
+            time_limit_seconds,
+        )
+    else:
+        result = milp(
+            c=objective_array,
+            integrality=integrality,
+            bounds=Bounds(lower_array, upper_array),
+            constraints=LinearConstraint(
+                matrix,
+                row_lower_array,
+                row_upper_array,
+            ),
+            options={
+                "time_limit": time_limit_seconds,
+                "mip_rel_gap": MIP_RELATIVE_GAP,
+            },
+        )
     if result.x is None:
         raise ValueError(
             "Exact global pairing-pattern materialization failed: "
