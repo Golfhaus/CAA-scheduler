@@ -10,7 +10,10 @@ from .bank_materialization import build_bank_materialization_diagnostic_from_man
 from .baseline import build_baseline
 from .candidate import build_candidate
 from .demand import build_demand_plan_from_manifest
-from .exact_materialization import build_exact_materialization_plan_from_manifest
+from .exact_materialization import (
+    ExactSeedStageComplete,
+    build_exact_materialization_plan_from_manifest,
+)
 from .gate_export import export_gate_schedule
 from .io import read_json, write_json
 from .operating_validation import validate_operating_rules
@@ -140,6 +143,7 @@ def _parser() -> argparse.ArgumentParser:
     exact.add_argument("output", type=Path)
     exact.add_argument("--repo-root", type=Path, default=Path.cwd())
     exact.add_argument("--seed-checkpoint", type=Path)
+    exact.add_argument("--seed-fleets-per-run", type=int)
     exact.add_argument("--progress", action="store_true")
 
     web = subcommands.add_parser(
@@ -365,7 +369,6 @@ def main(argv: list[str] | None = None) -> int:
             demand_plan,
             args.manifest,
             args.repo_root.resolve(),
-            args.seed_checkpoint,
         )
         write_json(args.output, plan)
         print(
@@ -456,14 +459,20 @@ def main(argv: list[str] | None = None) -> int:
         frequency_plan = read_json(args.frequency_plan)
         bank_plan = read_json(args.bank_plan)
         repair_plan = read_json(args.repair_plan)
-        plan = build_exact_materialization_plan_from_manifest(
-            canonical,
-            frequency_plan,
-            bank_plan,
-            repair_plan,
-            args.manifest,
-            args.repo_root.resolve(),
-        )
+        try:
+            plan = build_exact_materialization_plan_from_manifest(
+                canonical,
+                frequency_plan,
+                bank_plan,
+                repair_plan,
+                args.manifest,
+                args.repo_root.resolve(),
+                args.seed_checkpoint,
+                args.seed_fleets_per_run,
+            )
+        except ExactSeedStageComplete as result:
+            print(str(result))
+            return 0
         write_json(args.output, plan, indent=None)
         print(
             f"Exact materialization: {plan['status'].upper()} "

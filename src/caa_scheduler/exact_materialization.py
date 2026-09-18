@@ -39,6 +39,17 @@ EXACT_SEED_MODEL_VERSION = "1.0.0"
 LOGGER = logging.getLogger(__name__)
 
 
+class ExactSeedStageComplete(RuntimeError):
+    """Signal a successful bounded seed-only invocation."""
+
+    def __init__(self, completed_fleets: list[str]):
+        self.completed_fleets = completed_fleets
+        super().__init__(
+            "Exact seed checkpoint completed fleets: "
+            + ", ".join(completed_fleets)
+        )
+
+
 def _exact_seed_fingerprint(
     canonical: dict[str, Any],
     frequency_plan: dict[str, Any],
@@ -2355,6 +2366,7 @@ def build_exact_materialization_plan(
     repair_plan: dict[str, Any],
     planning_rules: dict[str, Any],
     seed_checkpoint_path: Path | None = None,
+    seed_fleets_per_run: int | None = None,
 ) -> dict[str, Any]:
     if any(
         artifact.get("status") != "pass"
@@ -2369,6 +2381,13 @@ def build_exact_materialization_plan(
     policy = canonical["operatingPolicy"]
     fleet_counts = canonical["schedule"]["fleetCounts"]
     exact_options = planning_rules.get("exactMaterialization", {})
+    if seed_fleets_per_run is not None:
+        if seed_fleets_per_run < 1:
+            raise ValueError("Seed fleets per run must be at least one")
+        if seed_checkpoint_path is None:
+            raise ValueError(
+                "Seed fleets per run requires an exact seed checkpoint path"
+            )
     bank_assignment_mode = exact_options.get(
         "bankAssignmentMode", "assigned_leg_waves"
     )
@@ -2539,6 +2558,7 @@ def build_exact_materialization_plan(
         seed_solver_fleets: dict[str, dict[str, Any]] = {}
         seed_overflow: dict[tuple[str, str], int] = {}
         seed_reused_fleets: list[str] = []
+        new_seed_fleets = 0
         if constructive_seed_mode == "independent_fleets":
             seed_materialized = {}
             seed_order = sorted(
@@ -2650,6 +2670,18 @@ def build_exact_materialization_plan(
                         seed_order,
                         seed_materialized_by_fleet,
                         seed_solver_fleets,
+                    )
+                new_seed_fleets += 1
+                if (
+                    seed_fleets_per_run is not None
+                    and new_seed_fleets >= seed_fleets_per_run
+                ):
+                    raise ExactSeedStageComplete(
+                        [
+                            fleet_name
+                            for fleet_name in seed_order
+                            if fleet_name in seed_materialized_by_fleet
+                        ]
                     )
             seed_usage: Counter[tuple[str, str]] = Counter()
             for leg in seed_materialized.values():
@@ -3184,6 +3216,7 @@ def build_exact_materialization_plan_from_manifest(
     manifest_path: Path,
     repo_root: Path,
     seed_checkpoint_path: Path | None = None,
+    seed_fleets_per_run: int | None = None,
 ) -> dict[str, Any]:
     loaded = load_demand_sources_from_manifest(manifest_path, repo_root)
     if loaded["manifest"]["id"] != frequency_plan["demandDataVersion"]:
@@ -3205,4 +3238,5 @@ def build_exact_materialization_plan_from_manifest(
         repair_plan,
         loaded["planningRules"],
         seed_checkpoint_path,
+        seed_fleets_per_run,
     )
