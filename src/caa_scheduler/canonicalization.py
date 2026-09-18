@@ -173,6 +173,24 @@ def build_canonical_schedule_from_exact_plan(
     construction_provenance: dict[str, Any],
 ) -> tuple[dict[str, Any], dict[str, Any]]:
     """Assign canonical identifiers to a passing exact materialization plan."""
+    schedule_id = str(seed["schedule"]["id"])
+    mismatched_schedule_ids = {
+        name: str(plan.get("scheduleId"))
+        for name, plan in (
+            ("frequency plan", frequency_plan),
+            ("hub-bank plan", hub_bank_plan),
+            ("exact plan", exact_plan),
+        )
+        if str(plan.get("scheduleId")) != schedule_id
+    }
+    if mismatched_schedule_ids:
+        details = ", ".join(
+            f"{name}={identifier}"
+            for name, identifier in mismatched_schedule_ids.items()
+        )
+        raise ValueError(
+            f"Canonicalization schedule ID mismatch: seed={schedule_id}; {details}"
+        )
     if exact_plan.get("status") != "pass" or exact_plan.get(
         "materializationStatus"
     ) != "complete":

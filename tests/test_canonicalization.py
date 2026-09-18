@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import copy
 import json
 import sys
 import unittest
@@ -153,6 +154,19 @@ class CanonicalizationTests(unittest.TestCase):
         )
         self.assertEqual(repeated, self.canonical)
         self.assertEqual(repeated_report, self.report)
+
+    def test_schedule_identity_must_match_every_planning_artifact(self) -> None:
+        mismatched = copy.deepcopy(self.exact)
+        mismatched["scheduleId"] = "different_schedule"
+        with self.assertRaisesRegex(ValueError, "schedule ID mismatch"):
+            build_canonical_schedule_from_exact_plan(
+                self.seed,
+                self.demand,
+                self.frequency,
+                self.banks,
+                mismatched,
+                self.provenance,
+            )
 
 
 if __name__ == "__main__":
