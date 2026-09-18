@@ -919,6 +919,28 @@ def _solve_fleet_with_pairing_patterns(
     }
 
 
+def _expand_flexible_seed_types_to_markets(
+    flexible_types: set[tuple[Any, ...]],
+    group_items: list[
+        tuple[tuple[Any, ...], list[dict[str, Any]]]
+    ],
+) -> set[tuple[Any, ...]]:
+    """Allow both directions of a seed market to retime as one flow unit."""
+    flexible_markets = {
+        (str(key[0]), frozenset((str(key[1]), str(key[2]))))
+        for key in flexible_types
+    }
+    return flexible_types | {
+        key
+        for key, _ in group_items
+        if (
+            str(key[0]),
+            frozenset((str(key[1]), str(key[2]))),
+        )
+        in flexible_markets
+    }
+
+
 def _solve_all_fleets_with_pairing_patterns(
     inventory: dict[str, list[dict[str, Any]]],
     fleet_counts: dict[str, int],
@@ -1007,6 +1029,10 @@ def _solve_all_fleets_with_pairing_patterns(
             }
             if touches & seed_overflow_keys:
                 flexible_seed_types.add(key)
+        flexible_seed_types = _expand_flexible_seed_types_to_markets(
+            flexible_seed_types,
+            group_items,
+        )
         for times in seed_departures.values():
             times.sort()
 
@@ -1461,10 +1487,18 @@ def _solve_all_fleets_with_pairing_patterns(
     if bank_overflow:
         total_overflow = sum(bank_overflow.values())
         maximum_overflow = max(bank_overflow.values())
+        largest_overflows = ", ".join(
+            f"{key}={value:.0f}"
+            for key, value in sorted(
+                bank_overflow.items(),
+                key=lambda item: (-item[1], item[0]),
+            )[:8]
+        )
         raise ValueError(
             "Exact global pairing-pattern materialization retained "
             f"{total_overflow:.3f} bank touches of feasibility overflow "
-            f"(maximum wave overage {maximum_overflow:.3f}) after: {result.message}"
+            f"(maximum wave overage {maximum_overflow:.3f}; "
+            f"largest rows: {largest_overflows}) after: {result.message}"
         )
     maximum_fraction = max(abs(value - round(value)) for value in result.x)
     if maximum_fraction > 1e-6:

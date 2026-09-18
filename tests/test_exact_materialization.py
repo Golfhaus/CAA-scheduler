@@ -11,6 +11,7 @@ sys.path.insert(0, str(REPO_ROOT / "src"))
 
 from caa_scheduler.exact_materialization import (
     _apply_assigned_bank_waves,
+    _expand_flexible_seed_types_to_markets,
     _pairing_patterns,
     blocked_exact_materialization_plan,
 )
@@ -161,6 +162,24 @@ class ExactMaterializationPlanTests(unittest.TestCase):
                 for first, second in departures
             )
         )
+
+    def test_seed_repair_retimes_both_directions_of_a_market(self) -> None:
+        outbound = ("CRJ700", "HUB", "AAA", "hub_spoke", 60)
+        inbound = ("CRJ700", "AAA", "HUB", "hub_spoke", 60)
+        unrelated = ("CRJ700", "HUB", "BBB", "hub_spoke", 70)
+        other_fleet = ("CRJ200", "AAA", "HUB", "hub_spoke", 60)
+
+        expanded = _expand_flexible_seed_types_to_markets(
+            {outbound},
+            [
+                (outbound, []),
+                (inbound, []),
+                (unrelated, []),
+                (other_fleet, []),
+            ],
+        )
+
+        self.assertEqual(expanded, {outbound, inbound})
 
 
 if __name__ == "__main__":
