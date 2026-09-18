@@ -5,6 +5,7 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -16,6 +17,7 @@ from caa_scheduler.exact_materialization import (
     _expand_flexible_seed_types_to_markets,
     _pairing_patterns,
     _read_exact_seed_checkpoint,
+    _repair_successor_cycles,
     _write_exact_seed_checkpoint,
     blocked_exact_materialization_plan,
 )
@@ -217,6 +219,74 @@ class ExactMaterializationPlanTests(unittest.TestCase):
         self.assertEqual(
             expanded,
             {jax_b14_departure, jax_b1_departure, jax_b13_departure},
+        )
+
+    def test_successor_repair_can_cross_a_score_plateau(self) -> None:
+        identifiers = ("A", "B", "C", "D")
+        legs = {
+            identifier: {
+                "id": identifier,
+                "fleet": "CRJ200",
+                "destination": "HUB",
+            }
+            for identifier in identifiers
+        }
+        successors = {identifier: identifier for identifier in identifiers}
+        base_state = tuple(sorted(successors.items()))
+        plateau_successors = dict(successors)
+        plateau_successors["A"], plateau_successors["B"] = (
+            plateau_successors["B"],
+            plateau_successors["A"],
+        )
+        plateau_state = tuple(sorted(plateau_successors.items()))
+        passing_successors = dict(plateau_successors)
+        passing_successors["C"], passing_successors["D"] = (
+            passing_successors["D"],
+            passing_successors["C"],
+        )
+        passing_state = tuple(sorted(passing_successors.items()))
+
+        def fake_cycles(_legs, candidate_successors, *_args, **_kwargs):
+            state = tuple(sorted(candidate_successors.items()))
+            if state == passing_state:
+                score = (0, 0, 0, 0, 0, 4)
+                maximum_gap = 0
+            elif state in {base_state, plateau_state}:
+                score = (0, 0, 1, 1, 12, 4)
+                maximum_gap = 12
+            else:
+                score = (0, 0, 1, 2, 13, 4)
+                maximum_gap = 13
+            return [
+                {
+                    "maximumDaysWithoutTargetRon": maximum_gap,
+                    "legIds": list(identifiers),
+                    "score": score,
+                }
+            ]
+
+        with patch(
+            "caa_scheduler.exact_materialization._cycles",
+            side_effect=fake_cycles,
+        ), patch(
+            "caa_scheduler.exact_materialization._cycle_score",
+            side_effect=lambda cycles, *_args: cycles[0]["score"],
+        ):
+            cycles, swaps = _repair_successor_cycles(
+                legs,
+                successors,
+                {"turns": {"minimumMinutes": 40}},
+                {},
+                set(),
+                {"CRJ200": 4},
+                11,
+                True,
+            )
+
+        self.assertEqual(cycles[0]["score"], (0, 0, 0, 0, 0, 4))
+        self.assertEqual(
+            [swap["moveKind"] for swap in swaps],
+            ["plateau", "improvement"],
         )
 
     def test_exact_seed_checkpoint_round_trip_and_input_guard(self) -> None:

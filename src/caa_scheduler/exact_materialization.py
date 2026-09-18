@@ -3,6 +3,7 @@ from __future__ import annotations
 import hashlib
 import json
 import logging
+import random
 import time
 from collections import Counter, defaultdict
 from pathlib import Path
@@ -37,6 +38,7 @@ BANK_OVERFLOW_OBJECTIVE_WEIGHT = 1_000_000_000.0
 SEED_DEVIATION_OBJECTIVE_WEIGHT = 1_000_000.0
 EXACT_SEED_MODEL_VERSION = "1.0.0"
 HUB_OPERATION_CLOSURE_MAX_OVERFLOW_ROWS = 2
+SUCCESSOR_PLATEAU_RANDOM_SEED = 20_260_918
 LOGGER = logging.getLogger(__name__)
 
 
@@ -2375,6 +2377,8 @@ def _repair_successor_cycles(
     for identifiers in arrivals_by_station.values():
         identifiers.sort()
 
+    plateau_random = random.Random(SUCCESSOR_PLATEAU_RANDOM_SEED)
+    seen_states = {tuple(sorted(successors.items()))}
     for _ in range(20):
         current_score = _cycle_score(
             cycles, required_destinations, fleet_counts, rolling_limit
@@ -2388,7 +2392,9 @@ def _repair_successor_cycles(
             for leg_id in cycle["legIds"]
         }
         best = None
-        for arrivals in arrivals_by_station.values():
+        plateau_candidates = []
+        for station_key in sorted(arrivals_by_station):
+            arrivals = arrivals_by_station[station_key]
             for first_index, first in enumerate(arrivals):
                 for second in arrivals[first_index + 1 :]:
                     if first not in bad_legs and second not in bad_legs:
@@ -2410,11 +2416,23 @@ def _repair_successor_cycles(
                         fleet_counts,
                         rolling_limit,
                     )
+                    candidate_state = tuple(sorted(successors.items()))
                     successors[first], successors[second] = (
                         successors[second],
                         successors[first],
                     )
-                    if candidate_score >= current_score:
+                    if candidate_score > current_score:
+                        continue
+                    candidate = (
+                        candidate_score,
+                        first,
+                        second,
+                        candidate_cycles,
+                        candidate_state,
+                    )
+                    if candidate_score == current_score:
+                        if candidate_state not in seen_states:
+                            plateau_candidates.append(candidate)
                         continue
                     if best is None or candidate_score < best[0]:
                         best = (
@@ -2422,18 +2440,28 @@ def _repair_successor_cycles(
                             first,
                             second,
                             candidate_cycles,
+                            candidate_state,
                         )
         if best is None:
-            break
-        score, first, second, candidate_cycles = best
+            if not plateau_candidates:
+                break
+            best = plateau_candidates[
+                plateau_random.randrange(len(plateau_candidates))
+            ]
+            move_kind = "plateau"
+        else:
+            move_kind = "improvement"
+        score, first, second, candidate_cycles, candidate_state = best
         successors[first], successors[second] = (
             successors[second],
             successors[first],
         )
+        seen_states.add(candidate_state)
         swaps.append(
             {
                 "firstArrivingLegId": first,
                 "secondArrivingLegId": second,
+                "moveKind": move_kind,
                 "beforeScore": list(current_score),
                 "afterScore": list(score),
             }
@@ -2787,7 +2815,7 @@ def build_exact_materialization_plan(
             joint_solver = {
                 "status": "constructive_seed_feasible",
                 "message": (
-                    "Independent fleet solutions jointly satisfy the shared bank capacity"
+                    "Checkpointed fleet solutions jointly satisfy the shared bank capacity"
                 ),
                 "bankFeasibilityOverflow": 0,
                 "constructiveSeed": True,
@@ -2828,33 +2856,33 @@ def build_exact_materialization_plan(
                 joint_solver["seedCheckpointReusedFleets"] = (
                     seed_reused_fleets
                 )
+                if seed_checkpoint_path is not None:
+                    repair_seed_order = sorted(
+                        fleet_counts,
+                        key=lambda fleet: (
+                            -len(inventory.get(fleet, [])),
+                            fleet,
+                        ),
+                    )
+                    improved_by_fleet: dict[
+                        str, dict[str, dict[str, Any]]
+                    ] = {fleet: {} for fleet in repair_seed_order}
+                    for leg_id, leg in materialized.items():
+                        improved_by_fleet[str(leg["fleet"])][leg_id] = leg
+                    _write_exact_seed_checkpoint(
+                        seed_checkpoint_path,
+                        _exact_seed_fingerprint(
+                            canonical,
+                            frequency_plan,
+                            bank_plan,
+                            repair_plan,
+                            planning_rules,
+                        ),
+                        repair_seed_order,
+                        improved_by_fleet,
+                        solver_fleets,
+                    )
                 if float(joint_solver["bankFeasibilityOverflow"]) > 0:
-                    if seed_checkpoint_path is not None:
-                        repair_seed_order = sorted(
-                            fleet_counts,
-                            key=lambda fleet: (
-                                -len(inventory.get(fleet, [])),
-                                fleet,
-                            ),
-                        )
-                        improved_by_fleet: dict[
-                            str, dict[str, dict[str, Any]]
-                        ] = {fleet: {} for fleet in repair_seed_order}
-                        for leg_id, leg in materialized.items():
-                            improved_by_fleet[str(leg["fleet"])][leg_id] = leg
-                        _write_exact_seed_checkpoint(
-                            seed_checkpoint_path,
-                            _exact_seed_fingerprint(
-                                canonical,
-                                frequency_plan,
-                                bank_plan,
-                                repair_plan,
-                                planning_rules,
-                            ),
-                            repair_seed_order,
-                            improved_by_fleet,
-                            solver_fleets,
-                        )
                     raise ExactGlobalRepairIncomplete(
                         {
                             str(key): float(value)
