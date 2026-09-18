@@ -239,6 +239,15 @@ class ExactMaterializationPlanTests(unittest.TestCase):
             plateau_successors["A"],
         )
         plateau_state = tuple(sorted(plateau_successors.items()))
+        over_ceiling_successors = dict(successors)
+        (
+            over_ceiling_successors["A"],
+            over_ceiling_successors["C"],
+        ) = (
+            over_ceiling_successors["C"],
+            over_ceiling_successors["A"],
+        )
+        over_ceiling_state = tuple(sorted(over_ceiling_successors.items()))
         passing_successors = dict(plateau_successors)
         passing_successors["C"], passing_successors["D"] = (
             passing_successors["D"],
@@ -250,6 +259,9 @@ class ExactMaterializationPlanTests(unittest.TestCase):
             state = tuple(sorted(candidate_successors.items()))
             if state == passing_state:
                 score = (0, 0, 0, 0, 0, 4)
+                maximum_gap = 0
+            elif state == over_ceiling_state:
+                score = (0, 0, 0, 0, 0, 5)
                 maximum_gap = 0
             elif state in {base_state, plateau_state}:
                 score = (0, 0, 1, 1, 12, 4)

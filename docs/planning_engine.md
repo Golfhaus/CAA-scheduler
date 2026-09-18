@@ -80,7 +80,9 @@ For the current proposal, the relaxed bank/turn/RON lower bound fits every confi
 
 `exact_materialization_plan.json` is defined by [`schemas/exact_materialization_plan.schema.json`](../schemas/exact_materialization_plan.schema.json). A time-expanded integer model chooses one five-minute departure time for every proposed leg. Aircraft inventory is conserved at every station, the 40-minute turn floor is enforced before an arrival becomes available again, every hub event remains inside an approved core, and fleet capacity comes directly from the schedule configuration.
 
-The v5 exact plan schedules all 1,406 legs, including all 306 non-hub legs, in 221 of 225 configured aircraft: MAX9 34/35, CRJ900 44/45, CRJ700 65/65, and CRJ200 78/80. The model enforces the Section 2.6 hard floor and near-target threshold as it chooses times. Exception variables are created only when candidate-time capacity proves that a pairing with four or more departures mathematically requires the policy's one allowed short gap. The current plan has zero spacing violations and one permitted exception on PHF–SAV; its 35-minute gap remains above the 30-minute hard floor. The resulting successor cycles provide a real overnight at all 99 required destinations, with one deterministic same-station successor swap clearing the rolling target-RON cadence.
+The v6 materializer coordinates all four fleets in one compiled-pattern MILP. Each bank's arrival and departure rows are capped by the hub's physical gate count, so bank reassignment happens inside the same capacity envelope rather than invalidating an upstream placement proof. Independent fleet solutions provide a constructive timetable; repair then unlocks only types touching overloaded rows, their reverse directions, and—when one or two rows remain—the same operation across that hub. Every improved incumbent is checkpointed, including a zero-overflow solution, so bounded retries and downstream validation do not repeat completed work.
+
+The current exact plan schedules all 1,406 legs, including all 306 non-hub legs, in all 225 configured aircraft: MAX9 35/35, CRJ900 45/45, CRJ700 65/65, and CRJ200 80/80. The global repair returned an optimal zero-overflow timetable across all 90 hub-bank operation rows; PHF, DAY, MCI, and JAX reach the 16-gate ceiling without exceeding it, while SYR peaks at 15. All 1,100 hub-touching legs remain inside approved bank cores, all 99 required destinations receive a routed overnight, and 14 deterministic same-station successor exchanges—including nine score-neutral plateau moves—clear the 11-day rolling target-RON window without exceeding the MILP's 225-aircraft result. Section 2.6 has zero violations; OKC–BHM and SAT–BHM each use the permitted single 30-minute gap, which remains at the policy's hard floor.
 
 ## Multi-hub qualification
 
@@ -166,8 +168,12 @@ python -m caa_scheduler build-exact-materialization \
   hub_bank_plan.json \
   routing_repair_plan.json \
   config/demand_data/bts_db1c_6mo_v3.json \
-  exact_materialization_plan.json
+  exact_materialization_plan.json \
+  --seed-checkpoint exact_seed_checkpoint.json \
+  --progress
 ```
+
+For long builds, `--seed-fleets-per-run 1` can be added to populate the same checkpoint one fleet at a time. Once every fleet is present, omit that option to run or resume the joint capacity repair. The checkpoint is guarded by a fingerprint of the canonical schedule, planning artifacts, and planning rules; a mismatched input is rejected instead of silently reused.
 
 The golden-baseline and candidate commands generate these planning artifacts automatically. Candidate construction resolves the demand version to exactly one manifest and verifies every source fingerprint; an unknown version or mismatch blocks publishable output. If a candidate violates a hard stop such as a curfew, its canonical, timetable, and gate outputs remain suppressed. The demand/planning snapshots and diagnostic validation reports are retained so the failed build can be investigated.
 

@@ -2379,6 +2379,9 @@ def _repair_successor_cycles(
 
     plateau_random = random.Random(SUCCESSOR_PLATEAU_RANDOM_SEED)
     seen_states = {tuple(sorted(successors.items()))}
+    aircraft_ceiling = _cycle_score(
+        cycles, required_destinations, fleet_counts, rolling_limit
+    )[-1]
     for _ in range(20):
         current_score = _cycle_score(
             cycles, required_destinations, fleet_counts, rolling_limit
@@ -2393,8 +2396,7 @@ def _repair_successor_cycles(
         }
         best = None
         plateau_candidates = []
-        for station_key in sorted(arrivals_by_station):
-            arrivals = arrivals_by_station[station_key]
+        for arrivals in arrivals_by_station.values():
             for first_index, first in enumerate(arrivals):
                 for second in arrivals[first_index + 1 :]:
                     if first not in bad_legs and second not in bad_legs:
@@ -2421,7 +2423,10 @@ def _repair_successor_cycles(
                         successors[second],
                         successors[first],
                     )
-                    if candidate_score > current_score:
+                    if (
+                        candidate_score[-1] > aircraft_ceiling
+                        or candidate_score > current_score
+                    ):
                         continue
                     candidate = (
                         candidate_score,
