@@ -10,6 +10,7 @@ from scipy.sparse import coo_matrix
 
 from .bank_placement import _curfew_status, _maximum_spaced_departures
 from .demand import load_demand_sources_from_manifest
+from .gate_export import _capacity
 from .routing import (
     _connection_wait,
     _cycles,
@@ -26,6 +27,8 @@ AIRCRAFT_OBJECTIVE_WEIGHT = 1_000_000.0
 MIP_RELATIVE_GAP = 0.01
 MIP_TIME_LIMIT_SECONDS = 120
 SPACING_EXCEPTION_OBJECTIVE_WEIGHT = 10_000.0
+BANK_OVERFLOW_OBJECTIVE_WEIGHT = 1_000_000_000.0
+SEED_DEVIATION_OBJECTIVE_WEIGHT = 1_000_000.0
 
 
 def blocked_exact_materialization_plan(
@@ -114,6 +117,58 @@ def _bank_id(value: int, windows: list[dict[str, Any]]) -> str | None:
     )
 
 
+def _apply_assigned_bank_waves(
+    inventory: dict[str, list[dict[str, Any]]],
+    bank_plan: dict[str, Any],
+) -> None:
+    """Attach each planned hub touch to its specific capacity-checked wave."""
+    inventory_groups: defaultdict[
+        tuple[str, str, str], list[dict[str, Any]]
+    ] = defaultdict(list)
+    for fleet_legs in inventory.values():
+        for leg in fleet_legs:
+            inventory_groups[
+                (str(leg["fleet"]), str(leg["origin"]), str(leg["destination"]))
+            ].append(leg)
+
+    placement_groups: defaultdict[
+        tuple[str, str, str], list[dict[str, Any]]
+    ] = defaultdict(list)
+    for placement in bank_plan["placements"]:
+        placement_groups[
+            (
+                str(placement["fleet"]),
+                str(placement["origin"]),
+                str(placement["destination"]),
+            )
+        ].append(placement)
+
+    for key, placements in sorted(placement_groups.items()):
+        legs = sorted(inventory_groups.get(key, []), key=lambda row: row["id"])
+        placements = sorted(
+            placements,
+            key=lambda row: (int(row["roundTripOrdinal"]), str(row["id"])),
+        )
+        if len(legs) != len(placements):
+            fleet, origin, destination = key
+            raise ValueError(
+                f"Assigned-bank inventory mismatch for {origin}-{destination}-{fleet}: "
+                f"{len(legs)} exact copies, {len(placements)} bank placements"
+            )
+        for leg, placement in zip(legs, placements):
+            for touch in placement["bankTouches"]:
+                field = (
+                    "originBankId"
+                    if touch["operation"] == "departure"
+                    else "destinationBankId"
+                )
+                if field in leg:
+                    raise ValueError(
+                        f"Exact inventory leg {leg['id']} has multiple {field} values"
+                    )
+                leg[field] = str(touch["bankId"])
+
+
 def _circular_distance(first: int, second: int) -> int:
     return min((first - second) % 1440, (second - first) % 1440)
 
@@ -174,6 +229,1160 @@ def _timing_cost(
     return float(cost)
 
 
+def _pairing_patterns(
+    candidates: list[dict[str, Any]],
+    frequency: int,
+    minimum_gap: float,
+    hard_floor: float,
+    allowed_exceptions: int,
+    reserved: list[int],
+    maximum_patterns: int,
+    beam_width: int,
+) -> list[dict[str, Any]]:
+    """Build deterministic, spacing-valid departure patterns for one pairing.
+
+    Repeated copies of the same directional market are interchangeable.  Encoding
+    every copy as an integer count at every minute leaves the MILP with a large
+    symmetric search tree.  A pattern compiles that symmetry away: one binary
+    choice represents all departures for the directional market.
+    """
+    if frequency < 1:
+        return []
+
+    ordered = sorted(
+        candidates,
+        key=lambda row: (int(row["departureUtcMinute"]), float(row["cost"])),
+    )
+    reserved_exception_pairs = sum(
+        1
+        for position, first in enumerate(reserved)
+        for second in reserved[position + 1 :]
+        if hard_floor
+        <= _circular_distance(first, second)
+        < minimum_gap
+    )
+    remaining_exceptions = allowed_exceptions - reserved_exception_pairs
+    if remaining_exceptions < 0:
+        return []
+
+    usable: list[tuple[dict[str, Any], int]] = []
+    for candidate in ordered:
+        minute = int(candidate["departureUtcMinute"])
+        distances = [_circular_distance(minute, other) for other in reserved]
+        if any(distance < hard_floor for distance in distances):
+            continue
+        exception_count = sum(
+            hard_floor <= distance < minimum_gap for distance in distances
+        )
+        if exception_count <= remaining_exceptions:
+            usable.append((candidate, exception_count))
+
+    if frequency == 1:
+        return [
+            {
+                "events": (candidate,),
+                "cost": float(candidate["cost"])
+                + SPACING_EXCEPTION_OBJECTIVE_WEIGHT * exception_count,
+                "spacingExceptions": exception_count,
+            }
+            for candidate, exception_count in usable
+        ]
+
+    states: list[tuple[tuple[int, ...], float, int]] = [
+        ((index,), float(candidate["cost"]), exception_count)
+        for index, (candidate, exception_count) in enumerate(usable)
+    ]
+    ideal_gap = 1440.0 / frequency
+    for depth in range(2, frequency + 1):
+        expanded: list[tuple[tuple[int, ...], float, int]] = []
+        for indices, cost, exception_count in states:
+            first_minute = int(
+                usable[indices[0]][0]["departureUtcMinute"]
+            )
+            last_minute = int(
+                usable[indices[-1]][0]["departureUtcMinute"]
+            )
+            target = first_minute + (depth - 1) * ideal_gap
+            viable: list[tuple[float, float, int]] = []
+            for candidate_index in range(indices[-1] + 1, len(usable)):
+                candidate, reserved_exceptions = usable[candidate_index]
+                minute = int(candidate["departureUtcMinute"])
+                distances = [
+                    _circular_distance(
+                        minute,
+                        int(usable[prior][0]["departureUtcMinute"]),
+                    )
+                    for prior in indices
+                ]
+                if any(distance < hard_floor for distance in distances):
+                    continue
+                added_exceptions = reserved_exceptions + sum(
+                    hard_floor <= distance < minimum_gap
+                    for distance in distances
+                )
+                if exception_count + added_exceptions > remaining_exceptions:
+                    continue
+                viable.append(
+                    (
+                        abs(minute - target),
+                        float(candidate["cost"]),
+                        candidate_index,
+                    )
+                )
+
+            # Target-near choices preserve broad time-of-day coverage; cheap
+            # choices retain the bank-core objective.  Their union keeps the
+            # bounded pattern set useful to the downstream fleet-flow solve.
+            selected_indices = []
+            seen_indices: set[int] = set()
+            for _, _, candidate_index in sorted(viable)[:8] + sorted(
+                viable, key=lambda row: (row[1], row[0], row[2])
+            )[:4]:
+                if candidate_index not in seen_indices:
+                    selected_indices.append(candidate_index)
+                    seen_indices.add(candidate_index)
+            for candidate_index in selected_indices:
+                candidate, reserved_exceptions = usable[candidate_index]
+                minute = int(candidate["departureUtcMinute"])
+                added_exceptions = reserved_exceptions + sum(
+                    hard_floor
+                    <= _circular_distance(
+                        minute,
+                        int(usable[prior][0]["departureUtcMinute"]),
+                    )
+                    < minimum_gap
+                    for prior in indices
+                )
+                expanded.append(
+                    (
+                        indices + (candidate_index,),
+                        cost + float(candidate["cost"]),
+                        exception_count + added_exceptions,
+                    )
+                )
+
+        if len(expanded) > beam_width:
+            expanded.sort(
+                key=lambda row: (
+                    row[1]
+                    + SPACING_EXCEPTION_OBJECTIVE_WEIGHT * row[2],
+                    tuple(
+                        int(usable[index][0]["departureUtcMinute"])
+                        for index in row[0]
+                    ),
+                )
+            )
+            broadly_timed: dict[tuple[int, int, int], tuple[tuple[int, ...], float, int]] = {}
+            for state in expanded:
+                minutes = [
+                    int(usable[index][0]["departureUtcMinute"])
+                    for index in state[0]
+                ]
+                signature = (
+                    minutes[0] // 30,
+                    minutes[-1] // 30,
+                    sum(minutes) // (30 * len(minutes)),
+                )
+                broadly_timed.setdefault(signature, state)
+            retained = expanded[: beam_width // 2]
+            retained_ids = {state[0] for state in retained}
+            for state in broadly_timed.values():
+                if state[0] not in retained_ids:
+                    retained.append(state)
+                    retained_ids.add(state[0])
+                if len(retained) >= beam_width:
+                    break
+            states = retained
+        else:
+            states = expanded
+        if not states:
+            return []
+
+    patterns = [
+        {
+            "events": tuple(usable[index][0] for index in indices),
+            "cost": cost
+            + SPACING_EXCEPTION_OBJECTIVE_WEIGHT * exception_count,
+            "spacingExceptions": exception_count,
+        }
+        for indices, cost, exception_count in states
+    ]
+    patterns.sort(
+        key=lambda row: (
+            float(row["cost"]),
+            tuple(
+                int(event["departureUtcMinute"])
+                for event in row["events"]
+            ),
+        )
+    )
+    if len(patterns) <= maximum_patterns:
+        return patterns
+
+    retained = patterns[: maximum_patterns // 2]
+    retained_times = {
+        tuple(int(event["departureUtcMinute"]) for event in row["events"])
+        for row in retained
+    }
+    signatures: set[tuple[int, int, int]] = set()
+    for row in patterns:
+        minutes = [int(event["departureUtcMinute"]) for event in row["events"]]
+        signature = (
+            minutes[0] // 30,
+            minutes[-1] // 30,
+            sum(minutes) // (30 * len(minutes)),
+        )
+        if signature in signatures:
+            continue
+        signatures.add(signature)
+        times = tuple(minutes)
+        if times in retained_times:
+            continue
+        retained.append(row)
+        retained_times.add(times)
+        if len(retained) >= maximum_patterns:
+            break
+    if len(retained) < maximum_patterns:
+        for row in patterns:
+            times = tuple(
+                int(event["departureUtcMinute"])
+                for event in row["events"]
+            )
+            if times in retained_times:
+                continue
+            retained.append(row)
+            retained_times.add(times)
+            if len(retained) >= maximum_patterns:
+                break
+    return retained
+
+
+def _solve_fleet_with_pairing_patterns(
+    fleet: str,
+    copies: list[dict[str, Any]],
+    configured_aircraft: int,
+    assigned_rons: list[str],
+    cities: dict[str, dict[str, Any]],
+    policy: dict[str, Any],
+    windows: dict[str, list[dict[str, Any]]],
+    targets: dict[str, dict[str, list[int]]],
+    pairing_departure_counts: Counter[tuple[str, str]],
+    station_departure_counts: Counter[str],
+    reserved_pair_departures: dict[tuple[str, str], list[int]],
+    bank_touch_limits: dict[tuple[str, str], int] | None,
+    bank_touch_constraint: str | None,
+    feasibility_only: bool,
+    allow_pairing_spacing_exceptions: bool,
+    time_limit_seconds: int,
+    maximum_patterns: int,
+    beam_width: int,
+) -> tuple[dict[str, dict[str, Any]], dict[str, Any]]:
+    """Solve one fleet with repeated pairings compiled into binary patterns."""
+    minimum_turn = int(policy["turns"]["minimumMinutes"])
+    grouped: defaultdict[tuple[Any, ...], list[dict[str, Any]]] = defaultdict(list)
+    for leg in copies:
+        if leg.get("originBankId") is not None or leg.get("destinationBankId") is not None:
+            raise ValueError(
+                "Pairing-pattern materialization requires joint bank assignment"
+            )
+        grouped[
+            (
+                leg["origin"],
+                leg["destination"],
+                leg["classification"],
+                int(leg["blockMinutes"]),
+            )
+        ].append(leg)
+    group_items = sorted(grouped.items())
+    pairings = [(str(key[0]), str(key[1])) for key, _ in group_items]
+    if len(pairings) != len(set(pairings)):
+        raise ValueError(
+            f"Pairing-pattern {fleet} inventory has duplicate directional groups"
+        )
+
+    section26 = policy["section26"]
+    hubs = set(policy["hubs"])
+    choices: list[dict[str, Any]] = []
+    choices_by_type: defaultdict[int, list[int]] = defaultdict(list)
+    pattern_counts: dict[str, int] = {}
+    spacing_exception_capacity = 0
+    for type_index, (key, legs) in enumerate(group_items):
+        origin, destination, classification, block = key
+        candidates = []
+        for departure_utc in range(0, 1440, TIME_STEP_MINUTES):
+            departure_local = _local_minute(departure_utc, origin, cities)
+            arrival_utc = (departure_utc + block) % 1440
+            arrival_local = _local_minute(arrival_utc, destination, cities)
+            if origin in windows and not _inside_windows(
+                departure_local, windows[origin]
+            ):
+                continue
+            if destination in windows and not _inside_windows(
+                arrival_local, windows[destination]
+            ):
+                continue
+            if (
+                _curfew_status(origin, departure_local, arrival_local, policy)
+                != "pass"
+            ):
+                continue
+            candidates.append(
+                {
+                    "origin": origin,
+                    "destination": destination,
+                    "classification": classification,
+                    "blockMinutes": block,
+                    "departureUtcMinute": departure_utc,
+                    "arrivalUtcMinute": arrival_utc,
+                    "readyUtcMinute": (
+                        departure_utc + block + minimum_turn
+                    )
+                    % 1440,
+                    "originBankId": (
+                        _bank_id(departure_local, windows[origin])
+                        if origin in windows
+                        else None
+                    ),
+                    "destinationBankId": (
+                        _bank_id(arrival_local, windows[destination])
+                        if destination in windows
+                        else None
+                    ),
+                    "cost": _timing_cost(
+                        origin,
+                        destination,
+                        departure_utc,
+                        arrival_utc,
+                        cities,
+                        targets,
+                    ),
+                }
+            )
+        rule = pairing_spacing_rule(
+            origin,
+            destination,
+            int(pairing_departure_counts[(origin, destination)]),
+            int(station_departure_counts[origin]),
+            hubs,
+            section26,
+        )
+        allowed_exceptions = (
+            int(rule["allowedExceptions"])
+            if allow_pairing_spacing_exceptions
+            else 0
+        )
+        spacing_exception_capacity += allowed_exceptions
+        patterns = _pairing_patterns(
+            candidates,
+            len(legs),
+            float(rule["minimumGapMinutes"]),
+            float(rule["hardFloorMinutes"]),
+            allowed_exceptions,
+            reserved_pair_departures.get((origin, destination), []),
+            maximum_patterns,
+            beam_width,
+        )
+        if not patterns:
+            raise ValueError(
+                f"No Section 2.6-compliant pattern exists for "
+                f"{origin}-{destination}-{fleet}"
+            )
+        pattern_counts[f"{origin}-{destination}"] = len(patterns)
+        for pattern in patterns:
+            index = len(choices)
+            choices.append(
+                {
+                    "type": type_index,
+                    "events": pattern["events"],
+                    "cost": float(pattern["cost"]),
+                    "spacingExceptions": int(pattern["spacingExceptions"]),
+                }
+            )
+            choices_by_type[type_index].append(index)
+
+    arrivals: defaultdict[tuple[str, int], dict[int, float]] = defaultdict(dict)
+    departures: defaultdict[tuple[str, int], dict[int, float]] = defaultdict(dict)
+    bank_touches: defaultdict[tuple[str, str], dict[int, float]] = defaultdict(dict)
+    station_events: defaultdict[str, set[int]] = defaultdict(set)
+
+    def add_coefficient(row: dict[int, float], index: int, value: float = 1.0) -> None:
+        row[index] = row.get(index, 0.0) + value
+
+    objective = [float(choice["cost"]) for choice in choices]
+    upper_bounds = [1.0] * len(choices)
+    for index, choice in enumerate(choices):
+        for event in choice["events"]:
+            origin = str(event["origin"])
+            destination = str(event["destination"])
+            departure_utc = int(event["departureUtcMinute"])
+            ready_utc = int(event["readyUtcMinute"])
+            add_coefficient(departures[(origin, departure_utc)], index)
+            add_coefficient(arrivals[(destination, ready_utc)], index)
+            station_events[origin].add(departure_utc)
+            station_events[destination].add(ready_utc)
+            if event["originBankId"] is not None:
+                add_coefficient(
+                    bank_touches[(str(event["originBankId"]), "departure")],
+                    index,
+                )
+            if event["destinationBankId"] is not None:
+                add_coefficient(
+                    bank_touches[(str(event["destinationBankId"]), "arrival")],
+                    index,
+                )
+
+    q_by_event: dict[tuple[str, int], int] = {}
+    for station in sorted(station_events):
+        for minute in sorted(station_events[station]):
+            q_by_event[(station, minute)] = len(objective)
+            objective.append(0.0)
+            upper_bounds.append(float(configured_aircraft))
+
+    rows: list[dict[int, float]] = []
+    lower_bounds: list[float] = []
+    row_upper_bounds: list[float] = []
+    for type_index in range(len(group_items)):
+        rows.append({index: 1.0 for index in choices_by_type[type_index]})
+        lower_bounds.append(1.0)
+        row_upper_bounds.append(1.0)
+
+    bank_capacity_constraints = 0
+    if bank_touch_limits is not None:
+        if bank_touch_constraint not in {"exact", "capacity"}:
+            raise ValueError("Bank-touch constraints require exact or capacity mode")
+        for hub_windows in windows.values():
+            for window in hub_windows:
+                for operation in ("arrival", "departure"):
+                    key = (str(window["id"]), operation)
+                    rows.append(dict(bank_touches.get(key, {})))
+                    limit = float(bank_touch_limits.get(key, 0))
+                    lower_bounds.append(
+                        limit if bank_touch_constraint == "exact" else 0.0
+                    )
+                    row_upper_bounds.append(limit)
+                    bank_capacity_constraints += 1
+
+    for station in sorted(station_events):
+        events = sorted(station_events[station])
+        for position, minute in enumerate(events):
+            previous = events[position - 1]
+            row = {
+                q_by_event[(station, minute)]: 1.0,
+                q_by_event[(station, previous)]: -1.0,
+            }
+            for index, value in arrivals[(station, minute)].items():
+                row[index] = row.get(index, 0.0) - value
+            for index, value in departures[(station, minute)].items():
+                row[index] = row.get(index, 0.0) + value
+            rows.append(row)
+            lower_bounds.append(0.0)
+            row_upper_bounds.append(0.0)
+
+    capacity_row: dict[int, float] = {}
+    for station, events in station_events.items():
+        reference_minute = 0 if 0 in events else max(events)
+        capacity_row[q_by_event[(station, reference_minute)]] = 1.0
+    for index, choice in enumerate(choices):
+        for event in choice["events"]:
+            unavailable_minutes = int(event["blockMinutes"]) + minimum_turn
+            departure_utc = int(event["departureUtcMinute"])
+            if departure_utc == 0 or departure_utc + unavailable_minutes > 1440:
+                add_coefficient(capacity_row, index)
+    rows.append(capacity_row)
+    lower_bounds.append(0.0)
+    row_upper_bounds.append(float(configured_aircraft))
+    for index, coefficient in capacity_row.items():
+        objective[index] += AIRCRAFT_OBJECTIVE_WEIGHT * coefficient
+
+    for station in assigned_rons:
+        boundary = _utc_minute(180, station, cities)
+        events = sorted(station_events[station])
+        state_minute = (
+            boundary
+            if boundary in station_events[station]
+            else max(
+                (minute for minute in events if minute < boundary),
+                default=max(events),
+            )
+        )
+        physical_presence = {q_by_event[(station, state_minute)]: 1.0}
+        for index, value in departures[(station, boundary)].items():
+            physical_presence[index] = physical_presence.get(index, 0.0) + value
+        for index, choice in enumerate(choices):
+            presence = sum(
+                1
+                for event in choice["events"]
+                if event["destination"] == station
+                and (
+                    boundary - int(event["arrivalUtcMinute"])
+                )
+                % 1440
+                < minimum_turn
+            )
+            if presence:
+                physical_presence[index] = (
+                    physical_presence.get(index, 0.0) + presence
+                )
+        rows.append(physical_presence)
+        lower_bounds.append(1.0)
+        row_upper_bounds.append(np.inf)
+
+    matrix_rows: list[int] = []
+    matrix_columns: list[int] = []
+    matrix_values: list[float] = []
+    for row_index, row in enumerate(rows):
+        for column_index, value in row.items():
+            matrix_rows.append(row_index)
+            matrix_columns.append(column_index)
+            matrix_values.append(value)
+    matrix = coo_matrix(
+        (matrix_values, (matrix_rows, matrix_columns)),
+        shape=(len(rows), len(objective)),
+    ).tocsr()
+    integrality = np.zeros(len(objective))
+    integrality[: len(choices)] = 1.0
+    for station, events in station_events.items():
+        integrality[q_by_event[(station, min(events))]] = 1.0
+    result = milp(
+        # Pattern choices already compile the hard spacing rule.  Retain the
+        # aircraft objective even in joint-bank feasibility mode so HiGHS has
+        # a useful search direction toward the fixed fleet cap.
+        c=np.asarray(objective),
+        integrality=integrality,
+        bounds=Bounds(np.zeros(len(objective)), np.asarray(upper_bounds)),
+        constraints=LinearConstraint(
+            matrix,
+            np.asarray(lower_bounds),
+            np.asarray(row_upper_bounds),
+        ),
+        options={
+            "time_limit": time_limit_seconds,
+            "mip_rel_gap": MIP_RELATIVE_GAP,
+        },
+    )
+    if result.x is None:
+        raise ValueError(
+            f"Exact {fleet} pairing-pattern materialization failed: {result.message}"
+        )
+    maximum_fraction = max(abs(value - round(value)) for value in result.x)
+    if maximum_fraction > 1e-6:
+        raise ValueError(
+            f"Exact {fleet} pairing-pattern materialization returned fractional inventory"
+        )
+
+    materialized: dict[str, dict[str, Any]] = {}
+    for type_index, (_, legs) in enumerate(group_items):
+        selected = [
+            index
+            for index in choices_by_type[type_index]
+            if int(round(result.x[index])) == 1
+        ]
+        if len(selected) != 1:
+            raise ValueError(
+                f"Exact {fleet} selected {len(selected)} patterns for type {type_index}"
+            )
+        selected_events = sorted(
+            choices[selected[0]]["events"],
+            key=lambda event: int(event["departureUtcMinute"]),
+        )
+        if len(selected_events) != len(legs):
+            raise ValueError(
+                f"Exact {fleet} pattern contains {len(selected_events)} of "
+                f"{len(legs)} required legs"
+            )
+        for leg, event in zip(
+            sorted(legs, key=lambda row: row["id"]), selected_events
+        ):
+            departure_utc = int(event["departureUtcMinute"])
+            arrival_utc = departure_utc + int(leg["blockMinutes"])
+            departure_local = _local_minute(departure_utc, leg["origin"], cities)
+            arrival_local = _local_minute(arrival_utc, leg["destination"], cities)
+            materialized[leg["id"]] = {
+                **leg,
+                "source": "exact_materialization",
+                "departureUtcMinute": departure_utc,
+                "arrivalUtcMinute": arrival_utc % 1440,
+                "departureMinute": departure_local,
+                "arrivalMinute": arrival_local,
+                "originBankId": (
+                    _bank_id(departure_local, windows[leg["origin"]])
+                    if leg["origin"] in windows
+                    else None
+                ),
+                "destinationBankId": (
+                    _bank_id(arrival_local, windows[leg["destination"]])
+                    if leg["destination"] in windows
+                    else None
+                ),
+                "curfewStatus": "pass",
+            }
+
+    aircraft_required = round(
+        sum(result.x[index] * value for index, value in capacity_row.items())
+    )
+    return materialized, {
+        "status": "optimal_within_gap" if result.success else "feasible_time_limit",
+        "message": str(result.message),
+        "mipGap": round(float(getattr(result, "mip_gap", 0.0) or 0.0), 9),
+        "legTypes": len(group_items),
+        "timeVariables": len(choices),
+        "inventoryVariables": len(q_by_event),
+        "constraints": len(rows),
+        "aircraftRequiredAtReference": int(aircraft_required),
+        "assignedDestinationRons": len(assigned_rons),
+        "objectiveMode": (
+            "minimum_aircraft_with_fixed_cap"
+            if feasibility_only
+            else "minimum_aircraft"
+        ),
+        "pairingModel": "compiled_patterns",
+        "maximumPatternsPerPairing": maximum_patterns,
+        "generatedPatterns": len(choices),
+        "minimumGeneratedPatterns": min(pattern_counts.values(), default=0),
+        "maximumGeneratedPatterns": max(pattern_counts.values(), default=0),
+        "bankCapacityConstraints": bank_capacity_constraints,
+        "bankCapacityConstraintMode": bank_touch_constraint,
+        "section26SpacingConstraints": "compiled_into_patterns",
+        "section26PolicyExceptionCapacity": spacing_exception_capacity,
+    }
+
+
+def _solve_all_fleets_with_pairing_patterns(
+    inventory: dict[str, list[dict[str, Any]]],
+    fleet_counts: dict[str, int],
+    assigned_rons: dict[str, list[str]],
+    cities: dict[str, dict[str, Any]],
+    policy: dict[str, Any],
+    windows: dict[str, list[dict[str, Any]]],
+    targets: dict[str, dict[str, list[int]]],
+    pairing_departure_counts: Counter[tuple[str, str]],
+    station_departure_counts: Counter[str],
+    bank_touch_limits: dict[tuple[str, str], int],
+    allow_pairing_spacing_exceptions: bool,
+    time_limit_seconds: int,
+    maximum_patterns: int,
+    beam_width: int,
+    seed_materialized: dict[str, dict[str, Any]] | None = None,
+) -> tuple[
+    dict[str, dict[str, Any]],
+    dict[str, dict[str, Any]],
+    dict[str, Any],
+]:
+    """Jointly choose every fleet's patterns against one bank-capacity ledger."""
+    minimum_turn = int(policy["turns"]["minimumMinutes"])
+    grouped: defaultdict[tuple[Any, ...], list[dict[str, Any]]] = defaultdict(list)
+    for fleet, copies in inventory.items():
+        for leg in copies:
+            if leg.get("originBankId") is not None or leg.get("destinationBankId") is not None:
+                raise ValueError(
+                    "Global pairing-pattern materialization requires joint bank assignment"
+                )
+            grouped[
+                (
+                    fleet,
+                    leg["origin"],
+                    leg["destination"],
+                    leg["classification"],
+                    int(leg["blockMinutes"]),
+                )
+            ].append(leg)
+    group_items = sorted(grouped.items())
+    pairings = [(str(key[1]), str(key[2])) for key, _ in group_items]
+    if len(pairings) != len(set(pairings)):
+        raise ValueError(
+            "Global pairing-pattern inventory requires one fleet per directional market"
+        )
+
+    seed_departures: defaultdict[tuple[Any, ...], list[int]] = defaultdict(list)
+    seed_bank_usage: Counter[tuple[str, str]] = Counter()
+    seed_overflow_keys: set[tuple[str, str]] = set()
+    flexible_seed_types: set[tuple[Any, ...]] = set()
+    if seed_materialized is not None:
+        for leg in seed_materialized.values():
+            key = (
+                str(leg["fleet"]),
+                str(leg["origin"]),
+                str(leg["destination"]),
+                str(leg["classification"]),
+                int(leg["blockMinutes"]),
+            )
+            seed_departures[key].append(int(leg["departureUtcMinute"]))
+            if leg.get("originBankId") is not None:
+                seed_bank_usage[(str(leg["originBankId"]), "departure")] += 1
+            if leg.get("destinationBankId") is not None:
+                seed_bank_usage[(str(leg["destinationBankId"]), "arrival")] += 1
+        seed_overflow_keys = {
+            key
+            for key, touches in seed_bank_usage.items()
+            if touches > int(bank_touch_limits[key])
+        }
+        for leg in seed_materialized.values():
+            key = (
+                str(leg["fleet"]),
+                str(leg["origin"]),
+                str(leg["destination"]),
+                str(leg["classification"]),
+                int(leg["blockMinutes"]),
+            )
+            touches = {
+                (str(leg["originBankId"]), "departure")
+                for _ in [0]
+                if leg.get("originBankId") is not None
+            } | {
+                (str(leg["destinationBankId"]), "arrival")
+                for _ in [0]
+                if leg.get("destinationBankId") is not None
+            }
+            if touches & seed_overflow_keys:
+                flexible_seed_types.add(key)
+        for times in seed_departures.values():
+            times.sort()
+
+    section26 = policy["section26"]
+    hubs = set(policy["hubs"])
+    choices: list[dict[str, Any]] = []
+    choices_by_type: defaultdict[int, list[int]] = defaultdict(list)
+    choices_by_fleet: defaultdict[str, list[int]] = defaultdict(list)
+    types_by_fleet: Counter[str] = Counter()
+    pattern_counts_by_fleet: defaultdict[str, list[int]] = defaultdict(list)
+    spacing_capacity_by_fleet: Counter[str] = Counter()
+    for type_index, (key, legs) in enumerate(group_items):
+        fleet, origin, destination, classification, block = key
+        types_by_fleet[fleet] += 1
+        candidates = []
+        for departure_utc in range(0, 1440, TIME_STEP_MINUTES):
+            departure_local = _local_minute(departure_utc, origin, cities)
+            arrival_utc = (departure_utc + block) % 1440
+            arrival_local = _local_minute(arrival_utc, destination, cities)
+            if origin in windows and not _inside_windows(
+                departure_local, windows[origin]
+            ):
+                continue
+            if destination in windows and not _inside_windows(
+                arrival_local, windows[destination]
+            ):
+                continue
+            if (
+                _curfew_status(origin, departure_local, arrival_local, policy)
+                != "pass"
+            ):
+                continue
+            candidates.append(
+                {
+                    "fleet": fleet,
+                    "origin": origin,
+                    "destination": destination,
+                    "classification": classification,
+                    "blockMinutes": block,
+                    "departureUtcMinute": departure_utc,
+                    "arrivalUtcMinute": arrival_utc,
+                    "readyUtcMinute": (
+                        departure_utc + block + minimum_turn
+                    )
+                    % 1440,
+                    "originBankId": (
+                        _bank_id(departure_local, windows[origin])
+                        if origin in windows
+                        else None
+                    ),
+                    "destinationBankId": (
+                        _bank_id(arrival_local, windows[destination])
+                        if destination in windows
+                        else None
+                    ),
+                    "cost": _timing_cost(
+                        origin,
+                        destination,
+                        departure_utc,
+                        arrival_utc,
+                        cities,
+                        targets,
+                    ),
+                }
+            )
+        rule = pairing_spacing_rule(
+            origin,
+            destination,
+            int(pairing_departure_counts[(origin, destination)]),
+            int(station_departure_counts[origin]),
+            hubs,
+            section26,
+        )
+        allowed_exceptions = (
+            int(rule["allowedExceptions"])
+            if allow_pairing_spacing_exceptions
+            else 0
+        )
+        spacing_capacity_by_fleet[fleet] += allowed_exceptions
+        patterns = _pairing_patterns(
+            candidates,
+            len(legs),
+            float(rule["minimumGapMinutes"]),
+            float(rule["hardFloorMinutes"]),
+            allowed_exceptions,
+            [],
+            maximum_patterns,
+            beam_width,
+        )
+        seed_times = tuple(seed_departures.get(key, []))
+        if seed_materialized is not None:
+            matching_seed = [
+                pattern
+                for pattern in patterns
+                if tuple(
+                    int(event["departureUtcMinute"])
+                    for event in pattern["events"]
+                )
+                == seed_times
+            ]
+            if not matching_seed:
+                raise ValueError(
+                    f"Constructive seed pattern is missing for "
+                    f"{origin}-{destination}-{fleet}"
+                )
+            if key not in flexible_seed_types:
+                patterns = matching_seed
+        if not patterns:
+            raise ValueError(
+                f"No Section 2.6-compliant pattern exists for "
+                f"{origin}-{destination}-{fleet}"
+            )
+        pattern_counts_by_fleet[fleet].append(len(patterns))
+        for pattern in patterns:
+            pattern_times = tuple(
+                int(event["departureUtcMinute"])
+                for event in pattern["events"]
+            )
+            index = len(choices)
+            choices.append(
+                {
+                    "type": type_index,
+                    "fleet": fleet,
+                    "events": pattern["events"],
+                    "cost": float(pattern["cost"])
+                    + (
+                        SEED_DEVIATION_OBJECTIVE_WEIGHT
+                        if seed_materialized is not None
+                        and pattern_times != seed_times
+                        else 0.0
+                    ),
+                    "spacingExceptions": int(pattern["spacingExceptions"]),
+                }
+            )
+            choices_by_type[type_index].append(index)
+            choices_by_fleet[fleet].append(index)
+
+    arrivals: defaultdict[
+        tuple[str, str, int], dict[int, float]
+    ] = defaultdict(dict)
+    departures: defaultdict[
+        tuple[str, str, int], dict[int, float]
+    ] = defaultdict(dict)
+    bank_touches: defaultdict[
+        tuple[str, str], dict[int, float]
+    ] = defaultdict(dict)
+    station_events: defaultdict[tuple[str, str], set[int]] = defaultdict(set)
+
+    def add_coefficient(row: dict[int, float], index: int, value: float = 1.0) -> None:
+        row[index] = row.get(index, 0.0) + value
+
+    objective = [float(choice["cost"]) for choice in choices]
+    upper_bounds = [1.0] * len(choices)
+    for index, choice in enumerate(choices):
+        fleet = str(choice["fleet"])
+        for event in choice["events"]:
+            origin = str(event["origin"])
+            destination = str(event["destination"])
+            departure_utc = int(event["departureUtcMinute"])
+            ready_utc = int(event["readyUtcMinute"])
+            add_coefficient(
+                departures[(fleet, origin, departure_utc)], index
+            )
+            add_coefficient(
+                arrivals[(fleet, destination, ready_utc)], index
+            )
+            station_events[(fleet, origin)].add(departure_utc)
+            station_events[(fleet, destination)].add(ready_utc)
+            if event["originBankId"] is not None:
+                add_coefficient(
+                    bank_touches[(str(event["originBankId"]), "departure")],
+                    index,
+                )
+            if event["destinationBankId"] is not None:
+                add_coefficient(
+                    bank_touches[(str(event["destinationBankId"]), "arrival")],
+                    index,
+                )
+
+    q_by_event: dict[tuple[str, str, int], int] = {}
+    for fleet, station in sorted(station_events):
+        for minute in sorted(station_events[(fleet, station)]):
+            q_by_event[(fleet, station, minute)] = len(objective)
+            objective.append(0.0)
+            upper_bounds.append(float(fleet_counts[fleet]))
+
+    rows: list[dict[int, float]] = []
+    lower_bounds: list[float] = []
+    row_upper_bounds: list[float] = []
+    for type_index in range(len(group_items)):
+        rows.append({index: 1.0 for index in choices_by_type[type_index]})
+        lower_bounds.append(1.0)
+        row_upper_bounds.append(1.0)
+
+    bank_capacity_constraints = 0
+    bank_overflow_variables: dict[tuple[str, str], int] = {}
+    for hub_windows in windows.values():
+        for window in hub_windows:
+            for operation in ("arrival", "departure"):
+                key = (str(window["id"]), operation)
+                overflow_index = len(objective)
+                objective.append(BANK_OVERFLOW_OBJECTIVE_WEIGHT)
+                upper_bounds.append(
+                    float(sum(bank_touches.get(key, {}).values()))
+                )
+                bank_overflow_variables[key] = overflow_index
+                row = dict(bank_touches.get(key, {}))
+                row[overflow_index] = -1.0
+                rows.append(row)
+                lower_bounds.append(0.0)
+                row_upper_bounds.append(float(bank_touch_limits[key]))
+                bank_capacity_constraints += 1
+
+    for fleet, station in sorted(station_events):
+        events = sorted(station_events[(fleet, station)])
+        for position, minute in enumerate(events):
+            previous = events[position - 1]
+            row = {
+                q_by_event[(fleet, station, minute)]: 1.0,
+                q_by_event[(fleet, station, previous)]: -1.0,
+            }
+            for index, value in arrivals[(fleet, station, minute)].items():
+                row[index] = row.get(index, 0.0) - value
+            for index, value in departures[(fleet, station, minute)].items():
+                row[index] = row.get(index, 0.0) + value
+            rows.append(row)
+            lower_bounds.append(0.0)
+            row_upper_bounds.append(0.0)
+
+    capacity_rows: dict[str, dict[int, float]] = {}
+    for fleet in sorted(fleet_counts):
+        capacity_row: dict[int, float] = {}
+        for candidate_fleet, station in station_events:
+            if candidate_fleet != fleet:
+                continue
+            events = station_events[(fleet, station)]
+            reference_minute = 0 if 0 in events else max(events)
+            capacity_row[q_by_event[(fleet, station, reference_minute)]] = 1.0
+        for index in choices_by_fleet[fleet]:
+            for event in choices[index]["events"]:
+                unavailable_minutes = int(event["blockMinutes"]) + minimum_turn
+                departure_utc = int(event["departureUtcMinute"])
+                if departure_utc == 0 or departure_utc + unavailable_minutes > 1440:
+                    add_coefficient(capacity_row, index)
+        rows.append(capacity_row)
+        lower_bounds.append(0.0)
+        row_upper_bounds.append(float(fleet_counts[fleet]))
+        capacity_rows[fleet] = capacity_row
+
+    ron_constraints_by_fleet: Counter[str] = Counter()
+    for fleet, stations in sorted(assigned_rons.items()):
+        for station in stations:
+            boundary = _utc_minute(180, station, cities)
+            events = sorted(station_events[(fleet, station)])
+            state_minute = (
+                boundary
+                if boundary in station_events[(fleet, station)]
+                else max(
+                    (minute for minute in events if minute < boundary),
+                    default=max(events),
+                )
+            )
+            physical_presence = {
+                q_by_event[(fleet, station, state_minute)]: 1.0
+            }
+            for index, value in departures[(fleet, station, boundary)].items():
+                physical_presence[index] = (
+                    physical_presence.get(index, 0.0) + value
+                )
+            for index in choices_by_fleet[fleet]:
+                presence = sum(
+                    1
+                    for event in choices[index]["events"]
+                    if event["destination"] == station
+                    and (
+                        boundary - int(event["arrivalUtcMinute"])
+                    )
+                    % 1440
+                    < minimum_turn
+                )
+                if presence:
+                    physical_presence[index] = (
+                        physical_presence.get(index, 0.0) + presence
+                    )
+            rows.append(physical_presence)
+            lower_bounds.append(1.0)
+            row_upper_bounds.append(np.inf)
+            ron_constraints_by_fleet[fleet] += 1
+
+    matrix_rows: list[int] = []
+    matrix_columns: list[int] = []
+    matrix_values: list[float] = []
+    for row_index, row in enumerate(rows):
+        for column_index, value in row.items():
+            matrix_rows.append(row_index)
+            matrix_columns.append(column_index)
+            matrix_values.append(value)
+    matrix = coo_matrix(
+        (matrix_values, (matrix_rows, matrix_columns)),
+        shape=(len(rows), len(objective)),
+    ).tocsr()
+    integrality = np.zeros(len(objective))
+    integrality[: len(choices)] = 1.0
+    for fleet, station in station_events:
+        integrality[
+            q_by_event[(fleet, station, min(station_events[(fleet, station)]))]
+        ] = 1.0
+    result = milp(
+        c=np.asarray(objective),
+        integrality=integrality,
+        bounds=Bounds(np.zeros(len(objective)), np.asarray(upper_bounds)),
+        constraints=LinearConstraint(
+            matrix,
+            np.asarray(lower_bounds),
+            np.asarray(row_upper_bounds),
+        ),
+        options={
+            "time_limit": time_limit_seconds,
+            "mip_rel_gap": MIP_RELATIVE_GAP,
+        },
+    )
+    if result.x is None:
+        raise ValueError(
+            "Exact global pairing-pattern materialization failed: "
+            + str(result.message)
+        )
+    bank_overflow = {
+        f"{bank_id}:{operation}": float(result.x[index])
+        for (bank_id, operation), index in bank_overflow_variables.items()
+        if float(result.x[index]) > 1e-6
+    }
+    if bank_overflow:
+        total_overflow = sum(bank_overflow.values())
+        maximum_overflow = max(bank_overflow.values())
+        raise ValueError(
+            "Exact global pairing-pattern materialization retained "
+            f"{total_overflow:.3f} bank touches of feasibility overflow "
+            f"(maximum wave overage {maximum_overflow:.3f}) after: {result.message}"
+        )
+    maximum_fraction = max(abs(value - round(value)) for value in result.x)
+    if maximum_fraction > 1e-6:
+        raise ValueError(
+            "Exact global pairing-pattern materialization returned fractional inventory"
+        )
+
+    materialized: dict[str, dict[str, Any]] = {}
+    for type_index, (key, legs) in enumerate(group_items):
+        fleet = str(key[0])
+        selected = [
+            index
+            for index in choices_by_type[type_index]
+            if int(round(result.x[index])) == 1
+        ]
+        if len(selected) != 1:
+            raise ValueError(
+                f"Exact global solve selected {len(selected)} patterns for type {type_index}"
+            )
+        selected_events = sorted(
+            choices[selected[0]]["events"],
+            key=lambda event: int(event["departureUtcMinute"]),
+        )
+        if len(selected_events) != len(legs):
+            raise ValueError(
+                f"Exact {fleet} pattern contains {len(selected_events)} of "
+                f"{len(legs)} required legs"
+            )
+        for leg, event in zip(
+            sorted(legs, key=lambda row: row["id"]), selected_events
+        ):
+            departure_utc = int(event["departureUtcMinute"])
+            arrival_utc = departure_utc + int(leg["blockMinutes"])
+            departure_local = _local_minute(departure_utc, leg["origin"], cities)
+            arrival_local = _local_minute(arrival_utc, leg["destination"], cities)
+            materialized[leg["id"]] = {
+                **leg,
+                "source": "exact_materialization",
+                "departureUtcMinute": departure_utc,
+                "arrivalUtcMinute": arrival_utc % 1440,
+                "departureMinute": departure_local,
+                "arrivalMinute": arrival_local,
+                "originBankId": (
+                    _bank_id(departure_local, windows[leg["origin"]])
+                    if leg["origin"] in windows
+                    else None
+                ),
+                "destinationBankId": (
+                    _bank_id(arrival_local, windows[leg["destination"]])
+                    if leg["destination"] in windows
+                    else None
+                ),
+                "curfewStatus": "pass",
+            }
+
+    solver_fleets: dict[str, dict[str, Any]] = {}
+    for fleet in sorted(fleet_counts):
+        pattern_counts = pattern_counts_by_fleet[fleet]
+        aircraft_required = round(
+            sum(
+                result.x[index] * value
+                for index, value in capacity_rows[fleet].items()
+            )
+        )
+        solver_fleets[fleet] = {
+            "status": (
+                "optimal_within_gap" if result.success else "feasible_time_limit"
+            ),
+            "message": str(result.message),
+            "mipGap": round(float(getattr(result, "mip_gap", 0.0) or 0.0), 9),
+            "legTypes": int(types_by_fleet[fleet]),
+            "timeVariables": len(choices_by_fleet[fleet]),
+            "inventoryVariables": sum(
+                len(events)
+                for (candidate_fleet, _), events in station_events.items()
+                if candidate_fleet == fleet
+            ),
+            "constraints": len(rows),
+            "aircraftRequiredAtReference": int(aircraft_required),
+            "assignedDestinationRons": int(ron_constraints_by_fleet[fleet]),
+            "objectiveMode": "global_minimum_aircraft_with_fixed_fleet_caps",
+            "pairingModel": "compiled_patterns",
+            "maximumPatternsPerPairing": maximum_patterns,
+            "generatedPatterns": len(choices_by_fleet[fleet]),
+            "minimumGeneratedPatterns": min(pattern_counts, default=0),
+            "maximumGeneratedPatterns": max(pattern_counts, default=0),
+            "bankCapacityConstraints": bank_capacity_constraints,
+            "bankCapacityConstraintMode": "global_capacity",
+            "section26SpacingConstraints": "compiled_into_patterns",
+            "section26PolicyExceptionCapacity": int(
+                spacing_capacity_by_fleet[fleet]
+            ),
+        }
+    joint_solver = {
+        "status": "optimal_within_gap" if result.success else "feasible_time_limit",
+        "message": str(result.message),
+        "mipGap": round(float(getattr(result, "mip_gap", 0.0) or 0.0), 9),
+        "timeVariables": len(choices),
+        "inventoryVariables": len(q_by_event),
+        "constraints": len(rows),
+        "bankCapacityConstraints": bank_capacity_constraints,
+        "bankFeasibilityOverflow": 0,
+        "constructiveSeed": seed_materialized is not None,
+        "seedOverloadedBankRows": len(seed_overflow_keys),
+        "seedFlexibleLegTypes": len(flexible_seed_types),
+        "timeLimitSeconds": time_limit_seconds,
+    }
+    return materialized, solver_fleets, joint_solver
+
+
 def _solve_fleet(
     fleet: str,
     copies: list[dict[str, Any]],
@@ -186,6 +1395,9 @@ def _solve_fleet(
     pairing_departure_counts: Counter[tuple[str, str]],
     station_departure_counts: Counter[str],
     reserved_pair_departures: dict[tuple[str, str], list[int]],
+    bank_touch_limits: dict[tuple[str, str], int] | None,
+    bank_touch_constraint: str | None,
+    feasibility_only: bool,
     enforce_pairing_spacing: bool,
     allow_pairing_spacing_exceptions: bool,
     time_limit_seconds: int,
@@ -199,6 +1411,8 @@ def _solve_fleet(
                 leg["destination"],
                 leg["classification"],
                 int(leg["blockMinutes"]),
+                leg.get("originBankId"),
+                leg.get("destinationBankId"),
             )
         ].append(leg)
     group_items = sorted(grouped.items())
@@ -210,22 +1424,52 @@ def _solve_fleet(
     pairing_departures: defaultdict[
         tuple[str, str], defaultdict[int, list[int]]
     ] = defaultdict(lambda: defaultdict(list))
+    bank_touches: defaultdict[tuple[str, str], list[int]] = defaultdict(list)
     station_events: defaultdict[str, set[int]] = defaultdict(set)
     objective: list[float] = []
     upper_bounds: list[float] = []
 
     for type_index, (key, legs) in enumerate(group_items):
-        origin, destination, classification, block = key
+        (
+            origin,
+            destination,
+            classification,
+            block,
+            origin_bank_id,
+            destination_bank_id,
+        ) = key
+        origin_windows = windows.get(origin, [])
+        destination_windows = windows.get(destination, [])
+        if origin_bank_id is not None:
+            origin_windows = [
+                window
+                for window in origin_windows
+                if window["id"] == origin_bank_id
+            ]
+            if not origin_windows:
+                raise ValueError(
+                    f"Assigned origin bank {origin_bank_id} is missing for {origin}"
+                )
+        if destination_bank_id is not None:
+            destination_windows = [
+                window
+                for window in destination_windows
+                if window["id"] == destination_bank_id
+            ]
+            if not destination_windows:
+                raise ValueError(
+                    f"Assigned destination bank {destination_bank_id} is missing for {destination}"
+                )
         for departure_utc in range(0, 1440, TIME_STEP_MINUTES):
             departure_local = _local_minute(departure_utc, origin, cities)
             arrival_utc = (departure_utc + block) % 1440
             arrival_local = _local_minute(arrival_utc, destination, cities)
             if origin in windows and not _inside_windows(
-                departure_local, windows[origin]
+                departure_local, origin_windows
             ):
                 continue
             if destination in windows and not _inside_windows(
-                arrival_local, windows[destination]
+                arrival_local, destination_windows
             ):
                 continue
             if (
@@ -245,6 +1489,16 @@ def _solve_fleet(
                     "departureUtcMinute": departure_utc,
                     "arrivalUtcMinute": arrival_utc,
                     "readyUtcMinute": ready_utc,
+                    "originBankId": (
+                        _bank_id(departure_local, windows[origin])
+                        if origin in windows
+                        else None
+                    ),
+                    "destinationBankId": (
+                        _bank_id(arrival_local, windows[destination])
+                        if destination in windows
+                        else None
+                    ),
                 }
             )
             y_by_type[type_index].append(index)
@@ -253,6 +1507,14 @@ def _solve_fleet(
             arrivals[(destination, ready_utc)].append(index)
             station_events[origin].add(departure_utc)
             station_events[destination].add(ready_utc)
+            if origin in windows:
+                bank_touches[
+                    (str(y_rows[index]["originBankId"]), "departure")
+                ].append(index)
+            if destination in windows:
+                bank_touches[
+                    (str(y_rows[index]["destinationBankId"]), "arrival")
+                ].append(index)
             objective.append(
                 _timing_cost(
                     origin,
@@ -285,10 +1547,29 @@ def _solve_fleet(
         lower_bounds.append(float(len(legs)))
         row_upper_bounds.append(float(len(legs)))
 
+    bank_capacity_constraints = 0
+    if bank_touch_limits is not None:
+        if bank_touch_constraint not in {"exact", "capacity"}:
+            raise ValueError("Bank-touch constraints require exact or capacity mode")
+        for hub_windows in windows.values():
+            for window in hub_windows:
+                for operation in ("arrival", "departure"):
+                    key = (str(window["id"]), operation)
+                    rows.append(
+                        {index: 1.0 for index in bank_touches.get(key, [])}
+                    )
+                    limit = float(bank_touch_limits.get(key, 0))
+                    lower_bounds.append(
+                        limit if bank_touch_constraint == "exact" else 0.0
+                    )
+                    row_upper_bounds.append(limit)
+                    bank_capacity_constraints += 1
+
     spacing_constraints = 0
     spacing_reserved_rejections = 0
     spacing_exception_variables = 0
     spacing_policy_exception_capacity = 0
+    integer_auxiliary_variables: set[int] = set()
     if enforce_pairing_spacing:
         hubs = set(policy["hubs"])
         section26 = policy["section26"]
@@ -392,6 +1673,7 @@ def _solve_fleet(
                     exception_index = len(objective)
                     objective.append(SPACING_EXCEPTION_OBJECTIVE_WEIGHT)
                     upper_bounds.append(1.0)
+                    integer_auxiliary_variables.add(exception_index)
                     spacing_exception_variables += 1
                     row = {
                         index: 1.0
@@ -481,9 +1763,19 @@ def _solve_fleet(
         (matrix_values, (matrix_rows, matrix_columns)),
         shape=(len(rows), len(objective)),
     ).tocsr()
+    integrality = np.zeros(len(objective))
+    integrality[: len(y_rows)] = 1.0
+    for station, events in station_events.items():
+        integrality[q_by_event[(station, min(events))]] = 1.0
+    for index in integer_auxiliary_variables:
+        integrality[index] = 1.0
     result = milp(
-        c=np.asarray(objective),
-        integrality=np.ones(len(objective)),
+        c=(
+            np.zeros(len(objective))
+            if feasibility_only
+            else np.asarray(objective)
+        ),
+        integrality=integrality,
         bounds=Bounds(np.zeros(len(objective)), np.asarray(upper_bounds)),
         constraints=LinearConstraint(
             matrix,
@@ -562,6 +1854,15 @@ def _solve_fleet(
         "constraints": len(rows),
         "aircraftRequiredAtReference": int(aircraft_required),
         "assignedDestinationRons": len(assigned_rons),
+        "objectiveMode": "feasibility" if feasibility_only else "minimum_aircraft",
+        **(
+            {
+                "bankCapacityConstraints": bank_capacity_constraints,
+                "bankCapacityConstraintMode": bank_touch_constraint,
+            }
+            if bank_touch_limits is not None
+            else {}
+        ),
         **(
             {
                 "section26SpacingConstraints": spacing_constraints,
@@ -733,11 +2034,24 @@ def build_exact_materialization_plan(
     }
     policy = canonical["operatingPolicy"]
     fleet_counts = canonical["schedule"]["fleetCounts"]
+    exact_options = planning_rules.get("exactMaterialization", {})
+    bank_assignment_mode = exact_options.get(
+        "bankAssignmentMode", "assigned_leg_waves"
+    )
+    joint_bank_assignment = (
+        bank_assignment_mode == "joint_within_capacity_envelope"
+    )
     profiles = {
         row["fleet"]: row
         for row in planning_rules["frequencyAllocation"]["fleetProfiles"]
     }
     inventory = _leg_inventory(frequency_plan, profiles, cities)
+    if exact_options.get("preserveAssignedBankWaves", False):
+        if joint_bank_assignment:
+            raise ValueError(
+                "Joint bank assignment cannot also preserve leg-level bank waves"
+            )
+        _apply_assigned_bank_waves(inventory, bank_plan)
     unsupported = sorted(set(inventory) - set(fleet_counts))
     if unsupported:
         raise ValueError(
@@ -768,7 +2082,6 @@ def build_exact_materialization_plan(
     ron_assignments = _assign_destination_rons(
         repair_plan, required_destinations, fleet_counts
     )
-    exact_options = planning_rules.get("exactMaterialization", {})
     spacing_options = exact_options.get("pairingSpacing", {})
     enforce_pairing_spacing = (
         spacing_options.get("mode")
@@ -783,6 +2096,50 @@ def build_exact_materialization_plan(
     time_limit_seconds = int(
         exact_options.get(
             "timeLimitSecondsPerFleet", MIP_TIME_LIMIT_SECONDS
+        )
+    )
+    pairing_model = str(exact_options.get("pairingModel", "time_counts"))
+    if pairing_model not in {"time_counts", "compiled_patterns"}:
+        raise ValueError(f"Unsupported exact pairing model: {pairing_model}")
+    if pairing_model == "compiled_patterns" and not enforce_pairing_spacing:
+        raise ValueError(
+            "Compiled pairing patterns require Section 2.6 spacing enforcement"
+        )
+    maximum_patterns = int(
+        exact_options.get("maximumPatternsPerPairing", 96)
+    )
+    pairing_pattern_beam_width = int(
+        exact_options.get("pairingPatternBeamWidth", 3000)
+    )
+    fleet_coordination = str(
+        exact_options.get("fleetCoordination", "sequential")
+    )
+    if fleet_coordination not in {"sequential", "global"}:
+        raise ValueError(
+            f"Unsupported exact fleet coordination mode: {fleet_coordination}"
+        )
+    if fleet_coordination == "global" and (
+        pairing_model != "compiled_patterns" or not joint_bank_assignment
+    ):
+        raise ValueError(
+            "Global fleet coordination requires compiled patterns and joint bank assignment"
+        )
+    global_time_limit_seconds = int(
+        exact_options.get(
+            "globalTimeLimitSeconds",
+            time_limit_seconds * len(fleet_counts),
+        )
+    )
+    constructive_seed_mode = str(
+        exact_options.get("constructiveSeed", "none")
+    )
+    if constructive_seed_mode not in {"none", "independent_fleets"}:
+        raise ValueError(
+            f"Unsupported constructive seed mode: {constructive_seed_mode}"
+        )
+    seed_time_limit_seconds = int(
+        exact_options.get(
+            "seedTimeLimitSecondsPerFleet", time_limit_seconds
         )
     )
     all_inventory_legs = [
@@ -801,32 +2158,229 @@ def build_exact_materialization_plan(
     assigned_by_fleet: defaultdict[str, list[str]] = defaultdict(list)
     for destination, fleet in ron_assignments.items():
         assigned_by_fleet[fleet].append(destination)
+    bank_quotas_by_fleet: defaultdict[
+        str, Counter[tuple[str, str]]
+    ] = defaultdict(Counter)
+    if joint_bank_assignment:
+        for placement in bank_plan["placements"]:
+            fleet = str(placement["fleet"])
+            for touch in placement["bankTouches"]:
+                bank_quotas_by_fleet[fleet][
+                    (str(touch["bankId"]), str(touch["operation"]))
+                ] += 1
+    remaining_bank_capacity: dict[tuple[str, str], int] = {}
+    if joint_bank_assignment:
+        for hub in bank_plan["hubs"]:
+            gate_count = _capacity(cities[str(hub["hub"])])[0]
+            for bank in hub["banks"]:
+                for operation in ("arrival", "departure"):
+                    remaining_bank_capacity[
+                        (str(bank["id"]), operation)
+                    ] = gate_count
 
     materialized: dict[str, dict[str, Any]] = {}
     solver_fleets = {}
-    for fleet in fleet_counts:
-        fleet_legs, solver = _solve_fleet(
-            fleet,
-            inventory.get(fleet, []),
-            int(fleet_counts[fleet]),
-            sorted(assigned_by_fleet[fleet]),
-            cities,
-            policy,
-            windows,
-            targets,
-            pairing_departure_counts,
-            station_departure_counts,
-            reserved_pair_departures,
-            enforce_pairing_spacing,
-            allow_pairing_spacing_exceptions,
-            time_limit_seconds,
-        )
-        materialized.update(fleet_legs)
-        solver_fleets[fleet] = solver
-        for leg in fleet_legs.values():
-            reserved_pair_departures[
-                (str(leg["origin"]), str(leg["destination"]))
-            ].append(int(leg["departureUtcMinute"]))
+    joint_solver = None
+    if fleet_coordination == "global":
+        seed_materialized = None
+        seed_solver_fleets: dict[str, dict[str, Any]] = {}
+        seed_overflow: dict[tuple[str, str], int] = {}
+        if constructive_seed_mode == "independent_fleets":
+            seed_materialized = {}
+            seed_order = sorted(
+                fleet_counts,
+                key=lambda fleet: (
+                    -len(inventory.get(fleet, [])),
+                    fleet,
+                ),
+            )
+            for fleet in seed_order:
+                fleet_legs, fleet_solver = (
+                    _solve_fleet_with_pairing_patterns(
+                        fleet,
+                        inventory.get(fleet, []),
+                        int(fleet_counts[fleet]),
+                        sorted(assigned_by_fleet[fleet]),
+                        cities,
+                        policy,
+                        windows,
+                        targets,
+                        pairing_departure_counts,
+                        station_departure_counts,
+                        {},
+                        remaining_bank_capacity,
+                        "capacity",
+                        True,
+                        allow_pairing_spacing_exceptions,
+                        seed_time_limit_seconds,
+                        maximum_patterns,
+                        pairing_pattern_beam_width,
+                    )
+                )
+                seed_materialized.update(fleet_legs)
+                seed_solver_fleets[fleet] = fleet_solver
+            seed_usage: Counter[tuple[str, str]] = Counter()
+            for leg in seed_materialized.values():
+                if leg["originBankId"] is not None:
+                    seed_usage[
+                        (str(leg["originBankId"]), "departure")
+                    ] += 1
+                if leg["destinationBankId"] is not None:
+                    seed_usage[
+                        (str(leg["destinationBankId"]), "arrival")
+                    ] += 1
+            seed_overflow = {
+                key: touches - remaining_bank_capacity[key]
+                for key, touches in seed_usage.items()
+                if touches > remaining_bank_capacity[key]
+            }
+        if seed_materialized is not None and not seed_overflow:
+            materialized = seed_materialized
+            solver_fleets = seed_solver_fleets
+            joint_solver = {
+                "status": "constructive_seed_feasible",
+                "message": (
+                    "Independent fleet solutions jointly satisfy the shared bank capacity"
+                ),
+                "bankFeasibilityOverflow": 0,
+                "constructiveSeed": True,
+                "seedOverloadedBankRows": 0,
+                "timeLimitSeconds": global_time_limit_seconds,
+            }
+        else:
+            materialized, solver_fleets, joint_solver = (
+                _solve_all_fleets_with_pairing_patterns(
+                    inventory,
+                    {
+                        fleet: int(count)
+                        for fleet, count in fleet_counts.items()
+                    },
+                    {
+                        fleet: sorted(assigned_by_fleet[fleet])
+                        for fleet in fleet_counts
+                    },
+                    cities,
+                    policy,
+                    windows,
+                    targets,
+                    pairing_departure_counts,
+                    station_departure_counts,
+                    remaining_bank_capacity,
+                    allow_pairing_spacing_exceptions,
+                    global_time_limit_seconds,
+                    maximum_patterns,
+                    pairing_pattern_beam_width,
+                    seed_materialized,
+                )
+            )
+            if joint_solver is not None:
+                joint_solver["seedTotalBankOverage"] = sum(
+                    seed_overflow.values()
+                )
+        for leg in materialized.values():
+            if leg["originBankId"] is not None:
+                remaining_bank_capacity[
+                    (str(leg["originBankId"]), "departure")
+                ] -= 1
+            if leg["destinationBankId"] is not None:
+                remaining_bank_capacity[
+                    (str(leg["destinationBankId"]), "arrival")
+                ] -= 1
+        if min(remaining_bank_capacity.values(), default=0) < 0:
+            raise ValueError("Exact global materialization exceeded bank capacity")
+    else:
+        configured_fleet_order = exact_options.get("fleetSolveOrder")
+        if configured_fleet_order is not None:
+            fleet_order = [str(fleet) for fleet in configured_fleet_order]
+            if set(fleet_order) != set(fleet_counts) or len(fleet_order) != len(
+                fleet_counts
+            ):
+                raise ValueError(
+                    "Exact fleetSolveOrder must list every configured fleet exactly once"
+                )
+        else:
+            fleet_order = (
+                sorted(
+                    fleet_counts,
+                    key=lambda fleet: (-len(inventory.get(fleet, [])), fleet),
+                )
+                if joint_bank_assignment
+                else list(fleet_counts)
+            )
+        for fleet_position, fleet in enumerate(fleet_order):
+            bank_limits = None
+            if joint_bank_assignment:
+                future_fleets = fleet_order[fleet_position + 1 :]
+                bank_limits = {
+                    key: max(
+                        0,
+                        remaining
+                        - sum(
+                            int(bank_quotas_by_fleet[future][key])
+                            for future in future_fleets
+                        ),
+                    )
+                    for key, remaining in remaining_bank_capacity.items()
+                }
+            if pairing_model == "compiled_patterns":
+                fleet_legs, solver = _solve_fleet_with_pairing_patterns(
+                    fleet,
+                    inventory.get(fleet, []),
+                    int(fleet_counts[fleet]),
+                    sorted(assigned_by_fleet[fleet]),
+                    cities,
+                    policy,
+                    windows,
+                    targets,
+                    pairing_departure_counts,
+                    station_departure_counts,
+                    reserved_pair_departures,
+                    bank_limits,
+                    "capacity" if joint_bank_assignment else None,
+                    joint_bank_assignment,
+                    allow_pairing_spacing_exceptions,
+                    time_limit_seconds,
+                    maximum_patterns,
+                    pairing_pattern_beam_width,
+                )
+            else:
+                fleet_legs, solver = _solve_fleet(
+                    fleet,
+                    inventory.get(fleet, []),
+                    int(fleet_counts[fleet]),
+                    sorted(assigned_by_fleet[fleet]),
+                    cities,
+                    policy,
+                    windows,
+                    targets,
+                    pairing_departure_counts,
+                    station_departure_counts,
+                    reserved_pair_departures,
+                    bank_limits,
+                    "capacity" if joint_bank_assignment else None,
+                    joint_bank_assignment,
+                    enforce_pairing_spacing,
+                    allow_pairing_spacing_exceptions,
+                    time_limit_seconds,
+                )
+            materialized.update(fleet_legs)
+            solver_fleets[fleet] = solver
+            if joint_bank_assignment:
+                for leg in fleet_legs.values():
+                    if leg["originBankId"] is not None:
+                        key = (str(leg["originBankId"]), "departure")
+                        remaining_bank_capacity[key] -= 1
+                    if leg["destinationBankId"] is not None:
+                        key = (str(leg["destinationBankId"]), "arrival")
+                        remaining_bank_capacity[key] -= 1
+                if min(remaining_bank_capacity.values(), default=0) < 0:
+                    raise ValueError(
+                        f"Exact {fleet} materialization exceeded bank capacity"
+                    )
+            for leg in fleet_legs.values():
+                reserved_pair_departures[
+                    (str(leg["origin"]), str(leg["destination"]))
+                ].append(int(leg["departureUtcMinute"]))
 
     minimum_turn = int(policy["turns"]["minimumMinutes"])
     successors, _ = _match_station_successors(materialized, minimum_turn)
@@ -1131,7 +2685,16 @@ def build_exact_materialization_plan(
             "name": "scipy-highs-time-expanded-milp",
             "relativeGap": MIP_RELATIVE_GAP,
             "timeLimitSecondsPerFleet": time_limit_seconds,
+            "fleetCoordination": fleet_coordination,
             "fleets": solver_fleets,
+            **(
+                {
+                    "globalTimeLimitSeconds": global_time_limit_seconds,
+                    "joint": joint_solver,
+                }
+                if joint_solver is not None
+                else {}
+            ),
             **(
                 {
                     "pairingSpacingMode": spacing_options["mode"],

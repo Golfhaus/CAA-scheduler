@@ -11,10 +11,15 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO_ROOT / "src"))
 
 from caa_scheduler.bank_placement import build_hub_bank_plan_from_manifest
+from caa_scheduler.allocation import build_frequency_fleet_plan_from_manifest
+from caa_scheduler.gate_export import _capacity
 
 
 SCHEDULE_DIRECTORY = REPO_ROOT / "data" / "schedules" / "schedule_6_v2_2_5"
 MANIFEST_PATH = REPO_ROOT / "config" / "demand_data" / "bts_db1c_6mo_v3.json"
+GATE_CAPACITY_MANIFEST_PATH = (
+    REPO_ROOT / "config" / "demand_data" / "bts_db1c_6mo_v6.json"
+)
 
 
 class HubBankPlanTests(unittest.TestCase):
@@ -79,6 +84,51 @@ class HubBankPlanTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "does not match"):
             build_hub_bank_plan_from_manifest(
                 self.canonical, changed, MANIFEST_PATH, REPO_ROOT
+            )
+
+    def test_capacity_override_adds_nonoverlapping_bank_waves(self) -> None:
+        demand = json.loads(
+            (SCHEDULE_DIRECTORY / "demand_plan.json").read_text()
+        )
+        demand["demandDataVersion"] = "bts-db1c-6mo-jul2025-apr2026-v6"
+        frequency = build_frequency_fleet_plan_from_manifest(
+            self.canonical,
+            demand,
+            GATE_CAPACITY_MANIFEST_PATH,
+            REPO_ROOT,
+        )
+        plan = build_hub_bank_plan_from_manifest(
+            self.canonical,
+            frequency,
+            GATE_CAPACITY_MANIFEST_PATH,
+            REPO_ROOT,
+        )
+        self.assertEqual(plan["status"], "pass")
+        self.assertEqual(plan["summary"]["banks"], 45)
+        self.assertEqual(plan["summary"]["bankCountSource"], "planning_rules_override")
+        self.assertEqual(plan["pairingWaveSpacingViolations"], [])
+        self.assertEqual(
+            plan["bankCountPolicy"]["effectiveCounts"],
+            {"DAY": 8, "JAX": 14, "MCI": 10, "PHF": 7, "SYR": 6},
+        )
+        for hub in plan["hubs"]:
+            city = next(
+                row for row in self.canonical["cities"] if row["code"] == hub["hub"]
+            )
+            gate_count = _capacity(city)[0]
+            windows = hub["banks"]
+            self.assertTrue(
+                all(
+                    first["endMinute"] <= second["startMinute"]
+                    for first, second in zip(windows, windows[1:])
+                )
+            )
+            self.assertTrue(
+                all(
+                    max(bank["arrivalCount"], bank["departureCount"])
+                    <= gate_count
+                    for bank in windows
+                )
             )
 
 

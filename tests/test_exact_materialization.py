@@ -9,7 +9,11 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO_ROOT / "src"))
 
-from caa_scheduler.exact_materialization import blocked_exact_materialization_plan
+from caa_scheduler.exact_materialization import (
+    _apply_assigned_bank_waves,
+    _pairing_patterns,
+    blocked_exact_materialization_plan,
+)
 
 
 PLAN_PATH = (
@@ -74,6 +78,89 @@ class ExactMaterializationPlanTests(unittest.TestCase):
             blocked["nextStep"]["action"], "retry_exact_materialization"
         )
         self.assertIn("time limit", blocked["diagnostics"]["solverFailure"])
+
+    def test_capacity_checked_bank_waves_are_attached_to_exact_copies(self) -> None:
+        inventory = {
+            "CRJ200": [
+                {
+                    "id": "AAA-HUB-CRJ200-01-OUT",
+                    "fleet": "CRJ200",
+                    "origin": "AAA",
+                    "destination": "HUB",
+                },
+                {
+                    "id": "AAA-HUB-CRJ200-02-OUT",
+                    "fleet": "CRJ200",
+                    "origin": "AAA",
+                    "destination": "HUB",
+                },
+            ]
+        }
+        bank_plan = {
+            "placements": [
+                {
+                    "id": "second",
+                    "fleet": "CRJ200",
+                    "origin": "AAA",
+                    "destination": "HUB",
+                    "roundTripOrdinal": 2,
+                    "bankTouches": [
+                        {
+                            "hub": "HUB",
+                            "operation": "arrival",
+                            "bankId": "HUB-B2",
+                        }
+                    ],
+                },
+                {
+                    "id": "first",
+                    "fleet": "CRJ200",
+                    "origin": "AAA",
+                    "destination": "HUB",
+                    "roundTripOrdinal": 1,
+                    "bankTouches": [
+                        {
+                            "hub": "HUB",
+                            "operation": "arrival",
+                            "bankId": "HUB-B1",
+                        }
+                    ],
+                },
+            ]
+        }
+        _apply_assigned_bank_waves(inventory, bank_plan)
+        self.assertEqual(
+            [leg["destinationBankId"] for leg in inventory["CRJ200"]],
+            ["HUB-B1", "HUB-B2"],
+        )
+
+    def test_pairing_patterns_compile_spacing_before_the_fleet_solve(self) -> None:
+        candidates = [
+            {"departureUtcMinute": minute, "cost": float(minute)}
+            for minute in (0, 20, 40, 720)
+        ]
+        patterns = _pairing_patterns(
+            candidates,
+            frequency=2,
+            minimum_gap=60.0,
+            hard_floor=30.0,
+            allowed_exceptions=0,
+            reserved=[],
+            maximum_patterns=20,
+            beam_width=100,
+        )
+        departures = [
+            tuple(event["departureUtcMinute"] for event in row["events"])
+            for row in patterns
+        ]
+        self.assertIn((0, 720), departures)
+        self.assertTrue(
+            all(
+                min((second - first) % 1440, (first - second) % 1440)
+                >= 60
+                for first, second in departures
+            )
+        )
 
 
 if __name__ == "__main__":

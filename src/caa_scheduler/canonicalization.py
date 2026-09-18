@@ -318,6 +318,12 @@ def build_canonical_schedule_from_exact_plan(
         "cityInformation": copy.deepcopy(seed["provenance"]["cityInformation"]),
         "operatingPolicy": copy.deepcopy(seed["provenance"]["operatingPolicy"]),
     }
+    operating_policy = copy.deepcopy(seed["operatingPolicy"])
+    effective_bank_counts = {
+        hub["hub"]: int(hub["bankCount"])
+        for hub in hub_bank_plan["hubs"]
+    }
+    operating_policy["hubBankCounts"] = effective_bank_counts
     canonical = {
         "schemaVersion": "1.0.0",
         "schedule": copy.deepcopy(seed["schedule"]),
@@ -326,7 +332,7 @@ def build_canonical_schedule_from_exact_plan(
             "label": seed["schedule"]["label"],
             "forcedStandSplits": {},
         },
-        "operatingPolicy": copy.deepcopy(seed["operatingPolicy"]),
+        "operatingPolicy": operating_policy,
         "hubBanks": hub_banks,
         "bankAssignments": bank_assignments,
         "cities": cities,
