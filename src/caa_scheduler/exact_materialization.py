@@ -1081,6 +1081,7 @@ def _solve_all_fleets_with_pairing_patterns(
     dict[str, Any],
 ]:
     """Jointly choose every fleet's patterns against one bank-capacity ledger."""
+    global_started = time.monotonic()
     minimum_turn = int(policy["turns"]["minimumMinutes"])
     grouped: defaultdict[tuple[Any, ...], list[dict[str, Any]]] = defaultdict(list)
     for fleet, copies in inventory.items():
@@ -1147,9 +1148,20 @@ def _solve_all_fleets_with_pairing_patterns(
             }
             if touches & seed_overflow_keys:
                 flexible_seed_types.add(key)
+        directly_flexible_types = len(flexible_seed_types)
         flexible_seed_types = _expand_flexible_seed_types_to_markets(
             flexible_seed_types,
             group_items,
+        )
+        LOGGER.info(
+            "global seed overflow rows=%d touches=%d; flexible types=%d direct, %d with reverse markets",
+            len(seed_overflow_keys),
+            sum(
+                max(0, touches - int(bank_touch_limits[key]))
+                for key, touches in seed_bank_usage.items()
+            ),
+            directly_flexible_types,
+            len(flexible_seed_types),
         )
         for times in seed_departures.values():
             times.sort()
@@ -1334,6 +1346,13 @@ def _solve_all_fleets_with_pairing_patterns(
             choices_by_fleet[fleet].append(index)
             if seed_materialized is not None and pattern_times == seed_times:
                 seed_choice_by_type[type_index] = index
+
+    LOGGER.info(
+        "compiled global repair patterns types=%d choices=%d in %.1fs",
+        len(group_items),
+        len(choices),
+        time.monotonic() - global_started,
+    )
 
     arrivals: defaultdict[
         tuple[str, str, int], dict[int, float]
@@ -1566,6 +1585,12 @@ def _solve_all_fleets_with_pairing_patterns(
                 f"row lower {lower_violation:.6f}, row upper {upper_violation:.6f}, "
                 f"bound {bound_violation:.6f}"
             )
+        LOGGER.info(
+            "starting global repair variables=%d constraints=%d time_limit=%ds",
+            len(objective),
+            len(rows),
+            time_limit_seconds,
+        )
         result = _milp_with_start(
             objective_array,
             integrality,
@@ -1602,6 +1627,12 @@ def _solve_all_fleets_with_pairing_patterns(
         for (bank_id, operation), index in bank_overflow_variables.items()
         if float(result.x[index]) > 1e-6
     }
+    LOGGER.info(
+        "global repair returned %s with %.0f overflow touches in %.1fs",
+        result.message,
+        sum(bank_overflow.values()),
+        time.monotonic() - global_started,
+    )
     if bank_overflow:
         total_overflow = sum(bank_overflow.values())
         maximum_overflow = max(bank_overflow.values())
