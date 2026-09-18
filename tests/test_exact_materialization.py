@@ -12,9 +12,10 @@ sys.path.insert(0, str(REPO_ROOT / "src"))
 
 from caa_scheduler.exact_materialization import (
     _apply_assigned_bank_waves,
-    _read_exact_seed_checkpoint,
+    _expand_flexible_seed_types_to_hub_operations,
     _expand_flexible_seed_types_to_markets,
     _pairing_patterns,
+    _read_exact_seed_checkpoint,
     _write_exact_seed_checkpoint,
     blocked_exact_materialization_plan,
 )
@@ -183,6 +184,40 @@ class ExactMaterializationPlanTests(unittest.TestCase):
         )
 
         self.assertEqual(expanded, {outbound, inbound})
+
+    def test_seed_repair_expands_across_an_overloaded_hub_operation(self) -> None:
+        jax_b14_departure = ("CRJ700", "JAX", "AAA", "hub_spoke", 60)
+        jax_b1_departure = ("CRJ900", "JAX", "BBB", "hub_spoke", 70)
+        jax_b13_departure = ("MAX9", "JAX", "CCC", "hub_spoke", 80)
+        jax_arrival = ("CRJ200", "DDD", "JAX", "hub_spoke", 55)
+        mci_departure = ("CRJ700", "MCI", "EEE", "hub_spoke", 65)
+        touches = {
+            jax_b14_departure: {("JAX-B14", "departure")},
+            jax_b1_departure: {("JAX-B1", "departure")},
+            jax_b13_departure: {("JAX-B13", "departure")},
+            jax_arrival: {("JAX-B14", "arrival")},
+            mci_departure: {("MCI-B14", "departure")},
+        }
+        windows = {
+            "JAX": [
+                {"id": "JAX-B1"},
+                {"id": "JAX-B13"},
+                {"id": "JAX-B14"},
+            ],
+            "MCI": [{"id": "MCI-B14"}],
+        }
+
+        expanded = _expand_flexible_seed_types_to_hub_operations(
+            {jax_b14_departure},
+            touches,
+            {("JAX-B14", "departure")},
+            windows,
+        )
+
+        self.assertEqual(
+            expanded,
+            {jax_b14_departure, jax_b1_departure, jax_b13_departure},
+        )
 
     def test_exact_seed_checkpoint_round_trip_and_input_guard(self) -> None:
         with tempfile.TemporaryDirectory() as directory:

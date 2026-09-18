@@ -36,6 +36,7 @@ SPACING_EXCEPTION_OBJECTIVE_WEIGHT = 10_000.0
 BANK_OVERFLOW_OBJECTIVE_WEIGHT = 1_000_000_000.0
 SEED_DEVIATION_OBJECTIVE_WEIGHT = 1_000_000.0
 EXACT_SEED_MODEL_VERSION = "1.0.0"
+HUB_OPERATION_CLOSURE_MAX_OVERFLOW_ROWS = 2
 LOGGER = logging.getLogger(__name__)
 
 
@@ -1085,6 +1086,36 @@ def _expand_flexible_seed_types_to_markets(
     }
 
 
+def _expand_flexible_seed_types_to_hub_operations(
+    flexible_types: set[tuple[Any, ...]],
+    seed_touches_by_type: dict[
+        tuple[Any, ...], set[tuple[str, str]]
+    ],
+    seed_overflow_keys: set[tuple[str, str]],
+    windows: dict[str, list[dict[str, Any]]],
+) -> set[tuple[Any, ...]]:
+    """Retiming closure for every seed type sharing an overloaded hub operation."""
+    hub_by_bank = {
+        str(window["id"]): str(hub)
+        for hub, hub_windows in windows.items()
+        for window in hub_windows
+    }
+    overflow_hub_operations = {
+        (hub_by_bank[bank_id], operation)
+        for bank_id, operation in seed_overflow_keys
+        if bank_id in hub_by_bank
+    }
+    return flexible_types | {
+        key
+        for key, touches in seed_touches_by_type.items()
+        if any(
+            (hub_by_bank.get(bank_id), operation)
+            in overflow_hub_operations
+            for bank_id, operation in touches
+        )
+    }
+
+
 def _solve_all_fleets_with_pairing_patterns(
     inventory: dict[str, list[dict[str, Any]]],
     fleet_counts: dict[str, int],
@@ -1134,6 +1165,9 @@ def _solve_all_fleets_with_pairing_patterns(
 
     seed_departures: defaultdict[tuple[Any, ...], list[int]] = defaultdict(list)
     seed_bank_usage: Counter[tuple[str, str]] = Counter()
+    seed_touches_by_type: defaultdict[
+        tuple[Any, ...], set[tuple[str, str]]
+    ] = defaultdict(set)
     seed_overflow_keys: set[tuple[str, str]] = set()
     flexible_seed_types: set[tuple[Any, ...]] = set()
     if seed_materialized is not None:
@@ -1147,46 +1181,49 @@ def _solve_all_fleets_with_pairing_patterns(
             )
             seed_departures[key].append(int(leg["departureUtcMinute"]))
             if leg.get("originBankId") is not None:
-                seed_bank_usage[(str(leg["originBankId"]), "departure")] += 1
+                touch = (str(leg["originBankId"]), "departure")
+                seed_bank_usage[touch] += 1
+                seed_touches_by_type[key].add(touch)
             if leg.get("destinationBankId") is not None:
-                seed_bank_usage[(str(leg["destinationBankId"]), "arrival")] += 1
+                touch = (str(leg["destinationBankId"]), "arrival")
+                seed_bank_usage[touch] += 1
+                seed_touches_by_type[key].add(touch)
         seed_overflow_keys = {
             key
             for key, touches in seed_bank_usage.items()
             if touches > int(bank_touch_limits[key])
         }
-        for leg in seed_materialized.values():
-            key = (
-                str(leg["fleet"]),
-                str(leg["origin"]),
-                str(leg["destination"]),
-                str(leg["classification"]),
-                int(leg["blockMinutes"]),
-            )
-            touches = {
-                (str(leg["originBankId"]), "departure")
-                for _ in [0]
-                if leg.get("originBankId") is not None
-            } | {
-                (str(leg["destinationBankId"]), "arrival")
-                for _ in [0]
-                if leg.get("destinationBankId") is not None
-            }
+        for key, touches in seed_touches_by_type.items():
             if touches & seed_overflow_keys:
                 flexible_seed_types.add(key)
         directly_flexible_types = len(flexible_seed_types)
+        hub_operation_flexible_types = directly_flexible_types
+        if (
+            len(seed_overflow_keys)
+            <= HUB_OPERATION_CLOSURE_MAX_OVERFLOW_ROWS
+        ):
+            flexible_seed_types = (
+                _expand_flexible_seed_types_to_hub_operations(
+                    flexible_seed_types,
+                    dict(seed_touches_by_type),
+                    seed_overflow_keys,
+                    windows,
+                )
+            )
+            hub_operation_flexible_types = len(flexible_seed_types)
         flexible_seed_types = _expand_flexible_seed_types_to_markets(
             flexible_seed_types,
             group_items,
         )
         LOGGER.info(
-            "global seed overflow rows=%d touches=%d; flexible types=%d direct, %d with reverse markets",
+            "global seed overflow rows=%d touches=%d; flexible types=%d direct, %d with hub-operation closure, %d with reverse markets",
             len(seed_overflow_keys),
             sum(
                 max(0, touches - int(bank_touch_limits[key]))
                 for key, touches in seed_bank_usage.items()
             ),
             directly_flexible_types,
+            hub_operation_flexible_types,
             len(flexible_seed_types),
         )
         for times in seed_departures.values():
