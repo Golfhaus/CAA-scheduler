@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import hashlib
 import json
+import logging
+import time
 from collections import Counter, defaultdict
 from pathlib import Path
 from types import SimpleNamespace
@@ -34,6 +36,7 @@ SPACING_EXCEPTION_OBJECTIVE_WEIGHT = 10_000.0
 BANK_OVERFLOW_OBJECTIVE_WEIGHT = 1_000_000_000.0
 SEED_DEVIATION_OBJECTIVE_WEIGHT = 1_000_000.0
 EXACT_SEED_MODEL_VERSION = "1.0.0"
+LOGGER = logging.getLogger(__name__)
 
 
 def _exact_seed_fingerprint(
@@ -671,6 +674,7 @@ def _solve_fleet_with_pairing_patterns(
     pattern_counts: dict[str, int] = {}
     spacing_exception_capacity = 0
     for type_index, (key, legs) in enumerate(group_items):
+        pattern_started = time.monotonic()
         origin, destination, classification, block = key
         candidates = []
         for departure_utc in range(0, 1440, TIME_STEP_MINUTES):
@@ -745,6 +749,17 @@ def _solve_fleet_with_pairing_patterns(
             reserved_pair_departures.get((origin, destination), []),
             maximum_patterns,
             beam_width,
+        )
+        LOGGER.info(
+            "compiled %s pairing %d/%d %s-%s frequency=%d patterns=%d in %.1fs",
+            fleet,
+            type_index + 1,
+            len(group_items),
+            origin,
+            destination,
+            len(legs),
+            len(patterns),
+            time.monotonic() - pattern_started,
         )
         if not patterns:
             raise ValueError(
@@ -2560,10 +2575,13 @@ def build_exact_materialization_plan(
                 ]
             for fleet in seed_order:
                 if fleet in seed_materialized_by_fleet:
+                    LOGGER.info("reusing exact seed fleet %s", fleet)
                     seed_materialized.update(
                         seed_materialized_by_fleet[fleet]
                     )
                     continue
+                LOGGER.info("solving exact seed fleet %s", fleet)
+                seed_started = time.monotonic()
                 seed_pairing_model = seed_pairing_model_by_fleet.get(
                     fleet, "compiled_patterns"
                 )
@@ -2616,6 +2634,12 @@ def build_exact_materialization_plan(
                 seed_materialized.update(fleet_legs)
                 seed_materialized_by_fleet[fleet] = fleet_legs
                 seed_solver_fleets[fleet] = fleet_solver
+                LOGGER.info(
+                    "completed exact seed fleet %s legs=%d in %.1fs",
+                    fleet,
+                    len(fleet_legs),
+                    time.monotonic() - seed_started,
+                )
                 if (
                     seed_checkpoint_path is not None
                     and seed_checkpoint_fingerprint is not None

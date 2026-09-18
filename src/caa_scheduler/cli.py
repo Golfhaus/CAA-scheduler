@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import logging
 from pathlib import Path
 
 from .allocation import build_frequency_fleet_plan_from_manifest
@@ -139,6 +140,7 @@ def _parser() -> argparse.ArgumentParser:
     exact.add_argument("output", type=Path)
     exact.add_argument("--repo-root", type=Path, default=Path.cwd())
     exact.add_argument("--seed-checkpoint", type=Path)
+    exact.add_argument("--progress", action="store_true")
 
     web = subcommands.add_parser(
         "build-web", help="Assemble the static GitHub Pages console"
@@ -449,6 +451,8 @@ def main(argv: list[str] | None = None) -> int:
         print(f"Wrote {args.output}")
         return 0 if diagnostic["materializationStatus"] != "blocked" else 1
     if args.command == "build-exact-materialization":
+        if args.progress:
+            logging.basicConfig(level=logging.INFO, format="%(message)s")
         frequency_plan = read_json(args.frequency_plan)
         bank_plan = read_json(args.bank_plan)
         repair_plan = read_json(args.repair_plan)
