@@ -1036,10 +1036,54 @@ def _solve_all_fleets_with_pairing_patterns(
                 == seed_times
             ]
             if not matching_seed:
-                raise ValueError(
-                    f"Constructive seed pattern is missing for "
-                    f"{origin}-{destination}-{fleet}"
+                candidates_by_minute = {
+                    int(candidate["departureUtcMinute"]): candidate
+                    for candidate in candidates
+                }
+                if len(seed_times) != len(legs) or any(
+                    minute not in candidates_by_minute for minute in seed_times
+                ):
+                    raise ValueError(
+                        f"Constructive seed uses an unavailable time for "
+                        f"{origin}-{destination}-{fleet}"
+                    )
+                distances = [
+                    _circular_distance(first, second)
+                    for position, first in enumerate(seed_times)
+                    for second in seed_times[position + 1 :]
+                ]
+                if any(
+                    distance < float(rule["hardFloorMinutes"])
+                    for distance in distances
+                ):
+                    raise ValueError(
+                        f"Constructive seed misses the hard spacing floor for "
+                        f"{origin}-{destination}-{fleet}"
+                    )
+                seed_exceptions = sum(
+                    float(rule["hardFloorMinutes"])
+                    <= distance
+                    < float(rule["minimumGapMinutes"])
+                    for distance in distances
                 )
+                if seed_exceptions > allowed_exceptions:
+                    raise ValueError(
+                        f"Constructive seed exceeds the spacing exception allowance for "
+                        f"{origin}-{destination}-{fleet}"
+                    )
+                seed_pattern = {
+                    "events": tuple(
+                        candidates_by_minute[minute] for minute in seed_times
+                    ),
+                    "cost": sum(
+                        float(candidates_by_minute[minute]["cost"])
+                        for minute in seed_times
+                    )
+                    + SPACING_EXCEPTION_OBJECTIVE_WEIGHT * seed_exceptions,
+                    "spacingExceptions": seed_exceptions,
+                }
+                patterns.append(seed_pattern)
+                matching_seed = [seed_pattern]
             if key not in flexible_seed_types:
                 patterns = matching_seed
         if not patterns:
@@ -2142,6 +2186,25 @@ def build_exact_materialization_plan(
             "seedTimeLimitSecondsPerFleet", time_limit_seconds
         )
     )
+    seed_time_limits_by_fleet = {
+        str(fleet): int(seconds)
+        for fleet, seconds in exact_options.get(
+            "seedTimeLimitSecondsByFleet", {}
+        ).items()
+    }
+    seed_pairing_model_by_fleet = {
+        str(fleet): str(model)
+        for fleet, model in exact_options.get(
+            "seedPairingModelByFleet", {}
+        ).items()
+    }
+    if any(
+        model not in {"compiled_patterns", "time_counts"}
+        for model in seed_pairing_model_by_fleet.values()
+    ):
+        raise ValueError(
+            "Seed pairing models must be compiled_patterns or time_counts"
+        )
     all_inventory_legs = [
         leg for fleet_legs in inventory.values() for leg in fleet_legs
     ]
@@ -2195,8 +2258,37 @@ def build_exact_materialization_plan(
                 ),
             )
             for fleet in seed_order:
-                fleet_legs, fleet_solver = (
-                    _solve_fleet_with_pairing_patterns(
+                seed_pairing_model = seed_pairing_model_by_fleet.get(
+                    fleet, "compiled_patterns"
+                )
+                fleet_time_limit = seed_time_limits_by_fleet.get(
+                    fleet, seed_time_limit_seconds
+                )
+                if seed_pairing_model == "compiled_patterns":
+                    fleet_legs, fleet_solver = (
+                        _solve_fleet_with_pairing_patterns(
+                            fleet,
+                            inventory.get(fleet, []),
+                            int(fleet_counts[fleet]),
+                            sorted(assigned_by_fleet[fleet]),
+                            cities,
+                            policy,
+                            windows,
+                            targets,
+                            pairing_departure_counts,
+                            station_departure_counts,
+                            {},
+                            remaining_bank_capacity,
+                            "capacity",
+                            True,
+                            allow_pairing_spacing_exceptions,
+                            fleet_time_limit,
+                            maximum_patterns,
+                            pairing_pattern_beam_width,
+                        )
+                    )
+                else:
+                    fleet_legs, fleet_solver = _solve_fleet(
                         fleet,
                         inventory.get(fleet, []),
                         int(fleet_counts[fleet]),
@@ -2210,13 +2302,11 @@ def build_exact_materialization_plan(
                         {},
                         remaining_bank_capacity,
                         "capacity",
+                        False,
                         True,
                         allow_pairing_spacing_exceptions,
-                        seed_time_limit_seconds,
-                        maximum_patterns,
-                        pairing_pattern_beam_width,
+                        fleet_time_limit,
                     )
-                )
                 seed_materialized.update(fleet_legs)
                 seed_solver_fleets[fleet] = fleet_solver
             seed_usage: Counter[tuple[str, str]] = Counter()

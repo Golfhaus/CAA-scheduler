@@ -137,6 +137,8 @@
     "fleetCoordination": "global",
     "constructiveSeed": "independent_fleets",
     "seedTimeLimitSecondsPerFleet": 300,
+    "seedTimeLimitSecondsByFleet": {"MAX9": 600},
+    "seedPairingModelByFleet": {"MAX9": "time_counts"},
     "pairingModel": "compiled_patterns",
     "maximumPatternsPerPairing": 128,
     "pairingPatternBeamWidth": 4000,
