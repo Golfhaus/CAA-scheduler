@@ -1,0 +1,108 @@
+{
+  "schemaVersion": "1.0.0",
+  "scheduleId": "schedule_7_v0_1_0",
+  "status": "pass",
+  "sourceExactPlanSha256": "6c11b7b929c1fef68aa18d3350ede3a4b0451d07f6b5a8b75e36c62726f125b9",
+  "summary": {
+    "cycles": 32,
+    "lines": 32,
+    "routes": 225,
+    "legs": 1406,
+    "pairings": 470,
+    "reusedPairings": 394,
+    "newPairings": 76,
+    "bankAssignments": 1160
+  },
+  "lineDays": {
+    "A": 5,
+    "AA": 37,
+    "AB": 41,
+    "AC": 2,
+    "AD": 12,
+    "AE": 8,
+    "AF": 1,
+    "AG": 26,
+    "AH": 1,
+    "AI": 3,
+    "AJ": 13,
+    "AK": 1,
+    "AL": 1,
+    "AM": 6,
+    "AN": 8,
+    "AO": 2,
+    "AP": 2,
+    "AQ": 8,
+    "AR": 1,
+    "AS": 1,
+    "AT": 3,
+    "AU": 1,
+    "AV": 2,
+    "AW": 2,
+    "AX": 3,
+    "AY": 1,
+    "AZ": 1,
+    "B": 20,
+    "BA": 1,
+    "BB": 1,
+    "BC": 1,
+    "C": 10
+  },
+  "cycleByLine": {
+    "A": "CYCLE-007",
+    "AA": "CYCLE-001",
+    "AB": "CYCLE-002",
+    "AC": "CYCLE-003",
+    "AD": "CYCLE-004",
+    "AE": "CYCLE-005",
+    "AF": "CYCLE-006",
+    "AG": "CYCLE-009",
+    "AH": "CYCLE-010",
+    "AI": "CYCLE-011",
+    "AJ": "CYCLE-012",
+    "AK": "CYCLE-014",
+    "AL": "CYCLE-015",
+    "AM": "CYCLE-016",
+    "AN": "CYCLE-017",
+    "AO": "CYCLE-018",
+    "AP": "CYCLE-019",
+    "AQ": "CYCLE-020",
+    "AR": "CYCLE-021",
+    "AS": "CYCLE-022",
+    "AT": "CYCLE-023",
+    "AU": "CYCLE-024",
+    "AV": "CYCLE-025",
+    "AW": "CYCLE-026",
+    "AX": "CYCLE-027",
+    "AY": "CYCLE-028",
+    "AZ": "CYCLE-029",
+    "B": "CYCLE-008",
+    "BA": "CYCLE-030",
+    "BB": "CYCLE-031",
+    "BC": "CYCLE-032",
+    "C": "CYCLE-013"
+  },
+  "numbering": {
+    "flightRange": [
+      1001,
+      2406
+    ],
+    "routeRanges": {
+      "CRJ200": [
+        101,
+        180
+      ],
+      "CRJ700": [
+        301,
+        365
+      ],
+      "CRJ900": [
+        501,
+        545
+      ],
+      "MAX9": [
+        701,
+        735
+      ]
+    }
+  }
+}
