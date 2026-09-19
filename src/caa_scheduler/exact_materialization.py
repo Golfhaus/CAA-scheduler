@@ -60,21 +60,30 @@ class ExactGlobalRepairIncomplete(RuntimeError):
         self,
         bank_overflow: dict[str, float],
         solver_message: str,
+        physical_capacity_overflow: dict[str, float] | None = None,
     ):
         self.bank_overflow = bank_overflow
-        total_overflow = sum(bank_overflow.values())
-        maximum_overflow = max(bank_overflow.values())
+        self.physical_capacity_overflow = physical_capacity_overflow or {}
+        combined_overflow = {
+            **{f"bank:{key}": value for key, value in bank_overflow.items()},
+            **{
+                f"airport:{key}": value
+                for key, value in self.physical_capacity_overflow.items()
+            },
+        }
+        total_overflow = sum(combined_overflow.values())
+        maximum_overflow = max(combined_overflow.values())
         largest_overflows = ", ".join(
             f"{key}={value:.0f}"
             for key, value in sorted(
-                bank_overflow.items(),
+                combined_overflow.items(),
                 key=lambda item: (-item[1], item[0]),
             )[:8]
         )
         super().__init__(
             "Exact global repair checkpoint retained "
-            f"{total_overflow:.3f} bank touches of feasibility overflow "
-            f"(maximum wave overage {maximum_overflow:.3f}; "
+            f"{total_overflow:.3f} units of feasibility overflow "
+            f"(maximum row overage {maximum_overflow:.3f}; "
             f"largest rows: {largest_overflows}) after: {solver_message}"
         )
 
@@ -1118,6 +1127,81 @@ def _expand_flexible_seed_types_to_hub_operations(
     }
 
 
+def _cyclic_state_minute(events: set[int] | list[int], minute: int) -> int:
+    """Return the latest event state at or before a cyclic daily boundary."""
+    ordered = sorted(events)
+    return max(
+        (event for event in ordered if event <= minute),
+        default=ordered[-1],
+    )
+
+
+def _materialized_physical_capacity_overflow(
+    materialized: dict[str, dict[str, Any]],
+    cities: dict[str, dict[str, Any]],
+    minimum_turn: int,
+) -> dict[tuple[str, int], int]:
+    """Measure minimum cyclic ground inventory above gate-plus-stand capacity."""
+    station_events: defaultdict[tuple[str, str], set[int]] = defaultdict(set)
+    event_deltas: Counter[tuple[str, str, int]] = Counter()
+    physical_events: defaultdict[str, set[int]] = defaultdict(set)
+    arrivals_by_station: defaultdict[str, list[tuple[str, int]]] = defaultdict(list)
+    for leg in materialized.values():
+        fleet = str(leg["fleet"])
+        origin = str(leg["origin"])
+        destination = str(leg["destination"])
+        departure = int(leg["departureUtcMinute"]) % 1440
+        arrival = (departure + int(leg["blockMinutes"])) % 1440
+        ready = (arrival + minimum_turn) % 1440
+        station_events[(fleet, origin)].add(departure)
+        station_events[(fleet, destination)].add(ready)
+        event_deltas[(fleet, origin, departure)] -= 1
+        event_deltas[(fleet, destination, ready)] += 1
+        physical_events[origin].add(departure)
+        physical_events[destination].add(arrival)
+        arrivals_by_station[destination].append((fleet, arrival))
+
+    inventory_states: dict[tuple[str, str, int], int] = {}
+    for (fleet, station), event_set in station_events.items():
+        events = sorted(event_set)
+        values = {events[0]: 0}
+        for previous, minute in zip(events, events[1:]):
+            values[minute] = (
+                values[previous] + event_deltas[(fleet, station, minute)]
+            )
+        shift = max(0, -min(values.values()))
+        for minute, value in values.items():
+            inventory_states[(fleet, station, minute)] = value + shift
+
+    overflow: dict[tuple[str, int], int] = {}
+    for station in physical_events:
+        capacity = sum(_capacity(cities[station]))
+        fleet_stations = [
+            (fleet, event_set)
+            for (fleet, candidate_station), event_set in station_events.items()
+            if candidate_station == station
+        ]
+        for minute in range(1440):
+            occupied = sum(
+                inventory_states[
+                    (
+                        fleet,
+                        station,
+                        _cyclic_state_minute(event_set, minute),
+                    )
+                ]
+                for fleet, event_set in fleet_stations
+            )
+            occupied += sum(
+                1
+                for _, arrival in arrivals_by_station[station]
+                if (minute - arrival) % 1440 < minimum_turn
+            )
+            if occupied > capacity:
+                overflow[(station, minute)] = occupied - capacity
+    return overflow
+
+
 def _solve_all_fleets_with_pairing_patterns(
     inventory: dict[str, list[dict[str, Any]]],
     fleet_counts: dict[str, int],
@@ -1171,6 +1255,7 @@ def _solve_all_fleets_with_pairing_patterns(
         tuple[Any, ...], set[tuple[str, str]]
     ] = defaultdict(set)
     seed_overflow_keys: set[tuple[str, str]] = set()
+    seed_physical_capacity_overflow: dict[tuple[str, int], int] = {}
     flexible_seed_types: set[tuple[Any, ...]] = set()
     if seed_materialized is not None:
         for leg in seed_materialized.values():
@@ -1217,13 +1302,44 @@ def _solve_all_fleets_with_pairing_patterns(
             flexible_seed_types,
             group_items,
         )
+        seed_physical_capacity_overflow = (
+            _materialized_physical_capacity_overflow(
+                seed_materialized,
+                cities,
+                minimum_turn,
+            )
+        )
+        physical_overflow_by_station: defaultdict[str, list[int]] = (
+            defaultdict(list)
+        )
+        for (station, _), overflow in seed_physical_capacity_overflow.items():
+            physical_overflow_by_station[station].append(overflow)
+        overloaded_stations = {
+            station
+            for station, _ in sorted(
+                physical_overflow_by_station.items(),
+                key=lambda item: (
+                    -max(item[1]),
+                    -sum(item[1]),
+                    item[0],
+                ),
+            )[:1]
+        }
+        flexible_seed_types.update(
+            key
+            for key, _ in group_items
+            if str(key[1]) in overloaded_stations
+            or str(key[2]) in overloaded_stations
+        )
         LOGGER.info(
-            "global seed overflow rows=%d touches=%d; flexible types=%d direct, %d with hub-operation closure, %d with reverse markets",
+            "global seed overflow bank_rows=%d bank_touches=%d airport_rows=%d selected_airports=%s; flexible types=%d direct, %d with hub-operation closure, %d total",
             len(seed_overflow_keys),
             sum(
                 max(0, touches - int(bank_touch_limits[key]))
                 for key, touches in seed_bank_usage.items()
             ),
+            len(seed_physical_capacity_overflow),
+            ",".join(sorted(overloaded_stations)) or "none",
             directly_flexible_types,
             hub_operation_flexible_types,
             len(flexible_seed_types),
@@ -1308,17 +1424,22 @@ def _solve_all_fleets_with_pairing_patterns(
             else 0
         )
         spacing_capacity_by_fleet[fleet] += allowed_exceptions
-        patterns = _pairing_patterns(
-            candidates,
-            len(legs),
-            float(rule["minimumGapMinutes"]),
-            float(rule["hardFloorMinutes"]),
-            allowed_exceptions,
-            [],
-            maximum_patterns,
-            beam_width,
-        )
         seed_times = tuple(seed_departures.get(key, []))
+        patterns = (
+            []
+            if seed_materialized is not None
+            and key not in flexible_seed_types
+            else _pairing_patterns(
+                candidates,
+                len(legs),
+                float(rule["minimumGapMinutes"]),
+                float(rule["hardFloorMinutes"]),
+                allowed_exceptions,
+                [],
+                maximum_patterns,
+                beam_width,
+            )
+        )
         if seed_materialized is not None:
             matching_seed = [
                 pattern
@@ -1429,6 +1550,10 @@ def _solve_all_fleets_with_pairing_patterns(
         tuple[str, str], dict[int, float]
     ] = defaultdict(dict)
     station_events: defaultdict[tuple[str, str], set[int]] = defaultdict(set)
+    physical_station_events: defaultdict[str, set[int]] = defaultdict(set)
+    arrival_events_by_station: defaultdict[
+        str, list[tuple[int, str, int]]
+    ] = defaultdict(list)
 
     def add_coefficient(row: dict[int, float], index: int, value: float = 1.0) -> None:
         row[index] = row.get(index, 0.0) + value
@@ -1441,6 +1566,7 @@ def _solve_all_fleets_with_pairing_patterns(
             origin = str(event["origin"])
             destination = str(event["destination"])
             departure_utc = int(event["departureUtcMinute"])
+            arrival_utc = int(event["arrivalUtcMinute"])
             ready_utc = int(event["readyUtcMinute"])
             add_coefficient(
                 departures[(fleet, origin, departure_utc)], index
@@ -1450,6 +1576,11 @@ def _solve_all_fleets_with_pairing_patterns(
             )
             station_events[(fleet, origin)].add(departure_utc)
             station_events[(fleet, destination)].add(ready_utc)
+            physical_station_events[origin].add(departure_utc)
+            physical_station_events[destination].add(arrival_utc)
+            arrival_events_by_station[destination].append(
+                (index, fleet, arrival_utc)
+            )
             if event["originBankId"] is not None:
                 add_coefficient(
                     bank_touches[(str(event["originBankId"]), "departure")],
@@ -1494,6 +1625,41 @@ def _solve_all_fleets_with_pairing_patterns(
                 lower_bounds.append(0.0)
                 row_upper_bounds.append(float(bank_touch_limits[key]))
                 bank_capacity_constraints += 1
+
+    physical_capacity_constraints = 0
+    physical_capacity_rows: dict[tuple[str, int], dict[int, float]] = {}
+    physical_capacity_overflow_variables: dict[str, int] = {}
+    for station in sorted(physical_station_events):
+        combined_capacity = float(sum(_capacity(cities[station])))
+        overflow_index = len(objective)
+        objective.append(BANK_OVERFLOW_OBJECTIVE_WEIGHT)
+        upper_bounds.append(float(sum(fleet_counts.values())))
+        physical_capacity_overflow_variables[station] = overflow_index
+        fleet_station_events = [
+            (fleet, event_set)
+            for (fleet, candidate_station), event_set in station_events.items()
+            if candidate_station == station
+        ]
+        for minute in sorted(physical_station_events[station]):
+            row = {
+                q_by_event[
+                    (
+                        fleet,
+                        station,
+                        _cyclic_state_minute(event_set, minute),
+                    )
+                ]: 1.0
+                for fleet, event_set in fleet_station_events
+            }
+            for index, _, arrival_utc in arrival_events_by_station[station]:
+                if (minute - arrival_utc) % 1440 < minimum_turn:
+                    add_coefficient(row, index)
+            physical_capacity_rows[(station, minute)] = dict(row)
+            row[overflow_index] = -1.0
+            rows.append(row)
+            lower_bounds.append(-np.inf)
+            row_upper_bounds.append(combined_capacity)
+            physical_capacity_constraints += 1
 
     for fleet, station in sorted(station_events):
         events = sorted(station_events[(fleet, station)])
@@ -1633,6 +1799,23 @@ def _solve_all_fleets_with_pairing_patterns(
             mip_start[overflow_index] = max(
                 0.0, touches - float(bank_touch_limits[key])
             )
+        for station, overflow_index in physical_capacity_overflow_variables.items():
+            maximum_overflow = max(
+                (
+                    sum(
+                        value * mip_start[index]
+                        for index, value in row.items()
+                    )
+                    - float(sum(_capacity(cities[station])))
+                    for (candidate_station, _), row in physical_capacity_rows.items()
+                    if candidate_station == station
+                ),
+                default=0.0,
+            )
+            mip_start[overflow_index] = max(
+                0.0,
+                maximum_overflow,
+            )
         row_values = np.asarray(matrix @ mip_start).reshape(-1)
         lower_violation = np.max(
             np.maximum(row_lower_array - row_values, 0.0), initial=0.0
@@ -1692,10 +1875,16 @@ def _solve_all_fleets_with_pairing_patterns(
         for (bank_id, operation), index in bank_overflow_variables.items()
         if float(result.x[index]) > 1e-6
     }
+    physical_capacity_overflow = {
+        station: float(result.x[index])
+        for station, index in physical_capacity_overflow_variables.items()
+        if float(result.x[index]) > 1e-6
+    }
     LOGGER.info(
-        "global repair returned %s with %.0f overflow touches in %.1fs",
+        "global repair returned %s with %.0f bank overflow and %.0f airport overflow in %.1fs",
         result.message,
         sum(bank_overflow.values()),
+        sum(physical_capacity_overflow.values()),
         time.monotonic() - global_started,
     )
     maximum_fraction = max(abs(value - round(value)) for value in result.x)
@@ -1785,6 +1974,8 @@ def _solve_all_fleets_with_pairing_patterns(
             "maximumGeneratedPatterns": max(pattern_counts, default=0),
             "bankCapacityConstraints": bank_capacity_constraints,
             "bankCapacityConstraintMode": "global_capacity",
+            "physicalCapacityConstraints": physical_capacity_constraints,
+            "physicalCapacityConstraintMode": "global_gate_plus_stand_capacity",
             "section26SpacingConstraints": "compiled_into_patterns",
             "section26PolicyExceptionCapacity": int(
                 spacing_capacity_by_fleet[fleet]
@@ -1793,7 +1984,7 @@ def _solve_all_fleets_with_pairing_patterns(
     joint_solver = {
         "status": (
             "repair_incomplete_time_limit"
-            if bank_overflow
+            if bank_overflow or physical_capacity_overflow
             else "optimal_within_gap" if result.success else "feasible_time_limit"
         ),
         "message": str(result.message),
@@ -1804,8 +1995,16 @@ def _solve_all_fleets_with_pairing_patterns(
         "bankCapacityConstraints": bank_capacity_constraints,
         "bankFeasibilityOverflow": sum(bank_overflow.values()),
         "bankOverflowRows": bank_overflow,
+        "physicalCapacityConstraints": physical_capacity_constraints,
+        "physicalCapacityFeasibilityOverflow": sum(
+            physical_capacity_overflow.values()
+        ),
+        "physicalCapacityOverflowRows": physical_capacity_overflow,
         "constructiveSeed": seed_materialized is not None,
         "seedOverloadedBankRows": len(seed_overflow_keys),
+        "seedOverloadedPhysicalCapacityRows": len(
+            seed_physical_capacity_overflow
+        ),
         "seedFlexibleLegTypes": len(flexible_seed_types),
         "timeLimitSeconds": time_limit_seconds,
     }
@@ -2673,6 +2872,7 @@ def build_exact_materialization_plan(
         seed_materialized = None
         seed_solver_fleets: dict[str, dict[str, Any]] = {}
         seed_overflow: dict[tuple[str, str], int] = {}
+        seed_physical_capacity_overflow: dict[tuple[str, int], int] = {}
         seed_reused_fleets: list[str] = []
         new_seed_fleets = 0
         if constructive_seed_mode == "independent_fleets":
@@ -2814,7 +3014,18 @@ def build_exact_materialization_plan(
                 for key, touches in seed_usage.items()
                 if touches > remaining_bank_capacity[key]
             }
-        if seed_materialized is not None and not seed_overflow:
+            seed_physical_capacity_overflow = (
+                _materialized_physical_capacity_overflow(
+                    seed_materialized,
+                    cities,
+                    int(policy["turns"]["minimumMinutes"]),
+                )
+            )
+        if (
+            seed_materialized is not None
+            and not seed_overflow
+            and not seed_physical_capacity_overflow
+        ):
             materialized = seed_materialized
             solver_fleets = seed_solver_fleets
             joint_solver = {
@@ -2823,9 +3034,11 @@ def build_exact_materialization_plan(
                     "Checkpointed fleet solutions jointly satisfy the shared bank capacity"
                 ),
                 "bankFeasibilityOverflow": 0,
+                "physicalCapacityFeasibilityOverflow": 0,
                 "constructiveSeed": True,
                 "seedCheckpointReusedFleets": seed_reused_fleets,
                 "seedOverloadedBankRows": 0,
+                "seedOverloadedPhysicalCapacityRows": 0,
                 "timeLimitSeconds": global_time_limit_seconds,
             }
         else:
@@ -2858,6 +3071,9 @@ def build_exact_materialization_plan(
                 joint_solver["seedTotalBankOverage"] = sum(
                     seed_overflow.values()
                 )
+                joint_solver["seedTotalPhysicalCapacityOverage"] = sum(
+                    seed_physical_capacity_overflow.values()
+                )
                 joint_solver["seedCheckpointReusedFleets"] = (
                     seed_reused_fleets
                 )
@@ -2887,7 +3103,15 @@ def build_exact_materialization_plan(
                         improved_by_fleet,
                         solver_fleets,
                     )
-                if float(joint_solver["bankFeasibilityOverflow"]) > 0:
+                if (
+                    float(joint_solver["bankFeasibilityOverflow"]) > 0
+                    or float(
+                        joint_solver[
+                            "physicalCapacityFeasibilityOverflow"
+                        ]
+                    )
+                    > 0
+                ):
                     raise ExactGlobalRepairIncomplete(
                         {
                             str(key): float(value)
@@ -2896,6 +3120,12 @@ def build_exact_materialization_plan(
                             ].items()
                         },
                         str(joint_solver["message"]),
+                        {
+                            str(key): float(value)
+                            for key, value in joint_solver[
+                                "physicalCapacityOverflowRows"
+                            ].items()
+                        },
                     )
         for leg in materialized.values():
             if leg["originBankId"] is not None:

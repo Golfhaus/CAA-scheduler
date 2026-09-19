@@ -205,6 +205,7 @@ class CandidateBuildTests(unittest.TestCase):
                 / "exact_materialization_plan.json"
             ).read_text()
         )
+        exact["scheduleId"] = config["buildId"]
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             config_path = root / "build_config.json"

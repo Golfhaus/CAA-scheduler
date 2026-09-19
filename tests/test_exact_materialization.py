@@ -15,6 +15,7 @@ from caa_scheduler.exact_materialization import (
     _apply_assigned_bank_waves,
     _expand_flexible_seed_types_to_hub_operations,
     _expand_flexible_seed_types_to_markets,
+    _materialized_physical_capacity_overflow,
     _pairing_patterns,
     _read_exact_seed_checkpoint,
     _repair_successor_cycles,
@@ -220,6 +221,46 @@ class ExactMaterializationPlanTests(unittest.TestCase):
             expanded,
             {jax_b14_departure, jax_b1_departure, jax_b13_departure},
         )
+
+    def test_materialized_capacity_counts_cyclic_ground_inventory(self) -> None:
+        materialized = {}
+        for ordinal in (1, 2):
+            materialized[f"OUT-{ordinal}"] = {
+                "id": f"OUT-{ordinal}",
+                "fleet": "CRJ700",
+                "origin": "AAA",
+                "destination": "BBB",
+                "departureUtcMinute": 0,
+                "blockMinutes": 60,
+            }
+            materialized[f"BACK-{ordinal}"] = {
+                "id": f"BACK-{ordinal}",
+                "fleet": "CRJ700",
+                "origin": "BBB",
+                "destination": "AAA",
+                "departureUtcMinute": 120,
+                "blockMinutes": 60,
+            }
+        cities = {
+            code: {
+                "role": "destination",
+                "gateAllocationOverride": gates,
+                "standAllocationOverride": stands,
+            }
+            for code, gates, stands in (
+                ("AAA", 1, 0),
+                ("BBB", 2, 0),
+            )
+        }
+
+        overflow = _materialized_physical_capacity_overflow(
+            materialized,
+            cities,
+            30,
+        )
+
+        self.assertEqual(overflow[("AAA", 180)], 1)
+        self.assertNotIn(("BBB", 60), overflow)
 
     def test_successor_repair_can_cross_a_score_plateau(self) -> None:
         identifiers = ("A", "B", "C", "D")
