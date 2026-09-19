@@ -7,6 +7,8 @@ from pathlib import Path
 from typing import Any
 
 from .demand import load_demand_sources_from_manifest, parse_airport_od_matrix
+from .gate_export import _capacity
+from .gates import TOUCH_ARRIVAL_MINUTES, TOUCH_DEPARTURE_MINUTES
 from .planning import haversine_nm
 
 
@@ -273,6 +275,106 @@ def _consolidate_market_fleets(
     return unconsolidated
 
 
+def _rebalance_connecting_markets(
+    allocation: dict[str, Any],
+    classifications: dict[Market, str],
+    demand: dict[Market, float],
+    round_trip_costs: dict[tuple[Market, str], float],
+    active_cities: dict[str, dict[str, Any]],
+    runway_thresholds: dict[str, int],
+    rules: dict[str, Any] | None,
+) -> dict[str, Any]:
+    """Promote high-demand connecting markets into exact-routing headroom."""
+    if not rules:
+        return {
+            "sourceFleet": None,
+            "targetFleet": None,
+            "minimumRoundTrips": 0,
+            "promotedRoundTrips": 0,
+            "markets": [],
+        }
+    source = str(rules["sourceFleet"])
+    target = str(rules["targetFleet"])
+    minimum = int(rules["minimumPromotedRoundTrips"])
+    maximum_market_round_trips = rules.get("maximumPromotedMarketRoundTrips")
+    eligible_classifications = set(rules["eligibleClassifications"])
+    assignments: defaultdict[Market, Counter[str]] = allocation["assignments"]
+    remaining: dict[str, float] = allocation["remaining"]
+    work: Counter[str] = allocation["work"]
+    runway_floor = int(runway_thresholds[target])
+
+    candidates = []
+    for market, fleets in assignments.items():
+        source_round_trips = int(fleets.get(source, 0))
+        if (
+            not source_round_trips
+            or len(fleets) != 1
+            or classifications[market] not in eligible_classifications
+            or (
+                maximum_market_round_trips is not None
+                and source_round_trips > int(maximum_market_round_trips)
+            )
+        ):
+            continue
+        known_runways = [
+            int(active_cities[code]["runwayLengthFeet"])
+            for code in market
+            if active_cities[code].get("runwayLengthFeet") is not None
+        ]
+        if known_runways and min(known_runways) < runway_floor:
+            continue
+        candidates.append(
+            (
+                -float(demand[market]),
+                market,
+                source_round_trips,
+            )
+        )
+
+    promoted = 0
+    rows = []
+    for _, market, round_trips in sorted(candidates):
+        if promoted >= minimum:
+            break
+        target_cost = round_trips * round_trip_costs[(market, target)]
+        if target_cost > remaining[target] + 1e-9:
+            continue
+        source_cost = round_trips * round_trip_costs[(market, source)]
+        del assignments[market][source]
+        assignments[market][target] = round_trips
+        remaining[source] += source_cost
+        work[source] -= source_cost
+        remaining[target] -= target_cost
+        work[target] += target_cost
+        promoted += round_trips
+        rows.append(
+            {
+                "origin": market[0],
+                "destination": market[1],
+                "classification": classifications[market],
+                "twoWayDemand": demand[market],
+                "roundTrips": round_trips,
+                "sourceFleet": source,
+                "targetFleet": target,
+                "runwayScreening": (
+                    "passed_populated_lengths"
+                    if any(
+                        active_cities[code].get("runwayLengthFeet") is not None
+                        for code in market
+                    )
+                    else "pending_missing_lengths"
+                ),
+            }
+        )
+    return {
+        "sourceFleet": source,
+        "targetFleet": target,
+        "minimumRoundTrips": minimum,
+        "promotedRoundTrips": promoted,
+        "markets": rows,
+    }
+
+
 def build_frequency_fleet_plan(
     canonical: dict[str, Any],
     demand_plan: dict[str, Any],
@@ -436,6 +538,39 @@ def build_frequency_fleet_plan(
         )
     )
 
+    enforce_hub_gate_throughput = bool(
+        allocation_rules.get("enforceHubGateBankThroughput", False)
+    )
+    hub_gate_capacity: dict[str, int] = {}
+    if enforce_hub_gate_throughput:
+        bank_counts = planning_rules["bankPlacement"].get(
+            "hubBankCountsOverride",
+            canonical["operatingPolicy"]["hubBankCounts"],
+        )
+        bank_width = int(canonical["operatingPolicy"]["hubBankWindowMinutes"])
+        touch_window = max(TOUCH_ARRIVAL_MINUTES, TOUCH_DEPARTURE_MINUTES)
+        turns_per_gate_per_bank = (bank_width - 1) // touch_window + 1
+        hub_gate_capacity = {
+            hub: (
+                _capacity(active_cities[hub])[0]
+                * int(bank_counts[hub])
+                * turns_per_gate_per_bank
+            )
+            for hub in hub_codes
+        }
+
+    def hub_gate_load(values: dict[Market, int], hub: str) -> int:
+        return sum(frequency for market, frequency in values.items() if hub in market)
+
+    def has_hub_gate_capacity(values: dict[Market, int], market: Market) -> bool:
+        if not enforce_hub_gate_throughput:
+            return True
+        return all(
+            hub_gate_load(values, hub) <= hub_gate_capacity[hub]
+            for hub in market
+            if hub in hub_gate_capacity
+        )
+
     def market_ceiling(market: Market) -> int:
         return (
             interhub_ceiling
@@ -493,6 +628,10 @@ def build_frequency_fleet_plan(
             accepted = False
             for market in eligible:
                 frequencies[market] += 1
+                if not has_hub_gate_capacity(frequencies, market):
+                    frequencies[market] -= 1
+                    blocked.add(market)
+                    continue
                 trial = _assign_frequencies(
                     frequencies,
                     demand,
@@ -515,6 +654,29 @@ def build_frequency_fleet_plan(
         _consolidate_market_fleets(allocation, profiles, round_trip_costs)
         if allocation_rules.get("requireSingleFleetPerMarket", False)
         else []
+    )
+    fleet_rebalancing_rules = allocation_rules.get("exactFleetRebalancing")
+    if fleet_rebalancing_rules:
+        target_fleet = str(fleet_rebalancing_rules["targetFleet"])
+        target_minutes = int(
+            fleet_rebalancing_rules["targetProductiveMinutesPerAircraftDay"]
+        )
+        if target_minutes < productive_minutes[target_fleet]:
+            raise ValueError(
+                "Exact fleet-rebalancing headroom cannot reduce productive minutes"
+            )
+        allocation["remaining"][target_fleet] += (
+            target_minutes - productive_minutes[target_fleet]
+        ) * int(fleet_counts[target_fleet])
+        productive_minutes[target_fleet] = target_minutes
+    fleet_rebalancing = _rebalance_connecting_markets(
+        allocation,
+        classifications,
+        demand,
+        round_trip_costs,
+        active_cities,
+        canonical["operatingPolicy"]["runwayScreeningFeet"],
+        fleet_rebalancing_rules,
     )
     planned_frequency = {
         market: sum(assigned_counts[market].values()) for market in candidate_pairs
@@ -648,6 +810,16 @@ def build_frequency_fleet_plan(
         for hub, frequency in row["hubRoundTrips"].items()
         if frequency < 1
     ]
+    hub_gate_rows = [
+        {
+            "hub": hub,
+            "plannedRoundTrips": hub_gate_load(planned_frequency, hub),
+            "maximumRoundTrips": capacity,
+            "remainingRoundTrips": capacity
+            - hub_gate_load(planned_frequency, hub),
+        }
+        for hub, capacity in sorted(hub_gate_capacity.items())
+    ]
     checks = [
         {
             "id": "mandatory_capacity",
@@ -711,6 +883,22 @@ def build_frequency_fleet_plan(
             "message": "Every fleet remains within its schedule-specific aircraft-minute budget",
         },
     ]
+    if allocation_rules.get("exactFleetRebalancing"):
+        checks.append(
+            {
+                "id": "exact_fleet_rebalancing",
+                "status": (
+                    "pass"
+                    if fleet_rebalancing["promotedRoundTrips"]
+                    >= fleet_rebalancing["minimumRoundTrips"]
+                    else "fail"
+                ),
+                "message": (
+                    f"Promoted {fleet_rebalancing['promotedRoundTrips']} high-demand connecting round trips from "
+                    f"{fleet_rebalancing['sourceFleet']} to {fleet_rebalancing['targetFleet']}"
+                ),
+            }
+        )
     if allocation_rules.get("requireSingleFleetPerMarket", False):
         checks.append(
             {
@@ -721,6 +909,22 @@ def build_frequency_fleet_plan(
                     if not unconsolidated_markets
                     else "Markets split across fleets: "
                     + ", ".join("-".join(market) for market in unconsolidated_markets)
+                ),
+            }
+        )
+    if enforce_hub_gate_throughput:
+        checks.append(
+            {
+                "id": "hub_gate_bank_throughput",
+                "status": (
+                    "pass"
+                    if all(row["remainingRoundTrips"] >= 0 for row in hub_gate_rows)
+                    else "fail"
+                ),
+                "message": (
+                    "Every hub's planned frequency fits its gate-count, bank-count, and passenger-touch throughput"
+                    if all(row["remainingRoundTrips"] >= 0 for row in hub_gate_rows)
+                    else "One or more hubs exceed construction-time gate throughput"
                 ),
             }
         )
@@ -750,6 +954,18 @@ def build_frequency_fleet_plan(
             **(
                 {"mixedFleetMarkets": len(unconsolidated_markets)}
                 if allocation_rules.get("requireSingleFleetPerMarket", False)
+                else {}
+            ),
+            **(
+                {
+                    "fleetRebalancedMarkets": len(
+                        fleet_rebalancing["markets"]
+                    ),
+                    "fleetRebalancedRoundTrips": fleet_rebalancing[
+                        "promotedRoundTrips"
+                    ],
+                }
+                if allocation_rules.get("exactFleetRebalancing")
                 else {}
             ),
             **(
@@ -796,6 +1012,12 @@ def build_frequency_fleet_plan(
         "markets": market_rows,
         "cityService": city_service,
         **(
+            {"fleetRebalancing": fleet_rebalancing}
+            if allocation_rules.get("exactFleetRebalancing")
+            else {}
+        ),
+        **({"hubGateCapacity": hub_gate_rows} if enforce_hub_gate_throughput else {}),
+        **(
             {"networkReconciliation": network_reconciliation}
             if network_reconciliation["mode"] == "strict_tier_caps"
             else {}
@@ -806,7 +1028,11 @@ def build_frequency_fleet_plan(
                 if network_reconciliation["mode"] == "strict_tier_caps"
                 else "The existing canonical market set is retained as a seed; newly assigned hub markets are added, but entirely new point-to-point markets are not selected yet."
             ),
-            "Aircraft-minute allocation is a planning envelope, not a timed routing proof. Curfews, banks, gates, turns, RONs, and routing continuity remain mandatory downstream checks.",
+            (
+                "Hub frequency is capped by the configured gates, effective bank count, bank width, and passenger-touch window; exact timing and physical gate/stand assignment remain mandatory downstream checks."
+                if enforce_hub_gate_throughput
+                else "Aircraft-minute allocation is a planning envelope, not a timed routing proof. Curfews, banks, gates, turns, RONs, and routing continuity remain mandatory downstream checks."
+            ),
             "Optional point-to-point frequency is deliberately withheld; the preserved point-to-point market set must remain within the 10% schedule cap.",
         ],
     }

@@ -29,8 +29,8 @@ class WebBuildTests(unittest.TestCase):
             result = build_web_console(
                 REPO_ROOT / "web" / "schedules.json", REPO_ROOT, output
             )
-            self.assertEqual(result["scheduleCount"], 1)
-            self.assertEqual(result["dataFileCount"], 18)
+            self.assertEqual(result["scheduleCount"], 2)
+            self.assertEqual(result["dataFileCount"], 32)
             self.assertGreater(result["instructionEntryCount"], 40)
             self.assertTrue((output / "index.html").is_file())
             self.assertTrue((output / "favicon.svg").is_file())

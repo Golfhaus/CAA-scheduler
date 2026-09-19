@@ -5,6 +5,7 @@ from pathlib import Path
 from typing import Any
 
 from .demand import load_demand_sources_from_manifest
+from .gate_export import _capacity
 from .planning import haversine_nm
 
 
@@ -162,6 +163,16 @@ def _maximum_spaced_departures(
             selected.pop()
         best = max(best, len(selected))
     return best
+
+
+def _nearest_cyclic_gap(minute: int, assigned: list[int]) -> int:
+    """Return the nearest circular gap to an already assigned departure."""
+    if not assigned:
+        return 1440
+    return min(
+        min((minute - other) % 1440, (other - minute) % 1440)
+        for other in assigned
+    )
 
 
 def _interhub_spacing_capacity(
@@ -346,16 +357,38 @@ def build_hub_bank_plan(
     if frequency_plan.get("status") != "pass":
         raise ValueError("Hub-bank placement requires a passing frequency/fleet plan")
     bank_rules = planning_rules["bankPlacement"]
+    distinct_pairing_waves = bool(
+        bank_rules.get(
+            "requireDistinctPairingWaves",
+            planning_rules.get("exactMaterialization", {}).get(
+                "preserveAssignedBankWaves", False
+            ),
+        )
+    )
+    prefer_pairing_spread = bool(
+        bank_rules.get("preferPairingSpread", distinct_pairing_waves)
+    )
+    enforce_gate_capacity = bool(
+        planning_rules["frequencyAllocation"].get(
+            "enforceHubGateBankThroughput", False
+        )
+    )
     policy = canonical["operatingPolicy"]
     hubs = sorted(policy["hubs"])
     hub_set = set(hubs)
-    bank_counts = policy["hubBankCounts"]
+    policy_bank_counts = policy["hubBankCounts"]
+    bank_counts = bank_rules.get("hubBankCountsOverride", policy_bank_counts)
+    if set(bank_counts) != set(hubs):
+        raise ValueError(
+            "Effective hub-bank counts must define every operating-policy hub"
+        )
     width = int(policy["hubBankWindowMinutes"])
     if width != 60:
         raise ValueError("The v1 bank placer requires the policy's 60-minute core")
     cities = {
         city["code"]: city for city in canonical["cities"] if city.get("active")
     }
+    hub_gate_counts = {hub: _capacity(cities[hub])[0] for hub in hubs}
     for city in cities.values():
         timezone = city.get("timezone")
         if timezone not in TIMEZONE_OFFSETS:
@@ -439,6 +472,10 @@ def build_hub_bank_plan(
         ]
 
     touch_load: Counter[tuple[str, str]] = Counter()
+    pairing_wave_load: Counter[tuple[str, str, str]] = Counter()
+    pairing_departure_minutes: defaultdict[
+        tuple[str, str], list[int]
+    ] = defaultdict(list)
     placements: list[dict[str, Any]] = []
     unplaced: list[dict[str, Any]] = []
 
@@ -459,6 +496,16 @@ def build_hub_bank_plan(
         status = _curfew_status(origin, departure, arrival, policy)
         for touch in touches:
             touch_load[(touch["bankId"], touch["operation"])] += 1
+        timing_wave = next(
+            (
+                touch["bankId"]
+                for touch in touches
+                if touch["operation"] == "departure"
+            ),
+            touches[0]["bankId"],
+        )
+        pairing_wave_load[(origin, destination, timing_wave)] += 1
+        pairing_departure_minutes[(origin, destination)].append(departure)
         placements.append(
             {
                 "id": identifier,
@@ -505,6 +552,24 @@ def build_hub_bank_plan(
                     )
                     feasible = []
                     for bank in windows[hub]:
+                        if (
+                            enforce_gate_capacity
+                            and (
+                                touch_load[(bank["id"], "arrival")]
+                                >= hub_gate_counts[hub]
+                                or touch_load[(bank["id"], "departure")]
+                                >= hub_gate_counts[hub]
+                            )
+                        ):
+                            continue
+                        if (
+                            distinct_pairing_waves
+                            and (
+                                pairing_wave_load[(spoke, hub, bank["id"])]
+                                or pairing_wave_load[(hub, spoke, bank["id"])]
+                            )
+                        ):
+                            continue
                         inbound_arrival = bank["arrivalTargetMinute"]
                         inbound_departure = _local_departure(
                             inbound_arrival, block, spoke, hub, cities
@@ -527,7 +592,24 @@ def build_hub_bank_plan(
                                 touch_load[(bank["id"], "arrival")]
                                 + touch_load[(bank["id"], "departure")]
                             )
-                            feasible.append((load, bank["sequence"], bank))
+                            pairing_gap = min(
+                                _nearest_cyclic_gap(
+                                    inbound_departure,
+                                    pairing_departure_minutes[(spoke, hub)],
+                                ),
+                                _nearest_cyclic_gap(
+                                    outbound_departure,
+                                    pairing_departure_minutes[(hub, spoke)],
+                                ),
+                            )
+                            feasible.append(
+                                (
+                                    load,
+                                    -pairing_gap if prefer_pairing_spread else 0,
+                                    bank["sequence"],
+                                    bank,
+                                )
+                            )
                     if not feasible:
                         unplaced.extend(
                             {
@@ -577,6 +659,21 @@ def build_hub_bank_plan(
                     candidates = [
                         row for row in candidates
                         if _curfew_status(origin, row[2], row[3], policy) == "pass"
+                        and (
+                            not enforce_gate_capacity
+                            or (
+                                touch_load[(row[0]["id"], "departure")]
+                                < hub_gate_counts[origin]
+                                and touch_load[(row[1]["id"], "arrival")]
+                                < hub_gate_counts[destination]
+                            )
+                        )
+                        and (
+                            not distinct_pairing_waves
+                            or not pairing_wave_load[
+                                (origin, destination, row[0]["id"])
+                            ]
+                        )
                     ]
                     if not candidates:
                         unplaced.append(
@@ -594,6 +691,16 @@ def build_hub_bank_plan(
                         key=lambda row: (
                             touch_load[(row[0]["id"], "departure")]
                             + touch_load[(row[1]["id"], "arrival")],
+                            (
+                                -_nearest_cyclic_gap(
+                                    row[2],
+                                    pairing_departure_minutes[
+                                        (origin, destination)
+                                    ],
+                                )
+                                if prefer_pairing_spread
+                                else 0
+                            ),
                             abs(row[0]["departureTargetMinute"] - row[2])
                             + abs(row[1]["arrivalTargetMinute"] - row[3]),
                             row[2], row[0]["sequence"], row[1]["sequence"],
@@ -647,6 +754,32 @@ def build_hub_bank_plan(
         for bank in hub["banks"]
         if not bank["arrivalCount"] or not bank["departureCount"]
     ]
+    over_capacity_bank_touches = [
+        {
+            "hub": hub["hub"],
+            "bankId": bank["id"],
+            "arrivalCount": bank["arrivalCount"],
+            "departureCount": bank["departureCount"],
+            "gateCount": hub_gate_counts[hub["hub"]],
+        }
+        for hub in bank_rows
+        for bank in hub["banks"]
+        if enforce_gate_capacity
+        and max(bank["arrivalCount"], bank["departureCount"])
+        > hub_gate_counts[hub["hub"]]
+    ]
+    repeated_pairing_waves = [
+        {
+            "origin": origin,
+            "destination": destination,
+            "bankId": bank_id,
+            "departures": count,
+        }
+        for (origin, destination, bank_id), count in sorted(
+            pairing_wave_load.items()
+        )
+        if distinct_pairing_waves and count > 1
+    ]
     windows_policy = policy["departureWindows"]
     invalid_windows = [
         bank["id"]
@@ -679,7 +812,7 @@ def build_hub_bank_plan(
             "id": "bank_window_definition",
             "status": "pass" if not invalid_windows else "fail",
             "message": (
-                f"Generated all {sum(bank_counts.values())} policy-required 60-minute bank cores"
+                f"Generated all {sum(bank_counts.values())} effective 60-minute bank cores"
                 if not invalid_windows
                 else "Invalid bank windows: " + ", ".join(invalid_windows)
             ),
@@ -725,6 +858,30 @@ def build_hub_bank_plan(
             ),
         },
     ]
+    if enforce_gate_capacity:
+        checks.append(
+            {
+                "id": "bank_passenger_touch_capacity",
+                "status": "pass" if not over_capacity_bank_touches else "fail",
+                "message": (
+                    "Every bank keeps arrivals and departures within configured gate capacity"
+                    if not over_capacity_bank_touches
+                    else f"{len(over_capacity_bank_touches)} bank-direction loads exceed configured gates"
+                ),
+            }
+        )
+    if distinct_pairing_waves:
+        checks.append(
+            {
+                "id": "pairing_wave_spacing_capacity",
+                "status": "pass" if not repeated_pairing_waves else "fail",
+                "message": (
+                    "Every directed pairing uses each assigned wave at most once"
+                    if not repeated_pairing_waves
+                    else f"{len(repeated_pairing_waves)} pairing-wave assignments repeat inside one core"
+                ),
+            }
+        )
     if bank_rules.get("requireInterhubSpacingCapacity", False):
         checks.append(
             {
@@ -751,6 +908,11 @@ def build_hub_bank_plan(
             "failed": failed,
             "hubs": len(hubs),
             "banks": sum(bank_counts.values()),
+            "bankCountSource": (
+                "planning_rules_override"
+                if bank_counts != policy_bank_counts
+                else "operating_policy"
+            ),
             "hubMarketLegs": expected_hub_legs,
             "placedLegs": len(placements),
             "unplacedLegs": len(unplaced),
@@ -769,8 +931,19 @@ def build_hub_bank_plan(
         },
         "checks": checks,
         "hubs": bank_rows,
+        "bankCountPolicy": {
+            "source": (
+                "planning_rules_override"
+                if bank_counts != policy_bank_counts
+                else "operating_policy"
+            ),
+            "operatingPolicyCounts": dict(sorted(policy_bank_counts.items())),
+            "effectiveCounts": dict(sorted(bank_counts.items())),
+        },
         "placements": placements,
         "unplaced": unplaced,
+        "bankTouchCapacityViolations": over_capacity_bank_touches,
+        "pairingWaveSpacingViolations": repeated_pairing_waves,
         **(
             {"interHubSpacingCapacity": interhub_capacity}
             if bank_rules.get("requireInterhubSpacingCapacity", False)

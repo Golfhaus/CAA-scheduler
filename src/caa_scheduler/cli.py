@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import logging
 from pathlib import Path
 
 from .allocation import build_frequency_fleet_plan_from_manifest
@@ -9,7 +10,11 @@ from .bank_materialization import build_bank_materialization_diagnostic_from_man
 from .baseline import build_baseline
 from .candidate import build_candidate
 from .demand import build_demand_plan_from_manifest
-from .exact_materialization import build_exact_materialization_plan_from_manifest
+from .exact_materialization import (
+    ExactGlobalRepairIncomplete,
+    ExactSeedStageComplete,
+    build_exact_materialization_plan_from_manifest,
+)
 from .gate_export import export_gate_schedule
 from .io import read_json, write_json
 from .operating_validation import validate_operating_rules
@@ -138,6 +143,9 @@ def _parser() -> argparse.ArgumentParser:
     exact.add_argument("manifest", type=Path)
     exact.add_argument("output", type=Path)
     exact.add_argument("--repo-root", type=Path, default=Path.cwd())
+    exact.add_argument("--seed-checkpoint", type=Path)
+    exact.add_argument("--seed-fleets-per-run", type=int)
+    exact.add_argument("--progress", action="store_true")
 
     web = subcommands.add_parser(
         "build-web", help="Assemble the static GitHub Pages console"
@@ -447,17 +455,28 @@ def main(argv: list[str] | None = None) -> int:
         print(f"Wrote {args.output}")
         return 0 if diagnostic["materializationStatus"] != "blocked" else 1
     if args.command == "build-exact-materialization":
+        if args.progress:
+            logging.basicConfig(level=logging.INFO, format="%(message)s")
         frequency_plan = read_json(args.frequency_plan)
         bank_plan = read_json(args.bank_plan)
         repair_plan = read_json(args.repair_plan)
-        plan = build_exact_materialization_plan_from_manifest(
-            canonical,
-            frequency_plan,
-            bank_plan,
-            repair_plan,
-            args.manifest,
-            args.repo_root.resolve(),
-        )
+        try:
+            plan = build_exact_materialization_plan_from_manifest(
+                canonical,
+                frequency_plan,
+                bank_plan,
+                repair_plan,
+                args.manifest,
+                args.repo_root.resolve(),
+                args.seed_checkpoint,
+                args.seed_fleets_per_run,
+            )
+        except ExactSeedStageComplete as result:
+            print(str(result))
+            return 0
+        except ExactGlobalRepairIncomplete as result:
+            print(str(result))
+            return 1
         write_json(args.output, plan, indent=None)
         print(
             f"Exact materialization: {plan['status'].upper()} "
