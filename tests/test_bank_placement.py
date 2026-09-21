@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import copy
 import json
+import random
 import sys
 import unittest
 from pathlib import Path
@@ -10,7 +11,10 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO_ROOT / "src"))
 
-from caa_scheduler.bank_placement import build_hub_bank_plan_from_manifest
+from caa_scheduler.bank_placement import (
+    _maximum_spaced_departures,
+    build_hub_bank_plan_from_manifest,
+)
 from caa_scheduler.allocation import build_frequency_fleet_plan_from_manifest
 from caa_scheduler.gate_export import _capacity
 
@@ -77,6 +81,34 @@ class HubBankPlanTests(unittest.TestCase):
 
     def test_phase_search_is_deterministic(self) -> None:
         self.assertEqual(self.build(), self.build())
+
+    def test_spaced_departure_capacity_matches_exhaustive_cyclic_greedy(self) -> None:
+        def exhaustive(departures: set[int], minimum_gap: int) -> int:
+            best = 0
+            for first in sorted(departures):
+                offsets = sorted(
+                    (minute - first) % 1440 for minute in departures
+                )
+                selected: list[int] = []
+                for offset in offsets:
+                    if not selected or offset - selected[-1] >= minimum_gap:
+                        selected.append(offset)
+                while (
+                    len(selected) > 1
+                    and 1440 - selected[-1] + selected[0] < minimum_gap
+                ):
+                    selected.pop()
+                best = max(best, len(selected))
+            return best
+
+        randomizer = random.Random(711)
+        for _ in range(100):
+            departures = set(randomizer.sample(range(0, 1440, 5), 40))
+            minimum_gap = randomizer.choice([60, 90, 120, 180])
+            self.assertEqual(
+                _maximum_spaced_departures(departures, minimum_gap),
+                exhaustive(departures, minimum_gap),
+            )
 
     def test_manifest_version_must_match_frequency_plan(self) -> None:
         changed = copy.deepcopy(self.frequency_plan)

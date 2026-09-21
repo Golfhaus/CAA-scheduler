@@ -185,25 +185,58 @@ def build_claims(
     return claims
 
 
+def _cyclic_segments(claim: GateClaim) -> tuple[tuple[float, float], ...]:
+    duration = claim.end - claim.start
+    if duration <= 0:
+        return ()
+    if duration >= 1440:
+        return ((0, 1440),)
+    start = claim.start % 1440
+    end = start + duration
+    if end <= 1440:
+        return ((start, end),)
+    return ((start, 1440), (0, end - 1440))
+
+
+def _segments_overlap(
+    first: tuple[tuple[float, float], ...],
+    second: tuple[tuple[float, float], ...],
+) -> bool:
+    return any(
+        first_start < second_end and second_start < first_end
+        for first_start, first_end in first
+        for second_start, second_end in second
+    )
+
+
 def overlaps(first: GateClaim, second: GateClaim) -> bool:
     """Return whether two daily recurring claims overlap cyclically."""
-    for first_shift in (-1440, 0, 1440):
-        for second_shift in (-1440, 0, 1440):
-            if (
-                first.start + first_shift < second.end + second_shift
-                and second.start + second_shift < first.end + first_shift
-            ):
-                return True
-    return False
+    return _segments_overlap(
+        _cyclic_segments(first),
+        _cyclic_segments(second),
+    )
 
 
 def _conflict_graph(claims: list[GateClaim]) -> list[set[int]]:
     adjacency = [set() for _ in claims]
-    for first in range(len(claims)):
-        for second in range(first + 1, len(claims)):
-            if overlaps(claims[first], claims[second]):
-                adjacency[first].add(second)
-                adjacency[second].add(first)
+    segments = [_cyclic_segments(claim) for claim in claims]
+    events = [
+        event
+        for index, claim_segments in enumerate(segments)
+        for start, end in claim_segments
+        for event in ((end, 0, index), (start, 1, index))
+    ]
+    active: set[int] = set()
+    for _, kind, index in sorted(events):
+        if kind == 0:
+            active.discard(index)
+            continue
+        for other in active:
+            if other == index:
+                continue
+            adjacency[index].add(other)
+            adjacency[other].add(index)
+        active.add(index)
     return adjacency
 
 
@@ -213,28 +246,60 @@ def _greedy_coloring(claims: list[GateClaim]) -> list[int]:
         return []
     adjacency = _conflict_graph(claims)
     colors = [0] * len(claims)
-    for _ in claims:
-        uncolored = [index for index, color in enumerate(colors) if not color]
+    uncolored = set(range(len(claims)))
+    saturation = [set() for _ in claims]
+    while uncolored:
         vertex = max(
             uncolored,
             key=lambda index: (
-                len({colors[neighbor] for neighbor in adjacency[index] if colors[neighbor]}),
+                len(saturation[index]),
                 len(adjacency[index]),
                 -index,
             ),
         )
-        unavailable = {
-            colors[neighbor]
-            for neighbor in adjacency[vertex]
-            if colors[neighbor]
-        }
         color = next(
             candidate
             for candidate in range(1, len(claims) + 1)
-            if candidate not in unavailable
+            if candidate not in saturation[vertex]
         )
         colors[vertex] = color
+        uncolored.remove(vertex)
+        for neighbor in adjacency[vertex]:
+            if neighbor in uncolored:
+                saturation[neighbor].add(color)
     return colors
+
+
+def _maximum_cyclic_concurrency(claims: list[GateClaim]) -> int:
+    """Return a sound lower bound for recurring daily slot demand."""
+    full_day = 0
+    events: list[tuple[float, int]] = []
+    for claim in claims:
+        duration = claim.end - claim.start
+        if duration <= 0:
+            continue
+        if duration >= 1440:
+            full_day += 1
+            continue
+        start = claim.start % 1440
+        end = start + duration
+        if end <= 1440:
+            events.extend(((start, 1), (end, -1)))
+        else:
+            events.extend(
+                (
+                    (start, 1),
+                    (1440, -1),
+                    (0, 1),
+                    (end - 1440, -1),
+                )
+            )
+    active = full_day
+    maximum = active
+    for _, delta in sorted(events, key=lambda event: (event[0], event[1])):
+        active += delta
+        maximum = max(maximum, active)
+    return maximum
 
 
 def _bounded_coloring(
@@ -244,6 +309,8 @@ def _bounded_coloring(
     if max(colors, default=0) <= maximum_slots:
         return colors
     if maximum_slots < 1:
+        return None
+    if _maximum_cyclic_concurrency(claims) > maximum_slots:
         return None
 
     adjacency = _conflict_graph(claims)

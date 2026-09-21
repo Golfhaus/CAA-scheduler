@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from bisect import bisect_left
 from collections import Counter, defaultdict
 from pathlib import Path
 from typing import Any
@@ -149,19 +150,32 @@ def _maximum_spaced_departures(
     """Return the maximum cyclic selection at or above ``minimum_gap``."""
     if not departures:
         return 0
+    ordered = sorted(departures)
+    doubled = ordered + [minute + 1440 for minute in ordered]
+    departure_count = len(ordered)
     best = 0
-    for first in sorted(departures):
-        offsets = sorted((minute - first) % 1440 for minute in departures)
-        selected: list[int] = []
-        for offset in offsets:
-            if not selected or offset - selected[-1] >= minimum_gap:
-                selected.append(offset)
-        while (
-            len(selected) > 1
-            and 1440 - selected[-1] + selected[0] < minimum_gap
-        ):
-            selected.pop()
-        best = max(best, len(selected))
+    for start in range(departure_count):
+        first = doubled[start]
+        last = first
+        selected = 1
+        stop = start + departure_count
+        latest = first + 1440 - minimum_gap
+        index = bisect_left(
+            doubled,
+            last + minimum_gap,
+            start + 1,
+            stop,
+        )
+        while index < stop and doubled[index] <= latest:
+            selected += 1
+            last = doubled[index]
+            index = bisect_left(
+                doubled,
+                last + minimum_gap,
+                index + 1,
+                stop,
+            )
+        best = max(best, selected)
     return best
 
 
@@ -228,77 +242,94 @@ def _optimize_phases(
     candidates = list(range(earliest, latest + 1, phase_step))
     cadence = bank_rules["cadenceMinutesByBankCount"]
     width = 60
+    phase_windows = {
+        (hub, value): [
+            {
+                "id": f"{hub}-B{index + 1}",
+                "startMinute": start,
+                "endMinute": start + width,
+            }
+            for index, start in enumerate(
+                _starts(hub, {hub: value}, bank_counts, cadence)
+            )
+        ]
+        for hub in hubs
+        for value in candidates
+    }
+    spoke_services_by_hub = {
+        hub: [service for service in spoke_services if service["hub"] == hub]
+        for hub in hubs
+    }
+    interhub_services_by_pair: defaultdict[
+        tuple[str, str], list[dict[str, Any]]
+    ] = defaultdict(list)
+    for service in interhub_services:
+        interhub_services_by_pair[
+            (service["origin"], service["destination"])
+        ].append(service)
+    hub_phase_score_cache: dict[tuple[str, int], tuple[int, int, int]] = {}
+    interhub_phase_score_cache: dict[
+        tuple[str, str, int, int], tuple[int, int]
+    ] = {}
 
     def windows_for(phase: dict[str, int]) -> dict[str, list[dict[str, Any]]]:
-        return {
-            hub: [
-                {
-                    "id": f"{hub}-B{index + 1}",
-                    "startMinute": start,
-                    "endMinute": start + width,
-                }
-                for index, start in enumerate(
-                    _starts(hub, phase, bank_counts, cadence)
-                )
-            ]
-            for hub in hubs
-        }
+        return {hub: phase_windows[(hub, phase[hub])] for hub in hubs}
 
-    def score(phase: dict[str, int]) -> tuple[int, ...]:
-        windows = windows_for(phase)
+    def hub_phase_score(hub: str, value: int) -> tuple[int, int, int]:
+        key = (hub, value)
+        cached = hub_phase_score_cache.get(key)
+        if cached is not None:
+            return cached
+        hub_services = spoke_services_by_hub[hub]
+        hub_windows = phase_windows[key]
         directional_banks = 0
         if bank_rules.get("requireDirectionalPhaseCoverage", False):
-            for hub in hubs:
-                hub_services = [
-                    service for service in spoke_services if service["hub"] == hub
-                ]
-                for bank in windows[hub]:
-                    arrival_target = (
-                        bank["startMinute"]
-                        + int(bank_rules["spokeArrivalOffsetMinutes"])
-                    )
-                    departure_target = (
-                        bank["startMinute"]
-                        + int(bank_rules["hubDepartureOffsetMinutes"])
-                    )
-                    if any(
-                        _curfew_status(
-                            service["spoke"],
-                            _local_departure(
-                                arrival_target,
-                                service["blockMinutes"],
-                                service["spoke"],
-                                hub,
-                                cities,
-                            ),
+            for bank in hub_windows:
+                arrival_target = (
+                    bank["startMinute"]
+                    + int(bank_rules["spokeArrivalOffsetMinutes"])
+                )
+                departure_target = (
+                    bank["startMinute"]
+                    + int(bank_rules["hubDepartureOffsetMinutes"])
+                )
+                if any(
+                    _curfew_status(
+                        service["spoke"],
+                        _local_departure(
                             arrival_target,
-                            policy,
-                        )
-                        == "pass"
-                        and _curfew_status(
+                            service["blockMinutes"],
+                            service["spoke"],
                             hub,
+                            cities,
+                        ),
+                        arrival_target,
+                        policy,
+                    )
+                    == "pass"
+                    and _curfew_status(
+                        hub,
+                        departure_target,
+                        _local_arrival(
                             departure_target,
-                            _local_arrival(
-                                departure_target,
-                                service["blockMinutes"],
-                                hub,
-                                service["spoke"],
-                                cities,
-                            ),
-                            policy,
-                        )
-                        == "pass"
-                        for service in hub_services
-                    ):
-                        directional_banks += 1
-        spoke_capacity_score: tuple[int, int] = (0, 0)
+                            service["blockMinutes"],
+                            hub,
+                            service["spoke"],
+                            cities,
+                        ),
+                        policy,
+                    )
+                    == "pass"
+                    for service in hub_services
+                ):
+                    directional_banks += 1
+        spoke_shortfall = 0
+        spoke_covered = 0
         if bank_rules.get("optimizeSpokePlacementCapacity", False):
-            spoke_shortfall = 0
-            spoke_covered = 0
-            for service in spoke_services:
+            for service in hub_services:
                 feasible_banks = sum(
                     1
-                    for bank in windows[service["hub"]]
+                    for bank in hub_windows
                     if (
                         _curfew_status(
                             service["spoke"],
@@ -307,7 +338,7 @@ def _optimize_phases(
                                 + int(bank_rules["spokeArrivalOffsetMinutes"]),
                                 service["blockMinutes"],
                                 service["spoke"],
-                                service["hub"],
+                                hub,
                                 cities,
                             ),
                             bank["startMinute"]
@@ -316,14 +347,14 @@ def _optimize_phases(
                         )
                         == "pass"
                         and _curfew_status(
-                            service["hub"],
+                            hub,
                             bank["startMinute"]
                             + int(bank_rules["hubDepartureOffsetMinutes"]),
                             _local_arrival(
                                 bank["startMinute"]
                                 + int(bank_rules["hubDepartureOffsetMinutes"]),
                                 service["blockMinutes"],
-                                service["hub"],
+                                hub,
                                 service["spoke"],
                                 cities,
                             ),
@@ -335,26 +366,76 @@ def _optimize_phases(
                 required = int(service["weight"])
                 spoke_shortfall += max(0, required - feasible_banks)
                 spoke_covered += min(required, feasible_banks)
-            spoke_capacity_score = (-spoke_shortfall, spoke_covered)
-        if bank_rules.get("requireInterhubSpacingCapacity", False):
-            capacity_rows = _interhub_spacing_capacity(
-                interhub_services,
-                windows,
+        result = (directional_banks, spoke_shortfall, spoke_covered)
+        hub_phase_score_cache[key] = result
+        return result
+
+    def interhub_phase_score(
+        origin: str,
+        destination: str,
+        origin_phase: int,
+        destination_phase: int,
+    ) -> tuple[int, int]:
+        key = (origin, destination, origin_phase, destination_phase)
+        cached = interhub_phase_score_cache.get(key)
+        if cached is not None:
+            return cached
+        pairing_services = interhub_services_by_pair[(origin, destination)]
+        pair_windows = {
+            origin: phase_windows[(origin, origin_phase)],
+            destination: phase_windows[(destination, destination_phase)],
+        }
+        departures = {
+            candidate[2]
+            for service in pairing_services
+            for candidate in _interhub_candidates(
+                origin,
+                destination,
+                service["blockMinutes"],
+                pair_windows,
                 cities,
                 int(bank_rules["interHubSearchStepMinutes"]),
-                int(policy["section26"]["hardFloorMinutes"]),
             )
-            shortfall = sum(row["shortfall"] for row in capacity_rows)
-            covered = sum(
-                min(row["requiredDepartures"], row["spacedCandidateCapacity"])
-                for row in capacity_rows
-            )
+        }
+        required = sum(
+            int(service["weight"]) for service in pairing_services
+        )
+        capacity = _maximum_spaced_departures(
+            departures,
+            int(policy["section26"]["hardFloorMinutes"]),
+        )
+        result = (max(0, required - capacity), min(required, capacity))
+        interhub_phase_score_cache[key] = result
+        return result
+
+    def score(phase: dict[str, int]) -> tuple[int, ...]:
+        hub_scores = [
+            hub_phase_score(hub, phase[hub]) for hub in hubs
+        ]
+        directional_banks = sum(row[0] for row in hub_scores)
+        spoke_capacity_score = (
+            -sum(row[1] for row in hub_scores),
+            sum(row[2] for row in hub_scores),
+        )
+        if bank_rules.get("requireInterhubSpacingCapacity", False):
+            capacity_scores = [
+                interhub_phase_score(
+                    origin,
+                    destination,
+                    phase[origin],
+                    phase[destination],
+                )
+                for origin, destination in sorted(interhub_services_by_pair)
+            ]
+            shortfall = sum(row[0] for row in capacity_scores)
+            covered = sum(row[1] for row in capacity_scores)
             return (
                 *spoke_capacity_score,
                 directional_banks,
                 -shortfall,
                 covered,
             )
+        windows = windows_for(phase)
         interhub_score = sum(
             service["weight"]
             for service in interhub_services
