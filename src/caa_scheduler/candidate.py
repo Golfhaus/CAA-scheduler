@@ -382,6 +382,9 @@ def build_candidate(
                                     "frequencyFleetPlan": frequency_fleet_plan,
                                     "hubBankPlan": hub_bank_plan,
                                     "routingRepairPlan": routing_repair_plan,
+                                    "demandManifestSha256": sha256_file(
+                                        demand_manifest
+                                    ),
                                 },
                                 indent=None,
                             )[:16]
