@@ -19,6 +19,7 @@ from caa_scheduler.gates import (
     _bounded_coloring,
     _greedy_coloring,
     assign_gates,
+    build_claims,
     overlaps,
 )
 from caa_scheduler.importer import import_canonical_schedule
@@ -104,6 +105,43 @@ class ScheduleSixBaselineTests(unittest.TestCase):
         separate = GateClaim(120, 180, "separate", "CRJ200", "turn", None, None)
         self.assertTrue(overlaps(late, early))
         self.assertFalse(overlaps(late, separate))
+
+    def test_fixed_inventory_uses_elapsed_hold_across_route_day_cut(self) -> None:
+        legs = [
+            {
+                "line": "AA",
+                "day": 1,
+                "route": 101,
+                "fleet": "CRJ200",
+                "origin": "BBB",
+                "destination": "AAA",
+                "departureMinute": 60,
+                "arrivalMinute": 272,
+            },
+            {
+                "line": "AA",
+                "day": 2,
+                "route": 102,
+                "fleet": "CRJ200",
+                "origin": "AAA",
+                "destination": "CCC",
+                "departureMinute": 315,
+                "arrivalMinute": 400,
+            },
+        ]
+
+        legacy = build_claims(legs, "AAA")
+        fixed_inventory = build_claims(
+            legs,
+            "AAA",
+            cyclic_successor_holds=True,
+        )
+
+        self.assertEqual((legacy[0].end, legacy[0].kind), (1755, "ron"))
+        self.assertEqual(
+            (fixed_inventory[0].end, fixed_inventory[0].kind),
+            (315, "turn"),
+        )
 
     def test_gate_rescue_does_not_reuse_reserved_touch_slot(self) -> None:
         claims = [

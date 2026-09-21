@@ -50,7 +50,11 @@ def export_gate_schedule(canonical: dict[str, Any]) -> dict[str, Any]:
         if not city["active"]:
             continue
         gates, stands = _capacity(city)
-        claims = build_claims(canonical["legs"], city["code"])
+        claims = build_claims(
+            canonical["legs"],
+            city["code"],
+            cyclic_successor_holds=enforce_fixed_inventory,
+        )
         if city["code"] in forced:
             claims = apply_forced_stand_splits(claims, forced[city["code"]])
         assignments = assign_gates(

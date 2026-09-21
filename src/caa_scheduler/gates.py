@@ -47,7 +47,12 @@ class GateCapacityError(ValueError):
         self.stranded_touches = stranded_touches or []
 
 
-def build_claims(legs: list[dict[str, Any]], city_code: str) -> list[GateClaim]:
+def build_claims(
+    legs: list[dict[str, Any]],
+    city_code: str,
+    *,
+    cyclic_successor_holds: bool = False,
+) -> list[GateClaim]:
     """Build recurring turn, overnight, origin, and termination claims.
 
     This is the single authoritative implementation used by validators and
@@ -83,13 +88,24 @@ def build_claims(legs: list[dict[str, Any]], city_code: str) -> list[GateClaim]:
                     None,
                 )
                 if next_leg is not None:
+                    end = next_leg["departureMinute"]
+                    kind = "turn"
+                    if cyclic_successor_holds:
+                        wait = (
+                            int(next_leg["departureMinute"])
+                            - int(leg["arrivalMinute"])
+                        ) % 1440
+                        if wait == 0:
+                            wait = 1440
+                        end = int(leg["arrivalMinute"]) + wait
+                        kind = "ron" if wait >= 360 else "turn"
                     claims.append(
                         GateClaim(
                             leg["arrivalMinute"],
-                            next_leg["departureMinute"],
+                            end,
                             str(route),
                             fleet,
-                            "turn",
+                            kind,
                             leg["origin"],
                             next_leg["destination"],
                         )
@@ -100,13 +116,24 @@ def build_claims(legs: list[dict[str, Any]], city_code: str) -> list[GateClaim]:
                 next_day_legs = days.get(next_day, [])
                 if next_day_legs and next_day_legs[0]["origin"] == city_code:
                     next_route = next_day_legs[0]["route"]
+                    end = next_day_legs[0]["departureMinute"] + 1440
+                    kind = "ron"
+                    if cyclic_successor_holds:
+                        wait = (
+                            int(next_day_legs[0]["departureMinute"])
+                            - int(leg["arrivalMinute"])
+                        ) % 1440
+                        if wait == 0:
+                            wait = 1440
+                        end = int(leg["arrivalMinute"]) + wait
+                        kind = "ron" if wait >= 360 else "turn"
                     claims.append(
                         GateClaim(
                             leg["arrivalMinute"],
-                            next_day_legs[0]["departureMinute"] + 1440,
+                            end,
                             f"{route} -> {next_route}",
                             fleet,
-                            "ron",
+                            kind,
                             leg["origin"],
                             next_day_legs[0]["destination"],
                         )

@@ -657,19 +657,22 @@ def validate_operating_rules(canonical: dict[str, Any]) -> dict[str, Any]:
     )
     for city in sorted((city for city in cities if city["active"]), key=lambda city: city["sourceOrder"]):
         gate_count, stand_count = _capacity(city)
-        claims = build_claims(legs, city["code"])
+        claims = build_claims(
+            legs,
+            city["code"],
+            cyclic_successor_holds=enforce_fixed_inventory,
+        )
         if city["code"] in forced:
             claims = apply_forced_stand_splits(claims, forced[city["code"]])
-        assignments, stand_middles = assign_gates(claims, gate_count, return_provenance=True)
-        if enforce_fixed_inventory:
-            try:
-                assign_gates(
-                    claims,
-                    gate_count,
-                    n_stands=stand_count,
-                    return_provenance=True,
-                )
-            except GateCapacityError as error:
+        try:
+            assignments, stand_middles = assign_gates(
+                claims,
+                gate_count,
+                n_stands=stand_count if enforce_fixed_inventory else None,
+                return_provenance=True,
+            )
+        except GateCapacityError as error:
+            if enforce_fixed_inventory:
                 fixed_inventory_failures.append(
                     _finding(
                         city["code"],
@@ -682,6 +685,11 @@ def validate_operating_rules(canonical: dict[str, Any]) -> dict[str, Any]:
                         strandedPassengerTouches=len(error.stranded_touches),
                     )
                 )
+            assignments, stand_middles = assign_gates(
+                claims,
+                gate_count,
+                return_provenance=True,
+            )
         max_stand = max((slot - gate_count for _, slot in assignments if slot > gate_count), default=0)
         if max_stand > stand_count:
             stand_overflow.append(
