@@ -23,6 +23,7 @@ from caa_scheduler.exact_materialization import (
     _pairing_patterns,
     _read_exact_seed_checkpoint,
     _repair_successor_cycles,
+    _repair_successor_gate_capacity,
     _write_exact_seed_checkpoint,
     blocked_exact_materialization_plan,
 )
@@ -297,8 +298,14 @@ class ExactMaterializationPlanTests(unittest.TestCase):
             materialized,
             cities,
         )
+        reserved_overflow = _materialized_passenger_gate_overflow(
+            materialized,
+            cities,
+            {"AAA": 1},
+        )
 
         self.assertEqual(overflow[("AAA", 120)], 1)
+        self.assertEqual(reserved_overflow[("AAA", 120)], 2)
 
     def test_capacity_repair_unlocks_every_passenger_overloaded_station(self) -> None:
         selected = _capacity_repair_stations(
@@ -370,6 +377,94 @@ class ExactMaterializationPlanTests(unittest.TestCase):
 
         self.assertEqual(blocked["status"], "fail")
         self.assertEqual(repaired["status"], "pass")
+
+    def test_gate_repair_continues_after_one_station_is_exhausted(self) -> None:
+        failures = [
+            {
+                "station": "AAA",
+                "strandedPassengerTouches": 2,
+                "requiredGates": 2,
+                "configuredGates": 1,
+                "requiredStands": 0,
+                "configuredStands": 0,
+                "strandedLabels": ["A1 -> A1"],
+            },
+            {
+                "station": "BBB",
+                "strandedPassengerTouches": 1,
+                "requiredGates": 2,
+                "configuredGates": 1,
+                "requiredStands": 0,
+                "configuredStands": 0,
+                "strandedLabels": ["B1 -> B1"],
+            },
+        ]
+        legs = {
+            "A1": {
+                "id": "A1",
+                "fleet": "CRJ200",
+                "origin": "CCC",
+                "destination": "AAA",
+                "departureUtcMinute": 0,
+                "blockMinutes": 60,
+            },
+            "B1": {
+                "id": "B1",
+                "fleet": "CRJ200",
+                "origin": "CCC",
+                "destination": "BBB",
+                "departureUtcMinute": 0,
+                "blockMinutes": 60,
+            },
+        }
+        successors = {"A1": "A1", "B1": "B1"}
+        station_results = {
+            "AAA": {
+                "status": "fail",
+                "towMovements": 0,
+                "failures": [
+                    {**failures[0], "strandedLabels": ["A1 -> A1"]}
+                ],
+            },
+            "BBB": {
+                "status": "fail",
+                "towMovements": 0,
+                "failures": [
+                    {**failures[1], "strandedLabels": ["B1 -> B1"]}
+                ],
+            },
+        }
+        full_result = {
+            "status": "fail",
+            "stations": 2,
+            "towMovements": 0,
+            "failures": failures,
+        }
+
+        with (
+            patch(
+                "caa_scheduler.exact_materialization._materialized_gate_assignments",
+                return_value=({}, full_result),
+            ),
+            patch(
+                "caa_scheduler.exact_materialization._materialized_station_gate_assignments",
+                side_effect=lambda *args: ([], station_results[args[-1]]),
+            ) as station_assignment,
+        ):
+            _repair_successor_gate_capacity(
+                legs,
+                successors,
+                [],
+                {"turns": {"minimumMinutes": 40}},
+                {},
+                set(),
+                {"CRJ200": 1},
+                10,
+                False,
+            )
+
+        attempted = [call.args[-1] for call in station_assignment.call_args_list]
+        self.assertEqual(attempted, ["AAA", "BBB"])
 
     def test_exact_gate_assignment_tows_only_the_long_hold_middle(self) -> None:
         materialized = {
