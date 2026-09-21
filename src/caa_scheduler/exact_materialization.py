@@ -2165,13 +2165,20 @@ def _solve_all_fleets_with_pairing_patterns(
         for station, overflow_index in (
             passenger_gate_overflow_variables.items()
         ):
+            gate_capacity = max(
+                0,
+                _capacity(cities[station])[0]
+                - int(
+                    (passenger_gate_capacity_reserve or {}).get(station, 0)
+                ),
+            )
             maximum_overflow = max(
                 (
                     sum(
                         value * mip_start[index]
                         for index, value in row.items()
                     )
-                    - float(_capacity(cities[station])[0])
+                    - float(gate_capacity)
                     for (candidate_station, _), row in (
                         passenger_gate_rows.items()
                     )
