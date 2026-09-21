@@ -22,6 +22,8 @@ class WebBuildTests(unittest.TestCase):
         selectors = set(re.findall(r'\$\("#([^"]+)"\)', script))
         self.assertEqual(len(ids), len(set(ids)), "index.html contains duplicate IDs")
         self.assertEqual(selectors - set(ids), set())
+        self.assertIn('id="preview-warning"', html)
+        self.assertIn("previewNotice", script)
 
     def test_build_copies_console_and_pinned_schedule_data(self) -> None:
         with tempfile.TemporaryDirectory() as directory:

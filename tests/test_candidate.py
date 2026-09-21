@@ -248,6 +248,56 @@ class CandidateBuildTests(unittest.TestCase):
                 checks["section_26_pairing_spacing"]["status"], "fail"
             )
 
+    def test_provisional_preview_exports_failed_materialized_exact_plan(self) -> None:
+        config = _config(self.baseline)
+        exact = json.loads(
+            (
+                REPO_ROOT
+                / "data"
+                / "schedules"
+                / "schedule_6_v2_2_5"
+                / "exact_materialization_plan.json"
+            ).read_text()
+        )
+        exact["scheduleId"] = config["buildId"]
+        exact["status"] = "fail"
+        exact["materializationStatus"] = "blocked"
+        exact["previewOnly"] = True
+        exact["checks"].append(
+            {
+                "id": "fixed_physical_inventory",
+                "status": "fail",
+                "hardStop": True,
+                "message": "Synthetic fixed-inventory preview failure",
+            }
+        )
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            config_path = root / "build_config.json"
+            output = root / "candidate"
+            config_path.write_text(json.dumps(config))
+            with patch(
+                "caa_scheduler.candidate.build_exact_materialization_plan_from_manifest",
+                return_value=exact,
+            ) as exact_builder:
+                report = build_candidate(
+                    config_path,
+                    REPO_ROOT,
+                    baseline_path=CANONICAL_PATH,
+                    output_directory=output,
+                    provisional_preview=True,
+                )
+
+            self.assertTrue(report["previewOnly"])
+            self.assertFalse(report["publicationReady"])
+            self.assertEqual(report["canonicalization"]["status"], "preview_only")
+            self.assertTrue((output / "canonical_schedule.json").is_file())
+            self.assertTrue((output / "timetable.json").is_file())
+            self.assertTrue((output / "gates.json").is_file())
+            self.assertTrue(
+                exact_builder.call_args.kwargs["allow_infeasible_preview"]
+            )
+
     def test_missing_demand_pin_blocks_before_compilation(self) -> None:
         config = _config(self.baseline)
         config["inputs"]["demandData"]["version"] = ""

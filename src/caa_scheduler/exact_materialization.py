@@ -3593,6 +3593,7 @@ def build_exact_materialization_plan(
     planning_rules: dict[str, Any],
     seed_checkpoint_path: Path | None = None,
     seed_fleets_per_run: int | None = None,
+    allow_infeasible_preview: bool = False,
 ) -> dict[str, Any]:
     if any(
         artifact.get("status") != "pass"
@@ -4054,7 +4055,7 @@ def build_exact_materialization_plan(
                         ]
                     )
                     > 0
-                ):
+                ) and not allow_infeasible_preview:
                     raise ExactGlobalRepairIncomplete(
                         {
                             str(key): float(value)
@@ -4085,7 +4086,10 @@ def build_exact_materialization_plan(
                 remaining_bank_capacity[
                     (str(leg["destinationBankId"]), "arrival")
                 ] -= 1
-        if min(remaining_bank_capacity.values(), default=0) < 0:
+        if (
+            min(remaining_bank_capacity.values(), default=0) < 0
+            and not allow_infeasible_preview
+        ):
             raise ValueError("Exact global materialization exceeded bank capacity")
     else:
         configured_fleet_order = exact_options.get("fleetSolveOrder")
@@ -4505,6 +4509,7 @@ def build_exact_materialization_plan(
         "operatingPolicyId": policy["id"],
         "status": "pass" if not failed else "fail",
         "materializationStatus": "complete" if not failed else "blocked",
+        "previewOnly": bool(allow_infeasible_preview),
         "timeStepMinutes": TIME_STEP_MINUTES,
         "summary": {
             "checks": len(checks),
@@ -4627,6 +4632,7 @@ def build_exact_materialization_plan_from_manifest(
     repo_root: Path,
     seed_checkpoint_path: Path | None = None,
     seed_fleets_per_run: int | None = None,
+    allow_infeasible_preview: bool = False,
 ) -> dict[str, Any]:
     loaded = load_demand_sources_from_manifest(manifest_path, repo_root)
     if loaded["manifest"]["id"] != frequency_plan["demandDataVersion"]:
@@ -4649,4 +4655,5 @@ def build_exact_materialization_plan_from_manifest(
         loaded["planningRules"],
         seed_checkpoint_path,
         seed_fleets_per_run,
+        allow_infeasible_preview,
     )

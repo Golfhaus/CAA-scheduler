@@ -420,6 +420,10 @@ async function initialize() {
 }
 
 function renderAll() {
+  const previewWarning = $("#preview-warning");
+  const previewNotice = state.scheduleEntry?.previewNotice;
+  previewWarning.hidden = !previewNotice;
+  previewWarning.textContent = previewNotice || "";
   ensureBuildConfig();
   renderOverview();
   renderSetup();

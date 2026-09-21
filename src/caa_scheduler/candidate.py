@@ -219,6 +219,7 @@ def build_candidate(
     *,
     baseline_path: Path | None = None,
     output_directory: Path | None = None,
+    provisional_preview: bool = False,
 ) -> dict[str, Any]:
     repo_root = repo_root.resolve()
     config_source = resolve_from_repo(repo_root, str(config_path)).resolve()
@@ -403,6 +404,7 @@ def build_candidate(
                                             f"{checkpoint_token}.json"
                                         )
                                     ),
+                                    allow_infeasible_preview=provisional_preview,
                                 )
                             except (
                                 ValueError,
@@ -415,7 +417,16 @@ def build_candidate(
                                     str(error),
                                 )
                             report["exactMaterializationPlan"] = exact_materialization
-                            if exact_materialization["status"] != "pass":
+                            preview_materialized = (
+                                provisional_preview
+                                and bool(exact_materialization.get("previewOnly"))
+                                and bool(exact_materialization.get("legs"))
+                                and bool(exact_materialization.get("cycles"))
+                            )
+                            if (
+                                exact_materialization["status"] != "pass"
+                                and not preview_materialized
+                            ):
                                 report["status"] = "blocked_planning_input"
                                 report["blockers"].append(
                                     exact_materialization["nextStep"]["message"]
@@ -462,6 +473,7 @@ def build_candidate(
                                         hub_bank_plan,
                                         exact_materialization,
                                         construction_provenance,
+                                        allow_incomplete_preview=preview_materialized,
                                     )
                                 )
                                 generated_candidate["gatePlan"][
@@ -521,6 +533,14 @@ def build_candidate(
                                     ]
                                     == 0
                                 )
+                                if provisional_preview:
+                                    report["previewOnly"] = True
+                                    report["publicationReady"] = False
+                                    report["previewWarning"] = (
+                                        "Provisional sandbox snapshot. The exact plan "
+                                        "has unresolved feasibility findings and must "
+                                        "not be published or treated as an accepted candidate."
+                                    )
     except ValueError as error:
         if report["status"] != "blocked_hard_stop":
             report["status"] = "blocked_planning_input"
@@ -602,7 +622,9 @@ def build_candidate(
     if "canonicalization" in report:
         report["outputs"]["canonicalization"] = "canonicalization_report.json"
 
-    if report["status"] in {"candidate_ready", "candidate_review_required"}:
+    if report["status"] in {"candidate_ready", "candidate_review_required"} or (
+        provisional_preview and report.get("previewOnly")
+    ):
         write_json(destination / "canonical_schedule.json", candidate)
         write_json(
             destination / "timetable.json",

@@ -176,6 +176,17 @@ main {
   padding: clamp(1.2rem, 3vw, 2.5rem) clamp(1rem, 4vw, 3.5rem) 4rem;
 }
 
+.preview-warning {
+  margin-bottom: 1.25rem;
+  border: 2px solid var(--danger);
+  border-radius: 0.75rem;
+  padding: 0.9rem 1rem;
+  background: var(--danger-soft);
+  color: var(--danger);
+  font-weight: 800;
+  line-height: 1.45;
+}
+
 .view[hidden], #app[hidden], .error-state[hidden] { display: none; }
 
 .loading-state, .error-state {

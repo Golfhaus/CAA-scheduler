@@ -1,0 +1,44 @@
+{
+  "schemaVersion": "1.0.0",
+  "defaultScheduleId": "schedule_7_v0_2_0_preview",
+  "repositoryUrl": "https://github.com/Golfhaus/CAA-scheduler",
+  "instructions": {
+    "version": "2.0 with turn-on-stand hard-stop addition",
+    "source": "instructions/CAA_Build_Instructions_TEMPLATE_v2_0.md",
+    "additions": [
+      "instructions/additions/BUILD_INSTRUCTIONS_ADDITION.md"
+    ],
+    "catalog": "data/instructions/build_instructions_v2_0.json"
+  },
+  "schedules": [
+    {
+      "id": "schedule_7_v0_2_0_preview",
+      "label": "Schedule 7 · v0.2.0 — PROVISIONAL INVALID SNAPSHOT",
+      "previewNotice": "PROVISIONAL SANDBOX SNAPSHOT — Fixed-inventory feasibility remains unresolved. Use this build to inspect the schedule, not as an accepted or publishable candidate.",
+      "files": {
+        "canonical": "builds/schedule_7_v0_2_0/canonical_schedule.json",
+        "structuralValidation": "builds/schedule_7_v0_2_0/validation_report.json",
+        "operatingValidation": "builds/schedule_7_v0_2_0/operating_validation_report.json",
+        "planning": "builds/schedule_7_v0_2_0/planning_snapshot.json",
+        "planningValidation": "builds/schedule_7_v0_2_0/planning_validation_report.json",
+        "demandPlan": "builds/schedule_7_v0_2_0/demand_plan.json",
+        "frequencyFleetPlan": "builds/schedule_7_v0_2_0/frequency_fleet_plan.json",
+        "hubBankPlan": "builds/schedule_7_v0_2_0/hub_bank_plan.json",
+        "aircraftRoutePlan": "builds/schedule_7_v0_2_0/aircraft_route_plan.json",
+        "routingRepairPlan": "builds/schedule_7_v0_2_0/routing_repair_plan.json",
+        "bankMaterializationDiagnostic": "builds/schedule_7_v0_2_0/bank_materialization_diagnostic.json",
+        "exactMaterializationPlan": "builds/schedule_7_v0_2_0/exact_materialization_plan.json",
+        "timetable": "builds/schedule_7_v0_2_0/timetable.json",
+        "gates": "builds/schedule_7_v0_2_0/gates.json"
+      }
+    }
+  ],
+  "buildSetup": {
+    "schema": "schemas/build_config.schema.json",
+    "storage": "browser-local",
+    "demandData": {
+      "version": "bts-db1c-6mo-jul2025-apr2026-v7",
+      "manifest": "config/demand_data/bts_db1c_6mo_v7.json"
+    }
+  }
+}

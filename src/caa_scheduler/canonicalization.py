@@ -171,6 +171,8 @@ def build_canonical_schedule_from_exact_plan(
     hub_bank_plan: dict[str, Any],
     exact_plan: dict[str, Any],
     construction_provenance: dict[str, Any],
+    *,
+    allow_incomplete_preview: bool = False,
 ) -> tuple[dict[str, Any], dict[str, Any]]:
     """Assign canonical identifiers to a passing exact materialization plan."""
     schedule_id = str(seed["schedule"]["id"])
@@ -191,9 +193,17 @@ def build_canonical_schedule_from_exact_plan(
         raise ValueError(
             f"Canonicalization schedule ID mismatch: seed={schedule_id}; {details}"
         )
-    if exact_plan.get("status") != "pass" or exact_plan.get(
-        "materializationStatus"
-    ) != "complete":
+    exact_plan_is_complete = (
+        exact_plan.get("status") == "pass"
+        and exact_plan.get("materializationStatus") == "complete"
+    )
+    preview_plan_is_materialized = (
+        allow_incomplete_preview
+        and bool(exact_plan.get("previewOnly"))
+        and bool(exact_plan.get("legs"))
+        and bool(exact_plan.get("cycles"))
+    )
+    if not exact_plan_is_complete and not preview_plan_is_materialized:
         raise ValueError("Canonicalization requires a complete passing exact plan")
     if hub_bank_plan.get("status") != "pass":
         raise ValueError("Canonicalization requires a passing hub-bank plan")
@@ -362,7 +372,7 @@ def build_canonical_schedule_from_exact_plan(
     report = {
         "schemaVersion": "1.0.0",
         "scheduleId": canonical["schedule"]["id"],
-        "status": "pass",
+        "status": "preview_only" if preview_plan_is_materialized else "pass",
         "sourceExactPlanSha256": construction_provenance["exactMaterialization"][
             "sha256"
         ],
