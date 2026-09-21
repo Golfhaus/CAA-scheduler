@@ -54,6 +54,15 @@
         "maximum": { "type": "integer", "minimum": 1 }
       }
     },
+    "constructionPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fixedPhysicalInventory", "optimizeNetworkAndUtilization"],
+      "properties": {
+        "fixedPhysicalInventory": { "type": "boolean" },
+        "optimizeNetworkAndUtilization": { "type": "boolean" }
+      }
+    },
     "inputs": {
       "type": "object",
       "additionalProperties": false,

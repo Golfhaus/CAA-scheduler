@@ -17,6 +17,13 @@ from scipy.sparse import coo_matrix
 from .bank_placement import _curfew_status, _maximum_spaced_departures
 from .demand import load_demand_sources_from_manifest
 from .gate_export import _capacity
+from .gates import (
+    TOUCH_ARRIVAL_MINUTES,
+    TOUCH_DEPARTURE_MINUTES,
+    GateCapacityError,
+    GateClaim,
+    assign_gates,
+)
 from .io import read_json, write_json
 from .routing import (
     _connection_wait,
@@ -61,14 +68,20 @@ class ExactGlobalRepairIncomplete(RuntimeError):
         bank_overflow: dict[str, float],
         solver_message: str,
         physical_capacity_overflow: dict[str, float] | None = None,
+        passenger_gate_overflow: dict[str, float] | None = None,
     ):
         self.bank_overflow = bank_overflow
         self.physical_capacity_overflow = physical_capacity_overflow or {}
+        self.passenger_gate_overflow = passenger_gate_overflow or {}
         combined_overflow = {
             **{f"bank:{key}": value for key, value in bank_overflow.items()},
             **{
                 f"airport:{key}": value
                 for key, value in self.physical_capacity_overflow.items()
+            },
+            **{
+                f"gate:{key}": value
+                for key, value in self.passenger_gate_overflow.items()
             },
         }
         total_overflow = sum(combined_overflow.values())
@@ -1202,6 +1215,149 @@ def _materialized_physical_capacity_overflow(
     return overflow
 
 
+def _materialized_passenger_gate_overflow(
+    materialized: dict[str, dict[str, Any]],
+    cities: dict[str, dict[str, Any]],
+) -> dict[tuple[str, int], int]:
+    """Measure the minimum passenger-gate demand implied by timed legs.
+
+    Arrival and departure touch windows may belong to the same through-turn.
+    Matching those touches by fleet gives a safe lower bound without assuming
+    that a ready aircraft must occupy a gate throughout a long RON/ROD hold.
+    The concrete successor allocator remains the final proof.
+    """
+    arrivals: defaultdict[str, list[tuple[str, int]]] = defaultdict(list)
+    departures: defaultdict[str, list[tuple[str, int]]] = defaultdict(list)
+    event_minutes: defaultdict[str, set[int]] = defaultdict(set)
+    for leg in materialized.values():
+        fleet = str(leg["fleet"])
+        origin = str(leg["origin"])
+        destination = str(leg["destination"])
+        departure = int(leg["departureUtcMinute"]) % 1440
+        arrival = (
+            departure + int(leg["blockMinutes"])
+        ) % 1440
+        departures[origin].append((fleet, departure))
+        arrivals[destination].append((fleet, arrival))
+        event_minutes[origin].update(
+            {
+                (departure - TOUCH_DEPARTURE_MINUTES) % 1440,
+                departure,
+            }
+        )
+        event_minutes[destination].update(
+            {
+                arrival,
+                (arrival + TOUCH_ARRIVAL_MINUTES) % 1440,
+            }
+        )
+
+    overflow: dict[tuple[str, int], int] = {}
+    for station, minutes in event_minutes.items():
+        for minute in sorted(minutes):
+            required = 0
+            fleets = {
+                fleet
+                for fleet, _ in arrivals[station] + departures[station]
+            }
+            for fleet in fleets:
+                arrival_touches = sum(
+                    candidate_fleet == fleet
+                    and (minute - arrival) % 1440
+                    < TOUCH_ARRIVAL_MINUTES
+                    for candidate_fleet, arrival in arrivals[station]
+                )
+                departure_touches = sum(
+                    candidate_fleet == fleet
+                    and 0
+                    < (departure - minute) % 1440
+                    <= TOUCH_DEPARTURE_MINUTES
+                    for candidate_fleet, departure in departures[station]
+                )
+                required += max(arrival_touches, departure_touches)
+            gates = _capacity(cities[station])[0]
+            if required > gates:
+                overflow[(station, minute)] = required - gates
+    return overflow
+
+
+def _materialized_gate_assignments(
+    materialized: dict[str, dict[str, Any]],
+    successors: dict[str, str],
+    cities: dict[str, dict[str, Any]],
+    minimum_turn: int,
+) -> tuple[dict[str, list[tuple[GateClaim, int]]], dict[str, Any]]:
+    """Assign real successor holds to fixed gates and stands.
+
+    Unlike the aggregate inventory lower bound, this evaluates the actual
+    arrival-to-next-departure connection selected for each aircraft cycle.
+    Long RON/ROD holds may be split, but every passenger touch must remain at
+    a gate and no row may exceed the configured physical inventory.
+    """
+    claims_by_station: defaultdict[str, list[GateClaim]] = defaultdict(list)
+    for identifier, successor in successors.items():
+        leg = materialized[identifier]
+        following = materialized[successor]
+        station = str(leg["destination"])
+        arrival_utc = int(leg["departureUtcMinute"]) + int(
+            leg["blockMinutes"]
+        )
+        wait = _connection_wait(
+            arrival_utc,
+            int(following["departureUtcMinute"]),
+            minimum_turn,
+        )
+        start = _local_minute(arrival_utc, station, cities)
+        claims_by_station[station].append(
+            GateClaim(
+                start,
+                start + wait,
+                f"{identifier} -> {successor}",
+                str(leg["fleet"]),
+                "ron" if wait >= 360 else "turn",
+                str(leg["origin"]),
+                str(following["destination"]),
+            )
+        )
+
+    assignments: dict[str, list[tuple[GateClaim, int]]] = {}
+    failures = []
+    tow_count = 0
+    for station in sorted(claims_by_station):
+        gates, stands = _capacity(cities[station])
+        try:
+            station_assignments, stand_middles = assign_gates(
+                claims_by_station[station],
+                gates,
+                n_stands=stands,
+                return_provenance=True,
+            )
+        except GateCapacityError as error:
+            failures.append(
+                {
+                    "station": station,
+                    "message": str(error),
+                    "requiredGates": error.required_gates,
+                    "configuredGates": error.configured_gates,
+                    "requiredStands": error.required_stands,
+                    "configuredStands": error.configured_stands,
+                    "strandedPassengerTouches": len(error.stranded_touches),
+                    "strandedLabels": sorted(
+                        claim.label for claim in error.stranded_touches
+                    ),
+                }
+            )
+            continue
+        assignments[station] = station_assignments
+        tow_count += len(stand_middles)
+    return assignments, {
+        "status": "pass" if not failures else "fail",
+        "stations": len(claims_by_station),
+        "towMovements": tow_count,
+        "failures": failures,
+    }
+
+
 def _solve_all_fleets_with_pairing_patterns(
     inventory: dict[str, list[dict[str, Any]]],
     fleet_counts: dict[str, int],
@@ -1218,6 +1374,7 @@ def _solve_all_fleets_with_pairing_patterns(
     maximum_patterns: int,
     beam_width: int,
     seed_materialized: dict[str, dict[str, Any]] | None = None,
+    enforce_passenger_gate_capacity: bool = False,
 ) -> tuple[
     dict[str, dict[str, Any]],
     dict[str, dict[str, Any]],
@@ -1256,6 +1413,7 @@ def _solve_all_fleets_with_pairing_patterns(
     ] = defaultdict(set)
     seed_overflow_keys: set[tuple[str, str]] = set()
     seed_physical_capacity_overflow: dict[tuple[str, int], int] = {}
+    seed_passenger_gate_overflow: dict[tuple[str, int], int] = {}
     flexible_seed_types: set[tuple[Any, ...]] = set()
     if seed_materialized is not None:
         for leg in seed_materialized.values():
@@ -1309,6 +1467,13 @@ def _solve_all_fleets_with_pairing_patterns(
                 minimum_turn,
             )
         )
+        if enforce_passenger_gate_capacity:
+            seed_passenger_gate_overflow = (
+                _materialized_passenger_gate_overflow(
+                    seed_materialized,
+                    cities,
+                )
+            )
         physical_overflow_by_station: defaultdict[str, list[int]] = (
             defaultdict(list)
         )
@@ -1325,6 +1490,22 @@ def _solve_all_fleets_with_pairing_patterns(
                 ),
             )[:1]
         }
+        passenger_overflow_by_station: defaultdict[str, list[int]] = (
+            defaultdict(list)
+        )
+        for (station, _), overflow in seed_passenger_gate_overflow.items():
+            passenger_overflow_by_station[station].append(overflow)
+        overloaded_stations.update(
+            station
+            for station, _ in sorted(
+                passenger_overflow_by_station.items(),
+                key=lambda item: (
+                    -max(item[1]),
+                    -sum(item[1]),
+                    item[0],
+                ),
+            )[:3]
+        )
         flexible_seed_types.update(
             key
             for key, _ in group_items
@@ -1332,13 +1513,14 @@ def _solve_all_fleets_with_pairing_patterns(
             or str(key[2]) in overloaded_stations
         )
         LOGGER.info(
-            "global seed overflow bank_rows=%d bank_touches=%d airport_rows=%d selected_airports=%s; flexible types=%d direct, %d with hub-operation closure, %d total",
+            "global seed overflow bank_rows=%d bank_touches=%d airport_rows=%d passenger_gate_rows=%d selected_airports=%s; flexible types=%d direct, %d with hub-operation closure, %d total",
             len(seed_overflow_keys),
             sum(
                 max(0, touches - int(bank_touch_limits[key]))
                 for key, touches in seed_bank_usage.items()
             ),
             len(seed_physical_capacity_overflow),
+            len(seed_passenger_gate_overflow),
             ",".join(sorted(overloaded_stations)) or "none",
             directly_flexible_types,
             hub_operation_flexible_types,
@@ -1551,7 +1733,11 @@ def _solve_all_fleets_with_pairing_patterns(
     ] = defaultdict(dict)
     station_events: defaultdict[tuple[str, str], set[int]] = defaultdict(set)
     physical_station_events: defaultdict[str, set[int]] = defaultdict(set)
+    passenger_gate_events: defaultdict[str, set[int]] = defaultdict(set)
     arrival_events_by_station: defaultdict[
+        str, list[tuple[int, str, int]]
+    ] = defaultdict(list)
+    departure_events_by_station: defaultdict[
         str, list[tuple[int, str, int]]
     ] = defaultdict(list)
 
@@ -1578,8 +1764,23 @@ def _solve_all_fleets_with_pairing_patterns(
             station_events[(fleet, destination)].add(ready_utc)
             physical_station_events[origin].add(departure_utc)
             physical_station_events[destination].add(arrival_utc)
+            passenger_gate_events[origin].update(
+                {
+                    (departure_utc - TOUCH_DEPARTURE_MINUTES) % 1440,
+                    departure_utc,
+                }
+            )
+            passenger_gate_events[destination].update(
+                {
+                    arrival_utc,
+                    (arrival_utc + TOUCH_ARRIVAL_MINUTES) % 1440,
+                }
+            )
             arrival_events_by_station[destination].append(
                 (index, fleet, arrival_utc)
+            )
+            departure_events_by_station[origin].append(
+                (index, fleet, departure_utc)
             )
             if event["originBankId"] is not None:
                 add_coefficient(
@@ -1660,6 +1861,79 @@ def _solve_all_fleets_with_pairing_patterns(
             lower_bounds.append(-np.inf)
             row_upper_bounds.append(combined_capacity)
             physical_capacity_constraints += 1
+
+    passenger_gate_constraints = 0
+    passenger_touch_variables: dict[tuple[str, int, str], int] = {}
+    passenger_arrival_rows: dict[
+        tuple[str, int, str], dict[int, float]
+    ] = {}
+    passenger_departure_rows: dict[
+        tuple[str, int, str], dict[int, float]
+    ] = {}
+    passenger_gate_rows: dict[tuple[str, int], dict[int, float]] = {}
+    passenger_gate_overflow_variables: dict[str, int] = {}
+    if enforce_passenger_gate_capacity:
+        for station in sorted(passenger_gate_events):
+            overflow_index = len(objective)
+            objective.append(BANK_OVERFLOW_OBJECTIVE_WEIGHT)
+            upper_bounds.append(float(sum(fleet_counts.values())))
+            passenger_gate_overflow_variables[station] = overflow_index
+            station_fleets = sorted(
+                {
+                    fleet
+                    for _, fleet, _ in (
+                        arrival_events_by_station[station]
+                        + departure_events_by_station[station]
+                    )
+                }
+            )
+            for minute in sorted(passenger_gate_events[station]):
+                gate_row: dict[int, float] = {}
+                for fleet in station_fleets:
+                    key = (station, minute, fleet)
+                    touch_index = len(objective)
+                    objective.append(0.0)
+                    upper_bounds.append(float(fleet_counts[fleet]))
+                    passenger_touch_variables[key] = touch_index
+                    arrival_row: dict[int, float] = {}
+                    for index, candidate_fleet, arrival_utc in (
+                        arrival_events_by_station[station]
+                    ):
+                        if (
+                            candidate_fleet == fleet
+                            and (minute - arrival_utc) % 1440
+                            < TOUCH_ARRIVAL_MINUTES
+                        ):
+                            add_coefficient(arrival_row, index)
+                    departure_row: dict[int, float] = {}
+                    for index, candidate_fleet, departure_utc in (
+                        departure_events_by_station[station]
+                    ):
+                        until_departure = (departure_utc - minute) % 1440
+                        if (
+                            candidate_fleet == fleet
+                            and 0
+                            < until_departure
+                            <= TOUCH_DEPARTURE_MINUTES
+                        ):
+                            add_coefficient(departure_row, index)
+                    passenger_arrival_rows[key] = arrival_row
+                    passenger_departure_rows[key] = departure_row
+                    for touch_row in (arrival_row, departure_row):
+                        row = {touch_index: 1.0}
+                        for index, value in touch_row.items():
+                            add_coefficient(row, index, -value)
+                        rows.append(row)
+                        lower_bounds.append(0.0)
+                        row_upper_bounds.append(np.inf)
+                        passenger_gate_constraints += 1
+                    gate_row[touch_index] = 1.0
+                passenger_gate_rows[(station, minute)] = dict(gate_row)
+                gate_row[overflow_index] = -1.0
+                rows.append(gate_row)
+                lower_bounds.append(-np.inf)
+                row_upper_bounds.append(float(_capacity(cities[station])[0]))
+                passenger_gate_constraints += 1
 
     for fleet, station in sorted(station_events):
         events = sorted(station_events[(fleet, station)])
@@ -1816,6 +2090,39 @@ def _solve_all_fleets_with_pairing_patterns(
                 0.0,
                 maximum_overflow,
             )
+        for key, touch_index in passenger_touch_variables.items():
+            arrival_touches = sum(
+                value
+                for index, value in passenger_arrival_rows[key].items()
+                if index in selected_choice_indices
+            )
+            departure_touches = sum(
+                value
+                for index, value in passenger_departure_rows[key].items()
+                if index in selected_choice_indices
+            )
+            mip_start[touch_index] = max(
+                arrival_touches,
+                departure_touches,
+            )
+        for station, overflow_index in (
+            passenger_gate_overflow_variables.items()
+        ):
+            maximum_overflow = max(
+                (
+                    sum(
+                        value * mip_start[index]
+                        for index, value in row.items()
+                    )
+                    - float(_capacity(cities[station])[0])
+                    for (candidate_station, _), row in (
+                        passenger_gate_rows.items()
+                    )
+                    if candidate_station == station
+                ),
+                default=0.0,
+            )
+            mip_start[overflow_index] = max(0.0, maximum_overflow)
         row_values = np.asarray(matrix @ mip_start).reshape(-1)
         lower_violation = np.max(
             np.maximum(row_lower_array - row_values, 0.0), initial=0.0
@@ -1880,11 +2187,17 @@ def _solve_all_fleets_with_pairing_patterns(
         for station, index in physical_capacity_overflow_variables.items()
         if float(result.x[index]) > 1e-6
     }
+    passenger_gate_overflow = {
+        station: float(result.x[index])
+        for station, index in passenger_gate_overflow_variables.items()
+        if float(result.x[index]) > 1e-6
+    }
     LOGGER.info(
-        "global repair returned %s with %.0f bank overflow and %.0f airport overflow in %.1fs",
+        "global repair returned %s with %.0f bank overflow, %.0f airport overflow, and %.0f passenger-gate overflow in %.1fs",
         result.message,
         sum(bank_overflow.values()),
         sum(physical_capacity_overflow.values()),
+        sum(passenger_gate_overflow.values()),
         time.monotonic() - global_started,
     )
     maximum_fraction = max(abs(value - round(value)) for value in result.x)
@@ -1976,6 +2289,12 @@ def _solve_all_fleets_with_pairing_patterns(
             "bankCapacityConstraintMode": "global_capacity",
             "physicalCapacityConstraints": physical_capacity_constraints,
             "physicalCapacityConstraintMode": "global_gate_plus_stand_capacity",
+            "passengerGateConstraints": passenger_gate_constraints,
+            "passengerGateConstraintMode": (
+                "fleet_matched_arrival_departure_touch_windows"
+                if enforce_passenger_gate_capacity
+                else "disabled"
+            ),
             "section26SpacingConstraints": "compiled_into_patterns",
             "section26PolicyExceptionCapacity": int(
                 spacing_capacity_by_fleet[fleet]
@@ -1984,7 +2303,11 @@ def _solve_all_fleets_with_pairing_patterns(
     joint_solver = {
         "status": (
             "repair_incomplete_time_limit"
-            if bank_overflow or physical_capacity_overflow
+            if (
+                bank_overflow
+                or physical_capacity_overflow
+                or passenger_gate_overflow
+            )
             else "optimal_within_gap" if result.success else "feasible_time_limit"
         ),
         "message": str(result.message),
@@ -2000,10 +2323,18 @@ def _solve_all_fleets_with_pairing_patterns(
             physical_capacity_overflow.values()
         ),
         "physicalCapacityOverflowRows": physical_capacity_overflow,
+        "passengerGateConstraints": passenger_gate_constraints,
+        "passengerGateFeasibilityOverflow": sum(
+            passenger_gate_overflow.values()
+        ),
+        "passengerGateOverflowRows": passenger_gate_overflow,
         "constructiveSeed": seed_materialized is not None,
         "seedOverloadedBankRows": len(seed_overflow_keys),
         "seedOverloadedPhysicalCapacityRows": len(
             seed_physical_capacity_overflow
+        ),
+        "seedOverloadedPassengerGateRows": len(
+            seed_passenger_gate_overflow
         ),
         "seedFlexibleLegTypes": len(flexible_seed_types),
         "timeLimitSeconds": time_limit_seconds,
@@ -2696,6 +3027,9 @@ def build_exact_materialization_plan(
     policy = canonical["operatingPolicy"]
     fleet_counts = canonical["schedule"]["fleetCounts"]
     exact_options = planning_rules.get("exactMaterialization", {})
+    enforce_fixed_inventory = bool(
+        exact_options.get("enforceFixedPhysicalInventory", False)
+    )
     if seed_fleets_per_run is not None:
         if seed_fleets_per_run < 1:
             raise ValueError("Seed fleets per run must be at least one")
@@ -2873,6 +3207,7 @@ def build_exact_materialization_plan(
         seed_solver_fleets: dict[str, dict[str, Any]] = {}
         seed_overflow: dict[tuple[str, str], int] = {}
         seed_physical_capacity_overflow: dict[tuple[str, int], int] = {}
+        seed_passenger_gate_overflow: dict[tuple[str, int], int] = {}
         seed_reused_fleets: list[str] = []
         new_seed_fleets = 0
         if constructive_seed_mode == "independent_fleets":
@@ -3021,10 +3356,18 @@ def build_exact_materialization_plan(
                     int(policy["turns"]["minimumMinutes"]),
                 )
             )
+            if enforce_fixed_inventory:
+                seed_passenger_gate_overflow = (
+                    _materialized_passenger_gate_overflow(
+                        seed_materialized,
+                        cities,
+                    )
+                )
         if (
             seed_materialized is not None
             and not seed_overflow
             and not seed_physical_capacity_overflow
+            and not seed_passenger_gate_overflow
         ):
             materialized = seed_materialized
             solver_fleets = seed_solver_fleets
@@ -3035,10 +3378,12 @@ def build_exact_materialization_plan(
                 ),
                 "bankFeasibilityOverflow": 0,
                 "physicalCapacityFeasibilityOverflow": 0,
+                "passengerGateFeasibilityOverflow": 0,
                 "constructiveSeed": True,
                 "seedCheckpointReusedFleets": seed_reused_fleets,
                 "seedOverloadedBankRows": 0,
                 "seedOverloadedPhysicalCapacityRows": 0,
+                "seedOverloadedPassengerGateRows": 0,
                 "timeLimitSeconds": global_time_limit_seconds,
             }
         else:
@@ -3065,6 +3410,7 @@ def build_exact_materialization_plan(
                     maximum_patterns,
                     pairing_pattern_beam_width,
                     seed_materialized,
+                    enforce_fixed_inventory,
                 )
             )
             if joint_solver is not None:
@@ -3073,6 +3419,9 @@ def build_exact_materialization_plan(
                 )
                 joint_solver["seedTotalPhysicalCapacityOverage"] = sum(
                     seed_physical_capacity_overflow.values()
+                )
+                joint_solver["seedTotalPassengerGateOverage"] = sum(
+                    seed_passenger_gate_overflow.values()
                 )
                 joint_solver["seedCheckpointReusedFleets"] = (
                     seed_reused_fleets
@@ -3111,6 +3460,12 @@ def build_exact_materialization_plan(
                         ]
                     )
                     > 0
+                    or float(
+                        joint_solver[
+                            "passengerGateFeasibilityOverflow"
+                        ]
+                    )
+                    > 0
                 ):
                     raise ExactGlobalRepairIncomplete(
                         {
@@ -3124,6 +3479,12 @@ def build_exact_materialization_plan(
                             str(key): float(value)
                             for key, value in joint_solver[
                                 "physicalCapacityOverflowRows"
+                            ].items()
+                        },
+                        {
+                            str(key): float(value)
+                            for key, value in joint_solver[
+                                "passengerGateOverflowRows"
                             ].items()
                         },
                     )
@@ -3251,6 +3612,19 @@ def build_exact_materialization_plan(
             )
         ),
     )
+    gate_diagnostic = {
+        "status": "not_evaluated",
+        "stations": 0,
+        "towMovements": 0,
+        "failures": [],
+    }
+    if enforce_fixed_inventory:
+        _, gate_diagnostic = _materialized_gate_assignments(
+            materialized,
+            successors,
+            cities,
+            minimum_turn,
+        )
 
     hubs = set(policy["hubs"])
     legs = [materialized[identifier] for identifier in sorted(materialized)]
@@ -3487,6 +3861,19 @@ def build_exact_materialization_plan(
                 ),
             }
         )
+    if enforce_fixed_inventory:
+        checks.append(
+            {
+                "id": "fixed_physical_inventory",
+                "status": gate_diagnostic["status"],
+                "hardStop": True,
+                "message": (
+                    f"All {gate_diagnostic['stations']} stations fit their configured gates and stands with {gate_diagnostic['towMovements']} conditional tow(s)"
+                    if gate_diagnostic["status"] == "pass"
+                    else f"{len(gate_diagnostic['failures'])} stations cannot fit their configured gates and stands"
+                ),
+            }
+        )
     failed = sum(check["status"] == "fail" for check in checks)
     required_aircraft = sum(
         int(row["requiredAircraft"]) for row in fleet_plan.values()
@@ -3519,6 +3906,18 @@ def build_exact_materialization_plan(
             "destinationsWithoutRon": len(missing_rons),
             "rollingRonViolations": len(rolling_violations),
             "successorSwaps": len(swaps),
+            **(
+                {
+                    "gateCapacityFailures": len(
+                        gate_diagnostic["failures"]
+                    ),
+                    "conditionalTows": int(
+                        gate_diagnostic["towMovements"]
+                    ),
+                }
+                if enforce_fixed_inventory
+                else {}
+            ),
             **(
                 {"spacingViolations": len(spacing_violations)}
                 if enforce_pairing_spacing
@@ -3565,6 +3964,11 @@ def build_exact_materialization_plan(
             "missingDestinationRons": missing_rons,
             "rollingRonViolations": rolling_violations,
             **(
+                {"gateCapacity": gate_diagnostic}
+                if enforce_fixed_inventory
+                else {}
+            ),
+            **(
                 {
                     "spacingViolations": spacing_violations,
                     "spacingExceptions": spacing_exceptions,
@@ -3584,7 +3988,11 @@ def build_exact_materialization_plan(
         },
         "limitations": [
             "Exact materialization proves five-minute flight times, complete non-hub integration, aircraft-cycle continuity, fleet capacity, hard curfews, destination RONs, and rolling target-RON cadence.",
-            "Gate and stand capacity has not yet been evaluated against these newly materialized cycles.",
+            (
+                "Exact-cycle gate and stand claims use fixed physical inventory; RON/ROD towing is conditional and passenger handling remains at gates."
+                if enforce_fixed_inventory
+                else "Gate and stand capacity has not yet been evaluated against these newly materialized cycles."
+            ),
             "Canonical Line/Day/Route, pairing, and flight identifiers remain unassigned until the next construction stage.",
         ],
     }

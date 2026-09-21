@@ -45,6 +45,7 @@ def export_gate_schedule(canonical: dict[str, Any]) -> dict[str, Any]:
         for code, labels in gate_plan.get("forcedStandSplits", {}).items()
     }
     cities = []
+    enforce_fixed_inventory = bool(gate_plan.get("fixedPhysicalInventory", False))
     for city in sorted(canonical["cities"], key=lambda item: item["sourceOrder"]):
         if not city["active"]:
             continue
@@ -52,7 +53,11 @@ def export_gate_schedule(canonical: dict[str, Any]) -> dict[str, Any]:
         claims = build_claims(canonical["legs"], city["code"])
         if city["code"] in forced:
             claims = apply_forced_stand_splits(claims, forced[city["code"]])
-        assignments = assign_gates(claims, n_gates=gates)
+        assignments = assign_gates(
+            claims,
+            n_gates=gates,
+            n_stands=stands if enforce_fixed_inventory else None,
+        )
         cities.append(
             {
                 "code": city["code"],

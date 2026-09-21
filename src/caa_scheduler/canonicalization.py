@@ -349,6 +349,9 @@ def build_canonical_schedule_from_exact_plan(
         "gatePlan": {
             "label": seed["schedule"]["label"],
             "forcedStandSplits": {},
+            "fixedPhysicalInventory": bool(
+                seed.get("gatePlan", {}).get("fixedPhysicalInventory", False)
+            ),
         },
         "operatingPolicy": operating_policy,
         "hubBanks": hub_banks,

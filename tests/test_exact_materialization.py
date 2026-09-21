@@ -15,7 +15,9 @@ from caa_scheduler.exact_materialization import (
     _apply_assigned_bank_waves,
     _expand_flexible_seed_types_to_hub_operations,
     _expand_flexible_seed_types_to_markets,
+    _materialized_passenger_gate_overflow,
     _materialized_physical_capacity_overflow,
+    _materialized_gate_assignments,
     _pairing_patterns,
     _read_exact_seed_checkpoint,
     _repair_successor_cycles,
@@ -261,6 +263,152 @@ class ExactMaterializationPlanTests(unittest.TestCase):
 
         self.assertEqual(overflow[("AAA", 180)], 1)
         self.assertNotIn(("BBB", 60), overflow)
+
+    def test_materialized_passenger_gate_overflow_counts_touch_windows(self) -> None:
+        materialized = {
+            f"IN-{ordinal}": {
+                "id": f"IN-{ordinal}",
+                "fleet": "CRJ200",
+                "origin": origin,
+                "destination": "AAA",
+                "departureUtcMinute": 60,
+                "blockMinutes": 60,
+            }
+            for ordinal, origin in enumerate(("BBB", "CCC", "DDD"), 1)
+        }
+        cities = {
+            code: {
+                "role": "destination",
+                "timezone": "Eastern",
+                "gateAllocationOverride": gates,
+                "standAllocationOverride": 2,
+            }
+            for code, gates in (
+                ("AAA", 2),
+                ("BBB", 2),
+                ("CCC", 2),
+                ("DDD", 2),
+            )
+        }
+
+        overflow = _materialized_passenger_gate_overflow(
+            materialized,
+            cities,
+        )
+
+        self.assertEqual(overflow[("AAA", 120)], 1)
+
+    def test_exact_gate_assignment_tows_only_the_long_hold_middle(self) -> None:
+        materialized = {
+            "ARRIVE": {
+                "id": "ARRIVE",
+                "fleet": "CRJ200",
+                "origin": "BBB",
+                "destination": "AAA",
+                "departureUtcMinute": 1140,
+                "blockMinutes": 60,
+            },
+            "DEPART": {
+                "id": "DEPART",
+                "fleet": "CRJ200",
+                "origin": "AAA",
+                "destination": "BBB",
+                "departureUtcMinute": 360,
+                "blockMinutes": 60,
+            },
+            "TURN_IN": {
+                "id": "TURN_IN",
+                "fleet": "CRJ200",
+                "origin": "CCC",
+                "destination": "AAA",
+                "departureUtcMinute": 1260,
+                "blockMinutes": 40,
+            },
+            "TURN_OUT": {
+                "id": "TURN_OUT",
+                "fleet": "CRJ200",
+                "origin": "AAA",
+                "destination": "CCC",
+                "departureUtcMinute": 1360,
+                "blockMinutes": 40,
+            },
+        }
+        successors = {
+            "ARRIVE": "DEPART",
+            "DEPART": "ARRIVE",
+            "TURN_IN": "TURN_OUT",
+            "TURN_OUT": "TURN_IN",
+        }
+        cities = {
+            code: {
+                "role": "destination",
+                "timezone": "Eastern",
+                "gateAllocationOverride": gates,
+                "standAllocationOverride": stands,
+            }
+            for code, gates, stands in (
+                ("AAA", 1, 1),
+                ("BBB", 2, 2),
+                ("CCC", 2, 2),
+            )
+        }
+
+        _, diagnostic = _materialized_gate_assignments(
+            materialized,
+            successors,
+            cities,
+            40,
+        )
+
+        self.assertEqual(diagnostic["status"], "pass")
+        self.assertEqual(diagnostic["towMovements"], 1)
+
+    def test_exact_gate_assignment_rejects_exhausted_inventory(self) -> None:
+        materialized = {}
+        successors = {}
+        for ordinal in range(3):
+            incoming = f"IN-{ordinal}"
+            outgoing = f"OUT-{ordinal}"
+            materialized[incoming] = {
+                "id": incoming,
+                "fleet": "CRJ200",
+                "origin": "BBB",
+                "destination": "AAA",
+                "departureUtcMinute": 1200,
+                "blockMinutes": 60,
+            }
+            materialized[outgoing] = {
+                "id": outgoing,
+                "fleet": "CRJ200",
+                "origin": "AAA",
+                "destination": "BBB",
+                "departureUtcMinute": 1320,
+                "blockMinutes": 60,
+            }
+            successors[incoming] = outgoing
+            successors[outgoing] = incoming
+        cities = {
+            code: {
+                "role": "destination",
+                "timezone": "Eastern",
+                "gateAllocationOverride": gates,
+                "standAllocationOverride": stands,
+            }
+            for code, gates, stands in (
+                ("AAA", 1, 1),
+                ("BBB", 3, 3),
+            )
+        }
+
+        _, diagnostic = _materialized_gate_assignments(
+            materialized,
+            successors,
+            cities,
+            40,
+        )
+
+        self.assertEqual(diagnostic["status"], "fail")
+        self.assertEqual(diagnostic["failures"][0]["station"], "AAA")
 
     def test_successor_repair_can_cross_a_score_plateau(self) -> None:
         identifiers = ("A", "B", "C", "D")

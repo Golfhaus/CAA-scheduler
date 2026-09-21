@@ -14,6 +14,7 @@ from .canonicalization import (
 )
 from .demand import build_demand_plan_from_manifest, resolve_demand_manifest
 from .exact_materialization import (
+    ExactGlobalRepairIncomplete,
     blocked_exact_materialization_plan,
     build_exact_materialization_plan_from_manifest,
 )
@@ -375,6 +376,15 @@ def build_candidate(
                                 "Exact materialization is suppressed until the candidate's hard stops are cleared"
                             )
                         else:
+                            checkpoint_token = sha256_json(
+                                {
+                                    "candidate": candidate,
+                                    "frequencyFleetPlan": frequency_fleet_plan,
+                                    "hubBankPlan": hub_bank_plan,
+                                    "routingRepairPlan": routing_repair_plan,
+                                },
+                                indent=None,
+                            )[:16]
                             try:
                                 exact_materialization = build_exact_materialization_plan_from_manifest(
                                     candidate,
@@ -383,8 +393,18 @@ def build_candidate(
                                     routing_repair_plan,
                                     demand_manifest,
                                     repo_root,
+                                    seed_checkpoint_path=(
+                                        destination
+                                        / (
+                                            ".exact_seed_checkpoint_"
+                                            f"{checkpoint_token}.json"
+                                        )
+                                    ),
                                 )
-                            except ValueError as error:
+                            except (
+                                ValueError,
+                                ExactGlobalRepairIncomplete,
+                            ) as error:
                                 exact_materialization = blocked_exact_materialization_plan(
                                     candidate,
                                     frequency_fleet_plan,
@@ -439,6 +459,13 @@ def build_candidate(
                                         hub_bank_plan,
                                         exact_materialization,
                                         construction_provenance,
+                                    )
+                                )
+                                generated_candidate["gatePlan"][
+                                    "fixedPhysicalInventory"
+                                ] = bool(
+                                    config.get("constructionPolicy", {}).get(
+                                        "fixedPhysicalInventory", False
                                     )
                                 )
                                 report["canonicalization"] = canonicalization

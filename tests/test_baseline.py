@@ -13,7 +13,12 @@ sys.path.insert(0, str(REPO_ROOT / "src"))
 
 from caa_scheduler.baseline import build_baseline
 from caa_scheduler.gate_export import export_gate_schedule
-from caa_scheduler.gates import GateClaim, assign_gates, overlaps
+from caa_scheduler.gates import (
+    GateCapacityError,
+    GateClaim,
+    assign_gates,
+    overlaps,
+)
 from caa_scheduler.importer import import_canonical_schedule
 from caa_scheduler.io import read_json
 from caa_scheduler.operating_validation import validate_operating_rules
@@ -119,6 +124,58 @@ class ScheduleSixBaselineTests(unittest.TestCase):
         ]
         self.assertEqual(conflicts, [])
 
+    def test_bounded_assignment_uses_a_stand_only_for_a_long_hold_middle(self) -> None:
+        overnight = GateClaim(1200, 1800, "ron", "CRJ200", "ron", "A", "B")
+        passenger_turn = GateClaim(1300, 1360, "turn", "CRJ200", "turn", "C", "D")
+
+        assignments, stand_middles = assign_gates(
+            [overnight, passenger_turn],
+            1,
+            n_stands=1,
+            return_provenance=True,
+        )
+
+        self.assertEqual(len(stand_middles), 1)
+        self.assertTrue(
+            all(
+                slot == 1
+                for claim, slot in assignments
+                if claim not in stand_middles
+            )
+        )
+        self.assertEqual(
+            {slot for claim, slot in assignments if claim in stand_middles},
+            {2},
+        )
+
+    def test_bounded_assignment_never_synthesizes_an_extra_stand(self) -> None:
+        claims = [
+            GateClaim(1200, 1800, str(index), "CRJ200", "ron", "A", "B")
+            for index in range(3)
+        ]
+
+        with self.assertRaises(GateCapacityError) as raised:
+            assign_gates(claims, 1, n_stands=1)
+
+        self.assertGreater(raised.exception.required_stands, 1)
+        self.assertEqual(raised.exception.configured_stands, 1)
+
+    def test_ron_claims_stay_at_gates_when_all_continuous_holds_fit(self) -> None:
+        claims = [
+            GateClaim(1200, 1800, str(index), "CRJ200", "ron", "A", "B")
+            for index in range(4)
+        ]
+
+        assignments, stand_middles = assign_gates(
+            claims,
+            4,
+            n_stands=4,
+            return_provenance=True,
+        )
+
+        self.assertFalse(stand_middles)
+        self.assertTrue(all(slot <= 4 for _, slot in assignments))
+
     def test_operating_validator_exposes_known_baseline_findings(self) -> None:
         report = validate_operating_rules(self.canonical)
         self.assertEqual(report["status"], "fail")
@@ -152,6 +209,18 @@ class ScheduleSixBaselineTests(unittest.TestCase):
         self.assertEqual(checks["hub_bank_alignment"]["status"], "not_evaluated")
         self.assertEqual(len(checks["market_frequency_ceiling"]["findings"]), 3)
         self.assertEqual(len(checks["passenger_touch_on_stand"]["findings"]), 35)
+
+    def test_fixed_inventory_mode_turns_synthesized_positions_into_hard_stops(self) -> None:
+        candidate = copy.deepcopy(self.canonical)
+        candidate["gatePlan"]["fixedPhysicalInventory"] = True
+
+        report = validate_operating_rules(candidate)
+        checks = {check["id"]: check for check in report["checks"]}
+
+        self.assertEqual(checks["fixed_physical_inventory"]["status"], "fail")
+        self.assertTrue(checks["fixed_physical_inventory"]["hardStop"])
+        self.assertTrue(checks["passenger_touch_on_stand"]["hardStop"])
+        self.assertTrue(checks["stand_capacity"]["hardStop"])
 
     def test_fleet_counts_are_schedule_specific(self) -> None:
         candidate = copy.deepcopy(self.canonical)

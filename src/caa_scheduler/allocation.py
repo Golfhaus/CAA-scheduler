@@ -19,6 +19,122 @@ def _market(origin: str, destination: str) -> Market:
     return tuple(sorted((origin, destination)))  # type: ignore[return-value]
 
 
+def _percentile(values: list[float], percentile: float) -> float:
+    """Return a deterministic linearly interpolated percentile."""
+    if not values:
+        return 0.0
+    ordered = sorted(values)
+    position = (len(ordered) - 1) * percentile / 100.0
+    lower = math.floor(position)
+    upper = math.ceil(position)
+    if lower == upper:
+        return ordered[lower]
+    fraction = position - lower
+    return ordered[lower] * (1.0 - fraction) + ordered[upper] * fraction
+
+
+def _optimize_service_assignments(
+    assignments: dict[str, list[str]],
+    assignment_rows: list[dict[str, Any]],
+    active_cities: dict[str, dict[str, Any]],
+    hub_codes: list[str],
+    matrix_values: dict[str, dict[str, float]],
+    rules: dict[str, Any] | None,
+) -> tuple[dict[str, list[str]], dict[str, Any]]:
+    """Select capacity-aware hub endpoints within each city's tier cap.
+
+    The demand qualification remains the starting point.  When enabled by a
+    versioned policy, strong previously-unselected hub markets can compete for
+    an available tier slot.  A primary hub can remain anchored while every
+    other slot is ranked by local demand, network coverage, and the reviewed
+    endpoint-balance weights.
+    """
+    if not rules or not rules.get("allowNewHubMarkets", False):
+        return assignments, {
+            "enabled": False,
+            "newMarketDemandThreshold": None,
+            "assignmentChanges": [],
+        }
+
+    row_by_code = {row["code"]: row for row in assignment_rows}
+    possible_new_demands = []
+    for code in assignments:
+        for hub in hub_codes:
+            if hub in assignments[code]:
+                continue
+            possible_new_demands.append(
+                float(matrix_values[code][hub])
+                + float(matrix_values[hub][code])
+            )
+    threshold = _percentile(
+        possible_new_demands,
+        float(rules.get("minimumNewMarketDemandPercentile", 100)),
+    )
+    endpoint_weights = {
+        str(code): float(weight)
+        for code, weight in rules.get(
+            "serviceAssignmentEndpointWeights", {}
+        ).items()
+    }
+    coverage = rules.get("northernToFloridaCoverage", {})
+    coverage_groups = set(coverage.get("originGroups", []))
+    coverage_hub = str(coverage.get("connectingHub", ""))
+    coverage_multiplier = float(coverage.get("scoreMultiplier", 1.0))
+    optimized: dict[str, list[str]] = {}
+    changes = []
+    for code in sorted(assignments):
+        original = list(assignments[code])
+        cap = int(row_by_code[code]["maximumHubs"])
+        candidates = set(original)
+        for hub in hub_codes:
+            two_way = (
+                float(matrix_values[code][hub])
+                + float(matrix_values[hub][code])
+            )
+            if two_way >= threshold:
+                candidates.add(hub)
+
+        anchored = []
+        if rules.get("preservePrimaryHub", True) and original:
+            anchored.append(original[0])
+        ranked = sorted(
+            (endpoint for endpoint in candidates if endpoint not in anchored),
+            key=lambda endpoint: (
+                -(
+                    math.sqrt(
+                        float(matrix_values[code][endpoint])
+                        + float(matrix_values[endpoint][code])
+                    )
+                    * endpoint_weights.get(endpoint, 1.0)
+                    * (
+                        coverage_multiplier
+                        if active_cities[code].get("group") in coverage_groups
+                        and endpoint == coverage_hub
+                        else 1.0
+                    )
+                ),
+                endpoint,
+            ),
+        )
+        selected = (anchored + ranked)[:cap]
+        optimized[code] = selected
+        if selected != original:
+            changes.append(
+                {
+                    "code": code,
+                    "originalAssignments": original,
+                    "optimizedAssignments": selected,
+                    "added": sorted(set(selected) - set(original)),
+                    "removed": sorted(set(original) - set(selected)),
+                }
+            )
+    return optimized, {
+        "enabled": True,
+        "newMarketDemandThreshold": round(threshold, 6),
+        "assignmentChanges": changes,
+    }
+
+
 def _tier_minimum_flight_legs(
     percentile: float, tiers: list[dict[str, Any]]
 ) -> int:
@@ -453,11 +569,53 @@ def build_frequency_fleet_plan(
         planning_rules,
     )
 
+    matrix_values = matrix["values"]
+    assigned_hubs, optimization_audit = _optimize_service_assignments(
+        assigned_hubs,
+        assignment_rows,
+        active_cities,
+        hub_codes,
+        matrix_values,
+        planning_rules.get("networkOptimization"),
+    )
+    network_reconciliation["optimization"] = optimization_audit
+
     retained_existing_pairs = set(existing_pairs)
-    removed_historical_pairs = {
-        _market(row["origin"], row["destination"])
-        for row in network_reconciliation["removedHistoricalServiceMarkets"]
-    }
+    if optimization_audit["enabled"]:
+        selected_service_pairs = {
+            _market(code, endpoint)
+            for code, endpoints in assigned_hubs.items()
+            for endpoint in endpoints
+        }
+        service_codes = {
+            code
+            for code, city in active_cities.items()
+            if city["role"] in {"hub", "focus_city"}
+        }
+        removed_historical_pairs = {
+            market
+            for market in existing_pairs
+            if bool(set(market) & service_codes)
+            and not (
+                active_cities[market[0]]["role"]
+                == active_cities[market[1]]["role"]
+                == "hub"
+            )
+            and market not in selected_service_pairs
+        }
+        network_reconciliation["removedHistoricalServiceMarkets"] = [
+            {
+                "origin": market[0],
+                "destination": market[1],
+                "reason": "outside_optimized_tier_service_assignments",
+            }
+            for market in sorted(removed_historical_pairs)
+        ]
+    else:
+        removed_historical_pairs = {
+            _market(row["origin"], row["destination"])
+            for row in network_reconciliation["removedHistoricalServiceMarkets"]
+        }
     for row in network_reconciliation["removedHistoricalServiceMarkets"]:
         market = _market(row["origin"], row["destination"])
         row["historicalLegs"] = historical_legs[market]
@@ -477,7 +635,6 @@ def build_frequency_fleet_plan(
         for destination in hub_codes[index + 1 :]
     }
     candidate_pairs = retained_existing_pairs | required_pairs | inter_hub_pairs
-    matrix_values = matrix["values"]
     demand = {
         market: round(
             float(matrix_values[market[0]][market[1]])
@@ -541,6 +698,7 @@ def build_frequency_fleet_plan(
     enforce_hub_gate_throughput = bool(
         allocation_rules.get("enforceHubGateBankThroughput", False)
     )
+    network_optimization = planning_rules.get("networkOptimization")
     hub_gate_capacity: dict[str, int] = {}
     if enforce_hub_gate_throughput:
         bank_counts = planning_rules["bankPlacement"].get(
@@ -571,11 +729,160 @@ def build_frequency_fleet_plan(
             if hub in hub_gate_capacity
         )
 
-    def market_ceiling(market: Market) -> int:
+    station_round_trip_capacity: dict[str, int] = {}
+    station_score_capacity: dict[str, int] = {}
+    if network_optimization:
+        operating_minutes = int(
+            network_optimization["stationOperatingMinutes"]
+        )
+        minutes_per_round_trip = int(
+            network_optimization["stationGateMinutesPerRoundTrip"]
+        )
+        station_round_trip_capacity = {
+            code: max(
+                1,
+                int(_capacity(city)[0] * operating_minutes / minutes_per_round_trip),
+            )
+            for code, city in active_cities.items()
+        }
+        station_score_capacity = dict(station_round_trip_capacity)
+        station_round_trip_capacity.update(
+            {
+                str(code): int(capacity)
+                for code, capacity in network_optimization.get(
+                    "stationRoundTripCapacityOverrides", {}
+                ).items()
+            }
+        )
+
+    def station_load(values: dict[Market, int], station: str) -> int:
+        return sum(
+            frequency
+            for market, frequency in values.items()
+            if station in market
+        )
+
+    def has_station_capacity(values: dict[Market, int], market: Market) -> bool:
+        if not station_round_trip_capacity:
+            return True
+        return all(
+            station_load(values, station)
+            <= station_round_trip_capacity[station]
+            for station in market
+        )
+
+    endpoint_weights = {
+        str(code): float(weight)
+        for code, weight in (network_optimization or {}).get(
+            "serviceAssignmentEndpointWeights", {}
+        ).items()
+    }
+    coverage = (network_optimization or {}).get(
+        "northernToFloridaCoverage", {}
+    )
+    coverage_groups = set(coverage.get("originGroups", []))
+    coverage_hub = str(coverage.get("connectingHub", ""))
+    coverage_multiplier = float(coverage.get("scoreMultiplier", 1.0))
+    market_ceiling_overrides = {
+        tuple(sorted(str(pair).split("-"))): int(value)
+        for pair, value in (network_optimization or {}).get(
+            "marketFrequencyCeilingRoundTripsOverrides", {}
+        ).items()
+    }
+
+    def marginal_score(market: Market, next_frequency: int) -> float:
+        endpoint_factor = math.prod(
+            endpoint_weights.get(endpoint, 1.0)
+            for endpoint in market
+            if endpoint in endpoint_weights
+        )
+        spoke = next(
+            (
+                endpoint
+                for endpoint in market
+                if active_cities[endpoint]["role"] not in {"hub", "focus_city"}
+            ),
+            None,
+        )
+        network_factor = (
+            coverage_multiplier
+            if spoke is not None
+            and active_cities[spoke].get("group") in coverage_groups
+            and coverage_hub in market
+            else 1.0
+        )
+        classification_factor = {
+            "assigned_hub": 1.2,
+            "supplemental_hub": 1.0,
+            "focus_city": 1.1,
+            "inter_hub": 1.15,
+            "point_to_point": 0.85,
+        }[classifications[market]]
+        capacity_factor = math.prod(
+            max(
+                0.2,
+                (
+                    station_score_capacity[endpoint]
+                    - station_load(frequencies, endpoint)
+                )
+                / station_score_capacity[endpoint],
+            )
+            for endpoint in market
+        ) if station_round_trip_capacity else 1.0
         return (
+            math.sqrt(max(0.0, demand[market]))
+            * endpoint_factor
+            * network_factor
+            * classification_factor
+            * capacity_factor
+            / max(1, next_frequency)
+        )
+
+    def optional_score(market: Market, next_frequency: int) -> float:
+        if network_optimization:
+            return marginal_score(market, next_frequency)
+        return math.sqrt(demand[market]) / max(1, next_frequency)
+
+    def market_ceiling(market: Market) -> int:
+        result = (
             interhub_ceiling
             if classifications[market] == "inter_hub"
             else ceiling
+        )
+        if (
+            network_optimization
+            and "BHM" in market
+            and classifications[market] == "focus_city"
+        ):
+            result = min(
+                result,
+                int(
+                    network_optimization[
+                        "focusCityOptionalRoundTripCapPerMarket"
+                    ]
+                )
+                + mandatory_frequencies.get(market, 0),
+            )
+        result = min(result, market_ceiling_overrides.get(market, result))
+        return result
+
+    capacity_removed_point_to_point_round_trips: list[Market] = []
+    for market in candidate_pairs:
+        applicable_ceiling = market_ceiling(market)
+        if frequencies[market] <= applicable_ceiling:
+            continue
+        if classifications[market] != "point_to_point":
+            raise ValueError(
+                "A market-specific frequency ceiling cannot remove required "
+                f"hub service: {'-'.join(market)}"
+            )
+        removed = frequencies[market] - applicable_ceiling
+        frequencies[market] = applicable_ceiling
+        mandatory_frequencies[market] = min(
+            mandatory_frequencies[market], applicable_ceiling
+        )
+        capacity_removed_point_to_point_round_trips.extend(
+            [market] * removed
         )
 
     round_trip_costs = {
@@ -606,6 +913,22 @@ def build_frequency_fleet_plan(
             if maximum_planned_legs is not None
             else None
         )
+        optional_score_floor = 0.0
+        if network_optimization:
+            initial_optional_scores = [
+                marginal_score(market, frequencies[market] + 1)
+                for market in candidate_pairs
+                if classifications[market] != "point_to_point"
+                and frequencies[market] < market_ceiling(market)
+            ]
+            optional_score_floor = _percentile(
+                initial_optional_scores,
+                float(
+                    network_optimization[
+                        "minimumOptionalScorePercentile"
+                    ]
+                ),
+            )
         while True:
             if (
                 maximum_round_trips is not None
@@ -621,14 +944,25 @@ def build_frequency_fleet_plan(
             ]
             eligible.sort(
                 key=lambda market: (
-                    -math.sqrt(demand[market]) / (frequencies[market] + 1),
+                    -optional_score(market, frequencies[market] + 1),
                     market,
                 )
             )
+            if (
+                network_optimization
+                and eligible
+                and optional_score(
+                    eligible[0], frequencies[eligible[0]] + 1
+                )
+                < optional_score_floor
+            ):
+                break
             accepted = False
             for market in eligible:
                 frequencies[market] += 1
-                if not has_hub_gate_capacity(frequencies, market):
+                if not has_hub_gate_capacity(
+                    frequencies, market
+                ) or not has_station_capacity(frequencies, market):
                     frequencies[market] -= 1
                     blocked.add(market)
                     continue
@@ -648,6 +982,50 @@ def build_frequency_fleet_plan(
                 blocked.add(market)
             if not accepted:
                 break
+
+    removed_point_to_point_round_trips: list[Market] = list(
+        capacity_removed_point_to_point_round_trips
+    )
+    if network_optimization and not allocation["unassigned"]:
+        point_to_point_limit = float(
+            allocation_rules["pointToPointMaximumShare"]
+        )
+        while True:
+            total_round_trips = sum(frequencies.values())
+            point_to_point_round_trips = sum(
+                frequencies[market]
+                for market in candidate_pairs
+                if classifications[market] == "point_to_point"
+            )
+            share = (
+                point_to_point_round_trips / total_round_trips
+                if total_round_trips
+                else 0.0
+            )
+            if share <= point_to_point_limit + 1e-9:
+                break
+            removable = sorted(
+                (
+                    market
+                    for market in candidate_pairs
+                    if classifications[market] == "point_to_point"
+                    and frequencies[market] > 0
+                ),
+                key=lambda market: (demand[market], market),
+            )
+            if not removable:
+                break
+            market = removable[0]
+            frequencies[market] -= 1
+            removed_point_to_point_round_trips.append(market)
+            allocation = _assign_frequencies(
+                frequencies,
+                demand,
+                profiles,
+                fleet_counts,
+                round_trip_costs,
+                productive_minutes,
+            )
 
     assigned_counts: defaultdict[Market, Counter[str]] = allocation["assignments"]
     unconsolidated_markets = (
@@ -691,6 +1069,10 @@ def build_frequency_fleet_plan(
     point_to_point_share = (
         point_to_point_legs / planned_legs if planned_legs else 0.0
     )
+    if network_optimization:
+        network_reconciliation["optimization"][
+            "removedPointToPointRoundTrips"
+        ] = ["-".join(market) for market in removed_point_to_point_round_trips]
 
     city_service = []
     for code, row in sorted(demand_city.items()):
@@ -716,11 +1098,7 @@ def build_frequency_fleet_plan(
                         "hubCountCap": row["maximumHubs"],
                         "qualifiedHubs": list(row["hubAssignments"]),
                         "serviceAssignments": list(hubs),
-                        "focusCitySubstitutionUsed": any(
-                            decision["code"] == code
-                            and decision["focusCitySubstitutionUsed"]
-                            for decision in network_reconciliation["cityDecisions"]
-                        ),
+                        "focusCitySubstitutionUsed": "BHM" in hubs,
                     }
                     if network_reconciliation["mode"] == "strict_tier_caps"
                     else {}
@@ -794,6 +1172,23 @@ def build_frequency_fleet_plan(
                 "historicalLegs": historical_legs.get(market, 0),
                 "historicalFleetLegs": dict(sorted(historical_fleets[market].items())),
                 **(
+                    {
+                        "marginalSelectionScore": round(
+                            marginal_score(
+                                market,
+                                max(1, planned_frequency[market]),
+                            ),
+                            6,
+                        ),
+                        "newOptimizedMarket": (
+                            market in required_pairs
+                            and market not in existing_pairs
+                        ),
+                    }
+                    if network_optimization
+                    else {}
+                ),
+                **(
                     {"frequencyCeilingRoundTrips": market_ceiling(market)}
                     if "interHubMarketFrequencyCeilingRoundTrips"
                     in allocation_rules
@@ -819,6 +1214,16 @@ def build_frequency_fleet_plan(
             - hub_gate_load(planned_frequency, hub),
         }
         for hub, capacity in sorted(hub_gate_capacity.items())
+    ]
+    station_capacity_rows = [
+        {
+            "station": station,
+            "plannedRoundTrips": station_load(planned_frequency, station),
+            "maximumRoundTrips": capacity,
+            "remainingRoundTrips": capacity
+            - station_load(planned_frequency, station),
+        }
+        for station, capacity in sorted(station_round_trip_capacity.items())
     ]
     checks = [
         {
@@ -928,6 +1333,22 @@ def build_frequency_fleet_plan(
                 ),
             }
         )
+    if network_optimization:
+        station_capacity_passed = all(
+            row["remainingRoundTrips"] >= 0
+            for row in station_capacity_rows
+        )
+        checks.append(
+            {
+                "id": "station_gate_throughput",
+                "status": "pass" if station_capacity_passed else "fail",
+                "message": (
+                    "Every station's planned frequency fits its gate-derived daily throughput envelope"
+                    if station_capacity_passed
+                    else "One or more stations exceed the gate-derived daily throughput envelope"
+                ),
+            }
+        )
     failed = sum(check["status"] == "fail" for check in checks)
     return {
         "schemaVersion": "1.0.0",
@@ -999,8 +1420,8 @@ def build_frequency_fleet_plan(
                         removed_historical_pairs
                     ),
                     "focusCitySubstitutions": sum(
-                        row["focusCitySubstitutionUsed"]
-                        for row in network_reconciliation["cityDecisions"]
+                        row.get("focusCitySubstitutionUsed", False)
+                        for row in city_service
                     ),
                 }
                 if network_reconciliation["mode"] == "strict_tier_caps"
@@ -1017,6 +1438,11 @@ def build_frequency_fleet_plan(
             else {}
         ),
         **({"hubGateCapacity": hub_gate_rows} if enforce_hub_gate_throughput else {}),
+        **(
+            {"stationGateCapacity": station_capacity_rows}
+            if network_optimization
+            else {}
+        ),
         **(
             {"networkReconciliation": network_reconciliation}
             if network_reconciliation["mode"] == "strict_tier_caps"

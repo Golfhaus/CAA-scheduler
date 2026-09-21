@@ -291,6 +291,51 @@ def _optimize_phases(
                         for service in hub_services
                     ):
                         directional_banks += 1
+        spoke_capacity_score: tuple[int, int] = (0, 0)
+        if bank_rules.get("optimizeSpokePlacementCapacity", False):
+            spoke_shortfall = 0
+            spoke_covered = 0
+            for service in spoke_services:
+                feasible_banks = sum(
+                    1
+                    for bank in windows[service["hub"]]
+                    if (
+                        _curfew_status(
+                            service["spoke"],
+                            _local_departure(
+                                bank["startMinute"]
+                                + int(bank_rules["spokeArrivalOffsetMinutes"]),
+                                service["blockMinutes"],
+                                service["spoke"],
+                                service["hub"],
+                                cities,
+                            ),
+                            bank["startMinute"]
+                            + int(bank_rules["spokeArrivalOffsetMinutes"]),
+                            policy,
+                        )
+                        == "pass"
+                        and _curfew_status(
+                            service["hub"],
+                            bank["startMinute"]
+                            + int(bank_rules["hubDepartureOffsetMinutes"]),
+                            _local_arrival(
+                                bank["startMinute"]
+                                + int(bank_rules["hubDepartureOffsetMinutes"]),
+                                service["blockMinutes"],
+                                service["hub"],
+                                service["spoke"],
+                                cities,
+                            ),
+                            policy,
+                        )
+                        == "pass"
+                    )
+                )
+                required = int(service["weight"])
+                spoke_shortfall += max(0, required - feasible_banks)
+                spoke_covered += min(required, feasible_banks)
+            spoke_capacity_score = (-spoke_shortfall, spoke_covered)
         if bank_rules.get("requireInterhubSpacingCapacity", False):
             capacity_rows = _interhub_spacing_capacity(
                 interhub_services,
@@ -304,7 +349,12 @@ def _optimize_phases(
                 min(row["requiredDepartures"], row["spacedCandidateCapacity"])
                 for row in capacity_rows
             )
-            return directional_banks, -shortfall, covered
+            return (
+                *spoke_capacity_score,
+                directional_banks,
+                -shortfall,
+                covered,
+            )
         interhub_score = sum(
             service["weight"]
             for service in interhub_services
@@ -317,7 +367,7 @@ def _optimize_phases(
                 int(bank_rules["interHubSearchStepMinutes"]),
             )
         )
-        return directional_banks, interhub_score
+        return (*spoke_capacity_score, directional_banks, interhub_score)
 
     best: tuple[tuple[int, ...], tuple[int, ...], dict[str, int]] | None = None
     for seed in candidates:
@@ -524,10 +574,70 @@ def build_hub_bank_plan(
             }
         )
 
-    for market in sorted(
-        frequency_plan["markets"],
-        key=lambda row: (-row["twoWayDemand"], row["origin"], row["destination"]),
-    ):
+    placement_markets: list[dict[str, Any]]
+    if bank_rules.get("prioritizeMandatoryService", False):
+        mandatory_parts = []
+        optional_parts = []
+        for market in frequency_plan["markets"]:
+            remaining_mandatory = int(market["mandatoryRoundTrips"])
+            ordinal_offset = 0
+            for allocation in market["allocations"]:
+                total = int(allocation["roundTrips"])
+                mandatory = min(total, remaining_mandatory)
+                optional = total - mandatory
+                if mandatory:
+                    mandatory_parts.append(
+                        {
+                            **market,
+                            "allocations": [
+                                {**allocation, "roundTrips": mandatory}
+                            ],
+                            "_ordinalOffset": ordinal_offset,
+                        }
+                    )
+                if optional:
+                    optional_parts.append(
+                        {
+                            **market,
+                            "allocations": [
+                                {**allocation, "roundTrips": optional}
+                            ],
+                            "_ordinalOffset": ordinal_offset + mandatory,
+                        }
+                    )
+                remaining_mandatory -= mandatory
+                ordinal_offset += total
+        placement_markets = [
+            *sorted(
+                mandatory_parts,
+                key=lambda row: (
+                    -row["twoWayDemand"],
+                    row["origin"],
+                    row["destination"],
+                    row["_ordinalOffset"],
+                ),
+            ),
+            *sorted(
+                optional_parts,
+                key=lambda row: (
+                    -row["twoWayDemand"],
+                    row["origin"],
+                    row["destination"],
+                    row["_ordinalOffset"],
+                ),
+            ),
+        ]
+    else:
+        placement_markets = sorted(
+            frequency_plan["markets"],
+            key=lambda row: (
+                -row["twoWayDemand"],
+                row["origin"],
+                row["destination"],
+            ),
+        )
+
+    for market in placement_markets:
         market_hubs = [
             code
             for code in (market["origin"], market["destination"])
@@ -535,7 +645,7 @@ def build_hub_bank_plan(
         ]
         if not market_hubs:
             continue
-        ordinal = 0
+        ordinal = int(market.get("_ordinalOffset", 0))
         for allocation in market["allocations"]:
             fleet = allocation["fleet"]
             block = _block_minutes(

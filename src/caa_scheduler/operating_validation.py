@@ -5,6 +5,7 @@ from typing import Any, Iterable
 
 from .gate_export import _capacity
 from .gates import (
+    GateCapacityError,
     GateClaim,
     apply_forced_stand_splits,
     assign_gates,
@@ -650,12 +651,37 @@ def validate_operating_rules(canonical: dict[str, Any]) -> dict[str, Any]:
     stand_overflow = []
     gate_conflicts = []
     one_minute_overflow = []
+    fixed_inventory_failures = []
+    enforce_fixed_inventory = bool(
+        canonical.get("gatePlan", {}).get("fixedPhysicalInventory", False)
+    )
     for city in sorted((city for city in cities if city["active"]), key=lambda city: city["sourceOrder"]):
         gate_count, stand_count = _capacity(city)
         claims = build_claims(legs, city["code"])
         if city["code"] in forced:
             claims = apply_forced_stand_splits(claims, forced[city["code"]])
         assignments, stand_middles = assign_gates(claims, gate_count, return_provenance=True)
+        if enforce_fixed_inventory:
+            try:
+                assign_gates(
+                    claims,
+                    gate_count,
+                    n_stands=stand_count,
+                    return_provenance=True,
+                )
+            except GateCapacityError as error:
+                fixed_inventory_failures.append(
+                    _finding(
+                        city["code"],
+                        f"{city['code']} cannot fit its claims into the configured physical inventory: {error}",
+                        city=city["code"],
+                        requiredGates=error.required_gates,
+                        configuredGates=error.configured_gates,
+                        requiredStands=error.required_stands,
+                        configuredStands=error.configured_stands,
+                        strandedPassengerTouches=len(error.stranded_touches),
+                    )
+                )
         max_stand = max((slot - gate_count for _, slot in assignments if slot > gate_count), default=0)
         if max_stand > stand_count:
             stand_overflow.append(
@@ -731,6 +757,7 @@ def validate_operating_rules(canonical: dict[str, Any]) -> dict[str, Any]:
             "error",
             gate_conflicts,
             "No assigned physical slot is double-booked cyclically",
+            hard_stop=enforce_fixed_inventory,
         )
     )
     checks.append(
@@ -741,6 +768,7 @@ def validate_operating_rules(canonical: dict[str, Any]) -> dict[str, Any]:
             "error",
             touch_on_stand,
             "Every deplaning and boarding touch is assigned to a gate",
+            hard_stop=enforce_fixed_inventory,
         )
     )
     checks.append(
@@ -751,6 +779,7 @@ def validate_operating_rules(canonical: dict[str, Any]) -> dict[str, Any]:
             "error",
             stand_overflow,
             "Every assignment fits within configured stand capacity",
+            hard_stop=enforce_fixed_inventory,
         )
     )
     checks.append(
@@ -761,8 +790,21 @@ def validate_operating_rules(canonical: dict[str, Any]) -> dict[str, Any]:
             "error",
             one_minute_overflow,
             "Every city's one-minute peak fits combined gate and stand capacity",
+            hard_stop=enforce_fixed_inventory,
         )
     )
+    if enforce_fixed_inventory:
+        checks.append(
+            _check(
+                "fixed_physical_inventory",
+                "Authoritative gate and stand inventory",
+                "§1.7 / §2.2",
+                "error",
+                fixed_inventory_failures,
+                "Every airport assignment fits its configured gates and stands without synthesized positions",
+                hard_stop=True,
+            )
+        )
 
     runway_known = {city["code"] for city in cities if city["runwayLengthFeet"] is not None}
     if not runway_known:
