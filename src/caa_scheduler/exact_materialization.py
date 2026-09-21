@@ -1281,6 +1281,40 @@ def _materialized_passenger_gate_overflow(
     return overflow
 
 
+def _capacity_repair_stations(
+    physical_overflow: dict[tuple[str, int], int],
+    passenger_gate_overflow: dict[tuple[str, int], int],
+) -> set[str]:
+    """Select every station whose passenger touches need exact retiming.
+
+    Physical gate-plus-stand overflow can make a large model unnecessarily
+    broad, so repair retains the existing largest-station bound there. A
+    passenger-gate overflow is different: leaving even one affected station's
+    market types fixed guarantees that PHOS can survive an otherwise optimal
+    repair. Every passenger-overloaded station must therefore be flexible.
+    """
+    physical_by_station: defaultdict[str, list[int]] = defaultdict(list)
+    for (station, _), overflow in physical_overflow.items():
+        physical_by_station[station].append(overflow)
+    selected = {
+        station
+        for station, _ in sorted(
+            physical_by_station.items(),
+            key=lambda item: (
+                -max(item[1]),
+                -sum(item[1]),
+                item[0],
+            ),
+        )[:1]
+    }
+
+    passenger_by_station: defaultdict[str, list[int]] = defaultdict(list)
+    for (station, _), overflow in passenger_gate_overflow.items():
+        passenger_by_station[station].append(overflow)
+    selected.update(passenger_by_station)
+    return selected
+
+
 def _materialized_gate_assignments(
     materialized: dict[str, dict[str, Any]],
     successors: dict[str, str],
@@ -1474,37 +1508,9 @@ def _solve_all_fleets_with_pairing_patterns(
                     cities,
                 )
             )
-        physical_overflow_by_station: defaultdict[str, list[int]] = (
-            defaultdict(list)
-        )
-        for (station, _), overflow in seed_physical_capacity_overflow.items():
-            physical_overflow_by_station[station].append(overflow)
-        overloaded_stations = {
-            station
-            for station, _ in sorted(
-                physical_overflow_by_station.items(),
-                key=lambda item: (
-                    -max(item[1]),
-                    -sum(item[1]),
-                    item[0],
-                ),
-            )[:1]
-        }
-        passenger_overflow_by_station: defaultdict[str, list[int]] = (
-            defaultdict(list)
-        )
-        for (station, _), overflow in seed_passenger_gate_overflow.items():
-            passenger_overflow_by_station[station].append(overflow)
-        overloaded_stations.update(
-            station
-            for station, _ in sorted(
-                passenger_overflow_by_station.items(),
-                key=lambda item: (
-                    -max(item[1]),
-                    -sum(item[1]),
-                    item[0],
-                ),
-            )[:3]
+        overloaded_stations = _capacity_repair_stations(
+            seed_physical_capacity_overflow,
+            seed_passenger_gate_overflow,
         )
         flexible_seed_types.update(
             key

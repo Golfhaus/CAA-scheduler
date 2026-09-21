@@ -13,6 +13,7 @@ sys.path.insert(0, str(REPO_ROOT / "src"))
 
 from caa_scheduler.exact_materialization import (
     _apply_assigned_bank_waves,
+    _capacity_repair_stations,
     _expand_flexible_seed_types_to_hub_operations,
     _expand_flexible_seed_types_to_markets,
     _materialized_passenger_gate_overflow,
@@ -297,6 +298,25 @@ class ExactMaterializationPlanTests(unittest.TestCase):
         )
 
         self.assertEqual(overflow[("AAA", 120)], 1)
+
+    def test_capacity_repair_unlocks_every_passenger_overloaded_station(self) -> None:
+        selected = _capacity_repair_stations(
+            {
+                ("PHYSICAL_A", 100): 2,
+                ("PHYSICAL_B", 200): 1,
+            },
+            {
+                ("BHM", 100): 1,
+                ("BNA", 200): 1,
+                ("DAL", 300): 1,
+                ("RFD", 400): 1,
+            },
+        )
+
+        self.assertEqual(
+            selected,
+            {"PHYSICAL_A", "BHM", "BNA", "DAL", "RFD"},
+        )
 
     def test_exact_gate_assignment_tows_only_the_long_hold_middle(self) -> None:
         materialized = {
