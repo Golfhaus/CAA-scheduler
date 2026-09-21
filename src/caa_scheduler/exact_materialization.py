@@ -3277,6 +3277,314 @@ def _repair_successor_gate_capacity(
     return cycles, swaps
 
 
+def _gate_capacity_score(
+    station_scores: dict[str, tuple[int, int, int, int, int]],
+) -> tuple[int, int, int, int, int]:
+    failures = [score for score in station_scores.values() if score[0]]
+    return (
+        len(failures),
+        sum(score[1] for score in failures),
+        sum(score[2] for score in failures),
+        sum(score[3] for score in failures),
+        sum(score[4] for score in station_scores.values() if not score[0]),
+    )
+
+
+def _assigned_bank_windows_hold(
+    leg: dict[str, Any],
+    windows: dict[str, list[dict[str, Any]]],
+) -> bool:
+    for station_key, bank_key, minute_key in (
+        ("origin", "originBankId", "departureMinute"),
+        ("destination", "destinationBankId", "arrivalMinute"),
+    ):
+        assigned = leg.get(bank_key)
+        if assigned is None:
+            continue
+        station = str(leg[station_key])
+        if _bank_id(int(leg[minute_key]) % 1440, windows[station]) != assigned:
+            return False
+    return True
+
+
+def _pairing_spacing_holds_for_leg(
+    leg: dict[str, Any],
+    materialized: dict[str, dict[str, Any]],
+    station_departure_counts: Counter[str],
+    policy: dict[str, Any],
+    allow_pairing_spacing_exceptions: bool,
+) -> bool:
+    pairing = (str(leg["origin"]), str(leg["destination"]))
+    departures = sorted(
+        int(candidate["departureMinute"]) % 1440
+        for candidate in materialized.values()
+        if (
+            str(candidate["origin"]),
+            str(candidate["destination"]),
+        )
+        == pairing
+    )
+    if len(departures) < 2:
+        return True
+    rule = pairing_spacing_rule(
+        pairing[0],
+        pairing[1],
+        len(departures),
+        int(station_departure_counts[pairing[0]]),
+        set(policy["hubs"]),
+        policy["section26"],
+    )
+    gaps = [
+        (departures[(index + 1) % len(departures)] - minute) % 1440
+        for index, minute in enumerate(departures)
+    ]
+    if any(gap < rule["hardFloorMinutes"] for gap in gaps):
+        return False
+    allowed_exceptions = (
+        int(rule["allowedExceptions"])
+        if allow_pairing_spacing_exceptions
+        else 0
+    )
+    return (
+        sum(gap < rule["minimumGapMinutes"] for gap in gaps)
+        <= allowed_exceptions
+    )
+
+
+def _repair_exact_gate_times(
+    materialized: dict[str, dict[str, Any]],
+    successors: dict[str, str],
+    cycles: list[dict[str, Any]],
+    policy: dict[str, Any],
+    cities: dict[str, dict[str, Any]],
+    windows: dict[str, list[dict[str, Any]]],
+    required_destinations: set[str],
+    fleet_counts: dict[str, int],
+    rolling_limit: int,
+    single_target_full_gap: bool,
+    station_departure_counts: Counter[str],
+    allow_pairing_spacing_exceptions: bool,
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    """Shift stranded passenger touches within their assigned bank cores.
+
+    The global model constrains simultaneous touch demand, while the final
+    recurring gate chart is a cyclic coloring problem. Small exact-time moves
+    can break a circular coloring conflict without changing service, routing,
+    or inventory. Every accepted move strictly improves the global gate score
+    and revalidates both endpoints, bank identity, curfew, pairing spacing,
+    turns, RON coverage, and the aircraft requirement.
+    """
+    minimum_turn = int(policy["turns"]["minimumMinutes"])
+    predecessors = {
+        successor: identifier for identifier, successor in successors.items()
+    }
+    stations = sorted(
+        {str(leg["destination"]) for leg in materialized.values()}
+    )
+    station_scores: dict[str, tuple[int, int, int, int, int]] = {}
+    station_diagnostics: dict[str, dict[str, Any]] = {}
+    for station in stations:
+        _, diagnostic = _materialized_station_gate_assignments(
+            materialized,
+            successors,
+            cities,
+            minimum_turn,
+            station,
+        )
+        station_scores[station] = _station_gate_score(diagnostic)
+        station_diagnostics[station] = diagnostic
+
+    aircraft_ceiling = _cycle_score(
+        cycles,
+        required_destinations,
+        fleet_counts,
+        rolling_limit,
+    )[-1]
+    exhausted_stations: set[str] = set()
+    moves: list[dict[str, Any]] = []
+    offsets = (-60, -45, -30, -20, -15, -10, -5, 5, 10, 15, 20, 30, 45, 60)
+
+    for _ in range(30):
+        failures = [
+            station
+            for station, score in station_scores.items()
+            if score[0] and station not in exhausted_stations
+        ]
+        if not failures:
+            break
+        station = max(
+            failures,
+            key=lambda candidate: (
+                station_scores[candidate][1],
+                station_scores[candidate][2],
+                candidate,
+            ),
+        )
+        failure = station_diagnostics[station]["failures"][0]
+        candidate_legs = set()
+        for label in failure["strandedLabels"]:
+            arriving, departing = str(label).split(" -> ", 1)
+            candidate_legs.update((arriving, departing))
+
+        current_score = _gate_capacity_score(station_scores)
+        candidates = []
+        for identifier in sorted(candidate_legs):
+            if identifier not in predecessors or identifier not in successors:
+                continue
+            original = materialized[identifier]
+            for offset in offsets:
+                departure_utc = (
+                    int(original["departureUtcMinute"]) + offset
+                ) % 1440
+                arrival_utc = (
+                    departure_utc + int(original["blockMinutes"])
+                ) % 1440
+                candidate_leg = dict(original)
+                candidate_leg.update(
+                    {
+                        "departureUtcMinute": departure_utc,
+                        "arrivalUtcMinute": arrival_utc,
+                        "departureMinute": _local_minute(
+                            departure_utc,
+                            str(original["origin"]),
+                            cities,
+                        ),
+                        "arrivalMinute": _local_minute(
+                            arrival_utc,
+                            str(original["destination"]),
+                            cities,
+                        ),
+                    }
+                )
+                candidate_leg["curfewStatus"] = _curfew_status(
+                    str(candidate_leg["origin"]),
+                    int(candidate_leg["departureMinute"]),
+                    int(candidate_leg["arrivalMinute"]),
+                    policy,
+                )
+                if (
+                    candidate_leg["curfewStatus"] != "pass"
+                    or not _assigned_bank_windows_hold(candidate_leg, windows)
+                ):
+                    continue
+
+                materialized[identifier] = candidate_leg
+                predecessor = materialized[predecessors[identifier]]
+                following = materialized[successors[identifier]]
+                predecessor_wait = _connection_wait(
+                    int(predecessor["departureUtcMinute"])
+                    + int(predecessor["blockMinutes"]),
+                    departure_utc,
+                    minimum_turn,
+                )
+                following_wait = _connection_wait(
+                    departure_utc + int(candidate_leg["blockMinutes"]),
+                    int(following["departureUtcMinute"]),
+                    minimum_turn,
+                )
+                if (
+                    predecessor_wait < minimum_turn
+                    or following_wait < minimum_turn
+                    or not _pairing_spacing_holds_for_leg(
+                        candidate_leg,
+                        materialized,
+                        station_departure_counts,
+                        policy,
+                        allow_pairing_spacing_exceptions,
+                    )
+                ):
+                    materialized[identifier] = original
+                    continue
+
+                affected_stations = {
+                    str(candidate_leg["origin"]),
+                    str(candidate_leg["destination"]),
+                }
+                candidate_scores = dict(station_scores)
+                candidate_diagnostics = {}
+                for affected in affected_stations:
+                    _, diagnostic = _materialized_station_gate_assignments(
+                        materialized,
+                        successors,
+                        cities,
+                        minimum_turn,
+                        affected,
+                    )
+                    candidate_scores[affected] = _station_gate_score(diagnostic)
+                    candidate_diagnostics[affected] = diagnostic
+                gate_score = _gate_capacity_score(candidate_scores)
+                if gate_score >= current_score:
+                    materialized[identifier] = original
+                    continue
+
+                candidate_cycles = _cycles(
+                    materialized,
+                    successors,
+                    policy,
+                    cities,
+                    single_target_full_gap=single_target_full_gap,
+                )
+                cycle_score = _cycle_score(
+                    candidate_cycles,
+                    required_destinations,
+                    fleet_counts,
+                    rolling_limit,
+                )
+                materialized[identifier] = original
+                if (
+                    cycle_score[:4] != (0, 0, 0, 0)
+                    or cycle_score[-1] > aircraft_ceiling
+                ):
+                    continue
+                candidates.append(
+                    (
+                        gate_score,
+                        identifier,
+                        abs(offset),
+                        offset,
+                        candidate_leg,
+                        candidate_cycles,
+                        candidate_scores,
+                        candidate_diagnostics,
+                        cycle_score,
+                    )
+                )
+
+        if not candidates:
+            exhausted_stations.add(station)
+            continue
+        (
+            gate_score,
+            identifier,
+            _,
+            offset,
+            candidate_leg,
+            cycles,
+            station_scores,
+            candidate_diagnostics,
+            cycle_score,
+        ) = min(candidates, key=lambda candidate: candidate[:4])
+        original = materialized[identifier]
+        materialized[identifier] = candidate_leg
+        station_diagnostics.update(candidate_diagnostics)
+        exhausted_stations.clear()
+        moves.append(
+            {
+                "legId": identifier,
+                "offsetMinutes": offset,
+                "beforeDepartureUtcMinute": int(
+                    original["departureUtcMinute"]
+                ),
+                "afterDepartureUtcMinute": int(
+                    candidate_leg["departureUtcMinute"]
+                ),
+                "afterGateScore": list(gate_score),
+                "afterCycleScore": list(cycle_score),
+            }
+        )
+    return cycles, moves
+
+
 def build_exact_materialization_plan(
     canonical: dict[str, Any],
     frequency_plan: dict[str, Any],
@@ -3893,6 +4201,7 @@ def build_exact_materialization_plan(
         rolling_limit,
         single_target_full_gap,
     )
+    gate_time_shifts: list[dict[str, Any]] = []
     if enforce_fixed_inventory:
         cycles, gate_swaps = _repair_successor_gate_capacity(
             materialized,
@@ -3906,6 +4215,20 @@ def build_exact_materialization_plan(
             single_target_full_gap,
         )
         swaps.extend(gate_swaps)
+        cycles, gate_time_shifts = _repair_exact_gate_times(
+            materialized,
+            successors,
+            cycles,
+            policy,
+            cities,
+            windows,
+            required_destinations,
+            fleet_counts,
+            rolling_limit,
+            single_target_full_gap,
+            station_departure_counts,
+            allow_pairing_spacing_exceptions,
+        )
     gate_diagnostic = {
         "status": "not_evaluated",
         "stations": 0,
@@ -3940,6 +4263,7 @@ def build_exact_materialization_plan(
             leg["destination"] in hubs
             and leg["destinationBankId"] is None
         )
+        or not _assigned_bank_windows_hold(leg, windows)
     ]
     curfew_violations = [
         leg["id"]
@@ -4200,6 +4524,7 @@ def build_exact_materialization_plan(
             "destinationsWithoutRon": len(missing_rons),
             "rollingRonViolations": len(rolling_violations),
             "successorSwaps": len(swaps),
+            "gateTimeShifts": len(gate_time_shifts),
             **(
                 {
                     "gateCapacityFailures": len(
@@ -4251,6 +4576,7 @@ def build_exact_materialization_plan(
         "legs": legs,
         "diagnostics": {
             "successorSwaps": swaps,
+            "gateTimeShifts": gate_time_shifts,
             "bankUnalignedLegs": bank_unaligned,
             "continuityViolations": continuity_violations,
             "turnViolations": turn_violations,

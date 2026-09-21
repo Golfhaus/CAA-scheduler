@@ -13,6 +13,7 @@ sys.path.insert(0, str(REPO_ROOT / "src"))
 
 from caa_scheduler.exact_materialization import (
     _apply_assigned_bank_waves,
+    _assigned_bank_windows_hold,
     _capacity_repair_stations,
     _expand_flexible_seed_types_to_hub_operations,
     _expand_flexible_seed_types_to_markets,
@@ -325,6 +326,29 @@ class ExactMaterializationPlanTests(unittest.TestCase):
             selected,
             {"PHYSICAL_A", "BHM", "BNA", "DAL", "RFD"},
         )
+
+    def test_gate_time_shift_must_stay_in_its_assigned_bank(self) -> None:
+        windows = {
+            "AAA": [
+                {"id": "AAA-B1", "startMinute": 100, "endMinute": 160},
+                {"id": "AAA-B2", "startMinute": 200, "endMinute": 260},
+            ],
+            "BBB": [
+                {"id": "BBB-B1", "startMinute": 300, "endMinute": 360}
+            ],
+        }
+        leg = {
+            "origin": "AAA",
+            "destination": "BBB",
+            "originBankId": "AAA-B1",
+            "destinationBankId": "BBB-B1",
+            "departureMinute": 120,
+            "arrivalMinute": 330,
+        }
+
+        self.assertTrue(_assigned_bank_windows_hold(leg, windows))
+        leg["departureMinute"] = 220
+        self.assertFalse(_assigned_bank_windows_hold(leg, windows))
 
     def test_successor_choice_can_clear_a_concrete_gate_conflict(self) -> None:
         materialized = {
