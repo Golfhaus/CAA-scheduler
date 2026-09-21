@@ -21,6 +21,7 @@ from caa_scheduler.gates import (
     assign_gates,
     build_claims,
     overlaps,
+    serialize_assignments,
 )
 from caa_scheduler.importer import import_canonical_schedule
 from caa_scheduler.io import read_json
@@ -199,6 +200,31 @@ class ScheduleSixBaselineTests(unittest.TestCase):
 
         self.assertGreater(raised.exception.required_stands, 1)
         self.assertEqual(raised.exception.configured_stands, 1)
+
+    def test_preview_marks_excess_inventory_as_unassigned(self) -> None:
+        claims = [
+            GateClaim(1200, 1800, str(index), "CRJ200", "ron", "A", "B")
+            for index in range(3)
+        ]
+
+        assignments, stand_middles = assign_gates(
+            claims,
+            1,
+            n_stands=1,
+            return_provenance=True,
+            allow_infeasible_preview=True,
+        )
+        serialized = serialize_assignments(
+            assignments,
+            1,
+            n_stands=1,
+            stand_middles=stand_middles,
+        )
+
+        self.assertTrue(any(row["rowType"] == "overflow" for row in serialized))
+        self.assertFalse(
+            any(row["rowType"] == "stand" and row["row"] > 1 for row in serialized)
+        )
 
     def test_ron_claims_stay_at_gates_when_all_continuous_holds_fit(self) -> None:
         claims = [

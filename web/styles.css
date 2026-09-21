@@ -513,6 +513,7 @@ tbody tr:hover { background: #f6f9fc; }
 .lane-track { position: relative; height: 1.45rem; border-bottom: 1px solid #e4eaf1; background: repeating-linear-gradient(90deg, transparent 0, transparent calc(16.6667% - 1px), #edf1f5 calc(16.6667% - 1px), #edf1f5 16.6667%); }
 .claim-bar { position: absolute; top: 0.16rem; height: 1.12rem; overflow: hidden; appearance: none; border: 1px solid rgba(6, 26, 51, 0.18); border-radius: 0.23rem; padding: 0.05rem 0.2rem; color: #10223a; font-size: 0.63rem; font-weight: 750; line-height: 1; text-align: left; white-space: nowrap; text-overflow: ellipsis; touch-action: manipulation; }
 .claim-bar.kind-stand { border-style: dashed; }
+.claim-bar.kind-overflow { border: 2px solid var(--danger); background: var(--danger-soft) !important; color: var(--danger); font-weight: 900; }
 .claim-bar[aria-expanded="true"] { z-index: 3; outline: 3px solid rgba(245, 130, 32, 0.62); outline-offset: 2px; }
 .claim-bar.is-passenger-handling { z-index: 2; top: 0.1rem; height: 1.24rem; border: 2px solid var(--fleet-color); background: color-mix(in srgb, var(--fleet-color) 23%, white) !important; box-shadow: 0 0 0 1px white, 0 0 0 3px var(--fleet-color); color: var(--danger); font-weight: 900; }
 .claim-bar.kind-stand.is-passenger-handling { border-style: solid; }

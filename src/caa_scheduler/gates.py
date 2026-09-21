@@ -420,6 +420,7 @@ def assign_gates(
     *,
     n_stands: int | None = None,
     return_provenance: bool = False,
+    allow_infeasible_preview: bool = False,
 ) -> list[Assignment] | tuple[list[Assignment], set[GateClaim]]:
     """Assign claims using short-first packing and targeted long-hold rescue.
 
@@ -670,7 +671,9 @@ def assign_gates(
             (slot - n_gates for _, slot in result if slot > n_gates),
             default=0,
         )
-        if stranded_touches or required_stands > n_stands:
+        if (
+            stranded_touches or required_stands > n_stands
+        ) and not allow_infeasible_preview:
             required_gates = max(
                 n_gates + (1 if stranded_touches else 0),
                 max((slot for _, slot in result if slot <= n_gates), default=0),
@@ -696,12 +699,29 @@ def assign_gates(
 
 
 def serialize_assignments(
-    assignments: list[Assignment], n_gates: int
+    assignments: list[Assignment],
+    n_gates: int,
+    *,
+    n_stands: int | None = None,
+    stand_middles: set[GateClaim] | None = None,
 ) -> list[dict[str, Any]]:
     claims: list[dict[str, Any]] = []
     for claim, slot in assignments:
-        row_type = "gate" if slot <= n_gates else "stand"
-        row = slot if slot <= n_gates else slot - n_gates
+        if slot <= n_gates:
+            row_type = "gate"
+            row = slot
+        elif (
+            n_stands is None
+            or (
+                claim in (stand_middles or set())
+                and slot <= n_gates + n_stands
+            )
+        ):
+            row_type = "stand"
+            row = slot - n_gates
+        else:
+            row_type = "overflow"
+            row = max(1, slot - n_gates)
         claims.append(
             {
                 "start": claim.start,

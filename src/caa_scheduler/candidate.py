@@ -634,7 +634,12 @@ def build_candidate(
         )
         write_json(
             destination / "gates.json",
-            export_gate_schedule(candidate),
+            export_gate_schedule(
+                candidate,
+                allow_infeasible_preview=bool(
+                    provisional_preview and report.get("previewOnly")
+                ),
+            ),
             indent=1,
             trailing_newline=False,
         )

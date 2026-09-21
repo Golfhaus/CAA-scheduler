@@ -62,6 +62,11 @@ def _parser() -> argparse.ArgumentParser:
     gates = subcommands.add_parser("export-gates", help="Export gate JSON")
     gates.add_argument("canonical", type=Path)
     gates.add_argument("output", type=Path)
+    gates.add_argument(
+        "--provisional-preview",
+        action="store_true",
+        help="Mark claims beyond fixed physical inventory as unassigned preview rows",
+    )
 
     operating = subcommands.add_parser(
         "validate-operating", help="Validate operating rules and constraints"
@@ -319,7 +324,10 @@ def main(argv: list[str] | None = None) -> int:
     if args.command == "export-gates":
         write_json(
             args.output,
-            export_gate_schedule(canonical),
+            export_gate_schedule(
+                canonical,
+                allow_infeasible_preview=args.provisional_preview,
+            ),
             indent=1,
             trailing_newline=False,
         )
