@@ -1041,7 +1041,11 @@ def build_frequency_fleet_plan(
             else None
         )
         optional_score_floor = 0.0
+        minimum_optional_market_demand = 0.0
         if network_optimization:
+            minimum_optional_market_demand = float(
+                network_optimization.get("minimumOptionalMarketDemand", 0.0)
+            )
             initial_optional_scores = [
                 marginal_score(market, frequencies[market] + 1)
                 for market in candidate_pairs
@@ -1070,6 +1074,7 @@ def build_frequency_fleet_plan(
                 for market in candidate_pairs
                 if market not in blocked
                 and frequencies[market] < market_ceiling(market)
+                and demand[market] >= minimum_optional_market_demand
                 and (
                     classifications[market] != "point_to_point"
                     or point_to_point_competes

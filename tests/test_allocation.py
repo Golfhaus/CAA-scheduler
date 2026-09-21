@@ -175,6 +175,11 @@ class FrequencyFleetPlanTests(unittest.TestCase):
         self.assertEqual(markets[("RFD", "SFB")]["mandatoryRoundTrips"], 0)
         self.assertEqual(markets[("RFD", "SFB")]["plannedRoundTrips"], 1)
         self.assertEqual(markets[("MKE", "RFD")]["plannedRoundTrips"], 0)
+        self.assertEqual(markets[("CMH", "DAY")]["twoWayDemand"], 2.8)
+        self.assertEqual(
+            markets[("CMH", "DAY")]["plannedRoundTrips"],
+            markets[("CMH", "DAY")]["mandatoryRoundTrips"],
+        )
         self.assertLessEqual(plan["summary"]["pointToPointShare"], 0.1)
         self.assertTrue(
             all(row["legCount"] > 0 for row in plan["fleetPlan"].values())
