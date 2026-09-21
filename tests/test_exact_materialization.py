@@ -604,7 +604,9 @@ class ExactMaterializationPlanTests(unittest.TestCase):
         self.assertEqual(diagnostic["status"], "fail")
         self.assertEqual(diagnostic["failures"][0]["station"], "AAA")
 
-    def test_demand_supported_mission_can_relieve_a_gate_blocking_hold(self) -> None:
+    def test_nonhub_can_add_historically_compatible_gate_relief_market(
+        self,
+    ) -> None:
         materialized = {
             "ARRIVE": {
                 "id": "ARRIVE",
@@ -655,19 +657,22 @@ class ExactMaterializationPlanTests(unittest.TestCase):
         }
         cities = {
             code: {
-                "role": "hub" if code == "AAA" else "destination",
+                "role": "destination",
                 "timezone": "Eastern",
                 "gateAllocationOverride": gates,
                 "standAllocationOverride": stands,
+                "latitude": latitude,
+                "longitude": longitude,
             }
-            for code, gates, stands in (
-                ("AAA", 1, 0),
-                ("BBB", 3, 1),
-                ("CCC", 2, 1),
+            for code, gates, stands, latitude, longitude in (
+                ("AAA", 1, 0, 35.0, -80.0),
+                ("BBB", 3, 1, 36.0, -80.0),
+                ("CCC", 2, 1, 37.0, -80.0),
+                ("DDD", 2, 1, 35.0, -79.0),
             )
         }
         policy = {
-            "hubs": ["AAA"],
+            "hubs": [],
             "focusCities": [],
             "departureWindows": {
                 "earliestMinute": 0,
@@ -694,23 +699,17 @@ class ExactMaterializationPlanTests(unittest.TestCase):
             "markets": [
                 {
                     "origin": "AAA",
-                    "destination": "BBB",
-                    "classification": "assigned_hub",
+                    "destination": "DDD",
+                    "classification": "point_to_point",
                     "twoWayDemand": 100.0,
-                    "plannedRoundTrips": 1,
-                    "frequencyCeilingRoundTrips": 3,
-                    "allocations": [
-                        {"fleet": "CRJ200", "roundTrips": 1}
-                    ],
+                    "plannedRoundTrips": 0,
+                    "frequencyCeilingRoundTrips": 1,
+                    "allocations": [],
+                    "historicalFleetLegs": {"CRJ200": 2},
                 }
             ]
         }
-        windows = {
-            "AAA": [
-                {"id": "AAA-B1", "startMinute": 1330, "endMinute": 1370},
-                {"id": "AAA-B2", "startMinute": 50, "endMinute": 80},
-            ]
-        }
+        windows = {}
         _, before = _materialized_station_gate_assignments(
             materialized, successors, cities, 40, "AAA"
         )
@@ -747,13 +746,21 @@ class ExactMaterializationPlanTests(unittest.TestCase):
                     "maximumMissions": 1,
                     "maximumTimingsPerHoldMarket": 4,
                 },
+                {
+                    "CRJ200": {
+                        "fleet": "CRJ200",
+                        "blockMinutesPerNauticalMile": 0.1,
+                        "blockMinutesIntercept": 30.0,
+                    }
+                },
             )
 
         _, after = _materialized_station_gate_assignments(
             materialized, successors, cities, 40, "AAA"
         )
         self.assertEqual(len(additions), 1)
-        self.assertEqual(additions[0]["market"], ["AAA", "BBB"])
+        self.assertEqual(additions[0]["market"], ["AAA", "DDD"])
+        self.assertTrue(additions[0]["newFrequency"])
         self.assertEqual(after["status"], "pass")
 
     def test_successor_repair_can_cross_a_score_plateau(self) -> None:

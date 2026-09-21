@@ -34,6 +34,13 @@ improves that station's fixed-inventory score, stays within the market's
 frequency ceiling, preserves the anchored successor and fleet requirement,
 and does not worsen the destination station. This is gate relief first and
 productive utilization second; it is not authority to fill every idle window.
+The relief aircraft may remain away through the overloaded passenger touch and
+return before its anchored departure. Returning it to a stand before the peak
+does not create capacity when every configured stand is already occupied.
+Non-hub relief stations do not require hub-bank assignments. An unplanned
+frequency may be considered when its demand clears the configured floor and
+the selected fleet has historical market compatibility; block time is then
+calculated from the same fleet profile used by the allocation engine.
 
 ## Incremental milestones
 

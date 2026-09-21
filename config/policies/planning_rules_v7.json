@@ -149,11 +149,11 @@
       "SYR": 2
     },
     "productiveGateRelief": {
-      "targetStations": ["MCI"],
-      "preferredDestinations": ["DAY", "PHF", "SYR"],
+      "targetStations": ["MCI", "CLT", "PIE"],
+      "preferredDestinations": ["DAY", "PHF", "SYR", "SFB"],
       "minimumHoldMinutes": 240,
       "minimumTwoWayDemand": 8.0,
-      "maximumMissions": 4,
+      "maximumMissions": 6,
       "maximumTimingsPerHoldMarket": 8
     },
     "minimizeTows": true

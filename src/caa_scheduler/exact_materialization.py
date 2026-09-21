@@ -14,7 +14,11 @@ import numpy as np
 from scipy.optimize import Bounds, LinearConstraint, milp
 from scipy.sparse import coo_matrix
 
-from .bank_placement import _curfew_status, _maximum_spaced_departures
+from .bank_placement import (
+    _block_minutes,
+    _curfew_status,
+    _maximum_spaced_departures,
+)
 from .demand import load_demand_sources_from_manifest
 from .gate_export import _capacity
 from .gates import (
@@ -3305,10 +3309,14 @@ def _gate_relief_market_candidates(
             continue
         if float(market["twoWayDemand"]) < minimum_two_way_demand:
             continue
-        if not any(
+        allocated_to_fleet = any(
             str(allocation["fleet"]) == fleet
             for allocation in market.get("allocations", [])
-        ):
+        )
+        historically_flown_by_fleet = (
+            int(market.get("historicalFleetLegs", {}).get(fleet, 0)) > 0
+        )
+        if not allocated_to_fleet and not historically_flown_by_fleet:
             continue
         market_key = tuple(sorted(endpoints))
         planned = int(market["plannedRoundTrips"]) + int(
@@ -3329,6 +3337,7 @@ def _gate_relief_market_candidates(
                 ),
                 "marginalDemand": float(market["twoWayDemand"])
                 / float(planned + 1),
+                "newFrequency": planned == 0,
             }
         )
     return sorted(
@@ -3366,6 +3375,7 @@ def _repair_gate_capacity_with_missions(
     station_departure_counts: Counter[str],
     allow_pairing_spacing_exceptions: bool,
     options: dict[str, Any],
+    fleet_profiles: dict[str, dict[str, Any]] | None = None,
 ) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
     """Insert bounded, demand-supported round trips into gate-blocking holds.
 
@@ -3431,7 +3441,6 @@ def _repair_gate_capacity_with_missions(
             current_score = _station_gate_score(current_diagnostic)
             if current_score[0] == 0:
                 break
-
             ranked_candidates: list[tuple[Any, ...]] = []
             for arriving_id, following_id in sorted(successors.items()):
                 arriving = materialized[arriving_id]
@@ -3466,6 +3475,17 @@ def _repair_gate_capacity_with_missions(
                     block_minutes = block_minutes_by_market_fleet.get(
                         (market["market"], fleet)
                     )
+                    if (
+                        block_minutes is None
+                        and fleet_profiles is not None
+                        and fleet in fleet_profiles
+                    ):
+                        block_minutes = _block_minutes(
+                            station,
+                            destination,
+                            fleet_profiles[fleet],
+                            cities,
+                        )
                     if block_minutes is None:
                         continue
                     latest_outbound = (
@@ -3501,7 +3521,7 @@ def _repair_gate_capacity_with_missions(
                             policy,
                         ) != "pass":
                             continue
-                        if (
+                        if station in hubs and (
                             _gate_relief_bank_id(
                                 station,
                                 outbound_departure,
@@ -3552,7 +3572,7 @@ def _repair_gate_capacity_with_missions(
                                 windows,
                             ) is None:
                                 continue
-                            if _gate_relief_bank_id(
+                            if station in hubs and _gate_relief_bank_id(
                                 station,
                                 return_arrival,
                                 hubs,
@@ -3564,10 +3584,31 @@ def _repair_gate_capacity_with_missions(
                             )
                             break
 
-                    timing_candidates = sorted(
-                        set(timing_candidates),
-                        key=lambda row: (-(row[1] - row[0]), row[0], row[1]),
-                    )[:maximum_timings]
+                    unique_timings = sorted(set(timing_candidates))
+                    if maximum_timings <= 1:
+                        timing_candidates = unique_timings[:1]
+                    elif len(unique_timings) > maximum_timings:
+                        sampled_indices = {
+                            round(
+                                index
+                                * (len(unique_timings) - 1)
+                                / (maximum_timings - 1)
+                            )
+                            for index in range(maximum_timings)
+                        }
+                        timing_candidates = [
+                            unique_timings[index]
+                            for index in sorted(sampled_indices)
+                        ]
+                    else:
+                        timing_candidates = unique_timings
+                    timing_candidates.sort(
+                        key=lambda row: (
+                            row[1] - (row[0] + block_minutes),
+                            -row[1],
+                            row[0],
+                        )
+                    )
                     for outbound_utc, return_utc in timing_candidates:
                         ordinal = (
                             additions_by_market[market["market"]] + 1
@@ -3725,6 +3766,7 @@ def _repair_gate_capacity_with_missions(
                             destination_score,
                             0 if destination in preferred_destinations else 1,
                             -float(market["marginalDemand"]),
+                            return_utc - outbound_arrival_utc,
                             -(return_utc - outbound_utc),
                             outbound_utc,
                             destination,
@@ -3815,6 +3857,7 @@ def _repair_gate_capacity_with_missions(
                     ],
                     "twoWayDemand": market["twoWayDemand"],
                     "marginalDemand": market["marginalDemand"],
+                    "newFrequency": market["newFrequency"],
                     "beforeGateScore": list(current_score),
                     "afterGateScore": list(target_score),
                     "destinationGateScore": list(destination_score),
@@ -4791,6 +4834,7 @@ def build_exact_materialization_plan(
                     station_departure_counts,
                     allow_pairing_spacing_exceptions,
                     gate_relief_options,
+                    profiles,
                 )
             )
     gate_diagnostic = {
