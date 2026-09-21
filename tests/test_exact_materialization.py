@@ -19,6 +19,7 @@ from caa_scheduler.exact_materialization import (
     _materialized_passenger_gate_overflow,
     _materialized_physical_capacity_overflow,
     _materialized_gate_assignments,
+    _materialized_station_gate_assignments,
     _pairing_patterns,
     _read_exact_seed_checkpoint,
     _repair_successor_cycles,
@@ -317,6 +318,58 @@ class ExactMaterializationPlanTests(unittest.TestCase):
             selected,
             {"PHYSICAL_A", "BHM", "BNA", "DAL", "RFD"},
         )
+
+    def test_successor_choice_can_clear_a_concrete_gate_conflict(self) -> None:
+        materialized = {
+            **{
+                f"A{index}": {
+                    "id": f"A{index}",
+                    "fleet": "CRJ200",
+                    "origin": "BBB",
+                    "destination": "AAA",
+                    "departureUtcMinute": arrival - 60,
+                    "blockMinutes": 60,
+                }
+                for index, arrival in enumerate((600, 660, 720))
+            },
+            **{
+                f"D{index}": {
+                    "id": f"D{index}",
+                    "fleet": "CRJ200",
+                    "origin": "AAA",
+                    "destination": "BBB",
+                    "departureUtcMinute": departure,
+                    "blockMinutes": 60,
+                }
+                for index, departure in enumerate((600, 660, 720))
+            },
+        }
+        cities = {
+            "AAA": {
+                "role": "destination",
+                "timezone": "Eastern",
+                "gateAllocationOverride": 1,
+                "standAllocationOverride": 0,
+            }
+        }
+
+        _, blocked = _materialized_station_gate_assignments(
+            materialized,
+            {"A0": "D0", "A1": "D2", "A2": "D1"},
+            cities,
+            40,
+            "AAA",
+        )
+        _, repaired = _materialized_station_gate_assignments(
+            materialized,
+            {"A0": "D1", "A1": "D2", "A2": "D0"},
+            cities,
+            40,
+            "AAA",
+        )
+
+        self.assertEqual(blocked["status"], "fail")
+        self.assertEqual(repaired["status"], "pass")
 
     def test_exact_gate_assignment_tows_only_the_long_hold_middle(self) -> None:
         materialized = {

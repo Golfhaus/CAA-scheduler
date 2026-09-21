@@ -3,6 +3,10 @@ from __future__ import annotations
 from collections import defaultdict
 from typing import Any, NamedTuple
 
+import numpy as np
+from scipy.optimize import Bounds, LinearConstraint, milp
+from scipy.sparse import coo_matrix
+
 
 TOUCH_ARRIVAL_MINUTES = 45
 TOUCH_DEPARTURE_MINUTES = 60
@@ -166,16 +170,21 @@ def overlaps(first: GateClaim, second: GateClaim) -> bool:
     return False
 
 
-def _greedy_coloring(claims: list[GateClaim]) -> list[int]:
-    """Color a cyclic interval-conflict graph with deterministic DSATUR."""
-    if not claims:
-        return []
+def _conflict_graph(claims: list[GateClaim]) -> list[set[int]]:
     adjacency = [set() for _ in claims]
     for first in range(len(claims)):
         for second in range(first + 1, len(claims)):
             if overlaps(claims[first], claims[second]):
                 adjacency[first].add(second)
                 adjacency[second].add(first)
+    return adjacency
+
+
+def _greedy_coloring(claims: list[GateClaim]) -> list[int]:
+    """Color a cyclic interval-conflict graph with deterministic DSATUR."""
+    if not claims:
+        return []
+    adjacency = _conflict_graph(claims)
     colors = [0] * len(claims)
     for _ in claims:
         uncolored = [index for index, color in enumerate(colors) if not color]
@@ -205,7 +214,68 @@ def _bounded_coloring(
     claims: list[GateClaim], maximum_slots: int
 ) -> list[int] | None:
     colors = _greedy_coloring(claims)
-    return colors if max(colors, default=0) <= maximum_slots else None
+    if max(colors, default=0) <= maximum_slots:
+        return colors
+    if maximum_slots < 1:
+        return None
+
+    adjacency = _conflict_graph(claims)
+    variable_count = len(claims) * maximum_slots
+    row_indexes: list[int] = []
+    column_indexes: list[int] = []
+    values: list[float] = []
+    lower_bounds: list[float] = []
+    upper_bounds: list[float] = []
+
+    for claim_index in range(len(claims)):
+        row = len(lower_bounds)
+        for color in range(maximum_slots):
+            row_indexes.append(row)
+            column_indexes.append(claim_index * maximum_slots + color)
+            values.append(1.0)
+        lower_bounds.append(1.0)
+        upper_bounds.append(1.0)
+
+    for first, neighbors in enumerate(adjacency):
+        for second in sorted(neighbor for neighbor in neighbors if neighbor > first):
+            for color in range(maximum_slots):
+                row = len(lower_bounds)
+                row_indexes.extend((row, row))
+                column_indexes.extend(
+                    (
+                        first * maximum_slots + color,
+                        second * maximum_slots + color,
+                    )
+                )
+                values.extend((1.0, 1.0))
+                lower_bounds.append(-np.inf)
+                upper_bounds.append(1.0)
+
+    matrix = coo_matrix(
+        (values, (row_indexes, column_indexes)),
+        shape=(len(lower_bounds), variable_count),
+    ).tocsr()
+    result = milp(
+        c=np.zeros(variable_count),
+        integrality=np.ones(variable_count),
+        bounds=Bounds(np.zeros(variable_count), np.ones(variable_count)),
+        constraints=LinearConstraint(
+            matrix,
+            np.asarray(lower_bounds),
+            np.asarray(upper_bounds),
+        ),
+        options={"time_limit": 30},
+    )
+    if result.x is None:
+        return None
+    return [
+        max(
+            range(maximum_slots),
+            key=lambda color: result.x[claim_index * maximum_slots + color],
+        )
+        + 1
+        for claim_index in range(len(claims))
+    ]
 
 
 def split_for_waypoint(

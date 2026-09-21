@@ -16,6 +16,8 @@ from caa_scheduler.gate_export import export_gate_schedule
 from caa_scheduler.gates import (
     GateCapacityError,
     GateClaim,
+    _bounded_coloring,
+    _greedy_coloring,
     assign_gates,
     overlaps,
 )
@@ -175,6 +177,28 @@ class ScheduleSixBaselineTests(unittest.TestCase):
 
         self.assertFalse(stand_middles)
         self.assertTrue(all(slot <= 4 for _, slot in assignments))
+
+    def test_bounded_coloring_proves_capacity_after_greedy_overstates_it(self) -> None:
+        claims = [
+            GateClaim(start, end, str(index), "CRJ200", "turn", "A", "B")
+            for index, (start, end) in enumerate(
+                (
+                    (600, 1020),
+                    (120, 420),
+                    (840, 1050),
+                    (840, 1290),
+                    (180, 540),
+                    (360, 810),
+                    (1200, 1650),
+                )
+            )
+        ]
+
+        self.assertEqual(max(_greedy_coloring(claims)), 4)
+        coloring = _bounded_coloring(claims, 3)
+        self.assertIsNotNone(coloring)
+        assert coloring is not None
+        self.assertEqual(max(coloring), 3)
 
     def test_operating_validator_exposes_known_baseline_findings(self) -> None:
         report = validate_operating_rules(self.canonical)
