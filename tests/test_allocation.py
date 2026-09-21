@@ -24,6 +24,9 @@ SPACING_MANIFEST_PATH = (
 GATE_CAPACITY_MANIFEST_PATH = (
     REPO_ROOT / "config" / "demand_data" / "bts_db1c_6mo_v6.json"
 )
+NETWORK_OPTIMIZATION_MANIFEST_PATH = (
+    REPO_ROOT / "config" / "demand_data" / "bts_db1c_6mo_v7.json"
+)
 
 
 class FrequencyFleetPlanTests(unittest.TestCase):
@@ -148,6 +151,31 @@ class FrequencyFleetPlanTests(unittest.TestCase):
             )["allocations"][0]["fleet"],
             "CRJ700",
         )
+
+    def test_retained_point_to_point_markets_compete_for_gate_capacity(self) -> None:
+        demand = copy.deepcopy(self.demand_plan)
+        demand["demandDataVersion"] = "bts-db1c-6mo-jul2025-apr2026-v7"
+        plan = build_frequency_fleet_plan_from_manifest(
+            self.canonical,
+            demand,
+            NETWORK_OPTIMIZATION_MANIFEST_PATH,
+            REPO_ROOT,
+        )
+        self.assertEqual(plan["status"], "pass")
+        capacity = {
+            row["station"]: row for row in plan["stationGateCapacity"]
+        }
+        self.assertTrue(
+            all(row["remainingRoundTrips"] >= 0 for row in capacity.values())
+        )
+        markets = {
+            (row["origin"], row["destination"]): row
+            for row in plan["markets"]
+        }
+        self.assertEqual(markets[("RFD", "SFB")]["mandatoryRoundTrips"], 0)
+        self.assertEqual(markets[("RFD", "SFB")]["plannedRoundTrips"], 1)
+        self.assertEqual(markets[("MKE", "RFD")]["plannedRoundTrips"], 0)
+        self.assertLessEqual(plan["summary"]["pointToPointShare"], 0.1)
 
     def test_fleet_counts_come_from_the_schedule(self) -> None:
         changed = copy.deepcopy(self.canonical)

@@ -28,6 +28,7 @@
   },
   "networkOptimization": {
     "allowNewHubMarkets": true,
+    "competeRetainedPointToPointMarkets": true,
     "minimumNewMarketDemandPercentile": 90,
     "preservePrimaryHub": true,
     "serviceAssignmentEndpointWeights": {
@@ -48,8 +49,8 @@
     "stationGateMinutesPerRoundTrip": 90,
     "stationOperatingMinutes": 990,
     "stationRoundTripCapacityOverrides": {
-      "BHM": 32,
-      "BNA": 9,
+      "BHM": 31,
+      "BNA": 8,
       "BWI": 10,
       "CID": 3,
       "CLT": 17,
@@ -58,8 +59,8 @@
       "JAX": 103,
       "MCI": 105,
       "PHF": 89,
-      "RFD": 27,
-      "SFB": 28,
+      "RFD": 24,
+      "SFB": 25,
       "SYR": 79
     },
     "marketFrequencyCeilingRoundTripsOverrides": {

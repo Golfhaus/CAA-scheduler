@@ -648,7 +648,22 @@ def build_frequency_fleet_plan(
         for market in candidate_pairs
     }
 
-    frequencies = {market: 1 for market in candidate_pairs}
+    network_optimization = planning_rules.get("networkOptimization")
+    point_to_point_competes = bool(
+        network_optimization
+        and network_optimization.get(
+            "competeRetainedPointToPointMarkets", False
+        )
+    )
+    frequencies = {
+        market: (
+            0
+            if point_to_point_competes
+            and classifications[market] == "point_to_point"
+            else 1
+        )
+        for market in candidate_pairs
+    }
     service_tiers = allocation_rules["serviceMinimumFlightLegs"]
     for code, city_row in sorted(demand_city.items()):
         hub_markets = [_market(code, hub) for hub in assigned_hubs[code]]
@@ -698,7 +713,6 @@ def build_frequency_fleet_plan(
     enforce_hub_gate_throughput = bool(
         allocation_rules.get("enforceHubGateBankThroughput", False)
     )
-    network_optimization = planning_rules.get("networkOptimization")
     hub_gate_capacity: dict[str, int] = {}
     if enforce_hub_gate_throughput:
         bank_counts = planning_rules["bankPlacement"].get(
@@ -864,7 +878,25 @@ def build_frequency_fleet_plan(
                 + mandatory_frequencies.get(market, 0),
             )
         result = min(result, market_ceiling_overrides.get(market, result))
+        if (
+            point_to_point_competes
+            and classifications[market] == "point_to_point"
+        ):
+            result = min(result, 1)
         return result
+
+    def point_to_point_share_with(values: dict[Market, int]) -> float:
+        total = sum(values.values())
+        if not total:
+            return 0.0
+        return (
+            sum(
+                frequency
+                for market, frequency in values.items()
+                if classifications[market] == "point_to_point"
+            )
+            / total
+        )
 
     capacity_removed_point_to_point_round_trips: list[Market] = []
     for market in candidate_pairs:
@@ -918,7 +950,10 @@ def build_frequency_fleet_plan(
             initial_optional_scores = [
                 marginal_score(market, frequencies[market] + 1)
                 for market in candidate_pairs
-                if classifications[market] != "point_to_point"
+                if (
+                    classifications[market] != "point_to_point"
+                    or point_to_point_competes
+                )
                 and frequencies[market] < market_ceiling(market)
             ]
             optional_score_floor = _percentile(
@@ -940,7 +975,10 @@ def build_frequency_fleet_plan(
                 for market in candidate_pairs
                 if market not in blocked
                 and frequencies[market] < market_ceiling(market)
-                and classifications[market] != "point_to_point"
+                and (
+                    classifications[market] != "point_to_point"
+                    or point_to_point_competes
+                )
             ]
             eligible.sort(
                 key=lambda market: (
@@ -960,6 +998,14 @@ def build_frequency_fleet_plan(
             accepted = False
             for market in eligible:
                 frequencies[market] += 1
+                if (
+                    classifications[market] == "point_to_point"
+                    and point_to_point_share_with(frequencies)
+                    > float(allocation_rules["pointToPointMaximumShare"])
+                    + 1e-9
+                ):
+                    frequencies[market] -= 1
+                    continue
                 if not has_hub_gate_capacity(
                     frequencies, market
                 ) or not has_station_capacity(frequencies, market):
@@ -1073,6 +1119,15 @@ def build_frequency_fleet_plan(
         network_reconciliation["optimization"][
             "removedPointToPointRoundTrips"
         ] = ["-".join(market) for market in removed_point_to_point_round_trips]
+        if point_to_point_competes:
+            network_reconciliation["optimization"][
+                "omittedPointToPointMarkets"
+            ] = [
+                "-".join(market)
+                for market in sorted(candidate_pairs)
+                if classifications[market] == "point_to_point"
+                and planned_frequency[market] == 0
+            ]
 
     city_service = []
     for code, row in sorted(demand_city.items()):
@@ -1450,7 +1505,9 @@ def build_frequency_fleet_plan(
         ),
         "limitations": [
             (
-                "Historical point-to-point markets are retained, but historical hub/focus markets outside each city's effective tier assignments are removed before allocation."
+                "Historical point-to-point markets remain eligible and compete for demand, network, fleet, and gate capacity; historical hub/focus markets outside each city's effective tier assignments are removed before allocation."
+                if point_to_point_competes
+                else "Historical point-to-point markets are retained, but historical hub/focus markets outside each city's effective tier assignments are removed before allocation."
                 if network_reconciliation["mode"] == "strict_tier_caps"
                 else "The existing canonical market set is retained as a seed; newly assigned hub markets are added, but entirely new point-to-point markets are not selected yet."
             ),
@@ -1459,7 +1516,11 @@ def build_frequency_fleet_plan(
                 if enforce_hub_gate_throughput
                 else "Aircraft-minute allocation is a planning envelope, not a timed routing proof. Curfews, banks, gates, turns, RONs, and routing continuity remain mandatory downstream checks."
             ),
-            "Optional point-to-point frequency is deliberately withheld; the preserved point-to-point market set must remain within the 10% schedule cap.",
+            (
+                "Retained point-to-point markets compete for their first round trip and remain within the 10% schedule cap."
+                if point_to_point_competes
+                else "Optional point-to-point frequency is deliberately withheld; the preserved point-to-point market set must remain within the 10% schedule cap."
+            ),
         ],
     }
 
