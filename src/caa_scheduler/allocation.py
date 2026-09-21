@@ -298,6 +298,7 @@ def _assign_frequencies(
     fleet_counts: dict[str, int],
     round_trip_costs: dict[tuple[Market, str], float],
     productive_minutes: dict[str, int],
+    assignment_mode: str = "largest_first",
 ) -> dict[str, Any]:
     units = [
         (market, ordinal)
@@ -314,6 +315,96 @@ def _assign_frequencies(
     }
     assignments: defaultdict[Market, Counter[str]] = defaultdict(Counter)
     work: Counter[str] = Counter()
+    if assignment_mode == "demand_ranked_capacity_share":
+        market_rows = sorted(
+            (
+                market
+                for market, frequency in frequencies.items()
+                if frequency > 0
+            ),
+            key=lambda market: (-demand[market], market),
+        )
+        reference_work = {
+            market: frequencies[market]
+            * sum(
+                round_trip_costs[(market, profile["fleet"])]
+                for profile in profiles
+            )
+            / len(profiles)
+            for market in market_rows
+        }
+        total_reference_work = sum(reference_work.values())
+        total_available = sum(
+            fleet_counts[profile["fleet"]]
+            * productive_minutes[profile["fleet"]]
+            for profile in profiles
+        )
+        cumulative_targets = []
+        cumulative = 0.0
+        for profile in profiles:
+            cumulative += (
+                fleet_counts[profile["fleet"]]
+                * productive_minutes[profile["fleet"]]
+                / total_available
+                if total_available
+                else 0.0
+            )
+            cumulative_targets.append(cumulative * total_reference_work)
+
+        consumed_reference = 0.0
+        unassigned = []
+        for market in market_rows:
+            frequency = int(frequencies[market])
+            midpoint = consumed_reference + reference_work[market] / 2
+            target_index = next(
+                (
+                    index
+                    for index, threshold in enumerate(cumulative_targets)
+                    if midpoint <= threshold + 1e-9
+                ),
+                len(profiles) - 1,
+            )
+            candidate_indexes = sorted(
+                range(len(profiles)),
+                key=lambda index: (
+                    abs(index - target_index),
+                    index,
+                ),
+            )
+            selected = next(
+                (
+                    profiles[index]["fleet"]
+                    for index in candidate_indexes
+                    if frequency
+                    * round_trip_costs[
+                        (market, profiles[index]["fleet"])
+                    ]
+                    <= remaining[profiles[index]["fleet"]] + 1e-9
+                ),
+                None,
+            )
+            if selected is None:
+                unassigned.extend(
+                    (market, ordinal)
+                    for ordinal in range(1, frequency + 1)
+                )
+            else:
+                required = frequency * round_trip_costs[(market, selected)]
+                remaining[selected] -= required
+                work[selected] += required
+                assignments[market][selected] = frequency
+            consumed_reference += reference_work[market]
+        return {
+            "assignments": assignments,
+            "work": work,
+            "remaining": remaining,
+            "unassigned": unassigned,
+        }
+    if assignment_mode != "largest_first":
+        raise ValueError(
+            f"Unsupported fleet-assignment mode: {assignment_mode}"
+        )
+
     unassigned = units
     for profile in profiles:
         fleet = profile["fleet"]
@@ -703,6 +794,9 @@ def build_frequency_fleet_plan(
         )
         for fleet in fleet_counts
     }
+    assignment_mode = str(
+        allocation_rules.get("fleetAssignmentMode", "largest_first")
+    )
     ceiling = int(allocation_rules["marketFrequencyCeilingRoundTrips"])
     interhub_ceiling = int(
         allocation_rules.get(
@@ -931,6 +1025,7 @@ def build_frequency_fleet_plan(
         fleet_counts,
         round_trip_costs,
         productive_minutes,
+        assignment_mode,
     )
 
     if not allocation["unassigned"]:
@@ -1019,6 +1114,7 @@ def build_frequency_fleet_plan(
                     fleet_counts,
                     round_trip_costs,
                     productive_minutes,
+                    assignment_mode,
                 )
                 if not trial["unassigned"]:
                     allocation = trial
@@ -1071,6 +1167,7 @@ def build_frequency_fleet_plan(
                 fleet_counts,
                 round_trip_costs,
                 productive_minutes,
+                assignment_mode,
             )
 
     assigned_counts: defaultdict[Market, Counter[str]] = allocation["assignments"]

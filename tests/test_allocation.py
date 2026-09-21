@@ -176,6 +176,13 @@ class FrequencyFleetPlanTests(unittest.TestCase):
         self.assertEqual(markets[("RFD", "SFB")]["plannedRoundTrips"], 1)
         self.assertEqual(markets[("MKE", "RFD")]["plannedRoundTrips"], 0)
         self.assertLessEqual(plan["summary"]["pointToPointShare"], 0.1)
+        self.assertTrue(
+            all(row["legCount"] > 0 for row in plan["fleetPlan"].values())
+        )
+        utilizations = [
+            row["utilization"] for row in plan["fleetPlan"].values()
+        ]
+        self.assertLess(max(utilizations) - min(utilizations), 0.1)
 
     def test_fleet_counts_come_from_the_schedule(self) -> None:
         changed = copy.deepcopy(self.canonical)

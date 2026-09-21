@@ -86,19 +86,11 @@
       "CRJ700": 820,
       "CRJ200": 900
     },
+    "fleetAssignmentMode": "demand_ranked_capacity_share",
     "enforceHubGateBankThroughput": true,
     "marketFrequencyCeilingRoundTrips": 6,
     "interHubMarketFrequencyCeilingRoundTrips": 3,
     "requireSingleFleetPerMarket": true,
-    "exactFleetRebalancing": {
-      "sourceFleet": "CRJ200",
-      "targetFleet": "CRJ700",
-      "targetProductiveMinutesPerAircraftDay": 830,
-      "minimumPromotedRoundTrips": 2,
-      "maximumPromotedMarketRoundTrips": 2,
-      "eligibleClassifications": ["assigned_hub", "focus_city", "inter_hub"],
-      "selection": "highest_two_way_demand"
-    },
     "pointToPointMaximumShare": 0.1,
     "serviceMinimumFlightLegs": [
       { "maximumPercentile": 25, "minimumFlightLegs": 3 },
