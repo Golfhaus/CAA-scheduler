@@ -4,6 +4,7 @@ import json
 import sys
 import tempfile
 import unittest
+from collections import Counter
 from pathlib import Path
 from unittest.mock import patch
 
@@ -23,6 +24,7 @@ from caa_scheduler.exact_materialization import (
     _materialized_station_gate_assignments,
     _pairing_patterns,
     _read_exact_seed_checkpoint,
+    _repair_gate_capacity_with_missions,
     _repair_successor_cycles,
     _repair_successor_gate_capacity,
     _write_exact_seed_checkpoint,
@@ -601,6 +603,158 @@ class ExactMaterializationPlanTests(unittest.TestCase):
 
         self.assertEqual(diagnostic["status"], "fail")
         self.assertEqual(diagnostic["failures"][0]["station"], "AAA")
+
+    def test_demand_supported_mission_can_relieve_a_gate_blocking_hold(self) -> None:
+        materialized = {
+            "ARRIVE": {
+                "id": "ARRIVE",
+                "fleet": "CRJ200",
+                "origin": "BBB",
+                "destination": "AAA",
+                "departureUtcMinute": 100,
+                "blockMinutes": 60,
+                "originBankId": None,
+                "destinationBankId": None,
+            },
+            "DEPART": {
+                "id": "DEPART",
+                "fleet": "CRJ200",
+                "origin": "AAA",
+                "destination": "BBB",
+                "departureUtcMinute": 700,
+                "blockMinutes": 60,
+                "originBankId": None,
+                "destinationBankId": None,
+            },
+            "OTHER_IN": {
+                "id": "OTHER_IN",
+                "fleet": "CRJ200",
+                "origin": "CCC",
+                "destination": "AAA",
+                "departureUtcMinute": 180,
+                "blockMinutes": 60,
+                "originBankId": None,
+                "destinationBankId": None,
+            },
+            "OTHER_OUT": {
+                "id": "OTHER_OUT",
+                "fleet": "CRJ200",
+                "origin": "AAA",
+                "destination": "CCC",
+                "departureUtcMinute": 300,
+                "blockMinutes": 60,
+                "originBankId": None,
+                "destinationBankId": None,
+            },
+        }
+        successors = {
+            "ARRIVE": "DEPART",
+            "DEPART": "ARRIVE",
+            "OTHER_IN": "OTHER_OUT",
+            "OTHER_OUT": "OTHER_IN",
+        }
+        cities = {
+            code: {
+                "role": "hub" if code == "AAA" else "destination",
+                "timezone": "Eastern",
+                "gateAllocationOverride": gates,
+                "standAllocationOverride": stands,
+            }
+            for code, gates, stands in (
+                ("AAA", 1, 0),
+                ("BBB", 3, 1),
+                ("CCC", 2, 1),
+            )
+        }
+        policy = {
+            "hubs": ["AAA"],
+            "focusCities": [],
+            "departureWindows": {
+                "earliestMinute": 0,
+                "destinationLatestMinute": 1439,
+                "hubOrFocusLatestMinute": 1439,
+                "redEyeLatestMinute": 0,
+                "redEyeArrivalMinimumMinute": 0,
+                "redEyeArrivalMaximumMinute": 1439,
+            },
+            "turns": {"minimumMinutes": 40},
+            "section26": {
+                "hardFloorMinutes": 30,
+                "pairingTargetMaximumMinutes": 240,
+                "maximumCityDepartureGapMinutes": 240,
+                "numeratorMinutes": 480,
+                "stationReferenceDepartures": 4,
+                "stationFactorMinimum": 0.7,
+                "stationFactorMaximum": 1.8,
+                "nearTargetTolerance": 0.9,
+                "oneExceptionMinimumFrequency": 4,
+            },
+        }
+        frequency_plan = {
+            "markets": [
+                {
+                    "origin": "AAA",
+                    "destination": "BBB",
+                    "classification": "assigned_hub",
+                    "twoWayDemand": 100.0,
+                    "plannedRoundTrips": 1,
+                    "frequencyCeilingRoundTrips": 3,
+                    "allocations": [
+                        {"fleet": "CRJ200", "roundTrips": 1}
+                    ],
+                }
+            ]
+        }
+        windows = {
+            "AAA": [
+                {"id": "AAA-B1", "startMinute": 1330, "endMinute": 1370},
+                {"id": "AAA-B2", "startMinute": 50, "endMinute": 80},
+            ]
+        }
+        _, before = _materialized_station_gate_assignments(
+            materialized, successors, cities, 40, "AAA"
+        )
+        self.assertEqual(before["status"], "fail")
+
+        with patch(
+            "caa_scheduler.exact_materialization._cycles",
+            return_value=[{"fleet": "CRJ200", "aircraftRequired": 2}],
+        ), patch(
+            "caa_scheduler.exact_materialization._cycle_score",
+            return_value=(0, 0, 0, 0, 0, 2),
+        ), patch(
+            "caa_scheduler.exact_materialization._pairing_spacing_holds_for_leg",
+            return_value=True,
+        ):
+            _, additions = _repair_gate_capacity_with_missions(
+                materialized,
+                successors,
+                [{"fleet": "CRJ200", "aircraftRequired": 2}],
+                frequency_plan,
+                policy,
+                cities,
+                windows,
+                set(),
+                {"CRJ200": 2},
+                11,
+                True,
+                Counter(leg["origin"] for leg in materialized.values()),
+                True,
+                {
+                    "targetStations": ["AAA"],
+                    "minimumHoldMinutes": 240,
+                    "minimumTwoWayDemand": 8.0,
+                    "maximumMissions": 1,
+                    "maximumTimingsPerHoldMarket": 4,
+                },
+            )
+
+        _, after = _materialized_station_gate_assignments(
+            materialized, successors, cities, 40, "AAA"
+        )
+        self.assertEqual(len(additions), 1)
+        self.assertEqual(additions[0]["market"], ["AAA", "BBB"])
+        self.assertEqual(after["status"], "pass")
 
     def test_successor_repair_can_cross_a_score_plateau(self) -> None:
         identifiers = ("A", "B", "C", "D")

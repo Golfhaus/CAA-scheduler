@@ -28,6 +28,13 @@ compatible gates after feasible towing, allocation or timing must change the
 flight plan. Productive-utilization additions run after that plan is feasible so
 they cannot be mistaken for automatic utilization targets.
 
+One bounded exception is permitted during exact gate repair: a mission may be
+inserted into a long hold at an already-infeasible station when it strictly
+improves that station's fixed-inventory score, stays within the market's
+frequency ceiling, preserves the anchored successor and fleet requirement,
+and does not worsen the destination station. This is gate relief first and
+productive utilization second; it is not authority to fill every idle window.
+
 ## Incremental milestones
 
 ### A. Fixed physical inventory and conditional towing

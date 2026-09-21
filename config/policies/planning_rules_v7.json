@@ -148,6 +148,14 @@
       "PHF": 2,
       "SYR": 2
     },
+    "productiveGateRelief": {
+      "targetStations": ["MCI"],
+      "preferredDestinations": ["DAY", "PHF", "SYR"],
+      "minimumHoldMinutes": 240,
+      "minimumTwoWayDemand": 8.0,
+      "maximumMissions": 4,
+      "maximumTimingsPerHoldMarket": 8
+    },
     "minimizeTows": true
   }
 }

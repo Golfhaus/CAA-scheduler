@@ -3290,6 +3290,539 @@ def _gate_capacity_score(
     )
 
 
+def _gate_relief_market_candidates(
+    frequency_plan: dict[str, Any],
+    station: str,
+    fleet: str,
+    additions_by_market: Counter[tuple[str, str]],
+    minimum_two_way_demand: float,
+) -> list[dict[str, Any]]:
+    """Return demand-supported same-fleet increments still below their ceiling."""
+    candidates = []
+    for market in frequency_plan["markets"]:
+        endpoints = (str(market["origin"]), str(market["destination"]))
+        if station not in endpoints:
+            continue
+        if float(market["twoWayDemand"]) < minimum_two_way_demand:
+            continue
+        if not any(
+            str(allocation["fleet"]) == fleet
+            for allocation in market.get("allocations", [])
+        ):
+            continue
+        market_key = tuple(sorted(endpoints))
+        planned = int(market["plannedRoundTrips"]) + int(
+            additions_by_market[market_key]
+        )
+        if planned >= int(market["frequencyCeilingRoundTrips"]):
+            continue
+        destination = endpoints[1] if endpoints[0] == station else endpoints[0]
+        candidates.append(
+            {
+                "market": market_key,
+                "destination": destination,
+                "classification": str(market["classification"]),
+                "twoWayDemand": float(market["twoWayDemand"]),
+                "plannedRoundTrips": planned,
+                "frequencyCeilingRoundTrips": int(
+                    market["frequencyCeilingRoundTrips"]
+                ),
+                "marginalDemand": float(market["twoWayDemand"])
+                / float(planned + 1),
+            }
+        )
+    return sorted(
+        candidates,
+        key=lambda row: (
+            -float(row["marginalDemand"]),
+            str(row["destination"]),
+        ),
+    )
+
+
+def _gate_relief_bank_id(
+    station: str,
+    local_minute: int,
+    hubs: set[str],
+    windows: dict[str, list[dict[str, Any]]],
+) -> str | None:
+    if station not in hubs:
+        return None
+    return _bank_id(local_minute % 1440, windows[station])
+
+
+def _repair_gate_capacity_with_missions(
+    materialized: dict[str, dict[str, Any]],
+    successors: dict[str, str],
+    cycles: list[dict[str, Any]],
+    frequency_plan: dict[str, Any],
+    policy: dict[str, Any],
+    cities: dict[str, dict[str, Any]],
+    windows: dict[str, list[dict[str, Any]]],
+    required_destinations: set[str],
+    fleet_counts: dict[str, int],
+    rolling_limit: int,
+    single_target_full_gap: bool,
+    station_departure_counts: Counter[str],
+    allow_pairing_spacing_exceptions: bool,
+    options: dict[str, Any],
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    """Insert bounded, demand-supported round trips into gate-blocking holds.
+
+    This repair is deliberately narrower than a general utilization pass.  It
+    considers only configured stations that currently fail their exact fixed-
+    inventory assignment, and accepts a mission only when it strictly improves
+    that station's gate score without worsening the destination or increasing
+    the number of aircraft required.
+    """
+    target_stations = [
+        str(station) for station in options.get("targetStations", [])
+    ]
+    if not target_stations:
+        return cycles, []
+
+    minimum_turn = int(policy["turns"]["minimumMinutes"])
+    minimum_hold = int(options.get("minimumHoldMinutes", 240))
+    minimum_demand = float(options.get("minimumTwoWayDemand", 8.0))
+    maximum_additions = int(options.get("maximumMissions", 4))
+    maximum_timings = int(options.get("maximumTimingsPerHoldMarket", 8))
+    preferred_destinations = {
+        str(station) for station in options.get("preferredDestinations", [])
+    }
+    hubs = set(policy["hubs"])
+    additions: list[dict[str, Any]] = []
+    additions_by_market: Counter[tuple[str, str]] = Counter()
+    block_minutes_by_market_fleet: dict[
+        tuple[tuple[str, str], str], int
+    ] = {}
+    for leg in materialized.values():
+        block_minutes_by_market_fleet[
+            (
+                tuple(sorted((str(leg["origin"]), str(leg["destination"])))),
+                str(leg["fleet"]),
+            )
+        ] = int(leg["blockMinutes"])
+
+    bank_usage: Counter[tuple[str, str]] = Counter()
+    for leg in materialized.values():
+        if leg.get("originBankId") is not None:
+            bank_usage[(str(leg["originBankId"]), "departure")] += 1
+        if leg.get("destinationBankId") is not None:
+            bank_usage[(str(leg["destinationBankId"]), "arrival")] += 1
+
+    aircraft_ceiling = _cycle_score(
+        cycles,
+        required_destinations,
+        fleet_counts,
+        rolling_limit,
+    )[-1]
+
+    for station in target_stations:
+        if station not in cities:
+            continue
+        while len(additions) < maximum_additions:
+            _, current_diagnostic = _materialized_station_gate_assignments(
+                materialized,
+                successors,
+                cities,
+                minimum_turn,
+                station,
+            )
+            current_score = _station_gate_score(current_diagnostic)
+            if current_score[0] == 0:
+                break
+
+            ranked_candidates: list[tuple[Any, ...]] = []
+            for arriving_id, following_id in sorted(successors.items()):
+                arriving = materialized[arriving_id]
+                following = materialized[following_id]
+                if (
+                    str(arriving["destination"]) != station
+                    or str(following["origin"]) != station
+                    or str(arriving["fleet"]) != str(following["fleet"])
+                ):
+                    continue
+                arrival_utc = int(arriving["departureUtcMinute"]) + int(
+                    arriving["blockMinutes"]
+                )
+                hold_minutes = _connection_wait(
+                    arrival_utc,
+                    int(following["departureUtcMinute"]),
+                    minimum_turn,
+                )
+                if hold_minutes < minimum_hold:
+                    continue
+                following_departure_utc = arrival_utc + hold_minutes
+                fleet = str(arriving["fleet"])
+                markets = _gate_relief_market_candidates(
+                    frequency_plan,
+                    station,
+                    fleet,
+                    additions_by_market,
+                    minimum_demand,
+                )
+                for market in markets:
+                    destination = str(market["destination"])
+                    block_minutes = block_minutes_by_market_fleet.get(
+                        (market["market"], fleet)
+                    )
+                    if block_minutes is None:
+                        continue
+                    latest_outbound = (
+                        following_departure_utc
+                        - minimum_turn
+                        - block_minutes
+                        - minimum_turn
+                        - block_minutes
+                    )
+                    earliest_outbound = arrival_utc + minimum_turn
+                    if latest_outbound < earliest_outbound:
+                        continue
+
+                    timing_candidates: list[tuple[int, int]] = []
+                    for outbound_utc in range(
+                        ((earliest_outbound + TIME_STEP_MINUTES - 1)
+                         // TIME_STEP_MINUTES)
+                        * TIME_STEP_MINUTES,
+                        latest_outbound + 1,
+                        TIME_STEP_MINUTES,
+                    ):
+                        outbound_departure = _local_minute(
+                            outbound_utc, station, cities
+                        )
+                        outbound_arrival_utc = outbound_utc + block_minutes
+                        outbound_arrival = _local_minute(
+                            outbound_arrival_utc, destination, cities
+                        )
+                        if _curfew_status(
+                            station,
+                            outbound_departure,
+                            outbound_arrival,
+                            policy,
+                        ) != "pass":
+                            continue
+                        if (
+                            _gate_relief_bank_id(
+                                station,
+                                outbound_departure,
+                                hubs,
+                                windows,
+                            )
+                            is None
+                        ):
+                            continue
+                        if destination in hubs and _gate_relief_bank_id(
+                            destination,
+                            outbound_arrival,
+                            hubs,
+                            windows,
+                        ) is None:
+                            continue
+
+                        latest_return = (
+                            following_departure_utc
+                            - minimum_turn
+                            - block_minutes
+                        )
+                        earliest_return = outbound_arrival_utc + minimum_turn
+                        for return_utc in range(
+                            (latest_return // TIME_STEP_MINUTES)
+                            * TIME_STEP_MINUTES,
+                            earliest_return - 1,
+                            -TIME_STEP_MINUTES,
+                        ):
+                            return_departure = _local_minute(
+                                return_utc, destination, cities
+                            )
+                            return_arrival_utc = return_utc + block_minutes
+                            return_arrival = _local_minute(
+                                return_arrival_utc, station, cities
+                            )
+                            if _curfew_status(
+                                destination,
+                                return_departure,
+                                return_arrival,
+                                policy,
+                            ) != "pass":
+                                continue
+                            if destination in hubs and _gate_relief_bank_id(
+                                destination,
+                                return_departure,
+                                hubs,
+                                windows,
+                            ) is None:
+                                continue
+                            if _gate_relief_bank_id(
+                                station,
+                                return_arrival,
+                                hubs,
+                                windows,
+                            ) is None:
+                                continue
+                            timing_candidates.append(
+                                (outbound_utc, return_utc)
+                            )
+                            break
+
+                    timing_candidates = sorted(
+                        set(timing_candidates),
+                        key=lambda row: (-(row[1] - row[0]), row[0], row[1]),
+                    )[:maximum_timings]
+                    for outbound_utc, return_utc in timing_candidates:
+                        ordinal = (
+                            additions_by_market[market["market"]] + 1
+                        )
+                        id_prefix = (
+                            f"GATE-RELIEF-{station}-{destination}-{fleet}-{ordinal:02d}"
+                        )
+                        outbound_id = f"{id_prefix}-OUT"
+                        return_id = f"{id_prefix}-IN"
+                        if outbound_id in materialized or return_id in materialized:
+                            continue
+                        outbound_arrival_utc = outbound_utc + block_minutes
+                        return_arrival_utc = return_utc + block_minutes
+                        outbound_departure = _local_minute(
+                            outbound_utc, station, cities
+                        )
+                        outbound_arrival = _local_minute(
+                            outbound_arrival_utc, destination, cities
+                        )
+                        return_departure = _local_minute(
+                            return_utc, destination, cities
+                        )
+                        return_arrival = _local_minute(
+                            return_arrival_utc, station, cities
+                        )
+                        outbound_origin_bank = _gate_relief_bank_id(
+                            station,
+                            outbound_departure,
+                            hubs,
+                            windows,
+                        )
+                        outbound_destination_bank = _gate_relief_bank_id(
+                            destination,
+                            outbound_arrival,
+                            hubs,
+                            windows,
+                        )
+                        return_origin_bank = _gate_relief_bank_id(
+                            destination,
+                            return_departure,
+                            hubs,
+                            windows,
+                        )
+                        return_destination_bank = _gate_relief_bank_id(
+                            station,
+                            return_arrival,
+                            hubs,
+                            windows,
+                        )
+                        bank_touches = [
+                            (outbound_origin_bank, "departure", station),
+                            (outbound_destination_bank, "arrival", destination),
+                            (return_origin_bank, "departure", destination),
+                            (return_destination_bank, "arrival", station),
+                        ]
+                        if any(
+                            bank_id is not None
+                            and bank_usage[(bank_id, operation)] + 1
+                            > _capacity(cities[bank_station])[0]
+                            for bank_id, operation, bank_station in bank_touches
+                        ):
+                            continue
+                        common = {
+                            "source": "productive_gate_relief",
+                            "market": list(market["market"]),
+                            "classification": market["classification"],
+                            "fleet": fleet,
+                            "blockMinutes": block_minutes,
+                            "curfewStatus": "pass",
+                        }
+                        outbound_leg = {
+                            "id": outbound_id,
+                            **common,
+                            "origin": station,
+                            "destination": destination,
+                            "departureUtcMinute": outbound_utc % 1440,
+                            "arrivalUtcMinute": outbound_arrival_utc % 1440,
+                            "departureMinute": outbound_departure,
+                            "arrivalMinute": outbound_arrival,
+                            "originBankId": outbound_origin_bank,
+                            "destinationBankId": outbound_destination_bank,
+                        }
+                        return_leg = {
+                            "id": return_id,
+                            **common,
+                            "origin": destination,
+                            "destination": station,
+                            "departureUtcMinute": return_utc % 1440,
+                            "arrivalUtcMinute": return_arrival_utc % 1440,
+                            "departureMinute": return_departure,
+                            "arrivalMinute": return_arrival,
+                            "originBankId": return_origin_bank,
+                            "destinationBankId": return_destination_bank,
+                        }
+                        candidate_materialized = dict(materialized)
+                        candidate_materialized[outbound_id] = outbound_leg
+                        candidate_materialized[return_id] = return_leg
+                        candidate_counts = Counter(station_departure_counts)
+                        candidate_counts[station] += 1
+                        candidate_counts[destination] += 1
+                        if not all(
+                            _pairing_spacing_holds_for_leg(
+                                leg,
+                                candidate_materialized,
+                                candidate_counts,
+                                policy,
+                                allow_pairing_spacing_exceptions,
+                            )
+                            for leg in (outbound_leg, return_leg)
+                        ):
+                            continue
+                        candidate_successors = dict(successors)
+                        candidate_successors[arriving_id] = outbound_id
+                        candidate_successors[outbound_id] = return_id
+                        candidate_successors[return_id] = following_id
+                        _, target_diagnostic = (
+                            _materialized_station_gate_assignments(
+                                candidate_materialized,
+                                candidate_successors,
+                                cities,
+                                minimum_turn,
+                                station,
+                            )
+                        )
+                        target_score = _station_gate_score(target_diagnostic)
+                        if target_score >= current_score:
+                            continue
+                        _, destination_before = (
+                            _materialized_station_gate_assignments(
+                                materialized,
+                                successors,
+                                cities,
+                                minimum_turn,
+                                destination,
+                            )
+                        )
+                        _, destination_after = (
+                            _materialized_station_gate_assignments(
+                                candidate_materialized,
+                                candidate_successors,
+                                cities,
+                                minimum_turn,
+                                destination,
+                            )
+                        )
+                        destination_score = _station_gate_score(
+                            destination_after
+                        )
+                        if destination_score > _station_gate_score(
+                            destination_before
+                        ):
+                            continue
+                        candidate_key = (
+                            target_score,
+                            destination_score,
+                            0 if destination in preferred_destinations else 1,
+                            -float(market["marginalDemand"]),
+                            -(return_utc - outbound_utc),
+                            outbound_utc,
+                            destination,
+                        )
+                        candidate = (
+                            candidate_key,
+                            arriving_id,
+                            following_id,
+                            outbound_leg,
+                            return_leg,
+                            target_score,
+                            destination_score,
+                            market,
+                            bank_touches,
+                            candidate_materialized,
+                            candidate_successors,
+                        )
+                        ranked_candidates.append(candidate)
+
+            best: tuple[Any, ...] | None = None
+            for candidate in sorted(
+                ranked_candidates,
+                key=lambda row: row[0],
+            )[:32]:
+                candidate_materialized = candidate[-2]
+                candidate_successors = candidate[-1]
+                candidate_cycles = _cycles(
+                    candidate_materialized,
+                    candidate_successors,
+                    policy,
+                    cities,
+                    single_target_full_gap=single_target_full_gap,
+                )
+                cycle_score = _cycle_score(
+                    candidate_cycles,
+                    required_destinations,
+                    fleet_counts,
+                    rolling_limit,
+                )
+                if (
+                    cycle_score[:4] != (0, 0, 0, 0)
+                    or cycle_score[-1] > aircraft_ceiling
+                ):
+                    continue
+                best = (*candidate[:-2], candidate_cycles)
+                break
+            if best is None:
+                break
+            (
+                _,
+                arriving_id,
+                following_id,
+                outbound_leg,
+                return_leg,
+                target_score,
+                destination_score,
+                market,
+                bank_touches,
+                cycles,
+            ) = best
+            materialized[outbound_leg["id"]] = outbound_leg
+            materialized[return_leg["id"]] = return_leg
+            successors[arriving_id] = outbound_leg["id"]
+            successors[outbound_leg["id"]] = return_leg["id"]
+            successors[return_leg["id"]] = following_id
+            station_departure_counts[station] += 1
+            station_departure_counts[str(market["destination"])] += 1
+            additions_by_market[market["market"]] += 1
+            for bank_id, operation, _ in bank_touches:
+                if bank_id is not None:
+                    bank_usage[(bank_id, operation)] += 1
+            additions.append(
+                {
+                    "station": station,
+                    "market": list(market["market"]),
+                    "destination": market["destination"],
+                    "fleet": outbound_leg["fleet"],
+                    "blockMinutes": outbound_leg["blockMinutes"],
+                    "afterArrivingLegId": arriving_id,
+                    "beforeDepartingLegId": following_id,
+                    "outboundLegId": outbound_leg["id"],
+                    "returnLegId": return_leg["id"],
+                    "outboundDepartureUtcMinute": outbound_leg[
+                        "departureUtcMinute"
+                    ],
+                    "returnArrivalUtcMinute": return_leg[
+                        "arrivalUtcMinute"
+                    ],
+                    "twoWayDemand": market["twoWayDemand"],
+                    "marginalDemand": market["marginalDemand"],
+                    "beforeGateScore": list(current_score),
+                    "afterGateScore": list(target_score),
+                    "destinationGateScore": list(destination_score),
+                }
+            )
+    return cycles, additions
+
+
 def _assigned_bank_windows_hold(
     leg: dict[str, Any],
     windows: dict[str, list[dict[str, Any]]],
@@ -3617,6 +4150,7 @@ def build_exact_materialization_plan(
             "passengerGateCapacityReserveByStation", {}
         ).items()
     }
+    gate_relief_options = exact_options.get("productiveGateRelief", {})
     if seed_fleets_per_run is not None:
         if seed_fleets_per_run < 1:
             raise ValueError("Seed fleets per run must be at least one")
@@ -4041,9 +4575,11 @@ def build_exact_materialization_plan(
                         improved_by_fleet,
                         solver_fleets,
                     )
-                if (
+                bank_overflow_remains = (
                     float(joint_solver["bankFeasibilityOverflow"]) > 0
-                    or float(
+                )
+                gate_overflow_remains = (
+                    float(
                         joint_solver[
                             "physicalCapacityFeasibilityOverflow"
                         ]
@@ -4055,6 +4591,10 @@ def build_exact_materialization_plan(
                         ]
                     )
                     > 0
+                )
+                if (
+                    bank_overflow_remains
+                    or (gate_overflow_remains and not gate_relief_options)
                 ) and not allow_infeasible_preview:
                     raise ExactGlobalRepairIncomplete(
                         {
@@ -4206,6 +4746,7 @@ def build_exact_materialization_plan(
         single_target_full_gap,
     )
     gate_time_shifts: list[dict[str, Any]] = []
+    gate_relief_missions: list[dict[str, Any]] = []
     if enforce_fixed_inventory:
         cycles, gate_swaps = _repair_successor_gate_capacity(
             materialized,
@@ -4233,6 +4774,25 @@ def build_exact_materialization_plan(
             station_departure_counts,
             allow_pairing_spacing_exceptions,
         )
+        if gate_relief_options:
+            cycles, gate_relief_missions = (
+                _repair_gate_capacity_with_missions(
+                    materialized,
+                    successors,
+                    cycles,
+                    frequency_plan,
+                    policy,
+                    cities,
+                    windows,
+                    required_destinations,
+                    fleet_counts,
+                    rolling_limit,
+                    single_target_full_gap,
+                    station_departure_counts,
+                    allow_pairing_spacing_exceptions,
+                    gate_relief_options,
+                )
+            )
     gate_diagnostic = {
         "status": "not_evaluated",
         "stations": 0,
@@ -4384,7 +4944,14 @@ def build_exact_materialization_plan(
             "solverMipGap": solver_fleets[fleet]["mipGap"],
         }
     capacity_shortfall = sum(row["shortfall"] for row in fleet_plan.values())
-    planned_legs = int(frequency_plan["summary"]["plannedLegs"])
+    selected_legs = int(frequency_plan["summary"]["plannedLegs"])
+    planned_legs = selected_legs + 2 * len(gate_relief_missions)
+    added_nonhub_legs = sum(
+        leg.get("source") == "productive_gate_relief"
+        and leg["origin"] not in hubs
+        and leg["destination"] not in hubs
+        for leg in legs
+    )
     checks = [
         {
             "id": "service_coverage",
@@ -4396,7 +4963,9 @@ def build_exact_materialization_plan(
             "status": (
                 "pass"
                 if len(nonhub)
-                == planned_legs - int(bank_plan["summary"]["hubMarketLegs"])
+                == selected_legs
+                - int(bank_plan["summary"]["hubMarketLegs"])
+                + added_nonhub_legs
                 else "fail"
             ),
             "message": f"All {len(nonhub)} non-hub legs are integrated into aircraft cycles",
@@ -4530,6 +5099,8 @@ def build_exact_materialization_plan(
             "rollingRonViolations": len(rolling_violations),
             "successorSwaps": len(swaps),
             "gateTimeShifts": len(gate_time_shifts),
+            "gateReliefMissions": len(gate_relief_missions),
+            "selectedLegs": selected_legs,
             **(
                 {
                     "gateCapacityFailures": len(
@@ -4582,6 +5153,7 @@ def build_exact_materialization_plan(
         "diagnostics": {
             "successorSwaps": swaps,
             "gateTimeShifts": gate_time_shifts,
+            "gateReliefMissions": gate_relief_missions,
             "bankUnalignedLegs": bank_unaligned,
             "continuityViolations": continuity_violations,
             "turnViolations": turn_violations,
