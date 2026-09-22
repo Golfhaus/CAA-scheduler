@@ -122,3 +122,24 @@ validation changes plus a complete 1,028-leg exact-seed checkpoint, but not a
 publishable canonical package. Productive-utilization source and tests from the
 lost workspace must be reconstructed. Every milestone above will be committed
 and pushed separately under the disconnect-resilient workflow.
+
+## Current diagnostic checkpoint
+
+The fresh September 22 provisional build reuses exact-seed checkpoint
+`1a26aa68aefdf720` and is intentionally exported only through
+`web/schedules.preview.json`. It is not publication-ready:
+
+- exact materialization routes 914 legs with 176 of 225 configured aircraft;
+- the plan includes 42 conditional tows, 20 gate time shifts, 9 successor
+  swaps, and one MCI-BNA-MCI gate-relief round trip;
+- BWI remains the exact-plan fixed-inventory failure with two configured gates
+  and two configured stands; and
+- provisional canonical validation also exposes two RFD turns on stands, so
+  the package contains four PHOS findings and two fixed-inventory findings in
+  total.
+
+The private web snapshot must retain its provisional-invalid banner. The next
+solver increment must feed these exact fixed-inventory failures back into
+flight selection or route/timing construction. Post-hoc gate assignment,
+unbounded stand creation, or suppressing the hard stops is not an acceptable
+repair.
