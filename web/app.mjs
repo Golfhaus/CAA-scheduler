@@ -82,6 +82,14 @@ export function sortFlightsByDeparture(flights) {
   );
 }
 
+export function sortRoutingsByRouteAndSequence(legs) {
+  return [...legs].sort(
+    (a, b) => Number(a.route) - Number(b.route)
+      || Number(a.sequenceWithinRoute) - Number(b.sequenceWithinRoute)
+      || Number(a.flight) - Number(b.flight)
+  );
+}
+
 function flightDurationMinutes(flight, timezoneByCode) {
   const originOffset = TIMEZONE_OFFSETS[timezoneByCode[flight.origin]] ?? 0;
   const destinationOffset = TIMEZONE_OFFSETS[timezoneByCode[flight.dest]] ?? 0;
@@ -633,7 +641,9 @@ function renderRoutings() {
     origin: $("#routing-origin").value,
     destination: $("#routing-destination").value,
   };
-  const filtered = state.canonical.legs.filter((leg) => legMatches(leg, query, filters));
+  const filtered = sortRoutingsByRouteAndSequence(
+    state.canonical.legs.filter((leg) => legMatches(leg, query, filters))
+  );
   const paged = paginate(filtered, state.routingPage, state.routingPageSize);
   state.routingPage = paged.page;
   $("#routing-result-count").textContent = `${filtered.length.toLocaleString()} flights`;
