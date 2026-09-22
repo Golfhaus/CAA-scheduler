@@ -22,6 +22,7 @@ from .bank_placement import (
 from .demand import load_demand_sources_from_manifest
 from .gate_export import _capacity
 from .gates import (
+    SHORT_CLAIM_THRESHOLD_MINUTES,
     TOUCH_ARRIVAL_MINUTES,
     TOUCH_DEPARTURE_MINUTES,
     GateCapacityError,
@@ -1419,6 +1420,21 @@ def _materialized_station_gate_assignments(
             "strandedPassengerTouches": len(error.stranded_touches),
             "strandedLabels": sorted(
                 claim.label for claim in error.stranded_touches
+            ),
+            "strandedTouchWindows": sorted(
+                (
+                    {
+                        "label": claim.label,
+                        "startMinute": int(claim.start),
+                        "endMinute": int(claim.end),
+                    }
+                    for claim in error.stranded_touches
+                ),
+                key=lambda row: (
+                    row["startMinute"],
+                    row["endMinute"],
+                    row["label"],
+                ),
             ),
         }
         return [], {
@@ -3941,14 +3957,16 @@ def _repair_exact_gate_times(
     station_departure_counts: Counter[str],
     allow_pairing_spacing_exceptions: bool,
 ) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
-    """Shift stranded passenger touches within their assigned bank cores.
+    """Shift stranded or directly competing passenger touches.
 
     The global model constrains simultaneous touch demand, while the final
     recurring gate chart is a cyclic coloring problem. Small exact-time moves
     can break a circular coloring conflict without changing service, routing,
-    or inventory. Every accepted move strictly improves the global gate score
-    and revalidates both endpoints, bank identity, curfew, pairing spacing,
-    turns, RON coverage, and the aircraft requirement.
+    or inventory. Moves normally remain in their assigned bank core. A bounded
+    move to an immediately adjacent bank is permitted when that bank has spare
+    gate-touch capacity. Every accepted move strictly improves the global gate
+    score and revalidates both endpoints, bank capacity, curfew, pairing
+    spacing, turns, RON coverage, and the aircraft requirement.
     """
     minimum_turn = int(policy["turns"]["minimumMinutes"])
     predecessors = {
@@ -3978,7 +3996,74 @@ def _repair_exact_gate_times(
     )[-1]
     exhausted_stations: set[str] = set()
     moves: list[dict[str, Any]] = []
-    offsets = (-60, -45, -30, -20, -15, -10, -5, 5, 10, 15, 20, 30, 45, 60)
+    standard_offsets = (
+        -60,
+        -45,
+        -30,
+        -20,
+        -15,
+        -10,
+        -5,
+        5,
+        10,
+        15,
+        20,
+        30,
+        45,
+        60,
+    )
+    bank_positions = {
+        station: {
+            str(bank["id"]): index
+            for index, bank in enumerate(station_windows)
+        }
+        for station, station_windows in windows.items()
+    }
+
+    def bank_is_adjacent(
+        station: str,
+        original_bank: str,
+        candidate_bank: str,
+    ) -> bool:
+        positions = bank_positions[station]
+        size = len(positions)
+        distance = abs(
+            positions[original_bank] - positions[candidate_bank]
+        )
+        return min(distance, size - distance) <= 1
+
+    def candidate_offsets(leg: dict[str, Any]) -> tuple[int, ...]:
+        offsets = set(standard_offsets)
+        for station_key, bank_key, minute_key in (
+            ("origin", "originBankId", "departureMinute"),
+            ("destination", "destinationBankId", "arrivalMinute"),
+        ):
+            assigned_bank = leg.get(bank_key)
+            if assigned_bank is None:
+                continue
+            bank_station = str(leg[station_key])
+            station_windows = windows[bank_station]
+            position = bank_positions[bank_station][str(assigned_bank)]
+            current_minute = int(leg[minute_key])
+            for adjacent_position in {
+                (position - 1) % len(station_windows),
+                (position + 1) % len(station_windows),
+            }:
+                adjacent = station_windows[adjacent_position]
+                first_minute = int(adjacent["startMinute"]) + (
+                    (current_minute - int(adjacent["startMinute"])) % 5
+                )
+                for candidate_minute in range(
+                    first_minute,
+                    int(adjacent["endMinute"]) + 1,
+                    5,
+                ):
+                    offset = (
+                        candidate_minute - current_minute + 720
+                    ) % 1440 - 720
+                    if offset and abs(offset) <= 180:
+                        offsets.add(offset)
+        return tuple(sorted(offsets))
 
     for _ in range(30):
         failures = [
@@ -4001,14 +4086,66 @@ def _repair_exact_gate_times(
         for label in failure["strandedLabels"]:
             arriving, departing = str(label).split(" -> ", 1)
             candidate_legs.update((arriving, departing))
+        conflict_windows = [
+            (int(row["startMinute"]), int(row["endMinute"]))
+            for row in failure.get("strandedTouchWindows", [])
+        ]
+        if conflict_windows:
+            for arriving, departing in successors.items():
+                arriving_leg = materialized[arriving]
+                departing_leg = materialized[departing]
+                if str(arriving_leg["destination"]) != station:
+                    continue
+                arrival_utc = int(
+                    arriving_leg["departureUtcMinute"]
+                ) + int(arriving_leg["blockMinutes"])
+                wait = _connection_wait(
+                    arrival_utc,
+                    int(departing_leg["departureUtcMinute"]),
+                    minimum_turn,
+                )
+                start = _local_minute(arrival_utc, station, cities)
+                end = start + wait
+                if wait > SHORT_CLAIM_THRESHOLD_MINUTES:
+                    touch_candidates = (
+                        (
+                            start,
+                            start + TOUCH_ARRIVAL_MINUTES,
+                            arriving,
+                        ),
+                        (
+                            end - TOUCH_DEPARTURE_MINUTES,
+                            end,
+                            departing,
+                        ),
+                    )
+                else:
+                    touch_candidates = (
+                        (start, end, arriving),
+                        (start, end, departing),
+                    )
+                for touch_start, touch_end, identifier in touch_candidates:
+                    if any(
+                        touch_start + shift < conflict_end
+                        and conflict_start < touch_end + shift
+                        for shift in (-1440, 0, 1440)
+                        for conflict_start, conflict_end in conflict_windows
+                    ):
+                        candidate_legs.add(identifier)
 
         current_score = _gate_capacity_score(station_scores)
+        bank_usage: Counter[tuple[str, str]] = Counter()
+        for leg in materialized.values():
+            if leg.get("originBankId") is not None:
+                bank_usage[(str(leg["originBankId"]), "departure")] += 1
+            if leg.get("destinationBankId") is not None:
+                bank_usage[(str(leg["destinationBankId"]), "arrival")] += 1
         candidates = []
         for identifier in sorted(candidate_legs):
             if identifier not in predecessors or identifier not in successors:
                 continue
             original = materialized[identifier]
-            for offset in offsets:
+            for offset in candidate_offsets(original):
                 departure_utc = (
                     int(original["departureUtcMinute"]) + offset
                 ) % 1440
@@ -4032,6 +4169,56 @@ def _repair_exact_gate_times(
                         ),
                     }
                 )
+                bank_change_count = 0
+                bank_assignment_valid = True
+                for station_key, bank_key, minute_key in (
+                    ("origin", "originBankId", "departureMinute"),
+                    (
+                        "destination",
+                        "destinationBankId",
+                        "arrivalMinute",
+                    ),
+                ):
+                    original_bank = original.get(bank_key)
+                    if original_bank is None:
+                        continue
+                    bank_station = str(original[station_key])
+                    candidate_bank = _bank_id(
+                        int(candidate_leg[minute_key]),
+                        windows[bank_station],
+                    )
+                    if (
+                        candidate_bank is None
+                        or not bank_is_adjacent(
+                            bank_station,
+                            str(original_bank),
+                            candidate_bank,
+                        )
+                    ):
+                        bank_assignment_valid = False
+                        break
+                    candidate_leg[bank_key] = candidate_bank
+                    if candidate_bank != original_bank:
+                        bank_change_count += 1
+                        operation = (
+                            "departure"
+                            if bank_key == "originBankId"
+                            else "arrival"
+                        )
+                        if (
+                            bank_usage[(candidate_bank, operation)] + 1
+                            > _capacity(cities[bank_station])[0]
+                        ):
+                            bank_assignment_valid = False
+                            break
+                if (
+                    not bank_assignment_valid
+                    or (
+                        bank_change_count == 0
+                        and offset not in standard_offsets
+                    )
+                ):
+                    continue
                 candidate_leg["curfewStatus"] = _curfew_status(
                     str(candidate_leg["origin"]),
                     int(candidate_leg["departureMinute"]),
@@ -4115,6 +4302,7 @@ def _repair_exact_gate_times(
                 candidates.append(
                     (
                         gate_score,
+                        bank_change_count,
                         identifier,
                         abs(offset),
                         offset,
@@ -4131,6 +4319,7 @@ def _repair_exact_gate_times(
             continue
         (
             gate_score,
+            bank_change_count,
             identifier,
             _,
             offset,
@@ -4139,7 +4328,7 @@ def _repair_exact_gate_times(
             station_scores,
             candidate_diagnostics,
             cycle_score,
-        ) = min(candidates, key=lambda candidate: candidate[:4])
+        ) = min(candidates, key=lambda candidate: candidate[:5])
         original = materialized[identifier]
         materialized[identifier] = candidate_leg
         station_diagnostics.update(candidate_diagnostics)
@@ -4153,6 +4342,15 @@ def _repair_exact_gate_times(
                 ),
                 "afterDepartureUtcMinute": int(
                     candidate_leg["departureUtcMinute"]
+                ),
+                "bankReassignment": bool(bank_change_count),
+                "beforeOriginBankId": original.get("originBankId"),
+                "afterOriginBankId": candidate_leg.get("originBankId"),
+                "beforeDestinationBankId": original.get(
+                    "destinationBankId"
+                ),
+                "afterDestinationBankId": candidate_leg.get(
+                    "destinationBankId"
                 ),
                 "afterGateScore": list(gate_score),
                 "afterCycleScore": list(cycle_score),
@@ -4817,6 +5015,8 @@ def build_exact_materialization_plan(
             station_departure_counts,
             allow_pairing_spacing_exceptions,
         )
+        for move in gate_time_shifts:
+            move["repairPhase"] = "before_gate_relief"
         if gate_relief_options:
             cycles, gate_relief_missions = (
                 _repair_gate_capacity_with_missions(
@@ -4837,6 +5037,26 @@ def build_exact_materialization_plan(
                     profiles,
                 )
             )
+            if gate_relief_missions:
+                cycles, post_relief_time_shifts = (
+                    _repair_exact_gate_times(
+                        materialized,
+                        successors,
+                        cycles,
+                        policy,
+                        cities,
+                        windows,
+                        required_destinations,
+                        fleet_counts,
+                        rolling_limit,
+                        single_target_full_gap,
+                        station_departure_counts,
+                        allow_pairing_spacing_exceptions,
+                    )
+                )
+                for move in post_relief_time_shifts:
+                    move["repairPhase"] = "after_gate_relief"
+                gate_time_shifts.extend(post_relief_time_shifts)
     gate_diagnostic = {
         "status": "not_evaluated",
         "stations": 0,

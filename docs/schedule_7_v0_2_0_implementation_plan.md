@@ -41,6 +41,12 @@ Non-hub relief stations do not require hub-bank assignments. An unplanned
 frequency may be considered when its demand clears the configured floor and
 the selected fleet has historical market compatibility; block time is then
 calculated from the same fleet profile used by the allocation engine.
+After relief missions are inserted, exact gate timing is repaired once more
+because the new holds can change which passenger touches compete. That pass may
+move a directly overlapping neighbor rather than the stranded flight itself.
+Normally it stays inside the assigned bank; a move to the immediately adjacent
+bank is allowed only when the receiving bank has spare gate-touch capacity and
+the complete gate, turn, spacing, curfew, RON, and fleet checks improve.
 
 ## Incremental milestones
 
