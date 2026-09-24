@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "defaultScheduleId": "schedule_6_v2_2_5",
+  "defaultScheduleId": "schedule_7_v0_2_0",
   "repositoryUrl": "https://github.com/Golfhaus/CAA-scheduler",
   "instructions": {
     "version": "2.0 with turn-on-stand hard-stop addition",
@@ -50,14 +50,34 @@
         "timetable": "data/schedules/schedule_7_v0_1_0_review/timetable.json",
         "gates": "data/schedules/schedule_7_v0_1_0_review/gates.json"
       }
+    },
+    {
+      "id": "schedule_7_v0_2_0",
+      "label": "Schedule 7 · v0.2.0 — Scheduling-App Review",
+      "files": {
+        "canonical": "data/schedules/schedule_7_v0_2_0_review/canonical_schedule.json",
+        "structuralValidation": "data/schedules/schedule_7_v0_2_0_review/validation_report.json",
+        "operatingValidation": "data/schedules/schedule_7_v0_2_0_review/operating_validation_report.json",
+        "planning": "data/schedules/schedule_7_v0_2_0_review/planning_snapshot.json",
+        "planningValidation": "data/schedules/schedule_7_v0_2_0_review/planning_validation_report.json",
+        "demandPlan": "data/schedules/schedule_7_v0_2_0_review/demand_plan.json",
+        "frequencyFleetPlan": "data/schedules/schedule_7_v0_2_0_review/frequency_fleet_plan.json",
+        "hubBankPlan": "data/schedules/schedule_7_v0_2_0_review/hub_bank_plan.json",
+        "aircraftRoutePlan": "data/schedules/schedule_7_v0_2_0_review/aircraft_route_plan.json",
+        "routingRepairPlan": "data/schedules/schedule_7_v0_2_0_review/routing_repair_plan.json",
+        "bankMaterializationDiagnostic": "data/schedules/schedule_7_v0_2_0_review/bank_materialization_diagnostic.json",
+        "exactMaterializationPlan": "data/schedules/schedule_7_v0_2_0_review/exact_materialization_plan.json",
+        "timetable": "data/schedules/schedule_7_v0_2_0_review/timetable.json",
+        "gates": "data/schedules/schedule_7_v0_2_0_review/gates.json"
+      }
     }
   ],
   "buildSetup": {
     "schema": "schemas/build_config.schema.json",
     "storage": "browser-local",
     "demandData": {
-      "version": "bts-db1c-6mo-jul2025-apr2026-v5",
-      "manifest": "config/demand_data/bts_db1c_6mo_v5.json"
+      "version": "bts-db1c-6mo-jul2025-apr2026-v7",
+      "manifest": "config/demand_data/bts_db1c_6mo_v7.json"
     }
   }
 }

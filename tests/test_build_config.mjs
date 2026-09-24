@@ -28,7 +28,7 @@ test("new setup is explicit and schedule-specific", () => {
   canonical.schedule.fleetCounts.MAX9 = 999;
   assert.equal(config.fleetCounts.MAX9, 35);
   canonical.schedule.fleetCounts.MAX9 = 35;
-  assert.equal(config.inputs.demandData.version, "bts-db1c-6mo-jul2025-apr2026-v5");
+  assert.equal(config.inputs.demandData.version, "bts-db1c-6mo-jul2025-apr2026-v7");
 });
 
 test("preflight blocks an unpinned demand snapshot", () => {
