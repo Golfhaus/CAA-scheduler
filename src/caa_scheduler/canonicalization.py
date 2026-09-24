@@ -37,6 +37,33 @@ def _double_letter(index: int) -> str:
     return chr(ord("A") + index // 26) + chr(ord("A") + index % 26)
 
 
+def _canonical_demand_by_market(
+    frequency_plan: dict[str, Any], exact_plan: dict[str, Any]
+) -> dict[tuple[str, str], float]:
+    """Include demand-supported markets added during exact post-processing."""
+    demand_by_market = {
+        tuple(sorted((market["origin"], market["destination"]))): float(
+            market["twoWayDemand"]
+        )
+        for market in frequency_plan["markets"]
+    }
+    diagnostics = exact_plan.get("diagnostics", {})
+    for diagnostic_key, market_key in (
+        ("gateReliefMissions", "market"),
+        ("lineBridgeMissions", "connectorMarket"),
+    ):
+        for mission in diagnostics.get(diagnostic_key, []):
+            market = mission.get(market_key)
+            if not isinstance(market, list) or len(market) != 2:
+                raise ValueError(
+                    f"Exact {diagnostic_key} entry has no two-airport market"
+                )
+            demand_by_market[tuple(sorted(str(code) for code in market))] = float(
+                mission["twoWayDemand"]
+            )
+    return demand_by_market
+
+
 def _line_assignments(cycles: list[dict[str, Any]]) -> dict[str, str]:
     max9 = [cycle for cycle in cycles if cycle["fleet"] == "MAX9"]
     crj = [cycle for cycle in cycles if cycle["fleet"] != "MAX9"]
@@ -267,12 +294,19 @@ def build_canonical_schedule_from_exact_plan(
     for leg in generated:
         leg["pairing"] = pairings[(leg["origin"], leg["destination"])]
 
-    demand_by_market = {
-        tuple(sorted((market["origin"], market["destination"]))): float(
-            market["twoWayDemand"]
+    demand_by_market = _canonical_demand_by_market(frequency_plan, exact_plan)
+    missing_demand = sorted(
+        {
+            tuple(sorted((leg["origin"], leg["destination"])))
+            for leg in generated
+        }
+        - set(demand_by_market)
+    )
+    if missing_demand:
+        raise ValueError(
+            "Canonical flight numbering has no demand for: "
+            + ", ".join("-".join(market) for market in missing_demand)
         )
-        for market in frequency_plan["markets"]
-    }
     flight_order = sorted(
         generated,
         key=lambda leg: (

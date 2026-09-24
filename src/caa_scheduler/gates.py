@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from collections import defaultdict
+from itertools import combinations
 from typing import Any, NamedTuple
 
 import numpy as np
@@ -11,6 +12,7 @@ from scipy.sparse import coo_matrix
 TOUCH_ARRIVAL_MINUTES = 45
 TOUCH_DEPARTURE_MINUTES = 60
 SHORT_CLAIM_THRESHOLD_MINUTES = 150
+MAXIMUM_TOW_SUBSET_TRIALS = 20_000
 
 
 class GateClaim(NamedTuple):
@@ -65,7 +67,30 @@ def build_claims(
         lines[leg["line"]].setdefault(leg["day"], []).append(leg)
     for days in lines.values():
         for day_legs in days.values():
-            day_legs.sort(key=lambda item: item["departureMinute"])
+            sequence_order = sorted(
+                day_legs,
+                key=lambda item: (
+                    item.get("sequenceWithinRoute", 1_000_000),
+                    item["departureMinute"],
+                ),
+            )
+            crosses_midnight = cyclic_successor_holds and any(
+                int(following["departureMinute"])
+                < int(previous["departureMinute"])
+                for previous, following in zip(
+                    sequence_order, sequence_order[1:]
+                )
+            )
+            if crosses_midnight:
+                # Canonical routes can cross midnight while remaining on the
+                # same aircraft day.  Local clock order would put a 00:50
+                # continuation ahead of its 22:08 arrival and create both a
+                # false termination and a duplicate originator claim.  Use
+                # route sequence only for that wrap; ordinary routes retain
+                # the legacy clock ordering and deterministic gate parity.
+                day_legs[:] = sequence_order
+            else:
+                day_legs.sort(key=lambda item: item["departureMinute"])
 
     claims: list[GateClaim] = []
     for days in lines.values():
@@ -414,6 +439,86 @@ def apply_forced_stand_splits(
     return result
 
 
+def _minimum_tow_feasible_assignment(
+    claims: list[GateClaim],
+    n_gates: int,
+    n_stands: int,
+) -> tuple[list[Assignment], set[GateClaim]] | None:
+    """Find the fewest conditional tows that fit fixed physical inventory.
+
+    The ordinary allocator remains the fast path.  This bounded subset search
+    runs only after that heuristic would strand a passenger touch or exceed
+    configured stands.  It never invents capacity: gate touches and stand
+    middles must each admit an exact coloring within their configured counts.
+    """
+    forced_stand_middles = {
+        claim for claim in claims if claim.kind == "forced_stand_mid"
+    }
+    gate_claims = [
+        claim for claim in claims if claim not in forced_stand_middles
+    ]
+    towable = sorted(
+        (
+            claim
+            for claim in gate_claims
+            if claim.end - claim.start > SHORT_CLAIM_THRESHOLD_MINUTES
+            and claim.end - claim.start
+            > TOUCH_ARRIVAL_MINUTES + TOUCH_DEPARTURE_MINUTES
+        ),
+        key=lambda claim: (claim.start, claim.end, claim.label, claim.fleet),
+    )
+    trials = 0
+    for tow_count in range(len(towable) + 1):
+        best: tuple[tuple[Any, ...], list[Assignment], set[GateClaim]] | None = None
+        for selected in combinations(towable, tow_count):
+            trials += 1
+            if trials > MAXIMUM_TOW_SUBSET_TRIALS:
+                return None
+            selected_set = set(selected)
+            trial_gate_claims = [
+                claim for claim in gate_claims if claim not in selected_set
+            ]
+            trial_stand_claims = list(forced_stand_middles)
+            split_pieces: list[tuple[GateClaim, GateClaim, GateClaim]] = []
+            for claim in selected:
+                pieces = split_for_waypoint(claim)
+                split_pieces.append(pieces)
+                gate_in, stand_middle, gate_out = pieces
+                trial_gate_claims.extend((gate_in, gate_out))
+                trial_stand_claims.append(stand_middle)
+            if _maximum_cyclic_concurrency(trial_stand_claims) > n_stands:
+                continue
+            if _maximum_cyclic_concurrency(trial_gate_claims) > n_gates:
+                continue
+            stand_colors = _bounded_coloring(trial_stand_claims, n_stands)
+            if stand_colors is None:
+                continue
+            gate_colors = _bounded_coloring(trial_gate_claims, n_gates)
+            if gate_colors is None:
+                continue
+            assignments = [
+                (claim, color)
+                for claim, color in zip(trial_gate_claims, gate_colors)
+            ]
+            assignments.extend(
+                (claim, n_gates + color)
+                for claim, color in zip(trial_stand_claims, stand_colors)
+            )
+            score = (
+                sum(claim.end - claim.start for claim in trial_stand_claims),
+                tuple(
+                    (claim.start, claim.end, claim.label)
+                    for claim in selected
+                ),
+            )
+            candidate = (score, assignments, set(trial_stand_claims))
+            if best is None or candidate[0] < best[0]:
+                best = candidate
+        if best is not None:
+            return best[1], best[2]
+    return None
+
+
 def assign_gates(
     claims: list[GateClaim],
     n_gates: int | None = None,
@@ -671,6 +776,21 @@ def assign_gates(
             (slot - n_gates for _, slot in result if slot > n_gates),
             default=0,
         )
+        if stranded_touches or required_stands > n_stands:
+            exact_assignment = _minimum_tow_feasible_assignment(
+                claims, n_gates, n_stands
+            )
+            if exact_assignment is not None:
+                result, stand_middles = exact_assignment
+                stranded_touches = []
+                required_stands = max(
+                    (
+                        slot - n_gates
+                        for _, slot in result
+                        if slot > n_gates
+                    ),
+                    default=0,
+                )
         if (
             stranded_touches or required_stands > n_stands
         ) and not allow_infeasible_preview:

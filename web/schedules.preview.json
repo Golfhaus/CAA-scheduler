@@ -13,23 +13,22 @@
   "schedules": [
     {
       "id": "schedule_7_v0_2_0_preview",
-      "label": "Schedule 7 · v0.2.0 — PROVISIONAL INVALID SNAPSHOT",
-      "previewNotice": "PROVISIONAL SANDBOX SNAPSHOT — Fixed-inventory feasibility remains unresolved. Use this build to inspect the schedule, not as an accepted or publishable candidate.",
+      "label": "Schedule 7 · v0.2.0 — Scheduling-App Review",
       "files": {
-        "canonical": "builds/schedule_7_v0_2_0/canonical_schedule.json",
-        "structuralValidation": "builds/schedule_7_v0_2_0/validation_report.json",
-        "operatingValidation": "builds/schedule_7_v0_2_0/operating_validation_report.json",
-        "planning": "builds/schedule_7_v0_2_0/planning_snapshot.json",
-        "planningValidation": "builds/schedule_7_v0_2_0/planning_validation_report.json",
-        "demandPlan": "builds/schedule_7_v0_2_0/demand_plan.json",
-        "frequencyFleetPlan": "builds/schedule_7_v0_2_0/frequency_fleet_plan.json",
-        "hubBankPlan": "builds/schedule_7_v0_2_0/hub_bank_plan.json",
-        "aircraftRoutePlan": "builds/schedule_7_v0_2_0/aircraft_route_plan.json",
-        "routingRepairPlan": "builds/schedule_7_v0_2_0/routing_repair_plan.json",
-        "bankMaterializationDiagnostic": "builds/schedule_7_v0_2_0/bank_materialization_diagnostic.json",
-        "exactMaterializationPlan": "builds/schedule_7_v0_2_0/exact_materialization_plan.json",
-        "timetable": "builds/schedule_7_v0_2_0/timetable.json",
-        "gates": "builds/schedule_7_v0_2_0/gates.json"
+        "canonical": "builds/schedule_7_v0_2_0/stages/final/canonical_schedule.json",
+        "structuralValidation": "builds/schedule_7_v0_2_0/stages/final/validation_report.json",
+        "operatingValidation": "builds/schedule_7_v0_2_0/stages/final/operating_validation_report.json",
+        "planning": "builds/schedule_7_v0_2_0/stages/final/planning_snapshot.json",
+        "planningValidation": "builds/schedule_7_v0_2_0/stages/final/planning_validation_report.json",
+        "demandPlan": "builds/schedule_7_v0_2_0/stages/final/demand_plan.json",
+        "frequencyFleetPlan": "builds/schedule_7_v0_2_0/stages/final/frequency_fleet_plan.json",
+        "hubBankPlan": "builds/schedule_7_v0_2_0/stages/final/hub_bank_plan.json",
+        "aircraftRoutePlan": "builds/schedule_7_v0_2_0/stages/final/aircraft_route_plan.json",
+        "routingRepairPlan": "builds/schedule_7_v0_2_0/stages/final/routing_repair_plan.json",
+        "bankMaterializationDiagnostic": "builds/schedule_7_v0_2_0/stages/final/bank_materialization_diagnostic.json",
+        "exactMaterializationPlan": "builds/schedule_7_v0_2_0/stages/final/exact_materialization_plan.json",
+        "timetable": "builds/schedule_7_v0_2_0/stages/final/timetable.json",
+        "gates": "builds/schedule_7_v0_2_0/stages/final/gates.json"
       }
     }
   ],

@@ -18,19 +18,25 @@ from caa_scheduler.exact_materialization import (
     _capacity_repair_stations,
     _expand_flexible_seed_types_to_hub_operations,
     _expand_flexible_seed_types_to_markets,
+    _exact_seed_fingerprint,
     _materialized_passenger_gate_overflow,
     _materialized_physical_capacity_overflow,
     _materialized_gate_assignments,
     _materialized_station_gate_assignments,
+    _gate_relief_market_candidates,
+    _bridge_rebalanced_successor_cycles,
     _pairing_patterns,
     _read_exact_seed_checkpoint,
+    _rebalance_successor_cycles,
     _repair_exact_gate_times,
     _repair_gate_capacity_with_missions,
     _repair_successor_cycles,
     _repair_successor_gate_capacity,
     _write_exact_seed_checkpoint,
+    _verified_reusable_solver_leg_ids,
     blocked_exact_materialization_plan,
 )
+from caa_scheduler.routing import _cycles
 
 
 PLAN_PATH = (
@@ -764,6 +770,33 @@ class ExactMaterializationPlanTests(unittest.TestCase):
         self.assertTrue(additions[0]["newFrequency"])
         self.assertEqual(after["status"], "pass")
 
+    def test_explicit_unplanned_gate_relief_market_uses_pinned_demand(self) -> None:
+        candidates = _gate_relief_market_candidates(
+            {"markets": []},
+            "BWI",
+            "CRJ700",
+            Counter(),
+            8.0,
+            [
+                {
+                    "origin": "BWI",
+                    "destination": "FLL",
+                    "classification": "point_to_point",
+                    "twoWayDemand": 596.4,
+                    "plannedRoundTrips": 0,
+                    "frequencyCeilingRoundTrips": 1,
+                    "allocations": [],
+                    "historicalFleetLegs": {},
+                    "eligibleFleets": ["CRJ700"],
+                }
+            ],
+        )
+
+        self.assertEqual(len(candidates), 1)
+        self.assertEqual(candidates[0]["market"], ("BWI", "FLL"))
+        self.assertEqual(candidates[0]["marginalDemand"], 596.4)
+        self.assertTrue(candidates[0]["newFrequency"])
+
     def test_gate_time_repair_can_move_neighbor_to_adjacent_bank(self) -> None:
         def leg(
             identifier: str,
@@ -999,6 +1032,281 @@ class ExactMaterializationPlanTests(unittest.TestCase):
         self.assertEqual(
             [swap["moveKind"] for swap in swaps],
             ["plateau", "improvement"],
+        )
+
+    def test_line_rebalancing_preserves_receiver_and_cycle_ids(self) -> None:
+        legs = {
+            identifier: {
+                "id": identifier,
+                "fleet": "CRJ700",
+                "origin": "AAA",
+                "destination": "AAA",
+                "departureUtcMinute": 300,
+                "blockMinutes": 60,
+            }
+            for identifier in ("D1", "D2", "D3", "D4", "D5", "R1")
+        }
+        successors = {
+            "D1": "D2",
+            "D2": "D3",
+            "D3": "D4",
+            "D4": "D5",
+            "D5": "D1",
+            "R1": "R1",
+        }
+        policy = {
+            "turns": {"minimumMinutes": 40},
+            "ronTargetCities": ["AAA"],
+        }
+        cities = {"AAA": {"timezone": "Eastern"}}
+        cycles = [
+            {
+                **cycle,
+                "id": identifier,
+            }
+            for cycle, identifier in zip(
+                _cycles(
+                    legs,
+                    successors,
+                    policy,
+                    cities,
+                    single_target_full_gap=True,
+                ),
+                ("CYCLE-001", "CYCLE-002"),
+            )
+        ]
+
+        rebalanced, moves = _rebalance_successor_cycles(
+            legs,
+            successors,
+            cycles,
+            policy,
+            cities,
+            set(),
+            {"CRJ700": 6},
+            11,
+            True,
+            {
+                "minimumDaysPerLine": 2,
+                "maximumDaysPerLine": 2,
+                "transfers": [
+                    {
+                        "receiverAnchorLegId": "R1",
+                        "targetDays": 3,
+                        "maximumDays": 3,
+                    }
+                ],
+            },
+            False,
+        )
+
+        self.assertEqual(len(moves), 1)
+        self.assertEqual(moves[0]["beforeReceiverDays"], 1)
+        self.assertEqual(moves[0]["afterReceiverDays"], 3)
+        self.assertEqual(moves[0]["maximumReceiverDays"], 3)
+        self.assertEqual(moves[0]["beforeDonorDays"], 5)
+        self.assertEqual(moves[0]["afterDonorDays"], 3)
+        self.assertEqual(
+            {cycle["id"]: cycle["aircraftRequired"] for cycle in rebalanced},
+            {"CYCLE-001": 3, "CYCLE-002": 3},
+        )
+        receiver = next(
+            cycle for cycle in rebalanced if cycle["id"] == "CYCLE-002"
+        )
+        self.assertIn("R1", receiver["legIds"])
+
+    def test_line_rebalancing_does_not_invalidate_exact_seed(self) -> None:
+        inputs = (
+            {"schedule": {"id": "test"}},
+            {"markets": []},
+            {"placements": []},
+            {"routes": []},
+        )
+        base_rules = {"exactMaterialization": {"timeLimitSecondsPerFleet": 60}}
+        rebalanced_rules = {
+            "exactMaterialization": {
+                "timeLimitSecondsPerFleet": 60,
+                "lineRebalancing": {
+                    "transfers": [
+                        {"receiverAnchorLegId": "A-B-01", "targetDays": 12}
+                    ]
+                },
+            }
+        }
+
+        self.assertEqual(
+            _exact_seed_fingerprint(*inputs, base_rules),
+            _exact_seed_fingerprint(*inputs, rebalanced_rules),
+        )
+
+    def test_reusable_exact_plan_requires_identical_solver_inventory(self) -> None:
+        inventory = {
+            "CRJ700": [
+                {
+                    "id": "AAA-BBB-CRJ700-01-OUT",
+                    "origin": "AAA",
+                    "destination": "BBB",
+                    "fleet": "CRJ700",
+                    "blockMinutes": 60,
+                }
+            ]
+        }
+        prior = {
+            "legs": [
+                {
+                    **inventory["CRJ700"][0],
+                    "source": "exact_materialization",
+                    "departureMinute": 600,
+                },
+                {
+                    "id": "GATE-RELIEF-AAA-CCC-CRJ700-01-OUT",
+                    "source": "productive_gate_relief",
+                },
+            ]
+        }
+
+        self.assertEqual(
+            _verified_reusable_solver_leg_ids(prior, inventory),
+            {"AAA-BBB-CRJ700-01-OUT"},
+        )
+        prior["legs"][0]["blockMinutes"] = 65
+        with self.assertRaisesRegex(ValueError, "blockMinutes"):
+            _verified_reusable_solver_leg_ids(prior, inventory)
+
+    @patch("caa_scheduler.exact_materialization._block_minutes", return_value=60)
+    def test_line_bridge_joins_short_receiver_to_donor_segment(
+        self, _mock_block_minutes
+    ) -> None:
+        def leg(
+            identifier: str,
+            origin: str,
+            destination: str,
+            departure: int,
+        ) -> dict[str, object]:
+            return {
+                "id": identifier,
+                "source": "test",
+                "market": sorted((origin, destination)),
+                "classification": "point_to_point",
+                "fleet": "CRJ700",
+                "origin": origin,
+                "destination": destination,
+                "blockMinutes": 60,
+                "departureUtcMinute": departure,
+                "arrivalUtcMinute": (departure + 60) % 1440,
+                "departureMinute": departure,
+                "arrivalMinute": (departure + 60) % 1440,
+                "originBankId": None,
+                "destinationBankId": None,
+                "curfewStatus": "pass",
+            }
+
+        legs = {
+            **{
+                identifier: leg(identifier, "XXX", "XXX", 300)
+                for identifier in ("D1", "D2", "D3", "D4")
+            },
+            "R1": leg("R1", "BBB", "CCC", 500),
+            "R2": leg("R2", "CCC", "BBB", 600),
+        }
+        successors = {
+            "D1": "D2",
+            "D2": "D3",
+            "D3": "D4",
+            "D4": "D1",
+            "R1": "R2",
+            "R2": "R1",
+        }
+        policy = {
+            "turns": {"minimumMinutes": 40},
+            "ronTargetCities": ["XXX"],
+            "hubs": [],
+            "focusCities": [],
+            "departureWindows": {
+                "earliestMinute": 0,
+                "hubOrFocusLatestMinute": 1439,
+                "destinationLatestMinute": 1439,
+                "redEyeLatestMinute": 0,
+                "redEyeArrivalMinimumMinute": 0,
+                "redEyeArrivalMaximumMinute": 1439,
+            },
+        }
+        cities = {
+            code: {
+                "timezone": "Eastern",
+                "latitude": 0.0,
+                "longitude": 0.0,
+            }
+            for code in ("BBB", "CCC", "XXX")
+        }
+        cycles = [
+            {**cycle, "id": identifier}
+            for cycle, identifier in zip(
+                _cycles(
+                    legs,
+                    successors,
+                    policy,
+                    cities,
+                    single_target_full_gap=True,
+                ),
+                ("DONOR", "RECEIVER"),
+            )
+        ]
+        donor = next(cycle for cycle in cycles if "D1" in cycle["legIds"])
+        receiver = next(cycle for cycle in cycles if "R1" in cycle["legIds"])
+
+        bridged, moves = _bridge_rebalanced_successor_cycles(
+            legs,
+            successors,
+            cycles,
+            policy,
+            cities,
+            {},
+            set(),
+            {"CRJ700": 5},
+            10,
+            True,
+            Counter({"BBB": 1, "CCC": 1, "XXX": 4}),
+            True,
+            {
+                "bridgeTransfers": [
+                    {
+                        "receiverAnchorLegId": "R1",
+                        "receiverArrivalLegId": "R2",
+                        "donorBoundaryArrivalLegIds": ["D1", "D3"],
+                        "transferredBoundaryArrivalLegId": "D1",
+                        "connectorMarket": ["BBB", "XXX"],
+                        "receiverDepartureLocalMinute": 500,
+                        "receiverArrivalDepartureLocalMinute": 600,
+                        "fromReceiverDepartureLocalMinute": 700,
+                        "toReceiverDepartureLocalMinute": 400,
+                        "targetReceiverDays": 2,
+                        "minimumTwoWayDemand": 100.0,
+                        "minimumMarginalDemand": 100.0,
+                        "frequencyCeilingRoundTrips": 1,
+                    }
+                ]
+            },
+            {"CRJ700": {}},
+            {
+                "values": {
+                    "BBB": {"XXX": 60.0},
+                    "XXX": {"BBB": 60.0},
+                }
+            },
+            False,
+        )
+
+        self.assertEqual(len(moves), 1)
+        self.assertEqual(moves[0]["twoWayDemand"], 120.0)
+        self.assertTrue(moves[0]["newFrequency"])
+        self.assertEqual(len(legs), 8)
+        by_id = {cycle["id"]: cycle for cycle in bridged}
+        self.assertEqual(by_id[donor["id"]]["aircraftRequired"], 2)
+        self.assertEqual(by_id[receiver["id"]]["aircraftRequired"], 2)
+        self.assertIn(
+            "LINE-BRIDGE-BBB-XXX-CRJ700-01-OUT",
+            by_id[receiver["id"]]["legIds"],
         )
 
     def test_exact_seed_checkpoint_round_trip_and_input_guard(self) -> None:

@@ -19,7 +19,7 @@ from .bank_placement import (
     _curfew_status,
     _maximum_spaced_departures,
 )
-from .demand import load_demand_sources_from_manifest
+from .demand import load_demand_sources_from_manifest, parse_airport_od_matrix
 from .gate_export import _capacity
 from .gates import (
     SHORT_CLAIM_THRESHOLD_MINUTES,
@@ -114,6 +114,10 @@ def _exact_seed_fingerprint(
     planning_rules: dict[str, Any],
 ) -> str:
     """Fingerprint every input that can affect an independent fleet seed."""
+    seed_planning_rules = json.loads(json.dumps(planning_rules))
+    seed_planning_rules.get("exactMaterialization", {}).pop(
+        "lineRebalancing", None
+    )
     payload = json.dumps(
         {
             "seedModelVersion": EXACT_SEED_MODEL_VERSION,
@@ -121,13 +125,32 @@ def _exact_seed_fingerprint(
             "frequencyPlan": frequency_plan,
             "bankPlan": bank_plan,
             "repairPlan": repair_plan,
-            "planningRules": planning_rules,
+            "planningRules": seed_planning_rules,
         },
         ensure_ascii=False,
         separators=(",", ":"),
         sort_keys=True,
     ).encode("utf-8")
     return hashlib.sha256(payload).hexdigest()
+
+
+def exact_seed_fingerprint_from_manifest(
+    canonical: dict[str, Any],
+    frequency_plan: dict[str, Any],
+    bank_plan: dict[str, Any],
+    repair_plan: dict[str, Any],
+    manifest_path: Path,
+    repo_root: Path,
+) -> str:
+    """Return the compatibility key used by resumable exact seed files."""
+    loaded = load_demand_sources_from_manifest(manifest_path, repo_root)
+    return _exact_seed_fingerprint(
+        canonical,
+        frequency_plan,
+        bank_plan,
+        repair_plan,
+        loaded["planningRules"],
+    )
 
 
 def _read_exact_seed_checkpoint(
@@ -3089,6 +3112,694 @@ def _repair_successor_cycles(
     return cycles, swaps
 
 
+def _line_length_penalty(
+    cycles: list[dict[str, Any]], minimum_days: int, maximum_days: int
+) -> int:
+    return sum(
+        max(0, minimum_days - int(cycle["aircraftRequired"]))
+        + max(0, int(cycle["aircraftRequired"]) - maximum_days)
+        for cycle in cycles
+    )
+
+
+def _gate_plan_score(diagnostic: dict[str, Any]) -> tuple[int, int, int, int, int]:
+    failures = diagnostic.get("failures", [])
+    return (
+        0 if diagnostic.get("status") == "pass" else 1,
+        sum(int(row["strandedPassengerTouches"]) for row in failures),
+        sum(
+            max(0, int(row["requiredGates"]) - int(row["configuredGates"]))
+            for row in failures
+        ),
+        sum(
+            max(0, int(row["requiredStands"]) - int(row["configuredStands"]))
+            for row in failures
+        ),
+        int(diagnostic.get("towMovements", 0)),
+    )
+
+
+def _preserve_rebalanced_cycle_ids(
+    previous_cycles: list[dict[str, Any]],
+    candidate_cycles: list[dict[str, Any]],
+    donor_id: str,
+    receiver_id: str,
+    receiver_leg_ids: set[str],
+) -> list[dict[str, Any]]:
+    """Keep canonical line names stable across a targeted cycle transfer."""
+    old_by_legs = {
+        frozenset(cycle["legIds"]): str(cycle["id"])
+        for cycle in previous_cycles
+        if str(cycle["id"]) not in {donor_id, receiver_id}
+    }
+    preserved = []
+    assigned_ids: set[str] = set()
+    for cycle in candidate_cycles:
+        leg_ids = set(cycle["legIds"])
+        if receiver_leg_ids <= leg_ids:
+            identifier = receiver_id
+        elif frozenset(leg_ids) in old_by_legs:
+            identifier = old_by_legs[frozenset(leg_ids)]
+        else:
+            identifier = donor_id
+        if identifier in assigned_ids:
+            raise ValueError(
+                f"Line rebalancing produced duplicate cycle identifier {identifier}"
+            )
+        assigned_ids.add(identifier)
+        preserved.append({**cycle, "id": identifier})
+    expected_ids = {str(cycle["id"]) for cycle in previous_cycles}
+    if assigned_ids != expected_ids:
+        raise ValueError("Line rebalancing could not preserve every cycle identifier")
+    return sorted(preserved, key=lambda row: str(row["id"]))
+
+
+def _rebalance_successor_cycles(
+    legs: dict[str, dict[str, Any]],
+    successors: dict[str, str],
+    cycles: list[dict[str, Any]],
+    policy: dict[str, Any],
+    cities: dict[str, dict[str, Any]],
+    required_destinations: set[str],
+    fleet_counts: dict[str, int],
+    rolling_limit: int,
+    single_target_full_gap: bool,
+    options: dict[str, Any],
+    enforce_fixed_inventory: bool,
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    """Move a contiguous donor segment into a short same-fleet cycle.
+
+    A three-way successor rotation opens the receiver once and the donor twice.
+    This keeps every existing receiver leg together, transfers a contiguous donor
+    segment, and closes the donor remainder without adding or retiming flights.
+    Configured receiver anchors make the optimization incremental and auditable.
+    """
+    transfers = options.get("transfers", [])
+    if not transfers:
+        return cycles, []
+    minimum_days = int(options.get("minimumDaysPerLine", 9))
+    maximum_days = int(options.get("maximumDaysPerLine", 12))
+    minimum_turn = int(policy["turns"]["minimumMinutes"])
+    moves: list[dict[str, Any]] = []
+
+    for transfer in transfers:
+        anchor = str(transfer["receiverAnchorLegId"])
+        target_days = int(transfer.get("targetDays", maximum_days))
+        receiver_maximum_days = int(
+            transfer.get("maximumDays", maximum_days)
+        )
+        if anchor not in legs:
+            raise ValueError(f"Line-rebalancing anchor leg is missing: {anchor}")
+        receiver = next(
+            (cycle for cycle in cycles if anchor in cycle["legIds"]), None
+        )
+        if receiver is None:
+            raise ValueError(f"No cycle contains line-rebalancing anchor {anchor}")
+        receiver_days = int(receiver["aircraftRequired"])
+        if receiver_days >= target_days:
+            continue
+        receiver_id = str(receiver["id"])
+        receiver_leg_ids = set(receiver["legIds"])
+        baseline_cycle_score = _cycle_score(
+            cycles, required_destinations, fleet_counts, rolling_limit
+        )
+        baseline_aircraft = sum(
+            int(cycle["aircraftRequired"]) for cycle in cycles
+        )
+        baseline_gate_score = None
+        if enforce_fixed_inventory:
+            _, diagnostic = _materialized_gate_assignments(
+                legs, successors, cities, minimum_turn
+            )
+            baseline_gate_score = _gate_plan_score(diagnostic)
+
+        candidates: list[tuple[tuple[Any, ...], str, str, str, str]] = []
+        donors = sorted(
+            (
+                cycle
+                for cycle in cycles
+                if cycle["fleet"] == receiver["fleet"]
+                and int(cycle["aircraftRequired"]) > maximum_days
+            ),
+            key=lambda row: (-int(row["aircraftRequired"]), str(row["id"])),
+        )
+        for donor in donors:
+            donor_id = str(donor["id"])
+            donor_leg_ids = set(donor["legIds"])
+            donor_arrivals: defaultdict[str, list[str]] = defaultdict(list)
+            receiver_arrivals: defaultdict[str, list[str]] = defaultdict(list)
+            for identifier in donor_leg_ids:
+                donor_arrivals[str(legs[identifier]["destination"])].append(identifier)
+            for identifier in receiver_leg_ids:
+                receiver_arrivals[str(legs[identifier]["destination"])].append(
+                    identifier
+                )
+            for station in sorted(set(donor_arrivals) & set(receiver_arrivals)):
+                donor_ids = sorted(donor_arrivals[station])
+                if len(donor_ids) < 2:
+                    continue
+                for first_index, first in enumerate(donor_ids):
+                    for second in donor_ids[first_index + 1 :]:
+                        for donor_before, donor_after in (
+                            (first, second),
+                            (second, first),
+                        ):
+                            for receiver_arrival in sorted(
+                                receiver_arrivals[station]
+                            ):
+                                candidate_successors = dict(successors)
+                                candidate_successors[receiver_arrival] = successors[
+                                    donor_before
+                                ]
+                                candidate_successors[donor_after] = successors[
+                                    receiver_arrival
+                                ]
+                                candidate_successors[donor_before] = successors[
+                                    donor_after
+                                ]
+                                candidate_cycles = _cycles(
+                                    legs,
+                                    candidate_successors,
+                                    policy,
+                                    cities,
+                                    single_target_full_gap=single_target_full_gap,
+                                )
+                                affected = [
+                                    cycle
+                                    for cycle in candidate_cycles
+                                    if set(cycle["legIds"])
+                                    & (donor_leg_ids | receiver_leg_ids)
+                                ]
+                                if len(affected) != 2:
+                                    continue
+                                candidate_receiver = next(
+                                    (
+                                        cycle
+                                        for cycle in affected
+                                        if receiver_leg_ids
+                                        <= set(cycle["legIds"])
+                                    ),
+                                    None,
+                                )
+                                if candidate_receiver is None:
+                                    continue
+                                candidate_donor = next(
+                                    cycle
+                                    for cycle in affected
+                                    if cycle is not candidate_receiver
+                                )
+                                new_receiver_days = int(
+                                    candidate_receiver["aircraftRequired"]
+                                )
+                                new_donor_days = int(
+                                    candidate_donor["aircraftRequired"]
+                                )
+                                if (
+                                    new_receiver_days <= receiver_days
+                                    or new_receiver_days > receiver_maximum_days
+                                    or new_donor_days
+                                    >= int(donor["aircraftRequired"])
+                                ):
+                                    continue
+                                candidate_aircraft = sum(
+                                    int(cycle["aircraftRequired"])
+                                    for cycle in candidate_cycles
+                                )
+                                if candidate_aircraft > baseline_aircraft:
+                                    continue
+                                candidate_cycle_score = _cycle_score(
+                                    candidate_cycles,
+                                    required_destinations,
+                                    fleet_counts,
+                                    rolling_limit,
+                                )
+                                if candidate_cycle_score > baseline_cycle_score:
+                                    continue
+                                topology_score = (
+                                    abs(target_days - new_receiver_days),
+                                    _line_length_penalty(
+                                        candidate_cycles,
+                                        minimum_days,
+                                        maximum_days,
+                                    ),
+                                    max(
+                                        int(cycle["aircraftRequired"])
+                                        for cycle in candidate_cycles
+                                    ),
+                                    max(
+                                        int(cycle["maximumDaysWithoutTargetRon"])
+                                        for cycle in affected
+                                    ),
+                                    donor_id,
+                                    station,
+                                    donor_before,
+                                    donor_after,
+                                    receiver_arrival,
+                                )
+                                candidates.append(
+                                    (
+                                        topology_score,
+                                        donor_id,
+                                        donor_before,
+                                        donor_after,
+                                        receiver_arrival,
+                                    )
+                                )
+
+        accepted = None
+        for _, donor_id, donor_before, donor_after, receiver_arrival in sorted(
+            candidates
+        ):
+            candidate_successors = dict(successors)
+            candidate_successors[receiver_arrival] = successors[donor_before]
+            candidate_successors[donor_after] = successors[receiver_arrival]
+            candidate_successors[donor_before] = successors[donor_after]
+            candidate_cycles = _cycles(
+                legs,
+                candidate_successors,
+                policy,
+                cities,
+                single_target_full_gap=single_target_full_gap,
+            )
+            if enforce_fixed_inventory:
+                _, diagnostic = _materialized_gate_assignments(
+                    legs, candidate_successors, cities, minimum_turn
+                )
+                if _gate_plan_score(diagnostic) > baseline_gate_score:
+                    continue
+            accepted = (
+                donor_id,
+                donor_before,
+                donor_after,
+                receiver_arrival,
+                candidate_successors,
+                candidate_cycles,
+            )
+            break
+        if accepted is None:
+            raise ValueError(
+                f"No compliant line-rebalancing transfer reaches {anchor}"
+            )
+
+        (
+            donor_id,
+            donor_before,
+            donor_after,
+            receiver_arrival,
+            candidate_successors,
+            candidate_cycles,
+        ) = accepted
+        previous_donor = next(
+            cycle for cycle in cycles if str(cycle["id"]) == donor_id
+        )
+        candidate_cycles = _preserve_rebalanced_cycle_ids(
+            cycles,
+            candidate_cycles,
+            donor_id,
+            receiver_id,
+            receiver_leg_ids,
+        )
+        candidate_receiver = next(
+            cycle for cycle in candidate_cycles if str(cycle["id"]) == receiver_id
+        )
+        candidate_donor = next(
+            cycle for cycle in candidate_cycles if str(cycle["id"]) == donor_id
+        )
+        successors.clear()
+        successors.update(candidate_successors)
+        cycles = candidate_cycles
+        moves.append(
+            {
+                "receiverAnchorLegId": anchor,
+                "receiverCycleId": receiver_id,
+                "donorCycleId": donor_id,
+                "station": str(legs[receiver_arrival]["destination"]),
+                "beforeReceiverDays": receiver_days,
+                "afterReceiverDays": int(candidate_receiver["aircraftRequired"]),
+                "maximumReceiverDays": receiver_maximum_days,
+                "beforeDonorDays": int(previous_donor["aircraftRequired"]),
+                "afterDonorDays": int(candidate_donor["aircraftRequired"]),
+                "successorRotation": {
+                    "receiverArrivalLegId": receiver_arrival,
+                    "donorBeforeLegId": donor_before,
+                    "donorAfterLegId": donor_after,
+                },
+            }
+        )
+    return cycles, moves
+
+
+def _bridge_rebalanced_successor_cycles(
+    legs: dict[str, dict[str, Any]],
+    successors: dict[str, str],
+    cycles: list[dict[str, Any]],
+    policy: dict[str, Any],
+    cities: dict[str, dict[str, Any]],
+    windows: dict[str, list[dict[str, Any]]],
+    required_destinations: set[str],
+    fleet_counts: dict[str, int],
+    rolling_limit: int,
+    single_target_full_gap: bool,
+    station_departure_counts: Counter[str],
+    allow_pairing_spacing_exceptions: bool,
+    options: dict[str, Any],
+    fleet_profiles: dict[str, dict[str, Any]],
+    demand_matrix: dict[str, Any] | None,
+    enforce_fixed_inventory: bool,
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    """Join a short line to a donor segment with one supported round trip.
+
+    This is a bounded post-solve operation.  Every boundary, retiming, market,
+    and demand floor is configured explicitly.  The move is accepted only when
+    it preserves routing feasibility, fleet use, RON rules, pairing spacing,
+    and fixed physical inventory.
+    """
+    transfers = options.get("bridgeTransfers", [])
+    if not transfers:
+        return cycles, []
+    if demand_matrix is None:
+        raise ValueError("Line-bridge transfers require the pinned demand matrix")
+
+    minimum_turn = int(policy["turns"]["minimumMinutes"])
+    matrix_values = demand_matrix.get("values", {})
+    moves: list[dict[str, Any]] = []
+
+    def retimed_leg(
+        source: dict[str, Any], local_departure: int
+    ) -> dict[str, Any]:
+        departure_utc = _utc_minute(
+            local_departure, str(source["origin"]), cities
+        )
+        arrival_utc = departure_utc + int(source["blockMinutes"])
+        arrival = _local_minute(
+            arrival_utc, str(source["destination"]), cities
+        )
+        candidate = {
+            **source,
+            "departureUtcMinute": departure_utc,
+            "arrivalUtcMinute": arrival_utc % 1440,
+            "departureMinute": local_departure,
+            "arrivalMinute": arrival,
+            "curfewStatus": _curfew_status(
+                str(source["origin"]), local_departure, arrival, policy
+            ),
+        }
+        if candidate["curfewStatus"] != "pass":
+            raise ValueError(
+                f"Line-bridge retiming violates curfew: {source['id']}"
+            )
+        if not _assigned_bank_windows_hold(candidate, windows):
+            raise ValueError(
+                f"Line-bridge retiming leaves its assigned bank: {source['id']}"
+            )
+        return candidate
+
+    for transfer in transfers:
+        receiver_departure_id = str(transfer["receiverAnchorLegId"])
+        receiver_arrival_id = str(transfer["receiverArrivalLegId"])
+        boundaries = [
+            str(identifier)
+            for identifier in transfer["donorBoundaryArrivalLegIds"]
+        ]
+        transferred_boundary = str(
+            transfer["transferredBoundaryArrivalLegId"]
+        )
+        if len(boundaries) != 2 or len(set(boundaries)) != 2:
+            raise ValueError(
+                "A line bridge requires exactly two distinct donor boundaries"
+            )
+        if transferred_boundary not in boundaries:
+            raise ValueError(
+                "The transferred line-bridge boundary is not a donor boundary"
+            )
+        retained_boundary = next(
+            identifier
+            for identifier in boundaries
+            if identifier != transferred_boundary
+        )
+        referenced = {
+            receiver_departure_id,
+            receiver_arrival_id,
+            *boundaries,
+        }
+        missing = sorted(referenced - set(legs))
+        if missing:
+            raise ValueError(
+                "Line-bridge legs are missing: " + ", ".join(missing)
+            )
+
+        receiver = next(
+            (
+                cycle
+                for cycle in cycles
+                if receiver_departure_id in cycle["legIds"]
+            ),
+            None,
+        )
+        donor = next(
+            (cycle for cycle in cycles if set(boundaries) <= set(cycle["legIds"])),
+            None,
+        )
+        if receiver is None or donor is None:
+            raise ValueError("Line-bridge donor or receiver cycle is missing")
+        if receiver is donor:
+            raise ValueError("Line-bridge donor and receiver must be distinct")
+        fleet = str(legs[receiver_departure_id]["fleet"])
+        if any(str(legs[identifier]["fleet"]) != fleet for identifier in referenced):
+            raise ValueError("Line-bridge legs must use one fleet")
+
+        receiver_station = str(legs[receiver_departure_id]["origin"])
+        donor_station = str(legs[retained_boundary]["destination"])
+        if str(legs[receiver_arrival_id]["destination"]) != receiver_station:
+            raise ValueError("Line-bridge receiver legs do not close at one station")
+        if any(str(legs[identifier]["destination"]) != donor_station for identifier in boundaries):
+            raise ValueError("Line-bridge donor boundaries end at different stations")
+        configured_market = tuple(
+            sorted(str(code) for code in transfer["connectorMarket"])
+        )
+        if configured_market != tuple(sorted((receiver_station, donor_station))):
+            raise ValueError("Line-bridge connector market does not match its boundaries")
+
+        try:
+            two_way_demand = round(
+                float(matrix_values[receiver_station][donor_station])
+                + float(matrix_values[donor_station][receiver_station]),
+                6,
+            )
+        except KeyError as error:
+            raise ValueError(
+                f"Line-bridge demand is missing for {receiver_station}-{donor_station}"
+            ) from error
+        existing_outbound = sum(
+            str(leg["origin"]) == receiver_station
+            and str(leg["destination"]) == donor_station
+            for leg in legs.values()
+        )
+        existing_return = sum(
+            str(leg["origin"]) == donor_station
+            and str(leg["destination"]) == receiver_station
+            for leg in legs.values()
+        )
+        existing_frequency = min(existing_outbound, existing_return)
+        ceiling = int(transfer.get("frequencyCeilingRoundTrips", 1))
+        marginal_demand = two_way_demand / float(existing_frequency + 1)
+        if existing_frequency >= ceiling:
+            raise ValueError("Line-bridge connector frequency ceiling is exhausted")
+        if two_way_demand < float(transfer.get("minimumTwoWayDemand", 0.0)):
+            raise ValueError("Line-bridge connector misses its demand floor")
+        if marginal_demand < float(transfer.get("minimumMarginalDemand", 0.0)):
+            raise ValueError("Line-bridge connector misses its marginal-demand floor")
+
+        receiver_id = str(receiver["id"])
+        donor_id = str(donor["id"])
+        receiver_leg_ids = set(receiver["legIds"])
+        baseline_aircraft = sum(int(cycle["aircraftRequired"]) for cycle in cycles)
+        baseline_cycle_score = _cycle_score(
+            cycles, required_destinations, fleet_counts, rolling_limit
+        )
+        baseline_gate_score = None
+        if enforce_fixed_inventory:
+            _, diagnostic = _materialized_gate_assignments(
+                legs, successors, cities, minimum_turn
+            )
+            baseline_gate_score = _gate_plan_score(diagnostic)
+
+        candidate_legs = {identifier: dict(leg) for identifier, leg in legs.items()}
+        retimings = {
+            receiver_departure_id: int(
+                transfer["receiverDepartureLocalMinute"]
+            ),
+            receiver_arrival_id: int(
+                transfer["receiverArrivalDepartureLocalMinute"]
+            ),
+        }
+        for identifier, local_departure in retimings.items():
+            candidate_legs[identifier] = retimed_leg(
+                candidate_legs[identifier], local_departure
+            )
+
+        profile = fleet_profiles.get(fleet)
+        if profile is None:
+            raise ValueError(f"Line bridge has no fleet profile for {fleet}")
+        block_minutes = _block_minutes(
+            receiver_station, donor_station, profile, cities
+        )
+        ordinal = existing_frequency + 1
+        id_prefix = (
+            f"LINE-BRIDGE-{receiver_station}-{donor_station}-{fleet}-{ordinal:02d}"
+        )
+        from_receiver_id = f"{id_prefix}-OUT"
+        to_receiver_id = f"{id_prefix}-IN"
+        if from_receiver_id in candidate_legs or to_receiver_id in candidate_legs:
+            raise ValueError("Line-bridge connector identifier already exists")
+
+        common = {
+            "source": "productive_line_bridge",
+            "market": list(configured_market),
+            "classification": "point_to_point",
+            "fleet": fleet,
+            "blockMinutes": block_minutes,
+            "originBankId": None,
+            "destinationBankId": None,
+        }
+        from_receiver = retimed_leg(
+            {
+                "id": from_receiver_id,
+                **common,
+                "origin": receiver_station,
+                "destination": donor_station,
+            },
+            int(transfer["fromReceiverDepartureLocalMinute"]),
+        )
+        to_receiver = retimed_leg(
+            {
+                "id": to_receiver_id,
+                **common,
+                "origin": donor_station,
+                "destination": receiver_station,
+            },
+            int(transfer["toReceiverDepartureLocalMinute"]),
+        )
+        candidate_legs[from_receiver_id] = from_receiver
+        candidate_legs[to_receiver_id] = to_receiver
+
+        candidate_counts = Counter(station_departure_counts)
+        candidate_counts[receiver_station] += 1
+        candidate_counts[donor_station] += 1
+        spacing_legs = [
+            candidate_legs[receiver_departure_id],
+            candidate_legs[receiver_arrival_id],
+            from_receiver,
+            to_receiver,
+        ]
+        if not all(
+            _pairing_spacing_holds_for_leg(
+                leg,
+                candidate_legs,
+                candidate_counts,
+                policy,
+                allow_pairing_spacing_exceptions,
+            )
+            for leg in spacing_legs
+        ):
+            raise ValueError("Line bridge violates pairing spacing")
+
+        candidate_successors = dict(successors)
+        transferred_start = successors[retained_boundary]
+        candidate_successors[retained_boundary] = successors[transferred_boundary]
+        candidate_successors[transferred_boundary] = to_receiver_id
+        candidate_successors[to_receiver_id] = receiver_departure_id
+        candidate_successors[receiver_arrival_id] = from_receiver_id
+        candidate_successors[from_receiver_id] = transferred_start
+        candidate_cycles = _cycles(
+            candidate_legs,
+            candidate_successors,
+            policy,
+            cities,
+            single_target_full_gap=single_target_full_gap,
+        )
+        candidate_cycles = _preserve_rebalanced_cycle_ids(
+            cycles,
+            candidate_cycles,
+            donor_id,
+            receiver_id,
+            receiver_leg_ids,
+        )
+        candidate_receiver = next(
+            cycle for cycle in candidate_cycles if str(cycle["id"]) == receiver_id
+        )
+        candidate_donor = next(
+            cycle for cycle in candidate_cycles if str(cycle["id"]) == donor_id
+        )
+        target_days = int(transfer["targetReceiverDays"])
+        if int(candidate_receiver["aircraftRequired"]) != target_days:
+            raise ValueError(
+                "Line bridge produced "
+                f"{candidate_receiver['aircraftRequired']} receiver days, expected {target_days}"
+            )
+        candidate_aircraft = sum(
+            int(cycle["aircraftRequired"]) for cycle in candidate_cycles
+        )
+        if candidate_aircraft > baseline_aircraft:
+            raise ValueError(
+                "Line bridge increases required aircraft from "
+                f"{baseline_aircraft} to {candidate_aircraft}; receiver "
+                f"{receiver['aircraftRequired']}->{candidate_receiver['aircraftRequired']}, "
+                f"donor {donor['aircraftRequired']}->{candidate_donor['aircraftRequired']}"
+            )
+        candidate_cycle_score = _cycle_score(
+            candidate_cycles, required_destinations, fleet_counts, rolling_limit
+        )
+        if candidate_cycle_score > baseline_cycle_score:
+            raise ValueError("Line bridge worsens RON or fleet feasibility")
+        candidate_gate_score = None
+        if enforce_fixed_inventory:
+            _, diagnostic = _materialized_gate_assignments(
+                candidate_legs, candidate_successors, cities, minimum_turn
+            )
+            candidate_gate_score = _gate_plan_score(diagnostic)
+            if candidate_gate_score > baseline_gate_score:
+                raise ValueError("Line bridge worsens fixed physical inventory")
+
+        legs.clear()
+        legs.update(candidate_legs)
+        successors.clear()
+        successors.update(candidate_successors)
+        cycles = candidate_cycles
+        station_departure_counts.clear()
+        station_departure_counts.update(candidate_counts)
+        moves.append(
+            {
+                "receiverCycleId": receiver_id,
+                "donorCycleId": donor_id,
+                "receiverAnchorLegId": receiver_departure_id,
+                "receiverArrivalLegId": receiver_arrival_id,
+                "donorBoundaryArrivalLegIds": boundaries,
+                "transferredBoundaryArrivalLegId": transferred_boundary,
+                "connectorMarket": list(configured_market),
+                "connectorLegIds": [from_receiver_id, to_receiver_id],
+                "fleet": fleet,
+                "blockMinutes": block_minutes,
+                "twoWayDemand": two_way_demand,
+                "marginalDemand": round(marginal_demand, 6),
+                "newFrequency": existing_frequency == 0,
+                "beforeReceiverDays": int(receiver["aircraftRequired"]),
+                "afterReceiverDays": int(candidate_receiver["aircraftRequired"]),
+                "beforeDonorDays": int(donor["aircraftRequired"]),
+                "afterDonorDays": int(candidate_donor["aircraftRequired"]),
+                **(
+                    {
+                        "beforeGateScore": list(baseline_gate_score),
+                        "afterGateScore": list(candidate_gate_score),
+                    }
+                    if enforce_fixed_inventory
+                    else {}
+                ),
+            }
+        )
+    return cycles, moves
+
+
 def _station_gate_score(diagnostic: dict[str, Any]) -> tuple[int, int, int, int, int]:
     if diagnostic["status"] == "pass":
         return (0, 0, 0, 0, int(diagnostic["towMovements"]))
@@ -3316,10 +4027,14 @@ def _gate_relief_market_candidates(
     fleet: str,
     additions_by_market: Counter[tuple[str, str]],
     minimum_two_way_demand: float,
+    additional_markets: list[dict[str, Any]] | None = None,
 ) -> list[dict[str, Any]]:
     """Return demand-supported same-fleet increments still below their ceiling."""
     candidates = []
-    for market in frequency_plan["markets"]:
+    for market in [
+        *frequency_plan["markets"],
+        *(additional_markets or []),
+    ]:
         endpoints = (str(market["origin"]), str(market["destination"]))
         if station not in endpoints:
             continue
@@ -3332,7 +4047,14 @@ def _gate_relief_market_candidates(
         historically_flown_by_fleet = (
             int(market.get("historicalFleetLegs", {}).get(fleet, 0)) > 0
         )
-        if not allocated_to_fleet and not historically_flown_by_fleet:
+        explicitly_eligible = fleet in {
+            str(candidate) for candidate in market.get("eligibleFleets", [])
+        }
+        if (
+            not allocated_to_fleet
+            and not historically_flown_by_fleet
+            and not explicitly_eligible
+        ):
             continue
         market_key = tuple(sorted(endpoints))
         planned = int(market["plannedRoundTrips"]) + int(
@@ -3392,6 +4114,7 @@ def _repair_gate_capacity_with_missions(
     allow_pairing_spacing_exceptions: bool,
     options: dict[str, Any],
     fleet_profiles: dict[str, dict[str, Any]] | None = None,
+    demand_matrix: dict[str, Any] | None = None,
 ) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
     """Insert bounded, demand-supported round trips into gate-blocking holds.
 
@@ -3415,6 +4138,53 @@ def _repair_gate_capacity_with_missions(
     preferred_destinations = {
         str(station) for station in options.get("preferredDestinations", [])
     }
+    minimum_missions_by_station = {
+        str(station): int(count)
+        for station, count in options.get(
+            "minimumMissionsByStation", {}
+        ).items()
+    }
+    minimum_distinct_holds_by_station = {
+        str(station): int(count)
+        for station, count in options.get(
+            "minimumDistinctHoldsByStation", {}
+        ).items()
+    }
+    existing_markets = {
+        tuple(sorted((str(row["origin"]), str(row["destination"]))))
+        for row in frequency_plan["markets"]
+    }
+    additional_markets: list[dict[str, Any]] = []
+    matrix_values = (demand_matrix or {}).get("values", {})
+    for row in options.get("unplannedCandidateMarkets", []):
+        endpoints = tuple(sorted(str(code) for code in row.get("market", [])))
+        if len(endpoints) != 2 or endpoints in existing_markets:
+            continue
+        origin, destination = endpoints
+        if origin not in matrix_values or destination not in matrix_values:
+            continue
+        two_way_demand = round(
+            float(matrix_values[origin][destination])
+            + float(matrix_values[destination][origin]),
+            6,
+        )
+        additional_markets.append(
+            {
+                "origin": origin,
+                "destination": destination,
+                "classification": "point_to_point",
+                "twoWayDemand": two_way_demand,
+                "plannedRoundTrips": 0,
+                "frequencyCeilingRoundTrips": int(
+                    row.get("frequencyCeilingRoundTrips", 1)
+                ),
+                "allocations": [],
+                "historicalFleetLegs": {},
+                "eligibleFleets": [
+                    str(fleet) for fleet in row.get("eligibleFleets", [])
+                ],
+            }
+        )
     hubs = set(policy["hubs"])
     additions: list[dict[str, Any]] = []
     additions_by_market: Counter[tuple[str, str]] = Counter()
@@ -3447,6 +4217,17 @@ def _repair_gate_capacity_with_missions(
         if station not in cities:
             continue
         while len(additions) < maximum_additions:
+            station_additions = [
+                row for row in additions if row["station"] == station
+            ]
+            minimum_missions = minimum_missions_by_station.get(station, 0)
+            minimum_distinct_holds = minimum_distinct_holds_by_station.get(
+                station, 0
+            )
+            used_holds = {
+                str(row["afterArrivingLegId"])
+                for row in station_additions
+            }
             _, current_diagnostic = _materialized_station_gate_assignments(
                 materialized,
                 successors,
@@ -3455,7 +4236,10 @@ def _repair_gate_capacity_with_missions(
                 station,
             )
             current_score = _station_gate_score(current_diagnostic)
-            if current_score[0] == 0:
+            if (
+                current_score[0] == 0
+                and len(station_additions) >= minimum_missions
+            ):
                 break
             ranked_candidates: list[tuple[Any, ...]] = []
             for arriving_id, following_id in sorted(successors.items()):
@@ -3465,6 +4249,11 @@ def _repair_gate_capacity_with_missions(
                     str(arriving["destination"]) != station
                     or str(following["origin"]) != station
                     or str(arriving["fleet"]) != str(following["fleet"])
+                ):
+                    continue
+                if (
+                    len(used_holds) < minimum_distinct_holds
+                    and arriving_id in used_holds
                 ):
                     continue
                 arrival_utc = int(arriving["departureUtcMinute"]) + int(
@@ -3485,6 +4274,7 @@ def _repair_gate_capacity_with_missions(
                     fleet,
                     additions_by_market,
                     minimum_demand,
+                    additional_markets,
                 )
                 for market in markets:
                     destination = str(market["destination"])
@@ -3750,7 +4540,10 @@ def _repair_gate_capacity_with_missions(
                             )
                         )
                         target_score = _station_gate_score(target_diagnostic)
-                        if target_score >= current_score:
+                        if current_score[0] != 0:
+                            if target_score >= current_score:
+                                continue
+                        elif target_score > current_score:
                             continue
                         _, destination_before = (
                             _materialized_station_gate_assignments(
@@ -4368,6 +5161,7 @@ def build_exact_materialization_plan(
     seed_checkpoint_path: Path | None = None,
     seed_fleets_per_run: int | None = None,
     allow_infeasible_preview: bool = False,
+    demand_matrix: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     if any(
         artifact.get("status") != "pass"
@@ -4392,6 +5186,7 @@ def build_exact_materialization_plan(
         ).items()
     }
     gate_relief_options = exact_options.get("productiveGateRelief", {})
+    line_rebalancing_options = exact_options.get("lineRebalancing", {})
     if seed_fleets_per_run is not None:
         if seed_fleets_per_run < 1:
             raise ValueError("Seed fleets per run must be at least one")
@@ -4988,6 +5783,8 @@ def build_exact_materialization_plan(
     )
     gate_time_shifts: list[dict[str, Any]] = []
     gate_relief_missions: list[dict[str, Any]] = []
+    line_rebalancing_moves: list[dict[str, Any]] = []
+    line_bridge_missions: list[dict[str, Any]] = []
     if enforce_fixed_inventory:
         cycles, gate_swaps = _repair_successor_gate_capacity(
             materialized,
@@ -5035,6 +5832,7 @@ def build_exact_materialization_plan(
                     allow_pairing_spacing_exceptions,
                     gate_relief_options,
                     profiles,
+                    demand_matrix,
                 )
             )
             if gate_relief_missions:
@@ -5057,6 +5855,38 @@ def build_exact_materialization_plan(
                 for move in post_relief_time_shifts:
                     move["repairPhase"] = "after_gate_relief"
                 gate_time_shifts.extend(post_relief_time_shifts)
+    if line_rebalancing_options:
+        cycles, line_rebalancing_moves = _rebalance_successor_cycles(
+            materialized,
+            successors,
+            cycles,
+            policy,
+            cities,
+            required_destinations,
+            fleet_counts,
+            rolling_limit,
+            single_target_full_gap,
+            line_rebalancing_options,
+            enforce_fixed_inventory,
+        )
+        cycles, line_bridge_missions = _bridge_rebalanced_successor_cycles(
+            materialized,
+            successors,
+            cycles,
+            policy,
+            cities,
+            windows,
+            required_destinations,
+            fleet_counts,
+            rolling_limit,
+            single_target_full_gap,
+            station_departure_counts,
+            allow_pairing_spacing_exceptions,
+            line_rebalancing_options,
+            profiles,
+            demand_matrix,
+            enforce_fixed_inventory,
+        )
     gate_diagnostic = {
         "status": "not_evaluated",
         "stations": 0,
@@ -5209,9 +6039,12 @@ def build_exact_materialization_plan(
         }
     capacity_shortfall = sum(row["shortfall"] for row in fleet_plan.values())
     selected_legs = int(frequency_plan["summary"]["plannedLegs"])
-    planned_legs = selected_legs + 2 * len(gate_relief_missions)
+    planned_legs = selected_legs + 2 * (
+        len(gate_relief_missions) + len(line_bridge_missions)
+    )
     added_nonhub_legs = sum(
-        leg.get("source") == "productive_gate_relief"
+        leg.get("source")
+        in {"productive_gate_relief", "productive_line_bridge"}
         and leg["origin"] not in hubs
         and leg["destination"] not in hubs
         for leg in legs
@@ -5364,6 +6197,8 @@ def build_exact_materialization_plan(
             "successorSwaps": len(swaps),
             "gateTimeShifts": len(gate_time_shifts),
             "gateReliefMissions": len(gate_relief_missions),
+            "lineRebalancingMoves": len(line_rebalancing_moves),
+            "lineBridgeMissions": len(line_bridge_missions),
             "selectedLegs": selected_legs,
             **(
                 {
@@ -5418,6 +6253,8 @@ def build_exact_materialization_plan(
             "successorSwaps": swaps,
             "gateTimeShifts": gate_time_shifts,
             "gateReliefMissions": gate_relief_missions,
+            "lineRebalancingMoves": line_rebalancing_moves,
+            "lineBridgeMissions": line_bridge_missions,
             "bankUnalignedLegs": bank_unaligned,
             "continuityViolations": continuity_violations,
             "turnViolations": turn_violations,
@@ -5492,4 +6329,591 @@ def build_exact_materialization_plan_from_manifest(
         seed_checkpoint_path,
         seed_fleets_per_run,
         allow_infeasible_preview,
+        demand_matrix=parse_airport_od_matrix(
+            loaded["airportOdMatrixText"]
+        ),
+    )
+
+
+def _verified_reusable_solver_leg_ids(
+    prior_plan: dict[str, Any],
+    inventory: dict[str, list[dict[str, Any]]],
+) -> set[str]:
+    """Prove that a prior exact plan times the current solver inventory."""
+    expected = {
+        str(leg["id"]): leg
+        for fleet_legs in inventory.values()
+        for leg in fleet_legs
+    }
+    actual = {
+        str(leg["id"]): leg
+        for leg in prior_plan.get("legs", [])
+        if leg.get("source") == "exact_materialization"
+    }
+    if set(actual) != set(expected):
+        missing = sorted(set(expected) - set(actual))
+        extra = sorted(set(actual) - set(expected))
+        raise ValueError(
+            "Reusable exact plan solver-leg inventory differs from current inputs; "
+            f"missing={missing[:8]}, extra={extra[:8]}"
+        )
+    immutable_fields = ("origin", "destination", "fleet", "blockMinutes")
+    for identifier in sorted(expected):
+        mismatched = [
+            field
+            for field in immutable_fields
+            if actual[identifier].get(field) != expected[identifier].get(field)
+        ]
+        if mismatched:
+            raise ValueError(
+                f"Reusable exact leg {identifier} differs in: "
+                + ", ".join(mismatched)
+            )
+    return set(expected)
+
+
+def refresh_exact_materialization_postsolve(
+    prior_plan: dict[str, Any],
+    canonical: dict[str, Any],
+    frequency_plan: dict[str, Any],
+    bank_plan: dict[str, Any],
+    repair_plan: dict[str, Any],
+    planning_rules: dict[str, Any],
+    allow_infeasible_preview: bool = False,
+    demand_matrix: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    """Reapply post-solve policy to a proven-compatible exact timing plan.
+
+    This path never constructs or invokes a MILP.  It is intentionally strict:
+    every solver-selected leg and RON assignment must match current inputs, and
+    every refreshed routing, timing, spacing, fleet, and gate check is rerun.
+    """
+    if prior_plan.get("scheduleId") != canonical["schedule"]["id"]:
+        raise ValueError("Reusable exact plan belongs to a different schedule")
+    if prior_plan.get("planningRulesId") != planning_rules["id"]:
+        raise ValueError("Reusable exact plan uses a different planning-rules ID")
+    if int(prior_plan.get("summary", {}).get("selectedLegs", -1)) != int(
+        frequency_plan["summary"]["plannedLegs"]
+    ):
+        raise ValueError("Reusable exact plan selected-leg count differs")
+
+    cities = {
+        city["code"]: city for city in canonical["cities"] if city.get("active")
+    }
+    policy = canonical["operatingPolicy"]
+    fleet_counts = canonical["schedule"]["fleetCounts"]
+    profiles = {
+        row["fleet"]: row
+        for row in planning_rules["frequencyAllocation"]["fleetProfiles"]
+    }
+    inventory = _leg_inventory(frequency_plan, profiles, cities)
+    solver_leg_ids = _verified_reusable_solver_leg_ids(prior_plan, inventory)
+    additions = [
+        leg
+        for leg in prior_plan.get("legs", [])
+        if str(leg["id"]) not in solver_leg_ids
+    ]
+    unsupported_sources = sorted(
+        {
+            str(leg.get("source"))
+            for leg in additions
+            if leg.get("source") != "productive_gate_relief"
+        }
+    )
+    if unsupported_sources:
+        raise ValueError(
+            "Reusable exact plan has unsupported prior post-solve legs: "
+            + ", ".join(unsupported_sources)
+        )
+    prior_diagnostics = prior_plan.get("diagnostics", {})
+    gate_relief_missions = json.loads(
+        json.dumps(prior_diagnostics.get("gateReliefMissions", []))
+    )
+    if len(additions) != 2 * len(gate_relief_missions):
+        raise ValueError("Reusable exact plan gate-relief provenance is incomplete")
+    if prior_diagnostics.get("lineBridgeMissions"):
+        raise ValueError("Reusable exact plan already contains a line bridge")
+
+    exemptions = set(policy.get("destinationRonExemptions", []))
+    required_destinations = {
+        city["code"]
+        for city in cities.values()
+        if city["role"] == "destination" and city["code"] not in exemptions
+    }
+    ron_assignments = _assign_destination_rons(
+        repair_plan, required_destinations, fleet_counts
+    )
+    if prior_plan.get("ronAssignments") != {
+        destination: ron_assignments[destination]
+        for destination in sorted(ron_assignments)
+    }:
+        raise ValueError("Reusable exact plan RON assignments differ")
+
+    materialized = {
+        str(leg["id"]): json.loads(json.dumps(leg))
+        for leg in prior_plan["legs"]
+    }
+    cycles = json.loads(json.dumps(prior_plan["cycles"]))
+    successors: dict[str, str] = {}
+    routed_ids: set[str] = set()
+    for cycle in cycles:
+        leg_ids = [str(identifier) for identifier in cycle["legIds"]]
+        if not leg_ids:
+            raise ValueError("Reusable exact plan contains an empty cycle")
+        if routed_ids & set(leg_ids):
+            raise ValueError("Reusable exact plan routes a leg more than once")
+        routed_ids.update(leg_ids)
+        for identifier, successor in zip(leg_ids, leg_ids[1:] + leg_ids[:1]):
+            successors[identifier] = successor
+    if routed_ids != set(materialized):
+        raise ValueError("Reusable exact plan cycles do not cover every leg")
+
+    exact_options = planning_rules.get("exactMaterialization", {})
+    line_options = exact_options.get("lineRebalancing", {})
+    configured_transfer_anchors = {
+        str(row["receiverAnchorLegId"])
+        for row in line_options.get("transfers", [])
+    }
+    existing_line_moves = json.loads(
+        json.dumps(prior_diagnostics.get("lineRebalancingMoves", []))
+    )
+    stale_moves = [
+        str(row.get("receiverAnchorLegId"))
+        for row in existing_line_moves
+        if str(row.get("receiverAnchorLegId")) not in configured_transfer_anchors
+    ]
+    if stale_moves:
+        raise ValueError(
+            "Reusable exact plan contains line moves absent from current policy: "
+            + ", ".join(stale_moves)
+        )
+
+    windows = {row["hub"]: row["banks"] for row in bank_plan["hubs"]}
+    rolling_limit = int(planning_rules["routing"]["rollingRonWindowDays"]) + int(
+        policy["rollingRonGraceDays"]
+    )
+    single_target_full_gap = bool(
+        planning_rules["routing"].get("singleTargetUsesFullCycleGap", False)
+    )
+    spacing_options = exact_options.get("pairingSpacing", {})
+    enforce_pairing_spacing = spacing_options.get("mode") in {
+        "section26_conservative_no_exception",
+        "section26_policy_exception",
+    }
+    allow_pairing_spacing_exceptions = (
+        spacing_options.get("mode") == "section26_policy_exception"
+    )
+    enforce_fixed_inventory = bool(
+        exact_options.get("enforceFixedPhysicalInventory", False)
+    )
+    station_departure_counts = Counter(
+        str(leg["origin"]) for leg in materialized.values()
+    )
+
+    new_line_moves: list[dict[str, Any]] = []
+    line_bridge_missions: list[dict[str, Any]] = []
+    if line_options:
+        cycles, new_line_moves = _rebalance_successor_cycles(
+            materialized,
+            successors,
+            cycles,
+            policy,
+            cities,
+            required_destinations,
+            fleet_counts,
+            rolling_limit,
+            single_target_full_gap,
+            line_options,
+            enforce_fixed_inventory,
+        )
+        cycles, line_bridge_missions = _bridge_rebalanced_successor_cycles(
+            materialized,
+            successors,
+            cycles,
+            policy,
+            cities,
+            windows,
+            required_destinations,
+            fleet_counts,
+            rolling_limit,
+            single_target_full_gap,
+            station_departure_counts,
+            allow_pairing_spacing_exceptions,
+            line_options,
+            profiles,
+            demand_matrix,
+            enforce_fixed_inventory,
+        )
+    line_rebalancing_moves = existing_line_moves + new_line_moves
+
+    minimum_turn = int(policy["turns"]["minimumMinutes"])
+    gate_diagnostic = {
+        "status": "not_evaluated",
+        "stations": 0,
+        "towMovements": 0,
+        "failures": [],
+    }
+    if enforce_fixed_inventory:
+        _, gate_diagnostic = _materialized_gate_assignments(
+            materialized, successors, cities, minimum_turn
+        )
+
+    hubs = set(policy["hubs"])
+    legs = [materialized[identifier] for identifier in sorted(materialized)]
+    bank_touch = [
+        leg
+        for leg in legs
+        if leg["origin"] in hubs or leg["destination"] in hubs
+    ]
+    nonhub = [
+        leg
+        for leg in legs
+        if leg["origin"] not in hubs and leg["destination"] not in hubs
+    ]
+    bank_unaligned = [
+        str(leg["id"])
+        for leg in bank_touch
+        if (leg["origin"] in hubs and leg.get("originBankId") is None)
+        or (leg["destination"] in hubs and leg.get("destinationBankId") is None)
+        or not _assigned_bank_windows_hold(leg, windows)
+    ]
+    continuity_violations = [
+        [identifier, successor]
+        for identifier, successor in successors.items()
+        if materialized[identifier]["destination"]
+        != materialized[successor]["origin"]
+        or materialized[identifier]["fleet"] != materialized[successor]["fleet"]
+    ]
+    turn_violations = []
+    for identifier, successor in successors.items():
+        leg = materialized[identifier]
+        following = materialized[successor]
+        arrival_utc = int(leg["departureUtcMinute"]) + int(leg["blockMinutes"])
+        wait = _connection_wait(
+            arrival_utc,
+            int(following["departureUtcMinute"]),
+            minimum_turn,
+        )
+        if wait < minimum_turn:
+            turn_violations.append([identifier, successor, wait])
+    curfew_violations = [
+        str(leg["id"])
+        for leg in legs
+        if _curfew_status(
+            str(leg["origin"]),
+            int(leg["departureMinute"]),
+            int(leg["arrivalMinute"]),
+            policy,
+        )
+        != "pass"
+    ]
+    ron_cities = {
+        stop["station"] for cycle in cycles for stop in cycle["ronStops"]
+    }
+    missing_rons = sorted(required_destinations - ron_cities)
+    rolling_violations = [
+        str(cycle["id"])
+        for cycle in cycles
+        if int(cycle["maximumDaysWithoutTargetRon"]) > rolling_limit
+    ]
+
+    spacing_violations: list[dict[str, Any]] = []
+    spacing_exceptions: list[dict[str, Any]] = []
+    if enforce_pairing_spacing:
+        pair_departures: defaultdict[tuple[str, str], list[int]] = defaultdict(list)
+        actual_departure_counts = Counter(str(leg["origin"]) for leg in legs)
+        for leg in legs:
+            pair_departures[(leg["origin"], leg["destination"])].append(
+                int(leg["departureMinute"]) % 1440
+            )
+        for (origin, destination), departures in sorted(pair_departures.items()):
+            if len(departures) < 2:
+                continue
+            rule = pairing_spacing_rule(
+                origin,
+                destination,
+                len(departures),
+                int(actual_departure_counts[origin]),
+                hubs,
+                policy["section26"],
+            )
+            ordered = sorted(departures)
+            gaps = [
+                (ordered[(index + 1) % len(ordered)] - minute) % 1440
+                for index, minute in enumerate(ordered)
+            ]
+            hard_gaps = [gap for gap in gaps if gap < rule["hardFloorMinutes"]]
+            short_gaps = [gap for gap in gaps if gap < rule["minimumGapMinutes"]]
+            allowed = (
+                int(rule["allowedExceptions"])
+                if allow_pairing_spacing_exceptions
+                else 0
+            )
+            finding = {
+                "origin": origin,
+                "destination": destination,
+                "departures": ordered,
+                "minimumGapMinutes": rule["minimumGapMinutes"],
+            }
+            if hard_gaps or len(short_gaps) > allowed:
+                spacing_violations.append(
+                    {**finding, "gaps": gaps, "allowedExceptions": allowed}
+                )
+            elif short_gaps:
+                spacing_exceptions.append({**finding, "shortGaps": short_gaps})
+
+    fleet_plan = {}
+    for fleet, configured in fleet_counts.items():
+        fleet_cycles = [cycle for cycle in cycles if cycle["fleet"] == fleet]
+        required = sum(int(cycle["aircraftRequired"]) for cycle in fleet_cycles)
+        prior_fleet = prior_plan.get("fleetPlan", {}).get(fleet, {})
+        fleet_plan[fleet] = {
+            "configuredAircraft": int(configured),
+            "requiredAircraft": required,
+            "shortfall": max(0, required - int(configured)),
+            "remainingAircraft": max(0, int(configured) - required),
+            "cycles": len(fleet_cycles),
+            "routedLegs": sum(int(cycle["legCount"]) for cycle in fleet_cycles),
+            "assignedDestinationRons": sum(
+                assigned_fleet == fleet
+                for assigned_fleet in ron_assignments.values()
+            ),
+            "solverMipGap": prior_fleet.get("solverMipGap"),
+        }
+    capacity_shortfall = sum(row["shortfall"] for row in fleet_plan.values())
+    selected_legs = int(frequency_plan["summary"]["plannedLegs"])
+    planned_legs = selected_legs + sum(
+        leg.get("source")
+        in {"productive_gate_relief", "productive_line_bridge"}
+        for leg in legs
+    )
+    added_nonhub_legs = sum(
+        leg.get("source")
+        in {"productive_gate_relief", "productive_line_bridge"}
+        and leg["origin"] not in hubs
+        and leg["destination"] not in hubs
+        for leg in legs
+    )
+    check_rows = [
+        (
+            "service_coverage",
+            len(legs) == planned_legs,
+            f"All {planned_legs} proposed legs receive exact times",
+        ),
+        (
+            "nonhub_integration",
+            len(nonhub)
+            == selected_legs
+            - int(bank_plan["summary"]["hubMarketLegs"])
+            + added_nonhub_legs,
+            f"All {len(nonhub)} non-hub legs are integrated into aircraft cycles",
+        ),
+        (
+            "bank_core_alignment",
+            not bank_unaligned,
+            f"All {len(bank_touch)} hub-touching legs land inside approved bank cores",
+        ),
+        (
+            "routing_continuity",
+            not continuity_violations,
+            "Every exact successor retains station and fleet continuity",
+        ),
+        (
+            "minimum_turns",
+            not turn_violations,
+            f"Every exact connection meets the {minimum_turn}-minute floor",
+        ),
+        (
+            "fleet_capacity",
+            not capacity_shortfall,
+            "Every exact cycle fits the fleet counts selected for this schedule",
+        ),
+        (
+            "curfew_enforcement",
+            not curfew_violations,
+            "Every exact leg is curfew compliant",
+        ),
+        (
+            "destination_ron_coverage",
+            not missing_rons,
+            f"All {len(required_destinations)} required destinations receive a real routed overnight",
+        ),
+        (
+            "rolling_target_ron",
+            not rolling_violations,
+            f"Every exact cycle reaches a target RON within {rolling_limit} days",
+        ),
+    ]
+    checks = [
+        {
+            "id": identifier,
+            "status": "pass" if passed else "fail",
+            "message": message if passed else f"{identifier} validation failed",
+            **(
+                {"hardStop": True}
+                if identifier == "curfew_enforcement"
+                else {}
+            ),
+        }
+        for identifier, passed, message in check_rows
+    ]
+    if enforce_pairing_spacing:
+        checks.append(
+            {
+                "id": "section_26_pairing_spacing",
+                "status": "pass" if not spacing_violations else "fail",
+                "message": (
+                    f"Every exact directed pairing satisfies Section 2.6 spacing; {len(spacing_exceptions)} use the permitted one-gap exception"
+                    if not spacing_violations
+                    else f"{len(spacing_violations)} exact directed pairings miss the Section 2.6 spacing threshold"
+                ),
+            }
+        )
+    if enforce_fixed_inventory:
+        checks.append(
+            {
+                "id": "fixed_physical_inventory",
+                "status": gate_diagnostic["status"],
+                "hardStop": True,
+                "message": (
+                    f"All {gate_diagnostic['stations']} stations fit their configured gates and stands with {gate_diagnostic['towMovements']} conditional tow(s)"
+                    if gate_diagnostic["status"] == "pass"
+                    else f"{len(gate_diagnostic['failures'])} stations cannot fit their configured gates and stands"
+                ),
+            }
+        )
+    failed = sum(check["status"] == "fail" for check in checks)
+    required_aircraft = sum(row["requiredAircraft"] for row in fleet_plan.values())
+    configured_aircraft = sum(int(value) for value in fleet_counts.values())
+    successor_swaps = json.loads(
+        json.dumps(prior_diagnostics.get("successorSwaps", []))
+    )
+    gate_time_shifts = json.loads(
+        json.dumps(prior_diagnostics.get("gateTimeShifts", []))
+    )
+
+    refreshed = json.loads(json.dumps(prior_plan))
+    refreshed.update(
+        {
+            "status": "pass" if not failed else "fail",
+            "materializationStatus": "complete" if not failed else "blocked",
+            "previewOnly": bool(allow_infeasible_preview),
+            "planningRulesId": planning_rules["id"],
+            "summary": {
+                "checks": len(checks),
+                "passed": len(checks) - failed,
+                "failed": failed,
+                "plannedLegs": planned_legs,
+                "routedLegs": len(legs),
+                "bankTouchLegs": len(bank_touch),
+                "bankAlignedLegs": len(bank_touch) - len(bank_unaligned),
+                "nonHubLegs": len(nonhub),
+                "nonHubIntegratedLegs": len(nonhub),
+                "configuredAircraft": configured_aircraft,
+                "requiredAircraft": required_aircraft,
+                "remainingAircraft": configured_aircraft - required_aircraft,
+                "cycles": len(cycles),
+                "curfewViolations": len(curfew_violations),
+                "destinationsWithoutRon": len(missing_rons),
+                "rollingRonViolations": len(rolling_violations),
+                "successorSwaps": len(successor_swaps),
+                "gateTimeShifts": len(gate_time_shifts),
+                "gateReliefMissions": len(gate_relief_missions),
+                "lineRebalancingMoves": len(line_rebalancing_moves),
+                "lineBridgeMissions": len(line_bridge_missions),
+                "selectedLegs": selected_legs,
+                **(
+                    {
+                        "gateCapacityFailures": len(gate_diagnostic["failures"]),
+                        "conditionalTows": int(gate_diagnostic["towMovements"]),
+                    }
+                    if enforce_fixed_inventory
+                    else {}
+                ),
+                **(
+                    {"spacingViolations": len(spacing_violations)}
+                    if enforce_pairing_spacing
+                    else {}
+                ),
+            },
+            "checks": checks,
+            "fleetPlan": fleet_plan,
+            "cycles": cycles,
+            "legs": legs,
+            "diagnostics": {
+                "successorSwaps": successor_swaps,
+                "gateTimeShifts": gate_time_shifts,
+                "gateReliefMissions": gate_relief_missions,
+                "lineRebalancingMoves": line_rebalancing_moves,
+                "lineBridgeMissions": line_bridge_missions,
+                "bankUnalignedLegs": bank_unaligned,
+                "continuityViolations": continuity_violations,
+                "turnViolations": turn_violations,
+                "curfewViolations": curfew_violations,
+                "missingDestinationRons": missing_rons,
+                "rollingRonViolations": rolling_violations,
+                **(
+                    {"gateCapacity": gate_diagnostic}
+                    if enforce_fixed_inventory
+                    else {}
+                ),
+                **(
+                    {
+                        "spacingViolations": spacing_violations,
+                        "spacingExceptions": spacing_exceptions,
+                    }
+                    if enforce_pairing_spacing
+                    else {}
+                ),
+            },
+            "nextStep": {
+                "status": "ready" if not failed else "blocked",
+                "action": (
+                    "assign_canonical_identifiers"
+                    if not failed
+                    else "repair_exact_cycles"
+                ),
+                "message": (
+                    "Assign canonical Line/Day/Route, pairing, and flight identifiers, then run full operating and gate validation."
+                    if not failed
+                    else "Repair the remaining exact-cycle failures before assigning canonical identifiers."
+                ),
+            },
+        }
+    )
+    refreshed.setdefault("solver", {})["postsolveReuse"] = {
+        "sourceScheduleId": prior_plan["scheduleId"],
+        "verifiedSolverLegs": len(solver_leg_ids),
+        "globalMilpInvoked": False,
+        "postsolvePolicyReapplied": True,
+    }
+    return refreshed
+
+
+def refresh_exact_materialization_postsolve_from_manifest(
+    prior_plan: dict[str, Any],
+    canonical: dict[str, Any],
+    frequency_plan: dict[str, Any],
+    bank_plan: dict[str, Any],
+    repair_plan: dict[str, Any],
+    manifest_path: Path,
+    repo_root: Path,
+    allow_infeasible_preview: bool = False,
+) -> dict[str, Any]:
+    loaded = load_demand_sources_from_manifest(manifest_path, repo_root)
+    if loaded["manifest"]["id"] != frequency_plan["demandDataVersion"]:
+        raise ValueError("Frequency plan version does not match the reuse manifest")
+    if bank_plan["planningRulesId"] != loaded["planningRules"]["id"]:
+        raise ValueError("Bank plan version does not match the reuse manifest")
+    if repair_plan["planningRulesId"] != loaded["planningRules"]["id"]:
+        raise ValueError("Repair plan version does not match the reuse manifest")
+    return refresh_exact_materialization_postsolve(
+        prior_plan,
+        canonical,
+        frequency_plan,
+        bank_plan,
+        repair_plan,
+        loaded["planningRules"],
+        allow_infeasible_preview,
+        demand_matrix=parse_airport_od_matrix(loaded["airportOdMatrixText"]),
     )

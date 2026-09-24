@@ -17,6 +17,7 @@ from .exact_materialization import (
     ExactGlobalRepairIncomplete,
     blocked_exact_materialization_plan,
     build_exact_materialization_plan_from_manifest,
+    exact_seed_fingerprint_from_manifest,
 )
 from .gate_export import export_gate_schedule
 from .io import read_json, resolve_from_repo, sha256_file, write_json
@@ -31,6 +32,7 @@ from .validation import validate_schedule
 GENERATED_FILENAMES = (
     "build_config.json",
     "build_report.json",
+    "candidate_seed.json",
     "canonical_schedule.json",
     "validation_report.json",
     "operating_validation_report.json",
@@ -46,7 +48,30 @@ GENERATED_FILENAMES = (
     "canonicalization_report.json",
     "timetable.json",
     "gates.json",
+    "regeneration_progress.json",
 )
+
+
+class CandidatePreparationComplete(RuntimeError):
+    """Stop a staged build after all deterministic pre-exact artifacts exist."""
+
+
+def compatible_exact_checkpoint_path(
+    destination: Path,
+    fingerprint: str,
+) -> Path:
+    """Reuse any checkpoint whose embedded solver fingerprint still matches."""
+    compatible = []
+    for path in destination.glob(".exact_seed_checkpoint_*.json"):
+        try:
+            checkpoint = read_json(path)
+        except (OSError, ValueError):
+            continue
+        if checkpoint.get("fingerprint") == fingerprint:
+            compatible.append(path)
+    if compatible:
+        return max(compatible, key=lambda path: path.stat().st_mtime_ns)
+    return destination / f".exact_seed_checkpoint_{fingerprint[:16]}.json"
 
 
 def baseline_path_for(config: dict[str, Any], repo_root: Path) -> Path | None:
@@ -220,10 +245,18 @@ def build_candidate(
     baseline_path: Path | None = None,
     output_directory: Path | None = None,
     provisional_preview: bool = False,
+    stop_after_pre_exact: bool = False,
+    exact_plan_path: Path | None = None,
+    seed_checkpoint_path: Path | None = None,
 ) -> dict[str, Any]:
     repo_root = repo_root.resolve()
     config_source = resolve_from_repo(repo_root, str(config_path)).resolve()
     config = read_json(config_source)
+    if stop_after_pre_exact and exact_plan_path is not None:
+        raise ValueError(
+            "A staged candidate cannot stop before exact materialization and "
+            "consume an exact plan in the same invocation"
+        )
     baseline_source = baseline_path or baseline_path_for(config, repo_root)
     if baseline_source is None:
         baseline: dict[str, Any] = {
@@ -372,40 +405,83 @@ def build_candidate(
                             repo_root,
                         )
                         report["bankMaterializationDiagnostic"] = materialization
+                        if (
+                            stop_after_pre_exact
+                            and report["status"] != "blocked_hard_stop"
+                        ):
+                            report["status"] = "prepared_exact_materialization"
+                            report["publicationReady"] = False
+                            report["nextStep"] = {
+                                "phase": "exact_fleet_seed",
+                                "action": "build_exact_materialization",
+                                "message": (
+                                    "Pre-exact artifacts are complete. Run the "
+                                    "fleet-seed phase against candidate_seed.json."
+                                ),
+                            }
+                            raise CandidatePreparationComplete
                         if report["status"] == "blocked_hard_stop":
                             report["blockers"].append(
                                 "Exact materialization is suppressed until the candidate's hard stops are cleared"
                             )
                         else:
-                            checkpoint_token = sha256_json(
-                                {
-                                    "candidate": candidate,
-                                    "frequencyFleetPlan": frequency_fleet_plan,
-                                    "hubBankPlan": hub_bank_plan,
-                                    "routingRepairPlan": routing_repair_plan,
-                                    "demandManifestSha256": sha256_file(
-                                        demand_manifest
-                                    ),
-                                },
-                                indent=None,
-                            )[:16]
-                            try:
-                                exact_materialization = build_exact_materialization_plan_from_manifest(
-                                    candidate,
-                                    frequency_fleet_plan,
-                                    hub_bank_plan,
-                                    routing_repair_plan,
-                                    demand_manifest,
-                                    repo_root,
-                                    seed_checkpoint_path=(
-                                        destination
-                                        / (
-                                            ".exact_seed_checkpoint_"
-                                            f"{checkpoint_token}.json"
-                                        )
-                                    ),
-                                    allow_infeasible_preview=provisional_preview,
+                            seed_fingerprint = exact_seed_fingerprint_from_manifest(
+                                candidate,
+                                frequency_fleet_plan,
+                                hub_bank_plan,
+                                routing_repair_plan,
+                                demand_manifest,
+                                repo_root,
+                            )
+                            checkpoint_path = (
+                                resolve_from_repo(
+                                    repo_root, str(seed_checkpoint_path)
+                                ).resolve()
+                                if seed_checkpoint_path is not None
+                                else compatible_exact_checkpoint_path(
+                                    destination, seed_fingerprint
                                 )
+                            )
+                            try:
+                                if exact_plan_path is not None:
+                                    exact_materialization = read_json(
+                                        resolve_from_repo(
+                                            repo_root, str(exact_plan_path)
+                                        ).resolve()
+                                    )
+                                    if (
+                                        exact_materialization.get("scheduleId")
+                                        != config["buildId"]
+                                        or exact_materialization.get(
+                                            "planningRulesId"
+                                        )
+                                        != hub_bank_plan["planningRulesId"]
+                                        or int(
+                                            exact_materialization.get(
+                                                "summary", {}
+                                            ).get("selectedLegs", -1)
+                                        )
+                                        != int(
+                                            frequency_fleet_plan["summary"][
+                                                "plannedLegs"
+                                            ]
+                                        )
+                                    ):
+                                        raise ValueError(
+                                            "Supplied exact plan does not match the "
+                                            "prepared candidate inputs"
+                                        )
+                                else:
+                                    exact_materialization = build_exact_materialization_plan_from_manifest(
+                                        candidate,
+                                        frequency_fleet_plan,
+                                        hub_bank_plan,
+                                        routing_repair_plan,
+                                        demand_manifest,
+                                        repo_root,
+                                        seed_checkpoint_path=checkpoint_path,
+                                        allow_infeasible_preview=provisional_preview,
+                                    )
                             except (
                                 ValueError,
                                 ExactGlobalRepairIncomplete,
@@ -541,6 +617,8 @@ def build_candidate(
                                         "has unresolved feasibility findings and must "
                                         "not be published or treated as an accepted candidate."
                                     )
+    except CandidatePreparationComplete:
+        pass
     except ValueError as error:
         if report["status"] != "blocked_hard_stop":
             report["status"] = "blocked_planning_input"
@@ -622,6 +700,10 @@ def build_candidate(
     if "canonicalization" in report:
         report["outputs"]["canonicalization"] = "canonicalization_report.json"
 
+    if report["status"] == "prepared_exact_materialization":
+        write_json(destination / "candidate_seed.json", candidate, indent=None)
+        report["outputs"]["candidateSeed"] = "candidate_seed.json"
+
     if report["status"] in {"candidate_ready", "candidate_review_required"} or (
         provisional_preview and report.get("previewOnly")
     ):
@@ -651,5 +733,32 @@ def build_candidate(
             }
         )
 
+    phase = (
+        "pre_exact"
+        if report["status"] == "prepared_exact_materialization"
+        else "finalize"
+        if "exactMaterializationPlan" in report
+        else "prepare"
+    )
+    progress = {
+        "schemaVersion": "1.0.0",
+        "buildId": config.get("buildId"),
+        "phase": phase,
+        "status": (
+            "complete"
+            if report["status"]
+            in {
+                "prepared_exact_materialization",
+                "candidate_ready",
+                "candidate_review_required",
+                "blocked_hard_stop",
+            }
+            else "blocked"
+        ),
+        "buildStatus": report["status"],
+        "nextStep": report.get("nextStep"),
+    }
+    write_json(destination / "regeneration_progress.json", progress)
+    report["outputs"]["regenerationProgress"] = "regeneration_progress.json"
     write_json(destination / "build_report.json", report)
     return report

@@ -14,6 +14,7 @@ from .exact_materialization import (
     ExactGlobalRepairIncomplete,
     ExactSeedStageComplete,
     build_exact_materialization_plan_from_manifest,
+    refresh_exact_materialization_postsolve_from_manifest,
 )
 from .gate_export import export_gate_schedule
 from .io import read_json, write_json
@@ -49,6 +50,21 @@ def _parser() -> argparse.ArgumentParser:
             "Export a clearly marked sandbox snapshot even when exact physical "
             "inventory feasibility remains unresolved"
         ),
+    )
+    candidate.add_argument(
+        "--stop-after-pre-exact",
+        action="store_true",
+        help="Write deterministic planning inputs and stop before any exact solve",
+    )
+    candidate.add_argument(
+        "--exact-plan",
+        type=Path,
+        help="Finalize from a separately generated compatible exact plan",
+    )
+    candidate.add_argument(
+        "--seed-checkpoint",
+        type=Path,
+        help="Use an explicit resumable exact-seed checkpoint",
     )
 
     validate = subcommands.add_parser("validate", help="Validate a canonical schedule")
@@ -158,7 +174,20 @@ def _parser() -> argparse.ArgumentParser:
     exact.add_argument("--repo-root", type=Path, default=Path.cwd())
     exact.add_argument("--seed-checkpoint", type=Path)
     exact.add_argument("--seed-fleets-per-run", type=int)
+    exact.add_argument(
+        "--reuse-exact-plan",
+        type=Path,
+        help=(
+            "Verify compatible exact timings and rerun only post-solve policy "
+            "and validation"
+        ),
+    )
     exact.add_argument("--progress", action="store_true")
+    exact.add_argument(
+        "--provisional-preview",
+        action="store_true",
+        help="Retain a materialized exact plan with unresolved gate findings",
+    )
 
     web = subcommands.add_parser(
         "build-web", help="Assemble the static GitHub Pages console"
@@ -178,6 +207,9 @@ def main(argv: list[str] | None = None) -> int:
             baseline_path=args.baseline,
             output_directory=args.output,
             provisional_preview=args.provisional_preview,
+            stop_after_pre_exact=args.stop_after_pre_exact,
+            exact_plan_path=args.exact_plan,
+            seed_checkpoint_path=args.seed_checkpoint,
         )
         print(f"Candidate build: {report['status']}")
         print(f"Output: {report['outputDirectory']}")
@@ -193,6 +225,7 @@ def main(argv: list[str] | None = None) -> int:
         return 0 if report["status"] in {
             "candidate_ready",
             "candidate_review_required",
+            "prepared_exact_materialization",
         } or report.get("previewOnly") else 1
     if args.command == "build-web":
         result = build_web_console(
@@ -480,16 +513,36 @@ def main(argv: list[str] | None = None) -> int:
         bank_plan = read_json(args.bank_plan)
         repair_plan = read_json(args.repair_plan)
         try:
-            plan = build_exact_materialization_plan_from_manifest(
-                canonical,
-                frequency_plan,
-                bank_plan,
-                repair_plan,
-                args.manifest,
-                args.repo_root.resolve(),
-                args.seed_checkpoint,
-                args.seed_fleets_per_run,
-            )
+            if args.reuse_exact_plan is not None:
+                if (
+                    args.seed_checkpoint is not None
+                    or args.seed_fleets_per_run is not None
+                ):
+                    raise ValueError(
+                        "Exact-plan reuse cannot also run an exact seed stage"
+                    )
+                plan = refresh_exact_materialization_postsolve_from_manifest(
+                    read_json(args.reuse_exact_plan),
+                    canonical,
+                    frequency_plan,
+                    bank_plan,
+                    repair_plan,
+                    args.manifest,
+                    args.repo_root.resolve(),
+                    args.provisional_preview,
+                )
+            else:
+                plan = build_exact_materialization_plan_from_manifest(
+                    canonical,
+                    frequency_plan,
+                    bank_plan,
+                    repair_plan,
+                    args.manifest,
+                    args.repo_root.resolve(),
+                    args.seed_checkpoint,
+                    args.seed_fleets_per_run,
+                    args.provisional_preview,
+                )
         except ExactSeedStageComplete as result:
             print(str(result))
             return 0
@@ -505,5 +558,5 @@ def main(argv: list[str] | None = None) -> int:
             f"{plan['summary']['configuredAircraft']} aircraft)"
         )
         print(f"Wrote {args.output}")
-        return 0 if plan["status"] == "pass" else 1
+        return 0 if plan["status"] == "pass" or plan.get("previewOnly") else 1
     return 2

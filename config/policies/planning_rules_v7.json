@@ -149,12 +149,61 @@
       "SYR": 2
     },
     "productiveGateRelief": {
-      "targetStations": ["MCI", "CLT", "PIE"],
+      "targetStations": ["MCI", "CLT", "PIE", "BWI"],
       "preferredDestinations": ["DAY", "PHF", "SYR", "SFB"],
       "minimumHoldMinutes": 240,
       "minimumTwoWayDemand": 8.0,
-      "maximumMissions": 6,
-      "maximumTimingsPerHoldMarket": 8
+      "maximumMissions": 8,
+      "maximumTimingsPerHoldMarket": 8,
+      "minimumMissionsByStation": { "BWI": 2 },
+      "minimumDistinctHoldsByStation": { "BWI": 2 },
+      "unplannedCandidateMarkets": [
+        {
+          "market": ["BWI", "FLL"],
+          "eligibleFleets": ["CRJ700"],
+          "frequencyCeilingRoundTrips": 1
+        },
+        {
+          "market": ["BWI", "PIE"],
+          "eligibleFleets": ["CRJ700"],
+          "frequencyCeilingRoundTrips": 1
+        }
+      ]
+    },
+    "lineRebalancing": {
+      "minimumDaysPerLine": 9,
+      "maximumDaysPerLine": 12,
+      "transfers": [
+        {
+          "receiverAnchorLegId": "BWI-PHF-CRJ700-01-OUT",
+          "targetDays": 12
+        },
+        {
+          "receiverAnchorLegId": "CMH-MCI-CRJ700-01-OUT",
+          "targetDays": 13,
+          "maximumDays": 13
+        }
+      ],
+      "bridgeTransfers": [
+        {
+          "receiverAnchorLegId": "BDL-DAB-CRJ700-01-OUT",
+          "receiverArrivalLegId": "BDL-DAB-CRJ700-01-IN",
+          "donorBoundaryArrivalLegIds": [
+            "CLT-SYR-CRJ700-01-IN",
+            "CLT-SYR-CRJ700-04-IN"
+          ],
+          "transferredBoundaryArrivalLegId": "CLT-SYR-CRJ700-04-IN",
+          "connectorMarket": ["BDL", "CLT"],
+          "receiverDepartureLocalMinute": 270,
+          "receiverArrivalDepartureLocalMinute": 1260,
+          "fromReceiverDepartureLocalMinute": 270,
+          "toReceiverDepartureLocalMinute": 1160,
+          "targetReceiverDays": 13,
+          "minimumTwoWayDemand": 100.0,
+          "minimumMarginalDemand": 100.0,
+          "frequencyCeilingRoundTrips": 1
+        }
+      ]
     },
     "minimizeTows": true
   }

@@ -92,6 +92,7 @@ class SchedulerCliTests(unittest.TestCase):
             Path.cwd().resolve(),
             Path("seed.json"),
             1,
+            False,
         )
         write_json_mock.assert_not_called()
 
@@ -129,6 +130,64 @@ class SchedulerCliTests(unittest.TestCase):
 
         self.assertEqual(result, 1)
         write_json_mock.assert_not_called()
+
+    @patch("caa_scheduler.cli.write_json")
+    @patch("caa_scheduler.cli.build_exact_materialization_plan_from_manifest")
+    @patch("caa_scheduler.cli.refresh_exact_materialization_postsolve_from_manifest")
+    @patch("caa_scheduler.cli.read_json")
+    def test_exact_plan_reuse_skips_every_solver_stage(
+        self,
+        read_json_mock,
+        refresh_mock,
+        build_mock,
+        write_json_mock,
+    ) -> None:
+        artifacts = [
+            {"id": name}
+            for name in ("canonical", "frequency", "bank", "repair")
+        ]
+        prior = {"scheduleId": "test"}
+        read_json_mock.side_effect = [*artifacts, prior]
+        refresh_mock.return_value = {
+            "status": "fail",
+            "previewOnly": True,
+            "summary": {
+                "routedLegs": 4,
+                "plannedLegs": 4,
+                "requiredAircraft": 1,
+                "configuredAircraft": 2,
+            },
+        }
+
+        result = main(
+            [
+                "build-exact-materialization",
+                "canonical.json",
+                "frequency.json",
+                "bank.json",
+                "repair.json",
+                "manifest.json",
+                "exact.json",
+                "--repo-root",
+                ".",
+                "--reuse-exact-plan",
+                "prior.json",
+                "--provisional-preview",
+            ]
+        )
+
+        self.assertEqual(result, 0)
+        refresh_mock.assert_called_once_with(
+            prior,
+            *artifacts,
+            Path("manifest.json"),
+            Path.cwd().resolve(),
+            True,
+        )
+        build_mock.assert_not_called()
+        write_json_mock.assert_called_once_with(
+            Path("exact.json"), refresh_mock.return_value, indent=None
+        )
 
 
 if __name__ == "__main__":

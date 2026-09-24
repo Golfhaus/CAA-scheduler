@@ -21,6 +21,9 @@ documentation for the behavior in that commit travel together.
 
 ## Long solver runs
 
+Use the approval-gated commands in
+[`staged_regeneration.md`](staged_regeneration.md) for candidate regeneration.
+
 - Commit and push all solver inputs before starting a long run.
 - Fingerprint every checkpoint from all behavior-affecting inputs.
 - Save a checkpoint after each fleet and after each successful global-repair
@@ -53,4 +56,3 @@ not verification of the recovered branch. Re-run it against the pushed commit.
   validation work remains.
 - Push generated review artifacts only after all non-waivable hard stops pass.
 - Do not merge a review package to the main branch without explicit approval.
-

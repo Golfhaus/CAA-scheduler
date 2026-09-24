@@ -139,6 +139,10 @@ python -m caa_scheduler build-exact-materialization \
 
 ## Compile a candidate schedule
 
+For long or approval-gated builds, use the resumable phases in
+[`docs/staged_regeneration.md`](docs/staged_regeneration.md) instead of one
+uninterrupted candidate command.
+
 Export an approved configuration from **Schedule Setup**, add it to a working branch, and run:
 
 ```bash

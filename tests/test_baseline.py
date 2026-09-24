@@ -144,6 +144,54 @@ class ScheduleSixBaselineTests(unittest.TestCase):
             (315, "turn"),
         )
 
+    def test_fixed_inventory_keeps_red_eye_route_sequence_across_midnight(
+        self,
+    ) -> None:
+        legs = [
+            {
+                "line": "AA",
+                "day": 1,
+                "route": 101,
+                "sequenceWithinRoute": 1,
+                "fleet": "CRJ200",
+                "origin": "BBB",
+                "destination": "AAA",
+                "departureMinute": 1320,
+                "arrivalMinute": 1380,
+            },
+            {
+                "line": "AA",
+                "day": 1,
+                "route": 101,
+                "sequenceWithinRoute": 2,
+                "fleet": "CRJ200",
+                "origin": "AAA",
+                "destination": "CCC",
+                "departureMinute": 30,
+                "arrivalMinute": 90,
+            },
+        ]
+
+        claims = build_claims(
+            legs,
+            "AAA",
+            cyclic_successor_holds=True,
+        )
+
+        self.assertEqual(len(claims), 1)
+        self.assertEqual(
+            claims[0],
+            GateClaim(
+                1380,
+                1470,
+                "101",
+                "CRJ200",
+                "turn",
+                "BBB",
+                "CCC",
+            ),
+        )
+
     def test_gate_rescue_does_not_reuse_reserved_touch_slot(self) -> None:
         claims = [
             GateClaim(1050, 1170, "0", "CRJ200", "turn", "A", "B"),

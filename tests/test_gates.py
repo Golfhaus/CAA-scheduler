@@ -12,6 +12,7 @@ sys.path.insert(0, str(REPO_ROOT / "src"))
 
 from caa_scheduler.gates import (
     GateClaim,
+    assign_gates,
     _bounded_coloring,
     _conflict_graph,
     _greedy_coloring,
@@ -121,6 +122,65 @@ class GateColoringTests(unittest.TestCase):
         with patch("caa_scheduler.gates.milp") as solver:
             self.assertIsNone(_bounded_coloring(claims, 2))
         solver.assert_not_called()
+
+    def test_exact_tow_fallback_frees_gate_for_bwi_passenger_turn(self) -> None:
+        claims = [
+            GateClaim(
+                743,
+                1905,
+                "331 -> 332",
+                "CRJ700",
+                "ron",
+                "PHF",
+                "PHF",
+            ),
+            GateClaim(
+                883,
+                2045,
+                "330 -> 331",
+                "CRJ700",
+                "ron",
+                "PHF",
+                "PHF",
+            ),
+            GateClaim(
+                1279,
+                1715,
+                "707 -> 708",
+                "MAX9",
+                "ron",
+                "JAX",
+                "JAX",
+            ),
+            GateClaim(
+                1441,
+                1745,
+                "521 -> 522",
+                "CRJ900",
+                "turn",
+                "MCI",
+                "MCI",
+            ),
+        ]
+
+        assignments, stand_middles = assign_gates(
+            claims,
+            2,
+            n_stands=2,
+            return_provenance=True,
+        )
+
+        self.assertEqual(
+            {claim.label for claim in stand_middles},
+            {"330 -> 331", "331 -> 332"},
+        )
+        passenger_pieces = [
+            (claim, slot)
+            for claim, slot in assignments
+            if claim.label == "521 -> 522"
+        ]
+        self.assertEqual(len(passenger_pieces), 1)
+        self.assertLessEqual(passenger_pieces[0][1], 2)
 
 
 if __name__ == "__main__":

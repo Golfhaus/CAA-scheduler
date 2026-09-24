@@ -12,6 +12,7 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO_ROOT / "src"))
 
 from caa_scheduler.canonicalization import (
+    _canonical_demand_by_market,
     build_canonical_schedule_from_exact_plan,
 )
 from caa_scheduler.operating_validation import validate_operating_rules
@@ -167,6 +168,32 @@ class CanonicalizationTests(unittest.TestCase):
                 mismatched,
                 self.provenance,
             )
+
+    def test_postsolve_bridge_contributes_pinned_numbering_demand(self) -> None:
+        demand = _canonical_demand_by_market(
+            {
+                "markets": [
+                    {
+                        "origin": "AAA",
+                        "destination": "BBB",
+                        "twoWayDemand": 50.0,
+                    }
+                ]
+            },
+            {
+                "diagnostics": {
+                    "lineBridgeMissions": [
+                        {
+                            "connectorMarket": ["CCC", "AAA"],
+                            "twoWayDemand": 122.0,
+                        }
+                    ]
+                }
+            },
+        )
+
+        self.assertEqual(demand[("AAA", "BBB")], 50.0)
+        self.assertEqual(demand[("AAA", "CCC")], 122.0)
 
 
 if __name__ == "__main__":

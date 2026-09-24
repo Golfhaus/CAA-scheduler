@@ -21,6 +21,7 @@ import {
   scheduleMetrics,
   selectItineraries,
   sortFlightsByDeparture,
+  sortRoutingsByRouteAndSequence,
   splitClaimSegments,
 } from "../web/app.mjs";
 
@@ -222,6 +223,19 @@ test("published flights default to departure-time order", () => {
     { flight: 1, dep: "04:30" },
   ];
   assert.deepEqual(sortFlightsByDeparture(flights).map((flight) => flight.flight), [1, 2, 3]);
+});
+
+test("routings default to route then sequence order", () => {
+  const legs = [
+    { route: 102, sequenceWithinRoute: 1, flight: 1004 },
+    { route: 101, sequenceWithinRoute: 2, flight: 1002 },
+    { route: 101, sequenceWithinRoute: 1, flight: 1003 },
+    { route: 101, sequenceWithinRoute: 1, flight: 1001 },
+  ];
+  assert.deepEqual(
+    sortRoutingsByRouteAndSequence(legs).map((leg) => leg.flight),
+    [1001, 1003, 1002, 1004],
+  );
 });
 
 test("connection search uses hubs, including the BHM override supplied by the console", () => {
