@@ -1,0 +1,2013 @@
+{
+  "schemaVersion": "1.0.0",
+  "demandDataVersion": "bts-db1c-6mo-jul2025-apr2026-v7",
+  "status": "pass",
+  "provenance": {
+    "airportOdMatrix": {
+      "filename": "data/reference/airport_od_matrix_consolidated_v2.csv",
+      "sha256": "49c04922ee0cebb3fef8aad923e04bd11874587a263c9511358ddb833b860bc6"
+    },
+    "intergroupDemandId": "intergroup-demand-consolidated-v2",
+    "planningRulesId": "caa-planning-rules-v7",
+    "manifest": "config/demand_data/bts_db1c_6mo_v7.json",
+    "manifestSchemaVersion": "1.0.0"
+  },
+  "matrix": {
+    "title": "Coastal American Airways - Airport-to-Airport O&D Matrix (Consolidated)",
+    "description": "Average daily O&D passengers, real BTS DB1C data, simple mean of 6 months: July 2025, April 2026, December 2025, February 2026, January 2026, November 2025. Secondary-airport rows use the dampened own/primary blend (see BLEND_WEIGHTS in process_chunk.py). Rows = origin, Columns = destination. Values are directional.",
+    "airportCount": 105,
+    "directionalCellCount": 11025,
+    "directionalPassengersPerDay": 101247.1
+  },
+  "summary": {
+    "checks": 2,
+    "passed": 2,
+    "failed": 0
+  },
+  "checks": [
+    {
+      "id": "active_city_coverage",
+      "status": "pass",
+      "message": "Airport O-D matrix covers all 105 active cities",
+      "metrics": {
+        "activeCities": 105,
+        "matrixAirports": 105,
+        "missing": [],
+        "unknown": [],
+        "inactiveRepresented": []
+      }
+    },
+    {
+      "id": "golden_hub_assignment_parity",
+      "status": "pass",
+      "message": "Computed hub assignments match all 100 non-hub cities",
+      "metrics": {
+        "compared": 100,
+        "matched": 100,
+        "differences": []
+      }
+    }
+  ],
+  "marketSizes": {
+    "ABE": 277.3,
+    "ACY": 260.6,
+    "AGS": 140.7,
+    "ALB": 819.7,
+    "ATW": 248.3,
+    "AUS": 2864.3,
+    "AVL": 423.2,
+    "AVP": 153.8,
+    "BDL": 1507.1,
+    "BGR": 167.4,
+    "BHM": 644.0,
+    "BLV": 1661.0,
+    "BNA": 3443.3,
+    "BTR": 194.9,
+    "BTV": 281.8,
+    "BUF": 988.0,
+    "BWI": 3298.6,
+    "CAE": 275.7,
+    "CAK": 1477.7,
+    "CHA": 262.9,
+    "CHS": 1198.5,
+    "CID": 264.9,
+    "CLT": 3125.5,
+    "CMH": 1562.6,
+    "COU": 67.5,
+    "CRP": 161.9,
+    "CRW": 102.0,
+    "DAB": 215.4,
+    "DAL": 4503.2,
+    "DAY": 255.4,
+    "DLH": 62.0,
+    "DSM": 528.5,
+    "ECP": 429.3,
+    "ELP": 689.7,
+    "ERI": 47.2,
+    "EYW": 457.3,
+    "FAR": 199.9,
+    "FLL": 5339.7,
+    "FSD": 250.4,
+    "FWA": 200.1,
+    "GNV": 128.2,
+    "GPT": 154.3,
+    "GRR": 781.1,
+    "GSO": 373.1,
+    "GSP": 611.6,
+    "HOU": 3011.9,
+    "HPN": 542.7,
+    "HRL": 221.9,
+    "HSV": 330.6,
+    "HVN": 509.5,
+    "ICT": 310.0,
+    "ILM": 402.8,
+    "IND": 1759.7,
+    "ISP": 477.5,
+    "JAN": 260.0,
+    "JAX": 1395.6,
+    "LBB": 236.6,
+    "LEX": 325.6,
+    "LIT": 399.5,
+    "MAF": 294.2,
+    "MCI": 1838.0,
+    "MCN": 0.0,
+    "MDT": 428.5,
+    "MEM": 860.8,
+    "MFE": 202.7,
+    "MHT": 422.3,
+    "MKE": 1023.2,
+    "MLB": 146.3,
+    "MOB": 140.5,
+    "MSN": 435.4,
+    "MSY": 2280.7,
+    "MYR": 748.9,
+    "OKC": 731.1,
+    "OMA": 796.7,
+    "ORH": 83.8,
+    "PGD": 2300.5,
+    "PHF": 898.6,
+    "PIA": 149.5,
+    "PIE": 3828.1,
+    "PIT": 1871.8,
+    "PNS": 652.5,
+    "PVD": 1140.7,
+    "PWM": 518.0,
+    "RDU": 2614.3,
+    "RFD": 8173.5,
+    "ROA": 170.0,
+    "ROC": 578.8,
+    "SAT": 1641.4,
+    "SAV": 743.2,
+    "SBN": 231.1,
+    "SDF": 828.8,
+    "SFB": 8218.2,
+    "SGF": 252.5,
+    "SHV": 148.7,
+    "SRQ": 1309.6,
+    "SWF": 75.1,
+    "SYR": 627.6,
+    "TLH": 156.0,
+    "TOL": 27.6,
+    "TRI": 103.5,
+    "TTN": 107.3,
+    "TUL": 538.1,
+    "TYS": 672.0,
+    "VPS": 488.2,
+    "XNA": 465.3
+  },
+  "multiHubAssignments": {
+    "groups": [
+      {
+        "group": "APP",
+        "centroid": {
+          "latitude": 36.456233,
+          "longitude": -84.393156
+        },
+        "qualifiedHubs": [
+          "DAY",
+          "JAX"
+        ],
+        "rankings": [
+          {
+            "hub": "DAY",
+            "rank": "primary",
+            "servablePassengersPerDay": 12122.0,
+            "distanceRatio": 0.0,
+            "qualified": true
+          },
+          {
+            "hub": "JAX",
+            "rank": "secondary",
+            "servablePassengersPerDay": 5762.0,
+            "distanceRatio": 1.848234,
+            "qualified": true
+          },
+          {
+            "hub": "MCI",
+            "rank": "tertiary",
+            "servablePassengersPerDay": 3070.0,
+            "distanceRatio": 2.499916,
+            "qualified": false
+          }
+        ]
+      },
+      {
+        "group": "CGI",
+        "centroid": {
+          "latitude": 34.365992,
+          "longitude": -80.556775
+        },
+        "qualifiedHubs": [
+          "JAX",
+          "PHF",
+          "DAY"
+        ],
+        "rankings": [
+          {
+            "hub": "JAX",
+            "rank": "primary",
+            "servablePassengersPerDay": 18365.0,
+            "distanceRatio": 0.0,
+            "qualified": true
+          },
+          {
+            "hub": "PHF",
+            "rank": "secondary",
+            "servablePassengersPerDay": 14129.0,
+            "distanceRatio": 1.079174,
+            "qualified": true
+          },
+          {
+            "hub": "DAY",
+            "rank": "tertiary",
+            "servablePassengersPerDay": 6004.0,
+            "distanceRatio": 1.569171,
+            "qualified": true
+          },
+          {
+            "hub": "MCI",
+            "rank": "quaternary",
+            "servablePassengersPerDay": 4644.0,
+            "distanceRatio": 3.094367,
+            "qualified": false
+          }
+        ]
+      },
+      {
+        "group": "FLP",
+        "centroid": {
+          "latitude": 27.622267,
+          "longitude": -81.594611
+        },
+        "qualifiedHubs": [
+          "JAX"
+        ],
+        "rankings": [
+          {
+            "hub": "JAX",
+            "rank": "primary",
+            "servablePassengersPerDay": 40709.0,
+            "distanceRatio": 0.0,
+            "qualified": true
+          },
+          {
+            "hub": "DAY",
+            "rank": "secondary",
+            "servablePassengersPerDay": 17324.0,
+            "distanceRatio": 4.340816,
+            "qualified": false
+          }
+        ]
+      },
+      {
+        "group": "GCP",
+        "centroid": {
+          "latitude": 30.92116,
+          "longitude": -87.94091
+        },
+        "qualifiedHubs": [
+          "JAX",
+          "MCI"
+        ],
+        "rankings": [
+          {
+            "hub": "JAX",
+            "rank": "primary",
+            "servablePassengersPerDay": 10038.0,
+            "distanceRatio": 0.0,
+            "qualified": true
+          },
+          {
+            "hub": "MCI",
+            "rank": "secondary",
+            "servablePassengersPerDay": 3245.0,
+            "distanceRatio": 1.861038,
+            "qualified": true
+          },
+          {
+            "hub": "DAY",
+            "rank": "tertiary",
+            "servablePassengersPerDay": 2895.0,
+            "distanceRatio": 1.757407,
+            "qualified": false
+          }
+        ]
+      },
+      {
+        "group": "GLC",
+        "centroid": {
+          "latitude": 42.228138,
+          "longitude": -87.2726
+        },
+        "qualifiedHubs": [
+          "DAY"
+        ],
+        "rankings": [
+          {
+            "hub": "DAY",
+            "rank": "primary",
+            "servablePassengersPerDay": 23781.0,
+            "distanceRatio": 0.0,
+            "qualified": true
+          },
+          {
+            "hub": "JAX",
+            "rank": "secondary",
+            "servablePassengersPerDay": 12745.0,
+            "distanceRatio": 3.838318,
+            "qualified": false
+          }
+        ]
+      },
+      {
+        "group": "LEC",
+        "centroid": {
+          "latitude": 41.5904,
+          "longitude": -80.707529
+        },
+        "qualifiedHubs": [
+          "DAY",
+          "SYR"
+        ],
+        "rankings": [
+          {
+            "hub": "DAY",
+            "rank": "primary",
+            "servablePassengersPerDay": 11913.0,
+            "distanceRatio": 0.0,
+            "qualified": true
+          },
+          {
+            "hub": "SYR",
+            "rank": "secondary",
+            "servablePassengersPerDay": 10641.0,
+            "distanceRatio": 1.182128,
+            "qualified": true
+          },
+          {
+            "hub": "JAX",
+            "rank": "tertiary",
+            "servablePassengersPerDay": 7716.0,
+            "distanceRatio": 3.530953,
+            "qualified": false
+          }
+        ]
+      },
+      {
+        "group": "MAC",
+        "centroid": {
+          "latitude": 40.18235,
+          "longitude": -75.66435
+        },
+        "qualifiedHubs": [
+          "PHF",
+          "SYR"
+        ],
+        "rankings": [
+          {
+            "hub": "PHF",
+            "rank": "primary",
+            "servablePassengersPerDay": 8018.0,
+            "distanceRatio": 0.0,
+            "qualified": true
+          },
+          {
+            "hub": "SYR",
+            "rank": "secondary",
+            "servablePassengersPerDay": 7607.0,
+            "distanceRatio": 0.945199,
+            "qualified": true
+          },
+          {
+            "hub": "JAX",
+            "rank": "tertiary",
+            "servablePassengersPerDay": 3920.0,
+            "distanceRatio": 3.481453,
+            "qualified": false
+          }
+        ]
+      },
+      {
+        "group": "NEC",
+        "centroid": {
+          "latitude": 42.430517,
+          "longitude": -72.276342
+        },
+        "qualifiedHubs": [
+          "SYR"
+        ],
+        "rankings": [
+          {
+            "hub": "SYR",
+            "rank": "primary",
+            "servablePassengersPerDay": 12427.0,
+            "distanceRatio": 0.0,
+            "qualified": true
+          },
+          {
+            "hub": "JAX",
+            "rank": "secondary",
+            "servablePassengersPerDay": 8764.0,
+            "distanceRatio": 4.879343,
+            "qualified": false
+          }
+        ]
+      },
+      {
+        "group": "OZK",
+        "centroid": {
+          "latitude": 36.077229,
+          "longitude": -94.402829
+        },
+        "qualifiedHubs": [
+          "MCI"
+        ],
+        "rankings": [
+          {
+            "hub": "MCI",
+            "rank": "primary",
+            "servablePassengersPerDay": 6701.0,
+            "distanceRatio": 0.0,
+            "qualified": true
+          },
+          {
+            "hub": "JAX",
+            "rank": "secondary",
+            "servablePassengersPerDay": 2773.0,
+            "distanceRatio": 3.71292,
+            "qualified": false
+          }
+        ]
+      },
+      {
+        "group": "TEX",
+        "centroid": {
+          "latitude": 30.204982,
+          "longitude": -98.717118
+        },
+        "qualifiedHubs": [
+          "MCI",
+          "JAX",
+          "DAY"
+        ],
+        "rankings": [
+          {
+            "hub": "MCI",
+            "rank": "primary",
+            "servablePassengersPerDay": 22281.0,
+            "distanceRatio": 0.0,
+            "qualified": true
+          },
+          {
+            "hub": "JAX",
+            "rank": "secondary",
+            "servablePassengersPerDay": 9726.0,
+            "distanceRatio": 1.519146,
+            "qualified": true
+          },
+          {
+            "hub": "DAY",
+            "rank": "tertiary",
+            "servablePassengersPerDay": 7918.0,
+            "distanceRatio": 1.581855,
+            "qualified": true
+          },
+          {
+            "hub": "PHF",
+            "rank": "quaternary",
+            "servablePassengersPerDay": 3984.0,
+            "distanceRatio": 2.037217,
+            "qualified": false
+          }
+        ]
+      },
+      {
+        "group": "UMP",
+        "centroid": {
+          "latitude": 42.232633,
+          "longitude": -93.196122
+        },
+        "qualifiedHubs": [
+          "MCI"
+        ],
+        "rankings": [
+          {
+            "hub": "MCI",
+            "rank": "primary",
+            "servablePassengersPerDay": 7433.0,
+            "distanceRatio": 0.0,
+            "qualified": true
+          },
+          {
+            "hub": "JAX",
+            "rank": "secondary",
+            "servablePassengersPerDay": 3508.0,
+            "distanceRatio": 4.735457,
+            "qualified": false
+          }
+        ]
+      }
+    ],
+    "cities": [
+      {
+        "code": "ABE",
+        "group": "MAC",
+        "marketSize": 277.3,
+        "percentile": 39.0,
+        "maximumHubs": 2,
+        "hubAssignments": [
+          "PHF",
+          "SYR"
+        ],
+        "expectedHubAssignments": [
+          "PHF",
+          "SYR"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "ACY",
+        "group": "MAC",
+        "marketSize": 260.6,
+        "percentile": 35.0,
+        "maximumHubs": 2,
+        "hubAssignments": [
+          "PHF",
+          "SYR"
+        ],
+        "expectedHubAssignments": [
+          "PHF",
+          "SYR"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "AGS",
+        "group": "CGI",
+        "marketSize": 140.7,
+        "percentile": 13.0,
+        "maximumHubs": 1,
+        "hubAssignments": [
+          "JAX"
+        ],
+        "expectedHubAssignments": [
+          "JAX"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "ALB",
+        "group": "NEC",
+        "marketSize": 819.7,
+        "percentile": 73.0,
+        "maximumHubs": 3,
+        "hubAssignments": [
+          "SYR"
+        ],
+        "expectedHubAssignments": [
+          "SYR"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "ATW",
+        "group": "GLC",
+        "marketSize": 248.3,
+        "percentile": 31.0,
+        "maximumHubs": 2,
+        "hubAssignments": [
+          "DAY"
+        ],
+        "expectedHubAssignments": [
+          "DAY"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "AUS",
+        "group": "TEX",
+        "marketSize": 2864.3,
+        "percentile": 91.0,
+        "maximumHubs": 4,
+        "hubAssignments": [
+          "MCI",
+          "JAX",
+          "DAY"
+        ],
+        "expectedHubAssignments": [
+          "MCI",
+          "JAX",
+          "DAY"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "AVL",
+        "group": "APP",
+        "marketSize": 423.2,
+        "percentile": 49.0,
+        "maximumHubs": 2,
+        "hubAssignments": [
+          "DAY",
+          "JAX"
+        ],
+        "expectedHubAssignments": [
+          "DAY",
+          "JAX"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "AVP",
+        "group": "MAC",
+        "marketSize": 153.8,
+        "percentile": 17.0,
+        "maximumHubs": 1,
+        "hubAssignments": [
+          "PHF"
+        ],
+        "expectedHubAssignments": [
+          "PHF"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "BDL",
+        "group": "NEC",
+        "marketSize": 1507.1,
+        "percentile": 82.0,
+        "maximumHubs": 3,
+        "hubAssignments": [
+          "SYR"
+        ],
+        "expectedHubAssignments": [
+          "SYR"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "BGR",
+        "group": "NEC",
+        "marketSize": 167.4,
+        "percentile": 21.0,
+        "maximumHubs": 1,
+        "hubAssignments": [
+          "SYR"
+        ],
+        "expectedHubAssignments": [
+          "SYR"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "BHM",
+        "group": "GCP",
+        "marketSize": 644.0,
+        "percentile": 64.0,
+        "maximumHubs": 2,
+        "hubAssignments": [
+          "JAX",
+          "MCI"
+        ],
+        "expectedHubAssignments": [
+          "JAX",
+          "MCI"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "BLV",
+        "group": "UMP",
+        "marketSize": 1661.0,
+        "percentile": 85.0,
+        "maximumHubs": 3,
+        "hubAssignments": [
+          "MCI"
+        ],
+        "expectedHubAssignments": [
+          "MCI"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "BNA",
+        "group": "APP",
+        "marketSize": 3443.3,
+        "percentile": 95.0,
+        "maximumHubs": 4,
+        "hubAssignments": [
+          "DAY",
+          "JAX"
+        ],
+        "expectedHubAssignments": [
+          "DAY",
+          "JAX"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "BTR",
+        "group": "GCP",
+        "marketSize": 194.9,
+        "percentile": 23.0,
+        "maximumHubs": 1,
+        "hubAssignments": [
+          "JAX"
+        ],
+        "expectedHubAssignments": [
+          "JAX"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "BTV",
+        "group": "NEC",
+        "marketSize": 281.8,
+        "percentile": 40.0,
+        "maximumHubs": 2,
+        "hubAssignments": [
+          "SYR"
+        ],
+        "expectedHubAssignments": [
+          "SYR"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "BUF",
+        "group": "LEC",
+        "marketSize": 988.0,
+        "percentile": 76.0,
+        "maximumHubs": 3,
+        "hubAssignments": [
+          "DAY",
+          "SYR"
+        ],
+        "expectedHubAssignments": [
+          "DAY",
+          "SYR"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "BWI",
+        "group": "MAC",
+        "marketSize": 3298.6,
+        "percentile": 94.0,
+        "maximumHubs": 4,
+        "hubAssignments": [
+          "PHF",
+          "SYR"
+        ],
+        "expectedHubAssignments": [
+          "PHF",
+          "SYR"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "CAE",
+        "group": "CGI",
+        "marketSize": 275.7,
+        "percentile": 38.0,
+        "maximumHubs": 2,
+        "hubAssignments": [
+          "JAX",
+          "PHF"
+        ],
+        "expectedHubAssignments": [
+          "JAX",
+          "PHF"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "CAK",
+        "group": "LEC",
+        "marketSize": 1477.7,
+        "percentile": 81.0,
+        "maximumHubs": 3,
+        "hubAssignments": [
+          "DAY",
+          "SYR"
+        ],
+        "expectedHubAssignments": [
+          "DAY",
+          "SYR"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "CHA",
+        "group": "APP",
+        "marketSize": 262.9,
+        "percentile": 36.0,
+        "maximumHubs": 2,
+        "hubAssignments": [
+          "DAY",
+          "JAX"
+        ],
+        "expectedHubAssignments": [
+          "DAY",
+          "JAX"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "CHS",
+        "group": "CGI",
+        "marketSize": 1198.5,
+        "percentile": 79.0,
+        "maximumHubs": 3,
+        "hubAssignments": [
+          "JAX",
+          "PHF",
+          "DAY"
+        ],
+        "expectedHubAssignments": [
+          "JAX",
+          "PHF",
+          "DAY"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "CID",
+        "group": "UMP",
+        "marketSize": 264.9,
+        "percentile": 37.0,
+        "maximumHubs": 2,
+        "hubAssignments": [
+          "MCI"
+        ],
+        "expectedHubAssignments": [
+          "MCI"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "CLT",
+        "group": "CGI",
+        "marketSize": 3125.5,
+        "percentile": 93.0,
+        "maximumHubs": 4,
+        "hubAssignments": [
+          "JAX",
+          "PHF",
+          "DAY"
+        ],
+        "expectedHubAssignments": [
+          "JAX",
+          "PHF",
+          "DAY"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "CMH",
+        "group": "LEC",
+        "marketSize": 1562.6,
+        "percentile": 83.0,
+        "maximumHubs": 3,
+        "hubAssignments": [
+          "DAY",
+          "SYR"
+        ],
+        "expectedHubAssignments": [
+          "DAY",
+          "SYR"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "COU",
+        "group": "UMP",
+        "marketSize": 67.5,
+        "percentile": 5.0,
+        "maximumHubs": 1,
+        "hubAssignments": [
+          "MCI"
+        ],
+        "expectedHubAssignments": [
+          "MCI"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "CRP",
+        "group": "TEX",
+        "marketSize": 161.9,
+        "percentile": 20.0,
+        "maximumHubs": 1,
+        "hubAssignments": [
+          "MCI"
+        ],
+        "expectedHubAssignments": [
+          "MCI"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "CRW",
+        "group": "APP",
+        "marketSize": 102.0,
+        "percentile": 8.0,
+        "maximumHubs": 1,
+        "hubAssignments": [
+          "DAY"
+        ],
+        "expectedHubAssignments": [
+          "DAY"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "DAB",
+        "group": "FLP",
+        "marketSize": 215.4,
+        "percentile": 27.0,
+        "maximumHubs": 2,
+        "hubAssignments": [
+          "JAX"
+        ],
+        "expectedHubAssignments": [
+          "JAX"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "DAL",
+        "group": "TEX",
+        "marketSize": 4503.2,
+        "percentile": 97.0,
+        "maximumHubs": 4,
+        "hubAssignments": [
+          "MCI",
+          "JAX",
+          "DAY"
+        ],
+        "expectedHubAssignments": [
+          "MCI",
+          "JAX",
+          "DAY"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "DLH",
+        "group": "UMP",
+        "marketSize": 62.0,
+        "percentile": 4.0,
+        "maximumHubs": 1,
+        "hubAssignments": [
+          "MCI"
+        ],
+        "expectedHubAssignments": [
+          "MCI"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "DSM",
+        "group": "UMP",
+        "marketSize": 528.5,
+        "percentile": 59.0,
+        "maximumHubs": 2,
+        "hubAssignments": [
+          "MCI"
+        ],
+        "expectedHubAssignments": [
+          "MCI"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "ECP",
+        "group": "GCP",
+        "marketSize": 429.3,
+        "percentile": 51.0,
+        "maximumHubs": 2,
+        "hubAssignments": [
+          "JAX",
+          "MCI"
+        ],
+        "expectedHubAssignments": [
+          "JAX",
+          "MCI"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "ELP",
+        "group": "TEX",
+        "marketSize": 689.7,
+        "percentile": 67.0,
+        "maximumHubs": 2,
+        "hubAssignments": [
+          "MCI",
+          "JAX"
+        ],
+        "expectedHubAssignments": [
+          "MCI",
+          "JAX"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "ERI",
+        "group": "LEC",
+        "marketSize": 47.2,
+        "percentile": 3.0,
+        "maximumHubs": 1,
+        "hubAssignments": [
+          "DAY"
+        ],
+        "expectedHubAssignments": [
+          "DAY"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "EYW",
+        "group": "FLP",
+        "marketSize": 457.3,
+        "percentile": 53.0,
+        "maximumHubs": 2,
+        "hubAssignments": [
+          "JAX"
+        ],
+        "expectedHubAssignments": [
+          "JAX"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "FAR",
+        "group": "UMP",
+        "marketSize": 199.9,
+        "percentile": 24.0,
+        "maximumHubs": 1,
+        "hubAssignments": [
+          "MCI"
+        ],
+        "expectedHubAssignments": [
+          "MCI"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "FLL",
+        "group": "FLP",
+        "marketSize": 5339.7,
+        "percentile": 98.0,
+        "maximumHubs": 4,
+        "hubAssignments": [
+          "JAX"
+        ],
+        "expectedHubAssignments": [
+          "JAX"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "FSD",
+        "group": "UMP",
+        "marketSize": 250.4,
+        "percentile": 32.0,
+        "maximumHubs": 2,
+        "hubAssignments": [
+          "MCI"
+        ],
+        "expectedHubAssignments": [
+          "MCI"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "FWA",
+        "group": "GLC",
+        "marketSize": 200.1,
+        "percentile": 25.0,
+        "maximumHubs": 1,
+        "hubAssignments": [
+          "DAY"
+        ],
+        "expectedHubAssignments": [
+          "DAY"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "GNV",
+        "group": "FLP",
+        "marketSize": 128.2,
+        "percentile": 11.0,
+        "maximumHubs": 1,
+        "hubAssignments": [
+          "JAX"
+        ],
+        "expectedHubAssignments": [
+          "JAX"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "GPT",
+        "group": "GCP",
+        "marketSize": 154.3,
+        "percentile": 18.0,
+        "maximumHubs": 1,
+        "hubAssignments": [
+          "JAX"
+        ],
+        "expectedHubAssignments": [
+          "JAX"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "GRR",
+        "group": "GLC",
+        "marketSize": 781.1,
+        "percentile": 71.0,
+        "maximumHubs": 3,
+        "hubAssignments": [
+          "DAY"
+        ],
+        "expectedHubAssignments": [
+          "DAY"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "GSO",
+        "group": "CGI",
+        "marketSize": 373.1,
+        "percentile": 45.0,
+        "maximumHubs": 2,
+        "hubAssignments": [
+          "JAX",
+          "PHF"
+        ],
+        "expectedHubAssignments": [
+          "JAX",
+          "PHF"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "GSP",
+        "group": "CGI",
+        "marketSize": 611.6,
+        "percentile": 63.0,
+        "maximumHubs": 2,
+        "hubAssignments": [
+          "JAX",
+          "PHF"
+        ],
+        "expectedHubAssignments": [
+          "JAX",
+          "PHF"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "HOU",
+        "group": "TEX",
+        "marketSize": 3011.9,
+        "percentile": 92.0,
+        "maximumHubs": 4,
+        "hubAssignments": [
+          "MCI",
+          "JAX",
+          "DAY"
+        ],
+        "expectedHubAssignments": [
+          "MCI",
+          "JAX",
+          "DAY"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "HPN",
+        "group": "NEC",
+        "marketSize": 542.7,
+        "percentile": 61.0,
+        "maximumHubs": 2,
+        "hubAssignments": [
+          "SYR"
+        ],
+        "expectedHubAssignments": [
+          "SYR"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "HRL",
+        "group": "TEX",
+        "marketSize": 221.9,
+        "percentile": 28.0,
+        "maximumHubs": 2,
+        "hubAssignments": [
+          "MCI",
+          "JAX"
+        ],
+        "expectedHubAssignments": [
+          "MCI",
+          "JAX"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "HSV",
+        "group": "APP",
+        "marketSize": 330.6,
+        "percentile": 44.0,
+        "maximumHubs": 2,
+        "hubAssignments": [
+          "DAY",
+          "JAX"
+        ],
+        "expectedHubAssignments": [
+          "DAY",
+          "JAX"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "HVN",
+        "group": "NEC",
+        "marketSize": 509.5,
+        "percentile": 57.0,
+        "maximumHubs": 2,
+        "hubAssignments": [
+          "SYR"
+        ],
+        "expectedHubAssignments": [
+          "SYR"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "ICT",
+        "group": "OZK",
+        "marketSize": 310.0,
+        "percentile": 42.0,
+        "maximumHubs": 2,
+        "hubAssignments": [
+          "MCI"
+        ],
+        "expectedHubAssignments": [
+          "MCI"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "ILM",
+        "group": "CGI",
+        "marketSize": 402.8,
+        "percentile": 47.0,
+        "maximumHubs": 2,
+        "hubAssignments": [
+          "JAX",
+          "PHF"
+        ],
+        "expectedHubAssignments": [
+          "JAX",
+          "PHF"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "IND",
+        "group": "GLC",
+        "marketSize": 1759.7,
+        "percentile": 86.0,
+        "maximumHubs": 3,
+        "hubAssignments": [
+          "DAY"
+        ],
+        "expectedHubAssignments": [
+          "DAY"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "ISP",
+        "group": "NEC",
+        "marketSize": 477.5,
+        "percentile": 55.0,
+        "maximumHubs": 2,
+        "hubAssignments": [
+          "SYR"
+        ],
+        "expectedHubAssignments": [
+          "SYR"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "JAN",
+        "group": "GCP",
+        "marketSize": 260.0,
+        "percentile": 34.0,
+        "maximumHubs": 2,
+        "hubAssignments": [
+          "JAX",
+          "MCI"
+        ],
+        "expectedHubAssignments": [
+          "JAX",
+          "MCI"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "LBB",
+        "group": "TEX",
+        "marketSize": 236.6,
+        "percentile": 30.0,
+        "maximumHubs": 2,
+        "hubAssignments": [
+          "MCI",
+          "JAX"
+        ],
+        "expectedHubAssignments": [
+          "MCI",
+          "JAX"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "LEX",
+        "group": "APP",
+        "marketSize": 325.6,
+        "percentile": 43.0,
+        "maximumHubs": 2,
+        "hubAssignments": [
+          "DAY",
+          "JAX"
+        ],
+        "expectedHubAssignments": [
+          "DAY",
+          "JAX"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "LIT",
+        "group": "OZK",
+        "marketSize": 399.5,
+        "percentile": 46.0,
+        "maximumHubs": 2,
+        "hubAssignments": [
+          "MCI"
+        ],
+        "expectedHubAssignments": [
+          "MCI"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "MAF",
+        "group": "TEX",
+        "marketSize": 294.2,
+        "percentile": 41.0,
+        "maximumHubs": 2,
+        "hubAssignments": [
+          "MCI",
+          "JAX"
+        ],
+        "expectedHubAssignments": [
+          "MCI",
+          "JAX"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "MCN",
+        "group": "CGI",
+        "marketSize": 0.0,
+        "percentile": 1.0,
+        "maximumHubs": 1,
+        "hubAssignments": [
+          "JAX"
+        ],
+        "expectedHubAssignments": [
+          "JAX"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "MDT",
+        "group": "MAC",
+        "marketSize": 428.5,
+        "percentile": 50.0,
+        "maximumHubs": 2,
+        "hubAssignments": [
+          "PHF",
+          "SYR"
+        ],
+        "expectedHubAssignments": [
+          "PHF",
+          "SYR"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "MEM",
+        "group": "OZK",
+        "marketSize": 860.8,
+        "percentile": 75.0,
+        "maximumHubs": 3,
+        "hubAssignments": [
+          "MCI"
+        ],
+        "expectedHubAssignments": [
+          "MCI"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "MFE",
+        "group": "TEX",
+        "marketSize": 202.7,
+        "percentile": 26.0,
+        "maximumHubs": 2,
+        "hubAssignments": [
+          "MCI",
+          "JAX"
+        ],
+        "expectedHubAssignments": [
+          "MCI",
+          "JAX"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "MHT",
+        "group": "NEC",
+        "marketSize": 422.3,
+        "percentile": 48.0,
+        "maximumHubs": 2,
+        "hubAssignments": [
+          "SYR"
+        ],
+        "expectedHubAssignments": [
+          "SYR"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "MKE",
+        "group": "GLC",
+        "marketSize": 1023.2,
+        "percentile": 77.0,
+        "maximumHubs": 3,
+        "hubAssignments": [
+          "DAY"
+        ],
+        "expectedHubAssignments": [
+          "DAY"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "MLB",
+        "group": "FLP",
+        "marketSize": 146.3,
+        "percentile": 14.0,
+        "maximumHubs": 1,
+        "hubAssignments": [
+          "JAX"
+        ],
+        "expectedHubAssignments": [
+          "JAX"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "MOB",
+        "group": "GCP",
+        "marketSize": 140.5,
+        "percentile": 12.0,
+        "maximumHubs": 1,
+        "hubAssignments": [
+          "JAX"
+        ],
+        "expectedHubAssignments": [
+          "JAX"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "MSN",
+        "group": "GLC",
+        "marketSize": 435.4,
+        "percentile": 52.0,
+        "maximumHubs": 2,
+        "hubAssignments": [
+          "DAY"
+        ],
+        "expectedHubAssignments": [
+          "DAY"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "MSY",
+        "group": "GCP",
+        "marketSize": 2280.7,
+        "percentile": 88.0,
+        "maximumHubs": 3,
+        "hubAssignments": [
+          "JAX",
+          "MCI"
+        ],
+        "expectedHubAssignments": [
+          "JAX",
+          "MCI"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "MYR",
+        "group": "CGI",
+        "marketSize": 748.9,
+        "percentile": 70.0,
+        "maximumHubs": 2,
+        "hubAssignments": [
+          "JAX",
+          "PHF"
+        ],
+        "expectedHubAssignments": [
+          "JAX",
+          "PHF"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "OKC",
+        "group": "OZK",
+        "marketSize": 731.1,
+        "percentile": 68.0,
+        "maximumHubs": 2,
+        "hubAssignments": [
+          "MCI"
+        ],
+        "expectedHubAssignments": [
+          "MCI"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "OMA",
+        "group": "UMP",
+        "marketSize": 796.7,
+        "percentile": 72.0,
+        "maximumHubs": 3,
+        "hubAssignments": [
+          "MCI"
+        ],
+        "expectedHubAssignments": [
+          "MCI"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "ORH",
+        "group": "NEC",
+        "marketSize": 83.8,
+        "percentile": 7.0,
+        "maximumHubs": 1,
+        "hubAssignments": [
+          "SYR"
+        ],
+        "expectedHubAssignments": [
+          "SYR"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "PGD",
+        "group": "FLP",
+        "marketSize": 2300.5,
+        "percentile": 89.0,
+        "maximumHubs": 3,
+        "hubAssignments": [
+          "JAX"
+        ],
+        "expectedHubAssignments": [
+          "JAX"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "PIA",
+        "group": "UMP",
+        "marketSize": 149.5,
+        "percentile": 16.0,
+        "maximumHubs": 1,
+        "hubAssignments": [
+          "MCI"
+        ],
+        "expectedHubAssignments": [
+          "MCI"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "PIE",
+        "group": "FLP",
+        "marketSize": 3828.1,
+        "percentile": 96.0,
+        "maximumHubs": 4,
+        "hubAssignments": [
+          "JAX"
+        ],
+        "expectedHubAssignments": [
+          "JAX"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "PIT",
+        "group": "LEC",
+        "marketSize": 1871.8,
+        "percentile": 87.0,
+        "maximumHubs": 3,
+        "hubAssignments": [
+          "DAY",
+          "SYR"
+        ],
+        "expectedHubAssignments": [
+          "DAY",
+          "SYR"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "PNS",
+        "group": "GCP",
+        "marketSize": 652.5,
+        "percentile": 65.0,
+        "maximumHubs": 2,
+        "hubAssignments": [
+          "JAX",
+          "MCI"
+        ],
+        "expectedHubAssignments": [
+          "JAX",
+          "MCI"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "PVD",
+        "group": "NEC",
+        "marketSize": 1140.7,
+        "percentile": 78.0,
+        "maximumHubs": 3,
+        "hubAssignments": [
+          "SYR"
+        ],
+        "expectedHubAssignments": [
+          "SYR"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "PWM",
+        "group": "NEC",
+        "marketSize": 518.0,
+        "percentile": 58.0,
+        "maximumHubs": 2,
+        "hubAssignments": [
+          "SYR"
+        ],
+        "expectedHubAssignments": [
+          "SYR"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "RDU",
+        "group": "CGI",
+        "marketSize": 2614.3,
+        "percentile": 90.0,
+        "maximumHubs": 4,
+        "hubAssignments": [
+          "JAX",
+          "PHF",
+          "DAY"
+        ],
+        "expectedHubAssignments": [
+          "JAX",
+          "PHF",
+          "DAY"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "RFD",
+        "group": "GLC",
+        "marketSize": 8173.5,
+        "percentile": 99.0,
+        "maximumHubs": 4,
+        "hubAssignments": [
+          "DAY"
+        ],
+        "expectedHubAssignments": [
+          "DAY"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "ROA",
+        "group": "CGI",
+        "marketSize": 170.0,
+        "percentile": 22.0,
+        "maximumHubs": 1,
+        "hubAssignments": [
+          "JAX"
+        ],
+        "expectedHubAssignments": [
+          "JAX"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "ROC",
+        "group": "LEC",
+        "marketSize": 578.8,
+        "percentile": 62.0,
+        "maximumHubs": 2,
+        "hubAssignments": [
+          "DAY",
+          "SYR"
+        ],
+        "expectedHubAssignments": [
+          "DAY",
+          "SYR"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "SAT",
+        "group": "TEX",
+        "marketSize": 1641.4,
+        "percentile": 84.0,
+        "maximumHubs": 3,
+        "hubAssignments": [
+          "MCI",
+          "JAX",
+          "DAY"
+        ],
+        "expectedHubAssignments": [
+          "MCI",
+          "JAX",
+          "DAY"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "SAV",
+        "group": "CGI",
+        "marketSize": 743.2,
+        "percentile": 69.0,
+        "maximumHubs": 2,
+        "hubAssignments": [
+          "JAX",
+          "PHF"
+        ],
+        "expectedHubAssignments": [
+          "JAX",
+          "PHF"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "SBN",
+        "group": "GLC",
+        "marketSize": 231.1,
+        "percentile": 29.0,
+        "maximumHubs": 2,
+        "hubAssignments": [
+          "DAY"
+        ],
+        "expectedHubAssignments": [
+          "DAY"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "SDF",
+        "group": "APP",
+        "marketSize": 828.8,
+        "percentile": 74.0,
+        "maximumHubs": 3,
+        "hubAssignments": [
+          "DAY",
+          "JAX"
+        ],
+        "expectedHubAssignments": [
+          "DAY",
+          "JAX"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "SFB",
+        "group": "FLP",
+        "marketSize": 8218.2,
+        "percentile": 100.0,
+        "maximumHubs": 4,
+        "hubAssignments": [
+          "JAX"
+        ],
+        "expectedHubAssignments": [
+          "JAX"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "SGF",
+        "group": "OZK",
+        "marketSize": 252.5,
+        "percentile": 33.0,
+        "maximumHubs": 2,
+        "hubAssignments": [
+          "MCI"
+        ],
+        "expectedHubAssignments": [
+          "MCI"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "SHV",
+        "group": "TEX",
+        "marketSize": 148.7,
+        "percentile": 15.0,
+        "maximumHubs": 1,
+        "hubAssignments": [
+          "MCI"
+        ],
+        "expectedHubAssignments": [
+          "MCI"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "SRQ",
+        "group": "FLP",
+        "marketSize": 1309.6,
+        "percentile": 80.0,
+        "maximumHubs": 3,
+        "hubAssignments": [
+          "JAX"
+        ],
+        "expectedHubAssignments": [
+          "JAX"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "SWF",
+        "group": "NEC",
+        "marketSize": 75.1,
+        "percentile": 6.0,
+        "maximumHubs": 1,
+        "hubAssignments": [
+          "SYR"
+        ],
+        "expectedHubAssignments": [
+          "SYR"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "TLH",
+        "group": "GCP",
+        "marketSize": 156.0,
+        "percentile": 19.0,
+        "maximumHubs": 1,
+        "hubAssignments": [
+          "JAX"
+        ],
+        "expectedHubAssignments": [
+          "JAX"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "TOL",
+        "group": "LEC",
+        "marketSize": 27.6,
+        "percentile": 2.0,
+        "maximumHubs": 1,
+        "hubAssignments": [
+          "DAY"
+        ],
+        "expectedHubAssignments": [
+          "DAY"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "TRI",
+        "group": "APP",
+        "marketSize": 103.5,
+        "percentile": 9.0,
+        "maximumHubs": 1,
+        "hubAssignments": [
+          "DAY"
+        ],
+        "expectedHubAssignments": [
+          "DAY"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "TTN",
+        "group": "MAC",
+        "marketSize": 107.3,
+        "percentile": 10.0,
+        "maximumHubs": 1,
+        "hubAssignments": [
+          "PHF"
+        ],
+        "expectedHubAssignments": [
+          "PHF"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "TUL",
+        "group": "OZK",
+        "marketSize": 538.1,
+        "percentile": 60.0,
+        "maximumHubs": 2,
+        "hubAssignments": [
+          "MCI"
+        ],
+        "expectedHubAssignments": [
+          "MCI"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "TYS",
+        "group": "APP",
+        "marketSize": 672.0,
+        "percentile": 66.0,
+        "maximumHubs": 2,
+        "hubAssignments": [
+          "DAY",
+          "JAX"
+        ],
+        "expectedHubAssignments": [
+          "DAY",
+          "JAX"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "VPS",
+        "group": "GCP",
+        "marketSize": 488.2,
+        "percentile": 56.0,
+        "maximumHubs": 2,
+        "hubAssignments": [
+          "JAX",
+          "MCI"
+        ],
+        "expectedHubAssignments": [
+          "JAX",
+          "MCI"
+        ],
+        "matchesExpected": true
+      },
+      {
+        "code": "XNA",
+        "group": "OZK",
+        "marketSize": 465.3,
+        "percentile": 54.0,
+        "maximumHubs": 2,
+        "hubAssignments": [
+          "MCI"
+        ],
+        "expectedHubAssignments": [
+          "MCI"
+        ],
+        "matchesExpected": true
+      }
+    ]
+  },
+  "assignmentParity": {
+    "compared": 100,
+    "matched": 100,
+    "differences": []
+  }
+}

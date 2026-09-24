@@ -1,0 +1,181 @@
+{
+  "schemaVersion": "1.0.0",
+  "scheduleId": "schedule_7_v0_2_0",
+  "sourceKind": "independent_direction_bank_flow_lower_bound",
+  "planningRulesId": "caa-planning-rules-v7",
+  "operatingPolicyId": "caa-operating-rules-v2.0-plus-hard-stop",
+  "directionalBankAssignment": "independent",
+  "bankWindowTiming": "full_core_five_minute_options",
+  "status": "pending_nonhub_integration",
+  "materializationStatus": "pending",
+  "summary": {
+    "bankedLegs": 780,
+    "nonHubLegs": 132,
+    "configuredAircraft": 225,
+    "bankAndRonMinimumAircraft": 93,
+    "fleetAllocationShortfall": 0,
+    "bankWindowLowerBoundHeadroom": 132,
+    "curfewViolations": 0,
+    "requiredDestinationRons": 99
+  },
+  "checks": [
+    {
+      "id": "directional_bank_assignment",
+      "status": "pass",
+      "message": "Inbound and outbound market frequencies are independently assigned to approved bank cores before aircraft routing"
+    },
+    {
+      "id": "banked_service_coverage",
+      "status": "pass",
+      "message": "All 780 hub-touching legs enter the time-flow model"
+    },
+    {
+      "id": "curfew_enforcement",
+      "status": "pass",
+      "hardStop": true,
+      "message": "Every eligible bank option passes the hard curfew rules"
+    },
+    {
+      "id": "destination_ron_lower_bound",
+      "status": "pass",
+      "message": "The relaxed flow reserves a RON-capable connection at all 99 required destinations"
+    },
+    {
+      "id": "fleet_allocation_fit",
+      "status": "pass",
+      "message": "The bank-window lower bound remains within every configured fleet"
+    },
+    {
+      "id": "nonhub_materialization",
+      "status": "pending",
+      "message": "132 non-hub legs remain to be inserted after fleet allocation repair"
+    }
+  ],
+  "fleetPlan": {
+    "MAX9": {
+      "configuredAircraft": 35,
+      "bankOnlyMinimumAircraft": 10,
+      "bankAndRonMinimumAircraft": 10,
+      "minimumAircraftDays": 9.630916,
+      "minimumAircraftMinutes": 13868.518519,
+      "shortfall": 0,
+      "headroom": 25
+    },
+    "CRJ900": {
+      "configuredAircraft": 45,
+      "bankOnlyMinimumAircraft": 17,
+      "bankAndRonMinimumAircraft": 17,
+      "minimumAircraftDays": 16.577962,
+      "minimumAircraftMinutes": 23872.265625,
+      "shortfall": 0,
+      "headroom": 28
+    },
+    "CRJ700": {
+      "configuredAircraft": 65,
+      "bankOnlyMinimumAircraft": 28,
+      "bankAndRonMinimumAircraft": 28,
+      "minimumAircraftDays": 27.324653,
+      "minimumAircraftMinutes": 39347.5,
+      "shortfall": 0,
+      "headroom": 37
+    },
+    "CRJ200": {
+      "configuredAircraft": 80,
+      "bankOnlyMinimumAircraft": 38,
+      "bankAndRonMinimumAircraft": 38,
+      "minimumAircraftDays": 37.758449,
+      "minimumAircraftMinutes": 54372.166667,
+      "shortfall": 0,
+      "headroom": 42
+    }
+  },
+  "lowerBounds": {
+    "withoutDestinationRon": {
+      "solver": "scipy-highs-bank-window-relaxation",
+      "objectiveMinutes": 57684.45081,
+      "legTypes": 364,
+      "bankOptionVariables": 3404,
+      "connectionVariables": 29489,
+      "destinationRonConstraints": 0,
+      "fleet": {
+        "CRJ200": {
+          "bankedBlockMinutes": 27452,
+          "minimumConnectionWaitMinutes": 26880.166667,
+          "minimumAircraftMinutes": 54332.166667,
+          "minimumAircraftDays": 37.730671,
+          "minimumWholeAircraft": 38
+        },
+        "CRJ700": {
+          "bankedBlockMinutes": 22968,
+          "minimumConnectionWaitMinutes": 16379.5,
+          "minimumAircraftMinutes": 39347.5,
+          "minimumAircraftDays": 27.324653,
+          "minimumWholeAircraft": 28
+        },
+        "CRJ900": {
+          "bankedBlockMinutes": 14692,
+          "minimumConnectionWaitMinutes": 9180.265625,
+          "minimumAircraftMinutes": 23872.265625,
+          "minimumAircraftDays": 16.577962,
+          "minimumWholeAircraft": 17
+        },
+        "MAX9": {
+          "bankedBlockMinutes": 8624,
+          "minimumConnectionWaitMinutes": 5244.518519,
+          "minimumAircraftMinutes": 13868.518519,
+          "minimumAircraftDays": 9.630916,
+          "minimumWholeAircraft": 10
+        }
+      }
+    },
+    "withDestinationRon": {
+      "solver": "scipy-highs-bank-window-relaxation",
+      "objectiveMinutes": 57724.45081,
+      "legTypes": 364,
+      "bankOptionVariables": 3404,
+      "connectionVariables": 29489,
+      "destinationRonConstraints": 99,
+      "fleet": {
+        "CRJ200": {
+          "bankedBlockMinutes": 27452,
+          "minimumConnectionWaitMinutes": 26920.166667,
+          "minimumAircraftMinutes": 54372.166667,
+          "minimumAircraftDays": 37.758449,
+          "minimumWholeAircraft": 38
+        },
+        "CRJ700": {
+          "bankedBlockMinutes": 22968,
+          "minimumConnectionWaitMinutes": 16379.5,
+          "minimumAircraftMinutes": 39347.5,
+          "minimumAircraftDays": 27.324653,
+          "minimumWholeAircraft": 28
+        },
+        "CRJ900": {
+          "bankedBlockMinutes": 14692,
+          "minimumConnectionWaitMinutes": 9180.265625,
+          "minimumAircraftMinutes": 23872.265625,
+          "minimumAircraftDays": 16.577962,
+          "minimumWholeAircraft": 17
+        },
+        "MAX9": {
+          "bankedBlockMinutes": 8624,
+          "minimumConnectionWaitMinutes": 5244.518519,
+          "minimumAircraftMinutes": 13868.518519,
+          "minimumAircraftDays": 9.630916,
+          "minimumWholeAircraft": 10
+        }
+      }
+    }
+  },
+  "nextRepair": {
+    "status": "ready",
+    "action": "integrate_nonhub_legs",
+    "message": "Integrate all 132 non-hub legs, then solve exact whole-flight route cycles."
+  },
+  "limitations": [
+    "This continuous bank-window relaxation is a mathematical lower bound, not a published timetable; if it exceeds a fleet count, no integer routing can fit that allocation.",
+    "The relaxation may select different five-minute points inside the same event window for different connections, so fitting the lower bound does not prove that exact whole-flight route cycles exist.",
+    "The diagnostic preserves the schedule-selected fleet counts and does not silently add aircraft.",
+    "Canonical Line/Day/Route, pairing, and flight identifiers remain unassigned until exact materialization passes."
+  ]
+}
