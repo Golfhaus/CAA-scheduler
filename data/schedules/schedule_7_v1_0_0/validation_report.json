@@ -1,0 +1,108 @@
+{
+  "scheduleId": "schedule_7_v1_0_0",
+  "status": "pass",
+  "summary": {
+    "checks": 18,
+    "passed": 18,
+    "failed": 0
+  },
+  "metrics": {
+    "flights": 916,
+    "cities": 105,
+    "servedCities": 105,
+    "routes": 176,
+    "lines": 21
+  },
+  "checks": [
+    {
+      "id": "schema_version",
+      "status": "pass",
+      "message": "Canonical schema version is 1.0.0"
+    },
+    {
+      "id": "has_legs",
+      "status": "pass",
+      "message": "Schedule contains 916 legs"
+    },
+    {
+      "id": "canonical_provenance",
+      "status": "pass",
+      "message": "Canonical schedule has exclusive deterministic-construction provenance"
+    },
+    {
+      "id": "operating_policy_pinned",
+      "status": "pass",
+      "message": "Operating policy caa-operating-rules-v2.0-plus-hard-stop is embedded and pinned"
+    },
+    {
+      "id": "schedule_fleet_plan",
+      "status": "pass",
+      "message": "Fleet counts are pinned as a schedule-specific build input"
+    },
+    {
+      "id": "unique_city_codes",
+      "status": "pass",
+      "message": "City codes are unique"
+    },
+    {
+      "id": "city_metadata_coverage",
+      "status": "pass",
+      "message": "Every served city has metadata"
+    },
+    {
+      "id": "unique_flight_numbers",
+      "status": "pass",
+      "message": "Flight numbers are unique"
+    },
+    {
+      "id": "unique_leg_ids",
+      "status": "pass",
+      "message": "Leg identifiers are unique"
+    },
+    {
+      "id": "time_format",
+      "status": "pass",
+      "message": "Every departure and arrival uses 24-hour HH:MM"
+    },
+    {
+      "id": "operational_times",
+      "status": "pass",
+      "message": "Every leg has an ordered operational minute interval"
+    },
+    {
+      "id": "city_source_order",
+      "status": "pass",
+      "message": "City source order is complete and unique"
+    },
+    {
+      "id": "route_identity",
+      "status": "pass",
+      "message": "Each route maps to exactly one line, fleet, and day"
+    },
+    {
+      "id": "route_sequence",
+      "status": "pass",
+      "message": "Sequence numbers are contiguous within every route"
+    },
+    {
+      "id": "routing_continuity",
+      "status": "pass",
+      "message": "Every route is geographically continuous"
+    },
+    {
+      "id": "pairing_integrity",
+      "status": "pass",
+      "message": "Each pairing maps to one directed market"
+    },
+    {
+      "id": "connection_window",
+      "status": "pass",
+      "message": "Connection window is 30-240 minutes"
+    },
+    {
+      "id": "gate_plan_cities",
+      "status": "pass",
+      "message": "Every forced stand split references a known city"
+    }
+  ]
+}

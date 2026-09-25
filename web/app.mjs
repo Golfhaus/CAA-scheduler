@@ -428,6 +428,10 @@ async function initialize() {
 }
 
 function renderAll() {
+  const previewWarning = $("#preview-warning");
+  const previewNotice = state.scheduleEntry?.previewNotice;
+  previewWarning.hidden = !previewNotice;
+  previewWarning.textContent = previewNotice || "";
   ensureBuildConfig();
   renderOverview();
   renderSetup();
@@ -864,6 +868,7 @@ function renderGates() {
   if (!city) return;
   const gateClaims = city.claims.filter((claim) => claim.rowType === "gate");
   const standClaims = city.claims.filter((claim) => claim.rowType === "stand");
+  const overflowClaims = city.claims.filter((claim) => claim.rowType === "overflow");
   const passengerStandClaims = passengerStandFindings(state.operating, city.code);
   $("#gate-metrics").innerHTML = [
     metricCard("Airport", city.code, city.name),
@@ -874,8 +879,8 @@ function renderGates() {
       city.nStands,
       passengerStandClaims.length
         ? `${passengerStandClaims.length} passenger-handling conflict${passengerStandClaims.length === 1 ? "" : "s"}`
-        : `${standClaims.length} assigned claim pieces · no passenger handling`,
-      passengerStandClaims.length ? "is-danger" : ""
+        : `${standClaims.length} assigned claim pieces · no passenger handling${overflowClaims.length ? ` · ${overflowClaims.length} unassigned` : ""}`,
+      passengerStandClaims.length || overflowClaims.length ? "is-danger" : ""
     ),
   ].join("");
   const colors = state.gates.fleetColors;
@@ -883,9 +888,11 @@ function renderGates() {
 
   const maximumGateRow = Math.max(city.nGates, ...gateClaims.map((claim) => claim.row));
   const maximumStandRow = Math.max(city.nStands, ...standClaims.map((claim) => claim.row));
+  const maximumOverflowRow = Math.max(0, ...overflowClaims.map((claim) => claim.row));
   const lanes = [
     ...Array.from({ length: maximumGateRow }, (_, index) => ({ type: "gate", row: index + 1 })),
     ...Array.from({ length: maximumStandRow }, (_, index) => ({ type: "stand", row: index + 1 })),
+    ...Array.from({ length: maximumOverflowRow }, (_, index) => ({ type: "overflow", row: index + 1 })),
   ];
   const axis = Array.from({ length: 7 }, (_, index) => GATE_WINDOW_START + index * 240);
   $("#gate-timeline").innerHTML = `<div class="time-axis"><span></span><div class="axis-track">${axis.map((minute) => `<span class="axis-label" style="left:${((minute - GATE_WINDOW_START) / 1440) * 100}%">${formatMinute24(minute)}</span>`).join("")}</div></div>${lanes.map((lane) => renderLane(city, lane, colors, passengerStandClaims)).join("")}`;
@@ -900,7 +907,8 @@ function renderLane(city, lane, colors, passengerStandClaims) {
     const accessibleLabel = `${claim.label}, ${claim.fleet}, ${claim.kind}, ${timeLabel}${passengerHandling ? ", passenger handling on a stand" : ""}`;
     return splitClaimSegments(claim.start, claim.end, GATE_WINDOW_START).map((segment) => `<button type="button" class="claim-bar kind-${lane.type}${passengerHandling ? " is-passenger-handling" : ""}" title="${escapeHtml(accessibleLabel)}" aria-label="${escapeHtml(accessibleLabel)}" aria-controls="claim-tooltip" aria-expanded="false" data-gate-claim data-claim-label="${escapeHtml(claim.label)}" data-claim-fleet="${escapeHtml(claim.fleet)}" data-claim-kind="${escapeHtml(claim.kind)}" data-claim-start="${escapeHtml(claim.start)}" data-claim-end="${escapeHtml(claim.end)}" data-claim-row-type="${escapeHtml(claim.rowType)}" data-claim-row="${escapeHtml(claim.row)}" data-claim-arrival-city="${escapeHtml(claim.arrivalCity || "")}" data-claim-departure-city="${escapeHtml(claim.departureCity || "")}" data-claim-passenger-handling="${passengerHandling}" style="--fleet-color:${escapeHtml(fleetColor)};left:${(segment.start / 1440) * 100}%;width:${Math.max(0.12, (segment.duration / 1440) * 100)}%;background:${escapeHtml(fleetColor)}">${escapeHtml(claim.label)}</button>`);
   }).join("");
-  return `<div class="timeline-row"><span class="lane-label">${lane.type === "gate" ? "Gate" : "Stand"} ${lane.row}</span><div class="lane-track">${bars}</div></div>`;
+  const laneLabel = lane.type === "gate" ? "Gate" : lane.type === "stand" ? "Stand" : "Unassigned";
+  return `<div class="timeline-row"><span class="lane-label">${laneLabel} ${lane.row}</span><div class="lane-track">${bars}</div></div>`;
 }
 
 function closeGateClaimDetails() {
@@ -918,7 +926,10 @@ function toggleGateClaimDetails(button) {
   if (wasOpen) return;
 
   const passengerHandling = button.dataset.claimPassengerHandling === "true";
-  const position = `${button.dataset.claimRowType === "gate" ? "Gate" : "Stand"} ${button.dataset.claimRow}`;
+  const positionType = button.dataset.claimRowType === "gate"
+    ? "Gate"
+    : button.dataset.claimRowType === "stand" ? "Stand" : "Unassigned";
+  const position = `${positionType} ${button.dataset.claimRow}`;
   const movement = [button.dataset.claimArrivalCity, button.dataset.claimDepartureCity]
     .filter(Boolean)
     .join(` → ${$("#gate-airport").value} → `);

@@ -13,7 +13,16 @@ sys.path.insert(0, str(REPO_ROOT / "src"))
 
 from caa_scheduler.baseline import build_baseline
 from caa_scheduler.gate_export import export_gate_schedule
-from caa_scheduler.gates import GateClaim, assign_gates, overlaps
+from caa_scheduler.gates import (
+    GateCapacityError,
+    GateClaim,
+    _bounded_coloring,
+    _greedy_coloring,
+    assign_gates,
+    build_claims,
+    overlaps,
+    serialize_assignments,
+)
 from caa_scheduler.importer import import_canonical_schedule
 from caa_scheduler.io import read_json
 from caa_scheduler.operating_validation import validate_operating_rules
@@ -98,6 +107,91 @@ class ScheduleSixBaselineTests(unittest.TestCase):
         self.assertTrue(overlaps(late, early))
         self.assertFalse(overlaps(late, separate))
 
+    def test_fixed_inventory_uses_elapsed_hold_across_route_day_cut(self) -> None:
+        legs = [
+            {
+                "line": "AA",
+                "day": 1,
+                "route": 101,
+                "fleet": "CRJ200",
+                "origin": "BBB",
+                "destination": "AAA",
+                "departureMinute": 60,
+                "arrivalMinute": 272,
+            },
+            {
+                "line": "AA",
+                "day": 2,
+                "route": 102,
+                "fleet": "CRJ200",
+                "origin": "AAA",
+                "destination": "CCC",
+                "departureMinute": 315,
+                "arrivalMinute": 400,
+            },
+        ]
+
+        legacy = build_claims(legs, "AAA")
+        fixed_inventory = build_claims(
+            legs,
+            "AAA",
+            cyclic_successor_holds=True,
+        )
+
+        self.assertEqual((legacy[0].end, legacy[0].kind), (1755, "ron"))
+        self.assertEqual(
+            (fixed_inventory[0].end, fixed_inventory[0].kind),
+            (315, "turn"),
+        )
+
+    def test_fixed_inventory_keeps_red_eye_route_sequence_across_midnight(
+        self,
+    ) -> None:
+        legs = [
+            {
+                "line": "AA",
+                "day": 1,
+                "route": 101,
+                "sequenceWithinRoute": 1,
+                "fleet": "CRJ200",
+                "origin": "BBB",
+                "destination": "AAA",
+                "departureMinute": 1320,
+                "arrivalMinute": 1380,
+            },
+            {
+                "line": "AA",
+                "day": 1,
+                "route": 101,
+                "sequenceWithinRoute": 2,
+                "fleet": "CRJ200",
+                "origin": "AAA",
+                "destination": "CCC",
+                "departureMinute": 30,
+                "arrivalMinute": 90,
+            },
+        ]
+
+        claims = build_claims(
+            legs,
+            "AAA",
+            cyclic_successor_holds=True,
+        )
+
+        self.assertEqual(len(claims), 1)
+        self.assertEqual(
+            claims[0],
+            GateClaim(
+                1380,
+                1470,
+                "101",
+                "CRJ200",
+                "turn",
+                "BBB",
+                "CCC",
+            ),
+        )
+
     def test_gate_rescue_does_not_reuse_reserved_touch_slot(self) -> None:
         claims = [
             GateClaim(1050, 1170, "0", "CRJ200", "turn", "A", "B"),
@@ -118,6 +212,105 @@ class ScheduleSixBaselineTests(unittest.TestCase):
             if overlaps(first, second)
         ]
         self.assertEqual(conflicts, [])
+
+    def test_bounded_assignment_uses_a_stand_only_for_a_long_hold_middle(self) -> None:
+        overnight = GateClaim(1200, 1800, "ron", "CRJ200", "ron", "A", "B")
+        passenger_turn = GateClaim(1300, 1360, "turn", "CRJ200", "turn", "C", "D")
+
+        assignments, stand_middles = assign_gates(
+            [overnight, passenger_turn],
+            1,
+            n_stands=1,
+            return_provenance=True,
+        )
+
+        self.assertEqual(len(stand_middles), 1)
+        self.assertTrue(
+            all(
+                slot == 1
+                for claim, slot in assignments
+                if claim not in stand_middles
+            )
+        )
+        self.assertEqual(
+            {slot for claim, slot in assignments if claim in stand_middles},
+            {2},
+        )
+
+    def test_bounded_assignment_never_synthesizes_an_extra_stand(self) -> None:
+        claims = [
+            GateClaim(1200, 1800, str(index), "CRJ200", "ron", "A", "B")
+            for index in range(3)
+        ]
+
+        with self.assertRaises(GateCapacityError) as raised:
+            assign_gates(claims, 1, n_stands=1)
+
+        self.assertGreater(raised.exception.required_stands, 1)
+        self.assertEqual(raised.exception.configured_stands, 1)
+
+    def test_preview_marks_excess_inventory_as_unassigned(self) -> None:
+        claims = [
+            GateClaim(1200, 1800, str(index), "CRJ200", "ron", "A", "B")
+            for index in range(3)
+        ]
+
+        assignments, stand_middles = assign_gates(
+            claims,
+            1,
+            n_stands=1,
+            return_provenance=True,
+            allow_infeasible_preview=True,
+        )
+        serialized = serialize_assignments(
+            assignments,
+            1,
+            n_stands=1,
+            stand_middles=stand_middles,
+        )
+
+        self.assertTrue(any(row["rowType"] == "overflow" for row in serialized))
+        self.assertFalse(
+            any(row["rowType"] == "stand" and row["row"] > 1 for row in serialized)
+        )
+
+    def test_ron_claims_stay_at_gates_when_all_continuous_holds_fit(self) -> None:
+        claims = [
+            GateClaim(1200, 1800, str(index), "CRJ200", "ron", "A", "B")
+            for index in range(4)
+        ]
+
+        assignments, stand_middles = assign_gates(
+            claims,
+            4,
+            n_stands=4,
+            return_provenance=True,
+        )
+
+        self.assertFalse(stand_middles)
+        self.assertTrue(all(slot <= 4 for _, slot in assignments))
+
+    def test_bounded_coloring_proves_capacity_after_greedy_overstates_it(self) -> None:
+        claims = [
+            GateClaim(start, end, str(index), "CRJ200", "turn", "A", "B")
+            for index, (start, end) in enumerate(
+                (
+                    (600, 1020),
+                    (120, 420),
+                    (840, 1050),
+                    (840, 1290),
+                    (180, 540),
+                    (360, 810),
+                    (1200, 1650),
+                )
+            )
+        ]
+
+        self.assertEqual(max(_greedy_coloring(claims)), 4)
+        coloring = _bounded_coloring(claims, 3)
+        self.assertIsNotNone(coloring)
+        assert coloring is not None
+        self.assertEqual(max(coloring), 3)
 
     def test_operating_validator_exposes_known_baseline_findings(self) -> None:
         report = validate_operating_rules(self.canonical)
@@ -152,6 +345,18 @@ class ScheduleSixBaselineTests(unittest.TestCase):
         self.assertEqual(checks["hub_bank_alignment"]["status"], "not_evaluated")
         self.assertEqual(len(checks["market_frequency_ceiling"]["findings"]), 3)
         self.assertEqual(len(checks["passenger_touch_on_stand"]["findings"]), 35)
+
+    def test_fixed_inventory_mode_turns_synthesized_positions_into_hard_stops(self) -> None:
+        candidate = copy.deepcopy(self.canonical)
+        candidate["gatePlan"]["fixedPhysicalInventory"] = True
+
+        report = validate_operating_rules(candidate)
+        checks = {check["id"]: check for check in report["checks"]}
+
+        self.assertEqual(checks["fixed_physical_inventory"]["status"], "fail")
+        self.assertTrue(checks["fixed_physical_inventory"]["hardStop"])
+        self.assertTrue(checks["passenger_touch_on_stand"]["hardStop"])
+        self.assertTrue(checks["stand_capacity"]["hardStop"])
 
     def test_fleet_counts_are_schedule_specific(self) -> None:
         candidate = copy.deepcopy(self.canonical)

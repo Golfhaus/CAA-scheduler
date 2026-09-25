@@ -2,14 +2,41 @@ from __future__ import annotations
 
 import json
 import sys
+import tempfile
 import unittest
+from collections import Counter
 from pathlib import Path
+from unittest.mock import patch
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO_ROOT / "src"))
 
-from caa_scheduler.exact_materialization import blocked_exact_materialization_plan
+from caa_scheduler.exact_materialization import (
+    _apply_assigned_bank_waves,
+    _assigned_bank_windows_hold,
+    _capacity_repair_stations,
+    _expand_flexible_seed_types_to_hub_operations,
+    _expand_flexible_seed_types_to_markets,
+    _exact_seed_fingerprint,
+    _materialized_passenger_gate_overflow,
+    _materialized_physical_capacity_overflow,
+    _materialized_gate_assignments,
+    _materialized_station_gate_assignments,
+    _gate_relief_market_candidates,
+    _bridge_rebalanced_successor_cycles,
+    _pairing_patterns,
+    _read_exact_seed_checkpoint,
+    _rebalance_successor_cycles,
+    _repair_exact_gate_times,
+    _repair_gate_capacity_with_missions,
+    _repair_successor_cycles,
+    _repair_successor_gate_capacity,
+    _write_exact_seed_checkpoint,
+    _verified_reusable_solver_leg_ids,
+    blocked_exact_materialization_plan,
+)
+from caa_scheduler.routing import _cycles
 
 
 PLAN_PATH = (
@@ -74,6 +101,1248 @@ class ExactMaterializationPlanTests(unittest.TestCase):
             blocked["nextStep"]["action"], "retry_exact_materialization"
         )
         self.assertIn("time limit", blocked["diagnostics"]["solverFailure"])
+
+    def test_capacity_checked_bank_waves_are_attached_to_exact_copies(self) -> None:
+        inventory = {
+            "CRJ200": [
+                {
+                    "id": "AAA-HUB-CRJ200-01-OUT",
+                    "fleet": "CRJ200",
+                    "origin": "AAA",
+                    "destination": "HUB",
+                },
+                {
+                    "id": "AAA-HUB-CRJ200-02-OUT",
+                    "fleet": "CRJ200",
+                    "origin": "AAA",
+                    "destination": "HUB",
+                },
+            ]
+        }
+        bank_plan = {
+            "placements": [
+                {
+                    "id": "second",
+                    "fleet": "CRJ200",
+                    "origin": "AAA",
+                    "destination": "HUB",
+                    "roundTripOrdinal": 2,
+                    "bankTouches": [
+                        {
+                            "hub": "HUB",
+                            "operation": "arrival",
+                            "bankId": "HUB-B2",
+                        }
+                    ],
+                },
+                {
+                    "id": "first",
+                    "fleet": "CRJ200",
+                    "origin": "AAA",
+                    "destination": "HUB",
+                    "roundTripOrdinal": 1,
+                    "bankTouches": [
+                        {
+                            "hub": "HUB",
+                            "operation": "arrival",
+                            "bankId": "HUB-B1",
+                        }
+                    ],
+                },
+            ]
+        }
+        _apply_assigned_bank_waves(inventory, bank_plan)
+        self.assertEqual(
+            [leg["destinationBankId"] for leg in inventory["CRJ200"]],
+            ["HUB-B1", "HUB-B2"],
+        )
+
+    def test_pairing_patterns_compile_spacing_before_the_fleet_solve(self) -> None:
+        candidates = [
+            {"departureUtcMinute": minute, "cost": float(minute)}
+            for minute in (0, 20, 40, 720)
+        ]
+        patterns = _pairing_patterns(
+            candidates,
+            frequency=2,
+            minimum_gap=60.0,
+            hard_floor=30.0,
+            allowed_exceptions=0,
+            reserved=[],
+            maximum_patterns=20,
+            beam_width=100,
+        )
+        departures = [
+            tuple(event["departureUtcMinute"] for event in row["events"])
+            for row in patterns
+        ]
+        self.assertIn((0, 720), departures)
+        self.assertTrue(
+            all(
+                min((second - first) % 1440, (first - second) % 1440)
+                >= 60
+                for first, second in departures
+            )
+        )
+
+    def test_seed_repair_retimes_both_directions_of_a_market(self) -> None:
+        outbound = ("CRJ700", "HUB", "AAA", "hub_spoke", 60)
+        inbound = ("CRJ700", "AAA", "HUB", "hub_spoke", 60)
+        unrelated = ("CRJ700", "HUB", "BBB", "hub_spoke", 70)
+        other_fleet = ("CRJ200", "AAA", "HUB", "hub_spoke", 60)
+
+        expanded = _expand_flexible_seed_types_to_markets(
+            {outbound},
+            [
+                (outbound, []),
+                (inbound, []),
+                (unrelated, []),
+                (other_fleet, []),
+            ],
+        )
+
+        self.assertEqual(expanded, {outbound, inbound})
+
+    def test_seed_repair_expands_across_an_overloaded_hub_operation(self) -> None:
+        jax_b14_departure = ("CRJ700", "JAX", "AAA", "hub_spoke", 60)
+        jax_b1_departure = ("CRJ900", "JAX", "BBB", "hub_spoke", 70)
+        jax_b13_departure = ("MAX9", "JAX", "CCC", "hub_spoke", 80)
+        jax_arrival = ("CRJ200", "DDD", "JAX", "hub_spoke", 55)
+        mci_departure = ("CRJ700", "MCI", "EEE", "hub_spoke", 65)
+        touches = {
+            jax_b14_departure: {("JAX-B14", "departure")},
+            jax_b1_departure: {("JAX-B1", "departure")},
+            jax_b13_departure: {("JAX-B13", "departure")},
+            jax_arrival: {("JAX-B14", "arrival")},
+            mci_departure: {("MCI-B14", "departure")},
+        }
+        windows = {
+            "JAX": [
+                {"id": "JAX-B1"},
+                {"id": "JAX-B13"},
+                {"id": "JAX-B14"},
+            ],
+            "MCI": [{"id": "MCI-B14"}],
+        }
+
+        expanded = _expand_flexible_seed_types_to_hub_operations(
+            {jax_b14_departure},
+            touches,
+            {("JAX-B14", "departure")},
+            windows,
+        )
+
+        self.assertEqual(
+            expanded,
+            {jax_b14_departure, jax_b1_departure, jax_b13_departure},
+        )
+
+    def test_materialized_capacity_counts_cyclic_ground_inventory(self) -> None:
+        materialized = {}
+        for ordinal in (1, 2):
+            materialized[f"OUT-{ordinal}"] = {
+                "id": f"OUT-{ordinal}",
+                "fleet": "CRJ700",
+                "origin": "AAA",
+                "destination": "BBB",
+                "departureUtcMinute": 0,
+                "blockMinutes": 60,
+            }
+            materialized[f"BACK-{ordinal}"] = {
+                "id": f"BACK-{ordinal}",
+                "fleet": "CRJ700",
+                "origin": "BBB",
+                "destination": "AAA",
+                "departureUtcMinute": 120,
+                "blockMinutes": 60,
+            }
+        cities = {
+            code: {
+                "role": "destination",
+                "gateAllocationOverride": gates,
+                "standAllocationOverride": stands,
+            }
+            for code, gates, stands in (
+                ("AAA", 1, 0),
+                ("BBB", 2, 0),
+            )
+        }
+
+        overflow = _materialized_physical_capacity_overflow(
+            materialized,
+            cities,
+            30,
+        )
+
+        self.assertEqual(overflow[("AAA", 180)], 1)
+        self.assertNotIn(("BBB", 60), overflow)
+
+    def test_materialized_passenger_gate_overflow_counts_touch_windows(self) -> None:
+        materialized = {
+            f"IN-{ordinal}": {
+                "id": f"IN-{ordinal}",
+                "fleet": "CRJ200",
+                "origin": origin,
+                "destination": "AAA",
+                "departureUtcMinute": 60,
+                "blockMinutes": 60,
+            }
+            for ordinal, origin in enumerate(("BBB", "CCC", "DDD"), 1)
+        }
+        cities = {
+            code: {
+                "role": "destination",
+                "timezone": "Eastern",
+                "gateAllocationOverride": gates,
+                "standAllocationOverride": 2,
+            }
+            for code, gates in (
+                ("AAA", 2),
+                ("BBB", 2),
+                ("CCC", 2),
+                ("DDD", 2),
+            )
+        }
+
+        overflow = _materialized_passenger_gate_overflow(
+            materialized,
+            cities,
+        )
+        reserved_overflow = _materialized_passenger_gate_overflow(
+            materialized,
+            cities,
+            {"AAA": 1},
+        )
+
+        self.assertEqual(overflow[("AAA", 120)], 1)
+        self.assertEqual(reserved_overflow[("AAA", 120)], 2)
+
+    def test_capacity_repair_unlocks_every_passenger_overloaded_station(self) -> None:
+        selected = _capacity_repair_stations(
+            {
+                ("PHYSICAL_A", 100): 2,
+                ("PHYSICAL_B", 200): 1,
+            },
+            {
+                ("BHM", 100): 1,
+                ("BNA", 200): 1,
+                ("DAL", 300): 1,
+                ("RFD", 400): 1,
+            },
+        )
+
+        self.assertEqual(
+            selected,
+            {"PHYSICAL_A", "BHM", "BNA", "DAL", "RFD"},
+        )
+
+    def test_gate_time_shift_must_stay_in_its_assigned_bank(self) -> None:
+        windows = {
+            "AAA": [
+                {"id": "AAA-B1", "startMinute": 100, "endMinute": 160},
+                {"id": "AAA-B2", "startMinute": 200, "endMinute": 260},
+            ],
+            "BBB": [
+                {"id": "BBB-B1", "startMinute": 300, "endMinute": 360}
+            ],
+        }
+        leg = {
+            "origin": "AAA",
+            "destination": "BBB",
+            "originBankId": "AAA-B1",
+            "destinationBankId": "BBB-B1",
+            "departureMinute": 120,
+            "arrivalMinute": 330,
+        }
+
+        self.assertTrue(_assigned_bank_windows_hold(leg, windows))
+        leg["departureMinute"] = 220
+        self.assertFalse(_assigned_bank_windows_hold(leg, windows))
+
+    def test_successor_choice_can_clear_a_concrete_gate_conflict(self) -> None:
+        materialized = {
+            **{
+                f"A{index}": {
+                    "id": f"A{index}",
+                    "fleet": "CRJ200",
+                    "origin": "BBB",
+                    "destination": "AAA",
+                    "departureUtcMinute": arrival - 60,
+                    "blockMinutes": 60,
+                }
+                for index, arrival in enumerate((600, 660, 720))
+            },
+            **{
+                f"D{index}": {
+                    "id": f"D{index}",
+                    "fleet": "CRJ200",
+                    "origin": "AAA",
+                    "destination": "BBB",
+                    "departureUtcMinute": departure,
+                    "blockMinutes": 60,
+                }
+                for index, departure in enumerate((600, 660, 720))
+            },
+        }
+        cities = {
+            "AAA": {
+                "role": "destination",
+                "timezone": "Eastern",
+                "gateAllocationOverride": 1,
+                "standAllocationOverride": 0,
+            }
+        }
+
+        _, blocked = _materialized_station_gate_assignments(
+            materialized,
+            {"A0": "D0", "A1": "D2", "A2": "D1"},
+            cities,
+            40,
+            "AAA",
+        )
+        _, repaired = _materialized_station_gate_assignments(
+            materialized,
+            {"A0": "D1", "A1": "D2", "A2": "D0"},
+            cities,
+            40,
+            "AAA",
+        )
+
+        self.assertEqual(blocked["status"], "fail")
+        self.assertEqual(repaired["status"], "pass")
+
+    def test_gate_repair_continues_after_one_station_is_exhausted(self) -> None:
+        failures = [
+            {
+                "station": "AAA",
+                "strandedPassengerTouches": 2,
+                "requiredGates": 2,
+                "configuredGates": 1,
+                "requiredStands": 0,
+                "configuredStands": 0,
+                "strandedLabels": ["A1 -> A1"],
+            },
+            {
+                "station": "BBB",
+                "strandedPassengerTouches": 1,
+                "requiredGates": 2,
+                "configuredGates": 1,
+                "requiredStands": 0,
+                "configuredStands": 0,
+                "strandedLabels": ["B1 -> B1"],
+            },
+        ]
+        legs = {
+            "A1": {
+                "id": "A1",
+                "fleet": "CRJ200",
+                "origin": "CCC",
+                "destination": "AAA",
+                "departureUtcMinute": 0,
+                "blockMinutes": 60,
+            },
+            "B1": {
+                "id": "B1",
+                "fleet": "CRJ200",
+                "origin": "CCC",
+                "destination": "BBB",
+                "departureUtcMinute": 0,
+                "blockMinutes": 60,
+            },
+        }
+        successors = {"A1": "A1", "B1": "B1"}
+        station_results = {
+            "AAA": {
+                "status": "fail",
+                "towMovements": 0,
+                "failures": [
+                    {**failures[0], "strandedLabels": ["A1 -> A1"]}
+                ],
+            },
+            "BBB": {
+                "status": "fail",
+                "towMovements": 0,
+                "failures": [
+                    {**failures[1], "strandedLabels": ["B1 -> B1"]}
+                ],
+            },
+        }
+        full_result = {
+            "status": "fail",
+            "stations": 2,
+            "towMovements": 0,
+            "failures": failures,
+        }
+
+        with (
+            patch(
+                "caa_scheduler.exact_materialization._materialized_gate_assignments",
+                return_value=({}, full_result),
+            ),
+            patch(
+                "caa_scheduler.exact_materialization._materialized_station_gate_assignments",
+                side_effect=lambda *args: ([], station_results[args[-1]]),
+            ) as station_assignment,
+        ):
+            _repair_successor_gate_capacity(
+                legs,
+                successors,
+                [],
+                {"turns": {"minimumMinutes": 40}},
+                {},
+                set(),
+                {"CRJ200": 1},
+                10,
+                False,
+            )
+
+        attempted = [call.args[-1] for call in station_assignment.call_args_list]
+        self.assertEqual(attempted, ["AAA", "BBB"])
+
+    def test_exact_gate_assignment_tows_only_the_long_hold_middle(self) -> None:
+        materialized = {
+            "ARRIVE": {
+                "id": "ARRIVE",
+                "fleet": "CRJ200",
+                "origin": "BBB",
+                "destination": "AAA",
+                "departureUtcMinute": 1140,
+                "blockMinutes": 60,
+            },
+            "DEPART": {
+                "id": "DEPART",
+                "fleet": "CRJ200",
+                "origin": "AAA",
+                "destination": "BBB",
+                "departureUtcMinute": 360,
+                "blockMinutes": 60,
+            },
+            "TURN_IN": {
+                "id": "TURN_IN",
+                "fleet": "CRJ200",
+                "origin": "CCC",
+                "destination": "AAA",
+                "departureUtcMinute": 1260,
+                "blockMinutes": 40,
+            },
+            "TURN_OUT": {
+                "id": "TURN_OUT",
+                "fleet": "CRJ200",
+                "origin": "AAA",
+                "destination": "CCC",
+                "departureUtcMinute": 1360,
+                "blockMinutes": 40,
+            },
+        }
+        successors = {
+            "ARRIVE": "DEPART",
+            "DEPART": "ARRIVE",
+            "TURN_IN": "TURN_OUT",
+            "TURN_OUT": "TURN_IN",
+        }
+        cities = {
+            code: {
+                "role": "destination",
+                "timezone": "Eastern",
+                "gateAllocationOverride": gates,
+                "standAllocationOverride": stands,
+            }
+            for code, gates, stands in (
+                ("AAA", 1, 1),
+                ("BBB", 2, 2),
+                ("CCC", 2, 2),
+            )
+        }
+
+        _, diagnostic = _materialized_gate_assignments(
+            materialized,
+            successors,
+            cities,
+            40,
+        )
+
+        self.assertEqual(diagnostic["status"], "pass")
+        self.assertEqual(diagnostic["towMovements"], 1)
+
+    def test_exact_gate_assignment_rejects_exhausted_inventory(self) -> None:
+        materialized = {}
+        successors = {}
+        for ordinal in range(3):
+            incoming = f"IN-{ordinal}"
+            outgoing = f"OUT-{ordinal}"
+            materialized[incoming] = {
+                "id": incoming,
+                "fleet": "CRJ200",
+                "origin": "BBB",
+                "destination": "AAA",
+                "departureUtcMinute": 1200,
+                "blockMinutes": 60,
+            }
+            materialized[outgoing] = {
+                "id": outgoing,
+                "fleet": "CRJ200",
+                "origin": "AAA",
+                "destination": "BBB",
+                "departureUtcMinute": 1320,
+                "blockMinutes": 60,
+            }
+            successors[incoming] = outgoing
+            successors[outgoing] = incoming
+        cities = {
+            code: {
+                "role": "destination",
+                "timezone": "Eastern",
+                "gateAllocationOverride": gates,
+                "standAllocationOverride": stands,
+            }
+            for code, gates, stands in (
+                ("AAA", 1, 1),
+                ("BBB", 3, 3),
+            )
+        }
+
+        _, diagnostic = _materialized_gate_assignments(
+            materialized,
+            successors,
+            cities,
+            40,
+        )
+
+        self.assertEqual(diagnostic["status"], "fail")
+        self.assertEqual(diagnostic["failures"][0]["station"], "AAA")
+
+    def test_nonhub_can_add_historically_compatible_gate_relief_market(
+        self,
+    ) -> None:
+        materialized = {
+            "ARRIVE": {
+                "id": "ARRIVE",
+                "fleet": "CRJ200",
+                "origin": "BBB",
+                "destination": "AAA",
+                "departureUtcMinute": 100,
+                "blockMinutes": 60,
+                "originBankId": None,
+                "destinationBankId": None,
+            },
+            "DEPART": {
+                "id": "DEPART",
+                "fleet": "CRJ200",
+                "origin": "AAA",
+                "destination": "BBB",
+                "departureUtcMinute": 700,
+                "blockMinutes": 60,
+                "originBankId": None,
+                "destinationBankId": None,
+            },
+            "OTHER_IN": {
+                "id": "OTHER_IN",
+                "fleet": "CRJ200",
+                "origin": "CCC",
+                "destination": "AAA",
+                "departureUtcMinute": 180,
+                "blockMinutes": 60,
+                "originBankId": None,
+                "destinationBankId": None,
+            },
+            "OTHER_OUT": {
+                "id": "OTHER_OUT",
+                "fleet": "CRJ200",
+                "origin": "AAA",
+                "destination": "CCC",
+                "departureUtcMinute": 300,
+                "blockMinutes": 60,
+                "originBankId": None,
+                "destinationBankId": None,
+            },
+        }
+        successors = {
+            "ARRIVE": "DEPART",
+            "DEPART": "ARRIVE",
+            "OTHER_IN": "OTHER_OUT",
+            "OTHER_OUT": "OTHER_IN",
+        }
+        cities = {
+            code: {
+                "role": "destination",
+                "timezone": "Eastern",
+                "gateAllocationOverride": gates,
+                "standAllocationOverride": stands,
+                "latitude": latitude,
+                "longitude": longitude,
+            }
+            for code, gates, stands, latitude, longitude in (
+                ("AAA", 1, 0, 35.0, -80.0),
+                ("BBB", 3, 1, 36.0, -80.0),
+                ("CCC", 2, 1, 37.0, -80.0),
+                ("DDD", 2, 1, 35.0, -79.0),
+            )
+        }
+        policy = {
+            "hubs": [],
+            "focusCities": [],
+            "departureWindows": {
+                "earliestMinute": 0,
+                "destinationLatestMinute": 1439,
+                "hubOrFocusLatestMinute": 1439,
+                "redEyeLatestMinute": 0,
+                "redEyeArrivalMinimumMinute": 0,
+                "redEyeArrivalMaximumMinute": 1439,
+            },
+            "turns": {"minimumMinutes": 40},
+            "section26": {
+                "hardFloorMinutes": 30,
+                "pairingTargetMaximumMinutes": 240,
+                "maximumCityDepartureGapMinutes": 240,
+                "numeratorMinutes": 480,
+                "stationReferenceDepartures": 4,
+                "stationFactorMinimum": 0.7,
+                "stationFactorMaximum": 1.8,
+                "nearTargetTolerance": 0.9,
+                "oneExceptionMinimumFrequency": 4,
+            },
+        }
+        frequency_plan = {
+            "markets": [
+                {
+                    "origin": "AAA",
+                    "destination": "DDD",
+                    "classification": "point_to_point",
+                    "twoWayDemand": 100.0,
+                    "plannedRoundTrips": 0,
+                    "frequencyCeilingRoundTrips": 1,
+                    "allocations": [],
+                    "historicalFleetLegs": {"CRJ200": 2},
+                }
+            ]
+        }
+        windows = {}
+        _, before = _materialized_station_gate_assignments(
+            materialized, successors, cities, 40, "AAA"
+        )
+        self.assertEqual(before["status"], "fail")
+
+        with patch(
+            "caa_scheduler.exact_materialization._cycles",
+            return_value=[{"fleet": "CRJ200", "aircraftRequired": 2}],
+        ), patch(
+            "caa_scheduler.exact_materialization._cycle_score",
+            return_value=(0, 0, 0, 0, 0, 2),
+        ), patch(
+            "caa_scheduler.exact_materialization._pairing_spacing_holds_for_leg",
+            return_value=True,
+        ):
+            _, additions = _repair_gate_capacity_with_missions(
+                materialized,
+                successors,
+                [{"fleet": "CRJ200", "aircraftRequired": 2}],
+                frequency_plan,
+                policy,
+                cities,
+                windows,
+                set(),
+                {"CRJ200": 2},
+                11,
+                True,
+                Counter(leg["origin"] for leg in materialized.values()),
+                True,
+                {
+                    "targetStations": ["AAA"],
+                    "minimumHoldMinutes": 240,
+                    "minimumTwoWayDemand": 8.0,
+                    "maximumMissions": 1,
+                    "maximumTimingsPerHoldMarket": 4,
+                },
+                {
+                    "CRJ200": {
+                        "fleet": "CRJ200",
+                        "blockMinutesPerNauticalMile": 0.1,
+                        "blockMinutesIntercept": 30.0,
+                    }
+                },
+            )
+
+        _, after = _materialized_station_gate_assignments(
+            materialized, successors, cities, 40, "AAA"
+        )
+        self.assertEqual(len(additions), 1)
+        self.assertEqual(additions[0]["market"], ["AAA", "DDD"])
+        self.assertTrue(additions[0]["newFrequency"])
+        self.assertEqual(after["status"], "pass")
+
+    def test_explicit_unplanned_gate_relief_market_uses_pinned_demand(self) -> None:
+        candidates = _gate_relief_market_candidates(
+            {"markets": []},
+            "BWI",
+            "CRJ700",
+            Counter(),
+            8.0,
+            [
+                {
+                    "origin": "BWI",
+                    "destination": "FLL",
+                    "classification": "point_to_point",
+                    "twoWayDemand": 596.4,
+                    "plannedRoundTrips": 0,
+                    "frequencyCeilingRoundTrips": 1,
+                    "allocations": [],
+                    "historicalFleetLegs": {},
+                    "eligibleFleets": ["CRJ700"],
+                }
+            ],
+        )
+
+        self.assertEqual(len(candidates), 1)
+        self.assertEqual(candidates[0]["market"], ("BWI", "FLL"))
+        self.assertEqual(candidates[0]["marginalDemand"], 596.4)
+        self.assertTrue(candidates[0]["newFrequency"])
+
+    def test_gate_time_repair_can_move_neighbor_to_adjacent_bank(self) -> None:
+        def leg(
+            identifier: str,
+            origin: str,
+            destination: str,
+            departure_local: int,
+            block_minutes: int,
+            *,
+            origin_bank: str | None = None,
+        ) -> dict[str, object]:
+            departure_utc = (departure_local + 300) % 1440
+            arrival_utc = (departure_utc + block_minutes) % 1440
+            return {
+                "id": identifier,
+                "fleet": "CRJ200",
+                "origin": origin,
+                "destination": destination,
+                "departureUtcMinute": departure_utc,
+                "arrivalUtcMinute": arrival_utc,
+                "departureMinute": departure_local,
+                "arrivalMinute": (departure_local + block_minutes) % 1440,
+                "blockMinutes": block_minutes,
+                "originBankId": origin_bank,
+                "destinationBankId": None,
+                "curfewStatus": "pass",
+            }
+
+        materialized = {
+            "A_IN": leg("A_IN", "DDD", "AAA", 80, 60),
+            "A_OUT": leg("A_OUT", "AAA", "DDD", 220, 60),
+            "B_PREVIOUS": leg("B_PREVIOUS", "CCC", "BBB", 0, 60),
+            "B_IN": leg(
+                "B_IN",
+                "BBB",
+                "AAA",
+                100,
+                60,
+                origin_bank="BBB-B1",
+            ),
+            "B_OUT": leg("B_OUT", "AAA", "CCC", 320, 60),
+        }
+        successors = {
+            "A_IN": "A_OUT",
+            "A_OUT": "A_IN",
+            "B_PREVIOUS": "B_IN",
+            "B_IN": "B_OUT",
+            "B_OUT": "B_PREVIOUS",
+        }
+        cities = {
+            code: {
+                "role": "hub" if code == "BBB" else "destination",
+                "timezone": "Eastern",
+                "gateAllocationOverride": 5,
+                "standAllocationOverride": 2,
+            }
+            for code in ("AAA", "BBB", "CCC", "DDD")
+        }
+        policy = {
+            "hubs": ["BBB"],
+            "focusCities": [],
+            "departureWindows": {
+                "earliestMinute": 0,
+                "destinationLatestMinute": 1439,
+                "hubOrFocusLatestMinute": 1439,
+                "redEyeLatestMinute": 0,
+                "redEyeArrivalMinimumMinute": 0,
+                "redEyeArrivalMaximumMinute": 1439,
+            },
+            "turns": {"minimumMinutes": 40},
+            "section26": {
+                "hardFloorMinutes": 30,
+                "pairingTargetMaximumMinutes": 240,
+                "maximumCityDepartureGapMinutes": 240,
+                "numeratorMinutes": 480,
+                "stationReferenceDepartures": 4,
+                "stationFactorMinimum": 0.7,
+                "stationFactorMaximum": 1.8,
+                "nearTargetTolerance": 0.9,
+                "oneExceptionMinimumFrequency": 4,
+            },
+        }
+        windows = {
+            "BBB": [
+                {"id": "BBB-B1", "startMinute": 80, "endMinute": 140},
+                {"id": "BBB-B2", "startMinute": 220, "endMinute": 280},
+            ]
+        }
+
+        def gate_diagnostic(_legs, _successors, _cities, _turn, station):
+            if (
+                station == "AAA"
+                and materialized["B_IN"]["originBankId"] == "BBB-B1"
+            ):
+                return [], {
+                    "status": "fail",
+                    "stations": 1,
+                    "towMovements": 0,
+                    "failures": [
+                        {
+                            "station": "AAA",
+                            "requiredGates": 2,
+                            "configuredGates": 1,
+                            "requiredStands": 0,
+                            "configuredStands": 0,
+                            "strandedPassengerTouches": 1,
+                            "strandedLabels": ["A_IN -> A_OUT"],
+                            "strandedTouchWindows": [
+                                {
+                                    "label": "A_IN -> A_OUT",
+                                    "startMinute": 160,
+                                    "endMinute": 220,
+                                }
+                            ],
+                        }
+                    ],
+                }
+            return [], {
+                "status": "pass",
+                "stations": 1,
+                "towMovements": 0,
+                "failures": [],
+            }
+
+        with patch(
+            "caa_scheduler.exact_materialization._materialized_station_gate_assignments",
+            side_effect=gate_diagnostic,
+        ), patch(
+            "caa_scheduler.exact_materialization._cycles",
+            return_value=[{"fleet": "CRJ200", "aircraftRequired": 2}],
+        ), patch(
+            "caa_scheduler.exact_materialization._cycle_score",
+            return_value=(0, 0, 0, 0, 0, 2),
+        ), patch(
+            "caa_scheduler.exact_materialization._pairing_spacing_holds_for_leg",
+            return_value=True,
+        ):
+            _, moves = _repair_exact_gate_times(
+                materialized,
+                successors,
+                [{"fleet": "CRJ200", "aircraftRequired": 2}],
+                policy,
+                cities,
+                windows,
+                set(),
+                {"CRJ200": 2},
+                11,
+                True,
+                Counter(leg["origin"] for leg in materialized.values()),
+                True,
+            )
+
+        self.assertEqual(len(moves), 1)
+        self.assertEqual(moves[0]["legId"], "B_IN")
+        self.assertTrue(moves[0]["bankReassignment"])
+        self.assertEqual(moves[0]["beforeOriginBankId"], "BBB-B1")
+        self.assertEqual(moves[0]["afterOriginBankId"], "BBB-B2")
+
+    def test_successor_repair_can_cross_a_score_plateau(self) -> None:
+        identifiers = ("A", "B", "C", "D")
+        legs = {
+            identifier: {
+                "id": identifier,
+                "fleet": "CRJ200",
+                "destination": "HUB",
+            }
+            for identifier in identifiers
+        }
+        successors = {identifier: identifier for identifier in identifiers}
+        base_state = tuple(sorted(successors.items()))
+        plateau_successors = dict(successors)
+        plateau_successors["A"], plateau_successors["B"] = (
+            plateau_successors["B"],
+            plateau_successors["A"],
+        )
+        plateau_state = tuple(sorted(plateau_successors.items()))
+        over_ceiling_successors = dict(successors)
+        (
+            over_ceiling_successors["A"],
+            over_ceiling_successors["C"],
+        ) = (
+            over_ceiling_successors["C"],
+            over_ceiling_successors["A"],
+        )
+        over_ceiling_state = tuple(sorted(over_ceiling_successors.items()))
+        passing_successors = dict(plateau_successors)
+        passing_successors["C"], passing_successors["D"] = (
+            passing_successors["D"],
+            passing_successors["C"],
+        )
+        passing_state = tuple(sorted(passing_successors.items()))
+
+        def fake_cycles(_legs, candidate_successors, *_args, **_kwargs):
+            state = tuple(sorted(candidate_successors.items()))
+            if state == passing_state:
+                score = (0, 0, 0, 0, 0, 4)
+                maximum_gap = 0
+            elif state == over_ceiling_state:
+                score = (0, 0, 0, 0, 0, 5)
+                maximum_gap = 0
+            elif state in {base_state, plateau_state}:
+                score = (0, 0, 1, 1, 12, 4)
+                maximum_gap = 12
+            else:
+                score = (0, 0, 1, 2, 13, 4)
+                maximum_gap = 13
+            return [
+                {
+                    "maximumDaysWithoutTargetRon": maximum_gap,
+                    "legIds": list(identifiers),
+                    "score": score,
+                }
+            ]
+
+        with patch(
+            "caa_scheduler.exact_materialization._cycles",
+            side_effect=fake_cycles,
+        ), patch(
+            "caa_scheduler.exact_materialization._cycle_score",
+            side_effect=lambda cycles, *_args: cycles[0]["score"],
+        ):
+            cycles, swaps = _repair_successor_cycles(
+                legs,
+                successors,
+                {"turns": {"minimumMinutes": 40}},
+                {},
+                set(),
+                {"CRJ200": 4},
+                11,
+                True,
+            )
+
+        self.assertEqual(cycles[0]["score"], (0, 0, 0, 0, 0, 4))
+        self.assertEqual(
+            [swap["moveKind"] for swap in swaps],
+            ["plateau", "improvement"],
+        )
+
+    def test_line_rebalancing_preserves_receiver_and_cycle_ids(self) -> None:
+        legs = {
+            identifier: {
+                "id": identifier,
+                "fleet": "CRJ700",
+                "origin": "AAA",
+                "destination": "AAA",
+                "departureUtcMinute": 300,
+                "blockMinutes": 60,
+            }
+            for identifier in ("D1", "D2", "D3", "D4", "D5", "R1")
+        }
+        successors = {
+            "D1": "D2",
+            "D2": "D3",
+            "D3": "D4",
+            "D4": "D5",
+            "D5": "D1",
+            "R1": "R1",
+        }
+        policy = {
+            "turns": {"minimumMinutes": 40},
+            "ronTargetCities": ["AAA"],
+        }
+        cities = {"AAA": {"timezone": "Eastern"}}
+        cycles = [
+            {
+                **cycle,
+                "id": identifier,
+            }
+            for cycle, identifier in zip(
+                _cycles(
+                    legs,
+                    successors,
+                    policy,
+                    cities,
+                    single_target_full_gap=True,
+                ),
+                ("CYCLE-001", "CYCLE-002"),
+            )
+        ]
+
+        rebalanced, moves = _rebalance_successor_cycles(
+            legs,
+            successors,
+            cycles,
+            policy,
+            cities,
+            set(),
+            {"CRJ700": 6},
+            11,
+            True,
+            {
+                "minimumDaysPerLine": 2,
+                "maximumDaysPerLine": 2,
+                "transfers": [
+                    {
+                        "receiverAnchorLegId": "R1",
+                        "targetDays": 3,
+                        "maximumDays": 3,
+                    }
+                ],
+            },
+            False,
+        )
+
+        self.assertEqual(len(moves), 1)
+        self.assertEqual(moves[0]["beforeReceiverDays"], 1)
+        self.assertEqual(moves[0]["afterReceiverDays"], 3)
+        self.assertEqual(moves[0]["maximumReceiverDays"], 3)
+        self.assertEqual(moves[0]["beforeDonorDays"], 5)
+        self.assertEqual(moves[0]["afterDonorDays"], 3)
+        self.assertEqual(
+            {cycle["id"]: cycle["aircraftRequired"] for cycle in rebalanced},
+            {"CYCLE-001": 3, "CYCLE-002": 3},
+        )
+        receiver = next(
+            cycle for cycle in rebalanced if cycle["id"] == "CYCLE-002"
+        )
+        self.assertIn("R1", receiver["legIds"])
+
+    def test_line_rebalancing_does_not_invalidate_exact_seed(self) -> None:
+        inputs = (
+            {"schedule": {"id": "test"}},
+            {"markets": []},
+            {"placements": []},
+            {"routes": []},
+        )
+        base_rules = {"exactMaterialization": {"timeLimitSecondsPerFleet": 60}}
+        rebalanced_rules = {
+            "exactMaterialization": {
+                "timeLimitSecondsPerFleet": 60,
+                "lineRebalancing": {
+                    "transfers": [
+                        {"receiverAnchorLegId": "A-B-01", "targetDays": 12}
+                    ]
+                },
+            }
+        }
+
+        self.assertEqual(
+            _exact_seed_fingerprint(*inputs, base_rules),
+            _exact_seed_fingerprint(*inputs, rebalanced_rules),
+        )
+
+    def test_reusable_exact_plan_requires_identical_solver_inventory(self) -> None:
+        inventory = {
+            "CRJ700": [
+                {
+                    "id": "AAA-BBB-CRJ700-01-OUT",
+                    "origin": "AAA",
+                    "destination": "BBB",
+                    "fleet": "CRJ700",
+                    "blockMinutes": 60,
+                }
+            ]
+        }
+        prior = {
+            "legs": [
+                {
+                    **inventory["CRJ700"][0],
+                    "source": "exact_materialization",
+                    "departureMinute": 600,
+                },
+                {
+                    "id": "GATE-RELIEF-AAA-CCC-CRJ700-01-OUT",
+                    "source": "productive_gate_relief",
+                },
+            ]
+        }
+
+        self.assertEqual(
+            _verified_reusable_solver_leg_ids(prior, inventory),
+            {"AAA-BBB-CRJ700-01-OUT"},
+        )
+        prior["legs"][0]["blockMinutes"] = 65
+        with self.assertRaisesRegex(ValueError, "blockMinutes"):
+            _verified_reusable_solver_leg_ids(prior, inventory)
+
+    @patch("caa_scheduler.exact_materialization._block_minutes", return_value=60)
+    def test_line_bridge_joins_short_receiver_to_donor_segment(
+        self, _mock_block_minutes
+    ) -> None:
+        def leg(
+            identifier: str,
+            origin: str,
+            destination: str,
+            departure: int,
+        ) -> dict[str, object]:
+            return {
+                "id": identifier,
+                "source": "test",
+                "market": sorted((origin, destination)),
+                "classification": "point_to_point",
+                "fleet": "CRJ700",
+                "origin": origin,
+                "destination": destination,
+                "blockMinutes": 60,
+                "departureUtcMinute": departure,
+                "arrivalUtcMinute": (departure + 60) % 1440,
+                "departureMinute": departure,
+                "arrivalMinute": (departure + 60) % 1440,
+                "originBankId": None,
+                "destinationBankId": None,
+                "curfewStatus": "pass",
+            }
+
+        legs = {
+            **{
+                identifier: leg(identifier, "XXX", "XXX", 300)
+                for identifier in ("D1", "D2", "D3", "D4")
+            },
+            "R1": leg("R1", "BBB", "CCC", 500),
+            "R2": leg("R2", "CCC", "BBB", 600),
+        }
+        successors = {
+            "D1": "D2",
+            "D2": "D3",
+            "D3": "D4",
+            "D4": "D1",
+            "R1": "R2",
+            "R2": "R1",
+        }
+        policy = {
+            "turns": {"minimumMinutes": 40},
+            "ronTargetCities": ["XXX"],
+            "hubs": [],
+            "focusCities": [],
+            "departureWindows": {
+                "earliestMinute": 0,
+                "hubOrFocusLatestMinute": 1439,
+                "destinationLatestMinute": 1439,
+                "redEyeLatestMinute": 0,
+                "redEyeArrivalMinimumMinute": 0,
+                "redEyeArrivalMaximumMinute": 1439,
+            },
+        }
+        cities = {
+            code: {
+                "timezone": "Eastern",
+                "latitude": 0.0,
+                "longitude": 0.0,
+            }
+            for code in ("BBB", "CCC", "XXX")
+        }
+        cycles = [
+            {**cycle, "id": identifier}
+            for cycle, identifier in zip(
+                _cycles(
+                    legs,
+                    successors,
+                    policy,
+                    cities,
+                    single_target_full_gap=True,
+                ),
+                ("DONOR", "RECEIVER"),
+            )
+        ]
+        donor = next(cycle for cycle in cycles if "D1" in cycle["legIds"])
+        receiver = next(cycle for cycle in cycles if "R1" in cycle["legIds"])
+
+        bridged, moves = _bridge_rebalanced_successor_cycles(
+            legs,
+            successors,
+            cycles,
+            policy,
+            cities,
+            {},
+            set(),
+            {"CRJ700": 5},
+            10,
+            True,
+            Counter({"BBB": 1, "CCC": 1, "XXX": 4}),
+            True,
+            {
+                "bridgeTransfers": [
+                    {
+                        "receiverAnchorLegId": "R1",
+                        "receiverArrivalLegId": "R2",
+                        "donorBoundaryArrivalLegIds": ["D1", "D3"],
+                        "transferredBoundaryArrivalLegId": "D1",
+                        "connectorMarket": ["BBB", "XXX"],
+                        "receiverDepartureLocalMinute": 500,
+                        "receiverArrivalDepartureLocalMinute": 600,
+                        "fromReceiverDepartureLocalMinute": 700,
+                        "toReceiverDepartureLocalMinute": 400,
+                        "targetReceiverDays": 2,
+                        "minimumTwoWayDemand": 100.0,
+                        "minimumMarginalDemand": 100.0,
+                        "frequencyCeilingRoundTrips": 1,
+                    }
+                ]
+            },
+            {"CRJ700": {}},
+            {
+                "values": {
+                    "BBB": {"XXX": 60.0},
+                    "XXX": {"BBB": 60.0},
+                }
+            },
+            False,
+        )
+
+        self.assertEqual(len(moves), 1)
+        self.assertEqual(moves[0]["twoWayDemand"], 120.0)
+        self.assertTrue(moves[0]["newFrequency"])
+        self.assertEqual(len(legs), 8)
+        by_id = {cycle["id"]: cycle for cycle in bridged}
+        self.assertEqual(by_id[donor["id"]]["aircraftRequired"], 2)
+        self.assertEqual(by_id[receiver["id"]]["aircraftRequired"], 2)
+        self.assertIn(
+            "LINE-BRIDGE-BBB-XXX-CRJ700-01-OUT",
+            by_id[receiver["id"]]["legIds"],
+        )
+
+    def test_exact_seed_checkpoint_round_trip_and_input_guard(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "seed.json"
+            materialized = {
+                "CRJ700": {
+                    "AAA-HUB-01": {
+                        "id": "AAA-HUB-01",
+                        "fleet": "CRJ700",
+                        "departureUtcMinute": 600,
+                    }
+                }
+            }
+            solvers = {"CRJ700": {"status": "feasible_time_limit"}}
+            _write_exact_seed_checkpoint(
+                path,
+                "matching-fingerprint",
+                ["CRJ700", "CRJ200"],
+                materialized,
+                solvers,
+            )
+
+            loaded_materialized, loaded_solvers = _read_exact_seed_checkpoint(
+                path,
+                "matching-fingerprint",
+                ["CRJ700", "CRJ200"],
+            )
+            self.assertEqual(loaded_materialized, materialized)
+            self.assertEqual(loaded_solvers, solvers)
+            with self.assertRaisesRegex(ValueError, "does not match"):
+                _read_exact_seed_checkpoint(
+                    path,
+                    "changed-input-fingerprint",
+                    ["CRJ700", "CRJ200"],
+                )
 
 
 if __name__ == "__main__":

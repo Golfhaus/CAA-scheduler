@@ -10,7 +10,7 @@ python -m caa_scheduler build-candidate path/to/build_config.json
 
 The compiler resolves a `previous_schedule` starting point from `data/schedules/<scheduleId>/canonical_schedule.json`. `--baseline` can select an explicit canonical file for testing, and `--output` can override the default `builds/<buildId>` directory.
 
-The accepted Schedule 7 v0.1.0 configuration is stored at `config/candidates/schedule_7_v0_1_0.json`. Its schedule-specific fleet selection is MAX9 35, CRJ900 45, CRJ700 65, and CRJ200 80.
+The accepted Schedule 7 v1.0.0 configuration is stored at `config/candidates/schedule_7_v1_0_0.json`. Its schedule-specific fleet selection is MAX9 35, CRJ900 45, CRJ700 65, and CRJ200 80.
 
 Each run replaces only the compiler's known files in that output directory. This prevents a newly blocked build from leaving an older canonical/timetable/gate candidate behind and making it look publishable.
 

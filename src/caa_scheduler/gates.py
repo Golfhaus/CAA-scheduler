@@ -1,12 +1,18 @@
 from __future__ import annotations
 
 from collections import defaultdict
+from itertools import combinations
 from typing import Any, NamedTuple
+
+import numpy as np
+from scipy.optimize import Bounds, LinearConstraint, milp
+from scipy.sparse import coo_matrix
 
 
 TOUCH_ARRIVAL_MINUTES = 45
 TOUCH_DEPARTURE_MINUTES = 60
 SHORT_CLAIM_THRESHOLD_MINUTES = 150
+MAXIMUM_TOW_SUBSET_TRIALS = 20_000
 
 
 class GateClaim(NamedTuple):
@@ -22,7 +28,33 @@ class GateClaim(NamedTuple):
 Assignment = tuple[GateClaim, int]
 
 
-def build_claims(legs: list[dict[str, Any]], city_code: str) -> list[GateClaim]:
+class GateCapacityError(ValueError):
+    """Raised when claims cannot fit the configured physical inventory."""
+
+    def __init__(
+        self,
+        message: str,
+        *,
+        required_gates: int,
+        configured_gates: int,
+        required_stands: int,
+        configured_stands: int,
+        stranded_touches: list[GateClaim] | None = None,
+    ) -> None:
+        super().__init__(message)
+        self.required_gates = required_gates
+        self.configured_gates = configured_gates
+        self.required_stands = required_stands
+        self.configured_stands = configured_stands
+        self.stranded_touches = stranded_touches or []
+
+
+def build_claims(
+    legs: list[dict[str, Any]],
+    city_code: str,
+    *,
+    cyclic_successor_holds: bool = False,
+) -> list[GateClaim]:
     """Build recurring turn, overnight, origin, and termination claims.
 
     This is the single authoritative implementation used by validators and
@@ -35,7 +67,30 @@ def build_claims(legs: list[dict[str, Any]], city_code: str) -> list[GateClaim]:
         lines[leg["line"]].setdefault(leg["day"], []).append(leg)
     for days in lines.values():
         for day_legs in days.values():
-            day_legs.sort(key=lambda item: item["departureMinute"])
+            sequence_order = sorted(
+                day_legs,
+                key=lambda item: (
+                    item.get("sequenceWithinRoute", 1_000_000),
+                    item["departureMinute"],
+                ),
+            )
+            crosses_midnight = cyclic_successor_holds and any(
+                int(following["departureMinute"])
+                < int(previous["departureMinute"])
+                for previous, following in zip(
+                    sequence_order, sequence_order[1:]
+                )
+            )
+            if crosses_midnight:
+                # Canonical routes can cross midnight while remaining on the
+                # same aircraft day.  Local clock order would put a 00:50
+                # continuation ahead of its 22:08 arrival and create both a
+                # false termination and a duplicate originator claim.  Use
+                # route sequence only for that wrap; ordinary routes retain
+                # the legacy clock ordering and deterministic gate parity.
+                day_legs[:] = sequence_order
+            else:
+                day_legs.sort(key=lambda item: item["departureMinute"])
 
     claims: list[GateClaim] = []
     for days in lines.values():
@@ -58,13 +113,24 @@ def build_claims(legs: list[dict[str, Any]], city_code: str) -> list[GateClaim]:
                     None,
                 )
                 if next_leg is not None:
+                    end = next_leg["departureMinute"]
+                    kind = "turn"
+                    if cyclic_successor_holds:
+                        wait = (
+                            int(next_leg["departureMinute"])
+                            - int(leg["arrivalMinute"])
+                        ) % 1440
+                        if wait == 0:
+                            wait = 1440
+                        end = int(leg["arrivalMinute"]) + wait
+                        kind = "ron" if wait >= 360 else "turn"
                     claims.append(
                         GateClaim(
                             leg["arrivalMinute"],
-                            next_leg["departureMinute"],
+                            end,
                             str(route),
                             fleet,
-                            "turn",
+                            kind,
                             leg["origin"],
                             next_leg["destination"],
                         )
@@ -75,13 +141,24 @@ def build_claims(legs: list[dict[str, Any]], city_code: str) -> list[GateClaim]:
                 next_day_legs = days.get(next_day, [])
                 if next_day_legs and next_day_legs[0]["origin"] == city_code:
                     next_route = next_day_legs[0]["route"]
+                    end = next_day_legs[0]["departureMinute"] + 1440
+                    kind = "ron"
+                    if cyclic_successor_holds:
+                        wait = (
+                            int(next_day_legs[0]["departureMinute"])
+                            - int(leg["arrivalMinute"])
+                        ) % 1440
+                        if wait == 0:
+                            wait = 1440
+                        end = int(leg["arrivalMinute"]) + wait
+                        kind = "ron" if wait >= 360 else "turn"
                     claims.append(
                         GateClaim(
                             leg["arrivalMinute"],
-                            next_day_legs[0]["departureMinute"] + 1440,
+                            end,
                             f"{route} -> {next_route}",
                             fleet,
-                            "ron",
+                            kind,
                             leg["origin"],
                             next_day_legs[0]["destination"],
                         )
@@ -133,16 +210,191 @@ def build_claims(legs: list[dict[str, Any]], city_code: str) -> list[GateClaim]:
     return claims
 
 
+def _cyclic_segments(claim: GateClaim) -> tuple[tuple[float, float], ...]:
+    duration = claim.end - claim.start
+    if duration <= 0:
+        return ()
+    if duration >= 1440:
+        return ((0, 1440),)
+    start = claim.start % 1440
+    end = start + duration
+    if end <= 1440:
+        return ((start, end),)
+    return ((start, 1440), (0, end - 1440))
+
+
+def _segments_overlap(
+    first: tuple[tuple[float, float], ...],
+    second: tuple[tuple[float, float], ...],
+) -> bool:
+    return any(
+        first_start < second_end and second_start < first_end
+        for first_start, first_end in first
+        for second_start, second_end in second
+    )
+
+
 def overlaps(first: GateClaim, second: GateClaim) -> bool:
     """Return whether two daily recurring claims overlap cyclically."""
-    for first_shift in (-1440, 0, 1440):
-        for second_shift in (-1440, 0, 1440):
-            if (
-                first.start + first_shift < second.end + second_shift
-                and second.start + second_shift < first.end + first_shift
-            ):
-                return True
-    return False
+    return _segments_overlap(
+        _cyclic_segments(first),
+        _cyclic_segments(second),
+    )
+
+
+def _conflict_graph(claims: list[GateClaim]) -> list[set[int]]:
+    adjacency = [set() for _ in claims]
+    segments = [_cyclic_segments(claim) for claim in claims]
+    events = [
+        event
+        for index, claim_segments in enumerate(segments)
+        for start, end in claim_segments
+        for event in ((end, 0, index), (start, 1, index))
+    ]
+    active: set[int] = set()
+    for _, kind, index in sorted(events):
+        if kind == 0:
+            active.discard(index)
+            continue
+        for other in active:
+            if other == index:
+                continue
+            adjacency[index].add(other)
+            adjacency[other].add(index)
+        active.add(index)
+    return adjacency
+
+
+def _greedy_coloring(claims: list[GateClaim]) -> list[int]:
+    """Color a cyclic interval-conflict graph with deterministic DSATUR."""
+    if not claims:
+        return []
+    adjacency = _conflict_graph(claims)
+    colors = [0] * len(claims)
+    uncolored = set(range(len(claims)))
+    saturation = [set() for _ in claims]
+    while uncolored:
+        vertex = max(
+            uncolored,
+            key=lambda index: (
+                len(saturation[index]),
+                len(adjacency[index]),
+                -index,
+            ),
+        )
+        color = next(
+            candidate
+            for candidate in range(1, len(claims) + 1)
+            if candidate not in saturation[vertex]
+        )
+        colors[vertex] = color
+        uncolored.remove(vertex)
+        for neighbor in adjacency[vertex]:
+            if neighbor in uncolored:
+                saturation[neighbor].add(color)
+    return colors
+
+
+def _maximum_cyclic_concurrency(claims: list[GateClaim]) -> int:
+    """Return a sound lower bound for recurring daily slot demand."""
+    full_day = 0
+    events: list[tuple[float, int]] = []
+    for claim in claims:
+        duration = claim.end - claim.start
+        if duration <= 0:
+            continue
+        if duration >= 1440:
+            full_day += 1
+            continue
+        start = claim.start % 1440
+        end = start + duration
+        if end <= 1440:
+            events.extend(((start, 1), (end, -1)))
+        else:
+            events.extend(
+                (
+                    (start, 1),
+                    (1440, -1),
+                    (0, 1),
+                    (end - 1440, -1),
+                )
+            )
+    active = full_day
+    maximum = active
+    for _, delta in sorted(events, key=lambda event: (event[0], event[1])):
+        active += delta
+        maximum = max(maximum, active)
+    return maximum
+
+
+def _bounded_coloring(
+    claims: list[GateClaim], maximum_slots: int
+) -> list[int] | None:
+    colors = _greedy_coloring(claims)
+    if max(colors, default=0) <= maximum_slots:
+        return colors
+    if maximum_slots < 1:
+        return None
+    if _maximum_cyclic_concurrency(claims) > maximum_slots:
+        return None
+
+    adjacency = _conflict_graph(claims)
+    variable_count = len(claims) * maximum_slots
+    row_indexes: list[int] = []
+    column_indexes: list[int] = []
+    values: list[float] = []
+    lower_bounds: list[float] = []
+    upper_bounds: list[float] = []
+
+    for claim_index in range(len(claims)):
+        row = len(lower_bounds)
+        for color in range(maximum_slots):
+            row_indexes.append(row)
+            column_indexes.append(claim_index * maximum_slots + color)
+            values.append(1.0)
+        lower_bounds.append(1.0)
+        upper_bounds.append(1.0)
+
+    for first, neighbors in enumerate(adjacency):
+        for second in sorted(neighbor for neighbor in neighbors if neighbor > first):
+            for color in range(maximum_slots):
+                row = len(lower_bounds)
+                row_indexes.extend((row, row))
+                column_indexes.extend(
+                    (
+                        first * maximum_slots + color,
+                        second * maximum_slots + color,
+                    )
+                )
+                values.extend((1.0, 1.0))
+                lower_bounds.append(-np.inf)
+                upper_bounds.append(1.0)
+
+    matrix = coo_matrix(
+        (values, (row_indexes, column_indexes)),
+        shape=(len(lower_bounds), variable_count),
+    ).tocsr()
+    result = milp(
+        c=np.zeros(variable_count),
+        integrality=np.ones(variable_count),
+        bounds=Bounds(np.zeros(variable_count), np.ones(variable_count)),
+        constraints=LinearConstraint(
+            matrix,
+            np.asarray(lower_bounds),
+            np.asarray(upper_bounds),
+        ),
+        options={"time_limit": 30},
+    )
+    if result.x is None:
+        return None
+    return [
+        max(
+            range(maximum_slots),
+            key=lambda color: result.x[claim_index * maximum_slots + color],
+        )
+        + 1
+        for claim_index in range(len(claims))
+    ]
 
 
 def split_for_waypoint(
@@ -187,11 +439,93 @@ def apply_forced_stand_splits(
     return result
 
 
+def _minimum_tow_feasible_assignment(
+    claims: list[GateClaim],
+    n_gates: int,
+    n_stands: int,
+) -> tuple[list[Assignment], set[GateClaim]] | None:
+    """Find the fewest conditional tows that fit fixed physical inventory.
+
+    The ordinary allocator remains the fast path.  This bounded subset search
+    runs only after that heuristic would strand a passenger touch or exceed
+    configured stands.  It never invents capacity: gate touches and stand
+    middles must each admit an exact coloring within their configured counts.
+    """
+    forced_stand_middles = {
+        claim for claim in claims if claim.kind == "forced_stand_mid"
+    }
+    gate_claims = [
+        claim for claim in claims if claim not in forced_stand_middles
+    ]
+    towable = sorted(
+        (
+            claim
+            for claim in gate_claims
+            if claim.end - claim.start > SHORT_CLAIM_THRESHOLD_MINUTES
+            and claim.end - claim.start
+            > TOUCH_ARRIVAL_MINUTES + TOUCH_DEPARTURE_MINUTES
+        ),
+        key=lambda claim: (claim.start, claim.end, claim.label, claim.fleet),
+    )
+    trials = 0
+    for tow_count in range(len(towable) + 1):
+        best: tuple[tuple[Any, ...], list[Assignment], set[GateClaim]] | None = None
+        for selected in combinations(towable, tow_count):
+            trials += 1
+            if trials > MAXIMUM_TOW_SUBSET_TRIALS:
+                return None
+            selected_set = set(selected)
+            trial_gate_claims = [
+                claim for claim in gate_claims if claim not in selected_set
+            ]
+            trial_stand_claims = list(forced_stand_middles)
+            split_pieces: list[tuple[GateClaim, GateClaim, GateClaim]] = []
+            for claim in selected:
+                pieces = split_for_waypoint(claim)
+                split_pieces.append(pieces)
+                gate_in, stand_middle, gate_out = pieces
+                trial_gate_claims.extend((gate_in, gate_out))
+                trial_stand_claims.append(stand_middle)
+            if _maximum_cyclic_concurrency(trial_stand_claims) > n_stands:
+                continue
+            if _maximum_cyclic_concurrency(trial_gate_claims) > n_gates:
+                continue
+            stand_colors = _bounded_coloring(trial_stand_claims, n_stands)
+            if stand_colors is None:
+                continue
+            gate_colors = _bounded_coloring(trial_gate_claims, n_gates)
+            if gate_colors is None:
+                continue
+            assignments = [
+                (claim, color)
+                for claim, color in zip(trial_gate_claims, gate_colors)
+            ]
+            assignments.extend(
+                (claim, n_gates + color)
+                for claim, color in zip(trial_stand_claims, stand_colors)
+            )
+            score = (
+                sum(claim.end - claim.start for claim in trial_stand_claims),
+                tuple(
+                    (claim.start, claim.end, claim.label)
+                    for claim in selected
+                ),
+            )
+            candidate = (score, assignments, set(trial_stand_claims))
+            if best is None or candidate[0] < best[0]:
+                best = candidate
+        if best is not None:
+            return best[1], best[2]
+    return None
+
+
 def assign_gates(
     claims: list[GateClaim],
     n_gates: int | None = None,
     *,
+    n_stands: int | None = None,
     return_provenance: bool = False,
+    allow_infeasible_preview: bool = False,
 ) -> list[Assignment] | tuple[list[Assignment], set[GateClaim]]:
     """Assign claims using short-first packing and targeted long-hold rescue.
 
@@ -222,6 +556,8 @@ def assign_gates(
         assignment[claim] = slot
 
     if n_gates is None:
+        if n_stands is not None:
+            raise ValueError("Configured stands require a configured gate count")
         result = list(assignment.items())
         return (result, set()) if return_provenance else result
 
@@ -354,17 +690,158 @@ def assign_gates(
                 assignment[claim] = slot
                 break
 
+    if n_stands is not None:
+        while True:
+            gate_claims = [
+                claim for claim in assignment if claim not in stand_middles
+            ]
+            stand_claims = [
+                claim for claim in assignment if claim in stand_middles
+            ]
+            if (
+                _bounded_coloring(gate_claims, n_gates) is not None
+                and _bounded_coloring(stand_claims, n_stands) is not None
+            ):
+                break
+            towable = [
+                claim
+                for claim in gate_claims
+                if claim.end - claim.start > SHORT_CLAIM_THRESHOLD_MINUTES
+            ]
+            trials = []
+            for claim in towable:
+                gate_in, stand_middle, gate_out = split_for_waypoint(claim)
+                trial_gate_claims = [
+                    candidate
+                    for candidate in gate_claims
+                    if candidate is not claim
+                ] + [gate_in, gate_out]
+                trial_stand_claims = stand_claims + [stand_middle]
+                gate_colors = _greedy_coloring(trial_gate_claims)
+                stand_colors = _greedy_coloring(trial_stand_claims)
+                required_stands = max(stand_colors, default=0)
+                if required_stands > n_stands:
+                    continue
+                trials.append(
+                    (
+                        max(gate_colors, default=0),
+                        required_stands,
+                        claim.start,
+                        claim,
+                        gate_in,
+                        stand_middle,
+                        gate_out,
+                    )
+                )
+            if not trials:
+                break
+            (
+                _,
+                _,
+                _,
+                claim,
+                gate_in,
+                stand_middle,
+                gate_out,
+            ) = min(trials, key=lambda trial: trial[:3])
+            del assignment[claim]
+            assignment[gate_in] = 0
+            assignment[gate_out] = 0
+            assignment[stand_middle] = 0
+            stand_middles.add(stand_middle)
+
+        gate_claims = [
+            claim for claim in assignment if claim not in stand_middles
+        ]
+        gate_colors = _bounded_coloring(gate_claims, n_gates)
+        if gate_colors is not None:
+            for claim, color in zip(gate_claims, gate_colors):
+                assignment[claim] = color
+        stand_claims = [
+            claim for claim in assignment if claim in stand_middles
+        ]
+        stand_colors = _bounded_coloring(stand_claims, n_stands)
+        if stand_colors is not None:
+            for claim, color in zip(stand_claims, stand_colors):
+                assignment[claim] = n_gates + color
+
     result = list(assignment.items())
+    if n_stands is not None:
+        stranded_touches = [
+            claim
+            for claim, slot in result
+            if slot > n_gates and claim not in stand_middles
+        ]
+        required_stands = max(
+            (slot - n_gates for _, slot in result if slot > n_gates),
+            default=0,
+        )
+        if stranded_touches or required_stands > n_stands:
+            exact_assignment = _minimum_tow_feasible_assignment(
+                claims, n_gates, n_stands
+            )
+            if exact_assignment is not None:
+                result, stand_middles = exact_assignment
+                stranded_touches = []
+                required_stands = max(
+                    (
+                        slot - n_gates
+                        for _, slot in result
+                        if slot > n_gates
+                    ),
+                    default=0,
+                )
+        if (
+            stranded_touches or required_stands > n_stands
+        ) and not allow_infeasible_preview:
+            required_gates = max(
+                n_gates + (1 if stranded_touches else 0),
+                max((slot for _, slot in result if slot <= n_gates), default=0),
+            )
+            problems = []
+            if stranded_touches:
+                problems.append(
+                    f"{len(stranded_touches)} passenger touch(es) remain off-gate"
+                )
+            if required_stands > n_stands:
+                problems.append(
+                    f"stand {required_stands} is required but only {n_stands} are configured"
+                )
+            raise GateCapacityError(
+                "; ".join(problems),
+                required_gates=required_gates,
+                configured_gates=n_gates,
+                required_stands=required_stands,
+                configured_stands=n_stands,
+                stranded_touches=stranded_touches,
+            )
     return (result, stand_middles) if return_provenance else result
 
 
 def serialize_assignments(
-    assignments: list[Assignment], n_gates: int
+    assignments: list[Assignment],
+    n_gates: int,
+    *,
+    n_stands: int | None = None,
+    stand_middles: set[GateClaim] | None = None,
 ) -> list[dict[str, Any]]:
     claims: list[dict[str, Any]] = []
     for claim, slot in assignments:
-        row_type = "gate" if slot <= n_gates else "stand"
-        row = slot if slot <= n_gates else slot - n_gates
+        if slot <= n_gates:
+            row_type = "gate"
+            row = slot
+        elif (
+            n_stands is None
+            or (
+                claim in (stand_middles or set())
+                and slot <= n_gates + n_stands
+            )
+        ):
+            row_type = "stand"
+            row = slot - n_gates
+        else:
+            row_type = "overflow"
+            row = max(1, slot - n_gates)
         claims.append(
             {
                 "start": claim.start,

@@ -38,21 +38,42 @@ def _capacity(city: dict[str, Any]) -> tuple[int, int]:
     )
 
 
-def export_gate_schedule(canonical: dict[str, Any]) -> dict[str, Any]:
+def export_gate_schedule(
+    canonical: dict[str, Any], *, allow_infeasible_preview: bool = False
+) -> dict[str, Any]:
     gate_plan = canonical["gatePlan"]
     forced = {
         code: set(labels)
         for code, labels in gate_plan.get("forcedStandSplits", {}).items()
     }
     cities = []
+    enforce_fixed_inventory = bool(gate_plan.get("fixedPhysicalInventory", False))
     for city in sorted(canonical["cities"], key=lambda item: item["sourceOrder"]):
         if not city["active"]:
             continue
         gates, stands = _capacity(city)
-        claims = build_claims(canonical["legs"], city["code"])
+        claims = build_claims(
+            canonical["legs"],
+            city["code"],
+            cyclic_successor_holds=enforce_fixed_inventory,
+        )
         if city["code"] in forced:
             claims = apply_forced_stand_splits(claims, forced[city["code"]])
-        assignments = assign_gates(claims, n_gates=gates)
+        stand_middles = None
+        if enforce_fixed_inventory:
+            assignments, stand_middles = assign_gates(
+                claims,
+                n_gates=gates,
+                n_stands=stands,
+                return_provenance=True,
+                allow_infeasible_preview=allow_infeasible_preview,
+            )
+        else:
+            assignments = assign_gates(
+                claims,
+                n_gates=gates,
+                n_stands=None,
+            )
         cities.append(
             {
                 "code": city["code"],
@@ -62,7 +83,12 @@ def export_gate_schedule(canonical: dict[str, Any]) -> dict[str, Any]:
                 "nGates": gates,
                 "nStands": stands,
                 "peakUsed": peak_demand(claims),
-                "claims": serialize_assignments(assignments, gates),
+                "claims": serialize_assignments(
+                    assignments,
+                    gates,
+                    n_stands=stands if enforce_fixed_inventory else None,
+                    stand_middles=stand_middles,
+                ),
             }
         )
     return {

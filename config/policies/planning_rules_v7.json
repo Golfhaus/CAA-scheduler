@@ -1,0 +1,210 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "caa-planning-rules-v7",
+  "multiHubQualification": {
+    "rankThresholds": [
+      { "rank": "secondary", "minimumServablePassengersPerDay": 443, "maximumDistanceRatio": 2.75 },
+      { "rank": "tertiary", "minimumServablePassengersPerDay": 1356, "maximumDistanceRatio": 1.75 },
+      { "rank": "quaternary", "minimumServablePassengersPerDay": 2173, "maximumDistanceRatio": 1.3 }
+    ],
+    "cityPercentileHubCaps": [
+      { "maximumPercentile": 25, "maximumHubs": 1 },
+      { "maximumPercentile": 70, "maximumHubs": 2 },
+      { "maximumPercentile": 89, "maximumHubs": 3 },
+      { "maximumPercentile": 100, "maximumHubs": 4 }
+    ]
+  },
+  "networkReconciliation": {
+    "mode": "strict_tier_caps",
+    "retainHistoricalPointToPointMarkets": true,
+    "focusCitySubstitutions": [
+      {
+        "code": "BHM",
+        "eligibleGroups": ["FLP", "GCP", "OZK", "TEX"],
+        "requiresExistingMarket": true,
+        "maximumSlots": 1
+      }
+    ]
+  },
+  "networkOptimization": {
+    "allowNewHubMarkets": true,
+    "competeRetainedPointToPointMarkets": true,
+    "minimumNewMarketDemandPercentile": 90,
+    "preservePrimaryHub": true,
+    "serviceAssignmentEndpointWeights": {
+      "JAX": 0.45,
+      "BHM": 0.6,
+      "MCI": 0.58,
+      "PHF": 1.4,
+      "DAY": 1.35,
+      "SYR": 1.3
+    },
+    "northernToFloridaCoverage": {
+      "originGroups": ["NEC", "MAC", "LEC"],
+      "floridaGroup": "FLP",
+      "connectingHub": "JAX",
+      "scoreMultiplier": 1.35
+    },
+    "minimumOptionalScorePercentile": 40,
+    "minimumOptionalMarketDemand": 8,
+    "stationGateMinutesPerRoundTrip": 90,
+    "stationOperatingMinutes": 990,
+    "stationRoundTripCapacityOverrides": {
+      "BHM": 26,
+      "BNA": 8,
+      "BWI": 10,
+      "CID": 3,
+      "CLT": 17,
+      "DAL": 20,
+      "DAY": 75,
+      "JAX": 89,
+      "MCI": 90,
+      "PHF": 89,
+      "RFD": 24,
+      "SFB": 23,
+      "SYR": 73
+    },
+    "marketFrequencyCeilingRoundTripsOverrides": {
+      "BDL-SYR": 1,
+      "BNA-SYR": 1,
+      "BNA-JAN": 0,
+      "BWI-PHF": 3,
+      "CID-RFD": 0,
+      "DAL-DAY": 4,
+      "MCI-RFD": 1,
+      "MYR-PHF": 1,
+      "PHF-SFB": 5,
+      "RFD-SYR": 2,
+      "ROC-SYR": 2
+    },
+    "focusCityOptionalRoundTripCapPerMarket": 2
+  },
+  "frequencyAllocation": {
+    "productiveMinutesPerAircraftDay": 900,
+    "productiveMinutesPerAircraftDayByFleet": {
+      "MAX9": 890,
+      "CRJ900": 820,
+      "CRJ700": 820,
+      "CRJ200": 900
+    },
+    "fleetAssignmentMode": "demand_ranked_capacity_share",
+    "enforceHubGateBankThroughput": true,
+    "marketFrequencyCeilingRoundTrips": 6,
+    "interHubMarketFrequencyCeilingRoundTrips": 3,
+    "requireSingleFleetPerMarket": true,
+    "pointToPointMaximumShare": 0.1,
+    "serviceMinimumFlightLegs": [
+      { "maximumPercentile": 25, "minimumFlightLegs": 3 },
+      { "maximumPercentile": 70, "minimumFlightLegs": 6 },
+      { "maximumPercentile": 89, "minimumFlightLegs": 8 },
+      { "maximumPercentile": 100, "minimumFlightLegs": 8 }
+    ],
+    "fleetProfiles": [
+      { "fleet": "MAX9", "sizeRank": 4, "blockMinutesPerNauticalMile": 0.1293, "blockMinutesIntercept": 34.1 },
+      { "fleet": "CRJ900", "sizeRank": 3, "blockMinutesPerNauticalMile": 0.1364, "blockMinutesIntercept": 31.94 },
+      { "fleet": "CRJ700", "sizeRank": 2, "blockMinutesPerNauticalMile": 0.1467, "blockMinutesIntercept": 29.96 },
+      { "fleet": "CRJ200", "sizeRank": 1, "blockMinutesPerNauticalMile": 0.1581, "blockMinutesIntercept": 27.82 }
+    ]
+  },
+  "bankPlacement": {
+    "requireDistinctPairingWaves": true,
+    "preferPairingSpread": true,
+    "hubBankCountsOverride": { "JAX": 14, "DAY": 8, "MCI": 10, "SYR": 6, "PHF": 7 },
+    "requireDirectionalPhaseCoverage": true,
+    "optimizeSpokePlacementCapacity": true,
+    "prioritizeMandatoryService": true,
+    "phaseCandidateEarliestMinute": 270,
+    "phaseCandidateLatestMinute": 450,
+    "phaseStepMinutes": 5,
+    "cadenceMinutesByBankCount": { "4": 240, "5": 200, "6": 165, "7": 140, "8": 125, "10": 100, "13": 75, "14": 65 },
+    "spokeArrivalOffsetMinutes": 10,
+    "hubDepartureOffsetMinutes": 50,
+    "interHubSearchStepMinutes": 5,
+    "requireInterhubSpacingCapacity": true
+  },
+  "routing": {
+    "rollingRonWindowDays": 10,
+    "maximumRoundTripsPerPairingPerDay": 6,
+    "singleTargetUsesFullCycleGap": true
+  },
+  "exactMaterialization": {
+    "timeLimitSecondsPerFleet": 240,
+    "globalTimeLimitSeconds": 900,
+    "preserveAssignedBankWaves": false,
+    "bankAssignmentMode": "joint_within_capacity_envelope",
+    "fleetCoordination": "global",
+    "constructiveSeed": "independent_fleets",
+    "seedTimeLimitSecondsPerFleet": 300,
+    "seedTimeLimitSecondsByFleet": { "MAX9": 600 },
+    "seedPairingModelByFleet": { "MAX9": "time_counts" },
+    "pairingModel": "compiled_patterns",
+    "maximumPatternsPerPairing": 128,
+    "pairingPatternBeamWidth": 4000,
+    "pairingSpacing": { "mode": "section26_policy_exception" },
+    "enforceFixedPhysicalInventory": true,
+    "passengerGateCapacityReserveByStation": {
+      "DAY": 1,
+      "MCI": 3,
+      "PHF": 2,
+      "SYR": 2
+    },
+    "productiveGateRelief": {
+      "targetStations": ["MCI", "CLT", "PIE", "BWI"],
+      "preferredDestinations": ["DAY", "PHF", "SYR", "SFB"],
+      "minimumHoldMinutes": 240,
+      "minimumTwoWayDemand": 8.0,
+      "maximumMissions": 8,
+      "maximumTimingsPerHoldMarket": 8,
+      "minimumMissionsByStation": { "BWI": 2 },
+      "minimumDistinctHoldsByStation": { "BWI": 2 },
+      "unplannedCandidateMarkets": [
+        {
+          "market": ["BWI", "FLL"],
+          "eligibleFleets": ["CRJ700"],
+          "frequencyCeilingRoundTrips": 1
+        },
+        {
+          "market": ["BWI", "PIE"],
+          "eligibleFleets": ["CRJ700"],
+          "frequencyCeilingRoundTrips": 1
+        }
+      ]
+    },
+    "lineRebalancing": {
+      "minimumDaysPerLine": 9,
+      "maximumDaysPerLine": 12,
+      "transfers": [
+        {
+          "receiverAnchorLegId": "BWI-PHF-CRJ700-01-OUT",
+          "targetDays": 12
+        },
+        {
+          "receiverAnchorLegId": "CMH-MCI-CRJ700-01-OUT",
+          "targetDays": 13,
+          "maximumDays": 13
+        }
+      ],
+      "bridgeTransfers": [
+        {
+          "receiverAnchorLegId": "BDL-DAB-CRJ700-01-OUT",
+          "receiverArrivalLegId": "BDL-DAB-CRJ700-01-IN",
+          "donorBoundaryArrivalLegIds": [
+            "CLT-SYR-CRJ700-01-IN",
+            "CLT-SYR-CRJ700-04-IN"
+          ],
+          "transferredBoundaryArrivalLegId": "CLT-SYR-CRJ700-04-IN",
+          "connectorMarket": ["BDL", "CLT"],
+          "receiverDepartureLocalMinute": 270,
+          "receiverArrivalDepartureLocalMinute": 1260,
+          "fromReceiverDepartureLocalMinute": 270,
+          "toReceiverDepartureLocalMinute": 1160,
+          "targetReceiverDays": 13,
+          "minimumTwoWayDemand": 100.0,
+          "minimumMarginalDemand": 100.0,
+          "frequencyCeilingRoundTrips": 1
+        }
+      ]
+    },
+    "minimizeTows": true
+  }
+}

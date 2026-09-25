@@ -37,6 +37,33 @@ def _double_letter(index: int) -> str:
     return chr(ord("A") + index // 26) + chr(ord("A") + index % 26)
 
 
+def _canonical_demand_by_market(
+    frequency_plan: dict[str, Any], exact_plan: dict[str, Any]
+) -> dict[tuple[str, str], float]:
+    """Include demand-supported markets added during exact post-processing."""
+    demand_by_market = {
+        tuple(sorted((market["origin"], market["destination"]))): float(
+            market["twoWayDemand"]
+        )
+        for market in frequency_plan["markets"]
+    }
+    diagnostics = exact_plan.get("diagnostics", {})
+    for diagnostic_key, market_key in (
+        ("gateReliefMissions", "market"),
+        ("lineBridgeMissions", "connectorMarket"),
+    ):
+        for mission in diagnostics.get(diagnostic_key, []):
+            market = mission.get(market_key)
+            if not isinstance(market, list) or len(market) != 2:
+                raise ValueError(
+                    f"Exact {diagnostic_key} entry has no two-airport market"
+                )
+            demand_by_market[tuple(sorted(str(code) for code in market))] = float(
+                mission["twoWayDemand"]
+            )
+    return demand_by_market
+
+
 def _line_assignments(cycles: list[dict[str, Any]]) -> dict[str, str]:
     max9 = [cycle for cycle in cycles if cycle["fleet"] == "MAX9"]
     crj = [cycle for cycle in cycles if cycle["fleet"] != "MAX9"]
@@ -171,11 +198,39 @@ def build_canonical_schedule_from_exact_plan(
     hub_bank_plan: dict[str, Any],
     exact_plan: dict[str, Any],
     construction_provenance: dict[str, Any],
+    *,
+    allow_incomplete_preview: bool = False,
 ) -> tuple[dict[str, Any], dict[str, Any]]:
     """Assign canonical identifiers to a passing exact materialization plan."""
-    if exact_plan.get("status") != "pass" or exact_plan.get(
-        "materializationStatus"
-    ) != "complete":
+    schedule_id = str(seed["schedule"]["id"])
+    mismatched_schedule_ids = {
+        name: str(plan.get("scheduleId"))
+        for name, plan in (
+            ("frequency plan", frequency_plan),
+            ("hub-bank plan", hub_bank_plan),
+            ("exact plan", exact_plan),
+        )
+        if str(plan.get("scheduleId")) != schedule_id
+    }
+    if mismatched_schedule_ids:
+        details = ", ".join(
+            f"{name}={identifier}"
+            for name, identifier in mismatched_schedule_ids.items()
+        )
+        raise ValueError(
+            f"Canonicalization schedule ID mismatch: seed={schedule_id}; {details}"
+        )
+    exact_plan_is_complete = (
+        exact_plan.get("status") == "pass"
+        and exact_plan.get("materializationStatus") == "complete"
+    )
+    preview_plan_is_materialized = (
+        allow_incomplete_preview
+        and bool(exact_plan.get("previewOnly"))
+        and bool(exact_plan.get("legs"))
+        and bool(exact_plan.get("cycles"))
+    )
+    if not exact_plan_is_complete and not preview_plan_is_materialized:
         raise ValueError("Canonicalization requires a complete passing exact plan")
     if hub_bank_plan.get("status") != "pass":
         raise ValueError("Canonicalization requires a passing hub-bank plan")
@@ -239,12 +294,19 @@ def build_canonical_schedule_from_exact_plan(
     for leg in generated:
         leg["pairing"] = pairings[(leg["origin"], leg["destination"])]
 
-    demand_by_market = {
-        tuple(sorted((market["origin"], market["destination"]))): float(
-            market["twoWayDemand"]
+    demand_by_market = _canonical_demand_by_market(frequency_plan, exact_plan)
+    missing_demand = sorted(
+        {
+            tuple(sorted((leg["origin"], leg["destination"])))
+            for leg in generated
+        }
+        - set(demand_by_market)
+    )
+    if missing_demand:
+        raise ValueError(
+            "Canonical flight numbering has no demand for: "
+            + ", ".join("-".join(market) for market in missing_demand)
         )
-        for market in frequency_plan["markets"]
-    }
     flight_order = sorted(
         generated,
         key=lambda leg: (
@@ -318,6 +380,12 @@ def build_canonical_schedule_from_exact_plan(
         "cityInformation": copy.deepcopy(seed["provenance"]["cityInformation"]),
         "operatingPolicy": copy.deepcopy(seed["provenance"]["operatingPolicy"]),
     }
+    operating_policy = copy.deepcopy(seed["operatingPolicy"])
+    effective_bank_counts = {
+        hub["hub"]: int(hub["bankCount"])
+        for hub in hub_bank_plan["hubs"]
+    }
+    operating_policy["hubBankCounts"] = effective_bank_counts
     canonical = {
         "schemaVersion": "1.0.0",
         "schedule": copy.deepcopy(seed["schedule"]),
@@ -325,8 +393,11 @@ def build_canonical_schedule_from_exact_plan(
         "gatePlan": {
             "label": seed["schedule"]["label"],
             "forcedStandSplits": {},
+            "fixedPhysicalInventory": bool(
+                seed.get("gatePlan", {}).get("fixedPhysicalInventory", False)
+            ),
         },
-        "operatingPolicy": copy.deepcopy(seed["operatingPolicy"]),
+        "operatingPolicy": operating_policy,
         "hubBanks": hub_banks,
         "bankAssignments": bank_assignments,
         "cities": cities,
@@ -335,7 +406,7 @@ def build_canonical_schedule_from_exact_plan(
     report = {
         "schemaVersion": "1.0.0",
         "scheduleId": canonical["schedule"]["id"],
-        "status": "pass",
+        "status": "preview_only" if preview_plan_is_materialized else "pass",
         "sourceExactPlanSha256": construction_provenance["exactMaterialization"][
             "sha256"
         ],

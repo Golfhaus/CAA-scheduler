@@ -1,0 +1,7969 @@
+{
+ "label": "Schedule 7, Version 1.0.0",
+ "minConnect": 30,
+ "maxConnect": 240,
+ "flightCount": 916,
+ "cityCount": 105,
+ "cities": [
+  {
+   "code": "ABE",
+   "name": "Allentown PA",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "ACY",
+   "name": "Atlantic City NJ",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "AGS",
+   "name": "Augusta GA",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "ALB",
+   "name": "Albany NY",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "ATW",
+   "name": "Appleton WI",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "AUS",
+   "name": "Austin TX",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "AVL",
+   "name": "Asheville NC",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "AVP",
+   "name": "Wilkes-Barre/Scranton PA",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "BDL",
+   "name": "Hartford CT",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "BGR",
+   "name": "Bangor ME",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "BHM",
+   "name": "Birmingham AL",
+   "isHub": false,
+   "isFocusCity": true
+  },
+  {
+   "code": "BLV",
+   "name": "St. Louis/Belleville",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "BNA",
+   "name": "Nashville TN",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "BTR",
+   "name": "Baton Rouge LA",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "BTV",
+   "name": "Burlington VT",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "BUF",
+   "name": "Buffalo NY",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "BWI",
+   "name": "Baltimore MD",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "CAE",
+   "name": "Columbia SC",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "CAK",
+   "name": "Akron-Canton OH",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "CHA",
+   "name": "Chattanooga TN",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "CHS",
+   "name": "Charleston SC",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "CID",
+   "name": "Cedar Rapids IA",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "CLT",
+   "name": "Charlotte NC",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "CMH",
+   "name": "Columbus OH",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "COU",
+   "name": "Columbia MO",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "CRP",
+   "name": "Corpus Christi TX",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "CRW",
+   "name": "Charleston WV",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "DAB",
+   "name": "Daytona Beach FL",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "DAL",
+   "name": "Dallas/Love",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "DAY",
+   "name": "Dayton OH",
+   "isHub": true,
+   "isFocusCity": false
+  },
+  {
+   "code": "DLH",
+   "name": "Duluth MN",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "DSM",
+   "name": "Des Moines IA",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "ECP",
+   "name": "Panama City FL",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "ELP",
+   "name": "El Paso TX",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "ERI",
+   "name": "Erie PA",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "EYW",
+   "name": "Key West FL",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "FAR",
+   "name": "Fargo ND",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "FLL",
+   "name": "Fort Lauderdale FL",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "FSD",
+   "name": "Sioux Falls SD",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "FWA",
+   "name": "Fort Wayne IN",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "GNV",
+   "name": "Gainesville FL",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "GPT",
+   "name": "Gulfport-Biloxi MS",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "GRR",
+   "name": "Grand Rapids MI",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "GSO",
+   "name": "Greensboro NC",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "GSP",
+   "name": "Greenville-Spartanburg SC",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "HOU",
+   "name": "Houston/Hobby",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "HPN",
+   "name": "White Plains/Westchester NY",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "HRL",
+   "name": "Harlingen TX",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "HSV",
+   "name": "Huntsville AL",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "HVN",
+   "name": "New Haven CT",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "ICT",
+   "name": "Wichita KS",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "ILM",
+   "name": "Wilmington NC",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "IND",
+   "name": "Indianapolis IN",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "ISP",
+   "name": "Islip/Long Island NY",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "JAN",
+   "name": "Jackson MS",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "JAX",
+   "name": "Jacksonville FL",
+   "isHub": true,
+   "isFocusCity": false
+  },
+  {
+   "code": "LBB",
+   "name": "Lubbock TX",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "LEX",
+   "name": "Lexington KY",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "LIT",
+   "name": "Little Rock AR",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "MAF",
+   "name": "Midland/Odessa TX",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "MCI",
+   "name": "Kansas City MO",
+   "isHub": true,
+   "isFocusCity": false
+  },
+  {
+   "code": "MCN",
+   "name": "Macon GA",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "MDT",
+   "name": "Harrisburg PA",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "MEM",
+   "name": "Memphis TN",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "MFE",
+   "name": "McAllen TX",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "MHT",
+   "name": "Manchester NH",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "MKE",
+   "name": "Milwaukee WI",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "MLB",
+   "name": "Melbourne FL",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "MOB",
+   "name": "Mobile AL",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "MSN",
+   "name": "Madison WI",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "MSY",
+   "name": "New Orleans LA",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "MYR",
+   "name": "Myrtle Beach SC",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "OKC",
+   "name": "Oklahoma City OK",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "OMA",
+   "name": "Omaha NE",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "ORH",
+   "name": "Worcester MA",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "PGD",
+   "name": "Punta Gorda FL",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "PHF",
+   "name": "Newport News VA",
+   "isHub": true,
+   "isFocusCity": false
+  },
+  {
+   "code": "PIA",
+   "name": "Peoria IL",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "PIE",
+   "name": "St Pete-Clearwater FL",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "PIT",
+   "name": "Pittsburgh PA",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "PNS",
+   "name": "Pensacola FL",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "PVD",
+   "name": "Providence RI",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "PWM",
+   "name": "Portland ME",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "RDU",
+   "name": "Raleigh-Durham NC",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "RFD",
+   "name": "Chicago/Rockford IL",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "ROA",
+   "name": "Roanoke VA",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "ROC",
+   "name": "Rochester NY",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "SAT",
+   "name": "San Antonio TX",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "SAV",
+   "name": "Savannah GA",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "SBN",
+   "name": "South Bend IN",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "SDF",
+   "name": "Louisville KY",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "SFB",
+   "name": "Orlando/Sanford FL",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "SGF",
+   "name": "Springfield MO",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "SHV",
+   "name": "Shreveport LA",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "SRQ",
+   "name": "Sarasota-Bradenton FL",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "SWF",
+   "name": "Newburgh/Stewart NY",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "SYR",
+   "name": "Syracuse NY",
+   "isHub": true,
+   "isFocusCity": false
+  },
+  {
+   "code": "TLH",
+   "name": "Tallahassee FL",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "TOL",
+   "name": "Toledo OH",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "TRI",
+   "name": "Tri-Cities TN/VA",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "TTN",
+   "name": "Trenton NJ",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "TUL",
+   "name": "Tulsa OK",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "TYS",
+   "name": "Knoxville TN",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "VPS",
+   "name": "Destin/Fort Walton Beach FL",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "XNA",
+   "name": "Northwest Arkansas",
+   "isHub": false,
+   "isFocusCity": false
+  }
+ ],
+ "flights": [
+  {
+   "origin": "RFD",
+   "dest": "SFB",
+   "dep": "04:35",
+   "arr": "08:04",
+   "flight": 1001,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "SFB",
+   "dest": "RFD",
+   "dep": "07:35",
+   "arr": "09:04",
+   "flight": 1002,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "RFD",
+   "dest": "FLL",
+   "dep": "00:40",
+   "arr": "04:32",
+   "flight": 1003,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "FLL",
+   "dest": "RFD",
+   "dep": "05:15",
+   "arr": "07:07",
+   "flight": 1004,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "DAL",
+   "dest": "RFD",
+   "dep": "21:00",
+   "arr": "23:01",
+   "flight": 1005,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "RFD",
+   "dest": "DAL",
+   "dep": "07:20",
+   "arr": "09:21",
+   "flight": 1006,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "PIE",
+   "dest": "RFD",
+   "dep": "05:15",
+   "arr": "06:47",
+   "flight": 1007,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "RFD",
+   "dest": "PIE",
+   "dep": "01:00",
+   "arr": "04:32",
+   "flight": 1008,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "BWI",
+   "dest": "SFB",
+   "dep": "14:35",
+   "arr": "16:35",
+   "flight": 1009,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "SFB",
+   "dest": "BWI",
+   "dep": "14:20",
+   "arr": "16:20",
+   "flight": 1010,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "PGD",
+   "dest": "RFD",
+   "dep": "05:15",
+   "arr": "06:56",
+   "flight": 1011,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "RFD",
+   "dest": "PGD",
+   "dep": "00:50",
+   "arr": "04:31",
+   "flight": 1012,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "DAL",
+   "dest": "SFB",
+   "dep": "21:00",
+   "arr": "00:23",
+   "flight": 1013,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "SFB",
+   "dest": "DAL",
+   "dep": "16:25",
+   "arr": "17:48",
+   "flight": 1014,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "HOU",
+   "dest": "RFD",
+   "dep": "21:00",
+   "arr": "23:19",
+   "flight": 1015,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "RFD",
+   "dest": "HOU",
+   "dep": "18:00",
+   "arr": "20:19",
+   "flight": 1016,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "AUS",
+   "dest": "RFD",
+   "dep": "21:00",
+   "arr": "23:22",
+   "flight": 1017,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "RFD",
+   "dest": "AUS",
+   "dep": "20:55",
+   "arr": "23:17",
+   "flight": 1018,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "BNA",
+   "dest": "RFD",
+   "dep": "20:45",
+   "arr": "22:08",
+   "flight": 1019,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "RFD",
+   "dest": "BNA",
+   "dep": "06:15",
+   "arr": "07:38",
+   "flight": 1020,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "RDU",
+   "dest": "SFB",
+   "dep": "06:45",
+   "arr": "08:17",
+   "flight": 1021,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "SFB",
+   "dest": "RDU",
+   "dep": "04:30",
+   "arr": "06:02",
+   "flight": 1022,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "BNA",
+   "dest": "SFB",
+   "dep": "04:30",
+   "arr": "07:11",
+   "flight": 1023,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "SFB",
+   "dest": "BNA",
+   "dep": "19:10",
+   "arr": "19:51",
+   "flight": 1024,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "RFD",
+   "dest": "CLT",
+   "dep": "07:45",
+   "arr": "10:32",
+   "flight": 1025,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "CLT",
+   "dest": "RFD",
+   "dep": "16:00",
+   "arr": "16:47",
+   "flight": 1026,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "HOU",
+   "dest": "SFB",
+   "dep": "21:00",
+   "arr": "00:09",
+   "flight": 1027,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "SFB",
+   "dest": "HOU",
+   "dep": "19:10",
+   "arr": "20:19",
+   "flight": 1028,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "CLT",
+   "dest": "SFB",
+   "dep": "04:30",
+   "arr": "05:54",
+   "flight": 1029,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "SFB",
+   "dest": "CLT",
+   "dep": "11:45",
+   "arr": "13:09",
+   "flight": 1030,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "RFD",
+   "dest": "MSY",
+   "dep": "21:00",
+   "arr": "23:09",
+   "flight": 1031,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "MSY",
+   "dest": "RFD",
+   "dep": "04:30",
+   "arr": "06:39",
+   "flight": 1032,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "MCI",
+   "dest": "RFD",
+   "dep": "19:00",
+   "arr": "20:14",
+   "flight": 1033,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "RFD",
+   "dest": "MCI",
+   "dep": "17:05",
+   "arr": "18:19",
+   "flight": 1034,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "MCI",
+   "dest": "SFB",
+   "dep": "05:35",
+   "arr": "09:08",
+   "flight": 1035,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "MCI",
+   "dest": "SFB",
+   "dep": "10:35",
+   "arr": "14:08",
+   "flight": 1036,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "SFB",
+   "dest": "MCI",
+   "dep": "11:45",
+   "arr": "13:18",
+   "flight": 1037,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "SFB",
+   "dest": "MCI",
+   "dep": "19:05",
+   "arr": "20:38",
+   "flight": 1038,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "BLV",
+   "dest": "RFD",
+   "dep": "19:15",
+   "arr": "20:18",
+   "flight": 1039,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "RFD",
+   "dest": "BLV",
+   "dep": "17:30",
+   "arr": "18:33",
+   "flight": 1040,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "HPN",
+   "dest": "SFB",
+   "dep": "04:30",
+   "arr": "06:51",
+   "flight": 1041,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "SFB",
+   "dest": "HPN",
+   "dep": "20:05",
+   "arr": "22:26",
+   "flight": 1042,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "MCI",
+   "dest": "DAL",
+   "dep": "13:45",
+   "arr": "15:11",
+   "flight": 1043,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "MCI",
+   "dest": "DAL",
+   "dep": "18:50",
+   "arr": "20:16",
+   "flight": 1044,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "DAL",
+   "dest": "MCI",
+   "dep": "10:05",
+   "arr": "11:31",
+   "flight": 1045,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "DAL",
+   "dest": "MCI",
+   "dep": "18:30",
+   "arr": "19:56",
+   "flight": 1046,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "HOU",
+   "dest": "DAL",
+   "dep": "17:40",
+   "arr": "18:41",
+   "flight": 1047,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "DAL",
+   "dest": "HOU",
+   "dep": "15:55",
+   "arr": "16:56",
+   "flight": 1048,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "SFB",
+   "dest": "SYR",
+   "dep": "05:25",
+   "arr": "07:55",
+   "flight": 1049,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "SFB",
+   "dest": "SYR",
+   "dep": "08:00",
+   "arr": "10:30",
+   "flight": 1050,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "SFB",
+   "dest": "SYR",
+   "dep": "10:55",
+   "arr": "13:25",
+   "flight": 1051,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "SFB",
+   "dest": "SYR",
+   "dep": "13:45",
+   "arr": "16:15",
+   "flight": 1052,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "SYR",
+   "dest": "SFB",
+   "dep": "08:35",
+   "arr": "11:05",
+   "flight": 1053,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "SYR",
+   "dest": "SFB",
+   "dep": "11:10",
+   "arr": "13:40",
+   "flight": 1054,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "SYR",
+   "dest": "SFB",
+   "dep": "14:05",
+   "arr": "16:35",
+   "flight": 1055,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "SYR",
+   "dest": "SFB",
+   "dep": "16:55",
+   "arr": "19:25",
+   "flight": 1056,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "MCI",
+   "dest": "FLL",
+   "dep": "07:15",
+   "arr": "11:09",
+   "flight": 1057,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "MCI",
+   "dest": "FLL",
+   "dep": "20:35",
+   "arr": "00:29",
+   "flight": 1058,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "FLL",
+   "dest": "MCI",
+   "dep": "04:40",
+   "arr": "06:34",
+   "flight": 1059,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "FLL",
+   "dest": "MCI",
+   "dep": "11:55",
+   "arr": "13:49",
+   "flight": 1060,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "PIE",
+   "dest": "FLL",
+   "dep": "04:30",
+   "arr": "05:27",
+   "flight": 1061,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "FLL",
+   "dest": "PIE",
+   "dep": "16:45",
+   "arr": "17:42",
+   "flight": 1062,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "PHF",
+   "dest": "SFB",
+   "dep": "09:10",
+   "arr": "10:56",
+   "flight": 1063,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "PHF",
+   "dest": "SFB",
+   "dep": "11:35",
+   "arr": "13:21",
+   "flight": 1064,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "PHF",
+   "dest": "SFB",
+   "dep": "13:55",
+   "arr": "15:41",
+   "flight": 1065,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "PHF",
+   "dest": "SFB",
+   "dep": "16:15",
+   "arr": "18:01",
+   "flight": 1066,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "SFB",
+   "dest": "PHF",
+   "dep": "04:30",
+   "arr": "06:16",
+   "flight": 1067,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "SFB",
+   "dest": "PHF",
+   "dep": "06:50",
+   "arr": "08:36",
+   "flight": 1068,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "SFB",
+   "dest": "PHF",
+   "dep": "09:05",
+   "arr": "10:51",
+   "flight": 1069,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "SFB",
+   "dest": "PHF",
+   "dep": "11:30",
+   "arr": "13:16",
+   "flight": 1070,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "MCI",
+   "dest": "PIE",
+   "dep": "12:20",
+   "arr": "15:52",
+   "flight": 1071,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "MCI",
+   "dest": "PIE",
+   "dep": "20:40",
+   "arr": "00:12",
+   "flight": 1072,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "PIE",
+   "dest": "MCI",
+   "dep": "16:35",
+   "arr": "18:07",
+   "flight": 1073,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "PIE",
+   "dest": "MCI",
+   "dep": "18:25",
+   "arr": "19:57",
+   "flight": 1074,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "OMA",
+   "dest": "RFD",
+   "dep": "15:10",
+   "arr": "16:24",
+   "flight": 1075,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "RFD",
+   "dest": "OMA",
+   "dep": "13:15",
+   "arr": "14:29",
+   "flight": 1076,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "MCI",
+   "dest": "BNA",
+   "dep": "14:55",
+   "arr": "16:24",
+   "flight": 1077,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "MCI",
+   "dest": "BNA",
+   "dep": "20:35",
+   "arr": "22:04",
+   "flight": 1078,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "BNA",
+   "dest": "MCI",
+   "dep": "08:20",
+   "arr": "09:49",
+   "flight": 1079,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "BNA",
+   "dest": "MCI",
+   "dep": "18:25",
+   "arr": "19:54",
+   "flight": 1080,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "MCI",
+   "dest": "AUS",
+   "dep": "12:15",
+   "arr": "14:02",
+   "flight": 1081,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "MCI",
+   "dest": "AUS",
+   "dep": "15:40",
+   "arr": "17:27",
+   "flight": 1082,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "AUS",
+   "dest": "MCI",
+   "dep": "06:30",
+   "arr": "08:17",
+   "flight": 1083,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "AUS",
+   "dest": "MCI",
+   "dep": "08:10",
+   "arr": "09:57",
+   "flight": 1084,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "ELP",
+   "dest": "DAL",
+   "dep": "17:40",
+   "arr": "20:17",
+   "flight": 1085,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "DAL",
+   "dest": "ELP",
+   "dep": "16:20",
+   "arr": "16:57",
+   "flight": 1086,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "JAX",
+   "dest": "BWI",
+   "dep": "07:05",
+   "arr": "08:54",
+   "flight": 1087,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "JAX",
+   "dest": "BWI",
+   "dep": "12:05",
+   "arr": "13:54",
+   "flight": 1088,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "JAX",
+   "dest": "BWI",
+   "dep": "19:30",
+   "arr": "21:19",
+   "flight": 1089,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "BWI",
+   "dest": "JAX",
+   "dep": "04:35",
+   "arr": "06:24",
+   "flight": 1090,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "BWI",
+   "dest": "JAX",
+   "dep": "09:35",
+   "arr": "11:24",
+   "flight": 1091,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "BWI",
+   "dest": "JAX",
+   "dep": "17:00",
+   "arr": "18:49",
+   "flight": 1092,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "AUS",
+   "dest": "DAL",
+   "dep": "14:45",
+   "arr": "15:40",
+   "flight": 1093,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "DAL",
+   "dest": "AUS",
+   "dep": "19:25",
+   "arr": "20:20",
+   "flight": 1094,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "CLT",
+   "dest": "MCI",
+   "dep": "12:00",
+   "arr": "13:05",
+   "flight": 1095,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "CLT",
+   "dest": "MCI",
+   "dep": "13:50",
+   "arr": "14:55",
+   "flight": 1096,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "MCI",
+   "dest": "CLT",
+   "dep": "12:05",
+   "arr": "15:10",
+   "flight": 1097,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "MCI",
+   "dest": "CLT",
+   "dep": "20:40",
+   "arr": "23:45",
+   "flight": 1098,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "MCI",
+   "dest": "HOU",
+   "dep": "15:35",
+   "arr": "17:24",
+   "flight": 1099,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "HOU",
+   "dest": "MCI",
+   "dep": "18:05",
+   "arr": "19:54",
+   "flight": 1100,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "BDL",
+   "dest": "CLT",
+   "dep": "04:30",
+   "arr": "06:22",
+   "flight": 1101,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "CLT",
+   "dest": "BDL",
+   "dep": "19:20",
+   "arr": "21:12",
+   "flight": 1102,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "GSP",
+   "dest": "RFD",
+   "dep": "10:55",
+   "arr": "11:39",
+   "flight": 1103,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "RFD",
+   "dest": "GSP",
+   "dep": "07:30",
+   "arr": "10:14",
+   "flight": 1104,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "PHF",
+   "dest": "FLL",
+   "dep": "07:00",
+   "arr": "09:03",
+   "flight": 1105,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "PHF",
+   "dest": "FLL",
+   "dep": "08:25",
+   "arr": "10:28",
+   "flight": 1106,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "PHF",
+   "dest": "FLL",
+   "dep": "09:20",
+   "arr": "11:23",
+   "flight": 1107,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "PHF",
+   "dest": "FLL",
+   "dep": "13:55",
+   "arr": "15:58",
+   "flight": 1108,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "PHF",
+   "dest": "FLL",
+   "dep": "15:25",
+   "arr": "17:28",
+   "flight": 1109,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "PHF",
+   "dest": "FLL",
+   "dep": "20:55",
+   "arr": "22:58",
+   "flight": 1110,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "FLL",
+   "dest": "PHF",
+   "dep": "06:30",
+   "arr": "08:33",
+   "flight": 1111,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "FLL",
+   "dest": "PHF",
+   "dep": "08:50",
+   "arr": "10:53",
+   "flight": 1112,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "FLL",
+   "dest": "PHF",
+   "dep": "11:10",
+   "arr": "13:13",
+   "flight": 1113,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "FLL",
+   "dest": "PHF",
+   "dep": "13:30",
+   "arr": "15:33",
+   "flight": 1114,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "FLL",
+   "dest": "PHF",
+   "dep": "15:50",
+   "arr": "17:53",
+   "flight": 1115,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "FLL",
+   "dest": "PHF",
+   "dep": "18:10",
+   "arr": "20:13",
+   "flight": 1116,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "RFD",
+   "dest": "PHF",
+   "dep": "07:55",
+   "arr": "10:54",
+   "flight": 1117,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "RFD",
+   "dest": "PHF",
+   "dep": "10:15",
+   "arr": "13:14",
+   "flight": 1118,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "RFD",
+   "dest": "PHF",
+   "dep": "12:35",
+   "arr": "15:34",
+   "flight": 1119,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "PHF",
+   "dest": "RFD",
+   "dep": "11:35",
+   "arr": "12:34",
+   "flight": 1120,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "PHF",
+   "dest": "RFD",
+   "dep": "16:15",
+   "arr": "17:14",
+   "flight": 1121,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "PHF",
+   "dest": "RFD",
+   "dep": "18:35",
+   "arr": "19:34",
+   "flight": 1122,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "ALB",
+   "dest": "RFD",
+   "dep": "04:30",
+   "arr": "05:32",
+   "flight": 1123,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "RFD",
+   "dest": "ALB",
+   "dep": "20:15",
+   "arr": "23:17",
+   "flight": 1124,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "SFB",
+   "dest": "FLL",
+   "dep": "14:05",
+   "arr": "15:01",
+   "flight": 1125,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "FLL",
+   "dest": "SFB",
+   "dep": "12:05",
+   "arr": "13:01",
+   "flight": 1126,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "FLL",
+   "dest": "SYR",
+   "dep": "05:00",
+   "arr": "07:54",
+   "flight": 1127,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "FLL",
+   "dest": "SYR",
+   "dep": "07:45",
+   "arr": "10:39",
+   "flight": 1128,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "FLL",
+   "dest": "SYR",
+   "dep": "10:30",
+   "arr": "13:24",
+   "flight": 1129,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "FLL",
+   "dest": "SYR",
+   "dep": "13:15",
+   "arr": "16:09",
+   "flight": 1130,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "FLL",
+   "dest": "SYR",
+   "dep": "16:00",
+   "arr": "18:54",
+   "flight": 1131,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "SYR",
+   "dest": "FLL",
+   "dep": "05:50",
+   "arr": "08:44",
+   "flight": 1132,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "SYR",
+   "dest": "FLL",
+   "dep": "08:35",
+   "arr": "11:29",
+   "flight": 1133,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "SYR",
+   "dest": "FLL",
+   "dep": "11:20",
+   "arr": "14:14",
+   "flight": 1134,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "SYR",
+   "dest": "FLL",
+   "dep": "16:50",
+   "arr": "19:44",
+   "flight": 1135,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "SYR",
+   "dest": "FLL",
+   "dep": "19:35",
+   "arr": "22:29",
+   "flight": 1136,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "RDU",
+   "dest": "MCI",
+   "dep": "08:35",
+   "arr": "09:54",
+   "flight": 1137,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "RDU",
+   "dest": "MCI",
+   "dep": "11:55",
+   "arr": "13:14",
+   "flight": 1138,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "MCI",
+   "dest": "RDU",
+   "dep": "05:35",
+   "arr": "08:54",
+   "flight": 1139,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "MCI",
+   "dest": "RDU",
+   "dep": "18:55",
+   "arr": "22:14",
+   "flight": 1140,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "DAL",
+   "dest": "BHM",
+   "dep": "18:10",
+   "arr": "19:51",
+   "flight": 1141,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "DAL",
+   "dest": "BHM",
+   "dep": "21:00",
+   "arr": "22:41",
+   "flight": 1142,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "BHM",
+   "dest": "DAL",
+   "dep": "08:25",
+   "arr": "10:06",
+   "flight": 1143,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "BHM",
+   "dest": "DAL",
+   "dep": "20:35",
+   "arr": "22:16",
+   "flight": 1144,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "GSO",
+   "dest": "RFD",
+   "dep": "04:30",
+   "arr": "05:18",
+   "flight": 1145,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "RFD",
+   "dest": "GSO",
+   "dep": "21:00",
+   "arr": "23:48",
+   "flight": 1146,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "JAX",
+   "dest": "AUS",
+   "dep": "08:35",
+   "arr": "10:00",
+   "flight": 1147,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "JAX",
+   "dest": "AUS",
+   "dep": "12:55",
+   "arr": "14:20",
+   "flight": 1148,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "AUS",
+   "dest": "JAX",
+   "dep": "11:00",
+   "arr": "14:25",
+   "flight": 1149,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "AUS",
+   "dest": "JAX",
+   "dep": "15:20",
+   "arr": "18:45",
+   "flight": 1150,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "SYR",
+   "dest": "RFD",
+   "dep": "14:05",
+   "arr": "14:55",
+   "flight": 1151,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "SYR",
+   "dest": "RFD",
+   "dep": "19:30",
+   "arr": "20:20",
+   "flight": 1152,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "RFD",
+   "dest": "SYR",
+   "dep": "10:35",
+   "arr": "13:25",
+   "flight": 1153,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "RFD",
+   "dest": "SYR",
+   "dep": "16:05",
+   "arr": "18:55",
+   "flight": 1154,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "TUL",
+   "dest": "SFB",
+   "dep": "09:10",
+   "arr": "12:40",
+   "flight": 1155,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "SFB",
+   "dest": "TUL",
+   "dep": "13:20",
+   "arr": "14:50",
+   "flight": 1156,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "TUL",
+   "dest": "HOU",
+   "dep": "18:00",
+   "arr": "19:26",
+   "flight": 1157,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "HOU",
+   "dest": "TUL",
+   "dep": "07:00",
+   "arr": "08:26",
+   "flight": 1158,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "JAX",
+   "dest": "PHF",
+   "dep": "14:00",
+   "arr": "15:37",
+   "flight": 1159,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "JAX",
+   "dest": "PHF",
+   "dep": "16:10",
+   "arr": "17:47",
+   "flight": 1160,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "PHF",
+   "dest": "JAX",
+   "dep": "09:15",
+   "arr": "10:52",
+   "flight": 1161,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "PHF",
+   "dest": "JAX",
+   "dep": "11:35",
+   "arr": "13:12",
+   "flight": 1162,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "JAX",
+   "dest": "PIT",
+   "dep": "06:25",
+   "arr": "08:19",
+   "flight": 1163,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "JAX",
+   "dest": "PIT",
+   "dep": "08:35",
+   "arr": "10:29",
+   "flight": 1164,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "JAX",
+   "dest": "PIT",
+   "dep": "19:25",
+   "arr": "21:19",
+   "flight": 1165,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "PIT",
+   "dest": "JAX",
+   "dep": "04:55",
+   "arr": "06:49",
+   "flight": 1166,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "PIT",
+   "dest": "JAX",
+   "dep": "09:15",
+   "arr": "11:09",
+   "flight": 1167,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "PIT",
+   "dest": "JAX",
+   "dep": "11:25",
+   "arr": "13:19",
+   "flight": 1168,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "BWI",
+   "dest": "MCI",
+   "dep": "05:05",
+   "arr": "06:31",
+   "flight": 1169,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "MCI",
+   "dest": "BWI",
+   "dep": "20:35",
+   "arr": "00:01",
+   "flight": 1170,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "PHF",
+   "dest": "PIE",
+   "dep": "06:55",
+   "arr": "08:54",
+   "flight": 1171,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "PHF",
+   "dest": "PIE",
+   "dep": "09:15",
+   "arr": "11:14",
+   "flight": 1172,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "PHF",
+   "dest": "PIE",
+   "dep": "13:55",
+   "arr": "15:54",
+   "flight": 1173,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "PHF",
+   "dest": "PIE",
+   "dep": "16:15",
+   "arr": "18:14",
+   "flight": 1174,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "PHF",
+   "dest": "PIE",
+   "dep": "18:35",
+   "arr": "20:34",
+   "flight": 1175,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "PHF",
+   "dest": "PIE",
+   "dep": "20:55",
+   "arr": "22:54",
+   "flight": 1176,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "PIE",
+   "dest": "PHF",
+   "dep": "06:35",
+   "arr": "08:34",
+   "flight": 1177,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "PIE",
+   "dest": "PHF",
+   "dep": "08:55",
+   "arr": "10:54",
+   "flight": 1178,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "PIE",
+   "dest": "PHF",
+   "dep": "11:15",
+   "arr": "13:14",
+   "flight": 1179,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "PIE",
+   "dest": "PHF",
+   "dep": "13:35",
+   "arr": "15:34",
+   "flight": 1180,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "PIE",
+   "dest": "PHF",
+   "dep": "18:15",
+   "arr": "20:14",
+   "flight": 1181,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "PIE",
+   "dest": "PHF",
+   "dep": "19:00",
+   "arr": "20:59",
+   "flight": 1182,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "IND",
+   "dest": "JAX",
+   "dep": "10:20",
+   "arr": "12:14",
+   "flight": 1183,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "IND",
+   "dest": "JAX",
+   "dep": "11:25",
+   "arr": "13:19",
+   "flight": 1184,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "JAX",
+   "dest": "IND",
+   "dep": "07:30",
+   "arr": "09:24",
+   "flight": 1185,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "JAX",
+   "dest": "IND",
+   "dep": "19:30",
+   "arr": "21:24",
+   "flight": 1186,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "MCI",
+   "dest": "MSY",
+   "dep": "10:35",
+   "arr": "12:29",
+   "flight": 1187,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "MCI",
+   "dest": "MSY",
+   "dep": "13:55",
+   "arr": "15:49",
+   "flight": 1188,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "MSY",
+   "dest": "MCI",
+   "dep": "16:30",
+   "arr": "18:24",
+   "flight": 1189,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "MSY",
+   "dest": "MCI",
+   "dep": "17:55",
+   "arr": "19:49",
+   "flight": 1190,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "MCI",
+   "dest": "SAT",
+   "dep": "14:00",
+   "arr": "15:56",
+   "flight": 1191,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "MCI",
+   "dest": "SAT",
+   "dep": "17:15",
+   "arr": "19:11",
+   "flight": 1192,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "SAT",
+   "dest": "MCI",
+   "dep": "06:20",
+   "arr": "08:16",
+   "flight": 1193,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "SAT",
+   "dest": "MCI",
+   "dep": "08:45",
+   "arr": "10:41",
+   "flight": 1194,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "MCI",
+   "dest": "PGD",
+   "dep": "05:25",
+   "arr": "09:10",
+   "flight": 1195,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "MCI",
+   "dest": "PGD",
+   "dep": "13:55",
+   "arr": "17:40",
+   "flight": 1196,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "PGD",
+   "dest": "MCI",
+   "dep": "09:50",
+   "arr": "11:35",
+   "flight": 1197,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "PGD",
+   "dest": "MCI",
+   "dep": "18:20",
+   "arr": "20:05",
+   "flight": 1198,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "PHF",
+   "dest": "DAL",
+   "dep": "11:35",
+   "arr": "13:28",
+   "flight": 1199,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "PHF",
+   "dest": "DAL",
+   "dep": "15:25",
+   "arr": "17:18",
+   "flight": 1200,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "PHF",
+   "dest": "DAL",
+   "dep": "16:15",
+   "arr": "18:08",
+   "flight": 1201,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "PHF",
+   "dest": "DAL",
+   "dep": "18:25",
+   "arr": "20:18",
+   "flight": 1202,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "PHF",
+   "dest": "DAL",
+   "dep": "20:55",
+   "arr": "22:48",
+   "flight": 1203,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "DAL",
+   "dest": "PHF",
+   "dep": "04:40",
+   "arr": "08:33",
+   "flight": 1204,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "DAL",
+   "dest": "PHF",
+   "dep": "07:00",
+   "arr": "10:53",
+   "flight": 1205,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "DAL",
+   "dest": "PHF",
+   "dep": "09:20",
+   "arr": "13:13",
+   "flight": 1206,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "DAL",
+   "dest": "PHF",
+   "dep": "11:40",
+   "arr": "15:33",
+   "flight": 1207,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "DAL",
+   "dest": "PHF",
+   "dep": "16:20",
+   "arr": "20:13",
+   "flight": 1208,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "DSM",
+   "dest": "RFD",
+   "dep": "07:40",
+   "arr": "08:40",
+   "flight": 1209,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "RFD",
+   "dest": "DSM",
+   "dep": "06:00",
+   "arr": "07:00",
+   "flight": 1210,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "JAX",
+   "dest": "CLT",
+   "dep": "14:00",
+   "arr": "15:11",
+   "flight": 1211,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "JAX",
+   "dest": "CLT",
+   "dep": "17:15",
+   "arr": "18:26",
+   "flight": 1212,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "CLT",
+   "dest": "JAX",
+   "dep": "04:30",
+   "arr": "05:41",
+   "flight": 1213,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "CLT",
+   "dest": "JAX",
+   "dep": "16:25",
+   "arr": "17:36",
+   "flight": 1214,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "JAX",
+   "dest": "BLV",
+   "dep": "07:30",
+   "arr": "08:28",
+   "flight": 1215,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "JAX",
+   "dest": "BLV",
+   "dep": "14:00",
+   "arr": "14:58",
+   "flight": 1216,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "BLV",
+   "dest": "JAX",
+   "dep": "04:40",
+   "arr": "07:38",
+   "flight": 1217,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "BLV",
+   "dest": "JAX",
+   "dep": "09:15",
+   "arr": "12:13",
+   "flight": 1218,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "ABE",
+   "dest": "SFB",
+   "dep": "13:30",
+   "arr": "15:47",
+   "flight": 1219,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "SFB",
+   "dest": "ABE",
+   "dep": "20:50",
+   "arr": "23:07",
+   "flight": 1220,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "MCI",
+   "dest": "IND",
+   "dep": "07:20",
+   "arr": "09:45",
+   "flight": 1221,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "IND",
+   "dest": "MCI",
+   "dep": "04:30",
+   "arr": "04:55",
+   "flight": 1222,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "SYR",
+   "dest": "PIE",
+   "dep": "05:25",
+   "arr": "08:09",
+   "flight": 1223,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "SYR",
+   "dest": "PIE",
+   "dep": "08:35",
+   "arr": "11:19",
+   "flight": 1224,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "SYR",
+   "dest": "PIE",
+   "dep": "11:20",
+   "arr": "14:04",
+   "flight": 1225,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "SYR",
+   "dest": "PIE",
+   "dep": "14:05",
+   "arr": "16:49",
+   "flight": 1226,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "SYR",
+   "dest": "PIE",
+   "dep": "16:50",
+   "arr": "19:34",
+   "flight": 1227,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "PIE",
+   "dest": "SYR",
+   "dep": "05:10",
+   "arr": "07:54",
+   "flight": 1228,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "PIE",
+   "dest": "SYR",
+   "dep": "07:55",
+   "arr": "10:39",
+   "flight": 1229,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "PIE",
+   "dest": "SYR",
+   "dep": "13:25",
+   "arr": "16:09",
+   "flight": 1230,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "PIE",
+   "dest": "SYR",
+   "dep": "16:05",
+   "arr": "18:49",
+   "flight": 1231,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "PIE",
+   "dest": "SYR",
+   "dep": "16:35",
+   "arr": "19:19",
+   "flight": 1232,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "LBB",
+   "dest": "DAL",
+   "dep": "04:30",
+   "arr": "05:37",
+   "flight": 1233,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "DAL",
+   "dest": "LBB",
+   "dep": "18:50",
+   "arr": "19:57",
+   "flight": 1234,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "BLV",
+   "dest": "BNA",
+   "dep": "18:00",
+   "arr": "19:00",
+   "flight": 1235,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "BNA",
+   "dest": "BLV",
+   "dep": "19:40",
+   "arr": "20:40",
+   "flight": 1236,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "GSP",
+   "dest": "FLL",
+   "dep": "04:30",
+   "arr": "06:16",
+   "flight": 1237,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "FLL",
+   "dest": "GSP",
+   "dep": "20:25",
+   "arr": "22:11",
+   "flight": 1238,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "BHM",
+   "dest": "HOU",
+   "dep": "04:40",
+   "arr": "06:19",
+   "flight": 1239,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "BHM",
+   "dest": "HOU",
+   "dep": "23:20",
+   "arr": "00:59",
+   "flight": 1240,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "HOU",
+   "dest": "BHM",
+   "dep": "04:40",
+   "arr": "06:19",
+   "flight": 1241,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "HOU",
+   "dest": "BHM",
+   "dep": "20:20",
+   "arr": "21:59",
+   "flight": 1242,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "JAX",
+   "dest": "BDL",
+   "dep": "09:40",
+   "arr": "12:03",
+   "flight": 1243,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "JAX",
+   "dest": "BDL",
+   "dep": "11:50",
+   "arr": "14:13",
+   "flight": 1244,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "JAX",
+   "dest": "BDL",
+   "dep": "18:20",
+   "arr": "20:43",
+   "flight": 1245,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "BDL",
+   "dest": "JAX",
+   "dep": "05:30",
+   "arr": "07:53",
+   "flight": 1246,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "BDL",
+   "dest": "JAX",
+   "dep": "13:10",
+   "arr": "15:33",
+   "flight": 1247,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "BDL",
+   "dest": "JAX",
+   "dep": "15:15",
+   "arr": "17:38",
+   "flight": 1248,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "JAX",
+   "dest": "CMH",
+   "dep": "14:00",
+   "arr": "15:50",
+   "flight": 1249,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "JAX",
+   "dest": "CMH",
+   "dep": "18:20",
+   "arr": "20:10",
+   "flight": 1250,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "CMH",
+   "dest": "JAX",
+   "dep": "05:00",
+   "arr": "06:50",
+   "flight": 1251,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "CMH",
+   "dest": "JAX",
+   "dep": "16:55",
+   "arr": "18:45",
+   "flight": 1252,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "JAX",
+   "dest": "MCI",
+   "dep": "11:50",
+   "arr": "13:15",
+   "flight": 1253,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "MCI",
+   "dest": "JAX",
+   "dep": "05:35",
+   "arr": "09:00",
+   "flight": 1254,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "ABE",
+   "dest": "MYR",
+   "dep": "04:30",
+   "arr": "06:03",
+   "flight": 1255,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "MYR",
+   "dest": "ABE",
+   "dep": "11:15",
+   "arr": "12:48",
+   "flight": 1256,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "CHS",
+   "dest": "SFB",
+   "dep": "19:00",
+   "arr": "20:07",
+   "flight": 1257,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "SFB",
+   "dest": "CHS",
+   "dep": "16:30",
+   "arr": "17:37",
+   "flight": 1258,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "JAX",
+   "dest": "RDU",
+   "dep": "06:30",
+   "arr": "07:50",
+   "flight": 1259,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "RDU",
+   "dest": "JAX",
+   "dep": "04:30",
+   "arr": "05:50",
+   "flight": 1260,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "MCI",
+   "dest": "MKE",
+   "dep": "07:15",
+   "arr": "08:39",
+   "flight": 1261,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "MCI",
+   "dest": "MKE",
+   "dep": "12:15",
+   "arr": "13:39",
+   "flight": 1262,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "MCI",
+   "dest": "MKE",
+   "dep": "20:35",
+   "arr": "21:59",
+   "flight": 1263,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "MKE",
+   "dest": "MCI",
+   "dep": "05:10",
+   "arr": "06:34",
+   "flight": 1264,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "MKE",
+   "dest": "MCI",
+   "dep": "11:50",
+   "arr": "13:14",
+   "flight": 1265,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "MKE",
+   "dest": "MCI",
+   "dep": "15:10",
+   "arr": "16:34",
+   "flight": 1266,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "PHF",
+   "dest": "MSY",
+   "dep": "06:55",
+   "arr": "08:24",
+   "flight": 1267,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "PHF",
+   "dest": "MSY",
+   "dep": "09:15",
+   "arr": "10:44",
+   "flight": 1268,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "PHF",
+   "dest": "MSY",
+   "dep": "11:35",
+   "arr": "13:04",
+   "flight": 1269,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "PHF",
+   "dest": "MSY",
+   "dep": "13:55",
+   "arr": "15:24",
+   "flight": 1270,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "PHF",
+   "dest": "MSY",
+   "dep": "16:15",
+   "arr": "17:44",
+   "flight": 1271,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "PHF",
+   "dest": "MSY",
+   "dep": "18:35",
+   "arr": "20:04",
+   "flight": 1272,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "MSY",
+   "dest": "PHF",
+   "dep": "05:05",
+   "arr": "08:34",
+   "flight": 1273,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "MSY",
+   "dest": "PHF",
+   "dep": "07:25",
+   "arr": "10:54",
+   "flight": 1274,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "MSY",
+   "dest": "PHF",
+   "dep": "09:45",
+   "arr": "13:14",
+   "flight": 1275,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "MSY",
+   "dest": "PHF",
+   "dep": "12:05",
+   "arr": "15:34",
+   "flight": 1276,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "MSY",
+   "dest": "PHF",
+   "dep": "14:25",
+   "arr": "17:54",
+   "flight": 1277,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "MSY",
+   "dest": "PHF",
+   "dep": "16:45",
+   "arr": "20:14",
+   "flight": 1278,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "PHF",
+   "dest": "PVD",
+   "dep": "06:55",
+   "arr": "08:18",
+   "flight": 1279,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "PHF",
+   "dest": "PVD",
+   "dep": "09:15",
+   "arr": "10:38",
+   "flight": 1280,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "PHF",
+   "dest": "PVD",
+   "dep": "13:55",
+   "arr": "15:18",
+   "flight": 1281,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "PHF",
+   "dest": "PVD",
+   "dep": "16:15",
+   "arr": "17:38",
+   "flight": 1282,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "PHF",
+   "dest": "PVD",
+   "dep": "18:35",
+   "arr": "19:58",
+   "flight": 1283,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "PHF",
+   "dest": "PVD",
+   "dep": "20:55",
+   "arr": "22:18",
+   "flight": 1284,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "PVD",
+   "dest": "PHF",
+   "dep": "04:50",
+   "arr": "06:13",
+   "flight": 1285,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "PVD",
+   "dest": "PHF",
+   "dep": "07:10",
+   "arr": "08:33",
+   "flight": 1286,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "PVD",
+   "dest": "PHF",
+   "dep": "09:30",
+   "arr": "10:53",
+   "flight": 1287,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "PVD",
+   "dest": "PHF",
+   "dep": "11:50",
+   "arr": "13:13",
+   "flight": 1288,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "PVD",
+   "dest": "PHF",
+   "dep": "16:30",
+   "arr": "17:53",
+   "flight": 1289,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "PVD",
+   "dest": "PHF",
+   "dep": "18:50",
+   "arr": "20:13",
+   "flight": 1290,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "PHF",
+   "dest": "BNA",
+   "dep": "09:10",
+   "arr": "09:52",
+   "flight": 1291,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "PHF",
+   "dest": "BNA",
+   "dep": "20:55",
+   "arr": "21:37",
+   "flight": 1292,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "BNA",
+   "dest": "PHF",
+   "dep": "10:35",
+   "arr": "13:17",
+   "flight": 1293,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "BNA",
+   "dest": "PHF",
+   "dep": "17:30",
+   "arr": "20:12",
+   "flight": 1294,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "SYR",
+   "dest": "SRQ",
+   "dep": "05:50",
+   "arr": "08:46",
+   "flight": 1295,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "SYR",
+   "dest": "SRQ",
+   "dep": "08:35",
+   "arr": "11:31",
+   "flight": 1296,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "SYR",
+   "dest": "SRQ",
+   "dep": "11:20",
+   "arr": "14:16",
+   "flight": 1297,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "SYR",
+   "dest": "SRQ",
+   "dep": "19:05",
+   "arr": "22:01",
+   "flight": 1298,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "SYR",
+   "dest": "SRQ",
+   "dep": "19:35",
+   "arr": "22:31",
+   "flight": 1299,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "SRQ",
+   "dest": "SYR",
+   "dep": "04:55",
+   "arr": "07:51",
+   "flight": 1300,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "SRQ",
+   "dest": "SYR",
+   "dep": "07:45",
+   "arr": "10:41",
+   "flight": 1301,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "SRQ",
+   "dest": "SYR",
+   "dep": "10:25",
+   "arr": "13:21",
+   "flight": 1302,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "SRQ",
+   "dest": "SYR",
+   "dep": "13:10",
+   "arr": "16:06",
+   "flight": 1303,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "SRQ",
+   "dest": "SYR",
+   "dep": "15:55",
+   "arr": "18:51",
+   "flight": 1304,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "SYR",
+   "dest": "CLT",
+   "dep": "05:50",
+   "arr": "07:37",
+   "flight": 1305,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "SYR",
+   "dest": "CLT",
+   "dep": "11:20",
+   "arr": "13:07",
+   "flight": 1306,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "SYR",
+   "dest": "CLT",
+   "dep": "16:50",
+   "arr": "18:37",
+   "flight": 1307,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "SYR",
+   "dest": "CLT",
+   "dep": "19:35",
+   "arr": "21:22",
+   "flight": 1308,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "CLT",
+   "dest": "SYR",
+   "dep": "09:25",
+   "arr": "11:12",
+   "flight": 1309,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "CLT",
+   "dest": "SYR",
+   "dep": "11:40",
+   "arr": "13:27",
+   "flight": 1310,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "CLT",
+   "dest": "SYR",
+   "dep": "14:25",
+   "arr": "16:12",
+   "flight": 1311,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "CLT",
+   "dest": "SYR",
+   "dep": "17:10",
+   "arr": "18:57",
+   "flight": 1312,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "PVD",
+   "dest": "JAX",
+   "dep": "12:55",
+   "arr": "15:28",
+   "flight": 1313,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "PVD",
+   "dest": "JAX",
+   "dep": "16:10",
+   "arr": "18:43",
+   "flight": 1314,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "JAX",
+   "dest": "PVD",
+   "dep": "09:40",
+   "arr": "12:13",
+   "flight": 1315,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "JAX",
+   "dest": "PVD",
+   "dep": "12:55",
+   "arr": "15:28",
+   "flight": 1316,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "LIT",
+   "dest": "DAL",
+   "dep": "04:30",
+   "arr": "05:38",
+   "flight": 1317,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "DAL",
+   "dest": "LIT",
+   "dep": "20:20",
+   "arr": "21:28",
+   "flight": 1318,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "MCI",
+   "dest": "CMH",
+   "dep": "15:40",
+   "arr": "18:30",
+   "flight": 1319,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "CMH",
+   "dest": "MCI",
+   "dep": "19:10",
+   "arr": "20:00",
+   "flight": 1320,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "HOU",
+   "dest": "PHF",
+   "dep": "04:30",
+   "arr": "08:33",
+   "flight": 1321,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "HOU",
+   "dest": "PHF",
+   "dep": "06:50",
+   "arr": "10:53",
+   "flight": 1322,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "HOU",
+   "dest": "PHF",
+   "dep": "09:10",
+   "arr": "13:13",
+   "flight": 1323,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "HOU",
+   "dest": "PHF",
+   "dep": "11:30",
+   "arr": "15:33",
+   "flight": 1324,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "HOU",
+   "dest": "PHF",
+   "dep": "13:50",
+   "arr": "17:53",
+   "flight": 1325,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "HOU",
+   "dest": "PHF",
+   "dep": "16:10",
+   "arr": "20:13",
+   "flight": 1326,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "PHF",
+   "dest": "HOU",
+   "dep": "06:05",
+   "arr": "08:08",
+   "flight": 1327,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "PHF",
+   "dest": "HOU",
+   "dep": "07:00",
+   "arr": "09:03",
+   "flight": 1328,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "PHF",
+   "dest": "HOU",
+   "dep": "09:15",
+   "arr": "11:18",
+   "flight": 1329,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "PHF",
+   "dest": "HOU",
+   "dep": "11:35",
+   "arr": "13:38",
+   "flight": 1330,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "PHF",
+   "dest": "HOU",
+   "dep": "18:35",
+   "arr": "20:38",
+   "flight": 1331,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "PHF",
+   "dest": "HOU",
+   "dep": "20:55",
+   "arr": "22:58",
+   "flight": 1332,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "JAX",
+   "dest": "MSY",
+   "dep": "05:20",
+   "arr": "05:55",
+   "flight": 1333,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "MSY",
+   "dest": "JAX",
+   "dep": "05:20",
+   "arr": "07:55",
+   "flight": 1334,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "SYR",
+   "dest": "BNA",
+   "dep": "13:55",
+   "arr": "14:59",
+   "flight": 1335,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "BNA",
+   "dest": "SYR",
+   "dep": "04:50",
+   "arr": "07:54",
+   "flight": 1336,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "RFD",
+   "dest": "DAY",
+   "dep": "05:05",
+   "arr": "07:13",
+   "flight": 1337,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "RFD",
+   "dest": "DAY",
+   "dep": "11:20",
+   "arr": "13:28",
+   "flight": 1338,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "DAY",
+   "dest": "RFD",
+   "dep": "10:00",
+   "arr": "10:08",
+   "flight": 1339,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "DAY",
+   "dest": "RFD",
+   "dep": "20:25",
+   "arr": "20:33",
+   "flight": 1340,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "ABE",
+   "dest": "FLL",
+   "dep": "20:50",
+   "arr": "23:33",
+   "flight": 1341,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "FLL",
+   "dest": "ABE",
+   "dep": "17:20",
+   "arr": "20:03",
+   "flight": 1342,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "MCI",
+   "dest": "PNS",
+   "dep": "10:35",
+   "arr": "12:40",
+   "flight": 1343,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "MCI",
+   "dest": "PNS",
+   "dep": "19:50",
+   "arr": "21:55",
+   "flight": 1344,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "PNS",
+   "dest": "MCI",
+   "dep": "04:30",
+   "arr": "06:35",
+   "flight": 1345,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "PNS",
+   "dest": "MCI",
+   "dep": "16:10",
+   "arr": "18:15",
+   "flight": 1346,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "SAT",
+   "dest": "JAX",
+   "dep": "01:00",
+   "arr": "04:38",
+   "flight": 1347,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "JAX",
+   "dest": "SAT",
+   "dep": "16:10",
+   "arr": "17:48",
+   "flight": 1348,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "AUS",
+   "dest": "BHM",
+   "dep": "20:40",
+   "arr": "22:37",
+   "flight": 1349,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "BHM",
+   "dest": "AUS",
+   "dep": "07:00",
+   "arr": "08:57",
+   "flight": 1350,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "JAX",
+   "dest": "TYS",
+   "dep": "05:20",
+   "arr": "06:40",
+   "flight": 1351,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "JAX",
+   "dest": "TYS",
+   "dep": "19:25",
+   "arr": "20:45",
+   "flight": 1352,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "TYS",
+   "dest": "JAX",
+   "dep": "04:30",
+   "arr": "05:50",
+   "flight": 1353,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "TYS",
+   "dest": "JAX",
+   "dep": "07:40",
+   "arr": "09:00",
+   "flight": 1354,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "MCI",
+   "dest": "BLV",
+   "dep": "07:15",
+   "arr": "08:19",
+   "flight": 1355,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "MCI",
+   "dest": "BLV",
+   "dep": "12:15",
+   "arr": "13:19",
+   "flight": 1356,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "BLV",
+   "dest": "MCI",
+   "dep": "10:25",
+   "arr": "11:29",
+   "flight": 1357,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "BLV",
+   "dest": "MCI",
+   "dep": "15:30",
+   "arr": "16:34",
+   "flight": 1358,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "BDL",
+   "dest": "DAB",
+   "dep": "04:30",
+   "arr": "07:07",
+   "flight": 1359,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "DAB",
+   "dest": "BDL",
+   "dep": "21:00",
+   "arr": "23:37",
+   "flight": 1360,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "CAE",
+   "dest": "FLL",
+   "dep": "15:00",
+   "arr": "16:40",
+   "flight": 1361,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "FLL",
+   "dest": "CAE",
+   "dep": "12:40",
+   "arr": "14:20",
+   "flight": 1362,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "DAY",
+   "dest": "DAL",
+   "dep": "14:10",
+   "arr": "15:29",
+   "flight": 1363,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "DAY",
+   "dest": "DAL",
+   "dep": "16:15",
+   "arr": "17:34",
+   "flight": 1364,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "DAY",
+   "dest": "DAL",
+   "dep": "18:20",
+   "arr": "19:39",
+   "flight": 1365,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "DAL",
+   "dest": "DAY",
+   "dep": "06:00",
+   "arr": "09:19",
+   "flight": 1366,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "DAL",
+   "dest": "DAY",
+   "dep": "08:05",
+   "arr": "11:24",
+   "flight": 1367,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "DAL",
+   "dest": "DAY",
+   "dep": "16:25",
+   "arr": "19:44",
+   "flight": 1368,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "SAT",
+   "dest": "BHM",
+   "dep": "18:30",
+   "arr": "20:35",
+   "flight": 1369,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "BHM",
+   "dest": "SAT",
+   "dep": "21:25",
+   "arr": "23:30",
+   "flight": 1370,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "JAX",
+   "dest": "SDF",
+   "dep": "09:40",
+   "arr": "11:24",
+   "flight": 1371,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "JAX",
+   "dest": "SDF",
+   "dep": "12:55",
+   "arr": "14:39",
+   "flight": 1372,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "JAX",
+   "dest": "SDF",
+   "dep": "17:15",
+   "arr": "18:59",
+   "flight": 1373,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "SDF",
+   "dest": "JAX",
+   "dep": "05:05",
+   "arr": "06:49",
+   "flight": 1374,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "SDF",
+   "dest": "JAX",
+   "dep": "12:45",
+   "arr": "14:29",
+   "flight": 1375,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "SDF",
+   "dest": "JAX",
+   "dep": "15:55",
+   "arr": "17:39",
+   "flight": 1376,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "CLT",
+   "dest": "PHF",
+   "dep": "05:10",
+   "arr": "06:16",
+   "flight": 1377,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "CLT",
+   "dest": "PHF",
+   "dep": "07:30",
+   "arr": "08:36",
+   "flight": 1378,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "CLT",
+   "dest": "PHF",
+   "dep": "09:50",
+   "arr": "10:56",
+   "flight": 1379,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "CLT",
+   "dest": "PHF",
+   "dep": "15:15",
+   "arr": "16:21",
+   "flight": 1380,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "CLT",
+   "dest": "PHF",
+   "dep": "16:40",
+   "arr": "17:46",
+   "flight": 1381,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "CLT",
+   "dest": "PHF",
+   "dep": "17:10",
+   "arr": "18:16",
+   "flight": 1382,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "PHF",
+   "dest": "CLT",
+   "dep": "06:55",
+   "arr": "08:01",
+   "flight": 1383,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "PHF",
+   "dest": "CLT",
+   "dep": "09:15",
+   "arr": "10:21",
+   "flight": 1384,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "PHF",
+   "dest": "CLT",
+   "dep": "11:35",
+   "arr": "12:41",
+   "flight": 1385,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "PHF",
+   "dest": "CLT",
+   "dep": "13:55",
+   "arr": "15:01",
+   "flight": 1386,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "PHF",
+   "dest": "CLT",
+   "dep": "16:15",
+   "arr": "17:21",
+   "flight": 1387,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "PHF",
+   "dest": "CLT",
+   "dep": "18:35",
+   "arr": "19:41",
+   "flight": 1388,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "PHF",
+   "dest": "MCI",
+   "dep": "10:45",
+   "arr": "12:22",
+   "flight": 1389,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "MCI",
+   "dest": "PHF",
+   "dep": "17:20",
+   "arr": "20:57",
+   "flight": 1390,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "CHS",
+   "dest": "PHF",
+   "dep": "05:00",
+   "arr": "06:15",
+   "flight": 1391,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "CHS",
+   "dest": "PHF",
+   "dep": "07:20",
+   "arr": "08:35",
+   "flight": 1392,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "CHS",
+   "dest": "PHF",
+   "dep": "09:40",
+   "arr": "10:55",
+   "flight": 1393,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "CHS",
+   "dest": "PHF",
+   "dep": "12:00",
+   "arr": "13:15",
+   "flight": 1394,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "CHS",
+   "dest": "PHF",
+   "dep": "14:15",
+   "arr": "15:30",
+   "flight": 1395,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "CHS",
+   "dest": "PHF",
+   "dep": "19:00",
+   "arr": "20:15",
+   "flight": 1396,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "PHF",
+   "dest": "CHS",
+   "dep": "06:55",
+   "arr": "08:10",
+   "flight": 1397,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "PHF",
+   "dest": "CHS",
+   "dep": "09:15",
+   "arr": "10:30",
+   "flight": 1398,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "PHF",
+   "dest": "CHS",
+   "dep": "11:35",
+   "arr": "12:50",
+   "flight": 1399,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "PHF",
+   "dest": "CHS",
+   "dep": "16:15",
+   "arr": "17:30",
+   "flight": 1400,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "PHF",
+   "dest": "CHS",
+   "dep": "18:35",
+   "arr": "19:50",
+   "flight": 1401,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "PHF",
+   "dest": "CHS",
+   "dep": "20:55",
+   "arr": "22:10",
+   "flight": 1402,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "ELP",
+   "dest": "MCI",
+   "dep": "04:55",
+   "arr": "08:11",
+   "flight": 1403,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "ELP",
+   "dest": "MCI",
+   "dep": "11:40",
+   "arr": "14:56",
+   "flight": 1404,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "MCI",
+   "dest": "ELP",
+   "dep": "05:35",
+   "arr": "06:51",
+   "flight": 1405,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "MCI",
+   "dest": "ELP",
+   "dep": "08:55",
+   "arr": "10:11",
+   "flight": 1406,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "SYR",
+   "dest": "JAX",
+   "dep": "14:10",
+   "arr": "16:38",
+   "flight": 1407,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "JAX",
+   "dest": "SYR",
+   "dep": "08:10",
+   "arr": "10:38",
+   "flight": 1408,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "BHM",
+   "dest": "MCI",
+   "dep": "06:30",
+   "arr": "08:16",
+   "flight": 1409,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "BHM",
+   "dest": "MCI",
+   "dep": "09:50",
+   "arr": "11:36",
+   "flight": 1410,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "MCI",
+   "dest": "BHM",
+   "dep": "07:15",
+   "arr": "09:01",
+   "flight": 1411,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "MCI",
+   "dest": "BHM",
+   "dep": "18:55",
+   "arr": "20:41",
+   "flight": 1412,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "OKC",
+   "dest": "DAL",
+   "dep": "20:55",
+   "arr": "21:48",
+   "flight": 1413,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "DAL",
+   "dest": "OKC",
+   "dep": "18:15",
+   "arr": "19:08",
+   "flight": 1414,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "BWI",
+   "dest": "PHF",
+   "dep": "07:45",
+   "arr": "08:33",
+   "flight": 1415,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "BWI",
+   "dest": "PHF",
+   "dep": "10:05",
+   "arr": "10:53",
+   "flight": 1416,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "BWI",
+   "dest": "PHF",
+   "dep": "12:25",
+   "arr": "13:13",
+   "flight": 1417,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "PHF",
+   "dest": "BWI",
+   "dep": "09:15",
+   "arr": "10:03",
+   "flight": 1418,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "PHF",
+   "dest": "BWI",
+   "dep": "11:35",
+   "arr": "12:23",
+   "flight": 1419,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "PHF",
+   "dest": "BWI",
+   "dep": "13:55",
+   "arr": "14:43",
+   "flight": 1420,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "BHM",
+   "dest": "JAX",
+   "dep": "14:15",
+   "arr": "16:31",
+   "flight": 1421,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "JAX",
+   "dest": "BHM",
+   "dep": "17:20",
+   "arr": "17:36",
+   "flight": 1422,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "MCI",
+   "dest": "MEM",
+   "dep": "08:55",
+   "arr": "10:15",
+   "flight": 1423,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "MCI",
+   "dest": "MEM",
+   "dep": "12:15",
+   "arr": "13:35",
+   "flight": 1424,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "MCI",
+   "dest": "MEM",
+   "dep": "13:55",
+   "arr": "15:15",
+   "flight": 1425,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "MCI",
+   "dest": "MEM",
+   "dep": "18:55",
+   "arr": "20:15",
+   "flight": 1426,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "MEM",
+   "dest": "MCI",
+   "dep": "05:15",
+   "arr": "06:35",
+   "flight": 1427,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "MEM",
+   "dest": "MCI",
+   "dep": "11:55",
+   "arr": "13:15",
+   "flight": 1428,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "MEM",
+   "dest": "MCI",
+   "dep": "15:15",
+   "arr": "16:35",
+   "flight": 1429,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "MEM",
+   "dest": "MCI",
+   "dep": "16:55",
+   "arr": "18:15",
+   "flight": 1430,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "OKC",
+   "dest": "BHM",
+   "dep": "04:30",
+   "arr": "06:20",
+   "flight": 1431,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "OKC",
+   "dest": "BHM",
+   "dep": "20:00",
+   "arr": "21:50",
+   "flight": 1432,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "BHM",
+   "dest": "OKC",
+   "dep": "18:25",
+   "arr": "20:15",
+   "flight": 1433,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "BHM",
+   "dest": "OKC",
+   "dep": "21:15",
+   "arr": "23:05",
+   "flight": 1434,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "FLL",
+   "dest": "JAX",
+   "dep": "07:45",
+   "arr": "08:56",
+   "flight": 1435,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "JAX",
+   "dest": "FLL",
+   "dep": "10:45",
+   "arr": "11:56",
+   "flight": 1436,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "JAX",
+   "dest": "SFB",
+   "dep": "16:15",
+   "arr": "17:00",
+   "flight": 1437,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "SFB",
+   "dest": "JAX",
+   "dep": "18:00",
+   "arr": "18:45",
+   "flight": 1438,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "MCI",
+   "dest": "SYR",
+   "dep": "13:05",
+   "arr": "16:42",
+   "flight": 1439,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "SYR",
+   "dest": "MCI",
+   "dep": "08:40",
+   "arr": "10:17",
+   "flight": 1440,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "JAX",
+   "dest": "LEX",
+   "dep": "06:30",
+   "arr": "08:10",
+   "flight": 1441,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "JAX",
+   "dest": "LEX",
+   "dep": "18:20",
+   "arr": "20:00",
+   "flight": 1442,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "LEX",
+   "dest": "JAX",
+   "dep": "05:05",
+   "arr": "06:45",
+   "flight": 1443,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "LEX",
+   "dest": "JAX",
+   "dep": "09:30",
+   "arr": "11:10",
+   "flight": 1444,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "JAX",
+   "dest": "ELP",
+   "dep": "19:25",
+   "arr": "21:01",
+   "flight": 1445,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "ELP",
+   "dest": "JAX",
+   "dep": "23:00",
+   "arr": "04:36",
+   "flight": 1446,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "HRL",
+   "dest": "MCI",
+   "dep": "05:50",
+   "arr": "08:17",
+   "flight": 1447,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "HRL",
+   "dest": "MCI",
+   "dep": "09:50",
+   "arr": "12:17",
+   "flight": 1448,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "MCI",
+   "dest": "HRL",
+   "dep": "13:55",
+   "arr": "16:22",
+   "flight": 1449,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "MCI",
+   "dest": "HRL",
+   "dep": "17:15",
+   "arr": "19:42",
+   "flight": 1450,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "JAX",
+   "dest": "DAY",
+   "dep": "15:45",
+   "arr": "17:40",
+   "flight": 1451,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "DAY",
+   "dest": "JAX",
+   "dep": "08:00",
+   "arr": "09:55",
+   "flight": 1452,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "JAX",
+   "dest": "GSO",
+   "dep": "07:30",
+   "arr": "08:51",
+   "flight": 1453,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "JAX",
+   "dest": "GSO",
+   "dep": "19:25",
+   "arr": "20:46",
+   "flight": 1454,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "GSO",
+   "dest": "JAX",
+   "dep": "07:40",
+   "arr": "09:01",
+   "flight": 1455,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "GSO",
+   "dest": "JAX",
+   "dep": "09:50",
+   "arr": "11:11",
+   "flight": 1456,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "PGD",
+   "dest": "PIE",
+   "dep": "09:55",
+   "arr": "10:35",
+   "flight": 1457,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "PIE",
+   "dest": "PGD",
+   "dep": "11:15",
+   "arr": "11:55",
+   "flight": 1458,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "DAY",
+   "dest": "RDU",
+   "dep": "12:05",
+   "arr": "13:27",
+   "flight": 1459,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "DAY",
+   "dest": "RDU",
+   "dep": "14:10",
+   "arr": "15:32",
+   "flight": 1460,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "DAY",
+   "dest": "RDU",
+   "dep": "16:20",
+   "arr": "17:42",
+   "flight": 1461,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "DAY",
+   "dest": "RDU",
+   "dep": "18:25",
+   "arr": "19:47",
+   "flight": 1462,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "DAY",
+   "dest": "RDU",
+   "dep": "20:30",
+   "arr": "21:52",
+   "flight": 1463,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "RDU",
+   "dest": "DAY",
+   "dep": "05:55",
+   "arr": "07:17",
+   "flight": 1464,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "RDU",
+   "dest": "DAY",
+   "dep": "08:00",
+   "arr": "09:22",
+   "flight": 1465,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "RDU",
+   "dest": "DAY",
+   "dep": "14:15",
+   "arr": "15:37",
+   "flight": 1466,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "RDU",
+   "dest": "DAY",
+   "dep": "16:20",
+   "arr": "17:42",
+   "flight": 1467,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "RDU",
+   "dest": "DAY",
+   "dep": "18:25",
+   "arr": "19:47",
+   "flight": 1468,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "BHM",
+   "dest": "PGD",
+   "dep": "22:30",
+   "arr": "01:09",
+   "flight": 1469,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "PGD",
+   "dest": "BHM",
+   "dep": "12:35",
+   "arr": "13:14",
+   "flight": 1470,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "JAX",
+   "dest": "HSV",
+   "dep": "08:35",
+   "arr": "08:57",
+   "flight": 1471,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "JAX",
+   "dest": "HSV",
+   "dep": "11:50",
+   "arr": "12:12",
+   "flight": 1472,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "HSV",
+   "dest": "JAX",
+   "dep": "09:50",
+   "arr": "12:12",
+   "flight": 1473,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "HSV",
+   "dest": "JAX",
+   "dep": "13:10",
+   "arr": "15:32",
+   "flight": 1474,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "AUS",
+   "dest": "DAY",
+   "dep": "05:40",
+   "arr": "09:19",
+   "flight": 1475,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "AUS",
+   "dest": "DAY",
+   "dep": "09:50",
+   "arr": "13:29",
+   "flight": 1476,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "AUS",
+   "dest": "DAY",
+   "dep": "11:55",
+   "arr": "15:34",
+   "flight": 1477,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "AUS",
+   "dest": "DAY",
+   "dep": "14:00",
+   "arr": "17:39",
+   "flight": 1478,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "AUS",
+   "dest": "DAY",
+   "dep": "16:05",
+   "arr": "19:44",
+   "flight": 1479,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "DAY",
+   "dest": "AUS",
+   "dep": "07:55",
+   "arr": "09:34",
+   "flight": 1480,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "DAY",
+   "dest": "AUS",
+   "dep": "10:00",
+   "arr": "11:39",
+   "flight": 1481,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "DAY",
+   "dest": "AUS",
+   "dep": "12:05",
+   "arr": "13:44",
+   "flight": 1482,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "DAY",
+   "dest": "AUS",
+   "dep": "18:20",
+   "arr": "19:59",
+   "flight": 1483,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "DAY",
+   "dest": "AUS",
+   "dep": "20:25",
+   "arr": "22:04",
+   "flight": 1484,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "EYW",
+   "dest": "FLL",
+   "dep": "06:00",
+   "arr": "06:48",
+   "flight": 1485,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "FLL",
+   "dest": "EYW",
+   "dep": "04:30",
+   "arr": "05:18",
+   "flight": 1486,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "GSP",
+   "dest": "JAX",
+   "dep": "13:15",
+   "arr": "14:24",
+   "flight": 1487,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "GSP",
+   "dest": "JAX",
+   "dep": "17:35",
+   "arr": "18:44",
+   "flight": 1488,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "JAX",
+   "dest": "GSP",
+   "dep": "10:45",
+   "arr": "11:54",
+   "flight": 1489,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "JAX",
+   "dest": "GSP",
+   "dep": "15:05",
+   "arr": "16:14",
+   "flight": 1490,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "PHF",
+   "dest": "SAV",
+   "dep": "11:35",
+   "arr": "13:01",
+   "flight": 1491,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "PHF",
+   "dest": "SAV",
+   "dep": "13:55",
+   "arr": "15:21",
+   "flight": 1492,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "PHF",
+   "dest": "SAV",
+   "dep": "16:15",
+   "arr": "17:41",
+   "flight": 1493,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "PHF",
+   "dest": "SAV",
+   "dep": "20:55",
+   "arr": "22:21",
+   "flight": 1494,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "SAV",
+   "dest": "PHF",
+   "dep": "05:00",
+   "arr": "06:26",
+   "flight": 1495,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "SAV",
+   "dest": "PHF",
+   "dep": "11:50",
+   "arr": "13:16",
+   "flight": 1496,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "SAV",
+   "dest": "PHF",
+   "dep": "14:10",
+   "arr": "15:36",
+   "flight": 1497,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "SAV",
+   "dest": "PHF",
+   "dep": "16:30",
+   "arr": "17:56",
+   "flight": 1498,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "JAN",
+   "dest": "MCI",
+   "dep": "06:30",
+   "arr": "08:13",
+   "flight": 1499,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "JAN",
+   "dest": "MCI",
+   "dep": "08:10",
+   "arr": "09:53",
+   "flight": 1500,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "MCI",
+   "dest": "JAN",
+   "dep": "12:15",
+   "arr": "13:58",
+   "flight": 1501,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "MCI",
+   "dest": "JAN",
+   "dep": "15:35",
+   "arr": "17:18",
+   "flight": 1502,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "DAY",
+   "dest": "HOU",
+   "dep": "05:50",
+   "arr": "07:28",
+   "flight": 1503,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "DAY",
+   "dest": "HOU",
+   "dep": "07:55",
+   "arr": "09:33",
+   "flight": 1504,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "DAY",
+   "dest": "HOU",
+   "dep": "10:00",
+   "arr": "11:38",
+   "flight": 1505,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "DAY",
+   "dest": "HOU",
+   "dep": "12:05",
+   "arr": "13:43",
+   "flight": 1506,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "HOU",
+   "dest": "DAY",
+   "dep": "09:50",
+   "arr": "13:28",
+   "flight": 1507,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "HOU",
+   "dest": "DAY",
+   "dep": "11:55",
+   "arr": "15:33",
+   "flight": 1508,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "HOU",
+   "dest": "DAY",
+   "dep": "14:00",
+   "arr": "17:38",
+   "flight": 1509,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "HOU",
+   "dest": "DAY",
+   "dep": "16:05",
+   "arr": "19:43",
+   "flight": 1510,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "SYR",
+   "dest": "PHF",
+   "dep": "14:10",
+   "arr": "15:35",
+   "flight": 1511,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "SYR",
+   "dest": "PHF",
+   "dep": "16:50",
+   "arr": "18:15",
+   "flight": 1512,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "PHF",
+   "dest": "SYR",
+   "dep": "06:55",
+   "arr": "08:20",
+   "flight": 1513,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "PHF",
+   "dest": "SYR",
+   "dep": "09:15",
+   "arr": "10:40",
+   "flight": 1514,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "JAX",
+   "dest": "CHS",
+   "dep": "07:30",
+   "arr": "08:24",
+   "flight": 1515,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "CHS",
+   "dest": "JAX",
+   "dep": "16:45",
+   "arr": "17:39",
+   "flight": 1516,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "JAX",
+   "dest": "JAN",
+   "dep": "19:25",
+   "arr": "20:03",
+   "flight": 1517,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "JAN",
+   "dest": "JAX",
+   "dep": "15:00",
+   "arr": "17:38",
+   "flight": 1518,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "TUL",
+   "dest": "BHM",
+   "dep": "04:30",
+   "arr": "06:13",
+   "flight": 1519,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "TUL",
+   "dest": "BHM",
+   "dep": "20:30",
+   "arr": "22:13",
+   "flight": 1520,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "BHM",
+   "dest": "TUL",
+   "dep": "18:00",
+   "arr": "19:43",
+   "flight": 1521,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "BHM",
+   "dest": "TUL",
+   "dep": "20:35",
+   "arr": "22:18",
+   "flight": 1522,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "LBB",
+   "dest": "MCI",
+   "dep": "12:15",
+   "arr": "13:59",
+   "flight": 1523,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "LBB",
+   "dest": "MCI",
+   "dep": "18:10",
+   "arr": "19:54",
+   "flight": 1524,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "MCI",
+   "dest": "LBB",
+   "dep": "12:15",
+   "arr": "13:59",
+   "flight": 1525,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "MCI",
+   "dest": "LBB",
+   "dep": "15:35",
+   "arr": "17:19",
+   "flight": 1526,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "BHM",
+   "dest": "SRQ",
+   "dep": "06:45",
+   "arr": "09:21",
+   "flight": 1527,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "SRQ",
+   "dest": "BHM",
+   "dep": "19:00",
+   "arr": "19:36",
+   "flight": 1528,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "MCI",
+   "dest": "LIT",
+   "dep": "07:15",
+   "arr": "08:30",
+   "flight": 1529,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "MCI",
+   "dest": "LIT",
+   "dep": "12:15",
+   "arr": "13:30",
+   "flight": 1530,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "MCI",
+   "dest": "LIT",
+   "dep": "15:35",
+   "arr": "16:50",
+   "flight": 1531,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "LIT",
+   "dest": "MCI",
+   "dep": "09:25",
+   "arr": "10:40",
+   "flight": 1532,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "LIT",
+   "dest": "MCI",
+   "dep": "15:20",
+   "arr": "16:35",
+   "flight": 1533,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "LIT",
+   "dest": "MCI",
+   "dep": "18:40",
+   "arr": "19:55",
+   "flight": 1534,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "JAX",
+   "dest": "PIE",
+   "dep": "11:50",
+   "arr": "12:44",
+   "flight": 1535,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "PIE",
+   "dest": "JAX",
+   "dep": "13:30",
+   "arr": "14:24",
+   "flight": 1536,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "MCI",
+   "dest": "DAY",
+   "dep": "10:40",
+   "arr": "13:25",
+   "flight": 1537,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "DAY",
+   "dest": "MCI",
+   "dep": "14:10",
+   "arr": "14:55",
+   "flight": 1538,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "JAX",
+   "dest": "CHA",
+   "dep": "10:45",
+   "arr": "12:04",
+   "flight": 1539,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "JAX",
+   "dest": "CHA",
+   "dep": "15:05",
+   "arr": "16:24",
+   "flight": 1540,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "CHA",
+   "dest": "JAX",
+   "dep": "13:05",
+   "arr": "14:24",
+   "flight": 1541,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "CHA",
+   "dest": "JAX",
+   "dep": "17:25",
+   "arr": "18:44",
+   "flight": 1542,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "JAX",
+   "dest": "AVL",
+   "dep": "09:40",
+   "arr": "10:55",
+   "flight": 1543,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "JAX",
+   "dest": "AVL",
+   "dep": "12:55",
+   "arr": "14:10",
+   "flight": 1544,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "AVL",
+   "dest": "JAX",
+   "dep": "12:05",
+   "arr": "13:20",
+   "flight": 1545,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "AVL",
+   "dest": "JAX",
+   "dep": "15:20",
+   "arr": "16:35",
+   "flight": 1546,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "JAX",
+   "dest": "PNS",
+   "dep": "12:55",
+   "arr": "13:08",
+   "flight": 1547,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "PNS",
+   "dest": "JAX",
+   "dep": "14:20",
+   "arr": "16:33",
+   "flight": 1548,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "MCI",
+   "dest": "CRP",
+   "dep": "08:55",
+   "arr": "11:14",
+   "flight": 1549,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "MCI",
+   "dest": "CRP",
+   "dep": "20:35",
+   "arr": "22:54",
+   "flight": 1550,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "CRP",
+   "dest": "MCI",
+   "dep": "05:55",
+   "arr": "08:14",
+   "flight": 1551,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "CRP",
+   "dest": "MCI",
+   "dep": "12:35",
+   "arr": "14:54",
+   "flight": 1552,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "MCI",
+   "dest": "OKC",
+   "dep": "12:15",
+   "arr": "13:26",
+   "flight": 1553,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "OKC",
+   "dest": "MCI",
+   "dep": "15:25",
+   "arr": "16:36",
+   "flight": 1554,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "EYW",
+   "dest": "JAX",
+   "dep": "05:25",
+   "arr": "06:49",
+   "flight": 1555,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "EYW",
+   "dest": "JAX",
+   "dep": "17:20",
+   "arr": "18:44",
+   "flight": 1556,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "JAX",
+   "dest": "EYW",
+   "dep": "11:50",
+   "arr": "13:14",
+   "flight": 1557,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "JAX",
+   "dest": "EYW",
+   "dep": "15:05",
+   "arr": "16:29",
+   "flight": 1558,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "JAX",
+   "dest": "ROA",
+   "dep": "14:00",
+   "arr": "15:34",
+   "flight": 1559,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "JAX",
+   "dest": "ROA",
+   "dep": "17:15",
+   "arr": "18:49",
+   "flight": 1560,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "ROA",
+   "dest": "JAX",
+   "dep": "05:15",
+   "arr": "06:49",
+   "flight": 1561,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "ROA",
+   "dest": "JAX",
+   "dep": "17:10",
+   "arr": "18:44",
+   "flight": 1562,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "MCI",
+   "dest": "FAR",
+   "dep": "08:55",
+   "arr": "10:37",
+   "flight": 1563,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "MCI",
+   "dest": "FAR",
+   "dep": "20:35",
+   "arr": "22:17",
+   "flight": 1564,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "FAR",
+   "dest": "MCI",
+   "dep": "04:55",
+   "arr": "06:37",
+   "flight": 1565,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "FAR",
+   "dest": "MCI",
+   "dep": "11:35",
+   "arr": "13:17",
+   "flight": 1566,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "DAY",
+   "dest": "PHF",
+   "dep": "12:05",
+   "arr": "13:36",
+   "flight": 1567,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "DAY",
+   "dest": "PHF",
+   "dep": "14:05",
+   "arr": "15:36",
+   "flight": 1568,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "DAY",
+   "dest": "PHF",
+   "dep": "16:20",
+   "arr": "17:51",
+   "flight": 1569,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "PHF",
+   "dest": "DAY",
+   "dep": "14:00",
+   "arr": "15:31",
+   "flight": 1570,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "PHF",
+   "dest": "DAY",
+   "dep": "16:10",
+   "arr": "17:41",
+   "flight": 1571,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "PHF",
+   "dest": "DAY",
+   "dep": "18:15",
+   "arr": "19:46",
+   "flight": 1572,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "XNA",
+   "dest": "BHM",
+   "dep": "04:30",
+   "arr": "06:02",
+   "flight": 1573,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "XNA",
+   "dest": "BHM",
+   "dep": "21:00",
+   "arr": "22:32",
+   "flight": 1574,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "BHM",
+   "dest": "XNA",
+   "dep": "10:30",
+   "arr": "12:02",
+   "flight": 1575,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "BHM",
+   "dest": "XNA",
+   "dep": "22:15",
+   "arr": "23:47",
+   "flight": 1576,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "CHS",
+   "dest": "DAY",
+   "dep": "09:40",
+   "arr": "11:22",
+   "flight": 1577,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "DAY",
+   "dest": "CHS",
+   "dep": "14:10",
+   "arr": "15:52",
+   "flight": 1578,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "MAF",
+   "dest": "MCI",
+   "dep": "04:35",
+   "arr": "06:33",
+   "flight": 1579,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "MAF",
+   "dest": "MCI",
+   "dep": "16:15",
+   "arr": "18:13",
+   "flight": 1580,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "MCI",
+   "dest": "MAF",
+   "dep": "10:35",
+   "arr": "12:33",
+   "flight": 1581,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "MCI",
+   "dest": "MAF",
+   "dep": "20:35",
+   "arr": "22:33",
+   "flight": 1582,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "JAX",
+   "dest": "BTR",
+   "dep": "07:30",
+   "arr": "08:15",
+   "flight": 1583,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "JAX",
+   "dest": "BTR",
+   "dep": "19:25",
+   "arr": "20:10",
+   "flight": 1584,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "BTR",
+   "dest": "JAX",
+   "dep": "05:10",
+   "arr": "07:55",
+   "flight": 1585,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "BTR",
+   "dest": "JAX",
+   "dep": "09:30",
+   "arr": "12:15",
+   "flight": 1586,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "MCI",
+   "dest": "MFE",
+   "dep": "08:55",
+   "arr": "11:30",
+   "flight": 1587,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "MCI",
+   "dest": "MFE",
+   "dep": "18:55",
+   "arr": "21:30",
+   "flight": 1588,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "MFE",
+   "dest": "MCI",
+   "dep": "12:20",
+   "arr": "14:55",
+   "flight": 1589,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "MFE",
+   "dest": "MCI",
+   "dep": "15:40",
+   "arr": "18:15",
+   "flight": 1590,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "GSP",
+   "dest": "PHF",
+   "dep": "09:35",
+   "arr": "10:52",
+   "flight": 1591,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "PHF",
+   "dest": "GSP",
+   "dep": "06:55",
+   "arr": "08:12",
+   "flight": 1592,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "BHM",
+   "dest": "EYW",
+   "dep": "22:40",
+   "arr": "01:43",
+   "flight": 1593,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "EYW",
+   "dest": "BHM",
+   "dep": "13:55",
+   "arr": "14:58",
+   "flight": 1594,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "MCI",
+   "dest": "SHV",
+   "dep": "05:35",
+   "arr": "07:08",
+   "flight": 1595,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "MCI",
+   "dest": "SHV",
+   "dep": "18:55",
+   "arr": "20:28",
+   "flight": 1596,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "SHV",
+   "dest": "MCI",
+   "dep": "06:40",
+   "arr": "08:13",
+   "flight": 1597,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "SHV",
+   "dest": "MCI",
+   "dep": "08:20",
+   "arr": "09:53",
+   "flight": 1598,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "JAX",
+   "dest": "ILM",
+   "dep": "10:45",
+   "arr": "12:00",
+   "flight": 1599,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "JAX",
+   "dest": "ILM",
+   "dep": "15:05",
+   "arr": "16:20",
+   "flight": 1600,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "ILM",
+   "dest": "JAX",
+   "dep": "13:10",
+   "arr": "14:25",
+   "flight": 1601,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "ILM",
+   "dest": "JAX",
+   "dep": "17:30",
+   "arr": "18:45",
+   "flight": 1602,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "JAX",
+   "dest": "PGD",
+   "dep": "14:00",
+   "arr": "15:02",
+   "flight": 1603,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "PGD",
+   "dest": "JAX",
+   "dep": "16:40",
+   "arr": "17:42",
+   "flight": 1604,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "JAX",
+   "dest": "MAF",
+   "dep": "12:55",
+   "arr": "15:10",
+   "flight": 1605,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "MAF",
+   "dest": "JAX",
+   "dep": "13:25",
+   "arr": "17:40",
+   "flight": 1606,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "PIT",
+   "dest": "SYR",
+   "dep": "09:35",
+   "arr": "10:41",
+   "flight": 1607,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "SYR",
+   "dest": "PIT",
+   "dep": "16:50",
+   "arr": "17:56",
+   "flight": 1608,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "JAX",
+   "dest": "GPT",
+   "dep": "08:35",
+   "arr": "09:03",
+   "flight": 1609,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "JAX",
+   "dest": "GPT",
+   "dep": "19:25",
+   "arr": "19:53",
+   "flight": 1610,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "GPT",
+   "dest": "JAX",
+   "dep": "05:25",
+   "arr": "07:53",
+   "flight": 1611,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "GPT",
+   "dest": "JAX",
+   "dep": "09:45",
+   "arr": "12:13",
+   "flight": 1612,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "JAX",
+   "dest": "MFE",
+   "dep": "12:55",
+   "arr": "14:47",
+   "flight": 1613,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "MFE",
+   "dest": "JAX",
+   "dep": "05:10",
+   "arr": "09:02",
+   "flight": 1614,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "PHF",
+   "dest": "CAE",
+   "dep": "13:55",
+   "arr": "15:10",
+   "flight": 1615,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "PHF",
+   "dest": "CAE",
+   "dep": "20:55",
+   "arr": "22:10",
+   "flight": 1616,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "DAY",
+   "dest": "BNA",
+   "dep": "05:55",
+   "arr": "06:03",
+   "flight": 1617,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "BNA",
+   "dest": "DAY",
+   "dep": "07:10",
+   "arr": "09:18",
+   "flight": 1618,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "CAE",
+   "dest": "PHF",
+   "dep": "05:00",
+   "arr": "06:15",
+   "flight": 1619,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "CAE",
+   "dest": "PHF",
+   "dep": "09:40",
+   "arr": "10:55",
+   "flight": 1620,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "BHM",
+   "dest": "DAB",
+   "dep": "09:40",
+   "arr": "12:10",
+   "flight": 1621,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "BHM",
+   "dest": "DAB",
+   "dep": "22:00",
+   "arr": "00:30",
+   "flight": 1622,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "DAB",
+   "dest": "BHM",
+   "dep": "09:05",
+   "arr": "09:35",
+   "flight": 1623,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "DAB",
+   "dest": "BHM",
+   "dep": "12:55",
+   "arr": "13:25",
+   "flight": 1624,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "JAX",
+   "dest": "SAV",
+   "dep": "11:50",
+   "arr": "12:34",
+   "flight": 1625,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "JAX",
+   "dest": "MYR",
+   "dep": "10:45",
+   "arr": "11:50",
+   "flight": 1626,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "JAX",
+   "dest": "MYR",
+   "dep": "15:05",
+   "arr": "16:10",
+   "flight": 1627,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "MYR",
+   "dest": "JAX",
+   "dep": "13:20",
+   "arr": "14:25",
+   "flight": 1628,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "MYR",
+   "dest": "JAX",
+   "dep": "17:40",
+   "arr": "18:45",
+   "flight": 1629,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "SAV",
+   "dest": "JAX",
+   "dep": "13:40",
+   "arr": "14:24",
+   "flight": 1630,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "LBB",
+   "dest": "BHM",
+   "dep": "14:40",
+   "arr": "17:07",
+   "flight": 1631,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "BHM",
+   "dest": "LBB",
+   "dep": "06:40",
+   "arr": "09:07",
+   "flight": 1632,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "MCI",
+   "dest": "OMA",
+   "dep": "05:35",
+   "arr": "06:24",
+   "flight": 1633,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "MCI",
+   "dest": "OMA",
+   "dep": "07:15",
+   "arr": "08:04",
+   "flight": 1634,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "MCI",
+   "dest": "OMA",
+   "dep": "08:55",
+   "arr": "09:44",
+   "flight": 1635,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "MCI",
+   "dest": "OMA",
+   "dep": "18:55",
+   "arr": "19:44",
+   "flight": 1636,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "OMA",
+   "dest": "MCI",
+   "dep": "05:45",
+   "arr": "06:34",
+   "flight": 1637,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "OMA",
+   "dest": "MCI",
+   "dep": "09:05",
+   "arr": "09:54",
+   "flight": 1638,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "OMA",
+   "dest": "MCI",
+   "dep": "09:55",
+   "arr": "10:44",
+   "flight": 1639,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "OMA",
+   "dest": "MCI",
+   "dep": "19:05",
+   "arr": "19:54",
+   "flight": 1640,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "SGF",
+   "dest": "BHM",
+   "dep": "04:30",
+   "arr": "06:00",
+   "flight": 1641,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "SGF",
+   "dest": "BHM",
+   "dep": "20:30",
+   "arr": "22:00",
+   "flight": 1642,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "BHM",
+   "dest": "SGF",
+   "dep": "18:15",
+   "arr": "19:45",
+   "flight": 1643,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "BHM",
+   "dest": "SGF",
+   "dep": "21:05",
+   "arr": "22:35",
+   "flight": 1644,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "DAY",
+   "dest": "HSV",
+   "dep": "20:25",
+   "arr": "20:46",
+   "flight": 1645,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "HSV",
+   "dest": "DAY",
+   "dep": "04:50",
+   "arr": "07:11",
+   "flight": 1646,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "MCI",
+   "dest": "ICT",
+   "dep": "05:35",
+   "arr": "06:28",
+   "flight": 1647,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "MCI",
+   "dest": "ICT",
+   "dep": "10:15",
+   "arr": "11:08",
+   "flight": 1648,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "MCI",
+   "dest": "ICT",
+   "dep": "18:55",
+   "arr": "19:48",
+   "flight": 1649,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "ICT",
+   "dest": "MCI",
+   "dep": "05:40",
+   "arr": "06:33",
+   "flight": 1650,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "ICT",
+   "dest": "MCI",
+   "dep": "09:00",
+   "arr": "09:53",
+   "flight": 1651,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "ICT",
+   "dest": "MCI",
+   "dep": "19:00",
+   "arr": "19:53",
+   "flight": 1652,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "JAX",
+   "dest": "MOB",
+   "dep": "07:30",
+   "arr": "07:51",
+   "flight": 1653,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "JAX",
+   "dest": "MOB",
+   "dep": "19:25",
+   "arr": "19:46",
+   "flight": 1654,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "MOB",
+   "dest": "JAX",
+   "dep": "04:30",
+   "arr": "06:51",
+   "flight": 1655,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "MOB",
+   "dest": "JAX",
+   "dep": "08:50",
+   "arr": "11:11",
+   "flight": 1656,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "DAY",
+   "dest": "SYR",
+   "dep": "12:05",
+   "arr": "13:38",
+   "flight": 1657,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "SYR",
+   "dest": "DAY",
+   "dep": "14:05",
+   "arr": "15:38",
+   "flight": 1658,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "PHF",
+   "dest": "RDU",
+   "dep": "16:15",
+   "arr": "17:04",
+   "flight": 1659,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "RDU",
+   "dest": "PHF",
+   "dep": "19:25",
+   "arr": "20:14",
+   "flight": 1660,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "MCI",
+   "dest": "TUL",
+   "dep": "17:15",
+   "arr": "18:14",
+   "flight": 1661,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "TUL",
+   "dest": "MCI",
+   "dep": "18:55",
+   "arr": "19:54",
+   "flight": 1662,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "HRL",
+   "dest": "BHM",
+   "dep": "18:00",
+   "arr": "20:21",
+   "flight": 1663,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "BHM",
+   "dest": "HRL",
+   "dep": "14:05",
+   "arr": "16:26",
+   "flight": 1664,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "DAY",
+   "dest": "MKE",
+   "dep": "12:10",
+   "arr": "12:17",
+   "flight": 1665,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "MKE",
+   "dest": "DAY",
+   "dep": "13:25",
+   "arr": "15:32",
+   "flight": 1666,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "DAY",
+   "dest": "CMH",
+   "dep": "16:15",
+   "arr": "16:53",
+   "flight": 1667,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "CMH",
+   "dest": "DAY",
+   "dep": "19:05",
+   "arr": "19:43",
+   "flight": 1668,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "CAK",
+   "dest": "SYR",
+   "dep": "06:40",
+   "arr": "07:51",
+   "flight": 1669,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "CAK",
+   "dest": "SYR",
+   "dep": "14:55",
+   "arr": "16:06",
+   "flight": 1670,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "CAK",
+   "dest": "SYR",
+   "dep": "17:45",
+   "arr": "18:56",
+   "flight": 1671,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "SYR",
+   "dest": "CAK",
+   "dep": "11:20",
+   "arr": "12:31",
+   "flight": 1672,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "SYR",
+   "dest": "CAK",
+   "dep": "16:50",
+   "arr": "18:01",
+   "flight": 1673,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "SYR",
+   "dest": "CAK",
+   "dep": "19:35",
+   "arr": "20:46",
+   "flight": 1674,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "MCI",
+   "dest": "FSD",
+   "dep": "05:35",
+   "arr": "06:46",
+   "flight": 1675,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "MCI",
+   "dest": "FSD",
+   "dep": "08:55",
+   "arr": "10:06",
+   "flight": 1676,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "MCI",
+   "dest": "FSD",
+   "dep": "18:55",
+   "arr": "20:06",
+   "flight": 1677,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "FSD",
+   "dest": "MCI",
+   "dep": "05:25",
+   "arr": "06:36",
+   "flight": 1678,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "FSD",
+   "dest": "MCI",
+   "dep": "10:25",
+   "arr": "11:36",
+   "flight": 1679,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "FSD",
+   "dest": "MCI",
+   "dep": "17:05",
+   "arr": "18:16",
+   "flight": 1680,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "JAX",
+   "dest": "CAE",
+   "dep": "07:30",
+   "arr": "08:31",
+   "flight": 1681,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "CAE",
+   "dest": "JAX",
+   "dep": "16:40",
+   "arr": "17:41",
+   "flight": 1682,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "SYR",
+   "dest": "BWI",
+   "dep": "16:00",
+   "arr": "17:05",
+   "flight": 1683,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "BWI",
+   "dest": "SYR",
+   "dep": "17:50",
+   "arr": "18:55",
+   "flight": 1684,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "BUF",
+   "dest": "SYR",
+   "dep": "07:05",
+   "arr": "07:51",
+   "flight": 1685,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "BUF",
+   "dest": "SYR",
+   "dep": "09:55",
+   "arr": "10:41",
+   "flight": 1686,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "SYR",
+   "dest": "BUF",
+   "dep": "08:40",
+   "arr": "09:26",
+   "flight": 1687,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "SYR",
+   "dest": "BUF",
+   "dep": "16:55",
+   "arr": "17:41",
+   "flight": 1688,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "MCI",
+   "dest": "DLH",
+   "dep": "07:15",
+   "arr": "08:57",
+   "flight": 1689,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "MCI",
+   "dest": "DLH",
+   "dep": "20:35",
+   "arr": "22:17",
+   "flight": 1690,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "DLH",
+   "dest": "MCI",
+   "dep": "04:55",
+   "arr": "06:37",
+   "flight": 1691,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "DLH",
+   "dest": "MCI",
+   "dep": "10:25",
+   "arr": "12:07",
+   "flight": 1692,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "DAY",
+   "dest": "MSN",
+   "dep": "07:55",
+   "arr": "08:10",
+   "flight": 1693,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "DAY",
+   "dest": "MSN",
+   "dep": "16:15",
+   "arr": "16:30",
+   "flight": 1694,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "DAY",
+   "dest": "MSN",
+   "dep": "20:25",
+   "arr": "20:40",
+   "flight": 1695,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "MSN",
+   "dest": "DAY",
+   "dep": "05:00",
+   "arr": "07:15",
+   "flight": 1696,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "MSN",
+   "dest": "DAY",
+   "dep": "09:10",
+   "arr": "11:25",
+   "flight": 1697,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "MSN",
+   "dest": "DAY",
+   "dep": "17:30",
+   "arr": "19:45",
+   "flight": 1698,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "SYR",
+   "dest": "PWM",
+   "dep": "08:35",
+   "arr": "09:43",
+   "flight": 1699,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "SYR",
+   "dest": "PWM",
+   "dep": "14:05",
+   "arr": "15:13",
+   "flight": 1700,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "SYR",
+   "dest": "PWM",
+   "dep": "19:35",
+   "arr": "20:43",
+   "flight": 1701,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "PWM",
+   "dest": "SYR",
+   "dep": "04:30",
+   "arr": "05:38",
+   "flight": 1702,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "PWM",
+   "dest": "SYR",
+   "dep": "09:30",
+   "arr": "10:38",
+   "flight": 1703,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "PWM",
+   "dest": "SYR",
+   "dep": "15:00",
+   "arr": "16:08",
+   "flight": 1704,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "ROC",
+   "dest": "SYR",
+   "dep": "04:30",
+   "arr": "05:09",
+   "flight": 1705,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "ROC",
+   "dest": "SYR",
+   "dep": "12:45",
+   "arr": "13:24",
+   "flight": 1706,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "SYR",
+   "dest": "ROC",
+   "dep": "08:35",
+   "arr": "09:14",
+   "flight": 1707,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "SYR",
+   "dest": "ROC",
+   "dep": "11:20",
+   "arr": "11:59",
+   "flight": 1708,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "MDT",
+   "dest": "PHF",
+   "dep": "05:20",
+   "arr": "06:17",
+   "flight": 1709,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "MDT",
+   "dest": "PHF",
+   "dep": "19:15",
+   "arr": "20:12",
+   "flight": 1710,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "PHF",
+   "dest": "MDT",
+   "dep": "06:55",
+   "arr": "07:52",
+   "flight": 1711,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "PHF",
+   "dest": "MDT",
+   "dep": "16:15",
+   "arr": "17:12",
+   "flight": 1712,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "MYR",
+   "dest": "PHF",
+   "dep": "05:10",
+   "arr": "06:16",
+   "flight": 1713,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "PHF",
+   "dest": "MYR",
+   "dep": "20:55",
+   "arr": "22:01",
+   "flight": 1714,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "MCI",
+   "dest": "CID",
+   "dep": "05:35",
+   "arr": "06:36",
+   "flight": 1715,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "MCI",
+   "dest": "CID",
+   "dep": "08:55",
+   "arr": "09:56",
+   "flight": 1716,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "MCI",
+   "dest": "CID",
+   "dep": "19:55",
+   "arr": "20:56",
+   "flight": 1717,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "CID",
+   "dest": "MCI",
+   "dep": "07:15",
+   "arr": "08:16",
+   "flight": 1718,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "CID",
+   "dest": "MCI",
+   "dep": "08:55",
+   "arr": "09:56",
+   "flight": 1719,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "CID",
+   "dest": "MCI",
+   "dep": "12:15",
+   "arr": "13:16",
+   "flight": 1720,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "SRQ",
+   "dest": "JAX",
+   "dep": "10:10",
+   "arr": "11:08",
+   "flight": 1721,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "JAX",
+   "dest": "SRQ",
+   "dep": "17:15",
+   "arr": "18:13",
+   "flight": 1722,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "MCI",
+   "dest": "SGF",
+   "dep": "17:15",
+   "arr": "18:05",
+   "flight": 1723,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "SGF",
+   "dest": "MCI",
+   "dep": "19:50",
+   "arr": "20:40",
+   "flight": 1724,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "JAX",
+   "dest": "VPS",
+   "dep": "08:35",
+   "arr": "08:42",
+   "flight": 1725,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "JAX",
+   "dest": "VPS",
+   "dep": "19:25",
+   "arr": "19:32",
+   "flight": 1726,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "VPS",
+   "dest": "JAX",
+   "dep": "05:50",
+   "arr": "07:57",
+   "flight": 1727,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "VPS",
+   "dest": "JAX",
+   "dep": "10:10",
+   "arr": "12:17",
+   "flight": 1728,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "DAY",
+   "dest": "ROC",
+   "dep": "20:25",
+   "arr": "21:48",
+   "flight": 1729,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "ROC",
+   "dest": "DAY",
+   "dep": "10:00",
+   "arr": "11:23",
+   "flight": 1730,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "MCI",
+   "dest": "DSM",
+   "dep": "08:55",
+   "arr": "09:45",
+   "flight": 1731,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "MCI",
+   "dest": "DSM",
+   "dep": "15:35",
+   "arr": "16:25",
+   "flight": 1732,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "MCI",
+   "dest": "DSM",
+   "dep": "19:55",
+   "arr": "20:45",
+   "flight": 1733,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "DSM",
+   "dest": "MCI",
+   "dep": "07:25",
+   "arr": "08:15",
+   "flight": 1734,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "DSM",
+   "dest": "MCI",
+   "dep": "09:05",
+   "arr": "09:55",
+   "flight": 1735,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "DSM",
+   "dest": "MCI",
+   "dep": "10:45",
+   "arr": "11:35",
+   "flight": 1736,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "JAX",
+   "dest": "GNV",
+   "dep": "06:25",
+   "arr": "07:02",
+   "flight": 1737,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "JAX",
+   "dest": "GNV",
+   "dep": "19:25",
+   "arr": "20:02",
+   "flight": 1738,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "GNV",
+   "dest": "JAX",
+   "dep": "05:10",
+   "arr": "05:47",
+   "flight": 1739,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "GNV",
+   "dest": "JAX",
+   "dep": "08:25",
+   "arr": "09:02",
+   "flight": 1740,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "JAX",
+   "dest": "ECP",
+   "dep": "07:30",
+   "arr": "07:31",
+   "flight": 1741,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "JAX",
+   "dest": "ECP",
+   "dep": "19:25",
+   "arr": "19:26",
+   "flight": 1742,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "ECP",
+   "dest": "JAX",
+   "dep": "04:50",
+   "arr": "06:51",
+   "flight": 1743,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "ECP",
+   "dest": "JAX",
+   "dep": "09:10",
+   "arr": "11:11",
+   "flight": 1744,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "PHF",
+   "dest": "AVP",
+   "dep": "11:35",
+   "arr": "12:43",
+   "flight": 1745,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "PHF",
+   "dest": "AVP",
+   "dep": "20:55",
+   "arr": "22:03",
+   "flight": 1746,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "AVP",
+   "dest": "PHF",
+   "dep": "05:05",
+   "arr": "06:13",
+   "flight": 1747,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "AVP",
+   "dest": "PHF",
+   "dep": "14:25",
+   "arr": "15:33",
+   "flight": 1748,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "SYR",
+   "dest": "ALB",
+   "dep": "05:50",
+   "arr": "06:34",
+   "flight": 1749,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "SYR",
+   "dest": "ALB",
+   "dep": "08:35",
+   "arr": "09:19",
+   "flight": 1750,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "SYR",
+   "dest": "ALB",
+   "dep": "14:05",
+   "arr": "14:49",
+   "flight": 1751,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "SYR",
+   "dest": "ALB",
+   "dep": "16:45",
+   "arr": "17:29",
+   "flight": 1752,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "ALB",
+   "dest": "SYR",
+   "dep": "04:30",
+   "arr": "05:14",
+   "flight": 1753,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "ALB",
+   "dest": "SYR",
+   "dep": "09:55",
+   "arr": "10:39",
+   "flight": 1754,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "ALB",
+   "dest": "SYR",
+   "dep": "15:25",
+   "arr": "16:09",
+   "flight": 1755,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "ALB",
+   "dest": "SYR",
+   "dep": "18:10",
+   "arr": "18:54",
+   "flight": 1756,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "JAX",
+   "dest": "TLH",
+   "dep": "07:30",
+   "arr": "08:20",
+   "flight": 1757,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "JAX",
+   "dest": "TLH",
+   "dep": "19:25",
+   "arr": "20:15",
+   "flight": 1758,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "TLH",
+   "dest": "JAX",
+   "dep": "04:55",
+   "arr": "05:45",
+   "flight": 1759,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "TLH",
+   "dest": "JAX",
+   "dep": "09:15",
+   "arr": "10:05",
+   "flight": 1760,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "GSO",
+   "dest": "PHF",
+   "dep": "10:00",
+   "arr": "10:56",
+   "flight": 1761,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "PHF",
+   "dest": "GSO",
+   "dep": "06:55",
+   "arr": "07:51",
+   "flight": 1762,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "JAX",
+   "dest": "DAB",
+   "dep": "07:30",
+   "arr": "08:11",
+   "flight": 1763,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "MCI",
+   "dest": "PIA",
+   "dep": "08:55",
+   "arr": "10:02",
+   "flight": 1764,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "MCI",
+   "dest": "PIA",
+   "dep": "20:35",
+   "arr": "21:42",
+   "flight": 1765,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "PIA",
+   "dest": "MCI",
+   "dep": "05:30",
+   "arr": "06:37",
+   "flight": 1766,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "PIA",
+   "dest": "MCI",
+   "dep": "12:10",
+   "arr": "13:17",
+   "flight": 1767,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "DAB",
+   "dest": "JAX",
+   "dep": "05:05",
+   "arr": "05:46",
+   "flight": 1768,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "BUF",
+   "dest": "DAY",
+   "dep": "10:10",
+   "arr": "11:26",
+   "flight": 1769,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "BUF",
+   "dest": "DAY",
+   "dep": "18:25",
+   "arr": "19:41",
+   "flight": 1770,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "DAY",
+   "dest": "BUF",
+   "dep": "07:55",
+   "arr": "09:11",
+   "flight": 1771,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "DAY",
+   "dest": "BUF",
+   "dep": "20:25",
+   "arr": "21:41",
+   "flight": 1772,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "SYR",
+   "dest": "BGR",
+   "dep": "14:05",
+   "arr": "15:25",
+   "flight": 1773,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "SYR",
+   "dest": "BGR",
+   "dep": "19:35",
+   "arr": "20:55",
+   "flight": 1774,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "BGR",
+   "dest": "SYR",
+   "dep": "06:35",
+   "arr": "07:55",
+   "flight": 1775,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "BGR",
+   "dest": "SYR",
+   "dep": "17:35",
+   "arr": "18:55",
+   "flight": 1776,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "JAX",
+   "dest": "AGS",
+   "dep": "08:35",
+   "arr": "09:30",
+   "flight": 1777,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "JAX",
+   "dest": "AGS",
+   "dep": "19:25",
+   "arr": "20:20",
+   "flight": 1778,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "AGS",
+   "dest": "JAX",
+   "dep": "05:55",
+   "arr": "06:50",
+   "flight": 1779,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "AGS",
+   "dest": "JAX",
+   "dep": "10:15",
+   "arr": "11:10",
+   "flight": 1780,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "AVL",
+   "dest": "DAY",
+   "dep": "06:00",
+   "arr": "07:12",
+   "flight": 1781,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "DAY",
+   "dest": "AVL",
+   "dep": "20:25",
+   "arr": "21:37",
+   "flight": 1782,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "MCI",
+   "dest": "XNA",
+   "dep": "18:55",
+   "arr": "19:52",
+   "flight": 1783,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "XNA",
+   "dest": "MCI",
+   "dep": "14:00",
+   "arr": "14:57",
+   "flight": 1784,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "DAY",
+   "dest": "ATW",
+   "dep": "05:50",
+   "arr": "06:09",
+   "flight": 1785,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "DAY",
+   "dest": "ATW",
+   "dep": "07:55",
+   "arr": "08:14",
+   "flight": 1786,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "DAY",
+   "dest": "ATW",
+   "dep": "10:00",
+   "arr": "10:19",
+   "flight": 1787,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "ATW",
+   "dest": "DAY",
+   "dep": "04:55",
+   "arr": "07:14",
+   "flight": 1788,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "ATW",
+   "dest": "DAY",
+   "dep": "13:15",
+   "arr": "15:34",
+   "flight": 1789,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "ATW",
+   "dest": "DAY",
+   "dep": "17:25",
+   "arr": "19:44",
+   "flight": 1790,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "BDL",
+   "dest": "SYR",
+   "dep": "18:00",
+   "arr": "18:54",
+   "flight": 1791,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "SYR",
+   "dest": "BDL",
+   "dep": "14:05",
+   "arr": "14:59",
+   "flight": 1792,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "DAY",
+   "dest": "PIT",
+   "dep": "07:55",
+   "arr": "08:52",
+   "flight": 1793,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "PIT",
+   "dest": "DAY",
+   "dep": "18:45",
+   "arr": "19:42",
+   "flight": 1794,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "CHA",
+   "dest": "DAY",
+   "dep": "06:00",
+   "arr": "07:15",
+   "flight": 1795,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "DAY",
+   "dest": "CHA",
+   "dep": "20:25",
+   "arr": "21:40",
+   "flight": 1796,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "BHM",
+   "dest": "ECP",
+   "dep": "22:55",
+   "arr": "23:54",
+   "flight": 1797,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "ECP",
+   "dest": "BHM",
+   "dep": "20:10",
+   "arr": "21:09",
+   "flight": 1798,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "DAY",
+   "dest": "TYS",
+   "dep": "12:05",
+   "arr": "13:12",
+   "flight": 1799,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "ILM",
+   "dest": "PHF",
+   "dep": "05:15",
+   "arr": "06:12",
+   "flight": 1800,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "PHF",
+   "dest": "ILM",
+   "dep": "20:55",
+   "arr": "21:52",
+   "flight": 1801,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "TYS",
+   "dest": "DAY",
+   "dep": "14:25",
+   "arr": "15:32",
+   "flight": 1802,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "GRR",
+   "dest": "DAY",
+   "dep": "06:15",
+   "arr": "07:13",
+   "flight": 1803,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "GRR",
+   "dest": "DAY",
+   "dep": "10:25",
+   "arr": "11:23",
+   "flight": 1804,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "GRR",
+   "dest": "DAY",
+   "dep": "14:35",
+   "arr": "15:33",
+   "flight": 1805,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "GRR",
+   "dest": "DAY",
+   "dep": "18:45",
+   "arr": "19:43",
+   "flight": 1806,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "DAY",
+   "dest": "GRR",
+   "dep": "07:55",
+   "arr": "08:53",
+   "flight": 1807,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "DAY",
+   "dest": "GRR",
+   "dep": "12:05",
+   "arr": "13:03",
+   "flight": 1808,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "DAY",
+   "dest": "GRR",
+   "dep": "16:15",
+   "arr": "17:13",
+   "flight": 1809,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "DAY",
+   "dest": "GRR",
+   "dep": "19:40",
+   "arr": "20:38",
+   "flight": 1810,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "SYR",
+   "dest": "PVD",
+   "dep": "08:35",
+   "arr": "09:38",
+   "flight": 1811,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "PVD",
+   "dest": "SYR",
+   "dep": "12:20",
+   "arr": "13:23",
+   "flight": 1812,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "CAK",
+   "dest": "DAY",
+   "dep": "18:55",
+   "arr": "19:45",
+   "flight": 1813,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "DAY",
+   "dest": "CAK",
+   "dep": "16:15",
+   "arr": "17:05",
+   "flight": 1814,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "BHM",
+   "dest": "VPS",
+   "dep": "23:15",
+   "arr": "00:12",
+   "flight": 1815,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "VPS",
+   "dest": "BHM",
+   "dep": "20:15",
+   "arr": "21:12",
+   "flight": 1816,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "SYR",
+   "dest": "MDT",
+   "dep": "19:35",
+   "arr": "20:31",
+   "flight": 1817,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "MDT",
+   "dest": "SYR",
+   "dep": "09:40",
+   "arr": "10:36",
+   "flight": 1818,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "DAY",
+   "dest": "IND",
+   "dep": "16:15",
+   "arr": "16:58",
+   "flight": 1819,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "IND",
+   "dest": "DAY",
+   "dep": "19:00",
+   "arr": "19:43",
+   "flight": 1820,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "ABE",
+   "dest": "PHF",
+   "dep": "12:15",
+   "arr": "13:17",
+   "flight": 1821,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "ABE",
+   "dest": "PHF",
+   "dep": "19:10",
+   "arr": "20:12",
+   "flight": 1822,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "PHF",
+   "dest": "ABE",
+   "dep": "09:15",
+   "arr": "10:17",
+   "flight": 1823,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "PHF",
+   "dest": "ABE",
+   "dep": "16:15",
+   "arr": "17:17",
+   "flight": 1824,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "SYR",
+   "dest": "BTV",
+   "dep": "11:20",
+   "arr": "12:12",
+   "flight": 1825,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "SYR",
+   "dest": "BTV",
+   "dep": "14:05",
+   "arr": "14:57",
+   "flight": 1826,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "SYR",
+   "dest": "BTV",
+   "dep": "19:35",
+   "arr": "20:27",
+   "flight": 1827,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "BTV",
+   "dest": "SYR",
+   "dep": "07:00",
+   "arr": "07:52",
+   "flight": 1828,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "BTV",
+   "dest": "SYR",
+   "dep": "15:15",
+   "arr": "16:07",
+   "flight": 1829,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "BTV",
+   "dest": "SYR",
+   "dep": "18:00",
+   "arr": "18:52",
+   "flight": 1830,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "MCI",
+   "dest": "COU",
+   "dep": "07:15",
+   "arr": "08:02",
+   "flight": 1831,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "MCI",
+   "dest": "COU",
+   "dep": "20:05",
+   "arr": "20:52",
+   "flight": 1832,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "COU",
+   "dest": "MCI",
+   "dep": "05:50",
+   "arr": "06:37",
+   "flight": 1833,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "COU",
+   "dest": "MCI",
+   "dep": "09:10",
+   "arr": "09:57",
+   "flight": 1834,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "SYR",
+   "dest": "MHT",
+   "dep": "08:35",
+   "arr": "09:35",
+   "flight": 1835,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "SYR",
+   "dest": "MHT",
+   "dep": "11:25",
+   "arr": "12:25",
+   "flight": 1836,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "SYR",
+   "dest": "MHT",
+   "dep": "19:35",
+   "arr": "20:35",
+   "flight": 1837,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "MHT",
+   "dest": "SYR",
+   "dep": "06:55",
+   "arr": "07:55",
+   "flight": 1838,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "MHT",
+   "dest": "SYR",
+   "dep": "12:25",
+   "arr": "13:25",
+   "flight": 1839,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "MHT",
+   "dest": "SYR",
+   "dep": "15:10",
+   "arr": "16:10",
+   "flight": 1840,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "DAY",
+   "dest": "TRI",
+   "dep": "12:05",
+   "arr": "13:08",
+   "flight": 1841,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "DAY",
+   "dest": "TRI",
+   "dep": "20:25",
+   "arr": "21:28",
+   "flight": 1842,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "TRI",
+   "dest": "DAY",
+   "dep": "06:10",
+   "arr": "07:13",
+   "flight": 1843,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "TRI",
+   "dest": "DAY",
+   "dep": "14:30",
+   "arr": "15:33",
+   "flight": 1844,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "JAX",
+   "dest": "MLB",
+   "dep": "15:05",
+   "arr": "15:57",
+   "flight": 1845,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "JAX",
+   "dest": "MLB",
+   "dep": "18:20",
+   "arr": "19:12",
+   "flight": 1846,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "MLB",
+   "dest": "JAX",
+   "dep": "04:55",
+   "arr": "05:47",
+   "flight": 1847,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "MLB",
+   "dest": "JAX",
+   "dep": "16:50",
+   "arr": "17:42",
+   "flight": 1848,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "DAY",
+   "dest": "SDF",
+   "dep": "16:20",
+   "arr": "17:08",
+   "flight": 1849,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "SDF",
+   "dest": "DAY",
+   "dep": "18:55",
+   "arr": "19:43",
+   "flight": 1850,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "SYR",
+   "dest": "HPN",
+   "dep": "08:35",
+   "arr": "09:29",
+   "flight": 1851,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "SYR",
+   "dest": "HPN",
+   "dep": "11:20",
+   "arr": "12:14",
+   "flight": 1852,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "SYR",
+   "dest": "HPN",
+   "dep": "14:05",
+   "arr": "14:59",
+   "flight": 1853,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "HPN",
+   "dest": "SYR",
+   "dep": "12:30",
+   "arr": "13:24",
+   "flight": 1854,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "HPN",
+   "dest": "SYR",
+   "dep": "15:15",
+   "arr": "16:09",
+   "flight": 1855,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "HPN",
+   "dest": "SYR",
+   "dep": "18:00",
+   "arr": "18:54",
+   "flight": 1856,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "SBN",
+   "dest": "DAY",
+   "dep": "06:25",
+   "arr": "07:16",
+   "flight": 1857,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "SBN",
+   "dest": "DAY",
+   "dep": "10:35",
+   "arr": "11:26",
+   "flight": 1858,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "SBN",
+   "dest": "DAY",
+   "dep": "18:50",
+   "arr": "19:41",
+   "flight": 1859,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "DAY",
+   "dest": "SBN",
+   "dep": "07:55",
+   "arr": "08:46",
+   "flight": 1860,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "DAY",
+   "dest": "SBN",
+   "dep": "16:15",
+   "arr": "17:06",
+   "flight": 1861,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "DAY",
+   "dest": "SBN",
+   "dep": "20:25",
+   "arr": "21:16",
+   "flight": 1862,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "ABE",
+   "dest": "SYR",
+   "dep": "18:00",
+   "arr": "18:52",
+   "flight": 1863,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "SYR",
+   "dest": "ABE",
+   "dep": "16:50",
+   "arr": "17:42",
+   "flight": 1864,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "ACY",
+   "dest": "PHF",
+   "dep": "05:20",
+   "arr": "06:14",
+   "flight": 1865,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "ACY",
+   "dest": "PHF",
+   "dep": "19:20",
+   "arr": "20:14",
+   "flight": 1866,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "DAY",
+   "dest": "LEX",
+   "dep": "07:55",
+   "arr": "08:41",
+   "flight": 1867,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "LEX",
+   "dest": "DAY",
+   "dep": "10:35",
+   "arr": "11:21",
+   "flight": 1868,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "PHF",
+   "dest": "ACY",
+   "dep": "06:55",
+   "arr": "07:49",
+   "flight": 1869,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "PHF",
+   "dest": "ACY",
+   "dep": "20:55",
+   "arr": "21:49",
+   "flight": 1870,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "FWA",
+   "dest": "DAY",
+   "dep": "04:30",
+   "arr": "05:10",
+   "flight": 1871,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "FWA",
+   "dest": "DAY",
+   "dep": "10:45",
+   "arr": "11:25",
+   "flight": 1872,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "DAY",
+   "dest": "FWA",
+   "dep": "05:50",
+   "arr": "06:30",
+   "flight": 1873,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "DAY",
+   "dest": "FWA",
+   "dep": "10:00",
+   "arr": "10:40",
+   "flight": 1874,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "SYR",
+   "dest": "HVN",
+   "dep": "05:50",
+   "arr": "06:46",
+   "flight": 1875,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "SYR",
+   "dest": "HVN",
+   "dep": "11:20",
+   "arr": "12:16",
+   "flight": 1876,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "SYR",
+   "dest": "HVN",
+   "dep": "16:50",
+   "arr": "17:46",
+   "flight": 1877,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "HVN",
+   "dest": "SYR",
+   "dep": "04:30",
+   "arr": "05:26",
+   "flight": 1878,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "HVN",
+   "dest": "SYR",
+   "dep": "09:45",
+   "arr": "10:41",
+   "flight": 1879,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "HVN",
+   "dest": "SYR",
+   "dep": "15:15",
+   "arr": "16:11",
+   "flight": 1880,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "SYR",
+   "dest": "ORH",
+   "dep": "08:35",
+   "arr": "09:33",
+   "flight": 1881,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "SYR",
+   "dest": "ORH",
+   "dep": "19:35",
+   "arr": "20:33",
+   "flight": 1882,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "ORH",
+   "dest": "SYR",
+   "dep": "06:55",
+   "arr": "07:53",
+   "flight": 1883,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "ORH",
+   "dest": "SYR",
+   "dep": "12:25",
+   "arr": "13:23",
+   "flight": 1884,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "SYR",
+   "dest": "SWF",
+   "dep": "05:50",
+   "arr": "06:39",
+   "flight": 1885,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "SYR",
+   "dest": "SWF",
+   "dep": "11:20",
+   "arr": "12:09",
+   "flight": 1886,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "SWF",
+   "dest": "SYR",
+   "dep": "07:05",
+   "arr": "07:54",
+   "flight": 1887,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "SWF",
+   "dest": "SYR",
+   "dep": "12:35",
+   "arr": "13:24",
+   "flight": 1888,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "SYR",
+   "dest": "ISP",
+   "dep": "08:35",
+   "arr": "09:33",
+   "flight": 1889,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "SYR",
+   "dest": "ISP",
+   "dep": "11:25",
+   "arr": "12:23",
+   "flight": 1890,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "SYR",
+   "dest": "ISP",
+   "dep": "19:35",
+   "arr": "20:33",
+   "flight": 1891,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "ISP",
+   "dest": "SYR",
+   "dep": "06:55",
+   "arr": "07:53",
+   "flight": 1892,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "ISP",
+   "dest": "SYR",
+   "dep": "12:25",
+   "arr": "13:23",
+   "flight": 1893,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "ISP",
+   "dest": "SYR",
+   "dep": "15:10",
+   "arr": "16:08",
+   "flight": 1894,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "DAY",
+   "dest": "CRW",
+   "dep": "12:05",
+   "arr": "12:57",
+   "flight": 1895,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "DAY",
+   "dest": "CRW",
+   "dep": "20:25",
+   "arr": "21:17",
+   "flight": 1896,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "CRW",
+   "dest": "DAY",
+   "dep": "06:20",
+   "arr": "07:12",
+   "flight": 1897,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "CRW",
+   "dest": "DAY",
+   "dep": "14:45",
+   "arr": "15:37",
+   "flight": 1898,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "DAY",
+   "dest": "ERI",
+   "dep": "07:55",
+   "arr": "08:58",
+   "flight": 1899,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "DAY",
+   "dest": "ERI",
+   "dep": "20:25",
+   "arr": "21:28",
+   "flight": 1900,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "ERI",
+   "dest": "DAY",
+   "dep": "06:10",
+   "arr": "07:13",
+   "flight": 1901,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "ERI",
+   "dest": "DAY",
+   "dep": "10:20",
+   "arr": "11:23",
+   "flight": 1902,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "DAY",
+   "dest": "TOL",
+   "dep": "07:55",
+   "arr": "08:39",
+   "flight": 1903,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "DAY",
+   "dest": "TOL",
+   "dep": "20:25",
+   "arr": "21:09",
+   "flight": 1904,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "TOL",
+   "dest": "DAY",
+   "dep": "04:30",
+   "arr": "05:14",
+   "flight": 1905,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "TOL",
+   "dest": "DAY",
+   "dep": "10:40",
+   "arr": "11:24",
+   "flight": 1906,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "SYR",
+   "dest": "ACY",
+   "dep": "16:50",
+   "arr": "17:54",
+   "flight": 1907,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "ACY",
+   "dest": "SYR",
+   "dep": "09:35",
+   "arr": "10:39",
+   "flight": 1908,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "PHF",
+   "dest": "TTN",
+   "dep": "11:35",
+   "arr": "12:35",
+   "flight": 1909,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "PHF",
+   "dest": "TTN",
+   "dep": "20:55",
+   "arr": "21:55",
+   "flight": 1910,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "TTN",
+   "dest": "PHF",
+   "dep": "05:15",
+   "arr": "06:15",
+   "flight": 1911,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "TTN",
+   "dest": "PHF",
+   "dep": "14:35",
+   "arr": "15:35",
+   "flight": 1912,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "JAX",
+   "dest": "MCN",
+   "dep": "08:35",
+   "arr": "09:29",
+   "flight": 1913,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "JAX",
+   "dest": "MCN",
+   "dep": "19:25",
+   "arr": "20:19",
+   "flight": 1914,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "MCN",
+   "dest": "JAX",
+   "dep": "05:55",
+   "arr": "06:49",
+   "flight": 1915,
+   "fleet": "CRJ200"
+  },
+  {
+   "origin": "MCN",
+   "dest": "JAX",
+   "dep": "10:15",
+   "arr": "11:09",
+   "flight": 1916,
+   "fleet": "CRJ200"
+  }
+ ]
+}

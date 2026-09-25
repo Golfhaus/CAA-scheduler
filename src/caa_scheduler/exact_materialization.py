@@ -1,15 +1,35 @@
 from __future__ import annotations
 
+import hashlib
+import json
+import logging
+import random
+import time
 from collections import Counter, defaultdict
 from pathlib import Path
+from types import SimpleNamespace
 from typing import Any
 
 import numpy as np
 from scipy.optimize import Bounds, LinearConstraint, milp
 from scipy.sparse import coo_matrix
 
-from .bank_placement import _curfew_status, _maximum_spaced_departures
-from .demand import load_demand_sources_from_manifest
+from .bank_placement import (
+    _block_minutes,
+    _curfew_status,
+    _maximum_spaced_departures,
+)
+from .demand import load_demand_sources_from_manifest, parse_airport_od_matrix
+from .gate_export import _capacity
+from .gates import (
+    SHORT_CLAIM_THRESHOLD_MINUTES,
+    TOUCH_ARRIVAL_MINUTES,
+    TOUCH_DEPARTURE_MINUTES,
+    GateCapacityError,
+    GateClaim,
+    assign_gates,
+)
+from .io import read_json, write_json
 from .routing import (
     _connection_wait,
     _cycles,
@@ -26,6 +46,246 @@ AIRCRAFT_OBJECTIVE_WEIGHT = 1_000_000.0
 MIP_RELATIVE_GAP = 0.01
 MIP_TIME_LIMIT_SECONDS = 120
 SPACING_EXCEPTION_OBJECTIVE_WEIGHT = 10_000.0
+BANK_OVERFLOW_OBJECTIVE_WEIGHT = 1_000_000_000.0
+SEED_DEVIATION_OBJECTIVE_WEIGHT = 1_000_000.0
+EXACT_SEED_MODEL_VERSION = "1.0.0"
+HUB_OPERATION_CLOSURE_MAX_OVERFLOW_ROWS = 2
+SUCCESSOR_PLATEAU_RANDOM_SEED = 20_260_918
+LOGGER = logging.getLogger(__name__)
+
+
+class ExactSeedStageComplete(RuntimeError):
+    """Signal a successful bounded seed-only invocation."""
+
+    def __init__(self, completed_fleets: list[str]):
+        self.completed_fleets = completed_fleets
+        super().__init__(
+            "Exact seed checkpoint completed fleets: "
+            + ", ".join(completed_fleets)
+        )
+
+
+class ExactGlobalRepairIncomplete(RuntimeError):
+    """Signal that an improved global incumbent still exceeds bank capacity."""
+
+    def __init__(
+        self,
+        bank_overflow: dict[str, float],
+        solver_message: str,
+        physical_capacity_overflow: dict[str, float] | None = None,
+        passenger_gate_overflow: dict[str, float] | None = None,
+    ):
+        self.bank_overflow = bank_overflow
+        self.physical_capacity_overflow = physical_capacity_overflow or {}
+        self.passenger_gate_overflow = passenger_gate_overflow or {}
+        combined_overflow = {
+            **{f"bank:{key}": value for key, value in bank_overflow.items()},
+            **{
+                f"airport:{key}": value
+                for key, value in self.physical_capacity_overflow.items()
+            },
+            **{
+                f"gate:{key}": value
+                for key, value in self.passenger_gate_overflow.items()
+            },
+        }
+        total_overflow = sum(combined_overflow.values())
+        maximum_overflow = max(combined_overflow.values())
+        largest_overflows = ", ".join(
+            f"{key}={value:.0f}"
+            for key, value in sorted(
+                combined_overflow.items(),
+                key=lambda item: (-item[1], item[0]),
+            )[:8]
+        )
+        super().__init__(
+            "Exact global repair checkpoint retained "
+            f"{total_overflow:.3f} units of feasibility overflow "
+            f"(maximum row overage {maximum_overflow:.3f}; "
+            f"largest rows: {largest_overflows}) after: {solver_message}"
+        )
+
+
+def _exact_seed_fingerprint(
+    canonical: dict[str, Any],
+    frequency_plan: dict[str, Any],
+    bank_plan: dict[str, Any],
+    repair_plan: dict[str, Any],
+    planning_rules: dict[str, Any],
+) -> str:
+    """Fingerprint every input that can affect an independent fleet seed."""
+    seed_planning_rules = json.loads(json.dumps(planning_rules))
+    seed_planning_rules.get("exactMaterialization", {}).pop(
+        "lineRebalancing", None
+    )
+    payload = json.dumps(
+        {
+            "seedModelVersion": EXACT_SEED_MODEL_VERSION,
+            "canonical": canonical,
+            "frequencyPlan": frequency_plan,
+            "bankPlan": bank_plan,
+            "repairPlan": repair_plan,
+            "planningRules": seed_planning_rules,
+        },
+        ensure_ascii=False,
+        separators=(",", ":"),
+        sort_keys=True,
+    ).encode("utf-8")
+    return hashlib.sha256(payload).hexdigest()
+
+
+def exact_seed_fingerprint_from_manifest(
+    canonical: dict[str, Any],
+    frequency_plan: dict[str, Any],
+    bank_plan: dict[str, Any],
+    repair_plan: dict[str, Any],
+    manifest_path: Path,
+    repo_root: Path,
+) -> str:
+    """Return the compatibility key used by resumable exact seed files."""
+    loaded = load_demand_sources_from_manifest(manifest_path, repo_root)
+    return _exact_seed_fingerprint(
+        canonical,
+        frequency_plan,
+        bank_plan,
+        repair_plan,
+        loaded["planningRules"],
+    )
+
+
+def _read_exact_seed_checkpoint(
+    path: Path,
+    fingerprint: str,
+    seed_order: list[str],
+) -> tuple[
+    dict[str, dict[str, dict[str, Any]]],
+    dict[str, dict[str, Any]],
+]:
+    if not path.exists():
+        return {}, {}
+    checkpoint = read_json(path)
+    if checkpoint.get("schemaVersion") != "1.0.0":
+        raise ValueError(f"Unsupported exact seed checkpoint schema: {path}")
+    if checkpoint.get("seedModelVersion") != EXACT_SEED_MODEL_VERSION:
+        raise ValueError(f"Unsupported exact seed model checkpoint: {path}")
+    if checkpoint.get("fingerprint") != fingerprint:
+        raise ValueError(
+            f"Exact seed checkpoint does not match the current build inputs: {path}"
+        )
+    if checkpoint.get("seedOrder") != seed_order:
+        raise ValueError(
+            f"Exact seed checkpoint fleet order does not match the current build: {path}"
+        )
+    materialized_by_fleet = checkpoint.get("materializedByFleet", {})
+    solver_fleets = checkpoint.get("solverFleets", {})
+    if not isinstance(materialized_by_fleet, dict) or not isinstance(
+        solver_fleets, dict
+    ):
+        raise ValueError(f"Malformed exact seed checkpoint: {path}")
+    completed = set(checkpoint.get("completedFleets", []))
+    if completed != set(materialized_by_fleet) or completed != set(solver_fleets):
+        raise ValueError(f"Incomplete exact seed checkpoint indexes: {path}")
+    if not completed.issubset(seed_order):
+        raise ValueError(f"Exact seed checkpoint contains unknown fleets: {path}")
+    return materialized_by_fleet, solver_fleets
+
+
+def _write_exact_seed_checkpoint(
+    path: Path,
+    fingerprint: str,
+    seed_order: list[str],
+    materialized_by_fleet: dict[str, dict[str, dict[str, Any]]],
+    solver_fleets: dict[str, dict[str, Any]],
+) -> None:
+    completed = [fleet for fleet in seed_order if fleet in materialized_by_fleet]
+    temporary = path.with_name(path.name + ".tmp")
+    write_json(
+        temporary,
+        {
+            "schemaVersion": "1.0.0",
+            "seedModelVersion": EXACT_SEED_MODEL_VERSION,
+            "fingerprint": fingerprint,
+            "seedOrder": seed_order,
+            "completedFleets": completed,
+            "materializedByFleet": {
+                fleet: materialized_by_fleet[fleet] for fleet in completed
+            },
+            "solverFleets": {fleet: solver_fleets[fleet] for fleet in completed},
+        },
+        indent=None,
+    )
+    temporary.replace(path)
+
+
+def _milp_with_start(
+    objective: np.ndarray,
+    integrality: np.ndarray,
+    lower: np.ndarray,
+    upper: np.ndarray,
+    matrix: Any,
+    row_lower: np.ndarray,
+    row_upper: np.ndarray,
+    mip_start: np.ndarray,
+    time_limit_seconds: int,
+) -> SimpleNamespace:
+    """Run bundled HiGHS with a complete incumbent supplied as a MIP start."""
+    from scipy.optimize._highspy._core import (  # type: ignore[attr-defined]
+        HighsLp,
+        HighsModelStatus,
+        HighsSolution,
+        HighsSparseMatrix,
+        HighsVarType,
+        MatrixFormat,
+        _Highs,
+    )
+
+    column_matrix = matrix.tocsc()
+    sparse_matrix = HighsSparseMatrix()
+    sparse_matrix.num_col_ = int(column_matrix.shape[1])
+    sparse_matrix.num_row_ = int(column_matrix.shape[0])
+    sparse_matrix.format_ = MatrixFormat.kColwise
+    sparse_matrix.start_ = column_matrix.indptr.astype(np.int32)
+    sparse_matrix.index_ = column_matrix.indices.astype(np.int32)
+    sparse_matrix.value_ = column_matrix.data.astype(np.float64)
+    sparse_matrix.p_end_ = np.asarray([], dtype=np.int32)
+
+    linear_program = HighsLp()
+    linear_program.num_col_ = int(column_matrix.shape[1])
+    linear_program.num_row_ = int(column_matrix.shape[0])
+    linear_program.col_cost_ = objective.astype(np.float64)
+    linear_program.col_lower_ = lower.astype(np.float64)
+    linear_program.col_upper_ = upper.astype(np.float64)
+    linear_program.row_lower_ = row_lower.astype(np.float64)
+    linear_program.row_upper_ = row_upper.astype(np.float64)
+    linear_program.integrality_ = [
+        HighsVarType.kInteger if value else HighsVarType.kContinuous
+        for value in integrality
+    ]
+    linear_program.a_matrix_ = sparse_matrix
+
+    solver = _Highs()
+    solver.setOptionValue("output_flag", False)
+    solver.setOptionValue("time_limit", float(time_limit_seconds))
+    solver.setOptionValue("mip_rel_gap", MIP_RELATIVE_GAP)
+    solver.passModel(linear_program)
+    solution = HighsSolution()
+    solution.col_value = mip_start.astype(np.float64)
+    solution.value_valid = True
+    solver.setSolution(solution)
+    solver.run()
+    model_status = solver.getModelStatus()
+    solved = solver.getSolution()
+    info = solver.getInfo()
+    return SimpleNamespace(
+        x=(
+            np.asarray(solved.col_value, dtype=np.float64)
+            if solved.value_valid
+            else None
+        ),
+        success=model_status == HighsModelStatus.kOptimal,
+        message=solver.modelStatusToString(model_status),
+        mip_gap=float(info.mip_gap),
+    )
 
 
 def blocked_exact_materialization_plan(
@@ -114,6 +374,58 @@ def _bank_id(value: int, windows: list[dict[str, Any]]) -> str | None:
     )
 
 
+def _apply_assigned_bank_waves(
+    inventory: dict[str, list[dict[str, Any]]],
+    bank_plan: dict[str, Any],
+) -> None:
+    """Attach each planned hub touch to its specific capacity-checked wave."""
+    inventory_groups: defaultdict[
+        tuple[str, str, str], list[dict[str, Any]]
+    ] = defaultdict(list)
+    for fleet_legs in inventory.values():
+        for leg in fleet_legs:
+            inventory_groups[
+                (str(leg["fleet"]), str(leg["origin"]), str(leg["destination"]))
+            ].append(leg)
+
+    placement_groups: defaultdict[
+        tuple[str, str, str], list[dict[str, Any]]
+    ] = defaultdict(list)
+    for placement in bank_plan["placements"]:
+        placement_groups[
+            (
+                str(placement["fleet"]),
+                str(placement["origin"]),
+                str(placement["destination"]),
+            )
+        ].append(placement)
+
+    for key, placements in sorted(placement_groups.items()):
+        legs = sorted(inventory_groups.get(key, []), key=lambda row: row["id"])
+        placements = sorted(
+            placements,
+            key=lambda row: (int(row["roundTripOrdinal"]), str(row["id"])),
+        )
+        if len(legs) != len(placements):
+            fleet, origin, destination = key
+            raise ValueError(
+                f"Assigned-bank inventory mismatch for {origin}-{destination}-{fleet}: "
+                f"{len(legs)} exact copies, {len(placements)} bank placements"
+            )
+        for leg, placement in zip(legs, placements):
+            for touch in placement["bankTouches"]:
+                field = (
+                    "originBankId"
+                    if touch["operation"] == "departure"
+                    else "destinationBankId"
+                )
+                if field in leg:
+                    raise ValueError(
+                        f"Exact inventory leg {leg['id']} has multiple {field} values"
+                    )
+                leg[field] = str(touch["bankId"])
+
+
 def _circular_distance(first: int, second: int) -> int:
     return min((first - second) % 1440, (second - first) % 1440)
 
@@ -174,6 +486,1969 @@ def _timing_cost(
     return float(cost)
 
 
+def _pairing_patterns(
+    candidates: list[dict[str, Any]],
+    frequency: int,
+    minimum_gap: float,
+    hard_floor: float,
+    allowed_exceptions: int,
+    reserved: list[int],
+    maximum_patterns: int,
+    beam_width: int,
+) -> list[dict[str, Any]]:
+    """Build deterministic, spacing-valid departure patterns for one pairing.
+
+    Repeated copies of the same directional market are interchangeable.  Encoding
+    every copy as an integer count at every minute leaves the MILP with a large
+    symmetric search tree.  A pattern compiles that symmetry away: one binary
+    choice represents all departures for the directional market.
+    """
+    if frequency < 1:
+        return []
+
+    ordered = sorted(
+        candidates,
+        key=lambda row: (int(row["departureUtcMinute"]), float(row["cost"])),
+    )
+    reserved_exception_pairs = sum(
+        1
+        for position, first in enumerate(reserved)
+        for second in reserved[position + 1 :]
+        if hard_floor
+        <= _circular_distance(first, second)
+        < minimum_gap
+    )
+    remaining_exceptions = allowed_exceptions - reserved_exception_pairs
+    if remaining_exceptions < 0:
+        return []
+
+    usable: list[tuple[dict[str, Any], int]] = []
+    for candidate in ordered:
+        minute = int(candidate["departureUtcMinute"])
+        distances = [_circular_distance(minute, other) for other in reserved]
+        if any(distance < hard_floor for distance in distances):
+            continue
+        exception_count = sum(
+            hard_floor <= distance < minimum_gap for distance in distances
+        )
+        if exception_count <= remaining_exceptions:
+            usable.append((candidate, exception_count))
+
+    if frequency == 1:
+        return [
+            {
+                "events": (candidate,),
+                "cost": float(candidate["cost"])
+                + SPACING_EXCEPTION_OBJECTIVE_WEIGHT * exception_count,
+                "spacingExceptions": exception_count,
+            }
+            for candidate, exception_count in usable
+        ]
+
+    states: list[tuple[tuple[int, ...], float, int]] = [
+        ((index,), float(candidate["cost"]), exception_count)
+        for index, (candidate, exception_count) in enumerate(usable)
+    ]
+    ideal_gap = 1440.0 / frequency
+    for depth in range(2, frequency + 1):
+        expanded: list[tuple[tuple[int, ...], float, int]] = []
+        for indices, cost, exception_count in states:
+            first_minute = int(
+                usable[indices[0]][0]["departureUtcMinute"]
+            )
+            last_minute = int(
+                usable[indices[-1]][0]["departureUtcMinute"]
+            )
+            target = first_minute + (depth - 1) * ideal_gap
+            viable: list[tuple[float, float, int]] = []
+            for candidate_index in range(indices[-1] + 1, len(usable)):
+                candidate, reserved_exceptions = usable[candidate_index]
+                minute = int(candidate["departureUtcMinute"])
+                distances = [
+                    _circular_distance(
+                        minute,
+                        int(usable[prior][0]["departureUtcMinute"]),
+                    )
+                    for prior in indices
+                ]
+                if any(distance < hard_floor for distance in distances):
+                    continue
+                added_exceptions = reserved_exceptions + sum(
+                    hard_floor <= distance < minimum_gap
+                    for distance in distances
+                )
+                if exception_count + added_exceptions > remaining_exceptions:
+                    continue
+                viable.append(
+                    (
+                        abs(minute - target),
+                        float(candidate["cost"]),
+                        candidate_index,
+                    )
+                )
+
+            # Target-near choices preserve broad time-of-day coverage; cheap
+            # choices retain the bank-core objective.  Their union keeps the
+            # bounded pattern set useful to the downstream fleet-flow solve.
+            selected_indices = []
+            seen_indices: set[int] = set()
+            for _, _, candidate_index in sorted(viable)[:8] + sorted(
+                viable, key=lambda row: (row[1], row[0], row[2])
+            )[:4]:
+                if candidate_index not in seen_indices:
+                    selected_indices.append(candidate_index)
+                    seen_indices.add(candidate_index)
+            for candidate_index in selected_indices:
+                candidate, reserved_exceptions = usable[candidate_index]
+                minute = int(candidate["departureUtcMinute"])
+                added_exceptions = reserved_exceptions + sum(
+                    hard_floor
+                    <= _circular_distance(
+                        minute,
+                        int(usable[prior][0]["departureUtcMinute"]),
+                    )
+                    < minimum_gap
+                    for prior in indices
+                )
+                expanded.append(
+                    (
+                        indices + (candidate_index,),
+                        cost + float(candidate["cost"]),
+                        exception_count + added_exceptions,
+                    )
+                )
+
+        if len(expanded) > beam_width:
+            expanded.sort(
+                key=lambda row: (
+                    row[1]
+                    + SPACING_EXCEPTION_OBJECTIVE_WEIGHT * row[2],
+                    tuple(
+                        int(usable[index][0]["departureUtcMinute"])
+                        for index in row[0]
+                    ),
+                )
+            )
+            broadly_timed: dict[tuple[int, int, int], tuple[tuple[int, ...], float, int]] = {}
+            for state in expanded:
+                minutes = [
+                    int(usable[index][0]["departureUtcMinute"])
+                    for index in state[0]
+                ]
+                signature = (
+                    minutes[0] // 30,
+                    minutes[-1] // 30,
+                    sum(minutes) // (30 * len(minutes)),
+                )
+                broadly_timed.setdefault(signature, state)
+            retained = expanded[: beam_width // 2]
+            retained_ids = {state[0] for state in retained}
+            for state in broadly_timed.values():
+                if state[0] not in retained_ids:
+                    retained.append(state)
+                    retained_ids.add(state[0])
+                if len(retained) >= beam_width:
+                    break
+            states = retained
+        else:
+            states = expanded
+        if not states:
+            return []
+
+    patterns = [
+        {
+            "events": tuple(usable[index][0] for index in indices),
+            "cost": cost
+            + SPACING_EXCEPTION_OBJECTIVE_WEIGHT * exception_count,
+            "spacingExceptions": exception_count,
+        }
+        for indices, cost, exception_count in states
+    ]
+    patterns.sort(
+        key=lambda row: (
+            float(row["cost"]),
+            tuple(
+                int(event["departureUtcMinute"])
+                for event in row["events"]
+            ),
+        )
+    )
+    if len(patterns) <= maximum_patterns:
+        return patterns
+
+    retained = patterns[: maximum_patterns // 2]
+    retained_times = {
+        tuple(int(event["departureUtcMinute"]) for event in row["events"])
+        for row in retained
+    }
+    signatures: set[tuple[int, int, int]] = set()
+    for row in patterns:
+        minutes = [int(event["departureUtcMinute"]) for event in row["events"]]
+        signature = (
+            minutes[0] // 30,
+            minutes[-1] // 30,
+            sum(minutes) // (30 * len(minutes)),
+        )
+        if signature in signatures:
+            continue
+        signatures.add(signature)
+        times = tuple(minutes)
+        if times in retained_times:
+            continue
+        retained.append(row)
+        retained_times.add(times)
+        if len(retained) >= maximum_patterns:
+            break
+    if len(retained) < maximum_patterns:
+        for row in patterns:
+            times = tuple(
+                int(event["departureUtcMinute"])
+                for event in row["events"]
+            )
+            if times in retained_times:
+                continue
+            retained.append(row)
+            retained_times.add(times)
+            if len(retained) >= maximum_patterns:
+                break
+    return retained
+
+
+def _solve_fleet_with_pairing_patterns(
+    fleet: str,
+    copies: list[dict[str, Any]],
+    configured_aircraft: int,
+    assigned_rons: list[str],
+    cities: dict[str, dict[str, Any]],
+    policy: dict[str, Any],
+    windows: dict[str, list[dict[str, Any]]],
+    targets: dict[str, dict[str, list[int]]],
+    pairing_departure_counts: Counter[tuple[str, str]],
+    station_departure_counts: Counter[str],
+    reserved_pair_departures: dict[tuple[str, str], list[int]],
+    bank_touch_limits: dict[tuple[str, str], int] | None,
+    bank_touch_constraint: str | None,
+    feasibility_only: bool,
+    allow_pairing_spacing_exceptions: bool,
+    time_limit_seconds: int,
+    maximum_patterns: int,
+    beam_width: int,
+) -> tuple[dict[str, dict[str, Any]], dict[str, Any]]:
+    """Solve one fleet with repeated pairings compiled into binary patterns."""
+    minimum_turn = int(policy["turns"]["minimumMinutes"])
+    grouped: defaultdict[tuple[Any, ...], list[dict[str, Any]]] = defaultdict(list)
+    for leg in copies:
+        if leg.get("originBankId") is not None or leg.get("destinationBankId") is not None:
+            raise ValueError(
+                "Pairing-pattern materialization requires joint bank assignment"
+            )
+        grouped[
+            (
+                leg["origin"],
+                leg["destination"],
+                leg["classification"],
+                int(leg["blockMinutes"]),
+            )
+        ].append(leg)
+    group_items = sorted(grouped.items())
+    pairings = [(str(key[0]), str(key[1])) for key, _ in group_items]
+    if len(pairings) != len(set(pairings)):
+        raise ValueError(
+            f"Pairing-pattern {fleet} inventory has duplicate directional groups"
+        )
+
+    section26 = policy["section26"]
+    hubs = set(policy["hubs"])
+    choices: list[dict[str, Any]] = []
+    choices_by_type: defaultdict[int, list[int]] = defaultdict(list)
+    pattern_counts: dict[str, int] = {}
+    spacing_exception_capacity = 0
+    for type_index, (key, legs) in enumerate(group_items):
+        pattern_started = time.monotonic()
+        origin, destination, classification, block = key
+        candidates = []
+        for departure_utc in range(0, 1440, TIME_STEP_MINUTES):
+            departure_local = _local_minute(departure_utc, origin, cities)
+            arrival_utc = (departure_utc + block) % 1440
+            arrival_local = _local_minute(arrival_utc, destination, cities)
+            if origin in windows and not _inside_windows(
+                departure_local, windows[origin]
+            ):
+                continue
+            if destination in windows and not _inside_windows(
+                arrival_local, windows[destination]
+            ):
+                continue
+            if (
+                _curfew_status(origin, departure_local, arrival_local, policy)
+                != "pass"
+            ):
+                continue
+            candidates.append(
+                {
+                    "origin": origin,
+                    "destination": destination,
+                    "classification": classification,
+                    "blockMinutes": block,
+                    "departureUtcMinute": departure_utc,
+                    "arrivalUtcMinute": arrival_utc,
+                    "readyUtcMinute": (
+                        departure_utc + block + minimum_turn
+                    )
+                    % 1440,
+                    "originBankId": (
+                        _bank_id(departure_local, windows[origin])
+                        if origin in windows
+                        else None
+                    ),
+                    "destinationBankId": (
+                        _bank_id(arrival_local, windows[destination])
+                        if destination in windows
+                        else None
+                    ),
+                    "cost": _timing_cost(
+                        origin,
+                        destination,
+                        departure_utc,
+                        arrival_utc,
+                        cities,
+                        targets,
+                    ),
+                }
+            )
+        rule = pairing_spacing_rule(
+            origin,
+            destination,
+            int(pairing_departure_counts[(origin, destination)]),
+            int(station_departure_counts[origin]),
+            hubs,
+            section26,
+        )
+        allowed_exceptions = (
+            int(rule["allowedExceptions"])
+            if allow_pairing_spacing_exceptions
+            else 0
+        )
+        spacing_exception_capacity += allowed_exceptions
+        patterns = _pairing_patterns(
+            candidates,
+            len(legs),
+            float(rule["minimumGapMinutes"]),
+            float(rule["hardFloorMinutes"]),
+            allowed_exceptions,
+            reserved_pair_departures.get((origin, destination), []),
+            maximum_patterns,
+            beam_width,
+        )
+        LOGGER.info(
+            "compiled %s pairing %d/%d %s-%s frequency=%d patterns=%d in %.1fs",
+            fleet,
+            type_index + 1,
+            len(group_items),
+            origin,
+            destination,
+            len(legs),
+            len(patterns),
+            time.monotonic() - pattern_started,
+        )
+        if not patterns:
+            raise ValueError(
+                f"No Section 2.6-compliant pattern exists for "
+                f"{origin}-{destination}-{fleet}"
+            )
+        pattern_counts[f"{origin}-{destination}"] = len(patterns)
+        for pattern in patterns:
+            index = len(choices)
+            choices.append(
+                {
+                    "type": type_index,
+                    "events": pattern["events"],
+                    "cost": float(pattern["cost"]),
+                    "spacingExceptions": int(pattern["spacingExceptions"]),
+                }
+            )
+            choices_by_type[type_index].append(index)
+
+    arrivals: defaultdict[tuple[str, int], dict[int, float]] = defaultdict(dict)
+    departures: defaultdict[tuple[str, int], dict[int, float]] = defaultdict(dict)
+    bank_touches: defaultdict[tuple[str, str], dict[int, float]] = defaultdict(dict)
+    station_events: defaultdict[str, set[int]] = defaultdict(set)
+
+    def add_coefficient(row: dict[int, float], index: int, value: float = 1.0) -> None:
+        row[index] = row.get(index, 0.0) + value
+
+    objective = [float(choice["cost"]) for choice in choices]
+    upper_bounds = [1.0] * len(choices)
+    for index, choice in enumerate(choices):
+        for event in choice["events"]:
+            origin = str(event["origin"])
+            destination = str(event["destination"])
+            departure_utc = int(event["departureUtcMinute"])
+            ready_utc = int(event["readyUtcMinute"])
+            add_coefficient(departures[(origin, departure_utc)], index)
+            add_coefficient(arrivals[(destination, ready_utc)], index)
+            station_events[origin].add(departure_utc)
+            station_events[destination].add(ready_utc)
+            if event["originBankId"] is not None:
+                add_coefficient(
+                    bank_touches[(str(event["originBankId"]), "departure")],
+                    index,
+                )
+            if event["destinationBankId"] is not None:
+                add_coefficient(
+                    bank_touches[(str(event["destinationBankId"]), "arrival")],
+                    index,
+                )
+
+    q_by_event: dict[tuple[str, int], int] = {}
+    for station in sorted(station_events):
+        for minute in sorted(station_events[station]):
+            q_by_event[(station, minute)] = len(objective)
+            objective.append(0.0)
+            upper_bounds.append(float(configured_aircraft))
+
+    rows: list[dict[int, float]] = []
+    lower_bounds: list[float] = []
+    row_upper_bounds: list[float] = []
+    for type_index in range(len(group_items)):
+        rows.append({index: 1.0 for index in choices_by_type[type_index]})
+        lower_bounds.append(1.0)
+        row_upper_bounds.append(1.0)
+
+    bank_capacity_constraints = 0
+    if bank_touch_limits is not None:
+        if bank_touch_constraint not in {"exact", "capacity"}:
+            raise ValueError("Bank-touch constraints require exact or capacity mode")
+        for hub_windows in windows.values():
+            for window in hub_windows:
+                for operation in ("arrival", "departure"):
+                    key = (str(window["id"]), operation)
+                    rows.append(dict(bank_touches.get(key, {})))
+                    limit = float(bank_touch_limits.get(key, 0))
+                    lower_bounds.append(
+                        limit if bank_touch_constraint == "exact" else 0.0
+                    )
+                    row_upper_bounds.append(limit)
+                    bank_capacity_constraints += 1
+
+    for station in sorted(station_events):
+        events = sorted(station_events[station])
+        for position, minute in enumerate(events):
+            previous = events[position - 1]
+            row = {
+                q_by_event[(station, minute)]: 1.0,
+                q_by_event[(station, previous)]: -1.0,
+            }
+            for index, value in arrivals[(station, minute)].items():
+                row[index] = row.get(index, 0.0) - value
+            for index, value in departures[(station, minute)].items():
+                row[index] = row.get(index, 0.0) + value
+            rows.append(row)
+            lower_bounds.append(0.0)
+            row_upper_bounds.append(0.0)
+
+    capacity_row: dict[int, float] = {}
+    for station, events in station_events.items():
+        reference_minute = 0 if 0 in events else max(events)
+        capacity_row[q_by_event[(station, reference_minute)]] = 1.0
+    for index, choice in enumerate(choices):
+        for event in choice["events"]:
+            unavailable_minutes = int(event["blockMinutes"]) + minimum_turn
+            departure_utc = int(event["departureUtcMinute"])
+            if departure_utc == 0 or departure_utc + unavailable_minutes > 1440:
+                add_coefficient(capacity_row, index)
+    rows.append(capacity_row)
+    lower_bounds.append(0.0)
+    row_upper_bounds.append(float(configured_aircraft))
+    for index, coefficient in capacity_row.items():
+        objective[index] += AIRCRAFT_OBJECTIVE_WEIGHT * coefficient
+
+    for station in assigned_rons:
+        boundary = _utc_minute(180, station, cities)
+        events = sorted(station_events[station])
+        state_minute = (
+            boundary
+            if boundary in station_events[station]
+            else max(
+                (minute for minute in events if minute < boundary),
+                default=max(events),
+            )
+        )
+        physical_presence = {q_by_event[(station, state_minute)]: 1.0}
+        for index, value in departures[(station, boundary)].items():
+            physical_presence[index] = physical_presence.get(index, 0.0) + value
+        for index, choice in enumerate(choices):
+            presence = sum(
+                1
+                for event in choice["events"]
+                if event["destination"] == station
+                and (
+                    boundary - int(event["arrivalUtcMinute"])
+                )
+                % 1440
+                < minimum_turn
+            )
+            if presence:
+                physical_presence[index] = (
+                    physical_presence.get(index, 0.0) + presence
+                )
+        rows.append(physical_presence)
+        lower_bounds.append(1.0)
+        row_upper_bounds.append(np.inf)
+
+    matrix_rows: list[int] = []
+    matrix_columns: list[int] = []
+    matrix_values: list[float] = []
+    for row_index, row in enumerate(rows):
+        for column_index, value in row.items():
+            matrix_rows.append(row_index)
+            matrix_columns.append(column_index)
+            matrix_values.append(value)
+    matrix = coo_matrix(
+        (matrix_values, (matrix_rows, matrix_columns)),
+        shape=(len(rows), len(objective)),
+    ).tocsr()
+    integrality = np.zeros(len(objective))
+    integrality[: len(choices)] = 1.0
+    for station, events in station_events.items():
+        integrality[q_by_event[(station, min(events))]] = 1.0
+    result = milp(
+        # Pattern choices already compile the hard spacing rule.  Retain the
+        # aircraft objective even in joint-bank feasibility mode so HiGHS has
+        # a useful search direction toward the fixed fleet cap.
+        c=np.asarray(objective),
+        integrality=integrality,
+        bounds=Bounds(np.zeros(len(objective)), np.asarray(upper_bounds)),
+        constraints=LinearConstraint(
+            matrix,
+            np.asarray(lower_bounds),
+            np.asarray(row_upper_bounds),
+        ),
+        options={
+            "time_limit": time_limit_seconds,
+            "mip_rel_gap": MIP_RELATIVE_GAP,
+        },
+    )
+    if result.x is None:
+        raise ValueError(
+            f"Exact {fleet} pairing-pattern materialization failed: {result.message}"
+        )
+    maximum_fraction = max(abs(value - round(value)) for value in result.x)
+    if maximum_fraction > 1e-6:
+        raise ValueError(
+            f"Exact {fleet} pairing-pattern materialization returned fractional inventory"
+        )
+
+    materialized: dict[str, dict[str, Any]] = {}
+    for type_index, (_, legs) in enumerate(group_items):
+        selected = [
+            index
+            for index in choices_by_type[type_index]
+            if int(round(result.x[index])) == 1
+        ]
+        if len(selected) != 1:
+            raise ValueError(
+                f"Exact {fleet} selected {len(selected)} patterns for type {type_index}"
+            )
+        selected_events = sorted(
+            choices[selected[0]]["events"],
+            key=lambda event: int(event["departureUtcMinute"]),
+        )
+        if len(selected_events) != len(legs):
+            raise ValueError(
+                f"Exact {fleet} pattern contains {len(selected_events)} of "
+                f"{len(legs)} required legs"
+            )
+        for leg, event in zip(
+            sorted(legs, key=lambda row: row["id"]), selected_events
+        ):
+            departure_utc = int(event["departureUtcMinute"])
+            arrival_utc = departure_utc + int(leg["blockMinutes"])
+            departure_local = _local_minute(departure_utc, leg["origin"], cities)
+            arrival_local = _local_minute(arrival_utc, leg["destination"], cities)
+            materialized[leg["id"]] = {
+                **leg,
+                "source": "exact_materialization",
+                "departureUtcMinute": departure_utc,
+                "arrivalUtcMinute": arrival_utc % 1440,
+                "departureMinute": departure_local,
+                "arrivalMinute": arrival_local,
+                "originBankId": (
+                    _bank_id(departure_local, windows[leg["origin"]])
+                    if leg["origin"] in windows
+                    else None
+                ),
+                "destinationBankId": (
+                    _bank_id(arrival_local, windows[leg["destination"]])
+                    if leg["destination"] in windows
+                    else None
+                ),
+                "curfewStatus": "pass",
+            }
+
+    aircraft_required = round(
+        sum(result.x[index] * value for index, value in capacity_row.items())
+    )
+    return materialized, {
+        "status": "optimal_within_gap" if result.success else "feasible_time_limit",
+        "message": str(result.message),
+        "mipGap": round(float(getattr(result, "mip_gap", 0.0) or 0.0), 9),
+        "legTypes": len(group_items),
+        "timeVariables": len(choices),
+        "inventoryVariables": len(q_by_event),
+        "constraints": len(rows),
+        "aircraftRequiredAtReference": int(aircraft_required),
+        "assignedDestinationRons": len(assigned_rons),
+        "objectiveMode": (
+            "minimum_aircraft_with_fixed_cap"
+            if feasibility_only
+            else "minimum_aircraft"
+        ),
+        "pairingModel": "compiled_patterns",
+        "maximumPatternsPerPairing": maximum_patterns,
+        "generatedPatterns": len(choices),
+        "minimumGeneratedPatterns": min(pattern_counts.values(), default=0),
+        "maximumGeneratedPatterns": max(pattern_counts.values(), default=0),
+        "bankCapacityConstraints": bank_capacity_constraints,
+        "bankCapacityConstraintMode": bank_touch_constraint,
+        "section26SpacingConstraints": "compiled_into_patterns",
+        "section26PolicyExceptionCapacity": spacing_exception_capacity,
+    }
+
+
+def _expand_flexible_seed_types_to_markets(
+    flexible_types: set[tuple[Any, ...]],
+    group_items: list[
+        tuple[tuple[Any, ...], list[dict[str, Any]]]
+    ],
+) -> set[tuple[Any, ...]]:
+    """Allow both directions of a seed market to retime as one flow unit."""
+    flexible_markets = {
+        (str(key[0]), frozenset((str(key[1]), str(key[2]))))
+        for key in flexible_types
+    }
+    return flexible_types | {
+        key
+        for key, _ in group_items
+        if (
+            str(key[0]),
+            frozenset((str(key[1]), str(key[2]))),
+        )
+        in flexible_markets
+    }
+
+
+def _expand_flexible_seed_types_to_hub_operations(
+    flexible_types: set[tuple[Any, ...]],
+    seed_touches_by_type: dict[
+        tuple[Any, ...], set[tuple[str, str]]
+    ],
+    seed_overflow_keys: set[tuple[str, str]],
+    windows: dict[str, list[dict[str, Any]]],
+) -> set[tuple[Any, ...]]:
+    """Retiming closure for every seed type sharing an overloaded hub operation."""
+    hub_by_bank = {
+        str(window["id"]): str(hub)
+        for hub, hub_windows in windows.items()
+        for window in hub_windows
+    }
+    overflow_hub_operations = {
+        (hub_by_bank[bank_id], operation)
+        for bank_id, operation in seed_overflow_keys
+        if bank_id in hub_by_bank
+    }
+    return flexible_types | {
+        key
+        for key, touches in seed_touches_by_type.items()
+        if any(
+            (hub_by_bank.get(bank_id), operation)
+            in overflow_hub_operations
+            for bank_id, operation in touches
+        )
+    }
+
+
+def _cyclic_state_minute(events: set[int] | list[int], minute: int) -> int:
+    """Return the latest event state at or before a cyclic daily boundary."""
+    ordered = sorted(events)
+    return max(
+        (event for event in ordered if event <= minute),
+        default=ordered[-1],
+    )
+
+
+def _materialized_physical_capacity_overflow(
+    materialized: dict[str, dict[str, Any]],
+    cities: dict[str, dict[str, Any]],
+    minimum_turn: int,
+) -> dict[tuple[str, int], int]:
+    """Measure minimum cyclic ground inventory above gate-plus-stand capacity."""
+    station_events: defaultdict[tuple[str, str], set[int]] = defaultdict(set)
+    event_deltas: Counter[tuple[str, str, int]] = Counter()
+    physical_events: defaultdict[str, set[int]] = defaultdict(set)
+    arrivals_by_station: defaultdict[str, list[tuple[str, int]]] = defaultdict(list)
+    for leg in materialized.values():
+        fleet = str(leg["fleet"])
+        origin = str(leg["origin"])
+        destination = str(leg["destination"])
+        departure = int(leg["departureUtcMinute"]) % 1440
+        arrival = (departure + int(leg["blockMinutes"])) % 1440
+        ready = (arrival + minimum_turn) % 1440
+        station_events[(fleet, origin)].add(departure)
+        station_events[(fleet, destination)].add(ready)
+        event_deltas[(fleet, origin, departure)] -= 1
+        event_deltas[(fleet, destination, ready)] += 1
+        physical_events[origin].add(departure)
+        physical_events[destination].add(arrival)
+        arrivals_by_station[destination].append((fleet, arrival))
+
+    inventory_states: dict[tuple[str, str, int], int] = {}
+    for (fleet, station), event_set in station_events.items():
+        events = sorted(event_set)
+        values = {events[0]: 0}
+        for previous, minute in zip(events, events[1:]):
+            values[minute] = (
+                values[previous] + event_deltas[(fleet, station, minute)]
+            )
+        shift = max(0, -min(values.values()))
+        for minute, value in values.items():
+            inventory_states[(fleet, station, minute)] = value + shift
+
+    overflow: dict[tuple[str, int], int] = {}
+    for station in physical_events:
+        capacity = sum(_capacity(cities[station]))
+        fleet_stations = [
+            (fleet, event_set)
+            for (fleet, candidate_station), event_set in station_events.items()
+            if candidate_station == station
+        ]
+        for minute in range(1440):
+            occupied = sum(
+                inventory_states[
+                    (
+                        fleet,
+                        station,
+                        _cyclic_state_minute(event_set, minute),
+                    )
+                ]
+                for fleet, event_set in fleet_stations
+            )
+            occupied += sum(
+                1
+                for _, arrival in arrivals_by_station[station]
+                if (minute - arrival) % 1440 < minimum_turn
+            )
+            if occupied > capacity:
+                overflow[(station, minute)] = occupied - capacity
+    return overflow
+
+
+def _materialized_passenger_gate_overflow(
+    materialized: dict[str, dict[str, Any]],
+    cities: dict[str, dict[str, Any]],
+    capacity_reserve: dict[str, int] | None = None,
+) -> dict[tuple[str, int], int]:
+    """Measure the minimum passenger-gate demand implied by timed legs.
+
+    Arrival and departure touch windows may belong to the same through-turn.
+    Matching those touches by fleet gives a safe lower bound without assuming
+    that a ready aircraft must occupy a gate throughout a long RON/ROD hold.
+    The concrete successor allocator remains the final proof.
+    """
+    arrivals: defaultdict[str, list[tuple[str, int]]] = defaultdict(list)
+    departures: defaultdict[str, list[tuple[str, int]]] = defaultdict(list)
+    event_minutes: defaultdict[str, set[int]] = defaultdict(set)
+    for leg in materialized.values():
+        fleet = str(leg["fleet"])
+        origin = str(leg["origin"])
+        destination = str(leg["destination"])
+        departure = int(leg["departureUtcMinute"]) % 1440
+        arrival = (
+            departure + int(leg["blockMinutes"])
+        ) % 1440
+        departures[origin].append((fleet, departure))
+        arrivals[destination].append((fleet, arrival))
+        event_minutes[origin].update(
+            {
+                (departure - TOUCH_DEPARTURE_MINUTES) % 1440,
+                departure,
+            }
+        )
+        event_minutes[destination].update(
+            {
+                arrival,
+                (arrival + TOUCH_ARRIVAL_MINUTES) % 1440,
+            }
+        )
+
+    overflow: dict[tuple[str, int], int] = {}
+    for station, minutes in event_minutes.items():
+        for minute in sorted(minutes):
+            required = 0
+            fleets = {
+                fleet
+                for fleet, _ in arrivals[station] + departures[station]
+            }
+            for fleet in fleets:
+                arrival_touches = sum(
+                    candidate_fleet == fleet
+                    and (minute - arrival) % 1440
+                    < TOUCH_ARRIVAL_MINUTES
+                    for candidate_fleet, arrival in arrivals[station]
+                )
+                departure_touches = sum(
+                    candidate_fleet == fleet
+                    and 0
+                    < (departure - minute) % 1440
+                    <= TOUCH_DEPARTURE_MINUTES
+                    for candidate_fleet, departure in departures[station]
+                )
+                required += max(arrival_touches, departure_touches)
+            gates = max(
+                0,
+                _capacity(cities[station])[0]
+                - int((capacity_reserve or {}).get(station, 0)),
+            )
+            if required > gates:
+                overflow[(station, minute)] = required - gates
+    return overflow
+
+
+def _capacity_repair_stations(
+    physical_overflow: dict[tuple[str, int], int],
+    passenger_gate_overflow: dict[tuple[str, int], int],
+) -> set[str]:
+    """Select every station whose passenger touches need exact retiming.
+
+    Physical gate-plus-stand overflow can make a large model unnecessarily
+    broad, so repair retains the existing largest-station bound there. A
+    passenger-gate overflow is different: leaving even one affected station's
+    market types fixed guarantees that PHOS can survive an otherwise optimal
+    repair. Every passenger-overloaded station must therefore be flexible.
+    """
+    physical_by_station: defaultdict[str, list[int]] = defaultdict(list)
+    for (station, _), overflow in physical_overflow.items():
+        physical_by_station[station].append(overflow)
+    selected = {
+        station
+        for station, _ in sorted(
+            physical_by_station.items(),
+            key=lambda item: (
+                -max(item[1]),
+                -sum(item[1]),
+                item[0],
+            ),
+        )[:1]
+    }
+
+    passenger_by_station: defaultdict[str, list[int]] = defaultdict(list)
+    for (station, _), overflow in passenger_gate_overflow.items():
+        passenger_by_station[station].append(overflow)
+    selected.update(passenger_by_station)
+    return selected
+
+
+def _materialized_gate_assignments(
+    materialized: dict[str, dict[str, Any]],
+    successors: dict[str, str],
+    cities: dict[str, dict[str, Any]],
+    minimum_turn: int,
+) -> tuple[dict[str, list[tuple[GateClaim, int]]], dict[str, Any]]:
+    """Assign real successor holds to fixed gates and stands.
+
+    Unlike the aggregate inventory lower bound, this evaluates the actual
+    arrival-to-next-departure connection selected for each aircraft cycle.
+    Long RON/ROD holds may be split, but every passenger touch must remain at
+    a gate and no row may exceed the configured physical inventory.
+    """
+    stations = sorted(
+        {str(leg["destination"]) for leg in materialized.values()}
+    )
+    assignments: dict[str, list[tuple[GateClaim, int]]] = {}
+    failures = []
+    tow_count = 0
+    for station in stations:
+        station_assignments, diagnostic = (
+            _materialized_station_gate_assignments(
+                materialized,
+                successors,
+                cities,
+                minimum_turn,
+                station,
+            )
+        )
+        if diagnostic["status"] == "fail":
+            failures.extend(diagnostic["failures"])
+            continue
+        assignments[station] = station_assignments
+        tow_count += int(diagnostic["towMovements"])
+    return assignments, {
+        "status": "pass" if not failures else "fail",
+        "stations": len(stations),
+        "towMovements": tow_count,
+        "failures": failures,
+    }
+
+
+def _materialized_station_gate_assignments(
+    materialized: dict[str, dict[str, Any]],
+    successors: dict[str, str],
+    cities: dict[str, dict[str, Any]],
+    minimum_turn: int,
+    station: str,
+) -> tuple[list[tuple[GateClaim, int]], dict[str, Any]]:
+    claims: list[GateClaim] = []
+    for identifier, successor in successors.items():
+        leg = materialized[identifier]
+        if str(leg["destination"]) != station:
+            continue
+        following = materialized[successor]
+        arrival_utc = int(leg["departureUtcMinute"]) + int(
+            leg["blockMinutes"]
+        )
+        wait = _connection_wait(
+            arrival_utc,
+            int(following["departureUtcMinute"]),
+            minimum_turn,
+        )
+        start = _local_minute(arrival_utc, station, cities)
+        claims.append(
+            GateClaim(
+                start,
+                start + wait,
+                f"{identifier} -> {successor}",
+                str(leg["fleet"]),
+                "ron" if wait >= 360 else "turn",
+                str(leg["origin"]),
+                str(following["destination"]),
+            )
+        )
+
+    gates, stands = _capacity(cities[station])
+    try:
+        assignments, stand_middles = assign_gates(
+            claims,
+            gates,
+            n_stands=stands,
+            return_provenance=True,
+        )
+    except GateCapacityError as error:
+        failure = {
+            "station": station,
+            "message": str(error),
+            "requiredGates": error.required_gates,
+            "configuredGates": error.configured_gates,
+            "requiredStands": error.required_stands,
+            "configuredStands": error.configured_stands,
+            "strandedPassengerTouches": len(error.stranded_touches),
+            "strandedLabels": sorted(
+                claim.label for claim in error.stranded_touches
+            ),
+            "strandedTouchWindows": sorted(
+                (
+                    {
+                        "label": claim.label,
+                        "startMinute": int(claim.start),
+                        "endMinute": int(claim.end),
+                    }
+                    for claim in error.stranded_touches
+                ),
+                key=lambda row: (
+                    row["startMinute"],
+                    row["endMinute"],
+                    row["label"],
+                ),
+            ),
+        }
+        return [], {
+            "status": "fail",
+            "stations": 1,
+            "towMovements": 0,
+            "failures": [failure],
+        }
+    return assignments, {
+        "status": "pass",
+        "stations": 1,
+        "towMovements": len(stand_middles),
+        "failures": [],
+    }
+
+
+def _solve_all_fleets_with_pairing_patterns(
+    inventory: dict[str, list[dict[str, Any]]],
+    fleet_counts: dict[str, int],
+    assigned_rons: dict[str, list[str]],
+    cities: dict[str, dict[str, Any]],
+    policy: dict[str, Any],
+    windows: dict[str, list[dict[str, Any]]],
+    targets: dict[str, dict[str, list[int]]],
+    pairing_departure_counts: Counter[tuple[str, str]],
+    station_departure_counts: Counter[str],
+    bank_touch_limits: dict[tuple[str, str], int],
+    allow_pairing_spacing_exceptions: bool,
+    time_limit_seconds: int,
+    maximum_patterns: int,
+    beam_width: int,
+    seed_materialized: dict[str, dict[str, Any]] | None = None,
+    enforce_passenger_gate_capacity: bool = False,
+    passenger_gate_capacity_reserve: dict[str, int] | None = None,
+) -> tuple[
+    dict[str, dict[str, Any]],
+    dict[str, dict[str, Any]],
+    dict[str, Any],
+]:
+    """Jointly choose every fleet's patterns against one bank-capacity ledger."""
+    global_started = time.monotonic()
+    minimum_turn = int(policy["turns"]["minimumMinutes"])
+    grouped: defaultdict[tuple[Any, ...], list[dict[str, Any]]] = defaultdict(list)
+    for fleet, copies in inventory.items():
+        for leg in copies:
+            if leg.get("originBankId") is not None or leg.get("destinationBankId") is not None:
+                raise ValueError(
+                    "Global pairing-pattern materialization requires joint bank assignment"
+                )
+            grouped[
+                (
+                    fleet,
+                    leg["origin"],
+                    leg["destination"],
+                    leg["classification"],
+                    int(leg["blockMinutes"]),
+                )
+            ].append(leg)
+    group_items = sorted(grouped.items())
+    pairings = [(str(key[1]), str(key[2])) for key, _ in group_items]
+    if len(pairings) != len(set(pairings)):
+        raise ValueError(
+            "Global pairing-pattern inventory requires one fleet per directional market"
+        )
+
+    seed_departures: defaultdict[tuple[Any, ...], list[int]] = defaultdict(list)
+    seed_bank_usage: Counter[tuple[str, str]] = Counter()
+    seed_touches_by_type: defaultdict[
+        tuple[Any, ...], set[tuple[str, str]]
+    ] = defaultdict(set)
+    seed_overflow_keys: set[tuple[str, str]] = set()
+    seed_physical_capacity_overflow: dict[tuple[str, int], int] = {}
+    seed_passenger_gate_overflow: dict[tuple[str, int], int] = {}
+    flexible_seed_types: set[tuple[Any, ...]] = set()
+    if seed_materialized is not None:
+        for leg in seed_materialized.values():
+            key = (
+                str(leg["fleet"]),
+                str(leg["origin"]),
+                str(leg["destination"]),
+                str(leg["classification"]),
+                int(leg["blockMinutes"]),
+            )
+            seed_departures[key].append(int(leg["departureUtcMinute"]))
+            if leg.get("originBankId") is not None:
+                touch = (str(leg["originBankId"]), "departure")
+                seed_bank_usage[touch] += 1
+                seed_touches_by_type[key].add(touch)
+            if leg.get("destinationBankId") is not None:
+                touch = (str(leg["destinationBankId"]), "arrival")
+                seed_bank_usage[touch] += 1
+                seed_touches_by_type[key].add(touch)
+        seed_overflow_keys = {
+            key
+            for key, touches in seed_bank_usage.items()
+            if touches > int(bank_touch_limits[key])
+        }
+        for key, touches in seed_touches_by_type.items():
+            if touches & seed_overflow_keys:
+                flexible_seed_types.add(key)
+        directly_flexible_types = len(flexible_seed_types)
+        hub_operation_flexible_types = directly_flexible_types
+        if (
+            len(seed_overflow_keys)
+            <= HUB_OPERATION_CLOSURE_MAX_OVERFLOW_ROWS
+        ):
+            flexible_seed_types = (
+                _expand_flexible_seed_types_to_hub_operations(
+                    flexible_seed_types,
+                    dict(seed_touches_by_type),
+                    seed_overflow_keys,
+                    windows,
+                )
+            )
+            hub_operation_flexible_types = len(flexible_seed_types)
+        flexible_seed_types = _expand_flexible_seed_types_to_markets(
+            flexible_seed_types,
+            group_items,
+        )
+        seed_physical_capacity_overflow = (
+            _materialized_physical_capacity_overflow(
+                seed_materialized,
+                cities,
+                minimum_turn,
+            )
+        )
+        if enforce_passenger_gate_capacity:
+            seed_passenger_gate_overflow = (
+                _materialized_passenger_gate_overflow(
+                    seed_materialized,
+                    cities,
+                    passenger_gate_capacity_reserve,
+                )
+            )
+        overloaded_stations = _capacity_repair_stations(
+            seed_physical_capacity_overflow,
+            seed_passenger_gate_overflow,
+        )
+        overloaded_stations.update(passenger_gate_capacity_reserve or {})
+        flexible_seed_types.update(
+            key
+            for key, _ in group_items
+            if str(key[1]) in overloaded_stations
+            or str(key[2]) in overloaded_stations
+        )
+        LOGGER.info(
+            "global seed overflow bank_rows=%d bank_touches=%d airport_rows=%d passenger_gate_rows=%d selected_airports=%s; flexible types=%d direct, %d with hub-operation closure, %d total",
+            len(seed_overflow_keys),
+            sum(
+                max(0, touches - int(bank_touch_limits[key]))
+                for key, touches in seed_bank_usage.items()
+            ),
+            len(seed_physical_capacity_overflow),
+            len(seed_passenger_gate_overflow),
+            ",".join(sorted(overloaded_stations)) or "none",
+            directly_flexible_types,
+            hub_operation_flexible_types,
+            len(flexible_seed_types),
+        )
+        for times in seed_departures.values():
+            times.sort()
+
+    section26 = policy["section26"]
+    hubs = set(policy["hubs"])
+    choices: list[dict[str, Any]] = []
+    choices_by_type: defaultdict[int, list[int]] = defaultdict(list)
+    choices_by_fleet: defaultdict[str, list[int]] = defaultdict(list)
+    seed_choice_by_type: dict[int, int] = {}
+    types_by_fleet: Counter[str] = Counter()
+    pattern_counts_by_fleet: defaultdict[str, list[int]] = defaultdict(list)
+    spacing_capacity_by_fleet: Counter[str] = Counter()
+    for type_index, (key, legs) in enumerate(group_items):
+        fleet, origin, destination, classification, block = key
+        types_by_fleet[fleet] += 1
+        candidates = []
+        for departure_utc in range(0, 1440, TIME_STEP_MINUTES):
+            departure_local = _local_minute(departure_utc, origin, cities)
+            arrival_utc = (departure_utc + block) % 1440
+            arrival_local = _local_minute(arrival_utc, destination, cities)
+            if origin in windows and not _inside_windows(
+                departure_local, windows[origin]
+            ):
+                continue
+            if destination in windows and not _inside_windows(
+                arrival_local, windows[destination]
+            ):
+                continue
+            if (
+                _curfew_status(origin, departure_local, arrival_local, policy)
+                != "pass"
+            ):
+                continue
+            candidates.append(
+                {
+                    "fleet": fleet,
+                    "origin": origin,
+                    "destination": destination,
+                    "classification": classification,
+                    "blockMinutes": block,
+                    "departureUtcMinute": departure_utc,
+                    "arrivalUtcMinute": arrival_utc,
+                    "readyUtcMinute": (
+                        departure_utc + block + minimum_turn
+                    )
+                    % 1440,
+                    "originBankId": (
+                        _bank_id(departure_local, windows[origin])
+                        if origin in windows
+                        else None
+                    ),
+                    "destinationBankId": (
+                        _bank_id(arrival_local, windows[destination])
+                        if destination in windows
+                        else None
+                    ),
+                    "cost": _timing_cost(
+                        origin,
+                        destination,
+                        departure_utc,
+                        arrival_utc,
+                        cities,
+                        targets,
+                    ),
+                }
+            )
+        rule = pairing_spacing_rule(
+            origin,
+            destination,
+            int(pairing_departure_counts[(origin, destination)]),
+            int(station_departure_counts[origin]),
+            hubs,
+            section26,
+        )
+        allowed_exceptions = (
+            int(rule["allowedExceptions"])
+            if allow_pairing_spacing_exceptions
+            else 0
+        )
+        spacing_capacity_by_fleet[fleet] += allowed_exceptions
+        seed_times = tuple(seed_departures.get(key, []))
+        patterns = (
+            []
+            if seed_materialized is not None
+            and key not in flexible_seed_types
+            else _pairing_patterns(
+                candidates,
+                len(legs),
+                float(rule["minimumGapMinutes"]),
+                float(rule["hardFloorMinutes"]),
+                allowed_exceptions,
+                [],
+                maximum_patterns,
+                beam_width,
+            )
+        )
+        if seed_materialized is not None:
+            matching_seed = [
+                pattern
+                for pattern in patterns
+                if tuple(
+                    int(event["departureUtcMinute"])
+                    for event in pattern["events"]
+                )
+                == seed_times
+            ]
+            if not matching_seed:
+                candidates_by_minute = {
+                    int(candidate["departureUtcMinute"]): candidate
+                    for candidate in candidates
+                }
+                if len(seed_times) != len(legs) or any(
+                    minute not in candidates_by_minute for minute in seed_times
+                ):
+                    raise ValueError(
+                        f"Constructive seed uses an unavailable time for "
+                        f"{origin}-{destination}-{fleet}"
+                    )
+                distances = [
+                    _circular_distance(first, second)
+                    for position, first in enumerate(seed_times)
+                    for second in seed_times[position + 1 :]
+                ]
+                if any(
+                    distance < float(rule["hardFloorMinutes"])
+                    for distance in distances
+                ):
+                    raise ValueError(
+                        f"Constructive seed misses the hard spacing floor for "
+                        f"{origin}-{destination}-{fleet}"
+                    )
+                seed_exceptions = sum(
+                    float(rule["hardFloorMinutes"])
+                    <= distance
+                    < float(rule["minimumGapMinutes"])
+                    for distance in distances
+                )
+                if seed_exceptions > allowed_exceptions:
+                    raise ValueError(
+                        f"Constructive seed exceeds the spacing exception allowance for "
+                        f"{origin}-{destination}-{fleet}"
+                    )
+                seed_pattern = {
+                    "events": tuple(
+                        candidates_by_minute[minute] for minute in seed_times
+                    ),
+                    "cost": sum(
+                        float(candidates_by_minute[minute]["cost"])
+                        for minute in seed_times
+                    )
+                    + SPACING_EXCEPTION_OBJECTIVE_WEIGHT * seed_exceptions,
+                    "spacingExceptions": seed_exceptions,
+                }
+                patterns.append(seed_pattern)
+                matching_seed = [seed_pattern]
+            if key not in flexible_seed_types:
+                patterns = matching_seed
+        if not patterns:
+            raise ValueError(
+                f"No Section 2.6-compliant pattern exists for "
+                f"{origin}-{destination}-{fleet}"
+            )
+        pattern_counts_by_fleet[fleet].append(len(patterns))
+        for pattern in patterns:
+            pattern_times = tuple(
+                int(event["departureUtcMinute"])
+                for event in pattern["events"]
+            )
+            index = len(choices)
+            choices.append(
+                {
+                    "type": type_index,
+                    "fleet": fleet,
+                    "events": pattern["events"],
+                    "cost": float(pattern["cost"])
+                    + (
+                        SEED_DEVIATION_OBJECTIVE_WEIGHT
+                        if seed_materialized is not None
+                        and pattern_times != seed_times
+                        else 0.0
+                    ),
+                    "spacingExceptions": int(pattern["spacingExceptions"]),
+                }
+            )
+            choices_by_type[type_index].append(index)
+            choices_by_fleet[fleet].append(index)
+            if seed_materialized is not None and pattern_times == seed_times:
+                seed_choice_by_type[type_index] = index
+
+    LOGGER.info(
+        "compiled global repair patterns types=%d choices=%d in %.1fs",
+        len(group_items),
+        len(choices),
+        time.monotonic() - global_started,
+    )
+
+    arrivals: defaultdict[
+        tuple[str, str, int], dict[int, float]
+    ] = defaultdict(dict)
+    departures: defaultdict[
+        tuple[str, str, int], dict[int, float]
+    ] = defaultdict(dict)
+    bank_touches: defaultdict[
+        tuple[str, str], dict[int, float]
+    ] = defaultdict(dict)
+    station_events: defaultdict[tuple[str, str], set[int]] = defaultdict(set)
+    physical_station_events: defaultdict[str, set[int]] = defaultdict(set)
+    passenger_gate_events: defaultdict[str, set[int]] = defaultdict(set)
+    arrival_events_by_station: defaultdict[
+        str, list[tuple[int, str, int]]
+    ] = defaultdict(list)
+    departure_events_by_station: defaultdict[
+        str, list[tuple[int, str, int]]
+    ] = defaultdict(list)
+
+    def add_coefficient(row: dict[int, float], index: int, value: float = 1.0) -> None:
+        row[index] = row.get(index, 0.0) + value
+
+    objective = [float(choice["cost"]) for choice in choices]
+    upper_bounds = [1.0] * len(choices)
+    for index, choice in enumerate(choices):
+        fleet = str(choice["fleet"])
+        for event in choice["events"]:
+            origin = str(event["origin"])
+            destination = str(event["destination"])
+            departure_utc = int(event["departureUtcMinute"])
+            arrival_utc = int(event["arrivalUtcMinute"])
+            ready_utc = int(event["readyUtcMinute"])
+            add_coefficient(
+                departures[(fleet, origin, departure_utc)], index
+            )
+            add_coefficient(
+                arrivals[(fleet, destination, ready_utc)], index
+            )
+            station_events[(fleet, origin)].add(departure_utc)
+            station_events[(fleet, destination)].add(ready_utc)
+            physical_station_events[origin].add(departure_utc)
+            physical_station_events[destination].add(arrival_utc)
+            passenger_gate_events[origin].update(
+                {
+                    (departure_utc - TOUCH_DEPARTURE_MINUTES) % 1440,
+                    departure_utc,
+                }
+            )
+            passenger_gate_events[destination].update(
+                {
+                    arrival_utc,
+                    (arrival_utc + TOUCH_ARRIVAL_MINUTES) % 1440,
+                }
+            )
+            arrival_events_by_station[destination].append(
+                (index, fleet, arrival_utc)
+            )
+            departure_events_by_station[origin].append(
+                (index, fleet, departure_utc)
+            )
+            if event["originBankId"] is not None:
+                add_coefficient(
+                    bank_touches[(str(event["originBankId"]), "departure")],
+                    index,
+                )
+            if event["destinationBankId"] is not None:
+                add_coefficient(
+                    bank_touches[(str(event["destinationBankId"]), "arrival")],
+                    index,
+                )
+
+    q_by_event: dict[tuple[str, str, int], int] = {}
+    for fleet, station in sorted(station_events):
+        for minute in sorted(station_events[(fleet, station)]):
+            q_by_event[(fleet, station, minute)] = len(objective)
+            objective.append(0.0)
+            upper_bounds.append(float(fleet_counts[fleet]))
+
+    rows: list[dict[int, float]] = []
+    lower_bounds: list[float] = []
+    row_upper_bounds: list[float] = []
+    for type_index in range(len(group_items)):
+        rows.append({index: 1.0 for index in choices_by_type[type_index]})
+        lower_bounds.append(1.0)
+        row_upper_bounds.append(1.0)
+
+    bank_capacity_constraints = 0
+    bank_overflow_variables: dict[tuple[str, str], int] = {}
+    for hub_windows in windows.values():
+        for window in hub_windows:
+            for operation in ("arrival", "departure"):
+                key = (str(window["id"]), operation)
+                overflow_index = len(objective)
+                objective.append(BANK_OVERFLOW_OBJECTIVE_WEIGHT)
+                upper_bounds.append(
+                    float(sum(bank_touches.get(key, {}).values()))
+                )
+                bank_overflow_variables[key] = overflow_index
+                row = dict(bank_touches.get(key, {}))
+                row[overflow_index] = -1.0
+                rows.append(row)
+                lower_bounds.append(0.0)
+                row_upper_bounds.append(float(bank_touch_limits[key]))
+                bank_capacity_constraints += 1
+
+    physical_capacity_constraints = 0
+    physical_capacity_rows: dict[tuple[str, int], dict[int, float]] = {}
+    physical_capacity_overflow_variables: dict[str, int] = {}
+    for station in sorted(physical_station_events):
+        combined_capacity = float(sum(_capacity(cities[station])))
+        overflow_index = len(objective)
+        objective.append(BANK_OVERFLOW_OBJECTIVE_WEIGHT)
+        upper_bounds.append(float(sum(fleet_counts.values())))
+        physical_capacity_overflow_variables[station] = overflow_index
+        fleet_station_events = [
+            (fleet, event_set)
+            for (fleet, candidate_station), event_set in station_events.items()
+            if candidate_station == station
+        ]
+        for minute in sorted(physical_station_events[station]):
+            row = {
+                q_by_event[
+                    (
+                        fleet,
+                        station,
+                        _cyclic_state_minute(event_set, minute),
+                    )
+                ]: 1.0
+                for fleet, event_set in fleet_station_events
+            }
+            for index, _, arrival_utc in arrival_events_by_station[station]:
+                if (minute - arrival_utc) % 1440 < minimum_turn:
+                    add_coefficient(row, index)
+            physical_capacity_rows[(station, minute)] = dict(row)
+            row[overflow_index] = -1.0
+            rows.append(row)
+            lower_bounds.append(-np.inf)
+            row_upper_bounds.append(combined_capacity)
+            physical_capacity_constraints += 1
+
+    passenger_gate_constraints = 0
+    passenger_touch_variables: dict[tuple[str, int, str], int] = {}
+    passenger_arrival_rows: dict[
+        tuple[str, int, str], dict[int, float]
+    ] = {}
+    passenger_departure_rows: dict[
+        tuple[str, int, str], dict[int, float]
+    ] = {}
+    passenger_gate_rows: dict[tuple[str, int], dict[int, float]] = {}
+    passenger_gate_overflow_variables: dict[str, int] = {}
+    if enforce_passenger_gate_capacity:
+        for station in sorted(passenger_gate_events):
+            overflow_index = len(objective)
+            objective.append(BANK_OVERFLOW_OBJECTIVE_WEIGHT)
+            upper_bounds.append(float(sum(fleet_counts.values())))
+            passenger_gate_overflow_variables[station] = overflow_index
+            station_fleets = sorted(
+                {
+                    fleet
+                    for _, fleet, _ in (
+                        arrival_events_by_station[station]
+                        + departure_events_by_station[station]
+                    )
+                }
+            )
+            for minute in sorted(passenger_gate_events[station]):
+                gate_row: dict[int, float] = {}
+                for fleet in station_fleets:
+                    key = (station, minute, fleet)
+                    touch_index = len(objective)
+                    objective.append(0.0)
+                    upper_bounds.append(float(fleet_counts[fleet]))
+                    passenger_touch_variables[key] = touch_index
+                    arrival_row: dict[int, float] = {}
+                    for index, candidate_fleet, arrival_utc in (
+                        arrival_events_by_station[station]
+                    ):
+                        if (
+                            candidate_fleet == fleet
+                            and (minute - arrival_utc) % 1440
+                            < TOUCH_ARRIVAL_MINUTES
+                        ):
+                            add_coefficient(arrival_row, index)
+                    departure_row: dict[int, float] = {}
+                    for index, candidate_fleet, departure_utc in (
+                        departure_events_by_station[station]
+                    ):
+                        until_departure = (departure_utc - minute) % 1440
+                        if (
+                            candidate_fleet == fleet
+                            and 0
+                            < until_departure
+                            <= TOUCH_DEPARTURE_MINUTES
+                        ):
+                            add_coefficient(departure_row, index)
+                    passenger_arrival_rows[key] = arrival_row
+                    passenger_departure_rows[key] = departure_row
+                    for touch_row in (arrival_row, departure_row):
+                        row = {touch_index: 1.0}
+                        for index, value in touch_row.items():
+                            add_coefficient(row, index, -value)
+                        rows.append(row)
+                        lower_bounds.append(0.0)
+                        row_upper_bounds.append(np.inf)
+                        passenger_gate_constraints += 1
+                    gate_row[touch_index] = 1.0
+                passenger_gate_rows[(station, minute)] = dict(gate_row)
+                gate_row[overflow_index] = -1.0
+                rows.append(gate_row)
+                lower_bounds.append(-np.inf)
+                gate_capacity = max(
+                    0,
+                    _capacity(cities[station])[0]
+                    - int(
+                        (passenger_gate_capacity_reserve or {}).get(
+                            station, 0
+                        )
+                    ),
+                )
+                row_upper_bounds.append(float(gate_capacity))
+                passenger_gate_constraints += 1
+
+    for fleet, station in sorted(station_events):
+        events = sorted(station_events[(fleet, station)])
+        for position, minute in enumerate(events):
+            previous = events[position - 1]
+            row = {
+                q_by_event[(fleet, station, minute)]: 1.0,
+                q_by_event[(fleet, station, previous)]: -1.0,
+            }
+            for index, value in arrivals[(fleet, station, minute)].items():
+                row[index] = row.get(index, 0.0) - value
+            for index, value in departures[(fleet, station, minute)].items():
+                row[index] = row.get(index, 0.0) + value
+            rows.append(row)
+            lower_bounds.append(0.0)
+            row_upper_bounds.append(0.0)
+
+    capacity_rows: dict[str, dict[int, float]] = {}
+    for fleet in sorted(fleet_counts):
+        capacity_row: dict[int, float] = {}
+        for candidate_fleet, station in station_events:
+            if candidate_fleet != fleet:
+                continue
+            events = station_events[(fleet, station)]
+            reference_minute = 0 if 0 in events else max(events)
+            capacity_row[q_by_event[(fleet, station, reference_minute)]] = 1.0
+        for index in choices_by_fleet[fleet]:
+            for event in choices[index]["events"]:
+                unavailable_minutes = int(event["blockMinutes"]) + minimum_turn
+                departure_utc = int(event["departureUtcMinute"])
+                if departure_utc == 0 or departure_utc + unavailable_minutes > 1440:
+                    add_coefficient(capacity_row, index)
+        rows.append(capacity_row)
+        lower_bounds.append(0.0)
+        row_upper_bounds.append(float(fleet_counts[fleet]))
+        capacity_rows[fleet] = capacity_row
+
+    ron_constraints_by_fleet: Counter[str] = Counter()
+    for fleet, stations in sorted(assigned_rons.items()):
+        for station in stations:
+            boundary = _utc_minute(180, station, cities)
+            events = sorted(station_events[(fleet, station)])
+            state_minute = (
+                boundary
+                if boundary in station_events[(fleet, station)]
+                else max(
+                    (minute for minute in events if minute < boundary),
+                    default=max(events),
+                )
+            )
+            physical_presence = {
+                q_by_event[(fleet, station, state_minute)]: 1.0
+            }
+            for index, value in departures[(fleet, station, boundary)].items():
+                physical_presence[index] = (
+                    physical_presence.get(index, 0.0) + value
+                )
+            for index in choices_by_fleet[fleet]:
+                presence = sum(
+                    1
+                    for event in choices[index]["events"]
+                    if event["destination"] == station
+                    and (
+                        boundary - int(event["arrivalUtcMinute"])
+                    )
+                    % 1440
+                    < minimum_turn
+                )
+                if presence:
+                    physical_presence[index] = (
+                        physical_presence.get(index, 0.0) + presence
+                    )
+            rows.append(physical_presence)
+            lower_bounds.append(1.0)
+            row_upper_bounds.append(np.inf)
+            ron_constraints_by_fleet[fleet] += 1
+
+    matrix_rows: list[int] = []
+    matrix_columns: list[int] = []
+    matrix_values: list[float] = []
+    for row_index, row in enumerate(rows):
+        for column_index, value in row.items():
+            matrix_rows.append(row_index)
+            matrix_columns.append(column_index)
+            matrix_values.append(value)
+    matrix = coo_matrix(
+        (matrix_values, (matrix_rows, matrix_columns)),
+        shape=(len(rows), len(objective)),
+    ).tocsr()
+    integrality = np.zeros(len(objective))
+    integrality[: len(choices)] = 1.0
+    for fleet, station in station_events:
+        integrality[
+            q_by_event[(fleet, station, min(station_events[(fleet, station)]))]
+        ] = 1.0
+    objective_array = np.asarray(objective)
+    lower_array = np.zeros(len(objective))
+    upper_array = np.asarray(upper_bounds)
+    row_lower_array = np.asarray(lower_bounds)
+    row_upper_array = np.asarray(row_upper_bounds)
+    if seed_materialized is not None:
+        if len(seed_choice_by_type) != len(group_items):
+            raise ValueError(
+                "Constructive seed does not select every directional leg type"
+            )
+        mip_start = np.zeros(len(objective))
+        selected_choice_indices = set(seed_choice_by_type.values())
+        for index in selected_choice_indices:
+            mip_start[index] = 1.0
+        event_deltas: Counter[tuple[str, str, int]] = Counter()
+        for index in selected_choice_indices:
+            fleet = str(choices[index]["fleet"])
+            for event in choices[index]["events"]:
+                event_deltas[
+                    (fleet, str(event["origin"]), int(event["departureUtcMinute"]))
+                ] -= 1
+                event_deltas[
+                    (fleet, str(event["destination"]), int(event["readyUtcMinute"]))
+                ] += 1
+        for fleet, station in station_events:
+            events = sorted(station_events[(fleet, station)])
+            values = {events[0]: 0.0}
+            for minute in events[1:]:
+                previous = events[events.index(minute) - 1]
+                values[minute] = values[previous] + float(
+                    event_deltas[(fleet, station, minute)]
+                )
+            shift = max(0.0, -min(values.values()))
+            for minute, value in values.items():
+                mip_start[q_by_event[(fleet, station, minute)]] = value + shift
+        for key, overflow_index in bank_overflow_variables.items():
+            touches = sum(
+                value
+                for index, value in bank_touches.get(key, {}).items()
+                if index in selected_choice_indices
+            )
+            mip_start[overflow_index] = max(
+                0.0, touches - float(bank_touch_limits[key])
+            )
+        for station, overflow_index in physical_capacity_overflow_variables.items():
+            maximum_overflow = max(
+                (
+                    sum(
+                        value * mip_start[index]
+                        for index, value in row.items()
+                    )
+                    - float(sum(_capacity(cities[station])))
+                    for (candidate_station, _), row in physical_capacity_rows.items()
+                    if candidate_station == station
+                ),
+                default=0.0,
+            )
+            mip_start[overflow_index] = max(
+                0.0,
+                maximum_overflow,
+            )
+        for key, touch_index in passenger_touch_variables.items():
+            arrival_touches = sum(
+                value
+                for index, value in passenger_arrival_rows[key].items()
+                if index in selected_choice_indices
+            )
+            departure_touches = sum(
+                value
+                for index, value in passenger_departure_rows[key].items()
+                if index in selected_choice_indices
+            )
+            mip_start[touch_index] = max(
+                arrival_touches,
+                departure_touches,
+            )
+        for station, overflow_index in (
+            passenger_gate_overflow_variables.items()
+        ):
+            gate_capacity = max(
+                0,
+                _capacity(cities[station])[0]
+                - int(
+                    (passenger_gate_capacity_reserve or {}).get(station, 0)
+                ),
+            )
+            maximum_overflow = max(
+                (
+                    sum(
+                        value * mip_start[index]
+                        for index, value in row.items()
+                    )
+                    - float(gate_capacity)
+                    for (candidate_station, _), row in (
+                        passenger_gate_rows.items()
+                    )
+                    if candidate_station == station
+                ),
+                default=0.0,
+            )
+            mip_start[overflow_index] = max(0.0, maximum_overflow)
+        row_values = np.asarray(matrix @ mip_start).reshape(-1)
+        lower_violation = np.max(
+            np.maximum(row_lower_array - row_values, 0.0), initial=0.0
+        )
+        upper_violation = np.max(
+            np.maximum(row_values - row_upper_array, 0.0), initial=0.0
+        )
+        bound_violation = max(
+            float(np.max(np.maximum(lower_array - mip_start, 0.0), initial=0.0)),
+            float(np.max(np.maximum(mip_start - upper_array, 0.0), initial=0.0)),
+        )
+        if max(lower_violation, upper_violation, bound_violation) > 1e-6:
+            raise ValueError(
+                "Constructive MIP start is invalid: "
+                f"row lower {lower_violation:.6f}, row upper {upper_violation:.6f}, "
+                f"bound {bound_violation:.6f}"
+            )
+        LOGGER.info(
+            "starting global repair variables=%d constraints=%d time_limit=%ds",
+            len(objective),
+            len(rows),
+            time_limit_seconds,
+        )
+        result = _milp_with_start(
+            objective_array,
+            integrality,
+            lower_array,
+            upper_array,
+            matrix,
+            row_lower_array,
+            row_upper_array,
+            mip_start,
+            time_limit_seconds,
+        )
+    else:
+        result = milp(
+            c=objective_array,
+            integrality=integrality,
+            bounds=Bounds(lower_array, upper_array),
+            constraints=LinearConstraint(
+                matrix,
+                row_lower_array,
+                row_upper_array,
+            ),
+            options={
+                "time_limit": time_limit_seconds,
+                "mip_rel_gap": MIP_RELATIVE_GAP,
+            },
+        )
+    if result.x is None:
+        raise ValueError(
+            "Exact global pairing-pattern materialization failed: "
+            + str(result.message)
+        )
+    bank_overflow = {
+        f"{bank_id}:{operation}": float(result.x[index])
+        for (bank_id, operation), index in bank_overflow_variables.items()
+        if float(result.x[index]) > 1e-6
+    }
+    physical_capacity_overflow = {
+        station: float(result.x[index])
+        for station, index in physical_capacity_overflow_variables.items()
+        if float(result.x[index]) > 1e-6
+    }
+    passenger_gate_overflow = {
+        station: float(result.x[index])
+        for station, index in passenger_gate_overflow_variables.items()
+        if float(result.x[index]) > 1e-6
+    }
+    LOGGER.info(
+        "global repair returned %s with %.0f bank overflow, %.0f airport overflow, and %.0f passenger-gate overflow in %.1fs",
+        result.message,
+        sum(bank_overflow.values()),
+        sum(physical_capacity_overflow.values()),
+        sum(passenger_gate_overflow.values()),
+        time.monotonic() - global_started,
+    )
+    maximum_fraction = max(abs(value - round(value)) for value in result.x)
+    if maximum_fraction > 1e-6:
+        raise ValueError(
+            "Exact global pairing-pattern materialization returned fractional inventory"
+        )
+
+    materialized: dict[str, dict[str, Any]] = {}
+    for type_index, (key, legs) in enumerate(group_items):
+        fleet = str(key[0])
+        selected = [
+            index
+            for index in choices_by_type[type_index]
+            if int(round(result.x[index])) == 1
+        ]
+        if len(selected) != 1:
+            raise ValueError(
+                f"Exact global solve selected {len(selected)} patterns for type {type_index}"
+            )
+        selected_events = sorted(
+            choices[selected[0]]["events"],
+            key=lambda event: int(event["departureUtcMinute"]),
+        )
+        if len(selected_events) != len(legs):
+            raise ValueError(
+                f"Exact {fleet} pattern contains {len(selected_events)} of "
+                f"{len(legs)} required legs"
+            )
+        for leg, event in zip(
+            sorted(legs, key=lambda row: row["id"]), selected_events
+        ):
+            departure_utc = int(event["departureUtcMinute"])
+            arrival_utc = departure_utc + int(leg["blockMinutes"])
+            departure_local = _local_minute(departure_utc, leg["origin"], cities)
+            arrival_local = _local_minute(arrival_utc, leg["destination"], cities)
+            materialized[leg["id"]] = {
+                **leg,
+                "source": "exact_materialization",
+                "departureUtcMinute": departure_utc,
+                "arrivalUtcMinute": arrival_utc % 1440,
+                "departureMinute": departure_local,
+                "arrivalMinute": arrival_local,
+                "originBankId": (
+                    _bank_id(departure_local, windows[leg["origin"]])
+                    if leg["origin"] in windows
+                    else None
+                ),
+                "destinationBankId": (
+                    _bank_id(arrival_local, windows[leg["destination"]])
+                    if leg["destination"] in windows
+                    else None
+                ),
+                "curfewStatus": "pass",
+            }
+
+    solver_fleets: dict[str, dict[str, Any]] = {}
+    for fleet in sorted(fleet_counts):
+        pattern_counts = pattern_counts_by_fleet[fleet]
+        aircraft_required = round(
+            sum(
+                result.x[index] * value
+                for index, value in capacity_rows[fleet].items()
+            )
+        )
+        solver_fleets[fleet] = {
+            "status": (
+                "optimal_within_gap" if result.success else "feasible_time_limit"
+            ),
+            "message": str(result.message),
+            "mipGap": round(float(getattr(result, "mip_gap", 0.0) or 0.0), 9),
+            "legTypes": int(types_by_fleet[fleet]),
+            "timeVariables": len(choices_by_fleet[fleet]),
+            "inventoryVariables": sum(
+                len(events)
+                for (candidate_fleet, _), events in station_events.items()
+                if candidate_fleet == fleet
+            ),
+            "constraints": len(rows),
+            "aircraftRequiredAtReference": int(aircraft_required),
+            "assignedDestinationRons": int(ron_constraints_by_fleet[fleet]),
+            "objectiveMode": "global_minimum_aircraft_with_fixed_fleet_caps",
+            "pairingModel": "compiled_patterns",
+            "maximumPatternsPerPairing": maximum_patterns,
+            "generatedPatterns": len(choices_by_fleet[fleet]),
+            "minimumGeneratedPatterns": min(pattern_counts, default=0),
+            "maximumGeneratedPatterns": max(pattern_counts, default=0),
+            "bankCapacityConstraints": bank_capacity_constraints,
+            "bankCapacityConstraintMode": "global_capacity",
+            "physicalCapacityConstraints": physical_capacity_constraints,
+            "physicalCapacityConstraintMode": "global_gate_plus_stand_capacity",
+            "passengerGateConstraints": passenger_gate_constraints,
+            "passengerGateConstraintMode": (
+                "fleet_matched_arrival_departure_touch_windows"
+                if enforce_passenger_gate_capacity
+                else "disabled"
+            ),
+            "section26SpacingConstraints": "compiled_into_patterns",
+            "section26PolicyExceptionCapacity": int(
+                spacing_capacity_by_fleet[fleet]
+            ),
+        }
+    joint_solver = {
+        "status": (
+            "repair_incomplete_time_limit"
+            if (
+                bank_overflow
+                or physical_capacity_overflow
+                or passenger_gate_overflow
+            )
+            else "optimal_within_gap" if result.success else "feasible_time_limit"
+        ),
+        "message": str(result.message),
+        "mipGap": round(float(getattr(result, "mip_gap", 0.0) or 0.0), 9),
+        "timeVariables": len(choices),
+        "inventoryVariables": len(q_by_event),
+        "constraints": len(rows),
+        "bankCapacityConstraints": bank_capacity_constraints,
+        "bankFeasibilityOverflow": sum(bank_overflow.values()),
+        "bankOverflowRows": bank_overflow,
+        "physicalCapacityConstraints": physical_capacity_constraints,
+        "physicalCapacityFeasibilityOverflow": sum(
+            physical_capacity_overflow.values()
+        ),
+        "physicalCapacityOverflowRows": physical_capacity_overflow,
+        "passengerGateConstraints": passenger_gate_constraints,
+        "passengerGateFeasibilityOverflow": sum(
+            passenger_gate_overflow.values()
+        ),
+        "passengerGateOverflowRows": passenger_gate_overflow,
+        "constructiveSeed": seed_materialized is not None,
+        "seedOverloadedBankRows": len(seed_overflow_keys),
+        "seedOverloadedPhysicalCapacityRows": len(
+            seed_physical_capacity_overflow
+        ),
+        "seedOverloadedPassengerGateRows": len(
+            seed_passenger_gate_overflow
+        ),
+        "seedFlexibleLegTypes": len(flexible_seed_types),
+        "timeLimitSeconds": time_limit_seconds,
+    }
+    return materialized, solver_fleets, joint_solver
+
+
 def _solve_fleet(
     fleet: str,
     copies: list[dict[str, Any]],
@@ -186,6 +2461,9 @@ def _solve_fleet(
     pairing_departure_counts: Counter[tuple[str, str]],
     station_departure_counts: Counter[str],
     reserved_pair_departures: dict[tuple[str, str], list[int]],
+    bank_touch_limits: dict[tuple[str, str], int] | None,
+    bank_touch_constraint: str | None,
+    feasibility_only: bool,
     enforce_pairing_spacing: bool,
     allow_pairing_spacing_exceptions: bool,
     time_limit_seconds: int,
@@ -199,6 +2477,8 @@ def _solve_fleet(
                 leg["destination"],
                 leg["classification"],
                 int(leg["blockMinutes"]),
+                leg.get("originBankId"),
+                leg.get("destinationBankId"),
             )
         ].append(leg)
     group_items = sorted(grouped.items())
@@ -210,22 +2490,52 @@ def _solve_fleet(
     pairing_departures: defaultdict[
         tuple[str, str], defaultdict[int, list[int]]
     ] = defaultdict(lambda: defaultdict(list))
+    bank_touches: defaultdict[tuple[str, str], list[int]] = defaultdict(list)
     station_events: defaultdict[str, set[int]] = defaultdict(set)
     objective: list[float] = []
     upper_bounds: list[float] = []
 
     for type_index, (key, legs) in enumerate(group_items):
-        origin, destination, classification, block = key
+        (
+            origin,
+            destination,
+            classification,
+            block,
+            origin_bank_id,
+            destination_bank_id,
+        ) = key
+        origin_windows = windows.get(origin, [])
+        destination_windows = windows.get(destination, [])
+        if origin_bank_id is not None:
+            origin_windows = [
+                window
+                for window in origin_windows
+                if window["id"] == origin_bank_id
+            ]
+            if not origin_windows:
+                raise ValueError(
+                    f"Assigned origin bank {origin_bank_id} is missing for {origin}"
+                )
+        if destination_bank_id is not None:
+            destination_windows = [
+                window
+                for window in destination_windows
+                if window["id"] == destination_bank_id
+            ]
+            if not destination_windows:
+                raise ValueError(
+                    f"Assigned destination bank {destination_bank_id} is missing for {destination}"
+                )
         for departure_utc in range(0, 1440, TIME_STEP_MINUTES):
             departure_local = _local_minute(departure_utc, origin, cities)
             arrival_utc = (departure_utc + block) % 1440
             arrival_local = _local_minute(arrival_utc, destination, cities)
             if origin in windows and not _inside_windows(
-                departure_local, windows[origin]
+                departure_local, origin_windows
             ):
                 continue
             if destination in windows and not _inside_windows(
-                arrival_local, windows[destination]
+                arrival_local, destination_windows
             ):
                 continue
             if (
@@ -245,6 +2555,16 @@ def _solve_fleet(
                     "departureUtcMinute": departure_utc,
                     "arrivalUtcMinute": arrival_utc,
                     "readyUtcMinute": ready_utc,
+                    "originBankId": (
+                        _bank_id(departure_local, windows[origin])
+                        if origin in windows
+                        else None
+                    ),
+                    "destinationBankId": (
+                        _bank_id(arrival_local, windows[destination])
+                        if destination in windows
+                        else None
+                    ),
                 }
             )
             y_by_type[type_index].append(index)
@@ -253,6 +2573,14 @@ def _solve_fleet(
             arrivals[(destination, ready_utc)].append(index)
             station_events[origin].add(departure_utc)
             station_events[destination].add(ready_utc)
+            if origin in windows:
+                bank_touches[
+                    (str(y_rows[index]["originBankId"]), "departure")
+                ].append(index)
+            if destination in windows:
+                bank_touches[
+                    (str(y_rows[index]["destinationBankId"]), "arrival")
+                ].append(index)
             objective.append(
                 _timing_cost(
                     origin,
@@ -285,10 +2613,29 @@ def _solve_fleet(
         lower_bounds.append(float(len(legs)))
         row_upper_bounds.append(float(len(legs)))
 
+    bank_capacity_constraints = 0
+    if bank_touch_limits is not None:
+        if bank_touch_constraint not in {"exact", "capacity"}:
+            raise ValueError("Bank-touch constraints require exact or capacity mode")
+        for hub_windows in windows.values():
+            for window in hub_windows:
+                for operation in ("arrival", "departure"):
+                    key = (str(window["id"]), operation)
+                    rows.append(
+                        {index: 1.0 for index in bank_touches.get(key, [])}
+                    )
+                    limit = float(bank_touch_limits.get(key, 0))
+                    lower_bounds.append(
+                        limit if bank_touch_constraint == "exact" else 0.0
+                    )
+                    row_upper_bounds.append(limit)
+                    bank_capacity_constraints += 1
+
     spacing_constraints = 0
     spacing_reserved_rejections = 0
     spacing_exception_variables = 0
     spacing_policy_exception_capacity = 0
+    integer_auxiliary_variables: set[int] = set()
     if enforce_pairing_spacing:
         hubs = set(policy["hubs"])
         section26 = policy["section26"]
@@ -392,6 +2739,7 @@ def _solve_fleet(
                     exception_index = len(objective)
                     objective.append(SPACING_EXCEPTION_OBJECTIVE_WEIGHT)
                     upper_bounds.append(1.0)
+                    integer_auxiliary_variables.add(exception_index)
                     spacing_exception_variables += 1
                     row = {
                         index: 1.0
@@ -481,9 +2829,19 @@ def _solve_fleet(
         (matrix_values, (matrix_rows, matrix_columns)),
         shape=(len(rows), len(objective)),
     ).tocsr()
+    integrality = np.zeros(len(objective))
+    integrality[: len(y_rows)] = 1.0
+    for station, events in station_events.items():
+        integrality[q_by_event[(station, min(events))]] = 1.0
+    for index in integer_auxiliary_variables:
+        integrality[index] = 1.0
     result = milp(
-        c=np.asarray(objective),
-        integrality=np.ones(len(objective)),
+        c=(
+            np.zeros(len(objective))
+            if feasibility_only
+            else np.asarray(objective)
+        ),
+        integrality=integrality,
         bounds=Bounds(np.zeros(len(objective)), np.asarray(upper_bounds)),
         constraints=LinearConstraint(
             matrix,
@@ -562,6 +2920,15 @@ def _solve_fleet(
         "constraints": len(rows),
         "aircraftRequiredAtReference": int(aircraft_required),
         "assignedDestinationRons": len(assigned_rons),
+        "objectiveMode": "feasibility" if feasibility_only else "minimum_aircraft",
+        **(
+            {
+                "bankCapacityConstraints": bank_capacity_constraints,
+                "bankCapacityConstraintMode": bank_touch_constraint,
+            }
+            if bank_touch_limits is not None
+            else {}
+        ),
         **(
             {
                 "section26SpacingConstraints": spacing_constraints,
@@ -647,6 +3014,11 @@ def _repair_successor_cycles(
     for identifiers in arrivals_by_station.values():
         identifiers.sort()
 
+    plateau_random = random.Random(SUCCESSOR_PLATEAU_RANDOM_SEED)
+    seen_states = {tuple(sorted(successors.items()))}
+    aircraft_ceiling = _cycle_score(
+        cycles, required_destinations, fleet_counts, rolling_limit
+    )[-1]
     for _ in range(20):
         current_score = _cycle_score(
             cycles, required_destinations, fleet_counts, rolling_limit
@@ -660,6 +3032,7 @@ def _repair_successor_cycles(
             for leg_id in cycle["legIds"]
         }
         best = None
+        plateau_candidates = []
         for arrivals in arrivals_by_station.values():
             for first_index, first in enumerate(arrivals):
                 for second in arrivals[first_index + 1 :]:
@@ -682,11 +3055,26 @@ def _repair_successor_cycles(
                         fleet_counts,
                         rolling_limit,
                     )
+                    candidate_state = tuple(sorted(successors.items()))
                     successors[first], successors[second] = (
                         successors[second],
                         successors[first],
                     )
-                    if candidate_score >= current_score:
+                    if (
+                        candidate_score[-1] > aircraft_ceiling
+                        or candidate_score > current_score
+                    ):
+                        continue
+                    candidate = (
+                        candidate_score,
+                        first,
+                        second,
+                        candidate_cycles,
+                        candidate_state,
+                    )
+                    if candidate_score == current_score:
+                        if candidate_state not in seen_states:
+                            plateau_candidates.append(candidate)
                         continue
                     if best is None or candidate_score < best[0]:
                         best = (
@@ -694,18 +3082,28 @@ def _repair_successor_cycles(
                             first,
                             second,
                             candidate_cycles,
+                            candidate_state,
                         )
         if best is None:
-            break
-        score, first, second, candidate_cycles = best
+            if not plateau_candidates:
+                break
+            best = plateau_candidates[
+                plateau_random.randrange(len(plateau_candidates))
+            ]
+            move_kind = "plateau"
+        else:
+            move_kind = "improvement"
+        score, first, second, candidate_cycles, candidate_state = best
         successors[first], successors[second] = (
             successors[second],
             successors[first],
         )
+        seen_states.add(candidate_state)
         swaps.append(
             {
                 "firstArrivingLegId": first,
                 "secondArrivingLegId": second,
+                "moveKind": move_kind,
                 "beforeScore": list(current_score),
                 "afterScore": list(score),
             }
@@ -714,12 +3112,2056 @@ def _repair_successor_cycles(
     return cycles, swaps
 
 
+def _line_length_penalty(
+    cycles: list[dict[str, Any]], minimum_days: int, maximum_days: int
+) -> int:
+    return sum(
+        max(0, minimum_days - int(cycle["aircraftRequired"]))
+        + max(0, int(cycle["aircraftRequired"]) - maximum_days)
+        for cycle in cycles
+    )
+
+
+def _gate_plan_score(diagnostic: dict[str, Any]) -> tuple[int, int, int, int, int]:
+    failures = diagnostic.get("failures", [])
+    return (
+        0 if diagnostic.get("status") == "pass" else 1,
+        sum(int(row["strandedPassengerTouches"]) for row in failures),
+        sum(
+            max(0, int(row["requiredGates"]) - int(row["configuredGates"]))
+            for row in failures
+        ),
+        sum(
+            max(0, int(row["requiredStands"]) - int(row["configuredStands"]))
+            for row in failures
+        ),
+        int(diagnostic.get("towMovements", 0)),
+    )
+
+
+def _preserve_rebalanced_cycle_ids(
+    previous_cycles: list[dict[str, Any]],
+    candidate_cycles: list[dict[str, Any]],
+    donor_id: str,
+    receiver_id: str,
+    receiver_leg_ids: set[str],
+) -> list[dict[str, Any]]:
+    """Keep canonical line names stable across a targeted cycle transfer."""
+    old_by_legs = {
+        frozenset(cycle["legIds"]): str(cycle["id"])
+        for cycle in previous_cycles
+        if str(cycle["id"]) not in {donor_id, receiver_id}
+    }
+    preserved = []
+    assigned_ids: set[str] = set()
+    for cycle in candidate_cycles:
+        leg_ids = set(cycle["legIds"])
+        if receiver_leg_ids <= leg_ids:
+            identifier = receiver_id
+        elif frozenset(leg_ids) in old_by_legs:
+            identifier = old_by_legs[frozenset(leg_ids)]
+        else:
+            identifier = donor_id
+        if identifier in assigned_ids:
+            raise ValueError(
+                f"Line rebalancing produced duplicate cycle identifier {identifier}"
+            )
+        assigned_ids.add(identifier)
+        preserved.append({**cycle, "id": identifier})
+    expected_ids = {str(cycle["id"]) for cycle in previous_cycles}
+    if assigned_ids != expected_ids:
+        raise ValueError("Line rebalancing could not preserve every cycle identifier")
+    return sorted(preserved, key=lambda row: str(row["id"]))
+
+
+def _rebalance_successor_cycles(
+    legs: dict[str, dict[str, Any]],
+    successors: dict[str, str],
+    cycles: list[dict[str, Any]],
+    policy: dict[str, Any],
+    cities: dict[str, dict[str, Any]],
+    required_destinations: set[str],
+    fleet_counts: dict[str, int],
+    rolling_limit: int,
+    single_target_full_gap: bool,
+    options: dict[str, Any],
+    enforce_fixed_inventory: bool,
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    """Move a contiguous donor segment into a short same-fleet cycle.
+
+    A three-way successor rotation opens the receiver once and the donor twice.
+    This keeps every existing receiver leg together, transfers a contiguous donor
+    segment, and closes the donor remainder without adding or retiming flights.
+    Configured receiver anchors make the optimization incremental and auditable.
+    """
+    transfers = options.get("transfers", [])
+    if not transfers:
+        return cycles, []
+    minimum_days = int(options.get("minimumDaysPerLine", 9))
+    maximum_days = int(options.get("maximumDaysPerLine", 12))
+    minimum_turn = int(policy["turns"]["minimumMinutes"])
+    moves: list[dict[str, Any]] = []
+
+    for transfer in transfers:
+        anchor = str(transfer["receiverAnchorLegId"])
+        target_days = int(transfer.get("targetDays", maximum_days))
+        receiver_maximum_days = int(
+            transfer.get("maximumDays", maximum_days)
+        )
+        if anchor not in legs:
+            raise ValueError(f"Line-rebalancing anchor leg is missing: {anchor}")
+        receiver = next(
+            (cycle for cycle in cycles if anchor in cycle["legIds"]), None
+        )
+        if receiver is None:
+            raise ValueError(f"No cycle contains line-rebalancing anchor {anchor}")
+        receiver_days = int(receiver["aircraftRequired"])
+        if receiver_days >= target_days:
+            continue
+        receiver_id = str(receiver["id"])
+        receiver_leg_ids = set(receiver["legIds"])
+        baseline_cycle_score = _cycle_score(
+            cycles, required_destinations, fleet_counts, rolling_limit
+        )
+        baseline_aircraft = sum(
+            int(cycle["aircraftRequired"]) for cycle in cycles
+        )
+        baseline_gate_score = None
+        if enforce_fixed_inventory:
+            _, diagnostic = _materialized_gate_assignments(
+                legs, successors, cities, minimum_turn
+            )
+            baseline_gate_score = _gate_plan_score(diagnostic)
+
+        candidates: list[tuple[tuple[Any, ...], str, str, str, str]] = []
+        donors = sorted(
+            (
+                cycle
+                for cycle in cycles
+                if cycle["fleet"] == receiver["fleet"]
+                and int(cycle["aircraftRequired"]) > maximum_days
+            ),
+            key=lambda row: (-int(row["aircraftRequired"]), str(row["id"])),
+        )
+        for donor in donors:
+            donor_id = str(donor["id"])
+            donor_leg_ids = set(donor["legIds"])
+            donor_arrivals: defaultdict[str, list[str]] = defaultdict(list)
+            receiver_arrivals: defaultdict[str, list[str]] = defaultdict(list)
+            for identifier in donor_leg_ids:
+                donor_arrivals[str(legs[identifier]["destination"])].append(identifier)
+            for identifier in receiver_leg_ids:
+                receiver_arrivals[str(legs[identifier]["destination"])].append(
+                    identifier
+                )
+            for station in sorted(set(donor_arrivals) & set(receiver_arrivals)):
+                donor_ids = sorted(donor_arrivals[station])
+                if len(donor_ids) < 2:
+                    continue
+                for first_index, first in enumerate(donor_ids):
+                    for second in donor_ids[first_index + 1 :]:
+                        for donor_before, donor_after in (
+                            (first, second),
+                            (second, first),
+                        ):
+                            for receiver_arrival in sorted(
+                                receiver_arrivals[station]
+                            ):
+                                candidate_successors = dict(successors)
+                                candidate_successors[receiver_arrival] = successors[
+                                    donor_before
+                                ]
+                                candidate_successors[donor_after] = successors[
+                                    receiver_arrival
+                                ]
+                                candidate_successors[donor_before] = successors[
+                                    donor_after
+                                ]
+                                candidate_cycles = _cycles(
+                                    legs,
+                                    candidate_successors,
+                                    policy,
+                                    cities,
+                                    single_target_full_gap=single_target_full_gap,
+                                )
+                                affected = [
+                                    cycle
+                                    for cycle in candidate_cycles
+                                    if set(cycle["legIds"])
+                                    & (donor_leg_ids | receiver_leg_ids)
+                                ]
+                                if len(affected) != 2:
+                                    continue
+                                candidate_receiver = next(
+                                    (
+                                        cycle
+                                        for cycle in affected
+                                        if receiver_leg_ids
+                                        <= set(cycle["legIds"])
+                                    ),
+                                    None,
+                                )
+                                if candidate_receiver is None:
+                                    continue
+                                candidate_donor = next(
+                                    cycle
+                                    for cycle in affected
+                                    if cycle is not candidate_receiver
+                                )
+                                new_receiver_days = int(
+                                    candidate_receiver["aircraftRequired"]
+                                )
+                                new_donor_days = int(
+                                    candidate_donor["aircraftRequired"]
+                                )
+                                if (
+                                    new_receiver_days <= receiver_days
+                                    or new_receiver_days > receiver_maximum_days
+                                    or new_donor_days
+                                    >= int(donor["aircraftRequired"])
+                                ):
+                                    continue
+                                candidate_aircraft = sum(
+                                    int(cycle["aircraftRequired"])
+                                    for cycle in candidate_cycles
+                                )
+                                if candidate_aircraft > baseline_aircraft:
+                                    continue
+                                candidate_cycle_score = _cycle_score(
+                                    candidate_cycles,
+                                    required_destinations,
+                                    fleet_counts,
+                                    rolling_limit,
+                                )
+                                if candidate_cycle_score > baseline_cycle_score:
+                                    continue
+                                topology_score = (
+                                    abs(target_days - new_receiver_days),
+                                    _line_length_penalty(
+                                        candidate_cycles,
+                                        minimum_days,
+                                        maximum_days,
+                                    ),
+                                    max(
+                                        int(cycle["aircraftRequired"])
+                                        for cycle in candidate_cycles
+                                    ),
+                                    max(
+                                        int(cycle["maximumDaysWithoutTargetRon"])
+                                        for cycle in affected
+                                    ),
+                                    donor_id,
+                                    station,
+                                    donor_before,
+                                    donor_after,
+                                    receiver_arrival,
+                                )
+                                candidates.append(
+                                    (
+                                        topology_score,
+                                        donor_id,
+                                        donor_before,
+                                        donor_after,
+                                        receiver_arrival,
+                                    )
+                                )
+
+        accepted = None
+        for _, donor_id, donor_before, donor_after, receiver_arrival in sorted(
+            candidates
+        ):
+            candidate_successors = dict(successors)
+            candidate_successors[receiver_arrival] = successors[donor_before]
+            candidate_successors[donor_after] = successors[receiver_arrival]
+            candidate_successors[donor_before] = successors[donor_after]
+            candidate_cycles = _cycles(
+                legs,
+                candidate_successors,
+                policy,
+                cities,
+                single_target_full_gap=single_target_full_gap,
+            )
+            if enforce_fixed_inventory:
+                _, diagnostic = _materialized_gate_assignments(
+                    legs, candidate_successors, cities, minimum_turn
+                )
+                if _gate_plan_score(diagnostic) > baseline_gate_score:
+                    continue
+            accepted = (
+                donor_id,
+                donor_before,
+                donor_after,
+                receiver_arrival,
+                candidate_successors,
+                candidate_cycles,
+            )
+            break
+        if accepted is None:
+            raise ValueError(
+                f"No compliant line-rebalancing transfer reaches {anchor}"
+            )
+
+        (
+            donor_id,
+            donor_before,
+            donor_after,
+            receiver_arrival,
+            candidate_successors,
+            candidate_cycles,
+        ) = accepted
+        previous_donor = next(
+            cycle for cycle in cycles if str(cycle["id"]) == donor_id
+        )
+        candidate_cycles = _preserve_rebalanced_cycle_ids(
+            cycles,
+            candidate_cycles,
+            donor_id,
+            receiver_id,
+            receiver_leg_ids,
+        )
+        candidate_receiver = next(
+            cycle for cycle in candidate_cycles if str(cycle["id"]) == receiver_id
+        )
+        candidate_donor = next(
+            cycle for cycle in candidate_cycles if str(cycle["id"]) == donor_id
+        )
+        successors.clear()
+        successors.update(candidate_successors)
+        cycles = candidate_cycles
+        moves.append(
+            {
+                "receiverAnchorLegId": anchor,
+                "receiverCycleId": receiver_id,
+                "donorCycleId": donor_id,
+                "station": str(legs[receiver_arrival]["destination"]),
+                "beforeReceiverDays": receiver_days,
+                "afterReceiverDays": int(candidate_receiver["aircraftRequired"]),
+                "maximumReceiverDays": receiver_maximum_days,
+                "beforeDonorDays": int(previous_donor["aircraftRequired"]),
+                "afterDonorDays": int(candidate_donor["aircraftRequired"]),
+                "successorRotation": {
+                    "receiverArrivalLegId": receiver_arrival,
+                    "donorBeforeLegId": donor_before,
+                    "donorAfterLegId": donor_after,
+                },
+            }
+        )
+    return cycles, moves
+
+
+def _bridge_rebalanced_successor_cycles(
+    legs: dict[str, dict[str, Any]],
+    successors: dict[str, str],
+    cycles: list[dict[str, Any]],
+    policy: dict[str, Any],
+    cities: dict[str, dict[str, Any]],
+    windows: dict[str, list[dict[str, Any]]],
+    required_destinations: set[str],
+    fleet_counts: dict[str, int],
+    rolling_limit: int,
+    single_target_full_gap: bool,
+    station_departure_counts: Counter[str],
+    allow_pairing_spacing_exceptions: bool,
+    options: dict[str, Any],
+    fleet_profiles: dict[str, dict[str, Any]],
+    demand_matrix: dict[str, Any] | None,
+    enforce_fixed_inventory: bool,
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    """Join a short line to a donor segment with one supported round trip.
+
+    This is a bounded post-solve operation.  Every boundary, retiming, market,
+    and demand floor is configured explicitly.  The move is accepted only when
+    it preserves routing feasibility, fleet use, RON rules, pairing spacing,
+    and fixed physical inventory.
+    """
+    transfers = options.get("bridgeTransfers", [])
+    if not transfers:
+        return cycles, []
+    if demand_matrix is None:
+        raise ValueError("Line-bridge transfers require the pinned demand matrix")
+
+    minimum_turn = int(policy["turns"]["minimumMinutes"])
+    matrix_values = demand_matrix.get("values", {})
+    moves: list[dict[str, Any]] = []
+
+    def retimed_leg(
+        source: dict[str, Any], local_departure: int
+    ) -> dict[str, Any]:
+        departure_utc = _utc_minute(
+            local_departure, str(source["origin"]), cities
+        )
+        arrival_utc = departure_utc + int(source["blockMinutes"])
+        arrival = _local_minute(
+            arrival_utc, str(source["destination"]), cities
+        )
+        candidate = {
+            **source,
+            "departureUtcMinute": departure_utc,
+            "arrivalUtcMinute": arrival_utc % 1440,
+            "departureMinute": local_departure,
+            "arrivalMinute": arrival,
+            "curfewStatus": _curfew_status(
+                str(source["origin"]), local_departure, arrival, policy
+            ),
+        }
+        if candidate["curfewStatus"] != "pass":
+            raise ValueError(
+                f"Line-bridge retiming violates curfew: {source['id']}"
+            )
+        if not _assigned_bank_windows_hold(candidate, windows):
+            raise ValueError(
+                f"Line-bridge retiming leaves its assigned bank: {source['id']}"
+            )
+        return candidate
+
+    for transfer in transfers:
+        receiver_departure_id = str(transfer["receiverAnchorLegId"])
+        receiver_arrival_id = str(transfer["receiverArrivalLegId"])
+        boundaries = [
+            str(identifier)
+            for identifier in transfer["donorBoundaryArrivalLegIds"]
+        ]
+        transferred_boundary = str(
+            transfer["transferredBoundaryArrivalLegId"]
+        )
+        if len(boundaries) != 2 or len(set(boundaries)) != 2:
+            raise ValueError(
+                "A line bridge requires exactly two distinct donor boundaries"
+            )
+        if transferred_boundary not in boundaries:
+            raise ValueError(
+                "The transferred line-bridge boundary is not a donor boundary"
+            )
+        retained_boundary = next(
+            identifier
+            for identifier in boundaries
+            if identifier != transferred_boundary
+        )
+        referenced = {
+            receiver_departure_id,
+            receiver_arrival_id,
+            *boundaries,
+        }
+        missing = sorted(referenced - set(legs))
+        if missing:
+            raise ValueError(
+                "Line-bridge legs are missing: " + ", ".join(missing)
+            )
+
+        receiver = next(
+            (
+                cycle
+                for cycle in cycles
+                if receiver_departure_id in cycle["legIds"]
+            ),
+            None,
+        )
+        donor = next(
+            (cycle for cycle in cycles if set(boundaries) <= set(cycle["legIds"])),
+            None,
+        )
+        if receiver is None or donor is None:
+            raise ValueError("Line-bridge donor or receiver cycle is missing")
+        if receiver is donor:
+            raise ValueError("Line-bridge donor and receiver must be distinct")
+        fleet = str(legs[receiver_departure_id]["fleet"])
+        if any(str(legs[identifier]["fleet"]) != fleet for identifier in referenced):
+            raise ValueError("Line-bridge legs must use one fleet")
+
+        receiver_station = str(legs[receiver_departure_id]["origin"])
+        donor_station = str(legs[retained_boundary]["destination"])
+        if str(legs[receiver_arrival_id]["destination"]) != receiver_station:
+            raise ValueError("Line-bridge receiver legs do not close at one station")
+        if any(str(legs[identifier]["destination"]) != donor_station for identifier in boundaries):
+            raise ValueError("Line-bridge donor boundaries end at different stations")
+        configured_market = tuple(
+            sorted(str(code) for code in transfer["connectorMarket"])
+        )
+        if configured_market != tuple(sorted((receiver_station, donor_station))):
+            raise ValueError("Line-bridge connector market does not match its boundaries")
+
+        try:
+            two_way_demand = round(
+                float(matrix_values[receiver_station][donor_station])
+                + float(matrix_values[donor_station][receiver_station]),
+                6,
+            )
+        except KeyError as error:
+            raise ValueError(
+                f"Line-bridge demand is missing for {receiver_station}-{donor_station}"
+            ) from error
+        existing_outbound = sum(
+            str(leg["origin"]) == receiver_station
+            and str(leg["destination"]) == donor_station
+            for leg in legs.values()
+        )
+        existing_return = sum(
+            str(leg["origin"]) == donor_station
+            and str(leg["destination"]) == receiver_station
+            for leg in legs.values()
+        )
+        existing_frequency = min(existing_outbound, existing_return)
+        ceiling = int(transfer.get("frequencyCeilingRoundTrips", 1))
+        marginal_demand = two_way_demand / float(existing_frequency + 1)
+        if existing_frequency >= ceiling:
+            raise ValueError("Line-bridge connector frequency ceiling is exhausted")
+        if two_way_demand < float(transfer.get("minimumTwoWayDemand", 0.0)):
+            raise ValueError("Line-bridge connector misses its demand floor")
+        if marginal_demand < float(transfer.get("minimumMarginalDemand", 0.0)):
+            raise ValueError("Line-bridge connector misses its marginal-demand floor")
+
+        receiver_id = str(receiver["id"])
+        donor_id = str(donor["id"])
+        receiver_leg_ids = set(receiver["legIds"])
+        baseline_aircraft = sum(int(cycle["aircraftRequired"]) for cycle in cycles)
+        baseline_cycle_score = _cycle_score(
+            cycles, required_destinations, fleet_counts, rolling_limit
+        )
+        baseline_gate_score = None
+        if enforce_fixed_inventory:
+            _, diagnostic = _materialized_gate_assignments(
+                legs, successors, cities, minimum_turn
+            )
+            baseline_gate_score = _gate_plan_score(diagnostic)
+
+        candidate_legs = {identifier: dict(leg) for identifier, leg in legs.items()}
+        retimings = {
+            receiver_departure_id: int(
+                transfer["receiverDepartureLocalMinute"]
+            ),
+            receiver_arrival_id: int(
+                transfer["receiverArrivalDepartureLocalMinute"]
+            ),
+        }
+        for identifier, local_departure in retimings.items():
+            candidate_legs[identifier] = retimed_leg(
+                candidate_legs[identifier], local_departure
+            )
+
+        profile = fleet_profiles.get(fleet)
+        if profile is None:
+            raise ValueError(f"Line bridge has no fleet profile for {fleet}")
+        block_minutes = _block_minutes(
+            receiver_station, donor_station, profile, cities
+        )
+        ordinal = existing_frequency + 1
+        id_prefix = (
+            f"LINE-BRIDGE-{receiver_station}-{donor_station}-{fleet}-{ordinal:02d}"
+        )
+        from_receiver_id = f"{id_prefix}-OUT"
+        to_receiver_id = f"{id_prefix}-IN"
+        if from_receiver_id in candidate_legs or to_receiver_id in candidate_legs:
+            raise ValueError("Line-bridge connector identifier already exists")
+
+        common = {
+            "source": "productive_line_bridge",
+            "market": list(configured_market),
+            "classification": "point_to_point",
+            "fleet": fleet,
+            "blockMinutes": block_minutes,
+            "originBankId": None,
+            "destinationBankId": None,
+        }
+        from_receiver = retimed_leg(
+            {
+                "id": from_receiver_id,
+                **common,
+                "origin": receiver_station,
+                "destination": donor_station,
+            },
+            int(transfer["fromReceiverDepartureLocalMinute"]),
+        )
+        to_receiver = retimed_leg(
+            {
+                "id": to_receiver_id,
+                **common,
+                "origin": donor_station,
+                "destination": receiver_station,
+            },
+            int(transfer["toReceiverDepartureLocalMinute"]),
+        )
+        candidate_legs[from_receiver_id] = from_receiver
+        candidate_legs[to_receiver_id] = to_receiver
+
+        candidate_counts = Counter(station_departure_counts)
+        candidate_counts[receiver_station] += 1
+        candidate_counts[donor_station] += 1
+        spacing_legs = [
+            candidate_legs[receiver_departure_id],
+            candidate_legs[receiver_arrival_id],
+            from_receiver,
+            to_receiver,
+        ]
+        if not all(
+            _pairing_spacing_holds_for_leg(
+                leg,
+                candidate_legs,
+                candidate_counts,
+                policy,
+                allow_pairing_spacing_exceptions,
+            )
+            for leg in spacing_legs
+        ):
+            raise ValueError("Line bridge violates pairing spacing")
+
+        candidate_successors = dict(successors)
+        transferred_start = successors[retained_boundary]
+        candidate_successors[retained_boundary] = successors[transferred_boundary]
+        candidate_successors[transferred_boundary] = to_receiver_id
+        candidate_successors[to_receiver_id] = receiver_departure_id
+        candidate_successors[receiver_arrival_id] = from_receiver_id
+        candidate_successors[from_receiver_id] = transferred_start
+        candidate_cycles = _cycles(
+            candidate_legs,
+            candidate_successors,
+            policy,
+            cities,
+            single_target_full_gap=single_target_full_gap,
+        )
+        candidate_cycles = _preserve_rebalanced_cycle_ids(
+            cycles,
+            candidate_cycles,
+            donor_id,
+            receiver_id,
+            receiver_leg_ids,
+        )
+        candidate_receiver = next(
+            cycle for cycle in candidate_cycles if str(cycle["id"]) == receiver_id
+        )
+        candidate_donor = next(
+            cycle for cycle in candidate_cycles if str(cycle["id"]) == donor_id
+        )
+        target_days = int(transfer["targetReceiverDays"])
+        if int(candidate_receiver["aircraftRequired"]) != target_days:
+            raise ValueError(
+                "Line bridge produced "
+                f"{candidate_receiver['aircraftRequired']} receiver days, expected {target_days}"
+            )
+        candidate_aircraft = sum(
+            int(cycle["aircraftRequired"]) for cycle in candidate_cycles
+        )
+        if candidate_aircraft > baseline_aircraft:
+            raise ValueError(
+                "Line bridge increases required aircraft from "
+                f"{baseline_aircraft} to {candidate_aircraft}; receiver "
+                f"{receiver['aircraftRequired']}->{candidate_receiver['aircraftRequired']}, "
+                f"donor {donor['aircraftRequired']}->{candidate_donor['aircraftRequired']}"
+            )
+        candidate_cycle_score = _cycle_score(
+            candidate_cycles, required_destinations, fleet_counts, rolling_limit
+        )
+        if candidate_cycle_score > baseline_cycle_score:
+            raise ValueError("Line bridge worsens RON or fleet feasibility")
+        candidate_gate_score = None
+        if enforce_fixed_inventory:
+            _, diagnostic = _materialized_gate_assignments(
+                candidate_legs, candidate_successors, cities, minimum_turn
+            )
+            candidate_gate_score = _gate_plan_score(diagnostic)
+            if candidate_gate_score > baseline_gate_score:
+                raise ValueError("Line bridge worsens fixed physical inventory")
+
+        legs.clear()
+        legs.update(candidate_legs)
+        successors.clear()
+        successors.update(candidate_successors)
+        cycles = candidate_cycles
+        station_departure_counts.clear()
+        station_departure_counts.update(candidate_counts)
+        moves.append(
+            {
+                "receiverCycleId": receiver_id,
+                "donorCycleId": donor_id,
+                "receiverAnchorLegId": receiver_departure_id,
+                "receiverArrivalLegId": receiver_arrival_id,
+                "donorBoundaryArrivalLegIds": boundaries,
+                "transferredBoundaryArrivalLegId": transferred_boundary,
+                "connectorMarket": list(configured_market),
+                "connectorLegIds": [from_receiver_id, to_receiver_id],
+                "fleet": fleet,
+                "blockMinutes": block_minutes,
+                "twoWayDemand": two_way_demand,
+                "marginalDemand": round(marginal_demand, 6),
+                "newFrequency": existing_frequency == 0,
+                "beforeReceiverDays": int(receiver["aircraftRequired"]),
+                "afterReceiverDays": int(candidate_receiver["aircraftRequired"]),
+                "beforeDonorDays": int(donor["aircraftRequired"]),
+                "afterDonorDays": int(candidate_donor["aircraftRequired"]),
+                **(
+                    {
+                        "beforeGateScore": list(baseline_gate_score),
+                        "afterGateScore": list(candidate_gate_score),
+                    }
+                    if enforce_fixed_inventory
+                    else {}
+                ),
+            }
+        )
+    return cycles, moves
+
+
+def _station_gate_score(diagnostic: dict[str, Any]) -> tuple[int, int, int, int, int]:
+    if diagnostic["status"] == "pass":
+        return (0, 0, 0, 0, int(diagnostic["towMovements"]))
+    failure = diagnostic["failures"][0]
+    return (
+        1,
+        int(failure["strandedPassengerTouches"]),
+        max(
+            0,
+            int(failure["requiredGates"])
+            - int(failure["configuredGates"]),
+        ),
+        max(
+            0,
+            int(failure["requiredStands"])
+            - int(failure["configuredStands"]),
+        ),
+        0,
+    )
+
+
+def _repair_successor_gate_capacity(
+    legs: dict[str, dict[str, Any]],
+    successors: dict[str, str],
+    cycles: list[dict[str, Any]],
+    policy: dict[str, Any],
+    cities: dict[str, dict[str, Any]],
+    required_destinations: set[str],
+    fleet_counts: dict[str, int],
+    rolling_limit: int,
+    single_target_full_gap: bool,
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    """Exchange same-station successors until fixed gate inventory fits.
+
+    Flight times already satisfy the passenger-touch lower bound. These swaps
+    change only aircraft continuation, so they can repair a concrete coloring
+    conflict without retiming, dropping, or rerouting a flight. Every accepted
+    exchange preserves RON coverage, the rolling target window, fleet capacity,
+    and the current total aircraft requirement.
+    """
+    minimum_turn = int(policy["turns"]["minimumMinutes"])
+    aircraft_ceiling = _cycle_score(
+        cycles,
+        required_destinations,
+        fleet_counts,
+        rolling_limit,
+    )[-1]
+    swaps: list[dict[str, Any]] = []
+    exhausted_stations: set[str] = set()
+
+    for _ in range(50):
+        _, gate_diagnostic = _materialized_gate_assignments(
+            legs,
+            successors,
+            cities,
+            minimum_turn,
+        )
+        if gate_diagnostic["status"] == "pass":
+            break
+        repairable_failures = [
+            row
+            for row in gate_diagnostic["failures"]
+            if str(row["station"]) not in exhausted_stations
+        ]
+        if not repairable_failures:
+            break
+        failure = max(
+            repairable_failures,
+            key=lambda row: (
+                int(row["strandedPassengerTouches"]),
+                int(row["requiredGates"]) - int(row["configuredGates"]),
+                row["station"],
+            ),
+        )
+        station = str(failure["station"])
+        _, current_station_diagnostic = (
+            _materialized_station_gate_assignments(
+                legs,
+                successors,
+                cities,
+                minimum_turn,
+                station,
+            )
+        )
+        current_gate_score = _station_gate_score(current_station_diagnostic)
+        bad_arrivals = {
+            str(label).split(" -> ", 1)[0]
+            for label in failure["strandedLabels"]
+        }
+        arrivals_by_fleet: defaultdict[str, list[str]] = defaultdict(list)
+        for identifier, leg in legs.items():
+            if str(leg["destination"]) == station:
+                arrivals_by_fleet[str(leg["fleet"])].append(identifier)
+        for identifiers in arrivals_by_fleet.values():
+            identifiers.sort()
+
+        best = None
+        for first in sorted(bad_arrivals):
+            if first not in successors:
+                continue
+            fleet = str(legs[first]["fleet"])
+            first_arrival = (
+                int(legs[first]["departureUtcMinute"])
+                + int(legs[first]["blockMinutes"])
+            ) % 1440
+            nearby_arrivals = sorted(
+                (
+                    second
+                    for second in arrivals_by_fleet[fleet]
+                    if first != second
+                ),
+                key=lambda second: (
+                    min(
+                        (
+                            (
+                                int(legs[second]["departureUtcMinute"])
+                                + int(legs[second]["blockMinutes"])
+                                - first_arrival
+                            )
+                            % 1440
+                        ),
+                        (
+                            first_arrival
+                            - int(legs[second]["departureUtcMinute"])
+                            - int(legs[second]["blockMinutes"])
+                        )
+                        % 1440,
+                    ),
+                    second,
+                ),
+            )[:8]
+            for second in nearby_arrivals:
+                successors[first], successors[second] = (
+                    successors[second],
+                    successors[first],
+                )
+                _, candidate_station_diagnostic = (
+                    _materialized_station_gate_assignments(
+                        legs,
+                        successors,
+                        cities,
+                        minimum_turn,
+                        station,
+                    )
+                )
+                gate_score = _station_gate_score(
+                    candidate_station_diagnostic
+                )
+                if gate_score >= current_gate_score:
+                    successors[first], successors[second] = (
+                        successors[second],
+                        successors[first],
+                    )
+                    continue
+                candidate_cycles = _cycles(
+                    legs,
+                    successors,
+                    policy,
+                    cities,
+                    single_target_full_gap=single_target_full_gap,
+                )
+                cycle_score = _cycle_score(
+                    candidate_cycles,
+                    required_destinations,
+                    fleet_counts,
+                    rolling_limit,
+                )
+                successors[first], successors[second] = (
+                    successors[second],
+                    successors[first],
+                )
+                if (
+                    cycle_score[:4] != (0, 0, 0, 0)
+                    or cycle_score[-1] > aircraft_ceiling
+                ):
+                    continue
+                candidate = (
+                    gate_score,
+                    cycle_score,
+                    first,
+                    second,
+                    candidate_cycles,
+                )
+                if best is None or candidate[:4] < best[:4]:
+                    best = candidate
+        if best is None:
+            exhausted_stations.add(station)
+            continue
+        gate_score, cycle_score, first, second, cycles = best
+        successors[first], successors[second] = (
+            successors[second],
+            successors[first],
+        )
+        exhausted_stations.discard(station)
+        swaps.append(
+            {
+                "firstArrivingLegId": first,
+                "secondArrivingLegId": second,
+                "moveKind": "gate_capacity",
+                "station": station,
+                "beforeGateScore": list(current_gate_score),
+                "afterGateScore": list(gate_score),
+                "afterCycleScore": list(cycle_score),
+            }
+        )
+    return cycles, swaps
+
+
+def _gate_capacity_score(
+    station_scores: dict[str, tuple[int, int, int, int, int]],
+) -> tuple[int, int, int, int, int]:
+    failures = [score for score in station_scores.values() if score[0]]
+    return (
+        len(failures),
+        sum(score[1] for score in failures),
+        sum(score[2] for score in failures),
+        sum(score[3] for score in failures),
+        sum(score[4] for score in station_scores.values() if not score[0]),
+    )
+
+
+def _gate_relief_market_candidates(
+    frequency_plan: dict[str, Any],
+    station: str,
+    fleet: str,
+    additions_by_market: Counter[tuple[str, str]],
+    minimum_two_way_demand: float,
+    additional_markets: list[dict[str, Any]] | None = None,
+) -> list[dict[str, Any]]:
+    """Return demand-supported same-fleet increments still below their ceiling."""
+    candidates = []
+    for market in [
+        *frequency_plan["markets"],
+        *(additional_markets or []),
+    ]:
+        endpoints = (str(market["origin"]), str(market["destination"]))
+        if station not in endpoints:
+            continue
+        if float(market["twoWayDemand"]) < minimum_two_way_demand:
+            continue
+        allocated_to_fleet = any(
+            str(allocation["fleet"]) == fleet
+            for allocation in market.get("allocations", [])
+        )
+        historically_flown_by_fleet = (
+            int(market.get("historicalFleetLegs", {}).get(fleet, 0)) > 0
+        )
+        explicitly_eligible = fleet in {
+            str(candidate) for candidate in market.get("eligibleFleets", [])
+        }
+        if (
+            not allocated_to_fleet
+            and not historically_flown_by_fleet
+            and not explicitly_eligible
+        ):
+            continue
+        market_key = tuple(sorted(endpoints))
+        planned = int(market["plannedRoundTrips"]) + int(
+            additions_by_market[market_key]
+        )
+        if planned >= int(market["frequencyCeilingRoundTrips"]):
+            continue
+        destination = endpoints[1] if endpoints[0] == station else endpoints[0]
+        candidates.append(
+            {
+                "market": market_key,
+                "destination": destination,
+                "classification": str(market["classification"]),
+                "twoWayDemand": float(market["twoWayDemand"]),
+                "plannedRoundTrips": planned,
+                "frequencyCeilingRoundTrips": int(
+                    market["frequencyCeilingRoundTrips"]
+                ),
+                "marginalDemand": float(market["twoWayDemand"])
+                / float(planned + 1),
+                "newFrequency": planned == 0,
+            }
+        )
+    return sorted(
+        candidates,
+        key=lambda row: (
+            -float(row["marginalDemand"]),
+            str(row["destination"]),
+        ),
+    )
+
+
+def _gate_relief_bank_id(
+    station: str,
+    local_minute: int,
+    hubs: set[str],
+    windows: dict[str, list[dict[str, Any]]],
+) -> str | None:
+    if station not in hubs:
+        return None
+    return _bank_id(local_minute % 1440, windows[station])
+
+
+def _repair_gate_capacity_with_missions(
+    materialized: dict[str, dict[str, Any]],
+    successors: dict[str, str],
+    cycles: list[dict[str, Any]],
+    frequency_plan: dict[str, Any],
+    policy: dict[str, Any],
+    cities: dict[str, dict[str, Any]],
+    windows: dict[str, list[dict[str, Any]]],
+    required_destinations: set[str],
+    fleet_counts: dict[str, int],
+    rolling_limit: int,
+    single_target_full_gap: bool,
+    station_departure_counts: Counter[str],
+    allow_pairing_spacing_exceptions: bool,
+    options: dict[str, Any],
+    fleet_profiles: dict[str, dict[str, Any]] | None = None,
+    demand_matrix: dict[str, Any] | None = None,
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    """Insert bounded, demand-supported round trips into gate-blocking holds.
+
+    This repair is deliberately narrower than a general utilization pass.  It
+    considers only configured stations that currently fail their exact fixed-
+    inventory assignment, and accepts a mission only when it strictly improves
+    that station's gate score without worsening the destination or increasing
+    the number of aircraft required.
+    """
+    target_stations = [
+        str(station) for station in options.get("targetStations", [])
+    ]
+    if not target_stations:
+        return cycles, []
+
+    minimum_turn = int(policy["turns"]["minimumMinutes"])
+    minimum_hold = int(options.get("minimumHoldMinutes", 240))
+    minimum_demand = float(options.get("minimumTwoWayDemand", 8.0))
+    maximum_additions = int(options.get("maximumMissions", 4))
+    maximum_timings = int(options.get("maximumTimingsPerHoldMarket", 8))
+    preferred_destinations = {
+        str(station) for station in options.get("preferredDestinations", [])
+    }
+    minimum_missions_by_station = {
+        str(station): int(count)
+        for station, count in options.get(
+            "minimumMissionsByStation", {}
+        ).items()
+    }
+    minimum_distinct_holds_by_station = {
+        str(station): int(count)
+        for station, count in options.get(
+            "minimumDistinctHoldsByStation", {}
+        ).items()
+    }
+    existing_markets = {
+        tuple(sorted((str(row["origin"]), str(row["destination"]))))
+        for row in frequency_plan["markets"]
+    }
+    additional_markets: list[dict[str, Any]] = []
+    matrix_values = (demand_matrix or {}).get("values", {})
+    for row in options.get("unplannedCandidateMarkets", []):
+        endpoints = tuple(sorted(str(code) for code in row.get("market", [])))
+        if len(endpoints) != 2 or endpoints in existing_markets:
+            continue
+        origin, destination = endpoints
+        if origin not in matrix_values or destination not in matrix_values:
+            continue
+        two_way_demand = round(
+            float(matrix_values[origin][destination])
+            + float(matrix_values[destination][origin]),
+            6,
+        )
+        additional_markets.append(
+            {
+                "origin": origin,
+                "destination": destination,
+                "classification": "point_to_point",
+                "twoWayDemand": two_way_demand,
+                "plannedRoundTrips": 0,
+                "frequencyCeilingRoundTrips": int(
+                    row.get("frequencyCeilingRoundTrips", 1)
+                ),
+                "allocations": [],
+                "historicalFleetLegs": {},
+                "eligibleFleets": [
+                    str(fleet) for fleet in row.get("eligibleFleets", [])
+                ],
+            }
+        )
+    hubs = set(policy["hubs"])
+    additions: list[dict[str, Any]] = []
+    additions_by_market: Counter[tuple[str, str]] = Counter()
+    block_minutes_by_market_fleet: dict[
+        tuple[tuple[str, str], str], int
+    ] = {}
+    for leg in materialized.values():
+        block_minutes_by_market_fleet[
+            (
+                tuple(sorted((str(leg["origin"]), str(leg["destination"])))),
+                str(leg["fleet"]),
+            )
+        ] = int(leg["blockMinutes"])
+
+    bank_usage: Counter[tuple[str, str]] = Counter()
+    for leg in materialized.values():
+        if leg.get("originBankId") is not None:
+            bank_usage[(str(leg["originBankId"]), "departure")] += 1
+        if leg.get("destinationBankId") is not None:
+            bank_usage[(str(leg["destinationBankId"]), "arrival")] += 1
+
+    aircraft_ceiling = _cycle_score(
+        cycles,
+        required_destinations,
+        fleet_counts,
+        rolling_limit,
+    )[-1]
+
+    for station in target_stations:
+        if station not in cities:
+            continue
+        while len(additions) < maximum_additions:
+            station_additions = [
+                row for row in additions if row["station"] == station
+            ]
+            minimum_missions = minimum_missions_by_station.get(station, 0)
+            minimum_distinct_holds = minimum_distinct_holds_by_station.get(
+                station, 0
+            )
+            used_holds = {
+                str(row["afterArrivingLegId"])
+                for row in station_additions
+            }
+            _, current_diagnostic = _materialized_station_gate_assignments(
+                materialized,
+                successors,
+                cities,
+                minimum_turn,
+                station,
+            )
+            current_score = _station_gate_score(current_diagnostic)
+            if (
+                current_score[0] == 0
+                and len(station_additions) >= minimum_missions
+            ):
+                break
+            ranked_candidates: list[tuple[Any, ...]] = []
+            for arriving_id, following_id in sorted(successors.items()):
+                arriving = materialized[arriving_id]
+                following = materialized[following_id]
+                if (
+                    str(arriving["destination"]) != station
+                    or str(following["origin"]) != station
+                    or str(arriving["fleet"]) != str(following["fleet"])
+                ):
+                    continue
+                if (
+                    len(used_holds) < minimum_distinct_holds
+                    and arriving_id in used_holds
+                ):
+                    continue
+                arrival_utc = int(arriving["departureUtcMinute"]) + int(
+                    arriving["blockMinutes"]
+                )
+                hold_minutes = _connection_wait(
+                    arrival_utc,
+                    int(following["departureUtcMinute"]),
+                    minimum_turn,
+                )
+                if hold_minutes < minimum_hold:
+                    continue
+                following_departure_utc = arrival_utc + hold_minutes
+                fleet = str(arriving["fleet"])
+                markets = _gate_relief_market_candidates(
+                    frequency_plan,
+                    station,
+                    fleet,
+                    additions_by_market,
+                    minimum_demand,
+                    additional_markets,
+                )
+                for market in markets:
+                    destination = str(market["destination"])
+                    block_minutes = block_minutes_by_market_fleet.get(
+                        (market["market"], fleet)
+                    )
+                    if (
+                        block_minutes is None
+                        and fleet_profiles is not None
+                        and fleet in fleet_profiles
+                    ):
+                        block_minutes = _block_minutes(
+                            station,
+                            destination,
+                            fleet_profiles[fleet],
+                            cities,
+                        )
+                    if block_minutes is None:
+                        continue
+                    latest_outbound = (
+                        following_departure_utc
+                        - minimum_turn
+                        - block_minutes
+                        - minimum_turn
+                        - block_minutes
+                    )
+                    earliest_outbound = arrival_utc + minimum_turn
+                    if latest_outbound < earliest_outbound:
+                        continue
+
+                    timing_candidates: list[tuple[int, int]] = []
+                    for outbound_utc in range(
+                        ((earliest_outbound + TIME_STEP_MINUTES - 1)
+                         // TIME_STEP_MINUTES)
+                        * TIME_STEP_MINUTES,
+                        latest_outbound + 1,
+                        TIME_STEP_MINUTES,
+                    ):
+                        outbound_departure = _local_minute(
+                            outbound_utc, station, cities
+                        )
+                        outbound_arrival_utc = outbound_utc + block_minutes
+                        outbound_arrival = _local_minute(
+                            outbound_arrival_utc, destination, cities
+                        )
+                        if _curfew_status(
+                            station,
+                            outbound_departure,
+                            outbound_arrival,
+                            policy,
+                        ) != "pass":
+                            continue
+                        if station in hubs and (
+                            _gate_relief_bank_id(
+                                station,
+                                outbound_departure,
+                                hubs,
+                                windows,
+                            )
+                            is None
+                        ):
+                            continue
+                        if destination in hubs and _gate_relief_bank_id(
+                            destination,
+                            outbound_arrival,
+                            hubs,
+                            windows,
+                        ) is None:
+                            continue
+
+                        latest_return = (
+                            following_departure_utc
+                            - minimum_turn
+                            - block_minutes
+                        )
+                        earliest_return = outbound_arrival_utc + minimum_turn
+                        for return_utc in range(
+                            (latest_return // TIME_STEP_MINUTES)
+                            * TIME_STEP_MINUTES,
+                            earliest_return - 1,
+                            -TIME_STEP_MINUTES,
+                        ):
+                            return_departure = _local_minute(
+                                return_utc, destination, cities
+                            )
+                            return_arrival_utc = return_utc + block_minutes
+                            return_arrival = _local_minute(
+                                return_arrival_utc, station, cities
+                            )
+                            if _curfew_status(
+                                destination,
+                                return_departure,
+                                return_arrival,
+                                policy,
+                            ) != "pass":
+                                continue
+                            if destination in hubs and _gate_relief_bank_id(
+                                destination,
+                                return_departure,
+                                hubs,
+                                windows,
+                            ) is None:
+                                continue
+                            if station in hubs and _gate_relief_bank_id(
+                                station,
+                                return_arrival,
+                                hubs,
+                                windows,
+                            ) is None:
+                                continue
+                            timing_candidates.append(
+                                (outbound_utc, return_utc)
+                            )
+                            break
+
+                    unique_timings = sorted(set(timing_candidates))
+                    if maximum_timings <= 1:
+                        timing_candidates = unique_timings[:1]
+                    elif len(unique_timings) > maximum_timings:
+                        sampled_indices = {
+                            round(
+                                index
+                                * (len(unique_timings) - 1)
+                                / (maximum_timings - 1)
+                            )
+                            for index in range(maximum_timings)
+                        }
+                        timing_candidates = [
+                            unique_timings[index]
+                            for index in sorted(sampled_indices)
+                        ]
+                    else:
+                        timing_candidates = unique_timings
+                    timing_candidates.sort(
+                        key=lambda row: (
+                            row[1] - (row[0] + block_minutes),
+                            -row[1],
+                            row[0],
+                        )
+                    )
+                    for outbound_utc, return_utc in timing_candidates:
+                        ordinal = (
+                            additions_by_market[market["market"]] + 1
+                        )
+                        id_prefix = (
+                            f"GATE-RELIEF-{station}-{destination}-{fleet}-{ordinal:02d}"
+                        )
+                        outbound_id = f"{id_prefix}-OUT"
+                        return_id = f"{id_prefix}-IN"
+                        if outbound_id in materialized or return_id in materialized:
+                            continue
+                        outbound_arrival_utc = outbound_utc + block_minutes
+                        return_arrival_utc = return_utc + block_minutes
+                        outbound_departure = _local_minute(
+                            outbound_utc, station, cities
+                        )
+                        outbound_arrival = _local_minute(
+                            outbound_arrival_utc, destination, cities
+                        )
+                        return_departure = _local_minute(
+                            return_utc, destination, cities
+                        )
+                        return_arrival = _local_minute(
+                            return_arrival_utc, station, cities
+                        )
+                        outbound_origin_bank = _gate_relief_bank_id(
+                            station,
+                            outbound_departure,
+                            hubs,
+                            windows,
+                        )
+                        outbound_destination_bank = _gate_relief_bank_id(
+                            destination,
+                            outbound_arrival,
+                            hubs,
+                            windows,
+                        )
+                        return_origin_bank = _gate_relief_bank_id(
+                            destination,
+                            return_departure,
+                            hubs,
+                            windows,
+                        )
+                        return_destination_bank = _gate_relief_bank_id(
+                            station,
+                            return_arrival,
+                            hubs,
+                            windows,
+                        )
+                        bank_touches = [
+                            (outbound_origin_bank, "departure", station),
+                            (outbound_destination_bank, "arrival", destination),
+                            (return_origin_bank, "departure", destination),
+                            (return_destination_bank, "arrival", station),
+                        ]
+                        if any(
+                            bank_id is not None
+                            and bank_usage[(bank_id, operation)] + 1
+                            > _capacity(cities[bank_station])[0]
+                            for bank_id, operation, bank_station in bank_touches
+                        ):
+                            continue
+                        common = {
+                            "source": "productive_gate_relief",
+                            "market": list(market["market"]),
+                            "classification": market["classification"],
+                            "fleet": fleet,
+                            "blockMinutes": block_minutes,
+                            "curfewStatus": "pass",
+                        }
+                        outbound_leg = {
+                            "id": outbound_id,
+                            **common,
+                            "origin": station,
+                            "destination": destination,
+                            "departureUtcMinute": outbound_utc % 1440,
+                            "arrivalUtcMinute": outbound_arrival_utc % 1440,
+                            "departureMinute": outbound_departure,
+                            "arrivalMinute": outbound_arrival,
+                            "originBankId": outbound_origin_bank,
+                            "destinationBankId": outbound_destination_bank,
+                        }
+                        return_leg = {
+                            "id": return_id,
+                            **common,
+                            "origin": destination,
+                            "destination": station,
+                            "departureUtcMinute": return_utc % 1440,
+                            "arrivalUtcMinute": return_arrival_utc % 1440,
+                            "departureMinute": return_departure,
+                            "arrivalMinute": return_arrival,
+                            "originBankId": return_origin_bank,
+                            "destinationBankId": return_destination_bank,
+                        }
+                        candidate_materialized = dict(materialized)
+                        candidate_materialized[outbound_id] = outbound_leg
+                        candidate_materialized[return_id] = return_leg
+                        candidate_counts = Counter(station_departure_counts)
+                        candidate_counts[station] += 1
+                        candidate_counts[destination] += 1
+                        if not all(
+                            _pairing_spacing_holds_for_leg(
+                                leg,
+                                candidate_materialized,
+                                candidate_counts,
+                                policy,
+                                allow_pairing_spacing_exceptions,
+                            )
+                            for leg in (outbound_leg, return_leg)
+                        ):
+                            continue
+                        candidate_successors = dict(successors)
+                        candidate_successors[arriving_id] = outbound_id
+                        candidate_successors[outbound_id] = return_id
+                        candidate_successors[return_id] = following_id
+                        _, target_diagnostic = (
+                            _materialized_station_gate_assignments(
+                                candidate_materialized,
+                                candidate_successors,
+                                cities,
+                                minimum_turn,
+                                station,
+                            )
+                        )
+                        target_score = _station_gate_score(target_diagnostic)
+                        if current_score[0] != 0:
+                            if target_score >= current_score:
+                                continue
+                        elif target_score > current_score:
+                            continue
+                        _, destination_before = (
+                            _materialized_station_gate_assignments(
+                                materialized,
+                                successors,
+                                cities,
+                                minimum_turn,
+                                destination,
+                            )
+                        )
+                        _, destination_after = (
+                            _materialized_station_gate_assignments(
+                                candidate_materialized,
+                                candidate_successors,
+                                cities,
+                                minimum_turn,
+                                destination,
+                            )
+                        )
+                        destination_score = _station_gate_score(
+                            destination_after
+                        )
+                        if destination_score > _station_gate_score(
+                            destination_before
+                        ):
+                            continue
+                        candidate_key = (
+                            target_score,
+                            destination_score,
+                            0 if destination in preferred_destinations else 1,
+                            -float(market["marginalDemand"]),
+                            return_utc - outbound_arrival_utc,
+                            -(return_utc - outbound_utc),
+                            outbound_utc,
+                            destination,
+                        )
+                        candidate = (
+                            candidate_key,
+                            arriving_id,
+                            following_id,
+                            outbound_leg,
+                            return_leg,
+                            target_score,
+                            destination_score,
+                            market,
+                            bank_touches,
+                            candidate_materialized,
+                            candidate_successors,
+                        )
+                        ranked_candidates.append(candidate)
+
+            best: tuple[Any, ...] | None = None
+            for candidate in sorted(
+                ranked_candidates,
+                key=lambda row: row[0],
+            )[:32]:
+                candidate_materialized = candidate[-2]
+                candidate_successors = candidate[-1]
+                candidate_cycles = _cycles(
+                    candidate_materialized,
+                    candidate_successors,
+                    policy,
+                    cities,
+                    single_target_full_gap=single_target_full_gap,
+                )
+                cycle_score = _cycle_score(
+                    candidate_cycles,
+                    required_destinations,
+                    fleet_counts,
+                    rolling_limit,
+                )
+                if (
+                    cycle_score[:4] != (0, 0, 0, 0)
+                    or cycle_score[-1] > aircraft_ceiling
+                ):
+                    continue
+                best = (*candidate[:-2], candidate_cycles)
+                break
+            if best is None:
+                break
+            (
+                _,
+                arriving_id,
+                following_id,
+                outbound_leg,
+                return_leg,
+                target_score,
+                destination_score,
+                market,
+                bank_touches,
+                cycles,
+            ) = best
+            materialized[outbound_leg["id"]] = outbound_leg
+            materialized[return_leg["id"]] = return_leg
+            successors[arriving_id] = outbound_leg["id"]
+            successors[outbound_leg["id"]] = return_leg["id"]
+            successors[return_leg["id"]] = following_id
+            station_departure_counts[station] += 1
+            station_departure_counts[str(market["destination"])] += 1
+            additions_by_market[market["market"]] += 1
+            for bank_id, operation, _ in bank_touches:
+                if bank_id is not None:
+                    bank_usage[(bank_id, operation)] += 1
+            additions.append(
+                {
+                    "station": station,
+                    "market": list(market["market"]),
+                    "destination": market["destination"],
+                    "fleet": outbound_leg["fleet"],
+                    "blockMinutes": outbound_leg["blockMinutes"],
+                    "afterArrivingLegId": arriving_id,
+                    "beforeDepartingLegId": following_id,
+                    "outboundLegId": outbound_leg["id"],
+                    "returnLegId": return_leg["id"],
+                    "outboundDepartureUtcMinute": outbound_leg[
+                        "departureUtcMinute"
+                    ],
+                    "returnArrivalUtcMinute": return_leg[
+                        "arrivalUtcMinute"
+                    ],
+                    "twoWayDemand": market["twoWayDemand"],
+                    "marginalDemand": market["marginalDemand"],
+                    "newFrequency": market["newFrequency"],
+                    "beforeGateScore": list(current_score),
+                    "afterGateScore": list(target_score),
+                    "destinationGateScore": list(destination_score),
+                }
+            )
+    return cycles, additions
+
+
+def _assigned_bank_windows_hold(
+    leg: dict[str, Any],
+    windows: dict[str, list[dict[str, Any]]],
+) -> bool:
+    for station_key, bank_key, minute_key in (
+        ("origin", "originBankId", "departureMinute"),
+        ("destination", "destinationBankId", "arrivalMinute"),
+    ):
+        assigned = leg.get(bank_key)
+        if assigned is None:
+            continue
+        station = str(leg[station_key])
+        if _bank_id(int(leg[minute_key]) % 1440, windows[station]) != assigned:
+            return False
+    return True
+
+
+def _pairing_spacing_holds_for_leg(
+    leg: dict[str, Any],
+    materialized: dict[str, dict[str, Any]],
+    station_departure_counts: Counter[str],
+    policy: dict[str, Any],
+    allow_pairing_spacing_exceptions: bool,
+) -> bool:
+    pairing = (str(leg["origin"]), str(leg["destination"]))
+    departures = sorted(
+        int(candidate["departureMinute"]) % 1440
+        for candidate in materialized.values()
+        if (
+            str(candidate["origin"]),
+            str(candidate["destination"]),
+        )
+        == pairing
+    )
+    if len(departures) < 2:
+        return True
+    rule = pairing_spacing_rule(
+        pairing[0],
+        pairing[1],
+        len(departures),
+        int(station_departure_counts[pairing[0]]),
+        set(policy["hubs"]),
+        policy["section26"],
+    )
+    gaps = [
+        (departures[(index + 1) % len(departures)] - minute) % 1440
+        for index, minute in enumerate(departures)
+    ]
+    if any(gap < rule["hardFloorMinutes"] for gap in gaps):
+        return False
+    allowed_exceptions = (
+        int(rule["allowedExceptions"])
+        if allow_pairing_spacing_exceptions
+        else 0
+    )
+    return (
+        sum(gap < rule["minimumGapMinutes"] for gap in gaps)
+        <= allowed_exceptions
+    )
+
+
+def _repair_exact_gate_times(
+    materialized: dict[str, dict[str, Any]],
+    successors: dict[str, str],
+    cycles: list[dict[str, Any]],
+    policy: dict[str, Any],
+    cities: dict[str, dict[str, Any]],
+    windows: dict[str, list[dict[str, Any]]],
+    required_destinations: set[str],
+    fleet_counts: dict[str, int],
+    rolling_limit: int,
+    single_target_full_gap: bool,
+    station_departure_counts: Counter[str],
+    allow_pairing_spacing_exceptions: bool,
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    """Shift stranded or directly competing passenger touches.
+
+    The global model constrains simultaneous touch demand, while the final
+    recurring gate chart is a cyclic coloring problem. Small exact-time moves
+    can break a circular coloring conflict without changing service, routing,
+    or inventory. Moves normally remain in their assigned bank core. A bounded
+    move to an immediately adjacent bank is permitted when that bank has spare
+    gate-touch capacity. Every accepted move strictly improves the global gate
+    score and revalidates both endpoints, bank capacity, curfew, pairing
+    spacing, turns, RON coverage, and the aircraft requirement.
+    """
+    minimum_turn = int(policy["turns"]["minimumMinutes"])
+    predecessors = {
+        successor: identifier for identifier, successor in successors.items()
+    }
+    stations = sorted(
+        {str(leg["destination"]) for leg in materialized.values()}
+    )
+    station_scores: dict[str, tuple[int, int, int, int, int]] = {}
+    station_diagnostics: dict[str, dict[str, Any]] = {}
+    for station in stations:
+        _, diagnostic = _materialized_station_gate_assignments(
+            materialized,
+            successors,
+            cities,
+            minimum_turn,
+            station,
+        )
+        station_scores[station] = _station_gate_score(diagnostic)
+        station_diagnostics[station] = diagnostic
+
+    aircraft_ceiling = _cycle_score(
+        cycles,
+        required_destinations,
+        fleet_counts,
+        rolling_limit,
+    )[-1]
+    exhausted_stations: set[str] = set()
+    moves: list[dict[str, Any]] = []
+    standard_offsets = (
+        -60,
+        -45,
+        -30,
+        -20,
+        -15,
+        -10,
+        -5,
+        5,
+        10,
+        15,
+        20,
+        30,
+        45,
+        60,
+    )
+    bank_positions = {
+        station: {
+            str(bank["id"]): index
+            for index, bank in enumerate(station_windows)
+        }
+        for station, station_windows in windows.items()
+    }
+
+    def bank_is_adjacent(
+        station: str,
+        original_bank: str,
+        candidate_bank: str,
+    ) -> bool:
+        positions = bank_positions[station]
+        size = len(positions)
+        distance = abs(
+            positions[original_bank] - positions[candidate_bank]
+        )
+        return min(distance, size - distance) <= 1
+
+    def candidate_offsets(leg: dict[str, Any]) -> tuple[int, ...]:
+        offsets = set(standard_offsets)
+        for station_key, bank_key, minute_key in (
+            ("origin", "originBankId", "departureMinute"),
+            ("destination", "destinationBankId", "arrivalMinute"),
+        ):
+            assigned_bank = leg.get(bank_key)
+            if assigned_bank is None:
+                continue
+            bank_station = str(leg[station_key])
+            station_windows = windows[bank_station]
+            position = bank_positions[bank_station][str(assigned_bank)]
+            current_minute = int(leg[minute_key])
+            for adjacent_position in {
+                (position - 1) % len(station_windows),
+                (position + 1) % len(station_windows),
+            }:
+                adjacent = station_windows[adjacent_position]
+                first_minute = int(adjacent["startMinute"]) + (
+                    (current_minute - int(adjacent["startMinute"])) % 5
+                )
+                for candidate_minute in range(
+                    first_minute,
+                    int(adjacent["endMinute"]) + 1,
+                    5,
+                ):
+                    offset = (
+                        candidate_minute - current_minute + 720
+                    ) % 1440 - 720
+                    if offset and abs(offset) <= 180:
+                        offsets.add(offset)
+        return tuple(sorted(offsets))
+
+    for _ in range(30):
+        failures = [
+            station
+            for station, score in station_scores.items()
+            if score[0] and station not in exhausted_stations
+        ]
+        if not failures:
+            break
+        station = max(
+            failures,
+            key=lambda candidate: (
+                station_scores[candidate][1],
+                station_scores[candidate][2],
+                candidate,
+            ),
+        )
+        failure = station_diagnostics[station]["failures"][0]
+        candidate_legs = set()
+        for label in failure["strandedLabels"]:
+            arriving, departing = str(label).split(" -> ", 1)
+            candidate_legs.update((arriving, departing))
+        conflict_windows = [
+            (int(row["startMinute"]), int(row["endMinute"]))
+            for row in failure.get("strandedTouchWindows", [])
+        ]
+        if conflict_windows:
+            for arriving, departing in successors.items():
+                arriving_leg = materialized[arriving]
+                departing_leg = materialized[departing]
+                if str(arriving_leg["destination"]) != station:
+                    continue
+                arrival_utc = int(
+                    arriving_leg["departureUtcMinute"]
+                ) + int(arriving_leg["blockMinutes"])
+                wait = _connection_wait(
+                    arrival_utc,
+                    int(departing_leg["departureUtcMinute"]),
+                    minimum_turn,
+                )
+                start = _local_minute(arrival_utc, station, cities)
+                end = start + wait
+                if wait > SHORT_CLAIM_THRESHOLD_MINUTES:
+                    touch_candidates = (
+                        (
+                            start,
+                            start + TOUCH_ARRIVAL_MINUTES,
+                            arriving,
+                        ),
+                        (
+                            end - TOUCH_DEPARTURE_MINUTES,
+                            end,
+                            departing,
+                        ),
+                    )
+                else:
+                    touch_candidates = (
+                        (start, end, arriving),
+                        (start, end, departing),
+                    )
+                for touch_start, touch_end, identifier in touch_candidates:
+                    if any(
+                        touch_start + shift < conflict_end
+                        and conflict_start < touch_end + shift
+                        for shift in (-1440, 0, 1440)
+                        for conflict_start, conflict_end in conflict_windows
+                    ):
+                        candidate_legs.add(identifier)
+
+        current_score = _gate_capacity_score(station_scores)
+        bank_usage: Counter[tuple[str, str]] = Counter()
+        for leg in materialized.values():
+            if leg.get("originBankId") is not None:
+                bank_usage[(str(leg["originBankId"]), "departure")] += 1
+            if leg.get("destinationBankId") is not None:
+                bank_usage[(str(leg["destinationBankId"]), "arrival")] += 1
+        candidates = []
+        for identifier in sorted(candidate_legs):
+            if identifier not in predecessors or identifier not in successors:
+                continue
+            original = materialized[identifier]
+            for offset in candidate_offsets(original):
+                departure_utc = (
+                    int(original["departureUtcMinute"]) + offset
+                ) % 1440
+                arrival_utc = (
+                    departure_utc + int(original["blockMinutes"])
+                ) % 1440
+                candidate_leg = dict(original)
+                candidate_leg.update(
+                    {
+                        "departureUtcMinute": departure_utc,
+                        "arrivalUtcMinute": arrival_utc,
+                        "departureMinute": _local_minute(
+                            departure_utc,
+                            str(original["origin"]),
+                            cities,
+                        ),
+                        "arrivalMinute": _local_minute(
+                            arrival_utc,
+                            str(original["destination"]),
+                            cities,
+                        ),
+                    }
+                )
+                bank_change_count = 0
+                bank_assignment_valid = True
+                for station_key, bank_key, minute_key in (
+                    ("origin", "originBankId", "departureMinute"),
+                    (
+                        "destination",
+                        "destinationBankId",
+                        "arrivalMinute",
+                    ),
+                ):
+                    original_bank = original.get(bank_key)
+                    if original_bank is None:
+                        continue
+                    bank_station = str(original[station_key])
+                    candidate_bank = _bank_id(
+                        int(candidate_leg[minute_key]),
+                        windows[bank_station],
+                    )
+                    if (
+                        candidate_bank is None
+                        or not bank_is_adjacent(
+                            bank_station,
+                            str(original_bank),
+                            candidate_bank,
+                        )
+                    ):
+                        bank_assignment_valid = False
+                        break
+                    candidate_leg[bank_key] = candidate_bank
+                    if candidate_bank != original_bank:
+                        bank_change_count += 1
+                        operation = (
+                            "departure"
+                            if bank_key == "originBankId"
+                            else "arrival"
+                        )
+                        if (
+                            bank_usage[(candidate_bank, operation)] + 1
+                            > _capacity(cities[bank_station])[0]
+                        ):
+                            bank_assignment_valid = False
+                            break
+                if (
+                    not bank_assignment_valid
+                    or (
+                        bank_change_count == 0
+                        and offset not in standard_offsets
+                    )
+                ):
+                    continue
+                candidate_leg["curfewStatus"] = _curfew_status(
+                    str(candidate_leg["origin"]),
+                    int(candidate_leg["departureMinute"]),
+                    int(candidate_leg["arrivalMinute"]),
+                    policy,
+                )
+                if (
+                    candidate_leg["curfewStatus"] != "pass"
+                    or not _assigned_bank_windows_hold(candidate_leg, windows)
+                ):
+                    continue
+
+                materialized[identifier] = candidate_leg
+                predecessor = materialized[predecessors[identifier]]
+                following = materialized[successors[identifier]]
+                predecessor_wait = _connection_wait(
+                    int(predecessor["departureUtcMinute"])
+                    + int(predecessor["blockMinutes"]),
+                    departure_utc,
+                    minimum_turn,
+                )
+                following_wait = _connection_wait(
+                    departure_utc + int(candidate_leg["blockMinutes"]),
+                    int(following["departureUtcMinute"]),
+                    minimum_turn,
+                )
+                if (
+                    predecessor_wait < minimum_turn
+                    or following_wait < minimum_turn
+                    or not _pairing_spacing_holds_for_leg(
+                        candidate_leg,
+                        materialized,
+                        station_departure_counts,
+                        policy,
+                        allow_pairing_spacing_exceptions,
+                    )
+                ):
+                    materialized[identifier] = original
+                    continue
+
+                affected_stations = {
+                    str(candidate_leg["origin"]),
+                    str(candidate_leg["destination"]),
+                }
+                candidate_scores = dict(station_scores)
+                candidate_diagnostics = {}
+                for affected in affected_stations:
+                    _, diagnostic = _materialized_station_gate_assignments(
+                        materialized,
+                        successors,
+                        cities,
+                        minimum_turn,
+                        affected,
+                    )
+                    candidate_scores[affected] = _station_gate_score(diagnostic)
+                    candidate_diagnostics[affected] = diagnostic
+                gate_score = _gate_capacity_score(candidate_scores)
+                if gate_score >= current_score:
+                    materialized[identifier] = original
+                    continue
+
+                candidate_cycles = _cycles(
+                    materialized,
+                    successors,
+                    policy,
+                    cities,
+                    single_target_full_gap=single_target_full_gap,
+                )
+                cycle_score = _cycle_score(
+                    candidate_cycles,
+                    required_destinations,
+                    fleet_counts,
+                    rolling_limit,
+                )
+                materialized[identifier] = original
+                if (
+                    cycle_score[:4] != (0, 0, 0, 0)
+                    or cycle_score[-1] > aircraft_ceiling
+                ):
+                    continue
+                candidates.append(
+                    (
+                        gate_score,
+                        bank_change_count,
+                        identifier,
+                        abs(offset),
+                        offset,
+                        candidate_leg,
+                        candidate_cycles,
+                        candidate_scores,
+                        candidate_diagnostics,
+                        cycle_score,
+                    )
+                )
+
+        if not candidates:
+            exhausted_stations.add(station)
+            continue
+        (
+            gate_score,
+            bank_change_count,
+            identifier,
+            _,
+            offset,
+            candidate_leg,
+            cycles,
+            station_scores,
+            candidate_diagnostics,
+            cycle_score,
+        ) = min(candidates, key=lambda candidate: candidate[:5])
+        original = materialized[identifier]
+        materialized[identifier] = candidate_leg
+        station_diagnostics.update(candidate_diagnostics)
+        exhausted_stations.clear()
+        moves.append(
+            {
+                "legId": identifier,
+                "offsetMinutes": offset,
+                "beforeDepartureUtcMinute": int(
+                    original["departureUtcMinute"]
+                ),
+                "afterDepartureUtcMinute": int(
+                    candidate_leg["departureUtcMinute"]
+                ),
+                "bankReassignment": bool(bank_change_count),
+                "beforeOriginBankId": original.get("originBankId"),
+                "afterOriginBankId": candidate_leg.get("originBankId"),
+                "beforeDestinationBankId": original.get(
+                    "destinationBankId"
+                ),
+                "afterDestinationBankId": candidate_leg.get(
+                    "destinationBankId"
+                ),
+                "afterGateScore": list(gate_score),
+                "afterCycleScore": list(cycle_score),
+            }
+        )
+    return cycles, moves
+
+
 def build_exact_materialization_plan(
     canonical: dict[str, Any],
     frequency_plan: dict[str, Any],
     bank_plan: dict[str, Any],
     repair_plan: dict[str, Any],
     planning_rules: dict[str, Any],
+    seed_checkpoint_path: Path | None = None,
+    seed_fleets_per_run: int | None = None,
+    allow_infeasible_preview: bool = False,
+    demand_matrix: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     if any(
         artifact.get("status") != "pass"
@@ -733,11 +5175,42 @@ def build_exact_materialization_plan(
     }
     policy = canonical["operatingPolicy"]
     fleet_counts = canonical["schedule"]["fleetCounts"]
+    exact_options = planning_rules.get("exactMaterialization", {})
+    enforce_fixed_inventory = bool(
+        exact_options.get("enforceFixedPhysicalInventory", False)
+    )
+    passenger_gate_capacity_reserve = {
+        str(station): int(reserve)
+        for station, reserve in exact_options.get(
+            "passengerGateCapacityReserveByStation", {}
+        ).items()
+    }
+    gate_relief_options = exact_options.get("productiveGateRelief", {})
+    line_rebalancing_options = exact_options.get("lineRebalancing", {})
+    if seed_fleets_per_run is not None:
+        if seed_fleets_per_run < 1:
+            raise ValueError("Seed fleets per run must be at least one")
+        if seed_checkpoint_path is None:
+            raise ValueError(
+                "Seed fleets per run requires an exact seed checkpoint path"
+            )
+    bank_assignment_mode = exact_options.get(
+        "bankAssignmentMode", "assigned_leg_waves"
+    )
+    joint_bank_assignment = (
+        bank_assignment_mode == "joint_within_capacity_envelope"
+    )
     profiles = {
         row["fleet"]: row
         for row in planning_rules["frequencyAllocation"]["fleetProfiles"]
     }
     inventory = _leg_inventory(frequency_plan, profiles, cities)
+    if exact_options.get("preserveAssignedBankWaves", False):
+        if joint_bank_assignment:
+            raise ValueError(
+                "Joint bank assignment cannot also preserve leg-level bank waves"
+            )
+        _apply_assigned_bank_waves(inventory, bank_plan)
     unsupported = sorted(set(inventory) - set(fleet_counts))
     if unsupported:
         raise ValueError(
@@ -768,7 +5241,6 @@ def build_exact_materialization_plan(
     ron_assignments = _assign_destination_rons(
         repair_plan, required_destinations, fleet_counts
     )
-    exact_options = planning_rules.get("exactMaterialization", {})
     spacing_options = exact_options.get("pairingSpacing", {})
     enforce_pairing_spacing = (
         spacing_options.get("mode")
@@ -785,6 +5257,69 @@ def build_exact_materialization_plan(
             "timeLimitSecondsPerFleet", MIP_TIME_LIMIT_SECONDS
         )
     )
+    pairing_model = str(exact_options.get("pairingModel", "time_counts"))
+    if pairing_model not in {"time_counts", "compiled_patterns"}:
+        raise ValueError(f"Unsupported exact pairing model: {pairing_model}")
+    if pairing_model == "compiled_patterns" and not enforce_pairing_spacing:
+        raise ValueError(
+            "Compiled pairing patterns require Section 2.6 spacing enforcement"
+        )
+    maximum_patterns = int(
+        exact_options.get("maximumPatternsPerPairing", 96)
+    )
+    pairing_pattern_beam_width = int(
+        exact_options.get("pairingPatternBeamWidth", 3000)
+    )
+    fleet_coordination = str(
+        exact_options.get("fleetCoordination", "sequential")
+    )
+    if fleet_coordination not in {"sequential", "global"}:
+        raise ValueError(
+            f"Unsupported exact fleet coordination mode: {fleet_coordination}"
+        )
+    if fleet_coordination == "global" and (
+        pairing_model != "compiled_patterns" or not joint_bank_assignment
+    ):
+        raise ValueError(
+            "Global fleet coordination requires compiled patterns and joint bank assignment"
+        )
+    global_time_limit_seconds = int(
+        exact_options.get(
+            "globalTimeLimitSeconds",
+            time_limit_seconds * len(fleet_counts),
+        )
+    )
+    constructive_seed_mode = str(
+        exact_options.get("constructiveSeed", "none")
+    )
+    if constructive_seed_mode not in {"none", "independent_fleets"}:
+        raise ValueError(
+            f"Unsupported constructive seed mode: {constructive_seed_mode}"
+        )
+    seed_time_limit_seconds = int(
+        exact_options.get(
+            "seedTimeLimitSecondsPerFleet", time_limit_seconds
+        )
+    )
+    seed_time_limits_by_fleet = {
+        str(fleet): int(seconds)
+        for fleet, seconds in exact_options.get(
+            "seedTimeLimitSecondsByFleet", {}
+        ).items()
+    }
+    seed_pairing_model_by_fleet = {
+        str(fleet): str(model)
+        for fleet, model in exact_options.get(
+            "seedPairingModelByFleet", {}
+        ).items()
+    }
+    if any(
+        model not in {"compiled_patterns", "time_counts"}
+        for model in seed_pairing_model_by_fleet.values()
+    ):
+        raise ValueError(
+            "Seed pairing models must be compiled_patterns or time_counts"
+        )
     all_inventory_legs = [
         leg for fleet_legs in inventory.values() for leg in fleet_legs
     ]
@@ -801,37 +5336,440 @@ def build_exact_materialization_plan(
     assigned_by_fleet: defaultdict[str, list[str]] = defaultdict(list)
     for destination, fleet in ron_assignments.items():
         assigned_by_fleet[fleet].append(destination)
+    bank_quotas_by_fleet: defaultdict[
+        str, Counter[tuple[str, str]]
+    ] = defaultdict(Counter)
+    if joint_bank_assignment:
+        for placement in bank_plan["placements"]:
+            fleet = str(placement["fleet"])
+            for touch in placement["bankTouches"]:
+                bank_quotas_by_fleet[fleet][
+                    (str(touch["bankId"]), str(touch["operation"]))
+                ] += 1
+    remaining_bank_capacity: dict[tuple[str, str], int] = {}
+    if joint_bank_assignment:
+        for hub in bank_plan["hubs"]:
+            gate_count = _capacity(cities[str(hub["hub"])])[0]
+            for bank in hub["banks"]:
+                for operation in ("arrival", "departure"):
+                    remaining_bank_capacity[
+                        (str(bank["id"]), operation)
+                    ] = gate_count
 
     materialized: dict[str, dict[str, Any]] = {}
     solver_fleets = {}
-    for fleet in fleet_counts:
-        fleet_legs, solver = _solve_fleet(
-            fleet,
-            inventory.get(fleet, []),
-            int(fleet_counts[fleet]),
-            sorted(assigned_by_fleet[fleet]),
-            cities,
-            policy,
-            windows,
-            targets,
-            pairing_departure_counts,
-            station_departure_counts,
-            reserved_pair_departures,
-            enforce_pairing_spacing,
-            allow_pairing_spacing_exceptions,
-            time_limit_seconds,
-        )
-        materialized.update(fleet_legs)
-        solver_fleets[fleet] = solver
-        for leg in fleet_legs.values():
-            reserved_pair_departures[
-                (str(leg["origin"]), str(leg["destination"]))
-            ].append(int(leg["departureUtcMinute"]))
+    joint_solver = None
+    if fleet_coordination == "global":
+        seed_materialized = None
+        seed_solver_fleets: dict[str, dict[str, Any]] = {}
+        seed_overflow: dict[tuple[str, str], int] = {}
+        seed_physical_capacity_overflow: dict[tuple[str, int], int] = {}
+        seed_passenger_gate_overflow: dict[tuple[str, int], int] = {}
+        seed_reused_fleets: list[str] = []
+        new_seed_fleets = 0
+        if constructive_seed_mode == "independent_fleets":
+            seed_materialized = {}
+            seed_order = sorted(
+                fleet_counts,
+                key=lambda fleet: (
+                    -len(inventory.get(fleet, [])),
+                    fleet,
+                ),
+            )
+            seed_materialized_by_fleet: dict[
+                str, dict[str, dict[str, Any]]
+            ] = {}
+            seed_checkpoint_fingerprint = None
+            if seed_checkpoint_path is not None:
+                seed_checkpoint_fingerprint = _exact_seed_fingerprint(
+                    canonical,
+                    frequency_plan,
+                    bank_plan,
+                    repair_plan,
+                    planning_rules,
+                )
+                (
+                    seed_materialized_by_fleet,
+                    seed_solver_fleets,
+                ) = _read_exact_seed_checkpoint(
+                    seed_checkpoint_path,
+                    seed_checkpoint_fingerprint,
+                    seed_order,
+                )
+                seed_reused_fleets = [
+                    fleet
+                    for fleet in seed_order
+                    if fleet in seed_materialized_by_fleet
+                ]
+            for fleet in seed_order:
+                if fleet in seed_materialized_by_fleet:
+                    LOGGER.info("reusing exact seed fleet %s", fleet)
+                    seed_materialized.update(
+                        seed_materialized_by_fleet[fleet]
+                    )
+                    continue
+                LOGGER.info("solving exact seed fleet %s", fleet)
+                seed_started = time.monotonic()
+                seed_pairing_model = seed_pairing_model_by_fleet.get(
+                    fleet, "compiled_patterns"
+                )
+                fleet_time_limit = seed_time_limits_by_fleet.get(
+                    fleet, seed_time_limit_seconds
+                )
+                if seed_pairing_model == "compiled_patterns":
+                    fleet_legs, fleet_solver = (
+                        _solve_fleet_with_pairing_patterns(
+                            fleet,
+                            inventory.get(fleet, []),
+                            int(fleet_counts[fleet]),
+                            sorted(assigned_by_fleet[fleet]),
+                            cities,
+                            policy,
+                            windows,
+                            targets,
+                            pairing_departure_counts,
+                            station_departure_counts,
+                            {},
+                            remaining_bank_capacity,
+                            "capacity",
+                            True,
+                            allow_pairing_spacing_exceptions,
+                            fleet_time_limit,
+                            maximum_patterns,
+                            pairing_pattern_beam_width,
+                        )
+                    )
+                else:
+                    fleet_legs, fleet_solver = _solve_fleet(
+                        fleet,
+                        inventory.get(fleet, []),
+                        int(fleet_counts[fleet]),
+                        sorted(assigned_by_fleet[fleet]),
+                        cities,
+                        policy,
+                        windows,
+                        targets,
+                        pairing_departure_counts,
+                        station_departure_counts,
+                        {},
+                        remaining_bank_capacity,
+                        "capacity",
+                        False,
+                        True,
+                        allow_pairing_spacing_exceptions,
+                        fleet_time_limit,
+                    )
+                seed_materialized.update(fleet_legs)
+                seed_materialized_by_fleet[fleet] = fleet_legs
+                seed_solver_fleets[fleet] = fleet_solver
+                LOGGER.info(
+                    "completed exact seed fleet %s legs=%d in %.1fs",
+                    fleet,
+                    len(fleet_legs),
+                    time.monotonic() - seed_started,
+                )
+                if (
+                    seed_checkpoint_path is not None
+                    and seed_checkpoint_fingerprint is not None
+                ):
+                    _write_exact_seed_checkpoint(
+                        seed_checkpoint_path,
+                        seed_checkpoint_fingerprint,
+                        seed_order,
+                        seed_materialized_by_fleet,
+                        seed_solver_fleets,
+                    )
+                new_seed_fleets += 1
+                if (
+                    seed_fleets_per_run is not None
+                    and new_seed_fleets >= seed_fleets_per_run
+                ):
+                    raise ExactSeedStageComplete(
+                        [
+                            fleet_name
+                            for fleet_name in seed_order
+                            if fleet_name in seed_materialized_by_fleet
+                        ]
+                    )
+            seed_usage: Counter[tuple[str, str]] = Counter()
+            for leg in seed_materialized.values():
+                if leg["originBankId"] is not None:
+                    seed_usage[
+                        (str(leg["originBankId"]), "departure")
+                    ] += 1
+                if leg["destinationBankId"] is not None:
+                    seed_usage[
+                        (str(leg["destinationBankId"]), "arrival")
+                    ] += 1
+            seed_overflow = {
+                key: touches - remaining_bank_capacity[key]
+                for key, touches in seed_usage.items()
+                if touches > remaining_bank_capacity[key]
+            }
+            seed_physical_capacity_overflow = (
+                _materialized_physical_capacity_overflow(
+                    seed_materialized,
+                    cities,
+                    int(policy["turns"]["minimumMinutes"]),
+                )
+            )
+            if enforce_fixed_inventory:
+                seed_passenger_gate_overflow = (
+                    _materialized_passenger_gate_overflow(
+                        seed_materialized,
+                        cities,
+                        passenger_gate_capacity_reserve,
+                    )
+                )
+        if (
+            seed_materialized is not None
+            and not seed_overflow
+            and not seed_physical_capacity_overflow
+            and not seed_passenger_gate_overflow
+        ):
+            materialized = seed_materialized
+            solver_fleets = seed_solver_fleets
+            joint_solver = {
+                "status": "constructive_seed_feasible",
+                "message": (
+                    "Checkpointed fleet solutions jointly satisfy the shared bank capacity"
+                ),
+                "bankFeasibilityOverflow": 0,
+                "physicalCapacityFeasibilityOverflow": 0,
+                "passengerGateFeasibilityOverflow": 0,
+                "constructiveSeed": True,
+                "seedCheckpointReusedFleets": seed_reused_fleets,
+                "seedOverloadedBankRows": 0,
+                "seedOverloadedPhysicalCapacityRows": 0,
+                "seedOverloadedPassengerGateRows": 0,
+                "timeLimitSeconds": global_time_limit_seconds,
+            }
+        else:
+            materialized, solver_fleets, joint_solver = (
+                _solve_all_fleets_with_pairing_patterns(
+                    inventory,
+                    {
+                        fleet: int(count)
+                        for fleet, count in fleet_counts.items()
+                    },
+                    {
+                        fleet: sorted(assigned_by_fleet[fleet])
+                        for fleet in fleet_counts
+                    },
+                    cities,
+                    policy,
+                    windows,
+                    targets,
+                    pairing_departure_counts,
+                    station_departure_counts,
+                    remaining_bank_capacity,
+                    allow_pairing_spacing_exceptions,
+                    global_time_limit_seconds,
+                    maximum_patterns,
+                    pairing_pattern_beam_width,
+                    seed_materialized,
+                    enforce_fixed_inventory,
+                    passenger_gate_capacity_reserve,
+                )
+            )
+            if joint_solver is not None:
+                joint_solver["seedTotalBankOverage"] = sum(
+                    seed_overflow.values()
+                )
+                joint_solver["seedTotalPhysicalCapacityOverage"] = sum(
+                    seed_physical_capacity_overflow.values()
+                )
+                joint_solver["seedTotalPassengerGateOverage"] = sum(
+                    seed_passenger_gate_overflow.values()
+                )
+                joint_solver["seedCheckpointReusedFleets"] = (
+                    seed_reused_fleets
+                )
+                if seed_checkpoint_path is not None:
+                    repair_seed_order = sorted(
+                        fleet_counts,
+                        key=lambda fleet: (
+                            -len(inventory.get(fleet, [])),
+                            fleet,
+                        ),
+                    )
+                    improved_by_fleet: dict[
+                        str, dict[str, dict[str, Any]]
+                    ] = {fleet: {} for fleet in repair_seed_order}
+                    for leg_id, leg in materialized.items():
+                        improved_by_fleet[str(leg["fleet"])][leg_id] = leg
+                    _write_exact_seed_checkpoint(
+                        seed_checkpoint_path,
+                        _exact_seed_fingerprint(
+                            canonical,
+                            frequency_plan,
+                            bank_plan,
+                            repair_plan,
+                            planning_rules,
+                        ),
+                        repair_seed_order,
+                        improved_by_fleet,
+                        solver_fleets,
+                    )
+                bank_overflow_remains = (
+                    float(joint_solver["bankFeasibilityOverflow"]) > 0
+                )
+                gate_overflow_remains = (
+                    float(
+                        joint_solver[
+                            "physicalCapacityFeasibilityOverflow"
+                        ]
+                    )
+                    > 0
+                    or float(
+                        joint_solver[
+                            "passengerGateFeasibilityOverflow"
+                        ]
+                    )
+                    > 0
+                )
+                if (
+                    bank_overflow_remains
+                    or (gate_overflow_remains and not gate_relief_options)
+                ) and not allow_infeasible_preview:
+                    raise ExactGlobalRepairIncomplete(
+                        {
+                            str(key): float(value)
+                            for key, value in joint_solver[
+                                "bankOverflowRows"
+                            ].items()
+                        },
+                        str(joint_solver["message"]),
+                        {
+                            str(key): float(value)
+                            for key, value in joint_solver[
+                                "physicalCapacityOverflowRows"
+                            ].items()
+                        },
+                        {
+                            str(key): float(value)
+                            for key, value in joint_solver[
+                                "passengerGateOverflowRows"
+                            ].items()
+                        },
+                    )
+        for leg in materialized.values():
+            if leg["originBankId"] is not None:
+                remaining_bank_capacity[
+                    (str(leg["originBankId"]), "departure")
+                ] -= 1
+            if leg["destinationBankId"] is not None:
+                remaining_bank_capacity[
+                    (str(leg["destinationBankId"]), "arrival")
+                ] -= 1
+        if (
+            min(remaining_bank_capacity.values(), default=0) < 0
+            and not allow_infeasible_preview
+        ):
+            raise ValueError("Exact global materialization exceeded bank capacity")
+    else:
+        configured_fleet_order = exact_options.get("fleetSolveOrder")
+        if configured_fleet_order is not None:
+            fleet_order = [str(fleet) for fleet in configured_fleet_order]
+            if set(fleet_order) != set(fleet_counts) or len(fleet_order) != len(
+                fleet_counts
+            ):
+                raise ValueError(
+                    "Exact fleetSolveOrder must list every configured fleet exactly once"
+                )
+        else:
+            fleet_order = (
+                sorted(
+                    fleet_counts,
+                    key=lambda fleet: (-len(inventory.get(fleet, [])), fleet),
+                )
+                if joint_bank_assignment
+                else list(fleet_counts)
+            )
+        for fleet_position, fleet in enumerate(fleet_order):
+            bank_limits = None
+            if joint_bank_assignment:
+                future_fleets = fleet_order[fleet_position + 1 :]
+                bank_limits = {
+                    key: max(
+                        0,
+                        remaining
+                        - sum(
+                            int(bank_quotas_by_fleet[future][key])
+                            for future in future_fleets
+                        ),
+                    )
+                    for key, remaining in remaining_bank_capacity.items()
+                }
+            if pairing_model == "compiled_patterns":
+                fleet_legs, solver = _solve_fleet_with_pairing_patterns(
+                    fleet,
+                    inventory.get(fleet, []),
+                    int(fleet_counts[fleet]),
+                    sorted(assigned_by_fleet[fleet]),
+                    cities,
+                    policy,
+                    windows,
+                    targets,
+                    pairing_departure_counts,
+                    station_departure_counts,
+                    reserved_pair_departures,
+                    bank_limits,
+                    "capacity" if joint_bank_assignment else None,
+                    joint_bank_assignment,
+                    allow_pairing_spacing_exceptions,
+                    time_limit_seconds,
+                    maximum_patterns,
+                    pairing_pattern_beam_width,
+                )
+            else:
+                fleet_legs, solver = _solve_fleet(
+                    fleet,
+                    inventory.get(fleet, []),
+                    int(fleet_counts[fleet]),
+                    sorted(assigned_by_fleet[fleet]),
+                    cities,
+                    policy,
+                    windows,
+                    targets,
+                    pairing_departure_counts,
+                    station_departure_counts,
+                    reserved_pair_departures,
+                    bank_limits,
+                    "capacity" if joint_bank_assignment else None,
+                    joint_bank_assignment,
+                    enforce_pairing_spacing,
+                    allow_pairing_spacing_exceptions,
+                    time_limit_seconds,
+                )
+            materialized.update(fleet_legs)
+            solver_fleets[fleet] = solver
+            if joint_bank_assignment:
+                for leg in fleet_legs.values():
+                    if leg["originBankId"] is not None:
+                        key = (str(leg["originBankId"]), "departure")
+                        remaining_bank_capacity[key] -= 1
+                    if leg["destinationBankId"] is not None:
+                        key = (str(leg["destinationBankId"]), "arrival")
+                        remaining_bank_capacity[key] -= 1
+                if min(remaining_bank_capacity.values(), default=0) < 0:
+                    raise ValueError(
+                        f"Exact {fleet} materialization exceeded bank capacity"
+                    )
+            for leg in fleet_legs.values():
+                reserved_pair_departures[
+                    (str(leg["origin"]), str(leg["destination"]))
+                ].append(int(leg["departureUtcMinute"]))
 
     minimum_turn = int(policy["turns"]["minimumMinutes"])
     successors, _ = _match_station_successors(materialized, minimum_turn)
     rolling_limit = int(planning_rules["routing"]["rollingRonWindowDays"]) + int(
         policy["rollingRonGraceDays"]
+    )
+    single_target_full_gap = bool(
+        planning_rules["routing"].get(
+            "singleTargetUsesFullCycleGap", False
+        )
     )
     cycles, swaps = _repair_successor_cycles(
         materialized,
@@ -841,12 +5779,127 @@ def build_exact_materialization_plan(
         required_destinations,
         fleet_counts,
         rolling_limit,
-        bool(
-            planning_rules["routing"].get(
-                "singleTargetUsesFullCycleGap", False
-            )
-        ),
+        single_target_full_gap,
     )
+    gate_time_shifts: list[dict[str, Any]] = []
+    gate_relief_missions: list[dict[str, Any]] = []
+    line_rebalancing_moves: list[dict[str, Any]] = []
+    line_bridge_missions: list[dict[str, Any]] = []
+    if enforce_fixed_inventory:
+        cycles, gate_swaps = _repair_successor_gate_capacity(
+            materialized,
+            successors,
+            cycles,
+            policy,
+            cities,
+            required_destinations,
+            fleet_counts,
+            rolling_limit,
+            single_target_full_gap,
+        )
+        swaps.extend(gate_swaps)
+        cycles, gate_time_shifts = _repair_exact_gate_times(
+            materialized,
+            successors,
+            cycles,
+            policy,
+            cities,
+            windows,
+            required_destinations,
+            fleet_counts,
+            rolling_limit,
+            single_target_full_gap,
+            station_departure_counts,
+            allow_pairing_spacing_exceptions,
+        )
+        for move in gate_time_shifts:
+            move["repairPhase"] = "before_gate_relief"
+        if gate_relief_options:
+            cycles, gate_relief_missions = (
+                _repair_gate_capacity_with_missions(
+                    materialized,
+                    successors,
+                    cycles,
+                    frequency_plan,
+                    policy,
+                    cities,
+                    windows,
+                    required_destinations,
+                    fleet_counts,
+                    rolling_limit,
+                    single_target_full_gap,
+                    station_departure_counts,
+                    allow_pairing_spacing_exceptions,
+                    gate_relief_options,
+                    profiles,
+                    demand_matrix,
+                )
+            )
+            if gate_relief_missions:
+                cycles, post_relief_time_shifts = (
+                    _repair_exact_gate_times(
+                        materialized,
+                        successors,
+                        cycles,
+                        policy,
+                        cities,
+                        windows,
+                        required_destinations,
+                        fleet_counts,
+                        rolling_limit,
+                        single_target_full_gap,
+                        station_departure_counts,
+                        allow_pairing_spacing_exceptions,
+                    )
+                )
+                for move in post_relief_time_shifts:
+                    move["repairPhase"] = "after_gate_relief"
+                gate_time_shifts.extend(post_relief_time_shifts)
+    if line_rebalancing_options:
+        cycles, line_rebalancing_moves = _rebalance_successor_cycles(
+            materialized,
+            successors,
+            cycles,
+            policy,
+            cities,
+            required_destinations,
+            fleet_counts,
+            rolling_limit,
+            single_target_full_gap,
+            line_rebalancing_options,
+            enforce_fixed_inventory,
+        )
+        cycles, line_bridge_missions = _bridge_rebalanced_successor_cycles(
+            materialized,
+            successors,
+            cycles,
+            policy,
+            cities,
+            windows,
+            required_destinations,
+            fleet_counts,
+            rolling_limit,
+            single_target_full_gap,
+            station_departure_counts,
+            allow_pairing_spacing_exceptions,
+            line_rebalancing_options,
+            profiles,
+            demand_matrix,
+            enforce_fixed_inventory,
+        )
+    gate_diagnostic = {
+        "status": "not_evaluated",
+        "stations": 0,
+        "towMovements": 0,
+        "failures": [],
+    }
+    if enforce_fixed_inventory:
+        _, gate_diagnostic = _materialized_gate_assignments(
+            materialized,
+            successors,
+            cities,
+            minimum_turn,
+        )
 
     hubs = set(policy["hubs"])
     legs = [materialized[identifier] for identifier in sorted(materialized)]
@@ -868,6 +5921,7 @@ def build_exact_materialization_plan(
             leg["destination"] in hubs
             and leg["destinationBankId"] is None
         )
+        or not _assigned_bank_windows_hold(leg, windows)
     ]
     curfew_violations = [
         leg["id"]
@@ -984,7 +6038,17 @@ def build_exact_materialization_plan(
             "solverMipGap": solver_fleets[fleet]["mipGap"],
         }
     capacity_shortfall = sum(row["shortfall"] for row in fleet_plan.values())
-    planned_legs = int(frequency_plan["summary"]["plannedLegs"])
+    selected_legs = int(frequency_plan["summary"]["plannedLegs"])
+    planned_legs = selected_legs + 2 * (
+        len(gate_relief_missions) + len(line_bridge_missions)
+    )
+    added_nonhub_legs = sum(
+        leg.get("source")
+        in {"productive_gate_relief", "productive_line_bridge"}
+        and leg["origin"] not in hubs
+        and leg["destination"] not in hubs
+        for leg in legs
+    )
     checks = [
         {
             "id": "service_coverage",
@@ -996,7 +6060,9 @@ def build_exact_materialization_plan(
             "status": (
                 "pass"
                 if len(nonhub)
-                == planned_legs - int(bank_plan["summary"]["hubMarketLegs"])
+                == selected_legs
+                - int(bank_plan["summary"]["hubMarketLegs"])
+                + added_nonhub_legs
                 else "fail"
             ),
             "message": f"All {len(nonhub)} non-hub legs are integrated into aircraft cycles",
@@ -1083,6 +6149,19 @@ def build_exact_materialization_plan(
                 ),
             }
         )
+    if enforce_fixed_inventory:
+        checks.append(
+            {
+                "id": "fixed_physical_inventory",
+                "status": gate_diagnostic["status"],
+                "hardStop": True,
+                "message": (
+                    f"All {gate_diagnostic['stations']} stations fit their configured gates and stands with {gate_diagnostic['towMovements']} conditional tow(s)"
+                    if gate_diagnostic["status"] == "pass"
+                    else f"{len(gate_diagnostic['failures'])} stations cannot fit their configured gates and stands"
+                ),
+            }
+        )
     failed = sum(check["status"] == "fail" for check in checks)
     required_aircraft = sum(
         int(row["requiredAircraft"]) for row in fleet_plan.values()
@@ -1096,6 +6175,7 @@ def build_exact_materialization_plan(
         "operatingPolicyId": policy["id"],
         "status": "pass" if not failed else "fail",
         "materializationStatus": "complete" if not failed else "blocked",
+        "previewOnly": bool(allow_infeasible_preview),
         "timeStepMinutes": TIME_STEP_MINUTES,
         "summary": {
             "checks": len(checks),
@@ -1115,6 +6195,23 @@ def build_exact_materialization_plan(
             "destinationsWithoutRon": len(missing_rons),
             "rollingRonViolations": len(rolling_violations),
             "successorSwaps": len(swaps),
+            "gateTimeShifts": len(gate_time_shifts),
+            "gateReliefMissions": len(gate_relief_missions),
+            "lineRebalancingMoves": len(line_rebalancing_moves),
+            "lineBridgeMissions": len(line_bridge_missions),
+            "selectedLegs": selected_legs,
+            **(
+                {
+                    "gateCapacityFailures": len(
+                        gate_diagnostic["failures"]
+                    ),
+                    "conditionalTows": int(
+                        gate_diagnostic["towMovements"]
+                    ),
+                }
+                if enforce_fixed_inventory
+                else {}
+            ),
             **(
                 {"spacingViolations": len(spacing_violations)}
                 if enforce_pairing_spacing
@@ -1131,7 +6228,16 @@ def build_exact_materialization_plan(
             "name": "scipy-highs-time-expanded-milp",
             "relativeGap": MIP_RELATIVE_GAP,
             "timeLimitSecondsPerFleet": time_limit_seconds,
+            "fleetCoordination": fleet_coordination,
             "fleets": solver_fleets,
+            **(
+                {
+                    "globalTimeLimitSeconds": global_time_limit_seconds,
+                    "joint": joint_solver,
+                }
+                if joint_solver is not None
+                else {}
+            ),
             **(
                 {
                     "pairingSpacingMode": spacing_options["mode"],
@@ -1145,12 +6251,21 @@ def build_exact_materialization_plan(
         "legs": legs,
         "diagnostics": {
             "successorSwaps": swaps,
+            "gateTimeShifts": gate_time_shifts,
+            "gateReliefMissions": gate_relief_missions,
+            "lineRebalancingMoves": line_rebalancing_moves,
+            "lineBridgeMissions": line_bridge_missions,
             "bankUnalignedLegs": bank_unaligned,
             "continuityViolations": continuity_violations,
             "turnViolations": turn_violations,
             "curfewViolations": curfew_violations,
             "missingDestinationRons": missing_rons,
             "rollingRonViolations": rolling_violations,
+            **(
+                {"gateCapacity": gate_diagnostic}
+                if enforce_fixed_inventory
+                else {}
+            ),
             **(
                 {
                     "spacingViolations": spacing_violations,
@@ -1171,7 +6286,11 @@ def build_exact_materialization_plan(
         },
         "limitations": [
             "Exact materialization proves five-minute flight times, complete non-hub integration, aircraft-cycle continuity, fleet capacity, hard curfews, destination RONs, and rolling target-RON cadence.",
-            "Gate and stand capacity has not yet been evaluated against these newly materialized cycles.",
+            (
+                "Exact-cycle gate and stand claims use fixed physical inventory; RON/ROD towing is conditional and passenger handling remains at gates."
+                if enforce_fixed_inventory
+                else "Gate and stand capacity has not yet been evaluated against these newly materialized cycles."
+            ),
             "Canonical Line/Day/Route, pairing, and flight identifiers remain unassigned until the next construction stage.",
         ],
     }
@@ -1184,6 +6303,9 @@ def build_exact_materialization_plan_from_manifest(
     repair_plan: dict[str, Any],
     manifest_path: Path,
     repo_root: Path,
+    seed_checkpoint_path: Path | None = None,
+    seed_fleets_per_run: int | None = None,
+    allow_infeasible_preview: bool = False,
 ) -> dict[str, Any]:
     loaded = load_demand_sources_from_manifest(manifest_path, repo_root)
     if loaded["manifest"]["id"] != frequency_plan["demandDataVersion"]:
@@ -1204,4 +6326,594 @@ def build_exact_materialization_plan_from_manifest(
         bank_plan,
         repair_plan,
         loaded["planningRules"],
+        seed_checkpoint_path,
+        seed_fleets_per_run,
+        allow_infeasible_preview,
+        demand_matrix=parse_airport_od_matrix(
+            loaded["airportOdMatrixText"]
+        ),
+    )
+
+
+def _verified_reusable_solver_leg_ids(
+    prior_plan: dict[str, Any],
+    inventory: dict[str, list[dict[str, Any]]],
+) -> set[str]:
+    """Prove that a prior exact plan times the current solver inventory."""
+    expected = {
+        str(leg["id"]): leg
+        for fleet_legs in inventory.values()
+        for leg in fleet_legs
+    }
+    actual = {
+        str(leg["id"]): leg
+        for leg in prior_plan.get("legs", [])
+        if leg.get("source") == "exact_materialization"
+    }
+    if set(actual) != set(expected):
+        missing = sorted(set(expected) - set(actual))
+        extra = sorted(set(actual) - set(expected))
+        raise ValueError(
+            "Reusable exact plan solver-leg inventory differs from current inputs; "
+            f"missing={missing[:8]}, extra={extra[:8]}"
+        )
+    immutable_fields = ("origin", "destination", "fleet", "blockMinutes")
+    for identifier in sorted(expected):
+        mismatched = [
+            field
+            for field in immutable_fields
+            if actual[identifier].get(field) != expected[identifier].get(field)
+        ]
+        if mismatched:
+            raise ValueError(
+                f"Reusable exact leg {identifier} differs in: "
+                + ", ".join(mismatched)
+            )
+    return set(expected)
+
+
+def refresh_exact_materialization_postsolve(
+    prior_plan: dict[str, Any],
+    canonical: dict[str, Any],
+    frequency_plan: dict[str, Any],
+    bank_plan: dict[str, Any],
+    repair_plan: dict[str, Any],
+    planning_rules: dict[str, Any],
+    allow_infeasible_preview: bool = False,
+    demand_matrix: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    """Reapply post-solve policy to a proven-compatible exact timing plan.
+
+    This path never constructs or invokes a MILP.  It is intentionally strict:
+    every solver-selected leg and RON assignment must match current inputs, and
+    every refreshed routing, timing, spacing, fleet, and gate check is rerun.
+    """
+    if prior_plan.get("scheduleId") != canonical["schedule"]["id"]:
+        raise ValueError("Reusable exact plan belongs to a different schedule")
+    if prior_plan.get("planningRulesId") != planning_rules["id"]:
+        raise ValueError("Reusable exact plan uses a different planning-rules ID")
+    if int(prior_plan.get("summary", {}).get("selectedLegs", -1)) != int(
+        frequency_plan["summary"]["plannedLegs"]
+    ):
+        raise ValueError("Reusable exact plan selected-leg count differs")
+
+    cities = {
+        city["code"]: city for city in canonical["cities"] if city.get("active")
+    }
+    policy = canonical["operatingPolicy"]
+    fleet_counts = canonical["schedule"]["fleetCounts"]
+    profiles = {
+        row["fleet"]: row
+        for row in planning_rules["frequencyAllocation"]["fleetProfiles"]
+    }
+    inventory = _leg_inventory(frequency_plan, profiles, cities)
+    solver_leg_ids = _verified_reusable_solver_leg_ids(prior_plan, inventory)
+    additions = [
+        leg
+        for leg in prior_plan.get("legs", [])
+        if str(leg["id"]) not in solver_leg_ids
+    ]
+    unsupported_sources = sorted(
+        {
+            str(leg.get("source"))
+            for leg in additions
+            if leg.get("source") != "productive_gate_relief"
+        }
+    )
+    if unsupported_sources:
+        raise ValueError(
+            "Reusable exact plan has unsupported prior post-solve legs: "
+            + ", ".join(unsupported_sources)
+        )
+    prior_diagnostics = prior_plan.get("diagnostics", {})
+    gate_relief_missions = json.loads(
+        json.dumps(prior_diagnostics.get("gateReliefMissions", []))
+    )
+    if len(additions) != 2 * len(gate_relief_missions):
+        raise ValueError("Reusable exact plan gate-relief provenance is incomplete")
+    if prior_diagnostics.get("lineBridgeMissions"):
+        raise ValueError("Reusable exact plan already contains a line bridge")
+
+    exemptions = set(policy.get("destinationRonExemptions", []))
+    required_destinations = {
+        city["code"]
+        for city in cities.values()
+        if city["role"] == "destination" and city["code"] not in exemptions
+    }
+    ron_assignments = _assign_destination_rons(
+        repair_plan, required_destinations, fleet_counts
+    )
+    if prior_plan.get("ronAssignments") != {
+        destination: ron_assignments[destination]
+        for destination in sorted(ron_assignments)
+    }:
+        raise ValueError("Reusable exact plan RON assignments differ")
+
+    materialized = {
+        str(leg["id"]): json.loads(json.dumps(leg))
+        for leg in prior_plan["legs"]
+    }
+    cycles = json.loads(json.dumps(prior_plan["cycles"]))
+    successors: dict[str, str] = {}
+    routed_ids: set[str] = set()
+    for cycle in cycles:
+        leg_ids = [str(identifier) for identifier in cycle["legIds"]]
+        if not leg_ids:
+            raise ValueError("Reusable exact plan contains an empty cycle")
+        if routed_ids & set(leg_ids):
+            raise ValueError("Reusable exact plan routes a leg more than once")
+        routed_ids.update(leg_ids)
+        for identifier, successor in zip(leg_ids, leg_ids[1:] + leg_ids[:1]):
+            successors[identifier] = successor
+    if routed_ids != set(materialized):
+        raise ValueError("Reusable exact plan cycles do not cover every leg")
+
+    exact_options = planning_rules.get("exactMaterialization", {})
+    line_options = exact_options.get("lineRebalancing", {})
+    configured_transfer_anchors = {
+        str(row["receiverAnchorLegId"])
+        for row in line_options.get("transfers", [])
+    }
+    existing_line_moves = json.loads(
+        json.dumps(prior_diagnostics.get("lineRebalancingMoves", []))
+    )
+    stale_moves = [
+        str(row.get("receiverAnchorLegId"))
+        for row in existing_line_moves
+        if str(row.get("receiverAnchorLegId")) not in configured_transfer_anchors
+    ]
+    if stale_moves:
+        raise ValueError(
+            "Reusable exact plan contains line moves absent from current policy: "
+            + ", ".join(stale_moves)
+        )
+
+    windows = {row["hub"]: row["banks"] for row in bank_plan["hubs"]}
+    rolling_limit = int(planning_rules["routing"]["rollingRonWindowDays"]) + int(
+        policy["rollingRonGraceDays"]
+    )
+    single_target_full_gap = bool(
+        planning_rules["routing"].get("singleTargetUsesFullCycleGap", False)
+    )
+    spacing_options = exact_options.get("pairingSpacing", {})
+    enforce_pairing_spacing = spacing_options.get("mode") in {
+        "section26_conservative_no_exception",
+        "section26_policy_exception",
+    }
+    allow_pairing_spacing_exceptions = (
+        spacing_options.get("mode") == "section26_policy_exception"
+    )
+    enforce_fixed_inventory = bool(
+        exact_options.get("enforceFixedPhysicalInventory", False)
+    )
+    station_departure_counts = Counter(
+        str(leg["origin"]) for leg in materialized.values()
+    )
+
+    new_line_moves: list[dict[str, Any]] = []
+    line_bridge_missions: list[dict[str, Any]] = []
+    if line_options:
+        cycles, new_line_moves = _rebalance_successor_cycles(
+            materialized,
+            successors,
+            cycles,
+            policy,
+            cities,
+            required_destinations,
+            fleet_counts,
+            rolling_limit,
+            single_target_full_gap,
+            line_options,
+            enforce_fixed_inventory,
+        )
+        cycles, line_bridge_missions = _bridge_rebalanced_successor_cycles(
+            materialized,
+            successors,
+            cycles,
+            policy,
+            cities,
+            windows,
+            required_destinations,
+            fleet_counts,
+            rolling_limit,
+            single_target_full_gap,
+            station_departure_counts,
+            allow_pairing_spacing_exceptions,
+            line_options,
+            profiles,
+            demand_matrix,
+            enforce_fixed_inventory,
+        )
+    line_rebalancing_moves = existing_line_moves + new_line_moves
+
+    minimum_turn = int(policy["turns"]["minimumMinutes"])
+    gate_diagnostic = {
+        "status": "not_evaluated",
+        "stations": 0,
+        "towMovements": 0,
+        "failures": [],
+    }
+    if enforce_fixed_inventory:
+        _, gate_diagnostic = _materialized_gate_assignments(
+            materialized, successors, cities, minimum_turn
+        )
+
+    hubs = set(policy["hubs"])
+    legs = [materialized[identifier] for identifier in sorted(materialized)]
+    bank_touch = [
+        leg
+        for leg in legs
+        if leg["origin"] in hubs or leg["destination"] in hubs
+    ]
+    nonhub = [
+        leg
+        for leg in legs
+        if leg["origin"] not in hubs and leg["destination"] not in hubs
+    ]
+    bank_unaligned = [
+        str(leg["id"])
+        for leg in bank_touch
+        if (leg["origin"] in hubs and leg.get("originBankId") is None)
+        or (leg["destination"] in hubs and leg.get("destinationBankId") is None)
+        or not _assigned_bank_windows_hold(leg, windows)
+    ]
+    continuity_violations = [
+        [identifier, successor]
+        for identifier, successor in successors.items()
+        if materialized[identifier]["destination"]
+        != materialized[successor]["origin"]
+        or materialized[identifier]["fleet"] != materialized[successor]["fleet"]
+    ]
+    turn_violations = []
+    for identifier, successor in successors.items():
+        leg = materialized[identifier]
+        following = materialized[successor]
+        arrival_utc = int(leg["departureUtcMinute"]) + int(leg["blockMinutes"])
+        wait = _connection_wait(
+            arrival_utc,
+            int(following["departureUtcMinute"]),
+            minimum_turn,
+        )
+        if wait < minimum_turn:
+            turn_violations.append([identifier, successor, wait])
+    curfew_violations = [
+        str(leg["id"])
+        for leg in legs
+        if _curfew_status(
+            str(leg["origin"]),
+            int(leg["departureMinute"]),
+            int(leg["arrivalMinute"]),
+            policy,
+        )
+        != "pass"
+    ]
+    ron_cities = {
+        stop["station"] for cycle in cycles for stop in cycle["ronStops"]
+    }
+    missing_rons = sorted(required_destinations - ron_cities)
+    rolling_violations = [
+        str(cycle["id"])
+        for cycle in cycles
+        if int(cycle["maximumDaysWithoutTargetRon"]) > rolling_limit
+    ]
+
+    spacing_violations: list[dict[str, Any]] = []
+    spacing_exceptions: list[dict[str, Any]] = []
+    if enforce_pairing_spacing:
+        pair_departures: defaultdict[tuple[str, str], list[int]] = defaultdict(list)
+        actual_departure_counts = Counter(str(leg["origin"]) for leg in legs)
+        for leg in legs:
+            pair_departures[(leg["origin"], leg["destination"])].append(
+                int(leg["departureMinute"]) % 1440
+            )
+        for (origin, destination), departures in sorted(pair_departures.items()):
+            if len(departures) < 2:
+                continue
+            rule = pairing_spacing_rule(
+                origin,
+                destination,
+                len(departures),
+                int(actual_departure_counts[origin]),
+                hubs,
+                policy["section26"],
+            )
+            ordered = sorted(departures)
+            gaps = [
+                (ordered[(index + 1) % len(ordered)] - minute) % 1440
+                for index, minute in enumerate(ordered)
+            ]
+            hard_gaps = [gap for gap in gaps if gap < rule["hardFloorMinutes"]]
+            short_gaps = [gap for gap in gaps if gap < rule["minimumGapMinutes"]]
+            allowed = (
+                int(rule["allowedExceptions"])
+                if allow_pairing_spacing_exceptions
+                else 0
+            )
+            finding = {
+                "origin": origin,
+                "destination": destination,
+                "departures": ordered,
+                "minimumGapMinutes": rule["minimumGapMinutes"],
+            }
+            if hard_gaps or len(short_gaps) > allowed:
+                spacing_violations.append(
+                    {**finding, "gaps": gaps, "allowedExceptions": allowed}
+                )
+            elif short_gaps:
+                spacing_exceptions.append({**finding, "shortGaps": short_gaps})
+
+    fleet_plan = {}
+    for fleet, configured in fleet_counts.items():
+        fleet_cycles = [cycle for cycle in cycles if cycle["fleet"] == fleet]
+        required = sum(int(cycle["aircraftRequired"]) for cycle in fleet_cycles)
+        prior_fleet = prior_plan.get("fleetPlan", {}).get(fleet, {})
+        fleet_plan[fleet] = {
+            "configuredAircraft": int(configured),
+            "requiredAircraft": required,
+            "shortfall": max(0, required - int(configured)),
+            "remainingAircraft": max(0, int(configured) - required),
+            "cycles": len(fleet_cycles),
+            "routedLegs": sum(int(cycle["legCount"]) for cycle in fleet_cycles),
+            "assignedDestinationRons": sum(
+                assigned_fleet == fleet
+                for assigned_fleet in ron_assignments.values()
+            ),
+            "solverMipGap": prior_fleet.get("solverMipGap"),
+        }
+    capacity_shortfall = sum(row["shortfall"] for row in fleet_plan.values())
+    selected_legs = int(frequency_plan["summary"]["plannedLegs"])
+    planned_legs = selected_legs + sum(
+        leg.get("source")
+        in {"productive_gate_relief", "productive_line_bridge"}
+        for leg in legs
+    )
+    added_nonhub_legs = sum(
+        leg.get("source")
+        in {"productive_gate_relief", "productive_line_bridge"}
+        and leg["origin"] not in hubs
+        and leg["destination"] not in hubs
+        for leg in legs
+    )
+    check_rows = [
+        (
+            "service_coverage",
+            len(legs) == planned_legs,
+            f"All {planned_legs} proposed legs receive exact times",
+        ),
+        (
+            "nonhub_integration",
+            len(nonhub)
+            == selected_legs
+            - int(bank_plan["summary"]["hubMarketLegs"])
+            + added_nonhub_legs,
+            f"All {len(nonhub)} non-hub legs are integrated into aircraft cycles",
+        ),
+        (
+            "bank_core_alignment",
+            not bank_unaligned,
+            f"All {len(bank_touch)} hub-touching legs land inside approved bank cores",
+        ),
+        (
+            "routing_continuity",
+            not continuity_violations,
+            "Every exact successor retains station and fleet continuity",
+        ),
+        (
+            "minimum_turns",
+            not turn_violations,
+            f"Every exact connection meets the {minimum_turn}-minute floor",
+        ),
+        (
+            "fleet_capacity",
+            not capacity_shortfall,
+            "Every exact cycle fits the fleet counts selected for this schedule",
+        ),
+        (
+            "curfew_enforcement",
+            not curfew_violations,
+            "Every exact leg is curfew compliant",
+        ),
+        (
+            "destination_ron_coverage",
+            not missing_rons,
+            f"All {len(required_destinations)} required destinations receive a real routed overnight",
+        ),
+        (
+            "rolling_target_ron",
+            not rolling_violations,
+            f"Every exact cycle reaches a target RON within {rolling_limit} days",
+        ),
+    ]
+    checks = [
+        {
+            "id": identifier,
+            "status": "pass" if passed else "fail",
+            "message": message if passed else f"{identifier} validation failed",
+            **(
+                {"hardStop": True}
+                if identifier == "curfew_enforcement"
+                else {}
+            ),
+        }
+        for identifier, passed, message in check_rows
+    ]
+    if enforce_pairing_spacing:
+        checks.append(
+            {
+                "id": "section_26_pairing_spacing",
+                "status": "pass" if not spacing_violations else "fail",
+                "message": (
+                    f"Every exact directed pairing satisfies Section 2.6 spacing; {len(spacing_exceptions)} use the permitted one-gap exception"
+                    if not spacing_violations
+                    else f"{len(spacing_violations)} exact directed pairings miss the Section 2.6 spacing threshold"
+                ),
+            }
+        )
+    if enforce_fixed_inventory:
+        checks.append(
+            {
+                "id": "fixed_physical_inventory",
+                "status": gate_diagnostic["status"],
+                "hardStop": True,
+                "message": (
+                    f"All {gate_diagnostic['stations']} stations fit their configured gates and stands with {gate_diagnostic['towMovements']} conditional tow(s)"
+                    if gate_diagnostic["status"] == "pass"
+                    else f"{len(gate_diagnostic['failures'])} stations cannot fit their configured gates and stands"
+                ),
+            }
+        )
+    failed = sum(check["status"] == "fail" for check in checks)
+    required_aircraft = sum(row["requiredAircraft"] for row in fleet_plan.values())
+    configured_aircraft = sum(int(value) for value in fleet_counts.values())
+    successor_swaps = json.loads(
+        json.dumps(prior_diagnostics.get("successorSwaps", []))
+    )
+    gate_time_shifts = json.loads(
+        json.dumps(prior_diagnostics.get("gateTimeShifts", []))
+    )
+
+    refreshed = json.loads(json.dumps(prior_plan))
+    refreshed.update(
+        {
+            "status": "pass" if not failed else "fail",
+            "materializationStatus": "complete" if not failed else "blocked",
+            "previewOnly": bool(allow_infeasible_preview),
+            "planningRulesId": planning_rules["id"],
+            "summary": {
+                "checks": len(checks),
+                "passed": len(checks) - failed,
+                "failed": failed,
+                "plannedLegs": planned_legs,
+                "routedLegs": len(legs),
+                "bankTouchLegs": len(bank_touch),
+                "bankAlignedLegs": len(bank_touch) - len(bank_unaligned),
+                "nonHubLegs": len(nonhub),
+                "nonHubIntegratedLegs": len(nonhub),
+                "configuredAircraft": configured_aircraft,
+                "requiredAircraft": required_aircraft,
+                "remainingAircraft": configured_aircraft - required_aircraft,
+                "cycles": len(cycles),
+                "curfewViolations": len(curfew_violations),
+                "destinationsWithoutRon": len(missing_rons),
+                "rollingRonViolations": len(rolling_violations),
+                "successorSwaps": len(successor_swaps),
+                "gateTimeShifts": len(gate_time_shifts),
+                "gateReliefMissions": len(gate_relief_missions),
+                "lineRebalancingMoves": len(line_rebalancing_moves),
+                "lineBridgeMissions": len(line_bridge_missions),
+                "selectedLegs": selected_legs,
+                **(
+                    {
+                        "gateCapacityFailures": len(gate_diagnostic["failures"]),
+                        "conditionalTows": int(gate_diagnostic["towMovements"]),
+                    }
+                    if enforce_fixed_inventory
+                    else {}
+                ),
+                **(
+                    {"spacingViolations": len(spacing_violations)}
+                    if enforce_pairing_spacing
+                    else {}
+                ),
+            },
+            "checks": checks,
+            "fleetPlan": fleet_plan,
+            "cycles": cycles,
+            "legs": legs,
+            "diagnostics": {
+                "successorSwaps": successor_swaps,
+                "gateTimeShifts": gate_time_shifts,
+                "gateReliefMissions": gate_relief_missions,
+                "lineRebalancingMoves": line_rebalancing_moves,
+                "lineBridgeMissions": line_bridge_missions,
+                "bankUnalignedLegs": bank_unaligned,
+                "continuityViolations": continuity_violations,
+                "turnViolations": turn_violations,
+                "curfewViolations": curfew_violations,
+                "missingDestinationRons": missing_rons,
+                "rollingRonViolations": rolling_violations,
+                **(
+                    {"gateCapacity": gate_diagnostic}
+                    if enforce_fixed_inventory
+                    else {}
+                ),
+                **(
+                    {
+                        "spacingViolations": spacing_violations,
+                        "spacingExceptions": spacing_exceptions,
+                    }
+                    if enforce_pairing_spacing
+                    else {}
+                ),
+            },
+            "nextStep": {
+                "status": "ready" if not failed else "blocked",
+                "action": (
+                    "assign_canonical_identifiers"
+                    if not failed
+                    else "repair_exact_cycles"
+                ),
+                "message": (
+                    "Assign canonical Line/Day/Route, pairing, and flight identifiers, then run full operating and gate validation."
+                    if not failed
+                    else "Repair the remaining exact-cycle failures before assigning canonical identifiers."
+                ),
+            },
+        }
+    )
+    refreshed.setdefault("solver", {})["postsolveReuse"] = {
+        "sourceScheduleId": prior_plan["scheduleId"],
+        "verifiedSolverLegs": len(solver_leg_ids),
+        "globalMilpInvoked": False,
+        "postsolvePolicyReapplied": True,
+    }
+    return refreshed
+
+
+def refresh_exact_materialization_postsolve_from_manifest(
+    prior_plan: dict[str, Any],
+    canonical: dict[str, Any],
+    frequency_plan: dict[str, Any],
+    bank_plan: dict[str, Any],
+    repair_plan: dict[str, Any],
+    manifest_path: Path,
+    repo_root: Path,
+    allow_infeasible_preview: bool = False,
+) -> dict[str, Any]:
+    loaded = load_demand_sources_from_manifest(manifest_path, repo_root)
+    if loaded["manifest"]["id"] != frequency_plan["demandDataVersion"]:
+        raise ValueError("Frequency plan version does not match the reuse manifest")
+    if bank_plan["planningRulesId"] != loaded["planningRules"]["id"]:
+        raise ValueError("Bank plan version does not match the reuse manifest")
+    if repair_plan["planningRulesId"] != loaded["planningRules"]["id"]:
+        raise ValueError("Repair plan version does not match the reuse manifest")
+    return refresh_exact_materialization_postsolve(
+        prior_plan,
+        canonical,
+        frequency_plan,
+        bank_plan,
+        repair_plan,
+        loaded["planningRules"],
+        allow_infeasible_preview,
+        demand_matrix=parse_airport_od_matrix(loaded["airportOdMatrixText"]),
     )

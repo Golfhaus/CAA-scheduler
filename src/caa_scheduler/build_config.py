@@ -187,6 +187,28 @@ def validate_build_config(
         )
     )
 
+    construction = config.get("constructionPolicy")
+    construction_valid = construction is None or (
+        isinstance(construction, dict)
+        and set(construction)
+        == {"fixedPhysicalInventory", "optimizeNetworkAndUtilization"}
+        and all(isinstance(value, bool) for value in construction.values())
+    )
+    checks.append(
+        _check(
+            "construction_policy",
+            "Construction optimization policy",
+            construction_valid,
+            (
+                "Construction optimization behavior is explicitly versioned"
+                if construction is not None and construction_valid
+                else "Legacy construction behavior remains selected"
+                if construction_valid
+                else "constructionPolicy must contain the two supported boolean controls"
+            ),
+        )
+    )
+
     inputs = _mapping(config.get("inputs"))
     instructions = _mapping(inputs.get("instructions"))
     city_source = _mapping(inputs.get("cityInformation"))

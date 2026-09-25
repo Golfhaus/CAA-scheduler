@@ -22,6 +22,8 @@ class WebBuildTests(unittest.TestCase):
         selectors = set(re.findall(r'\$\("#([^"]+)"\)', script))
         self.assertEqual(len(ids), len(set(ids)), "index.html contains duplicate IDs")
         self.assertEqual(selectors - set(ids), set())
+        self.assertIn('id="preview-warning"', html)
+        self.assertIn("previewNotice", script)
 
     def test_build_copies_console_and_pinned_schedule_data(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
@@ -29,14 +31,19 @@ class WebBuildTests(unittest.TestCase):
             result = build_web_console(
                 REPO_ROOT / "web" / "schedules.json", REPO_ROOT, output
             )
-            self.assertEqual(result["scheduleCount"], 1)
-            self.assertEqual(result["dataFileCount"], 18)
+            self.assertEqual(result["scheduleCount"], 2)
+            self.assertEqual(result["dataFileCount"], 32)
             self.assertGreater(result["instructionEntryCount"], 40)
             self.assertTrue((output / "index.html").is_file())
             self.assertTrue((output / "favicon.svg").is_file())
             self.assertTrue((output / "coastal-american-logo.png").is_file())
             self.assertTrue((output / "build-config.mjs").is_file())
             manifest = json.loads((output / "schedules.json").read_text())
+            self.assertEqual(manifest["defaultScheduleId"], "schedule_7_v1_0_0")
+            self.assertEqual(
+                [schedule["id"] for schedule in manifest["schedules"]],
+                ["schedule_6_v2_2_5", "schedule_7_v1_0_0"],
+            )
             self.assertTrue((output / manifest["buildSetup"]["schema"]).is_file())
             files = manifest["schedules"][0]["files"]
             self.assertTrue((output / files["canonical"]).is_file())

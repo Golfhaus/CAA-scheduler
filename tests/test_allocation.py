@@ -21,6 +21,12 @@ STRICT_MANIFEST_PATH = (
 SPACING_MANIFEST_PATH = (
     REPO_ROOT / "config" / "demand_data" / "bts_db1c_6mo_v5.json"
 )
+GATE_CAPACITY_MANIFEST_PATH = (
+    REPO_ROOT / "config" / "demand_data" / "bts_db1c_6mo_v6.json"
+)
+NETWORK_OPTIMIZATION_MANIFEST_PATH = (
+    REPO_ROOT / "config" / "demand_data" / "bts_db1c_6mo_v7.json"
+)
 
 
 class FrequencyFleetPlanTests(unittest.TestCase):
@@ -112,6 +118,76 @@ class FrequencyFleetPlanTests(unittest.TestCase):
         self.assertTrue(
             all(len(market["allocations"]) == 1 for market in plan["markets"])
         )
+
+    def test_capacity_derived_bank_waves_preserve_the_accepted_schedule_size(self) -> None:
+        demand = copy.deepcopy(self.demand_plan)
+        demand["demandDataVersion"] = "bts-db1c-6mo-jul2025-apr2026-v6"
+        plan = build_frequency_fleet_plan_from_manifest(
+            self.canonical,
+            demand,
+            GATE_CAPACITY_MANIFEST_PATH,
+            REPO_ROOT,
+        )
+        self.assertEqual(plan["status"], "pass")
+        self.assertEqual(plan["summary"]["plannedLegs"], 1406)
+        capacity = {row["hub"]: row for row in plan["hubGateCapacity"]}
+        self.assertEqual(capacity["JAX"]["maximumRoundTrips"], 224)
+        self.assertEqual(capacity["JAX"]["plannedRoundTrips"], 207)
+        self.assertTrue(all(row["remainingRoundTrips"] >= 0 for row in capacity.values()))
+        self.assertEqual(plan["fleetRebalancing"]["promotedRoundTrips"], 2)
+        self.assertEqual(
+            [
+                (row["origin"], row["destination"])
+                for row in plan["fleetRebalancing"]["markets"]
+            ],
+            [("CMH", "DAY")],
+        )
+        self.assertEqual(
+            next(
+                market
+                for market in plan["markets"]
+                if (market["origin"], market["destination"])
+                == ("CMH", "DAY")
+            )["allocations"][0]["fleet"],
+            "CRJ700",
+        )
+
+    def test_retained_point_to_point_markets_compete_for_gate_capacity(self) -> None:
+        demand = copy.deepcopy(self.demand_plan)
+        demand["demandDataVersion"] = "bts-db1c-6mo-jul2025-apr2026-v7"
+        plan = build_frequency_fleet_plan_from_manifest(
+            self.canonical,
+            demand,
+            NETWORK_OPTIMIZATION_MANIFEST_PATH,
+            REPO_ROOT,
+        )
+        self.assertEqual(plan["status"], "pass")
+        capacity = {
+            row["station"]: row for row in plan["stationGateCapacity"]
+        }
+        self.assertTrue(
+            all(row["remainingRoundTrips"] >= 0 for row in capacity.values())
+        )
+        markets = {
+            (row["origin"], row["destination"]): row
+            for row in plan["markets"]
+        }
+        self.assertEqual(markets[("RFD", "SFB")]["mandatoryRoundTrips"], 0)
+        self.assertEqual(markets[("RFD", "SFB")]["plannedRoundTrips"], 1)
+        self.assertEqual(markets[("MKE", "RFD")]["plannedRoundTrips"], 0)
+        self.assertEqual(markets[("CMH", "DAY")]["twoWayDemand"], 2.8)
+        self.assertEqual(
+            markets[("CMH", "DAY")]["plannedRoundTrips"],
+            markets[("CMH", "DAY")]["mandatoryRoundTrips"],
+        )
+        self.assertLessEqual(plan["summary"]["pointToPointShare"], 0.1)
+        self.assertTrue(
+            all(row["legCount"] > 0 for row in plan["fleetPlan"].values())
+        )
+        utilizations = [
+            row["utilization"] for row in plan["fleetPlan"].values()
+        ]
+        self.assertLess(max(utilizations) - min(utilizations), 0.1)
 
     def test_fleet_counts_come_from_the_schedule(self) -> None:
         changed = copy.deepcopy(self.canonical)
