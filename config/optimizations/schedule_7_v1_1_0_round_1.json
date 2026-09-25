@@ -1,0 +1,244 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "schedule-7-v1.1.0-phf-north-south-round-1",
+  "baseSchedule": {
+    "scheduleId": "schedule_7_v1_0_0",
+    "commit": "5154a582b9e23f2b6c071ae6986c72ec6e4514ab",
+    "canonical": "data/schedules/schedule_7_v1_0_0/canonical_schedule.json"
+  },
+  "schedule": {
+    "id": "schedule_7_v1_1_0_feasibility_02",
+    "version": "1.1.0-feasibility.02",
+    "label": "Schedule 7, Version 1.1.0 Feasibility 02",
+    "status": "draft"
+  },
+  "hubBanksToAdd": [
+    {
+      "id": "PHF-M1",
+      "hub": "PHF",
+      "startMinute": 575,
+      "endMinute": 635
+    },
+    {
+      "id": "PHF-M3",
+      "hub": "PHF",
+      "startMinute": 845,
+      "endMinute": 905
+    },
+    {
+      "id": "PHF-M5",
+      "hub": "PHF",
+      "startMinute": 985,
+      "endMinute": 1045
+    },
+    {
+      "id": "PHF-M6",
+      "hub": "PHF",
+      "startMinute": 1185,
+      "endMinute": 1205
+    }
+  ],
+  "hubBankCountOverrides": {
+    "PHF": 11
+  },
+  "operatingOverrides": [
+    {
+      "checkId": "tiered_service_minimums",
+      "findingId": "BHM",
+      "reason": "Schedule 7 v1.1.0 PHF north-south initiative: PHF is a geographically reasonable additional hub and the added service passes downstream feasibility checks.",
+      "approvedBy": "user",
+      "expiresAfterSchedule": 7
+    },
+    {
+      "checkId": "tiered_service_minimums",
+      "findingId": "BWI",
+      "reason": "Schedule 7 v1.1.0 PHF north-south initiative: the BWI-BHM-PHF triangles are geographically reasonable and pass downstream feasibility checks.",
+      "approvedBy": "user",
+      "expiresAfterSchedule": 7
+    },
+    {
+      "checkId": "tiered_service_minimums",
+      "findingId": "DAB",
+      "reason": "Schedule 7 v1.1.0 PHF north-south initiative: PHF is a geographically reasonable additional hub and the added service passes downstream feasibility checks.",
+      "approvedBy": "user",
+      "expiresAfterSchedule": 7
+    },
+    {
+      "checkId": "tiered_service_minimums",
+      "findingId": "PIT",
+      "reason": "Schedule 7 v1.1.0 PHF north-south initiative: PHF is a geographically reasonable additional hub and the added service passes downstream feasibility checks.",
+      "approvedBy": "user",
+      "expiresAfterSchedule": 7
+    }
+  ],
+  "retimeLegs": [
+    {
+      "legId": "CLT-PHF-CRJ700-04-OUT",
+      "expectedDepartureMinute": 915,
+      "expectedArrivalMinute": 981,
+      "departureMinute": 509,
+      "arrivalMinute": 575
+    }
+  ],
+  "insertLegs": [
+    {
+      "id": "V110-R307-PHF-PIT",
+      "route": 307,
+      "origin": "PHF",
+      "destination": "PIT",
+      "departureMinute": 615,
+      "arrivalMinute": 684
+    },
+    {
+      "id": "V110-R307-PIT-PHF",
+      "route": 307,
+      "origin": "PIT",
+      "destination": "PHF",
+      "departureMinute": 1006,
+      "arrivalMinute": 1075
+    },
+    {
+      "id": "V110-R312-DAB-PHF",
+      "route": 312,
+      "origin": "DAB",
+      "destination": "PHF",
+      "departureMinute": 467,
+      "arrivalMinute": 575
+    },
+    {
+      "id": "V110-R312-PHF-BDL",
+      "route": 312,
+      "origin": "PHF",
+      "destination": "BDL",
+      "departureMinute": 615,
+      "arrivalMinute": 695
+    },
+    {
+      "id": "V110-R312-BDL-PHF",
+      "route": 312,
+      "origin": "BDL",
+      "destination": "PHF",
+      "departureMinute": 765,
+      "arrivalMinute": 845
+    },
+    {
+      "id": "V110-R312-PHF-DAB",
+      "route": 312,
+      "origin": "PHF",
+      "destination": "DAB",
+      "departureMinute": 885,
+      "arrivalMinute": 993
+    },
+    {
+      "id": "V110-R314-PHF-PWM",
+      "route": 314,
+      "origin": "PHF",
+      "destination": "PWM",
+      "departureMinute": 845,
+      "arrivalMinute": 946
+    },
+    {
+      "id": "V110-R314-PWM-PHF",
+      "route": 314,
+      "origin": "PWM",
+      "destination": "PHF",
+      "departureMinute": 986,
+      "arrivalMinute": 1087
+    },
+    {
+      "id": "V110-R337-PHF-BUF",
+      "route": 337,
+      "origin": "PHF",
+      "destination": "BUF",
+      "departureMinute": 985,
+      "arrivalMinute": 1068
+    },
+    {
+      "id": "V110-R337-BUF-PHF",
+      "route": 337,
+      "origin": "BUF",
+      "destination": "PHF",
+      "departureMinute": 1108,
+      "arrivalMinute": 1191
+    },
+    {
+      "id": "V110-R330-BWI-BHM",
+      "route": 330,
+      "origin": "BWI",
+      "destination": "BHM",
+      "departureMinute": 923,
+      "arrivalMinute": 980
+    },
+    {
+      "id": "V110-R330-BHM-PHF",
+      "route": 330,
+      "origin": "BHM",
+      "destination": "PHF",
+      "departureMinute": 1020,
+      "arrivalMinute": 1190
+    },
+    {
+      "id": "V110-R330-PHF-BWI",
+      "route": 330,
+      "origin": "PHF",
+      "destination": "BWI",
+      "departureMinute": 1230,
+      "arrivalMinute": 1278
+    },
+    {
+      "id": "V110-R331-BWI-PHF",
+      "route": 331,
+      "origin": "BWI",
+      "destination": "PHF",
+      "departureMinute": 797,
+      "arrivalMinute": 845
+    },
+    {
+      "id": "V110-R331-PHF-BHM",
+      "route": 331,
+      "origin": "PHF",
+      "destination": "BHM",
+      "departureMinute": 885,
+      "arrivalMinute": 935
+    },
+    {
+      "id": "V110-R331-BHM-BWI",
+      "route": 331,
+      "origin": "BHM",
+      "destination": "BWI",
+      "departureMinute": 975,
+      "arrivalMinute": 1152
+    }
+  ],
+  "bankAssignmentReplacements": [
+    {
+      "legId": "CLT-PHF-CRJ700-04-OUT",
+      "operation": "arrival",
+      "bankId": "PHF-M1"
+    }
+  ],
+  "bankAssignmentsToAdd": [
+    {"legId": "V110-R307-PHF-PIT", "operation": "departure", "bankId": "PHF-M1"},
+    {"legId": "V110-R307-PIT-PHF", "operation": "arrival", "bankId": "PHF-B6"},
+    {"legId": "V110-R312-DAB-PHF", "operation": "arrival", "bankId": "PHF-M1"},
+    {"legId": "V110-R312-PHF-BDL", "operation": "departure", "bankId": "PHF-M1"},
+    {"legId": "V110-R312-BDL-PHF", "operation": "arrival", "bankId": "PHF-M3"},
+    {"legId": "V110-R312-PHF-DAB", "operation": "departure", "bankId": "PHF-M3"},
+    {"legId": "V110-R314-PHF-PWM", "operation": "departure", "bankId": "PHF-M3"},
+    {"legId": "V110-R314-PWM-PHF", "operation": "arrival", "bankId": "PHF-B6"},
+    {"legId": "V110-R337-PHF-BUF", "operation": "departure", "bankId": "PHF-M5"},
+    {"legId": "V110-R337-BUF-PHF", "operation": "arrival", "bankId": "PHF-M6"},
+    {"legId": "V110-R330-BHM-PHF", "operation": "arrival", "bankId": "PHF-M6"},
+    {"legId": "V110-R330-PHF-BWI", "operation": "departure", "bankId": "PHF-B7"},
+    {"legId": "V110-R331-BWI-PHF", "operation": "arrival", "bankId": "PHF-M3"},
+    {"legId": "V110-R331-PHF-BHM", "operation": "departure", "bankId": "PHF-M3"}
+  ],
+  "expectedCheckpoint": {
+    "legs": 932,
+    "routes": 176,
+    "lines": 21,
+    "effectiveOperatingErrors": 0,
+    "hardStopFailures": 0,
+    "phfPeakOccupancy": 21
+  }
+}

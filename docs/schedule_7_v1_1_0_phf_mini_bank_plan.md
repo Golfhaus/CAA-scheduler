@@ -103,10 +103,65 @@ The checkpoint contains 922 legs, 176 routes, and 21 lines.
   not evaluated where source data is absent. No new hard stop is hidden by
   those warnings.
 
+## Feasibility checkpoint 02
+
+The two BWI and two PHF early terminators can all accept productive missions
+without additional aircraft or changes to their released legs. These missions
+also remain compatible with the Route 307 and Route 312 checkpoint above.
+
+### Routes 330 and 331 — complementary BWI-BHM-PHF triangles
+
+The two routes operate opposite sides of the same triangle and still terminate
+at BWI.
+
+| Route | Added sequence | Times |
+| ---: | --- | --- |
+| 330 | BWI-BHM; BHM-PHF; PHF-BWI | 15:23-16:20; 17:00-19:50; 20:30-21:18 |
+| 331 | BWI-PHF; PHF-BHM; BHM-BWI | 13:17-14:05; 14:45-15:35; 16:15-19:12 |
+
+This creates a complete PHF-BHM round trip while using the otherwise-idle BWI
+aircraft. BHM and BWI receive explicit Schedule-7-only hub-count exceptions.
+
+### Routes 314 and 337 — PHF northern round trips
+
+| Route | Added sequence | Times |
+| ---: | --- | --- |
+| 314 | PHF-PWM; PWM-PHF | 14:05-15:46; 16:26-18:07 |
+| 337 | PHF-BUF; BUF-PHF | 16:25-17:48; 18:28-19:51 |
+
+Both routes already terminate at PHF, so the missions preserve line continuity
+and reduce their unproductive overnight gate holds.
+
+### Expanded mini-bank use
+
+- `PHF-M1`, 09:35-10:35: Route 307 and Route 312 turns.
+- `PHF-M3`, 14:05-15:05: five operations from Routes 312, 314, and 331.
+- `PHF-M5`, 16:25-17:25: the Route 337 departure to BUF.
+- `PHF-M6`, 19:45-20:05: the BUF and BHM arrivals, feeding PHF-B7.
+
+The complete checkpoint is expressed deterministically in
+`config/optimizations/schedule_7_v1_1_0_round_1.json` and applied by
+`caa_scheduler.optimization_overlay`. The overlay rejects a stale base timing,
+cannot delete existing flying, inherits route/fleet identity from the released
+schedule, and assigns new flight and pairing identifiers deterministically.
+
+### Combined validation result
+
+- 932 legs, 176 routes, and 21 lines; no additional aircraft.
+- Structural validation passes.
+- Zero effective operating errors and zero hard-stop failures.
+- Curfews, 40-minute turns, pairing spacing, route continuity, line continuity,
+  and fleet capacity all pass.
+- Fixed physical gate/stand inventory passes at every station.
+- PHF peaks at 21 aircraft against 16 gates plus 8 stands.
+- Conditional stand holds increase from 44 to 45; none is passenger handling.
+- BHM, BWI, DAB, and PIT use explicit Schedule-7-only hub-count exceptions.
+
 ## Next phase
 
-Search the two BWI and two PHF early terminators for additional missions that
-fit `PHF-M1` and `PHF-M3`, then test the remaining target cities in this order:
+Search other productive holds and the available CRJ700/CRJ900 capacity for the
+remaining targets: MHT, ALB, ROC, MLB, PGD, SRQ, VPS, and PNS. Test them in this
+order:
 
 1. timetable and 40-minute-turn feasibility;
 2. PHF gate feasibility;
