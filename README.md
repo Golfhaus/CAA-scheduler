@@ -149,7 +149,7 @@ Export an approved configuration from **Schedule Setup**, add it to a working br
 python -m caa_scheduler build-candidate path/to/build_config.json
 ```
 
-The accepted Schedule 7 v0.1.0 starting configuration is pinned at `config/candidates/schedule_7_v0_1_0.json` with fleet counts MAX9 35, CRJ900 45, CRJ700 65, and CRJ200 80.
+The accepted Schedule 7 v1.0.0 configuration is pinned at `config/candidates/schedule_7_v1_0_0.json` with fleet counts MAX9 35, CRJ900 45, CRJ700 65, and CRJ200 80.
 
 For a previous-schedule start, the compiler resolves the pinned canonical baseline from `data/schedules/<scheduleId>/canonical_schedule.json`. It writes an isolated package under `builds/<buildId>/` containing a copy of the approved input, validation reports, demand plan, fresh frequency/fleet proposal, generated hub-bank plan, the first-pass aircraft-route diagnostic, topology repair, bank-materialization lower bound, exact-cycle plan, and canonicalization report. A passing exact plan receives canonical identifiers and an exclusive generated-source provenance chain before full validation is rerun. Reviewable canonical, timetable, and gate outputs are written unless structural validation or a non-waivable hard stop blocks them. The manually dispatched **Build candidate schedule** GitHub Action runs the same command and retains the package as an artifact for 30 days.
 
