@@ -338,6 +338,74 @@ export function splitClaimSegments(start, end, windowStart = 0) {
   return segments.sort((a, b) => a.start - b.start);
 }
 
+function sameGateHold(first, second) {
+  return first.label === second.label
+    && first.fleet === second.fleet
+    && first.kind === second.kind
+    && first.arrivalCity === second.arrivalCity
+    && first.departureCity === second.departureCity;
+}
+
+export function gateClaimGroup(claims, selected) {
+  const candidates = claims.filter((claim) => sameGateHold(claim, selected));
+  const group = [selected];
+  let changed = true;
+  while (changed) {
+    changed = false;
+    candidates.forEach((candidate) => {
+      if (group.includes(candidate)) return;
+      if (group.some((claim) => Number(claim.end) === Number(candidate.start)
+        || Number(candidate.end) === Number(claim.start))) {
+        group.push(candidate);
+        changed = true;
+      }
+    });
+  }
+  return group.sort((a, b) => Number(a.start) - Number(b.start));
+}
+
+export function gateClaimDisplayLabel(claim, group) {
+  const routes = String(claim.label).split(/\s*->\s*/);
+  if (routes.length !== 2 || !group.some((piece) => piece.rowType === "stand")) {
+    return claim.label;
+  }
+  if (claim.rowType === "stand") return claim.label;
+  if (claim.moveTo?.rowType === "stand") return routes[0];
+  if (claim.moveFrom?.rowType === "stand") return routes[1];
+  return claim.label;
+}
+
+export function gateClaimDisplayKind(group) {
+  if (!group.length) return "";
+  if (group[0].kind !== "ron") return group[0].kind.toUpperCase();
+  return group.some((claim) => String(claim.label).includes("->")) ? "RON" : "ROD";
+}
+
+export function gateClaimPath(group) {
+  const positions = [...group]
+    .sort((a, b) => Number(a.start) - Number(b.start))
+    .map((claim) => `${claim.rowType === "gate" ? "Gate" : claim.rowType === "stand" ? "Stand" : "Unassigned"} ${claim.row}`)
+    .filter((position, index, values) => position !== values[index - 1]);
+  return positions.join(" -> ");
+}
+
+export function maximumConcurrentPositionUsage(claims, rowType) {
+  const events = claims
+    .filter((claim) => claim.rowType === rowType)
+    .flatMap((claim) => splitClaimSegments(claim.start, claim.end).flatMap((segment) => [
+      { minute: segment.start, delta: 1 },
+      { minute: segment.start + segment.duration, delta: -1 },
+    ]))
+    .sort((a, b) => a.minute - b.minute || a.delta - b.delta);
+  let current = 0;
+  let maximum = 0;
+  events.forEach((event) => {
+    current += event.delta;
+    maximum = Math.max(maximum, current);
+  });
+  return maximum;
+}
+
 function metricCard(label, value, note, variant = "") {
   return `<article class="metric-card ${variant}"><span>${escapeHtml(label)}</span><strong>${escapeHtml(value)}</strong><small>${escapeHtml(note)}</small></article>`;
 }
@@ -909,16 +977,18 @@ function renderGates() {
   const standClaims = city.claims.filter((claim) => claim.rowType === "stand");
   const overflowClaims = city.claims.filter((claim) => claim.rowType === "overflow");
   const passengerStandClaims = passengerStandFindings(state.operating, city.code);
+  const maximumGateUsage = maximumConcurrentPositionUsage(city.claims, "gate");
+  const maximumStandUsage = maximumConcurrentPositionUsage(city.claims, "stand");
   $("#gate-metrics").innerHTML = [
     metricCard("Airport", city.code, city.name),
     metricCard("Peak use", city.peakUsed, "Simultaneous aircraft", city.peakUsed > city.nGates + city.nStands ? "is-danger" : ""),
-    metricCard("Gates", city.nGates, `${gateClaims.length} assigned claim pieces`),
+    metricCard("Gates", `${maximumGateUsage}/${city.nGates}`, `${maximumGateUsage} maximum in use · ${gateClaims.length} assigned claim pieces`),
     metricCard(
       "Stands",
-      city.nStands,
+      `${maximumStandUsage}/${city.nStands}`,
       passengerStandClaims.length
-        ? `${passengerStandClaims.length} passenger-handling conflict${passengerStandClaims.length === 1 ? "" : "s"}`
-        : `${standClaims.length} assigned claim pieces · no passenger handling${overflowClaims.length ? ` · ${overflowClaims.length} unassigned` : ""}`,
+        ? `${maximumStandUsage} maximum in use · ${passengerStandClaims.length} passenger-handling conflict${passengerStandClaims.length === 1 ? "" : "s"}`
+        : `${maximumStandUsage} maximum in use · ${standClaims.length} assigned claim pieces · no passenger handling${overflowClaims.length ? ` · ${overflowClaims.length} unassigned` : ""}`,
       passengerStandClaims.length || overflowClaims.length ? "is-danger" : ""
     ),
   ].join("");
@@ -940,11 +1010,17 @@ function renderGates() {
 function renderLane(city, lane, colors, passengerStandClaims) {
   const claims = city.claims.filter((claim) => claim.rowType === lane.type && claim.row === lane.row);
   const bars = claims.flatMap((claim) => {
+    const group = gateClaimGroup(city.claims, claim);
+    const displayLabel = gateClaimDisplayLabel(claim, group);
+    const displayKind = gateClaimDisplayKind(group);
+    const fullStart = Math.min(...group.map((piece) => Number(piece.start)));
+    const fullEnd = Math.max(...group.map((piece) => Number(piece.end)));
+    const path = gateClaimPath(group);
     const passengerHandling = claimMatchesPassengerStandFinding(city.code, claim, passengerStandClaims);
     const fleetColor = colors[claim.fleet] || "#cbd5e1";
     const timeLabel = `${formatMinute24(claim.start)}–${formatMinute24(claim.end)}`;
-    const accessibleLabel = `${claim.label}, ${claim.fleet}, ${claim.kind}, ${timeLabel}${passengerHandling ? ", passenger handling on a stand" : ""}`;
-    return splitClaimSegments(claim.start, claim.end, GATE_WINDOW_START).map((segment) => `<button type="button" class="claim-bar kind-${lane.type}${passengerHandling ? " is-passenger-handling" : ""}" title="${escapeHtml(accessibleLabel)}" aria-label="${escapeHtml(accessibleLabel)}" aria-controls="claim-tooltip" aria-expanded="false" data-gate-claim data-claim-label="${escapeHtml(claim.label)}" data-claim-fleet="${escapeHtml(claim.fleet)}" data-claim-kind="${escapeHtml(claim.kind)}" data-claim-start="${escapeHtml(claim.start)}" data-claim-end="${escapeHtml(claim.end)}" data-claim-row-type="${escapeHtml(claim.rowType)}" data-claim-row="${escapeHtml(claim.row)}" data-claim-arrival-city="${escapeHtml(claim.arrivalCity || "")}" data-claim-departure-city="${escapeHtml(claim.departureCity || "")}" data-claim-passenger-handling="${passengerHandling}" style="--fleet-color:${escapeHtml(fleetColor)};left:${(segment.start / 1440) * 100}%;width:${Math.max(0.12, (segment.duration / 1440) * 100)}%;background:${escapeHtml(fleetColor)}">${escapeHtml(claim.label)}</button>`);
+    const accessibleLabel = `${displayLabel}, ${claim.fleet}, ${displayKind}, ${timeLabel}${passengerHandling ? ", passenger handling on a stand" : ""}`;
+    return splitClaimSegments(claim.start, claim.end, GATE_WINDOW_START).map((segment) => `<button type="button" class="claim-bar kind-${lane.type}${passengerHandling ? " is-passenger-handling" : ""}" title="${escapeHtml(accessibleLabel)}" aria-label="${escapeHtml(accessibleLabel)}" aria-controls="claim-tooltip" aria-expanded="false" data-gate-claim data-claim-label="${escapeHtml(displayLabel)}" data-claim-fleet="${escapeHtml(claim.fleet)}" data-claim-kind="${escapeHtml(displayKind)}" data-claim-start="${escapeHtml(fullStart)}" data-claim-end="${escapeHtml(fullEnd)}" data-claim-row-type="${escapeHtml(claim.rowType)}" data-claim-row="${escapeHtml(claim.row)}" data-claim-path="${escapeHtml(path)}" data-claim-arrival-city="${escapeHtml(claim.arrivalCity || "")}" data-claim-departure-city="${escapeHtml(claim.departureCity || "")}" data-claim-passenger-handling="${passengerHandling}" style="--fleet-color:${escapeHtml(fleetColor)};left:${(segment.start / 1440) * 100}%;width:${Math.max(0.12, (segment.duration / 1440) * 100)}%;background:${escapeHtml(fleetColor)}">${escapeHtml(displayLabel)}</button>`);
   }).join("");
   const laneLabel = lane.type === "gate" ? "Gate" : lane.type === "stand" ? "Stand" : "Unassigned";
   return `<div class="timeline-row"><span class="lane-label">${laneLabel} ${lane.row}</span><div class="lane-track">${bars}</div></div>`;
@@ -968,12 +1044,12 @@ function toggleGateClaimDetails(button) {
   const positionType = button.dataset.claimRowType === "gate"
     ? "Gate"
     : button.dataset.claimRowType === "stand" ? "Stand" : "Unassigned";
-  const position = `${positionType} ${button.dataset.claimRow}`;
+  const position = button.dataset.claimPath || `${positionType} ${button.dataset.claimRow}`;
   const movement = [button.dataset.claimArrivalCity, button.dataset.claimDepartureCity]
     .filter(Boolean)
     .join(` → ${$("#gate-airport").value} → `);
   $("#claim-tooltip-title").textContent = button.dataset.claimLabel;
-  $("#claim-tooltip-summary").textContent = `${button.dataset.claimFleet} · ${button.dataset.claimKind.toUpperCase()} · ${formatMinute24(button.dataset.claimStart)}–${formatMinute24(button.dataset.claimEnd)} · ${position}`;
+  $("#claim-tooltip-summary").textContent = `${button.dataset.claimFleet} · ${button.dataset.claimKind} · ${formatMinute24(button.dataset.claimStart)}–${formatMinute24(button.dataset.claimEnd)} · ${position}`;
   $("#claim-tooltip-movement").textContent = movement;
   $("#claim-tooltip-warning").textContent = passengerHandling
     ? "Passenger handling occurs on this stand segment; a gate is required."
@@ -1325,6 +1401,15 @@ function bindEvents() {
   });
   $("#routing-page-size").addEventListener("change", (event) => {
     state.routingPageSize = event.target.value === "all" ? "all" : Number(event.target.value);
+    state.routingPage = 1;
+    renderRoutings();
+  });
+  $("#routing-reset").addEventListener("click", () => {
+    $("#routing-search").value = "";
+    $("#routing-fleet").value = "";
+    $("#routing-line").value = "";
+    $("#routing-origin").value = "";
+    $("#routing-destination").value = "";
     state.routingPage = 1;
     renderRoutings();
   });

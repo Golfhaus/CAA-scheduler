@@ -9,6 +9,10 @@ import {
   flattenBankWindows,
   flattenFrequencyMarkets,
   fleetUsage,
+  gateClaimDisplayKind,
+  gateClaimDisplayLabel,
+  gateClaimGroup,
+  gateClaimPath,
   formatRemainingAircraft,
   formatMinute,
   formatMinute24,
@@ -16,6 +20,7 @@ import {
   instructionReferenceTokens,
   legMatches,
   marketMatches,
+  maximumConcurrentPositionUsage,
   paginate,
   passengerStandFindings,
   scheduleMetrics,
@@ -47,6 +52,15 @@ const gates = JSON.parse(
   await readFile(
     new URL(
       "../data/schedules/schedule_6_v2_2_5/gates.json",
+      import.meta.url,
+    ),
+    "utf8",
+  ),
+);
+const schedule7Gates = JSON.parse(
+  await readFile(
+    new URL(
+      "../data/schedules/schedule_7_v1_1_1/gates.json",
       import.meta.url,
     ),
     "utf8",
@@ -344,6 +358,36 @@ test("gate claims map into the 03:00–03:00 operating window", () => {
   assert.equal(formatMinute24(180), "03:00");
   assert.equal(formatMinute24(1380), "23:00");
   assert.equal(formatMinute24(1620), "03:00");
+});
+
+test("daytime stand holds are labeled ROD and expose the complete gate path", () => {
+  const phf = schedule7Gates.cities.find((city) => city.code === "PHF");
+  const selected = phf.claims.find((claim) => claim.label === "705" && claim.kind === "ron");
+  const group = gateClaimGroup(phf.claims, selected);
+  assert.equal(gateClaimDisplayKind(group), "ROD");
+  assert.equal(gateClaimPath(group), "Gate 16 -> Stand 3 -> Gate 9");
+  assert.deepEqual(group.map((claim) => gateClaimDisplayLabel(claim, group)), ["705", "705", "705"]);
+});
+
+test("overnight tow labels reserve route arrows for the 03:00 boundary blocks", () => {
+  const phf = schedule7Gates.cities.find((city) => city.code === "PHF");
+  const selected = phf.claims.find((claim) => claim.label === "715 -> 716");
+  const group = gateClaimGroup(phf.claims, selected);
+  assert.equal(gateClaimDisplayKind(group), "RON");
+  assert.equal(gateClaimPath(group), "Gate 15 -> Stand 1 -> Gate 2");
+  assert.deepEqual(
+    group.map((claim) => gateClaimDisplayLabel(claim, group)),
+    ["715", "715 -> 716", "716"],
+  );
+
+  const gateHold = phf.claims.find((claim) => claim.label === "337 -> 338");
+  assert.equal(gateClaimDisplayLabel(gateHold, gateClaimGroup(phf.claims, gateHold)), "337 -> 338");
+});
+
+test("gate and stand cards report maximum concurrent usage", () => {
+  const phf = schedule7Gates.cities.find((city) => city.code === "PHF");
+  assert.equal(maximumConcurrentPositionUsage(phf.claims, "gate"), 16);
+  assert.equal(maximumConcurrentPositionUsage(phf.claims, "stand"), 6);
 });
 
 test("stand passenger-handling counts come from the authoritative operating report", () => {

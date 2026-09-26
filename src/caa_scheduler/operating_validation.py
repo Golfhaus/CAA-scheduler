@@ -91,6 +91,23 @@ def _cyclic_gaps(values: list[int | float]) -> list[dict[str, int | float]]:
     ]
 
 
+def _service_window_gaps(
+    values: list[int | float], start_minute: int, end_minute: int
+) -> list[dict[str, int | float]]:
+    """Return consecutive-flight gaps inside a same-day service window."""
+
+    if not 0 <= start_minute < end_minute <= 1440:
+        raise ValueError("City departure-gap service window must be within one day")
+    points = sorted(
+        {value for value in values if start_minute <= value <= end_minute}
+    )
+    return [
+        {"from": start, "to": end, "minutes": end - start}
+        for start, end in zip(points, points[1:])
+        if end > start
+    ]
+
+
 def _apply_overrides(
     checks: list[dict[str, Any]], policy: dict[str, Any], schedule_number: int
 ) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
@@ -545,16 +562,17 @@ def validate_operating_rules(canonical: dict[str, Any]) -> dict[str, Any]:
     )
 
     maximum_gap = section26["maximumCityDepartureGapMinutes"]
+    service_window_start = windows["earliestMinute"]
+    service_window_end = windows["destinationLatestMinute"]
     city_gap_findings = []
     for city, departures in sorted(
         (city, [leg["departureMinute"] % 1440 for leg in legs if leg["origin"] == city])
         for city in active
     ):
-        gaps = _cyclic_gaps(departures)
-        considered = (
-            gaps
-            if section26["includeOvernightWrapForCityDepartureGap"]
-            else gaps[:-1]
+        considered = _service_window_gaps(
+            departures,
+            service_window_start,
+            service_window_end,
         )
         excessive = [gap for gap in considered if gap["minutes"] > maximum_gap]
         if excessive:
@@ -565,9 +583,11 @@ def validate_operating_rules(canonical: dict[str, Any]) -> dict[str, Any]:
                     city=city,
                     departures=sorted(departures),
                     excessiveGaps=excessive,
-                    includesOvernightWrap=section26[
-                        "includeOvernightWrapForCityDepartureGap"
-                    ],
+                    serviceWindowMinutes={
+                        "start": service_window_start,
+                        "end": service_window_end,
+                    },
+                    includesOvernightWrap=False,
                 )
             )
     checks.append(
@@ -577,26 +597,21 @@ def validate_operating_rules(canonical: dict[str, Any]) -> dict[str, Any]:
             "§2.6 Check B",
             "warning",
             city_gap_findings,
-            f"No city has a departure service gap over {maximum_gap} minutes",
+            (
+                f"No city has a departure service gap over {maximum_gap} minutes "
+                "between 04:30 and 21:00"
+            ),
         )
     )
 
-    minimum_wrap_gap = 1440 - windows["hubOrFocusLatestMinute"] + windows["earliestMinute"]
     policy_conflicts = []
-    if (
-        section26["includeOvernightWrapForCityDepartureGap"]
-        and minimum_wrap_gap > section26["maximumCityDepartureGapMinutes"]
-    ):
+    if not 0 <= service_window_start < service_window_end <= 1440:
         policy_conflicts.append(
             _finding(
-                "overnight-wrap",
-                "The literal cyclic city departure-gap ceiling is incompatible with the permitted departure window",
-                shortestPossibleOvernightGap=minimum_wrap_gap,
-                cityDepartureGapCeiling=section26[
-                    "maximumCityDepartureGapMinutes"
-                ],
-                earliestDeparture=windows["earliestMinute"],
-                latestDeparture=windows["hubOrFocusLatestMinute"],
+                "service-window",
+                "The city departure-gap service window is invalid",
+                startMinute=service_window_start,
+                endMinute=service_window_end,
             )
         )
     checks.append(
@@ -606,7 +621,7 @@ def validate_operating_rules(canonical: dict[str, Any]) -> dict[str, Any]:
             "§2.5 / §2.6 Check B",
             "warning",
             policy_conflicts,
-            "The cyclic city departure-gap rule is compatible with the operating window",
+            "The city departure-gap rule is bounded to the 04:30–21:00 service window",
         )
     )
 

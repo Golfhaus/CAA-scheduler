@@ -435,11 +435,11 @@ rationale.
 **Check B — city-level dead-zone check (NEW, replaces the old per-pairing coverage
 role for hub-bound flying).** For each origin city, take the union of *all* its
 daily departures — every pairing, every hub, combined into one sorted sequence — and
-check cyclically (per the existing −1440/0/+1440 convention, §1.7) for any gap
-exceeding `CEILING` (240 min). This is what actually prevents "06:15 and 07:30 and
-nothing the rest of the day" under a multi-hub network: a city doesn't need any
-*single* pairing to cover the day alone anymore, since its combined schedule across
-2-4 hub connections is what has to avoid a dead zone.
+check the service day from 04:30 through 21:00 for any gap exceeding `CEILING`
+(240 min). The overnight period is outside this check; only consecutive departures
+that both fall within the service-day window are compared. A city doesn't need any
+*single* pairing to cover the day alone; its combined schedule across 2-4 hub
+connections is checked for daytime gaps between actual flights.
 
 **Updated priority order:** RON-at-destination / RON-at-MX-base coverage outranks
 bank timing and 2.6 alike; bank timing (§1.6a) outranks 2.6; 2.6 (both checks)

@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#092a53">
     <meta name="description" content="Coastal American Airways schedule operations console">
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=console-ui-20260926">
     <title>CAA Scheduler</title>
   </head>
   <body>
@@ -26,15 +26,15 @@
 
     <nav class="tabbar" aria-label="Schedule views">
       <button class="tab is-active" type="button" data-tab="overview" aria-selected="true">Overview</button>
-      <button class="tab" type="button" data-tab="setup" aria-selected="false">Schedule Setup</button>
       <button class="tab" type="button" data-tab="planning" aria-selected="false">Planning</button>
       <button class="tab" type="button" data-tab="routings" aria-selected="false">Routings</button>
       <button class="tab" type="button" data-tab="validation" aria-selected="false">
         Validation <span class="tab-count" id="validation-count">—</span>
       </button>
-      <button class="tab" type="button" data-tab="instructions" aria-selected="false">Instructions</button>
       <button class="tab" type="button" data-tab="timetable" aria-selected="false">Timetable</button>
       <button class="tab" type="button" data-tab="gates" aria-selected="false">Gates</button>
+      <button class="tab" type="button" data-tab="instructions" aria-selected="false">Instructions</button>
+      <button class="tab tab-setup" type="button" data-tab="setup" aria-selected="false">Schedule Setup</button>
     </nav>
 
     <main id="workspace" tabindex="-1">
@@ -304,6 +304,7 @@
                 <option value="all">All</option>
               </select>
             </label>
+            <button class="secondary-button filter-reset" id="routing-reset" type="button">Reset filters</button>
           </div>
           <div class="table-shell">
             <table>
@@ -432,6 +433,6 @@
       </div>
     </main>
 
-    <script type="module" src="app.mjs?v=schedule-7-v1.1.1"></script>
+    <script type="module" src="app.mjs?v=console-ui-20260926"></script>
   </body>
 </html>

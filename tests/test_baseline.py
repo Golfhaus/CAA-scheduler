@@ -319,13 +319,13 @@ class ScheduleSixBaselineTests(unittest.TestCase):
             report["summary"],
             {
                 "checks": 24,
-                "passed": 10,
+                "passed": 11,
                 "failed": 7,
-                "warnings": 4,
+                "warnings": 3,
                 "notEvaluated": 3,
                 "overridden": 0,
                 "effectiveErrorFindings": 55,
-                "effectiveWarningFindings": 156,
+                "effectiveWarningFindings": 104,
             },
         )
         checks = {check["id"]: check for check in report["checks"]}
@@ -335,7 +335,7 @@ class ScheduleSixBaselineTests(unittest.TestCase):
         self.assertEqual(checks["minimum_turn_time"]["status"], "fail")
         self.assertEqual(
             checks["section_26_service_gap_policy_consistency"]["status"],
-            "warning",
+            "pass",
         )
         self.assertEqual(checks["departure_windows"]["hardStop"], True)
         self.assertEqual(

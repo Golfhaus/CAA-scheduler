@@ -29,7 +29,7 @@ Overrides match both `checkId` and `findingId`; broad check-level waivers are no
 - Point-to-point share
 - Per-direction market-frequency ceiling
 - Section 2.6 Check A, including the 30-minute hard floor, station factor, 90% tolerance, one-exception allowance, and hub-bound exemption from the target formula
-- Section 2.6 Check B maximum city departure service gaps (warning-only pending clarification)
+- Section 2.6 Check B maximum city departure service gaps within the 04:30–21:00 service day
 - Route/flight numbering conventions
 - Cyclic physical-slot conflicts, passenger handling on stands, configured stand capacity, and one-minute combined capacity
 - Runway screening when runway data exists
@@ -40,7 +40,7 @@ Overrides match both `checkId` and `findingId`; broad check-level waivers are no
 
 Structural validation passes and both published outputs remain byte-identical. The operating report separately records current-policy findings without changing the frozen schedule.
 
-Section 2.6 Check B is a service-spacing rule: it says no city should go more than 240 minutes without any departure, regardless of destination. It is not a curfew. Applied literally and cyclically, it flags all 105 cities because the permitted 04:30–23:30 operating window necessarily creates an overnight gap of at least 300 minutes. The validator therefore reports it as a warning-only diagnostic and adds a policy-consistency warning; it does not treat it as a construction gate or silently reinterpret it.
+Section 2.6 Check B is a service-spacing rule: between 04:30 and 21:00, consecutive departures from a city should not be more than 240 minutes apart, regardless of destination. The overnight period and the gaps from the window edges to the first or final flight are excluded. The check remains warning-only and is not a curfew.
 
 Curfews are different: the configured departure windows are enforced as hard-stop errors. A schedule with an unapproved departure outside those windows fails operating validation.
 

@@ -158,6 +158,14 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
 .tab.is-active { color: var(--navy-900); }
 .tab.is-active::after { background: var(--orange); }
 
+.tab-setup {
+  margin-left: 0.8rem;
+  border-left: 1px solid var(--line);
+  border-radius: 0.55rem 0.55rem 0 0;
+  background: #f3f7fb;
+  box-shadow: -0.8rem 0 0 -0.72rem #b9c7d8;
+}
+
 .tab-count {
   min-width: 1.45rem;
   display: inline-grid;
@@ -367,6 +375,7 @@ main {
 }
 .filter-bar .search-field { flex: 1 1 24rem; }
 .routing-filters label:not(.search-field) { flex: 1 1 9rem; }
+.filter-reset { flex: 0 0 auto; min-height: 2.7rem; }
 .timetable-filters { display: grid; grid-template-columns: minmax(15rem, 1fr) repeat(4, minmax(9rem, 0.45fr)); }
 .mode-note { margin: -0.15rem 0 0.9rem; color: var(--muted); font-size: 0.8rem; line-height: 1.45; }
 

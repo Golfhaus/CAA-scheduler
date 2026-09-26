@@ -25,9 +25,29 @@ class WebBuildTests(unittest.TestCase):
         self.assertIn('id="preview-warning"', html)
         self.assertIn("previewNotice", script)
         self.assertIn(
-            'src="app.mjs?v=schedule-7-v1.1.1"',
+            'src="app.mjs?v=console-ui-20260926"',
             html,
         )
+        self.assertIn(
+            'href="styles.css?v=console-ui-20260926"',
+            html,
+        )
+        tabs = re.findall(r'data-tab="([^"]+)"', html)
+        self.assertEqual(
+            tabs,
+            [
+                "overview",
+                "planning",
+                "routings",
+                "validation",
+                "timetable",
+                "gates",
+                "instructions",
+                "setup",
+            ],
+        )
+        self.assertIn('id="routing-reset"', html)
+        self.assertIn('$("#routing-reset").addEventListener', script)
 
     def test_build_copies_console_and_pinned_schedule_data(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
