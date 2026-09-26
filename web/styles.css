@@ -391,6 +391,11 @@ table { width: 100%; border-collapse: collapse; font-size: 0.86rem; }
 th { position: sticky; top: 0; z-index: 2; padding: 0.78rem 0.9rem; background: #edf3f9; color: #40536c; text-align: left; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; }
 td { padding: 0.78rem 0.9rem; border-top: 1px solid #e7ecf2; white-space: nowrap; }
 tbody tr:hover { background: #f6f9fc; }
+#routing-rows tr.routing-originator { background: #fff3e6; }
+#routing-rows tr.routing-originator:hover { background: #ffead2; }
+#routing-rows tr.routing-terminator { background: #eaf4fb; }
+#routing-rows tr.routing-terminator:hover { background: #deedf8; }
+#routing-rows tr.routing-originator.routing-terminator { background: linear-gradient(90deg, #fff3e6 0 50%, #eaf4fb 50% 100%); }
 .flight-number, .route-number { color: var(--navy-900); font-variant-numeric: tabular-nums; font-weight: 850; }
 .market-arrow { padding: 0 0.2rem; color: var(--orange); }
 .fleet-badge { display: inline-block; border-radius: 999px; padding: 0.24rem 0.45rem; background: var(--blue-100); color: var(--navy-900); font-size: 0.72rem; font-weight: 800; }

@@ -25,11 +25,11 @@ class WebBuildTests(unittest.TestCase):
         self.assertIn('id="preview-warning"', html)
         self.assertIn("previewNotice", script)
         self.assertIn(
-            'src="app.mjs?v=console-ui-20260926"',
+            'src="app.mjs?v=console-ui-20260926-2"',
             html,
         )
         self.assertIn(
-            'href="styles.css?v=console-ui-20260926"',
+            'href="styles.css?v=console-ui-20260926-2"',
             html,
         )
         tabs = re.findall(r'data-tab="([^"]+)"', html)

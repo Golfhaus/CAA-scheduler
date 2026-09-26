@@ -91,6 +91,27 @@ export function sortRoutingsByRouteAndSequence(legs) {
   );
 }
 
+export function routingEndpointKinds(legs) {
+  const bounds = new Map();
+  legs.forEach((leg) => {
+    const route = String(leg.route);
+    const sequence = Number(leg.sequenceWithinRoute);
+    const current = bounds.get(route) || { minimum: sequence, maximum: sequence };
+    current.minimum = Math.min(current.minimum, sequence);
+    current.maximum = Math.max(current.maximum, sequence);
+    bounds.set(route, current);
+  });
+
+  return new Map(legs.map((leg) => {
+    const sequence = Number(leg.sequenceWithinRoute);
+    const bound = bounds.get(String(leg.route));
+    const kinds = [];
+    if (sequence === bound.minimum) kinds.push("routing-originator");
+    if (sequence === bound.maximum) kinds.push("routing-terminator");
+    return [Number(leg.flight), kinds.join(" ")];
+  }));
+}
+
 function flightDurationMinutes(flight, timezoneByCode) {
   const originOffset = TIMEZONE_OFFSETS[timezoneByCode[flight.origin]] ?? 0;
   const destinationOffset = TIMEZONE_OFFSETS[timezoneByCode[flight.dest]] ?? 0;
@@ -756,10 +777,11 @@ function renderRoutings() {
     state.canonical.legs.filter((leg) => legMatches(leg, query, filters))
   );
   const paged = paginate(filtered, state.routingPage, state.routingPageSize);
+  const endpointKinds = routingEndpointKinds(state.canonical.legs);
   state.routingPage = paged.page;
   $("#routing-result-count").textContent = `${filtered.length.toLocaleString()} flights`;
   $("#routing-rows").innerHTML = paged.rows.length
-    ? paged.rows.map((leg) => `<tr id="flight-${leg.flight}"><td class="route-number">${leg.route}</td><td><strong>${escapeHtml(leg.line)}</strong> / ${leg.day}</td><td>${leg.sequenceWithinRoute}</td><td class="flight-number">${leg.flight}</td><td><strong>${escapeHtml(leg.origin)}</strong><span class="market-arrow">→</span><strong>${escapeHtml(leg.destination)}</strong></td><td>${escapeHtml(leg.departure)}–${escapeHtml(leg.arrival)}</td><td><span class="fleet-badge">${escapeHtml(leg.fleet)}</span></td></tr>`).join("")
+    ? paged.rows.map((leg) => `<tr id="flight-${leg.flight}" class="${endpointKinds.get(Number(leg.flight)) || ""}"><td class="route-number">${leg.route}</td><td><strong>${escapeHtml(leg.line)}</strong> / ${leg.day}</td><td>${leg.sequenceWithinRoute}</td><td class="flight-number">${leg.flight}</td><td><strong>${escapeHtml(leg.origin)}</strong><span class="market-arrow">→</span><strong>${escapeHtml(leg.destination)}</strong></td><td>${escapeHtml(leg.departure)}–${escapeHtml(leg.arrival)}</td><td><span class="fleet-badge">${escapeHtml(leg.fleet)}</span></td></tr>`).join("")
     : `<tr class="empty-row"><td colspan="7">No routings match these filters.</td></tr>`;
   renderPagination($("#routing-pagination"), "routing", filtered.length, paged.page, paged.pageCount, state.routingPageSize);
 }

@@ -23,6 +23,7 @@ import {
   maximumConcurrentPositionUsage,
   paginate,
   passengerStandFindings,
+  routingEndpointKinds,
   scheduleMetrics,
   selectItineraries,
   sortFlightsByDeparture,
@@ -154,6 +155,19 @@ test("routing pagination supports requested row counts and all rows", () => {
   assert.equal(paginate(values, 2, 250).rows.length, 250);
   assert.equal(paginate(values, 1, 500).rows.length, 500);
   assert.deepEqual(paginate(values, 4, "all").rows, values);
+});
+
+test("routing endpoints distinguish originators and terminators", () => {
+  const routeId = canonical.legs.find(
+    (candidate) => canonical.legs.filter((leg) => leg.route === candidate.route).length >= 3,
+  ).route;
+  const route = canonical.legs
+    .filter((leg) => leg.route === routeId)
+    .sort((left, right) => left.sequenceWithinRoute - right.sequenceWithinRoute);
+  const endpointKinds = routingEndpointKinds(canonical.legs);
+  assert.equal(endpointKinds.get(route[0].flight), "routing-originator");
+  assert.equal(endpointKinds.get(route.at(-1).flight), "routing-terminator");
+  assert.equal(endpointKinds.get(route[1].flight), "");
 });
 
 test("planning market filters preserve fleet and match either market endpoint", () => {
