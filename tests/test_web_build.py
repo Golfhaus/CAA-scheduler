@@ -77,6 +77,30 @@ class WebBuildTests(unittest.TestCase):
                 )
             )
 
+    def test_preview_build_supports_overlay_review_without_stale_planning(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            output = Path(directory) / "site"
+            result = build_web_console(
+                REPO_ROOT / "web" / "schedules.preview.json", REPO_ROOT, output
+            )
+            self.assertEqual(result["scheduleCount"], 2)
+            self.assertEqual(result["dataFileCount"], 27)
+            manifest = json.loads((output / "schedules.json").read_text())
+            self.assertEqual(
+                manifest["defaultScheduleId"], "schedule_7_v1_1_0_review"
+            )
+            review = next(
+                item
+                for item in manifest["schedules"]
+                if item["id"] == "schedule_7_v1_1_0_review"
+            )
+            self.assertNotIn("frequencyFleetPlan", review["files"])
+            self.assertNotIn("exactMaterializationPlan", review["files"])
+            self.assertTrue((output / review["files"]["canonical"]).is_file())
+            self.assertTrue(
+                (output / review["files"]["connectionAudit"]).is_file()
+            )
+
 
 if __name__ == "__main__":
     unittest.main()

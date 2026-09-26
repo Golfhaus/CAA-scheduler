@@ -19,6 +19,7 @@ from .exact_materialization import (
 from .gate_export import export_gate_schedule
 from .io import read_json, write_json
 from .operating_validation import validate_operating_rules
+from .optimization_review import build_optimization_review
 from .planning import reconstruct_planning_snapshot, validate_planning_snapshot
 from .routing import build_aircraft_route_plan_from_manifest
 from .routing_repair import build_routing_repair_plan_from_manifest
@@ -66,6 +67,14 @@ def _parser() -> argparse.ArgumentParser:
         type=Path,
         help="Use an explicit resumable exact-seed checkpoint",
     )
+
+    optimization_review = subcommands.add_parser(
+        "build-optimization-review",
+        help="Package a guarded optimization-overlay chain for review",
+    )
+    optimization_review.add_argument("config", type=Path)
+    optimization_review.add_argument("--output", type=Path)
+    optimization_review.add_argument("--repo-root", type=Path, default=Path.cwd())
 
     validate = subcommands.add_parser("validate", help="Validate a canonical schedule")
     validate.add_argument("canonical", type=Path)
@@ -227,6 +236,16 @@ def main(argv: list[str] | None = None) -> int:
             "candidate_review_required",
             "prepared_exact_materialization",
         } or report.get("previewOnly") else 1
+    if args.command == "build-optimization-review":
+        report = build_optimization_review(
+            args.config,
+            args.repo_root,
+            output_directory=args.output,
+        )
+        print(f"Optimization review: {report['status']}")
+        print(f"Output: {report['outputDirectory']}")
+        print(f"  {report['connectionFinding']}")
+        return 0
     if args.command == "build-web":
         result = build_web_console(
             args.manifest,

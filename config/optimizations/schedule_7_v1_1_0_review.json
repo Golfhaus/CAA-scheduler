@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "schedule-7-v1.1.0-review-package",
+  "sourceScheduleId": "schedule_7_v1_0_0",
+  "baseCanonical": "data/schedules/schedule_7_v1_0_0/canonical_schedule.json",
+  "overlays": [
+    "config/optimizations/schedule_7_v1_1_0_round_1.json",
+    "config/optimizations/schedule_7_v1_1_0_round_2.json"
+  ],
+  "outputDirectory": "data/schedules/schedule_7_v1_1_0_review",
+  "demandDataVersion": "bts-db1c-6mo-jul2025-apr2026-v7",
+  "schedule": {
+    "id": "schedule_7_v1_1_0_review",
+    "number": 7,
+    "version": "1.1.0-review.1",
+    "label": "Schedule 7, Version 1.1.0 Review 1",
+    "status": "review"
+  },
+  "connectionAudit": {
+    "hub": "PHF",
+    "groups": {
+      "north": ["PWM", "MHT", "BDL", "ALB", "ROC", "BUF", "PIT"],
+      "south": ["DAB", "MLB", "PGD", "SRQ", "VPS", "BHM", "PNS"]
+    }
+  },
+  "expectedReview": {
+    "legs": 948,
+    "routes": 179,
+    "lines": 22,
+    "effectiveOperatingErrors": 0,
+    "hardStopFailures": 0,
+    "directRoundTripCities": 14,
+    "connectedDirectionalPairs": 34
+  }
+}

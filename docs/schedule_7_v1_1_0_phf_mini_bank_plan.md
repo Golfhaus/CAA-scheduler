@@ -238,8 +238,31 @@ station-discontinuous route definitions.
   the new three-route Line AS falling below the standing 9-12-route guideline.
   None is an operating error or hard stop.
 
+## Review candidate package
+
+The cumulative overlays are packaged as `schedule_7_v1_1_0_review` with a
+reproducible review configuration and command. The package regenerates the
+canonical schedule, timetable, gate schedule, structural and operating
+validation, reconstructed planning snapshot, and a pair-by-pair PHF connection
+audit. The preview console intentionally omits the demand-allocation Planning
+tab because those upstream planning artifacts were not rerun for the approved
+overlay.
+
+The connection audit distinguishes network coverage from timed connectivity:
+
+- All 14 initiative cities have a direct PHF round trip.
+- 34 of 98 directional north-south pairs meet the 30-240-minute connection
+  window.
+- North-to-south coverage is 14 of 49 directional pairs.
+- South-to-north coverage is 20 of 49 directional pairs.
+
+The review candidate therefore remains on hold for a connection-scope decision;
+it does not represent universal pairwise north-south connectivity.
+
 ## Next phase
 
-Package the three feasibility checkpoints as a Schedule 7 v1.1.0 review
-candidate, regenerate its canonical, timetable, gate, and validation artifacts,
-and inspect the complete north-south connection set before proposing a release.
+Decide whether Schedule 7 v1.1.0 should optimize for selected bank clusters or
+for universal pairwise north-south connectivity. If universal connectivity is
+required, retime or add frequency before release packaging. If the selected
+clusters are sufficient, promote the review candidate without rerunning the
+archival Schedule 6 baseline.

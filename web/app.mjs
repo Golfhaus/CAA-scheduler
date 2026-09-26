@@ -26,6 +26,7 @@ const state = {
   routingRepairPlan: null,
   bankMaterializationDiagnostic: null,
   exactMaterializationPlan: null,
+  connectionAudit: null,
   timetable: null,
   gates: null,
   instructions: null,
@@ -354,6 +355,8 @@ function statusLabel(status) {
 function activateTab(tab, updateHash = true) {
   const valid = ["overview", "setup", "planning", "routings", "validation", "instructions", "timetable", "gates"];
   if (!valid.includes(tab)) tab = "overview";
+  const requestedButton = document.querySelector(`[data-tab="${tab}"]`);
+  if (requestedButton?.hidden) tab = "overview";
   $$("[data-tab]").forEach((button) => {
     const active = button.dataset.tab === tab;
     button.classList.toggle("is-active", active);
@@ -394,6 +397,7 @@ async function loadSchedule(scheduleId) {
     routingRepairPlan: data.routingRepairPlan,
     bankMaterializationDiagnostic: data.bankMaterializationDiagnostic,
     exactMaterializationPlan: data.exactMaterializationPlan,
+    connectionAudit: data.connectionAudit,
     timetable: data.timetable,
     gates: data.gates,
     routingPage: 1,
@@ -433,10 +437,26 @@ function renderAll() {
   previewWarning.hidden = !previewNotice;
   previewWarning.textContent = previewNotice || "";
   ensureBuildConfig();
+  const planningAvailable = Boolean(
+    state.planning
+      && state.planningValidation
+      && state.demandPlan
+      && state.frequencyFleetPlan
+      && state.hubBankPlan
+      && state.aircraftRoutePlan
+      && state.routingRepairPlan
+      && state.bankMaterializationDiagnostic
+      && state.exactMaterializationPlan
+  );
+  const planningTab = document.querySelector('[data-tab="planning"]');
+  planningTab.hidden = !planningAvailable;
+  if (!planningAvailable && planningTab.classList.contains("is-active")) {
+    activateTab("overview");
+  }
   renderOverview();
   renderSetup();
-  populateFilters();
-  renderPlanning();
+  populateFilters(planningAvailable);
+  if (planningAvailable) renderPlanning();
   renderRoutings();
   renderValidation();
   renderInstructions();
@@ -452,6 +472,22 @@ function renderOverview() {
   $("#schedule-note").textContent = schedule.label;
   $("#schedule-status").textContent = schedule.status.replaceAll("_", " ");
   $("#validation-count").textContent = operating.summary.effectiveErrorFindings;
+  const connectionMetrics = state.connectionAudit
+    ? [
+      metricCard(
+        "PHF target cities",
+        `${state.connectionAudit.summary.directRoundTripCities}/${state.connectionAudit.summary.targetCities}`,
+        "Direct round-trip coverage",
+        state.connectionAudit.summary.directRoundTripCities === state.connectionAudit.summary.targetCities ? "is-success" : "is-danger"
+      ),
+      metricCard(
+        "Cross-group connections",
+        `${state.connectionAudit.summary.connectedDirectionalPairs}/${state.connectionAudit.summary.directionalPairs}`,
+        `${state.connectionAudit.connectionWindowMinutes.minimum}–${state.connectionAudit.connectionWindowMinutes.maximum} minute PHF window`,
+        state.connectionAudit.summary.missingDirectionalPairs ? "is-danger" : "is-success"
+      ),
+    ]
+    : [];
   $("#overview-metrics").innerHTML = [
     metricCard("Flights", metrics.flights.toLocaleString(), "Published daily legs"),
     metricCard("Cities", metrics.cities, "Active network stations"),
@@ -463,6 +499,7 @@ function renderOverview() {
       "Migration fidelity",
       structural.status === "pass" ? "is-success" : "is-danger"
     ),
+    ...connectionMetrics,
   ].join("");
 
   const usage = fleetUsage(canonical);
@@ -505,7 +542,7 @@ function populateSelect(select, values, firstLabel) {
   if (values.includes(current)) select.value = current;
 }
 
-function populateFilters() {
+function populateFilters(planningAvailable = true) {
   const fleets = [...new Set(state.canonical.legs.map((leg) => leg.fleet))].sort();
   const cities = state.canonical.cities.filter((city) => city.active).map((city) => city.code).sort();
   const lines = [...new Set(state.canonical.legs.map((leg) => leg.line))].sort();
@@ -516,9 +553,11 @@ function populateFilters() {
   populateSelect($("#timetable-fleet"), fleets, "All fleets");
   populateSelect($("#timetable-origin"), cities, "Any origin");
   populateSelect($("#timetable-destination"), cities, "Any destination");
-  populateSelect($("#planning-fleet"), Object.keys(state.frequencyFleetPlan.fleetPlan).sort(), "All fleets");
-  populateSelect($("#planning-origin"), cities, "Any airport");
-  populateSelect($("#planning-destination"), cities, "Any airport");
+  if (planningAvailable) {
+    populateSelect($("#planning-fleet"), Object.keys(state.frequencyFleetPlan.fleetPlan).sort(), "All fleets");
+    populateSelect($("#planning-origin"), cities, "Any airport");
+    populateSelect($("#planning-destination"), cities, "Any airport");
+  }
 
   const gateSelect = $("#gate-airport");
   const previous = gateSelect.value;

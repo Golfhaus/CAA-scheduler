@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "defaultScheduleId": "schedule_7_v1_0_0",
+  "defaultScheduleId": "schedule_7_v1_1_0_review",
   "repositoryUrl": "https://github.com/Golfhaus/CAA-scheduler",
   "instructions": {
     "version": "2.0 with turn-on-stand hard-stop addition",
@@ -29,6 +29,22 @@
         "exactMaterializationPlan": "data/schedules/schedule_7_v1_0_0/exact_materialization_plan.json",
         "timetable": "data/schedules/schedule_7_v1_0_0/timetable.json",
         "gates": "data/schedules/schedule_7_v1_0_0/gates.json"
+      }
+    },
+    {
+      "id": "schedule_7_v1_1_0_review",
+      "label": "Schedule 7 · v1.1.0 Review 1",
+      "previewNotice": "Review candidate: all 14 initiative cities have PHF round trips; 34 of 98 directional north-south pairs meet the 30-240 minute connection window. Planning-stage diagnostics are intentionally omitted because this package applies approved overlays rather than rerunning demand allocation.",
+      "files": {
+        "canonical": "data/schedules/schedule_7_v1_1_0_review/canonical_schedule.json",
+        "structuralValidation": "data/schedules/schedule_7_v1_1_0_review/validation_report.json",
+        "operatingValidation": "data/schedules/schedule_7_v1_1_0_review/operating_validation_report.json",
+        "planning": "data/schedules/schedule_7_v1_1_0_review/planning_snapshot.json",
+        "planningValidation": "data/schedules/schedule_7_v1_1_0_review/planning_validation_report.json",
+        "timetable": "data/schedules/schedule_7_v1_1_0_review/timetable.json",
+        "gates": "data/schedules/schedule_7_v1_1_0_review/gates.json",
+        "connectionAudit": "data/schedules/schedule_7_v1_1_0_review/connection_audit.json",
+        "optimizationReview": "data/schedules/schedule_7_v1_1_0_review/optimization_review_report.json"
       }
     }
   ],

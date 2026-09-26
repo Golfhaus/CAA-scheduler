@@ -1,0 +1,31 @@
+{
+  "scheduleId": "schedule_7_v1_1_0_review",
+  "status": "pass",
+  "summary": {
+    "checks": 4,
+    "passed": 4,
+    "failed": 0
+  },
+  "checks": [
+    {
+      "id": "market_leg_total",
+      "status": "pass",
+      "message": "Market plan accounts for 948/948 canonical legs"
+    },
+    {
+      "id": "station_departure_total",
+      "status": "pass",
+      "message": "Station totals account for 948/948 canonical departures"
+    },
+    {
+      "id": "fleet_plan_coverage",
+      "status": "pass",
+      "message": "Planning fleet types exactly match the schedule-specific fleet configuration"
+    },
+    {
+      "id": "market_city_coverage",
+      "status": "pass",
+      "message": "Every planned market references known city metadata"
+    }
+  ]
+}

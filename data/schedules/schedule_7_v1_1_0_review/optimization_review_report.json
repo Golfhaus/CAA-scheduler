@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "1.0.0",
+  "scheduleId": "schedule_7_v1_1_0_review",
+  "status": "candidate_review_required",
+  "releaseRecommendation": "hold_for_connection_scope_decision",
+  "sourceScheduleId": "schedule_7_v1_0_0",
+  "overlayIds": [
+    "schedule-7-v1.1.0-phf-north-south-round-1",
+    "schedule-7-v1.1.0-phf-north-south-round-2"
+  ],
+  "summary": {
+    "legs": 948,
+    "routes": 179,
+    "lines": 22,
+    "effectiveOperatingErrors": 0,
+    "hardStopFailures": 0,
+    "directRoundTripCities": 14,
+    "connectedDirectionalPairs": 34
+  },
+  "validation": {
+    "structural": "pass",
+    "operating": "review",
+    "planningReconstruction": "pass"
+  },
+  "connectionFinding": "All 14 target cities have direct PHF round trips, but only 34/98 directional cross-group pairs meet the configured connection window.",
+  "artifacts": [
+    "canonical_schedule.json",
+    "connection_audit.json",
+    "gates.json",
+    "operating_validation_report.json",
+    "planning_snapshot.json",
+    "planning_validation_report.json",
+    "timetable.json",
+    "validation_report.json"
+  ]
+}
