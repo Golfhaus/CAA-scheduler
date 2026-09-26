@@ -65,7 +65,7 @@ class OptimizationOverlayTests(unittest.TestCase):
                 for city in gates["cities"]
                 for claim in city["claims"]
             ),
-            45,
+            30,
         )
 
     def test_overlay_rejects_a_stale_retime_anchor(self) -> None:
@@ -132,7 +132,7 @@ class OptimizationOverlayTests(unittest.TestCase):
                 for city in gates["cities"]
                 for claim in city["claims"]
             ),
-            52,
+            33,
         )
 
     def test_new_route_overlay_rejects_duplicate_and_discontinuous_routes(self) -> None:

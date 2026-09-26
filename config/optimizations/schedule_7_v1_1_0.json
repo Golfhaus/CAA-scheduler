@@ -1,20 +1,21 @@
 {
   "schemaVersion": "1.0.0",
-  "id": "schedule-7-v1.1.0-review-package",
+  "id": "schedule-7-v1.1.0-release",
   "sourceScheduleId": "schedule_7_v1_0_0",
   "baseCanonical": "data/schedules/schedule_7_v1_0_0/canonical_schedule.json",
   "overlays": [
     "config/optimizations/schedule_7_v1_1_0_round_1.json",
     "config/optimizations/schedule_7_v1_1_0_round_2.json"
   ],
-  "outputDirectory": "data/schedules/schedule_7_v1_1_0_review",
+  "outputDirectory": "data/schedules/schedule_7_v1_1_0",
+  "rejoinAvoidableTows": false,
   "demandDataVersion": "bts-db1c-6mo-jul2025-apr2026-v7",
   "schedule": {
-    "id": "schedule_7_v1_1_0_review",
+    "id": "schedule_7_v1_1_0",
     "number": 7,
-    "version": "1.1.0-review.1",
-    "label": "Schedule 7, Version 1.1.0 Review 1",
-    "status": "review"
+    "version": "1.1.0",
+    "label": "Schedule 7, Version 1.1.0",
+    "status": "released"
   },
   "connectionAudit": {
     "hub": "PHF",
@@ -29,13 +30,17 @@
     "approvedBy": "user",
     "futureWork": "Additional pairwise north-south connectivity is deferred to future Schedule 7 versions."
   },
-  "expectedReview": {
+  "expectedRelease": {
     "legs": 948,
     "routes": 179,
     "lines": 22,
     "effectiveOperatingErrors": 0,
     "hardStopFailures": 0,
     "directRoundTripCities": 14,
-    "connectedDirectionalPairs": 34
+    "connectedDirectionalPairs": 34,
+    "standClaims": 52,
+    "standMinutes": 26318,
+    "hubStandClaims": 17,
+    "hubStandMinutes": 6804
   }
 }

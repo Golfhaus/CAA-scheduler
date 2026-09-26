@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0.0",
+  "scheduleId": "schedule_7_v1_1_1",
+  "status": "released",
+  "sourceScheduleId": "schedule_7_v1_1_0",
+  "overlayIds": [
+    "schedule-7-v1.1.0-phf-north-south-round-1",
+    "schedule-7-v1.1.0-phf-north-south-round-2"
+  ],
+  "summary": {
+    "legs": 948,
+    "routes": 179,
+    "lines": 22,
+    "effectiveOperatingErrors": 0,
+    "hardStopFailures": 0,
+    "directRoundTripCities": 14,
+    "connectedDirectionalPairs": 34,
+    "standClaims": 33,
+    "standMinutes": 21761,
+    "hubStandClaims": 9,
+    "hubStandMinutes": 5616
+  },
+  "validation": {
+    "structural": "pass",
+    "operating": "review",
+    "planningReconstruction": "pass"
+  },
+  "connectionFinding": "All 14 target cities have direct PHF round trips, but only 34/98 directional cross-group pairs meet the configured connection window.",
+  "connectionScopeDecision": {
+    "status": "approved",
+    "model": "selected_bank_clusters",
+    "approvedBy": "user",
+    "futureWork": "Additional pairwise north-south connectivity is deferred to future Schedule 7 versions."
+  },
+  "patchScope": {
+    "kind": "gate_assignment_optimization",
+    "timetableChanged": false,
+    "routingChanged": false,
+    "description": "Rejoin avoidable conditional stand tows when the complete gate claim can fit through fixed-inventory recoloring."
+  },
+  "artifacts": [
+    "canonical_schedule.json",
+    "connection_audit.json",
+    "gates.json",
+    "operating_validation_report.json",
+    "planning_snapshot.json",
+    "planning_validation_report.json",
+    "timetable.json",
+    "validation_report.json"
+  ]
+}

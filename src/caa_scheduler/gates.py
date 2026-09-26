@@ -519,6 +519,84 @@ def _minimum_tow_feasible_assignment(
     return None
 
 
+def _rejoin_avoidable_tows(
+    assignments: list[Assignment],
+    stand_middles: set[GateClaim],
+    n_gates: int,
+    n_stands: int,
+) -> tuple[list[Assignment], set[GateClaim]]:
+    """Rejoin conditional tow pieces when a complete gate recoloring fits.
+
+    The fast allocator may split a long claim to rescue an early conflict and
+    later discover a valid fixed-inventory coloring for the complete set.  A
+    split must not become permanent merely because it made that intermediate
+    greedy placement possible.  Forced stand splits remain untouched.
+    """
+
+    assignment = dict(assignments)
+    remaining_middles = set(stand_middles)
+    candidates = sorted(
+        (
+            middle
+            for middle in stand_middles
+            if middle.kind != "forced_stand_mid"
+        ),
+        key=lambda claim: (
+            claim.end - claim.start,
+            claim.start,
+            claim.end,
+            claim.label,
+        ),
+    )
+    for middle in candidates:
+        merged = GateClaim(
+            middle.start - TOUCH_ARRIVAL_MINUTES,
+            middle.end + TOUCH_DEPARTURE_MINUTES,
+            middle.label,
+            middle.fleet,
+            middle.kind,
+            middle.arrival_city,
+            middle.departure_city,
+        )
+        gate_in, expected_middle, gate_out = split_for_waypoint(merged)
+        if (
+            expected_middle != middle
+            or gate_in not in assignment
+            or middle not in assignment
+            or gate_out not in assignment
+        ):
+            continue
+
+        removed = {gate_in, middle, gate_out}
+        trial_gate_claims = [
+            claim
+            for claim in assignment
+            if claim not in remaining_middles and claim not in removed
+        ] + [merged]
+        trial_stand_claims = [
+            claim
+            for claim in remaining_middles
+            if claim != middle
+        ]
+        gate_colors = _bounded_coloring(trial_gate_claims, n_gates)
+        if gate_colors is None:
+            continue
+        stand_colors = _bounded_coloring(trial_stand_claims, n_stands)
+        if stand_colors is None:
+            continue
+
+        for claim in removed:
+            del assignment[claim]
+        remaining_middles.remove(middle)
+        assignment[merged] = 0
+        for claim, color in zip(trial_gate_claims, gate_colors):
+            assignment[claim] = color
+        for claim, color in zip(trial_stand_claims, stand_colors):
+            assignment[claim] = n_gates + color
+
+    return list(assignment.items()), remaining_middles
+
+
 def assign_gates(
     claims: list[GateClaim],
     n_gates: int | None = None,
@@ -526,6 +604,7 @@ def assign_gates(
     n_stands: int | None = None,
     return_provenance: bool = False,
     allow_infeasible_preview: bool = False,
+    rejoin_avoidable_tows: bool = True,
 ) -> list[Assignment] | tuple[list[Assignment], set[GateClaim]]:
     """Assign claims using short-first packing and targeted long-hold rescue.
 
@@ -791,6 +870,21 @@ def assign_gates(
                     ),
                     default=0,
                 )
+        if (
+            rejoin_avoidable_tows
+            and not stranded_touches
+            and required_stands <= n_stands
+        ):
+            result, stand_middles = _rejoin_avoidable_tows(
+                result,
+                stand_middles,
+                n_gates,
+                n_stands,
+            )
+            required_stands = max(
+                (slot - n_gates for _, slot in result if slot > n_gates),
+                default=0,
+            )
         if (
             stranded_touches or required_stands > n_stands
         ) and not allow_infeasible_preview:

@@ -1,8 +1,7 @@
 {
   "schemaVersion": "1.0.0",
-  "scheduleId": "schedule_7_v1_1_0_review",
-  "status": "candidate_ready_for_review",
-  "releaseRecommendation": "proceed_with_selected_cluster_model",
+  "scheduleId": "schedule_7_v1_1_0",
+  "status": "released",
   "sourceScheduleId": "schedule_7_v1_0_0",
   "overlayIds": [
     "schedule-7-v1.1.0-phf-north-south-round-1",
@@ -15,7 +14,11 @@
     "effectiveOperatingErrors": 0,
     "hardStopFailures": 0,
     "directRoundTripCities": 14,
-    "connectedDirectionalPairs": 34
+    "connectedDirectionalPairs": 34,
+    "standClaims": 52,
+    "standMinutes": 26318,
+    "hubStandClaims": 17,
+    "hubStandMinutes": 6804
   },
   "validation": {
     "structural": "pass",
@@ -29,6 +32,7 @@
     "approvedBy": "user",
     "futureWork": "Additional pairwise north-south connectivity is deferred to future Schedule 7 versions."
   },
+  "patchScope": null,
   "artifacts": [
     "canonical_schedule.json",
     "connection_audit.json",

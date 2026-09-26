@@ -19,7 +19,7 @@ from .exact_materialization import (
 from .gate_export import export_gate_schedule
 from .io import read_json, write_json
 from .operating_validation import validate_operating_rules
-from .optimization_review import build_optimization_review
+from .optimization_release import build_optimization_release
 from .planning import reconstruct_planning_snapshot, validate_planning_snapshot
 from .routing import build_aircraft_route_plan_from_manifest
 from .routing_repair import build_routing_repair_plan_from_manifest
@@ -68,13 +68,13 @@ def _parser() -> argparse.ArgumentParser:
         help="Use an explicit resumable exact-seed checkpoint",
     )
 
-    optimization_review = subcommands.add_parser(
-        "build-optimization-review",
-        help="Package a guarded optimization-overlay chain for review",
+    optimization_release = subcommands.add_parser(
+        "build-optimization-release",
+        help="Package a guarded optimization-overlay chain for release",
     )
-    optimization_review.add_argument("config", type=Path)
-    optimization_review.add_argument("--output", type=Path)
-    optimization_review.add_argument("--repo-root", type=Path, default=Path.cwd())
+    optimization_release.add_argument("config", type=Path)
+    optimization_release.add_argument("--output", type=Path)
+    optimization_release.add_argument("--repo-root", type=Path, default=Path.cwd())
 
     validate = subcommands.add_parser("validate", help="Validate a canonical schedule")
     validate.add_argument("canonical", type=Path)
@@ -236,13 +236,13 @@ def main(argv: list[str] | None = None) -> int:
             "candidate_review_required",
             "prepared_exact_materialization",
         } or report.get("previewOnly") else 1
-    if args.command == "build-optimization-review":
-        report = build_optimization_review(
+    if args.command == "build-optimization-release":
+        report = build_optimization_release(
             args.config,
             args.repo_root,
             output_directory=args.output,
         )
-        print(f"Optimization review: {report['status']}")
+        print(f"Optimization release: {report['status']}")
         print(f"Output: {report['outputDirectory']}")
         print(f"  {report['connectionFinding']}")
         return 0

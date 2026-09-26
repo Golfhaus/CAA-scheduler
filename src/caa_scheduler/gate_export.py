@@ -39,7 +39,10 @@ def _capacity(city: dict[str, Any]) -> tuple[int, int]:
 
 
 def export_gate_schedule(
-    canonical: dict[str, Any], *, allow_infeasible_preview: bool = False
+    canonical: dict[str, Any],
+    *,
+    allow_infeasible_preview: bool = False,
+    rejoin_avoidable_tows: bool = True,
 ) -> dict[str, Any]:
     gate_plan = canonical["gatePlan"]
     forced = {
@@ -67,6 +70,7 @@ def export_gate_schedule(
                 n_stands=stands,
                 return_provenance=True,
                 allow_infeasible_preview=allow_infeasible_preview,
+                rejoin_avoidable_tows=rejoin_avoidable_tows,
             )
         else:
             assignments = assign_gates(

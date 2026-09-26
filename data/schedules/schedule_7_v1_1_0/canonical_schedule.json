@@ -1,11 +1,11 @@
 {
   "schemaVersion": "1.0.0",
   "schedule": {
-    "id": "schedule_7_v1_1_0_review",
+    "id": "schedule_7_v1_1_0",
     "number": 7,
-    "version": "1.1.0-review.1",
-    "label": "Schedule 7, Version 1.1.0 Review 1",
-    "status": "review",
+    "version": "1.1.0",
+    "label": "Schedule 7, Version 1.1.0",
+    "status": "released",
     "fleetCounts": {
       "MAX9": 35,
       "CRJ900": 45,
@@ -48,11 +48,11 @@
       "filename": "operating_rules_v2_0.json",
       "sha256": "14359a87e0399f545f05a416c10d75538675fb59a93e4b0442b202e55de9dd39"
     },
-    "optimizationReview": {
+    "optimizationRelease": {
       "sourceScheduleId": "schedule_7_v1_0_0",
       "config": {
-        "filename": "config/optimizations/schedule_7_v1_1_0_review.json",
-        "sha256": "ac227ff7656e544f40844fb02f59033b88c1b48e266d1616ff08ad48d562d293"
+        "filename": "config/optimizations/schedule_7_v1_1_0.json",
+        "sha256": "c27bf1d4c43a67200da2d66d876f0d792cd133d9351dc4ab4c3151d12cdb8c53"
       },
       "overlays": [
         {
@@ -69,7 +69,7 @@
     }
   },
   "gatePlan": {
-    "label": "Schedule 7, Version 1.1.0 Review 1",
+    "label": "Schedule 7, Version 1.1.0",
     "forcedStandSplits": {},
     "fixedPhysicalInventory": true
   },

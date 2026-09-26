@@ -17,7 +17,9 @@ from caa_scheduler.gates import (
     _conflict_graph,
     _greedy_coloring,
     _maximum_cyclic_concurrency,
+    _rejoin_avoidable_tows,
     overlaps,
+    split_for_waypoint,
 )
 
 
@@ -181,6 +183,27 @@ class GateColoringTests(unittest.TestCase):
         ]
         self.assertEqual(len(passenger_pieces), 1)
         self.assertLessEqual(passenger_pieces[0][1], 2)
+
+    def test_rejoin_avoidable_tow_uses_complete_gate_recoloring(self) -> None:
+        long_claim = claim(100, 400, "long")
+        gate_in, stand_middle, gate_out = split_for_waypoint(long_claim)
+        short_claim = claim(200, 250, "short")
+
+        assignments, stand_middles = _rejoin_avoidable_tows(
+            [
+                (gate_in, 1),
+                (stand_middle, 3),
+                (gate_out, 2),
+                (short_claim, 1),
+            ],
+            {stand_middle},
+            2,
+            1,
+        )
+
+        self.assertEqual(stand_middles, set())
+        self.assertEqual({item for item, _ in assignments}, {long_claim, short_claim})
+        self.assertTrue(all(slot <= 2 for _, slot in assignments))
 
 
 if __name__ == "__main__":

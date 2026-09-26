@@ -25,7 +25,7 @@ class WebBuildTests(unittest.TestCase):
         self.assertIn('id="preview-warning"', html)
         self.assertIn("previewNotice", script)
         self.assertIn(
-            'src="app.mjs?v=schedule-7-v1.1.0-review.1"',
+            'src="app.mjs?v=schedule-7-v1.1.1"',
             html,
         )
 
@@ -35,8 +35,8 @@ class WebBuildTests(unittest.TestCase):
             result = build_web_console(
                 REPO_ROOT / "web" / "schedules.json", REPO_ROOT, output
             )
-            self.assertEqual(result["scheduleCount"], 3)
-            self.assertEqual(result["dataFileCount"], 41)
+            self.assertEqual(result["scheduleCount"], 4)
+            self.assertEqual(result["dataFileCount"], 50)
             self.assertGreater(result["instructionEntryCount"], 40)
             self.assertTrue((output / "index.html").is_file())
             self.assertTrue((output / "favicon.svg").is_file())
@@ -44,14 +44,15 @@ class WebBuildTests(unittest.TestCase):
             self.assertTrue((output / "build-config.mjs").is_file())
             manifest = json.loads((output / "schedules.json").read_text())
             self.assertEqual(
-                manifest["defaultScheduleId"], "schedule_7_v1_1_0_review"
+                manifest["defaultScheduleId"], "schedule_7_v1_1_1"
             )
             self.assertEqual(
                 [schedule["id"] for schedule in manifest["schedules"]],
                 [
                     "schedule_6_v2_2_5",
                     "schedule_7_v1_0_0",
-                    "schedule_7_v1_1_0_review",
+                    "schedule_7_v1_1_0",
+                    "schedule_7_v1_1_1",
                 ],
             )
             self.assertTrue((output / manifest["buildSetup"]["schema"]).is_file())
@@ -93,22 +94,22 @@ class WebBuildTests(unittest.TestCase):
             result = build_web_console(
                 REPO_ROOT / "web" / "schedules.preview.json", REPO_ROOT, output
             )
-            self.assertEqual(result["scheduleCount"], 2)
-            self.assertEqual(result["dataFileCount"], 27)
+            self.assertEqual(result["scheduleCount"], 3)
+            self.assertEqual(result["dataFileCount"], 36)
             manifest = json.loads((output / "schedules.json").read_text())
             self.assertEqual(
-                manifest["defaultScheduleId"], "schedule_7_v1_1_0_review"
+                manifest["defaultScheduleId"], "schedule_7_v1_1_1"
             )
-            review = next(
+            release = next(
                 item
                 for item in manifest["schedules"]
-                if item["id"] == "schedule_7_v1_1_0_review"
+                if item["id"] == "schedule_7_v1_1_0"
             )
-            self.assertNotIn("frequencyFleetPlan", review["files"])
-            self.assertNotIn("exactMaterializationPlan", review["files"])
-            self.assertTrue((output / review["files"]["canonical"]).is_file())
+            self.assertNotIn("frequencyFleetPlan", release["files"])
+            self.assertNotIn("exactMaterializationPlan", release["files"])
+            self.assertTrue((output / release["files"]["canonical"]).is_file())
             self.assertTrue(
-                (output / review["files"]["connectionAudit"]).is_file()
+                (output / release["files"]["connectionAudit"]).is_file()
             )
 
 

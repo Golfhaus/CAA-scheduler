@@ -141,13 +141,13 @@ def audit_hub_connections(
     }
 
 
-def build_optimization_review(
+def build_optimization_release(
     config_path: Path,
     repo_root: Path,
     *,
     output_directory: Path | None = None,
 ) -> dict[str, Any]:
-    """Build authoritative review artifacts from a guarded overlay chain."""
+    """Build authoritative release artifacts from a guarded overlay chain."""
 
     repo_root = repo_root.resolve()
     config_path = config_path.resolve()
@@ -169,7 +169,7 @@ def build_optimization_review(
 
     canonical["schedule"].update(copy.deepcopy(config["schedule"]))
     canonical["gatePlan"]["label"] = canonical["schedule"]["label"]
-    canonical.setdefault("provenance", {})["optimizationReview"] = {
+    canonical.setdefault("provenance", {})["optimizationRelease"] = {
         "sourceScheduleId": config["sourceScheduleId"],
         "config": {
             "filename": str(config_path.relative_to(repo_root)),
@@ -186,12 +186,26 @@ def build_optimization_review(
     )
     planning_validation = validate_planning_snapshot(planning, canonical)
     timetable = export_timetable(canonical)
-    gates = export_gate_schedule(canonical)
+    gates = export_gate_schedule(
+        canonical,
+        rejoin_avoidable_tows=config.get("rejoinAvoidableTows", True),
+    )
     connection_audit = audit_hub_connections(
         canonical,
         hub=config["connectionAudit"]["hub"],
         groups=config["connectionAudit"]["groups"],
     )
+    stand_claims = [
+        claim
+        for city in gates["cities"]
+        for claim in city["claims"]
+        if claim["rowType"] == "stand"
+    ]
+    audit_hub = config["connectionAudit"]["hub"]
+    hub_gates = next(city for city in gates["cities"] if city["code"] == audit_hub)
+    hub_stand_claims = [
+        claim for claim in hub_gates["claims"] if claim["rowType"] == "stand"
+    ]
 
     actual = {
         "legs": len(canonical["legs"]),
@@ -210,24 +224,32 @@ def build_optimization_review(
         "connectedDirectionalPairs": connection_audit["summary"][
             "connectedDirectionalPairs"
         ],
+        "standClaims": len(stand_claims),
+        "standMinutes": sum(
+            claim["end"] - claim["start"] for claim in stand_claims
+        ),
+        "hubStandClaims": len(hub_stand_claims),
+        "hubStandMinutes": sum(
+            claim["end"] - claim["start"] for claim in hub_stand_claims
+        ),
     }
-    expected = config.get("expectedReview", {})
+    expected = config.get("expectedRelease", {})
     mismatches = {
         key: {"expected": value, "actual": actual.get(key)}
         for key, value in expected.items()
         if actual.get(key) != value
     }
     if mismatches:
-        raise ValueError(f"Optimization review expectations changed: {mismatches}")
+        raise ValueError(f"Optimization release expectations changed: {mismatches}")
 
     if structural["status"] != "pass":
-        raise ValueError("Optimization review failed structural validation")
+        raise ValueError("Optimization release failed structural validation")
     if operating["summary"]["effectiveErrorFindings"]:
-        raise ValueError("Optimization review has effective operating errors")
+        raise ValueError("Optimization release has effective operating errors")
     if actual["hardStopFailures"]:
-        raise ValueError("Optimization review has hard-stop failures")
+        raise ValueError("Optimization release has hard-stop failures")
     if planning_validation["status"] != "pass":
-        raise ValueError("Optimization review planning reconstruction failed")
+        raise ValueError("Optimization release planning reconstruction failed")
 
     output = (
         output_directory.resolve()
@@ -235,7 +257,7 @@ def build_optimization_review(
         else (repo_root / config["outputDirectory"]).resolve()
     )
     if output != repo_root and repo_root not in output.parents:
-        raise ValueError("Optimization review output must remain inside the repository")
+        raise ValueError("Optimization release output must remain inside the repository")
 
     artifacts = {
         "canonical_schedule.json": canonical,
@@ -254,23 +276,15 @@ def build_optimization_review(
             write_json(output / filename, value)
 
     connection_decision = copy.deepcopy(config.get("connectionScopeDecision"))
-    decision_approved = (
+    if (
         connection_decision is not None
-        and connection_decision.get("status") == "approved"
-    )
+        and connection_decision.get("status") != "approved"
+    ):
+        raise ValueError("Optimization release requires an approved scope decision")
     report = {
         "schemaVersion": "1.0.0",
         "scheduleId": canonical["schedule"]["id"],
-        "status": (
-            "candidate_ready_for_review"
-            if decision_approved
-            else "candidate_review_required"
-        ),
-        "releaseRecommendation": (
-            "proceed_with_selected_cluster_model"
-            if decision_approved
-            else "hold_for_connection_scope_decision"
-        ),
+        "status": "released",
         "sourceScheduleId": config["sourceScheduleId"],
         "overlayIds": [pin["id"] for pin in overlay_pins],
         "summary": actual,
@@ -287,7 +301,8 @@ def build_optimization_review(
             "pairs meet the configured connection window."
         ),
         "connectionScopeDecision": connection_decision,
+        "patchScope": copy.deepcopy(config.get("patchScope")),
         "artifacts": sorted(artifacts),
     }
-    write_json(output / "optimization_review_report.json", report)
+    write_json(output / "release_report.json", report)
     return {**report, "outputDirectory": output}

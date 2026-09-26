@@ -1,0 +1,1275 @@
+{
+  "schemaVersion": "1.0.0",
+  "scheduleId": "schedule_7_v1_1_0",
+  "hub": "PHF",
+  "connectionWindowMinutes": {
+    "minimum": 30,
+    "maximum": 240
+  },
+  "groups": {
+    "north": [
+      "PWM",
+      "MHT",
+      "BDL",
+      "ALB",
+      "ROC",
+      "BUF",
+      "PIT"
+    ],
+    "south": [
+      "DAB",
+      "MLB",
+      "PGD",
+      "SRQ",
+      "VPS",
+      "BHM",
+      "PNS"
+    ]
+  },
+  "summary": {
+    "targetCities": 14,
+    "directRoundTripCities": 14,
+    "directionalPairs": 98,
+    "connectedDirectionalPairs": 34,
+    "missingDirectionalPairs": 64,
+    "connectionCoverage": 0.346939,
+    "bySourceGroup": {
+      "north": {
+        "directionalPairs": 49,
+        "connectedDirectionalPairs": 14,
+        "missingDirectionalPairs": 35
+      },
+      "south": {
+        "directionalPairs": 49,
+        "connectedDirectionalPairs": 20,
+        "missingDirectionalPairs": 29
+      }
+    }
+  },
+  "directCoverage": [
+    {
+      "city": "PWM",
+      "group": "north",
+      "toHubLegs": 1,
+      "fromHubLegs": 1,
+      "roundTripCovered": true
+    },
+    {
+      "city": "MHT",
+      "group": "north",
+      "toHubLegs": 1,
+      "fromHubLegs": 1,
+      "roundTripCovered": true
+    },
+    {
+      "city": "BDL",
+      "group": "north",
+      "toHubLegs": 1,
+      "fromHubLegs": 1,
+      "roundTripCovered": true
+    },
+    {
+      "city": "ALB",
+      "group": "north",
+      "toHubLegs": 1,
+      "fromHubLegs": 1,
+      "roundTripCovered": true
+    },
+    {
+      "city": "ROC",
+      "group": "north",
+      "toHubLegs": 1,
+      "fromHubLegs": 1,
+      "roundTripCovered": true
+    },
+    {
+      "city": "BUF",
+      "group": "north",
+      "toHubLegs": 1,
+      "fromHubLegs": 1,
+      "roundTripCovered": true
+    },
+    {
+      "city": "PIT",
+      "group": "north",
+      "toHubLegs": 1,
+      "fromHubLegs": 1,
+      "roundTripCovered": true
+    },
+    {
+      "city": "DAB",
+      "group": "south",
+      "toHubLegs": 1,
+      "fromHubLegs": 1,
+      "roundTripCovered": true
+    },
+    {
+      "city": "MLB",
+      "group": "south",
+      "toHubLegs": 1,
+      "fromHubLegs": 1,
+      "roundTripCovered": true
+    },
+    {
+      "city": "PGD",
+      "group": "south",
+      "toHubLegs": 1,
+      "fromHubLegs": 1,
+      "roundTripCovered": true
+    },
+    {
+      "city": "SRQ",
+      "group": "south",
+      "toHubLegs": 1,
+      "fromHubLegs": 1,
+      "roundTripCovered": true
+    },
+    {
+      "city": "VPS",
+      "group": "south",
+      "toHubLegs": 1,
+      "fromHubLegs": 1,
+      "roundTripCovered": true
+    },
+    {
+      "city": "BHM",
+      "group": "south",
+      "toHubLegs": 1,
+      "fromHubLegs": 1,
+      "roundTripCovered": true
+    },
+    {
+      "city": "PNS",
+      "group": "south",
+      "toHubLegs": 1,
+      "fromHubLegs": 1,
+      "roundTripCovered": true
+    }
+  ],
+  "directionalPairs": [
+    {
+      "source": "PWM",
+      "sourceGroup": "north",
+      "destination": "DAB",
+      "destinationGroup": "south",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "PWM",
+      "sourceGroup": "north",
+      "destination": "MLB",
+      "destinationGroup": "south",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "PWM",
+      "sourceGroup": "north",
+      "destination": "PGD",
+      "destinationGroup": "south",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "PWM",
+      "sourceGroup": "north",
+      "destination": "SRQ",
+      "destinationGroup": "south",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "PWM",
+      "sourceGroup": "north",
+      "destination": "VPS",
+      "destinationGroup": "south",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "PWM",
+      "sourceGroup": "north",
+      "destination": "BHM",
+      "destinationGroup": "south",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "PWM",
+      "sourceGroup": "north",
+      "destination": "PNS",
+      "destinationGroup": "south",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "MHT",
+      "sourceGroup": "north",
+      "destination": "DAB",
+      "destinationGroup": "south",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "MHT",
+      "sourceGroup": "north",
+      "destination": "MLB",
+      "destinationGroup": "south",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V110-R352-MHT-PHF",
+          "inboundFlight": 1936,
+          "hubArrival": "14:27",
+          "outboundLegId": "V110-R352-PHF-MLB",
+          "outboundFlight": 1937,
+          "hubDeparture": "17:15",
+          "waitMinutes": 168
+        }
+      ]
+    },
+    {
+      "source": "MHT",
+      "sourceGroup": "north",
+      "destination": "PGD",
+      "destinationGroup": "south",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "MHT",
+      "sourceGroup": "north",
+      "destination": "SRQ",
+      "destinationGroup": "south",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "MHT",
+      "sourceGroup": "north",
+      "destination": "VPS",
+      "destinationGroup": "south",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V110-R352-MHT-PHF",
+          "inboundFlight": 1936,
+          "hubArrival": "14:27",
+          "outboundLegId": "V110-R353-PHF-VPS",
+          "outboundFlight": 1943,
+          "hubDeparture": "17:15",
+          "waitMinutes": 168
+        }
+      ]
+    },
+    {
+      "source": "MHT",
+      "sourceGroup": "north",
+      "destination": "BHM",
+      "destinationGroup": "south",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "MHT",
+      "sourceGroup": "north",
+      "destination": "PNS",
+      "destinationGroup": "south",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "BDL",
+      "sourceGroup": "north",
+      "destination": "DAB",
+      "destinationGroup": "south",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V110-R312-BDL-PHF",
+          "inboundFlight": 1921,
+          "hubArrival": "14:05",
+          "outboundLegId": "V110-R312-PHF-DAB",
+          "outboundFlight": 1922,
+          "hubDeparture": "14:45",
+          "waitMinutes": 40
+        }
+      ]
+    },
+    {
+      "source": "BDL",
+      "sourceGroup": "north",
+      "destination": "MLB",
+      "destinationGroup": "south",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V110-R312-BDL-PHF",
+          "inboundFlight": 1921,
+          "hubArrival": "14:05",
+          "outboundLegId": "V110-R352-PHF-MLB",
+          "outboundFlight": 1937,
+          "hubDeparture": "17:15",
+          "waitMinutes": 190
+        }
+      ]
+    },
+    {
+      "source": "BDL",
+      "sourceGroup": "north",
+      "destination": "PGD",
+      "destinationGroup": "south",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "BDL",
+      "sourceGroup": "north",
+      "destination": "SRQ",
+      "destinationGroup": "south",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "BDL",
+      "sourceGroup": "north",
+      "destination": "VPS",
+      "destinationGroup": "south",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V110-R312-BDL-PHF",
+          "inboundFlight": 1921,
+          "hubArrival": "14:05",
+          "outboundLegId": "V110-R353-PHF-VPS",
+          "outboundFlight": 1943,
+          "hubDeparture": "17:15",
+          "waitMinutes": 190
+        }
+      ]
+    },
+    {
+      "source": "BDL",
+      "sourceGroup": "north",
+      "destination": "BHM",
+      "destinationGroup": "south",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V110-R312-BDL-PHF",
+          "inboundFlight": 1921,
+          "hubArrival": "14:05",
+          "outboundLegId": "V110-R331-PHF-BHM",
+          "outboundFlight": 1931,
+          "hubDeparture": "14:45",
+          "waitMinutes": 40
+        }
+      ]
+    },
+    {
+      "source": "BDL",
+      "sourceGroup": "north",
+      "destination": "PNS",
+      "destinationGroup": "south",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "ALB",
+      "sourceGroup": "north",
+      "destination": "DAB",
+      "destinationGroup": "south",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V110-R353-ALB-PHF",
+          "inboundFlight": 1942,
+          "hubArrival": "14:11",
+          "outboundLegId": "V110-R312-PHF-DAB",
+          "outboundFlight": 1922,
+          "hubDeparture": "14:45",
+          "waitMinutes": 34
+        }
+      ]
+    },
+    {
+      "source": "ALB",
+      "sourceGroup": "north",
+      "destination": "MLB",
+      "destinationGroup": "south",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V110-R353-ALB-PHF",
+          "inboundFlight": 1942,
+          "hubArrival": "14:11",
+          "outboundLegId": "V110-R352-PHF-MLB",
+          "outboundFlight": 1937,
+          "hubDeparture": "17:15",
+          "waitMinutes": 184
+        }
+      ]
+    },
+    {
+      "source": "ALB",
+      "sourceGroup": "north",
+      "destination": "PGD",
+      "destinationGroup": "south",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "ALB",
+      "sourceGroup": "north",
+      "destination": "SRQ",
+      "destinationGroup": "south",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "ALB",
+      "sourceGroup": "north",
+      "destination": "VPS",
+      "destinationGroup": "south",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V110-R353-ALB-PHF",
+          "inboundFlight": 1942,
+          "hubArrival": "14:11",
+          "outboundLegId": "V110-R353-PHF-VPS",
+          "outboundFlight": 1943,
+          "hubDeparture": "17:15",
+          "waitMinutes": 184
+        }
+      ]
+    },
+    {
+      "source": "ALB",
+      "sourceGroup": "north",
+      "destination": "BHM",
+      "destinationGroup": "south",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V110-R353-ALB-PHF",
+          "inboundFlight": 1942,
+          "hubArrival": "14:11",
+          "outboundLegId": "V110-R331-PHF-BHM",
+          "outboundFlight": 1931,
+          "hubDeparture": "14:45",
+          "waitMinutes": 34
+        }
+      ]
+    },
+    {
+      "source": "ALB",
+      "sourceGroup": "north",
+      "destination": "PNS",
+      "destinationGroup": "south",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "ROC",
+      "sourceGroup": "north",
+      "destination": "DAB",
+      "destinationGroup": "south",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V110-R354-ROC-PHF",
+          "inboundFlight": 1948,
+          "hubArrival": "14:11",
+          "outboundLegId": "V110-R312-PHF-DAB",
+          "outboundFlight": 1922,
+          "hubDeparture": "14:45",
+          "waitMinutes": 34
+        }
+      ]
+    },
+    {
+      "source": "ROC",
+      "sourceGroup": "north",
+      "destination": "MLB",
+      "destinationGroup": "south",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V110-R354-ROC-PHF",
+          "inboundFlight": 1948,
+          "hubArrival": "14:11",
+          "outboundLegId": "V110-R352-PHF-MLB",
+          "outboundFlight": 1937,
+          "hubDeparture": "17:15",
+          "waitMinutes": 184
+        }
+      ]
+    },
+    {
+      "source": "ROC",
+      "sourceGroup": "north",
+      "destination": "PGD",
+      "destinationGroup": "south",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "ROC",
+      "sourceGroup": "north",
+      "destination": "SRQ",
+      "destinationGroup": "south",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "ROC",
+      "sourceGroup": "north",
+      "destination": "VPS",
+      "destinationGroup": "south",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V110-R354-ROC-PHF",
+          "inboundFlight": 1948,
+          "hubArrival": "14:11",
+          "outboundLegId": "V110-R353-PHF-VPS",
+          "outboundFlight": 1943,
+          "hubDeparture": "17:15",
+          "waitMinutes": 184
+        }
+      ]
+    },
+    {
+      "source": "ROC",
+      "sourceGroup": "north",
+      "destination": "BHM",
+      "destinationGroup": "south",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V110-R354-ROC-PHF",
+          "inboundFlight": 1948,
+          "hubArrival": "14:11",
+          "outboundLegId": "V110-R331-PHF-BHM",
+          "outboundFlight": 1931,
+          "hubDeparture": "14:45",
+          "waitMinutes": 34
+        }
+      ]
+    },
+    {
+      "source": "ROC",
+      "sourceGroup": "north",
+      "destination": "PNS",
+      "destinationGroup": "south",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "BUF",
+      "sourceGroup": "north",
+      "destination": "DAB",
+      "destinationGroup": "south",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "BUF",
+      "sourceGroup": "north",
+      "destination": "MLB",
+      "destinationGroup": "south",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "BUF",
+      "sourceGroup": "north",
+      "destination": "PGD",
+      "destinationGroup": "south",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "BUF",
+      "sourceGroup": "north",
+      "destination": "SRQ",
+      "destinationGroup": "south",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "BUF",
+      "sourceGroup": "north",
+      "destination": "VPS",
+      "destinationGroup": "south",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "BUF",
+      "sourceGroup": "north",
+      "destination": "BHM",
+      "destinationGroup": "south",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "BUF",
+      "sourceGroup": "north",
+      "destination": "PNS",
+      "destinationGroup": "south",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "PIT",
+      "sourceGroup": "north",
+      "destination": "DAB",
+      "destinationGroup": "south",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "PIT",
+      "sourceGroup": "north",
+      "destination": "MLB",
+      "destinationGroup": "south",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "PIT",
+      "sourceGroup": "north",
+      "destination": "PGD",
+      "destinationGroup": "south",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "PIT",
+      "sourceGroup": "north",
+      "destination": "SRQ",
+      "destinationGroup": "south",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "PIT",
+      "sourceGroup": "north",
+      "destination": "VPS",
+      "destinationGroup": "south",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "PIT",
+      "sourceGroup": "north",
+      "destination": "BHM",
+      "destinationGroup": "south",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "PIT",
+      "sourceGroup": "north",
+      "destination": "PNS",
+      "destinationGroup": "south",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "DAB",
+      "sourceGroup": "south",
+      "destination": "PWM",
+      "destinationGroup": "north",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "DAB",
+      "sourceGroup": "south",
+      "destination": "MHT",
+      "destinationGroup": "north",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V110-R312-DAB-PHF",
+          "inboundFlight": 1919,
+          "hubArrival": "09:35",
+          "outboundLegId": "V110-R352-PHF-MHT",
+          "outboundFlight": 1935,
+          "hubDeparture": "10:45",
+          "waitMinutes": 70
+        }
+      ]
+    },
+    {
+      "source": "DAB",
+      "sourceGroup": "south",
+      "destination": "BDL",
+      "destinationGroup": "north",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V110-R312-DAB-PHF",
+          "inboundFlight": 1919,
+          "hubArrival": "09:35",
+          "outboundLegId": "V110-R312-PHF-BDL",
+          "outboundFlight": 1920,
+          "hubDeparture": "10:15",
+          "waitMinutes": 40
+        }
+      ]
+    },
+    {
+      "source": "DAB",
+      "sourceGroup": "south",
+      "destination": "ALB",
+      "destinationGroup": "north",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V110-R312-DAB-PHF",
+          "inboundFlight": 1919,
+          "hubArrival": "09:35",
+          "outboundLegId": "V110-R353-PHF-ALB",
+          "outboundFlight": 1941,
+          "hubDeparture": "10:45",
+          "waitMinutes": 70
+        }
+      ]
+    },
+    {
+      "source": "DAB",
+      "sourceGroup": "south",
+      "destination": "ROC",
+      "destinationGroup": "north",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V110-R312-DAB-PHF",
+          "inboundFlight": 1919,
+          "hubArrival": "09:35",
+          "outboundLegId": "V110-R354-PHF-ROC",
+          "outboundFlight": 1947,
+          "hubDeparture": "10:45",
+          "waitMinutes": 70
+        }
+      ]
+    },
+    {
+      "source": "DAB",
+      "sourceGroup": "south",
+      "destination": "BUF",
+      "destinationGroup": "north",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "DAB",
+      "sourceGroup": "south",
+      "destination": "PIT",
+      "destinationGroup": "north",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V110-R312-DAB-PHF",
+          "inboundFlight": 1919,
+          "hubArrival": "09:35",
+          "outboundLegId": "V110-R307-PHF-PIT",
+          "outboundFlight": 1917,
+          "hubDeparture": "10:15",
+          "waitMinutes": 40
+        }
+      ]
+    },
+    {
+      "source": "MLB",
+      "sourceGroup": "south",
+      "destination": "PWM",
+      "destinationGroup": "north",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "MLB",
+      "sourceGroup": "south",
+      "destination": "MHT",
+      "destinationGroup": "north",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "MLB",
+      "sourceGroup": "south",
+      "destination": "BDL",
+      "destinationGroup": "north",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "MLB",
+      "sourceGroup": "south",
+      "destination": "ALB",
+      "destinationGroup": "north",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "MLB",
+      "sourceGroup": "south",
+      "destination": "ROC",
+      "destinationGroup": "north",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "MLB",
+      "sourceGroup": "south",
+      "destination": "BUF",
+      "destinationGroup": "north",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "MLB",
+      "sourceGroup": "south",
+      "destination": "PIT",
+      "destinationGroup": "north",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "PGD",
+      "sourceGroup": "south",
+      "destination": "PWM",
+      "destinationGroup": "north",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "PGD",
+      "sourceGroup": "south",
+      "destination": "MHT",
+      "destinationGroup": "north",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V110-R352-PGD-PHF",
+          "inboundFlight": 1934,
+          "hubArrival": "09:35",
+          "outboundLegId": "V110-R352-PHF-MHT",
+          "outboundFlight": 1935,
+          "hubDeparture": "10:45",
+          "waitMinutes": 70
+        }
+      ]
+    },
+    {
+      "source": "PGD",
+      "sourceGroup": "south",
+      "destination": "BDL",
+      "destinationGroup": "north",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V110-R352-PGD-PHF",
+          "inboundFlight": 1934,
+          "hubArrival": "09:35",
+          "outboundLegId": "V110-R312-PHF-BDL",
+          "outboundFlight": 1920,
+          "hubDeparture": "10:15",
+          "waitMinutes": 40
+        }
+      ]
+    },
+    {
+      "source": "PGD",
+      "sourceGroup": "south",
+      "destination": "ALB",
+      "destinationGroup": "north",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V110-R352-PGD-PHF",
+          "inboundFlight": 1934,
+          "hubArrival": "09:35",
+          "outboundLegId": "V110-R353-PHF-ALB",
+          "outboundFlight": 1941,
+          "hubDeparture": "10:45",
+          "waitMinutes": 70
+        }
+      ]
+    },
+    {
+      "source": "PGD",
+      "sourceGroup": "south",
+      "destination": "ROC",
+      "destinationGroup": "north",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V110-R352-PGD-PHF",
+          "inboundFlight": 1934,
+          "hubArrival": "09:35",
+          "outboundLegId": "V110-R354-PHF-ROC",
+          "outboundFlight": 1947,
+          "hubDeparture": "10:45",
+          "waitMinutes": 70
+        }
+      ]
+    },
+    {
+      "source": "PGD",
+      "sourceGroup": "south",
+      "destination": "BUF",
+      "destinationGroup": "north",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "PGD",
+      "sourceGroup": "south",
+      "destination": "PIT",
+      "destinationGroup": "north",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V110-R352-PGD-PHF",
+          "inboundFlight": 1934,
+          "hubArrival": "09:35",
+          "outboundLegId": "V110-R307-PHF-PIT",
+          "outboundFlight": 1917,
+          "hubDeparture": "10:15",
+          "waitMinutes": 40
+        }
+      ]
+    },
+    {
+      "source": "SRQ",
+      "sourceGroup": "south",
+      "destination": "PWM",
+      "destinationGroup": "north",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "SRQ",
+      "sourceGroup": "south",
+      "destination": "MHT",
+      "destinationGroup": "north",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V110-R353-SRQ-PHF",
+          "inboundFlight": 1940,
+          "hubArrival": "09:35",
+          "outboundLegId": "V110-R352-PHF-MHT",
+          "outboundFlight": 1935,
+          "hubDeparture": "10:45",
+          "waitMinutes": 70
+        }
+      ]
+    },
+    {
+      "source": "SRQ",
+      "sourceGroup": "south",
+      "destination": "BDL",
+      "destinationGroup": "north",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V110-R353-SRQ-PHF",
+          "inboundFlight": 1940,
+          "hubArrival": "09:35",
+          "outboundLegId": "V110-R312-PHF-BDL",
+          "outboundFlight": 1920,
+          "hubDeparture": "10:15",
+          "waitMinutes": 40
+        }
+      ]
+    },
+    {
+      "source": "SRQ",
+      "sourceGroup": "south",
+      "destination": "ALB",
+      "destinationGroup": "north",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V110-R353-SRQ-PHF",
+          "inboundFlight": 1940,
+          "hubArrival": "09:35",
+          "outboundLegId": "V110-R353-PHF-ALB",
+          "outboundFlight": 1941,
+          "hubDeparture": "10:45",
+          "waitMinutes": 70
+        }
+      ]
+    },
+    {
+      "source": "SRQ",
+      "sourceGroup": "south",
+      "destination": "ROC",
+      "destinationGroup": "north",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V110-R353-SRQ-PHF",
+          "inboundFlight": 1940,
+          "hubArrival": "09:35",
+          "outboundLegId": "V110-R354-PHF-ROC",
+          "outboundFlight": 1947,
+          "hubDeparture": "10:45",
+          "waitMinutes": 70
+        }
+      ]
+    },
+    {
+      "source": "SRQ",
+      "sourceGroup": "south",
+      "destination": "BUF",
+      "destinationGroup": "north",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "SRQ",
+      "sourceGroup": "south",
+      "destination": "PIT",
+      "destinationGroup": "north",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V110-R353-SRQ-PHF",
+          "inboundFlight": 1940,
+          "hubArrival": "09:35",
+          "outboundLegId": "V110-R307-PHF-PIT",
+          "outboundFlight": 1917,
+          "hubDeparture": "10:15",
+          "waitMinutes": 40
+        }
+      ]
+    },
+    {
+      "source": "VPS",
+      "sourceGroup": "south",
+      "destination": "PWM",
+      "destinationGroup": "north",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "VPS",
+      "sourceGroup": "south",
+      "destination": "MHT",
+      "destinationGroup": "north",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "VPS",
+      "sourceGroup": "south",
+      "destination": "BDL",
+      "destinationGroup": "north",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "VPS",
+      "sourceGroup": "south",
+      "destination": "ALB",
+      "destinationGroup": "north",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "VPS",
+      "sourceGroup": "south",
+      "destination": "ROC",
+      "destinationGroup": "north",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "VPS",
+      "sourceGroup": "south",
+      "destination": "BUF",
+      "destinationGroup": "north",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "VPS",
+      "sourceGroup": "south",
+      "destination": "PIT",
+      "destinationGroup": "north",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "BHM",
+      "sourceGroup": "south",
+      "destination": "PWM",
+      "destinationGroup": "north",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "BHM",
+      "sourceGroup": "south",
+      "destination": "MHT",
+      "destinationGroup": "north",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "BHM",
+      "sourceGroup": "south",
+      "destination": "BDL",
+      "destinationGroup": "north",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "BHM",
+      "sourceGroup": "south",
+      "destination": "ALB",
+      "destinationGroup": "north",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "BHM",
+      "sourceGroup": "south",
+      "destination": "ROC",
+      "destinationGroup": "north",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "BHM",
+      "sourceGroup": "south",
+      "destination": "BUF",
+      "destinationGroup": "north",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "BHM",
+      "sourceGroup": "south",
+      "destination": "PIT",
+      "destinationGroup": "north",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "PNS",
+      "sourceGroup": "south",
+      "destination": "PWM",
+      "destinationGroup": "north",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "PNS",
+      "sourceGroup": "south",
+      "destination": "MHT",
+      "destinationGroup": "north",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V110-R354-PNS-PHF",
+          "inboundFlight": 1946,
+          "hubArrival": "09:35",
+          "outboundLegId": "V110-R352-PHF-MHT",
+          "outboundFlight": 1935,
+          "hubDeparture": "10:45",
+          "waitMinutes": 70
+        }
+      ]
+    },
+    {
+      "source": "PNS",
+      "sourceGroup": "south",
+      "destination": "BDL",
+      "destinationGroup": "north",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V110-R354-PNS-PHF",
+          "inboundFlight": 1946,
+          "hubArrival": "09:35",
+          "outboundLegId": "V110-R312-PHF-BDL",
+          "outboundFlight": 1920,
+          "hubDeparture": "10:15",
+          "waitMinutes": 40
+        }
+      ]
+    },
+    {
+      "source": "PNS",
+      "sourceGroup": "south",
+      "destination": "ALB",
+      "destinationGroup": "north",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V110-R354-PNS-PHF",
+          "inboundFlight": 1946,
+          "hubArrival": "09:35",
+          "outboundLegId": "V110-R353-PHF-ALB",
+          "outboundFlight": 1941,
+          "hubDeparture": "10:45",
+          "waitMinutes": 70
+        }
+      ]
+    },
+    {
+      "source": "PNS",
+      "sourceGroup": "south",
+      "destination": "ROC",
+      "destinationGroup": "north",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V110-R354-PNS-PHF",
+          "inboundFlight": 1946,
+          "hubArrival": "09:35",
+          "outboundLegId": "V110-R354-PHF-ROC",
+          "outboundFlight": 1947,
+          "hubDeparture": "10:45",
+          "waitMinutes": 70
+        }
+      ]
+    },
+    {
+      "source": "PNS",
+      "sourceGroup": "south",
+      "destination": "BUF",
+      "destinationGroup": "north",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "PNS",
+      "sourceGroup": "south",
+      "destination": "PIT",
+      "destinationGroup": "north",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V110-R354-PNS-PHF",
+          "inboundFlight": 1946,
+          "hubArrival": "09:35",
+          "outboundLegId": "V110-R307-PHF-PIT",
+          "outboundFlight": 1917,
+          "hubDeparture": "10:15",
+          "waitMinutes": 40
+        }
+      ]
+    }
+  ]
+}

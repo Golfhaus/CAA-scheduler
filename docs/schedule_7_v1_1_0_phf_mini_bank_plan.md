@@ -238,15 +238,14 @@ station-discontinuous route definitions.
   the new three-route Line AS falling below the standing 9-12-route guideline.
   None is an operating error or hard stop.
 
-## Review candidate package
+## v1.1.0 release package
 
-The cumulative overlays are packaged as `schedule_7_v1_1_0_review` with a
-reproducible review configuration and command. The package regenerates the
+The cumulative overlays are released as `schedule_7_v1_1_0` with a
+reproducible release configuration and command. The package regenerates the
 canonical schedule, timetable, gate schedule, structural and operating
 validation, reconstructed planning snapshot, and a pair-by-pair PHF connection
-audit. The preview console intentionally omits the demand-allocation Planning
-tab because those upstream planning artifacts were not rerun for the approved
-overlay.
+audit. Upstream demand-allocation artifacts are intentionally omitted because
+they were not rerun for the approved overlay.
 
 The connection audit distinguishes network coverage from timed connectivity:
 
@@ -260,8 +259,8 @@ The selected-bank-cluster model is approved for this version. It does not
 represent universal pairwise north-south connectivity; additional pairwise
 coverage is deferred to future Schedule 7 versions.
 
-## Next phase
+## Release decision
 
-Review and promote the selected-bank-cluster candidate without rerunning the
-archival Schedule 6 baseline. Treat additional pairwise PHF connectivity as a
-future-version optimization rather than a blocker for v1.1.0.
+The selected-bank-cluster model is the final v1.1.0 release. The archival
+Schedule 6 baseline is not rerun. Additional pairwise PHF connectivity remains
+future-version work rather than a blocker for v1.1.0.
