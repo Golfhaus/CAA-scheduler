@@ -157,18 +157,89 @@ schedule, and assigns new flight and pairing identifiers deterministically.
 - Conditional stand holds increase from 44 to 45; none is passenger handling.
 - BHM, BWI, DAB, and PIT use explicit Schedule-7-only hub-count exceptions.
 
+## Feasibility checkpoint 03
+
+The remaining eight target cities fit on three new CRJ700 aircraft-days already
+available inside the released fleet count. No released leg moves or disappears,
+and CRJ700 use increases from 51 to 54 against the fixed count of 65.
+
+The routes deliberately pair southern arrivals with northern departures. Their
+09:35 PHF arrivals connect to 10:45 northern departures in 70 minutes. The
+northern returns reach PHF at 14:11 or 14:27 and connect to the two 17:15
+southern departures in 168-184 minutes. Both directions remain inside the
+30-240-minute connection window.
+
+All times below are local.
+
+### Route 352 — PGD, MHT, and MLB
+
+| Sequence | Leg | Time |
+| ---: | --- | --- |
+| 1 | PHF-PGD | 04:37-06:46 |
+| 2 | PGD-PHF | 07:26-09:35 |
+| 3 | PHF-MHT | 10:45-11:56 |
+| 4 | MHT-PHF | 12:56-14:27 |
+| 5 | PHF-MLB | 17:15-19:10 |
+| 6 | MLB-PHF | 19:50-21:45 |
+
+### Route 353 — SRQ, ALB, and VPS
+
+| Sequence | Leg | Time |
+| ---: | --- | --- |
+| 1 | PHF-SRQ | 04:41-06:48 |
+| 2 | SRQ-PHF | 07:28-09:35 |
+| 3 | PHF-ALB | 10:45-12:08 |
+| 4 | ALB-PHF | 12:48-14:11 |
+| 5 | PHF-VPS | 17:15 ET-18:19 CT |
+| 6 | VPS-PHF | 18:59 CT-22:03 ET |
+
+### Route 354 — PNS and ROC
+
+| Sequence | Leg | Time |
+| ---: | --- | --- |
+| 1 | PHF-PNS | 04:39 ET-05:47 CT |
+| 2 | PNS-PHF | 06:27 CT-09:35 ET |
+| 3 | PHF-ROC | 10:45-12:08 |
+| 4 | ROC-PHF | 12:48-14:11 |
+
+### Bank use
+
+- `PHF-M0`, 04:30-05:30: three early southern departures.
+- `PHF-M1`, 09:35-10:35: three new southern arrivals bring the complete bank
+  to seven operations.
+- `PHF-B3`, 10:45-11:45: three northern departures use the released bank.
+- `PHF-M3`, 14:05-15:05: three northern arrivals bring the complete bank to
+  eight operations.
+- `PHF-M5`, 16:25-17:25: the MLB and VPS departures join the BUF departure.
+- `PHF-M7`, 21:45-22:15: the MLB and VPS returns finish the operating day.
+
+The cumulative checkpoint is expressed as the round-one overlay followed by
+`config/optimizations/schedule_7_v1_1_0_round_2.json`. The overlay engine now
+supports guarded creation of new aircraft routes and rejects duplicate route
+numbers, duplicate line/day identities, unknown fleets, duplicate leg IDs, and
+station-discontinuous route definitions.
+
+### Combined validation result
+
+- 948 legs, 179 routes, and 22 lines.
+- Structural validation passes.
+- Zero effective operating errors and zero hard-stop failures.
+- Curfews, 40-minute turns, pairing spacing, route continuity, line continuity,
+  and fleet capacity all pass.
+- Fixed physical gate/stand inventory passes at every station.
+- PHF peaks at 22 aircraft against 16 gates plus 8 stands.
+- Conditional stand holds increase from 45 to 52; every passenger arrival and
+  departure remains at a gate.
+- Endpoint peaks are 2 positions at MHT, ALB, ROC, MLB, PGD, SRQ, and PNS and
+  1 position at VPS, all inside fixed inventory.
+- MLB, PGD, PNS, ROC, SRQ, and VPS use explicit Schedule-7-only hub-count
+  exceptions. ALB and MHT remain inside their ordinary caps.
+- Review-class findings increase by three: two deliberate long PHF holds and
+  the new three-route Line AS falling below the standing 9-12-route guideline.
+  None is an operating error or hard stop.
+
 ## Next phase
 
-Search other productive holds and the available CRJ700/CRJ900 capacity for the
-remaining targets: MHT, ALB, ROC, MLB, PGD, SRQ, VPS, and PNS. Test them in this
-order:
-
-1. timetable and 40-minute-turn feasibility;
-2. PHF gate feasibility;
-3. endpoint gate feasibility;
-4. complete operating validation;
-5. full-cycle continuity and fleet use.
-
-Only survivors advance. Any survivor that removes an existing leg, changes a
-different line, or needs fleet beyond the released counts is held for an
-explicit decision.
+Package the three feasibility checkpoints as a Schedule 7 v1.1.0 review
+candidate, regenerate its canonical, timetable, gate, and validation artifacts,
+and inspect the complete north-south connection set before proposing a release.

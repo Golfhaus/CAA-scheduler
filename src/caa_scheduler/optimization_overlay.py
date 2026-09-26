@@ -87,6 +87,71 @@ def apply_optimization_overlay(
     next_pairing = max(int(leg["pairing"]) for leg in result["legs"]) + 1
     next_flight = max(int(leg["flight"]) for leg in result["legs"]) + 1
 
+    line_days = {
+        (str(leg["line"]), int(leg["day"])) for leg in result["legs"]
+    }
+    existing_routes = {int(leg["route"]) for leg in result["legs"]}
+    for addition in overlay.get("addRoutes", []):
+        route = int(addition["route"])
+        line = str(addition["line"])
+        day = int(addition["day"])
+        fleet = str(addition["fleet"])
+        if route in existing_routes:
+            raise ValueError(f"Overlay route already exists: {route}")
+        if (line, day) in line_days:
+            raise ValueError(f"Overlay line/day already exists: {line}-{day}")
+        if fleet not in result["schedule"]["fleetCounts"]:
+            raise ValueError(f"Overlay route {route} uses unknown fleet {fleet}")
+        route_legs = addition.get("legs", [])
+        if not route_legs:
+            raise ValueError(f"Overlay route {route} has no legs")
+
+        previous_destination: str | None = None
+        for sequence, item in enumerate(route_legs, start=1):
+            identifier = str(item["id"])
+            if identifier in legs_by_id:
+                raise ValueError(f"Overlay leg already exists: {identifier}")
+            origin = str(item["origin"])
+            destination = str(item["destination"])
+            if previous_destination is not None and origin != previous_destination:
+                raise ValueError(
+                    f"Overlay route {route} is discontinuous before {identifier}: "
+                    f"expected {previous_destination}, found {origin}"
+                )
+            market = (origin, destination)
+            pairing = directed_pairings.get(market)
+            if pairing is None:
+                pairing = next_pairing
+                next_pairing += 1
+                directed_pairings[market] = pairing
+            departure = int(item["departureMinute"])
+            arrival = int(item["arrivalMinute"])
+            leg = {
+                "id": identifier,
+                "route": route,
+                "line": line,
+                "fleet": fleet,
+                "day": day,
+                "sequenceWithinRoute": sequence,
+                "pairing": pairing,
+                "flight": next_flight,
+                "origin": origin,
+                "destination": destination,
+                "departure": _clock(departure),
+                "arrival": _clock(arrival),
+                "departureMinute": departure,
+                "arrivalMinute": arrival,
+            }
+            next_flight += 1
+            result["legs"].append(leg)
+            legs_by_id[identifier] = leg
+            previous_destination = destination
+
+        route_attributes[route].add((line, fleet, day))
+        existing_routes.add(route)
+        line_days.add((line, day))
+        touched_routes.add(route)
+
     for addition in overlay.get("insertLegs", []):
         identifier = addition["id"]
         if identifier in legs_by_id:
