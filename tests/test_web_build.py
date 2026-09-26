@@ -24,6 +24,10 @@ class WebBuildTests(unittest.TestCase):
         self.assertEqual(selectors - set(ids), set())
         self.assertIn('id="preview-warning"', html)
         self.assertIn("previewNotice", script)
+        self.assertIn(
+            'src="app.mjs?v=schedule-7-v1.1.0-review.1"',
+            html,
+        )
 
     def test_build_copies_console_and_pinned_schedule_data(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
