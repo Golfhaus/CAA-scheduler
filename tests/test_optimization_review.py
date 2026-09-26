@@ -25,7 +25,11 @@ class OptimizationReviewTests(unittest.TestCase):
                 REPO_ROOT,
                 output_directory=output,
             )
-            self.assertEqual(report["status"], "candidate_review_required")
+            self.assertEqual(report["status"], "candidate_ready_for_review")
+            self.assertEqual(
+                report["releaseRecommendation"],
+                "proceed_with_selected_cluster_model",
+            )
             self.assertEqual(report["summary"]["legs"], 948)
             self.assertEqual(report["summary"]["connectedDirectionalPairs"], 34)
 

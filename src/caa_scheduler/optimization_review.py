@@ -253,11 +253,24 @@ def build_optimization_review(
         else:
             write_json(output / filename, value)
 
+    connection_decision = copy.deepcopy(config.get("connectionScopeDecision"))
+    decision_approved = (
+        connection_decision is not None
+        and connection_decision.get("status") == "approved"
+    )
     report = {
         "schemaVersion": "1.0.0",
         "scheduleId": canonical["schedule"]["id"],
-        "status": "candidate_review_required",
-        "releaseRecommendation": "hold_for_connection_scope_decision",
+        "status": (
+            "candidate_ready_for_review"
+            if decision_approved
+            else "candidate_review_required"
+        ),
+        "releaseRecommendation": (
+            "proceed_with_selected_cluster_model"
+            if decision_approved
+            else "hold_for_connection_scope_decision"
+        ),
         "sourceScheduleId": config["sourceScheduleId"],
         "overlayIds": [pin["id"] for pin in overlay_pins],
         "summary": actual,
@@ -273,6 +286,7 @@ def build_optimization_review(
             f"{connection_audit['summary']['directionalPairs']} directional cross-group "
             "pairs meet the configured connection window."
         ),
+        "connectionScopeDecision": connection_decision,
         "artifacts": sorted(artifacts),
     }
     write_json(output / "optimization_review_report.json", report)

@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0.0",
   "scheduleId": "schedule_7_v1_1_0_review",
-  "status": "candidate_review_required",
-  "releaseRecommendation": "hold_for_connection_scope_decision",
+  "status": "candidate_ready_for_review",
+  "releaseRecommendation": "proceed_with_selected_cluster_model",
   "sourceScheduleId": "schedule_7_v1_0_0",
   "overlayIds": [
     "schedule-7-v1.1.0-phf-north-south-round-1",
@@ -23,6 +23,12 @@
     "planningReconstruction": "pass"
   },
   "connectionFinding": "All 14 target cities have direct PHF round trips, but only 34/98 directional cross-group pairs meet the configured connection window.",
+  "connectionScopeDecision": {
+    "status": "approved",
+    "model": "selected_bank_clusters",
+    "approvedBy": "user",
+    "futureWork": "Additional pairwise north-south connectivity is deferred to future Schedule 7 versions."
+  },
   "artifacts": [
     "canonical_schedule.json",
     "connection_audit.json",

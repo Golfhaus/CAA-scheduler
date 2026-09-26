@@ -256,13 +256,12 @@ The connection audit distinguishes network coverage from timed connectivity:
 - North-to-south coverage is 14 of 49 directional pairs.
 - South-to-north coverage is 20 of 49 directional pairs.
 
-The review candidate therefore remains on hold for a connection-scope decision;
-it does not represent universal pairwise north-south connectivity.
+The selected-bank-cluster model is approved for this version. It does not
+represent universal pairwise north-south connectivity; additional pairwise
+coverage is deferred to future Schedule 7 versions.
 
 ## Next phase
 
-Decide whether Schedule 7 v1.1.0 should optimize for selected bank clusters or
-for universal pairwise north-south connectivity. If universal connectivity is
-required, retime or add frequency before release packaging. If the selected
-clusters are sufficient, promote the review candidate without rerunning the
-archival Schedule 6 baseline.
+Review and promote the selected-bank-cluster candidate without rerunning the
+archival Schedule 6 baseline. Treat additional pairwise PHF connectivity as a
+future-version optimization rather than a blocker for v1.1.0.
