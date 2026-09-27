@@ -1,0 +1,168 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "schedule-7-v1.1.2-mci-route-extensions-round-2",
+  "baseSchedule": {
+    "scheduleId": "schedule_7_v1_1_2_feasibility_01",
+    "commit": "41ba1481a5c6739c407d5f873c24cb99ae92ef65",
+    "overlay": "config/optimizations/schedule_7_v1_1_2_round_1.json"
+  },
+  "schedule": {
+    "id": "schedule_7_v1_1_2_feasibility_02",
+    "version": "1.1.2-feasibility.02",
+    "label": "Schedule 7, Version 1.1.2 Feasibility 02",
+    "status": "draft"
+  },
+  "initiative": {
+    "kind": "mci_route_day_extension",
+    "routes": [101, 133, 152, 153, 526],
+    "principles": [
+      "Extend Routes 101, 133, and 152 without changing any released v1.1.1 leg.",
+      "Use the long MCI ROD periods on Routes 153 and 526 for productive flying.",
+      "Add MCI round trips to MSN, ATW, SBN, and SDF without adding aircraft.",
+      "Keep every passenger arrival and departure on a gate within the fixed physical inventory."
+    ]
+  },
+  "insertLegs": [
+    {
+      "id": "V112-R101-ATW-MCI",
+      "route": 101,
+      "origin": "ATW",
+      "destination": "MCI",
+      "departureMinute": 752,
+      "arrivalMinute": 844
+    },
+    {
+      "id": "V112-R101-MCI-MSN",
+      "route": 101,
+      "origin": "MCI",
+      "destination": "MSN",
+      "departureMinute": 885,
+      "arrivalMinute": 966
+    },
+    {
+      "id": "V112-R101-MSN-MCI",
+      "route": 101,
+      "origin": "MSN",
+      "destination": "MCI",
+      "departureMinute": 1054,
+      "arrivalMinute": 1135
+    },
+    {
+      "id": "V112-R101-MCI-ATW",
+      "route": 101,
+      "origin": "MCI",
+      "destination": "ATW",
+      "departureMinute": 1185,
+      "arrivalMinute": 1277
+    },
+    {
+      "id": "V112-R133-MCI-SDF",
+      "route": 133,
+      "origin": "MCI",
+      "destination": "SDF",
+      "departureMinute": 544,
+      "arrivalMinute": 699
+    },
+    {
+      "id": "V112-R133-SDF-MCI",
+      "route": 133,
+      "origin": "SDF",
+      "destination": "MCI",
+      "departureMinute": 805,
+      "arrivalMinute": 840
+    },
+    {
+      "id": "V112-R152-MCI-SBN",
+      "route": 152,
+      "origin": "MCI",
+      "destination": "SBN",
+      "departureMinute": 685,
+      "arrivalMinute": 838
+    },
+    {
+      "id": "V112-R152-SBN-MCI",
+      "route": 152,
+      "origin": "SBN",
+      "destination": "MCI",
+      "departureMinute": 878,
+      "arrivalMinute": 911
+    },
+    {
+      "id": "V112-R153-MCI-SDF",
+      "route": 153,
+      "origin": "MCI",
+      "destination": "SDF",
+      "departureMinute": 705,
+      "arrivalMinute": 860
+    },
+    {
+      "id": "V112-R153-SDF-MCI",
+      "route": 153,
+      "origin": "SDF",
+      "destination": "MCI",
+      "departureMinute": 900,
+      "arrivalMinute": 935
+    },
+    {
+      "id": "V112-R526-MCI-MSN",
+      "route": 526,
+      "origin": "MCI",
+      "destination": "MSN",
+      "departureMinute": 585,
+      "arrivalMinute": 663
+    },
+    {
+      "id": "V112-R526-MSN-MCI",
+      "route": 526,
+      "origin": "MSN",
+      "destination": "MCI",
+      "departureMinute": 707,
+      "arrivalMinute": 785
+    },
+    {
+      "id": "V112-R526-MCI-ATW",
+      "route": 526,
+      "origin": "MCI",
+      "destination": "ATW",
+      "departureMinute": 844,
+      "arrivalMinute": 931
+    },
+    {
+      "id": "V112-R526-ATW-MCI",
+      "route": 526,
+      "origin": "ATW",
+      "destination": "MCI",
+      "departureMinute": 998,
+      "arrivalMinute": 1085
+    }
+  ],
+  "bankAssignmentsToAdd": [
+    {"legId": "V112-R101-ATW-MCI", "operation": "arrival", "bankId": "MCI-B6"},
+    {"legId": "V112-R101-MCI-MSN", "operation": "departure", "bankId": "MCI-B7"},
+    {"legId": "V112-R101-MSN-MCI", "operation": "arrival", "bankId": "MCI-B9"},
+    {"legId": "V112-R101-MCI-ATW", "operation": "departure", "bankId": "MCI-B10"},
+    {"legId": "V112-R133-MCI-SDF", "operation": "departure", "bankId": "MCI-B3"},
+    {"legId": "V112-R133-SDF-MCI", "operation": "arrival", "bankId": "MCI-B6"},
+    {"legId": "V112-R152-MCI-SBN", "operation": "departure", "bankId": "MCI-B5"},
+    {"legId": "V112-R152-SBN-MCI", "operation": "arrival", "bankId": "MCI-B7"},
+    {"legId": "V112-R153-MCI-SDF", "operation": "departure", "bankId": "MCI-B5"},
+    {"legId": "V112-R153-SDF-MCI", "operation": "arrival", "bankId": "MCI-B7"},
+    {"legId": "V112-R526-MCI-MSN", "operation": "departure", "bankId": "MCI-B4"},
+    {"legId": "V112-R526-MSN-MCI", "operation": "arrival", "bankId": "MCI-B6"},
+    {"legId": "V112-R526-MCI-ATW", "operation": "departure", "bankId": "MCI-B6"},
+    {"legId": "V112-R526-ATW-MCI", "operation": "arrival", "bankId": "MCI-B9"}
+  ],
+  "expectedCheckpoint": {
+    "legs": 970,
+    "routes": 179,
+    "lines": 22,
+    "effectiveOperatingErrors": 0,
+    "hardStopFailures": 0,
+    "standClaims": 32,
+    "standMinutes": 19729,
+    "mciStandClaims": 8,
+    "mciStandMinutes": 4822,
+    "phfStandClaims": 9,
+    "phfStandMinutes": 5616
+  }
+}
