@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#092a53">
     <meta name="description" content="Coastal American Airways schedule operations console">
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="styles.css?v=console-ui-20260926-2">
+    <link rel="stylesheet" href="styles.css?v=console-ui-20260926-3">
     <title>CAA Scheduler</title>
   </head>
   <body>
@@ -32,6 +32,7 @@
         Validation <span class="tab-count" id="validation-count">—</span>
       </button>
       <button class="tab" type="button" data-tab="timetable" aria-selected="false">Timetable</button>
+      <button class="tab" type="button" data-tab="deps-hubs" aria-selected="false">Deps to Hubs</button>
       <button class="tab" type="button" data-tab="gates" aria-selected="false">Gates</button>
       <button class="tab" type="button" data-tab="instructions" aria-selected="false">Instructions</button>
       <button class="tab tab-setup" type="button" data-tab="setup" aria-selected="false">Schedule Setup</button>
@@ -406,6 +407,22 @@
           <div class="pagination" id="timetable-pagination"></div>
         </section>
 
+        <section class="view" id="view-deps-hubs" data-view="deps-hubs" aria-labelledby="deps-hubs-title" hidden>
+          <div class="page-heading compact">
+            <div>
+              <p class="eyebrow">Daily network frequency</p>
+              <h1 id="deps-hubs-title">Departures to hubs and focus cities</h1>
+              <p class="page-note">Each count is the number of non-stop departures from the city in that row to the hub or focus city in that column. Select a count to open those flights in Timetable.</p>
+            </div>
+          </div>
+          <div class="table-shell deps-hub-shell">
+            <table class="deps-hub-table">
+              <thead><tr id="deps-hub-head"></tr></thead>
+              <tbody id="deps-hub-rows"></tbody>
+            </table>
+          </div>
+        </section>
+
         <section class="view" id="view-gates" data-view="gates" aria-labelledby="gates-title" hidden>
           <div class="page-heading compact gate-heading">
             <div>
@@ -433,6 +450,6 @@
       </div>
     </main>
 
-    <script type="module" src="app.mjs?v=console-ui-20260926-2"></script>
+    <script type="module" src="app.mjs?v=console-ui-20260926-3"></script>
   </body>
 </html>

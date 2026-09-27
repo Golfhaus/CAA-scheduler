@@ -406,6 +406,43 @@ tbody tr:hover { background: #f6f9fc; }
 .pagination button:disabled { cursor: default; opacity: 0.45; }
 .empty-row td { padding: 2.5rem 1rem; color: var(--muted); text-align: center; }
 
+.deps-hub-shell { max-height: calc(100vh - 14rem); }
+.deps-hub-table { min-width: 48rem; }
+.deps-hub-table th, .deps-hub-table td { text-align: center; }
+.deps-hub-table thead th { min-width: 6rem; }
+.deps-hub-table thead th strong, .deps-hub-table thead th span,
+.deps-hub-table tbody th strong, .deps-hub-table tbody th span { display: block; }
+.deps-hub-table thead th span { margin-top: 0.18rem; color: var(--muted); font-size: 0.62rem; letter-spacing: 0.04em; }
+.deps-hub-table .deps-city-heading { left: 0; z-index: 4; min-width: 15rem; text-align: left; }
+.deps-hub-table tbody th {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  min-width: 15rem;
+  padding: 0.68rem 0.9rem;
+  border-top: 1px solid #e7ecf2;
+  background: white;
+  text-align: left;
+  text-transform: none;
+  letter-spacing: normal;
+}
+.deps-hub-table tbody tr:hover th { background: #f6f9fc; }
+.deps-hub-table tbody th strong { color: var(--navy-900); font-size: 0.82rem; }
+.deps-hub-table tbody th span { margin-top: 0.12rem; color: var(--muted); font-size: 0.7rem; font-weight: 600; }
+.deps-hub-table td { min-width: 6rem; padding: 0; }
+.deps-hub-count {
+  width: 100%;
+  min-height: 3.2rem;
+  border: 0;
+  background: transparent;
+  color: var(--blue-700);
+  font-variant-numeric: tabular-nums;
+  font-weight: 850;
+}
+.deps-hub-count:hover { background: var(--blue-100); color: var(--navy-900); }
+.deps-hub-self { background: #dfe5ec; color: #7a8797; }
+.deps-hub-table tbody tr:hover .deps-hub-self { background: #d8dfe7; }
+
 .planning-fleet-panel { margin-bottom: 1rem; }
 .planning-demand-panel { margin-bottom: 1rem; }
 .planning-table-shell { border: 0; border-radius: 0; box-shadow: none; }

@@ -1,0 +1,112 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "schedule-7-v1.1.2-crj700-route-extensions-round-1",
+  "baseSchedule": {
+    "scheduleId": "schedule_7_v1_1_1",
+    "commit": "34f8190c8a26eb51c7d1e31a457639aadc03babb"
+  },
+  "schedule": {
+    "id": "schedule_7_v1_1_2_feasibility_01",
+    "version": "1.1.2-feasibility.01",
+    "label": "Schedule 7, Version 1.1.2 Feasibility 01",
+    "status": "draft"
+  },
+  "initiative": {
+    "kind": "crj700_route_day_extension",
+    "routes": [306, 323, 344, 350],
+    "principles": [
+      "Extend CRJ700 route-days that contain only one or two published flights.",
+      "Prefer useful PHF mini-bank frequency when the aircraft is already in the eastern network.",
+      "Keep MCI and ELP aircraft oriented toward western flying rather than forcing a PHF mission.",
+      "Do not add aircraft or displace any released v1.1.1 flight."
+    ]
+  },
+  "insertLegs": [
+    {
+      "id": "V112-R306-CLT-BDL",
+      "route": 306,
+      "origin": "CLT",
+      "destination": "BDL",
+      "departureMinute": 720,
+      "arrivalMinute": 832
+    },
+    {
+      "id": "V112-R306-BDL-CLT",
+      "route": 306,
+      "origin": "BDL",
+      "destination": "CLT",
+      "departureMinute": 872,
+      "arrivalMinute": 984
+    },
+    {
+      "id": "V112-R323-SYR-PHF-01",
+      "route": 323,
+      "origin": "SYR",
+      "destination": "PHF",
+      "departureMinute": 795,
+      "arrivalMinute": 880
+    },
+    {
+      "id": "V112-R323-PHF-SYR-01",
+      "route": 323,
+      "origin": "PHF",
+      "destination": "SYR",
+      "departureMinute": 925,
+      "arrivalMinute": 1010
+    },
+    {
+      "id": "V112-R344-MCI-HRL",
+      "route": 344,
+      "origin": "MCI",
+      "destination": "HRL",
+      "departureMinute": 685,
+      "arrivalMinute": 832
+    },
+    {
+      "id": "V112-R344-HRL-MCI",
+      "route": 344,
+      "origin": "HRL",
+      "destination": "MCI",
+      "departureMinute": 872,
+      "arrivalMinute": 1019
+    },
+    {
+      "id": "V112-R350-ELP-MCI-02",
+      "route": 350,
+      "origin": "ELP",
+      "destination": "MCI",
+      "departureMinute": 730,
+      "arrivalMinute": 926
+    },
+    {
+      "id": "V112-R350-MCI-ELP-02",
+      "route": 350,
+      "origin": "MCI",
+      "destination": "ELP",
+      "departureMinute": 985,
+      "arrivalMinute": 1061
+    }
+  ],
+  "bankAssignmentsToAdd": [
+    {"legId": "V112-R323-SYR-PHF-01", "operation": "departure", "bankId": "SYR-B4"},
+    {"legId": "V112-R323-SYR-PHF-01", "operation": "arrival", "bankId": "PHF-M3"},
+    {"legId": "V112-R323-PHF-SYR-01", "operation": "departure", "bankId": "PHF-B5"},
+    {"legId": "V112-R323-PHF-SYR-01", "operation": "arrival", "bankId": "SYR-B5"},
+    {"legId": "V112-R344-MCI-HRL", "operation": "departure", "bankId": "MCI-B5"},
+    {"legId": "V112-R344-HRL-MCI", "operation": "arrival", "bankId": "MCI-B8"},
+    {"legId": "V112-R350-ELP-MCI-02", "operation": "arrival", "bankId": "MCI-B7"},
+    {"legId": "V112-R350-MCI-ELP-02", "operation": "departure", "bankId": "MCI-B8"}
+  ],
+  "expectedCheckpoint": {
+    "legs": 956,
+    "routes": 179,
+    "lines": 22,
+    "crj700AircraftDays": 54,
+    "effectiveOperatingErrors": 0,
+    "hardStopFailures": 0,
+    "standClaims": 33,
+    "standMinutes": 21037,
+    "phfStandClaims": 9,
+    "phfStandMinutes": 5616
+  }
+}

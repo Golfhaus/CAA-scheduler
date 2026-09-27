@@ -240,6 +240,44 @@ export function scheduleMetrics(canonical) {
   };
 }
 
+export function buildDepartureHubMatrix(timetable) {
+  const cities = [...timetable.cities].sort((a, b) => a.code.localeCompare(b.code));
+  const destinations = cities
+    .filter((city) => city.isHub || city.isFocusCity)
+    .sort((a, b) => {
+      const rankA = a.isHub ? 0 : 1;
+      const rankB = b.isHub ? 0 : 1;
+      return rankA - rankB || a.code.localeCompare(b.code);
+    });
+  const counts = new Map();
+  timetable.flights.forEach((flight) => {
+    const key = `${flight.origin}:${flight.dest}`;
+    counts.set(key, (counts.get(key) || 0) + 1);
+  });
+  return {
+    destinations,
+    rows: cities.map((city) => ({
+      city,
+      counts: Object.fromEntries(
+        destinations.map((destination) => [
+          destination.code,
+          counts.get(`${city.code}:${destination.code}`) || 0,
+        ])
+      ),
+    })),
+  };
+}
+
+export function departureHubTimetableFilters(origin, destination) {
+  return {
+    search: "",
+    origin,
+    destination,
+    fleet: "",
+    connections: "nonstop",
+  };
+}
+
 export function fleetUsage(canonical) {
   const usage = new Map();
   for (const leg of canonical.legs) {
@@ -442,7 +480,7 @@ function statusLabel(status) {
 }
 
 function activateTab(tab, updateHash = true) {
-  const valid = ["overview", "setup", "planning", "routings", "validation", "instructions", "timetable", "gates"];
+  const valid = ["overview", "setup", "planning", "routings", "validation", "instructions", "timetable", "deps-hubs", "gates"];
   if (!valid.includes(tab)) tab = "overview";
   const requestedButton = document.querySelector(`[data-tab="${tab}"]`);
   if (requestedButton?.hidden) tab = "overview";
@@ -550,6 +588,7 @@ function renderAll() {
   renderValidation();
   renderInstructions();
   renderTimetable();
+  renderDepartureHubMatrix();
   renderGates();
 }
 
@@ -891,6 +930,37 @@ function renderTimetable() {
     ? paged.rows.map((flight) => `<tr><td class="flight-number">${flight.flight}</td><td><strong>${escapeHtml(flight.origin)}</strong></td><td>${escapeHtml(flight.dep)}</td><td><strong>${escapeHtml(flight.dest)}</strong></td><td>${escapeHtml(flight.arr)}</td><td><span class="fleet-badge">${escapeHtml(flight.fleet)}</span></td></tr>`).join("")
     : `<tr class="empty-row"><td colspan="6">No timetable flights match these filters.</td></tr>`;
   renderPagination($("#timetable-pagination"), "timetable", filtered.length, paged.page, paged.pageCount);
+}
+
+function renderDepartureHubMatrix() {
+  const matrix = buildDepartureHubMatrix(state.timetable);
+  $("#deps-hub-head").innerHTML = `<th class="deps-city-heading" scope="col">Origin city</th>${matrix.destinations
+    .map((destination) => `<th scope="col"><strong>${escapeHtml(destination.code)}</strong><span>${destination.isHub ? "Hub" : "Focus city"}</span></th>`)
+    .join("")}`;
+  $("#deps-hub-rows").innerHTML = matrix.rows
+    .map(({ city, counts }) => `<tr><th scope="row"><strong>${escapeHtml(city.code)}</strong><span>${escapeHtml(city.name)}</span></th>${matrix.destinations
+      .map((destination) => {
+        if (city.code === destination.code) {
+          return `<td class="deps-hub-self" aria-label="${escapeHtml(city.code)} to itself is not applicable"><span aria-hidden="true">—</span></td>`;
+        }
+        const count = counts[destination.code];
+        const label = `${count} departure${count === 1 ? "" : "s"} from ${city.name} (${city.code}) to ${destination.name} (${destination.code}); open in Timetable`;
+        return `<td><button type="button" class="deps-hub-count" data-deps-origin="${escapeHtml(city.code)}" data-deps-destination="${escapeHtml(destination.code)}" aria-label="${escapeHtml(label)}">${count}</button></td>`;
+      })
+      .join("")}</tr>`)
+    .join("");
+}
+
+function openTimetableMarket(origin, destination) {
+  const filters = departureHubTimetableFilters(origin, destination);
+  $("#timetable-search").value = filters.search;
+  $("#timetable-origin").value = filters.origin;
+  $("#timetable-destination").value = filters.destination;
+  $("#timetable-fleet").value = filters.fleet;
+  $("#timetable-connections").value = filters.connections;
+  state.timetablePage = 1;
+  renderTimetable();
+  activateTab("timetable");
 }
 
 function findingLinks(finding) {
@@ -1358,6 +1428,11 @@ function bindEvents() {
     const gateClaim = event.target.closest("[data-gate-claim]");
     if (gateClaim) {
       toggleGateClaimDetails(gateClaim);
+      return;
+    }
+    const departureCount = event.target.closest("[data-deps-origin][data-deps-destination]");
+    if (departureCount) {
+      openTimetableMarket(departureCount.dataset.depsOrigin, departureCount.dataset.depsDestination);
       return;
     }
     const tab = event.target.closest("[data-tab]");

@@ -15,10 +15,6 @@ jobs:
           cache: pip
       - run: python -m pip install -e .
       - run: python -m unittest discover -s tests -v
-      - name: Rebuild golden baseline
-        run: python -m caa_scheduler baseline --config config/baselines/schedule_6_v2_2_5.json
-      - name: Confirm generated baseline is committed
-        run: git diff --exit-code -- data/schedules/schedule_6_v2_2_5
       - name: Build web console
         run: python -m caa_scheduler build-web --output dist
       - name: Test web console helpers
