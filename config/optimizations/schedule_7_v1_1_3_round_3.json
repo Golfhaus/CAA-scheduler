@@ -1,0 +1,97 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "schedule-7-v1.1.3-bhm-flp-round-3",
+  "baseSchedule": {
+    "scheduleId": "schedule_7_v1_1_3_feasibility_02",
+    "commit": "06c98caaf3640d5315058c1ef0aeea07385b11d8",
+    "overlays": [
+      "config/optimizations/schedule_7_v1_1_3_round_1.json",
+      "config/optimizations/schedule_7_v1_1_3_round_2.json"
+    ]
+  },
+  "schedule": {
+    "id": "schedule_7_v1_1_3_feasibility_03",
+    "version": "1.1.3-feasibility.03",
+    "label": "Schedule 7, Version 1.1.3 Feasibility 03",
+    "status": "draft"
+  },
+  "initiative": {
+    "kind": "bhm_flp_connectivity",
+    "routes": [524],
+    "principles": [
+      "Convert an early MCI terminator into productive BHM focus-city flying.",
+      "Add frequency to high-demand FLL instead of forcing low-demand FLP coverage.",
+      "Preserve every released, Round 1, and Round 2 flight without retiming.",
+      "Preserve the MCI terminator and existing fleet inventory.",
+      "Keep the cumulative v1.1.3 candidate unpublished."
+    ]
+  },
+  "hubBanksToAdd": [
+    {
+      "id": "MCI-M12",
+      "hub": "MCI",
+      "startMinute": 1335,
+      "endMinute": 1395
+    }
+  ],
+  "hubBankCountOverrides": {
+    "MCI": 12
+  },
+  "insertLegs": [
+    {
+      "id": "V113-R524-MCI-BHM",
+      "route": 524,
+      "origin": "MCI",
+      "destination": "BHM",
+      "departureMinute": 735,
+      "arrivalMinute": 837
+    },
+    {
+      "id": "V113-R524-BHM-FLL",
+      "route": 524,
+      "origin": "BHM",
+      "destination": "FLL",
+      "departureMinute": 960,
+      "arrivalMinute": 1129
+    },
+    {
+      "id": "V113-R524-FLL-BHM",
+      "route": 524,
+      "origin": "FLL",
+      "destination": "BHM",
+      "departureMinute": 1169,
+      "arrivalMinute": 1218
+    },
+    {
+      "id": "V113-R524-BHM-MCI",
+      "route": 524,
+      "origin": "BHM",
+      "destination": "MCI",
+      "departureMinute": 1258,
+      "arrivalMinute": 1360
+    }
+  ],
+  "bankAssignmentsToAdd": [
+    {"legId": "V113-R524-MCI-BHM", "operation": "departure", "bankId": "MCI-B5"},
+    {"legId": "V113-R524-BHM-MCI", "operation": "arrival", "bankId": "MCI-M12"}
+  ],
+  "expectedCheckpoint": {
+    "legs": 990,
+    "routes": 179,
+    "lines": 22,
+    "effectiveOperatingErrors": 0,
+    "hardStopFailures": 0,
+    "standClaims": 30,
+    "standMinutes": 17268,
+    "mciStandClaims": 5,
+    "mciStandMinutes": 3888,
+    "dayStandClaims": 1,
+    "dayStandMinutes": 1003,
+    "phfStandClaims": 9,
+    "phfStandMinutes": 5126,
+    "bhmStandClaims": 1,
+    "bhmStandMinutes": 97,
+    "bhmFlpDestinations": 7,
+    "bhmFllRoundTrips": 2
+  }
+}

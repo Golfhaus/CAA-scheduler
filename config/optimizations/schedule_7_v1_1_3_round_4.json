@@ -1,0 +1,173 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "schedule-7-v1.1.3-bhm-flp-round-4",
+  "baseSchedule": {
+    "scheduleId": "schedule_7_v1_1_3_feasibility_03",
+    "commit": "d302cf8a71cde02907146145c5d20e806112b4ab",
+    "overlays": [
+      "config/optimizations/schedule_7_v1_1_3_round_1.json",
+      "config/optimizations/schedule_7_v1_1_3_round_2.json",
+      "config/optimizations/schedule_7_v1_1_3_round_3.json"
+    ]
+  },
+  "schedule": {
+    "id": "schedule_7_v1_1_3_feasibility_04",
+    "version": "1.1.3-feasibility.04",
+    "label": "Schedule 7, Version 1.1.3 Feasibility 04",
+    "status": "draft"
+  },
+  "initiative": {
+    "kind": "bhm_flp_connectivity",
+    "routes": [102, 130, 156, 161, 164],
+    "principles": [
+      "Convert the longest useful CRJ200 daytime holds into BHM focus-city feed.",
+      "Preserve existing flying unless a retime protects stronger FLP connectivity or fixed gate inventory.",
+      "Keep every new feeder within the published 30-240 minute connection window for multiple FLP flights.",
+      "Do not force duplicate MCI or ATW flying when spacing, banking, or marginal demand is weak.",
+      "Keep the cumulative v1.1.3 candidate unpublished."
+    ]
+  },
+  "operatingOverrides": [
+    {
+      "checkId": "tiered_service_minimums",
+      "findingId": "ATW",
+      "reason": "Schedule 7 v1.1.3 BHM focus-city initiative: ATW-BHM is deliberate focus-city feed for Florida Peninsula connectivity.",
+      "approvedBy": "user",
+      "expiresAfterSchedule": 7
+    }
+  ],
+  "retimeLegs": [
+    {
+      "legId": "MCI-OMA-CRJ200-01-IN",
+      "expectedDepartureMinute": 1145,
+      "expectedArrivalMinute": 1194,
+      "departureMinute": 1238,
+      "arrivalMinute": 1287
+    },
+    {
+      "legId": "MAF-MCI-CRJ200-01-IN",
+      "expectedDepartureMinute": 1235,
+      "expectedArrivalMinute": 1353,
+      "departureMinute": 1335,
+      "arrivalMinute": 1453
+    },
+    {
+      "legId": "BHM-TUL-CRJ200-01-OUT",
+      "expectedDepartureMinute": 1080,
+      "expectedArrivalMinute": 1183,
+      "departureMinute": 1030,
+      "arrivalMinute": 1133
+    },
+    {
+      "legId": "BHM-TUL-CRJ200-01-IN",
+      "expectedDepartureMinute": 1230,
+      "expectedArrivalMinute": 1333,
+      "departureMinute": 1173,
+      "arrivalMinute": 1276
+    },
+    {
+      "legId": "BHM-ECP-CRJ200-01-OUT",
+      "expectedDepartureMinute": 1375,
+      "expectedArrivalMinute": 1434,
+      "departureMinute": 1316,
+      "arrivalMinute": 1375
+    }
+  ],
+  "insertLegs": [
+    {
+      "id": "V113-R164-OMA-BHM",
+      "route": 164,
+      "origin": "OMA",
+      "destination": "BHM",
+      "departureMinute": 666,
+      "arrivalMinute": 794
+    },
+    {
+      "id": "V113-R164-BHM-OMA",
+      "route": 164,
+      "origin": "BHM",
+      "destination": "OMA",
+      "departureMinute": 1070,
+      "arrivalMinute": 1198
+    },
+    {
+      "id": "V113-R102-ATW-BHM",
+      "route": 102,
+      "origin": "ATW",
+      "destination": "BHM",
+      "departureMinute": 604,
+      "arrivalMinute": 734
+    },
+    {
+      "id": "V113-R102-BHM-ATW",
+      "route": 102,
+      "origin": "BHM",
+      "destination": "ATW",
+      "departureMinute": 875,
+      "arrivalMinute": 1005
+    },
+    {
+      "id": "V113-R130-ICT-BHM",
+      "route": 130,
+      "origin": "ICT",
+      "destination": "BHM",
+      "departureMinute": 722,
+      "arrivalMinute": 841
+    },
+    {
+      "id": "V113-R130-BHM-ICT",
+      "route": 130,
+      "origin": "BHM",
+      "destination": "ICT",
+      "departureMinute": 938,
+      "arrivalMinute": 1057
+    },
+    {
+      "id": "V113-R161-FSD-BHM",
+      "route": 161,
+      "origin": "FSD",
+      "destination": "BHM",
+      "departureMinute": 646,
+      "arrivalMinute": 794
+    },
+    {
+      "id": "V113-R161-BHM-FSD",
+      "route": 161,
+      "origin": "BHM",
+      "destination": "FSD",
+      "departureMinute": 834,
+      "arrivalMinute": 982
+    }
+  ],
+  "bankAssignmentReplacements": [
+    {
+      "legId": "MCI-OMA-CRJ200-01-IN",
+      "operation": "arrival",
+      "bankId": "MCI-M11"
+    },
+    {
+      "legId": "MAF-MCI-CRJ200-01-IN",
+      "operation": "departure",
+      "bankId": "MCI-M12"
+    }
+  ],
+  "expectedCheckpoint": {
+    "legs": 998,
+    "routes": 179,
+    "lines": 22,
+    "effectiveOperatingErrors": 0,
+    "hardStopFailures": 0,
+    "standClaims": 29,
+    "standMinutes": 16822,
+    "mciStandClaims": 5,
+    "mciStandMinutes": 3888,
+    "dayStandClaims": 1,
+    "dayStandMinutes": 1003,
+    "phfStandClaims": 9,
+    "phfStandMinutes": 5126,
+    "bhmStandClaims": 1,
+    "bhmStandMinutes": 97,
+    "bhmFlpDestinations": 7,
+    "newBhmFeederCities": 4
+  }
+}

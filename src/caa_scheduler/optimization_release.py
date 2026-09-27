@@ -294,8 +294,9 @@ def build_optimization_release(
             "planningReconstruction": planning_validation["status"],
         },
         "connectionFinding": (
-            f"All {connection_audit['summary']['directRoundTripCities']} target cities "
-            f"have direct {config['connectionAudit']['hub']} round trips, but only "
+            f"{connection_audit['summary']['directRoundTripCities']}/"
+            f"{connection_audit['summary']['targetCities']} target cities have direct "
+            f"{config['connectionAudit']['hub']} round trips, and "
             f"{connection_audit['summary']['connectedDirectionalPairs']}/"
             f"{connection_audit['summary']['directionalPairs']} directional cross-group "
             "pairs meet the configured connection window."

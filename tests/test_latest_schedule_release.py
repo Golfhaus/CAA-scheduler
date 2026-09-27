@@ -15,9 +15,9 @@ from caa_scheduler.io import read_json
 from caa_scheduler.optimization_release import build_optimization_release
 
 
-LATEST_SCHEDULE_ID = "schedule_7_v1_1_2"
+LATEST_SCHEDULE_ID = "schedule_7_v1_1_3"
 LATEST_RELEASE_CONFIG = (
-    REPO_ROOT / "config" / "optimizations" / "schedule_7_v1_1_2.json"
+    REPO_ROOT / "config" / "optimizations" / "schedule_7_v1_1_3.json"
 )
 LATEST_RELEASE_DIRECTORY = REPO_ROOT / "data" / "schedules" / LATEST_SCHEDULE_ID
 
@@ -51,7 +51,7 @@ class LatestScheduleReleaseTests(unittest.TestCase):
             )
             self.assertEqual(report["status"], "released")
             self.assertEqual(report["scheduleId"], LATEST_SCHEDULE_ID)
-            self.assertEqual(report["summary"]["legs"], 970)
+            self.assertEqual(report["summary"]["legs"], 998)
             self.assertEqual(report["summary"]["effectiveOperatingErrors"], 0)
             self.assertEqual(report["summary"]["hardStopFailures"], 0)
 

@@ -1,0 +1,233 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "schedule-7-v1.1.3-bhm-flp-round-1",
+  "baseSchedule": {
+    "scheduleId": "schedule_7_v1_1_2",
+    "commit": "505805252d4e004d1140d61176010df053078008"
+  },
+  "schedule": {
+    "id": "schedule_7_v1_1_3_feasibility_01",
+    "version": "1.1.3-feasibility.01",
+    "label": "Schedule 7, Version 1.1.3 Feasibility 01",
+    "status": "draft"
+  },
+  "initiative": {
+    "kind": "bhm_flp_connectivity",
+    "routes": [117, 128, 139, 162],
+    "principles": [
+      "Use BHM as a practical connecting focus city for Florida Peninsula traffic.",
+      "Convert long MCI, DAY, and BHM holds into productive flying without adding aircraft.",
+      "Add BHM round trips to high-demand FLP cities that lack BHM service.",
+      "Preserve each route's origin and terminator so line continuity remains unchanged.",
+      "Keep the candidate unpublished until the broader v1.1.3 effort is complete."
+    ]
+  },
+  "hubBanksToAdd": [
+    {
+      "id": "MCI-M11",
+      "hub": "MCI",
+      "startMinute": 1245,
+      "endMinute": 1305
+    }
+  ],
+  "hubBankCountOverrides": {
+    "MCI": 11
+  },
+  "operatingOverrides": [
+    {
+      "checkId": "tiered_service_minimums",
+      "findingId": "PIE",
+      "reason": "Schedule 7 v1.1.3 BHM focus-city initiative: PIE-BHM is deliberate focus-city service for Florida Peninsula connectivity.",
+      "approvedBy": "user",
+      "expiresAfterSchedule": 7
+    },
+    {
+      "checkId": "tiered_service_minimums",
+      "findingId": "SFB",
+      "reason": "Schedule 7 v1.1.3 BHM focus-city initiative: SFB-BHM is deliberate focus-city service for Florida Peninsula connectivity.",
+      "approvedBy": "user",
+      "expiresAfterSchedule": 7
+    }
+  ],
+  "retimeLegs": [
+    {
+      "legId": "MCI-PIA-CRJ200-01-OUT",
+      "expectedDepartureMinute": 1235,
+      "expectedArrivalMinute": 1302,
+      "departureMinute": 1247,
+      "arrivalMinute": 1314
+    },
+    {
+      "legId": "BHM-DAB-CRJ200-02-OUT",
+      "expectedDepartureMinute": 580,
+      "expectedArrivalMinute": 730,
+      "departureMinute": 675,
+      "arrivalMinute": 825
+    },
+    {
+      "legId": "BHM-DAB-CRJ200-02-IN",
+      "expectedDepartureMinute": 775,
+      "expectedArrivalMinute": 805,
+      "departureMinute": 865,
+      "arrivalMinute": 895
+    },
+    {
+      "legId": "BHM-HRL-CRJ200-01-OUT",
+      "expectedDepartureMinute": 845,
+      "expectedArrivalMinute": 986,
+      "departureMinute": 935,
+      "arrivalMinute": 1076
+    },
+    {
+      "legId": "BHM-HRL-CRJ200-01-IN",
+      "expectedDepartureMinute": 1080,
+      "expectedArrivalMinute": 1221,
+      "departureMinute": 1116,
+      "arrivalMinute": 1257
+    },
+    {
+      "legId": "BHM-SGF-CRJ200-02-OUT",
+      "expectedDepartureMinute": 1265,
+      "expectedArrivalMinute": 1355,
+      "departureMinute": 1297,
+      "arrivalMinute": 1387
+    },
+    {
+      "legId": "DAY-TOL-CRJ200-02-IN",
+      "expectedDepartureMinute": 640,
+      "expectedArrivalMinute": 684,
+      "departureMinute": 638,
+      "arrivalMinute": 682
+    },
+    {
+      "legId": "DAY-SBN-CRJ200-03-OUT",
+      "expectedDepartureMinute": 975,
+      "expectedArrivalMinute": 1026,
+      "departureMinute": 984,
+      "arrivalMinute": 1035
+    },
+    {
+      "legId": "DSM-MCI-CRJ200-03-IN",
+      "expectedDepartureMinute": 935,
+      "expectedArrivalMinute": 985,
+      "departureMinute": 1296,
+      "arrivalMinute": 1346
+    }
+  ],
+  "insertLegs": [
+    {
+      "id": "V113-R117-MCI-BHM",
+      "route": 117,
+      "origin": "MCI",
+      "destination": "BHM",
+      "departureMinute": 685,
+      "arrivalMinute": 794
+    },
+    {
+      "id": "V113-R117-BHM-SFB",
+      "route": 117,
+      "origin": "BHM",
+      "destination": "SFB",
+      "departureMinute": 834,
+      "arrivalMinute": 986
+    },
+    {
+      "id": "V113-R117-SFB-BHM",
+      "route": 117,
+      "origin": "SFB",
+      "destination": "BHM",
+      "departureMinute": 1026,
+      "arrivalMinute": 1058
+    },
+    {
+      "id": "V113-R117-BHM-MCI",
+      "route": 117,
+      "origin": "BHM",
+      "destination": "MCI",
+      "departureMinute": 1098,
+      "arrivalMinute": 1207
+    },
+    {
+      "id": "V113-R128-BHM-PIE",
+      "route": 128,
+      "origin": "BHM",
+      "destination": "PIE",
+      "departureMinute": 413,
+      "arrivalMinute": 564
+    },
+    {
+      "id": "V113-R128-PIE-BHM",
+      "route": 128,
+      "origin": "PIE",
+      "destination": "BHM",
+      "departureMinute": 604,
+      "arrivalMinute": 635
+    },
+    {
+      "id": "V113-R139-DAY-BHM",
+      "route": 139,
+      "origin": "DAY",
+      "destination": "BHM",
+      "departureMinute": 722,
+      "arrivalMinute": 753
+    },
+    {
+      "id": "V113-R139-BHM-DAY",
+      "route": 139,
+      "origin": "BHM",
+      "destination": "DAY",
+      "departureMinute": 793,
+      "arrivalMinute": 944
+    },
+    {
+      "id": "V113-R162-MCI-BHM",
+      "route": 162,
+      "origin": "MCI",
+      "destination": "BHM",
+      "departureMinute": 836,
+      "arrivalMinute": 945
+    },
+    {
+      "id": "V113-R162-BHM-MCI",
+      "route": 162,
+      "origin": "BHM",
+      "destination": "MCI",
+      "departureMinute": 1147,
+      "arrivalMinute": 1256
+    }
+  ],
+  "bankAssignmentReplacements": [
+    {
+      "legId": "DSM-MCI-CRJ200-03-IN",
+      "operation": "departure",
+      "bankId": "MCI-M11"
+    },
+    {
+      "legId": "MCI-PIA-CRJ200-01-OUT",
+      "operation": "departure",
+      "bankId": "MCI-M11"
+    }
+  ],
+  "bankAssignmentsToAdd": [
+    {"legId": "V113-R117-MCI-BHM", "operation": "departure", "bankId": "MCI-B5"},
+    {"legId": "V113-R117-BHM-MCI", "operation": "arrival", "bankId": "MCI-B10"},
+    {"legId": "V113-R139-DAY-BHM", "operation": "departure", "bankId": "DAY-B4"},
+    {"legId": "V113-R139-BHM-DAY", "operation": "arrival", "bankId": "DAY-B6"},
+    {"legId": "V113-R162-MCI-BHM", "operation": "departure", "bankId": "MCI-B6"},
+    {"legId": "V113-R162-BHM-MCI", "operation": "arrival", "bankId": "MCI-M11"}
+  ],
+  "expectedCheckpoint": {
+    "legs": 980,
+    "routes": 179,
+    "lines": 22,
+    "effectiveOperatingErrors": 0,
+    "hardStopFailures": 0,
+    "standClaims": 31,
+    "standMinutes": 18789,
+    "mciStandClaims": 6,
+    "mciStandMinutes": 4139,
+    "phfStandClaims": 9,
+    "phfStandMinutes": 5616,
+    "bhmFlpDestinations": 6
+  }
+}

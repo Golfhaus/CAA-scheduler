@@ -1,0 +1,2083 @@
+{
+ "label": "Schedule 7, Version 1.1.3",
+ "minConnect": 30,
+ "maxConnect": 240,
+ "flightCount": 998,
+ "cityCount": 105,
+ "cities": [
+  {
+   "code": "ABE",
+   "name": "Allentown PA",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "ACY",
+   "name": "Atlantic City NJ",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "AGS",
+   "name": "Augusta GA",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "ALB",
+   "name": "Albany NY",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "ATW",
+   "name": "Appleton WI",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "AUS",
+   "name": "Austin TX",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "AVL",
+   "name": "Asheville NC",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "AVP",
+   "name": "Wilkes-Barre/Scranton PA",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "BDL",
+   "name": "Hartford CT",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "BGR",
+   "name": "Bangor ME",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "BHM",
+   "name": "Birmingham AL",
+   "isHub": false,
+   "isFocusCity": true
+  },
+  {
+   "code": "BLV",
+   "name": "St. Louis/Belleville",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "BNA",
+   "name": "Nashville TN",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "BTR",
+   "name": "Baton Rouge LA",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "BTV",
+   "name": "Burlington VT",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "BUF",
+   "name": "Buffalo NY",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "BWI",
+   "name": "Baltimore MD",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "CAE",
+   "name": "Columbia SC",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "CAK",
+   "name": "Akron-Canton OH",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "CHA",
+   "name": "Chattanooga TN",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "CHS",
+   "name": "Charleston SC",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "CID",
+   "name": "Cedar Rapids IA",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "CLT",
+   "name": "Charlotte NC",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "CMH",
+   "name": "Columbus OH",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "COU",
+   "name": "Columbia MO",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "CRP",
+   "name": "Corpus Christi TX",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "CRW",
+   "name": "Charleston WV",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "DAB",
+   "name": "Daytona Beach FL",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "DAL",
+   "name": "Dallas/Love",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "DAY",
+   "name": "Dayton OH",
+   "isHub": true,
+   "isFocusCity": false
+  },
+  {
+   "code": "DLH",
+   "name": "Duluth MN",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "DSM",
+   "name": "Des Moines IA",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "ECP",
+   "name": "Panama City FL",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "ELP",
+   "name": "El Paso TX",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "ERI",
+   "name": "Erie PA",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "EYW",
+   "name": "Key West FL",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "FAR",
+   "name": "Fargo ND",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "FLL",
+   "name": "Fort Lauderdale FL",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "FSD",
+   "name": "Sioux Falls SD",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "FWA",
+   "name": "Fort Wayne IN",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "GNV",
+   "name": "Gainesville FL",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "GPT",
+   "name": "Gulfport-Biloxi MS",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "GRR",
+   "name": "Grand Rapids MI",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "GSO",
+   "name": "Greensboro NC",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "GSP",
+   "name": "Greenville-Spartanburg SC",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "HOU",
+   "name": "Houston/Hobby",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "HPN",
+   "name": "White Plains/Westchester NY",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "HRL",
+   "name": "Harlingen TX",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "HSV",
+   "name": "Huntsville AL",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "HVN",
+   "name": "New Haven CT",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "ICT",
+   "name": "Wichita KS",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "ILM",
+   "name": "Wilmington NC",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "IND",
+   "name": "Indianapolis IN",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "ISP",
+   "name": "Islip/Long Island NY",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "JAN",
+   "name": "Jackson MS",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "JAX",
+   "name": "Jacksonville FL",
+   "isHub": true,
+   "isFocusCity": false
+  },
+  {
+   "code": "LBB",
+   "name": "Lubbock TX",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "LEX",
+   "name": "Lexington KY",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "LIT",
+   "name": "Little Rock AR",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "MAF",
+   "name": "Midland/Odessa TX",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "MCI",
+   "name": "Kansas City MO",
+   "isHub": true,
+   "isFocusCity": false
+  },
+  {
+   "code": "MCN",
+   "name": "Macon GA",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "MDT",
+   "name": "Harrisburg PA",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "MEM",
+   "name": "Memphis TN",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "MFE",
+   "name": "McAllen TX",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "MHT",
+   "name": "Manchester NH",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "MKE",
+   "name": "Milwaukee WI",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "MLB",
+   "name": "Melbourne FL",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "MOB",
+   "name": "Mobile AL",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "MSN",
+   "name": "Madison WI",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "MSY",
+   "name": "New Orleans LA",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "MYR",
+   "name": "Myrtle Beach SC",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "OKC",
+   "name": "Oklahoma City OK",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "OMA",
+   "name": "Omaha NE",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "ORH",
+   "name": "Worcester MA",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "PGD",
+   "name": "Punta Gorda FL",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "PHF",
+   "name": "Newport News VA",
+   "isHub": true,
+   "isFocusCity": false
+  },
+  {
+   "code": "PIA",
+   "name": "Peoria IL",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "PIE",
+   "name": "St Pete-Clearwater FL",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "PIT",
+   "name": "Pittsburgh PA",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "PNS",
+   "name": "Pensacola FL",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "PVD",
+   "name": "Providence RI",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "PWM",
+   "name": "Portland ME",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "RDU",
+   "name": "Raleigh-Durham NC",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "RFD",
+   "name": "Chicago/Rockford IL",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "ROA",
+   "name": "Roanoke VA",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "ROC",
+   "name": "Rochester NY",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "SAT",
+   "name": "San Antonio TX",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "SAV",
+   "name": "Savannah GA",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "SBN",
+   "name": "South Bend IN",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "SDF",
+   "name": "Louisville KY",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "SFB",
+   "name": "Orlando/Sanford FL",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "SGF",
+   "name": "Springfield MO",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "SHV",
+   "name": "Shreveport LA",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "SRQ",
+   "name": "Sarasota-Bradenton FL",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "SWF",
+   "name": "Newburgh/Stewart NY",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "SYR",
+   "name": "Syracuse NY",
+   "isHub": true,
+   "isFocusCity": false
+  },
+  {
+   "code": "TLH",
+   "name": "Tallahassee FL",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "TOL",
+   "name": "Toledo OH",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "TRI",
+   "name": "Tri-Cities TN/VA",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "TTN",
+   "name": "Trenton NJ",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "TUL",
+   "name": "Tulsa OK",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "TYS",
+   "name": "Knoxville TN",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "VPS",
+   "name": "Destin/Fort Walton Beach FL",
+   "isHub": false,
+   "isFocusCity": false
+  },
+  {
+   "code": "XNA",
+   "name": "Northwest Arkansas",
+   "isHub": false,
+   "isFocusCity": false
+  }
+ ],
+ "flights": [
+  {
+   "origin": "RFD",
+   "dest": "SFB",
+   "dep": "04:35",
+   "arr": "08:04",
+   "flight": 1001,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "SFB",
+   "dest": "RFD",
+   "dep": "07:35",
+   "arr": "09:04",
+   "flight": 1002,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "RFD",
+   "dest": "FLL",
+   "dep": "00:40",
+   "arr": "04:32",
+   "flight": 1003,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "FLL",
+   "dest": "RFD",
+   "dep": "05:15",
+   "arr": "07:07",
+   "flight": 1004,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "DAL",
+   "dest": "RFD",
+   "dep": "21:00",
+   "arr": "23:01",
+   "flight": 1005,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "RFD",
+   "dest": "DAL",
+   "dep": "07:20",
+   "arr": "09:21",
+   "flight": 1006,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "PIE",
+   "dest": "RFD",
+   "dep": "05:15",
+   "arr": "06:47",
+   "flight": 1007,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "RFD",
+   "dest": "PIE",
+   "dep": "01:00",
+   "arr": "04:32",
+   "flight": 1008,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "BWI",
+   "dest": "SFB",
+   "dep": "14:35",
+   "arr": "16:35",
+   "flight": 1009,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "SFB",
+   "dest": "BWI",
+   "dep": "14:20",
+   "arr": "16:20",
+   "flight": 1010,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "PGD",
+   "dest": "RFD",
+   "dep": "05:15",
+   "arr": "06:56",
+   "flight": 1011,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "RFD",
+   "dest": "PGD",
+   "dep": "00:50",
+   "arr": "04:31",
+   "flight": 1012,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "DAL",
+   "dest": "SFB",
+   "dep": "21:00",
+   "arr": "00:23",
+   "flight": 1013,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "SFB",
+   "dest": "DAL",
+   "dep": "16:25",
+   "arr": "17:48",
+   "flight": 1014,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "HOU",
+   "dest": "RFD",
+   "dep": "21:00",
+   "arr": "23:19",
+   "flight": 1015,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "RFD",
+   "dest": "HOU",
+   "dep": "18:00",
+   "arr": "20:19",
+   "flight": 1016,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "AUS",
+   "dest": "RFD",
+   "dep": "21:00",
+   "arr": "23:22",
+   "flight": 1017,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "RFD",
+   "dest": "AUS",
+   "dep": "20:55",
+   "arr": "23:17",
+   "flight": 1018,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "BNA",
+   "dest": "RFD",
+   "dep": "20:45",
+   "arr": "22:08",
+   "flight": 1019,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "RFD",
+   "dest": "BNA",
+   "dep": "06:15",
+   "arr": "07:38",
+   "flight": 1020,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "RDU",
+   "dest": "SFB",
+   "dep": "06:45",
+   "arr": "08:17",
+   "flight": 1021,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "SFB",
+   "dest": "RDU",
+   "dep": "04:30",
+   "arr": "06:02",
+   "flight": 1022,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "BNA",
+   "dest": "SFB",
+   "dep": "04:30",
+   "arr": "07:11",
+   "flight": 1023,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "SFB",
+   "dest": "BNA",
+   "dep": "19:10",
+   "arr": "19:51",
+   "flight": 1024,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "RFD",
+   "dest": "CLT",
+   "dep": "07:45",
+   "arr": "10:32",
+   "flight": 1025,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "CLT",
+   "dest": "RFD",
+   "dep": "16:00",
+   "arr": "16:47",
+   "flight": 1026,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "HOU",
+   "dest": "SFB",
+   "dep": "21:00",
+   "arr": "00:09",
+   "flight": 1027,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "SFB",
+   "dest": "HOU",
+   "dep": "19:10",
+   "arr": "20:19",
+   "flight": 1028,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "CLT",
+   "dest": "SFB",
+   "dep": "04:30",
+   "arr": "05:54",
+   "flight": 1029,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "SFB",
+   "dest": "CLT",
+   "dep": "11:45",
+   "arr": "13:09",
+   "flight": 1030,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "RFD",
+   "dest": "MSY",
+   "dep": "21:00",
+   "arr": "23:09",
+   "flight": 1031,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "MSY",
+   "dest": "RFD",
+   "dep": "04:30",
+   "arr": "06:39",
+   "flight": 1032,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "MCI",
+   "dest": "RFD",
+   "dep": "19:00",
+   "arr": "20:14",
+   "flight": 1033,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "RFD",
+   "dest": "MCI",
+   "dep": "17:05",
+   "arr": "18:19",
+   "flight": 1034,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "MCI",
+   "dest": "SFB",
+   "dep": "05:35",
+   "arr": "09:08",
+   "flight": 1035,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "MCI",
+   "dest": "SFB",
+   "dep": "10:35",
+   "arr": "14:08",
+   "flight": 1036,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "SFB",
+   "dest": "MCI",
+   "dep": "11:45",
+   "arr": "13:18",
+   "flight": 1037,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "SFB",
+   "dest": "MCI",
+   "dep": "19:05",
+   "arr": "20:38",
+   "flight": 1038,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "BLV",
+   "dest": "RFD",
+   "dep": "19:15",
+   "arr": "20:18",
+   "flight": 1039,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "RFD",
+   "dest": "BLV",
+   "dep": "17:30",
+   "arr": "18:33",
+   "flight": 1040,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "HPN",
+   "dest": "SFB",
+   "dep": "04:30",
+   "arr": "06:51",
+   "flight": 1041,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "SFB",
+   "dest": "HPN",
+   "dep": "20:05",
+   "arr": "22:26",
+   "flight": 1042,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "MCI",
+   "dest": "DAL",
+   "dep": "13:45",
+   "arr": "15:11",
+   "flight": 1043,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "MCI",
+   "dest": "DAL",
+   "dep": "18:50",
+   "arr": "20:16",
+   "flight": 1044,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "DAL",
+   "dest": "MCI",
+   "dep": "10:05",
+   "arr": "11:31",
+   "flight": 1045,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "DAL",
+   "dest": "MCI",
+   "dep": "18:30",
+   "arr": "19:56",
+   "flight": 1046,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "HOU",
+   "dest": "DAL",
+   "dep": "17:40",
+   "arr": "18:41",
+   "flight": 1047,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "DAL",
+   "dest": "HOU",
+   "dep": "15:55",
+   "arr": "16:56",
+   "flight": 1048,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "SFB",
+   "dest": "SYR",
+   "dep": "05:25",
+   "arr": "07:55",
+   "flight": 1049,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "SFB",
+   "dest": "SYR",
+   "dep": "08:00",
+   "arr": "10:30",
+   "flight": 1050,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "SFB",
+   "dest": "SYR",
+   "dep": "10:55",
+   "arr": "13:25",
+   "flight": 1051,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "SFB",
+   "dest": "SYR",
+   "dep": "13:45",
+   "arr": "16:15",
+   "flight": 1052,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "SYR",
+   "dest": "SFB",
+   "dep": "08:35",
+   "arr": "11:05",
+   "flight": 1053,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "SYR",
+   "dest": "SFB",
+   "dep": "11:10",
+   "arr": "13:40",
+   "flight": 1054,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "SYR",
+   "dest": "SFB",
+   "dep": "14:05",
+   "arr": "16:35",
+   "flight": 1055,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "SYR",
+   "dest": "SFB",
+   "dep": "16:55",
+   "arr": "19:25",
+   "flight": 1056,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "MCI",
+   "dest": "FLL",
+   "dep": "07:15",
+   "arr": "11:09",
+   "flight": 1057,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "MCI",
+   "dest": "FLL",
+   "dep": "20:35",
+   "arr": "00:29",
+   "flight": 1058,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "FLL",
+   "dest": "MCI",
+   "dep": "04:40",
+   "arr": "06:34",
+   "flight": 1059,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "FLL",
+   "dest": "MCI",
+   "dep": "11:55",
+   "arr": "13:49",
+   "flight": 1060,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "PIE",
+   "dest": "FLL",
+   "dep": "04:30",
+   "arr": "05:27",
+   "flight": 1061,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "FLL",
+   "dest": "PIE",
+   "dep": "16:45",
+   "arr": "17:42",
+   "flight": 1062,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "PHF",
+   "dest": "SFB",
+   "dep": "09:10",
+   "arr": "10:56",
+   "flight": 1063,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "PHF",
+   "dest": "SFB",
+   "dep": "11:35",
+   "arr": "13:21",
+   "flight": 1064,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "PHF",
+   "dest": "SFB",
+   "dep": "13:55",
+   "arr": "15:41",
+   "flight": 1065,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "PHF",
+   "dest": "SFB",
+   "dep": "16:15",
+   "arr": "18:01",
+   "flight": 1066,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "SFB",
+   "dest": "PHF",
+   "dep": "04:30",
+   "arr": "06:16",
+   "flight": 1067,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "SFB",
+   "dest": "PHF",
+   "dep": "06:50",
+   "arr": "08:36",
+   "flight": 1068,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "SFB",
+   "dest": "PHF",
+   "dep": "09:05",
+   "arr": "10:51",
+   "flight": 1069,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "SFB",
+   "dest": "PHF",
+   "dep": "11:30",
+   "arr": "13:16",
+   "flight": 1070,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "MCI",
+   "dest": "PIE",
+   "dep": "12:20",
+   "arr": "15:52",
+   "flight": 1071,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "MCI",
+   "dest": "PIE",
+   "dep": "20:40",
+   "arr": "00:12",
+   "flight": 1072,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "PIE",
+   "dest": "MCI",
+   "dep": "16:35",
+   "arr": "18:07",
+   "flight": 1073,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "PIE",
+   "dest": "MCI",
+   "dep": "18:25",
+   "arr": "19:57",
+   "flight": 1074,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "OMA",
+   "dest": "RFD",
+   "dep": "15:10",
+   "arr": "16:24",
+   "flight": 1075,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "RFD",
+   "dest": "OMA",
+   "dep": "13:15",
+   "arr": "14:29",
+   "flight": 1076,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "MCI",
+   "dest": "BNA",
+   "dep": "14:55",
+   "arr": "16:24",
+   "flight": 1077,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "MCI",
+   "dest": "BNA",
+   "dep": "20:35",
+   "arr": "22:04",
+   "flight": 1078,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "BNA",
+   "dest": "MCI",
+   "dep": "08:20",
+   "arr": "09:49",
+   "flight": 1079,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "BNA",
+   "dest": "MCI",
+   "dep": "18:25",
+   "arr": "19:54",
+   "flight": 1080,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "MCI",
+   "dest": "AUS",
+   "dep": "12:15",
+   "arr": "14:02",
+   "flight": 1081,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "MCI",
+   "dest": "AUS",
+   "dep": "15:40",
+   "arr": "17:27",
+   "flight": 1082,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "AUS",
+   "dest": "MCI",
+   "dep": "06:30",
+   "arr": "08:17",
+   "flight": 1083,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "AUS",
+   "dest": "MCI",
+   "dep": "08:10",
+   "arr": "09:57",
+   "flight": 1084,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "ELP",
+   "dest": "DAL",
+   "dep": "17:40",
+   "arr": "20:17",
+   "flight": 1085,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "DAL",
+   "dest": "ELP",
+   "dep": "16:20",
+   "arr": "16:57",
+   "flight": 1086,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "JAX",
+   "dest": "BWI",
+   "dep": "07:05",
+   "arr": "08:54",
+   "flight": 1087,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "JAX",
+   "dest": "BWI",
+   "dep": "12:05",
+   "arr": "13:54",
+   "flight": 1088,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "JAX",
+   "dest": "BWI",
+   "dep": "19:30",
+   "arr": "21:19",
+   "flight": 1089,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "BWI",
+   "dest": "JAX",
+   "dep": "04:35",
+   "arr": "06:24",
+   "flight": 1090,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "BWI",
+   "dest": "JAX",
+   "dep": "09:35",
+   "arr": "11:24",
+   "flight": 1091,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "BWI",
+   "dest": "JAX",
+   "dep": "17:00",
+   "arr": "18:49",
+   "flight": 1092,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "AUS",
+   "dest": "DAL",
+   "dep": "14:45",
+   "arr": "15:40",
+   "flight": 1093,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "DAL",
+   "dest": "AUS",
+   "dep": "19:25",
+   "arr": "20:20",
+   "flight": 1094,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "CLT",
+   "dest": "MCI",
+   "dep": "12:00",
+   "arr": "13:05",
+   "flight": 1095,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "CLT",
+   "dest": "MCI",
+   "dep": "13:50",
+   "arr": "14:55",
+   "flight": 1096,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "MCI",
+   "dest": "CLT",
+   "dep": "12:05",
+   "arr": "15:10",
+   "flight": 1097,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "MCI",
+   "dest": "CLT",
+   "dep": "20:40",
+   "arr": "23:45",
+   "flight": 1098,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "MCI",
+   "dest": "HOU",
+   "dep": "15:35",
+   "arr": "17:24",
+   "flight": 1099,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "HOU",
+   "dest": "MCI",
+   "dep": "18:05",
+   "arr": "19:54",
+   "flight": 1100,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "BDL",
+   "dest": "CLT",
+   "dep": "04:30",
+   "arr": "06:22",
+   "flight": 1101,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "CLT",
+   "dest": "BDL",
+   "dep": "19:20",
+   "arr": "21:12",
+   "flight": 1102,
+   "fleet": "CRJ700"
+  },
+  {
+   "origin": "GSP",
+   "dest": "RFD",
+   "dep": "10:55",
+   "arr": "11:39",
+   "flight": 1103,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "RFD",
+   "dest": "GSP",
+   "dep": "07:30",
+   "arr": "10:14",
+   "flight": 1104,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "PHF",
+   "dest": "FLL",
+   "dep": "07:00",
+   "arr": "09:03",
+   "flight": 1105,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "PHF",
+   "dest": "FLL",
+   "dep": "08:25",
+   "arr": "10:28",
+   "flight": 1106,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "PHF",
+   "dest": "FLL",
+   "dep": "09:20",
+   "arr": "11:23",
+   "flight": 1107,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "PHF",
+   "dest": "FLL",
+   "dep": "13:55",
+   "arr": "15:58",
+   "flight": 1108,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "PHF",
+   "dest": "FLL",
+   "dep": "15:25",
+   "arr": "17:28",
+   "flight": 1109,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "PHF",
+   "dest": "FLL",
+   "dep": "20:55",
+   "arr": "22:58",
+   "flight": 1110,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "FLL",
+   "dest": "PHF",
+   "dep": "06:30",
+   "arr": "08:33",
+   "flight": 1111,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "FLL",
+   "dest": "PHF",
+   "dep": "08:50",
+   "arr": "10:53",
+   "flight": 1112,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "FLL",
+   "dest": "PHF",
+   "dep": "11:10",
+   "arr": "13:13",
+   "flight": 1113,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "FLL",
+   "dest": "PHF",
+   "dep": "13:30",
+   "arr": "15:33",
+   "flight": 1114,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "FLL",
+   "dest": "PHF",
+   "dep": "15:50",
+   "arr": "17:53",
+   "flight": 1115,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "FLL",
+   "dest": "PHF",
+   "dep": "18:10",
+   "arr": "20:13",
+   "flight": 1116,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "RFD",
+   "dest": "PHF",
+   "dep": "07:55",
+   "arr": "10:54",
+   "flight": 1117,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "RFD",
+   "dest": "PHF",
+   "dep": "10:15",
+   "arr": "13:14",
+   "flight": 1118,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "RFD",
+   "dest": "PHF",
+   "dep": "12:35",
+   "arr": "15:34",
+   "flight": 1119,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "PHF",
+   "dest": "RFD",
+   "dep": "11:35",
+   "arr": "12:34",
+   "flight": 1120,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "PHF",
+   "dest": "RFD",
+   "dep": "16:15",
+   "arr": "17:14",
+   "flight": 1121,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "PHF",
+   "dest": "RFD",
+   "dep": "18:35",
+   "arr": "19:34",
+   "flight": 1122,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "ALB",
+   "dest": "RFD",
+   "dep": "04:30",
+   "arr": "05:32",
+   "flight": 1123,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "RFD",
+   "dest": "ALB",
+   "dep": "20:15",
+   "arr": "23:17",
+   "flight": 1124,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "SFB",
+   "dest": "FLL",
+   "dep": "14:05",
+   "arr": "15:01",
+   "flight": 1125,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "FLL",
+   "dest": "SFB",
+   "dep": "12:05",
+   "arr": "13:01",
+   "flight": 1126,
+   "fleet": "MAX9"
+  },
+  {
+   "origin": "FLL",
+   "dest": "SYR",
+   "dep": "05:00",
+   "arr": "07:54",
+   "flight": 1127,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "FLL",
+   "dest": "SYR",
+   "dep": "07:45",
+   "arr": "10:39",
+   "flight": 1128,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "FLL",
+   "dest": "SYR",
+   "dep": "10:30",
+   "arr": "13:24",
+   "flight": 1129,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "FLL",
+   "dest": "SYR",
+   "dep": "13:15",
+   "arr": "16:09",
+   "flight": 1130,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "FLL",
+   "dest": "SYR",
+   "dep": "16:00",
+   "arr": "18:54",
+   "flight": 1131,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "SYR",
+   "dest": "FLL",
+   "dep": "05:50",
+   "arr": "08:44",
+   "flight": 1132,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "SYR",
+   "dest": "FLL",
+   "dep": "08:35",
+   "arr": "11:29",
+   "flight": 1133,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "SYR",
+   "dest": "FLL",
+   "dep": "11:20",
+   "arr": "14:14",
+   "flight": 1134,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "SYR",
+   "dest": "FLL",
+   "dep": "16:50",
+   "arr": "19:44",
+   "flight": 1135,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "SYR",
+   "dest": "FLL",
+   "dep": "19:35",
+   "arr": "22:29",
+   "flight": 1136,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "RDU",
+   "dest": "MCI",
+   "dep": "08:35",
+   "arr": "09:54",
+   "flight": 1137,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "RDU",
+   "dest": "MCI",
+   "dep": "11:55",
+   "arr": "13:14",
+   "flight": 1138,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "MCI",
+   "dest": "RDU",
+   "dep": "05:35",
+   "arr": "08:54",
+   "flight": 1139,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "MCI",
+   "dest": "RDU",
+   "dep": "18:55",
+   "arr": "22:14",
+   "flight": 1140,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "DAL",
+   "dest": "BHM",
+   "dep": "18:10",
+   "arr": "19:51",
+   "flight": 1141,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "DAL",
+   "dest": "BHM",
+   "dep": "21:00",
+   "arr": "22:41",
+   "flight": 1142,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "BHM",
+   "dest": "DAL",
+   "dep": "08:25",
+   "arr": "10:06",
+   "flight": 1143,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "BHM",
+   "dest": "DAL",
+   "dep": "20:35",
+   "arr": "22:16",
+   "flight": 1144,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "GSO",
+   "dest": "RFD",
+   "dep": "04:30",
+   "arr": "05:18",
+   "flight": 1145,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "RFD",
+   "dest": "GSO",
+   "dep": "21:00",
+   "arr": "23:48",
+   "flight": 1146,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "JAX",
+   "dest": "AUS",
+   "dep": "08:35",
+   "arr": "10:00",
+   "flight": 1147,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "JAX",
+   "dest": "AUS",
+   "dep": "12:55",
+   "arr": "14:20",
+   "flight": 1148,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "AUS",
+   "dest": "JAX",
+   "dep": "11:00",
+   "arr": "14:25",
+   "flight": 1149,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "AUS",
+   "dest": "JAX",
+   "dep": "15:20",
+   "arr": "18:45",
+   "flight": 1150,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "SYR",
+   "dest": "RFD",
+   "dep": "14:05",
+   "arr": "14:55",
+   "flight": 1151,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "SYR",
+   "dest": "RFD",
+   "dep": "19:30",
+   "arr": "20:20",
+   "flight": 1152,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "RFD",
+   "dest": "SYR",
+   "dep": "10:35",
+   "arr": "13:25",
+   "flight": 1153,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "RFD",
+   "dest": "SYR",
+   "dep": "16:05",
+   "arr": "18:55",
+   "flight": 1154,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "TUL",
+   "dest": "SFB",
+   "dep": "09:10",
+   "arr": "12:40",
+   "flight": 1155,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "SFB",
+   "dest": "TUL",
+   "dep": "13:20",
+   "arr": "14:50",
+   "flight": 1156,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "TUL",
+   "dest": "HOU",
+   "dep": "18:00",
+   "arr": "19:26",
+   "flight": 1157,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "HOU",
+   "dest": "TUL",
+   "dep": "07:00",
+   "arr": "08:26",
+   "flight": 1158,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "JAX",
+   "dest": "PHF",
+   "dep": "14:00",
+   "arr": "15:37",
+   "flight": 1159,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "JAX",
+   "dest": "PHF",
+   "dep": "16:10",
+   "arr": "17:47",
+   "flight": 1160,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "PHF",
+   "dest": "JAX",
+   "dep": "09:15",
+   "arr": "10:52",
+   "flight": 1161,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "PHF",
+   "dest": "JAX",
+   "dep": "11:35",
+   "arr": "13:12",
+   "flight": 1162,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "JAX",
+   "dest": "PIT",
+   "dep": "06:25",
+   "arr": "08:19",
+   "flight": 1163,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "JAX",
+   "dest": "PIT",
+   "dep": "08:35",
+   "arr": "10:29",
+   "flight": 1164,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "JAX",
+   "dest": "PIT",
+   "dep": "19:25",
+   "arr": "21:19",
+   "flight": 1165,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "PIT",
+   "dest": "JAX",
+   "dep": "04:55",
+   "arr": "06:49",
+   "flight": 1166,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "PIT",
+   "dest": "JAX",
+   "dep": "09:15",
+   "arr": "11:09",
+   "flight": 1167,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "PIT",
+   "dest": "JAX",
+   "dep": "11:25",
+   "arr": "13:19",
+   "flight": 1168,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "BWI",
+   "dest": "MCI",
+   "dep": "05:05",
+   "arr": "06:31",
+   "flight": 1169,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "MCI",
+   "dest": "BWI",
+   "dep": "20:35",
+   "arr": "00:01",
+   "flight": 1170,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "PHF",
+   "dest": "PIE",
+   "dep": "06:55",
+   "arr": "08:54",
+   "flight": 1171,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "PHF",
+   "dest": "PIE",
+   "dep": "09:15",
+   "arr": "11:14",
+   "flight": 1172,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "PHF",
+   "dest": "PIE",
+   "dep": "13:55",
+   "arr": "15:54",
+   "flight": 1173,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "PHF",
+   "dest": "PIE",
+   "dep": "16:15",
+   "arr": "18:14",
+   "flight": 1174,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "PHF",
+   "dest": "PIE",
+   "dep": "18:35",
+   "arr": "20:34",
+   "flight": 1175,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "PHF",
+   "dest": "PIE",
+   "dep": "20:55",
+   "arr": "22:54",
+   "flight": 1176,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "PIE",
+   "dest": "PHF",
+   "dep": "06:35",
+   "arr": "08:34",
+   "flight": 1177,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "PIE",
+   "dest": "PHF",
+   "dep": "08:55",
+   "arr": "10:54",
+   "flight": 1178,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "PIE",
+   "dest": "PHF",
+   "dep": "11:15",
+   "arr": "13:14",
+   "flight": 1179,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "PIE",
+   "dest": "PHF",
+   "dep": "13:35",
+   "arr": "15:34",
+   "flight": 1180,
+   "fleet": "CRJ900"
+  },
+  {
+   "origin": "PIE",
+   "dest": "PHF",
+  

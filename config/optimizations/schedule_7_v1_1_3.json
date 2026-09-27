@@ -1,0 +1,54 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "schedule-7-v1.1.3-bhm-flp-release",
+  "sourceScheduleId": "schedule_7_v1_1_2",
+  "baseCanonical": "data/schedules/schedule_7_v1_1_2/canonical_schedule.json",
+  "overlays": [
+    "config/optimizations/schedule_7_v1_1_3_round_1.json",
+    "config/optimizations/schedule_7_v1_1_3_round_2.json",
+    "config/optimizations/schedule_7_v1_1_3_round_3.json",
+    "config/optimizations/schedule_7_v1_1_3_round_4.json"
+  ],
+  "outputDirectory": "data/schedules/schedule_7_v1_1_3",
+  "rejoinAvoidableTows": true,
+  "demandDataVersion": "bts-db1c-6mo-jul2025-apr2026-v7",
+  "schedule": {
+    "id": "schedule_7_v1_1_3",
+    "number": 7,
+    "version": "1.1.3",
+    "label": "Schedule 7, Version 1.1.3",
+    "status": "released"
+  },
+  "patchScope": {
+    "kind": "bhm_flp_connectivity",
+    "timetableChanged": true,
+    "routingChanged": true,
+    "description": "Convert productive CRJ200 and other available route-day capacity into BHM focus-city feed and new PIE, SFB, and FLL frequencies without changing fleet inventory."
+  },
+  "connectionAudit": {
+    "hub": "BHM",
+    "groups": {
+      "feeders": ["OMA", "ATW", "ICT", "FSD", "MCI"],
+      "FLP": ["DAB", "EYW", "FLL", "GNV", "MLB", "PGD", "PIE", "SFB", "SRQ"]
+    }
+  },
+  "connectionScopeDecision": {
+    "status": "approved",
+    "model": "selected_bhm_bank_connections",
+    "approvedBy": "user",
+    "futureWork": "GNV, MLB, and additional BHM connectivity may be considered in future Schedule 7 versions when aircraft timing and demand justify them."
+  },
+  "expectedRelease": {
+    "legs": 998,
+    "routes": 179,
+    "lines": 22,
+    "effectiveOperatingErrors": 0,
+    "hardStopFailures": 0,
+    "directRoundTripCities": 12,
+    "connectedDirectionalPairs": 27,
+    "standClaims": 29,
+    "standMinutes": 16822,
+    "hubStandClaims": 1,
+    "hubStandMinutes": 97
+  }
+}

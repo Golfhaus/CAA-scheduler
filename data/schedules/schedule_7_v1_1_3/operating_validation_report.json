@@ -1,0 +1,1137 @@
+{
+  "scheduleId": "schedule_7_v1_1_3",
+  "policyId": "caa-operating-rules-v2.0-plus-hard-stop",
+  "status": "review",
+  "summary": {
+    "checks": 25,
+    "passed": 20,
+    "failed": 0,
+    "warnings": 3,
+    "notEvaluated": 1,
+    "overridden": 1,
+    "effectiveErrorFindings": 0,
+    "effectiveWarningFindings": 191
+  },
+  "checks": [
+    {
+      "id": "destination_coverage",
+      "title": "Active-city coverage",
+      "section": "§1.8",
+      "severity": "error",
+      "hardStop": false,
+      "status": "pass",
+      "message": "Every active city has scheduled service",
+      "metrics": {
+        "activeCities": 105,
+        "servedActiveCities": 105,
+        "findingCount": 0,
+        "effectiveFindingCount": 0,
+        "overriddenFindingCount": 0
+      },
+      "findings": []
+    },
+    {
+      "id": "fleet_capacity",
+      "title": "Fleet aircraft-day capacity",
+      "section": "§1.4 / §1.6a",
+      "severity": "error",
+      "hardStop": false,
+      "status": "pass",
+      "message": "Every fleet is within its aircraft-day cap",
+      "metrics": {
+        "MAX9": {
+          "used": 21,
+          "capacity": 35
+        },
+        "CRJ900": {
+          "used": 28,
+          "capacity": 45
+        },
+        "CRJ700": {
+          "used": 54,
+          "capacity": 65
+        },
+        "CRJ200": {
+          "used": 76,
+          "capacity": 80
+        },
+        "findingCount": 0,
+        "effectiveFindingCount": 0,
+        "overriddenFindingCount": 0
+      },
+      "findings": []
+    },
+    {
+      "id": "departure_windows",
+      "title": "Departure windows and curfews",
+      "section": "§2.5 / Lesson 32",
+      "severity": "error",
+      "hardStop": true,
+      "status": "pass",
+      "message": "Every departure is inside a normal window or valid red-eye window",
+      "metrics": {
+        "redEyes": 5,
+        "findingCount": 0,
+        "effectiveFindingCount": 0,
+        "overriddenFindingCount": 0
+      },
+      "findings": []
+    },
+    {
+      "id": "line_day_continuity",
+      "title": "Line continuity across operating days",
+      "section": "§2.8 / Lesson 29",
+      "severity": "error",
+      "hardStop": false,
+      "status": "pass",
+      "message": "Every line closes continuously across days, including wraparound",
+      "metrics": {
+        "findingCount": 0,
+        "effectiveFindingCount": 0,
+        "overriddenFindingCount": 0
+      },
+      "findings": []
+    },
+    {
+      "id": "minimum_turn_time",
+      "title": "Minimum same-day turn time",
+      "section": "§2.5",
+      "severity": "error",
+      "hardStop": false,
+      "status": "pass",
+      "message": "Every same-day turn is at least 40 minutes",
+      "metrics": {
+        "findingCount": 0,
+        "effectiveFindingCount": 0,
+        "overriddenFindingCount": 0
+      },
+      "findings": []
+    },
+    {
+      "id": "long_hold_review",
+      "title": "Long same-day holds",
+      "section": "§1.6a / §2.5",
+      "severity": "warning",
+      "hardStop": false,
+      "status": "warning",
+      "message": "91 finding(s)",
+      "metrics": {
+        "findingCount": 91,
+        "effectiveFindingCount": 91,
+        "overriddenFindingCount": 0
+      },
+      "findings": [
+        {
+          "id": "B-12-1001-1070",
+          "message": "Hold at SFB is 206 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "B",
+            "day": 12,
+            "city": "SFB",
+            "arrivalFlight": 1001,
+            "departureFlight": 1070,
+            "minutes": 206
+          }
+        },
+        {
+          "id": "B-4-1065-1024",
+          "message": "Hold at SFB is 209 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "B",
+            "day": 4,
+            "city": "SFB",
+            "arrivalFlight": 1065,
+            "departureFlight": 1024,
+            "minutes": 209
+          }
+        },
+        {
+          "id": "B-4-1019-1012",
+          "message": "Hold at RFD is 162 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "B",
+            "day": 4,
+            "city": "RFD",
+            "arrivalFlight": 1019,
+            "departureFlight": 1012,
+            "minutes": 162
+          }
+        },
+        {
+          "id": "A-5-1068-1109",
+          "message": "Hold at PHF is 409 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "A",
+            "day": 5,
+            "city": "PHF",
+            "arrivalFlight": 1068,
+            "departureFlight": 1109,
+            "minutes": 409
+          }
+        },
+        {
+          "id": "B-3-1055-1042",
+          "message": "Hold at SFB is 210 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "B",
+            "day": 3,
+            "city": "SFB",
+            "arrivalFlight": 1055,
+            "departureFlight": 1042,
+            "minutes": 210
+          }
+        },
+        {
+          "id": "A-3-1105-1060",
+          "message": "Hold at FLL is 172 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "A",
+            "day": 3,
+            "city": "FLL",
+            "arrivalFlight": 1105,
+            "departureFlight": 1060,
+            "minutes": 172
+          }
+        },
+        {
+          "id": "AH-2-1101-1379",
+          "message": "Hold at CLT is 208 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AH",
+            "day": 2,
+            "city": "CLT",
+            "arrivalFlight": 1101,
+            "departureFlight": 1379,
+            "minutes": 208
+          }
+        },
+        {
+          "id": "AH-2-1379-1270",
+          "message": "Hold at PHF is 179 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AH",
+            "day": 2,
+            "city": "PHF",
+            "arrivalFlight": 1379,
+            "departureFlight": 1270,
+            "minutes": 179
+          }
+        },
+        {
+          "id": "AH-13-1302-1307",
+          "message": "Hold at SYR is 209 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AH",
+            "day": 13,
+            "city": "SYR",
+            "arrivalFlight": 1302,
+            "departureFlight": 1307,
+            "minutes": 209
+          }
+        },
+        {
+          "id": "AJ-1-1187-1189",
+          "message": "Hold at MSY is 241 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AJ",
+            "day": 1,
+            "city": "MSY",
+            "arrivalFlight": 1187,
+            "departureFlight": 1189,
+            "minutes": 241
+          }
+        },
+        {
+          "id": "AJ-5-1139-1138",
+          "message": "Hold at RDU is 181 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AJ",
+            "day": 5,
+            "city": "RDU",
+            "arrivalFlight": 1139,
+            "departureFlight": 1138,
+            "minutes": 181
+          }
+        },
+        {
+          "id": "AG-5-1159-1202",
+          "message": "Hold at PHF is 168 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AG",
+            "day": 5,
+            "city": "PHF",
+            "arrivalFlight": 1159,
+            "departureFlight": 1202,
+            "minutes": 168
+          }
+        },
+        {
+          "id": "AG-6-1156-1157",
+          "message": "Hold at TUL is 190 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AG",
+            "day": 6,
+            "city": "TUL",
+            "arrivalFlight": 1156,
+            "departureFlight": 1157,
+            "minutes": 190
+          }
+        },
+        {
+          "id": "AG-4-1216-1235",
+          "message": "Hold at BLV is 182 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AG",
+            "day": 4,
+            "city": "BLV",
+            "arrivalFlight": 1216,
+            "departureFlight": 1235,
+            "minutes": 182
+          }
+        },
+        {
+          "id": "AJ-2-1261-1265",
+          "message": "Hold at MKE is 191 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AJ",
+            "day": 2,
+            "city": "MKE",
+            "arrivalFlight": 1261,
+            "departureFlight": 1265,
+            "minutes": 191
+          }
+        },
+        {
+          "id": "AG-8-1199-1208",
+          "message": "Hold at DAL is 172 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AG",
+            "day": 8,
+            "city": "DAL",
+            "arrivalFlight": 1199,
+            "departureFlight": 1208,
+            "minutes": 172
+          }
+        },
+        {
+          "id": "AB-1-1255-1256",
+          "message": "Hold at MYR is 312 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AB",
+            "day": 1,
+            "city": "MYR",
+            "arrivalFlight": 1255,
+            "departureFlight": 1256,
+            "minutes": 312
+          }
+        },
+        {
+          "id": "AL-6-1329-1325",
+          "message": "Hold at HOU is 152 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AL",
+            "day": 6,
+            "city": "HOU",
+            "arrivalFlight": 1329,
+            "departureFlight": 1325,
+            "minutes": 152
+          }
+        },
+        {
+          "id": "AH-8-1330-1326",
+          "message": "Hold at HOU is 152 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AH",
+            "day": 8,
+            "city": "HOU",
+            "arrivalFlight": 1330,
+            "departureFlight": 1326,
+            "minutes": 152
+          }
+        },
+        {
+          "id": "AL-2-1288-1493",
+          "message": "Hold at PHF is 182 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AL",
+            "day": 2,
+            "city": "PHF",
+            "arrivalFlight": 1288,
+            "departureFlight": 1493,
+            "minutes": 182
+          }
+        },
+        {
+          "id": "AH-9-1309-1335",
+          "message": "Hold at SYR is 163 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AH",
+            "day": 9,
+            "city": "SYR",
+            "arrivalFlight": 1309,
+            "departureFlight": 1335,
+            "minutes": 163
+          }
+        },
+        {
+          "id": "AH-9-1335-1294",
+          "message": "Hold at BNA is 151 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AH",
+            "day": 9,
+            "city": "BNA",
+            "arrivalFlight": 1335,
+            "departureFlight": 1294,
+            "minutes": 151
+          }
+        },
+        {
+          "id": "AH-3-1495-1291",
+          "message": "Hold at PHF is 164 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AH",
+            "day": 3,
+            "city": "PHF",
+            "arrivalFlight": 1495,
+            "departureFlight": 1291,
+            "minutes": 164
+          }
+        },
+        {
+          "id": "AL-7-1311-1298",
+          "message": "Hold at SYR is 173 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AL",
+            "day": 7,
+            "city": "SYR",
+            "arrivalFlight": 1311,
+            "departureFlight": 1298,
+            "minutes": 173
+          }
+        },
+        {
+          "id": "AH-12-1301-1951",
+          "message": "Hold at SYR is 154 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AH",
+            "day": 12,
+            "city": "SYR",
+            "arrivalFlight": 1301,
+            "departureFlight": 1951,
+            "minutes": 154
+          }
+        },
+        {
+          "id": "AA-7-1917-1918",
+          "message": "Hold at PIT is 322 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AA",
+            "day": 7,
+            "city": "PIT",
+            "arrivalFlight": 1917,
+            "departureFlight": 1918,
+            "minutes": 322
+          }
+        },
+        {
+          "id": "AK-4-1306-1382",
+          "message": "Hold at CLT is 243 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AK",
+            "day": 4,
+            "city": "CLT",
+            "arrivalFlight": 1306,
+            "departureFlight": 1382,
+            "minutes": 243
+          }
+        },
+        {
+          "id": "AA-5-1439-1308",
+          "message": "Hold at SYR is 173 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AA",
+            "day": 5,
+            "city": "SYR",
+            "arrivalFlight": 1439,
+            "departureFlight": 1308,
+            "minutes": 173
+          }
+        },
+        {
+          "id": "AL-9-1405-1404",
+          "message": "Hold at ELP is 289 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AL",
+            "day": 9,
+            "city": "ELP",
+            "arrivalFlight": 1405,
+            "departureFlight": 1404,
+            "minutes": 289
+          }
+        },
+        {
+          "id": "AL-1-1321-1491",
+          "message": "Hold at PHF is 182 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AL",
+            "day": 1,
+            "city": "PHF",
+            "arrivalFlight": 1321,
+            "departureFlight": 1491,
+            "minutes": 182
+          }
+        },
+        {
+          "id": "AA-3-1343-1346",
+          "message": "Hold at PNS is 210 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AA",
+            "day": 3,
+            "city": "PNS",
+            "arrivalFlight": 1343,
+            "departureFlight": 1346,
+            "minutes": 210
+          }
+        },
+        {
+          "id": "AH-1-1922-1360",
+          "message": "Hold at DAB is 267 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AH",
+            "day": 1,
+            "city": "DAB",
+            "arrivalFlight": 1922,
+            "departureFlight": 1360,
+            "minutes": 267
+          }
+        },
+        {
+          "id": "AA-9-1389-1426",
+          "message": "Hold at MCI is 393 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AA",
+            "day": 9,
+            "city": "MCI",
+            "arrivalFlight": 1389,
+            "departureFlight": 1426,
+            "minutes": 393
+          }
+        },
+        {
+          "id": "AL-11-1447-1424",
+          "message": "Hold at MCI is 238 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AL",
+            "day": 11,
+            "city": "MCI",
+            "arrivalFlight": 1447,
+            "departureFlight": 1424,
+            "minutes": 238
+          }
+        },
+        {
+          "id": "AL-3-1496-1400",
+          "message": "Hold at PHF is 179 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AL",
+            "day": 3,
+            "city": "PHF",
+            "arrivalFlight": 1496,
+            "departureFlight": 1400,
+            "minutes": 179
+          }
+        },
+        {
+          "id": "AK-10-1465-1459",
+          "message": "Hold at DAY is 163 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AK",
+            "day": 10,
+            "city": "DAY",
+            "arrivalFlight": 1465,
+            "departureFlight": 1459,
+            "minutes": 163
+          }
+        },
+        {
+          "id": "AE-14-1991-1992",
+          "message": "Hold at BHM is 276 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AE",
+            "day": 14,
+            "city": "BHM",
+            "arrivalFlight": 1991,
+            "departureFlight": 1992,
+            "minutes": 276
+          }
+        },
+        {
+          "id": "AD-27-1873-1872",
+          "message": "Hold at FWA is 255 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AD",
+            "day": 27,
+            "city": "FWA",
+            "arrivalFlight": 1873,
+            "departureFlight": 1872,
+            "minutes": 255
+          }
+        },
+        {
+          "id": "AD-13-1887-1511",
+          "message": "Hold at SYR is 376 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AD",
+            "day": 13,
+            "city": "SYR",
+            "arrivalFlight": 1887,
+            "departureFlight": 1511,
+            "minutes": 376
+          }
+        },
+        {
+          "id": "AC-3-1890-1894",
+          "message": "Hold at ISP is 167 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AC",
+            "day": 3,
+            "city": "ISP",
+            "arrivalFlight": 1890,
+            "departureFlight": 1894,
+            "minutes": 167
+          }
+        },
+        {
+          "id": "AC-3-1512-1910",
+          "message": "Hold at PHF is 160 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AC",
+            "day": 3,
+            "city": "PHF",
+            "arrivalFlight": 1512,
+            "departureFlight": 1910,
+            "minutes": 160
+          }
+        },
+        {
+          "id": "AC-4-1513-1876",
+          "message": "Hold at SYR is 180 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AC",
+            "day": 4,
+            "city": "SYR",
+            "arrivalFlight": 1513,
+            "departureFlight": 1876,
+            "minutes": 180
+          }
+        },
+        {
+          "id": "AC-4-1876-1880",
+          "message": "Hold at HVN is 179 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AC",
+            "day": 4,
+            "city": "HVN",
+            "arrivalFlight": 1876,
+            "departureFlight": 1880,
+            "minutes": 179
+          }
+        },
+        {
+          "id": "AD-34-1713-1514",
+          "message": "Hold at PHF is 179 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AD",
+            "day": 34,
+            "city": "PHF",
+            "arrivalFlight": 1713,
+            "departureFlight": 1514,
+            "minutes": 179
+          }
+        },
+        {
+          "id": "AD-32-1569-1616",
+          "message": "Hold at PHF is 184 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AD",
+            "day": 32,
+            "city": "PHF",
+            "arrivalFlight": 1569,
+            "departureFlight": 1616,
+            "minutes": 184
+          }
+        },
+        {
+          "id": "AD-19-1632-1523",
+          "message": "Hold at LBB is 188 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AD",
+            "day": 19,
+            "city": "LBB",
+            "arrivalFlight": 1632,
+            "departureFlight": 1523,
+            "minutes": 188
+          }
+        },
+        {
+          "id": "AD-19-1523-1717",
+          "message": "Hold at MCI is 356 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AD",
+            "day": 19,
+            "city": "MCI",
+            "arrivalFlight": 1523,
+            "departureFlight": 1717,
+            "minutes": 356
+          }
+        },
+        {
+          "id": "AD-30-1858-1538",
+          "message": "Hold at DAY is 164 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AD",
+            "day": 30,
+            "city": "DAY",
+            "arrivalFlight": 1858,
+            "departureFlight": 1538,
+            "minutes": 164
+          }
+        },
+        {
+          "id": "AE-8-1532-1733",
+          "message": "Hold at MCI is 555 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AE",
+            "day": 8,
+            "city": "MCI",
+            "arrivalFlight": 1532,
+            "departureFlight": 1733,
+            "minutes": 555
+          }
+        },
+        {
+          "id": "AD-24-1647-1651",
+          "message": "Hold at ICT is 152 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AD",
+            "day": 24,
+            "city": "ICT",
+            "arrivalFlight": 1647,
+            "departureFlight": 1651,
+            "minutes": 152
+          }
+        },
+        {
+          "id": "AE-10-1675-1679",
+          "message": "Hold at FSD is 219 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AE",
+            "day": 10,
+            "city": "FSD",
+            "arrivalFlight": 1675,
+            "departureFlight": 1679,
+            "minutes": 219
+          }
+        },
+        {
+          "id": "AE-10-1679-1531",
+          "message": "Hold at MCI is 239 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AE",
+            "day": 10,
+            "city": "MCI",
+            "arrivalFlight": 1679,
+            "departureFlight": 1531,
+            "minutes": 239
+          }
+        },
+        {
+          "id": "AD-26-1568-1572",
+          "message": "Hold at PHF is 159 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AD",
+            "day": 26,
+            "city": "PHF",
+            "arrivalFlight": 1568,
+            "departureFlight": 1572,
+            "minutes": 159
+          }
+        },
+        {
+          "id": "AE-9-1566-1723",
+          "message": "Hold at MCI is 238 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AE",
+            "day": 9,
+            "city": "MCI",
+            "arrivalFlight": 1566,
+            "departureFlight": 1723,
+            "minutes": 238
+          }
+        },
+        {
+          "id": "AF-4-1567-1571",
+          "message": "Hold at PHF is 154 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AF",
+            "day": 4,
+            "city": "PHF",
+            "arrivalFlight": 1567,
+            "departureFlight": 1571,
+            "minutes": 154
+          }
+        },
+        {
+          "id": "AF-4-1571-1862",
+          "message": "Hold at DAY is 164 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AF",
+            "day": 4,
+            "city": "DAY",
+            "arrivalFlight": 1571,
+            "departureFlight": 1862,
+            "minutes": 164
+          }
+        },
+        {
+          "id": "AC-9-1709-1823",
+          "message": "Hold at PHF is 178 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AC",
+            "day": 9,
+            "city": "PHF",
+            "arrivalFlight": 1709,
+            "departureFlight": 1823,
+            "minutes": 178
+          }
+        },
+        {
+          "id": "AE-3-1633-1638",
+          "message": "Hold at OMA is 161 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AE",
+            "day": 3,
+            "city": "OMA",
+            "arrivalFlight": 1633,
+            "departureFlight": 1638,
+            "minutes": 161
+          }
+        },
+        {
+          "id": "AE-3-1966-1783",
+          "message": "Hold at MCI is 200 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AE",
+            "day": 3,
+            "city": "MCI",
+            "arrivalFlight": 1966,
+            "departureFlight": 1783,
+            "minutes": 200
+          }
+        },
+        {
+          "id": "AE-1-1692-1661",
+          "message": "Hold at MCI is 308 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AE",
+            "day": 1,
+            "city": "MCI",
+            "arrivalFlight": 1692,
+            "departureFlight": 1661,
+            "minutes": 308
+          }
+        },
+        {
+          "id": "AD-8-1767-1588",
+          "message": "Hold at MCI is 338 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AD",
+            "day": 8,
+            "city": "MCI",
+            "arrivalFlight": 1767,
+            "departureFlight": 1588,
+            "minutes": 338
+          }
+        },
+        {
+          "id": "AD-37-1607-1683",
+          "message": "Hold at SYR is 319 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AD",
+            "day": 37,
+            "city": "SYR",
+            "arrivalFlight": 1607,
+            "departureFlight": 1683,
+            "minutes": 319
+          }
+        },
+        {
+          "id": "AC-10-1875-1879",
+          "message": "Hold at HVN is 179 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AC",
+            "day": 10,
+            "city": "HVN",
+            "arrivalFlight": 1875,
+            "departureFlight": 1879,
+            "minutes": 179
+          }
+        },
+        {
+          "id": "AC-10-1836-1840",
+          "message": "Hold at MHT is 165 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AC",
+            "day": 10,
+            "city": "MHT",
+            "arrivalFlight": 1836,
+            "departureFlight": 1840,
+            "minutes": 165
+          }
+        },
+        {
+          "id": "AD-3-1761-1615",
+          "message": "Hold at PHF is 179 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AD",
+            "day": 3,
+            "city": "PHF",
+            "arrivalFlight": 1761,
+            "departureFlight": 1615,
+            "minutes": 179
+          }
+        },
+        {
+          "id": "AD-40-1657-1752",
+          "message": "Hold at SYR is 187 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AD",
+            "day": 40,
+            "city": "SYR",
+            "arrivalFlight": 1657,
+            "departureFlight": 1752,
+            "minutes": 187
+          }
+        },
+        {
+          "id": "AD-15-1878-1811",
+          "message": "Hold at SYR is 189 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AD",
+            "day": 15,
+            "city": "SYR",
+            "arrivalFlight": 1878,
+            "departureFlight": 1811,
+            "minutes": 189
+          }
+        },
+        {
+          "id": "AD-15-1811-1812",
+          "message": "Hold at PVD is 162 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AD",
+            "day": 15,
+            "city": "PVD",
+            "arrivalFlight": 1811,
+            "departureFlight": 1812,
+            "minutes": 162
+          }
+        },
+        {
+          "id": "AC-8-1881-1884",
+          "message": "Hold at ORH is 172 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AC",
+            "day": 8,
+            "city": "ORH",
+            "arrivalFlight": 1881,
+            "departureFlight": 1884,
+            "minutes": 172
+          }
+        },
+        {
+          "id": "AC-8-1826-1830",
+          "message": "Hold at BTV is 183 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AC",
+            "day": 8,
+            "city": "BTV",
+            "arrivalFlight": 1826,
+            "departureFlight": 1830,
+            "minutes": 183
+          }
+        },
+        {
+          "id": "AF-2-1749-1754",
+          "message": "Hold at ALB is 201 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AF",
+            "day": 2,
+            "city": "ALB",
+            "arrivalFlight": 1749,
+            "departureFlight": 1754,
+            "minutes": 201
+          }
+        },
+        {
+          "id": "AF-1-1785-1789",
+          "message": "Hold at ATW is 426 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AF",
+            "day": 1,
+            "city": "ATW",
+            "arrivalFlight": 1785,
+            "departureFlight": 1789,
+            "minutes": 426
+          }
+        },
+        {
+          "id": "AC-7-1889-1893",
+          "message": "Hold at ISP is 172 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AC",
+            "day": 7,
+            "city": "ISP",
+            "arrivalFlight": 1889,
+            "departureFlight": 1893,
+            "minutes": 172
+          }
+        },
+        {
+          "id": "AC-7-1792-1791",
+          "message": "Hold at BDL is 181 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AC",
+            "day": 7,
+            "city": "BDL",
+            "arrivalFlight": 1792,
+            "departureFlight": 1791,
+            "minutes": 181
+          }
+        },
+        {
+          "id": "AC-5-1835-1839",
+          "message": "Hold at MHT is 170 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AC",
+            "day": 5,
+            "city": "MHT",
+            "arrivalFlight": 1835,
+            "departureFlight": 1839,
+            "minutes": 170
+          }
+        },
+        {
+          "id": "AD-11-1699-1704",
+          "message": "Hold at PWM is 317 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AD",
+            "day": 11,
+            "city": "PWM",
+            "arrivalFlight": 1699,
+            "departureFlight": 1704,
+            "minutes": 317
+          }
+        },
+        {
+          "id": "AD-11-1704-1701",
+          "message": "Hold at SYR is 207 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AD",
+            "day": 11,
+            "city": "SYR",
+            "arrivalFlight": 1704,
+            "departureFlight": 1701,
+            "minutes": 207
+          }
+        },
+        {
+          "id": "AD-12-1702-1886",
+          "message": "Hold at SYR is 342 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AD",
+            "day": 12,
+            "city": "SYR",
+            "arrivalFlight": 1702,
+            "departureFlight": 1886,
+            "minutes": 342
+          }
+        },
+        {
+          "id": "AD-35-1703-1853",
+          "message": "Hold at SYR is 207 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AD",
+            "day": 35,
+            "city": "SYR",
+            "arrivalFlight": 1703,
+            "departureFlight": 1853,
+            "minutes": 207
+          }
+        },
+        {
+          "id": "AD-35-1853-1856",
+          "message": "Hold at HPN is 181 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AD",
+            "day": 35,
+            "city": "HPN",
+            "arrivalFlight": 1853,
+            "departureFlight": 1856,
+            "minutes": 181
+          }
+        },
+        {
+          "id": "AD-14-1852-1855",
+          "message": "Hold at HPN is 181 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AD",
+            "day": 14,
+            "city": "HPN",
+            "arrivalFlight": 1852,
+            "departureFlight": 1855,
+            "minutes": 181
+          }
+        },
+        {
+          "id": "AE-12-1979-1980",
+          "message": "Hold at BHM is 202 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AE",
+            "day": 12,
+            "city": "BHM",
+            "arrivalFlight": 1979,
+            "departureFlight": 1980,
+            "minutes": 202
+          }
+        },
+        {
+          "id": "AD-2-1825-1829",
+          "message": "Hold at BTV is 183 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AD",
+            "day": 2,
+            "city": "BTV",
+            "arrivalFlight": 1825,
+            "departureFlight": 1829,
+            "minutes": 183
+          }
+        },
+        {
+          "id": "AD-1-1753-1750",
+          "message": "Hold at SYR is 201 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AD",
+            "day": 1,
+            "city": "SYR",
+            "arrivalFlight": 1753,
+            "departureFlight": 1750,
+            "minutes": 201
+          }
+        },
+        {
+          "id": "AD-1-1750-1755",
+          "message": "Hold at ALB is 366 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AD",
+            "

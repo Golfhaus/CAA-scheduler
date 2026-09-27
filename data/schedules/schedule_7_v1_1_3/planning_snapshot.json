@@ -1,0 +1,1854 @@
+{
+  "schemaVersion": "1.0.0",
+  "scheduleId": "schedule_7_v1_1_3",
+  "sourceKind": "canonical_reconstruction",
+  "demandDataVersion": "bts-db1c-6mo-jul2025-apr2026-v7",
+  "summary": {
+    "legCount": 998,
+    "marketRows": 552,
+    "stationCount": 105,
+    "fleetTypes": 4
+  },
+  "fleetPlan": {
+    "MAX9": {
+      "aircraftCount": 35,
+      "aircraftDaysUsed": 21,
+      "legCount": 128,
+      "blockMinutes": 14934,
+      "minimumTurnMinutes": 4280,
+      "requiredAircraftMinutes": 19214
+    },
+    "CRJ900": {
+      "aircraftCount": 45,
+      "aircraftDaysUsed": 28,
+      "legCount": 148,
+      "blockMinutes": 18112,
+      "minimumTurnMinutes": 4800,
+      "requiredAircraftMinutes": 22912
+    },
+    "CRJ700": {
+      "aircraftCount": 65,
+      "aircraftDaysUsed": 54,
+      "legCount": 274,
+      "blockMinutes": 29724,
+      "minimumTurnMinutes": 8800,
+      "requiredAircraftMinutes": 38524
+    },
+    "CRJ200": {
+      "aircraftCount": 80,
+      "aircraftDaysUsed": 76,
+      "legCount": 448,
+      "blockMinutes": 33326,
+      "minimumTurnMinutes": 14880,
+      "requiredAircraftMinutes": 48206
+    }
+  },
+  "markets": [
+    {
+      "fleet": "CRJ200",
+      "origin": "ABE",
+      "destination": "PHF",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "ABE",
+      "destination": "SYR",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "ACY",
+      "destination": "PHF",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "ACY",
+      "destination": "SYR",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "AGS",
+      "destination": "JAX",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "ALB",
+      "destination": "SYR",
+      "legs": 4
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "ATW",
+      "destination": "BHM",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "ATW",
+      "destination": "DAY",
+      "legs": 3
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "ATW",
+      "destination": "MCI",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "AVL",
+      "destination": "DAY",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "AVL",
+      "destination": "JAX",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "AVP",
+      "destination": "PHF",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "BDL",
+      "destination": "SYR",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "BGR",
+      "destination": "SYR",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "BHM",
+      "destination": "ATW",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "BHM",
+      "destination": "DAB",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "BHM",
+      "destination": "DAY",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "BHM",
+      "destination": "ECP",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "BHM",
+      "destination": "EYW",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "BHM",
+      "destination": "FSD",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "BHM",
+      "destination": "HRL",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "BHM",
+      "destination": "ICT",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "BHM",
+      "destination": "LBB",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "BHM",
+      "destination": "MCI",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "BHM",
+      "destination": "OMA",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "BHM",
+      "destination": "PIE",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "BHM",
+      "destination": "SFB",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "BHM",
+      "destination": "SGF",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "BHM",
+      "destination": "SRQ",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "BHM",
+      "destination": "TUL",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "BHM",
+      "destination": "VPS",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "BHM",
+      "destination": "XNA",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "BNA",
+      "destination": "DAY",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "BTR",
+      "destination": "JAX",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "BTV",
+      "destination": "SYR",
+      "legs": 3
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "BUF",
+      "destination": "DAY",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "BUF",
+      "destination": "SYR",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "BWI",
+      "destination": "SYR",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "CAE",
+      "destination": "JAX",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "CAE",
+      "destination": "PHF",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "CAK",
+      "destination": "DAY",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "CAK",
+      "destination": "SYR",
+      "legs": 3
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "CHA",
+      "destination": "DAY",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "CHA",
+      "destination": "JAX",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "CHS",
+      "destination": "DAY",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "CHS",
+      "destination": "JAX",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "CID",
+      "destination": "MCI",
+      "legs": 3
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "CMH",
+      "destination": "DAY",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "COU",
+      "destination": "MCI",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "CRP",
+      "destination": "MCI",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "CRW",
+      "destination": "DAY",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "DAB",
+      "destination": "BHM",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "DAB",
+      "destination": "JAX",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "DAY",
+      "destination": "ATW",
+      "legs": 3
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "DAY",
+      "destination": "AVL",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "DAY",
+      "destination": "BHM",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "DAY",
+      "destination": "BNA",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "DAY",
+      "destination": "BUF",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "DAY",
+      "destination": "CAK",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "DAY",
+      "destination": "CHA",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "DAY",
+      "destination": "CHS",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "DAY",
+      "destination": "CMH",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "DAY",
+      "destination": "CRW",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "DAY",
+      "destination": "ERI",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "DAY",
+      "destination": "FWA",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "DAY",
+      "destination": "GRR",
+      "legs": 4
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "DAY",
+      "destination": "HOU",
+      "legs": 4
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "DAY",
+      "destination": "HSV",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "DAY",
+      "destination": "IND",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "DAY",
+      "destination": "LEX",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "DAY",
+      "destination": "MCI",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "DAY",
+      "destination": "MKE",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "DAY",
+      "destination": "MSN",
+      "legs": 3
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "DAY",
+      "destination": "PHF",
+      "legs": 3
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "DAY",
+      "destination": "PIT",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "DAY",
+      "destination": "ROC",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "DAY",
+      "destination": "SBN",
+      "legs": 3
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "DAY",
+      "destination": "SDF",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "DAY",
+      "destination": "SYR",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "DAY",
+      "destination": "TOL",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "DAY",
+      "destination": "TRI",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "DAY",
+      "destination": "TYS",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "DLH",
+      "destination": "MCI",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "DSM",
+      "destination": "MCI",
+      "legs": 3
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "ECP",
+      "destination": "BHM",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "ECP",
+      "destination": "JAX",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "ERI",
+      "destination": "DAY",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "EYW",
+      "destination": "BHM",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "EYW",
+      "destination": "JAX",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "FAR",
+      "destination": "MCI",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "FSD",
+      "destination": "BHM",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "FSD",
+      "destination": "MCI",
+      "legs": 3
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "FWA",
+      "destination": "DAY",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "GNV",
+      "destination": "JAX",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "GPT",
+      "destination": "JAX",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "GRR",
+      "destination": "DAY",
+      "legs": 4
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "GSO",
+      "destination": "PHF",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "GSP",
+      "destination": "PHF",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "HOU",
+      "destination": "DAY",
+      "legs": 4
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "HPN",
+      "destination": "SYR",
+      "legs": 3
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "HRL",
+      "destination": "BHM",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "HSV",
+      "destination": "DAY",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "HVN",
+      "destination": "SYR",
+      "legs": 3
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "ICT",
+      "destination": "BHM",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "ICT",
+      "destination": "MCI",
+      "legs": 3
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "ILM",
+      "destination": "JAX",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "ILM",
+      "destination": "PHF",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "IND",
+      "destination": "DAY",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "ISP",
+      "destination": "SYR",
+      "legs": 3
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "JAN",
+      "destination": "JAX",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "JAN",
+      "destination": "MCI",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "JAX",
+      "destination": "AGS",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "JAX",
+      "destination": "AVL",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "JAX",
+      "destination": "BTR",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "JAX",
+      "destination": "CAE",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "JAX",
+      "destination": "CHA",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "JAX",
+      "destination": "CHS",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "JAX",
+      "destination": "DAB",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "JAX",
+      "destination": "ECP",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "JAX",
+      "destination": "EYW",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "JAX",
+      "destination": "GNV",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "JAX",
+      "destination": "GPT",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "JAX",
+      "destination": "ILM",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "JAX",
+      "destination": "JAN",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "JAX",
+      "destination": "MAF",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "JAX",
+      "destination": "MCN",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "JAX",
+      "destination": "MFE",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "JAX",
+      "destination": "MLB",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "JAX",
+      "destination": "MOB",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "JAX",
+      "destination": "MYR",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "JAX",
+      "destination": "PGD",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "JAX",
+      "destination": "PIE",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "JAX",
+      "destination": "PNS",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "JAX",
+      "destination": "ROA",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "JAX",
+      "destination": "SAV",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "JAX",
+      "destination": "SRQ",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "JAX",
+      "destination": "TLH",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "JAX",
+      "destination": "VPS",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "LBB",
+      "destination": "BHM",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "LBB",
+      "destination": "MCI",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "LEX",
+      "destination": "DAY",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "LIT",
+      "destination": "MCI",
+      "legs": 3
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "MAF",
+      "destination": "JAX",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "MAF",
+      "destination": "MCI",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "MCI",
+      "destination": "ATW",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "MCI",
+      "destination": "BHM",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "MCI",
+      "destination": "CID",
+      "legs": 3
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "MCI",
+      "destination": "COU",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "MCI",
+      "destination": "CRP",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "MCI",
+      "destination": "DAY",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "MCI",
+      "destination": "DLH",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "MCI",
+      "destination": "DSM",
+      "legs": 3
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "MCI",
+      "destination": "FAR",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "MCI",
+      "destination": "FSD",
+      "legs": 3
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "MCI",
+      "destination": "ICT",
+      "legs": 3
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "MCI",
+      "destination": "JAN",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "MCI",
+      "destination": "LBB",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "MCI",
+      "destination": "LIT",
+      "legs": 3
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "MCI",
+      "destination": "MAF",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "MCI",
+      "destination": "MFE",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "MCI",
+      "destination": "MSN",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "MCI",
+      "destination": "OKC",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "MCI",
+      "destination": "OMA",
+      "legs": 4
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "MCI",
+      "destination": "PIA",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "MCI",
+      "destination": "SBN",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "MCI",
+      "destination": "SDF",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "MCI",
+      "destination": "SGF",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "MCI",
+      "destination": "SHV",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "MCI",
+      "destination": "TUL",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "MCI",
+      "destination": "XNA",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "MCN",
+      "destination": "JAX",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "MDT",
+      "destination": "PHF",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "MDT",
+      "destination": "SYR",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "MFE",
+      "destination": "JAX",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "MFE",
+      "destination": "MCI",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "MHT",
+      "destination": "SYR",
+      "legs": 3
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "MKE",
+      "destination": "DAY",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "MLB",
+      "destination": "JAX",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "MOB",
+      "destination": "JAX",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "MSN",
+      "destination": "DAY",
+      "legs": 3
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "MSN",
+      "destination": "MCI",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "MYR",
+      "destination": "JAX",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "MYR",
+      "destination": "PHF",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "OKC",
+      "destination": "MCI",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "OMA",
+      "destination": "BHM",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "OMA",
+      "destination": "MCI",
+      "legs": 4
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "ORH",
+      "destination": "SYR",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "PGD",
+      "destination": "JAX",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "PHF",
+      "destination": "ABE",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "PHF",
+      "destination": "ACY",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "PHF",
+      "destination": "AVP",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "PHF",
+      "destination": "CAE",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "PHF",
+      "destination": "DAY",
+      "legs": 3
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "PHF",
+      "destination": "GSO",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "PHF",
+      "destination": "GSP",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "PHF",
+      "destination": "ILM",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "PHF",
+      "destination": "MDT",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "PHF",
+      "destination": "MYR",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "PHF",
+      "destination": "RDU",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "PHF",
+      "destination": "SYR",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "PHF",
+      "destination": "TTN",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "PIA",
+      "destination": "MCI",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "PIE",
+      "destination": "BHM",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "PIE",
+      "destination": "JAX",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "PIT",
+      "destination": "DAY",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "PIT",
+      "destination": "SYR",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "PNS",
+      "destination": "JAX",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "PVD",
+      "destination": "SYR",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "PWM",
+      "destination": "SYR",
+      "legs": 3
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "RDU",
+      "destination": "PHF",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "ROA",
+      "destination": "JAX",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "ROC",
+      "destination": "DAY",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "ROC",
+      "destination": "SYR",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "SAV",
+      "destination": "JAX",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "SBN",
+      "destination": "DAY",
+      "legs": 3
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "SBN",
+      "destination": "MCI",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "SDF",
+      "destination": "DAY",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "SDF",
+      "destination": "MCI",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "SFB",
+      "destination": "BHM",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "SGF",
+      "destination": "BHM",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "SGF",
+      "destination": "MCI",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "SHV",
+      "destination": "MCI",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "SRQ",
+      "destination": "BHM",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "SRQ",
+      "destination": "JAX",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "SWF",
+      "destination": "SYR",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "SYR",
+      "destination": "ABE",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "SYR",
+      "destination": "ACY",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "SYR",
+      "destination": "ALB",
+      "legs": 4
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "SYR",
+      "destination": "BDL",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "SYR",
+      "destination": "BGR",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "SYR",
+      "destination": "BTV",
+      "legs": 3
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "SYR",
+      "destination": "BUF",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "SYR",
+      "destination": "BWI",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "SYR",
+      "destination": "CAK",
+      "legs": 3
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "SYR",
+      "destination": "DAY",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "SYR",
+      "destination": "HPN",
+      "legs": 3
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "SYR",
+      "destination": "HVN",
+      "legs": 3
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "SYR",
+      "destination": "ISP",
+      "legs": 3
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "SYR",
+      "destination": "MDT",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "SYR",
+      "destination": "MHT",
+      "legs": 3
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "SYR",
+      "destination": "ORH",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "SYR",
+      "destination": "PHF",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "SYR",
+      "destination": "PIT",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "SYR",
+      "destination": "PVD",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "SYR",
+      "destination": "PWM",
+      "legs": 3
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "SYR",
+      "destination": "ROC",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "SYR",
+      "destination": "SWF",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "TLH",
+      "destination": "JAX",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "TOL",
+      "destination": "DAY",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "TRI",
+      "destination": "DAY",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "TTN",
+      "destination": "PHF",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "TUL",
+      "destination": "BHM",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "TUL",
+      "destination": "MCI",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "TYS",
+      "destination": "DAY",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "VPS",
+      "destination": "BHM",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "VPS",
+      "destination": "JAX",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "XNA",
+      "destination": "BHM",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "XNA",
+      "destination": "MCI",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ700",
+      "origin": "ABE",
+      "destination": "FLL",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ700",
+      "origin": "ALB",
+      "destination": "PHF",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ700",
+      "origin": "AUS",
+      "destination": "BHM",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ700",
+      "origin": "AUS",
+      "destination": "DAY",
+      "legs": 5
+    },
+    {
+      "fleet": "CRJ700",
+      "origin": "BDL",
+      "destination": "CLT",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ700",
+      "origin": "BDL",
+      "destination": "DAB",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ700",
+      "origin": "BDL",
+      "destination": "PHF",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ700",
+      "origin": "BHM",
+      "destination": "AUS",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ700",
+      "origin": "BHM",
+      "destination": "BWI",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ700",
+      "origin": "BHM",
+      "destination": "JAX",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ700",
+      "origin": "BHM",
+      "destination": "MCI",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ700",
+      "origin": "BHM",
+      "destination": "OKC",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ700",
+      "origin": "BHM",
+      "destination": "PGD",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ700",
+      "origin": "BHM",
+      "destination": "PHF",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ700",
+      "origin": "BHM",
+      "destination": "SAT",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ700",
+      "origin": "BLV",
+      "destination": "MCI",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ700",
+      "origin": "BNA",
+      "destination": "PHF",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ700",
+      "origin": "BNA",
+      "destination": "SYR",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ700",
+      "origin": "BUF",
+      "destination": "PHF",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ700",
+      "origin": "BWI",
+      "destination": "BHM",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ700",
+      "origin": "BWI",
+      "destination": "PHF",
+      "legs": 4
+    },
+    {
+      "fleet": "CRJ700",
+      "origin": "CAE",
+      "destination": "FLL",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ700",
+      "origin": "CHS",
+      "destination": "PHF",
+      "legs": 6
+    },
+    {
+      "fleet": "CRJ700",
+      "origin": "CLT",
+      "destination": "BDL",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ700",
+      "origin": "CLT",
+      "destination": "PHF",
+      "legs": 6
+    },
+    {
+      "fleet": "CRJ700",
+      "origin": "CLT",
+      "destination": "SYR",
+      "legs": 4
+    },
+    {
+      "fleet": "CRJ700",
+      "origin": "CMH",
+      "destination": "MCI",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ700",
+      "origin": "DAB",
+      "destination": "BDL",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ700",
+      "origin": "DAB",
+      "destination": "PHF",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ700",
+      "origin": "DAL",
+      "destination": "DAY",
+      "legs": 3
+    },
+    {
+      "fleet": "CRJ700",
+      "origin": "DAL",
+      "destination": "LIT",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ700",
+      "origin": "DAL",
+      "destination": "OKC",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ700",
+      "origin": "DAY",
+      "destination": "AUS",
+      "legs": 5
+    },
+    {
+      "fleet": "CRJ700",
+      "origin": "DAY",
+      "destination": "DAL",
+      "legs": 3
+    },
+    {
+      "fleet": "CRJ700",
+      "origin": "DAY",
+      "destination": "JAX",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ700",
+      "origin": "DAY",
+      "destination": "RDU",
+      "legs": 5
+    },
+    {
+      "fleet": "CRJ700",
+      "origin": "DAY",
+      "destination": "RFD",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ700",
+      "origin": "ELP",
+      "destination": "JAX",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ700",
+      "origin": "ELP",
+      "destination": "MCI",
+      "legs": 3
+    },
+    {
+      "fleet": "CRJ700",
+      "origin": "EYW",
+      "destination": "FLL",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ700",
+      "origin": "FLL",
+      "destination": "ABE",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ700",
+      "origin": "FLL",
+      "destination": "CAE",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ700",
+      "origin": "FLL",
+      "destination": "EYW",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ700",
