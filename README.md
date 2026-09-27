@@ -63,12 +63,18 @@ This writes:
 - `data/schedules/schedule_6_v2_2_5/bank_materialization_diagnostic.json`
 - `data/schedules/schedule_6_v2_2_5/exact_materialization_plan.json`
 
-Run the regression tests with:
+Run the routine patch/minor-release tests with:
 
 ```bash
 python -m unittest discover -s tests -v
 node --test tests/*.mjs
 ```
+
+Routine CI validates the current engine, web console, and latest released
+schedule. Historical schedule regression is reserved for major releases and is
+run by the manually dispatched **Full Schedule Regression** workflow (also
+triggered by `v*.0.0` tags). See
+[`docs/regression_policy.md`](docs/regression_policy.md).
 
 ## Build the web console
 

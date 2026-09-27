@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0.0",
+  "scheduleId": "schedule_7_v1_1_2",
+  "status": "released",
+  "sourceScheduleId": "schedule_7_v1_1_1",
+  "overlayIds": [
+    "schedule-7-v1.1.2-crj700-route-extensions-round-1",
+    "schedule-7-v1.1.2-mci-route-extensions-round-2"
+  ],
+  "summary": {
+    "legs": 970,
+    "routes": 179,
+    "lines": 22,
+    "effectiveOperatingErrors": 0,
+    "hardStopFailures": 0,
+    "directRoundTripCities": 14,
+    "connectedDirectionalPairs": 34,
+    "standClaims": 32,
+    "standMinutes": 19729,
+    "hubStandClaims": 9,
+    "hubStandMinutes": 5616
+  },
+  "validation": {
+    "structural": "pass",
+    "operating": "review",
+    "planningReconstruction": "pass"
+  },
+  "connectionFinding": "All 14 target cities have direct PHF round trips, but only 34/98 directional cross-group pairs meet the configured connection window.",
+  "connectionScopeDecision": {
+    "status": "approved",
+    "model": "selected_bank_clusters",
+    "approvedBy": "user",
+    "futureWork": "Additional pairwise north-south connectivity is deferred to future Schedule 7 versions."
+  },
+  "patchScope": {
+    "kind": "route_day_extensions",
+    "timetableChanged": true,
+    "routingChanged": true,
+    "description": "Extend short CRJ700 route-days and add productive MCI flying on Routes 101, 133, 152, 153, and 526 without changing released v1.1.1 legs or fleet inventory."
+  },
+  "artifacts": [
+    "canonical_schedule.json",
+    "connection_audit.json",
+    "gates.json",
+    "operating_validation_report.json",
+    "planning_snapshot.json",
+    "planning_validation_report.json",
+    "timetable.json",
+    "validation_report.json"
+  ]
+}

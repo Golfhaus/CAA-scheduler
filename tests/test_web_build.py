@@ -58,8 +58,8 @@ class WebBuildTests(unittest.TestCase):
             result = build_web_console(
                 REPO_ROOT / "web" / "schedules.json", REPO_ROOT, output
             )
-            self.assertEqual(result["scheduleCount"], 4)
-            self.assertEqual(result["dataFileCount"], 50)
+            self.assertEqual(result["scheduleCount"], 5)
+            self.assertEqual(result["dataFileCount"], 59)
             self.assertGreater(result["instructionEntryCount"], 40)
             self.assertTrue((output / "index.html").is_file())
             self.assertTrue((output / "favicon.svg").is_file())
@@ -67,7 +67,7 @@ class WebBuildTests(unittest.TestCase):
             self.assertTrue((output / "build-config.mjs").is_file())
             manifest = json.loads((output / "schedules.json").read_text())
             self.assertEqual(
-                manifest["defaultScheduleId"], "schedule_7_v1_1_1"
+                manifest["defaultScheduleId"], "schedule_7_v1_1_2"
             )
             self.assertEqual(
                 [schedule["id"] for schedule in manifest["schedules"]],
@@ -76,6 +76,7 @@ class WebBuildTests(unittest.TestCase):
                     "schedule_7_v1_0_0",
                     "schedule_7_v1_1_0",
                     "schedule_7_v1_1_1",
+                    "schedule_7_v1_1_2",
                 ],
             )
             self.assertTrue((output / manifest["buildSetup"]["schema"]).is_file())

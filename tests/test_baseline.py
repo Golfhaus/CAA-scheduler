@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import copy
 import json
+import os
 import sys
 import tempfile
 import unittest
@@ -56,6 +57,10 @@ GATE_PLAN = {
 }
 
 
+@unittest.skipUnless(
+    os.environ.get("FULL_SCHEDULE_REGRESSION") == "1",
+    "Schedule 6 regression runs only for major releases",
+)
 class ScheduleSixBaselineTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
