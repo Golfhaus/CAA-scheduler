@@ -4,7 +4,9 @@ import test from "node:test";
 
 import {
   buildItineraries,
+  buildDepartureHubMatrix,
   claimMatchesPassengerStandFinding,
+  departureHubTimetableFilters,
   extractReferences,
   flattenBankWindows,
   flattenFrequencyMarkets,
@@ -135,6 +137,36 @@ test("overview metrics reflect the frozen schedule", () => {
     CRJ700: 65,
     CRJ900: 45,
     MAX9: 35,
+  });
+});
+
+test("departure hub matrix counts flights and distinguishes hubs from focus cities", () => {
+  const matrix = buildDepartureHubMatrix({
+    cities: [
+      { code: "AAA", name: "Alpha", isHub: false, isFocusCity: false },
+      { code: "HUB", name: "Hub City", isHub: true, isFocusCity: false },
+      { code: "FOC", name: "Focus City", isHub: false, isFocusCity: true },
+    ],
+    flights: [
+      { origin: "AAA", dest: "HUB" },
+      { origin: "AAA", dest: "HUB" },
+      { origin: "AAA", dest: "FOC" },
+      { origin: "HUB", dest: "AAA" },
+    ],
+  });
+  assert.deepEqual(matrix.destinations.map((city) => city.code), ["HUB", "FOC"]);
+  assert.deepEqual(matrix.rows.map((row) => row.city.code), ["AAA", "FOC", "HUB"]);
+  assert.deepEqual(matrix.rows[0].counts, { HUB: 2, FOC: 1 });
+  assert.deepEqual(matrix.rows[1].counts, { HUB: 0, FOC: 0 });
+});
+
+test("departure hub cells open a clean non-stop Timetable filter", () => {
+  assert.deepEqual(departureHubTimetableFilters("AAA", "HUB"), {
+    search: "",
+    origin: "AAA",
+    destination: "HUB",
+    fleet: "",
+    connections: "nonstop",
   });
 });
 
