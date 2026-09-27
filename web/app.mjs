@@ -37,6 +37,7 @@ const state = {
   planningPage: 1,
   routingPageSize: DEFAULT_PAGE_SIZE,
   timetablePage: 1,
+  scheduleStatsTab: "deps-hubs",
   itineraryCache: new Map(),
 };
 
@@ -110,6 +111,61 @@ export function routingEndpointKinds(legs) {
     if (sequence === bound.maximum) kinds.push("routing-terminator");
     return [Number(leg.flight), kinds.join(" ")];
   }));
+}
+
+export function buildExtensionOpportunities(canonical, gates, minimumDuration = 120) {
+  const routes = new Map();
+  canonical.legs.forEach((leg) => {
+    const key = String(leg.route);
+    if (!routes.has(key)) routes.set(key, []);
+    routes.get(key).push(leg);
+  });
+  const orderedRoutes = [...routes.values()].map((legs) => [...legs].sort(
+    (a, b) => Number(a.sequenceWithinRoute) - Number(b.sequenceWithinRoute)
+      || Number(a.flight) - Number(b.flight)
+  ));
+  const originators = orderedRoutes
+    .map((legs) => legs[0])
+    .sort((a, b) => Number(b.departureMinute) - Number(a.departureMinute)
+      || Number(a.route) - Number(b.route));
+  const terminators = orderedRoutes
+    .map((legs) => legs.at(-1))
+    .sort((a, b) => Number(a.arrivalMinute) - Number(b.arrivalMinute)
+      || Number(a.route) - Number(b.route));
+  const holds = [];
+  gates.cities.forEach((city) => {
+    const seen = new Set();
+    city.claims.forEach((claim) => {
+      const group = gateClaimGroup(city.claims, claim);
+      const key = group
+        .map((piece) => `${piece.rowType}:${piece.row}:${piece.start}:${piece.end}`)
+        .join("|");
+      if (seen.has(key)) return;
+      seen.add(key);
+      const kind = gateClaimDisplayKind(group);
+      const start = Math.min(...group.map((piece) => Number(piece.start)));
+      const end = Math.max(...group.map((piece) => Number(piece.end)));
+      const duration = end - start;
+      if (!new Set(["TURN", "ROD"]).has(kind) || duration < minimumDuration) return;
+      holds.push({
+        route: claim.label,
+        fleet: claim.fleet,
+        airport: city.code,
+        kind,
+        start,
+        end,
+        duration,
+        arrivalCity: claim.arrivalCity || "",
+        departureCity: claim.departureCity || "",
+        path: gateClaimPath(group),
+      });
+    });
+  });
+  holds.sort((a, b) => b.duration - a.duration
+    || a.start - b.start
+    || String(a.airport).localeCompare(String(b.airport))
+    || String(a.route).localeCompare(String(b.route), undefined, { numeric: true }));
+  return { originators, terminators, holds };
 }
 
 function flightDurationMinutes(flight, timezoneByCode) {
@@ -448,6 +504,43 @@ export function gateClaimPath(group) {
   return positions.join(" -> ");
 }
 
+export function gateClaimDetail(claim, group, airportCode) {
+  const ordered = [...group].sort((a, b) => Number(a.start) - Number(b.start));
+  const isGateStandGate = ordered.length >= 3
+    && ordered[0].rowType === "gate"
+    && ordered.at(-1).rowType === "gate"
+    && ordered.some((piece) => piece.rowType === "stand");
+  const positionType = claim.rowType === "gate"
+    ? "Gate"
+    : claim.rowType === "stand" ? "Stand" : "Unassigned";
+  if (isGateStandGate) {
+    let movement = gateClaimPath(ordered);
+    if (claim.rowType === "gate" && claim.moveTo?.rowType === "stand") {
+      movement = [claim.arrivalCity, airportCode, `Stand ${claim.moveTo.row}`]
+        .filter(Boolean)
+        .join(" -> ");
+    } else if (claim.rowType === "gate" && claim.moveFrom?.rowType === "stand") {
+      movement = [`Stand ${claim.moveFrom.row}`, airportCode, claim.departureCity]
+        .filter(Boolean)
+        .join(" -> ");
+    }
+    return {
+      start: Number(claim.start),
+      end: Number(claim.end),
+      position: `${positionType} ${claim.row}`,
+      movement,
+    };
+  }
+  return {
+    start: Math.min(...ordered.map((piece) => Number(piece.start))),
+    end: Math.max(...ordered.map((piece) => Number(piece.end))),
+    position: gateClaimPath(ordered) || `${positionType} ${claim.row}`,
+    movement: [claim.arrivalCity, airportCode, claim.departureCity]
+      .filter(Boolean)
+      .join(" -> "),
+  };
+}
+
 export function maximumConcurrentPositionUsage(claims, rowType) {
   const events = claims
     .filter((claim) => claim.rowType === rowType)
@@ -480,7 +573,8 @@ function statusLabel(status) {
 }
 
 function activateTab(tab, updateHash = true) {
-  const valid = ["overview", "setup", "planning", "routings", "validation", "instructions", "timetable", "deps-hubs", "gates"];
+  if (tab === "deps-hubs") tab = "sked-stats";
+  const valid = ["overview", "setup", "planning", "routings", "validation", "instructions", "timetable", "sked-stats", "gates"];
   if (!valid.includes(tab)) tab = "overview";
   const requestedButton = document.querySelector(`[data-tab="${tab}"]`);
   if (requestedButton?.hidden) tab = "overview";
@@ -496,6 +590,21 @@ function activateTab(tab, updateHash = true) {
   });
   if (updateHash) history.replaceState(null, "", `#${tab}`);
   $("#workspace").focus({ preventScroll: true });
+}
+
+function activateScheduleStatsTab(tab) {
+  const valid = ["deps-hubs", "extension-opps"];
+  state.scheduleStatsTab = valid.includes(tab) ? tab : "deps-hubs";
+  $$('[data-stats-tab]').forEach((button) => {
+    const active = button.dataset.statsTab === state.scheduleStatsTab;
+    button.classList.toggle("is-active", active);
+    button.setAttribute("aria-selected", String(active));
+    button.tabIndex = active ? 0 : -1;
+  });
+  $$('[data-stats-view]').forEach((view) => {
+    const active = view.dataset.statsView === state.scheduleStatsTab;
+    view.hidden = !active;
+  });
 }
 
 async function fetchJson(path) {
@@ -530,6 +639,7 @@ async function loadSchedule(scheduleId) {
     routingPage: 1,
     planningPage: 1,
     timetablePage: 1,
+    scheduleStatsTab: "deps-hubs",
     itineraryCache: new Map(),
     buildConfig: null,
     buildPreflight: null,
@@ -589,6 +699,8 @@ function renderAll() {
   renderInstructions();
   renderTimetable();
   renderDepartureHubMatrix();
+  renderExtensionOpportunities();
+  activateScheduleStatsTab(state.scheduleStatsTab);
   renderGates();
 }
 
@@ -834,7 +946,7 @@ function timetableMatches(flight) {
     && (!$("#timetable-fleet").value || flight.fleet === $("#timetable-fleet").value);
 }
 
-function formatDuration(minutes) {
+export function formatDuration(minutes) {
   const hours = Math.floor(minutes / 60);
   const remainder = minutes % 60;
   return `${hours ? `${hours}h ` : ""}${remainder}m`;
@@ -950,6 +1062,22 @@ function renderDepartureHubMatrix() {
       })
       .join("")}</tr>`)
     .join("");
+}
+
+function renderExtensionOpportunities() {
+  const opportunities = buildExtensionOpportunities(state.canonical, state.gates);
+  $("#extension-originator-count").textContent = `${opportunities.originators.length} routes`;
+  $("#extension-terminator-count").textContent = `${opportunities.terminators.length} routes`;
+  $("#extension-hold-count").textContent = `${opportunities.holds.length} holds`;
+  $("#extension-originator-rows").innerHTML = opportunities.originators
+    .map((leg) => `<tr><td class="route-number">${escapeHtml(leg.route)}</td><td>${escapeHtml(leg.line)}</td><td><span class="fleet-badge">${escapeHtml(leg.fleet)}</span></td><td class="flight-number">${escapeHtml(leg.flight)}</td><td><strong>${escapeHtml(leg.origin)}</strong></td><td>${escapeHtml(leg.departure)}</td><td><strong>${escapeHtml(leg.destination)}</strong></td><td>${escapeHtml(leg.arrival)}</td></tr>`)
+    .join("");
+  $("#extension-terminator-rows").innerHTML = opportunities.terminators
+    .map((leg) => `<tr><td class="route-number">${escapeHtml(leg.route)}</td><td>${escapeHtml(leg.line)}</td><td><span class="fleet-badge">${escapeHtml(leg.fleet)}</span></td><td class="flight-number">${escapeHtml(leg.flight)}</td><td><strong>${escapeHtml(leg.origin)}</strong></td><td>${escapeHtml(leg.departure)}</td><td><strong>${escapeHtml(leg.destination)}</strong></td><td>${escapeHtml(leg.arrival)}</td></tr>`)
+    .join("");
+  $("#extension-hold-rows").innerHTML = opportunities.holds.length
+    ? opportunities.holds.map((hold) => `<tr><td class="route-number">${escapeHtml(hold.route)}</td><td><span class="fleet-badge">${escapeHtml(hold.fleet)}</span></td><td><strong>${escapeHtml(hold.airport)}</strong></td><td>${escapeHtml(hold.kind)}</td><td>${formatMinute24(hold.start)}–${formatMinute24(hold.end)}</td><td>${escapeHtml(formatDuration(hold.duration))}</td><td>${escapeHtml(hold.arrivalCity)} -> ${escapeHtml(hold.airport)} -> ${escapeHtml(hold.departureCity)}</td><td>${escapeHtml(hold.path)}</td></tr>`).join("")
+    : `<tr class="empty-row"><td colspan="8">No turns or RODs last two hours or more.</td></tr>`;
 }
 
 function openTimetableMarket(origin, destination) {
@@ -1106,14 +1234,12 @@ function renderLane(city, lane, colors, passengerStandClaims) {
     const group = gateClaimGroup(city.claims, claim);
     const displayLabel = gateClaimDisplayLabel(claim, group);
     const displayKind = gateClaimDisplayKind(group);
-    const fullStart = Math.min(...group.map((piece) => Number(piece.start)));
-    const fullEnd = Math.max(...group.map((piece) => Number(piece.end)));
-    const path = gateClaimPath(group);
+    const detail = gateClaimDetail(claim, group, city.code);
     const passengerHandling = claimMatchesPassengerStandFinding(city.code, claim, passengerStandClaims);
     const fleetColor = colors[claim.fleet] || "#cbd5e1";
     const timeLabel = `${formatMinute24(claim.start)}–${formatMinute24(claim.end)}`;
     const accessibleLabel = `${displayLabel}, ${claim.fleet}, ${displayKind}, ${timeLabel}${passengerHandling ? ", passenger handling on a stand" : ""}`;
-    return splitClaimSegments(claim.start, claim.end, GATE_WINDOW_START).map((segment) => `<button type="button" class="claim-bar kind-${lane.type}${passengerHandling ? " is-passenger-handling" : ""}" title="${escapeHtml(accessibleLabel)}" aria-label="${escapeHtml(accessibleLabel)}" aria-controls="claim-tooltip" aria-expanded="false" data-gate-claim data-claim-label="${escapeHtml(displayLabel)}" data-claim-fleet="${escapeHtml(claim.fleet)}" data-claim-kind="${escapeHtml(displayKind)}" data-claim-start="${escapeHtml(fullStart)}" data-claim-end="${escapeHtml(fullEnd)}" data-claim-row-type="${escapeHtml(claim.rowType)}" data-claim-row="${escapeHtml(claim.row)}" data-claim-path="${escapeHtml(path)}" data-claim-arrival-city="${escapeHtml(claim.arrivalCity || "")}" data-claim-departure-city="${escapeHtml(claim.departureCity || "")}" data-claim-passenger-handling="${passengerHandling}" style="--fleet-color:${escapeHtml(fleetColor)};left:${(segment.start / 1440) * 100}%;width:${Math.max(0.12, (segment.duration / 1440) * 100)}%;background:${escapeHtml(fleetColor)}">${escapeHtml(displayLabel)}</button>`);
+    return splitClaimSegments(claim.start, claim.end, GATE_WINDOW_START).map((segment) => `<button type="button" class="claim-bar kind-${lane.type}${passengerHandling ? " is-passenger-handling" : ""}" title="${escapeHtml(accessibleLabel)}" aria-label="${escapeHtml(accessibleLabel)}" aria-controls="claim-tooltip" aria-expanded="false" data-gate-claim data-claim-label="${escapeHtml(displayLabel)}" data-claim-fleet="${escapeHtml(claim.fleet)}" data-claim-kind="${escapeHtml(displayKind)}" data-claim-start="${escapeHtml(detail.start)}" data-claim-end="${escapeHtml(detail.end)}" data-claim-position="${escapeHtml(detail.position)}" data-claim-movement="${escapeHtml(detail.movement)}" data-claim-passenger-handling="${passengerHandling}" style="--fleet-color:${escapeHtml(fleetColor)};left:${(segment.start / 1440) * 100}%;width:${Math.max(0.12, (segment.duration / 1440) * 100)}%;background:${escapeHtml(fleetColor)}">${escapeHtml(displayLabel)}</button>`);
   }).join("");
   const laneLabel = lane.type === "gate" ? "Gate" : lane.type === "stand" ? "Stand" : "Unassigned";
   return `<div class="timeline-row"><span class="lane-label">${laneLabel} ${lane.row}</span><div class="lane-track">${bars}</div></div>`;
@@ -1134,16 +1260,9 @@ function toggleGateClaimDetails(button) {
   if (wasOpen) return;
 
   const passengerHandling = button.dataset.claimPassengerHandling === "true";
-  const positionType = button.dataset.claimRowType === "gate"
-    ? "Gate"
-    : button.dataset.claimRowType === "stand" ? "Stand" : "Unassigned";
-  const position = button.dataset.claimPath || `${positionType} ${button.dataset.claimRow}`;
-  const movement = [button.dataset.claimArrivalCity, button.dataset.claimDepartureCity]
-    .filter(Boolean)
-    .join(` → ${$("#gate-airport").value} → `);
   $("#claim-tooltip-title").textContent = button.dataset.claimLabel;
-  $("#claim-tooltip-summary").textContent = `${button.dataset.claimFleet} · ${button.dataset.claimKind} · ${formatMinute24(button.dataset.claimStart)}–${formatMinute24(button.dataset.claimEnd)} · ${position}`;
-  $("#claim-tooltip-movement").textContent = movement;
+  $("#claim-tooltip-summary").textContent = `${button.dataset.claimFleet} · ${button.dataset.claimKind} · ${formatMinute24(button.dataset.claimStart)}–${formatMinute24(button.dataset.claimEnd)} · ${button.dataset.claimPosition}`;
+  $("#claim-tooltip-movement").textContent = button.dataset.claimMovement;
   $("#claim-tooltip-warning").textContent = passengerHandling
     ? "Passenger handling occurs on this stand segment; a gate is required."
     : "";
@@ -1434,6 +1553,11 @@ function bindEvents() {
     const departureCount = event.target.closest("[data-deps-origin][data-deps-destination]");
     if (departureCount) {
       openTimetableMarket(departureCount.dataset.depsOrigin, departureCount.dataset.depsDestination);
+      return;
+    }
+    const statsTab = event.target.closest("[data-stats-tab]");
+    if (statsTab) {
+      activateScheduleStatsTab(statsTab.dataset.statsTab);
       return;
     }
     const tab = event.target.closest("[data-tab]");

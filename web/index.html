@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#092a53">
     <meta name="description" content="Coastal American Airways schedule operations console">
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="styles.css?v=console-ui-20260927-1">
+    <link rel="stylesheet" href="styles.css?v=console-ui-20260927-2">
     <title>CAA Scheduler</title>
   </head>
   <body>
@@ -32,7 +32,7 @@
         Validation <span class="tab-count" id="validation-count">—</span>
       </button>
       <button class="tab" type="button" data-tab="timetable" aria-selected="false">Timetable</button>
-      <button class="tab" type="button" data-tab="deps-hubs" aria-selected="false">Deps to Hubs</button>
+      <button class="tab" type="button" data-tab="sked-stats" aria-selected="false">Sked Stats</button>
       <button class="tab" type="button" data-tab="gates" aria-selected="false">Gates</button>
       <button class="tab" type="button" data-tab="instructions" aria-selected="false">Instructions</button>
       <button class="tab tab-setup" type="button" data-tab="setup" aria-selected="false">Schedule Setup</button>
@@ -407,19 +407,65 @@
           <div class="pagination" id="timetable-pagination"></div>
         </section>
 
-        <section class="view" id="view-deps-hubs" data-view="deps-hubs" aria-labelledby="deps-hubs-title" hidden>
+        <section class="view" id="view-sked-stats" data-view="sked-stats" aria-labelledby="sked-stats-title" hidden>
           <div class="page-heading compact">
             <div>
-              <p class="eyebrow">Daily network frequency</p>
-              <h1 id="deps-hubs-title">Departures to hubs and focus cities</h1>
-              <p class="page-note">Each count is the number of non-stop departures from the city in that row to the hub or focus city in that column. Select a count to open those flights in Timetable.</p>
+              <p class="eyebrow">Schedule analysis</p>
+              <h1 id="sked-stats-title">Schedule statistics</h1>
+              <p class="page-note">Review network frequency and opportunities to extend aircraft routings.</p>
             </div>
           </div>
-          <div class="table-shell deps-hub-shell">
-            <table class="deps-hub-table">
-              <thead><tr id="deps-hub-head"></tr></thead>
-              <tbody id="deps-hub-rows"></tbody>
-            </table>
+          <div class="stats-tabbar" role="tablist" aria-label="Schedule statistics">
+            <button class="stats-tab is-active" type="button" role="tab" data-stats-tab="deps-hubs" aria-controls="stats-deps-hubs" aria-selected="true">Dept to Hubs</button>
+            <button class="stats-tab" type="button" role="tab" data-stats-tab="extension-opps" aria-controls="stats-extension-opps" aria-selected="false" tabindex="-1">Extension Opps</button>
+          </div>
+          <div id="stats-deps-hubs" data-stats-view="deps-hubs" role="tabpanel">
+            <p class="stats-note">Each count is the number of non-stop departures from the city in that row to the hub or focus city in that column. Select a count to open those flights in Timetable.</p>
+            <div class="table-shell deps-hub-shell">
+              <table class="deps-hub-table">
+                <thead><tr id="deps-hub-head"></tr></thead>
+                <tbody id="deps-hub-rows"></tbody>
+              </table>
+            </div>
+          </div>
+          <div id="stats-extension-opps" data-stats-view="extension-opps" role="tabpanel" hidden>
+            <p class="stats-note">Route endpoints are ordered to surface late originators and early terminators. Turns and RODs include holds of at least two hours.</p>
+            <section class="panel extension-panel" aria-labelledby="extension-originators-title">
+              <div class="panel-heading">
+                <div><p class="eyebrow">Latest first</p><h2 id="extension-originators-title">Originators</h2></div>
+                <span class="result-count" id="extension-originator-count"></span>
+              </div>
+              <div class="table-shell extension-table-shell">
+                <table>
+                  <thead><tr><th>Route</th><th>Line</th><th>Fleet</th><th>Flight</th><th>Origin</th><th>Departs</th><th>Destination</th><th>Arrives</th></tr></thead>
+                  <tbody id="extension-originator-rows"></tbody>
+                </table>
+              </div>
+            </section>
+            <section class="panel extension-panel" aria-labelledby="extension-terminators-title">
+              <div class="panel-heading">
+                <div><p class="eyebrow">Earliest first</p><h2 id="extension-terminators-title">Terminators</h2></div>
+                <span class="result-count" id="extension-terminator-count"></span>
+              </div>
+              <div class="table-shell extension-table-shell">
+                <table>
+                  <thead><tr><th>Route</th><th>Line</th><th>Fleet</th><th>Flight</th><th>Origin</th><th>Departs</th><th>Destination</th><th>Arrives</th></tr></thead>
+                  <tbody id="extension-terminator-rows"></tbody>
+                </table>
+              </div>
+            </section>
+            <section class="panel extension-panel" aria-labelledby="extension-holds-title">
+              <div class="panel-heading">
+                <div><p class="eyebrow">Longest first</p><h2 id="extension-holds-title">Turns and RODs of two hours or more</h2></div>
+                <span class="result-count" id="extension-hold-count"></span>
+              </div>
+              <div class="table-shell extension-table-shell">
+                <table>
+                  <thead><tr><th>Route</th><th>Fleet</th><th>Airport</th><th>Type</th><th>Time</th><th>Duration</th><th>Movement</th><th>Position path</th></tr></thead>
+                  <tbody id="extension-hold-rows"></tbody>
+                </table>
+              </div>
+            </section>
           </div>
         </section>
 
@@ -450,6 +496,6 @@
       </div>
     </main>
 
-    <script type="module" src="app.mjs?v=console-ui-20260927-1"></script>
+    <script type="module" src="app.mjs?v=console-ui-20260927-2"></script>
   </body>
 </html>

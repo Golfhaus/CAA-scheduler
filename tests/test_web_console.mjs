@@ -5,17 +5,20 @@ import test from "node:test";
 import {
   buildItineraries,
   buildDepartureHubMatrix,
+  buildExtensionOpportunities,
   claimMatchesPassengerStandFinding,
   departureHubTimetableFilters,
   extractReferences,
   flattenBankWindows,
   flattenFrequencyMarkets,
   fleetUsage,
+  gateClaimDetail,
   gateClaimDisplayKind,
   gateClaimDisplayLabel,
   gateClaimGroup,
   gateClaimPath,
   formatRemainingAircraft,
+  formatDuration,
   formatMinute,
   formatMinute24,
   instructionId,
@@ -64,6 +67,24 @@ const schedule7Gates = JSON.parse(
   await readFile(
     new URL(
       "../data/schedules/schedule_7_v1_1_1/gates.json",
+      import.meta.url,
+    ),
+    "utf8",
+  ),
+);
+const schedule713Canonical = JSON.parse(
+  await readFile(
+    new URL(
+      "../data/schedules/schedule_7_v1_1_3/canonical_schedule.json",
+      import.meta.url,
+    ),
+    "utf8",
+  ),
+);
+const schedule713Gates = JSON.parse(
+  await readFile(
+    new URL(
+      "../data/schedules/schedule_7_v1_1_3/gates.json",
       import.meta.url,
     ),
     "utf8",
@@ -200,6 +221,25 @@ test("routing endpoints distinguish originators and terminators", () => {
   assert.equal(endpointKinds.get(route[0].flight), "routing-originator");
   assert.equal(endpointKinds.get(route.at(-1).flight), "routing-terminator");
   assert.equal(endpointKinds.get(route[1].flight), "");
+});
+
+test("extension opportunities sort endpoints and combine long physical holds", () => {
+  const opportunities = buildExtensionOpportunities(schedule713Canonical, schedule713Gates);
+  assert.equal(opportunities.originators.length, 179);
+  assert.equal(opportunities.terminators.length, 179);
+  assert.ok(opportunities.originators.every((leg, index, values) => (
+    index === 0 || values[index - 1].departureMinute >= leg.departureMinute
+  )));
+  assert.ok(opportunities.terminators.every((leg, index, values) => (
+    index === 0 || values[index - 1].arrivalMinute <= leg.arrivalMinute
+  )));
+  assert.ok(opportunities.holds.length > 0);
+  assert.ok(opportunities.holds.every((hold) => hold.duration >= 120));
+  assert.ok(opportunities.holds.every((hold) => ["TURN", "ROD"].includes(hold.kind)));
+  assert.ok(opportunities.holds.every((hold, index, values) => (
+    index === 0 || values[index - 1].duration >= hold.duration
+  )));
+  assert.equal(formatDuration(761), "12h 41m");
 });
 
 test("planning market filters preserve fleet and match either market endpoint", () => {
@@ -428,6 +468,33 @@ test("overnight tow labels reserve route arrows for the 03:00 boundary blocks", 
 
   const gateHold = phf.claims.find((claim) => claim.label === "337 -> 338");
   assert.equal(gateClaimDisplayLabel(gateHold, gateClaimGroup(phf.claims, gateHold)), "337 -> 338");
+});
+
+test("gate-stand-gate details describe only the selected segment", () => {
+  const phf = schedule713Gates.cities.find((city) => city.code === "PHF");
+  const pieces = phf.claims
+    .filter((claim) => claim.label === "354 -> 352")
+    .sort((a, b) => a.start - b.start);
+  assert.equal(pieces.length, 3);
+  const group = gateClaimGroup(phf.claims, pieces[0]);
+  assert.deepEqual(gateClaimDetail(pieces[0], group, "PHF"), {
+    start: 851,
+    end: 896,
+    position: "Gate 11",
+    movement: "ROC -> PHF -> Stand 2",
+  });
+  assert.deepEqual(gateClaimDetail(pieces[1], group, "PHF"), {
+    start: 896,
+    end: 1657,
+    position: "Stand 2",
+    movement: "Gate 11 -> Stand 2 -> Gate 6",
+  });
+  assert.deepEqual(gateClaimDetail(pieces[2], group, "PHF"), {
+    start: 1657,
+    end: 1717,
+    position: "Gate 6",
+    movement: "Stand 2 -> PHF -> PGD",
+  });
 });
 
 test("gate and stand cards report maximum concurrent usage", () => {
