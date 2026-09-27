@@ -25,13 +25,15 @@ class WebBuildTests(unittest.TestCase):
         self.assertIn('id="preview-warning"', html)
         self.assertIn("previewNotice", script)
         self.assertIn(
-            'src="app.mjs?v=console-ui-20260926-3"',
+            'src="app.mjs?v=console-ui-20260927-1"',
             html,
         )
         self.assertIn(
-            'href="styles.css?v=console-ui-20260926-3"',
+            'href="styles.css?v=console-ui-20260927-1"',
             html,
         )
+        self.assertIn('`${auditHub} target cities`', script)
+        self.assertIn("minute ${auditHub} window", script)
         tabs = re.findall(r'data-tab="([^"]+)"', html)
         self.assertEqual(
             tabs,

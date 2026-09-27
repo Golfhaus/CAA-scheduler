@@ -600,10 +600,11 @@ function renderOverview() {
   $("#schedule-note").textContent = schedule.label;
   $("#schedule-status").textContent = schedule.status.replaceAll("_", " ");
   $("#validation-count").textContent = operating.summary.effectiveErrorFindings;
+  const auditHub = state.connectionAudit?.hub;
   const connectionMetrics = state.connectionAudit
     ? [
       metricCard(
-        "PHF target cities",
+        `${auditHub} target cities`,
         `${state.connectionAudit.summary.directRoundTripCities}/${state.connectionAudit.summary.targetCities}`,
         "Direct round-trip coverage",
         state.connectionAudit.summary.directRoundTripCities === state.connectionAudit.summary.targetCities ? "is-success" : "is-danger"
@@ -611,7 +612,7 @@ function renderOverview() {
       metricCard(
         "Cross-group connections",
         `${state.connectionAudit.summary.connectedDirectionalPairs}/${state.connectionAudit.summary.directionalPairs}`,
-        `${state.connectionAudit.connectionWindowMinutes.minimum}–${state.connectionAudit.connectionWindowMinutes.maximum} minute PHF window`,
+        `${state.connectionAudit.connectionWindowMinutes.minimum}–${state.connectionAudit.connectionWindowMinutes.maximum} minute ${auditHub} window`,
         state.connectionAudit.summary.missingDirectionalPairs ? "is-danger" : "is-success"
       ),
     ]
