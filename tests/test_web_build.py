@@ -25,11 +25,11 @@ class WebBuildTests(unittest.TestCase):
         self.assertIn('id="preview-warning"', html)
         self.assertIn("previewNotice", script)
         self.assertIn(
-            'src="app.mjs?v=console-ui-20260927-2"',
+            'src="app.mjs?v=console-ui-20260928-1"',
             html,
         )
         self.assertIn(
-            'href="styles.css?v=console-ui-20260927-2"',
+            'href="styles.css?v=console-ui-20260928-1"',
             html,
         )
         self.assertIn('`${auditHub} target cities`', script)
@@ -58,6 +58,9 @@ class WebBuildTests(unittest.TestCase):
         self.assertIn('id="extension-originator-rows"', html)
         self.assertIn('id="extension-terminator-rows"', html)
         self.assertIn('id="extension-hold-rows"', html)
+        self.assertIn("data-claim-group", script)
+        self.assertIn('related.classList.toggle(', script)
+        self.assertIn(".claim-bar.is-related", (REPO_ROOT / "web" / "styles.css").read_text())
 
     def test_build_copies_console_and_pinned_schedule_data(self) -> None:
         with tempfile.TemporaryDirectory() as directory:

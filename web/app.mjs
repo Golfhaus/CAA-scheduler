@@ -479,6 +479,22 @@ export function gateClaimGroup(claims, selected) {
   return group.sort((a, b) => Number(a.start) - Number(b.start));
 }
 
+export function gateClaimGroupKey(group) {
+  const ordered = [...group].sort((a, b) => Number(a.start) - Number(b.start));
+  if (!ordered.length) return "";
+  const first = ordered[0];
+  const last = ordered[ordered.length - 1];
+  return [
+    first.label,
+    first.fleet,
+    first.kind,
+    first.arrivalCity,
+    first.departureCity,
+    first.start,
+    last.end,
+  ].join("|");
+}
+
 export function gateClaimDisplayLabel(claim, group) {
   const routes = String(claim.label).split(/\s*->\s*/);
   if (routes.length !== 2 || !group.some((piece) => piece.rowType === "stand")) {
@@ -1232,6 +1248,7 @@ function renderLane(city, lane, colors, passengerStandClaims) {
   const claims = city.claims.filter((claim) => claim.rowType === lane.type && claim.row === lane.row);
   const bars = claims.flatMap((claim) => {
     const group = gateClaimGroup(city.claims, claim);
+    const groupKey = gateClaimGroupKey(group);
     const displayLabel = gateClaimDisplayLabel(claim, group);
     const displayKind = gateClaimDisplayKind(group);
     const detail = gateClaimDetail(claim, group, city.code);
@@ -1239,7 +1256,7 @@ function renderLane(city, lane, colors, passengerStandClaims) {
     const fleetColor = colors[claim.fleet] || "#cbd5e1";
     const timeLabel = `${formatMinute24(claim.start)}–${formatMinute24(claim.end)}`;
     const accessibleLabel = `${displayLabel}, ${claim.fleet}, ${displayKind}, ${timeLabel}${passengerHandling ? ", passenger handling on a stand" : ""}`;
-    return splitClaimSegments(claim.start, claim.end, GATE_WINDOW_START).map((segment) => `<button type="button" class="claim-bar kind-${lane.type}${passengerHandling ? " is-passenger-handling" : ""}" title="${escapeHtml(accessibleLabel)}" aria-label="${escapeHtml(accessibleLabel)}" aria-controls="claim-tooltip" aria-expanded="false" data-gate-claim data-claim-label="${escapeHtml(displayLabel)}" data-claim-fleet="${escapeHtml(claim.fleet)}" data-claim-kind="${escapeHtml(displayKind)}" data-claim-start="${escapeHtml(detail.start)}" data-claim-end="${escapeHtml(detail.end)}" data-claim-position="${escapeHtml(detail.position)}" data-claim-movement="${escapeHtml(detail.movement)}" data-claim-passenger-handling="${passengerHandling}" style="--fleet-color:${escapeHtml(fleetColor)};left:${(segment.start / 1440) * 100}%;width:${Math.max(0.12, (segment.duration / 1440) * 100)}%;background:${escapeHtml(fleetColor)}">${escapeHtml(displayLabel)}</button>`);
+    return splitClaimSegments(claim.start, claim.end, GATE_WINDOW_START).map((segment) => `<button type="button" class="claim-bar kind-${lane.type}${passengerHandling ? " is-passenger-handling" : ""}" title="${escapeHtml(accessibleLabel)}" aria-label="${escapeHtml(accessibleLabel)}" aria-controls="claim-tooltip" aria-expanded="false" data-gate-claim data-claim-group="${escapeHtml(groupKey)}" data-claim-label="${escapeHtml(displayLabel)}" data-claim-fleet="${escapeHtml(claim.fleet)}" data-claim-kind="${escapeHtml(displayKind)}" data-claim-start="${escapeHtml(detail.start)}" data-claim-end="${escapeHtml(detail.end)}" data-claim-position="${escapeHtml(detail.position)}" data-claim-movement="${escapeHtml(detail.movement)}" data-claim-passenger-handling="${passengerHandling}" style="--fleet-color:${escapeHtml(fleetColor)};left:${(segment.start / 1440) * 100}%;width:${Math.max(0.12, (segment.duration / 1440) * 100)}%;background:${escapeHtml(fleetColor)}">${escapeHtml(displayLabel)}</button>`);
   }).join("");
   const laneLabel = lane.type === "gate" ? "Gate" : lane.type === "stand" ? "Stand" : "Unassigned";
   return `<div class="timeline-row"><span class="lane-label">${laneLabel} ${lane.row}</span><div class="lane-track">${bars}</div></div>`;
@@ -1249,6 +1266,7 @@ function closeGateClaimDetails() {
   const tooltip = $("#claim-tooltip");
   if (!tooltip) return;
   $$('[data-gate-claim][aria-expanded="true"]').forEach((button) => button.setAttribute("aria-expanded", "false"));
+  $$('[data-gate-claim].is-related').forEach((button) => button.classList.remove("is-related"));
   tooltip.hidden = true;
   tooltip.classList.remove("is-warning");
 }
@@ -1269,6 +1287,12 @@ function toggleGateClaimDetails(button) {
   $("#claim-tooltip-warning").hidden = !passengerHandling;
   tooltip.classList.toggle("is-warning", passengerHandling);
   tooltip.hidden = false;
+  $$('[data-gate-claim]').forEach((related) => {
+    related.classList.toggle(
+      "is-related",
+      related !== button && related.dataset.claimGroup === button.dataset.claimGroup,
+    );
+  });
   button.setAttribute("aria-expanded", "true");
 }
 

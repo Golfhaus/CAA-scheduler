@@ -16,6 +16,7 @@ import {
   gateClaimDisplayKind,
   gateClaimDisplayLabel,
   gateClaimGroup,
+  gateClaimGroupKey,
   gateClaimPath,
   formatRemainingAircraft,
   formatDuration,
@@ -453,6 +454,7 @@ test("daytime stand holds are labeled ROD and expose the complete gate path", ()
   assert.equal(gateClaimDisplayKind(group), "ROD");
   assert.equal(gateClaimPath(group), "Gate 16 -> Stand 3 -> Gate 9");
   assert.deepEqual(group.map((claim) => gateClaimDisplayLabel(claim, group)), ["705", "705", "705"]);
+  assert.equal(new Set(group.map((claim) => gateClaimGroupKey(gateClaimGroup(phf.claims, claim)))).size, 1);
 });
 
 test("overnight tow labels reserve route arrows for the 03:00 boundary blocks", () => {
