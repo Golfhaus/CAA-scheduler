@@ -1,0 +1,191 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "schedule-7-v1.1.4-tactical-round-2",
+  "baseSchedule": {
+    "scheduleId": "schedule_7_v1_1_4_feasibility_01",
+    "overlays": [
+      "config/optimizations/schedule_7_v1_1_4_round_1.json"
+    ]
+  },
+  "schedule": {
+    "id": "schedule_7_v1_1_4_feasibility_02",
+    "version": "1.1.4-feasibility.02",
+    "label": "Schedule 7, Version 1.1.4 Feasibility 02",
+    "status": "draft"
+  },
+  "initiative": {
+    "kind": "tactical_utilization",
+    "routes": [122, 169],
+    "principles": [
+      "Extend early terminators through the nearby hub that does not currently serve their destination.",
+      "Return each aircraft through its current hub and finish at its existing terminator city.",
+      "Use existing hub banks where fixed gates allow and narrow bank-edge exceptions at saturated SYR.",
+      "Keep the cumulative v1.1.4 candidate unpublished."
+    ],
+    "identifierNote": "F1886 is assigned to Route 122; Route 176 is the separate SYR-SWF-SYR route. The requested SWF-DAY-SWF-SYR-SWF extension therefore applies to Route 122."
+  },
+  "operatingOverrides": [
+    {
+      "checkId": "tiered_service_minimums",
+      "findingId": "FWA",
+      "reason": "Schedule 7 v1.1.4 tactical initiative: the user-approved FWA-SYR round trip deliberately gives FWA access to the nearby SYR hub in addition to DAY.",
+      "approvedBy": "user",
+      "expiresAfterSchedule": 7
+    },
+    {
+      "checkId": "tiered_service_minimums",
+      "findingId": "SWF",
+      "reason": "Schedule 7 v1.1.4 tactical initiative: the user-approved SWF-DAY round trip deliberately gives SWF access to the nearby DAY hub in addition to SYR.",
+      "approvedBy": "user",
+      "expiresAfterSchedule": 7
+    },
+    {
+      "checkId": "hub_bank_alignment",
+      "findingId": "V114-R169-SYR-FWA-departure",
+      "reason": "Schedule 7 v1.1.4 tactical initiative: the 14:35 SYR-FWA return departs 20 minutes after Bank 4 to remain within SYR's fixed 16-gate inventory without weakening existing bank connections.",
+      "approvedBy": "user",
+      "expiresAfterSchedule": 7
+    },
+    {
+      "checkId": "hub_bank_alignment",
+      "findingId": "V114-R122-SYR-SWF-departure",
+      "reason": "Schedule 7 v1.1.4 tactical initiative: the 20:10 SYR-SWF return departs 25 minutes after Bank 6 to remain within SYR's fixed 16-gate inventory without weakening existing bank connections.",
+      "approvedBy": "user",
+      "expiresAfterSchedule": 7
+    }
+  ],
+  "retimeLegs": [
+    {
+      "legId": "SWF-SYR-CRJ200-02-IN",
+      "expectedDepartureMinute": 680,
+      "expectedArrivalMinute": 729,
+      "departureMinute": 668,
+      "arrivalMinute": 717
+    }
+  ],
+  "insertLegs": [
+    {
+      "id": "V114-R169-FWA-SYR",
+      "route": 169,
+      "origin": "FWA",
+      "destination": "SYR",
+      "departureMinute": 740,
+      "arrivalMinute": 835
+    },
+    {
+      "id": "V114-R169-SYR-FWA",
+      "route": 169,
+      "origin": "SYR",
+      "destination": "FWA",
+      "departureMinute": 875,
+      "arrivalMinute": 970
+    },
+    {
+      "id": "V114-R169-FWA-DAY",
+      "route": 169,
+      "origin": "FWA",
+      "destination": "DAY",
+      "departureMinute": 1010,
+      "arrivalMinute": 1050
+    },
+    {
+      "id": "V114-R169-DAY-FWA",
+      "route": 169,
+      "origin": "DAY",
+      "destination": "FWA",
+      "departureMinute": 1090,
+      "arrivalMinute": 1130
+    },
+    {
+      "id": "V114-R122-SWF-DAY",
+      "route": 122,
+      "origin": "SWF",
+      "destination": "DAY",
+      "departureMinute": 757,
+      "arrivalMinute": 859
+    },
+    {
+      "id": "V114-R122-DAY-SWF",
+      "route": 122,
+      "origin": "DAY",
+      "destination": "SWF",
+      "departureMinute": 925,
+      "arrivalMinute": 1027
+    },
+    {
+      "id": "V114-R122-SWF-SYR",
+      "route": 122,
+      "origin": "SWF",
+      "destination": "SYR",
+      "departureMinute": 1121,
+      "arrivalMinute": 1170
+    },
+    {
+      "id": "V114-R122-SYR-SWF",
+      "route": 122,
+      "origin": "SYR",
+      "destination": "SWF",
+      "departureMinute": 1210,
+      "arrivalMinute": 1259
+    }
+  ],
+  "bankAssignmentsToAdd": [
+    {
+      "legId": "V114-R169-FWA-SYR",
+      "operation": "arrival",
+      "bankId": "SYR-B4"
+    },
+    {
+      "legId": "V114-R169-SYR-FWA",
+      "operation": "departure",
+      "bankId": "SYR-B4"
+    },
+    {
+      "legId": "V114-R169-FWA-DAY",
+      "operation": "arrival",
+      "bankId": "DAY-B7"
+    },
+    {
+      "legId": "V114-R169-DAY-FWA",
+      "operation": "departure",
+      "bankId": "DAY-B7"
+    },
+    {
+      "legId": "V114-R122-SWF-DAY",
+      "operation": "arrival",
+      "bankId": "DAY-B5"
+    },
+    {
+      "legId": "V114-R122-DAY-SWF",
+      "operation": "departure",
+      "bankId": "DAY-B6"
+    },
+    {
+      "legId": "V114-R122-SWF-SYR",
+      "operation": "arrival",
+      "bankId": "SYR-B6"
+    },
+    {
+      "legId": "V114-R122-SYR-SWF",
+      "operation": "departure",
+      "bankId": "SYR-B6"
+    }
+  ],
+  "expectedCheckpoint": {
+    "legs": 1012,
+    "routes": 179,
+    "lines": 23,
+    "crj200AircraftDays": 76,
+    "effectiveOperatingErrors": 0,
+    "hardStopFailures": 0,
+    "authorizedBankExceptions": 2,
+    "standClaims": 29,
+    "standMinutes": 16607,
+    "dayStandClaims": 1,
+    "dayStandMinutes": 1003,
+    "syrStandClaims": 6,
+    "syrStandMinutes": 3315,
+    "fwaStandClaims": 0,
+    "swfStandClaims": 0
+  }
+}

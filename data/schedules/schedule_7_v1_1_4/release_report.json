@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "1.0.0",
+  "scheduleId": "schedule_7_v1_1_4",
+  "status": "released",
+  "sourceScheduleId": "schedule_7_v1_1_3",
+  "overlayIds": [
+    "schedule-7-v1.1.4-tactical-round-1",
+    "schedule-7-v1.1.4-tactical-round-2",
+    "schedule-7-v1.1.4-tactical-round-3"
+  ],
+  "summary": {
+    "legs": 1022,
+    "routes": 179,
+    "lines": 23,
+    "effectiveOperatingErrors": 0,
+    "hardStopFailures": 0,
+    "directRoundTripCities": 12,
+    "connectedDirectionalPairs": 27,
+    "standClaims": 24,
+    "standMinutes": 12888,
+    "hubStandClaims": 1,
+    "hubStandMinutes": 97
+  },
+  "validation": {
+    "structural": "pass",
+    "operating": "review",
+    "planningReconstruction": "pass"
+  },
+  "connectionFinding": "12/14 target cities have direct BHM round trips, and 27/90 directional cross-group pairs meet the configured connection window.",
+  "connectionScopeDecision": {
+    "status": "approved",
+    "model": "selected_bhm_bank_connections",
+    "approvedBy": "user",
+    "futureWork": "Additional connectivity remains deferred to future Schedule 7 versions; v1.1.4 retains the approved connection model while applying tactical utilization changes."
+  },
+  "patchScope": {
+    "kind": "tactical_utilization",
+    "timetableChanged": true,
+    "routingChanged": true,
+    "description": "Use reciprocal pre-originator flying and productive extensions at FWA, SWF, and MCI to increase aircraft utilization and market frequency without increasing fleet inventory."
+  },
+  "artifacts": [
+    "canonical_schedule.json",
+    "connection_audit.json",
+    "gates.json",
+    "operating_validation_report.json",
+    "planning_snapshot.json",
+    "planning_validation_report.json",
+    "timetable.json",
+    "validation_report.json"
+  ]
+}

@@ -1,0 +1,344 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "schedule-7-v1.1.4-tactical-round-1",
+  "baseSchedule": {
+    "scheduleId": "schedule_7_v1_1_3",
+    "commit": "0835919511666a2ecd5b6e3054c4b4444f8a2f79"
+  },
+  "schedule": {
+    "id": "schedule_7_v1_1_4_feasibility_01",
+    "version": "1.1.4-feasibility.01",
+    "label": "Schedule 7, Version 1.1.4 Feasibility 01",
+    "status": "draft"
+  },
+  "initiative": {
+    "kind": "tactical_utilization",
+    "routes": [701, 702, 703, 704, 705, 706, 707, 708, 709, 710, 711, 712, 713, 714, 715, 716, 717, 718, 719],
+    "principles": [
+      "Use reciprocal late originators to create productive pre-originator flying without adding aircraft-days.",
+      "Keep PHF-FLL at the six-flight directional ceiling by converting existing nonstops into useful BHM and SFB paths.",
+      "Re-close the affected MAX9 rotations as continuous cycles rather than create a fleet-count exception.",
+      "Use Route 703's early termination for a late AUS-MCI and next-morning MCI-AUS bridge.",
+      "Keep the cumulative v1.1.4 candidate unpublished."
+    ]
+  },
+  "hubBankChanges": [
+    {
+      "bankId": "PHF-M7",
+      "expectedStartMinute": 1305,
+      "expectedEndMinute": 1335,
+      "startMinute": 1292,
+      "endMinute": 1335
+    }
+  ],
+  "removeLegs": [
+    {
+      "legId": "FLL-PHF-MAX9-02-IN",
+      "expectedRoute": 703,
+      "expectedOrigin": "PHF",
+      "expectedDestination": "FLL",
+      "expectedDepartureMinute": 420,
+      "expectedArrivalMinute": 543
+    },
+    {
+      "legId": "FLL-PHF-MAX9-06-OUT",
+      "expectedRoute": 705,
+      "expectedOrigin": "FLL",
+      "expectedDestination": "PHF",
+      "expectedDepartureMinute": 1090,
+      "expectedArrivalMinute": 1213
+    }
+  ],
+  "routeReassignments": [
+    {
+      "sourceRoute": 701,
+      "targetRoute": 701,
+      "expectedLine": "A",
+      "expectedDay": 1,
+      "expectedFleet": "MAX9",
+      "line": "B",
+      "day": 7
+    },
+    {
+      "sourceRoute": 702,
+      "targetRoute": 702,
+      "expectedLine": "A",
+      "expectedDay": 2,
+      "expectedFleet": "MAX9",
+      "line": "B",
+      "day": 8
+    },
+    {
+      "sourceRoute": 703,
+      "targetRoute": 703,
+      "expectedLine": "A",
+      "expectedDay": 3,
+      "expectedFleet": "MAX9",
+      "line": "A",
+      "day": 4
+    },
+    {
+      "sourceRoute": 704,
+      "targetRoute": 704,
+      "expectedLine": "A",
+      "expectedDay": 4,
+      "expectedFleet": "MAX9",
+      "line": "A",
+      "day": 5
+    },
+    {
+      "sourceRoute": 705,
+      "targetRoute": 705,
+      "expectedLine": "A",
+      "expectedDay": 5,
+      "expectedFleet": "MAX9",
+      "line": "A",
+      "day": 1
+    },
+    {
+      "sourceRoute": 706,
+      "targetRoute": 706,
+      "expectedLine": "A",
+      "expectedDay": 6,
+      "expectedFleet": "MAX9",
+      "line": "B",
+      "day": 6
+    },
+    {
+      "sourceRoute": 716,
+      "targetRoute": 712,
+      "expectedLine": "B",
+      "expectedDay": 10,
+      "expectedFleet": "MAX9",
+      "line": "A",
+      "day": 2
+    },
+    {
+      "sourceRoute": 712,
+      "targetRoute": 716,
+      "expectedLine": "B",
+      "expectedDay": 6,
+      "expectedFleet": "MAX9",
+      "line": "D",
+      "day": 1
+    },
+    {
+      "sourceRoute": 713,
+      "targetRoute": 713,
+      "expectedLine": "B",
+      "expectedDay": 7,
+      "expectedFleet": "MAX9",
+      "line": "D",
+      "day": 2
+    },
+    {
+      "sourceRoute": 714,
+      "targetRoute": 714,
+      "expectedLine": "B",
+      "expectedDay": 8,
+      "expectedFleet": "MAX9",
+      "line": "A",
+      "day": 3
+    },
+    {
+      "sourceRoute": 715,
+      "targetRoute": 715,
+      "expectedLine": "B",
+      "expectedDay": 9,
+      "expectedFleet": "MAX9",
+      "line": "B",
+      "day": 9
+    },
+    {
+      "sourceRoute": 717,
+      "targetRoute": 717,
+      "expectedLine": "B",
+      "expectedDay": 11,
+      "expectedFleet": "MAX9",
+      "line": "D",
+      "day": 3
+    },
+    {
+      "sourceRoute": 718,
+      "targetRoute": 718,
+      "expectedLine": "B",
+      "expectedDay": 12,
+      "expectedFleet": "MAX9",
+      "line": "D",
+      "day": 4
+    },
+    {
+      "sourceRoute": 719,
+      "targetRoute": 719,
+      "expectedLine": "B",
+      "expectedDay": 13,
+      "expectedFleet": "MAX9",
+      "line": "B",
+      "day": 10
+    }
+  ],
+  "retimeLegs": [
+    {
+      "legId": "AUS-MCI-MAX9-01-OUT",
+      "expectedDepartureMinute": 390,
+      "expectedArrivalMinute": 497,
+      "departureMinute": 435,
+      "arrivalMinute": 542
+    },
+    {
+      "legId": "FLL-PHF-MAX9-01-IN",
+      "expectedDepartureMinute": 1255,
+      "expectedArrivalMinute": 1378,
+      "departureMinute": 1334,
+      "arrivalMinute": 1457
+    },
+    {
+      "legId": "FLL-RFD-MAX9-01-OUT",
+      "expectedDepartureMinute": 315,
+      "expectedArrivalMinute": 427,
+      "departureMinute": 333,
+      "arrivalMinute": 445
+    },
+    {
+      "legId": "PHF-RFD-MAX9-01-IN",
+      "expectedDepartureMinute": 475,
+      "expectedArrivalMinute": 654,
+      "departureMinute": 485,
+      "arrivalMinute": 664
+    },
+    {
+      "legId": "PHF-SFB-MAX9-02-OUT",
+      "expectedDepartureMinute": 695,
+      "expectedArrivalMinute": 801,
+      "departureMinute": 704,
+      "arrivalMinute": 810
+    },
+    {
+      "legId": "FLL-SFB-MAX9-01-IN",
+      "expectedDepartureMinute": 845,
+      "expectedArrivalMinute": 901,
+      "departureMinute": 850,
+      "arrivalMinute": 906
+    }
+  ],
+  "insertLegs": [
+    {
+      "id": "V114-R703-PHF-BHM",
+      "route": 703,
+      "origin": "PHF",
+      "destination": "BHM",
+      "departureMinute": 420,
+      "arrivalMinute": 465
+    },
+    {
+      "id": "V114-R703-BHM-FLL",
+      "route": 703,
+      "origin": "BHM",
+      "destination": "FLL",
+      "departureMinute": 505,
+      "arrivalMinute": 672
+    },
+    {
+      "id": "V114-R703-AUS-MCI",
+      "route": 703,
+      "origin": "AUS",
+      "destination": "MCI",
+      "departureMinute": 1090,
+      "arrivalMinute": 1197
+    },
+    {
+      "id": "V114-R704-MCI-AUS",
+      "route": 704,
+      "origin": "MCI",
+      "destination": "AUS",
+      "departureMinute": 285,
+      "arrivalMinute": 392
+    },
+    {
+      "id": "V114-R705-FLL-SFB",
+      "route": 705,
+      "origin": "FLL",
+      "destination": "SFB",
+      "departureMinute": 1090,
+      "arrivalMinute": 1146
+    },
+    {
+      "id": "V114-R705-SFB-PHF",
+      "route": 705,
+      "origin": "SFB",
+      "destination": "PHF",
+      "departureMinute": 1186,
+      "arrivalMinute": 1292
+    },
+    {
+      "id": "V114-R712-FLL-PHF",
+      "route": 712,
+      "origin": "FLL",
+      "destination": "PHF",
+      "departureMinute": 300,
+      "arrivalMinute": 423
+    },
+    {
+      "id": "V114-R716-PHF-FLL",
+      "route": 716,
+      "origin": "PHF",
+      "destination": "FLL",
+      "departureMinute": 365,
+      "arrivalMinute": 488
+    }
+  ],
+  "bankAssignmentReplacements": [
+    {
+      "legId": "FLL-PHF-MAX9-01-IN",
+      "operation": "departure",
+      "bankId": "PHF-M7"
+    }
+  ],
+  "bankAssignmentsToAdd": [
+    {
+      "legId": "V114-R703-PHF-BHM",
+      "operation": "departure",
+      "bankId": "PHF-B1"
+    },
+    {
+      "legId": "V114-R703-AUS-MCI",
+      "operation": "arrival",
+      "bankId": "MCI-B10"
+    },
+    {
+      "legId": "V114-R704-MCI-AUS",
+      "operation": "departure",
+      "bankId": "MCI-B1"
+    },
+    {
+      "legId": "V114-R705-SFB-PHF",
+      "operation": "arrival",
+      "bankId": "PHF-M7"
+    },
+    {
+      "legId": "V114-R712-FLL-PHF",
+      "operation": "arrival",
+      "bankId": "PHF-B1"
+    },
+    {
+      "legId": "V114-R716-PHF-FLL",
+      "operation": "departure",
+      "bankId": "PHF-B1"
+    }
+  ],
+  "expectedCheckpoint": {
+    "legs": 1004,
+    "routes": 179,
+    "lines": 23,
+    "max9AircraftDays": 21,
+    "effectiveOperatingErrors": 0,
+    "hardStopFailures": 0,
+    "standClaims": 29,
+    "standMinutes": 16619,
+    "phfPeakUsed": 20,
+    "phfStandClaims": 8,
+    "phfStandMinutes": 4287,
+    "fllPeakUsed": 4,
+    "fllStrandedPassengerTouches": 0
+  }
+}

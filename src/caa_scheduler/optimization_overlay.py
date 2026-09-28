@@ -15,10 +15,10 @@ def apply_optimization_overlay(
     """Apply an auditable, schedule-specific feasibility overlay.
 
     The overlay is intentionally narrower than the construction optimizer. It
-    may retime named legs and insert named legs into existing routes, but it
-    cannot remove a leg, change fleet counts, or synthesize a route. The output
-    remains a draft feasibility checkpoint until the normal construction and
-    packaging stages regenerate final provenance.
+    may retime, replace, and insert named legs and may re-close existing route
+    cycles without changing fleet counts. The output remains a draft
+    feasibility checkpoint until the normal construction and packaging stages
+    regenerate final provenance.
     """
 
     expected_base = overlay["baseSchedule"]["scheduleId"]
@@ -39,6 +39,21 @@ def apply_optimization_overlay(
         result.setdefault("hubBanks", []).append(copy.deepcopy(bank))
         existing_bank_ids.add(bank["id"])
 
+    banks_by_id = {bank["id"]: bank for bank in result.get("hubBanks", [])}
+    for change in overlay.get("hubBankChanges", []):
+        bank = banks_by_id.get(change["bankId"])
+        if bank is None:
+            raise ValueError(f"Cannot change missing hub bank {change['bankId']}")
+        for field in ("startMinute", "endMinute"):
+            expected_key = f"expected{field[0].upper()}{field[1:]}"
+            if expected_key in change and bank[field] != change[expected_key]:
+                raise ValueError(
+                    f"Stale overlay for {change['bankId']}: expected {field} "
+                    f"{change[expected_key]}, found {bank[field]}"
+                )
+            if field in change:
+                bank[field] = int(change[field])
+
     for hub, count in overlay.get("hubBankCountOverrides", {}).items():
         result["operatingPolicy"]["hubBankCounts"][hub] = count
 
@@ -56,7 +71,81 @@ def apply_optimization_overlay(
         existing_overrides.add(key)
 
     legs_by_id = {leg["id"]: leg for leg in result["legs"]}
+    removed_leg_ids: set[str] = set()
+    for removal in overlay.get("removeLegs", []):
+        identifier = str(removal["legId"])
+        leg = legs_by_id.get(identifier)
+        if leg is None:
+            raise ValueError(f"Cannot remove missing leg {identifier}")
+        expected_fields = {
+            "expectedRoute": "route",
+            "expectedOrigin": "origin",
+            "expectedDestination": "destination",
+            "expectedDepartureMinute": "departureMinute",
+            "expectedArrivalMinute": "arrivalMinute",
+        }
+        for expected_key, field in expected_fields.items():
+            if expected_key in removal and leg[field] != removal[expected_key]:
+                raise ValueError(
+                    f"Stale overlay for {identifier}: expected {field} "
+                    f"{removal[expected_key]}, found {leg[field]}"
+                )
+        removed_leg_ids.add(identifier)
+        del legs_by_id[identifier]
+    if removed_leg_ids:
+        result["legs"] = [
+            leg for leg in result["legs"] if leg["id"] not in removed_leg_ids
+        ]
+        result["bankAssignments"] = [
+            assignment
+            for assignment in result.get("bankAssignments", [])
+            if assignment["legId"] not in removed_leg_ids
+        ]
+
+    route_changes = overlay.get("routeReassignments", [])
+    if route_changes:
+        changes_by_source: dict[int, dict[str, Any]] = {}
+        for change in route_changes:
+            source = int(change["sourceRoute"])
+            if source in changes_by_source:
+                raise ValueError(f"Duplicate route reassignment source: {source}")
+            changes_by_source[source] = change
+        source_route_legs = {
+            source: [
+                leg for leg in result["legs"] if int(leg["route"]) == source
+            ]
+            for source in changes_by_source
+        }
+        for source, change in changes_by_source.items():
+            route_legs = source_route_legs[source]
+            if not route_legs:
+                raise ValueError(f"Cannot reassign missing route {source}")
+            identities = {
+                (str(leg["line"]), int(leg["day"]), str(leg["fleet"]))
+                for leg in route_legs
+            }
+            if len(identities) != 1:
+                raise ValueError(f"Route {source} does not have one identity")
+            line, day, fleet = next(iter(identities))
+            expected = (
+                str(change.get("expectedLine", line)),
+                int(change.get("expectedDay", day)),
+                str(change.get("expectedFleet", fleet)),
+            )
+            if (line, day, fleet) != expected:
+                raise ValueError(
+                    f"Stale route reassignment for {source}: expected {expected}, "
+                    f"found {(line, day, fleet)}"
+                )
+            for leg in route_legs:
+                leg["route"] = int(change.get("targetRoute", source))
+                leg["line"] = str(change.get("line", line))
+                leg["day"] = int(change.get("day", day))
+
     touched_routes: set[int] = set()
+    for change in route_changes:
+        touched_routes.add(int(change["sourceRoute"]))
+        touched_routes.add(int(change.get("targetRoute", change["sourceRoute"])))
     for change in overlay.get("retimeLegs", []):
         leg = legs_by_id.get(change["legId"])
         if leg is None:

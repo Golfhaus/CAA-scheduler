@@ -29,7 +29,7 @@ class OperatingValidationTests(unittest.TestCase):
             REPO_ROOT
             / "data"
             / "schedules"
-            / "schedule_7_v1_1_3"
+            / "schedule_7_v1_1_4"
             / "canonical_schedule.json"
         )
         report = validate_operating_rules(canonical)

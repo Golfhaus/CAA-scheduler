@@ -1,0 +1,214 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "schedule-7-v1.1.4-tactical-round-3",
+  "baseSchedule": {
+    "scheduleId": "schedule_7_v1_1_4_feasibility_02",
+    "overlays": [
+      "config/optimizations/schedule_7_v1_1_4_round_1.json",
+      "config/optimizations/schedule_7_v1_1_4_round_2.json"
+    ]
+  },
+  "schedule": {
+    "id": "schedule_7_v1_1_4_feasibility_03",
+    "version": "1.1.4-feasibility.03",
+    "label": "Schedule 7, Version 1.1.4 Feasibility 03",
+    "status": "draft"
+  },
+  "initiative": {
+    "kind": "tactical_utilization",
+    "routes": [116, 133, 135, 152, 344],
+    "principles": [
+      "Turn each early MCI terminator directly from its arrival gate instead of beginning a day-long stand hold.",
+      "Prefer high-demand new or under-frequency MCI markets with clean Section 2.6 spacing.",
+      "Return the aircraft in MCI Banks 10 or 11 and preserve its following-day route position.",
+      "Do not add aircraft-days, gates, stands, or operating exceptions.",
+      "Keep the cumulative v1.1.4 candidate unpublished."
+    ],
+    "marketSelection": [
+      {
+        "route": 133,
+        "market": "MCI-CLT",
+        "averageDailyOdPassengers": 62.5,
+        "priorDailyRoundTrips": 2,
+        "resultingDailyRoundTrips": 3
+      },
+      {
+        "route": 116,
+        "market": "MCI-CAK",
+        "averageDailyOdPassengers": 20.6,
+        "priorDailyRoundTrips": 0,
+        "resultingDailyRoundTrips": 1
+      },
+      {
+        "route": 135,
+        "market": "MCI-PNS",
+        "averageDailyOdPassengers": 23.4,
+        "priorDailyRoundTrips": 2,
+        "resultingDailyRoundTrips": 3
+      },
+      {
+        "route": 152,
+        "market": "MCI-IND",
+        "averageDailyOdPassengers": 37.8,
+        "priorDailyRoundTrips": 1,
+        "resultingDailyRoundTrips": 2
+      },
+      {
+        "route": 344,
+        "market": "MCI-MKE",
+        "averageDailyOdPassengers": 28.8,
+        "priorDailyRoundTrips": 3,
+        "resultingDailyRoundTrips": 4
+      }
+    ]
+  },
+  "insertLegs": [
+    {
+      "id": "V114-R133-MCI-CLT",
+      "route": 133,
+      "origin": "MCI",
+      "destination": "CLT",
+      "departureMinute": 885,
+      "arrivalMinute": 1084
+    },
+    {
+      "id": "V114-R133-CLT-MCI",
+      "route": 133,
+      "origin": "CLT",
+      "destination": "MCI",
+      "departureMinute": 1124,
+      "arrivalMinute": 1203
+    },
+    {
+      "id": "V114-R116-MCI-CAK",
+      "route": 116,
+      "origin": "MCI",
+      "destination": "CAK",
+      "departureMinute": 937,
+      "arrivalMinute": 1122
+    },
+    {
+      "id": "V114-R116-CAK-MCI",
+      "route": 116,
+      "origin": "CAK",
+      "destination": "MCI",
+      "departureMinute": 1180,
+      "arrivalMinute": 1245
+    },
+    {
+      "id": "V114-R135-MCI-PNS",
+      "route": 135,
+      "origin": "MCI",
+      "destination": "PNS",
+      "departureMinute": 935,
+      "arrivalMinute": 1065
+    },
+    {
+      "id": "V114-R135-PNS-MCI",
+      "route": 135,
+      "origin": "PNS",
+      "destination": "MCI",
+      "departureMinute": 1105,
+      "arrivalMinute": 1235
+    },
+    {
+      "id": "V114-R152-MCI-IND",
+      "route": 152,
+      "origin": "MCI",
+      "destination": "IND",
+      "departureMinute": 985,
+      "arrivalMinute": 1135
+    },
+    {
+      "id": "V114-R152-IND-MCI",
+      "route": 152,
+      "origin": "IND",
+      "destination": "MCI",
+      "departureMinute": 1175,
+      "arrivalMinute": 1205
+    },
+    {
+      "id": "V114-R344-MCI-MKE",
+      "route": 344,
+      "origin": "MCI",
+      "destination": "MKE",
+      "departureMinute": 1085,
+      "arrivalMinute": 1170
+    },
+    {
+      "id": "V114-R344-MKE-MCI",
+      "route": 344,
+      "origin": "MKE",
+      "destination": "MCI",
+      "departureMinute": 1210,
+      "arrivalMinute": 1295
+    }
+  ],
+  "bankAssignmentsToAdd": [
+    {
+      "legId": "V114-R133-MCI-CLT",
+      "operation": "departure",
+      "bankId": "MCI-B7"
+    },
+    {
+      "legId": "V114-R133-CLT-MCI",
+      "operation": "arrival",
+      "bankId": "MCI-B10"
+    },
+    {
+      "legId": "V114-R116-MCI-CAK",
+      "operation": "departure",
+      "bankId": "MCI-B7"
+    },
+    {
+      "legId": "V114-R116-CAK-MCI",
+      "operation": "arrival",
+      "bankId": "MCI-M11"
+    },
+    {
+      "legId": "V114-R135-MCI-PNS",
+      "operation": "departure",
+      "bankId": "MCI-B7"
+    },
+    {
+      "legId": "V114-R135-PNS-MCI",
+      "operation": "arrival",
+      "bankId": "MCI-B10"
+    },
+    {
+      "legId": "V114-R152-MCI-IND",
+      "operation": "departure",
+      "bankId": "MCI-B8"
+    },
+    {
+      "legId": "V114-R152-IND-MCI",
+      "operation": "arrival",
+      "bankId": "MCI-B10"
+    },
+    {
+      "legId": "V114-R344-MCI-MKE",
+      "operation": "departure",
+      "bankId": "MCI-B9"
+    },
+    {
+      "legId": "V114-R344-MKE-MCI",
+      "operation": "arrival",
+      "bankId": "MCI-M11"
+    }
+  ],
+  "expectedCheckpoint": {
+    "legs": 1022,
+    "routes": 179,
+    "lines": 23,
+    "crj200AircraftDays": 76,
+    "crj700AircraftDays": 54,
+    "effectiveOperatingErrors": 0,
+    "hardStopFailures": 0,
+    "newOperatingOverrides": 0,
+    "standClaims": 24,
+    "standMinutes": 12888,
+    "mciPeakUsed": 16,
+    "mciStandClaims": 0,
+    "mciStandMinutes": 0
+  }
+}
