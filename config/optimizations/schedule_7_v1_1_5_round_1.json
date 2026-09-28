@@ -1,0 +1,248 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "schedule-7-v1.1.5-phf-early-terminators-round-1",
+  "baseSchedule": {
+    "scheduleId": "schedule_7_v1_1_4",
+    "commit": "1c39880f7fe6c38891595dfdb6b7ff7fa4a80f22"
+  },
+  "schedule": {
+    "id": "schedule_7_v1_1_5_feasibility_01",
+    "version": "1.1.5-feasibility.01",
+    "label": "Schedule 7, Version 1.1.5 Feasibility 01",
+    "status": "draft"
+  },
+  "initiative": {
+    "kind": "phf_early_terminator_utilization",
+    "routes": [718, 354, 329, 314, 328],
+    "principles": [
+      "Extend every route terminating at PHF before 18:30 instead of beginning its RON hold immediately.",
+      "Prefer demand-backed PHF markets that already fit the city's approved hub-service envelope.",
+      "Use PHF's late mini-bank after the 20:55 departure wave to return the extended aircraft to gates for RON.",
+      "Reduce net stand use without adding aircraft-days, gates, stands, or operating exceptions.",
+      "Keep the cumulative v1.1.5 candidate unpublished."
+    ],
+    "marketSelection": [
+      {
+        "route": 718,
+        "markets": ["PHF-JAX", "PHF-PIT"],
+        "averageDailyOdPassengers": [46.15, 11.4]
+      },
+      {
+        "route": 354,
+        "markets": ["PHF-RFD"],
+        "averageDailyOdPassengers": [57.15]
+      },
+      {
+        "route": 329,
+        "markets": ["PHF-BDL"],
+        "averageDailyOdPassengers": [21.6]
+      },
+      {
+        "route": 314,
+        "markets": ["PHF-BWI"],
+        "averageDailyOdPassengers": [11.7]
+      },
+      {
+        "route": 328,
+        "markets": ["PHF-GSP"],
+        "averageDailyOdPassengers": [3.2]
+      }
+    ]
+  },
+  "hubBankChanges": [
+    {
+      "bankId": "PHF-M6",
+      "expectedStartMinute": 1185,
+      "expectedEndMinute": 1205,
+      "startMinute": 1132,
+      "endMinute": 1192
+    }
+  ],
+  "insertLegs": [
+    {
+      "id": "V115-R718-PHF-JAX",
+      "route": 718,
+      "origin": "PHF",
+      "destination": "JAX",
+      "departureMinute": 836,
+      "arrivalMinute": 932
+    },
+    {
+      "id": "V115-R718-JAX-PHF",
+      "route": 718,
+      "origin": "JAX",
+      "destination": "PHF",
+      "departureMinute": 1010,
+      "arrivalMinute": 1106
+    },
+    {
+      "id": "V115-R718-PHF-PIT",
+      "route": 718,
+      "origin": "PHF",
+      "destination": "PIT",
+      "departureMinute": 1146,
+      "arrivalMinute": 1215
+    },
+    {
+      "id": "V115-R718-PIT-PHF",
+      "route": 718,
+      "origin": "PIT",
+      "destination": "PHF",
+      "departureMinute": 1255,
+      "arrivalMinute": 1324
+    },
+    {
+      "id": "V115-R354-PHF-RFD",
+      "route": 354,
+      "origin": "PHF",
+      "destination": "RFD",
+      "departureMinute": 891,
+      "arrivalMinute": 957
+    },
+    {
+      "id": "V115-R354-RFD-PHF",
+      "route": 354,
+      "origin": "RFD",
+      "destination": "PHF",
+      "departureMinute": 1148,
+      "arrivalMinute": 1334
+    },
+    {
+      "id": "V115-R329-PHF-BDL",
+      "route": 329,
+      "origin": "PHF",
+      "destination": "BDL",
+      "departureMinute": 1116,
+      "arrivalMinute": 1196
+    },
+    {
+      "id": "V115-R329-BDL-PHF",
+      "route": 329,
+      "origin": "BDL",
+      "destination": "PHF",
+      "departureMinute": 1236,
+      "arrivalMinute": 1316
+    },
+    {
+      "id": "V115-R314-PHF-BWI",
+      "route": 314,
+      "origin": "PHF",
+      "destination": "BWI",
+      "departureMinute": 1132,
+      "arrivalMinute": 1180
+    },
+    {
+      "id": "V115-R314-BWI-PHF",
+      "route": 314,
+      "origin": "BWI",
+      "destination": "PHF",
+      "departureMinute": 1244,
+      "arrivalMinute": 1292
+    },
+    {
+      "id": "V115-R328-PHF-GSP",
+      "route": 328,
+      "origin": "PHF",
+      "destination": "GSP",
+      "departureMinute": 1136,
+      "arrivalMinute": 1211
+    },
+    {
+      "id": "V115-R328-GSP-PHF",
+      "route": 328,
+      "origin": "GSP",
+      "destination": "PHF",
+      "departureMinute": 1251,
+      "arrivalMinute": 1326
+    }
+  ],
+  "bankAssignmentsToAdd": [
+    {
+      "legId": "V115-R718-PHF-JAX",
+      "operation": "departure",
+      "bankId": "PHF-B4"
+    },
+    {
+      "legId": "V115-R718-PHF-JAX",
+      "operation": "arrival",
+      "bankId": "JAX-B11"
+    },
+    {
+      "legId": "V115-R718-JAX-PHF",
+      "operation": "departure",
+      "bankId": "JAX-B12"
+    },
+    {
+      "legId": "V115-R718-JAX-PHF",
+      "operation": "arrival",
+      "bankId": "PHF-B6"
+    },
+    {
+      "legId": "V115-R718-PHF-PIT",
+      "operation": "departure",
+      "bankId": "PHF-M6"
+    },
+    {
+      "legId": "V115-R718-PIT-PHF",
+      "operation": "arrival",
+      "bankId": "PHF-M7"
+    },
+    {
+      "legId": "V115-R354-PHF-RFD",
+      "operation": "departure",
+      "bankId": "PHF-M3"
+    },
+    {
+      "legId": "V115-R354-RFD-PHF",
+      "operation": "arrival",
+      "bankId": "PHF-M7"
+    },
+    {
+      "legId": "V115-R329-PHF-BDL",
+      "operation": "departure",
+      "bankId": "PHF-B6"
+    },
+    {
+      "legId": "V115-R329-BDL-PHF",
+      "operation": "arrival",
+      "bankId": "PHF-M7"
+    },
+    {
+      "legId": "V115-R314-PHF-BWI",
+      "operation": "departure",
+      "bankId": "PHF-M6"
+    },
+    {
+      "legId": "V115-R314-BWI-PHF",
+      "operation": "arrival",
+      "bankId": "PHF-M7"
+    },
+    {
+      "legId": "V115-R328-PHF-GSP",
+      "operation": "departure",
+      "bankId": "PHF-M6"
+    },
+    {
+      "legId": "V115-R328-GSP-PHF",
+      "operation": "arrival",
+      "bankId": "PHF-M7"
+    }
+  ],
+  "expectedCheckpoint": {
+    "legs": 1034,
+    "routes": 179,
+    "lines": 23,
+    "crj200AircraftDays": 76,
+    "crj700AircraftDays": 54,
+    "crj900AircraftDays": 28,
+    "max9AircraftDays": 21,
+    "effectiveOperatingErrors": 0,
+    "hardStopFailures": 0,
+    "newOperatingOverrides": 0,
+    "standClaims": 21,
+    "standMinutes": 10320,
+    "phfPeakUsed": 18,
+    "phfStandClaims": 5,
+    "phfStandMinutes": 1719
+  }
+}

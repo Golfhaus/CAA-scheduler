@@ -152,7 +152,6 @@ class V114TacticalMovesTests(unittest.TestCase):
         exposed = {schedule["id"] for schedule in manifest["schedules"]}
         self.assertNotIn("schedule_7_v1_1_4_feasibility_01", exposed)
         self.assertIn("schedule_7_v1_1_4", exposed)
-        self.assertEqual(manifest["defaultScheduleId"], "schedule_7_v1_1_4")
 
 
 class V114TacticalRoundTwoTests(unittest.TestCase):
@@ -294,7 +293,7 @@ class V114TacticalRoundTwoTests(unittest.TestCase):
         exposed = {schedule["id"] for schedule in manifest["schedules"]}
         self.assertNotIn("schedule_7_v1_1_4_feasibility_01", exposed)
         self.assertNotIn("schedule_7_v1_1_4_feasibility_02", exposed)
-        self.assertEqual(manifest["defaultScheduleId"], "schedule_7_v1_1_4")
+        self.assertIn("schedule_7_v1_1_4", exposed)
 
 
 class V114TacticalRoundThreeTests(unittest.TestCase):
@@ -432,8 +431,6 @@ class V114TacticalRoundThreeTests(unittest.TestCase):
         exposed = {schedule["id"] for schedule in manifest["schedules"]}
         self.assertNotIn("schedule_7_v1_1_4_feasibility_03", exposed)
         self.assertIn("schedule_7_v1_1_4", exposed)
-        self.assertEqual(manifest["schedules"][-1]["id"], "schedule_7_v1_1_4")
-        self.assertEqual(manifest["defaultScheduleId"], "schedule_7_v1_1_4")
 
 
 if __name__ == "__main__":

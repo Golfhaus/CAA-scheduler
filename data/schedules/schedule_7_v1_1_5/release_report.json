@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "1.0.0",
+  "scheduleId": "schedule_7_v1_1_5",
+  "status": "released",
+  "sourceScheduleId": "schedule_7_v1_1_4",
+  "overlayIds": [
+    "schedule-7-v1.1.5-phf-early-terminators-round-1",
+    "schedule-7-v1.1.5-syr-late-bank-round-2",
+    "schedule-7-v1.1.5-syr-late-bank-round-3",
+    "schedule-7-v1.1.5-western-hold-utilization-round-4"
+  ],
+  "summary": {
+    "legs": 1062,
+    "routes": 179,
+    "lines": 23,
+    "effectiveOperatingErrors": 0,
+    "hardStopFailures": 0,
+    "directRoundTripCities": 12,
+    "connectedDirectionalPairs": 27,
+    "standClaims": 21,
+    "standMinutes": 8440,
+    "hubStandClaims": 1,
+    "hubStandMinutes": 97
+  },
+  "validation": {
+    "structural": "pass",
+    "operating": "review",
+    "planningReconstruction": "pass"
+  },
+  "connectionFinding": "12/14 target cities have direct BHM round trips, and 27/90 directional cross-group pairs meet the configured connection window.",
+  "connectionScopeDecision": {
+    "status": "approved",
+    "model": "selected_bhm_bank_connections",
+    "approvedBy": "user",
+    "futureWork": "Additional connectivity remains deferred to future Schedule 7 versions; v1.1.5 retains the approved connection model while applying tactical utilization changes."
+  },
+  "patchScope": {
+    "kind": "tactical_utilization",
+    "timetableChanged": true,
+    "routingChanged": true,
+    "description": "Extend early PHF terminators, establish a seventh SYR bank with late feeders and next-day originators, and replace long western day holds with productive flying without increasing fleet inventory."
+  },
+  "artifacts": [
+    "canonical_schedule.json",
+    "connection_audit.json",
+    "gates.json",
+    "operating_validation_report.json",
+    "planning_snapshot.json",
+    "planning_validation_report.json",
+    "timetable.json",
+    "validation_report.json"
+  ]
+}

@@ -314,7 +314,7 @@ class V113BhmConnectivityTests(unittest.TestCase):
             16822,
         )
 
-    def test_only_release_is_exposed_and_is_the_app_default(self) -> None:
+    def test_only_release_is_exposed(self) -> None:
         manifest = read_json(REPO_ROOT / "web" / "schedules.json")
         exposed = {schedule["id"] for schedule in manifest["schedules"]}
         self.assertNotIn("schedule_7_v1_1_3_feasibility_01", exposed)
@@ -322,8 +322,6 @@ class V113BhmConnectivityTests(unittest.TestCase):
         self.assertNotIn("schedule_7_v1_1_3_feasibility_03", exposed)
         self.assertNotIn("schedule_7_v1_1_3_feasibility_04", exposed)
         self.assertIn("schedule_7_v1_1_3", exposed)
-        self.assertEqual(manifest["schedules"][-1]["id"], "schedule_7_v1_1_3")
-        self.assertEqual(manifest["defaultScheduleId"], "schedule_7_v1_1_3")
 
 
 if __name__ == "__main__":

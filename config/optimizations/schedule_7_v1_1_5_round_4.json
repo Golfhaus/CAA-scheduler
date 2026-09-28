@@ -1,0 +1,177 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "schedule-7-v1.1.5-western-hold-utilization-round-4",
+  "baseSchedule": {
+    "scheduleId": "schedule_7_v1_1_5_feasibility_03",
+    "overlays": [
+      "config/optimizations/schedule_7_v1_1_5_round_1.json",
+      "config/optimizations/schedule_7_v1_1_5_round_2.json",
+      "config/optimizations/schedule_7_v1_1_5_round_3.json"
+    ]
+  },
+  "schedule": {
+    "id": "schedule_7_v1_1_5_feasibility_04",
+    "version": "1.1.5-feasibility.04",
+    "label": "Schedule 7, Version 1.1.5 Feasibility 04",
+    "status": "draft"
+  },
+  "initiative": {
+    "kind": "western_day_hold_utilization",
+    "routes": [158, 165, 309],
+    "principles": [
+      "Replace the extended MCI and ATW day holds with demand-backed western flying.",
+      "Prioritize MCI-RFD because it has approximately 200 daily O&D passengers but only one existing round trip.",
+      "Use consecutive MCI banks for the ATW extension so the aircraft returns well before its existing DAY departure.",
+      "Move Route 309's remaining ground time to RFD and return through MCI Bank 8.",
+      "Preserve every existing terminator, following-day origin, aircraft-day, gate, stand, and operating exception.",
+      "Keep the cumulative v1.1.5 candidate unpublished."
+    ],
+    "marketSelection": [
+      {
+        "route": 158,
+        "markets": ["MCI-RFD", "MCI-MKE"],
+        "averageDailyOdPassengers": [199.6, 29.0],
+        "priorDailyRoundTrips": [1, 4],
+        "resultingDailyRoundTrips": [3, 5]
+      },
+      {
+        "route": 165,
+        "markets": ["ATW-MCI"],
+        "purpose": "Add a morning MCI hub connection during the 426-minute ATW hold."
+      },
+      {
+        "route": 309,
+        "markets": ["MCI-RFD"],
+        "averageDailyOdPassengers": [199.6],
+        "priorDailyRoundTrips": [1],
+        "resultingDailyRoundTrips": [3]
+      }
+    ]
+  },
+  "insertLegs": [
+    {
+      "id": "V115-R165-ATW-MCI",
+      "route": 165,
+      "origin": "ATW",
+      "destination": "MCI",
+      "departureMinute": 452,
+      "arrivalMinute": 544
+    },
+    {
+      "id": "V115-R165-MCI-ATW",
+      "route": 165,
+      "origin": "MCI",
+      "destination": "ATW",
+      "departureMinute": 585,
+      "arrivalMinute": 677
+    },
+    {
+      "id": "V115-R158-MCI-RFD",
+      "route": 158,
+      "origin": "MCI",
+      "destination": "RFD",
+      "departureMinute": 685,
+      "arrivalMinute": 762
+    },
+    {
+      "id": "V115-R158-RFD-MCI",
+      "route": 158,
+      "origin": "RFD",
+      "destination": "MCI",
+      "departureMinute": 808,
+      "arrivalMinute": 885
+    },
+    {
+      "id": "V115-R158-MCI-MKE",
+      "route": 158,
+      "origin": "MCI",
+      "destination": "MKE",
+      "departureMinute": 928,
+      "arrivalMinute": 1016
+    },
+    {
+      "id": "V115-R158-MKE-MCI",
+      "route": 158,
+      "origin": "MKE",
+      "destination": "MCI",
+      "departureMinute": 1056,
+      "arrivalMinute": 1144
+    },
+    {
+      "id": "V115-R309-MCI-RFD",
+      "route": 309,
+      "origin": "MCI",
+      "destination": "RFD",
+      "departureMinute": 786,
+      "arrivalMinute": 861
+    },
+    {
+      "id": "V115-R309-RFD-MCI",
+      "route": 309,
+      "origin": "RFD",
+      "destination": "MCI",
+      "departureMinute": 960,
+      "arrivalMinute": 1035
+    }
+  ],
+  "bankAssignmentsToAdd": [
+    {
+      "legId": "V115-R165-ATW-MCI",
+      "operation": "arrival",
+      "bankId": "MCI-B3"
+    },
+    {
+      "legId": "V115-R165-MCI-ATW",
+      "operation": "departure",
+      "bankId": "MCI-B4"
+    },
+    {
+      "legId": "V115-R158-MCI-RFD",
+      "operation": "departure",
+      "bankId": "MCI-B5"
+    },
+    {
+      "legId": "V115-R158-RFD-MCI",
+      "operation": "arrival",
+      "bankId": "MCI-B7"
+    },
+    {
+      "legId": "V115-R158-MCI-MKE",
+      "operation": "departure",
+      "bankId": "MCI-B7"
+    },
+    {
+      "legId": "V115-R158-MKE-MCI",
+      "operation": "arrival",
+      "bankId": "MCI-B9"
+    },
+    {
+      "legId": "V115-R309-MCI-RFD",
+      "operation": "departure",
+      "bankId": "MCI-B6"
+    },
+    {
+      "legId": "V115-R309-RFD-MCI",
+      "operation": "arrival",
+      "bankId": "MCI-B8"
+    }
+  ],
+  "expectedCheckpoint": {
+    "legs": 1062,
+    "routes": 179,
+    "lines": 23,
+    "crj200AircraftDays": 76,
+    "crj700AircraftDays": 54,
+    "crj900AircraftDays": 28,
+    "max9AircraftDays": 21,
+    "effectiveOperatingErrors": 0,
+    "hardStopFailures": 0,
+    "newOperatingOverrides": 0,
+    "standClaims": 21,
+    "standMinutes": 8440,
+    "mciPeakUsed": 16,
+    "mciStandClaims": 0,
+    "atwPeakUsed": 2,
+    "atwStandClaims": 0
+  }
+}

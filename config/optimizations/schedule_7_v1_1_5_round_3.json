@@ -1,0 +1,188 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "schedule-7-v1.1.5-syr-late-bank-round-3",
+  "baseSchedule": {
+    "scheduleId": "schedule_7_v1_1_5_feasibility_02",
+    "overlays": [
+      "config/optimizations/schedule_7_v1_1_5_round_1.json",
+      "config/optimizations/schedule_7_v1_1_5_round_2.json"
+    ]
+  },
+  "schedule": {
+    "id": "schedule_7_v1_1_5_feasibility_03",
+    "version": "1.1.5-feasibility.03",
+    "label": "Schedule 7, Version 1.1.5 Feasibility 03",
+    "status": "draft"
+  },
+  "initiative": {
+    "kind": "syr_late_bank_additional_feeders",
+    "routes": [144, 150, 124],
+    "supportingRetimeRoutes": [343, 121],
+    "principles": [
+      "Use the PWM, ALB, and HVN terminators to add three more inbound feeds to SYR Bank 7.",
+      "Return every aircraft to its existing terminating city so line continuity and maintenance-base RON coverage remain unchanged.",
+      "Give Route 144 a productive PWM-SYR-BUF-SYR-PWM extension instead of a simple SYR round trip.",
+      "Advance two flexible Bank 6 departures to create the gate needed for Route 144's SYR turn without weakening legal connections.",
+      "Add no aircraft-days, gates, stands, markets requiring an override, or Section 2.6 exceptions.",
+      "Keep the cumulative v1.1.5 candidate unpublished."
+    ],
+    "marketSelection": [
+      {
+        "route": 144,
+        "path": "PWM-SYR-BUF-SYR-PWM",
+        "reason": "BUF is the strongest non-conflicting SYR market that permits a legal 20:51 departure and a Bank 7 return."
+      },
+      {
+        "route": 150,
+        "path": "ALB-SYR-ALB",
+        "reason": "A 20:46 ALB originator reaches Bank 7 and preserves the ALB terminator."
+      },
+      {
+        "route": 124,
+        "path": "HVN-SYR-HVN",
+        "reason": "A 20:34 HVN originator reaches Bank 7 and preserves the HVN terminator."
+      }
+    ]
+  },
+  "retimeLegs": [
+    {
+      "legId": "SRQ-SYR-CRJ700-01-IN",
+      "expectedDepartureMinute": 1145,
+      "expectedArrivalMinute": 1321,
+      "departureMinute": 1125,
+      "arrivalMinute": 1301
+    },
+    {
+      "legId": "PWM-SYR-CRJ200-01-IN",
+      "expectedDepartureMinute": 1175,
+      "expectedArrivalMinute": 1243,
+      "departureMinute": 1140,
+      "arrivalMinute": 1208
+    }
+  ],
+  "insertLegs": [
+    {
+      "id": "V115-R144-PWM-SYR",
+      "route": 144,
+      "origin": "PWM",
+      "destination": "SYR",
+      "departureMinute": 1057,
+      "arrivalMinute": 1125
+    },
+    {
+      "id": "V115-R144-SYR-BUF",
+      "route": 144,
+      "origin": "SYR",
+      "destination": "BUF",
+      "departureMinute": 1165,
+      "arrivalMinute": 1211
+    },
+    {
+      "id": "V115-R144-BUF-SYR",
+      "route": 144,
+      "origin": "BUF",
+      "destination": "SYR",
+      "departureMinute": 1251,
+      "arrivalMinute": 1297
+    },
+    {
+      "id": "V115-R144-SYR-PWM",
+      "route": 144,
+      "origin": "SYR",
+      "destination": "PWM",
+      "departureMinute": 1340,
+      "arrivalMinute": 1408
+    },
+    {
+      "id": "V115-R150-ALB-SYR",
+      "route": 150,
+      "origin": "ALB",
+      "destination": "SYR",
+      "departureMinute": 1246,
+      "arrivalMinute": 1290
+    },
+    {
+      "id": "V115-R150-SYR-ALB",
+      "route": 150,
+      "origin": "SYR",
+      "destination": "ALB",
+      "departureMinute": 1330,
+      "arrivalMinute": 1374
+    },
+    {
+      "id": "V115-R124-HVN-SYR",
+      "route": 124,
+      "origin": "HVN",
+      "destination": "SYR",
+      "departureMinute": 1234,
+      "arrivalMinute": 1290
+    },
+    {
+      "id": "V115-R124-SYR-HVN",
+      "route": 124,
+      "origin": "SYR",
+      "destination": "HVN",
+      "departureMinute": 1332,
+      "arrivalMinute": 1388
+    }
+  ],
+  "bankAssignmentsToAdd": [
+    {
+      "legId": "V115-R144-PWM-SYR",
+      "operation": "arrival",
+      "bankId": "SYR-B6"
+    },
+    {
+      "legId": "V115-R144-SYR-BUF",
+      "operation": "departure",
+      "bankId": "SYR-B6"
+    },
+    {
+      "legId": "V115-R144-BUF-SYR",
+      "operation": "arrival",
+      "bankId": "SYR-B7"
+    },
+    {
+      "legId": "V115-R144-SYR-PWM",
+      "operation": "departure",
+      "bankId": "SYR-B7"
+    },
+    {
+      "legId": "V115-R150-ALB-SYR",
+      "operation": "arrival",
+      "bankId": "SYR-B7"
+    },
+    {
+      "legId": "V115-R150-SYR-ALB",
+      "operation": "departure",
+      "bankId": "SYR-B7"
+    },
+    {
+      "legId": "V115-R124-HVN-SYR",
+      "operation": "arrival",
+      "bankId": "SYR-B7"
+    },
+    {
+      "legId": "V115-R124-SYR-HVN",
+      "operation": "departure",
+      "bankId": "SYR-B7"
+    }
+  ],
+  "expectedCheckpoint": {
+    "legs": 1054,
+    "routes": 179,
+    "lines": 23,
+    "crj200AircraftDays": 76,
+    "crj700AircraftDays": 54,
+    "crj900AircraftDays": 28,
+    "max9AircraftDays": 21,
+    "effectiveOperatingErrors": 0,
+    "hardStopFailures": 0,
+    "newOperatingOverrides": 0,
+    "standClaims": 21,
+    "standMinutes": 8440,
+    "syrPeakUsed": 18,
+    "syrStandClaims": 6,
+    "syrStandMinutes": 1435
+  }
+}

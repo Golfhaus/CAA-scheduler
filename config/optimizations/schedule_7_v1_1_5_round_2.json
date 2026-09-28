@@ -1,0 +1,289 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "schedule-7-v1.1.5-syr-late-bank-round-2",
+  "baseSchedule": {
+    "scheduleId": "schedule_7_v1_1_5_feasibility_01",
+    "overlays": [
+      "config/optimizations/schedule_7_v1_1_5_round_1.json"
+    ]
+  },
+  "schedule": {
+    "id": "schedule_7_v1_1_5_feasibility_02",
+    "version": "1.1.5-feasibility.02",
+    "label": "Schedule 7, Version 1.1.5 Feasibility 02",
+    "status": "draft"
+  },
+  "initiative": {
+    "kind": "syr_late_bank_and_bank_1_originators",
+    "routes": [176, 321, 323, 515, 165, 306, 518],
+    "principles": [
+      "Create a small seventh SYR bank using the aircraft that otherwise terminate by 19:19.",
+      "Overnight four aircraft at existing SYR spokes so they return as Bank 1 originators.",
+      "Keep Routes 176 and 165 at the SYR maintenance base after productive late round trips.",
+      "Leave Route 518 at SYR because its 05:25 continuation cannot safely accept an outstation originator.",
+      "Reduce SYR stand exposure without adding aircraft-days, gates, stands, new markets, or operating exceptions.",
+      "Keep the cumulative v1.1.5 candidate unpublished."
+    ],
+    "marketSelection": [
+      {
+        "route": 176,
+        "market": "SYR-BNA",
+        "purpose": "High-demand late round trip returning to SYR for maintenance-base RON and Bank 7 feed."
+      },
+      {
+        "route": 165,
+        "market": "SYR-ROC",
+        "purpose": "Curfew-compatible late round trip returning to SYR for maintenance-base RON and Bank 7 feed."
+      },
+      {
+        "route": 321,
+        "continuationRoute": 322,
+        "market": "SYR-PIT",
+        "purpose": "PIT overnight followed by a 04:30 Bank 1 originator."
+      },
+      {
+        "route": 323,
+        "continuationRoute": 324,
+        "market": "SYR-ABE",
+        "purpose": "ABE overnight followed by a 04:30 Bank 1 originator."
+      },
+      {
+        "route": 306,
+        "continuationRoute": 307,
+        "market": "SYR-BUF",
+        "purpose": "BUF overnight followed by a 04:30 Bank 1 originator."
+      },
+      {
+        "route": 515,
+        "continuationRoute": 516,
+        "market": "SYR-ORH",
+        "purpose": "ORH overnight followed by a 04:30 Bank 1 originator."
+      },
+      {
+        "route": 518,
+        "market": null,
+        "purpose": "Retain SYR RON to protect the following 05:25 departure."
+      }
+    ]
+  },
+  "hubBanksToAdd": [
+    {
+      "id": "SYR-B7",
+      "hub": "SYR",
+      "startMinute": 1290,
+      "endMinute": 1350
+    }
+  ],
+  "hubBankChanges": [
+    {
+      "bankId": "SYR-B1",
+      "expectedStartMinute": 300,
+      "expectedEndMinute": 360,
+      "startMinute": 309,
+      "endMinute": 369
+    }
+  ],
+  "hubBankCountOverrides": {
+    "SYR": 7
+  },
+  "retimeLegs": [
+    {
+      "legId": "SRQ-SYR-CRJ700-03-IN",
+      "expectedDepartureMinute": 350,
+      "expectedArrivalMinute": 526,
+      "departureMinute": 362,
+      "arrivalMinute": 538
+    },
+    {
+      "legId": "CLT-SYR-CRJ700-02-IN",
+      "expectedDepartureMinute": 350,
+      "expectedArrivalMinute": 457,
+      "departureMinute": 357,
+      "arrivalMinute": 464
+    },
+    {
+      "legId": "FLL-SYR-CRJ900-02-IN",
+      "expectedDepartureMinute": 350,
+      "expectedArrivalMinute": 524,
+      "departureMinute": 368,
+      "arrivalMinute": 542
+    }
+  ],
+  "insertLegs": [
+    {
+      "id": "V115-R176-SYR-BNA",
+      "route": 176,
+      "origin": "SYR",
+      "destination": "BNA",
+      "departureMinute": 990,
+      "arrivalMinute": 1060
+    },
+    {
+      "id": "V115-R176-BNA-SYR",
+      "route": 176,
+      "origin": "BNA",
+      "destination": "SYR",
+      "departureMinute": 1100,
+      "arrivalMinute": 1290
+    },
+    {
+      "id": "V115-R165-SYR-ROC",
+      "route": 165,
+      "origin": "SYR",
+      "destination": "ROC",
+      "departureMinute": 1176,
+      "arrivalMinute": 1215
+    },
+    {
+      "id": "V115-R165-ROC-SYR",
+      "route": 165,
+      "origin": "ROC",
+      "destination": "SYR",
+      "departureMinute": 1255,
+      "arrivalMinute": 1294
+    },
+    {
+      "id": "V115-R321-SYR-PIT",
+      "route": 321,
+      "origin": "SYR",
+      "destination": "PIT",
+      "departureMinute": 1334,
+      "arrivalMinute": 1400
+    },
+    {
+      "id": "V115-R322-PIT-SYR",
+      "route": 322,
+      "origin": "PIT",
+      "destination": "SYR",
+      "departureMinute": 270,
+      "arrivalMinute": 336
+    },
+    {
+      "id": "V115-R323-SYR-ABE",
+      "route": 323,
+      "origin": "SYR",
+      "destination": "ABE",
+      "departureMinute": 1338,
+      "arrivalMinute": 1390
+    },
+    {
+      "id": "V115-R324-ABE-SYR",
+      "route": 324,
+      "origin": "ABE",
+      "destination": "SYR",
+      "departureMinute": 270,
+      "arrivalMinute": 322
+    },
+    {
+      "id": "V115-R306-SYR-BUF",
+      "route": 306,
+      "origin": "SYR",
+      "destination": "BUF",
+      "departureMinute": 1342,
+      "arrivalMinute": 1389
+    },
+    {
+      "id": "V115-R307-BUF-SYR",
+      "route": 307,
+      "origin": "BUF",
+      "destination": "SYR",
+      "departureMinute": 270,
+      "arrivalMinute": 317
+    },
+    {
+      "id": "V115-R515-SYR-ORH",
+      "route": 515,
+      "origin": "SYR",
+      "destination": "ORH",
+      "departureMinute": 1346,
+      "arrivalMinute": 1404
+    },
+    {
+      "id": "V115-R516-ORH-SYR",
+      "route": 516,
+      "origin": "ORH",
+      "destination": "SYR",
+      "departureMinute": 270,
+      "arrivalMinute": 328
+    }
+  ],
+  "bankAssignmentsToAdd": [
+    {
+      "legId": "V115-R176-SYR-BNA",
+      "operation": "departure",
+      "bankId": "SYR-B5"
+    },
+    {
+      "legId": "V115-R176-BNA-SYR",
+      "operation": "arrival",
+      "bankId": "SYR-B7"
+    },
+    {
+      "legId": "V115-R165-SYR-ROC",
+      "operation": "departure",
+      "bankId": "SYR-B6"
+    },
+    {
+      "legId": "V115-R165-ROC-SYR",
+      "operation": "arrival",
+      "bankId": "SYR-B7"
+    },
+    {
+      "legId": "V115-R321-SYR-PIT",
+      "operation": "departure",
+      "bankId": "SYR-B7"
+    },
+    {
+      "legId": "V115-R322-PIT-SYR",
+      "operation": "arrival",
+      "bankId": "SYR-B1"
+    },
+    {
+      "legId": "V115-R323-SYR-ABE",
+      "operation": "departure",
+      "bankId": "SYR-B7"
+    },
+    {
+      "legId": "V115-R324-ABE-SYR",
+      "operation": "arrival",
+      "bankId": "SYR-B1"
+    },
+    {
+      "legId": "V115-R306-SYR-BUF",
+      "operation": "departure",
+      "bankId": "SYR-B7"
+    },
+    {
+      "legId": "V115-R307-BUF-SYR",
+      "operation": "arrival",
+      "bankId": "SYR-B1"
+    },
+    {
+      "legId": "V115-R515-SYR-ORH",
+      "operation": "departure",
+      "bankId": "SYR-B7"
+    },
+    {
+      "legId": "V115-R516-ORH-SYR",
+      "operation": "arrival",
+      "bankId": "SYR-B1"
+    }
+  ],
+  "expectedCheckpoint": {
+    "legs": 1046,
+    "routes": 179,
+    "lines": 23,
+    "crj200AircraftDays": 76,
+    "crj700AircraftDays": 54,
+    "crj900AircraftDays": 28,
+    "max9AircraftDays": 21,
+    "effectiveOperatingErrors": 0,
+    "hardStopFailures": 0,
+    "newOperatingOverrides": 0,
+    "standClaims": 21,
+    "standMinutes": 8440,
+    "syrPeakUsed": 18,
+    "syrStandClaims": 6,
+    "syrStandMinutes": 1435
+  }
+}
