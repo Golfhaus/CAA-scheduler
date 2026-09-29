@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "schedule-7-v1.1.6-utilization-release",
+  "sourceScheduleId": "schedule_7_v1_1_5",
+  "baseCanonical": "data/schedules/schedule_7_v1_1_5/canonical_schedule.json",
+  "overlays": [
+    "config/optimizations/schedule_7_v1_1_6_round_1.json",
+    "config/optimizations/schedule_7_v1_1_6_round_2.json",
+    "config/optimizations/schedule_7_v1_1_6_round_3.json"
+  ],
+  "outputDirectory": "data/schedules/schedule_7_v1_1_6",
+  "rejoinAvoidableTows": true,
+  "demandDataVersion": "bts-db1c-6mo-jul2025-apr2026-v7",
+  "schedule": {
+    "id": "schedule_7_v1_1_6",
+    "number": 7,
+    "version": "1.1.6",
+    "label": "Schedule 7, Version 1.1.6",
+    "status": "released"
+  },
+  "patchScope": {
+    "kind": "tactical_utilization",
+    "timetableChanged": true,
+    "routingChanged": true,
+    "description": "Add early BHM feed from CLT, SAV, and DAY; extend three independent early terminators; and use late PHF originators for morning DAY, SYR, and JAX round trips without increasing fleet inventory."
+  },
+  "connectionAudit": {
+    "hub": "BHM",
+    "groups": {
+      "feeders": ["OMA", "ATW", "ICT", "FSD", "MCI"],
+      "FLP": ["DAB", "EYW", "FLL", "GNV", "MLB", "PGD", "PIE", "SFB", "SRQ"]
+    }
+  },
+  "connectionScopeDecision": {
+    "status": "approved",
+    "model": "selected_bhm_bank_connections",
+    "approvedBy": "user",
+    "futureWork": "Additional connectivity remains deferred to future Schedule 7 versions; v1.1.6 retains the approved connection model while applying tactical utilization changes."
+  },
+  "expectedRelease": {
+    "legs": 1080,
+    "routes": 179,
+    "lines": 23,
+    "effectiveOperatingErrors": 0,
+    "hardStopFailures": 0,
+    "directRoundTripCities": 12,
+    "connectedDirectionalPairs": 27,
+    "standClaims": 21,
+    "standMinutes": 6188,
+    "hubStandClaims": 4,
+    "hubStandMinutes": 290
+  }
+}

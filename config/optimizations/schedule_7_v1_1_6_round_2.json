@@ -1,0 +1,134 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "schedule-7-v1.1.6-independent-terminator-round-2",
+  "baseSchedule": {
+    "scheduleId": "schedule_7_v1_1_6_feasibility_01",
+    "overlays": [
+      "config/optimizations/schedule_7_v1_1_6_round_1.json"
+    ]
+  },
+  "schedule": {
+    "id": "schedule_7_v1_1_6_feasibility_02",
+    "version": "1.1.6-feasibility.02",
+    "label": "Schedule 7, Version 1.1.6 Feasibility 02",
+    "status": "draft"
+  },
+  "initiative": {
+    "kind": "independent_early_terminator_utilization",
+    "routes": [148, 525, 346],
+    "principles": [
+      "Optimize each early terminator independently rather than force a common geography or hub pattern.",
+      "Use demand, productive block time, curfews, bank placement, and fixed gate capacity together when selecting each extension.",
+      "Return every aircraft to its existing terminating city so the following aircraft-day remains unchanged.",
+      "Avoid new operating exceptions and preserve all existing route legs.",
+      "Keep the cumulative v1.1.6 candidate unpublished."
+    ],
+    "marketSelection": [
+      {
+        "route": 148,
+        "market": "DAY-RFD",
+        "averageDailyOdPassengers": 24.0,
+        "priorDailyRoundTrips": 2,
+        "resultingDailyRoundTrips": 3,
+        "reason": "RFD is DAY's strongest practical late-day market. The 17:30 departure is the first time fixed DAY gate inventory can accept another passenger touch."
+      },
+      {
+        "route": 525,
+        "market": "SAT-SFB",
+        "averageDailyOdPassengers": 131.1,
+        "priorDailyRoundTrips": 0,
+        "resultingDailyRoundTrips": 1,
+        "reason": "SFB is SAT's strongest unserved feasible market. A 21:00 SFB return uses the full normal departure window without a curfew exception."
+      },
+      {
+        "route": 346,
+        "market": "HRL-AUS",
+        "averageDailyOdPassengers": 24.1,
+        "priorDailyRoundTrips": 0,
+        "resultingDailyRoundTrips": 1,
+        "reason": "AUS is HRL's strongest unserved feasible market and provides the best demand per added block minute."
+      }
+    ]
+  },
+  "insertLegs": [
+    {
+      "id": "V116-R148-DAY-RFD",
+      "route": 148,
+      "origin": "DAY",
+      "destination": "RFD",
+      "departureMinute": 1050,
+      "arrivalMinute": 1059
+    },
+    {
+      "id": "V116-R148-RFD-DAY",
+      "route": 148,
+      "origin": "RFD",
+      "destination": "DAY",
+      "departureMinute": 1099,
+      "arrivalMinute": 1228
+    },
+    {
+      "id": "V116-R525-SAT-SFB",
+      "route": 525,
+      "origin": "SAT",
+      "destination": "SFB",
+      "departureMinute": 1005,
+      "arrivalMinute": 1220
+    },
+    {
+      "id": "V116-R525-SFB-SAT",
+      "route": 525,
+      "origin": "SFB",
+      "destination": "SAT",
+      "departureMinute": 1260,
+      "arrivalMinute": 1355
+    },
+    {
+      "id": "V116-R346-HRL-AUS",
+      "route": 346,
+      "origin": "HRL",
+      "destination": "AUS",
+      "departureMinute": 1022,
+      "arrivalMinute": 1087
+    },
+    {
+      "id": "V116-R346-AUS-HRL",
+      "route": 346,
+      "origin": "AUS",
+      "destination": "HRL",
+      "departureMinute": 1127,
+      "arrivalMinute": 1192
+    }
+  ],
+  "bankAssignmentsToAdd": [
+    {
+      "legId": "V116-R148-DAY-RFD",
+      "operation": "departure",
+      "bankId": "DAY-B7"
+    },
+    {
+      "legId": "V116-R148-RFD-DAY",
+      "operation": "arrival",
+      "bankId": "DAY-B8"
+    }
+  ],
+  "expectedCheckpoint": {
+    "legs": 1074,
+    "routes": 179,
+    "lines": 23,
+    "crj200AircraftDays": 76,
+    "crj700AircraftDays": 54,
+    "crj900AircraftDays": 28,
+    "max9AircraftDays": 21,
+    "productiveBlockMinutesAdded": 578,
+    "effectiveOperatingErrors": 0,
+    "hardStopFailures": 0,
+    "newOperatingOverrides": 0,
+    "standClaims": 23,
+    "standMinutes": 7461,
+    "dayPeakUsed": 16,
+    "dayStandClaims": 0,
+    "satPeakUsed": 3,
+    "hrlPeakUsed": 2
+  }
+}

@@ -191,7 +191,7 @@ class V115PhfExtensionTests(unittest.TestCase):
         manifest = read_json(REPO_ROOT / "web" / "schedules.json")
         exposed = {schedule["id"] for schedule in manifest["schedules"]}
         self.assertNotIn("schedule_7_v1_1_5_feasibility_01", exposed)
-        self.assertEqual(manifest["defaultScheduleId"], "schedule_7_v1_1_5")
+        self.assertEqual(manifest["defaultScheduleId"], "schedule_7_v1_1_6")
 
 
 class V115SyrLateBankTests(unittest.TestCase):
@@ -387,7 +387,7 @@ class V115SyrLateBankTests(unittest.TestCase):
         manifest = read_json(REPO_ROOT / "web" / "schedules.json")
         exposed = {schedule["id"] for schedule in manifest["schedules"]}
         self.assertNotIn("schedule_7_v1_1_5_feasibility_02", exposed)
-        self.assertEqual(manifest["defaultScheduleId"], "schedule_7_v1_1_5")
+        self.assertEqual(manifest["defaultScheduleId"], "schedule_7_v1_1_6")
 
 
 class V115AdditionalSyrFeedersTests(unittest.TestCase):
@@ -628,7 +628,7 @@ class V115AdditionalSyrFeedersTests(unittest.TestCase):
         manifest = read_json(REPO_ROOT / "web" / "schedules.json")
         exposed = {schedule["id"] for schedule in manifest["schedules"]}
         self.assertNotIn("schedule_7_v1_1_5_feasibility_03", exposed)
-        self.assertEqual(manifest["defaultScheduleId"], "schedule_7_v1_1_5")
+        self.assertEqual(manifest["defaultScheduleId"], "schedule_7_v1_1_6")
 
 
 class V115WesternHoldUtilizationTests(unittest.TestCase):
@@ -833,7 +833,7 @@ class V115WesternHoldUtilizationTests(unittest.TestCase):
         exposed = {schedule["id"] for schedule in manifest["schedules"]}
         self.assertNotIn("schedule_7_v1_1_5_feasibility_04", exposed)
         self.assertIn("schedule_7_v1_1_5", exposed)
-        self.assertEqual(manifest["defaultScheduleId"], "schedule_7_v1_1_5")
+        self.assertEqual(manifest["defaultScheduleId"], "schedule_7_v1_1_6")
 
 
 if __name__ == "__main__":

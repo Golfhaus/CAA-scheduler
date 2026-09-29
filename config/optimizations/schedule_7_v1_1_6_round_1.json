@@ -1,0 +1,150 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "schedule-7-v1.1.6-bhm-morning-round-1",
+  "baseSchedule": {
+    "scheduleId": "schedule_7_v1_1_5",
+    "commit": "b19720a2b556d018bfd3097f7464cd9d940ccfe0"
+  },
+  "schedule": {
+    "id": "schedule_7_v1_1_6_feasibility_01",
+    "version": "1.1.6-feasibility.01",
+    "label": "Schedule 7, Version 1.1.6 Feasibility 01",
+    "status": "draft"
+  },
+  "initiative": {
+    "kind": "bhm_morning_bank_feed",
+    "routes": [306, 339, 149],
+    "principles": [
+      "Use late originators at CLT, SAV, and DAY for productive early BHM round trips.",
+      "Arrive before BHM's existing 06:00 wave and return after its departures to provide bidirectional connections.",
+      "Stagger gate returns as the existing BHM bank clears and use conditional stand holds during the peak.",
+      "Preserve every existing route destination, aircraft-day, gate, stand, and curfew limit.",
+      "Keep the cumulative v1.1.6 candidate unpublished."
+    ],
+    "evaluatedButDeferred": [
+      {
+        "route": 331,
+        "city": "BWI",
+        "reason": "BWI's two gates are already occupied by the 04:35 and 05:05 originators. An additional departure early enough to reach the BHM wave creates passenger gate touches on stands; a later departure misses BHM's available gate window and would cascade the existing Route 331 sequence."
+      }
+    ]
+  },
+  "operatingOverrides": [
+    {
+      "checkId": "tiered_service_minimums",
+      "findingId": "CLT",
+      "reason": "Schedule 7 v1.1.6 BHM morning initiative: CLT-BHM is deliberate focus-city feed into and out of BHM's existing morning connection wave.",
+      "approvedBy": "user",
+      "expiresAfterSchedule": 7
+    },
+    {
+      "checkId": "tiered_service_minimums",
+      "findingId": "SAV",
+      "reason": "Schedule 7 v1.1.6 BHM morning initiative: SAV-BHM is deliberate focus-city feed into and out of BHM's existing morning connection wave.",
+      "approvedBy": "user",
+      "expiresAfterSchedule": 7
+    },
+    {
+      "checkId": "hub_bank_alignment",
+      "findingId": "V116-R149-DAY-BHM-departure",
+      "reason": "Schedule 7 v1.1.6 BHM morning initiative: the 04:30 DAY departure is 30 minutes before DAY Bank 1 so the aircraft can feed BHM's morning wave while remaining within fixed gate capacity at both cities.",
+      "approvedBy": "user",
+      "expiresAfterSchedule": 7
+    }
+  ],
+  "retimeLegs": [
+    {
+      "legId": "DAY-HOU-CRJ200-03-OUT",
+      "expectedDepartureMinute": 600,
+      "expectedArrivalMinute": 698,
+      "departureMinute": 675,
+      "arrivalMinute": 773
+    }
+  ],
+  "insertLegs": [
+    {
+      "id": "V116-R306-CLT-BHM",
+      "route": 306,
+      "origin": "CLT",
+      "destination": "BHM",
+      "departureMinute": 270,
+      "arrivalMinute": 285
+    },
+    {
+      "id": "V116-R306-BHM-CLT",
+      "route": 306,
+      "origin": "BHM",
+      "destination": "CLT",
+      "departureMinute": 460,
+      "arrivalMinute": 655
+    },
+    {
+      "id": "V116-R339-SAV-BHM",
+      "route": 339,
+      "origin": "SAV",
+      "destination": "BHM",
+      "departureMinute": 270,
+      "arrivalMinute": 283
+    },
+    {
+      "id": "V116-R339-BHM-SAV",
+      "route": 339,
+      "origin": "BHM",
+      "destination": "SAV",
+      "departureMinute": 465,
+      "arrivalMinute": 598
+    },
+    {
+      "id": "V116-R149-DAY-BHM",
+      "route": 149,
+      "origin": "DAY",
+      "destination": "BHM",
+      "departureMinute": 270,
+      "arrivalMinute": 301
+    },
+    {
+      "id": "V116-R149-BHM-DAY",
+      "route": 149,
+      "origin": "BHM",
+      "destination": "DAY",
+      "departureMinute": 452,
+      "arrivalMinute": 603
+    }
+  ],
+  "bankAssignmentReplacements": [
+    {
+      "legId": "DAY-HOU-CRJ200-03-OUT",
+      "operation": "departure",
+      "bankId": "DAY-B4"
+    }
+  ],
+  "bankAssignmentsToAdd": [
+    {
+      "legId": "V116-R149-DAY-BHM",
+      "operation": "departure",
+      "bankId": "DAY-B1"
+    },
+    {
+      "legId": "V116-R149-BHM-DAY",
+      "operation": "arrival",
+      "bankId": "DAY-B3"
+    }
+  ],
+  "expectedCheckpoint": {
+    "legs": 1068,
+    "routes": 179,
+    "lines": 23,
+    "crj200AircraftDays": 76,
+    "crj700AircraftDays": 54,
+    "crj900AircraftDays": 28,
+    "max9AircraftDays": 21,
+    "effectiveOperatingErrors": 0,
+    "hardStopFailures": 0,
+    "newOperatingOverrides": 3,
+    "standClaims": 24,
+    "standMinutes": 8134,
+    "bhmPeakUsed": 8,
+    "bhmStandClaims": 4,
+    "bhmStandMinutes": 290
+  }
+}

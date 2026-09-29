@@ -1,0 +1,215 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "schedule-7-v1.1.6-phf-early-hub-round-3",
+  "baseSchedule": {
+    "scheduleId": "schedule_7_v1_1_6_feasibility_02",
+    "overlays": [
+      "config/optimizations/schedule_7_v1_1_6_round_1.json",
+      "config/optimizations/schedule_7_v1_1_6_round_2.json"
+    ]
+  },
+  "schedule": {
+    "id": "schedule_7_v1_1_6_feasibility_03",
+    "version": "1.1.6-feasibility.03",
+    "label": "Schedule 7, Version 1.1.6 Feasibility 03",
+    "status": "draft"
+  },
+  "initiative": {
+    "kind": "phf_early_hub_round_trips",
+    "routes": [330, 338, 719],
+    "principles": [
+      "Use three late PHF originators for 04:30 round trips to DAY, SYR, and JAX.",
+      "Return each aircraft to PHF with at least the 40-minute minimum turn before its existing originator.",
+      "Use the user-selected 08:20 compromise return for Route 330.",
+      "Accept the user-approved SYR bank exception for Route 338 and the three-minute early PHF Bank 2 arrival for Route 719.",
+      "Preserve every existing leg, aircraft-day, and fixed physical inventory limit.",
+      "Keep the cumulative v1.1.6 candidate unpublished."
+    ],
+    "turnMargins": [
+      {
+        "route": 330,
+        "returnArrivalMinute": 500,
+        "existingOriginatorMinute": 555,
+        "turnMinutes": 55,
+        "marginAboveMinimumMinutes": 15
+      },
+      {
+        "route": 338,
+        "returnArrivalMinute": 505,
+        "existingOriginatorMinute": 555,
+        "turnMinutes": 50,
+        "marginAboveMinimumMinutes": 10
+      },
+      {
+        "route": 719,
+        "returnArrivalMinute": 502,
+        "existingOriginatorMinute": 550,
+        "turnMinutes": 48,
+        "marginAboveMinimumMinutes": 8
+      }
+    ]
+  },
+  "operatingOverrides": [
+    {
+      "checkId": "hub_bank_alignment",
+      "findingId": "V116-R330-DAY-PHF-departure",
+      "reason": "Schedule 7 v1.1.6 PHF early-hub initiative: the user-selected 06:51 DAY departure splits the difference between a minimum turn and DAY Bank 2, producing an 08:20 PHF return with a 55-minute turn into the existing originator.",
+      "approvedBy": "user",
+      "expiresAfterSchedule": 7
+    },
+    {
+      "checkId": "hub_bank_alignment",
+      "findingId": "V116-R330-DAY-PHF-arrival",
+      "reason": "Schedule 7 v1.1.6 PHF early-hub initiative: the user-selected 08:20 return arrives five minutes before PHF Bank 2 and preserves a 55-minute turn into Route 330's existing originator.",
+      "approvedBy": "user",
+      "expiresAfterSchedule": 7
+    },
+    {
+      "checkId": "hub_bank_alignment",
+      "findingId": "V116-R338-SYR-PHF-departure",
+      "reason": "Schedule 7 v1.1.6 PHF early-hub initiative: the user approved the 07:02 SYR departure between Banks 1 and 2 so the aircraft reaches PHF Bank 2 with a 50-minute turn into its existing originator.",
+      "approvedBy": "user",
+      "expiresAfterSchedule": 7
+    },
+    {
+      "checkId": "hub_bank_alignment",
+      "findingId": "V116-R719-JAX-PHF-arrival",
+      "reason": "Schedule 7 v1.1.6 PHF early-hub initiative: the user approved the minimum-turn 06:46 JAX departure and its 08:22 PHF arrival three minutes before Bank 2.",
+      "approvedBy": "user",
+      "expiresAfterSchedule": 7
+    }
+  ],
+  "insertLegs": [
+    {
+      "id": "V116-R330-PHF-DAY",
+      "route": 330,
+      "origin": "PHF",
+      "destination": "DAY",
+      "departureMinute": 270,
+      "arrivalMinute": 359
+    },
+    {
+      "id": "V116-R330-DAY-PHF",
+      "route": 330,
+      "origin": "DAY",
+      "destination": "PHF",
+      "departureMinute": 411,
+      "arrivalMinute": 500
+    },
+    {
+      "id": "V116-R338-PHF-SYR",
+      "route": 338,
+      "origin": "PHF",
+      "destination": "SYR",
+      "departureMinute": 270,
+      "arrivalMinute": 353
+    },
+    {
+      "id": "V116-R338-SYR-PHF",
+      "route": 338,
+      "origin": "SYR",
+      "destination": "PHF",
+      "departureMinute": 422,
+      "arrivalMinute": 505
+    },
+    {
+      "id": "V116-R719-PHF-JAX",
+      "route": 719,
+      "origin": "PHF",
+      "destination": "JAX",
+      "departureMinute": 270,
+      "arrivalMinute": 366
+    },
+    {
+      "id": "V116-R719-JAX-PHF",
+      "route": 719,
+      "origin": "JAX",
+      "destination": "PHF",
+      "departureMinute": 406,
+      "arrivalMinute": 502
+    }
+  ],
+  "bankAssignmentsToAdd": [
+    {
+      "legId": "V116-R330-PHF-DAY",
+      "operation": "departure",
+      "bankId": "PHF-M0"
+    },
+    {
+      "legId": "V116-R330-PHF-DAY",
+      "operation": "arrival",
+      "bankId": "DAY-B1"
+    },
+    {
+      "legId": "V116-R330-DAY-PHF",
+      "operation": "departure",
+      "bankId": "DAY-B2"
+    },
+    {
+      "legId": "V116-R330-DAY-PHF",
+      "operation": "arrival",
+      "bankId": "PHF-B2"
+    },
+    {
+      "legId": "V116-R338-PHF-SYR",
+      "operation": "departure",
+      "bankId": "PHF-M0"
+    },
+    {
+      "legId": "V116-R338-PHF-SYR",
+      "operation": "arrival",
+      "bankId": "SYR-B1"
+    },
+    {
+      "legId": "V116-R338-SYR-PHF",
+      "operation": "departure",
+      "bankId": "SYR-B2"
+    },
+    {
+      "legId": "V116-R338-SYR-PHF",
+      "operation": "arrival",
+      "bankId": "PHF-B2"
+    },
+    {
+      "legId": "V116-R719-PHF-JAX",
+      "operation": "departure",
+      "bankId": "PHF-M0"
+    },
+    {
+      "legId": "V116-R719-PHF-JAX",
+      "operation": "arrival",
+      "bankId": "JAX-B2"
+    },
+    {
+      "legId": "V116-R719-JAX-PHF",
+      "operation": "departure",
+      "bankId": "JAX-B3"
+    },
+    {
+      "legId": "V116-R719-JAX-PHF",
+      "operation": "arrival",
+      "bankId": "PHF-B2"
+    }
+  ],
+  "expectedCheckpoint": {
+    "legs": 1080,
+    "routes": 179,
+    "lines": 23,
+    "crj200AircraftDays": 76,
+    "crj700AircraftDays": 54,
+    "crj900AircraftDays": 28,
+    "max9AircraftDays": 21,
+    "productiveBlockMinutesAdded": 536,
+    "effectiveOperatingErrors": 0,
+    "hardStopFailures": 0,
+    "newOperatingOverrides": 4,
+    "standClaims": 21,
+    "standMinutes": 6188,
+    "phfPeakUsed": 18,
+    "phfStandClaims": 3,
+    "phfStandMinutes": 446,
+    "dayPeakUsed": 16,
+    "syrPeakUsed": 18,
+    "jaxPeakUsed": 16
+  }
+}
