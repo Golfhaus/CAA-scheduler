@@ -17,6 +17,7 @@ jobs:
       - name: Run routine tests against the latest schedule
         run: |
           python tests/test_v116_bhm_morning.py
+          python tests/test_v120_crj900_lines.py
           python tests/test_latest_schedule_release.py
           python tests/test_operating_validation.py
           python tests/test_web_build.py
