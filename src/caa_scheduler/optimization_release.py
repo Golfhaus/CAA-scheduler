@@ -6,7 +6,7 @@ from typing import Any
 
 from .gate_export import export_gate_schedule
 from .io import read_json, sha256_file, write_json
-from .operating_validation import validate_operating_rules
+from .operating_validation import validate_operating_rules, validate_overnight_turns
 from .optimization_overlay import apply_optimization_overlay
 from .planning import reconstruct_planning_snapshot, validate_planning_snapshot
 from .timetable import export_timetable
@@ -180,6 +180,7 @@ def build_optimization_release(
 
     structural = validate_schedule(canonical)
     operating = validate_operating_rules(canonical)
+    overnight = validate_overnight_turns(canonical)
     planning = reconstruct_planning_snapshot(
         canonical,
         demand_data_version=config.get("demandDataVersion"),
@@ -218,6 +219,7 @@ def build_optimization_release(
             check["hardStop"] and check["status"] == "fail"
             for check in operating["checks"]
         ),
+        "overnightTurnFailures": len(overnight["findings"]),
         "directRoundTripCities": connection_audit["summary"][
             "directRoundTripCities"
         ],
@@ -248,6 +250,8 @@ def build_optimization_release(
         raise ValueError("Optimization release has effective operating errors")
     if actual["hardStopFailures"]:
         raise ValueError("Optimization release has hard-stop failures")
+    if overnight["status"] != "pass":
+        raise ValueError("Optimization release has overnight turn failures")
     if planning_validation["status"] != "pass":
         raise ValueError("Optimization release planning reconstruction failed")
 
@@ -263,6 +267,7 @@ def build_optimization_release(
         "canonical_schedule.json": canonical,
         "validation_report.json": structural,
         "operating_validation_report.json": operating,
+        "overnight_turn_validation.json": overnight,
         "planning_snapshot.json": planning,
         "planning_validation_report.json": planning_validation,
         "timetable.json": timetable,
@@ -291,6 +296,7 @@ def build_optimization_release(
         "validation": {
             "structural": structural["status"],
             "operating": operating["status"],
+            "overnightTurns": overnight["status"],
             "planningReconstruction": planning_validation["status"],
         },
         "connectionFinding": (

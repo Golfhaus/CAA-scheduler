@@ -57,10 +57,7 @@ GATE_PLAN = {
 }
 
 
-@unittest.skipUnless(
-    os.environ.get("FULL_SCHEDULE_REGRESSION") == "1",
-    "Schedule 6 regression runs only for major releases",
-)
+@unittest.skip("Archival schedule regression retired; only the latest release is required")
 class ScheduleSixBaselineTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:

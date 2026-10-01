@@ -9,6 +9,7 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO_ROOT / "src"))
 
 from caa_scheduler.io import read_json
+from latest_schedule import CANONICAL
 from caa_scheduler.operating_validation import (
     _service_window_gaps,
     validate_operating_rules,
@@ -25,13 +26,7 @@ class OperatingValidationTests(unittest.TestCase):
         )
 
     def test_schedule_seven_gap_findings_exclude_the_overnight_period(self) -> None:
-        canonical = read_json(
-            REPO_ROOT
-            / "data"
-            / "schedules"
-            / "schedule_7_v1_1_6"
-            / "canonical_schedule.json"
-        )
+        canonical = CANONICAL
         report = validate_operating_rules(canonical)
         checks = {check["id"]: check for check in report["checks"]}
         gap_check = checks["section_26_city_departure_gap"]

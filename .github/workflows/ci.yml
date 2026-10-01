@@ -15,12 +15,6 @@ jobs:
           cache: pip
       - run: python -m pip install -e .
       - name: Run routine tests against the latest schedule
-        run: |
-          python tests/test_v116_bhm_morning.py
-          python tests/test_latest_schedule_release.py
-          python tests/test_operating_validation.py
-          python tests/test_web_build.py
+        run: bash scripts/run_latest_regression.sh
       - name: Build web console
         run: python -m caa_scheduler build-web --output dist
-      - name: Test web console helpers
-        run: node --test tests/*.mjs

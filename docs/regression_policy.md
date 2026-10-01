@@ -1,21 +1,25 @@
-# Schedule regression policy
+# Latest schedule regression policy
 
-Routine CI for patch and minor Schedule releases validates the current engine,
-web console, and latest released schedule only. The latest schedule must be the
-default entry in `web/schedules.json`, reproduce operationally from its pinned
-release configuration, and pass structural, operating, planning, gate, stand,
-and app build checks. Interchangeable physical gate/stand row numbers are
-normalized for comparison; claims, movements, timing, and row type must match.
+As approved by the user on October 1, 2026, regression testing concerns the
+latest released schedule only. Schedule 6, superseded Schedule 7 versions,
+the v1.1 series, and rejected feasibility alternatives do not require
+reconstruction or regression testing, including at major releases.
 
-Historical schedule reconstruction is not part of routine patch/minor CI.
-Schedule 6 baseline regression and superseded Schedule 7 optimization-release
-regression are enabled only when `FULL_SCHEDULE_REGRESSION=1`.
+Run `bash scripts/run_latest_regression.sh`. Routine CI and the manually
+dispatched Latest Schedule Regression workflow use this command. Fixtures
+resolve the app's default entry in `web/schedules.json`; release reproduction
+uses the pinned configuration recorded in that canonical schedule. Older
+canonical inputs may remain necessary to build the latest overlay chain;
+using them as release inputs does not test their old release packages.
 
-The `Full Schedule Regression` GitHub Actions workflow sets that flag and runs:
+Coverage includes complete release reproduction, structure, operating rules,
+physical gates/stands, overnight turns, planning, approved service gains,
+connection accounting, app build, and UI helpers. Interchangeable physical
+gate/stand row numbers are normalized for reproducibility comparisons; claims,
+movements, timing, and row type must match. Rare UI states use small synthetic
+fixtures rather than archived schedule packages.
 
-- when started manually before a major release; or
-- when a major-version tag matching `v*.0.0` is pushed.
-
-Assertions already retired as archival incompatibilities remain skipped even in
-the full workflow. They document obsolete golden output rather than supported
-behavior.
+Old data remains available in the app for reference. Superseded regression
+classes remain skipped as historical documentation. The former full-history
+workflow now runs latest-only checks and no longer runs automatically for
+major-version tags.

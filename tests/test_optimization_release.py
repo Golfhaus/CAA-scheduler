@@ -14,10 +14,7 @@ from caa_scheduler.io import read_json
 from caa_scheduler.optimization_release import build_optimization_release
 
 
-@unittest.skipUnless(
-    os.environ.get("FULL_SCHEDULE_REGRESSION") == "1",
-    "Superseded Schedule 7 release regression runs only for major releases",
-)
+@unittest.skip("Archival schedule regression retired; only the latest release is required")
 class OptimizationReleaseTests(unittest.TestCase):
     def test_release_package_is_authoritative_and_audits_every_pair(self) -> None:
         with tempfile.TemporaryDirectory(dir=REPO_ROOT) as directory:

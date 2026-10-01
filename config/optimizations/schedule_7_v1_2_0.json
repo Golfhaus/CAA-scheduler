@@ -1,0 +1,70 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "schedule-7-v1.2.0-release",
+  "sourceScheduleId": "schedule_7_v1_1_6",
+  "baseCanonical": "data/schedules/schedule_7_v1_1_6/canonical_schedule.json",
+  "overlays": [
+    "config/optimizations/schedule_7_v1_2_0_round_1.json",
+    "config/optimizations/schedule_7_v1_2_0_round_2.json",
+    "config/proposals/schedule_7_v1_2_0_two_day_growth.json"
+  ],
+  "outputDirectory": "data/schedules/schedule_7_v1_2_0",
+  "rejoinAvoidableTows": true,
+  "demandDataVersion": "bts-db1c-6mo-jul2025-apr2026-v7",
+  "schedule": {
+    "id": "schedule_7_v1_2_0",
+    "number": 7,
+    "version": "1.2.0",
+    "label": "Schedule 7, Version 1.2.0",
+    "status": "released"
+  },
+  "patchScope": {
+    "kind": "line_consolidation_and_two_spare_max9_growth",
+    "timetableChanged": true,
+    "routingChanged": true,
+    "description": "Consolidate CRJ900 to three lines and MAX9 to two closed lines; insert the approved two-day DAY/JAX sequence at A3/A4, reaching four daily DAY-JAX flights each way and second service on five one-flight markets. Line A has a scoped approval for 13 days; inventory, banks, gates, stands and curfew policies remain fixed."
+  },
+  "connectionAudit": {
+    "hub": "BHM",
+    "groups": {
+      "feeders": [
+        "OMA",
+        "ATW",
+        "ICT",
+        "FSD",
+        "MCI"
+      ],
+      "FLP": [
+        "DAB",
+        "EYW",
+        "FLL",
+        "GNV",
+        "MLB",
+        "PGD",
+        "PIE",
+        "SFB",
+        "SRQ"
+      ]
+    }
+  },
+  "connectionScopeDecision": {
+    "status": "approved",
+    "model": "existing_hub_timetable_policy_with_two_stop_growth_analysis",
+    "approvedBy": "user",
+    "description": "The user approved publication of the cumulative line consolidation and two-spare-MAX9 DAY/JAX growth draft. Timetable connection display rules remain unchanged; two-stop demand opportunities informed the growth proposal and are not load forecasts."
+  },
+  "expectedRelease": {
+    "legs": 1096,
+    "routes": 181,
+    "lines": 20,
+    "effectiveOperatingErrors": 0,
+    "hardStopFailures": 0,
+    "directRoundTripCities": 12,
+    "connectedDirectionalPairs": 27,
+    "standClaims": 20,
+    "standMinutes": 5552,
+    "hubStandClaims": 4,
+    "hubStandMinutes": 290,
+    "overnightTurnFailures": 0
+  }
+}

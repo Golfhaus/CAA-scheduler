@@ -37,128 +37,42 @@ import {
   splitClaimSegments,
 } from "../web/app.mjs";
 
-const canonical = JSON.parse(
-  await readFile(
-    new URL(
-      "../data/schedules/schedule_6_v2_2_5/canonical_schedule.json",
-      import.meta.url,
-    ),
-    "utf8",
-  ),
-);
-const operatingReport = JSON.parse(
-  await readFile(
-    new URL(
-      "../data/schedules/schedule_6_v2_2_5/operating_validation_report.json",
-      import.meta.url,
-    ),
-    "utf8",
-  ),
-);
-const gates = JSON.parse(
-  await readFile(
-    new URL(
-      "../data/schedules/schedule_6_v2_2_5/gates.json",
-      import.meta.url,
-    ),
-    "utf8",
-  ),
-);
-const schedule7Gates = JSON.parse(
-  await readFile(
-    new URL(
-      "../data/schedules/schedule_7_v1_1_1/gates.json",
-      import.meta.url,
-    ),
-    "utf8",
-  ),
-);
-const schedule713Canonical = JSON.parse(
-  await readFile(
-    new URL(
-      "../data/schedules/schedule_7_v1_1_3/canonical_schedule.json",
-      import.meta.url,
-    ),
-    "utf8",
-  ),
-);
-const schedule713Gates = JSON.parse(
-  await readFile(
-    new URL(
-      "../data/schedules/schedule_7_v1_1_3/gates.json",
-      import.meta.url,
-    ),
-    "utf8",
-  ),
-);
-const frequencyFleetPlan = JSON.parse(
-  await readFile(
-    new URL(
-      "../data/schedules/schedule_6_v2_2_5/frequency_fleet_plan.json",
-      import.meta.url,
-    ),
-    "utf8",
-  ),
-);
-const hubBankPlan = JSON.parse(
-  await readFile(
-    new URL(
-      "../data/schedules/schedule_6_v2_2_5/hub_bank_plan.json",
-      import.meta.url,
-    ),
-    "utf8",
-  ),
-);
-const aircraftRoutePlan = JSON.parse(
-  await readFile(
-    new URL(
-      "../data/schedules/schedule_6_v2_2_5/aircraft_route_plan.json",
-      import.meta.url,
-    ),
-    "utf8",
-  ),
-);
-const routingRepairPlan = JSON.parse(
-  await readFile(
-    new URL(
-      "../data/schedules/schedule_6_v2_2_5/routing_repair_plan.json",
-      import.meta.url,
-    ),
-    "utf8",
-  ),
-);
-const bankMaterializationDiagnostic = JSON.parse(
-  await readFile(
-    new URL(
-      "../data/schedules/schedule_6_v2_2_5/bank_materialization_diagnostic.json",
-      import.meta.url,
-    ),
-    "utf8",
-  ),
-);
-const exactMaterializationPlan = JSON.parse(
-  await readFile(
-    new URL(
-      "../data/schedules/schedule_6_v2_2_5/exact_materialization_plan.json",
-      import.meta.url,
-    ),
-    "utf8",
-  ),
-);
+const manifest = JSON.parse(await readFile(new URL("../web/schedules.json", import.meta.url), "utf8"));
+const latest = manifest.schedules.find((entry) => entry.id === manifest.defaultScheduleId);
+const load = async (key) => JSON.parse(await readFile(new URL(`../${latest.files[key]}`, import.meta.url), "utf8"));
+const canonical = await load("canonical");
+const operatingReport = await load("operatingValidation");
+const gates = await load("gates");
+const frequencyFleetPlan = {markets: [
+  {origin: "DAY", destination: "JAX", allocations: [{fleet: "CRJ700", roundTrips: 1, legCount: 2}, {fleet: "MAX9", roundTrips: 3, legCount: 6}]},
+  {origin: "JAX", destination: "SFB", allocations: [{fleet: "MAX9", roundTrips: 1, legCount: 2}]},
+]};
+const hubBankPlan = {hubs: [...new Set(canonical.hubBanks.map((bank) => bank.hub))].map((hub) => ({
+  hub, banks: canonical.hubBanks.filter((bank) => bank.hub === hub),
+}))};
+// Small engine fixtures exercise rare tow and PHOS states absent from the released schedule.
+function towPieces(label, start, end) {
+  const base = {label, fleet: "CRJ700", kind: "ron", arrivalCity: "ROC", departureCity: "PGD"};
+  return [
+    {...base, start, end: start + 45, rowType: "gate", row: 11, moveTo: {rowType: "stand", row: 2}},
+    {...base, start: start + 45, end: end - 60, rowType: "stand", row: 2},
+    {...base, start: end - 60, end, rowType: "gate", row: 6, moveFrom: {rowType: "stand", row: 2}},
+  ];
+}
 
 test("overview metrics reflect the frozen schedule", () => {
   assert.deepEqual(scheduleMetrics(canonical), {
-    flights: 1383,
+    flights: 1096,
     cities: 105,
-    routes: 225,
+    routes: 181,
     lines: 20,
-    markets: 634,
+    markets: 552,
   });
   assert.deepEqual(fleetUsage(canonical), {
-    CRJ200: 80,
-    CRJ700: 65,
-    CRJ900: 45,
-    MAX9: 35,
+    CRJ200: 76,
+    CRJ700: 54,
+    CRJ900: 28,
+    MAX9: 23,
   });
 });
 
@@ -193,15 +107,15 @@ test("departure hub cells open a clean non-stop Timetable filter", () => {
 });
 
 test("routing search covers operational identifiers", () => {
-  const leg = canonical.legs[0];
-  assert.equal(legMatches(leg, "BWI"), true);
-  assert.equal(legMatches(leg, "1001"), true);
-  assert.equal(legMatches(leg, "101", "CRJ200"), true);
-  assert.equal(legMatches(leg, "flight:1001"), true);
-  assert.equal(legMatches(leg, "route:1001"), false);
-  assert.equal(legMatches(leg, "101", "MAX9"), false);
-  assert.equal(legMatches(leg, "", { line: "Q", origin: "BHM", destination: "BWI" }), true);
-  assert.equal(legMatches(leg, "", { line: "A" }), false);
+  const leg = canonical.legs.find((item) => item.flight === 2087);
+  assert.equal(legMatches(leg, "DAY"), true);
+  assert.equal(legMatches(leg, "2087"), true);
+  assert.equal(legMatches(leg, "703", "MAX9"), true);
+  assert.equal(legMatches(leg, "flight:2087"), true);
+  assert.equal(legMatches(leg, "route:2087"), false);
+  assert.equal(legMatches(leg, "703", "CRJ200"), false);
+  assert.equal(legMatches(leg, "", {line: "A", origin: "DAY", destination: "JAX"}), true);
+  assert.equal(legMatches(leg, "", {line: "B"}), false);
 });
 
 test("routing pagination supports requested row counts and all rows", () => {
@@ -225,9 +139,9 @@ test("routing endpoints distinguish originators and terminators", () => {
 });
 
 test("extension opportunities sort endpoints and combine long physical holds", () => {
-  const opportunities = buildExtensionOpportunities(schedule713Canonical, schedule713Gates);
-  assert.equal(opportunities.originators.length, 179);
-  assert.equal(opportunities.terminators.length, 179);
+  const opportunities = buildExtensionOpportunities(canonical, gates);
+  assert.equal(opportunities.originators.length, 181);
+  assert.equal(opportunities.terminators.length, 181);
   assert.ok(opportunities.originators.every((leg, index, values) => (
     index === 0 || values[index - 1].departureMinute >= leg.departureMinute
   )));
@@ -255,61 +169,17 @@ test("planning market filters preserve fleet and match either market endpoint", 
 
 test("fresh frequency markets flatten into filterable fleet rows", () => {
   const rows = flattenFrequencyMarkets(frequencyFleetPlan);
-  assert.equal(rows.length, 370);
-  assert.equal(rows.reduce((total, row) => total + row.legCount, 0), 1430);
-  assert.equal(rows.some((row) => row.origin === "CHS" && row.destination === "PHF"), true);
+  assert.equal(rows.length, 3);
+  assert.equal(rows.reduce((total, row) => total + row.legCount, 0), 10);
+  assert.equal(rows.some((row) => row.origin === "DAY" && row.destination === "JAX"), true);
   assert.equal(rows.every((row) => row.fleet && row.roundTrips > 0), true);
 });
 
-test("hub-bank windows flatten into the 24 policy-required rows", () => {
+test("hub-bank windows flatten the latest schedule's configured banks", () => {
   const rows = flattenBankWindows(hubBankPlan);
-  assert.equal(rows.length, 24);
-  assert.deepEqual(new Set(rows.map((row) => row.hub)), new Set(["DAY", "JAX", "MCI", "PHF", "SYR"]));
-  assert.equal(rows.every((row) => row.endMinute - row.startMinute === 60), true);
-  assert.equal(rows.every((row) => row.arrivalCount > 0 && row.departureCount > 0), true);
-});
-
-test("aircraft route plan exposes the complete, curfew-safe feasibility result", () => {
-  assert.equal(aircraftRoutePlan.summary.routedLegs, 1430);
-  assert.equal(aircraftRoutePlan.summary.unplacedRoundTrips, 0);
-  assert.equal(aircraftRoutePlan.summary.configuredAircraft, 225);
-  assert.equal(aircraftRoutePlan.summary.requiredAircraft, 409);
-  assert.equal(aircraftRoutePlan.summary.curfewViolations, 0);
-});
-
-test("routing repair fits the selected fleet while retaining materialization guard", () => {
-  assert.equal(routingRepairPlan.status, "pass");
-  assert.equal(routingRepairPlan.summary.routedLegs, 1430);
-  assert.equal(routingRepairPlan.summary.configuredAircraft, 225);
-  assert.equal(routingRepairPlan.summary.requiredAircraft, 209);
-  assert.equal(routingRepairPlan.summary.aircraftShortfall, 0);
-  assert.equal(routingRepairPlan.summary.curfewViolations, 0);
-  assert.equal(routingRepairPlan.summary.destinationsWithoutRon, 0);
-  assert.equal(routingRepairPlan.summary.rollingRonViolations, 0);
-  assert.equal(routingRepairPlan.materializationStatus, "pending_bank_alignment");
-});
-
-test("bank-window lower bound fits each fleet before non-hub integration", () => {
-  assert.equal(bankMaterializationDiagnostic.directionalBankAssignment, "independent");
-  assert.equal(bankMaterializationDiagnostic.bankWindowTiming, "full_core_five_minute_options");
-  assert.equal(bankMaterializationDiagnostic.status, "pending_nonhub_integration");
-  assert.equal(bankMaterializationDiagnostic.summary.bankedLegs, 1190);
-  assert.equal(bankMaterializationDiagnostic.summary.nonHubLegs, 240);
-  assert.equal(bankMaterializationDiagnostic.summary.fleetAllocationShortfall, 0);
-  assert.equal(bankMaterializationDiagnostic.fleetPlan.CRJ200.bankAndRonMinimumAircraft, 67);
-  assert.equal(bankMaterializationDiagnostic.fleetPlan.CRJ200.configuredAircraft, 80);
-});
-
-test("exact materialization integrates every leg inside the selected fleet", () => {
-  assert.equal(exactMaterializationPlan.status, "pass");
-  assert.equal(exactMaterializationPlan.materializationStatus, "complete");
-  assert.equal(exactMaterializationPlan.summary.routedLegs, 1430);
-  assert.equal(exactMaterializationPlan.summary.bankAlignedLegs, 1190);
-  assert.equal(exactMaterializationPlan.summary.nonHubIntegratedLegs, 240);
-  assert.equal(exactMaterializationPlan.summary.requiredAircraft, 208);
-  assert.equal(exactMaterializationPlan.summary.curfewViolations, 0);
-  assert.equal(exactMaterializationPlan.summary.destinationsWithoutRon, 0);
-  assert.equal(exactMaterializationPlan.summary.rollingRonViolations, 0);
+  assert.equal(rows.length, canonical.hubBanks.length);
+  assert.deepEqual(new Set(rows.map((row) => row.hub)), new Set(canonical.hubBanks.map((bank) => bank.hub)));
+  assert.ok(rows.every((row) => row.endMinute > row.startMinute));
 });
 
 test("exact fleet headroom is displayed as positive remaining aircraft", () => {
@@ -448,80 +318,54 @@ test("gate claims map into the 03:00–03:00 operating window", () => {
 });
 
 test("daytime stand holds are labeled ROD and expose the complete gate path", () => {
-  const phf = schedule7Gates.cities.find((city) => city.code === "PHF");
-  const selected = phf.claims.find((claim) => claim.label === "705" && claim.kind === "ron");
-  const group = gateClaimGroup(phf.claims, selected);
+  const pieces = towPieces("701", 500, 900);
+  const group = gateClaimGroup(pieces, pieces[1]);
   assert.equal(gateClaimDisplayKind(group), "ROD");
-  assert.equal(gateClaimPath(group), "Gate 16 -> Stand 3 -> Gate 9");
-  assert.deepEqual(group.map((claim) => gateClaimDisplayLabel(claim, group)), ["705", "705", "705"]);
-  assert.equal(new Set(group.map((claim) => gateClaimGroupKey(gateClaimGroup(phf.claims, claim)))).size, 1);
+  assert.equal(gateClaimPath(group), "Gate 11 -> Stand 2 -> Gate 6");
+  assert.deepEqual(group.map((claim) => gateClaimDisplayLabel(claim, group)), ["701", "701", "701"]);
+  assert.equal(new Set(group.map((claim) => gateClaimGroupKey(gateClaimGroup(pieces, claim)))).size, 1);
 });
 
 test("overnight tow labels reserve route arrows for the 03:00 boundary blocks", () => {
-  const phf = schedule7Gates.cities.find((city) => city.code === "PHF");
-  const selected = phf.claims.find((claim) => claim.label === "715 -> 716");
-  const group = gateClaimGroup(phf.claims, selected);
+  const pieces = towPieces("101 -> 102", 1200, 1740);
+  const group = gateClaimGroup(pieces, pieces[0]);
   assert.equal(gateClaimDisplayKind(group), "RON");
-  assert.equal(gateClaimPath(group), "Gate 15 -> Stand 1 -> Gate 2");
-  assert.deepEqual(
-    group.map((claim) => gateClaimDisplayLabel(claim, group)),
-    ["715", "715 -> 716", "716"],
-  );
-
-  const gateHold = phf.claims.find((claim) => claim.label === "337 -> 338");
-  assert.equal(gateClaimDisplayLabel(gateHold, gateClaimGroup(phf.claims, gateHold)), "337 -> 338");
+  assert.deepEqual(group.map((claim) => gateClaimDisplayLabel(claim, group)), ["101", "101 -> 102", "102"]);
 });
 
 test("gate-stand-gate details describe only the selected segment", () => {
-  const phf = schedule713Gates.cities.find((city) => city.code === "PHF");
-  const pieces = phf.claims
-    .filter((claim) => claim.label === "354 -> 352")
-    .sort((a, b) => a.start - b.start);
-  assert.equal(pieces.length, 3);
-  const group = gateClaimGroup(phf.claims, pieces[0]);
+  const pieces = towPieces("101 -> 102", 851, 1717);
+  const group = gateClaimGroup(pieces, pieces[0]);
   assert.deepEqual(gateClaimDetail(pieces[0], group, "PHF"), {
-    start: 851,
-    end: 896,
-    position: "Gate 11",
-    movement: "ROC -> PHF -> Stand 2",
+    start: 851, end: 896, position: "Gate 11", movement: "ROC -> PHF -> Stand 2",
   });
   assert.deepEqual(gateClaimDetail(pieces[1], group, "PHF"), {
-    start: 896,
-    end: 1657,
-    position: "Stand 2",
-    movement: "Gate 11 -> Stand 2 -> Gate 6",
+    start: 896, end: 1657, position: "Stand 2", movement: "Gate 11 -> Stand 2 -> Gate 6",
   });
   assert.deepEqual(gateClaimDetail(pieces[2], group, "PHF"), {
-    start: 1657,
-    end: 1717,
-    position: "Gate 6",
-    movement: "Stand 2 -> PHF -> PGD",
+    start: 1657, end: 1717, position: "Gate 6", movement: "Stand 2 -> PHF -> PGD",
   });
 });
 
-test("gate and stand cards report maximum concurrent usage", () => {
-  const phf = schedule7Gates.cities.find((city) => city.code === "PHF");
-  assert.equal(maximumConcurrentPositionUsage(phf.claims, "gate"), 16);
-  assert.equal(maximumConcurrentPositionUsage(phf.claims, "stand"), 6);
+test("gate and stand cards report latest usage within fixed capacities", () => {
+  for (const city of gates.cities) {
+    assert.ok(maximumConcurrentPositionUsage(city.claims, "gate") <= city.nGates);
+    assert.ok(maximumConcurrentPositionUsage(city.claims, "stand") <= city.nStands);
+  }
 });
 
-test("stand passenger-handling counts come from the authoritative operating report", () => {
-  const findings = passengerStandFindings(operatingReport, "JAX");
-  assert.equal(findings.length, 1);
-  assert.equal(findings[0].evidence.kind, "ron");
-  assert.equal(
-    operatingReport.checks.find((item) => item.id === "passenger_touch_on_stand").findings.length,
-    35,
-  );
+test("the latest release has no passenger handling on stands", () => {
+  assert.equal(operatingReport.checks.find((item) => item.id === "passenger_touch_on_stand").findings.length, 0);
+  assert.deepEqual(passengerStandFindings(operatingReport, "JAX"), []);
 });
 
 test("only passenger-handling edges of a stand RON are highlighted", () => {
-  const city = gates.cities.find((item) => item.code === "ALB");
-  const claims = city.claims.filter((claim) => claim.rowType === "stand" && claim.label === "358 -> 359");
-  const findings = passengerStandFindings(operatingReport, "ALB");
-  const arrival = claims.find((claim) => claim.start === 1396 && claim.end === 1441);
-  const overnight = claims.find((claim) => claim.start === 1441 && claim.end === 1680);
-  const departure = claims.find((claim) => claim.start === 1680 && claim.end === 1740);
+  const base = {rowType: "stand", label: "101 -> 102", kind: "ron"};
+  const arrival = {...base, start: 1396, end: 1441};
+  const overnight = {...base, start: 1441, end: 1680};
+  const departure = {...base, start: 1680, end: 1740};
+  const report = {checks: [{id: "passenger_touch_on_stand", findings: [arrival, departure].map((claim) => ({evidence: {city: "ALB", ...claim}}))}]};
+  const findings = passengerStandFindings(report, "ALB");
   assert.equal(claimMatchesPassengerStandFinding("ALB", arrival, findings), true);
   assert.equal(claimMatchesPassengerStandFinding("ALB", overnight, findings), false);
   assert.equal(claimMatchesPassengerStandFinding("ALB", departure, findings), true);

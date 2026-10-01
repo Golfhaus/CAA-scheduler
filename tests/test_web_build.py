@@ -12,6 +12,7 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO_ROOT / "src"))
 
 from caa_scheduler.web_build import build_web_console
+from latest_schedule import MANIFEST, ENTRY, SCHEDULE_ID
 
 
 class WebBuildTests(unittest.TestCase):
@@ -68,8 +69,8 @@ class WebBuildTests(unittest.TestCase):
             result = build_web_console(
                 REPO_ROOT / "web" / "schedules.json", REPO_ROOT, output
             )
-            self.assertEqual(result["scheduleCount"], 9)
-            self.assertEqual(result["dataFileCount"], 95)
+            self.assertEqual(result["scheduleCount"], len(MANIFEST["schedules"]))
+            self.assertEqual(result["dataFileCount"], 105)
             self.assertGreater(result["instructionEntryCount"], 40)
             self.assertTrue((output / "index.html").is_file())
             self.assertTrue((output / "favicon.svg").is_file())
@@ -77,38 +78,18 @@ class WebBuildTests(unittest.TestCase):
             self.assertTrue((output / "build-config.mjs").is_file())
             manifest = json.loads((output / "schedules.json").read_text())
             self.assertEqual(
-                manifest["defaultScheduleId"], "schedule_7_v1_1_6"
+                manifest["defaultScheduleId"], SCHEDULE_ID
             )
             self.assertEqual(
                 [schedule["id"] for schedule in manifest["schedules"]],
-                [
-                    "schedule_6_v2_2_5",
-                    "schedule_7_v1_0_0",
-                    "schedule_7_v1_1_0",
-                    "schedule_7_v1_1_1",
-                    "schedule_7_v1_1_2",
-                    "schedule_7_v1_1_3",
-                    "schedule_7_v1_1_4",
-                    "schedule_7_v1_1_5",
-                    "schedule_7_v1_1_6",
-                ],
+                [item["id"] for item in MANIFEST["schedules"]],
             )
             self.assertTrue((output / manifest["buildSetup"]["schema"]).is_file())
-            files = manifest["schedules"][0]["files"]
-            self.assertTrue((output / files["canonical"]).is_file())
-            self.assertTrue((output / files["gates"]).is_file())
-            self.assertTrue((output / files["planning"]).is_file())
-            self.assertTrue((output / files["demandPlan"]).is_file())
-            self.assertTrue((output / files["frequencyFleetPlan"]).is_file())
-            self.assertTrue((output / files["hubBankPlan"]).is_file())
-            self.assertTrue((output / files["aircraftRoutePlan"]).is_file())
-            self.assertTrue((output / files["routingRepairPlan"]).is_file())
-            self.assertTrue(
-                (output / files["bankMaterializationDiagnostic"]).is_file()
-            )
-            self.assertTrue(
-                (output / files["exactMaterializationPlan"]).is_file()
-            )
+            files = ENTRY["files"]
+            for relative_path in files.values():
+                self.assertTrue((output / relative_path).is_file())
+            self.assertNotIn("frequencyFleetPlan", files)
+            self.assertNotIn("exactMaterializationPlan", files)
             demand_setup = manifest["buildSetup"]["demandData"]
             demand_manifest_path = output / demand_setup["manifest"]
             self.assertTrue(demand_manifest_path.is_file())
@@ -126,29 +107,6 @@ class WebBuildTests(unittest.TestCase):
                 )
             )
 
-    def test_preview_build_supports_overlay_review_without_stale_planning(self) -> None:
-        with tempfile.TemporaryDirectory() as directory:
-            output = Path(directory) / "site"
-            result = build_web_console(
-                REPO_ROOT / "web" / "schedules.preview.json", REPO_ROOT, output
-            )
-            self.assertEqual(result["scheduleCount"], 3)
-            self.assertEqual(result["dataFileCount"], 36)
-            manifest = json.loads((output / "schedules.json").read_text())
-            self.assertEqual(
-                manifest["defaultScheduleId"], "schedule_7_v1_1_1"
-            )
-            release = next(
-                item
-                for item in manifest["schedules"]
-                if item["id"] == "schedule_7_v1_1_0"
-            )
-            self.assertNotIn("frequencyFleetPlan", release["files"])
-            self.assertNotIn("exactMaterializationPlan", release["files"])
-            self.assertTrue((output / release["files"]["canonical"]).is_file())
-            self.assertTrue(
-                (output / release["files"]["connectionAudit"]).is_file()
-            )
 
 
 if __name__ == "__main__":

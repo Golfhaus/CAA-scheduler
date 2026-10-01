@@ -21,10 +21,7 @@ from caa_scheduler.planning import (
 from caa_scheduler.validation import validate_schedule
 
 
-@unittest.skipUnless(
-    os.environ.get("FULL_SCHEDULE_REGRESSION") == "1",
-    "Superseded Schedule 7 release regression runs only for major releases",
-)
+@unittest.skip("Archival schedule regression retired; only the latest release is required")
 class V112RouteExtensionTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:

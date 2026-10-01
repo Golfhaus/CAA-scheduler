@@ -102,6 +102,41 @@ def apply_optimization_overlay(
             if assignment["legId"] not in removed_leg_ids
         ]
 
+    # Resolve all leg exchanges against the original route identities before
+    # relabeling routes. This permits simultaneous suffix swaps without
+    # duplicating flights or losing their IDs and bank assignments.
+    leg_changes = overlay.get("legReassignments", [])
+    original_identities: dict[int, set[tuple[str, str, int]]] = defaultdict(set)
+    for leg in result["legs"]:
+        original_identities[int(leg["route"])].add(
+            (str(leg["line"]), str(leg["fleet"]), int(leg["day"]))
+        )
+    moved_ids: set[str] = set()
+    moved_routes: set[int] = set()
+    for change in leg_changes:
+        identifier = str(change["legId"])
+        if identifier in moved_ids:
+            raise ValueError(f"Duplicate leg reassignment: {identifier}")
+        leg = legs_by_id.get(identifier)
+        if leg is None:
+            raise ValueError(f"Cannot reassign missing leg {identifier}")
+        source = int(leg["route"])
+        if source != int(change["expectedRoute"]):
+            raise ValueError(f"Stale leg reassignment for {identifier}: route {source}")
+        if ("expectedSequenceWithinRoute" in change
+                and leg["sequenceWithinRoute"] != change["expectedSequenceWithinRoute"]):
+            raise ValueError(f"Stale leg reassignment for {identifier}: sequence")
+        target = int(change["targetRoute"])
+        identities = original_identities.get(target, set())
+        if len(identities) != 1:
+            raise ValueError(f"Leg reassignment needs one target route identity: {target}")
+        line, fleet, day = next(iter(identities))
+        if fleet != leg["fleet"]:
+            raise ValueError(f"Leg reassignment cannot change fleet: {identifier}")
+        leg.update(route=target, line=line, day=day)
+        moved_ids.add(identifier)
+        moved_routes.update((source, target))
+
     route_changes = overlay.get("routeReassignments", [])
     if route_changes:
         changes_by_source: dict[int, dict[str, Any]] = {}
@@ -142,7 +177,7 @@ def apply_optimization_overlay(
                 leg["line"] = str(change.get("line", line))
                 leg["day"] = int(change.get("day", day))
 
-    touched_routes: set[int] = set()
+    touched_routes: set[int] = moved_routes.copy()
     for change in route_changes:
         touched_routes.add(int(change["sourceRoute"]))
         touched_routes.add(int(change.get("targetRoute", change["sourceRoute"])))

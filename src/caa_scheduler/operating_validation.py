@@ -75,6 +75,46 @@ def _routes(canonical: dict[str, Any]) -> dict[tuple[str, int], list[dict[str, A
     return dict(grouped)
 
 
+def validate_overnight_turns(canonical: dict[str, Any]) -> dict[str, Any]:
+    """Check next-day turns without wrapping a negative gap into another day.
+
+    Used as an explicit additional gate for new feasibility builds. Existing
+    released reports retain their original validation contract.
+    """
+    routes = _routes(canonical)
+    minimum = canonical["operatingPolicy"]["turns"]["minimumMinutes"]
+    findings = []
+    transitions = []
+    for line in sorted({line for line, _ in routes}):
+        days = sorted(day for candidate, day in routes if candidate == line)
+        for day, next_day in zip(days, days[1:] + days[:1]):
+            arriving = routes[(line, day)][-1]
+            departing = routes[(line, next_day)][0]
+            if arriving["destination"] != departing["origin"]:
+                continue  # Geographic continuity has its own validator.
+            # Departures before 03:00 occur after midnight in this route's
+            # 03:00-to-03:00 operating day. ArrivalMinute already includes any
+            # midnight crossing within the flight itself.
+            arrival = int(arriving["arrivalMinute"])
+            if int(arriving["departureMinute"]) < 180:
+                arrival += 1440
+            departure = int(departing["departureMinute"]) + 1440
+            duration = departure - arrival
+            evidence = {"line": line, "fromRoute": arriving["route"],
+                        "toRoute": departing["route"], "city": arriving["destination"],
+                        "minutes": duration, "minimumMinutes": minimum}
+            transitions.append(evidence)
+            if duration < minimum:
+                findings.append(_finding(
+                    f"{line}-{day}-{next_day}",
+                    f"Next-day turn at {arriving['destination']} is {duration} minutes",
+                    **evidence))
+    return _check("overnight_minimum_turn_time", "Minimum next-day turn time",
+                  "§2.5 / §2.8", "error", findings,
+                  f"Every next-day turn is at least {minimum} minutes",
+                  metrics={"transitions": transitions}, hard_stop=True)
+
+
 def _cyclic_gaps(values: list[int | float]) -> list[dict[str, int | float]]:
     ordered = sorted(values)
     if not ordered:

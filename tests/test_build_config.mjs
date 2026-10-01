@@ -10,20 +10,14 @@ import {
   validateBuildConfig,
 } from "../web/build-config.mjs";
 
-const canonical = JSON.parse(
-  await readFile(
-    new URL("../data/schedules/schedule_6_v2_2_5/canonical_schedule.json", import.meta.url),
-    "utf8",
-  ),
-);
-const manifest = JSON.parse(
-  await readFile(new URL("../web/schedules.json", import.meta.url), "utf8"),
-);
+const manifest = JSON.parse(await readFile(new URL("../web/schedules.json", import.meta.url), "utf8"));
+const latest = manifest.schedules.find((entry) => entry.id === manifest.defaultScheduleId);
+const canonical = JSON.parse(await readFile(new URL(`../${latest.files.canonical}`, import.meta.url), "utf8"));
 
 test("new setup is explicit and schedule-specific", () => {
   const config = createBuildConfig(canonical, manifest);
-  assert.equal(config.schedule.number, 7);
-  assert.equal(config.startingPoint.scheduleId, "schedule_6_v2_2_5");
+  assert.equal(config.schedule.number, 8);
+  assert.equal(config.startingPoint.scheduleId, manifest.defaultScheduleId);
   assert.deepEqual(config.fleetCounts, canonical.schedule.fleetCounts);
   canonical.schedule.fleetCounts.MAX9 = 999;
   assert.equal(config.fleetCounts.MAX9, 35);
@@ -78,5 +72,5 @@ test("export and import normalize to the same portable JSON", () => {
   const serialized = serializeBuildConfig(config);
   const imported = normalizeBuildConfig(JSON.parse(serialized));
   assert.equal(serializeBuildConfig(imported), serialized);
-  assert.equal(buildConfigFilename(imported), "schedule_7_v0_1_0_build_config.json");
+  assert.equal(buildConfigFilename(imported), "schedule_8_v0_1_0_build_config.json");
 });

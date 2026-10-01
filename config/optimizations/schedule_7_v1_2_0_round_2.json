@@ -1,0 +1,233 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "schedule-7-v1.2.0-max9-line-consolidation-round-2",
+  "baseSchedule": {
+    "scheduleId": "schedule_7_v1_2_0_feasibility_01",
+    "overlays": [
+      "config/optimizations/schedule_7_v1_2_0_round_1.json"
+    ]
+  },
+  "schedule": {
+    "id": "schedule_7_v1_2_0_feasibility_02",
+    "version": "1.2.0-feasibility.02",
+    "label": "Schedule 7, Version 1.2.0 Feasibility 02",
+    "status": "draft"
+  },
+  "initiative": {
+    "kind": "max9_overnight_line_consolidation",
+    "approvedBy": "user",
+    "principles": [
+      "Combine former A/C/D as one 11-day MAX9 line through overnight successor exchanges at FLL and PIE.",
+      "Preserve every flight sequence, flight ID/number, pairing, time, fleet assignment, bank, policy, and fixed capacity.",
+      "Leave Line B rotation intact; normalize all MAX9 route numbers consecutively within lines A and B.",
+      "Connect original Route 713 to Route 714 at PIE, giving a legal 43-minute next-day turn instead of the prior negative two-minute gap.",
+      "Keep the cumulative candidate unpublished."
+    ]
+  },
+  "routeReassignments": [
+    {
+      "sourceRoute": 705,
+      "expectedLine": "A",
+      "expectedDay": 1,
+      "expectedFleet": "MAX9",
+      "targetRoute": 701,
+      "line": "A",
+      "day": 1
+    },
+    {
+      "sourceRoute": 720,
+      "expectedLine": "C",
+      "expectedDay": 1,
+      "expectedFleet": "MAX9",
+      "targetRoute": 702,
+      "line": "A",
+      "day": 2
+    },
+    {
+      "sourceRoute": 721,
+      "expectedLine": "C",
+      "expectedDay": 2,
+      "expectedFleet": "MAX9",
+      "targetRoute": 703,
+      "line": "A",
+      "day": 3
+    },
+    {
+      "sourceRoute": 712,
+      "expectedLine": "A",
+      "expectedDay": 2,
+      "expectedFleet": "MAX9",
+      "targetRoute": 704,
+      "line": "A",
+      "day": 4
+    },
+    {
+      "sourceRoute": 717,
+      "expectedLine": "D",
+      "expectedDay": 3,
+      "expectedFleet": "MAX9",
+      "targetRoute": 705,
+      "line": "A",
+      "day": 5
+    },
+    {
+      "sourceRoute": 718,
+      "expectedLine": "D",
+      "expectedDay": 4,
+      "expectedFleet": "MAX9",
+      "targetRoute": 706,
+      "line": "A",
+      "day": 6
+    },
+    {
+      "sourceRoute": 716,
+      "expectedLine": "D",
+      "expectedDay": 1,
+      "expectedFleet": "MAX9",
+      "targetRoute": 707,
+      "line": "A",
+      "day": 7
+    },
+    {
+      "sourceRoute": 713,
+      "expectedLine": "D",
+      "expectedDay": 2,
+      "expectedFleet": "MAX9",
+      "targetRoute": 708,
+      "line": "A",
+      "day": 8
+    },
+    {
+      "sourceRoute": 714,
+      "expectedLine": "A",
+      "expectedDay": 3,
+      "expectedFleet": "MAX9",
+      "targetRoute": 709,
+      "line": "A",
+      "day": 9
+    },
+    {
+      "sourceRoute": 703,
+      "expectedLine": "A",
+      "expectedDay": 4,
+      "expectedFleet": "MAX9",
+      "targetRoute": 710,
+      "line": "A",
+      "day": 10
+    },
+    {
+      "sourceRoute": 704,
+      "expectedLine": "A",
+      "expectedDay": 5,
+      "expectedFleet": "MAX9",
+      "targetRoute": 711,
+      "line": "A",
+      "day": 11
+    },
+    {
+      "sourceRoute": 707,
+      "expectedLine": "B",
+      "expectedDay": 1,
+      "expectedFleet": "MAX9",
+      "targetRoute": 712,
+      "line": "B",
+      "day": 1
+    },
+    {
+      "sourceRoute": 708,
+      "expectedLine": "B",
+      "expectedDay": 2,
+      "expectedFleet": "MAX9",
+      "targetRoute": 713,
+      "line": "B",
+      "day": 2
+    },
+    {
+      "sourceRoute": 709,
+      "expectedLine": "B",
+      "expectedDay": 3,
+      "expectedFleet": "MAX9",
+      "targetRoute": 714,
+      "line": "B",
+      "day": 3
+    },
+    {
+      "sourceRoute": 710,
+      "expectedLine": "B",
+      "expectedDay": 4,
+      "expectedFleet": "MAX9",
+      "targetRoute": 715,
+      "line": "B",
+      "day": 4
+    },
+    {
+      "sourceRoute": 711,
+      "expectedLine": "B",
+      "expectedDay": 5,
+      "expectedFleet": "MAX9",
+      "targetRoute": 716,
+      "line": "B",
+      "day": 5
+    },
+    {
+      "sourceRoute": 706,
+      "expectedLine": "B",
+      "expectedDay": 6,
+      "expectedFleet": "MAX9",
+      "targetRoute": 717,
+      "line": "B",
+      "day": 6
+    },
+    {
+      "sourceRoute": 701,
+      "expectedLine": "B",
+      "expectedDay": 7,
+      "expectedFleet": "MAX9",
+      "targetRoute": 718,
+      "line": "B",
+      "day": 7
+    },
+    {
+      "sourceRoute": 702,
+      "expectedLine": "B",
+      "expectedDay": 8,
+      "expectedFleet": "MAX9",
+      "targetRoute": 719,
+      "line": "B",
+      "day": 8
+    },
+    {
+      "sourceRoute": 715,
+      "expectedLine": "B",
+      "expectedDay": 9,
+      "expectedFleet": "MAX9",
+      "targetRoute": 720,
+      "line": "B",
+      "day": 9
+    },
+    {
+      "sourceRoute": 719,
+      "expectedLine": "B",
+      "expectedDay": 10,
+      "expectedFleet": "MAX9",
+      "targetRoute": 721,
+      "line": "B",
+      "day": 10
+    }
+  ],
+  "expectedCheckpoint": {
+    "legs": 1080,
+    "routes": 179,
+    "lines": 20,
+    "max9AircraftDays": 21,
+    "max9LineLengths": {
+      "A": 11,
+      "B": 10
+    },
+    "effectiveOperatingErrors": 0,
+    "hardStopFailures": 0,
+    "overnightTurnFailures": 0,
+    "standClaims": 20,
+    "standMinutes": 5552
+  }
+}

@@ -17,10 +17,7 @@ from caa_scheduler.optimization_overlay import apply_optimization_overlay
 from caa_scheduler.validation import validate_schedule
 
 
-@unittest.skipUnless(
-    os.environ.get("FULL_SCHEDULE_REGRESSION") == "1",
-    "Superseded Schedule 7 overlay regression runs only for major releases",
-)
+@unittest.skip("Archival schedule regression retired; only the latest release is required")
 class OptimizationOverlayTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:

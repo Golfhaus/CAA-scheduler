@@ -1,5 +1,11 @@
 # Schedule 7 v1.2 handoff
 
+> Release update, October 1, 2026: the approved cumulative changes are now
+> published as v1.2.0. See `schedule_7_v1_2_0_release.md` and
+> `regression_policy.md` for current release and testing policy. The
+> feasibility/default statements below describe the original draft stage.
+
+
 This document is the starting context for Schedule 7 v1.2 work. It records the
 current released baseline, durable decisions made during the v1.1.x series,
 the optimization tactics that proved useful, and the expected development and

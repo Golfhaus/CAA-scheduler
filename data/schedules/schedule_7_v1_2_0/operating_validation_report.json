@@ -1,0 +1,4476 @@
+{
+  "scheduleId": "schedule_7_v1_2_0",
+  "policyId": "caa-operating-rules-v2.0-plus-hard-stop",
+  "status": "review",
+  "summary": {
+    "checks": 25,
+    "passed": 19,
+    "failed": 0,
+    "warnings": 3,
+    "notEvaluated": 1,
+    "overridden": 2,
+    "effectiveErrorFindings": 0,
+    "effectiveWarningFindings": 191
+  },
+  "checks": [
+    {
+      "id": "destination_coverage",
+      "title": "Active-city coverage",
+      "section": "§1.8",
+      "severity": "error",
+      "hardStop": false,
+      "status": "pass",
+      "message": "Every active city has scheduled service",
+      "metrics": {
+        "activeCities": 105,
+        "servedActiveCities": 105,
+        "findingCount": 0,
+        "effectiveFindingCount": 0,
+        "overriddenFindingCount": 0
+      },
+      "findings": []
+    },
+    {
+      "id": "fleet_capacity",
+      "title": "Fleet aircraft-day capacity",
+      "section": "§1.4 / §1.6a",
+      "severity": "error",
+      "hardStop": false,
+      "status": "pass",
+      "message": "Every fleet is within its aircraft-day cap",
+      "metrics": {
+        "MAX9": {
+          "used": 23,
+          "capacity": 35
+        },
+        "CRJ900": {
+          "used": 28,
+          "capacity": 45
+        },
+        "CRJ700": {
+          "used": 54,
+          "capacity": 65
+        },
+        "CRJ200": {
+          "used": 76,
+          "capacity": 80
+        },
+        "findingCount": 0,
+        "effectiveFindingCount": 0,
+        "overriddenFindingCount": 0
+      },
+      "findings": []
+    },
+    {
+      "id": "departure_windows",
+      "title": "Departure windows and curfews",
+      "section": "§2.5 / Lesson 32",
+      "severity": "error",
+      "hardStop": true,
+      "status": "pass",
+      "message": "Every departure is inside a normal window or valid red-eye window",
+      "metrics": {
+        "redEyes": 5,
+        "findingCount": 0,
+        "effectiveFindingCount": 0,
+        "overriddenFindingCount": 0
+      },
+      "findings": []
+    },
+    {
+      "id": "line_day_continuity",
+      "title": "Line continuity across operating days",
+      "section": "§2.8 / Lesson 29",
+      "severity": "error",
+      "hardStop": false,
+      "status": "pass",
+      "message": "Every line closes continuously across days, including wraparound",
+      "metrics": {
+        "findingCount": 0,
+        "effectiveFindingCount": 0,
+        "overriddenFindingCount": 0
+      },
+      "findings": []
+    },
+    {
+      "id": "minimum_turn_time",
+      "title": "Minimum same-day turn time",
+      "section": "§2.5",
+      "severity": "error",
+      "hardStop": false,
+      "status": "pass",
+      "message": "Every same-day turn is at least 40 minutes",
+      "metrics": {
+        "findingCount": 0,
+        "effectiveFindingCount": 0,
+        "overriddenFindingCount": 0
+      },
+      "findings": []
+    },
+    {
+      "id": "long_hold_review",
+      "title": "Long same-day holds",
+      "section": "§1.6a / §2.5",
+      "severity": "warning",
+      "hardStop": false,
+      "status": "warning",
+      "message": "99 finding(s)",
+      "metrics": {
+        "findingCount": 99,
+        "effectiveFindingCount": 99,
+        "overriddenFindingCount": 0
+      },
+      "findings": [
+        {
+          "id": "A-8-1001-1070",
+          "message": "Hold at SFB is 206 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "A",
+            "day": 8,
+            "city": "SFB",
+            "arrivalFlight": 1001,
+            "departureFlight": 1070,
+            "minutes": 206
+          }
+        },
+        {
+          "id": "B-4-1065-1024",
+          "message": "Hold at SFB is 209 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "B",
+            "day": 4,
+            "city": "SFB",
+            "arrivalFlight": 1065,
+            "departureFlight": 1024,
+            "minutes": 209
+          }
+        },
+        {
+          "id": "B-4-1019-1012",
+          "message": "Hold at RFD is 162 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "B",
+            "day": 4,
+            "city": "RFD",
+            "arrivalFlight": 1019,
+            "departureFlight": 1012,
+            "minutes": 162
+          }
+        },
+        {
+          "id": "A-1-1068-1109",
+          "message": "Hold at PHF is 409 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "A",
+            "day": 1,
+            "city": "PHF",
+            "arrivalFlight": 1068,
+            "departureFlight": 1109,
+            "minutes": 409
+          }
+        },
+        {
+          "id": "B-3-1055-1042",
+          "message": "Hold at SFB is 210 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "B",
+            "day": 3,
+            "city": "SFB",
+            "arrivalFlight": 1055,
+            "departureFlight": 1042,
+            "minutes": 210
+          }
+        },
+        {
+          "id": "AH-2-1101-1379",
+          "message": "Hold at CLT is 208 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AH",
+            "day": 2,
+            "city": "CLT",
+            "arrivalFlight": 1101,
+            "departureFlight": 1379,
+            "minutes": 208
+          }
+        },
+        {
+          "id": "AH-2-1379-1270",
+          "message": "Hold at PHF is 179 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AH",
+            "day": 2,
+            "city": "PHF",
+            "arrivalFlight": 1379,
+            "departureFlight": 1270,
+            "minutes": 179
+          }
+        },
+        {
+          "id": "AH-13-1302-1307",
+          "message": "Hold at SYR is 209 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AH",
+            "day": 13,
+            "city": "SYR",
+            "arrivalFlight": 1302,
+            "departureFlight": 1307,
+            "minutes": 209
+          }
+        },
+        {
+          "id": "AJ-5-1131-2047",
+          "message": "Hold at SYR is 212 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AJ",
+            "day": 5,
+            "city": "SYR",
+            "arrivalFlight": 1131,
+            "departureFlight": 2047,
+            "minutes": 212
+          }
+        },
+        {
+          "id": "AB-6-1187-1189",
+          "message": "Hold at MSY is 241 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AB",
+            "day": 6,
+            "city": "MSY",
+            "arrivalFlight": 1187,
+            "departureFlight": 1189,
+            "minutes": 241
+          }
+        },
+        {
+          "id": "AB-10-1139-1138",
+          "message": "Hold at RDU is 181 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AB",
+            "day": 10,
+            "city": "RDU",
+            "arrivalFlight": 1139,
+            "departureFlight": 1138,
+            "minutes": 181
+          }
+        },
+        {
+          "id": "AJ-9-1159-1202",
+          "message": "Hold at PHF is 168 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AJ",
+            "day": 9,
+            "city": "PHF",
+            "arrivalFlight": 1159,
+            "departureFlight": 1202,
+            "minutes": 168
+          }
+        },
+        {
+          "id": "AJ-1-1156-1157",
+          "message": "Hold at TUL is 190 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AJ",
+            "day": 1,
+            "city": "TUL",
+            "arrivalFlight": 1156,
+            "departureFlight": 1157,
+            "minutes": 190
+          }
+        },
+        {
+          "id": "AG-2-1216-1235",
+          "message": "Hold at BLV is 182 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AG",
+            "day": 2,
+            "city": "BLV",
+            "arrivalFlight": 1216,
+            "departureFlight": 1235,
+            "minutes": 182
+          }
+        },
+        {
+          "id": "AB-7-1261-1265",
+          "message": "Hold at MKE is 191 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AB",
+            "day": 7,
+            "city": "MKE",
+            "arrivalFlight": 1261,
+            "departureFlight": 1265,
+            "minutes": 191
+          }
+        },
+        {
+          "id": "AJ-3-1199-1208",
+          "message": "Hold at DAL is 172 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AJ",
+            "day": 3,
+            "city": "DAL",
+            "arrivalFlight": 1199,
+            "departureFlight": 1208,
+            "minutes": 172
+          }
+        },
+        {
+          "id": "AB-1-1255-1256",
+          "message": "Hold at MYR is 312 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AB",
+            "day": 1,
+            "city": "MYR",
+            "arrivalFlight": 1255,
+            "departureFlight": 1256,
+            "minutes": 312
+          }
+        },
+        {
+          "id": "AL-6-1329-1325",
+          "message": "Hold at HOU is 152 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AL",
+            "day": 6,
+            "city": "HOU",
+            "arrivalFlight": 1329,
+            "departureFlight": 1325,
+            "minutes": 152
+          }
+        },
+        {
+          "id": "AH-8-1330-1326",
+          "message": "Hold at HOU is 152 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AH",
+            "day": 8,
+            "city": "HOU",
+            "arrivalFlight": 1330,
+            "departureFlight": 1326,
+            "minutes": 152
+          }
+        },
+        {
+          "id": "AL-2-1288-1493",
+          "message": "Hold at PHF is 182 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AL",
+            "day": 2,
+            "city": "PHF",
+            "arrivalFlight": 1288,
+            "departureFlight": 1493,
+            "minutes": 182
+          }
+        },
+        {
+          "id": "AH-9-1309-1335",
+          "message": "Hold at SYR is 163 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AH",
+            "day": 9,
+            "city": "SYR",
+            "arrivalFlight": 1309,
+            "departureFlight": 1335,
+            "minutes": 163
+          }
+        },
+        {
+          "id": "AH-9-1335-1294",
+          "message": "Hold at BNA is 151 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AH",
+            "day": 9,
+            "city": "BNA",
+            "arrivalFlight": 1335,
+            "departureFlight": 1294,
+            "minutes": 151
+          }
+        },
+        {
+          "id": "AH-3-1495-1291",
+          "message": "Hold at PHF is 164 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AH",
+            "day": 3,
+            "city": "PHF",
+            "arrivalFlight": 1495,
+            "departureFlight": 1291,
+            "minutes": 164
+          }
+        },
+        {
+          "id": "AH-10-1303-2041",
+          "message": "Hold at SYR is 368 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AH",
+            "day": 10,
+            "city": "SYR",
+            "arrivalFlight": 1303,
+            "departureFlight": 2041,
+            "minutes": 368
+          }
+        },
+        {
+          "id": "AH-11-2042-1297",
+          "message": "Hold at SYR is 344 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AH",
+            "day": 11,
+            "city": "SYR",
+            "arrivalFlight": 2042,
+            "departureFlight": 1297,
+            "minutes": 344
+          }
+        },
+        {
+          "id": "AL-7-1311-1298",
+          "message": "Hold at SYR is 153 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AL",
+            "day": 7,
+            "city": "SYR",
+            "arrivalFlight": 1311,
+            "departureFlight": 1298,
+            "minutes": 153
+          }
+        },
+        {
+          "id": "AH-12-1301-1951",
+          "message": "Hold at SYR is 154 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AH",
+            "day": 12,
+            "city": "SYR",
+            "arrivalFlight": 1301,
+            "departureFlight": 1951,
+            "minutes": 154
+          }
+        },
+        {
+          "id": "AH-12-1952-2043",
+          "message": "Hold at SYR is 328 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AH",
+            "day": 12,
+            "city": "SYR",
+            "arrivalFlight": 1952,
+            "departureFlight": 2043,
+            "minutes": 328
+          }
+        },
+        {
+          "id": "AA-7-1917-1918",
+          "message": "Hold at PIT is 322 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AA",
+            "day": 7,
+            "city": "PIT",
+            "arrivalFlight": 1917,
+            "departureFlight": 1918,
+            "minutes": 322
+          }
+        },
+        {
+          "id": "AK-4-1306-1382",
+          "message": "Hold at CLT is 243 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AK",
+            "day": 4,
+            "city": "CLT",
+            "arrivalFlight": 1306,
+            "departureFlight": 1382,
+            "minutes": 243
+          }
+        },
+        {
+          "id": "AA-5-1439-1308",
+          "message": "Hold at SYR is 173 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AA",
+            "day": 5,
+            "city": "SYR",
+            "arrivalFlight": 1439,
+            "departureFlight": 1308,
+            "minutes": 173
+          }
+        },
+        {
+          "id": "AA-6-2065-2066",
+          "message": "Hold at BHM is 175 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AA",
+            "day": 6,
+            "city": "BHM",
+            "arrivalFlight": 2065,
+            "departureFlight": 2066,
+            "minutes": 175
+          }
+        },
+        {
+          "id": "AA-6-1312-2045",
+          "message": "Hold at SYR is 205 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AA",
+            "day": 6,
+            "city": "SYR",
+            "arrivalFlight": 1312,
+            "departureFlight": 2045,
+            "minutes": 205
+          }
+        },
+        {
+          "id": "AL-9-1405-1404",
+          "message": "Hold at ELP is 289 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AL",
+            "day": 9,
+            "city": "ELP",
+            "arrivalFlight": 1405,
+            "departureFlight": 1404,
+            "minutes": 289
+          }
+        },
+        {
+          "id": "AL-1-1321-1491",
+          "message": "Hold at PHF is 182 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AL",
+            "day": 1,
+            "city": "PHF",
+            "arrivalFlight": 1321,
+            "departureFlight": 1491,
+            "minutes": 182
+          }
+        },
+        {
+          "id": "AA-3-1343-1346",
+          "message": "Hold at PNS is 210 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AA",
+            "day": 3,
+            "city": "PNS",
+            "arrivalFlight": 1343,
+            "departureFlight": 1346,
+            "minutes": 210
+          }
+        },
+        {
+          "id": "AH-1-1922-1360",
+          "message": "Hold at DAB is 267 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AH",
+            "day": 1,
+            "city": "DAB",
+            "arrivalFlight": 1922,
+            "departureFlight": 1360,
+            "minutes": 267
+          }
+        },
+        {
+          "id": "AL-11-1447-1424",
+          "message": "Hold at MCI is 238 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AL",
+            "day": 11,
+            "city": "MCI",
+            "arrivalFlight": 1447,
+            "departureFlight": 1424,
+            "minutes": 238
+          }
+        },
+        {
+          "id": "AL-3-2067-2068",
+          "message": "Hold at BHM is 182 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AL",
+            "day": 3,
+            "city": "BHM",
+            "arrivalFlight": 2067,
+            "departureFlight": 2068,
+            "minutes": 182
+          }
+        },
+        {
+          "id": "AL-3-1496-1400",
+          "message": "Hold at PHF is 179 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AL",
+            "day": 3,
+            "city": "PHF",
+            "arrivalFlight": 1496,
+            "departureFlight": 1400,
+            "minutes": 179
+          }
+        },
+        {
+          "id": "AK-10-1465-1459",
+          "message": "Hold at DAY is 163 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AK",
+            "day": 10,
+            "city": "DAY",
+            "arrivalFlight": 1465,
+            "departureFlight": 1459,
+            "minutes": 163
+          }
+        },
+        {
+          "id": "AE-14-1991-1992",
+          "message": "Hold at BHM is 276 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AE",
+            "day": 14,
+            "city": "BHM",
+            "arrivalFlight": 1991,
+            "departureFlight": 1992,
+            "minutes": 276
+          }
+        },
+        {
+          "id": "AD-39-2069-2070",
+          "message": "Hold at BHM is 151 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AD",
+            "day": 39,
+            "city": "BHM",
+            "arrivalFlight": 2069,
+            "departureFlight": 2070,
+            "minutes": 151
+          }
+        },
+        {
+          "id": "AD-27-1873-1872",
+          "message": "Hold at FWA is 255 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AD",
+            "day": 27,
+            "city": "FWA",
+            "arrivalFlight": 1873,
+            "departureFlight": 1872,
+            "minutes": 255
+          }
+        },
+        {
+          "id": "AD-13-1887-1511",
+          "message": "Hold at SYR is 376 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AD",
+            "day": 13,
+            "city": "SYR",
+            "arrivalFlight": 1887,
+            "departureFlight": 1511,
+            "minutes": 376
+          }
+        },
+        {
+          "id": "AC-3-1890-1894",
+          "message": "Hold at ISP is 167 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AC",
+            "day": 3,
+            "city": "ISP",
+            "arrivalFlight": 1890,
+            "departureFlight": 1894,
+            "minutes": 167
+          }
+        },
+        {
+          "id": "AC-3-1512-1910",
+          "message": "Hold at PHF is 160 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AC",
+            "day": 3,
+            "city": "PHF",
+            "arrivalFlight": 1512,
+            "departureFlight": 1910,
+            "minutes": 160
+          }
+        },
+        {
+          "id": "AC-4-1513-1876",
+          "message": "Hold at SYR is 180 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AC",
+            "day": 4,
+            "city": "SYR",
+            "arrivalFlight": 1513,
+            "departureFlight": 1876,
+            "minutes": 180
+          }
+        },
+        {
+          "id": "AC-4-1876-1880",
+          "message": "Hold at HVN is 179 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AC",
+            "day": 4,
+            "city": "HVN",
+            "arrivalFlight": 1876,
+            "departureFlight": 1880,
+            "minutes": 179
+          }
+        },
+        {
+          "id": "AD-34-1713-1514",
+          "message": "Hold at PHF is 179 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AD",
+            "day": 34,
+            "city": "PHF",
+            "arrivalFlight": 1713,
+            "departureFlight": 1514,
+            "minutes": 179
+          }
+        },
+        {
+          "id": "AD-32-1569-1616",
+          "message": "Hold at PHF is 184 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AD",
+            "day": 32,
+            "city": "PHF",
+            "arrivalFlight": 1569,
+            "departureFlight": 1616,
+            "minutes": 184
+          }
+        },
+        {
+          "id": "AD-19-1632-1523",
+          "message": "Hold at LBB is 188 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AD",
+            "day": 19,
+            "city": "LBB",
+            "arrivalFlight": 1632,
+            "departureFlight": 1523,
+            "minutes": 188
+          }
+        },
+        {
+          "id": "AD-19-1523-1717",
+          "message": "Hold at MCI is 356 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AD",
+            "day": 19,
+            "city": "MCI",
+            "arrivalFlight": 1523,
+            "departureFlight": 1717,
+            "minutes": 356
+          }
+        },
+        {
+          "id": "AD-30-1858-1538",
+          "message": "Hold at DAY is 164 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AD",
+            "day": 30,
+            "city": "DAY",
+            "arrivalFlight": 1858,
+            "departureFlight": 1538,
+            "minutes": 164
+          }
+        },
+        {
+          "id": "AD-24-1647-1651",
+          "message": "Hold at ICT is 152 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AD",
+            "day": 24,
+            "city": "ICT",
+            "arrivalFlight": 1647,
+            "departureFlight": 1651,
+            "minutes": 152
+          }
+        },
+        {
+          "id": "AE-10-1675-1679",
+          "message": "Hold at FSD is 219 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AE",
+            "day": 10,
+            "city": "FSD",
+            "arrivalFlight": 1675,
+            "departureFlight": 1679,
+            "minutes": 219
+          }
+        },
+        {
+          "id": "AE-10-1679-1531",
+          "message": "Hold at MCI is 239 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AE",
+            "day": 10,
+            "city": "MCI",
+            "arrivalFlight": 1679,
+            "departureFlight": 1531,
+            "minutes": 239
+          }
+        },
+        {
+          "id": "AD-26-1568-1572",
+          "message": "Hold at PHF is 159 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AD",
+            "day": 26,
+            "city": "PHF",
+            "arrivalFlight": 1568,
+            "departureFlight": 1572,
+            "minutes": 159
+          }
+        },
+        {
+          "id": "AE-9-1566-1723",
+          "message": "Hold at MCI is 238 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AE",
+            "day": 9,
+            "city": "MCI",
+            "arrivalFlight": 1566,
+            "departureFlight": 1723,
+            "minutes": 238
+          }
+        },
+        {
+          "id": "AF-4-1567-1571",
+          "message": "Hold at PHF is 154 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AF",
+            "day": 4,
+            "city": "PHF",
+            "arrivalFlight": 1567,
+            "departureFlight": 1571,
+            "minutes": 154
+          }
+        },
+        {
+          "id": "AF-4-1571-1862",
+          "message": "Hold at DAY is 164 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AF",
+            "day": 4,
+            "city": "DAY",
+            "arrivalFlight": 1571,
+            "departureFlight": 1862,
+            "minutes": 164
+          }
+        },
+        {
+          "id": "AC-9-1709-1823",
+          "message": "Hold at PHF is 178 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AC",
+            "day": 9,
+            "city": "PHF",
+            "arrivalFlight": 1709,
+            "departureFlight": 1823,
+            "minutes": 178
+          }
+        },
+        {
+          "id": "AE-3-1633-1638",
+          "message": "Hold at OMA is 161 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AE",
+            "day": 3,
+            "city": "OMA",
+            "arrivalFlight": 1633,
+            "departureFlight": 1638,
+            "minutes": 161
+          }
+        },
+        {
+          "id": "AE-3-1966-1783",
+          "message": "Hold at MCI is 200 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AE",
+            "day": 3,
+            "city": "MCI",
+            "arrivalFlight": 1966,
+            "departureFlight": 1783,
+            "minutes": 200
+          }
+        },
+        {
+          "id": "AE-1-1692-1661",
+          "message": "Hold at MCI is 308 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AE",
+            "day": 1,
+            "city": "MCI",
+            "arrivalFlight": 1692,
+            "departureFlight": 1661,
+            "minutes": 308
+          }
+        },
+        {
+          "id": "AD-8-1767-1588",
+          "message": "Hold at MCI is 338 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AD",
+            "day": 8,
+            "city": "MCI",
+            "arrivalFlight": 1767,
+            "departureFlight": 1588,
+            "minutes": 338
+          }
+        },
+        {
+          "id": "AD-37-1607-1683",
+          "message": "Hold at SYR is 319 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AD",
+            "day": 37,
+            "city": "SYR",
+            "arrivalFlight": 1607,
+            "departureFlight": 1683,
+            "minutes": 319
+          }
+        },
+        {
+          "id": "AC-10-1875-1879",
+          "message": "Hold at HVN is 179 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AC",
+            "day": 10,
+            "city": "HVN",
+            "arrivalFlight": 1875,
+            "departureFlight": 1879,
+            "minutes": 179
+          }
+        },
+        {
+          "id": "AC-10-1836-1840",
+          "message": "Hold at MHT is 165 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AC",
+            "day": 10,
+            "city": "MHT",
+            "arrivalFlight": 1836,
+            "departureFlight": 1840,
+            "minutes": 165
+          }
+        },
+        {
+          "id": "AD-3-1761-1615",
+          "message": "Hold at PHF is 179 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AD",
+            "day": 3,
+            "city": "PHF",
+            "arrivalFlight": 1761,
+            "departureFlight": 1615,
+            "minutes": 179
+          }
+        },
+        {
+          "id": "AD-40-1657-1752",
+          "message": "Hold at SYR is 187 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AD",
+            "day": 40,
+            "city": "SYR",
+            "arrivalFlight": 1657,
+            "departureFlight": 1752,
+            "minutes": 187
+          }
+        },
+        {
+          "id": "AD-40-1752-2053",
+          "message": "Hold at ALB is 197 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AD",
+            "day": 40,
+            "city": "ALB",
+            "arrivalFlight": 1752,
+            "departureFlight": 2053,
+            "minutes": 197
+          }
+        },
+        {
+          "id": "AD-15-1878-1811",
+          "message": "Hold at SYR is 189 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AD",
+            "day": 15,
+            "city": "SYR",
+            "arrivalFlight": 1878,
+            "departureFlight": 1811,
+            "minutes": 189
+          }
+        },
+        {
+          "id": "AD-15-1811-1812",
+          "message": "Hold at PVD is 162 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AD",
+            "day": 15,
+            "city": "PVD",
+            "arrivalFlight": 1811,
+            "departureFlight": 1812,
+            "minutes": 162
+          }
+        },
+        {
+          "id": "AC-8-1881-1884",
+          "message": "Hold at ORH is 172 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AC",
+            "day": 8,
+            "city": "ORH",
+            "arrivalFlight": 1881,
+            "departureFlight": 1884,
+            "minutes": 172
+          }
+        },
+        {
+          "id": "AC-8-1826-1830",
+          "message": "Hold at BTV is 183 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AC",
+            "day": 8,
+            "city": "BTV",
+            "arrivalFlight": 1826,
+            "departureFlight": 1830,
+            "minutes": 183
+          }
+        },
+        {
+          "id": "AF-2-1749-1754",
+          "message": "Hold at ALB is 201 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AF",
+            "day": 2,
+            "city": "ALB",
+            "arrivalFlight": 1749,
+            "departureFlight": 1754,
+            "minutes": 201
+          }
+        },
+        {
+          "id": "AC-7-1889-1893",
+          "message": "Hold at ISP is 172 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AC",
+            "day": 7,
+            "city": "ISP",
+            "arrivalFlight": 1889,
+            "departureFlight": 1893,
+            "minutes": 172
+          }
+        },
+        {
+          "id": "AC-7-1792-1791",
+          "message": "Hold at BDL is 181 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AC",
+            "day": 7,
+            "city": "BDL",
+            "arrivalFlight": 1792,
+            "departureFlight": 1791,
+            "minutes": 181
+          }
+        },
+        {
+          "id": "AC-5-1835-1839",
+          "message": "Hold at MHT is 170 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AC",
+            "day": 5,
+            "city": "MHT",
+            "arrivalFlight": 1835,
+            "departureFlight": 1839,
+            "minutes": 170
+          }
+        },
+        {
+          "id": "AD-11-1699-1704",
+          "message": "Hold at PWM is 317 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AD",
+            "day": 11,
+            "city": "PWM",
+            "arrivalFlight": 1699,
+            "departureFlight": 1704,
+            "minutes": 317
+          }
+        },
+        {
+          "id": "AD-11-1704-1701",
+          "message": "Hold at SYR is 172 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AD",
+            "day": 11,
+            "city": "SYR",
+            "arrivalFlight": 1704,
+            "departureFlight": 1701,
+            "minutes": 172
+          }
+        },
+        {
+          "id": "AD-12-1702-1886",
+          "message": "Hold at SYR is 330 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AD",
+            "day": 12,
+            "city": "SYR",
+            "arrivalFlight": 1702,
+            "departureFlight": 1886,
+            "minutes": 330
+          }
+        },
+        {
+          "id": "AD-35-1703-1853",
+          "message": "Hold at SYR is 207 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AD",
+            "day": 35,
+            "city": "SYR",
+            "arrivalFlight": 1703,
+            "departureFlight": 1853,
+            "minutes": 207
+          }
+        },
+        {
+          "id": "AD-35-1853-1856",
+          "message": "Hold at HPN is 181 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AD",
+            "day": 35,
+            "city": "HPN",
+            "arrivalFlight": 1853,
+            "departureFlight": 1856,
+            "minutes": 181
+          }
+        },
+        {
+          "id": "AD-14-1852-1855",
+          "message": "Hold at HPN is 181 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AD",
+            "day": 14,
+            "city": "HPN",
+            "arrivalFlight": 1852,
+            "departureFlight": 1855,
+            "minutes": 181
+          }
+        },
+        {
+          "id": "AD-14-1877-2055",
+          "message": "Hold at HVN is 168 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AD",
+            "day": 14,
+            "city": "HVN",
+            "arrivalFlight": 1877,
+            "departureFlight": 2055,
+            "minutes": 168
+          }
+        },
+        {
+          "id": "AE-12-1979-1980",
+          "message": "Hold at BHM is 202 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AE",
+            "day": 12,
+            "city": "BHM",
+            "arrivalFlight": 1979,
+            "departureFlight": 1980,
+            "minutes": 202
+          }
+        },
+        {
+          "id": "AD-2-1825-1829",
+          "message": "Hold at BTV is 183 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AD",
+            "day": 2,
+            "city": "BTV",
+            "arrivalFlight": 1825,
+            "departureFlight": 1829,
+            "minutes": 183
+          }
+        },
+        {
+          "id": "AD-1-1753-1750",
+          "message": "Hold at SYR is 201 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AD",
+            "day": 1,
+            "city": "SYR",
+            "arrivalFlight": 1753,
+            "departureFlight": 1750,
+            "minutes": 201
+          }
+        },
+        {
+          "id": "AD-1-1750-1755",
+          "message": "Hold at ALB is 366 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AD",
+            "day": 1,
+            "city": "ALB",
+            "arrivalFlight": 1750,
+            "departureFlight": 1755,
+            "minutes": 366
+          }
+        },
+        {
+          "id": "AC-6-1851-1854",
+          "message": "Hold at HPN is 181 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AC",
+            "day": 6,
+            "city": "HPN",
+            "arrivalFlight": 1851,
+            "departureFlight": 1854,
+            "minutes": 181
+          }
+        },
+        {
+          "id": "AC-6-1751-1756",
+          "message": "Hold at ALB is 201 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AC",
+            "day": 6,
+            "city": "ALB",
+            "arrivalFlight": 1751,
+            "departureFlight": 1756,
+            "minutes": 201
+          }
+        },
+        {
+          "id": "AF-5-1857-1874",
+          "message": "Hold at DAY is 164 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AF",
+            "day": 5,
+            "city": "DAY",
+            "arrivalFlight": 1857,
+            "departureFlight": 1874,
+            "minutes": 164
+          }
+        },
+        {
+          "id": "AR-1-1885-1888",
+          "message": "Hold at SWF is 356 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AR",
+            "day": 1,
+            "city": "SWF",
+            "arrivalFlight": 1885,
+            "departureFlight": 1888,
+            "minutes": 356
+          }
+        },
+        {
+          "id": "AR-1-1888-2037",
+          "message": "Hold at SYR is 186 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AR",
+            "day": 1,
+            "city": "SYR",
+            "arrivalFlight": 1888,
+            "departureFlight": 2037,
+            "minutes": 186
+          }
+        },
+        {
+          "id": "AS-1-1936-1937",
+          "message": "Hold at PHF is 168 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AS",
+            "day": 1,
+            "city": "PHF",
+            "arrivalFlight": 1936,
+            "departureFlight": 1937,
+            "minutes": 168
+          }
+        },
+        {
+          "id": "AS-2-1942-1943",
+          "message": "Hold at PHF is 184 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AS",
+            "day": 2,
+            "city": "PHF",
+            "arrivalFlight": 1942,
+            "departureFlight": 1943,
+            "minutes": 184
+          }
+        },
+        {
+          "id": "AS-3-2029-2030",
+          "message": "Hold at RFD is 191 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AS",
+            "day": 3,
+            "city": "RFD",
+            "arrivalFlight": 2029,
+            "departureFlight": 2030,
+            "minutes": 191
+          }
+        }
+      ]
+    },
+    {
+      "id": "line_route_count",
+      "title": "Routes per line",
+      "section": "§2.8",
+      "severity": "warning",
+      "hardStop": false,
+      "status": "warning",
+      "message": "13 finding(s)",
+      "metrics": {
+        "findingCount": 13,
+        "effectiveFindingCount": 13,
+        "overriddenFindingCount": 0
+      },
+      "findings": [
+        {
+          "id": "A",
+          "message": "Line A contains 13 routes; the standing guideline is 9–12",
+          "evidence": {
+            "line": "A",
+            "routes": 13,
+            "guideline": [
+              9,
+              12
+            ]
+          }
+        },
+        {
+          "id": "AD",
+          "message": "Line AD contains 40 routes; the standing guideline is 9–12",
+          "evidence": {
+            "line": "AD",
+            "routes": 40,
+            "guideline": [
+              9,
+              12
+            ]
+          }
+        },
+        {
+          "id": "AE",
+          "message": "Line AE contains 14 routes; the standing guideline is 9–12",
+          "evidence": {
+            "line": "AE",
+            "routes": 14,
+            "guideline": [
+              9,
+              12
+            ]
+          }
+        },
+        {
+          "id": "AF",
+          "message": "Line AF contains 5 routes; the standing guideline is 9–12",
+          "evidence": {
+            "line": "AF",
+            "routes": 5,
+            "guideline": [
+              9,
+              12
+            ]
+          }
+        },
+        {
+          "id": "AH",
+          "message": "Line AH contains 13 routes; the standing guideline is 9–12",
+          "evidence": {
+            "line": "AH",
+            "routes": 13,
+            "guideline": [
+              9,
+              12
+            ]
+          }
+        },
+        {
+          "id": "AI",
+          "message": "Line AI contains 2 routes; the standing guideline is 9–12",
+          "evidence": {
+            "line": "AI",
+            "routes": 2,
+            "guideline": [
+              9,
+              12
+            ]
+          }
+        },
+        {
+          "id": "AL",
+          "message": "Line AL contains 13 routes; the standing guideline is 9–12",
+          "evidence": {
+            "line": "AL",
+            "routes": 13,
+            "guideline": [
+              9,
+              12
+            ]
+          }
+        },
+        {
+          "id": "AM",
+          "message": "Line AM contains 3 routes; the standing guideline is 9–12",
+          "evidence": {
+            "line": "AM",
+            "routes": 3,
+            "guideline": [
+              9,
+              12
+            ]
+          }
+        },
+        {
+          "id": "AN",
+          "message": "Line AN contains 1 routes; the standing guideline is 9–12",
+          "evidence": {
+            "line": "AN",
+            "routes": 1,
+            "guideline": [
+              9,
+              12
+            ]
+          }
+        },
+        {
+          "id": "AO",
+          "message": "Line AO contains 1 routes; the standing guideline is 9–12",
+          "evidence": {
+            "line": "AO",
+            "routes": 1,
+            "guideline": [
+              9,
+              12
+            ]
+          }
+        },
+        {
+          "id": "AQ",
+          "message": "Line AQ contains 1 routes; the standing guideline is 9–12",
+          "evidence": {
+            "line": "AQ",
+            "routes": 1,
+            "guideline": [
+              9,
+              12
+            ]
+          }
+        },
+        {
+          "id": "AR",
+          "message": "Line AR contains 1 routes; the standing guideline is 9–12",
+          "evidence": {
+            "line": "AR",
+            "routes": 1,
+            "guideline": [
+              9,
+              12
+            ]
+          }
+        },
+        {
+          "id": "AS",
+          "message": "Line AS contains 3 routes; the standing guideline is 9–12",
+          "evidence": {
+            "line": "AS",
+            "routes": 3,
+            "guideline": [
+              9,
+              12
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "rolling_ron_window",
+      "title": "Rolling target-city RON window",
+      "section": "§2.1 / Lesson 31",
+      "severity": "error",
+      "hardStop": false,
+      "status": "pass",
+      "message": "Every line reaches a target RON within 11 days",
+      "metrics": {
+        "findingCount": 0,
+        "effectiveFindingCount": 0,
+        "overriddenFindingCount": 0
+      },
+      "findings": []
+    },
+    {
+      "id": "rolling_ron_grace",
+      "title": "Rolling RON grace usage",
+      "section": "Lesson 31",
+      "severity": "warning",
+      "hardStop": false,
+      "status": "pass",
+      "message": "No line uses the standing one-day grace",
+      "metrics": {
+        "findingCount": 0,
+        "effectiveFindingCount": 0,
+        "overriddenFindingCount": 0
+      },
+      "findings": []
+    },
+    {
+      "id": "destination_ron_coverage",
+      "title": "Destination RON coverage",
+      "section": "§1.6a / §2.3",
+      "severity": "error",
+      "hardStop": false,
+      "status": "pass",
+      "message": "Every non-exempt destination has at least one terminating route",
+      "metrics": {
+        "findingCount": 0,
+        "effectiveFindingCount": 0,
+        "overriddenFindingCount": 0
+      },
+      "findings": []
+    },
+    {
+      "id": "point_to_point_share",
+      "title": "Point-to-point flight share",
+      "section": "§2.4",
+      "severity": "error",
+      "hardStop": false,
+      "status": "pass",
+      "message": "Point-to-point flying is within the 10% cap",
+      "metrics": {
+        "flights": 95,
+        "totalFlights": 1096,
+        "share": 0.08667883211678833,
+        "findingCount": 0,
+        "effectiveFindingCount": 0,
+        "overriddenFindingCount": 0
+      },
+      "findings": []
+    },
+    {
+      "id": "market_frequency_ceiling",
+      "title": "Per-direction market frequency ceiling",
+      "section": "§2.7",
+      "severity": "error",
+      "hardStop": false,
+      "status": "pass",
+      "message": "No directed market exceeds 6 daily departures",
+      "metrics": {
+        "findingCount": 0,
+        "effectiveFindingCount": 0,
+        "overriddenFindingCount": 0
+      },
+      "findings": []
+    },
+    {
+      "id": "section_26_pairing_spacing",
+      "title": "Section 2.6 Check A — same-pairing spacing",
+      "section": "§2.6 Check A",
+      "severity": "error",
+      "hardStop": false,
+      "status": "pass",
+      "message": "Every directed pairing satisfies its applicable spacing rule",
+      "metrics": {
+        "findingCount": 0,
+        "effectiveFindingCount": 0,
+        "overriddenFindingCount": 0
+      },
+      "findings": []
+    },
+    {
+      "id": "section_26_city_departure_gap",
+      "title": "Section 2.6 Check B — maximum city departure service gap",
+      "section": "§2.6 Check B",
+      "severity": "warning",
+      "hardStop": false,
+      "status": "warning",
+      "message": "79 finding(s)",
+      "metrics": {
+        "findingCount": 79,
+        "effectiveFindingCount": 79,
+        "overriddenFindingCount": 0
+      },
+      "findings": [
+        {
+          "id": "ABE",
+          "message": "ABE has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "ABE",
+            "departures": [
+              270,
+              270,
+              735,
+              810,
+              1080,
+              1150,
+              1250
+            ],
+            "excessiveGaps": [
+              {
+                "from": 270,
+                "to": 735,
+                "minutes": 465
+              },
+              {
+                "from": 810,
+                "to": 1080,
+                "minutes": 270
+              }
+            ],
+            "serviceWindowMinutes": {
+              "start": 270,
+              "end": 1260
+            },
+            "includesOvernightWrap": false
+          }
+        },
+        {
+          "id": "ACY",
+          "message": "ACY has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "ACY",
+            "departures": [
+              320,
+              575,
+              1160
+            ],
+            "excessiveGaps": [
+              {
+                "from": 320,
+                "to": 575,
+                "minutes": 255
+              },
+              {
+                "from": 575,
+                "to": 1160,
+                "minutes": 585
+              }
+            ],
+            "serviceWindowMinutes": {
+              "start": 270,
+              "end": 1260
+            },
+            "includesOvernightWrap": false
+          }
+        },
+        {
+          "id": "AGS",
+          "message": "AGS has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "AGS",
+            "departures": [
+              355,
+              615
+            ],
+            "excessiveGaps": [
+              {
+                "from": 355,
+                "to": 615,
+                "minutes": 260
+              }
+            ],
+            "serviceWindowMinutes": {
+              "start": 270,
+              "end": 1260
+            },
+            "includesOvernightWrap": false
+          }
+        },
+        {
+          "id": "ALB",
+          "message": "ALB has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "ALB",
+            "departures": [
+              270,
+              270,
+              595,
+              768,
+              925,
+              1090,
+              1246
+            ],
+            "excessiveGaps": [
+              {
+                "from": 270,
+                "to": 595,
+                "minutes": 325
+              }
+            ],
+            "serviceWindowMinutes": {
+              "start": 270,
+              "end": 1260
+            },
+            "includesOvernightWrap": false
+          }
+        },
+        {
+          "id": "AVL",
+          "message": "AVL has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "AVL",
+            "departures": [
+              360,
+              725,
+              920
+            ],
+            "excessiveGaps": [
+              {
+                "from": 360,
+                "to": 725,
+                "minutes": 365
+              }
+            ],
+            "serviceWindowMinutes": {
+              "start": 270,
+              "end": 1260
+            },
+            "includesOvernightWrap": false
+          }
+        },
+        {
+          "id": "AVP",
+          "message": "AVP has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "AVP",
+            "departures": [
+              305,
+              865
+            ],
+            "excessiveGaps": [
+              {
+                "from": 305,
+                "to": 865,
+                "minutes": 560
+              }
+            ],
+            "serviceWindowMinutes": {
+              "start": 270,
+              "end": 1260
+            },
+            "includesOvernightWrap": false
+          }
+        },
+        {
+          "id": "BDL",
+          "message": "BDL has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "BDL",
+            "departures": [
+              270,
+              270,
+              330,
+              765,
+              790,
+              872,
+              915,
+              1080,
+              1236
+            ],
+            "excessiveGaps": [
+              {
+                "from": 330,
+                "to": 765,
+                "minutes": 435
+              }
+            ],
+            "serviceWindowMinutes": {
+              "start": 270,
+              "end": 1260
+            },
+            "includesOvernightWrap": false
+          }
+        },
+        {
+          "id": "BGR",
+          "message": "BGR has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "BGR",
+            "departures": [
+              395,
+              1055
+            ],
+            "excessiveGaps": [
+              {
+                "from": 395,
+                "to": 1055,
+                "minutes": 660
+              }
+            ],
+            "serviceWindowMinutes": {
+              "start": 270,
+              "end": 1260
+            },
+            "includesOvernightWrap": false
+          }
+        },
+        {
+          "id": "BLV",
+          "message": "BLV has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "BLV",
+            "departures": [
+              280,
+              555,
+              625,
+              930,
+              1080,
+              1155
+            ],
+            "excessiveGaps": [
+              {
+                "from": 280,
+                "to": 555,
+                "minutes": 275
+              },
+              {
+                "from": 625,
+                "to": 930,
+                "minutes": 305
+              }
+            ],
+            "serviceWindowMinutes": {
+              "start": 270,
+              "end": 1260
+            },
+            "includesOvernightWrap": false
+          }
+        },
+        {
+          "id": "BNA",
+          "message": "BNA has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "BNA",
+            "departures": [
+              270,
+              290,
+              430,
+              500,
+              635,
+              1050,
+              1100,
+              1105,
+              1180,
+              1245
+            ],
+            "excessiveGaps": [
+              {
+                "from": 635,
+                "to": 1050,
+                "minutes": 415
+              }
+            ],
+            "serviceWindowMinutes": {
+              "start": 270,
+              "end": 1260
+            },
+            "includesOvernightWrap": false
+          }
+        },
+        {
+          "id": "BTR",
+          "message": "BTR has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "BTR",
+            "departures": [
+              310,
+              570
+            ],
+            "excessiveGaps": [
+              {
+                "from": 310,
+                "to": 570,
+                "minutes": 260
+              }
+            ],
+            "serviceWindowMinutes": {
+              "start": 270,
+              "end": 1260
+            },
+            "includesOvernightWrap": false
+          }
+        },
+        {
+          "id": "BTV",
+          "message": "BTV has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "BTV",
+            "departures": [
+              420,
+              915,
+              1080
+            ],
+            "excessiveGaps": [
+              {
+                "from": 420,
+                "to": 915,
+                "minutes": 495
+              }
+            ],
+            "serviceWindowMinutes": {
+              "start": 270,
+              "end": 1260
+            },
+            "includesOvernightWrap": false
+          }
+        },
+        {
+          "id": "BUF",
+          "message": "BUF has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "BUF",
+            "departures": [
+              270,
+              425,
+              595,
+              610,
+              1105,
+              1108,
+              1251
+            ],
+            "excessiveGaps": [
+              {
+                "from": 610,
+                "to": 1105,
+                "minutes": 495
+              }
+            ],
+            "serviceWindowMinutes": {
+              "start": 270,
+              "end": 1260
+            },
+            "includesOvernightWrap": false
+          }
+        },
+        {
+          "id": "CAE",
+          "message": "CAE has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "CAE",
+            "departures": [
+              300,
+              580,
+              900,
+              1000
+            ],
+            "excessiveGaps": [
+              {
+                "from": 300,
+                "to": 580,
+                "minutes": 280
+              },
+              {
+                "from": 580,
+                "to": 900,
+                "minutes": 320
+              }
+            ],
+            "serviceWindowMinutes": {
+              "start": 270,
+              "end": 1260
+            },
+            "includesOvernightWrap": false
+          }
+        },
+        {
+          "id": "CAK",
+          "message": "CAK has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "CAK",
+            "departures": [
+              400,
+              642,
+              895,
+              1065,
+              1135,
+              1180
+            ],
+            "excessiveGaps": [
+              {
+                "from": 400,
+                "to": 642,
+                "minutes": 242
+              },
+              {
+                "from": 642,
+                "to": 895,
+                "minutes": 253
+              }
+            ],
+            "serviceWindowMinutes": {
+              "start": 270,
+              "end": 1260
+            },
+            "includesOvernightWrap": false
+          }
+        },
+        {
+          "id": "CHA",
+          "message": "CHA has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "CHA",
+            "departures": [
+              360,
+              785,
+              1045
+            ],
+            "excessiveGaps": [
+              {
+                "from": 360,
+                "to": 785,
+                "minutes": 425
+              },
+              {
+                "from": 785,
+                "to": 1045,
+                "minutes": 260
+              }
+            ],
+            "serviceWindowMinutes": {
+              "start": 270,
+              "end": 1260
+            },
+            "includesOvernightWrap": false
+          }
+        },
+        {
+          "id": "CMH",
+          "message": "CMH has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "CMH",
+            "departures": [
+              300,
+              689,
+              1015,
+              1145,
+              1150
+            ],
+            "excessiveGaps": [
+              {
+                "from": 300,
+                "to": 689,
+                "minutes": 389
+              },
+              {
+                "from": 689,
+                "to": 1015,
+                "minutes": 326
+              }
+            ],
+            "serviceWindowMinutes": {
+              "start": 270,
+              "end": 1260
+            },
+            "includesOvernightWrap": false
+          }
+        },
+        {
+          "id": "CRP",
+          "message": "CRP has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "CRP",
+            "departures": [
+              355,
+              755
+            ],
+            "excessiveGaps": [
+              {
+                "from": 355,
+                "to": 755,
+                "minutes": 400
+              }
+            ],
+            "serviceWindowMinutes": {
+              "start": 270,
+              "end": 1260
+            },
+            "includesOvernightWrap": false
+          }
+        },
+        {
+          "id": "CRW",
+          "message": "CRW has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "CRW",
+            "departures": [
+              380,
+              885
+            ],
+            "excessiveGaps": [
+              {
+                "from": 380,
+                "to": 885,
+                "minutes": 505
+              }
+            ],
+            "serviceWindowMinutes": {
+              "start": 270,
+              "end": 1260
+            },
+            "includesOvernightWrap": false
+          }
+        },
+        {
+          "id": "DAB",
+          "message": "DAB has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "DAB",
+            "departures": [
+              305,
+              467,
+              545,
+              865,
+              1260
+            ],
+            "excessiveGaps": [
+              {
+                "from": 545,
+                "to": 865,
+                "minutes": 320
+              },
+              {
+                "from": 865,
+                "to": 1260,
+                "minutes": 395
+              }
+            ],
+            "serviceWindowMinutes": {
+              "start": 270,
+              "end": 1260
+            },
+            "includesOvernightWrap": false
+          }
+        },
+        {
+          "id": "DAL",
+          "message": "DAL has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "DAL",
+            "departures": [
+              280,
+              360,
+              420,
+              485,
+              560,
+              605,
+              700,
+              955,
+              980,
+              980,
+              985,
+              1090,
+              1095,
+              1110,
+              1130,
+              1165,
+              1220,
+              1260,
+              1260,
+              1260
+            ],
+            "excessiveGaps": [
+              {
+                "from": 700,
+                "to": 955,
+                "minutes": 255
+              }
+            ],
+            "serviceWindowMinutes": {
+              "start": 270,
+              "end": 1260
+            },
+            "includesOvernightWrap": false
+          }
+        },
+        {
+          "id": "DLH",
+          "message": "DLH has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "DLH",
+            "departures": [
+              295,
+              625
+            ],
+            "excessiveGaps": [
+              {
+                "from": 295,
+                "to": 625,
+                "minutes": 330
+              }
+            ],
+            "serviceWindowMinutes": {
+              "start": 270,
+              "end": 1260
+            },
+            "includesOvernightWrap": false
+          }
+        },
+        {
+          "id": "ECP",
+          "message": "ECP has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "ECP",
+            "departures": [
+              290,
+              550,
+              1210
+            ],
+            "excessiveGaps": [
+              {
+                "from": 290,
+                "to": 550,
+                "minutes": 260
+              },
+              {
+                "from": 550,
+                "to": 1210,
+                "minutes": 660
+              }
+            ],
+            "serviceWindowMinutes": {
+              "start": 270,
+              "end": 1260
+            },
+            "includesOvernightWrap": false
+          }
+        },
+        {
+          "id": "ELP",
+          "message": "ELP has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "ELP",
+            "departures": [
+              295,
+              700,
+              730,
+              1060,
+              1380
+            ],
+            "excessiveGaps": [
+              {
+                "from": 295,
+                "to": 700,
+                "minutes": 405
+              },
+              {
+                "from": 730,
+                "to": 1060,
+                "minutes": 330
+              }
+            ],
+            "serviceWindowMinutes": {
+              "start": 270,
+              "end": 1260
+            },
+            "includesOvernightWrap": false
+          }
+        },
+        {
+          "id": "ERI",
+          "message": "ERI has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "ERI",
+            "departures": [
+              370,
+              620
+            ],
+            "excessiveGaps": [
+              {
+                "from": 370,
+                "to": 620,
+                "minutes": 250
+              }
+            ],
+            "serviceWindowMinutes": {
+              "start": 270,
+              "end": 1260
+            },
+            "includesOvernightWrap": false
+          }
+        },
+        {
+          "id": "EYW",
+          "message": "EYW has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "EYW",
+            "departures": [
+              325,
+              360,
+              835,
+              1040
+            ],
+            "excessiveGaps": [
+              {
+                "from": 360,
+                "to": 835,
+                "minutes": 475
+              }
+            ],
+            "serviceWindowMinutes": {
+              "start": 270,
+              "end": 1260
+            },
+            "includesOvernightWrap": false
+          }
+        },
+        {
+          "id": "FAR",
+          "message": "FAR has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "FAR",
+            "departures": [
+              295,
+              695
+            ],
+            "excessiveGaps": [
+              {
+                "from": 295,
+                "to": 695,
+                "minutes": 400
+              }
+            ],
+            "serviceWindowMinutes": {
+              "start": 270,
+              "end": 1260
+            },
+            "includesOvernightWrap": false
+          }
+        },
+        {
+          "id": "FSD",
+          "message": "FSD has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "FSD",
+            "departures": [
+              325,
+              625,
+              646,
+              1025
+            ],
+            "excessiveGaps": [
+              {
+                "from": 325,
+                "to": 625,
+                "minutes": 300
+              },
+              {
+                "from": 646,
+                "to": 1025,
+                "minutes": 379
+              }
+            ],
+            "serviceWindowMinutes": {
+              "start": 270,
+              "end": 1260
+            },
+            "includesOvernightWrap": false
+          }
+        },
+        {
+          "id": "FWA",
+          "message": "FWA has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "FWA",
+            "departures": [
+              270,
+              645,
+              740,
+              1010
+            ],
+            "excessiveGaps": [
+              {
+                "from": 270,
+                "to": 645,
+                "minutes": 375
+              },
+              {
+                "from": 740,
+                "to": 1010,
+                "minutes": 270
+              }
+            ],
+            "serviceWindowMinutes": {
+              "start": 270,
+              "end": 1260
+            },
+            "includesOvernightWrap": false
+          }
+        },
+        {
+          "id": "GPT",
+          "message": "GPT has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "GPT",
+            "departures": [
+              325,
+              585
+            ],
+            "excessiveGaps": [
+              {
+                "from": 325,
+                "to": 585,
+                "minutes": 260
+              }
+            ],
+            "serviceWindowMinutes": {
+              "start": 270,
+              "end": 1260
+            },
+            "includesOvernightWrap": false
+          }
+        },
+        {
+          "id": "GRR",
+          "message": "GRR has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "GRR",
+            "departures": [
+              375,
+              625,
+              875,
+              1125
+            ],
+            "excessiveGaps": [
+              {
+                "from": 375,
+                "to": 625,
+                "minutes": 250
+              },
+              {
+                "from": 625,
+                "to": 875,
+                "minutes": 250
+              },
+              {
+                "from": 875,
+                "to": 1125,
+                "minutes": 250
+              }
+            ],
+            "serviceWindowMinutes": {
+              "start": 270,
+              "end": 1260
+            },
+            "includesOvernightWrap": false
+          }
+        },
+        {
+          "id": "GSP",
+          "message": "GSP has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "GSP",
+            "departures": [
+              270,
+              575,
+              655,
+              795,
+              1055,
+              1251
+            ],
+            "excessiveGaps": [
+              {
+                "from": 270,
+                "to": 575,
+                "minutes": 305
+              },
+              {
+                "from": 795,
+                "to": 1055,
+                "minutes": 260
+              }
+            ],
+            "serviceWindowMinutes": {
+              "start": 270,
+              "end": 1260
+            },
+            "includesOvernightWrap": false
+          }
+        },
+        {
+          "id": "HPN",
+          "message": "HPN has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "HPN",
+            "departures": [
+              270,
+              750,
+              915,
+              1080
+            ],
+            "excessiveGaps": [
+              {
+                "from": 270,
+                "to": 750,
+                "minutes": 480
+              }
+            ],
+            "serviceWindowMinutes": {
+              "start": 270,
+              "end": 1260
+            },
+            "includesOvernightWrap": false
+          }
+        },
+        {
+          "id": "HRL",
+          "message": "HRL has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "HRL",
+            "departures": [
+              350,
+              590,
+              872,
+              1022,
+              1116
+            ],
+            "excessiveGaps": [
+              {
+                "from": 590,
+                "to": 872,
+                "minutes": 282
+              }
+            ],
+            "serviceWindowMinutes": {
+              "start": 270,
+              "end": 1260
+            },
+            "includesOvernightWrap": false
+          }
+        },
+        {
+          "id": "HSV",
+          "message": "HSV has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "HSV",
+            "departures": [
+              290,
+              590,
+              790
+            ],
+            "excessiveGaps": [
+              {
+                "from": 290,
+                "to": 590,
+                "minutes": 300
+              }
+            ],
+            "serviceWindowMinutes": {
+              "start": 270,
+              "end": 1260
+            },
+            "includesOvernightWrap": false
+          }
+        },
+        {
+          "id": "HVN",
+          "message": "HVN has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "HVN",
+            "departures": [
+              270,
+              585,
+              915,
+              1234
+            ],
+            "excessiveGaps": [
+              {
+                "from": 270,
+                "to": 585,
+                "minutes": 315
+              },
+              {
+                "from": 585,
+                "to": 915,
+                "minutes": 330
+              },
+              {
+                "from": 915,
+                "to": 1234,
+                "minutes": 319
+              }
+            ],
+            "serviceWindowMinutes": {
+              "start": 270,
+              "end": 1260
+            },
+            "includesOvernightWrap": false
+          }
+        },
+        {
+          "id": "ICT",
+          "message": "ICT has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "ICT",
+            "departures": [
+              340,
+              540,
+              722,
+              1140
+            ],
+            "excessiveGaps": [
+              {
+                "from": 722,
+                "to": 1140,
+                "minutes": 418
+              }
+            ],
+            "serviceWindowMinutes": {
+              "start": 270,
+              "end": 1260
+            },
+            "includesOvernightWrap": false
+          }
+        },
+        {
+          "id": "ILM",
+          "message": "ILM has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "ILM",
+            "departures": [
+              315,
+              790,
+              1050
+            ],
+            "excessiveGaps": [
+              {
+                "from": 315,
+                "to": 790,
+                "minutes": 475
+              },
+              {
+                "from": 790,
+                "to": 1050,
+                "minutes": 260
+              }
+            ],
+            "serviceWindowMinutes": {
+              "start": 270,
+              "end": 1260
+            },
+            "includesOvernightWrap": false
+          }
+        },
+        {
+          "id": "IND",
+          "message": "IND has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "IND",
+            "departures": [
+              270,
+              620,
+              685,
+              887,
+              1140,
+              1175
+            ],
+            "excessiveGaps": [
+              {
+                "from": 270,
+                "to": 620,
+                "minutes": 350
+              },
+              {
+                "from": 887,
+                "to": 1140,
+                "minutes": 253
+              }
+            ],
+            "serviceWindowMinutes": {
+              "start": 270,
+              "end": 1260
+            },
+            "includesOvernightWrap": false
+          }
+        },
+        {
+          "id": "ISP",
+          "message": "ISP has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "ISP",
+            "departures": [
+              415,
+              745,
+              910
+            ],
+            "excessiveGaps": [
+              {
+                "from": 415,
+                "to": 745,
+                "minutes": 330
+              }
+            ],
+            "serviceWindowMinutes": {
+              "start": 270,
+              "end": 1260
+            },
+            "includesOvernightWrap": false
+          }
+        },
+        {
+          "id": "JAN",
+          "message": "JAN has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "JAN",
+            "departures": [
+              390,
+              490,
+              900
+            ],
+            "excessiveGaps": [
+              {
+                "from": 490,
+                "to": 900,
+                "minutes": 410
+              }
+            ],
+            "serviceWindowMinutes": {
+              "start": 270,
+              "end": 1260
+            },
+            "includesOvernightWrap": false
+          }
+        },
+        {
+          "id": "LBB",
+          "message": "LBB has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "LBB",
+            "departures": [
+              270,
+              735,
+              880,
+              1090
+            ],
+            "excessiveGaps": [
+              {
+                "from": 270,
+                "to": 735,
+                "minutes": 465
+              }
+            ],
+            "serviceWindowMinutes": {
+              "start": 270,
+              "end": 1260
+            },
+            "includesOvernightWrap": false
+          }
+        },
+        {
+          "id": "LEX",
+          "message": "LEX has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "LEX",
+            "departures": [
+              305,
+              570,
+              635
+            ],
+            "excessiveGaps": [
+              {
+                "from": 305,
+                "to": 570,
+                "minutes": 265
+              }
+            ],
+            "serviceWindowMinutes": {
+              "start": 270,
+              "end": 1260
+            },
+            "includesOvernightWrap": false
+          }
+        },
+        {
+          "id": "LIT",
+          "message": "LIT has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "LIT",
+            "departures": [
+              270,
+              565,
+              920,
+              1120
+            ],
+            "excessiveGaps": [
+              {
+                "from": 270,
+                "to": 565,
+                "minutes": 295
+              },
+              {
+                "from": 565,
+                "to": 920,
+                "minutes": 355
+              }
+            ],
+            "serviceWindowMinutes": {
+              "start": 270,
+              "end": 1260
+            },
+            "includesOvernightWrap": false
+          }
+        },
+        {
+          "id": "MAF",
+          "message": "MAF has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "MAF",
+            "departures": [
+              275,
+              805,
+              975
+            ],
+            "excessiveGaps": [
+              {
+                "from": 275,
+                "to": 805,
+                "minutes": 530
+              }
+            ],
+            "serviceWindowMinutes": {
+              "start": 270,
+              "end": 1260
+            },
+            "includesOvernightWrap": false
+          }
+        },
+        {
+          "id": "MCN",
+          "message": "MCN has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "MCN",
+            "departures": [
+              355,
+              615
+            ],
+            "excessiveGaps": [
+              {
+                "from": 355,
+                "to": 615,
+                "minutes": 260
+              }
+            ],
+            "serviceWindowMinutes": {
+              "start": 270,
+              "end": 1260
+            },
+            "includesOvernightWrap": false
+          }
+        },
+        {
+          "id": "MDT",
+          "message": "MDT has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "MDT",
+            "departures": [
+              320,
+              580,
+              1155
+            ],
+            "excessiveGaps": [
+              {
+                "from": 320,
+                "to": 580,
+                "minutes": 260
+              },
+              {
+                "from": 580,
+                "to": 1155,
+                "minutes": 575
+              }
+            ],
+            "serviceWindowMinutes": {
+              "start": 270,
+              "end": 1260
+            },
+            "includesOvernightWrap": false
+          }
+        },
+        {
+          "id": "MEM",
+          "message": "MEM has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "MEM",
+            "departures": [
+              315,
+              715,
+              915,
+              1015
+            ],
+            "excessiveGaps": [
+              {
+                "from": 315,
+                "to": 715,
+                "minutes": 400
+              }
+            ],
+            "serviceWindowMinutes": {
+              "start": 270,
+              "end": 1260
+            },
+            "includesOvernightWrap": false
+          }
+        },
+        {
+          "id": "MFE",
+          "message": "MFE has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "MFE",
+            "departures": [
+              310,
+              740,
+              940
+            ],
+            "excessiveGaps": [
+              {
+                "from": 310,
+                "to": 740,
+                "minutes": 430
+              }
+            ],
+            "serviceWindowMinutes": {
+              "start": 270,
+              "end": 1260
+            },
+            "includesOvernightWrap": false
+          }
+        },
+        {
+          "id": "MHT",
+          "message": "MHT has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "MHT",
+            "departures": [
+              415,
+              745,
+              776,
+              910
+            ],
+            "excessiveGaps": [
+              {
+                "from": 415,
+                "to": 745,
+                "minutes": 330
+              }
+            ],
+            "serviceWindowMinutes": {
+              "start": 270,
+              "end": 1260
+            },
+            "includesOvernightWrap": false
+          }
+        },
+        {
+          "id": "MKE",
+          "message": "MKE has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "MKE",
+            "departures": [
+              310,
+              710,
+              805,
+              910,
+              1056,
+              1210
+            ],
+            "excessiveGaps": [
+              {
+                "from": 310,
+                "to": 710,
+                "minutes": 400
+              }
+            ],
+            "serviceWindowMinutes": {
+              "start": 270,
+              "end": 1260
+            },
+            "includesOvernightWrap": false
+          }
+        },
+        {
+          "id": "MLB",
+          "message": "MLB has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "MLB",
+            "departures": [
+              295,
+              1010,
+              1190
+            ],
+            "excessiveGaps": [
+              {
+                "from": 295,
+                "to": 1010,
+                "minutes": 715
+              }
+            ],
+            "serviceWindowMinutes": {
+              "start": 270,
+              "end": 1260
+            },
+            "includesOvernightWrap": false
+          }
+        },
+        {
+          "id": "MOB",
+          "message": "MOB has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "MOB",
+            "departures": [
+              270,
+              530
+            ],
+            "excessiveGaps": [
+              {
+                "from": 270,
+                "to": 530,
+                "minutes": 260
+              }
+            ],
+            "serviceWindowMinutes": {
+              "start": 270,
+              "end": 1260
+            },
+            "includesOvernightWrap": false
+          }
+        },
+        {
+          "id": "MSN",
+          "message": "MSN has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "MSN",
+            "departures": [
+              300,
+              550,
+              707,
+              1050,
+              1054
+            ],
+            "excessiveGaps": [
+              {
+                "from": 300,
+                "to": 550,
+                "minutes": 250
+              },
+              {
+                "from": 707,
+                "to": 1050,
+                "minutes": 343
+              }
+            ],
+            "serviceWindowMinutes": {
+              "start": 270,
+              "end": 1260
+            },
+            "includesOvernightWrap": false
+          }
+        },
+        {
+          "id": "MYR",
+          "message": "MYR has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "MYR",
+            "departures": [
+              310,
+              675,
+              800,
+              1060
+            ],
+            "excessiveGaps": [
+              {
+                "from": 310,
+                "to": 675,
+                "minutes": 365
+              },
+              {
+                "from": 800,
+                "to": 1060,
+                "minutes": 260
+              }
+            ],
+            "serviceWindowMinutes": {
+              "start": 270,
+              "end": 1260
+            },
+            "includesOvernightWrap": false
+          }
+        },
+        {
+          "id": "OKC",
+          "message": "OKC has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "OKC",
+            "departures": [
+              270,
+              925,
+              1200,
+              1255
+            ],
+            "excessiveGaps": [
+              {
+                "from": 270,
+                "to": 925,
+                "minutes": 655
+              },
+              {
+                "from": 925,
+                "to": 1200,
+                "minutes": 275
+              }
+            ],
+            "serviceWindowMinutes": {
+              "start": 270,
+              "end": 1260
+            },
+            "includesOvernightWrap": false
+          }
+        },
+        {
+          "id": "OMA",
+          "message": "OMA has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "OMA",
+            "departures": [
+              345,
+              545,
+              595,
+              666,
+              910,
+              1238
+            ],
+            "excessiveGaps": [
+              {
+                "from": 666,
+                "to": 910,
+                "minutes": 244
+              },
+              {
+                "from": 910,
+                "to": 1238,
+                "minutes": 328
+              }
+            ],
+            "serviceWindowMinutes": {
+              "start": 270,
+              "end": 1260
+            },
+            "includesOvernightWrap": false
+          }
+        },
+        {
+          "id": "ORH",
+          "message": "ORH has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "ORH",
+            "departures": [
+              270,
+              415,
+              745
+            ],
+            "excessiveGaps": [
+              {
+                "from": 415,
+                "to": 745,
+                "minutes": 330
+              }
+            ],
+            "serviceWindowMinutes": {
+              "start": 270,
+              "end": 1260
+            },
+            "includesOvernightWrap": false
+          }
+        },
+        {
+          "id": "PGD",
+          "message": "PGD has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "PGD",
+            "departures": [
+              315,
+              446,
+              590,
+              595,
+              755,
+              1000,
+              1100
+            ],
+            "excessiveGaps": [
+              {
+                "from": 755,
+                "to": 1000,
+                "minutes": 245
+              }
+            ],
+            "serviceWindowMinutes": {
+              "start": 270,
+              "end": 1260
+            },
+            "includesOvernightWrap": false
+          }
+        },
+        {
+          "id": "PIA",
+          "message": "PIA has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "PIA",
+            "departures": [
+              330,
+              730
+            ],
+            "excessiveGaps": [
+              {
+                "from": 330,
+                "to": 730,
+                "minutes": 400
+              }
+            ],
+            "serviceWindowMinutes": {
+              "start": 270,
+              "end": 1260
+            },
+            "includesOvernightWrap": false
+          }
+        },
+        {
+          "id": "PIT",
+          "message": "PIT has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "PIT",
+            "departures": [
+              270,
+              295,
+              555,
+              575,
+              685,
+              1006,
+              1125,
+              1255
+            ],
+            "excessiveGaps": [
+              {
+                "from": 295,
+                "to": 555,
+                "minutes": 260
+              },
+              {
+                "from": 685,
+                "to": 1006,
+                "minutes": 321
+              }
+            ],
+            "serviceWindowMinutes": {
+              "start": 270,
+              "end": 1260
+            },
+            "includesOvernightWrap": false
+          }
+        },
+        {
+          "id": "PNS",
+          "message": "PNS has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "PNS",
+            "departures": [
+              270,
+              387,
+              860,
+              970,
+              1105
+            ],
+            "excessiveGaps": [
+              {
+                "from": 387,
+                "to": 860,
+                "minutes": 473
+              }
+            ],
+            "serviceWindowMinutes": {
+              "start": 270,
+              "end": 1260
+            },
+            "includesOvernightWrap": false
+          }
+        },
+        {
+          "id": "PWM",
+          "message": "PWM has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "PWM",
+            "departures": [
+              270,
+              570,
+              900,
+              986,
+              1057
+            ],
+            "excessiveGaps": [
+              {
+                "from": 270,
+                "to": 570,
+                "minutes": 300
+              },
+              {
+                "from": 570,
+                "to": 900,
+                "minutes": 330
+              }
+            ],
+            "serviceWindowMinutes": {
+              "start": 270,
+              "end": 1260
+            },
+            "includesOvernightWrap": false
+          }
+        },
+        {
+          "id": "ROA",
+          "message": "ROA has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "ROA",
+            "departures": [
+              315,
+              1030
+            ],
+            "excessiveGaps": [
+              {
+                "from": 315,
+                "to": 1030,
+                "minutes": 715
+              }
+            ],
+            "serviceWindowMinutes": {
+              "start": 270,
+              "end": 1260
+            },
+            "includesOvernightWrap": false
+          }
+        },
+        {
+          "id": "ROC",
+          "message": "ROC has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "ROC",
+            "departures": [
+              270,
+              600,
+              765,
+              768,
+              1255
+            ],
+            "excessiveGaps": [
+              {
+                "from": 270,
+                "to": 600,
+                "minutes": 330
+              },
+              {
+                "from": 768,
+                "to": 1255,
+                "minutes": 487
+              }
+            ],
+            "serviceWindowMinutes": {
+              "start": 270,
+              "end": 1260
+            },
+            "includesOvernightWrap": false
+          }
+        },
+        {
+          "id": "SAT",
+          "message": "SAT has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "SAT",
+            "departures": [
+              60,
+              380,
+              525,
+              1005,
+              1110
+            ],
+            "excessiveGaps": [
+              {
+                "from": 525,
+                "to": 1005,
+                "minutes": 480
+              }
+            ],
+            "serviceWindowMinutes": {
+              "start": 270,
+              "end": 1260
+            },
+            "includesOvernightWrap": false
+          }
+        },
+        {
+          "id": "SAV",
+          "message": "SAV has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "SAV",
+            "departures": [
+              270,
+              300,
+              710,
+              820,
+              850,
+              990
+            ],
+            "excessiveGaps": [
+              {
+                "from": 300,
+                "to": 710,
+                "minutes": 410
+              }
+            ],
+            "serviceWindowMinutes": {
+              "start": 270,
+              "end": 1260
+            },
+            "includesOvernightWrap": false
+          }
+        },
+        {
+          "id": "SBN",
+          "message": "SBN has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "SBN",
+            "departures": [
+              385,
+              635,
+              878,
+              1130
+            ],
+            "excessiveGaps": [
+              {
+                "from": 385,
+                "to": 635,
+                "minutes": 250
+              },
+              {
+                "from": 635,
+                "to": 878,
+                "minutes": 243
+              },
+              {
+                "from": 878,
+                "to": 1130,
+                "minutes": 252
+              }
+            ],
+            "serviceWindowMinutes": {
+              "start": 270,
+              "end": 1260
+            },
+            "includesOvernightWrap": false
+          }
+        },
+        {
+          "id": "SDF",
+          "message": "SDF has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "SDF",
+            "departures": [
+              305,
+              765,
+              805,
+              900,
+              955,
+              1135
+            ],
+            "excessiveGaps": [
+              {
+                "from": 305,
+                "to": 765,
+                "minutes": 460
+              }
+            ],
+            "serviceWindowMinutes": {
+              "start": 270,
+              "end": 1260
+            },
+            "includesOvernightWrap": false
+          }
+        },
+        {
+          "id": "SGF",
+          "message": "SGF has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "SGF",
+            "departures": [
+              270,
+              1190,
+              1230
+            ],
+            "excessiveGaps": [
+              {
+                "from": 270,
+                "to": 1190,
+                "minutes": 920
+              }
+            ],
+            "serviceWindowMinutes": {
+              "start": 270,
+              "end": 1260
+            },
+            "includesOvernightWrap": false
+          }
+        },
+        {
+          "id": "SWF",
+          "message": "SWF has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "SWF",
+            "departures": [
+              425,
+              755,
+              757,
+              1121
+            ],
+            "excessiveGaps": [
+              {
+                "from": 425,
+                "to": 755,
+                "minutes": 330
+              },
+              {
+                "from": 757,
+                "to": 1121,
+                "minutes": 364
+              }
+            ],
+            "serviceWindowMinutes": {
+              "start": 270,
+              "end": 1260
+            },
+            "includesOvernightWrap": false
+          }
+        },
+        {
+          "id": "TLH",
+          "message": "TLH has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "TLH",
+            "departures": [
+              295,
+              555
+            ],
+            "excessiveGaps": [
+              {
+                "from": 295,
+                "to": 555,
+                "minutes": 260
+              }
+            ],
+            "serviceWindowMinutes": {
+              "start": 270,
+              "end": 1260
+            },
+            "includesOvernightWrap": false
+          }
+        },
+        {
+          "id": "TOL",
+          "message": "TOL has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "TOL",
+            "departures": [
+              270,
+              638
+            ],
+            "excessiveGaps": [
+              {
+                "from": 270,
+                "to": 638,
+                "minutes": 368
+              }
+            ],
+            "serviceWindowMinutes": {
+              "start": 270,
+              "end": 1260
+            },
+            "includesOvernightWrap": false
+          }
+        },
+        {
+          "id": "TRI",
+          "message": "TRI has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "TRI",
+            "departures": [
+              370,
+              870
+            ],
+            "excessiveGaps": [
+              {
+                "from": 370,
+                "to": 870,
+                "minutes": 500
+              }
+            ],
+            "serviceWindowMinutes": {
+              "start": 270,
+              "end": 1260
+            },
+            "includesOvernightWrap": false
+          }
+        },
+        {
+          "id": "TTN",
+          "message": "TTN has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "TTN",
+            "departures": [
+              315,
+              875
+            ],
+            "excessiveGaps": [
+              {
+                "from": 315,
+                "to": 875,
+                "minutes": 560
+              }
+            ],
+            "serviceWindowMinutes": {
+              "start": 270,
+              "end": 1260
+            },
+            "includesOvernightWrap": false
+          }
+        },
+        {
+          "id": "TUL",
+          "message": "TUL has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "TUL",
+            "departures": [
+              270,
+              550,
+              1080,
+              1135,
+              1173
+            ],
+            "excessiveGaps": [
+              {
+                "from": 270,
+                "to": 550,
+                "minutes": 280
+              },
+              {
+                "from": 550,
+                "to": 1080,
+                "minutes": 530
+              }
+            ],
+            "serviceWindowMinutes": {
+              "start": 270,
+              "end": 1260
+            },
+            "includesOvernightWrap": false
+          }
+        },
+        {
+          "id": "TYS",
+          "message": "TYS has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "TYS",
+            "departures": [
+              270,
+              460,
+              865
+            ],
+            "excessiveGaps": [
+              {
+                "from": 460,
+                "to": 865,
+                "minutes": 405
+              }
+            ],
+            "serviceWindowMinutes": {
+              "start": 270,
+              "end": 1260
+            },
+            "includesOvernightWrap": false
+          }
+        },
+        {
+          "id": "VPS",
+          "message": "VPS has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "VPS",
+            "departures": [
+              350,
+              610,
+              1139,
+              1215
+            ],
+            "excessiveGaps": [
+              {
+                "from": 350,
+                "to": 610,
+                "minutes": 260
+              },
+              {
+                "from": 610,
+                "to": 1139,
+                "minutes": 529
+              }
+            ],
+            "serviceWindowMinutes": {
+              "start": 270,
+              "end": 1260
+            },
+            "includesOvernightWrap": false
+          }
+        },
+        {
+          "id": "XNA",
+          "message": "XNA has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "XNA",
+            "departures": [
+              270,
+              840,
+              1260
+            ],
+            "excessiveGaps": [
+              {
+                "from": 270,
+                "to": 840,
+                "minutes": 570
+              },
+              {
+                "from": 840,
+                "to": 1260,
+                "minutes": 420
+              }
+            ],
+            "serviceWindowMinutes": {
+              "start": 270,
+              "end": 1260
+            },
+            "includesOvernightWrap": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "section_26_service_gap_policy_consistency",
+      "title": "Section 2.6 service-gap policy consistency",
+      "section": "§2.5 / §2.6 Check B",
+      "severity": "warning",
+      "hardStop": false,
+      "status": "pass",
+      "message": "The city departure-gap rule is bounded to the 04:30–21:00 service window",
+      "metrics": {
+        "findingCount": 0,
+        "effectiveFindingCount": 0,
+        "overriddenFindingCount": 0
+      },
+      "findings": []
+    },
+    {
+      "id": "numbering_conventions",
+      "title": "Route and flight numbering conventions",
+      "section": "§2.8 / Lesson 33",
+      "severity": "error",
+      "hardStop": false,
+      "status": "pass",
+      "message": "Route blocks and flight-number ranges follow the standing convention",
+      "metrics": {
+        "findingCount": 0,
+        "effectiveFindingCount": 0,
+        "overriddenFindingCount": 0
+      },
+      "findings": []
+    },
+    {
+      "id": "gate_assignment_conflicts",
+      "title": "Physical gate/stand double-booking",
+      "section": "§1.7 / §2.2",
+      "severity": "error",
+      "hardStop": true,
+      "status": "pass",
+      "message": "No assigned physical slot is double-booked cyclically",
+      "metrics": {
+        "findingCount": 0,
+        "effectiveFindingCount": 0,
+        "overriddenFindingCount": 0
+      },
+      "findings": []
+    },
+    {
+      "id": "passenger_touch_on_stand",
+      "title": "Passenger handling on stands",
+      "section": "§1.7 hard-stop addition",
+      "severity": "error",
+      "hardStop": true,
+      "status": "pass",
+      "message": "Every deplaning and boarding touch is assigned to a gate",
+      "metrics": {
+        "findingCount": 0,
+        "effectiveFindingCount": 0,
+        "overriddenFindingCount": 0
+      },
+      "findings": []
+    },
+    {
+      "id": "stand_capacity",
+      "title": "Configured hard-stand capacity",
+      "section": "§2.2",
+      "severity": "error",
+      "hardStop": true,
+      "status": "pass",
+      "message": "Every assignment fits within configured stand capacity",
+      "metrics": {
+        "findingCount": 0,
+        "effectiveFindingCount": 0,
+        "overriddenFindingCount": 0
+      },
+      "findings": []
+    },
+    {
+      "id": "combined_capacity_peak",
+      "title": "One-minute combined capacity",
+      "section": "§1.7 / §2.2",
+      "severity": "error",
+      "hardStop": true,
+      "status": "pass",
+      "message": "Every city's one-minute peak fits combined gate and stand capacity",
+      "metrics": {
+        "findingCount": 0,
+        "effectiveFindingCount": 0,
+        "overriddenFindingCount": 0
+      },
+      "findings": []
+    },
+    {
+      "id": "fixed_physical_inventory",
+      "title": "Authoritative gate and stand inventory",
+      "section": "§1.7 / §2.2",
+      "severity": "error",
+      "hardStop": true,
+      "status": "pass",
+      "message": "Every airport assignment fits its configured gates and stands without synthesized positions",
+      "metrics": {
+        "findingCount": 0,
+        "effectiveFindingCount": 0,
+        "overriddenFindingCount": 0
+      },
+      "findings": []
+    },
+    {
+      "id": "runway_screening",
+      "title": "Fleet/runway screening",
+      "section": "§2.12",
+      "severity": "warning",
+      "hardStop": false,
+      "status": "not_evaluated",
+      "message": "No active city has runway length populated in the pinned city snapshot",
+      "metrics": {
+        "missingInputs": [
+          "cities[].runwayLengthFeet"
+        ],
+        "findingCount": 0,
+        "effectiveFindingCount": 0,
+        "overriddenFindingCount": 0
+      },
+      "findings": []
+    },
+    {
+      "id": "tiered_service_minimums",
+      "title": "Percentile-tier service minimums",
+      "section": "§2.3",
+      "severity": "error",
+      "hardStop": false,
+      "status": "overridden",
+      "message": "All 18 finding(s) have explicit overrides",
+      "metrics": {
+        "findingCount": 18,
+        "effectiveFindingCount": 0,
+        "overriddenFindingCount": 18
+      },
+      "findings": [
+        {
+          "id": "ATW",
+          "message": "ATW does not satisfy its percentile-tier service envelope",
+          "evidence": {
+            "city": "ATW",
+            "percentile": 31.0,
+            "totalFlights": 14,
+            "hubOrFocusFlights": 14,
+            "minimumFlights": 6,
+            "connectedHubs": [
+              "BHM",
+              "DAY",
+              "MCI"
+            ],
+            "hubCountCap": 2
+          },
+          "override": {
+            "reason": "Schedule 7 v1.1.3 BHM focus-city initiative: ATW-BHM is deliberate focus-city feed for Florida Peninsula connectivity.",
+            "approvedBy": "user",
+            "expiresAfterSchedule": 7
+          }
+        },
+        {
+          "id": "BHM",
+          "message": "BHM does not satisfy its percentile-tier service envelope",
+          "evidence": {
+            "city": "BHM",
+            "percentile": 64.0,
+            "totalFlights": 92,
+            "hubOrFocusFlights": 92,
+            "minimumFlights": 6,
+            "connectedHubs": [
+              "DAY",
+              "JAX",
+              "MCI",
+              "PHF"
+            ],
+            "hubCountCap": 2
+          },
+          "override": {
+            "reason": "Schedule 7 v1.1.0 PHF north-south initiative: PHF is a geographically reasonable additional hub and the added service passes downstream feasibility checks.",
+            "approvedBy": "user",
+            "expiresAfterSchedule": 7
+          }
+        },
+        {
+          "id": "BWI",
+          "message": "BWI does not satisfy its percentile-tier service envelope",
+          "evidence": {
+            "city": "BWI",
+            "percentile": 94.0,
+            "totalFlights": 24,
+            "hubOrFocusFlights": 22,
+            "minimumFlights": 8,
+            "connectedHubs": [
+              "BHM",
+              "JAX",
+              "MCI",
+              "PHF",
+              "SYR"
+            ],
+            "hubCountCap": 4
+          },
+          "override": {
+            "reason": "Schedule 7 v1.1.0 PHF north-south initiative: the BWI-BHM-PHF triangles are geographically reasonable and pass downstream feasibility checks.",
+            "approvedBy": "user",
+            "expiresAfterSchedule": 7
+          }
+        },
+        {
+          "id": "CLT",
+          "message": "CLT does not satisfy its percentile-tier service envelope",
+          "evidence": {
+            "city": "CLT",
+            "percentile": 93.0,
+            "totalFlights": 40,
+            "hubOrFocusFlights": 32,
+            "minimumFlights": 8,
+            "connectedHubs": [
+              "BHM",
+              "JAX",
+              "MCI",
+              "PHF",
+              "SYR"
+            ],
+            "hubCountCap": 4
+          },
+          "override": {
+            "reason": "Schedule 7 v1.1.6 BHM morning initiative: CLT-BHM is deliberate focus-city feed into and out of BHM's existing morning connection wave.",
+            "approvedBy": "user",
+            "expiresAfterSchedule": 7
+          }
+        },
+        {
+          "id": "DAB",
+          "message": "DAB does not satisfy its percentile-tier service envelope",
+          "evidence": {
+            "city": "DAB",
+            "percentile": 27.0,
+            "totalFlights": 10,
+            "hubOrFocusFlights": 8,
+            "minimumFlights": 6,
+            "connectedHubs": [
+              "BHM",
+              "JAX",
+              "PHF"
+            ],
+            "hubCountCap": 2
+          },
+          "override": {
+            "reason": "Schedule 7 v1.1.0 PHF north-south initiative: PHF is a geographically reasonable additional hub and the added service passes downstream feasibility checks.",
+            "approvedBy": "user",
+            "expiresAfterSchedule": 7
+          }
+        },
+        {
+          "id": "FLL",
+          "message": "FLL does not satisfy its percentile-tier service envelope",
+          "evidence": {
+            "city": "FLL",
+            "percentile": 98.0,
+            "totalFlights": 50,
+            "hubOrFocusFlights": 35,
+            "minimumFlights": 8,
+            "connectedHubs": [
+              "BHM",
+              "JAX",
+              "MCI",
+              "PHF",
+              "SYR"
+            ],
+            "hubCountCap": 4
+          },
+          "override": {
+            "reason": "Schedule 7 v1.1.3 BHM focus-city initiative: FLL-BHM is deliberate focus-city service for Florida Peninsula connectivity.",
+            "approvedBy": "user",
+            "expiresAfterSchedule": 7
+          }
+        },
+        {
+          "id": "FWA",
+          "message": "FWA does not satisfy its percentile-tier service envelope",
+          "evidence": {
+            "city": "FWA",
+            "percentile": 25.0,
+            "totalFlights": 8,
+            "hubOrFocusFlights": 8,
+            "minimumFlights": 3,
+            "connectedHubs": [
+              "DAY",
+              "SYR"
+            ],
+            "hubCountCap": 1
+          },
+          "override": {
+            "reason": "Schedule 7 v1.1.4 tactical initiative: the user-approved FWA-SYR round trip deliberately gives FWA access to the nearby SYR hub in addition to DAY.",
+            "approvedBy": "user",
+            "expiresAfterSchedule": 7
+          }
+        },
+        {
+          "id": "MLB",
+          "message": "MLB does not satisfy its percentile-tier service envelope",
+          "evidence": {
+            "city": "MLB",
+            "percentile": 14.0,
+            "totalFlights": 6,
+            "hubOrFocusFlights": 6,
+            "minimumFlights": 3,
+            "connectedHubs": [
+              "JAX",
+              "PHF"
+            ],
+            "hubCountCap": 1
+          },
+          "override": {
+            "reason": "Schedule 7 v1.1.0 PHF north-south initiative: PHF is a geographically reasonable additional hub and the added service passes downstream feasibility checks.",
+            "approvedBy": "user",
+            "expiresAfterSchedule": 7
+          }
+        },
+        {
+          "id": "PGD",
+          "message": "PGD does not satisfy its percentile-tier service envelope",
+          "evidence": {
+            "city": "PGD",
+            "percentile": 89.0,
+            "totalFlights": 14,
+            "hubOrFocusFlights": 10,
+            "minimumFlights": 8,
+            "connectedHubs": [
+              "BHM",
+              "JAX",
+              "MCI",
+              "PHF"
+            ],
+            "hubCountCap": 3
+          },
+          "override": {
+            "reason": "Schedule 7 v1.1.0 PHF north-south initiative: PHF is a geographically reasonable additional hub and the added service passes downstream feasibility checks.",
+            "approvedBy": "user",
+            "expiresAfterSchedule": 7
+          }
+        },
+        {
+          "id": "PIE",
+          "message": "PIE does not satisfy its percentile-tier service envelope",
+          "evidence": {
+            "city": "PIE",
+            "percentile": 96.0,
+            "totalFlights": 36,
+            "hubOrFocusFlights": 30,
+            "minimumFlights": 8,
+            "connectedHubs": [
+              "BHM",
+              "JAX",
+              "MCI",
+              "PHF",
+              "SYR"
+            ],
+            "hubCountCap": 4
+          },
+          "override": {
+            "reason": "Schedule 7 v1.1.3 BHM focus-city initiative: PIE-BHM is deliberate focus-city service for Florida Peninsula connectivity.",
+            "approvedBy": "user",
+            "expiresAfterSchedule": 7
+          }
+        },
+        {
+          "id": "PIT",
+          "message": "PIT does not satisfy its percentile-tier service envelope",
+          "evidence": {
+            "city": "PIT",
+            "percentile": 87.0,
+            "totalFlights": 16,
+            "hubOrFocusFlights": 16,
+            "minimumFlights": 8,
+            "connectedHubs": [
+              "DAY",
+              "JAX",
+              "PHF",
+              "SYR"
+            ],
+            "hubCountCap": 3
+          },
+          "override": {
+            "reason": "Schedule 7 v1.1.0 PHF north-south initiative: PHF is a geographically reasonable additional hub and the added service passes downstream feasibility checks.",
+            "approvedBy": "user",
+            "expiresAfterSchedule": 7
+          }
+        },
+        {
+          "id": "PNS",
+          "message": "PNS does not satisfy its percentile-tier service envelope",
+          "evidence": {
+            "city": "PNS",
+            "percentile": 65.0,
+            "totalFlights": 10,
+            "hubOrFocusFlights": 10,
+            "minimumFlights": 6,
+            "connectedHubs": [
+              "JAX",
+              "MCI",
+              "PHF"
+            ],
+            "hubCountCap": 2
+          },
+          "override": {
+            "reason": "Schedule 7 v1.1.0 PHF north-south initiative: PHF is a geographically reasonable additional hub and the added service passes downstream feasibility checks.",
+            "approvedBy": "user",
+            "expiresAfterSchedule": 7
+          }
+        },
+        {
+          "id": "ROC",
+          "message": "ROC does not satisfy its percentile-tier service envelope",
+          "evidence": {
+            "city": "ROC",
+            "percentile": 62.0,
+            "totalFlights": 10,
+            "hubOrFocusFlights": 10,
+            "minimumFlights": 6,
+            "connectedHubs": [
+              "DAY",
+              "PHF",
+              "SYR"
+            ],
+            "hubCountCap": 2
+          },
+          "override": {
+            "reason": "Schedule 7 v1.1.0 PHF north-south initiative: PHF is a geographically reasonable additional hub and the added service passes downstream feasibility checks.",
+            "approvedBy": "user",
+            "expiresAfterSchedule": 7
+          }
+        },
+        {
+          "id": "SAV",
+          "message": "SAV does not satisfy its percentile-tier service envelope",
+          "evidence": {
+            "city": "SAV",
+            "percentile": 69.0,
+            "totalFlights": 12,
+            "hubOrFocusFlights": 12,
+            "minimumFlights": 6,
+            "connectedHubs": [
+              "BHM",
+              "JAX",
+              "PHF"
+            ],
+            "hubCountCap": 2
+          },
+          "override": {
+            "reason": "Schedule 7 v1.1.6 BHM morning initiative: SAV-BHM is deliberate focus-city feed into and out of BHM's existing morning connection wave.",
+            "approvedBy": "user",
+            "expiresAfterSchedule": 7
+          }
+        },
+        {
+          "id": "SFB",
+          "message": "SFB does not satisfy its percentile-tier service envelope",
+          "evidence": {
+            "city": "SFB",
+            "percentile": 100.0,
+            "totalFlights": 54,
+            "hubOrFocusFlights": 27,
+            "minimumFlights": 8,
+            "connectedHubs": [
+              "BHM",
+              "JAX",
+              "MCI",
+              "PHF",
+              "SYR"
+            ],
+            "hubCountCap": 4
+          },
+          "override": {
+            "reason": "Schedule 7 v1.1.3 BHM focus-city initiative: SFB-BHM is deliberate focus-city service for Florida Peninsula connectivity.",
+            "approvedBy": "user",
+            "expiresAfterSchedule": 7
+          }
+        },
+        {
+          "id": "SRQ",
+          "message": "SRQ does not satisfy its percentile-tier service envelope",
+          "evidence": {
+            "city": "SRQ",
+            "percentile": 80.0,
+            "totalFlights": 16,
+            "hubOrFocusFlights": 16,
+            "minimumFlights": 8,
+            "connectedHubs": [
+              "BHM",
+              "JAX",
+              "PHF",
+              "SYR"
+            ],
+            "hubCountCap": 3
+          },
+          "override": {
+            "reason": "Schedule 7 v1.1.0 PHF north-south initiative: PHF is a geographically reasonable additional hub and the added service passes downstream feasibility checks.",
+            "approvedBy": "user",
+            "expiresAfterSchedule": 7
+          }
+        },
+        {
+          "id": "SWF",
+          "message": "SWF does not satisfy its percentile-tier service envelope",
+          "evidence": {
+            "city": "SWF",
+            "percentile": 6.0,
+            "totalFlights": 8,
+            "hubOrFocusFlights": 8,
+            "minimumFlights": 3,
+            "connectedHubs": [
+              "DAY",
+              "SYR"
+            ],
+            "hubCountCap": 1
+          },
+          "override": {
+            "reason": "Schedule 7 v1.1.4 tactical initiative: the user-approved SWF-DAY round trip deliberately gives SWF access to the nearby DAY hub in addition to SYR.",
+            "approvedBy": "user",
+            "expiresAfterSchedule": 7
+          }
+        },
+        {
+          "id": "VPS",
+          "message": "VPS does not satisfy its percentile-tier service envelope",
+          "evidence": {
+            "city": "VPS",
+            "percentile": 56.0,
+            "totalFlights": 8,
+            "hubOrFocusFlights": 8,
+            "minimumFlights": 6,
+            "connectedHubs": [
+              "BHM",
+              "JAX",
+              "PHF"
+            ],
+            "hubCountCap": 2
+          },
+          "override": {
+            "reason": "Schedule 7 v1.1.0 PHF north-south initiative: PHF is a geographically reasonable additional hub and the added service passes downstream feasibility checks.",
+            "approvedBy": "user",
+            "expiresAfterSchedule": 7
+          }
+        }
+      ]
+    },
+    {
+      "id": "hub_bank_alignment",
+      "title": "Hub-bank count and alignment",
+      "section": "§1.6a",
+      "severity": "error",
+      "hardStop": false,
+      "status": "overridden",
+      "message": "All 7 finding(s) have explicit overrides",
+      "metrics": {
+        "findingCount": 7,
+        "effectiveFindingCount": 0,
+        "overriddenFindingCount": 7
+      },
+      "findings": [
+        {
+          "id": "V114-R169-SYR-FWA-departure",
+          "message": "Departure for V114-R169-SYR-FWA falls outside bank SYR-B4",
+          "evidence": {
+            "assignment": {
+              "legId": "V114-R169-SYR-FWA",
+              "operation": "departure",
+              "bankId": "SYR-B4"
+            },
+            "minute": 875,
+            "bankWindow": [
+              795,
+              855
+            ]
+          },
+          "override": {
+            "reason": "Schedule 7 v1.1.4 tactical initiative: the 14:35 SYR-FWA return departs 20 minutes after Bank 4 to remain within SYR's fixed 16-gate inventory without weakening existing bank connections.",
+            "approvedBy": "user",
+            "expiresAfterSchedule": 7
+          }
+        },
+        {
+          "id": "V114-R122-SYR-SWF-departure",
+          "message": "Departure for V114-R122-SYR-SWF falls outside bank SYR-B6",
+          "evidence": {
+            "assignment": {
+              "legId": "V114-R122-SYR-SWF",
+              "operation": "departure",
+              "bankId": "SYR-B6"
+            },
+            "minute": 1210,
+            "bankWindow": [
+              1125,
+              1185
+            ]
+          },
+          "override": {
+            "reason": "Schedule 7 v1.1.4 tactical initiative: the 20:10 SYR-SWF return departs 25 minutes after Bank 6 to remain within SYR's fixed 16-gate inventory without weakening existing bank connections.",
+            "approvedBy": "user",
+            "expiresAfterSchedule": 7
+          }
+        },
+        {
+          "id": "V116-R149-DAY-BHM-departure",
+          "message": "Departure for V116-R149-DAY-BHM falls outside bank DAY-B1",
+          "evidence": {
+            "assignment": {
+              "legId": "V116-R149-DAY-BHM",
+              "operation": "departure",
+              "bankId": "DAY-B1"
+            },
+            "minute": 270,
+            "bankWindow": [
+              300,
+              360
+            ]
+          },
+          "override": {
+            "reason": "Schedule 7 v1.1.6 BHM morning initiative: the 04:30 DAY departure is 30 minutes before DAY Bank 1 so the aircraft can feed BHM's morning wave while remaining within fixed gate capacity at both cities.",
+            "approvedBy": "user",
+            "expiresAfterSchedule": 7
+          }
+        },
+        {
+          "id": "V116-R330-DAY-PHF-departure",
+          "message": "Departure for V116-R330-DAY-PHF falls outside bank DAY-B2",
+          "evidence": {
+            "assignment": {
+              "legId": "V116-R330-DAY-PHF",
+              "operation": "departure",
+              "bankId": "DAY-B2"
+            },
+            "minute": 411,
+            "bankWindow": [
+              425,
+              485
+            ]
+          },
+          "override": {
+            "reason": "Schedule 7 v1.1.6 PHF early-hub initiative: the user-selected 06:51 DAY departure splits the difference between a minimum turn and DAY Bank 2, producing an 08:20 PHF return with a 55-minute turn into the existing originator.",
+            "approvedBy": "user",
+            "expiresAfterSchedule": 7
+          }
+        },
+        {
+          "id": "V116-R330-DAY-PHF-arrival",
+          "message": "Arrival for V116-R330-DAY-PHF falls outside bank PHF-B2",
+          "evidence": {
+            "assignment": {
+              "legId": "V116-R330-DAY-PHF",
+              "operation": "arrival",
+              "bankId": "PHF-B2"
+            },
+            "minute": 500,
+            "bankWindow": [
+              505,
+              565
+            ]
+          },
+          "override": {
+            "reason": "Schedule 7 v1.1.6 PHF early-hub initiative: the user-selected 08:20 return arrives five minutes before PHF Bank 2 and preserves a 55-minute turn into Route 330's existing originator.",
+            "approvedBy": "user",
+            "expiresAfterSchedule": 7
+          }
+        },
+        {
+          "id": "V116-R338-SYR-PHF-departure",
+          "message": "Departure for V116-R338-SYR-PHF falls outside bank SYR-B2",
+          "evidence": {
+            "assignment": {
+              "legId": "V116-R338-SYR-PHF",
+              "operation": "departure",
+              "bankId": "SYR-B2"
+            },
+            "minute": 422,
+            "bankWindow": [
+              465,
+              525
+            ]
+          },
+          "override": {
+            "reason": "Schedule 7 v1.1.6 PHF early-hub initiative: the user approved the 07:02 SYR departure between Banks 1 and 2 so the aircraft reaches PHF Bank 2 with a 50-minute turn into its existing originator.",
+            "approvedBy": "user",
+            "expiresAfterSchedule": 7
+          }
+        },
+        {
+          "id": "V116-R719-JAX-PHF-arrival",
+          "message": "Arrival for V116-R719-JAX-PHF falls outside bank PHF-B2",
+          "evidence": {
+            "assignment": {
+              "legId": "V116-R719-JAX-PHF",
+              "operation": "arrival",
+              "bankId": "PHF-B2"
+            },
+            "minute": 502,
+            "bankWindow": [
+              505,
+              565
+            ]
+          },
+          "override": {
+            "reason": "Schedule 7 v1.1.6 PHF early-hub initiative: the user approved the minimum-turn 06:46 JAX departure and its 08:22 PHF arrival three minutes before Bank 2.",
+            "approvedBy": "user",
+            "expiresAfterSchedule": 7
+          }
+        }
+      ]
+    },
+    {
+      "id": "unused_overrides",
+      "title": "Override integrity",
+      "section": "§1.11",
+      "severity": "warning",
+      "hardStop": false,
+      "status": "pass",
+      "message": "Every configured override matches a current finding",
+      "metrics": {},
+      "findings": []
+    }
+  ]
+}

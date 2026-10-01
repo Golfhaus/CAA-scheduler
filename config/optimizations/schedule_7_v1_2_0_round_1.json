@@ -1,0 +1,566 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "schedule-7-v1.2.0-crj900-line-rebalance-round-1",
+  "baseSchedule": {
+    "scheduleId": "schedule_7_v1_1_6",
+    "commit": "e1389dbf5691f6b51dea8edf9f73857296cec3c5"
+  },
+  "schedule": {
+    "id": "schedule_7_v1_2_0_feasibility_01",
+    "version": "1.2.0-feasibility.01",
+    "label": "Schedule 7, Version 1.2.0 Feasibility 01",
+    "status": "draft"
+  },
+  "initiative": {
+    "kind": "crj900_line_rebalance",
+    "approvedBy": "user",
+    "principles": [
+      "Reclose the 28 existing CRJ900 aircraft-days as three 9\u201312-day lines before demand-ranked fleet promotion.",
+      "Preserve all existing flights, markets, fleet inventory, gates, stands, banks, and operating overrides.",
+      "Exchange seven same-station route suffixes and retime only SFB-ABE ten minutes later for a legal turn.",
+      "Renumber CRJ900 routes sequentially within each new line; retain flight IDs and numbers.",
+      "Keep all v1.2 work unpublished until explicitly authorized."
+    ],
+    "exchanges": [
+      {
+        "routes": [
+          501,
+          525
+        ],
+        "station": "SFB"
+      },
+      {
+        "routes": [
+          502,
+          526
+        ],
+        "station": "MCI"
+      },
+      {
+        "routes": [
+          503,
+          519
+        ],
+        "station": "JAX"
+      },
+      {
+        "routes": [
+          506,
+          512
+        ],
+        "station": "JAX"
+      },
+      {
+        "routes": [
+          509,
+          516
+        ],
+        "station": "PHF"
+      },
+      {
+        "routes": [
+          515,
+          527
+        ],
+        "station": "SYR"
+      },
+      {
+        "routes": [
+          517,
+          528
+        ],
+        "station": "SYR"
+      }
+    ]
+  },
+  "legReassignments": [
+    {
+      "legId": "ABE-SFB-CRJ900-01-IN",
+      "expectedRoute": 501,
+      "expectedSequenceWithinRoute": 6,
+      "targetRoute": 525
+    },
+    {
+      "legId": "V116-R525-SFB-SAT",
+      "expectedRoute": 525,
+      "expectedSequenceWithinRoute": 5,
+      "targetRoute": 501
+    },
+    {
+      "legId": "MCI-MSY-CRJ900-02-OUT",
+      "expectedRoute": 502,
+      "expectedSequenceWithinRoute": 5,
+      "targetRoute": 526
+    },
+    {
+      "legId": "MCI-MSY-CRJ900-02-IN",
+      "expectedRoute": 502,
+      "expectedSequenceWithinRoute": 6,
+      "targetRoute": 526
+    },
+    {
+      "legId": "MCI-MKE-CRJ900-01-OUT",
+      "expectedRoute": 502,
+      "expectedSequenceWithinRoute": 7,
+      "targetRoute": 526
+    },
+    {
+      "legId": "V112-R526-MCI-ATW",
+      "expectedRoute": 526,
+      "expectedSequenceWithinRoute": 4,
+      "targetRoute": 502
+    },
+    {
+      "legId": "V112-R526-ATW-MCI",
+      "expectedRoute": 526,
+      "expectedSequenceWithinRoute": 5,
+      "targetRoute": 502
+    },
+    {
+      "legId": "MCI-RDU-CRJ900-01-OUT",
+      "expectedRoute": 526,
+      "expectedSequenceWithinRoute": 6,
+      "targetRoute": 502
+    },
+    {
+      "legId": "CLT-JAX-CRJ900-01-IN",
+      "expectedRoute": 503,
+      "expectedSequenceWithinRoute": 4,
+      "targetRoute": 519
+    },
+    {
+      "legId": "CLT-JAX-CRJ900-02-OUT",
+      "expectedRoute": 503,
+      "expectedSequenceWithinRoute": 5,
+      "targetRoute": 519
+    },
+    {
+      "legId": "CMH-JAX-CRJ900-02-IN",
+      "expectedRoute": 503,
+      "expectedSequenceWithinRoute": 6,
+      "targetRoute": 519
+    },
+    {
+      "legId": "CMH-JAX-CRJ900-01-IN",
+      "expectedRoute": 519,
+      "expectedSequenceWithinRoute": 4,
+      "targetRoute": 503
+    },
+    {
+      "legId": "CMH-JAX-CRJ900-02-OUT",
+      "expectedRoute": 519,
+      "expectedSequenceWithinRoute": 5,
+      "targetRoute": 503
+    },
+    {
+      "legId": "IND-JAX-CRJ900-01-IN",
+      "expectedRoute": 519,
+      "expectedSequenceWithinRoute": 6,
+      "targetRoute": 503
+    },
+    {
+      "legId": "JAX-PIT-CRJ900-03-OUT",
+      "expectedRoute": 506,
+      "expectedSequenceWithinRoute": 2,
+      "targetRoute": 512
+    },
+    {
+      "legId": "JAX-PIT-CRJ900-03-IN",
+      "expectedRoute": 506,
+      "expectedSequenceWithinRoute": 3,
+      "targetRoute": 512
+    },
+    {
+      "legId": "JAX-PHF-CRJ900-01-OUT",
+      "expectedRoute": 506,
+      "expectedSequenceWithinRoute": 4,
+      "targetRoute": 512
+    },
+    {
+      "legId": "DAL-PHF-CRJ900-05-IN",
+      "expectedRoute": 506,
+      "expectedSequenceWithinRoute": 5,
+      "targetRoute": 512
+    },
+    {
+      "legId": "BHM-DAL-CRJ900-02-IN",
+      "expectedRoute": 506,
+      "expectedSequenceWithinRoute": 6,
+      "targetRoute": 512
+    },
+    {
+      "legId": "AUS-JAX-CRJ900-01-IN",
+      "expectedRoute": 512,
+      "expectedSequenceWithinRoute": 2,
+      "targetRoute": 506
+    },
+    {
+      "legId": "AUS-JAX-CRJ900-01-OUT",
+      "expectedRoute": 512,
+      "expectedSequenceWithinRoute": 3,
+      "targetRoute": 506
+    },
+    {
+      "legId": "JAX-PHF-CRJ900-02-OUT",
+      "expectedRoute": 512,
+      "expectedSequenceWithinRoute": 4,
+      "targetRoute": 506
+    },
+    {
+      "legId": "PHF-PIE-CRJ900-06-OUT",
+      "expectedRoute": 512,
+      "expectedSequenceWithinRoute": 5,
+      "targetRoute": 506
+    },
+    {
+      "legId": "DAL-PHF-CRJ900-01-IN",
+      "expectedRoute": 509,
+      "expectedSequenceWithinRoute": 5,
+      "targetRoute": 516
+    },
+    {
+      "legId": "PHF-PIE-CRJ900-01-OUT",
+      "expectedRoute": 516,
+      "expectedSequenceWithinRoute": 6,
+      "targetRoute": 509
+    },
+    {
+      "legId": "V115-R515-SYR-ORH",
+      "expectedRoute": 515,
+      "expectedSequenceWithinRoute": 7,
+      "targetRoute": 527
+    },
+    {
+      "legId": "FLL-SYR-CRJ900-01-IN",
+      "expectedRoute": 527,
+      "expectedSequenceWithinRoute": 5,
+      "targetRoute": 515
+    },
+    {
+      "legId": "PIE-SYR-CRJ900-02-IN",
+      "expectedRoute": 517,
+      "expectedSequenceWithinRoute": 2,
+      "targetRoute": 528
+    },
+    {
+      "legId": "PHF-PIE-CRJ900-05-IN",
+      "expectedRoute": 517,
+      "expectedSequenceWithinRoute": 3,
+      "targetRoute": 528
+    },
+    {
+      "legId": "PHF-PIE-CRJ900-05-OUT",
+      "expectedRoute": 517,
+      "expectedSequenceWithinRoute": 4,
+      "targetRoute": 528
+    },
+    {
+      "legId": "PHF-PIE-CRJ900-01-IN",
+      "expectedRoute": 517,
+      "expectedSequenceWithinRoute": 5,
+      "targetRoute": 528
+    },
+    {
+      "legId": "FLL-SYR-CRJ900-03-IN",
+      "expectedRoute": 528,
+      "expectedSequenceWithinRoute": 2,
+      "targetRoute": 517
+    },
+    {
+      "legId": "FLL-SYR-CRJ900-04-OUT",
+      "expectedRoute": 528,
+      "expectedSequenceWithinRoute": 3,
+      "targetRoute": 517
+    },
+    {
+      "legId": "FLL-SYR-CRJ900-05-IN",
+      "expectedRoute": 528,
+      "expectedSequenceWithinRoute": 4,
+      "targetRoute": 517
+    },
+    {
+      "legId": "FLL-GSP-CRJ900-01-OUT",
+      "expectedRoute": 528,
+      "expectedSequenceWithinRoute": 5,
+      "targetRoute": 517
+    }
+  ],
+  "routeReassignments": [
+    {
+      "sourceRoute": 501,
+      "expectedLine": "AB",
+      "expectedDay": 1,
+      "expectedFleet": "CRJ900",
+      "targetRoute": 501,
+      "line": "AB",
+      "day": 1
+    },
+    {
+      "sourceRoute": 526,
+      "expectedLine": "AJ",
+      "expectedDay": 6,
+      "expectedFleet": "CRJ900",
+      "targetRoute": 502,
+      "line": "AB",
+      "day": 2
+    },
+    {
+      "sourceRoute": 503,
+      "expectedLine": "AG",
+      "expectedDay": 2,
+      "expectedFleet": "CRJ900",
+      "targetRoute": 503,
+      "line": "AB",
+      "day": 3
+    },
+    {
+      "sourceRoute": 520,
+      "expectedLine": "AG",
+      "expectedDay": 19,
+      "expectedFleet": "CRJ900",
+      "targetRoute": 504,
+      "line": "AB",
+      "day": 4
+    },
+    {
+      "sourceRoute": 502,
+      "expectedLine": "AG",
+      "expectedDay": 1,
+      "expectedFleet": "CRJ900",
+      "targetRoute": 505,
+      "line": "AB",
+      "day": 5
+    },
+    {
+      "sourceRoute": 521,
+      "expectedLine": "AJ",
+      "expectedDay": 1,
+      "expectedFleet": "CRJ900",
+      "targetRoute": 506,
+      "line": "AB",
+      "day": 6
+    },
+    {
+      "sourceRoute": 522,
+      "expectedLine": "AJ",
+      "expectedDay": 2,
+      "expectedFleet": "CRJ900",
+      "targetRoute": 507,
+      "line": "AB",
+      "day": 7
+    },
+    {
+      "sourceRoute": 523,
+      "expectedLine": "AJ",
+      "expectedDay": 3,
+      "expectedFleet": "CRJ900",
+      "targetRoute": 508,
+      "line": "AB",
+      "day": 8
+    },
+    {
+      "sourceRoute": 524,
+      "expectedLine": "AJ",
+      "expectedDay": 4,
+      "expectedFleet": "CRJ900",
+      "targetRoute": 509,
+      "line": "AB",
+      "day": 9
+    },
+    {
+      "sourceRoute": 525,
+      "expectedLine": "AJ",
+      "expectedDay": 5,
+      "expectedFleet": "CRJ900",
+      "targetRoute": 510,
+      "line": "AB",
+      "day": 10
+    },
+    {
+      "sourceRoute": 504,
+      "expectedLine": "AG",
+      "expectedDay": 3,
+      "expectedFleet": "CRJ900",
+      "targetRoute": 511,
+      "line": "AG",
+      "day": 1
+    },
+    {
+      "sourceRoute": 505,
+      "expectedLine": "AG",
+      "expectedDay": 4,
+      "expectedFleet": "CRJ900",
+      "targetRoute": 512,
+      "line": "AG",
+      "day": 2
+    },
+    {
+      "sourceRoute": 506,
+      "expectedLine": "AG",
+      "expectedDay": 5,
+      "expectedFleet": "CRJ900",
+      "targetRoute": 513,
+      "line": "AG",
+      "day": 3
+    },
+    {
+      "sourceRoute": 513,
+      "expectedLine": "AG",
+      "expectedDay": 12,
+      "expectedFleet": "CRJ900",
+      "targetRoute": 514,
+      "line": "AG",
+      "day": 4
+    },
+    {
+      "sourceRoute": 514,
+      "expectedLine": "AG",
+      "expectedDay": 13,
+      "expectedFleet": "CRJ900",
+      "targetRoute": 515,
+      "line": "AG",
+      "day": 5
+    },
+    {
+      "sourceRoute": 515,
+      "expectedLine": "AG",
+      "expectedDay": 14,
+      "expectedFleet": "CRJ900",
+      "targetRoute": 516,
+      "line": "AG",
+      "day": 6
+    },
+    {
+      "sourceRoute": 528,
+      "expectedLine": "AP",
+      "expectedDay": 2,
+      "expectedFleet": "CRJ900",
+      "targetRoute": 517,
+      "line": "AG",
+      "day": 7
+    },
+    {
+      "sourceRoute": 518,
+      "expectedLine": "AG",
+      "expectedDay": 17,
+      "expectedFleet": "CRJ900",
+      "targetRoute": 518,
+      "line": "AG",
+      "day": 8
+    },
+    {
+      "sourceRoute": 519,
+      "expectedLine": "AG",
+      "expectedDay": 18,
+      "expectedFleet": "CRJ900",
+      "targetRoute": 519,
+      "line": "AG",
+      "day": 9
+    },
+    {
+      "sourceRoute": 507,
+      "expectedLine": "AG",
+      "expectedDay": 6,
+      "expectedFleet": "CRJ900",
+      "targetRoute": 520,
+      "line": "AJ",
+      "day": 1
+    },
+    {
+      "sourceRoute": 508,
+      "expectedLine": "AG",
+      "expectedDay": 7,
+      "expectedFleet": "CRJ900",
+      "targetRoute": 521,
+      "line": "AJ",
+      "day": 2
+    },
+    {
+      "sourceRoute": 509,
+      "expectedLine": "AG",
+      "expectedDay": 8,
+      "expectedFleet": "CRJ900",
+      "targetRoute": 522,
+      "line": "AJ",
+      "day": 3
+    },
+    {
+      "sourceRoute": 517,
+      "expectedLine": "AG",
+      "expectedDay": 16,
+      "expectedFleet": "CRJ900",
+      "targetRoute": 523,
+      "line": "AJ",
+      "day": 4
+    },
+    {
+      "sourceRoute": 527,
+      "expectedLine": "AP",
+      "expectedDay": 1,
+      "expectedFleet": "CRJ900",
+      "targetRoute": 524,
+      "line": "AJ",
+      "day": 5
+    },
+    {
+      "sourceRoute": 516,
+      "expectedLine": "AG",
+      "expectedDay": 15,
+      "expectedFleet": "CRJ900",
+      "targetRoute": 525,
+      "line": "AJ",
+      "day": 6
+    },
+    {
+      "sourceRoute": 510,
+      "expectedLine": "AG",
+      "expectedDay": 9,
+      "expectedFleet": "CRJ900",
+      "targetRoute": 526,
+      "line": "AJ",
+      "day": 7
+    },
+    {
+      "sourceRoute": 511,
+      "expectedLine": "AG",
+      "expectedDay": 10,
+      "expectedFleet": "CRJ900",
+      "targetRoute": 527,
+      "line": "AJ",
+      "day": 8
+    },
+    {
+      "sourceRoute": 512,
+      "expectedLine": "AG",
+      "expectedDay": 11,
+      "expectedFleet": "CRJ900",
+      "targetRoute": 528,
+      "line": "AJ",
+      "day": 9
+    }
+  ],
+  "retimeLegs": [
+    {
+      "legId": "ABE-SFB-CRJ900-01-IN",
+      "expectedDepartureMinute": 1250,
+      "expectedArrivalMinute": 1387,
+      "departureMinute": 1260,
+      "arrivalMinute": 1397
+    }
+  ],
+  "expectedCheckpoint": {
+    "legs": 1080,
+    "routes": 179,
+    "lines": 22,
+    "crj900AircraftDays": 28,
+    "crj900LineLengths": {
+      "AB": 10,
+      "AG": 9,
+      "AJ": 9
+    },
+    "effectiveOperatingErrors": 0,
+    "hardStopFailures": 0,
+    "standClaims": 21,
+    "standMinutes": 6188
+  }
+}

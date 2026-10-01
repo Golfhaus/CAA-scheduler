@@ -1,0 +1,292 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "schedule-7-v1.2.0-jax_core-proposal",
+  "baseSchedule": {
+    "scheduleId": "schedule_7_v1_2_0_feasibility_02",
+    "overlays": [
+      "config/optimizations/schedule_7_v1_2_0_round_1.json",
+      "config/optimizations/schedule_7_v1_2_0_round_2.json"
+    ]
+  },
+  "schedule": {
+    "id": "schedule_7_v1_2_0_jax_core_proposal",
+    "version": "1.2.0-jax_core-proposal",
+    "label": "Schedule 7 v1.2 jax_core proposal",
+    "status": "draft"
+  },
+  "initiative": {
+    "kind": "one_spare_max9_additive_growth",
+    "authorizedScope": "One additional active MAX9 from existing inventory, preserving every existing flight and time.",
+    "reviewStatus": "Unpublished proposal; alternatives are mutually exclusive.",
+    "principles": [
+      "No fleet or flight swaps, policy overrides, bank changes, or inventory increases.",
+      "Insert one aircraft-day at an existing Line A overnight boundary; normalize route/day labels only."
+    ]
+  },
+  "routeReassignments": [
+    {
+      "sourceRoute": 706,
+      "expectedLine": "A",
+      "expectedDay": 6,
+      "expectedFleet": "MAX9",
+      "targetRoute": 707,
+      "line": "A",
+      "day": 7
+    },
+    {
+      "sourceRoute": 717,
+      "expectedLine": "B",
+      "expectedDay": 6,
+      "expectedFleet": "MAX9",
+      "targetRoute": 718,
+      "line": "B",
+      "day": 6
+    },
+    {
+      "sourceRoute": 709,
+      "expectedLine": "A",
+      "expectedDay": 9,
+      "expectedFleet": "MAX9",
+      "targetRoute": 710,
+      "line": "A",
+      "day": 10
+    },
+    {
+      "sourceRoute": 716,
+      "expectedLine": "B",
+      "expectedDay": 5,
+      "expectedFleet": "MAX9",
+      "targetRoute": 717,
+      "line": "B",
+      "day": 5
+    },
+    {
+      "sourceRoute": 720,
+      "expectedLine": "B",
+      "expectedDay": 9,
+      "expectedFleet": "MAX9",
+      "targetRoute": 721,
+      "line": "B",
+      "day": 9
+    },
+    {
+      "sourceRoute": 712,
+      "expectedLine": "B",
+      "expectedDay": 1,
+      "expectedFleet": "MAX9",
+      "targetRoute": 713,
+      "line": "B",
+      "day": 1
+    },
+    {
+      "sourceRoute": 719,
+      "expectedLine": "B",
+      "expectedDay": 8,
+      "expectedFleet": "MAX9",
+      "targetRoute": 720,
+      "line": "B",
+      "day": 8
+    },
+    {
+      "sourceRoute": 714,
+      "expectedLine": "B",
+      "expectedDay": 3,
+      "expectedFleet": "MAX9",
+      "targetRoute": 715,
+      "line": "B",
+      "day": 3
+    },
+    {
+      "sourceRoute": 715,
+      "expectedLine": "B",
+      "expectedDay": 4,
+      "expectedFleet": "MAX9",
+      "targetRoute": 716,
+      "line": "B",
+      "day": 4
+    },
+    {
+      "sourceRoute": 703,
+      "expectedLine": "A",
+      "expectedDay": 3,
+      "expectedFleet": "MAX9",
+      "targetRoute": 704,
+      "line": "A",
+      "day": 4
+    },
+    {
+      "sourceRoute": 702,
+      "expectedLine": "A",
+      "expectedDay": 2,
+      "expectedFleet": "MAX9",
+      "targetRoute": 703,
+      "line": "A",
+      "day": 3
+    },
+    {
+      "sourceRoute": 705,
+      "expectedLine": "A",
+      "expectedDay": 5,
+      "expectedFleet": "MAX9",
+      "targetRoute": 706,
+      "line": "A",
+      "day": 6
+    },
+    {
+      "sourceRoute": 710,
+      "expectedLine": "A",
+      "expectedDay": 10,
+      "expectedFleet": "MAX9",
+      "targetRoute": 711,
+      "line": "A",
+      "day": 11
+    },
+    {
+      "sourceRoute": 708,
+      "expectedLine": "A",
+      "expectedDay": 8,
+      "expectedFleet": "MAX9",
+      "targetRoute": 709,
+      "line": "A",
+      "day": 9
+    },
+    {
+      "sourceRoute": 713,
+      "expectedLine": "B",
+      "expectedDay": 2,
+      "expectedFleet": "MAX9",
+      "targetRoute": 714,
+      "line": "B",
+      "day": 2
+    },
+    {
+      "sourceRoute": 718,
+      "expectedLine": "B",
+      "expectedDay": 7,
+      "expectedFleet": "MAX9",
+      "targetRoute": 719,
+      "line": "B",
+      "day": 7
+    },
+    {
+      "sourceRoute": 711,
+      "expectedLine": "A",
+      "expectedDay": 11,
+      "expectedFleet": "MAX9",
+      "targetRoute": 712,
+      "line": "A",
+      "day": 12
+    },
+    {
+      "sourceRoute": 704,
+      "expectedLine": "A",
+      "expectedDay": 4,
+      "expectedFleet": "MAX9",
+      "targetRoute": 705,
+      "line": "A",
+      "day": 5
+    },
+    {
+      "sourceRoute": 707,
+      "expectedLine": "A",
+      "expectedDay": 7,
+      "expectedFleet": "MAX9",
+      "targetRoute": 708,
+      "line": "A",
+      "day": 8
+    },
+    {
+      "sourceRoute": 721,
+      "expectedLine": "B",
+      "expectedDay": 10,
+      "expectedFleet": "MAX9",
+      "targetRoute": 722,
+      "line": "B",
+      "day": 10
+    }
+  ],
+  "addRoutes": [
+    {
+      "route": 702,
+      "line": "A",
+      "day": 2,
+      "fleet": "MAX9",
+      "legs": [
+        {
+          "id": "V120-GROWTH-FLL-JAX",
+          "origin": "FLL",
+          "destination": "JAX",
+          "departureMinute": 385,
+          "arrivalMinute": 455
+        },
+        {
+          "id": "V120-GROWTH-JAX-SFB",
+          "origin": "JAX",
+          "destination": "SFB",
+          "departureMinute": 500,
+          "arrivalMinute": 548
+        },
+        {
+          "id": "V120-GROWTH-SFB-JAX",
+          "origin": "SFB",
+          "destination": "JAX",
+          "departureMinute": 593,
+          "arrivalMinute": 641
+        },
+        {
+          "id": "V120-GROWTH-JAX-PIE",
+          "origin": "JAX",
+          "destination": "PIE",
+          "departureMinute": 895,
+          "arrivalMinute": 950
+        },
+        {
+          "id": "V120-GROWTH-PIE-JAX",
+          "origin": "PIE",
+          "destination": "JAX",
+          "departureMinute": 995,
+          "arrivalMinute": 1050
+        },
+        {
+          "id": "V120-GROWTH-JAX-FLL",
+          "origin": "JAX",
+          "destination": "FLL",
+          "departureMinute": 1115,
+          "arrivalMinute": 1185
+        }
+      ]
+    }
+  ],
+  "bankAssignmentsToAdd": [
+    {
+      "legId": "V120-GROWTH-FLL-JAX",
+      "operation": "arrival",
+      "bankId": "JAX-B3"
+    },
+    {
+      "legId": "V120-GROWTH-JAX-SFB",
+      "operation": "departure",
+      "bankId": "JAX-B4"
+    },
+    {
+      "legId": "V120-GROWTH-SFB-JAX",
+      "operation": "arrival",
+      "bankId": "JAX-B6"
+    },
+    {
+      "legId": "V120-GROWTH-JAX-PIE",
+      "operation": "departure",
+      "bankId": "JAX-B10"
+    },
+    {
+      "legId": "V120-GROWTH-PIE-JAX",
+      "operation": "arrival",
+      "bankId": "JAX-B13"
+    },
+    {
+      "legId": "V120-GROWTH-JAX-FLL",
+      "operation": "departure",
+      "bankId": "JAX-B14"
+    }
+  ]
+}

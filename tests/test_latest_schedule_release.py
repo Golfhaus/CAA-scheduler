@@ -13,13 +13,12 @@ sys.path.insert(0, str(REPO_ROOT / "src"))
 
 from caa_scheduler.io import read_json
 from caa_scheduler.optimization_release import build_optimization_release
+from latest_schedule import SCHEDULE_ID, RELEASE_CONFIG, DIRECTORY
 
 
-LATEST_SCHEDULE_ID = "schedule_7_v1_1_6"
-LATEST_RELEASE_CONFIG = (
-    REPO_ROOT / "config" / "optimizations" / "schedule_7_v1_1_6.json"
-)
-LATEST_RELEASE_DIRECTORY = REPO_ROOT / "data" / "schedules" / LATEST_SCHEDULE_ID
+LATEST_SCHEDULE_ID = SCHEDULE_ID
+LATEST_RELEASE_CONFIG = RELEASE_CONFIG
+LATEST_RELEASE_DIRECTORY = DIRECTORY
 
 
 class LatestScheduleReleaseTests(unittest.TestCase):
@@ -51,9 +50,10 @@ class LatestScheduleReleaseTests(unittest.TestCase):
             )
             self.assertEqual(report["status"], "released")
             self.assertEqual(report["scheduleId"], LATEST_SCHEDULE_ID)
-            self.assertEqual(report["summary"]["legs"], 1080)
+            self.assertEqual(report["summary"]["legs"], 1096)
             self.assertEqual(report["summary"]["effectiveOperatingErrors"], 0)
             self.assertEqual(report["summary"]["hardStopFailures"], 0)
+            self.assertEqual(report["summary"]["overnightTurnFailures"], 0)
 
             generated = {path.name for path in output.iterdir() if path.is_file()}
             committed = {

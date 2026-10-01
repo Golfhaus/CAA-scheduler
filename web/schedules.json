@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "defaultScheduleId": "schedule_7_v1_1_6",
+  "defaultScheduleId": "schedule_7_v1_2_0",
   "repositoryUrl": "https://github.com/Golfhaus/CAA-scheduler",
   "instructions": {
     "version": "2.0 with turn-on-stand hard-stop addition",
@@ -13,7 +13,7 @@
   "schedules": [
     {
       "id": "schedule_6_v2_2_5",
-      "label": "Schedule 6 · v2.2.5",
+      "label": "Schedule 6 \u00b7 v2.2.5",
       "files": {
         "canonical": "data/schedules/schedule_6_v2_2_5/canonical_schedule.json",
         "structuralValidation": "data/schedules/schedule_6_v2_2_5/validation_report.json",
@@ -33,7 +33,7 @@
     },
     {
       "id": "schedule_7_v1_0_0",
-      "label": "Schedule 7 · v1.0.0",
+      "label": "Schedule 7 \u00b7 v1.0.0",
       "files": {
         "canonical": "data/schedules/schedule_7_v1_0_0/canonical_schedule.json",
         "structuralValidation": "data/schedules/schedule_7_v1_0_0/validation_report.json",
@@ -53,7 +53,7 @@
     },
     {
       "id": "schedule_7_v1_1_0",
-      "label": "Schedule 7 · v1.1.0",
+      "label": "Schedule 7 \u00b7 v1.1.0",
       "files": {
         "canonical": "data/schedules/schedule_7_v1_1_0/canonical_schedule.json",
         "structuralValidation": "data/schedules/schedule_7_v1_1_0/validation_report.json",
@@ -68,7 +68,7 @@
     },
     {
       "id": "schedule_7_v1_1_1",
-      "label": "Schedule 7 · v1.1.1",
+      "label": "Schedule 7 \u00b7 v1.1.1",
       "files": {
         "canonical": "data/schedules/schedule_7_v1_1_1/canonical_schedule.json",
         "structuralValidation": "data/schedules/schedule_7_v1_1_1/validation_report.json",
@@ -83,7 +83,7 @@
     },
     {
       "id": "schedule_7_v1_1_2",
-      "label": "Schedule 7 · v1.1.2",
+      "label": "Schedule 7 \u00b7 v1.1.2",
       "files": {
         "canonical": "data/schedules/schedule_7_v1_1_2/canonical_schedule.json",
         "structuralValidation": "data/schedules/schedule_7_v1_1_2/validation_report.json",
@@ -98,7 +98,7 @@
     },
     {
       "id": "schedule_7_v1_1_3",
-      "label": "Schedule 7 · v1.1.3",
+      "label": "Schedule 7 \u00b7 v1.1.3",
       "files": {
         "canonical": "data/schedules/schedule_7_v1_1_3/canonical_schedule.json",
         "structuralValidation": "data/schedules/schedule_7_v1_1_3/validation_report.json",
@@ -113,7 +113,7 @@
     },
     {
       "id": "schedule_7_v1_1_4",
-      "label": "Schedule 7 · v1.1.4",
+      "label": "Schedule 7 \u00b7 v1.1.4",
       "files": {
         "canonical": "data/schedules/schedule_7_v1_1_4/canonical_schedule.json",
         "structuralValidation": "data/schedules/schedule_7_v1_1_4/validation_report.json",
@@ -128,7 +128,7 @@
     },
     {
       "id": "schedule_7_v1_1_5",
-      "label": "Schedule 7 · v1.1.5",
+      "label": "Schedule 7 \u00b7 v1.1.5",
       "files": {
         "canonical": "data/schedules/schedule_7_v1_1_5/canonical_schedule.json",
         "structuralValidation": "data/schedules/schedule_7_v1_1_5/validation_report.json",
@@ -143,7 +143,7 @@
     },
     {
       "id": "schedule_7_v1_1_6",
-      "label": "Schedule 7 · v1.1.6",
+      "label": "Schedule 7 \u00b7 v1.1.6",
       "files": {
         "canonical": "data/schedules/schedule_7_v1_1_6/canonical_schedule.json",
         "structuralValidation": "data/schedules/schedule_7_v1_1_6/validation_report.json",
@@ -154,6 +154,22 @@
         "gates": "data/schedules/schedule_7_v1_1_6/gates.json",
         "connectionAudit": "data/schedules/schedule_7_v1_1_6/connection_audit.json",
         "optimizationRelease": "data/schedules/schedule_7_v1_1_6/release_report.json"
+      }
+    },
+    {
+      "id": "schedule_7_v1_2_0",
+      "label": "Schedule 7 \u00b7 v1.2.0",
+      "files": {
+        "canonical": "data/schedules/schedule_7_v1_2_0/canonical_schedule.json",
+        "structuralValidation": "data/schedules/schedule_7_v1_2_0/validation_report.json",
+        "operatingValidation": "data/schedules/schedule_7_v1_2_0/operating_validation_report.json",
+        "planning": "data/schedules/schedule_7_v1_2_0/planning_snapshot.json",
+        "planningValidation": "data/schedules/schedule_7_v1_2_0/planning_validation_report.json",
+        "timetable": "data/schedules/schedule_7_v1_2_0/timetable.json",
+        "gates": "data/schedules/schedule_7_v1_2_0/gates.json",
+        "connectionAudit": "data/schedules/schedule_7_v1_2_0/connection_audit.json",
+        "optimizationRelease": "data/schedules/schedule_7_v1_2_0/release_report.json",
+        "overnightValidation": "data/schedules/schedule_7_v1_2_0/overnight_turn_validation.json"
       }
     }
   ],
