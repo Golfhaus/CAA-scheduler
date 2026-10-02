@@ -62,7 +62,7 @@ function towPieces(label, start, end) {
 
 test("overview metrics reflect the frozen schedule", () => {
   assert.deepEqual(scheduleMetrics(canonical), {
-    flights: 1096,
+    flights: 1116,
     cities: 105,
     routes: 181,
     lines: 20,

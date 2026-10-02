@@ -1,0 +1,67 @@
+{
+  "schemaVersion": "1.0.0",
+  "scheduleId": "schedule_7_v1_2_1",
+  "status": "released",
+  "sourceScheduleId": "schedule_7_v1_2_0",
+  "overlayIds": [
+    "schedule-7-v1.2.1-ground-hold-round-1",
+    "schedule-7-v1.2.1-ground-hold-round-2",
+    "schedule-7-v1.2.1-evening-extensions-round-3"
+  ],
+  "summary": {
+    "legs": 1116,
+    "routes": 181,
+    "lines": 20,
+    "effectiveOperatingErrors": 0,
+    "hardStopFailures": 0,
+    "overnightTurnFailures": 0,
+    "directRoundTripCities": 12,
+    "connectedDirectionalPairs": 27,
+    "standClaims": 15,
+    "standMinutes": 4277,
+    "hubStandClaims": 4,
+    "hubStandMinutes": 290
+  },
+  "validation": {
+    "structural": "pass",
+    "operating": "review",
+    "overnightTurns": "pass",
+    "planningReconstruction": "pass"
+  },
+  "connectionFinding": "12/14 target cities have direct BHM round trips, and 27/90 directional cross-group pairs meet the configured connection window.",
+  "connectionScopeDecision": {
+    "status": "approved",
+    "model": "existing_hub_timetable_policy_with_two_stop_growth_analysis",
+    "approvedBy": "user",
+    "description": "The user approved publication to main of the ten named route changes as v1.2.1. Existing timetable connection display rules remain unchanged; O-D and one/two-stop connection opportunity informed the additions and are not passenger-load forecasts."
+  },
+  "patchScope": {
+    "kind": "productive_ground_holds_and_evening_extensions",
+    "timetableChanged": true,
+    "routingChanged": true,
+    "approvedRoutes": [
+      701,
+      123,
+      321,
+      129,
+      118,
+      323,
+      147,
+      151,
+      508,
+      131
+    ],
+    "description": "Add ten approved round trips using existing aircraft on the ten named routes. Preserve the three previously proposed minor retimings and fixed aircraft, banks, gates, stands and operating rules."
+  },
+  "artifacts": [
+    "canonical_schedule.json",
+    "connection_audit.json",
+    "gates.json",
+    "operating_validation_report.json",
+    "overnight_turn_validation.json",
+    "planning_snapshot.json",
+    "planning_validation_report.json",
+    "timetable.json",
+    "validation_report.json"
+  ]
+}

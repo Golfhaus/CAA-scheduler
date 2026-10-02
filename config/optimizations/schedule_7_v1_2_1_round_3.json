@@ -1,0 +1,79 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "schedule-7-v1.2.1-evening-extensions-round-3",
+  "baseSchedule": {
+    "scheduleId": "schedule_7_v1_2_1_feasibility_02",
+    "overlays": [
+      "config/optimizations/schedule_7_v1_2_1_round_1.json",
+      "config/optimizations/schedule_7_v1_2_1_round_2.json"
+    ]
+  },
+  "schedule": {
+    "id": "schedule_7_v1_2_1_feasibility_03",
+    "version": "1.2.1-draft",
+    "label": "Schedule 7 v1.2.1 approved evening extensions",
+    "status": "draft"
+  },
+  "initiative": {
+    "kind": "approved_existing_aircraft_evening_extensions",
+    "authorizedBy": "user",
+    "scope": "Implement the proposed Route 508 SAT-MCI and Route 131 JAN-MCI round trips. Publish these and the eight approved ground-hold route changes as v1.2.1; Route 163 is excluded."
+  },
+  "insertLegs": [
+    {
+      "id": "V121-R508-1-SAT-MCI",
+      "origin": "SAT",
+      "destination": "MCI",
+      "departureMinute": 1219,
+      "arrivalMinute": 1335,
+      "route": 508
+    },
+    {
+      "id": "V121-R508-2-MCI-SAT",
+      "origin": "MCI",
+      "destination": "SAT",
+      "departureMinute": 1375,
+      "arrivalMinute": 1491,
+      "route": 508
+    },
+    {
+      "id": "V121-R131-1-JAN-MCI",
+      "origin": "JAN",
+      "destination": "MCI",
+      "departureMinute": 1145,
+      "arrivalMinute": 1248,
+      "route": 131
+    },
+    {
+      "id": "V121-R131-2-MCI-JAN",
+      "origin": "MCI",
+      "destination": "JAN",
+      "departureMinute": 1288,
+      "arrivalMinute": 1391,
+      "route": 131
+    }
+  ],
+  "bankAssignmentsToAdd": [
+    {
+      "legId": "V121-R508-1-SAT-MCI",
+      "operation": "arrival",
+      "bankId": "MCI-M12"
+    },
+    {
+      "legId": "V121-R508-2-MCI-SAT",
+      "operation": "departure",
+      "bankId": "MCI-M12"
+    },
+    {
+      "legId": "V121-R131-1-JAN-MCI",
+      "operation": "arrival",
+      "bankId": "MCI-M11"
+    },
+    {
+      "legId": "V121-R131-2-MCI-JAN",
+      "operation": "departure",
+      "bankId": "MCI-M11"
+    }
+  ],
+  "retimeLegs": []
+}

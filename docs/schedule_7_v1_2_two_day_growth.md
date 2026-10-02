@@ -160,7 +160,7 @@ The two approved overlays remain the ordinary builder's default; this
 growth draft is built explicitly for review. Published v1.1.6, its default
 manifest and app behavior are unchanged.
 
-`tests/test_v120_two_day_growth.py` checks unchanged service and physical
+`tests/test_latest_service_gains.py` checks the retained service in the latest release and physical
 inventory, exactly two new aircraft-days, four daily trunk flights each
 way, second service on the selected one-flight markets, retained RFD
 frequency, spacing, operating/planning/overnight validity, no additional

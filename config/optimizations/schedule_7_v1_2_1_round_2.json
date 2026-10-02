@@ -1,0 +1,152 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "schedule-7-v1.2.1-ground-hold-round-2",
+  "baseSchedule": {
+    "scheduleId": "schedule_7_v1_2_1_feasibility_01",
+    "overlays": [
+      "config/optimizations/schedule_7_v1_2_1_round_1.json"
+    ]
+  },
+  "schedule": {
+    "id": "schedule_7_v1_2_1_feasibility_02",
+    "version": "1.2.1-draft",
+    "label": "Schedule 7 v1.2.1 remaining hub-hold draft",
+    "status": "draft"
+  },
+  "initiative": {
+    "kind": "productive_day_hold_flying",
+    "authorizedBy": "user",
+    "scope": "All remaining intra-route daytime hub/focus-city holds of at least 300 minutes. Add demand-supported low-frequency flying where feasible; keep v1.2.1 unpublished.",
+    "selectionRationale": [
+      "Add MCI-BLV third service and MCI-XNA second service, the leading feasible demand candidates for their hold slots.",
+      "Add SYR-BWI second service on the late hold and SYR-PIT third service on the midday hold, avoiding two new BWI round trips.",
+      "Leave Routes 322 and 122 unchanged: the feasible ABE loop has almost no outbound opportunity; strong alternatives fail timing, spacing or gate screens even with small following-flight shifts."
+    ]
+  },
+  "insertLegs": [
+    {
+      "id": "V121-R118-1-MCI-BLV",
+      "origin": "MCI",
+      "destination": "BLV",
+      "departureMinute": 925,
+      "arrivalMinute": 990,
+      "route": 118
+    },
+    {
+      "id": "V121-R118-2-BLV-MCI",
+      "origin": "BLV",
+      "destination": "MCI",
+      "departureMinute": 1030,
+      "arrivalMinute": 1095,
+      "route": 118
+    },
+    {
+      "id": "V121-R151-1-MCI-XNA",
+      "origin": "MCI",
+      "destination": "XNA",
+      "departureMinute": 825,
+      "arrivalMinute": 882,
+      "route": 151
+    },
+    {
+      "id": "V121-R151-2-XNA-MCI",
+      "origin": "XNA",
+      "destination": "MCI",
+      "departureMinute": 938,
+      "arrivalMinute": 995,
+      "route": 151
+    },
+    {
+      "id": "V121-R147-1-SYR-PIT",
+      "origin": "SYR",
+      "destination": "PIT",
+      "departureMinute": 678,
+      "arrivalMinute": 744,
+      "route": 147
+    },
+    {
+      "id": "V121-R147-2-PIT-SYR",
+      "origin": "PIT",
+      "destination": "SYR",
+      "departureMinute": 784,
+      "arrivalMinute": 850,
+      "route": 147
+    },
+    {
+      "id": "V121-R323-1-SYR-BWI",
+      "origin": "SYR",
+      "destination": "BWI",
+      "departureMinute": 1135,
+      "arrivalMinute": 1200,
+      "route": 323
+    },
+    {
+      "id": "V121-R323-2-BWI-SYR",
+      "origin": "BWI",
+      "destination": "SYR",
+      "departureMinute": 1240,
+      "arrivalMinute": 1305,
+      "route": 323
+    }
+  ],
+  "bankAssignmentsToAdd": [
+    {
+      "legId": "V121-R118-1-MCI-BLV",
+      "operation": "departure",
+      "bankId": "MCI-B7"
+    },
+    {
+      "legId": "V121-R118-2-BLV-MCI",
+      "operation": "arrival",
+      "bankId": "MCI-B9"
+    },
+    {
+      "legId": "V121-R151-1-MCI-XNA",
+      "operation": "departure",
+      "bankId": "MCI-B6"
+    },
+    {
+      "legId": "V121-R151-2-XNA-MCI",
+      "operation": "arrival",
+      "bankId": "MCI-B8"
+    },
+    {
+      "legId": "V121-R147-1-SYR-PIT",
+      "operation": "departure",
+      "bankId": "SYR-B3"
+    },
+    {
+      "legId": "V121-R147-2-PIT-SYR",
+      "operation": "arrival",
+      "bankId": "SYR-B4"
+    },
+    {
+      "legId": "V121-R323-1-SYR-BWI",
+      "operation": "departure",
+      "bankId": "SYR-B6"
+    },
+    {
+      "legId": "V121-R323-2-BWI-SYR",
+      "operation": "arrival",
+      "bankId": "SYR-B7"
+    }
+  ],
+  "retimeLegs": [
+    {
+      "legId": "PIT-SYR-CRJ200-01-OUT",
+      "expectedDepartureMinute": 575,
+      "expectedArrivalMinute": 641,
+      "departureMinute": 572,
+      "arrivalMinute": 638,
+      "reason": "Minor timing alignment for additional flying in the remaining five-hour hub holds."
+    },
+    {
+      "legId": "V115-R323-SYR-ABE",
+      "expectedDepartureMinute": 1338,
+      "expectedArrivalMinute": 1390,
+      "departureMinute": 1345,
+      "arrivalMinute": 1397,
+      "reason": "Minor timing alignment for additional flying in the remaining five-hour hub holds."
+    }
+  ]
+}

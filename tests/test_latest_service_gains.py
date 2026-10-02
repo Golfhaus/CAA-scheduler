@@ -9,10 +9,8 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 sys.path.insert(0, str(ROOT / "scripts"))
 from latest_schedule import CANONICAL, SCHEDULE_ID
-from build_schedule_7_v1_2_two_day_growth import TwoStopScreen, OVERLAY
+from build_schedule_7_v1_2_two_day_growth import TwoStopScreen
 from caa_scheduler.gate_export import export_gate_schedule
-from caa_scheduler.io import read_json
-from caa_scheduler.optimization_overlay import apply_optimization_overlay
 from caa_scheduler.operating_validation import validate_operating_rules, validate_overnight_turns
 from caa_scheduler.planning import reconstruct_planning_snapshot, validate_planning_snapshot
 from caa_scheduler.validation import validate_schedule
@@ -24,9 +22,9 @@ class TwoDayGrowthTests(unittest.TestCase):
         cls.candidate = CANONICAL
 
     def test_released_sequence_and_consolidated_lines(self):
-        self.assertEqual(SCHEDULE_ID, "schedule_7_v1_2_0")
+        self.assertEqual(SCHEDULE_ID, "schedule_7_v1_2_1")
         self.assertEqual(self.candidate["schedule"]["status"], "released")
-        self.assertEqual(len(self.candidate["legs"]), 1096)
+        self.assertEqual(len(self.candidate["legs"]), 1116)
         new = sorted((l for l in self.candidate["legs"] if l["id"].startswith("V120-2MAX-")),
                      key=lambda l: l["flight"])
         self.assertEqual([l["flight"] for l in new], list(range(2083, 2099)))
@@ -72,7 +70,7 @@ class TwoDayGrowthTests(unittest.TestCase):
         self.assertTrue(any(f["evidence"]["line"] == "A" and f["evidence"]["routes"] == 13 for f in counts["findings"]))
         for schedule in (self.candidate,):
             stands = [p for city in export_gate_schedule(schedule)["cities"] for p in city["claims"] if p["rowType"] == "stand"]
-            self.assertEqual((len(stands), sum(p["end"] - p["start"] for p in stands)), (20, 5552))
+            self.assertEqual((len(stands), sum(p["end"] - p["start"] for p in stands)), (15, 4277))
 
     def test_two_stop_middle_leg_is_counted_once_and_demand_reconciles(self):
         screen = TwoStopScreen(self.candidate)

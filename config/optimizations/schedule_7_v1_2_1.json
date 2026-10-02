@@ -1,0 +1,82 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "schedule-7-v1.2.1-release",
+  "sourceScheduleId": "schedule_7_v1_2_0",
+  "baseCanonical": "data/schedules/schedule_7_v1_2_0/canonical_schedule.json",
+  "overlays": [
+    "config/optimizations/schedule_7_v1_2_1_round_1.json",
+    "config/optimizations/schedule_7_v1_2_1_round_2.json",
+    "config/optimizations/schedule_7_v1_2_1_round_3.json"
+  ],
+  "outputDirectory": "data/schedules/schedule_7_v1_2_1",
+  "rejoinAvoidableTows": true,
+  "demandDataVersion": "bts-db1c-6mo-jul2025-apr2026-v7",
+  "schedule": {
+    "id": "schedule_7_v1_2_1",
+    "number": 7,
+    "version": "1.2.1",
+    "label": "Schedule 7, Version 1.2.1",
+    "status": "released"
+  },
+  "patchScope": {
+    "kind": "productive_ground_holds_and_evening_extensions",
+    "timetableChanged": true,
+    "routingChanged": true,
+    "approvedRoutes": [
+      701,
+      123,
+      321,
+      129,
+      118,
+      323,
+      147,
+      151,
+      508,
+      131
+    ],
+    "description": "Add ten approved round trips using existing aircraft on the ten named routes. Preserve the three previously proposed minor retimings and fixed aircraft, banks, gates, stands and operating rules."
+  },
+  "connectionAudit": {
+    "hub": "BHM",
+    "groups": {
+      "feeders": [
+        "OMA",
+        "ATW",
+        "ICT",
+        "FSD",
+        "MCI"
+      ],
+      "FLP": [
+        "DAB",
+        "EYW",
+        "FLL",
+        "GNV",
+        "MLB",
+        "PGD",
+        "PIE",
+        "SFB",
+        "SRQ"
+      ]
+    }
+  },
+  "connectionScopeDecision": {
+    "status": "approved",
+    "model": "existing_hub_timetable_policy_with_two_stop_growth_analysis",
+    "approvedBy": "user",
+    "description": "The user approved publication to main of the ten named route changes as v1.2.1. Existing timetable connection display rules remain unchanged; O-D and one/two-stop connection opportunity informed the additions and are not passenger-load forecasts."
+  },
+  "expectedRelease": {
+    "legs": 1116,
+    "routes": 181,
+    "lines": 20,
+    "effectiveOperatingErrors": 0,
+    "hardStopFailures": 0,
+    "overnightTurnFailures": 0,
+    "directRoundTripCities": 12,
+    "connectedDirectionalPairs": 27,
+    "standClaims": 15,
+    "standMinutes": 4277,
+    "hubStandClaims": 4,
+    "hubStandMinutes": 290
+  }
+}

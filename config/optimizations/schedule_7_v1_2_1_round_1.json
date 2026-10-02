@@ -1,0 +1,152 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "schedule-7-v1.2.1-ground-hold-round-1",
+  "baseSchedule": {
+    "scheduleId": "schedule_7_v1_2_0"
+  },
+  "schedule": {
+    "id": "schedule_7_v1_2_1_feasibility_01",
+    "version": "1.2.1-draft",
+    "label": "Schedule 7 v1.2.1 ground-hold draft",
+    "status": "draft"
+  },
+  "initiative": {
+    "kind": "productive_day_hold_flying",
+    "authorizedBy": "user",
+    "scope": "Fill hub holds on Routes 701, 123, 321 and 129 using existing aircraft. Minor timing changes allowed. Publication is reserved to the user.",
+    "selectionRationale": [
+      "PHF-PGD and SYR-BDL receive second service with useful opportunity in both directions.",
+      "SYR-RFD receives third service; its return opportunity is materially stronger than the late BDL alternative.",
+      "MCI-DAY receives second inter-hub service and 80 more block minutes than a third BLV flight; BLV is commercially stronger (593.3 versus DAY's 495.0 combined opportunity in one-at-a-time joint comparisons).",
+      "Use modest margins on new flights; shift only the existing late SYR-PIT flight by eleven minutes."
+    ]
+  },
+  "insertLegs": [
+    {
+      "id": "V121-R701-1-PHF-PGD",
+      "origin": "PHF",
+      "destination": "PGD",
+      "departureMinute": 560,
+      "arrivalMinute": 681,
+      "route": 701
+    },
+    {
+      "id": "V121-R701-2-PGD-PHF",
+      "origin": "PGD",
+      "destination": "PHF",
+      "departureMinute": 760,
+      "arrivalMinute": 881,
+      "route": 701
+    },
+    {
+      "id": "V121-R123-1-SYR-BDL",
+      "origin": "SYR",
+      "destination": "BDL",
+      "departureMinute": 520,
+      "arrivalMinute": 574,
+      "route": 123
+    },
+    {
+      "id": "V121-R123-2-BDL-SYR",
+      "origin": "BDL",
+      "destination": "SYR",
+      "departureMinute": 630,
+      "arrivalMinute": 684,
+      "route": 123
+    },
+    {
+      "id": "V121-R321-1-SYR-RFD",
+      "origin": "SYR",
+      "destination": "RFD",
+      "departureMinute": 1010,
+      "arrivalMinute": 1064,
+      "route": 321
+    },
+    {
+      "id": "V121-R321-2-RFD-SYR",
+      "origin": "RFD",
+      "destination": "SYR",
+      "departureMinute": 1124,
+      "arrivalMinute": 1298,
+      "route": 321
+    },
+    {
+      "id": "V121-R129-1-MCI-DAY",
+      "origin": "MCI",
+      "destination": "DAY",
+      "departureMinute": 890,
+      "arrivalMinute": 1055,
+      "route": 129
+    },
+    {
+      "id": "V121-R129-2-DAY-MCI",
+      "origin": "DAY",
+      "destination": "MCI",
+      "departureMinute": 1095,
+      "arrivalMinute": 1140,
+      "route": 129
+    }
+  ],
+  "bankAssignmentsToAdd": [
+    {
+      "legId": "V121-R701-1-PHF-PGD",
+      "operation": "departure",
+      "bankId": "PHF-B2"
+    },
+    {
+      "legId": "V121-R701-2-PGD-PHF",
+      "operation": "arrival",
+      "bankId": "PHF-M3"
+    },
+    {
+      "legId": "V121-R123-1-SYR-BDL",
+      "operation": "departure",
+      "bankId": "SYR-B2"
+    },
+    {
+      "legId": "V121-R123-2-BDL-SYR",
+      "operation": "arrival",
+      "bankId": "SYR-B3"
+    },
+    {
+      "legId": "V121-R321-1-SYR-RFD",
+      "operation": "departure",
+      "bankId": "SYR-B5"
+    },
+    {
+      "legId": "V121-R321-2-RFD-SYR",
+      "operation": "arrival",
+      "bankId": "SYR-B7"
+    },
+    {
+      "legId": "V121-R129-1-MCI-DAY",
+      "operation": "departure",
+      "bankId": "MCI-B7"
+    },
+    {
+      "legId": "V121-R129-1-MCI-DAY",
+      "operation": "arrival",
+      "bankId": "DAY-B7"
+    },
+    {
+      "legId": "V121-R129-2-DAY-MCI",
+      "operation": "departure",
+      "bankId": "DAY-B7"
+    },
+    {
+      "legId": "V121-R129-2-DAY-MCI",
+      "operation": "arrival",
+      "bankId": "MCI-B9"
+    }
+  ],
+  "retimeLegs": [
+    {
+      "legId": "V115-R321-SYR-PIT",
+      "expectedDepartureMinute": 1334,
+      "expectedArrivalMinute": 1400,
+      "departureMinute": 1345,
+      "arrivalMinute": 1411,
+      "reason": "Allow the new RFD return to arrive eight minutes into SYR Bank 7 and retain 47 minutes before PIT departure."
+    }
+  ]
+}

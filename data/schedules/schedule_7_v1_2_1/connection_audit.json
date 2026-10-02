@@ -1,0 +1,1222 @@
+{
+  "schemaVersion": "1.0.0",
+  "scheduleId": "schedule_7_v1_2_1",
+  "hub": "BHM",
+  "connectionWindowMinutes": {
+    "minimum": 30,
+    "maximum": 240
+  },
+  "groups": {
+    "feeders": [
+      "OMA",
+      "ATW",
+      "ICT",
+      "FSD",
+      "MCI"
+    ],
+    "FLP": [
+      "DAB",
+      "EYW",
+      "FLL",
+      "GNV",
+      "MLB",
+      "PGD",
+      "PIE",
+      "SFB",
+      "SRQ"
+    ]
+  },
+  "summary": {
+    "targetCities": 14,
+    "directRoundTripCities": 12,
+    "directionalPairs": 90,
+    "connectedDirectionalPairs": 27,
+    "missingDirectionalPairs": 63,
+    "connectionCoverage": 0.3,
+    "bySourceGroup": {
+      "feeders": {
+        "directionalPairs": 45,
+        "connectedDirectionalPairs": 12,
+        "missingDirectionalPairs": 33
+      },
+      "FLP": {
+        "directionalPairs": 45,
+        "connectedDirectionalPairs": 15,
+        "missingDirectionalPairs": 30
+      }
+    }
+  },
+  "directCoverage": [
+    {
+      "city": "OMA",
+      "group": "feeders",
+      "toHubLegs": 1,
+      "fromHubLegs": 1,
+      "roundTripCovered": true
+    },
+    {
+      "city": "ATW",
+      "group": "feeders",
+      "toHubLegs": 1,
+      "fromHubLegs": 1,
+      "roundTripCovered": true
+    },
+    {
+      "city": "ICT",
+      "group": "feeders",
+      "toHubLegs": 1,
+      "fromHubLegs": 1,
+      "roundTripCovered": true
+    },
+    {
+      "city": "FSD",
+      "group": "feeders",
+      "toHubLegs": 1,
+      "fromHubLegs": 1,
+      "roundTripCovered": true
+    },
+    {
+      "city": "MCI",
+      "group": "feeders",
+      "toHubLegs": 5,
+      "fromHubLegs": 5,
+      "roundTripCovered": true
+    },
+    {
+      "city": "DAB",
+      "group": "FLP",
+      "toHubLegs": 2,
+      "fromHubLegs": 2,
+      "roundTripCovered": true
+    },
+    {
+      "city": "EYW",
+      "group": "FLP",
+      "toHubLegs": 1,
+      "fromHubLegs": 1,
+      "roundTripCovered": true
+    },
+    {
+      "city": "FLL",
+      "group": "FLP",
+      "toHubLegs": 2,
+      "fromHubLegs": 3,
+      "roundTripCovered": true
+    },
+    {
+      "city": "GNV",
+      "group": "FLP",
+      "toHubLegs": 0,
+      "fromHubLegs": 0,
+      "roundTripCovered": false
+    },
+    {
+      "city": "MLB",
+      "group": "FLP",
+      "toHubLegs": 0,
+      "fromHubLegs": 0,
+      "roundTripCovered": false
+    },
+    {
+      "city": "PGD",
+      "group": "FLP",
+      "toHubLegs": 1,
+      "fromHubLegs": 1,
+      "roundTripCovered": true
+    },
+    {
+      "city": "PIE",
+      "group": "FLP",
+      "toHubLegs": 1,
+      "fromHubLegs": 1,
+      "roundTripCovered": true
+    },
+    {
+      "city": "SFB",
+      "group": "FLP",
+      "toHubLegs": 1,
+      "fromHubLegs": 1,
+      "roundTripCovered": true
+    },
+    {
+      "city": "SRQ",
+      "group": "FLP",
+      "toHubLegs": 1,
+      "fromHubLegs": 1,
+      "roundTripCovered": true
+    }
+  ],
+  "directionalPairs": [
+    {
+      "source": "OMA",
+      "sourceGroup": "feeders",
+      "destination": "DAB",
+      "destinationGroup": "FLP",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "OMA",
+      "sourceGroup": "feeders",
+      "destination": "EYW",
+      "destinationGroup": "FLP",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "OMA",
+      "sourceGroup": "feeders",
+      "destination": "FLL",
+      "destinationGroup": "FLP",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V113-R164-OMA-BHM",
+          "inboundFlight": 1991,
+          "hubArrival": "13:14",
+          "outboundLegId": "V113-R524-BHM-FLL",
+          "outboundFlight": 1988,
+          "hubDeparture": "16:00",
+          "waitMinutes": 166
+        }
+      ]
+    },
+    {
+      "source": "OMA",
+      "sourceGroup": "feeders",
+      "destination": "GNV",
+      "destinationGroup": "FLP",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "OMA",
+      "sourceGroup": "feeders",
+      "destination": "MLB",
+      "destinationGroup": "FLP",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "OMA",
+      "sourceGroup": "feeders",
+      "destination": "PGD",
+      "destinationGroup": "FLP",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "OMA",
+      "sourceGroup": "feeders",
+      "destination": "PIE",
+      "destinationGroup": "FLP",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "OMA",
+      "sourceGroup": "feeders",
+      "destination": "SFB",
+      "destinationGroup": "FLP",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V113-R164-OMA-BHM",
+          "inboundFlight": 1991,
+          "hubArrival": "13:14",
+          "outboundLegId": "V113-R117-BHM-SFB",
+          "outboundFlight": 1972,
+          "hubDeparture": "13:54",
+          "waitMinutes": 40
+        }
+      ]
+    },
+    {
+      "source": "OMA",
+      "sourceGroup": "feeders",
+      "destination": "SRQ",
+      "destinationGroup": "FLP",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "ATW",
+      "sourceGroup": "feeders",
+      "destination": "DAB",
+      "destinationGroup": "FLP",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "ATW",
+      "sourceGroup": "feeders",
+      "destination": "EYW",
+      "destinationGroup": "FLP",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "ATW",
+      "sourceGroup": "feeders",
+      "destination": "FLL",
+      "destinationGroup": "FLP",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V113-R102-ATW-BHM",
+          "inboundFlight": 1993,
+          "hubArrival": "12:14",
+          "outboundLegId": "V113-R715-BHM-FLL",
+          "outboundFlight": 1984,
+          "hubDeparture": "12:56",
+          "waitMinutes": 42
+        },
+        {
+          "inboundLegId": "V113-R102-ATW-BHM",
+          "inboundFlight": 1993,
+          "hubArrival": "12:14",
+          "outboundLegId": "V113-R524-BHM-FLL",
+          "outboundFlight": 1988,
+          "hubDeparture": "16:00",
+          "waitMinutes": 226
+        }
+      ]
+    },
+    {
+      "source": "ATW",
+      "sourceGroup": "feeders",
+      "destination": "GNV",
+      "destinationGroup": "FLP",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "ATW",
+      "sourceGroup": "feeders",
+      "destination": "MLB",
+      "destinationGroup": "FLP",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "ATW",
+      "sourceGroup": "feeders",
+      "destination": "PGD",
+      "destinationGroup": "FLP",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "ATW",
+      "sourceGroup": "feeders",
+      "destination": "PIE",
+      "destinationGroup": "FLP",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "ATW",
+      "sourceGroup": "feeders",
+      "destination": "SFB",
+      "destinationGroup": "FLP",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V113-R102-ATW-BHM",
+          "inboundFlight": 1993,
+          "hubArrival": "12:14",
+          "outboundLegId": "V113-R117-BHM-SFB",
+          "outboundFlight": 1972,
+          "hubDeparture": "13:54",
+          "waitMinutes": 100
+        }
+      ]
+    },
+    {
+      "source": "ATW",
+      "sourceGroup": "feeders",
+      "destination": "SRQ",
+      "destinationGroup": "FLP",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "ICT",
+      "sourceGroup": "feeders",
+      "destination": "DAB",
+      "destinationGroup": "FLP",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "ICT",
+      "sourceGroup": "feeders",
+      "destination": "EYW",
+      "destinationGroup": "FLP",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "ICT",
+      "sourceGroup": "feeders",
+      "destination": "FLL",
+      "destinationGroup": "FLP",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V113-R130-ICT-BHM",
+          "inboundFlight": 1995,
+          "hubArrival": "14:01",
+          "outboundLegId": "V113-R524-BHM-FLL",
+          "outboundFlight": 1988,
+          "hubDeparture": "16:00",
+          "waitMinutes": 119
+        }
+      ]
+    },
+    {
+      "source": "ICT",
+      "sourceGroup": "feeders",
+      "destination": "GNV",
+      "destinationGroup": "FLP",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "ICT",
+      "sourceGroup": "feeders",
+      "destination": "MLB",
+      "destinationGroup": "FLP",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "ICT",
+      "sourceGroup": "feeders",
+      "destination": "PGD",
+      "destinationGroup": "FLP",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "ICT",
+      "sourceGroup": "feeders",
+      "destination": "PIE",
+      "destinationGroup": "FLP",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "ICT",
+      "sourceGroup": "feeders",
+      "destination": "SFB",
+      "destinationGroup": "FLP",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "ICT",
+      "sourceGroup": "feeders",
+      "destination": "SRQ",
+      "destinationGroup": "FLP",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "FSD",
+      "sourceGroup": "feeders",
+      "destination": "DAB",
+      "destinationGroup": "FLP",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "FSD",
+      "sourceGroup": "feeders",
+      "destination": "EYW",
+      "destinationGroup": "FLP",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "FSD",
+      "sourceGroup": "feeders",
+      "destination": "FLL",
+      "destinationGroup": "FLP",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V113-R161-FSD-BHM",
+          "inboundFlight": 1997,
+          "hubArrival": "13:14",
+          "outboundLegId": "V113-R524-BHM-FLL",
+          "outboundFlight": 1988,
+          "hubDeparture": "16:00",
+          "waitMinutes": 166
+        }
+      ]
+    },
+    {
+      "source": "FSD",
+      "sourceGroup": "feeders",
+      "destination": "GNV",
+      "destinationGroup": "FLP",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "FSD",
+      "sourceGroup": "feeders",
+      "destination": "MLB",
+      "destinationGroup": "FLP",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "FSD",
+      "sourceGroup": "feeders",
+      "destination": "PGD",
+      "destinationGroup": "FLP",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "FSD",
+      "sourceGroup": "feeders",
+      "destination": "PIE",
+      "destinationGroup": "FLP",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "FSD",
+      "sourceGroup": "feeders",
+      "destination": "SFB",
+      "destinationGroup": "FLP",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V113-R161-FSD-BHM",
+          "inboundFlight": 1997,
+          "hubArrival": "13:14",
+          "outboundLegId": "V113-R117-BHM-SFB",
+          "outboundFlight": 1972,
+          "hubDeparture": "13:54",
+          "waitMinutes": 40
+        }
+      ]
+    },
+    {
+      "source": "FSD",
+      "sourceGroup": "feeders",
+      "destination": "SRQ",
+      "destinationGroup": "FLP",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "MCI",
+      "sourceGroup": "feeders",
+      "destination": "DAB",
+      "destinationGroup": "FLP",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "BHM-MCI-CRJ700-01-IN",
+          "inboundFlight": 1412,
+          "hubArrival": "20:41",
+          "outboundLegId": "BHM-DAB-CRJ200-01-OUT",
+          "outboundFlight": 1622,
+          "hubDeparture": "22:00",
+          "waitMinutes": 79
+        },
+        {
+          "inboundLegId": "BHM-MCI-CRJ700-02-IN",
+          "inboundFlight": 1411,
+          "hubArrival": "09:01",
+          "outboundLegId": "BHM-DAB-CRJ200-02-OUT",
+          "outboundFlight": 1621,
+          "hubDeparture": "11:15",
+          "waitMinutes": 134
+        }
+      ]
+    },
+    {
+      "source": "MCI",
+      "sourceGroup": "feeders",
+      "destination": "EYW",
+      "destinationGroup": "FLP",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "BHM-MCI-CRJ700-01-IN",
+          "inboundFlight": 1412,
+          "hubArrival": "20:41",
+          "outboundLegId": "BHM-EYW-CRJ200-01-OUT",
+          "outboundFlight": 1593,
+          "hubDeparture": "22:40",
+          "waitMinutes": 119
+        }
+      ]
+    },
+    {
+      "source": "MCI",
+      "sourceGroup": "feeders",
+      "destination": "FLL",
+      "destinationGroup": "FLP",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V113-R524-MCI-BHM",
+          "inboundFlight": 1987,
+          "hubArrival": "13:57",
+          "outboundLegId": "V113-R524-BHM-FLL",
+          "outboundFlight": 1988,
+          "hubDeparture": "16:00",
+          "waitMinutes": 123
+        },
+        {
+          "inboundLegId": "V113-R117-MCI-BHM",
+          "inboundFlight": 1971,
+          "hubArrival": "13:14",
+          "outboundLegId": "V113-R524-BHM-FLL",
+          "outboundFlight": 1988,
+          "hubDeparture": "16:00",
+          "waitMinutes": 166
+        },
+        {
+          "inboundLegId": "BHM-MCI-CRJ700-02-IN",
+          "inboundFlight": 1411,
+          "hubArrival": "09:01",
+          "outboundLegId": "V113-R715-BHM-FLL",
+          "outboundFlight": 1984,
+          "hubDeparture": "12:56",
+          "waitMinutes": 235
+        }
+      ]
+    },
+    {
+      "source": "MCI",
+      "sourceGroup": "feeders",
+      "destination": "GNV",
+      "destinationGroup": "FLP",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "MCI",
+      "sourceGroup": "feeders",
+      "destination": "MLB",
+      "destinationGroup": "FLP",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "MCI",
+      "sourceGroup": "feeders",
+      "destination": "PGD",
+      "destinationGroup": "FLP",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "BHM-MCI-CRJ700-01-IN",
+          "inboundFlight": 1412,
+          "hubArrival": "20:41",
+          "outboundLegId": "BHM-PGD-CRJ700-01-OUT",
+          "outboundFlight": 1469,
+          "hubDeparture": "22:30",
+          "waitMinutes": 109
+        }
+      ]
+    },
+    {
+      "source": "MCI",
+      "sourceGroup": "feeders",
+      "destination": "PIE",
+      "destinationGroup": "FLP",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "MCI",
+      "sourceGroup": "feeders",
+      "destination": "SFB",
+      "destinationGroup": "FLP",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V113-R117-MCI-BHM",
+          "inboundFlight": 1971,
+          "hubArrival": "13:14",
+          "outboundLegId": "V113-R117-BHM-SFB",
+          "outboundFlight": 1972,
+          "hubDeparture": "13:54",
+          "waitMinutes": 40
+        }
+      ]
+    },
+    {
+      "source": "MCI",
+      "sourceGroup": "feeders",
+      "destination": "SRQ",
+      "destinationGroup": "FLP",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "DAB",
+      "sourceGroup": "FLP",
+      "destination": "OMA",
+      "destinationGroup": "feeders",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "BHM-DAB-CRJ200-02-IN",
+          "inboundFlight": 1624,
+          "hubArrival": "14:55",
+          "outboundLegId": "V113-R164-BHM-OMA",
+          "outboundFlight": 1992,
+          "hubDeparture": "17:50",
+          "waitMinutes": 175
+        }
+      ]
+    },
+    {
+      "source": "DAB",
+      "sourceGroup": "FLP",
+      "destination": "ATW",
+      "destinationGroup": "feeders",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "DAB",
+      "sourceGroup": "FLP",
+      "destination": "ICT",
+      "destinationGroup": "feeders",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "BHM-DAB-CRJ200-02-IN",
+          "inboundFlight": 1624,
+          "hubArrival": "14:55",
+          "outboundLegId": "V113-R130-BHM-ICT",
+          "outboundFlight": 1996,
+          "hubDeparture": "15:38",
+          "waitMinutes": 43
+        }
+      ]
+    },
+    {
+      "source": "DAB",
+      "sourceGroup": "FLP",
+      "destination": "FSD",
+      "destinationGroup": "feeders",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "DAB",
+      "sourceGroup": "FLP",
+      "destination": "MCI",
+      "destinationGroup": "feeders",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "BHM-DAB-CRJ200-02-IN",
+          "inboundFlight": 1624,
+          "hubArrival": "14:55",
+          "outboundLegId": "V113-R117-BHM-MCI",
+          "outboundFlight": 1974,
+          "hubDeparture": "18:18",
+          "waitMinutes": 203
+        }
+      ]
+    },
+    {
+      "source": "EYW",
+      "sourceGroup": "FLP",
+      "destination": "OMA",
+      "destinationGroup": "feeders",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "BHM-EYW-CRJ200-01-IN",
+          "inboundFlight": 1594,
+          "hubArrival": "14:58",
+          "outboundLegId": "V113-R164-BHM-OMA",
+          "outboundFlight": 1992,
+          "hubDeparture": "17:50",
+          "waitMinutes": 172
+        }
+      ]
+    },
+    {
+      "source": "EYW",
+      "sourceGroup": "FLP",
+      "destination": "ATW",
+      "destinationGroup": "feeders",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "EYW",
+      "sourceGroup": "FLP",
+      "destination": "ICT",
+      "destinationGroup": "feeders",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "BHM-EYW-CRJ200-01-IN",
+          "inboundFlight": 1594,
+          "hubArrival": "14:58",
+          "outboundLegId": "V113-R130-BHM-ICT",
+          "outboundFlight": 1996,
+          "hubDeparture": "15:38",
+          "waitMinutes": 40
+        }
+      ]
+    },
+    {
+      "source": "EYW",
+      "sourceGroup": "FLP",
+      "destination": "FSD",
+      "destinationGroup": "feeders",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "EYW",
+      "sourceGroup": "FLP",
+      "destination": "MCI",
+      "destinationGroup": "feeders",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "BHM-EYW-CRJ200-01-IN",
+          "inboundFlight": 1594,
+          "hubArrival": "14:58",
+          "outboundLegId": "V113-R117-BHM-MCI",
+          "outboundFlight": 1974,
+          "hubDeparture": "18:18",
+          "waitMinutes": 200
+        }
+      ]
+    },
+    {
+      "source": "FLL",
+      "sourceGroup": "FLP",
+      "destination": "OMA",
+      "destinationGroup": "feeders",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V113-R715-FLL-BHM",
+          "inboundFlight": 1985,
+          "hubArrival": "17:10",
+          "outboundLegId": "V113-R164-BHM-OMA",
+          "outboundFlight": 1992,
+          "hubDeparture": "17:50",
+          "waitMinutes": 40
+        }
+      ]
+    },
+    {
+      "source": "FLL",
+      "sourceGroup": "FLP",
+      "destination": "ATW",
+      "destinationGroup": "feeders",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "FLL",
+      "sourceGroup": "FLP",
+      "destination": "ICT",
+      "destinationGroup": "feeders",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "FLL",
+      "sourceGroup": "FLP",
+      "destination": "FSD",
+      "destinationGroup": "feeders",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "FLL",
+      "sourceGroup": "FLP",
+      "destination": "MCI",
+      "destinationGroup": "feeders",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V113-R524-FLL-BHM",
+          "inboundFlight": 1989,
+          "hubArrival": "20:18",
+          "outboundLegId": "V113-R524-BHM-MCI",
+          "outboundFlight": 1990,
+          "hubDeparture": "20:58",
+          "waitMinutes": 40
+        },
+        {
+          "inboundLegId": "V113-R715-FLL-BHM",
+          "inboundFlight": 1985,
+          "hubArrival": "17:10",
+          "outboundLegId": "V113-R117-BHM-MCI",
+          "outboundFlight": 1974,
+          "hubDeparture": "18:18",
+          "waitMinutes": 68
+        },
+        {
+          "inboundLegId": "V113-R715-FLL-BHM",
+          "inboundFlight": 1985,
+          "hubArrival": "17:10",
+          "outboundLegId": "V113-R162-BHM-MCI",
+          "outboundFlight": 1980,
+          "hubDeparture": "19:07",
+          "waitMinutes": 117
+        },
+        {
+          "inboundLegId": "V113-R715-FLL-BHM",
+          "inboundFlight": 1985,
+          "hubArrival": "17:10",
+          "outboundLegId": "V113-R524-BHM-MCI",
+          "outboundFlight": 1990,
+          "hubDeparture": "20:58",
+          "waitMinutes": 228
+        }
+      ]
+    },
+    {
+      "source": "GNV",
+      "sourceGroup": "FLP",
+      "destination": "OMA",
+      "destinationGroup": "feeders",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "GNV",
+      "sourceGroup": "FLP",
+      "destination": "ATW",
+      "destinationGroup": "feeders",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "GNV",
+      "sourceGroup": "FLP",
+      "destination": "ICT",
+      "destinationGroup": "feeders",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "GNV",
+      "sourceGroup": "FLP",
+      "destination": "FSD",
+      "destinationGroup": "feeders",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "GNV",
+      "sourceGroup": "FLP",
+      "destination": "MCI",
+      "destinationGroup": "feeders",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "MLB",
+      "sourceGroup": "FLP",
+      "destination": "OMA",
+      "destinationGroup": "feeders",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "MLB",
+      "sourceGroup": "FLP",
+      "destination": "ATW",
+      "destinationGroup": "feeders",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "MLB",
+      "sourceGroup": "FLP",
+      "destination": "ICT",
+      "destinationGroup": "feeders",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "MLB",
+      "sourceGroup": "FLP",
+      "destination": "FSD",
+      "destinationGroup": "feeders",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "MLB",
+      "sourceGroup": "FLP",
+      "destination": "MCI",
+      "destinationGroup": "feeders",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "PGD",
+      "sourceGroup": "FLP",
+      "destination": "OMA",
+      "destinationGroup": "feeders",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "PGD",
+      "sourceGroup": "FLP",
+      "destination": "ATW",
+      "destinationGroup": "feeders",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "BHM-PGD-CRJ700-01-IN",
+          "inboundFlight": 1470,
+          "hubArrival": "13:14",
+          "outboundLegId": "V113-R102-BHM-ATW",
+          "outboundFlight": 1994,
+          "hubDeparture": "14:35",
+          "waitMinutes": 81
+        }
+      ]
+    },
+    {
+      "source": "PGD",
+      "sourceGroup": "FLP",
+      "destination": "ICT",
+      "destinationGroup": "feeders",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "BHM-PGD-CRJ700-01-IN",
+          "inboundFlight": 1470,
+          "hubArrival": "13:14",
+          "outboundLegId": "V113-R130-BHM-ICT",
+          "outboundFlight": 1996,
+          "hubDeparture": "15:38",
+          "waitMinutes": 144
+        }
+      ]
+    },
+    {
+      "source": "PGD",
+      "sourceGroup": "FLP",
+      "destination": "FSD",
+      "destinationGroup": "feeders",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "BHM-PGD-CRJ700-01-IN",
+          "inboundFlight": 1470,
+          "hubArrival": "13:14",
+          "outboundLegId": "V113-R161-BHM-FSD",
+          "outboundFlight": 1998,
+          "hubDeparture": "13:54",
+          "waitMinutes": 40
+        }
+      ]
+    },
+    {
+      "source": "PGD",
+      "sourceGroup": "FLP",
+      "destination": "MCI",
+      "destinationGroup": "feeders",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "PIE",
+      "sourceGroup": "FLP",
+      "destination": "OMA",
+      "destinationGroup": "feeders",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "PIE",
+      "sourceGroup": "FLP",
+      "destination": "ATW",
+      "destinationGroup": "feeders",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V113-R128-PIE-BHM",
+          "inboundFlight": 1976,
+          "hubArrival": "10:35",
+          "outboundLegId": "V113-R102-BHM-ATW",
+          "outboundFlight": 1994,
+          "hubDeparture": "14:35",
+          "waitMinutes": 240
+        }
+      ]
+    },
+    {
+      "source": "PIE",
+      "sourceGroup": "FLP",
+      "destination": "ICT",
+      "destinationGroup": "feeders",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "PIE",
+      "sourceGroup": "FLP",
+      "destination": "FSD",
+      "destinationGroup": "feeders",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V113-R128-PIE-BHM",
+          "inboundFlight": 1976,
+          "hubArrival": "10:35",
+          "outboundLegId": "V113-R161-BHM-FSD",
+          "outboundFlight": 1998,
+          "hubDeparture": "13:54",
+          "waitMinutes": 199
+        }
+      ]
+    },
+    {
+      "source": "PIE",
+      "sourceGroup": "FLP",
+      "destination": "MCI",
+      "destinationGroup": "feeders",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "SFB",
+      "sourceGroup": "FLP",
+      "destination": "OMA",
+      "destinationGroup": "feeders",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "SFB",
+      "sourceGroup": "FLP",
+      "destination": "ATW",
+      "destinationGroup": "feeders",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "SFB",
+      "sourceGroup": "FLP",
+      "destination": "ICT",
+      "destinationGroup": "feeders",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "SFB",
+      "sourceGroup": "FLP",
+      "destination": "FSD",
+      "destinationGroup": "feeders",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "SFB",
+      "sourceGroup": "FLP",
+      "destination": "MCI",
+      "destinationGroup": "feeders",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V113-R117-SFB-BHM",
+          "inboundFlight": 1973,
+          "hubArrival": "17:38",
+          "outboundLegId": "V113-R117-BHM-MCI",
+          "outboundFlight": 1974,
+          "hubDeparture": "18:18",
+          "waitMinutes": 40
+        },
+        {
+          "inboundLegId": "V113-R117-SFB-BHM",
+          "inboundFlight": 1973,
+          "hubArrival": "17:38",
+          "outboundLegId": "V113-R162-BHM-MCI",
+          "outboundFlight": 1980,
+          "hubDeparture": "19:07",
+          "waitMinutes": 89
+        },
+        {
+          "inboundLegId": "V113-R117-SFB-BHM",
+          "inboundFlight": 1973,
+          "hubArrival": "17:38",
+          "outboundLegId": "V113-R524-BHM-MCI",
+          "outboundFlight": 1990,
+          "hubDeparture": "20:58",
+          "waitMinutes": 200
+        }
+      ]
+    },
+    {
+      "source": "SRQ",
+      "sourceGroup": "FLP",
+      "destination": "OMA",
+      "destinationGroup": "feeders",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "SRQ",
+      "sourceGroup": "FLP",
+      "destination": "ATW",
+      "destinationGroup": "feeders",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "SRQ",
+      "sourceGroup": "FLP",
+      "destination": "ICT",
+      "destinationGroup": "feeders",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "SRQ",
+      "sourceGroup": "FLP",
+      "destination": "FSD",
+      "destinationGroup": "feeders",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "SRQ",
+      "sourceGroup": "FLP",
+      "destination": "MCI",
+      "destinationGroup": "feeders",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "BHM-SRQ-CRJ200-01-IN",
+          "inboundFlight": 1528,
+          "hubArrival": "19:36",
+          "outboundLegId": "V113-R524-BHM-MCI",
+          "outboundFlight": 1990,
+          "hubDeparture": "20:58",
+          "waitMinutes": 82
+        }
+      ]
+    }
+  ]
+}
