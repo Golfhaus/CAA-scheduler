@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#092a53">
     <meta name="description" content="Coastal American Airways schedule operations console">
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="styles.css?v=console-ui-20260928-1">
+    <link rel="stylesheet" href="styles.css?v=console-ui-20261003-1">
     <title>CAA Scheduler</title>
   </head>
   <body>
@@ -429,7 +429,7 @@
             </div>
           </div>
           <div id="stats-extension-opps" data-stats-view="extension-opps" role="tabpanel" hidden>
-            <p class="stats-note">Route endpoints are ordered to surface late originators and early terminators. Turns and RODs include holds of at least two hours.</p>
+            <p class="stats-note">Route endpoints surface late originators and early terminators, with red-eyes last. Turns and RODs include holds of at least two hours; RONs are excluded.</p>
             <section class="panel extension-panel" aria-labelledby="extension-originators-title">
               <div class="panel-heading">
                 <div><p class="eyebrow">Latest first</p><h2 id="extension-originators-title">Originators</h2></div>
@@ -444,7 +444,7 @@
             </section>
             <section class="panel extension-panel" aria-labelledby="extension-terminators-title">
               <div class="panel-heading">
-                <div><p class="eyebrow">Earliest first</p><h2 id="extension-terminators-title">Terminators</h2></div>
+                <div><p class="eyebrow">Earliest first · red-eyes last</p><h2 id="extension-terminators-title">Terminators</h2></div>
                 <span class="result-count" id="extension-terminator-count"></span>
               </div>
               <div class="table-shell extension-table-shell">
@@ -496,6 +496,6 @@
       </div>
     </main>
 
-    <script type="module" src="app.mjs?v=console-ui-20260928-1"></script>
+    <script type="module" src="app.mjs?v=console-ui-20261003-1"></script>
   </body>
 </html>

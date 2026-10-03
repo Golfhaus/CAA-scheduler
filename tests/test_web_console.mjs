@@ -6,6 +6,7 @@ import {
   buildItineraries,
   buildDepartureHubMatrix,
   buildExtensionOpportunities,
+  buildGateBankGuide,
   claimMatchesPassengerStandFinding,
   departureHubTimetableFilters,
   extractReferences,
@@ -24,6 +25,7 @@ import {
   formatMinute24,
   instructionId,
   instructionReferenceTokens,
+  isRedEyeFlight,
   legMatches,
   marketMatches,
   maximumConcurrentPositionUsage,
@@ -145,16 +147,56 @@ test("extension opportunities sort endpoints and combine long physical holds", (
   assert.ok(opportunities.originators.every((leg, index, values) => (
     index === 0 || values[index - 1].departureMinute >= leg.departureMinute
   )));
-  assert.ok(opportunities.terminators.every((leg, index, values) => (
-    index === 0 || values[index - 1].arrivalMinute <= leg.arrivalMinute
-  )));
+  const redEyes = opportunities.terminators.map((leg) => isRedEyeFlight(leg, canonical.operatingPolicy.departureWindows));
+  assert.ok(redEyes.includes(true));
+  assert.ok(redEyes.every((redEye, index) => index === 0 || Number(redEyes[index - 1]) <= Number(redEye)));
   assert.ok(opportunities.holds.length > 0);
   assert.ok(opportunities.holds.every((hold) => hold.duration >= 120));
   assert.ok(opportunities.holds.every((hold) => ["TURN", "ROD"].includes(hold.kind)));
+  assert.ok(opportunities.holds.every((hold) => !String(hold.route).includes("->")));
   assert.ok(opportunities.holds.every((hold, index, values) => (
     index === 0 || values[index - 1].duration >= hold.duration
   )));
   assert.equal(formatDuration(761), "12h 41m");
+});
+
+test("terminators keep red-eyes last and after-midnight arrivals late in the operating day", () => {
+  const legs = [
+    {route: "1", flight: "1", sequenceWithinRoute: 1, departureMinute: 60, arrivalMinute: 278},
+    {route: "2", flight: "2", sequenceWithinRoute: 1, departureMinute: 270, arrivalMinute: 360},
+    {route: "3", flight: "3", sequenceWithinRoute: 1, departureMinute: 1100, arrivalMinute: 1200},
+    {route: "4", flight: "4", sequenceWithinRoute: 1, departureMinute: 1375, arrivalMinute: 1491},
+    {route: "5", flight: "5", sequenceWithinRoute: 1, departureMinute: 1375, arrivalMinute: 51},
+  ];
+  const result = buildExtensionOpportunities({...canonical, legs}, {cities: []});
+  assert.deepEqual(result.terminators.map((leg) => leg.route), ["2", "3", "4", "5", "1"]);
+});
+
+test("short successor RONs are excluded while same-route overnight turns and daytime RODs remain", () => {
+  const claims = [
+    {rowType: "gate", row: 1, kind: "turn", label: "321 -> 322", start: 1450, end: 1600},
+    {rowType: "gate", row: 2, kind: "turn", label: "310", start: 1410, end: 1560},
+    {rowType: "gate", row: 3, kind: "ron", label: "701", start: 600, end: 1000},
+  ];
+  const result = buildExtensionOpportunities({...canonical, legs: []}, {cities: [{code: "DAY", claims}]});
+  assert.deepEqual(result.holds.map((hold) => [hold.route, hold.kind]), [["701", "ROD"], ["310", "TURN"]]);
+});
+
+test("bank guides deduplicate shared edges and map overnight banks into the gate operating day", () => {
+  const hubBanks = [
+    {hub: "DAY", id: "DAY-B1", startMinute: 300, endMinute: 360},
+    {hub: "DAY", id: "DAY-B2", startMinute: 360, endMinute: 420},
+    {hub: "DAY", id: "DAY-B3", startMinute: 1380, endMinute: 1500},
+    {hub: "DAY", id: "DAY-B4", startMinute: 120, endMinute: 240},
+    {hub: "JAX", id: "JAX-B1", startMinute: 300, endMinute: 360},
+  ];
+  const guide = buildGateBankGuide({hubBanks}, {code: "DAY", isHub: true});
+  assert.deepEqual(guide.boundaries, [0, 60, 120, 180, 240, 1200, 1320, 1380, 1440]);
+  assert.deepEqual(guide.labels.filter((bank) => bank.label === "B3").map(({start, duration}) => ({start, duration})), [{start: 1200, duration: 120}]);
+  assert.deepEqual(guide.labels.filter((bank) => bank.label === "B4").map(({start, duration}) => ({start, duration})), [{start: 0, duration: 60}, {start: 1380, duration: 60}]);
+  assert.deepEqual(buildGateBankGuide({hubBanks}, {code: "DAY"}), {boundaries: [], labels: []});
+  assert.deepEqual(buildGateBankGuide({hubBanks}, {code: "DAY", isFocusCity: true}), guide);
+  assert.deepEqual(buildGateBankGuide(canonical, {code: "BHM", isFocusCity: true}), {boundaries: [], labels: []});
 });
 
 test("planning market filters preserve fleet and match either market endpoint", () => {

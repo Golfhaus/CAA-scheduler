@@ -130,7 +130,9 @@ export function buildExtensionOpportunities(canonical, gates, minimumDuration = 
       || Number(a.route) - Number(b.route));
   const terminators = orderedRoutes
     .map((legs) => legs.at(-1))
-    .sort((a, b) => Number(a.arrivalMinute) - Number(b.arrivalMinute)
+    .sort((a, b) => Number(isRedEyeFlight(a, canonical.operatingPolicy.departureWindows))
+      - Number(isRedEyeFlight(b, canonical.operatingPolicy.departureWindows))
+      || operatingArrivalMinute(a) - operatingArrivalMinute(b)
       || Number(a.route) - Number(b.route));
   const holds = [];
   gates.cities.forEach((city) => {
@@ -166,6 +168,21 @@ export function buildExtensionOpportunities(canonical, gates, minimumDuration = 
     || String(a.airport).localeCompare(String(b.airport))
     || String(a.route).localeCompare(String(b.route), undefined, { numeric: true }));
   return { originators, terminators, holds };
+}
+
+export function isRedEyeFlight(leg, windows) {
+  const departure = Number(leg.departureMinute) % 1440;
+  const arrival = Number(leg.arrivalMinute) % 1440;
+  return (departure > windows.destinationLatestMinute || departure <= windows.redEyeLatestMinute)
+    && arrival >= windows.redEyeArrivalMinimumMinute
+    && arrival <= windows.redEyeArrivalMaximumMinute;
+}
+
+function operatingArrivalMinute(leg) {
+  const arrival = Number(leg.arrivalMinute);
+  return arrival < GATE_WINDOW_START
+    || (Number(leg.departureMinute) < GATE_WINDOW_START && arrival < 1440)
+    ? arrival + 1440 : arrival;
 }
 
 function flightDurationMinutes(flight, timezoneByCode) {
@@ -508,8 +525,26 @@ export function gateClaimDisplayLabel(claim, group) {
 
 export function gateClaimDisplayKind(group) {
   if (!group.length) return "";
+  if (group.some((claim) => String(claim.label).includes("->"))) return "RON";
   if (group[0].kind !== "ron") return group[0].kind.toUpperCase();
-  return group.some((claim) => String(claim.label).includes("->")) ? "RON" : "ROD";
+  return "ROD";
+}
+
+export function buildGateBankGuide(canonical, city) {
+  if (!city.isHub && !city.isFocusCity) return { boundaries: [], labels: [] };
+  const labels = (canonical.hubBanks || [])
+    .filter((bank) => bank.hub === city.code)
+    .sort((a, b) => a.startMinute - b.startMinute)
+    .flatMap((bank) => splitClaimSegments(bank.startMinute, bank.endMinute, GATE_WINDOW_START)
+      .map((segment) => ({
+        ...segment,
+        id: bank.id,
+        label: bank.id.replace(`${city.code}-`, ""),
+        time: `${formatMinute24(bank.startMinute)}–${formatMinute24(bank.endMinute)}`,
+      })));
+  const boundaries = [...new Set(labels.flatMap((bank) => [bank.start, bank.start + bank.duration]))]
+    .sort((a, b) => a - b);
+  return { boundaries, labels };
 }
 
 export function gateClaimPath(group) {
@@ -728,23 +763,6 @@ function renderOverview() {
   $("#schedule-note").textContent = schedule.label;
   $("#schedule-status").textContent = schedule.status.replaceAll("_", " ");
   $("#validation-count").textContent = operating.summary.effectiveErrorFindings;
-  const auditHub = state.connectionAudit?.hub;
-  const connectionMetrics = state.connectionAudit
-    ? [
-      metricCard(
-        `${auditHub} target cities`,
-        `${state.connectionAudit.summary.directRoundTripCities}/${state.connectionAudit.summary.targetCities}`,
-        "Direct round-trip coverage",
-        state.connectionAudit.summary.directRoundTripCities === state.connectionAudit.summary.targetCities ? "is-success" : "is-danger"
-      ),
-      metricCard(
-        "Cross-group connections",
-        `${state.connectionAudit.summary.connectedDirectionalPairs}/${state.connectionAudit.summary.directionalPairs}`,
-        `${state.connectionAudit.connectionWindowMinutes.minimum}–${state.connectionAudit.connectionWindowMinutes.maximum} minute ${auditHub} window`,
-        state.connectionAudit.summary.missingDirectionalPairs ? "is-danger" : "is-success"
-      ),
-    ]
-    : [];
   $("#overview-metrics").innerHTML = [
     metricCard("Flights", metrics.flights.toLocaleString(), "Published daily legs"),
     metricCard("Cities", metrics.cities, "Active network stations"),
@@ -756,7 +774,6 @@ function renderOverview() {
       "Migration fidelity",
       structural.status === "pass" ? "is-success" : "is-danger"
     ),
-    ...connectionMetrics,
   ].join("");
 
   const usage = fleetUsage(canonical);
@@ -1241,10 +1258,15 @@ function renderGates() {
     ...Array.from({ length: maximumOverflowRow }, (_, index) => ({ type: "overflow", row: index + 1 })),
   ];
   const axis = Array.from({ length: 7 }, (_, index) => GATE_WINDOW_START + index * 240);
-  $("#gate-timeline").innerHTML = `<div class="time-axis"><span></span><div class="axis-track">${axis.map((minute) => `<span class="axis-label" style="left:${((minute - GATE_WINDOW_START) / 1440) * 100}%">${formatMinute24(minute)}</span>`).join("")}</div></div>${lanes.map((lane) => renderLane(city, lane, colors, passengerStandClaims)).join("")}`;
+  const banks = buildGateBankGuide(state.canonical, city);
+  const boundaries = banks.boundaries.map((minute) => `<i class="bank-boundary" aria-hidden="true" style="left:${(minute / 1440) * 100}%"></i>`).join("");
+  const bankDivider = banks.labels.length
+    ? `<div class="timeline-row timeline-bank-row"><span class="lane-label">Banks</span><div class="lane-track bank-label-track">${boundaries}${banks.labels.map((bank) => `<span class="bank-label" title="${escapeHtml(bank.id)} · ${escapeHtml(bank.time)}" style="left:${((bank.start + bank.duration / 2) / 1440) * 100}%">${escapeHtml(bank.label)}</span>`).join("")}</div></div>`
+    : "";
+  $("#gate-timeline").innerHTML = `<div class="time-axis"><span></span><div class="axis-track">${axis.map((minute) => `<span class="axis-label" style="left:${((minute - GATE_WINDOW_START) / 1440) * 100}%">${formatMinute24(minute)}</span>`).join("")}</div></div>${lanes.filter((lane) => lane.type === "gate").map((lane) => renderLane(city, lane, colors, passengerStandClaims, boundaries)).join("")}${bankDivider}${lanes.filter((lane) => lane.type !== "gate").map((lane) => renderLane(city, lane, colors, passengerStandClaims, boundaries)).join("")}`;
 }
 
-function renderLane(city, lane, colors, passengerStandClaims) {
+function renderLane(city, lane, colors, passengerStandClaims, boundaries = "") {
   const claims = city.claims.filter((claim) => claim.rowType === lane.type && claim.row === lane.row);
   const bars = claims.flatMap((claim) => {
     const group = gateClaimGroup(city.claims, claim);
@@ -1259,7 +1281,7 @@ function renderLane(city, lane, colors, passengerStandClaims) {
     return splitClaimSegments(claim.start, claim.end, GATE_WINDOW_START).map((segment) => `<button type="button" class="claim-bar kind-${lane.type}${passengerHandling ? " is-passenger-handling" : ""}" title="${escapeHtml(accessibleLabel)}" aria-label="${escapeHtml(accessibleLabel)}" aria-controls="claim-tooltip" aria-expanded="false" data-gate-claim data-claim-group="${escapeHtml(groupKey)}" data-claim-label="${escapeHtml(displayLabel)}" data-claim-fleet="${escapeHtml(claim.fleet)}" data-claim-kind="${escapeHtml(displayKind)}" data-claim-start="${escapeHtml(detail.start)}" data-claim-end="${escapeHtml(detail.end)}" data-claim-position="${escapeHtml(detail.position)}" data-claim-movement="${escapeHtml(detail.movement)}" data-claim-passenger-handling="${passengerHandling}" style="--fleet-color:${escapeHtml(fleetColor)};left:${(segment.start / 1440) * 100}%;width:${Math.max(0.12, (segment.duration / 1440) * 100)}%;background:${escapeHtml(fleetColor)}">${escapeHtml(displayLabel)}</button>`);
   }).join("");
   const laneLabel = lane.type === "gate" ? "Gate" : lane.type === "stand" ? "Stand" : "Unassigned";
-  return `<div class="timeline-row"><span class="lane-label">${laneLabel} ${lane.row}</span><div class="lane-track">${bars}</div></div>`;
+  return `<div class="timeline-row"><span class="lane-label">${laneLabel} ${lane.row}</span><div class="lane-track">${boundaries}${bars}</div></div>`;
 }
 
 function closeGateClaimDetails() {
