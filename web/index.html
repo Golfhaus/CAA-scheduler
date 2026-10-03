@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#092a53">
     <meta name="description" content="Coastal American Airways schedule operations console">
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="styles.css?v=console-ui-20261003-2">
+    <link rel="stylesheet" href="styles.css?v=console-ui-20261003-3">
     <title>CAA Scheduler</title>
   </head>
   <body>
@@ -443,7 +443,7 @@
             </section>
             <section class="panel bank-detail-panel" aria-labelledby="bank-detail-title" hidden id="bank-breakdown-detail">
               <div class="panel-heading"><div><p class="eyebrow">Cities and flights</p><h2 id="bank-detail-title" tabindex="-1"></h2></div><button type="button" class="source-link" id="bank-chart-back">Back to bank chart</button></div>
-              <div class="bank-detail-toolbar"><p id="bank-detail-summary"></p><label><span>Geographic group</span><select id="bank-breakdown-group"></select></label></div>
+              <div class="bank-detail-toolbar"><p id="bank-detail-summary"></p><label class="airport-picker"><span>Geographic group</span><select id="bank-breakdown-group"></select></label></div>
               <div class="bank-detail-columns" id="bank-breakdown-flights"></div>
             </section>
           </div>
@@ -515,6 +515,6 @@
       </div>
     </main>
 
-    <script type="module" src="app.mjs?v=console-ui-20261003-2"></script>
+    <script type="module" src="app.mjs?v=console-ui-20261003-3"></script>
   </body>
 </html>
