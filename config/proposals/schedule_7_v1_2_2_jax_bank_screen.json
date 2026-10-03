@@ -1,0 +1,6685 @@
+{
+  "workVersion": "1.2.2",
+  "status": "analysis-only; unpublished",
+  "baseline": "schedule_7_v1_2_1",
+  "demandId": "bts-db1c-6mo-jul2025-apr2026-v7",
+  "interpretation": "Full-capture seat-uncapped relative-choice opportunity units, not passenger forecasts or net incremental demand. Existing alternatives included. Main screen preserves all existing flight clocks and identities; optional Route 515 retiming sensitivity is explicitly separate.",
+  "draftBank": {
+    "id": "JAX-B15",
+    "hub": "JAX",
+    "startMinute": 1245,
+    "endMinute": 1305,
+    "startClock": "20:45",
+    "endClockExclusive": "21:45",
+    "status": "proposed; not finalized"
+  },
+  "approvedExtensionsValidationWithProposedBank": {
+    "structural": "pass",
+    "operatingErrors": 0,
+    "hardStopFailures": [],
+    "blocking": [],
+    "overnight": "pass",
+    "overnightFindings": [],
+    "planning": "pass",
+    "gates": "pass",
+    "jax": {
+      "code": "JAX",
+      "name": "Jacksonville FL",
+      "isHub": true,
+      "isFocusCity": false,
+      "nGates": 16,
+      "nStands": 12,
+      "peakUsed": 16
+    },
+    "standClaims": 15,
+    "standMinutes": 4277
+  },
+  "inventory": [
+    {
+      "route": 113,
+      "line": "AD",
+      "day": 3,
+      "fleet": "CRJ200",
+      "city": "AGS",
+      "group": "CGI",
+      "finish": "20:20",
+      "redEyeTerminator": false,
+      "earliestJaxArrival": "21:55",
+      "nextRoute": 114,
+      "nextStart": "05:55",
+      "latestMorningJaxDeparture": "04:20",
+      "overnightPossible": false,
+      "blockMinutes": 55,
+      "currentFrequencyToJax": 2,
+      "currentFrequencyFromJax": 2,
+      "localOdBothDirections": 1.2999999999999998
+    },
+    {
+      "route": 114,
+      "line": "AD",
+      "day": 4,
+      "fleet": "CRJ200",
+      "city": "ROA",
+      "group": "CGI",
+      "finish": "18:49",
+      "redEyeTerminator": false,
+      "earliestJaxArrival": "21:03",
+      "nextRoute": 115,
+      "nextStart": "05:15",
+      "latestMorningJaxDeparture": "03:01",
+      "overnightPossible": false,
+      "blockMinutes": 94,
+      "currentFrequencyToJax": 2,
+      "currentFrequencyFromJax": 2,
+      "localOdBothDirections": 8.1
+    },
+    {
+      "route": 115,
+      "line": "AD",
+      "day": 5,
+      "fleet": "CRJ200",
+      "city": "GNV",
+      "group": "FLP",
+      "finish": "20:02",
+      "redEyeTerminator": false,
+      "earliestJaxArrival": "21:19",
+      "nextRoute": 116,
+      "nextStart": "05:10",
+      "latestMorningJaxDeparture": "03:53",
+      "overnightPossible": false,
+      "blockMinutes": 37,
+      "currentFrequencyToJax": 2,
+      "currentFrequencyFromJax": 2,
+      "localOdBothDirections": 1.7000000000000002
+    },
+    {
+      "route": 126,
+      "line": "AD",
+      "day": 16,
+      "fleet": "CRJ200",
+      "city": "MLB",
+      "group": "FLP",
+      "finish": "19:12",
+      "redEyeTerminator": false,
+      "earliestJaxArrival": "20:44",
+      "nextRoute": 127,
+      "nextStart": "04:55",
+      "latestMorningJaxDeparture": "03:23",
+      "overnightPossible": false,
+      "blockMinutes": 52,
+      "currentFrequencyToJax": 2,
+      "currentFrequencyFromJax": 2,
+      "localOdBothDirections": 0.4
+    },
+    {
+      "route": 137,
+      "line": "AD",
+      "day": 27,
+      "fleet": "CRJ200",
+      "city": "HSV",
+      "group": "APP",
+      "finish": "20:46",
+      "redEyeTerminator": false,
+      "earliestJaxArrival": "23:50",
+      "nextRoute": 138,
+      "nextStart": "04:50",
+      "latestMorningJaxDeparture": "03:46",
+      "overnightPossible": false,
+      "blockMinutes": 84,
+      "currentFrequencyToJax": 2,
+      "currentFrequencyFromJax": 2,
+      "localOdBothDirections": 12.0
+    },
+    {
+      "route": 154,
+      "line": "AE",
+      "day": 4,
+      "fleet": "CRJ200",
+      "city": "TLH",
+      "group": "GCP",
+      "finish": "20:15",
+      "redEyeTerminator": false,
+      "earliestJaxArrival": "21:45",
+      "nextRoute": 155,
+      "nextStart": "04:55",
+      "latestMorningJaxDeparture": "03:25",
+      "overnightPossible": false,
+      "blockMinutes": 50,
+      "currentFrequencyToJax": 2,
+      "currentFrequencyFromJax": 2,
+      "localOdBothDirections": 1.5
+    },
+    {
+      "route": 155,
+      "line": "AE",
+      "day": 5,
+      "fleet": "CRJ200",
+      "city": "BTR",
+      "group": "GCP",
+      "finish": "20:10",
+      "redEyeTerminator": false,
+      "earliestJaxArrival": "23:35",
+      "nextRoute": 156,
+      "nextStart": "05:10",
+      "latestMorningJaxDeparture": "03:45",
+      "overnightPossible": false,
+      "blockMinutes": 105,
+      "currentFrequencyToJax": 2,
+      "currentFrequencyFromJax": 2,
+      "localOdBothDirections": 7.300000000000001
+    },
+    {
+      "route": 163,
+      "line": "AE",
+      "day": 13,
+      "fleet": "CRJ200",
+      "city": "JAN",
+      "group": "GCP",
+      "finish": "20:03",
+      "redEyeTerminator": false,
+      "earliestJaxArrival": "23:21",
+      "nextRoute": 164,
+      "nextStart": "06:30",
+      "latestMorningJaxDeparture": "05:12",
+      "overnightPossible": true,
+      "blockMinutes": 98,
+      "currentFrequencyToJax": 1,
+      "currentFrequencyFromJax": 1,
+      "localOdBothDirections": 9.9
+    },
+    {
+      "route": 170,
+      "line": "AI",
+      "day": 1,
+      "fleet": "CRJ200",
+      "city": "MOB",
+      "group": "GCP",
+      "finish": "19:46",
+      "redEyeTerminator": false,
+      "earliestJaxArrival": "22:47",
+      "nextRoute": 171,
+      "nextStart": "04:30",
+      "latestMorningJaxDeparture": "03:29",
+      "overnightPossible": false,
+      "blockMinutes": 81,
+      "currentFrequencyToJax": 2,
+      "currentFrequencyFromJax": 2,
+      "localOdBothDirections": 3.3
+    },
+    {
+      "route": 172,
+      "line": "AM",
+      "day": 1,
+      "fleet": "CRJ200",
+      "city": "MCN",
+      "group": "CGI",
+      "finish": "20:19",
+      "redEyeTerminator": false,
+      "earliestJaxArrival": "21:53",
+      "nextRoute": 173,
+      "nextStart": "05:55",
+      "latestMorningJaxDeparture": "04:21",
+      "overnightPossible": false,
+      "blockMinutes": 54,
+      "currentFrequencyToJax": 2,
+      "currentFrequencyFromJax": 2,
+      "localOdBothDirections": 0.0
+    },
+    {
+      "route": 174,
+      "line": "AM",
+      "day": 3,
+      "fleet": "CRJ200",
+      "city": "GPT",
+      "group": "GCP",
+      "finish": "19:53",
+      "redEyeTerminator": false,
+      "earliestJaxArrival": "23:01",
+      "nextRoute": 172,
+      "nextStart": "05:25",
+      "latestMorningJaxDeparture": "04:17",
+      "overnightPossible": false,
+      "blockMinutes": 88,
+      "currentFrequencyToJax": 2,
+      "currentFrequencyFromJax": 2,
+      "localOdBothDirections": 4.9
+    },
+    {
+      "route": 307,
+      "line": "AA",
+      "day": 7,
+      "fleet": "CRJ700",
+      "city": "CHS",
+      "group": "CGI",
+      "finish": "19:50",
+      "redEyeTerminator": false,
+      "earliestJaxArrival": "21:24",
+      "nextRoute": 308,
+      "nextStart": "07:20",
+      "latestMorningJaxDeparture": "05:46",
+      "overnightPossible": true,
+      "blockMinutes": 54,
+      "currentFrequencyToJax": 1,
+      "currentFrequencyFromJax": 1,
+      "localOdBothDirections": 10.100000000000001
+    },
+    {
+      "route": 308,
+      "line": "AA",
+      "day": 8,
+      "fleet": "CRJ700",
+      "city": "CLT",
+      "group": "CGI",
+      "finish": "19:41",
+      "redEyeTerminator": false,
+      "earliestJaxArrival": "21:33",
+      "nextRoute": 309,
+      "nextStart": "07:30",
+      "latestMorningJaxDeparture": "05:38",
+      "overnightPossible": true,
+      "blockMinutes": 72,
+      "currentFrequencyToJax": 2,
+      "currentFrequencyFromJax": 2,
+      "localOdBothDirections": 80.9
+    },
+    {
+      "route": 315,
+      "line": "AH",
+      "day": 4,
+      "fleet": "CRJ700",
+      "city": "MSY",
+      "group": "GCP",
+      "finish": "20:04",
+      "redEyeTerminator": false,
+      "earliestJaxArrival": "23:19",
+      "nextRoute": 316,
+      "nextStart": "05:20",
+      "latestMorningJaxDeparture": "04:05",
+      "overnightPossible": false,
+      "blockMinutes": 95,
+      "currentFrequencyToJax": 1,
+      "currentFrequencyFromJax": 1,
+      "localOdBothDirections": 51.400000000000006
+    },
+    {
+      "route": 316,
+      "line": "AH",
+      "day": 5,
+      "fleet": "CRJ700",
+      "city": "LEX",
+      "group": "APP",
+      "finish": "20:00",
+      "redEyeTerminator": false,
+      "earliestJaxArrival": "22:20",
+      "nextRoute": 317,
+      "nextStart": "05:05",
+      "latestMorningJaxDeparture": "02:45",
+      "overnightPossible": false,
+      "blockMinutes": 100,
+      "currentFrequencyToJax": 2,
+      "currentFrequencyFromJax": 2,
+      "localOdBothDirections": 15.2
+    },
+    {
+      "route": 317,
+      "line": "AH",
+      "day": 6,
+      "fleet": "CRJ700",
+      "city": "GSO",
+      "group": "CGI",
+      "finish": "20:46",
+      "redEyeTerminator": false,
+      "earliestJaxArrival": "22:47",
+      "nextRoute": 318,
+      "nextStart": "07:40",
+      "latestMorningJaxDeparture": "05:39",
+      "overnightPossible": true,
+      "blockMinutes": 81,
+      "currentFrequencyToJax": 2,
+      "currentFrequencyFromJax": 2,
+      "localOdBothDirections": 12.9
+    },
+    {
+      "route": 327,
+      "line": "AK",
+      "day": 3,
+      "fleet": "CRJ700",
+      "city": "SDF",
+      "group": "APP",
+      "finish": "18:59",
+      "redEyeTerminator": false,
+      "earliestJaxArrival": "21:23",
+      "nextRoute": 328,
+      "nextStart": "05:05",
+      "latestMorningJaxDeparture": "02:41",
+      "overnightPossible": false,
+      "blockMinutes": 104,
+      "currentFrequencyToJax": 3,
+      "currentFrequencyFromJax": 3,
+      "localOdBothDirections": 31.2
+    },
+    {
+      "route": 333,
+      "line": "AK",
+      "day": 9,
+      "fleet": "CRJ700",
+      "city": "RDU",
+      "group": "CGI",
+      "finish": "19:47",
+      "redEyeTerminator": false,
+      "earliestJaxArrival": "21:49",
+      "nextRoute": 334,
+      "nextStart": "08:00",
+      "latestMorningJaxDeparture": "05:58",
+      "overnightPossible": true,
+      "blockMinutes": 82,
+      "currentFrequencyToJax": 1,
+      "currentFrequencyFromJax": 1,
+      "localOdBothDirections": 57.7
+    },
+    {
+      "route": 338,
+      "line": "AL",
+      "day": 2,
+      "fleet": "CRJ700",
+      "city": "SAV",
+      "group": "CGI",
+      "finish": "17:41",
+      "redEyeTerminator": false,
+      "earliestJaxArrival": "19:06",
+      "nextRoute": 339,
+      "nextStart": "04:30",
+      "latestMorningJaxDeparture": "03:05",
+      "overnightPossible": false,
+      "blockMinutes": 45,
+      "currentFrequencyToJax": 1,
+      "currentFrequencyFromJax": 1,
+      "localOdBothDirections": 3.9
+    },
+    {
+      "route": 340,
+      "line": "AL",
+      "day": 4,
+      "fleet": "CRJ700",
+      "city": "CLT",
+      "group": "CGI",
+      "finish": "17:21",
+      "redEyeTerminator": false,
+      "earliestJaxArrival": "19:13",
+      "nextRoute": 341,
+      "nextStart": "05:10",
+      "latestMorningJaxDeparture": "03:18",
+      "overnightPossible": false,
+      "blockMinutes": 72,
+      "currentFrequencyToJax": 2,
+      "currentFrequencyFromJax": 2,
+      "localOdBothDirections": 80.9
+    },
+    {
+      "route": 341,
+      "line": "AL",
+      "day": 5,
+      "fleet": "CRJ700",
+      "city": "MSY",
+      "group": "GCP",
+      "finish": "17:44",
+      "redEyeTerminator": false,
+      "earliestJaxArrival": "20:59",
+      "nextRoute": 342,
+      "nextStart": "05:05",
+      "latestMorningJaxDeparture": "03:50",
+      "overnightPossible": false,
+      "blockMinutes": 95,
+      "currentFrequencyToJax": 1,
+      "currentFrequencyFromJax": 1,
+      "localOdBothDirections": 51.400000000000006
+    },
+    {
+      "route": 351,
+      "line": "AQ",
+      "day": 1,
+      "fleet": "CRJ700",
+      "city": "TYS",
+      "group": "APP",
+      "finish": "20:45",
+      "redEyeTerminator": false,
+      "earliestJaxArrival": "22:45",
+      "nextRoute": 351,
+      "nextStart": "04:30",
+      "latestMorningJaxDeparture": "02:30",
+      "overnightPossible": false,
+      "blockMinutes": 80,
+      "currentFrequencyToJax": 2,
+      "currentFrequencyFromJax": 2,
+      "localOdBothDirections": 41.4
+    },
+    {
+      "route": 504,
+      "line": "AB",
+      "day": 4,
+      "fleet": "CRJ900",
+      "city": "CLT",
+      "group": "CGI",
+      "finish": "18:26",
+      "redEyeTerminator": false,
+      "earliestJaxArrival": "20:17",
+      "nextRoute": 505,
+      "nextStart": "04:30",
+      "latestMorningJaxDeparture": "02:39",
+      "overnightPossible": false,
+      "blockMinutes": 71,
+      "currentFrequencyToJax": 2,
+      "currentFrequencyFromJax": 2,
+      "localOdBothDirections": 80.9
+    },
+    {
+      "route": 513,
+      "line": "AG",
+      "day": 3,
+      "fleet": "CRJ900",
+      "city": "PIE",
+      "group": "FLP",
+      "finish": "20:34",
+      "redEyeTerminator": false,
+      "earliestJaxArrival": "22:08",
+      "nextRoute": 514,
+      "nextStart": "06:35",
+      "latestMorningJaxDeparture": "05:01",
+      "overnightPossible": true,
+      "blockMinutes": 54,
+      "currentFrequencyToJax": 1,
+      "currentFrequencyFromJax": 1,
+      "localOdBothDirections": 9.4
+    },
+    {
+      "route": 514,
+      "line": "AG",
+      "day": 4,
+      "fleet": "CRJ900",
+      "city": "PIE",
+      "group": "FLP",
+      "finish": "19:34",
+      "redEyeTerminator": false,
+      "earliestJaxArrival": "21:08",
+      "nextRoute": 515,
+      "nextStart": "07:55",
+      "latestMorningJaxDeparture": "06:21",
+      "overnightPossible": true,
+      "blockMinutes": 54,
+      "currentFrequencyToJax": 1,
+      "currentFrequencyFromJax": 1,
+      "localOdBothDirections": 9.4
+    }
+  ],
+  "candidates": [
+    {
+      "route": 114,
+      "line": "AD",
+      "day": 4,
+      "fleet": "CRJ200",
+      "city": "ROA",
+      "group": "CGI",
+      "finish": "18:49",
+      "redEyeTerminator": false,
+      "earliestJaxArrival": "21:03",
+      "nextRoute": 115,
+      "nextStart": "05:15",
+      "latestMorningJaxDeparture": "03:01",
+      "overnightPossible": false,
+      "blockMinutes": 94,
+      "currentFrequencyToJax": 2,
+      "currentFrequencyFromJax": 2,
+      "localOdBothDirections": 8.1,
+      "kind": "evening-return",
+      "plans": [
+        {
+          "route": 114,
+          "legs": [
+            {
+              "id": "NEW",
+              "origin": "ROA",
+              "destination": "JAX",
+              "departureMinute": 1169,
+              "arrivalMinute": 1263
+            },
+            {
+              "id": "NEW",
+              "origin": "JAX",
+              "destination": "ROA",
+              "departureMinute": 1303,
+              "arrivalMinute": 1397
+            }
+          ]
+        }
+      ],
+      "score": 34.582472061186834,
+      "legScores": [
+        9.943327923148992,
+        24.63914413803784
+      ],
+      "validation": {
+        "structural": "pass",
+        "operatingErrors": 0,
+        "hardStopFailures": [],
+        "blocking": [],
+        "overnight": "pass",
+        "overnightFindings": [],
+        "planning": "pass",
+        "gates": "pass",
+        "jax": {
+          "code": "JAX",
+          "name": "Jacksonville FL",
+          "isHub": true,
+          "isFocusCity": false,
+          "nGates": 16,
+          "nStands": 12,
+          "peakUsed": 16
+        },
+        "standClaims": 15,
+        "standMinutes": 4277
+      },
+      "demand": [
+        {
+          "id": "V122-ANALYSIS-R114-1-ROA-JAX",
+          "route": 114,
+          "line": "AD",
+          "fleet": "CRJ200",
+          "day": 4,
+          "sequenceWithinRoute": 7,
+          "pairing": 215,
+          "flight": 2123,
+          "origin": "ROA",
+          "destination": "JAX",
+          "departure": "19:29",
+          "arrival": "21:03",
+          "departureMinute": 1169,
+          "arrivalMinute": 1263,
+          "departureClock": "19:29",
+          "arrivalClock": "21:03",
+          "local": 1.3666666666666665,
+          "connecting": 8.576661256482325,
+          "oneStop": 8.576661256482325,
+          "twoStop": 0,
+          "groups": {
+            "FLP": 8.576661256482325
+          },
+          "topMarkets": [
+            {
+              "origin": "ROA",
+              "destination": "SFB",
+              "opportunity": 8.576661256482325
+            }
+          ]
+        },
+        {
+          "id": "V122-ANALYSIS-R114-2-JAX-ROA",
+          "route": 114,
+          "line": "AD",
+          "fleet": "CRJ200",
+          "day": 4,
+          "sequenceWithinRoute": 8,
+          "pairing": 214,
+          "flight": 2124,
+          "origin": "JAX",
+          "destination": "ROA",
+          "departure": "21:43",
+          "arrival": "23:17",
+          "departureMinute": 1303,
+          "arrivalMinute": 1397,
+          "departureClock": "21:43",
+          "arrivalClock": "23:17",
+          "local": 1.3333333333333333,
+          "connecting": 23.305810804704503,
+          "oneStop": 21.035047843493917,
+          "twoStop": 2.2707629612105893,
+          "groups": {
+            "TEX": 4.6132095021074315,
+            "FLP": 18.0,
+            "HUB": 0.6926013025970725
+          },
+          "topMarkets": [
+            {
+              "origin": "SFB",
+              "destination": "ROA",
+              "opportunity": 11.4
+            },
+            {
+              "origin": "FLL",
+              "destination": "ROA",
+              "opportunity": 5.2
+            },
+            {
+              "origin": "AUS",
+              "destination": "ROA",
+              "opportunity": 3.3917208354381065
+            },
+            {
+              "origin": "EYW",
+              "destination": "ROA",
+              "opportunity": 1.4
+            },
+            {
+              "origin": "HOU",
+              "destination": "ROA",
+              "opportunity": 1.2214886666693252
+            },
+            {
+              "origin": "MCI",
+              "destination": "ROA",
+              "opportunity": 0.6926013025970725
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "route": 126,
+      "line": "AD",
+      "day": 16,
+      "fleet": "CRJ200",
+      "city": "MLB",
+      "group": "FLP",
+      "finish": "19:12",
+      "redEyeTerminator": false,
+      "earliestJaxArrival": "20:44",
+      "nextRoute": 127,
+      "nextStart": "04:55",
+      "latestMorningJaxDeparture": "03:23",
+      "overnightPossible": false,
+      "blockMinutes": 52,
+      "currentFrequencyToJax": 2,
+      "currentFrequencyFromJax": 2,
+      "localOdBothDirections": 0.4,
+      "kind": "evening-return",
+      "plans": [
+        {
+          "route": 126,
+          "legs": [
+            {
+              "id": "NEW",
+              "origin": "MLB",
+              "destination": "JAX",
+              "departureMinute": 1193,
+              "arrivalMinute": 1245
+            },
+            {
+              "id": "NEW",
+              "origin": "JAX",
+              "destination": "MLB",
+              "departureMinute": 1285,
+              "arrivalMinute": 1337
+            }
+          ]
+        }
+      ],
+      "score": 14.636690261813591,
+      "legScores": [
+        0.06666666666666667,
+        14.570023595146925
+      ],
+      "validation": {
+        "structural": "pass",
+        "operatingErrors": 0,
+        "hardStopFailures": [],
+        "blocking": [],
+        "overnight": "pass",
+        "overnightFindings": [],
+        "planning": "pass",
+        "gates": "pass",
+        "jax": {
+          "code": "JAX",
+          "name": "Jacksonville FL",
+          "isHub": true,
+          "isFocusCity": false,
+          "nGates": 16,
+          "nStands": 12,
+          "peakUsed": 16
+        },
+        "standClaims": 15,
+        "standMinutes": 4277
+      },
+      "demand": [
+        {
+          "id": "V122-ANALYSIS-R126-1-MLB-JAX",
+          "route": 126,
+          "line": "AD",
+          "fleet": "CRJ200",
+          "day": 16,
+          "sequenceWithinRoute": 6,
+          "pairing": 387,
+          "flight": 2123,
+          "origin": "MLB",
+          "destination": "JAX",
+          "departure": "19:53",
+          "arrival": "20:45",
+          "departureMinute": 1193,
+          "arrivalMinute": 1245,
+          "departureClock": "19:53",
+          "arrivalClock": "20:45",
+          "local": 0.06666666666666667,
+          "connecting": 0,
+          "oneStop": 0,
+          "twoStop": 0,
+          "groups": {},
+          "topMarkets": []
+        },
+        {
+          "id": "V122-ANALYSIS-R126-2-JAX-MLB",
+          "route": 126,
+          "line": "AD",
+          "fleet": "CRJ200",
+          "day": 16,
+          "sequenceWithinRoute": 7,
+          "pairing": 386,
+          "flight": 2124,
+          "origin": "JAX",
+          "destination": "MLB",
+          "departure": "21:25",
+          "arrival": "22:17",
+          "departureMinute": 1285,
+          "arrivalMinute": 1337,
+          "departureClock": "21:25",
+          "arrivalClock": "22:17",
+          "local": 0.06666666666666667,
+          "connecting": 14.503356928480256,
+          "oneStop": 8.801150528838308,
+          "twoStop": 5.702206399641949,
+          "groups": {
+            "HUB": 0.8640013060614158,
+            "GLC": 2.5180589911686235,
+            "TEX": 0.549525463101517,
+            "NEC": 0.6449431275207524,
+            "MAC": 0.825114742646353,
+            "CGI": 3.878127811533611,
+            "LEC": 2.030969954587158,
+            "APP": 3.0484490002087514,
+            "GCP": 0.14416653165207577
+          },
+          "topMarkets": [
+            {
+              "origin": "CLT",
+              "destination": "MLB",
+              "opportunity": 2.31602610814907
+            },
+            {
+              "origin": "CMH",
+              "destination": "MLB",
+              "opportunity": 2.030969954587158
+            },
+            {
+              "origin": "MKE",
+              "destination": "MLB",
+              "opportunity": 1.6
+            },
+            {
+              "origin": "TYS",
+              "destination": "MLB",
+              "opportunity": 1.5
+            },
+            {
+              "origin": "BWI",
+              "destination": "MLB",
+              "opportunity": 0.825114742646353
+            },
+            {
+              "origin": "ROA",
+              "destination": "MLB",
+              "opportunity": 0.7000000000000001
+            },
+            {
+              "origin": "CRW",
+              "destination": "MLB",
+              "opportunity": 0.6
+            },
+            {
+              "origin": "TRI",
+              "destination": "MLB",
+              "opportunity": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "route": 307,
+      "line": "AA",
+      "day": 7,
+      "fleet": "CRJ700",
+      "city": "CHS",
+      "group": "CGI",
+      "finish": "19:50",
+      "redEyeTerminator": false,
+      "earliestJaxArrival": "21:24",
+      "nextRoute": 308,
+      "nextStart": "07:20",
+      "latestMorningJaxDeparture": "05:46",
+      "overnightPossible": true,
+      "blockMinutes": 54,
+      "currentFrequencyToJax": 1,
+      "currentFrequencyFromJax": 1,
+      "localOdBothDirections": 10.100000000000001,
+      "kind": "jax-overnight",
+      "plans": [
+        {
+          "route": 307,
+          "legs": [
+            {
+              "id": "NEW",
+              "origin": "CHS",
+              "destination": "JAX",
+              "departureMinute": 1230,
+              "arrivalMinute": 1284
+            }
+          ]
+        },
+        {
+          "route": 308,
+          "legs": [
+            {
+              "id": "NEW",
+              "origin": "JAX",
+              "destination": "CHS",
+              "departureMinute": 270,
+              "arrivalMinute": 324
+            }
+          ]
+        }
+      ],
+      "score": 5.050000000000001,
+      "legScores": [
+        2.6,
+        2.45
+      ],
+      "validation": {
+        "structural": "pass",
+        "operatingErrors": 0,
+        "hardStopFailures": [],
+        "blocking": [],
+        "overnight": "pass",
+        "overnightFindings": [],
+        "planning": "pass",
+        "gates": "pass",
+        "jax": {
+          "code": "JAX",
+          "name": "Jacksonville FL",
+          "isHub": true,
+          "isFocusCity": false,
+          "nGates": 16,
+          "nStands": 12,
+          "peakUsed": 16
+        },
+        "standClaims": 15,
+        "standMinutes": 4277
+      },
+      "demand": [
+        {
+          "id": "V122-ANALYSIS-R307-1-CHS-JAX",
+          "route": 307,
+          "line": "AA",
+          "fleet": "CRJ700",
+          "day": 7,
+          "sequenceWithinRoute": 7,
+          "pairing": 406,
+          "flight": 2123,
+          "origin": "CHS",
+          "destination": "JAX",
+          "departure": "20:30",
+          "arrival": "21:24",
+          "departureMinute": 1230,
+          "arrivalMinute": 1284,
+          "departureClock": "20:30",
+          "arrivalClock": "21:24",
+          "local": 2.6,
+          "connecting": 0,
+          "oneStop": 0,
+          "twoStop": 0,
+          "groups": {},
+          "topMarkets": []
+        },
+        {
+          "id": "V122-ANALYSIS-R308-1-JAX-CHS",
+          "route": 308,
+          "line": "AA",
+          "fleet": "CRJ700",
+          "day": 8,
+          "sequenceWithinRoute": 1,
+          "pairing": 405,
+          "flight": 2124,
+          "origin": "JAX",
+          "destination": "CHS",
+          "departure": "04:30",
+          "arrival": "05:24",
+          "departureMinute": 270,
+          "arrivalMinute": 324,
+          "departureClock": "04:30",
+          "arrivalClock": "05:24",
+          "local": 2.45,
+          "connecting": 0,
+          "oneStop": 0,
+          "twoStop": 0,
+          "groups": {},
+          "topMarkets": []
+        }
+      ]
+    },
+    {
+      "route": 308,
+      "line": "AA",
+      "day": 8,
+      "fleet": "CRJ700",
+      "city": "CLT",
+      "group": "CGI",
+      "finish": "19:41",
+      "redEyeTerminator": false,
+      "earliestJaxArrival": "21:33",
+      "nextRoute": 309,
+      "nextStart": "07:30",
+      "latestMorningJaxDeparture": "05:38",
+      "overnightPossible": true,
+      "blockMinutes": 72,
+      "currentFrequencyToJax": 2,
+      "currentFrequencyFromJax": 2,
+      "localOdBothDirections": 80.9,
+      "kind": "jax-overnight",
+      "plans": [
+        {
+          "route": 308,
+          "legs": [
+            {
+              "id": "NEW",
+              "origin": "CLT",
+              "destination": "JAX",
+              "departureMinute": 1221,
+              "arrivalMinute": 1293
+            }
+          ]
+        },
+        {
+          "route": 309,
+          "legs": [
+            {
+              "id": "NEW",
+              "origin": "JAX",
+              "destination": "CLT",
+              "departureMinute": 310,
+              "arrivalMinute": 382
+            }
+          ]
+        }
+      ],
+      "score": 67.04059536651152,
+      "legScores": [
+        13.413005386462459,
+        53.62758998004906
+      ],
+      "validation": {
+        "structural": "pass",
+        "operatingErrors": 0,
+        "hardStopFailures": [],
+        "blocking": [],
+        "overnight": "pass",
+        "overnightFindings": [],
+        "planning": "pass",
+        "gates": "pass",
+        "jax": {
+          "code": "JAX",
+          "name": "Jacksonville FL",
+          "isHub": true,
+          "isFocusCity": false,
+          "nGates": 16,
+          "nStands": 12,
+          "peakUsed": 16
+        },
+        "standClaims": 14,
+        "standMinutes": 3673
+      },
+      "demand": [
+        {
+          "id": "V122-ANALYSIS-R308-1-CLT-JAX",
+          "route": 308,
+          "line": "AA",
+          "fleet": "CRJ700",
+          "day": 8,
+          "sequenceWithinRoute": 7,
+          "pairing": 596,
+          "flight": 2123,
+          "origin": "CLT",
+          "destination": "JAX",
+          "departure": "20:21",
+          "arrival": "21:33",
+          "departureMinute": 1221,
+          "arrivalMinute": 1293,
+          "departureClock": "20:21",
+          "arrivalClock": "21:33",
+          "local": 13.413005386462459,
+          "connecting": 0,
+          "oneStop": 0,
+          "twoStop": 0,
+          "groups": {},
+          "topMarkets": []
+        },
+        {
+          "id": "V122-ANALYSIS-R309-1-JAX-CLT",
+          "route": 309,
+          "line": "AA",
+          "fleet": "CRJ700",
+          "day": 9,
+          "sequenceWithinRoute": 1,
+          "pairing": 565,
+          "flight": 2124,
+          "origin": "JAX",
+          "destination": "CLT",
+          "departure": "05:10",
+          "arrival": "06:22",
+          "departureMinute": 310,
+          "arrivalMinute": 382,
+          "departureClock": "05:10",
+          "arrivalClock": "06:22",
+          "local": 13.053144266337853,
+          "connecting": 40.57444571371121,
+          "oneStop": 40.57444571371121,
+          "twoStop": 0,
+          "groups": {
+            "TEX": 40.57444571371121
+          },
+          "topMarkets": [
+            {
+              "origin": "SAT",
+              "destination": "CLT",
+              "opportunity": 34.06159817347466
+            },
+            {
+              "origin": "ELP",
+              "destination": "CLT",
+              "opportunity": 6.512847540236548
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "route": 338,
+      "line": "AL",
+      "day": 2,
+      "fleet": "CRJ700",
+      "city": "SAV",
+      "group": "CGI",
+      "finish": "17:41",
+      "redEyeTerminator": false,
+      "earliestJaxArrival": "19:06",
+      "nextRoute": 339,
+      "nextStart": "04:30",
+      "latestMorningJaxDeparture": "03:05",
+      "overnightPossible": false,
+      "blockMinutes": 45,
+      "currentFrequencyToJax": 1,
+      "currentFrequencyFromJax": 1,
+      "localOdBothDirections": 3.9,
+      "kind": "evening-return",
+      "plans": [
+        {
+          "route": 338,
+          "legs": [
+            {
+              "id": "NEW",
+              "origin": "SAV",
+              "destination": "JAX",
+              "departureMinute": 1200,
+              "arrivalMinute": 1245
+            },
+            {
+              "id": "NEW",
+              "origin": "JAX",
+              "destination": "SAV",
+              "departureMinute": 1285,
+              "arrivalMinute": 1330
+            }
+          ]
+        }
+      ],
+      "score": 111.52371670114194,
+      "legScores": [
+        3.867817052841076,
+        107.65589964830086
+      ],
+      "validation": {
+        "structural": "pass",
+        "operatingErrors": 0,
+        "hardStopFailures": [],
+        "blocking": [],
+        "overnight": "pass",
+        "overnightFindings": [],
+        "planning": "pass",
+        "gates": "pass",
+        "jax": {
+          "code": "JAX",
+          "name": "Jacksonville FL",
+          "isHub": true,
+          "isFocusCity": false,
+          "nGates": 16,
+          "nStands": 12,
+          "peakUsed": 16
+        },
+        "standClaims": 15,
+        "standMinutes": 4277
+      },
+      "demand": [
+        {
+          "id": "V122-ANALYSIS-R338-1-SAV-JAX",
+          "route": 338,
+          "line": "AL",
+          "fleet": "CRJ700",
+          "day": 2,
+          "sequenceWithinRoute": 6,
+          "pairing": 388,
+          "flight": 2123,
+          "origin": "SAV",
+          "destination": "JAX",
+          "departure": "20:00",
+          "arrival": "20:45",
+          "departureMinute": 1200,
+          "arrivalMinute": 1245,
+          "departureClock": "20:00",
+          "arrivalClock": "20:45",
+          "local": 0.9286543802070184,
+          "connecting": 2.939162672634058,
+          "oneStop": 2.939162672634058,
+          "twoStop": 0,
+          "groups": {
+            "FLP": 2.939162672634058
+          },
+          "topMarkets": [
+            {
+              "origin": "SAV",
+              "destination": "SFB",
+              "opportunity": 2.939162672634058
+            }
+          ]
+        },
+        {
+          "id": "V122-ANALYSIS-R338-2-JAX-SAV",
+          "route": 338,
+          "line": "AL",
+          "fleet": "CRJ700",
+          "day": 2,
+          "sequenceWithinRoute": 7,
+          "pairing": 171,
+          "flight": 2124,
+          "origin": "JAX",
+          "destination": "SAV",
+          "departure": "21:25",
+          "arrival": "22:10",
+          "departureMinute": 1285,
+          "arrivalMinute": 1330,
+          "departureClock": "21:25",
+          "arrivalClock": "22:10",
+          "local": 0.9775309265337037,
+          "connecting": 106.67836872176713,
+          "oneStop": 81.4161502596597,
+          "twoStop": 25.26221846210744,
+          "groups": {
+            "GLC": 22.474273302799062,
+            "NEC": 4.6076833555611,
+            "TEX": 17.338709297045938,
+            "MAC": 2.082698020312111,
+            "HUB": 1.356583089369454,
+            "CGI": 9.9,
+            "LEC": 11.447433067566415,
+            "APP": 13.231164453493776,
+            "FLP": 21.339824135619292,
+            "GCP": 2.9
+          },
+          "topMarkets": [
+            {
+              "origin": "AUS",
+              "destination": "SAV",
+              "opportunity": 15.373417737972439
+            },
+            {
+              "origin": "CMH",
+              "destination": "SAV",
+              "opportunity": 11.447433067566415
+            },
+            {
+              "origin": "SDF",
+              "destination": "SAV",
+              "opportunity": 11.3
+            },
+            {
+              "origin": "IND",
+              "destination": "SAV",
+              "opportunity": 10.812042941990201
+            },
+            {
+              "origin": "FLL",
+              "destination": "SAV",
+              "opportunity": 9.939824135619293
+            },
+            {
+              "origin": "CLT",
+              "destination": "SAV",
+              "opportunity": 6.8
+            },
+            {
+              "origin": "MKE",
+              "destination": "SAV",
+              "opportunity": 5.848635308527806
+            },
+            {
+              "origin": "PGD",
+              "destination": "SAV",
+              "opportunity": 4.3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "route": 340,
+      "line": "AL",
+      "day": 4,
+      "fleet": "CRJ700",
+      "city": "CLT",
+      "group": "CGI",
+      "finish": "17:21",
+      "redEyeTerminator": false,
+      "earliestJaxArrival": "19:13",
+      "nextRoute": 341,
+      "nextStart": "05:10",
+      "latestMorningJaxDeparture": "03:18",
+      "overnightPossible": false,
+      "blockMinutes": 72,
+      "currentFrequencyToJax": 2,
+      "currentFrequencyFromJax": 2,
+      "localOdBothDirections": 80.9,
+      "kind": "evening-return",
+      "plans": [
+        {
+          "route": 340,
+          "legs": [
+            {
+              "id": "NEW",
+              "origin": "CLT",
+              "destination": "JAX",
+              "departureMinute": 1173,
+              "arrivalMinute": 1245
+            },
+            {
+              "id": "NEW",
+              "origin": "JAX",
+              "destination": "CLT",
+              "departureMinute": 1285,
+              "arrivalMinute": 1357
+            }
+          ]
+        }
+      ],
+      "score": 186.04223707240197,
+      "legScores": [
+        31.318597743826494,
+        154.72363932857547
+      ],
+      "validation": {
+        "structural": "pass",
+        "operatingErrors": 0,
+        "hardStopFailures": [],
+        "blocking": [],
+        "overnight": "pass",
+        "overnightFindings": [],
+        "planning": "pass",
+        "gates": "pass",
+        "jax": {
+          "code": "JAX",
+          "name": "Jacksonville FL",
+          "isHub": true,
+          "isFocusCity": false,
+          "nGates": 16,
+          "nStands": 12,
+          "peakUsed": 16
+        },
+        "standClaims": 15,
+        "standMinutes": 4277
+      },
+      "demand": [
+        {
+          "id": "V122-ANALYSIS-R340-1-CLT-JAX",
+          "route": 340,
+          "line": "AL",
+          "fleet": "CRJ700",
+          "day": 4,
+          "sequenceWithinRoute": 7,
+          "pairing": 596,
+          "flight": 2123,
+          "origin": "CLT",
+          "destination": "JAX",
+          "departure": "19:33",
+          "arrival": "20:45",
+          "departureMinute": 1173,
+          "arrivalMinute": 1245,
+          "departureClock": "19:33",
+          "arrivalClock": "20:45",
+          "local": 13.413005386462459,
+          "connecting": 17.905592357364036,
+          "oneStop": 17.905592357364036,
+          "twoStop": 0,
+          "groups": {
+            "FLP": 17.905592357364036
+          },
+          "topMarkets": [
+            {
+              "origin": "CLT",
+              "destination": "SFB",
+              "opportunity": 17.905592357364036
+            }
+          ]
+        },
+        {
+          "id": "V122-ANALYSIS-R340-2-JAX-CLT",
+          "route": 340,
+          "line": "AL",
+          "fleet": "CRJ700",
+          "day": 4,
+          "sequenceWithinRoute": 8,
+          "pairing": 565,
+          "flight": 2124,
+          "origin": "JAX",
+          "destination": "CLT",
+          "departure": "21:25",
+          "arrival": "22:37",
+          "departureMinute": 1285,
+          "arrivalMinute": 1357,
+          "departureClock": "21:25",
+          "arrivalClock": "22:37",
+          "local": 13.053144266337853,
+          "connecting": 141.6704950622376,
+          "oneStop": 134.86090006643053,
+          "twoStop": 6.809594995807089,
+          "groups": {
+            "GLC": 4.460896423239523,
+            "FLP": 108.40477894250834,
+            "HUB": 0.026414268971936897,
+            "NEC": 0.5527225958658651,
+            "TEX": 16.625682831651947,
+            "GCP": 11.6
+          },
+          "topMarkets": [
+            {
+              "origin": "FLL",
+              "destination": "CLT",
+              "opportunity": 30.01343191306241
+            },
+            {
+              "origin": "SFB",
+              "destination": "CLT",
+              "opportunity": 29.058914705098225
+            },
+            {
+              "origin": "PGD",
+              "destination": "CLT",
+              "opportunity": 20.13500284343135
+            },
+            {
+              "origin": "EYW",
+              "destination": "CLT",
+              "opportunity": 17.8
+            },
+            {
+              "origin": "AUS",
+              "destination": "CLT",
+              "opportunity": 14.665447320970834
+            },
+            {
+              "origin": "JAN",
+              "destination": "CLT",
+              "opportunity": 11.6
+            },
+            {
+              "origin": "MLB",
+              "destination": "CLT",
+              "opportunity": 11.397429480916353
+            },
+            {
+              "origin": "GRR",
+              "destination": "CLT",
+              "opportunity": 2.137100277621413
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "route": 341,
+      "line": "AL",
+      "day": 5,
+      "fleet": "CRJ700",
+      "city": "MSY",
+      "group": "GCP",
+      "finish": "17:44",
+      "redEyeTerminator": false,
+      "earliestJaxArrival": "20:59",
+      "nextRoute": 342,
+      "nextStart": "05:05",
+      "latestMorningJaxDeparture": "03:50",
+      "overnightPossible": false,
+      "blockMinutes": 95,
+      "currentFrequencyToJax": 1,
+      "currentFrequencyFromJax": 1,
+      "localOdBothDirections": 51.400000000000006,
+      "kind": "evening-return",
+      "plans": [
+        {
+          "route": 341,
+          "legs": [
+            {
+              "id": "NEW",
+              "origin": "MSY",
+              "destination": "JAX",
+              "departureMinute": 1104,
+              "arrivalMinute": 1259
+            },
+            {
+              "id": "NEW",
+              "origin": "JAX",
+              "destination": "MSY",
+              "departureMinute": 1299,
+              "arrivalMinute": 1334
+            }
+          ]
+        }
+      ],
+      "score": 720.4108590509993,
+      "legScores": [
+        218.3,
+        502.11085905099935
+      ],
+      "validation": {
+        "structural": "pass",
+        "operatingErrors": 0,
+        "hardStopFailures": [],
+        "blocking": [],
+        "overnight": "pass",
+        "overnightFindings": [],
+        "planning": "pass",
+        "gates": "pass",
+        "jax": {
+          "code": "JAX",
+          "name": "Jacksonville FL",
+          "isHub": true,
+          "isFocusCity": false,
+          "nGates": 16,
+          "nStands": 12,
+          "peakUsed": 16
+        },
+        "standClaims": 15,
+        "standMinutes": 4277
+      },
+      "demand": [
+        {
+          "id": "V122-ANALYSIS-R341-1-MSY-JAX",
+          "route": 341,
+          "line": "AL",
+          "fleet": "CRJ700",
+          "day": 5,
+          "sequenceWithinRoute": 5,
+          "pairing": 392,
+          "flight": 2123,
+          "origin": "MSY",
+          "destination": "JAX",
+          "departure": "18:24",
+          "arrival": "20:59",
+          "departureMinute": 1104,
+          "arrivalMinute": 1259,
+          "departureClock": "18:24",
+          "arrivalClock": "20:59",
+          "local": 12.9,
+          "connecting": 205.4,
+          "oneStop": 205.4,
+          "twoStop": 0,
+          "groups": {
+            "FLP": 205.4
+          },
+          "topMarkets": [
+            {
+              "origin": "MSY",
+              "destination": "SFB",
+              "opportunity": 205.4
+            }
+          ]
+        },
+        {
+          "id": "V122-ANALYSIS-R341-2-JAX-MSY",
+          "route": 341,
+          "line": "AL",
+          "fleet": "CRJ700",
+          "day": 5,
+          "sequenceWithinRoute": 6,
+          "pairing": 391,
+          "flight": 2124,
+          "origin": "JAX",
+          "destination": "MSY",
+          "departure": "21:39",
+          "arrival": "22:14",
+          "departureMinute": 1299,
+          "arrivalMinute": 1334,
+          "departureClock": "21:39",
+          "arrivalClock": "22:14",
+          "local": 12.8,
+          "connecting": 489.31085905099934,
+          "oneStop": 466.43210201735917,
+          "twoStop": 22.878757033640184,
+          "groups": {
+            "GLC": 17.818674124324943,
+            "HUB": 0.7572629721601204,
+            "NEC": 0.7205176853723458,
+            "CGI": 29.14652294480951,
+            "MAC": 7.330646154053621,
+            "LEC": 21.83087884801709,
+            "APP": 23.706356322261726,
+            "FLP": 388.0
+          },
+          "topMarkets": [
+            {
+              "origin": "SFB",
+              "destination": "MSY",
+              "opportunity": 205.0
+            },
+            {
+              "origin": "FLL",
+              "destination": "MSY",
+              "opportunity": 162.6
+            },
+            {
+              "origin": "CMH",
+              "destination": "MSY",
+              "opportunity": 21.83087884801709
+            },
+            {
+              "origin": "SDF",
+              "destination": "MSY",
+              "opportunity": 17.8
+            },
+            {
+              "origin": "IND",
+              "destination": "MSY",
+              "opportunity": 13.894738701419058
+            },
+            {
+              "origin": "PGD",
+              "destination": "MSY",
+              "opportunity": 13.299999999999999
+            },
+            {
+              "origin": "BWI",
+              "destination": "MSY",
+              "opportunity": 7.330646154053621
+            },
+            {
+              "origin": "CHS",
+              "destination": "MSY",
+              "opportunity": 6.886936434127472
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "route": 504,
+      "line": "AB",
+      "day": 4,
+      "fleet": "CRJ900",
+      "city": "CLT",
+      "group": "CGI",
+      "finish": "18:26",
+      "redEyeTerminator": false,
+      "earliestJaxArrival": "20:17",
+      "nextRoute": 505,
+      "nextStart": "04:30",
+      "latestMorningJaxDeparture": "02:39",
+      "overnightPossible": false,
+      "blockMinutes": 71,
+      "currentFrequencyToJax": 2,
+      "currentFrequencyFromJax": 2,
+      "localOdBothDirections": 80.9,
+      "kind": "evening-return",
+      "plans": [
+        {
+          "route": 504,
+          "legs": [
+            {
+              "id": "NEW",
+              "origin": "CLT",
+              "destination": "JAX",
+              "departureMinute": 1174,
+              "arrivalMinute": 1245
+            },
+            {
+              "id": "NEW",
+              "origin": "JAX",
+              "destination": "CLT",
+              "departureMinute": 1285,
+              "arrivalMinute": 1356
+            }
+          ]
+        }
+      ],
+      "score": 187.34963067286196,
+      "legScores": [
+        31.772133786216244,
+        155.57749688664572
+      ],
+      "validation": {
+        "structural": "pass",
+        "operatingErrors": 0,
+        "hardStopFailures": [],
+        "blocking": [],
+        "overnight": "pass",
+        "overnightFindings": [],
+        "planning": "pass",
+        "gates": "pass",
+        "jax": {
+          "code": "JAX",
+          "name": "Jacksonville FL",
+          "isHub": true,
+          "isFocusCity": false,
+          "nGates": 16,
+          "nStands": 12,
+          "peakUsed": 16
+        },
+        "standClaims": 15,
+        "standMinutes": 4277
+      },
+      "demand": [
+        {
+          "id": "V122-ANALYSIS-R504-1-CLT-JAX",
+          "route": 504,
+          "line": "AB",
+          "fleet": "CRJ900",
+          "day": 4,
+          "sequenceWithinRoute": 6,
+          "pairing": 596,
+          "flight": 2123,
+          "origin": "CLT",
+          "destination": "JAX",
+          "departure": "19:34",
+          "arrival": "20:45",
+          "departureMinute": 1174,
+          "arrivalMinute": 1245,
+          "departureClock": "19:34",
+          "arrivalClock": "20:45",
+          "local": 13.666666666666668,
+          "connecting": 18.105467119549576,
+          "oneStop": 18.105467119549576,
+          "twoStop": 0,
+          "groups": {
+            "FLP": 18.105467119549576
+          },
+          "topMarkets": [
+            {
+              "origin": "CLT",
+              "destination": "SFB",
+              "opportunity": 18.105467119549576
+            }
+          ]
+        },
+        {
+          "id": "V122-ANALYSIS-R504-2-JAX-CLT",
+          "route": 504,
+          "line": "AB",
+          "fleet": "CRJ900",
+          "day": 4,
+          "sequenceWithinRoute": 7,
+          "pairing": 565,
+          "flight": 2124,
+          "origin": "JAX",
+          "destination": "CLT",
+          "departure": "21:25",
+          "arrival": "22:36",
+          "departureMinute": 1285,
+          "arrivalMinute": 1356,
+          "departureClock": "21:25",
+          "arrivalClock": "22:36",
+          "local": 13.3,
+          "connecting": 142.2774968866457,
+          "oneStop": 135.4446997113817,
+          "twoStop": 6.832797175264024,
+          "groups": {
+            "GLC": 4.477919687736742,
+            "FLP": 108.92533601409254,
+            "HUB": 0.026494827604696087,
+            "NEC": 0.555461538099961,
+            "TEX": 16.69228481911179,
+            "GCP": 11.6
+          },
+          "topMarkets": [
+            {
+              "origin": "FLL",
+              "destination": "CLT",
+              "opportunity": 30.15850988182938
+            },
+            {
+              "origin": "SFB",
+              "destination": "CLT",
+              "opportunity": 29.365296920586815
+            },
+            {
+              "origin": "PGD",
+              "destination": "CLT",
+              "opportunity": 20.195567944027562
+            },
+            {
+              "origin": "EYW",
+              "destination": "CLT",
+              "opportunity": 17.8
+            },
+            {
+              "origin": "AUS",
+              "destination": "CLT",
+              "opportunity": 14.726390569022787
+            },
+            {
+              "origin": "JAN",
+              "destination": "CLT",
+              "opportunity": 11.6
+            },
+            {
+              "origin": "MLB",
+              "destination": "CLT",
+              "opportunity": 11.405961267648777
+            },
+            {
+              "origin": "GRR",
+              "destination": "CLT",
+              "opportunity": 2.1452700032956398
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "route": 514,
+      "line": "AG",
+      "day": 4,
+      "fleet": "CRJ900",
+      "city": "PIE",
+      "group": "FLP",
+      "finish": "19:34",
+      "redEyeTerminator": false,
+      "earliestJaxArrival": "21:08",
+      "nextRoute": 515,
+      "nextStart": "07:55",
+      "latestMorningJaxDeparture": "06:21",
+      "overnightPossible": true,
+      "blockMinutes": 54,
+      "currentFrequencyToJax": 1,
+      "currentFrequencyFromJax": 1,
+      "localOdBothDirections": 9.4,
+      "kind": "jax-overnight",
+      "plans": [
+        {
+          "route": 514,
+          "legs": [
+            {
+              "id": "NEW",
+              "origin": "PIE",
+              "destination": "JAX",
+              "departureMinute": 1214,
+              "arrivalMinute": 1268
+            }
+          ]
+        },
+        {
+          "route": 515,
+          "legs": [
+            {
+              "id": "NEW",
+              "origin": "JAX",
+              "destination": "PIE",
+              "departureMinute": 380,
+              "arrivalMinute": 434
+            }
+          ]
+        }
+      ],
+      "score": 247.29862019657406,
+      "legScores": [
+        2.25,
+        245.04862019657406
+      ],
+      "validation": {
+        "structural": "pass",
+        "operatingErrors": 0,
+        "hardStopFailures": [],
+        "blocking": [],
+        "overnight": "pass",
+        "overnightFindings": [],
+        "planning": "pass",
+        "gates": "pass",
+        "jax": {
+          "code": "JAX",
+          "name": "Jacksonville FL",
+          "isHub": true,
+          "isFocusCity": false,
+          "nGates": 16,
+          "nStands": 12,
+          "peakUsed": 16
+        },
+        "standClaims": 15,
+        "standMinutes": 4277
+      },
+      "demand": [
+        {
+          "id": "V122-ANALYSIS-R514-1-PIE-JAX",
+          "route": 514,
+          "line": "AG",
+          "fleet": "CRJ900",
+          "day": 4,
+          "sequenceWithinRoute": 5,
+          "pairing": 292,
+          "flight": 2123,
+          "origin": "PIE",
+          "destination": "JAX",
+          "departure": "20:14",
+          "arrival": "21:08",
+          "departureMinute": 1214,
+          "arrivalMinute": 1268,
+          "departureClock": "20:14",
+          "arrivalClock": "21:08",
+          "local": 2.25,
+          "connecting": 0,
+          "oneStop": 0,
+          "twoStop": 0,
+          "groups": {},
+          "topMarkets": []
+        },
+        {
+          "id": "V122-ANALYSIS-R515-1-JAX-PIE",
+          "route": 515,
+          "line": "AG",
+          "fleet": "CRJ900",
+          "day": 5,
+          "sequenceWithinRoute": 1,
+          "pairing": 291,
+          "flight": 2124,
+          "origin": "JAX",
+          "destination": "PIE",
+          "departure": "06:20",
+          "arrival": "07:14",
+          "departureMinute": 380,
+          "arrivalMinute": 434,
+          "departureClock": "06:20",
+          "arrivalClock": "07:14",
+          "local": 2.45,
+          "connecting": 242.59862019657405,
+          "oneStop": 242.59862019657407,
+          "twoStop": 0,
+          "groups": {
+            "CGI": 172.4012135119039,
+            "TEX": 46.57892913118722,
+            "APP": 22.30773769612445,
+            "FLP": 0.8254108201850662,
+            "GCP": 0.48532903717342296
+          },
+          "topMarkets": [
+            {
+              "origin": "RDU",
+              "destination": "PIE",
+              "opportunity": 107.45551614926477
+            },
+            {
+              "origin": "CLT",
+              "destination": "PIE",
+              "opportunity": 64.94569736263914
+            },
+            {
+              "origin": "SAT",
+              "destination": "PIE",
+              "opportunity": 35.691097705120484
+            },
+            {
+              "origin": "TYS",
+              "destination": "PIE",
+              "opportunity": 22.30773769612445
+            },
+            {
+              "origin": "ELP",
+              "destination": "PIE",
+              "opportunity": 10.887831426066738
+            },
+            {
+              "origin": "DAB",
+              "destination": "PIE",
+              "opportunity": 0.5
+            },
+            {
+              "origin": "TLH",
+              "destination": "PIE",
+              "opportunity": 0.48532903717342296
+            },
+            {
+              "origin": "GNV",
+              "destination": "PIE",
+              "opportunity": 0.3254108201850662
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "jointEveningReturnScreen": {
+    "routes": [
+      341,
+      338,
+      504,
+      114,
+      126
+    ],
+    "plans": [
+      {
+        "route": 341,
+        "legs": [
+          {
+            "id": "NEW",
+            "origin": "MSY",
+            "destination": "JAX",
+            "departureMinute": 1104,
+            "arrivalMinute": 1259
+          },
+          {
+            "id": "NEW",
+            "origin": "JAX",
+            "destination": "MSY",
+            "departureMinute": 1299,
+            "arrivalMinute": 1334
+          }
+        ]
+      },
+      {
+        "route": 338,
+        "legs": [
+          {
+            "id": "NEW",
+            "origin": "SAV",
+            "destination": "JAX",
+            "departureMinute": 1200,
+            "arrivalMinute": 1245
+          },
+          {
+            "id": "NEW",
+            "origin": "JAX",
+            "destination": "SAV",
+            "departureMinute": 1285,
+            "arrivalMinute": 1330
+          }
+        ]
+      },
+      {
+        "route": 504,
+        "legs": [
+          {
+            "id": "NEW",
+            "origin": "CLT",
+            "destination": "JAX",
+            "departureMinute": 1174,
+            "arrivalMinute": 1245
+          },
+          {
+            "id": "NEW",
+            "origin": "JAX",
+            "destination": "CLT",
+            "departureMinute": 1285,
+            "arrivalMinute": 1356
+          }
+        ]
+      },
+      {
+        "route": 114,
+        "legs": [
+          {
+            "id": "NEW",
+            "origin": "ROA",
+            "destination": "JAX",
+            "departureMinute": 1169,
+            "arrivalMinute": 1263
+          },
+          {
+            "id": "NEW",
+            "origin": "JAX",
+            "destination": "ROA",
+            "departureMinute": 1303,
+            "arrivalMinute": 1397
+          }
+        ]
+      },
+      {
+        "route": 126,
+        "legs": [
+          {
+            "id": "NEW",
+            "origin": "MLB",
+            "destination": "JAX",
+            "departureMinute": 1193,
+            "arrivalMinute": 1245
+          },
+          {
+            "id": "NEW",
+            "origin": "JAX",
+            "destination": "MLB",
+            "departureMinute": 1285,
+            "arrivalMinute": 1337
+          }
+        ]
+      }
+    ],
+    "validation": {
+      "structural": "pass",
+      "operatingErrors": 0,
+      "hardStopFailures": [],
+      "blocking": [],
+      "overnight": "pass",
+      "overnightFindings": [],
+      "planning": "pass",
+      "gates": "pass",
+      "jax": {
+        "code": "JAX",
+        "name": "Jacksonville FL",
+        "isHub": true,
+        "isFocusCity": false,
+        "nGates": 16,
+        "nStands": 12,
+        "peakUsed": 16
+      },
+      "standClaims": 15,
+      "standMinutes": 4277
+    },
+    "demand": [
+      {
+        "id": "V122-ANALYSIS-R702-1-SFB-JAX",
+        "route": 702,
+        "line": "A",
+        "fleet": "MAX9",
+        "day": 2,
+        "sequenceWithinRoute": 6,
+        "pairing": 692,
+        "flight": 2119,
+        "origin": "SFB",
+        "destination": "JAX",
+        "departure": "20:05",
+        "arrival": "20:53",
+        "departureMinute": 1205,
+        "arrivalMinute": 1253,
+        "departureClock": "20:05",
+        "arrivalClock": "20:53",
+        "local": 2.7407932011331444,
+        "connecting": 184.54205519683686,
+        "oneStop": 184.54205519683686,
+        "twoStop": 0,
+        "groups": {
+          "CGI": 34.06088006636193,
+          "GCP": 150.48117513047492
+        },
+        "topMarkets": [
+          {
+            "origin": "SFB",
+            "destination": "MSY",
+            "opportunity": 150.48117513047492
+          },
+          {
+            "origin": "SFB",
+            "destination": "CLT",
+            "opportunity": 22.600511818125636
+          },
+          {
+            "origin": "SFB",
+            "destination": "ROA",
+            "opportunity": 8.340368248236297
+          },
+          {
+            "origin": "SFB",
+            "destination": "SAV",
+            "opportunity": 3.1199999999999997
+          }
+        ]
+      },
+      {
+        "id": "V122-ANALYSIS-R702-2-JAX-SFB",
+        "route": 702,
+        "line": "A",
+        "fleet": "MAX9",
+        "day": 2,
+        "sequenceWithinRoute": 7,
+        "pairing": 663,
+        "flight": 2120,
+        "origin": "JAX",
+        "destination": "SFB",
+        "departure": "21:33",
+        "arrival": "22:21",
+        "departureMinute": 1293,
+        "arrivalMinute": 1341,
+        "departureClock": "21:33",
+        "arrivalClock": "22:21",
+        "local": 2.8364022662889523,
+        "connecting": 704.6198811125425,
+        "oneStop": 595.3942921679952,
+        "twoStop": 109.22558894454752,
+        "groups": {
+          "GLC": 81.36773838397656,
+          "MAC": 11.479395568493079,
+          "TEX": 43.72481296641975,
+          "CGI": 71.36556082341292,
+          "HUB": 1.6840049739448926,
+          "FLP": 18.449876941585423,
+          "NEC": 31.817747006879387,
+          "LEC": 191.56094233996612,
+          "APP": 43.76044405659646,
+          "GCP": 209.40935805126813
+        },
+        "topMarkets": [
+          {
+            "origin": "MSY",
+            "destination": "SFB",
+            "opportunity": 205.4
+          },
+          {
+            "origin": "CMH",
+            "destination": "SFB",
+            "opportunity": 191.56094233996612
+          },
+          {
+            "origin": "MKE",
+            "destination": "SFB",
+            "opportunity": 43.79169233772295
+          },
+          {
+            "origin": "AUS",
+            "destination": "SFB",
+            "opportunity": 38.80914221034404
+          },
+          {
+            "origin": "CLT",
+            "destination": "SFB",
+            "opportunity": 22.089681332536557
+          },
+          {
+            "origin": "BDL",
+            "destination": "SFB",
+            "opportunity": 21.213184675072554
+          },
+          {
+            "origin": "IND",
+            "destination": "SFB",
+            "opportunity": 19.54504036537136
+          },
+          {
+            "origin": "EYW",
+            "destination": "SFB",
+            "opportunity": 18.4
+          }
+        ]
+      },
+      {
+        "id": "V122-ANALYSIS-R704-1-SFB-BHM",
+        "route": 704,
+        "line": "A",
+        "fleet": "MAX9",
+        "day": 4,
+        "sequenceWithinRoute": 9,
+        "pairing": 856,
+        "flight": 2121,
+        "origin": "SFB",
+        "destination": "BHM",
+        "departure": "20:19",
+        "arrival": "20:45",
+        "departureMinute": 1219,
+        "arrivalMinute": 1245,
+        "departureClock": "20:19",
+        "arrivalClock": "20:45",
+        "local": 38.31747793190416,
+        "connecting": 83.33044894477422,
+        "oneStop": 83.33044894477422,
+        "twoStop": 0,
+        "groups": {
+          "FLP": 83.33044894477422
+        },
+        "topMarkets": [
+          {
+            "origin": "SFB",
+            "destination": "XNA",
+            "opportunity": 29.32632547855264
+          },
+          {
+            "origin": "SFB",
+            "destination": "OKC",
+            "opportunity": 27.751369105911458
+          },
+          {
+            "origin": "SFB",
+            "destination": "SAT",
+            "opportunity": 10.91181349293674
+          },
+          {
+            "origin": "SFB",
+            "destination": "HOU",
+            "opportunity": 8.260029053398128
+          },
+          {
+            "origin": "SFB",
+            "destination": "SGF",
+            "opportunity": 6.727307606641229
+          },
+          {
+            "origin": "SFB",
+            "destination": "VPS",
+            "opportunity": 0.3536042073340293
+          }
+        ]
+      },
+      {
+        "id": "V122-ANALYSIS-R704-2-BHM-SFB",
+        "route": 704,
+        "line": "A",
+        "fleet": "MAX9",
+        "day": 4,
+        "sequenceWithinRoute": 10,
+        "pairing": 855,
+        "flight": 2122,
+        "origin": "BHM",
+        "destination": "SFB",
+        "departure": "23:15",
+        "arrival": "01:41",
+        "departureMinute": 1395,
+        "arrivalMinute": 1541,
+        "departureClock": "23:15",
+        "arrivalClock": "01:41 +1",
+        "local": 37.09266740523191,
+        "connecting": 548.9254930748097,
+        "oneStop": 257.6428320035166,
+        "twoStop": 291.28266107129303,
+        "groups": {
+          "GLC": 24.9552598306792,
+          "TEX": 164.06233829199968,
+          "HUB": 5.4143711047044345,
+          "OZK": 157.88681852578532,
+          "APP": 0.3643989038326041,
+          "GCP": 1.860668904403641,
+          "UMP": 194.3816375134048
+        },
+        "topMarkets": [
+          {
+            "origin": "BLV",
+            "destination": "SFB",
+            "opportunity": 193.0
+          },
+          {
+            "origin": "AUS",
+            "destination": "SFB",
+            "opportunity": 70.5849412519776
+          },
+          {
+            "origin": "OKC",
+            "destination": "SFB",
+            "opportunity": 60.79999999999999
+          },
+          {
+            "origin": "DAL",
+            "destination": "SFB",
+            "opportunity": 44.205521455037044
+          },
+          {
+            "origin": "MEM",
+            "destination": "SFB",
+            "opportunity": 37.3186884537673
+          },
+          {
+            "origin": "XNA",
+            "destination": "SFB",
+            "opportunity": 31.000000000000004
+          },
+          {
+            "origin": "SGF",
+            "destination": "SFB",
+            "opportunity": 17.0
+          },
+          {
+            "origin": "MKE",
+            "destination": "SFB",
+            "opportunity": 15.660165278178043
+          }
+        ]
+      },
+      {
+        "id": "V122-ANALYSIS-R341-1-MSY-JAX",
+        "route": 341,
+        "line": "AL",
+        "fleet": "CRJ700",
+        "day": 5,
+        "sequenceWithinRoute": 5,
+        "pairing": 392,
+        "flight": 2123,
+        "origin": "MSY",
+        "destination": "JAX",
+        "departure": "18:24",
+        "arrival": "20:59",
+        "departureMinute": 1104,
+        "arrivalMinute": 1259,
+        "departureClock": "18:24",
+        "arrivalClock": "20:59",
+        "local": 12.9,
+        "connecting": 209.4,
+        "oneStop": 209.4,
+        "twoStop": 0,
+        "groups": {
+          "FLP": 205.4,
+          "CGI": 4.0
+        },
+        "topMarkets": [
+          {
+            "origin": "MSY",
+            "destination": "SFB",
+            "opportunity": 205.4
+          },
+          {
+            "origin": "MSY",
+            "destination": "ROA",
+            "opportunity": 4.0
+          }
+        ]
+      },
+      {
+        "id": "V122-ANALYSIS-R341-2-JAX-MSY",
+        "route": 341,
+        "line": "AL",
+        "fleet": "CRJ700",
+        "day": 5,
+        "sequenceWithinRoute": 6,
+        "pairing": 391,
+        "flight": 2124,
+        "origin": "JAX",
+        "destination": "MSY",
+        "departure": "21:39",
+        "arrival": "22:14",
+        "departureMinute": 1299,
+        "arrivalMinute": 1334,
+        "departureClock": "21:39",
+        "arrivalClock": "22:14",
+        "local": 12.8,
+        "connecting": 530.0231967179905,
+        "oneStop": 507.1444396843504,
+        "twoStop": 22.878757033640184,
+        "groups": {
+          "GLC": 17.818674124324943,
+          "HUB": 0.7572629721601204,
+          "NEC": 0.7205176853723458,
+          "CGI": 69.85886061180075,
+          "MAC": 7.330646154053621,
+          "LEC": 21.83087884801709,
+          "APP": 23.706356322261726,
+          "FLP": 388.0
+        },
+        "topMarkets": [
+          {
+            "origin": "SFB",
+            "destination": "MSY",
+            "opportunity": 205.0
+          },
+          {
+            "origin": "FLL",
+            "destination": "MSY",
+            "opportunity": 162.6
+          },
+          {
+            "origin": "CLT",
+            "destination": "MSY",
+            "opportunity": 24.31233766699124
+          },
+          {
+            "origin": "CMH",
+            "destination": "MSY",
+            "opportunity": 21.83087884801709
+          },
+          {
+            "origin": "SDF",
+            "destination": "MSY",
+            "opportunity": 17.8
+          },
+          {
+            "origin": "SAV",
+            "destination": "MSY",
+            "opportunity": 16.4
+          },
+          {
+            "origin": "IND",
+            "destination": "MSY",
+            "opportunity": 13.894738701419058
+          },
+          {
+            "origin": "PGD",
+            "destination": "MSY",
+            "opportunity": 13.299999999999999
+          }
+        ]
+      },
+      {
+        "id": "V122-ANALYSIS-R338-1-SAV-JAX",
+        "route": 338,
+        "line": "AL",
+        "fleet": "CRJ700",
+        "day": 2,
+        "sequenceWithinRoute": 6,
+        "pairing": 388,
+        "flight": 2125,
+        "origin": "SAV",
+        "destination": "JAX",
+        "departure": "20:00",
+        "arrival": "20:45",
+        "departureMinute": 1200,
+        "arrivalMinute": 1245,
+        "departureClock": "20:00",
+        "arrivalClock": "20:45",
+        "local": 0.9286543802070184,
+        "connecting": 25.682573355984765,
+        "oneStop": 25.682573355984765,
+        "twoStop": 0,
+        "groups": {
+          "CGI": 6.159102711927273,
+          "FLP": 3.1234706440574933,
+          "GCP": 16.4
+        },
+        "topMarkets": [
+          {
+            "origin": "SAV",
+            "destination": "MSY",
+            "opportunity": 16.4
+          },
+          {
+            "origin": "SAV",
+            "destination": "CLT",
+            "opportunity": 5.1636942675159245
+          },
+          {
+            "origin": "SAV",
+            "destination": "SFB",
+            "opportunity": 2.939162672634058
+          },
+          {
+            "origin": "SAV",
+            "destination": "ROA",
+            "opportunity": 0.9954084444113486
+          },
+          {
+            "origin": "SAV",
+            "destination": "MLB",
+            "opportunity": 0.18430797142343563
+          }
+        ]
+      },
+      {
+        "id": "V122-ANALYSIS-R338-2-JAX-SAV",
+        "route": 338,
+        "line": "AL",
+        "fleet": "CRJ700",
+        "day": 2,
+        "sequenceWithinRoute": 7,
+        "pairing": 171,
+        "flight": 2126,
+        "origin": "JAX",
+        "destination": "SAV",
+        "departure": "21:25",
+        "arrival": "22:10",
+        "departureMinute": 1285,
+        "arrivalMinute": 1330,
+        "departureClock": "21:25",
+        "arrivalClock": "22:10",
+        "local": 0.9775309265337037,
+        "connecting": 106.67836872176713,
+        "oneStop": 81.4161502596597,
+        "twoStop": 25.26221846210744,
+        "groups": {
+          "GLC": 22.474273302799062,
+          "NEC": 4.6076833555611,
+          "TEX": 17.338709297045938,
+          "MAC": 2.082698020312111,
+          "HUB": 1.356583089369454,
+          "CGI": 9.9,
+          "LEC": 11.447433067566415,
+          "APP": 13.231164453493776,
+          "FLP": 21.339824135619292,
+          "GCP": 2.9
+        },
+        "topMarkets": [
+          {
+            "origin": "AUS",
+            "destination": "SAV",
+            "opportunity": 15.373417737972439
+          },
+          {
+            "origin": "CMH",
+            "destination": "SAV",
+            "opportunity": 11.447433067566415
+          },
+          {
+            "origin": "SDF",
+            "destination": "SAV",
+            "opportunity": 11.3
+          },
+          {
+            "origin": "IND",
+            "destination": "SAV",
+            "opportunity": 10.812042941990201
+          },
+          {
+            "origin": "FLL",
+            "destination": "SAV",
+            "opportunity": 9.939824135619293
+          },
+          {
+            "origin": "CLT",
+            "destination": "SAV",
+            "opportunity": 6.8
+          },
+          {
+            "origin": "MKE",
+            "destination": "SAV",
+            "opportunity": 5.848635308527806
+          },
+          {
+            "origin": "PGD",
+            "destination": "SAV",
+            "opportunity": 4.3
+          }
+        ]
+      },
+      {
+        "id": "V122-ANALYSIS-R504-1-CLT-JAX",
+        "route": 504,
+        "line": "AB",
+        "fleet": "CRJ900",
+        "day": 4,
+        "sequenceWithinRoute": 6,
+        "pairing": 596,
+        "flight": 2127,
+        "origin": "CLT",
+        "destination": "JAX",
+        "departure": "19:34",
+        "arrival": "20:45",
+        "departureMinute": 1174,
+        "arrivalMinute": 1245,
+        "departureClock": "19:34",
+        "arrivalClock": "20:45",
+        "local": 13.666666666666668,
+        "connecting": 53.983370494282525,
+        "oneStop": 53.983370494282525,
+        "twoStop": 0,
+        "groups": {
+          "FLP": 24.02535513252074,
+          "GCP": 24.31233766699124,
+          "CGI": 5.645677694770544
+        },
+        "topMarkets": [
+          {
+            "origin": "CLT",
+            "destination": "MSY",
+            "opportunity": 24.31233766699124
+          },
+          {
+            "origin": "CLT",
+            "destination": "SFB",
+            "opportunity": 18.105467119549576
+          },
+          {
+            "origin": "CLT",
+            "destination": "MLB",
+            "opportunity": 5.919888012971164
+          },
+          {
+            "origin": "CLT",
+            "destination": "SAV",
+            "opportunity": 5.645677694770544
+          }
+        ]
+      },
+      {
+        "id": "V122-ANALYSIS-R504-2-JAX-CLT",
+        "route": 504,
+        "line": "AB",
+        "fleet": "CRJ900",
+        "day": 4,
+        "sequenceWithinRoute": 7,
+        "pairing": 565,
+        "flight": 2128,
+        "origin": "JAX",
+        "destination": "CLT",
+        "departure": "21:25",
+        "arrival": "22:36",
+        "departureMinute": 1285,
+        "arrivalMinute": 1356,
+        "departureClock": "21:25",
+        "arrivalClock": "22:36",
+        "local": 13.3,
+        "connecting": 148.79113506377078,
+        "oneStop": 141.95833788850678,
+        "twoStop": 6.832797175264024,
+        "groups": {
+          "GLC": 4.477919687736742,
+          "FLP": 110.27527992370167,
+          "HUB": 0.026494827604696087,
+          "NEC": 0.555461538099961,
+          "TEX": 16.69228481911179,
+          "GCP": 11.6,
+          "CGI": 5.1636942675159245
+        },
+        "topMarkets": [
+          {
+            "origin": "FLL",
+            "destination": "CLT",
+            "opportunity": 30.15850988182938
+          },
+          {
+            "origin": "SFB",
+            "destination": "CLT",
+            "opportunity": 29.365296920586815
+          },
+          {
+            "origin": "PGD",
+            "destination": "CLT",
+            "opportunity": 20.195567944027562
+          },
+          {
+            "origin": "EYW",
+            "destination": "CLT",
+            "opportunity": 17.8
+          },
+          {
+            "origin": "AUS",
+            "destination": "CLT",
+            "opportunity": 14.726390569022787
+          },
+          {
+            "origin": "MLB",
+            "destination": "CLT",
+            "opportunity": 12.755905177257919
+          },
+          {
+            "origin": "JAN",
+            "destination": "CLT",
+            "opportunity": 11.6
+          },
+          {
+            "origin": "SAV",
+            "destination": "CLT",
+            "opportunity": 5.1636942675159245
+          }
+        ]
+      },
+      {
+        "id": "V122-ANALYSIS-R114-1-ROA-JAX",
+        "route": 114,
+        "line": "AD",
+        "fleet": "CRJ200",
+        "day": 4,
+        "sequenceWithinRoute": 7,
+        "pairing": 215,
+        "flight": 2129,
+        "origin": "ROA",
+        "destination": "JAX",
+        "departure": "19:29",
+        "arrival": "21:03",
+        "departureMinute": 1169,
+        "arrivalMinute": 1263,
+        "departureClock": "19:29",
+        "arrivalClock": "21:03",
+        "local": 1.3666666666666665,
+        "connecting": 11.470835054135243,
+        "oneStop": 11.470835054135243,
+        "twoStop": 0,
+        "groups": {
+          "FLP": 8.576661256482325,
+          "GCP": 2.8941737976529183
+        },
+        "topMarkets": [
+          {
+            "origin": "ROA",
+            "destination": "SFB",
+            "opportunity": 8.576661256482325
+          },
+          {
+            "origin": "ROA",
+            "destination": "MSY",
+            "opportunity": 2.8941737976529183
+          }
+        ]
+      },
+      {
+        "id": "V122-ANALYSIS-R114-2-JAX-ROA",
+        "route": 114,
+        "line": "AD",
+        "fleet": "CRJ200",
+        "day": 4,
+        "sequenceWithinRoute": 8,
+        "pairing": 214,
+        "flight": 2130,
+        "origin": "JAX",
+        "destination": "ROA",
+        "departure": "21:43",
+        "arrival": "23:17",
+        "departureMinute": 1303,
+        "arrivalMinute": 1397,
+        "departureClock": "21:43",
+        "arrivalClock": "23:17",
+        "local": 1.3333333333333333,
+        "connecting": 29.001219249115852,
+        "oneStop": 26.730456287905266,
+        "twoStop": 2.2707629612105893,
+        "groups": {
+          "TEX": 4.6132095021074315,
+          "FLP": 18.7,
+          "CGI": 0.9954084444113486,
+          "GCP": 4.0,
+          "HUB": 0.6926013025970725
+        },
+        "topMarkets": [
+          {
+            "origin": "SFB",
+            "destination": "ROA",
+            "opportunity": 11.4
+          },
+          {
+            "origin": "FLL",
+            "destination": "ROA",
+            "opportunity": 5.2
+          },
+          {
+            "origin": "MSY",
+            "destination": "ROA",
+            "opportunity": 4.0
+          },
+          {
+            "origin": "AUS",
+            "destination": "ROA",
+            "opportunity": 3.3917208354381065
+          },
+          {
+            "origin": "EYW",
+            "destination": "ROA",
+            "opportunity": 1.4
+          },
+          {
+            "origin": "HOU",
+            "destination": "ROA",
+            "opportunity": 1.2214886666693252
+          },
+          {
+            "origin": "SAV",
+            "destination": "ROA",
+            "opportunity": 0.9954084444113486
+          },
+          {
+            "origin": "MLB",
+            "destination": "ROA",
+            "opportunity": 0.7
+          }
+        ]
+      },
+      {
+        "id": "V122-ANALYSIS-R126-1-MLB-JAX",
+        "route": 126,
+        "line": "AD",
+        "fleet": "CRJ200",
+        "day": 16,
+        "sequenceWithinRoute": 6,
+        "pairing": 387,
+        "flight": 2131,
+        "origin": "MLB",
+        "destination": "JAX",
+        "departure": "19:53",
+        "arrival": "20:45",
+        "departureMinute": 1193,
+        "arrivalMinute": 1245,
+        "departureClock": "19:53",
+        "arrivalClock": "20:45",
+        "local": 0.06666666666666667,
+        "connecting": 12.334570212139456,
+        "oneStop": 12.334570212139456,
+        "twoStop": 0,
+        "groups": {
+          "GCP": 0.9419249748478895,
+          "CGI": 11.392645237291566
+        },
+        "topMarkets": [
+          {
+            "origin": "MLB",
+            "destination": "CLT",
+            "opportunity": 10.439115043925277
+          },
+          {
+            "origin": "MLB",
+            "destination": "MSY",
+            "opportunity": 0.9419249748478895
+          },
+          {
+            "origin": "MLB",
+            "destination": "ROA",
+            "opportunity": 0.7
+          },
+          {
+            "origin": "MLB",
+            "destination": "SAV",
+            "opportunity": 0.25353019336629007
+          }
+        ]
+      },
+      {
+        "id": "V122-ANALYSIS-R126-2-JAX-MLB",
+        "route": 126,
+        "line": "AD",
+        "fleet": "CRJ200",
+        "day": 16,
+        "sequenceWithinRoute": 7,
+        "pairing": 386,
+        "flight": 2132,
+        "origin": "JAX",
+        "destination": "MLB",
+        "departure": "21:25",
+        "arrival": "22:17",
+        "departureMinute": 1285,
+        "arrivalMinute": 1337,
+        "departureClock": "21:25",
+        "arrivalClock": "22:17",
+        "local": 0.06666666666666667,
+        "connecting": 19.560941065900817,
+        "oneStop": 13.858734666258867,
+        "twoStop": 5.702206399641949,
+        "groups": {
+          "HUB": 0.8640013060614158,
+          "GLC": 2.5180589911686235,
+          "TEX": 0.549525463101517,
+          "NEC": 0.6449431275207524,
+          "MAC": 0.825114742646353,
+          "CGI": 8.93571194895417,
+          "LEC": 2.030969954587158,
+          "APP": 3.0484490002087514,
+          "GCP": 0.14416653165207577
+        },
+        "topMarkets": [
+          {
+            "origin": "CLT",
+            "destination": "MLB",
+            "opportunity": 7.189302274146193
+          },
+          {
+            "origin": "CMH",
+            "destination": "MLB",
+            "opportunity": 2.030969954587158
+          },
+          {
+            "origin": "MKE",
+            "destination": "MLB",
+            "opportunity": 1.6
+          },
+          {
+            "origin": "TYS",
+            "destination": "MLB",
+            "opportunity": 1.5
+          },
+          {
+            "origin": "BWI",
+            "destination": "MLB",
+            "opportunity": 0.825114742646353
+          },
+          {
+            "origin": "ROA",
+            "destination": "MLB",
+            "opportunity": 0.7000000000000001
+          },
+          {
+            "origin": "CRW",
+            "destination": "MLB",
+            "opportunity": 0.6
+          },
+          {
+            "origin": "TRI",
+            "destination": "MLB",
+            "opportunity": 0.5
+          }
+        ]
+      }
+    ]
+  },
+  "jointWithPieOvernight": {
+    "routes": [
+      341,
+      338,
+      504,
+      114,
+      126,
+      514,
+      515
+    ],
+    "validation": {
+      "structural": "pass",
+      "operatingErrors": 0,
+      "hardStopFailures": [],
+      "blocking": [],
+      "overnight": "pass",
+      "overnightFindings": [],
+      "planning": "pass",
+      "gates": "pass",
+      "jax": {
+        "code": "JAX",
+        "name": "Jacksonville FL",
+        "isHub": true,
+        "isFocusCity": false,
+        "nGates": 16,
+        "nStands": 12,
+        "peakUsed": 16
+      },
+      "standClaims": 15,
+      "standMinutes": 4277
+    },
+    "demand": [
+      {
+        "id": "V122-ANALYSIS-R702-1-SFB-JAX",
+        "route": 702,
+        "line": "A",
+        "fleet": "MAX9",
+        "day": 2,
+        "sequenceWithinRoute": 6,
+        "pairing": 692,
+        "flight": 2119,
+        "origin": "SFB",
+        "destination": "JAX",
+        "departure": "20:05",
+        "arrival": "20:53",
+        "departureMinute": 1205,
+        "arrivalMinute": 1253,
+        "departureClock": "20:05",
+        "arrivalClock": "20:53",
+        "local": 2.7407932011331444,
+        "connecting": 184.54205519683686,
+        "oneStop": 184.54205519683686,
+        "twoStop": 0,
+        "groups": {
+          "CGI": 34.06088006636193,
+          "GCP": 150.48117513047492
+        },
+        "topMarkets": [
+          {
+            "origin": "SFB",
+            "destination": "MSY",
+            "opportunity": 150.48117513047492
+          },
+          {
+            "origin": "SFB",
+            "destination": "CLT",
+            "opportunity": 22.600511818125636
+          },
+          {
+            "origin": "SFB",
+            "destination": "ROA",
+            "opportunity": 8.340368248236297
+          },
+          {
+            "origin": "SFB",
+            "destination": "SAV",
+            "opportunity": 3.1199999999999997
+          }
+        ]
+      },
+      {
+        "id": "V122-ANALYSIS-R702-2-JAX-SFB",
+        "route": 702,
+        "line": "A",
+        "fleet": "MAX9",
+        "day": 2,
+        "sequenceWithinRoute": 7,
+        "pairing": 663,
+        "flight": 2120,
+        "origin": "JAX",
+        "destination": "SFB",
+        "departure": "21:33",
+        "arrival": "22:21",
+        "departureMinute": 1293,
+        "arrivalMinute": 1341,
+        "departureClock": "21:33",
+        "arrivalClock": "22:21",
+        "local": 2.8364022662889523,
+        "connecting": 704.6198811125425,
+        "oneStop": 595.3942921679952,
+        "twoStop": 109.22558894454752,
+        "groups": {
+          "GLC": 81.36773838397656,
+          "MAC": 11.479395568493079,
+          "TEX": 43.72481296641975,
+          "CGI": 71.36556082341292,
+          "HUB": 1.6840049739448926,
+          "FLP": 18.449876941585423,
+          "NEC": 31.817747006879387,
+          "LEC": 191.56094233996612,
+          "APP": 43.76044405659646,
+          "GCP": 209.40935805126813
+        },
+        "topMarkets": [
+          {
+            "origin": "MSY",
+            "destination": "SFB",
+            "opportunity": 205.4
+          },
+          {
+            "origin": "CMH",
+            "destination": "SFB",
+            "opportunity": 191.56094233996612
+          },
+          {
+            "origin": "MKE",
+            "destination": "SFB",
+            "opportunity": 43.79169233772295
+          },
+          {
+            "origin": "AUS",
+            "destination": "SFB",
+            "opportunity": 38.80914221034404
+          },
+          {
+            "origin": "CLT",
+            "destination": "SFB",
+            "opportunity": 22.089681332536557
+          },
+          {
+            "origin": "BDL",
+            "destination": "SFB",
+            "opportunity": 21.213184675072554
+          },
+          {
+            "origin": "IND",
+            "destination": "SFB",
+            "opportunity": 19.54504036537136
+          },
+          {
+            "origin": "EYW",
+            "destination": "SFB",
+            "opportunity": 18.4
+          }
+        ]
+      },
+      {
+        "id": "V122-ANALYSIS-R704-1-SFB-BHM",
+        "route": 704,
+        "line": "A",
+        "fleet": "MAX9",
+        "day": 4,
+        "sequenceWithinRoute": 9,
+        "pairing": 856,
+        "flight": 2121,
+        "origin": "SFB",
+        "destination": "BHM",
+        "departure": "20:19",
+        "arrival": "20:45",
+        "departureMinute": 1219,
+        "arrivalMinute": 1245,
+        "departureClock": "20:19",
+        "arrivalClock": "20:45",
+        "local": 38.31747793190416,
+        "connecting": 83.33044894477422,
+        "oneStop": 83.33044894477422,
+        "twoStop": 0,
+        "groups": {
+          "FLP": 83.33044894477422
+        },
+        "topMarkets": [
+          {
+            "origin": "SFB",
+            "destination": "XNA",
+            "opportunity": 29.32632547855264
+          },
+          {
+            "origin": "SFB",
+            "destination": "OKC",
+            "opportunity": 27.751369105911458
+          },
+          {
+            "origin": "SFB",
+            "destination": "SAT",
+            "opportunity": 10.91181349293674
+          },
+          {
+            "origin": "SFB",
+            "destination": "HOU",
+            "opportunity": 8.260029053398128
+          },
+          {
+            "origin": "SFB",
+            "destination": "SGF",
+            "opportunity": 6.727307606641229
+          },
+          {
+            "origin": "SFB",
+            "destination": "VPS",
+            "opportunity": 0.3536042073340293
+          }
+        ]
+      },
+      {
+        "id": "V122-ANALYSIS-R704-2-BHM-SFB",
+        "route": 704,
+        "line": "A",
+        "fleet": "MAX9",
+        "day": 4,
+        "sequenceWithinRoute": 10,
+        "pairing": 855,
+        "flight": 2122,
+        "origin": "BHM",
+        "destination": "SFB",
+        "departure": "23:15",
+        "arrival": "01:41",
+        "departureMinute": 1395,
+        "arrivalMinute": 1541,
+        "departureClock": "23:15",
+        "arrivalClock": "01:41 +1",
+        "local": 37.09266740523191,
+        "connecting": 548.9254930748097,
+        "oneStop": 257.6428320035166,
+        "twoStop": 291.28266107129303,
+        "groups": {
+          "GLC": 24.9552598306792,
+          "TEX": 164.06233829199968,
+          "HUB": 5.4143711047044345,
+          "OZK": 157.88681852578532,
+          "APP": 0.3643989038326041,
+          "GCP": 1.860668904403641,
+          "UMP": 194.3816375134048
+        },
+        "topMarkets": [
+          {
+            "origin": "BLV",
+            "destination": "SFB",
+            "opportunity": 193.0
+          },
+          {
+            "origin": "AUS",
+            "destination": "SFB",
+            "opportunity": 70.5849412519776
+          },
+          {
+            "origin": "OKC",
+            "destination": "SFB",
+            "opportunity": 60.79999999999999
+          },
+          {
+            "origin": "DAL",
+            "destination": "SFB",
+            "opportunity": 44.205521455037044
+          },
+          {
+            "origin": "MEM",
+            "destination": "SFB",
+            "opportunity": 37.3186884537673
+          },
+          {
+            "origin": "XNA",
+            "destination": "SFB",
+            "opportunity": 31.000000000000004
+          },
+          {
+            "origin": "SGF",
+            "destination": "SFB",
+            "opportunity": 17.0
+          },
+          {
+            "origin": "MKE",
+            "destination": "SFB",
+            "opportunity": 15.660165278178043
+          }
+        ]
+      },
+      {
+        "id": "V122-ANALYSIS-R341-1-MSY-JAX",
+        "route": 341,
+        "line": "AL",
+        "fleet": "CRJ700",
+        "day": 5,
+        "sequenceWithinRoute": 5,
+        "pairing": 392,
+        "flight": 2123,
+        "origin": "MSY",
+        "destination": "JAX",
+        "departure": "18:24",
+        "arrival": "20:59",
+        "departureMinute": 1104,
+        "arrivalMinute": 1259,
+        "departureClock": "18:24",
+        "arrivalClock": "20:59",
+        "local": 12.9,
+        "connecting": 209.4,
+        "oneStop": 209.4,
+        "twoStop": 0,
+        "groups": {
+          "FLP": 205.4,
+          "CGI": 4.0
+        },
+        "topMarkets": [
+          {
+            "origin": "MSY",
+            "destination": "SFB",
+            "opportunity": 205.4
+          },
+          {
+            "origin": "MSY",
+            "destination": "ROA",
+            "opportunity": 4.0
+          }
+        ]
+      },
+      {
+        "id": "V122-ANALYSIS-R341-2-JAX-MSY",
+        "route": 341,
+        "line": "AL",
+        "fleet": "CRJ700",
+        "day": 5,
+        "sequenceWithinRoute": 6,
+        "pairing": 391,
+        "flight": 2124,
+        "origin": "JAX",
+        "destination": "MSY",
+        "departure": "21:39",
+        "arrival": "22:14",
+        "departureMinute": 1299,
+        "arrivalMinute": 1334,
+        "departureClock": "21:39",
+        "arrivalClock": "22:14",
+        "local": 12.8,
+        "connecting": 628.4231967179905,
+        "oneStop": 605.5444396843504,
+        "twoStop": 22.878757033640184,
+        "groups": {
+          "GLC": 17.818674124324943,
+          "HUB": 0.7572629721601204,
+          "NEC": 0.7205176853723458,
+          "CGI": 69.85886061180075,
+          "MAC": 7.330646154053621,
+          "LEC": 21.83087884801709,
+          "APP": 23.706356322261726,
+          "FLP": 486.4
+        },
+        "topMarkets": [
+          {
+            "origin": "SFB",
+            "destination": "MSY",
+            "opportunity": 205.0
+          },
+          {
+            "origin": "FLL",
+            "destination": "MSY",
+            "opportunity": 162.6
+          },
+          {
+            "origin": "PIE",
+            "destination": "MSY",
+            "opportunity": 98.39999999999999
+          },
+          {
+            "origin": "CLT",
+            "destination": "MSY",
+            "opportunity": 24.31233766699124
+          },
+          {
+            "origin": "CMH",
+            "destination": "MSY",
+            "opportunity": 21.83087884801709
+          },
+          {
+            "origin": "SDF",
+            "destination": "MSY",
+            "opportunity": 17.8
+          },
+          {
+            "origin": "SAV",
+            "destination": "MSY",
+            "opportunity": 16.4
+          },
+          {
+            "origin": "IND",
+            "destination": "MSY",
+            "opportunity": 13.894738701419058
+          }
+        ]
+      },
+      {
+        "id": "V122-ANALYSIS-R338-1-SAV-JAX",
+        "route": 338,
+        "line": "AL",
+        "fleet": "CRJ700",
+        "day": 2,
+        "sequenceWithinRoute": 6,
+        "pairing": 388,
+        "flight": 2125,
+        "origin": "SAV",
+        "destination": "JAX",
+        "departure": "20:00",
+        "arrival": "20:45",
+        "departureMinute": 1200,
+        "arrivalMinute": 1245,
+        "departureClock": "20:00",
+        "arrivalClock": "20:45",
+        "local": 0.9286543802070184,
+        "connecting": 25.682573355984765,
+        "oneStop": 25.682573355984765,
+        "twoStop": 0,
+        "groups": {
+          "CGI": 6.159102711927273,
+          "FLP": 3.1234706440574933,
+          "GCP": 16.4
+        },
+        "topMarkets": [
+          {
+            "origin": "SAV",
+            "destination": "MSY",
+            "opportunity": 16.4
+          },
+          {
+            "origin": "SAV",
+            "destination": "CLT",
+            "opportunity": 5.1636942675159245
+          },
+          {
+            "origin": "SAV",
+            "destination": "SFB",
+            "opportunity": 2.939162672634058
+          },
+          {
+            "origin": "SAV",
+            "destination": "ROA",
+            "opportunity": 0.9954084444113486
+          },
+          {
+            "origin": "SAV",
+            "destination": "MLB",
+            "opportunity": 0.18430797142343563
+          }
+        ]
+      },
+      {
+        "id": "V122-ANALYSIS-R338-2-JAX-SAV",
+        "route": 338,
+        "line": "AL",
+        "fleet": "CRJ700",
+        "day": 2,
+        "sequenceWithinRoute": 7,
+        "pairing": 171,
+        "flight": 2126,
+        "origin": "JAX",
+        "destination": "SAV",
+        "departure": "21:25",
+        "arrival": "22:10",
+        "departureMinute": 1285,
+        "arrivalMinute": 1330,
+        "departureClock": "21:25",
+        "arrivalClock": "22:10",
+        "local": 0.9775309265337037,
+        "connecting": 106.67836872176713,
+        "oneStop": 81.4161502596597,
+        "twoStop": 25.26221846210744,
+        "groups": {
+          "GLC": 22.474273302799062,
+          "NEC": 4.6076833555611,
+          "TEX": 17.338709297045938,
+          "MAC": 2.082698020312111,
+          "HUB": 1.356583089369454,
+          "CGI": 9.9,
+          "LEC": 11.447433067566415,
+          "APP": 13.231164453493776,
+          "FLP": 21.339824135619292,
+          "GCP": 2.9
+        },
+        "topMarkets": [
+          {
+            "origin": "AUS",
+            "destination": "SAV",
+            "opportunity": 15.373417737972439
+          },
+          {
+            "origin": "CMH",
+            "destination": "SAV",
+            "opportunity": 11.447433067566415
+          },
+          {
+            "origin": "SDF",
+            "destination": "SAV",
+            "opportunity": 11.3
+          },
+          {
+            "origin": "IND",
+            "destination": "SAV",
+            "opportunity": 10.812042941990201
+          },
+          {
+            "origin": "FLL",
+            "destination": "SAV",
+            "opportunity": 9.939824135619293
+          },
+          {
+            "origin": "CLT",
+            "destination": "SAV",
+            "opportunity": 6.8
+          },
+          {
+            "origin": "MKE",
+            "destination": "SAV",
+            "opportunity": 5.848635308527806
+          },
+          {
+            "origin": "PGD",
+            "destination": "SAV",
+            "opportunity": 4.3
+          }
+        ]
+      },
+      {
+        "id": "V122-ANALYSIS-R504-1-CLT-JAX",
+        "route": 504,
+        "line": "AB",
+        "fleet": "CRJ900",
+        "day": 4,
+        "sequenceWithinRoute": 6,
+        "pairing": 596,
+        "flight": 2127,
+        "origin": "CLT",
+        "destination": "JAX",
+        "departure": "19:34",
+        "arrival": "20:45",
+        "departureMinute": 1174,
+        "arrivalMinute": 1245,
+        "departureClock": "19:34",
+        "arrivalClock": "20:45",
+        "local": 13.666666666666668,
+        "connecting": 53.983370494282525,
+        "oneStop": 53.983370494282525,
+        "twoStop": 0,
+        "groups": {
+          "FLP": 24.02535513252074,
+          "GCP": 24.31233766699124,
+          "CGI": 5.645677694770544
+        },
+        "topMarkets": [
+          {
+            "origin": "CLT",
+            "destination": "MSY",
+            "opportunity": 24.31233766699124
+          },
+          {
+            "origin": "CLT",
+            "destination": "SFB",
+            "opportunity": 18.105467119549576
+          },
+          {
+            "origin": "CLT",
+            "destination": "MLB",
+            "opportunity": 5.919888012971164
+          },
+          {
+            "origin": "CLT",
+            "destination": "SAV",
+            "opportunity": 5.645677694770544
+          }
+        ]
+      },
+      {
+        "id": "V122-ANALYSIS-R504-2-JAX-CLT",
+        "route": 504,
+        "line": "AB",
+        "fleet": "CRJ900",
+        "day": 4,
+        "sequenceWithinRoute": 7,
+        "pairing": 565,
+        "flight": 2128,
+        "origin": "JAX",
+        "destination": "CLT",
+        "departure": "21:25",
+        "arrival": "22:36",
+        "departureMinute": 1285,
+        "arrivalMinute": 1356,
+        "departureClock": "21:25",
+        "arrivalClock": "22:36",
+        "local": 13.3,
+        "connecting": 148.79113506377078,
+        "oneStop": 141.95833788850678,
+        "twoStop": 6.832797175264024,
+        "groups": {
+          "GLC": 4.477919687736742,
+          "FLP": 110.27527992370167,
+          "HUB": 0.026494827604696087,
+          "NEC": 0.555461538099961,
+          "TEX": 16.69228481911179,
+          "GCP": 11.6,
+          "CGI": 5.1636942675159245
+        },
+        "topMarkets": [
+          {
+            "origin": "FLL",
+            "destination": "CLT",
+            "opportunity": 30.15850988182938
+          },
+          {
+            "origin": "SFB",
+            "destination": "CLT",
+            "opportunity": 29.365296920586815
+          },
+          {
+            "origin": "PGD",
+            "destination": "CLT",
+            "opportunity": 20.195567944027562
+          },
+          {
+            "origin": "EYW",
+            "destination": "CLT",
+            "opportunity": 17.8
+          },
+          {
+            "origin": "AUS",
+            "destination": "CLT",
+            "opportunity": 14.726390569022787
+          },
+          {
+            "origin": "MLB",
+            "destination": "CLT",
+            "opportunity": 12.755905177257919
+          },
+          {
+            "origin": "JAN",
+            "destination": "CLT",
+            "opportunity": 11.6
+          },
+          {
+            "origin": "SAV",
+            "destination": "CLT",
+            "opportunity": 5.1636942675159245
+          }
+        ]
+      },
+      {
+        "id": "V122-ANALYSIS-R114-1-ROA-JAX",
+        "route": 114,
+        "line": "AD",
+        "fleet": "CRJ200",
+        "day": 4,
+        "sequenceWithinRoute": 7,
+        "pairing": 215,
+        "flight": 2129,
+        "origin": "ROA",
+        "destination": "JAX",
+        "departure": "19:29",
+        "arrival": "21:03",
+        "departureMinute": 1169,
+        "arrivalMinute": 1263,
+        "departureClock": "19:29",
+        "arrivalClock": "21:03",
+        "local": 1.3666666666666665,
+        "connecting": 11.470835054135243,
+        "oneStop": 11.470835054135243,
+        "twoStop": 0,
+        "groups": {
+          "FLP": 8.576661256482325,
+          "GCP": 2.8941737976529183
+        },
+        "topMarkets": [
+          {
+            "origin": "ROA",
+            "destination": "SFB",
+            "opportunity": 8.576661256482325
+          },
+          {
+            "origin": "ROA",
+            "destination": "MSY",
+            "opportunity": 2.8941737976529183
+          }
+        ]
+      },
+      {
+        "id": "V122-ANALYSIS-R114-2-JAX-ROA",
+        "route": 114,
+        "line": "AD",
+        "fleet": "CRJ200",
+        "day": 4,
+        "sequenceWithinRoute": 8,
+        "pairing": 214,
+        "flight": 2130,
+        "origin": "JAX",
+        "destination": "ROA",
+        "departure": "21:43",
+        "arrival": "23:17",
+        "departureMinute": 1303,
+        "arrivalMinute": 1397,
+        "departureClock": "21:43",
+        "arrivalClock": "23:17",
+        "local": 1.3333333333333333,
+        "connecting": 35.64148139550703,
+        "oneStop": 33.370718434296435,
+        "twoStop": 2.2707629612105893,
+        "groups": {
+          "TEX": 4.6132095021074315,
+          "FLP": 25.34026214639117,
+          "CGI": 0.9954084444113486,
+          "GCP": 4.0,
+          "HUB": 0.6926013025970725
+        },
+        "topMarkets": [
+          {
+            "origin": "SFB",
+            "destination": "ROA",
+            "opportunity": 11.4
+          },
+          {
+            "origin": "PIE",
+            "destination": "ROA",
+            "opportunity": 6.640262146391173
+          },
+          {
+            "origin": "FLL",
+            "destination": "ROA",
+            "opportunity": 5.2
+          },
+          {
+            "origin": "MSY",
+            "destination": "ROA",
+            "opportunity": 4.0
+          },
+          {
+            "origin": "AUS",
+            "destination": "ROA",
+            "opportunity": 3.3917208354381065
+          },
+          {
+            "origin": "EYW",
+            "destination": "ROA",
+            "opportunity": 1.4
+          },
+          {
+            "origin": "HOU",
+            "destination": "ROA",
+            "opportunity": 1.2214886666693252
+          },
+          {
+            "origin": "SAV",
+            "destination": "ROA",
+            "opportunity": 0.9954084444113486
+          }
+        ]
+      },
+      {
+        "id": "V122-ANALYSIS-R126-1-MLB-JAX",
+        "route": 126,
+        "line": "AD",
+        "fleet": "CRJ200",
+        "day": 16,
+        "sequenceWithinRoute": 6,
+        "pairing": 387,
+        "flight": 2131,
+        "origin": "MLB",
+        "destination": "JAX",
+        "departure": "19:53",
+        "arrival": "20:45",
+        "departureMinute": 1193,
+        "arrivalMinute": 1245,
+        "departureClock": "19:53",
+        "arrivalClock": "20:45",
+        "local": 0.06666666666666667,
+        "connecting": 12.334570212139456,
+        "oneStop": 12.334570212139456,
+        "twoStop": 0,
+        "groups": {
+          "GCP": 0.9419249748478895,
+          "CGI": 11.392645237291566
+        },
+        "topMarkets": [
+          {
+            "origin": "MLB",
+            "destination": "CLT",
+            "opportunity": 10.439115043925277
+          },
+          {
+            "origin": "MLB",
+            "destination": "MSY",
+            "opportunity": 0.9419249748478895
+          },
+          {
+            "origin": "MLB",
+            "destination": "ROA",
+            "opportunity": 0.7
+          },
+          {
+            "origin": "MLB",
+            "destination": "SAV",
+            "opportunity": 0.25353019336629007
+          }
+        ]
+      },
+      {
+        "id": "V122-ANALYSIS-R126-2-JAX-MLB",
+        "route": 126,
+        "line": "AD",
+        "fleet": "CRJ200",
+        "day": 16,
+        "sequenceWithinRoute": 7,
+        "pairing": 386,
+        "flight": 2132,
+        "origin": "JAX",
+        "destination": "MLB",
+        "departure": "21:25",
+        "arrival": "22:17",
+        "departureMinute": 1285,
+        "arrivalMinute": 1337,
+        "departureClock": "21:25",
+        "arrivalClock": "22:17",
+        "local": 0.06666666666666667,
+        "connecting": 19.560941065900817,
+        "oneStop": 13.858734666258867,
+        "twoStop": 5.702206399641949,
+        "groups": {
+          "HUB": 0.8640013060614158,
+          "GLC": 2.5180589911686235,
+          "TEX": 0.549525463101517,
+          "NEC": 0.6449431275207524,
+          "MAC": 0.825114742646353,
+          "CGI": 8.93571194895417,
+          "LEC": 2.030969954587158,
+          "APP": 3.0484490002087514,
+          "GCP": 0.14416653165207577
+        },
+        "topMarkets": [
+          {
+            "origin": "CLT",
+            "destination": "MLB",
+            "opportunity": 7.189302274146193
+          },
+          {
+            "origin": "CMH",
+            "destination": "MLB",
+            "opportunity": 2.030969954587158
+          },
+          {
+            "origin": "MKE",
+            "destination": "MLB",
+            "opportunity": 1.6
+          },
+          {
+            "origin": "TYS",
+            "destination": "MLB",
+            "opportunity": 1.5
+          },
+          {
+            "origin": "BWI",
+            "destination": "MLB",
+            "opportunity": 0.825114742646353
+          },
+          {
+            "origin": "ROA",
+            "destination": "MLB",
+            "opportunity": 0.7000000000000001
+          },
+          {
+            "origin": "CRW",
+            "destination": "MLB",
+            "opportunity": 0.6
+          },
+          {
+            "origin": "TRI",
+            "destination": "MLB",
+            "opportunity": 0.5
+          }
+        ]
+      },
+      {
+        "id": "V122-ANALYSIS-R514-1-PIE-JAX",
+        "route": 514,
+        "line": "AG",
+        "fleet": "CRJ900",
+        "day": 4,
+        "sequenceWithinRoute": 5,
+        "pairing": 292,
+        "flight": 2133,
+        "origin": "PIE",
+        "destination": "JAX",
+        "departure": "20:14",
+        "arrival": "21:08",
+        "departureMinute": 1214,
+        "arrivalMinute": 1268,
+        "departureClock": "20:14",
+        "arrivalClock": "21:08",
+        "local": 2.25,
+        "connecting": 105.04026214639117,
+        "oneStop": 105.04026214639117,
+        "twoStop": 0,
+        "groups": {
+          "CGI": 6.640262146391173,
+          "GCP": 98.39999999999999
+        },
+        "topMarkets": [
+          {
+            "origin": "PIE",
+            "destination": "MSY",
+            "opportunity": 98.39999999999999
+          },
+          {
+            "origin": "PIE",
+            "destination": "ROA",
+            "opportunity": 6.640262146391173
+          }
+        ]
+      },
+      {
+        "id": "V122-ANALYSIS-R515-1-JAX-PIE",
+        "route": 515,
+        "line": "AG",
+        "fleet": "CRJ900",
+        "day": 5,
+        "sequenceWithinRoute": 1,
+        "pairing": 291,
+        "flight": 2134,
+        "origin": "JAX",
+        "destination": "PIE",
+        "departure": "06:20",
+        "arrival": "07:14",
+        "departureMinute": 380,
+        "arrivalMinute": 434,
+        "departureClock": "06:20",
+        "arrivalClock": "07:14",
+        "local": 2.45,
+        "connecting": 242.59862019657405,
+        "oneStop": 242.59862019657407,
+        "twoStop": 0,
+        "groups": {
+          "CGI": 172.4012135119039,
+          "TEX": 46.57892913118722,
+          "APP": 22.30773769612445,
+          "FLP": 0.8254108201850662,
+          "GCP": 0.48532903717342296
+        },
+        "topMarkets": [
+          {
+            "origin": "RDU",
+            "destination": "PIE",
+            "opportunity": 107.45551614926477
+          },
+          {
+            "origin": "CLT",
+            "destination": "PIE",
+            "opportunity": 64.94569736263914
+          },
+          {
+            "origin": "SAT",
+            "destination": "PIE",
+            "opportunity": 35.691097705120484
+          },
+          {
+            "origin": "TYS",
+            "destination": "PIE",
+            "opportunity": 22.30773769612445
+          },
+          {
+            "origin": "ELP",
+            "destination": "PIE",
+            "opportunity": 10.887831426066738
+          },
+          {
+            "origin": "DAB",
+            "destination": "PIE",
+            "opportunity": 0.5
+          },
+          {
+            "origin": "TLH",
+            "destination": "PIE",
+            "opportunity": 0.48532903717342296
+          },
+          {
+            "origin": "GNV",
+            "destination": "PIE",
+            "opportunity": 0.3254108201850662
+          }
+        ]
+      }
+    ]
+  },
+  "notes": [
+    "Red-eye finish times describe aircraft availability, not availability of the same crew.",
+    "Overnight candidates add the morning return to the cyclic successor route; do not leave its original first departure without an aircraft.",
+    "Single-candidate inbound demand is limited by existing late departures. Joint bank analysis includes connections between new flights.",
+    "All feeder flying and bank policy remain proposed; only the SFB extensions have been accepted for storage."
+  ],
+  "jointWithBufferedPieOvernight": {
+    "plans": [
+      {
+        "route": 514,
+        "legs": [
+          {
+            "id": "NEW",
+            "origin": "PIE",
+            "destination": "JAX",
+            "departureMinute": 1214,
+            "arrivalMinute": 1268
+          }
+        ]
+      },
+      {
+        "route": 515,
+        "legs": [
+          {
+            "id": "NEW",
+            "origin": "JAX",
+            "destination": "PIE",
+            "departureMinute": 360,
+            "arrivalMinute": 414
+          }
+        ]
+      }
+    ],
+    "validation": {
+      "structural": "pass",
+      "operatingErrors": 0,
+      "hardStopFailures": [],
+      "blocking": [],
+      "overnight": "pass",
+      "overnightFindings": [],
+      "planning": "pass",
+      "gates": "pass",
+      "jax": {
+        "code": "JAX",
+        "name": "Jacksonville FL",
+        "isHub": true,
+        "isFocusCity": false,
+        "nGates": 16,
+        "nStands": 12,
+        "peakUsed": 16
+      },
+      "standClaims": 15,
+      "standMinutes": 4277
+    },
+    "demand": [
+      {
+        "id": "V122-ANALYSIS-R702-1-SFB-JAX",
+        "route": 702,
+        "line": "A",
+        "fleet": "MAX9",
+        "day": 2,
+        "sequenceWithinRoute": 6,
+        "pairing": 692,
+        "flight": 2119,
+        "origin": "SFB",
+        "destination": "JAX",
+        "departure": "20:05",
+        "arrival": "20:53",
+        "departureMinute": 1205,
+        "arrivalMinute": 1253,
+        "departureClock": "20:05",
+        "arrivalClock": "20:53",
+        "local": 2.7407932011331444,
+        "connecting": 184.54205519683686,
+        "oneStop": 184.54205519683686,
+        "twoStop": 0,
+        "groups": {
+          "CGI": 34.06088006636193,
+          "GCP": 150.48117513047492
+        },
+        "topMarkets": [
+          {
+            "origin": "SFB",
+            "destination": "MSY",
+            "opportunity": 150.48117513047492
+          },
+          {
+            "origin": "SFB",
+            "destination": "CLT",
+            "opportunity": 22.600511818125636
+          },
+          {
+            "origin": "SFB",
+            "destination": "ROA",
+            "opportunity": 8.340368248236297
+          },
+          {
+            "origin": "SFB",
+            "destination": "SAV",
+            "opportunity": 3.1199999999999997
+          }
+        ]
+      },
+      {
+        "id": "V122-ANALYSIS-R702-2-JAX-SFB",
+        "route": 702,
+        "line": "A",
+        "fleet": "MAX9",
+        "day": 2,
+        "sequenceWithinRoute": 7,
+        "pairing": 663,
+        "flight": 2120,
+        "origin": "JAX",
+        "destination": "SFB",
+        "departure": "21:33",
+        "arrival": "22:21",
+        "departureMinute": 1293,
+        "arrivalMinute": 1341,
+        "departureClock": "21:33",
+        "arrivalClock": "22:21",
+        "local": 2.8364022662889523,
+        "connecting": 704.6198811125425,
+        "oneStop": 595.3942921679952,
+        "twoStop": 109.22558894454752,
+        "groups": {
+          "GLC": 81.36773838397656,
+          "MAC": 11.479395568493079,
+          "TEX": 43.72481296641975,
+          "CGI": 71.36556082341292,
+          "HUB": 1.6840049739448926,
+          "FLP": 18.449876941585423,
+          "NEC": 31.817747006879387,
+          "LEC": 191.56094233996612,
+          "APP": 43.76044405659646,
+          "GCP": 209.40935805126813
+        },
+        "topMarkets": [
+          {
+            "origin": "MSY",
+            "destination": "SFB",
+            "opportunity": 205.4
+          },
+          {
+            "origin": "CMH",
+            "destination": "SFB",
+            "opportunity": 191.56094233996612
+          },
+          {
+            "origin": "MKE",
+            "destination": "SFB",
+            "opportunity": 43.79169233772295
+          },
+          {
+            "origin": "AUS",
+            "destination": "SFB",
+            "opportunity": 38.80914221034404
+          },
+          {
+            "origin": "CLT",
+            "destination": "SFB",
+            "opportunity": 22.089681332536557
+          },
+          {
+            "origin": "BDL",
+            "destination": "SFB",
+            "opportunity": 21.213184675072554
+          },
+          {
+            "origin": "IND",
+            "destination": "SFB",
+            "opportunity": 19.54504036537136
+          },
+          {
+            "origin": "EYW",
+            "destination": "SFB",
+            "opportunity": 18.4
+          }
+        ]
+      },
+      {
+        "id": "V122-ANALYSIS-R704-1-SFB-BHM",
+        "route": 704,
+        "line": "A",
+        "fleet": "MAX9",
+        "day": 4,
+        "sequenceWithinRoute": 9,
+        "pairing": 856,
+        "flight": 2121,
+        "origin": "SFB",
+        "destination": "BHM",
+        "departure": "20:19",
+        "arrival": "20:45",
+        "departureMinute": 1219,
+        "arrivalMinute": 1245,
+        "departureClock": "20:19",
+        "arrivalClock": "20:45",
+        "local": 38.31747793190416,
+        "connecting": 83.33044894477422,
+        "oneStop": 83.33044894477422,
+        "twoStop": 0,
+        "groups": {
+          "FLP": 83.33044894477422
+        },
+        "topMarkets": [
+          {
+            "origin": "SFB",
+            "destination": "XNA",
+            "opportunity": 29.32632547855264
+          },
+          {
+            "origin": "SFB",
+            "destination": "OKC",
+            "opportunity": 27.751369105911458
+          },
+          {
+            "origin": "SFB",
+            "destination": "SAT",
+            "opportunity": 10.91181349293674
+          },
+          {
+            "origin": "SFB",
+            "destination": "HOU",
+            "opportunity": 8.260029053398128
+          },
+          {
+            "origin": "SFB",
+            "destination": "SGF",
+            "opportunity": 6.727307606641229
+          },
+          {
+            "origin": "SFB",
+            "destination": "VPS",
+            "opportunity": 0.3536042073340293
+          }
+        ]
+      },
+      {
+        "id": "V122-ANALYSIS-R704-2-BHM-SFB",
+        "route": 704,
+        "line": "A",
+        "fleet": "MAX9",
+        "day": 4,
+        "sequenceWithinRoute": 10,
+        "pairing": 855,
+        "flight": 2122,
+        "origin": "BHM",
+        "destination": "SFB",
+        "departure": "23:15",
+        "arrival": "01:41",
+        "departureMinute": 1395,
+        "arrivalMinute": 1541,
+        "departureClock": "23:15",
+        "arrivalClock": "01:41 +1",
+        "local": 37.09266740523191,
+        "connecting": 548.9254930748097,
+        "oneStop": 257.6428320035166,
+        "twoStop": 291.28266107129303,
+        "groups": {
+          "GLC": 24.9552598306792,
+          "TEX": 164.06233829199968,
+          "HUB": 5.4143711047044345,
+          "OZK": 157.88681852578532,
+          "APP": 0.3643989038326041,
+          "GCP": 1.860668904403641,
+          "UMP": 194.3816375134048
+        },
+        "topMarkets": [
+          {
+            "origin": "BLV",
+            "destination": "SFB",
+            "opportunity": 193.0
+          },
+          {
+            "origin": "AUS",
+            "destination": "SFB",
+            "opportunity": 70.5849412519776
+          },
+          {
+            "origin": "OKC",
+            "destination": "SFB",
+            "opportunity": 60.79999999999999
+          },
+          {
+            "origin": "DAL",
+            "destination": "SFB",
+            "opportunity": 44.205521455037044
+          },
+          {
+            "origin": "MEM",
+            "destination": "SFB",
+            "opportunity": 37.3186884537673
+          },
+          {
+            "origin": "XNA",
+            "destination": "SFB",
+            "opportunity": 31.000000000000004
+          },
+          {
+            "origin": "SGF",
+            "destination": "SFB",
+            "opportunity": 17.0
+          },
+          {
+            "origin": "MKE",
+            "destination": "SFB",
+            "opportunity": 15.660165278178043
+          }
+        ]
+      },
+      {
+        "id": "V122-ANALYSIS-R341-1-MSY-JAX",
+        "route": 341,
+        "line": "AL",
+        "fleet": "CRJ700",
+        "day": 5,
+        "sequenceWithinRoute": 5,
+        "pairing": 392,
+        "flight": 2123,
+        "origin": "MSY",
+        "destination": "JAX",
+        "departure": "18:24",
+        "arrival": "20:59",
+        "departureMinute": 1104,
+        "arrivalMinute": 1259,
+        "departureClock": "18:24",
+        "arrivalClock": "20:59",
+        "local": 12.9,
+        "connecting": 209.4,
+        "oneStop": 209.4,
+        "twoStop": 0,
+        "groups": {
+          "FLP": 205.4,
+          "CGI": 4.0
+        },
+        "topMarkets": [
+          {
+            "origin": "MSY",
+            "destination": "SFB",
+            "opportunity": 205.4
+          },
+          {
+            "origin": "MSY",
+            "destination": "ROA",
+            "opportunity": 4.0
+          }
+        ]
+      },
+      {
+        "id": "V122-ANALYSIS-R341-2-JAX-MSY",
+        "route": 341,
+        "line": "AL",
+        "fleet": "CRJ700",
+        "day": 5,
+        "sequenceWithinRoute": 6,
+        "pairing": 391,
+        "flight": 2124,
+        "origin": "JAX",
+        "destination": "MSY",
+        "departure": "21:39",
+        "arrival": "22:14",
+        "departureMinute": 1299,
+        "arrivalMinute": 1334,
+        "departureClock": "21:39",
+        "arrivalClock": "22:14",
+        "local": 12.8,
+        "connecting": 628.4231967179905,
+        "oneStop": 605.5444396843504,
+        "twoStop": 22.878757033640184,
+        "groups": {
+          "GLC": 17.818674124324943,
+          "HUB": 0.7572629721601204,
+          "MAC": 7.330646154053621,
+          "LEC": 21.83087884801709,
+          "NEC": 0.7205176853723458,
+          "APP": 23.706356322261726,
+          "FLP": 486.4,
+          "CGI": 69.85886061180075
+        },
+        "topMarkets": [
+          {
+            "origin": "SFB",
+            "destination": "MSY",
+            "opportunity": 205.0
+          },
+          {
+            "origin": "FLL",
+            "destination": "MSY",
+            "opportunity": 162.6
+          },
+          {
+            "origin": "PIE",
+            "destination": "MSY",
+            "opportunity": 98.39999999999999
+          },
+          {
+            "origin": "CLT",
+            "destination": "MSY",
+            "opportunity": 24.31233766699124
+          },
+          {
+            "origin": "CMH",
+            "destination": "MSY",
+            "opportunity": 21.83087884801709
+          },
+          {
+            "origin": "SDF",
+            "destination": "MSY",
+            "opportunity": 17.8
+          },
+          {
+            "origin": "SAV",
+            "destination": "MSY",
+            "opportunity": 16.4
+          },
+          {
+            "origin": "IND",
+            "destination": "MSY",
+            "opportunity": 13.894738701419058
+          }
+        ]
+      },
+      {
+        "id": "V122-ANALYSIS-R338-1-SAV-JAX",
+        "route": 338,
+        "line": "AL",
+        "fleet": "CRJ700",
+        "day": 2,
+        "sequenceWithinRoute": 6,
+        "pairing": 388,
+        "flight": 2125,
+        "origin": "SAV",
+        "destination": "JAX",
+        "departure": "20:00",
+        "arrival": "20:45",
+        "departureMinute": 1200,
+        "arrivalMinute": 1245,
+        "departureClock": "20:00",
+        "arrivalClock": "20:45",
+        "local": 0.9286543802070184,
+        "connecting": 25.682573355984765,
+        "oneStop": 25.682573355984765,
+        "twoStop": 0,
+        "groups": {
+          "CGI": 6.159102711927273,
+          "FLP": 3.1234706440574933,
+          "GCP": 16.4
+        },
+        "topMarkets": [
+          {
+            "origin": "SAV",
+            "destination": "MSY",
+            "opportunity": 16.4
+          },
+          {
+            "origin": "SAV",
+            "destination": "CLT",
+            "opportunity": 5.1636942675159245
+          },
+          {
+            "origin": "SAV",
+            "destination": "SFB",
+            "opportunity": 2.939162672634058
+          },
+          {
+            "origin": "SAV",
+            "destination": "ROA",
+            "opportunity": 0.9954084444113486
+          },
+          {
+            "origin": "SAV",
+            "destination": "MLB",
+            "opportunity": 0.18430797142343563
+          }
+        ]
+      },
+      {
+        "id": "V122-ANALYSIS-R338-2-JAX-SAV",
+        "route": 338,
+        "line": "AL",
+        "fleet": "CRJ700",
+        "day": 2,
+        "sequenceWithinRoute": 7,
+        "pairing": 171,
+        "flight": 2126,
+        "origin": "JAX",
+        "destination": "SAV",
+        "departure": "21:25",
+        "arrival": "22:10",
+        "departureMinute": 1285,
+        "arrivalMinute": 1330,
+        "departureClock": "21:25",
+        "arrivalClock": "22:10",
+        "local": 0.9775309265337037,
+        "connecting": 106.67836872176714,
+        "oneStop": 81.4161502596597,
+        "twoStop": 25.26221846210744,
+        "groups": {
+          "MAC": 2.082698020312111,
+          "TEX": 17.338709297045938,
+          "CGI": 9.9,
+          "NEC": 4.6076833555611,
+          "LEC": 11.447433067566415,
+          "HUB": 1.356583089369454,
+          "APP": 13.231164453493776,
+          "FLP": 21.339824135619292,
+          "GCP": 2.9,
+          "GLC": 22.474273302799062
+        },
+        "topMarkets": [
+          {
+            "origin": "AUS",
+            "destination": "SAV",
+            "opportunity": 15.373417737972439
+          },
+          {
+            "origin": "CMH",
+            "destination": "SAV",
+            "opportunity": 11.447433067566415
+          },
+          {
+            "origin": "SDF",
+            "destination": "SAV",
+            "opportunity": 11.3
+          },
+          {
+            "origin": "IND",
+            "destination": "SAV",
+            "opportunity": 10.812042941990201
+          },
+          {
+            "origin": "FLL",
+            "destination": "SAV",
+            "opportunity": 9.939824135619293
+          },
+          {
+            "origin": "CLT",
+            "destination": "SAV",
+            "opportunity": 6.8
+          },
+          {
+            "origin": "MKE",
+            "destination": "SAV",
+            "opportunity": 5.848635308527806
+          },
+          {
+            "origin": "PGD",
+            "destination": "SAV",
+            "opportunity": 4.3
+          }
+        ]
+      },
+      {
+        "id": "V122-ANALYSIS-R504-1-CLT-JAX",
+        "route": 504,
+        "line": "AB",
+        "fleet": "CRJ900",
+        "day": 4,
+        "sequenceWithinRoute": 6,
+        "pairing": 596,
+        "flight": 2127,
+        "origin": "CLT",
+        "destination": "JAX",
+        "departure": "19:34",
+        "arrival": "20:45",
+        "departureMinute": 1174,
+        "arrivalMinute": 1245,
+        "departureClock": "19:34",
+        "arrivalClock": "20:45",
+        "local": 13.666666666666668,
+        "connecting": 53.983370494282525,
+        "oneStop": 53.983370494282525,
+        "twoStop": 0,
+        "groups": {
+          "FLP": 24.02535513252074,
+          "CGI": 5.645677694770544,
+          "GCP": 24.31233766699124
+        },
+        "topMarkets": [
+          {
+            "origin": "CLT",
+            "destination": "MSY",
+            "opportunity": 24.31233766699124
+          },
+          {
+            "origin": "CLT",
+            "destination": "SFB",
+            "opportunity": 18.105467119549576
+          },
+          {
+            "origin": "CLT",
+            "destination": "MLB",
+            "opportunity": 5.919888012971164
+          },
+          {
+            "origin": "CLT",
+            "destination": "SAV",
+            "opportunity": 5.645677694770544
+          }
+        ]
+      },
+      {
+        "id": "V122-ANALYSIS-R504-2-JAX-CLT",
+        "route": 504,
+        "line": "AB",
+        "fleet": "CRJ900",
+        "day": 4,
+        "sequenceWithinRoute": 7,
+        "pairing": 565,
+        "flight": 2128,
+        "origin": "JAX",
+        "destination": "CLT",
+        "departure": "21:25",
+        "arrival": "22:36",
+        "departureMinute": 1285,
+        "arrivalMinute": 1356,
+        "departureClock": "21:25",
+        "arrivalClock": "22:36",
+        "local": 13.3,
+        "connecting": 148.79113506377078,
+        "oneStop": 141.95833788850678,
+        "twoStop": 6.832797175264024,
+        "groups": {
+          "GLC": 4.477919687736742,
+          "FLP": 110.27527992370167,
+          "HUB": 0.026494827604696087,
+          "NEC": 0.555461538099961,
+          "TEX": 16.69228481911179,
+          "GCP": 11.6,
+          "CGI": 5.1636942675159245
+        },
+        "topMarkets": [
+          {
+            "origin": "FLL",
+            "destination": "CLT",
+            "opportunity": 30.15850988182938
+          },
+          {
+            "origin": "SFB",
+            "destination": "CLT",
+            "opportunity": 29.365296920586815
+          },
+          {
+            "origin": "PGD",
+            "destination": "CLT",
+            "opportunity": 20.195567944027562
+          },
+          {
+            "origin": "EYW",
+            "destination": "CLT",
+            "opportunity": 17.8
+          },
+          {
+            "origin": "AUS",
+            "destination": "CLT",
+            "opportunity": 14.726390569022787
+          },
+          {
+            "origin": "MLB",
+            "destination": "CLT",
+            "opportunity": 12.755905177257919
+          },
+          {
+            "origin": "JAN",
+            "destination": "CLT",
+            "opportunity": 11.6
+          },
+          {
+            "origin": "SAV",
+            "destination": "CLT",
+            "opportunity": 5.1636942675159245
+          }
+        ]
+      },
+      {
+        "id": "V122-ANALYSIS-R114-1-ROA-JAX",
+        "route": 114,
+        "line": "AD",
+        "fleet": "CRJ200",
+        "day": 4,
+        "sequenceWithinRoute": 7,
+        "pairing": 215,
+        "flight": 2129,
+        "origin": "ROA",
+        "destination": "JAX",
+        "departure": "19:29",
+        "arrival": "21:03",
+        "departureMinute": 1169,
+        "arrivalMinute": 1263,
+        "departureClock": "19:29",
+        "arrivalClock": "21:03",
+        "local": 1.3666666666666665,
+        "connecting": 11.470835054135243,
+        "oneStop": 11.470835054135243,
+        "twoStop": 0,
+        "groups": {
+          "FLP": 8.576661256482325,
+          "GCP": 2.8941737976529183
+        },
+        "topMarkets": [
+          {
+            "origin": "ROA",
+            "destination": "SFB",
+            "opportunity": 8.576661256482325
+          },
+          {
+            "origin": "ROA",
+            "destination": "MSY",
+            "opportunity": 2.8941737976529183
+          }
+        ]
+      },
+      {
+        "id": "V122-ANALYSIS-R114-2-JAX-ROA",
+        "route": 114,
+        "line": "AD",
+        "fleet": "CRJ200",
+        "day": 4,
+        "sequenceWithinRoute": 8,
+        "pairing": 214,
+        "flight": 2130,
+        "origin": "JAX",
+        "destination": "ROA",
+        "departure": "21:43",
+        "arrival": "23:17",
+        "departureMinute": 1303,
+        "arrivalMinute": 1397,
+        "departureClock": "21:43",
+        "arrivalClock": "23:17",
+        "local": 1.3333333333333333,
+        "connecting": 35.64148139550703,
+        "oneStop": 33.370718434296435,
+        "twoStop": 2.2707629612105893,
+        "groups": {
+          "TEX": 4.6132095021074315,
+          "FLP": 25.34026214639117,
+          "CGI": 0.9954084444113486,
+          "GCP": 4.0,
+          "HUB": 0.6926013025970725
+        },
+        "topMarkets": [
+          {
+            "origin": "SFB",
+            "destination": "ROA",
+            "opportunity": 11.4
+          },
+          {
+            "origin": "PIE",
+            "destination": "ROA",
+            "opportunity": 6.640262146391173
+          },
+          {
+            "origin": "FLL",
+            "destination": "ROA",
+            "opportunity": 5.2
+          },
+          {
+            "origin": "MSY",
+            "destination": "ROA",
+            "opportunity": 4.0
+          },
+          {
+            "origin": "AUS",
+            "destination": "ROA",
+            "opportunity": 3.3917208354381065
+          },
+          {
+            "origin": "EYW",
+            "destination": "ROA",
+            "opportunity": 1.4
+          },
+          {
+            "origin": "HOU",
+            "destination": "ROA",
+            "opportunity": 1.2214886666693252
+          },
+          {
+            "origin": "SAV",
+            "destination": "ROA",
+            "opportunity": 0.9954084444113486
+          }
+        ]
+      },
+      {
+        "id": "V122-ANALYSIS-R126-1-MLB-JAX",
+        "route": 126,
+        "line": "AD",
+        "fleet": "CRJ200",
+        "day": 16,
+        "sequenceWithinRoute": 6,
+        "pairing": 387,
+        "flight": 2131,
+        "origin": "MLB",
+        "destination": "JAX",
+        "departure": "19:53",
+        "arrival": "20:45",
+        "departureMinute": 1193,
+        "arrivalMinute": 1245,
+        "departureClock": "19:53",
+        "arrivalClock": "20:45",
+        "local": 0.06666666666666667,
+        "connecting": 12.334570212139456,
+        "oneStop": 12.334570212139456,
+        "twoStop": 0,
+        "groups": {
+          "GCP": 0.9419249748478895,
+          "CGI": 11.392645237291566
+        },
+        "topMarkets": [
+          {
+            "origin": "MLB",
+            "destination": "CLT",
+            "opportunity": 10.439115043925277
+          },
+          {
+            "origin": "MLB",
+            "destination": "MSY",
+            "opportunity": 0.9419249748478895
+          },
+          {
+            "origin": "MLB",
+            "destination": "ROA",
+            "opportunity": 0.7
+          },
+          {
+            "origin": "MLB",
+            "destination": "SAV",
+            "opportunity": 0.25353019336629007
+          }
+        ]
+      },
+      {
+        "id": "V122-ANALYSIS-R126-2-JAX-MLB",
+        "route": 126,
+        "line": "AD",
+        "fleet": "CRJ200",
+        "day": 16,
+        "sequenceWithinRoute": 7,
+        "pairing": 386,
+        "flight": 2132,
+        "origin": "JAX",
+        "destination": "MLB",
+        "departure": "21:25",
+        "arrival": "22:17",
+        "departureMinute": 1285,
+        "arrivalMinute": 1337,
+        "departureClock": "21:25",
+        "arrivalClock": "22:17",
+        "local": 0.06666666666666667,
+        "connecting": 19.56094106590082,
+        "oneStop": 13.858734666258867,
+        "twoStop": 5.702206399641949,
+        "groups": {
+          "HUB": 0.8640013060614158,
+          "MAC": 0.825114742646353,
+          "TEX": 0.5495254631015171,
+          "GLC": 2.5180589911686235,
+          "CGI": 8.93571194895417,
+          "NEC": 0.6449431275207524,
+          "LEC": 2.030969954587158,
+          "APP": 3.0484490002087514,
+          "GCP": 0.14416653165207577
+        },
+        "topMarkets": [
+          {
+            "origin": "CLT",
+            "destination": "MLB",
+            "opportunity": 7.189302274146193
+          },
+          {
+            "origin": "CMH",
+            "destination": "MLB",
+            "opportunity": 2.030969954587158
+          },
+          {
+            "origin": "MKE",
+            "destination": "MLB",
+            "opportunity": 1.6
+          },
+          {
+            "origin": "TYS",
+            "destination": "MLB",
+            "opportunity": 1.5
+          },
+          {
+            "origin": "BWI",
+            "destination": "MLB",
+            "opportunity": 0.825114742646353
+          },
+          {
+            "origin": "ROA",
+            "destination": "MLB",
+            "opportunity": 0.7000000000000001
+          },
+          {
+            "origin": "CRW",
+            "destination": "MLB",
+            "opportunity": 0.6
+          },
+          {
+            "origin": "TRI",
+            "destination": "MLB",
+            "opportunity": 0.5
+          }
+        ]
+      },
+      {
+        "id": "V122-ANALYSIS-R514-1-PIE-JAX",
+        "route": 514,
+        "line": "AG",
+        "fleet": "CRJ900",
+        "day": 4,
+        "sequenceWithinRoute": 5,
+        "pairing": 292,
+        "flight": 2133,
+        "origin": "PIE",
+        "destination": "JAX",
+        "departure": "20:14",
+        "arrival": "21:08",
+        "departureMinute": 1214,
+        "arrivalMinute": 1268,
+        "departureClock": "20:14",
+        "arrivalClock": "21:08",
+        "local": 2.25,
+        "connecting": 105.04026214639117,
+        "oneStop": 105.04026214639117,
+        "twoStop": 0,
+        "groups": {
+          "CGI": 6.640262146391173,
+          "GCP": 98.39999999999999
+        },
+        "topMarkets": [
+          {
+            "origin": "PIE",
+            "destination": "MSY",
+            "opportunity": 98.39999999999999
+          },
+          {
+            "origin": "PIE",
+            "destination": "ROA",
+            "opportunity": 6.640262146391173
+          }
+        ]
+      },
+      {
+        "id": "V122-ANALYSIS-R515-1-JAX-PIE",
+        "route": 515,
+        "line": "AG",
+        "fleet": "CRJ900",
+        "day": 5,
+        "sequenceWithinRoute": 1,
+        "pairing": 291,
+        "flight": 2134,
+        "origin": "JAX",
+        "destination": "PIE",
+        "departure": "06:00",
+        "arrival": "06:54",
+        "departureMinute": 360,
+        "arrivalMinute": 414,
+        "departureClock": "06:00",
+        "arrivalClock": "06:54",
+        "local": 2.45,
+        "connecting": 47.7811411529959,
+        "oneStop": 47.7811411529959,
+        "twoStop": 0,
+        "groups": {
+          "TEX": 47.7811411529959
+        },
+        "topMarkets": [
+          {
+            "origin": "SAT",
+            "destination": "PIE",
+            "opportunity": 36.842152923266745
+          },
+          {
+            "origin": "ELP",
+            "destination": "PIE",
+            "opportunity": 10.938988229729157
+          }
+        ]
+      }
+    ],
+    "rationale": "06:00 JAX departure reaches PIE at 06:54, leaving 61 minutes before Route 515 at 07:55, instead of the 41-minute ground time from the demand-optimal 06:20 departure."
+  },
+  "jointWithRetimedPieSuccessor": {
+    "status": "optional retiming proposal; not approved",
+    "retimeLegs": [
+      {
+        "legId": "PIE-SYR-CRJ900-02-OUT",
+        "expectedDepartureMinute": 475,
+        "expectedArrivalMinute": 639,
+        "departureMinute": 484,
+        "arrivalMinute": 648
+      },
+      {
+        "legId": "PIE-SYR-CRJ900-03-IN",
+        "expectedDepartureMinute": 680,
+        "expectedArrivalMinute": 844,
+        "departureMinute": 689,
+        "arrivalMinute": 853
+      }
+    ],
+    "validation": {
+      "structural": "pass",
+      "operatingErrors": 0,
+      "hardStopFailures": [],
+      "blocking": [],
+      "overnight": "pass",
+      "overnightFindings": [],
+      "planning": "pass",
+      "gates": "pass",
+      "jax": {
+        "code": "JAX",
+        "name": "Jacksonville FL",
+        "isHub": true,
+        "isFocusCity": false,
+        "nGates": 16,
+        "nStands": 12,
+        "peakUsed": 16
+      },
+      "standClaims": 15,
+      "standMinutes": 4277
+    },
+    "demand": [
+      {
+        "id": "V122-ANALYSIS-R702-1-SFB-JAX",
+        "route": 702,
+        "line": "A",
+        "fleet": "MAX9",
+        "day": 2,
+        "sequenceWithinRoute": 6,
+        "pairing": 692,
+        "flight": 2119,
+        "origin": "SFB",
+        "destination": "JAX",
+        "departure": "20:05",
+        "arrival": "20:53",
+        "departureMinute": 1205,
+        "arrivalMinute": 1253,
+        "departureClock": "20:05",
+        "arrivalClock": "20:53",
+        "local": 2.7407932011331444,
+        "connecting": 184.54205519683686,
+        "oneStop": 184.54205519683686,
+        "twoStop": 0,
+        "groups": {
+          "CGI": 34.06088006636193,
+          "GCP": 150.48117513047492
+        },
+        "topMarkets": [
+          {
+            "origin": "SFB",
+            "destination": "MSY",
+            "opportunity": 150.48117513047492
+          },
+          {
+            "origin": "SFB",
+            "destination": "CLT",
+            "opportunity": 22.600511818125636
+          },
+          {
+            "origin": "SFB",
+            "destination": "ROA",
+            "opportunity": 8.340368248236297
+          },
+          {
+            "origin": "SFB",
+            "destination": "SAV",
+            "opportunity": 3.1199999999999997
+          }
+        ]
+      },
+      {
+        "id": "V122-ANALYSIS-R702-2-JAX-SFB",
+        "route": 702,
+        "line": "A",
+        "fleet": "MAX9",
+        "day": 2,
+        "sequenceWithinRoute": 7,
+        "pairing": 663,
+        "flight": 2120,
+        "origin": "JAX",
+        "destination": "SFB",
+        "departure": "21:33",
+        "arrival": "22:21",
+        "departureMinute": 1293,
+        "arrivalMinute": 1341,
+        "departureClock": "21:33",
+        "arrivalClock": "22:21",
+        "local": 2.8364022662889523,
+        "connecting": 704.6198811125425,
+        "oneStop": 595.3942921679952,
+        "twoStop": 109.22558894454752,
+        "groups": {
+          "GLC": 81.36773838397656,
+          "MAC": 11.479395568493079,
+          "TEX": 43.72481296641975,
+          "CGI": 71.36556082341292,
+          "HUB": 1.6840049739448926,
+          "FLP": 18.449876941585423,
+          "NEC": 31.817747006879387,
+          "LEC": 191.56094233996612,
+          "APP": 43.76044405659646,
+          "GCP": 209.40935805126813
+        },
+        "topMarkets": [
+          {
+            "origin": "MSY",
+            "destination": "SFB",
+            "opportunity": 205.4
+          },
+          {
+            "origin": "CMH",
+            "destination": "SFB",
+            "opportunity": 191.56094233996612
+          },
+          {
+            "origin": "MKE",
+            "destination": "SFB",
+            "opportunity": 43.79169233772295
+          },
+          {
+            "origin": "AUS",
+            "destination": "SFB",
+            "opportunity": 38.80914221034404
+          },
+          {
+            "origin": "CLT",
+            "destination": "SFB",
+            "opportunity": 22.089681332536557
+          },
+          {
+            "origin": "BDL",
+            "destination": "SFB",
+            "opportunity": 21.213184675072554
+          },
+          {
+            "origin": "IND",
+            "destination": "SFB",
+            "opportunity": 19.54504036537136
+          },
+          {
+            "origin": "EYW",
+            "destination": "SFB",
+            "opportunity": 18.4
+          }
+        ]
+      },
+      {
+        "id": "V122-ANALYSIS-R704-1-SFB-BHM",
+        "route": 704,
+        "line": "A",
+        "fleet": "MAX9",
+        "day": 4,
+        "sequenceWithinRoute": 9,
+        "pairing": 856,
+        "flight": 2121,
+        "origin": "SFB",
+        "destination": "BHM",
+        "departure": "20:19",
+        "arrival": "20:45",
+        "departureMinute": 1219,
+        "arrivalMinute": 1245,
+        "departureClock": "20:19",
+        "arrivalClock": "20:45",
+        "local": 38.31747793190416,
+        "connecting": 83.33044894477422,
+        "oneStop": 83.33044894477422,
+        "twoStop": 0,
+        "groups": {
+          "FLP": 83.33044894477422
+        },
+        "topMarkets": [
+          {
+            "origin": "SFB",
+            "destination": "XNA",
+            "opportunity": 29.32632547855264
+          },
+          {
+            "origin": "SFB",
+            "destination": "OKC",
+            "opportunity": 27.751369105911458
+          },
+          {
+            "origin": "SFB",
+            "destination": "SAT",
+            "opportunity": 10.91181349293674
+          },
+          {
+            "origin": "SFB",
+            "destination": "HOU",
+            "opportunity": 8.260029053398128
+          },
+          {
+            "origin": "SFB",
+            "destination": "SGF",
+            "opportunity": 6.727307606641229
+          },
+          {
+            "origin": "SFB",
+            "destination": "VPS",
+            "opportunity": 0.3536042073340293
+          }
+        ]
+      },
+      {
+        "id": "V122-ANALYSIS-R704-2-BHM-SFB",
+        "route": 704,
+        "line": "A",
+        "fleet": "MAX9",
+        "day": 4,
+        "sequenceWithinRoute": 10,
+        "pairing": 855,
+        "flight": 2122,
+        "origin": "BHM",
+        "destination": "SFB",
+        "departure": "23:15",
+        "arrival": "01:41",
+        "departureMinute": 1395,
+        "arrivalMinute": 1541,
+        "departureClock": "23:15",
+        "arrivalClock": "01:41 +1",
+        "local": 37.09266740523191,
+        "connecting": 548.9254930748097,
+        "oneStop": 257.6428320035166,
+        "twoStop": 291.28266107129303,
+        "groups": {
+          "GLC": 24.9552598306792,
+          "TEX": 164.06233829199968,
+          "HUB": 5.4143711047044345,
+          "OZK": 157.88681852578532,
+          "UMP": 194.3816375134048,
+          "APP": 0.3643989038326041,
+          "GCP": 1.860668904403641
+        },
+        "topMarkets": [
+          {
+            "origin": "BLV",
+            "destination": "SFB",
+            "opportunity": 193.0
+          },
+          {
+            "origin": "AUS",
+            "destination": "SFB",
+            "opportunity": 70.5849412519776
+          },
+          {
+            "origin": "OKC",
+            "destination": "SFB",
+            "opportunity": 60.79999999999999
+          },
+          {
+            "origin": "DAL",
+            "destination": "SFB",
+            "opportunity": 44.205521455037044
+          },
+          {
+            "origin": "MEM",
+            "destination": "SFB",
+            "opportunity": 37.3186884537673
+          },
+          {
+            "origin": "XNA",
+            "destination": "SFB",
+            "opportunity": 31.000000000000004
+          },
+          {
+            "origin": "SGF",
+            "destination": "SFB",
+            "opportunity": 17.0
+          },
+          {
+            "origin": "MKE",
+            "destination": "SFB",
+            "opportunity": 15.660165278178043
+          }
+        ]
+      },
+      {
+        "id": "V122-ANALYSIS-R341-1-MSY-JAX",
+        "route": 341,
+        "line": "AL",
+        "fleet": "CRJ700",
+        "day": 5,
+        "sequenceWithinRoute": 5,
+        "pairing": 392,
+        "flight": 2123,
+        "origin": "MSY",
+        "destination": "JAX",
+        "departure": "18:24",
+        "arrival": "20:59",
+        "departureMinute": 1104,
+        "arrivalMinute": 1259,
+        "departureClock": "18:24",
+        "arrivalClock": "20:59",
+        "local": 12.9,
+        "connecting": 209.4,
+        "oneStop": 209.4,
+        "twoStop": 0,
+        "groups": {
+          "FLP": 205.4,
+          "CGI": 4.0
+        },
+        "topMarkets": [
+          {
+            "origin": "MSY",
+            "destination": "SFB",
+            "opportunity": 205.4
+          },
+          {
+            "origin": "MSY",
+            "destination": "ROA",
+            "opportunity": 4.0
+          }
+        ]
+      },
+      {
+        "id": "V122-ANALYSIS-R341-2-JAX-MSY",
+        "route": 341,
+        "line": "AL",
+        "fleet": "CRJ700",
+        "day": 5,
+        "sequenceWithinRoute": 6,
+        "pairing": 391,
+        "flight": 2124,
+        "origin": "JAX",
+        "destination": "MSY",
+        "departure": "21:39",
+        "arrival": "22:14",
+        "departureMinute": 1299,
+        "arrivalMinute": 1334,
+        "departureClock": "21:39",
+        "arrivalClock": "22:14",
+        "local": 12.8,
+        "connecting": 628.4231967179905,
+        "oneStop": 605.5444396843504,
+        "twoStop": 22.878757033640184,
+        "groups": {
+          "GLC": 17.818674124324943,
+          "HUB": 0.7572629721601204,
+          "CGI": 69.85886061180076,
+          "NEC": 0.7205176853723458,
+          "MAC": 7.330646154053621,
+          "LEC": 21.83087884801709,
+          "APP": 23.706356322261726,
+          "FLP": 486.4
+        },
+        "topMarkets": [
+          {
+            "origin": "SFB",
+            "destination": "MSY",
+            "opportunity": 205.0
+          },
+          {
+            "origin": "FLL",
+            "destination": "MSY",
+            "opportunity": 162.6
+          },
+          {
+            "origin": "PIE",
+            "destination": "MSY",
+            "opportunity": 98.39999999999999
+          },
+          {
+            "origin": "CLT",
+            "destination": "MSY",
+            "opportunity": 24.31233766699124
+          },
+          {
+            "origin": "CMH",
+            "destination": "MSY",
+            "opportunity": 21.83087884801709
+          },
+          {
+            "origin": "SDF",
+            "destination": "MSY",
+            "opportunity": 17.8
+          },
+          {
+            "origin": "SAV",
+            "destination": "MSY",
+            "opportunity": 16.4
+          },
+          {
+            "origin": "IND",
+            "destination": "MSY",
+            "opportunity": 13.894738701419058
+          }
+        ]
+      },
+      {
+        "id": "V122-ANALYSIS-R338-1-SAV-JAX",
+        "route": 338,
+        "line": "AL",
+        "fleet": "CRJ700",
+        "day": 2,
+        "sequenceWithinRoute": 6,
+        "pairing": 388,
+        "flight": 2125,
+        "origin": "SAV",
+        "destination": "JAX",
+        "departure": "20:00",
+        "arrival": "20:45",
+        "departureMinute": 1200,
+        "arrivalMinute": 1245,
+        "departureClock": "20:00",
+        "arrivalClock": "20:45",
+        "local": 0.9286543802070184,
+        "connecting": 25.682573355984765,
+        "oneStop": 25.682573355984765,
+        "twoStop": 0,
+        "groups": {
+          "CGI": 6.159102711927273,
+          "FLP": 3.1234706440574933,
+          "GCP": 16.4
+        },
+        "topMarkets": [
+          {
+            "origin": "SAV",
+            "destination": "MSY",
+            "opportunity": 16.4
+          },
+          {
+            "origin": "SAV",
+            "destination": "CLT",
+            "opportunity": 5.1636942675159245
+          },
+          {
+            "origin": "SAV",
+            "destination": "SFB",
+            "opportunity": 2.939162672634058
+          },
+          {
+            "origin": "SAV",
+            "destination": "ROA",
+            "opportunity": 0.9954084444113486
+          },
+          {
+            "origin": "SAV",
+            "destination": "MLB",
+            "opportunity": 0.18430797142343563
+          }
+        ]
+      },
+      {
+        "id": "V122-ANALYSIS-R338-2-JAX-SAV",
+        "route": 338,
+        "line": "AL",
+        "fleet": "CRJ700",
+        "day": 2,
+        "sequenceWithinRoute": 7,
+        "pairing": 171,
+        "flight": 2126,
+        "origin": "JAX",
+        "destination": "SAV",
+        "departure": "21:25",
+        "arrival": "22:10",
+        "departureMinute": 1285,
+        "arrivalMinute": 1330,
+        "departureClock": "21:25",
+        "arrivalClock": "22:10",
+        "local": 0.9775309265337037,
+        "connecting": 106.67836872176713,
+        "oneStop": 81.4161502596597,
+        "twoStop": 25.26221846210744,
+        "groups": {
+          "GLC": 22.474273302799062,
+          "NEC": 4.6076833555611,
+          "TEX": 17.338709297045938,
+          "MAC": 2.082698020312111,
+          "HUB": 1.356583089369454,
+          "CGI": 9.9,
+          "LEC": 11.447433067566415,
+          "APP": 13.231164453493776,
+          "FLP": 21.339824135619292,
+          "GCP": 2.9
+        },
+        "topMarkets": [
+          {
+            "origin": "AUS",
+            "destination": "SAV",
+            "opportunity": 15.373417737972439
+          },
+          {
+            "origin": "CMH",
+            "destination": "SAV",
+            "opportunity": 11.447433067566415
+          },
+          {
+            "origin": "SDF",
+            "destination": "SAV",
+            "opportunity": 11.3
+          },
+          {
+            "origin": "IND",
+            "destination": "SAV",
+            "opportunity": 10.812042941990201
+          },
+          {
+            "origin": "FLL",
+            "destination": "SAV",
+            "opportunity": 9.939824135619293
+          },
+          {
+            "origin": "CLT",
+            "destination": "SAV",
+            "opportunity": 6.8
+          },
+          {
+            "origin": "MKE",
+            "destination": "SAV",
+            "opportunity": 5.848635308527806
+          },
+          {
+            "origin": "PGD",
+            "destination": "SAV",
+            "opportunity": 4.3
+          }
+        ]
+      },
+      {
+        "id": "V122-ANALYSIS-R504-1-CLT-JAX",
+        "route": 504,
+        "line": "AB",
+        "fleet": "CRJ900",
+        "day": 4,
+        "sequenceWithinRoute": 6,
+        "pairing": 596,
+        "flight": 2127,
+        "origin": "CLT",
+        "destination": "JAX",
+        "departure": "19:34",
+        "arrival": "20:45",
+        "departureMinute": 1174,
+        "arrivalMinute": 1245,
+        "departureClock": "19:34",
+        "arrivalClock": "20:45",
+        "local": 13.666666666666668,
+        "connecting": 53.983370494282525,
+        "oneStop": 53.983370494282525,
+        "twoStop": 0,
+        "groups": {
+          "FLP": 24.02535513252074,
+          "GCP": 24.31233766699124,
+          "CGI": 5.645677694770544
+        },
+        "topMarkets": [
+          {
+            "origin": "CLT",
+            "destination": "MSY",
+            "opportunity": 24.31233766699124
+          },
+          {
+            "origin": "CLT",
+            "destination": "SFB",
+            "opportunity": 18.105467119549576
+          },
+          {
+            "origin": "CLT",
+            "destination": "MLB",
+            "opportunity": 5.919888012971164
+          },
+          {
+            "origin": "CLT",
+            "destination": "SAV",
+            "opportunity": 5.645677694770544
+          }
+        ]
+      },
+      {
+        "id": "V122-ANALYSIS-R504-2-JAX-CLT",
+        "route": 504,
+        "line": "AB",
+        "fleet": "CRJ900",
+        "day": 4,
+        "sequenceWithinRoute": 7,
+        "pairing": 565,
+        "flight": 2128,
+        "origin": "JAX",
+        "destination": "CLT",
+        "departure": "21:25",
+        "arrival": "22:36",
+        "departureMinute": 1285,
+        "arrivalMinute": 1356,
+        "departureClock": "21:25",
+        "arrivalClock": "22:36",
+        "local": 13.3,
+        "connecting": 148.7911350637708,
+        "oneStop": 141.95833788850678,
+        "twoStop": 6.832797175264024,
+        "groups": {
+          "GLC": 4.477919687736742,
+          "FLP": 110.27527992370167,
+          "HUB": 0.026494827604696087,
+          "NEC": 0.555461538099961,
+          "TEX": 16.69228481911179,
+          "GCP": 11.6,
+          "CGI": 5.1636942675159245
+        },
+        "topMarkets": [
+          {
+            "origin": "FLL",
+            "destination": "CLT",
+            "opportunity": 30.15850988182938
+          },
+          {
+            "origin": "SFB",
+            "destination": "CLT",
+            "opportunity": 29.365296920586815
+          },
+          {
+            "origin": "PGD",
+            "destination": "CLT",
+            "opportunity": 20.195567944027562
+          },
+          {
+            "origin": "EYW",
+            "destination": "CLT",
+            "opportunity": 17.8
+          },
+          {
+            "origin": "AUS",
+            "destination": "CLT",
+            "opportunity": 14.726390569022787
+          },
+          {
+            "origin": "MLB",
+            "destination": "CLT",
+            "opportunity": 12.755905177257919
+          },
+          {
+            "origin": "JAN",
+            "destination": "CLT",
+            "opportunity": 11.6
+          },
+          {
+            "origin": "SAV",
+            "destination": "CLT",
+            "opportunity": 5.1636942675159245
+          }
+        ]
+      },
+      {
+        "id": "V122-ANALYSIS-R114-1-ROA-JAX",
+        "route": 114,
+        "line": "AD",
+        "fleet": "CRJ200",
+        "day": 4,
+        "sequenceWithinRoute": 7,
+        "pairing": 215,
+        "flight": 2129,
+        "origin": "ROA",
+        "destination": "JAX",
+        "departure": "19:29",
+        "arrival": "21:03",
+        "departureMinute": 1169,
+        "arrivalMinute": 1263,
+        "departureClock": "19:29",
+        "arrivalClock": "21:03",
+        "local": 1.3666666666666665,
+        "connecting": 11.470835054135243,
+        "oneStop": 11.470835054135243,
+        "twoStop": 0,
+        "groups": {
+          "FLP": 8.576661256482325,
+          "GCP": 2.8941737976529183
+        },
+        "topMarkets": [
+          {
+            "origin": "ROA",
+            "destination": "SFB",
+            "opportunity": 8.576661256482325
+          },
+          {
+            "origin": "ROA",
+            "destination": "MSY",
+            "opportunity": 2.8941737976529183
+          }
+        ]
+      },
+      {
+        "id": "V122-ANALYSIS-R114-2-JAX-ROA",
+        "route": 114,
+        "line": "AD",
+        "fleet": "CRJ200",
+        "day": 4,
+        "sequenceWithinRoute": 8,
+        "pairing": 214,
+        "flight": 2130,
+        "origin": "JAX",
+        "destination": "ROA",
+        "departure": "21:43",
+        "arrival": "23:17",
+        "departureMinute": 1303,
+        "arrivalMinute": 1397,
+        "departureClock": "21:43",
+        "arrivalClock": "23:17",
+        "local": 1.3333333333333333,
+        "connecting": 35.64148139550703,
+        "oneStop": 33.370718434296435,
+        "twoStop": 2.2707629612105893,
+        "groups": {
+          "TEX": 4.6132095021074315,
+          "FLP": 25.34026214639117,
+          "CGI": 0.9954084444113486,
+          "GCP": 4.0,
+          "HUB": 0.6926013025970725
+        },
+        "topMarkets": [
+          {
+            "origin": "SFB",
+            "destination": "ROA",
+            "opportunity": 11.4
+          },
+          {
+            "origin": "PIE",
+            "destination": "ROA",
+            "opportunity": 6.640262146391173
+          },
+          {
+            "origin": "FLL",
+            "destination": "ROA",
+            "opportunity": 5.2
+          },
+          {
+            "origin": "MSY",
+            "destination": "ROA",
+            "opportunity": 4.0
+          },
+          {
+            "origin": "AUS",
+            "destination": "ROA",
+            "opportunity": 3.3917208354381065
+          },
+          {
+            "origin": "EYW",
+            "destination": "ROA",
+            "opportunity": 1.4
+          },
+          {
+            "origin": "HOU",
+            "destination": "ROA",
+            "opportunity": 1.2214886666693252
+          },
+          {
+            "origin": "SAV",
+            "destination": "ROA",
+            "opportunity": 0.9954084444113486
+          }
+        ]
+      },
+      {
+        "id": "V122-ANALYSIS-R126-1-MLB-JAX",
+        "route": 126,
+        "line": "AD",
+        "fleet": "CRJ200",
+        "day": 16,
+        "sequenceWithinRoute": 6,
+        "pairing": 387,
+        "flight": 2131,
+        "origin": "MLB",
+        "destination": "JAX",
+        "departure": "19:53",
+        "arrival": "20:45",
+        "departureMinute": 1193,
+        "arrivalMinute": 1245,
+        "departureClock": "19:53",
+        "arrivalClock": "20:45",
+        "local": 0.06666666666666667,
+        "connecting": 12.334570212139456,
+        "oneStop": 12.334570212139456,
+        "twoStop": 0,
+        "groups": {
+          "GCP": 0.9419249748478895,
+          "CGI": 11.392645237291566
+        },
+        "topMarkets": [
+          {
+            "origin": "MLB",
+            "destination": "CLT",
+            "opportunity": 10.439115043925277
+          },
+          {
+            "origin": "MLB",
+            "destination": "MSY",
+            "opportunity": 0.9419249748478895
+          },
+          {
+            "origin": "MLB",
+            "destination": "ROA",
+            "opportunity": 0.7
+          },
+          {
+            "origin": "MLB",
+            "destination": "SAV",
+            "opportunity": 0.25353019336629007
+          }
+        ]
+      },
+      {
+        "id": "V122-ANALYSIS-R126-2-JAX-MLB",
+        "route": 126,
+        "line": "AD",
+        "fleet": "CRJ200",
+        "day": 16,
+        "sequenceWithinRoute": 7,
+        "pairing": 386,
+        "flight": 2132,
+        "origin": "JAX",
+        "destination": "MLB",
+        "departure": "21:25",
+        "arrival": "22:17",
+        "departureMinute": 1285,
+        "arrivalMinute": 1337,
+        "departureClock": "21:25",
+        "arrivalClock": "22:17",
+        "local": 0.06666666666666667,
+        "connecting": 19.560941065900817,
+        "oneStop": 13.858734666258867,
+        "twoStop": 5.702206399641949,
+        "groups": {
+          "HUB": 0.8640013060614158,
+          "GLC": 2.5180589911686235,
+          "TEX": 0.549525463101517,
+          "NEC": 0.6449431275207524,
+          "MAC": 0.825114742646353,
+          "CGI": 8.93571194895417,
+          "LEC": 2.030969954587158,
+          "APP": 3.0484490002087514,
+          "GCP": 0.14416653165207577
+        },
+        "topMarkets": [
+          {
+            "origin": "CLT",
+            "destination": "MLB",
+            "opportunity": 7.189302274146193
+          },
+          {
+            "origin": "CMH",
+            "destination": "MLB",
+            "opportunity": 2.030969954587158
+          },
+          {
+            "origin": "MKE",
+            "destination": "MLB",
+            "opportunity": 1.6
+          },
+          {
+            "origin": "TYS",
+            "destination": "MLB",
+            "opportunity": 1.5
+          },
+          {
+            "origin": "BWI",
+            "destination": "MLB",
+            "opportunity": 0.825114742646353
+          },
+          {
+            "origin": "ROA",
+            "destination": "MLB",
+            "opportunity": 0.7000000000000001
+          },
+          {
+            "origin": "CRW",
+            "destination": "MLB",
+            "opportunity": 0.6
+          },
+          {
+            "origin": "TRI",
+            "destination": "MLB",
+            "opportunity": 0.5
+          }
+        ]
+      },
+      {
+        "id": "V122-ANALYSIS-R514-1-PIE-JAX",
+        "route": 514,
+        "line": "AG",
+        "fleet": "CRJ900",
+        "day": 4,
+        "sequenceWithinRoute": 5,
+        "pairing": 292,
+        "flight": 2133,
+        "origin": "PIE",
+        "destination": "JAX",
+        "departure": "20:14",
+        "arrival": "21:08",
+        "departureMinute": 1214,
+        "arrivalMinute": 1268,
+        "departureClock": "20:14",
+        "arrivalClock": "21:08",
+        "local": 2.25,
+        "connecting": 105.04026214639117,
+        "oneStop": 105.04026214639117,
+        "twoStop": 0,
+        "groups": {
+          "CGI": 6.640262146391173,
+          "GCP": 98.39999999999999
+        },
+        "topMarkets": [
+          {
+            "origin": "PIE",
+            "destination": "MSY",
+            "opportunity": 98.39999999999999
+          },
+          {
+            "origin": "PIE",
+            "destination": "ROA",
+            "opportunity": 6.640262146391173
+          }
+        ]
+      },
+      {
+        "id": "V122-ANALYSIS-R515-1-JAX-PIE",
+        "route": 515,
+        "line": "AG",
+        "fleet": "CRJ900",
+        "day": 5,
+        "sequenceWithinRoute": 1,
+        "pairing": 291,
+        "flight": 2134,
+        "origin": "JAX",
+        "destination": "PIE",
+        "departure": "06:20",
+        "arrival": "07:14",
+        "departureMinute": 380,
+        "arrivalMinute": 434,
+        "departureClock": "06:20",
+        "arrivalClock": "07:14",
+        "local": 2.45,
+        "connecting": 242.59862019657405,
+        "oneStop": 242.59862019657407,
+        "twoStop": 0,
+        "groups": {
+          "TEX": 46.57892913118722,
+          "CGI": 172.4012135119039,
+          "APP": 22.30773769612445,
+          "FLP": 0.8254108201850662,
+          "GCP": 0.48532903717342296
+        },
+        "topMarkets": [
+          {
+            "origin": "RDU",
+            "destination": "PIE",
+            "opportunity": 107.45551614926477
+          },
+          {
+            "origin": "CLT",
+            "destination": "PIE",
+            "opportunity": 64.94569736263914
+          },
+          {
+            "origin": "SAT",
+            "destination": "PIE",
+            "opportunity": 35.691097705120484
+          },
+          {
+            "origin": "TYS",
+            "destination": "PIE",
+            "opportunity": 22.30773769612445
+          },
+          {
+            "origin": "ELP",
+            "destination": "PIE",
+            "opportunity": 10.887831426066738
+          },
+          {
+            "origin": "DAB",
+            "destination": "PIE",
+            "opportunity": 0.5
+          },
+          {
+            "origin": "TLH",
+            "destination": "PIE",
+            "opportunity": 0.48532903717342296
+          },
+          {
+            "origin": "GNV",
+            "destination": "PIE",
+            "opportunity": 0.3254108201850662
+          }
+        ]
+      }
+    ],
+    "rationale": "Keep the 06:20 JAX departure to capture the 05:50 RDU and TYS arrivals. Move Route 515 PIE–SYR and SYR–PIE nine minutes later, giving 50 minutes at PIE. SYR departure is 11:29, just inside Bank 3 ending at 11:30. A 15-minute shift fails that bank. The 16:05 PIE–SYR and remaining flights stay unchanged."
+  },
+  "recommendations": {
+    "highestPriorityEveningReturns": [
+      341,
+      504,
+      338
+    ],
+    "alternateForClt": 340,
+    "conditionalOvernight": [
+      514,
+      515
+    ],
+    "marginal": [
+      114
+    ],
+    "defer": [
+      126,
+      307,
+      308
+    ],
+    "optionalRetiming": "Route 515 first two existing flights +9 minutes; subject to user decision",
+    "publication": "reserved to user"
+  },
+  "recommendedBankScenario": {
+    "status": "optional retiming proposal; not approved",
+    "retimeLegs": [
+      {
+        "legId": "PIE-SYR-CRJ900-02-OUT",
+        "expectedDepartureMinute": 475,
+        "expectedArrivalMinute": 639,
+        "departureMinute": 484,
+        "arrivalMinute": 648
+      },
+      {
+        "legId": "PIE-SYR-CRJ900-03-IN",
+        "expectedDepartureMinute": 680,
+        "expectedArrivalMinute": 844,
+        "departureMinute": 689,
+        "arrivalMinute": 853
+      }
+    ],
+    "validation": {
+      "structural": "pass",
+      "operatingErrors": 0,
+      "hardStopFailures": [],
+      "blocking": [],
+      "overnight": "pass",
+      "overnightFindings": [],
+      "planning": "pass",
+      "gates": "pass",
+      "jax": {
+        "code": "JAX",
+        "name": "Jacksonville FL",
+        "isHub": true,
+        "isFocusCity": false,
+        "nGates": 16,
+        "nStands": 12,
+        "peakUsed": 16
+      },
+      "standClaims": 15,
+      "standMinutes": 4277
+    },
+    "demand": [
+      {
+        "id": "V122-ANALYSIS-R702-1-SFB-JAX",
+        "route": 702,
+        "line": "A",
+        "fleet": "MAX9",
+        "day": 2,
+        "sequenceWithinRoute": 6,
+        "pairing": 692,
+        "flight": 2119,
+        "origin": "SFB",
+        "destination": "JAX",
+        "departure": "20:05",
+        "arrival": "20:53",
+        "departureMinute": 1205,
+        "arrivalMinute": 1253,
+        "departureClock": "20:05",
+        "arrivalClock": "20:53",
+        "local": 2.7407932011331444,
+        "connecting": 176.20168694860055,
+        "oneStop": 176.20168694860055,
+        "twoStop": 0,
+        "groups": {
+          "CGI": 25.720511818125637,
+          "GCP": 150.48117513047492
+        },
+        "topMarkets": [
+          {
+            "origin": "SFB",
+            "destination": "MSY",
+            "opportunity": 150.48117513047492
+          },
+          {
+            "origin": "SFB",
+            "destination": "CLT",
+            "opportunity": 22.600511818125636
+          },
+          {
+            "origin": "SFB",
+            "destination": "SAV",
+            "opportunity": 3.1199999999999997
+          }
+        ]
+      },
+      {
+        "id": "V122-ANALYSIS-R702-2-JAX-SFB",
+        "route": 702,
+        "line": "A",
+        "fleet": "MAX9",
+        "day": 2,
+        "sequenceWithinRoute": 7,
+        "pairing": 663,
+        "flight": 2120,
+        "origin": "JAX",
+        "destination": "SFB",
+        "departure": "21:33",
+        "arrival": "22:21",
+        "departureMinute": 1293,
+        "arrivalMinute": 1341,
+        "departureClock": "21:33",
+        "arrivalClock": "22:21",
+        "local": 2.8364022662889523,
+        "connecting": 704.6198811125425,
+        "oneStop": 595.3942921679952,
+        "twoStop": 109.22558894454752,
+        "groups": {
+          "GLC": 81.36773838397656,
+          "MAC": 11.479395568493079,
+          "TEX": 43.72481296641975,
+          "CGI": 71.36556082341292,
+          "HUB": 1.6840049739448926,
+          "FLP": 18.449876941585423,
+          "NEC": 31.817747006879387,
+          "LEC": 191.56094233996612,
+          "APP": 43.76044405659646,
+          "GCP": 209.40935805126813
+        },
+        "topMarkets": [
+          {
+            "origin": "MSY",
+            "destination": "SFB",
+            "opportunity": 205.4
+          },
+          {
+            "origin": "CMH",
+            "destination": "SFB",
+            "opportunity": 191.56094233996612
+          },
+          {
+            "origin": "MKE",
+            "destination": "SFB",
+            "opportunity": 43.79169233772295
+          },
+          {
+            "origin": "AUS",
+            "destination": "SFB",
+            "opportunity": 38.80914221034404
+          },
+          {
+            "origin": "CLT",
+            "destination": "SFB",
+            "opportunity": 22.089681332536557
+          },
+          {
+            "origin": "BDL",
+            "destination": "SFB",
+            "opportunity": 21.213184675072554
+          },
+          {
+            "origin": "IND",
+            "destination": "SFB",
+            "opportunity": 19.54504036537136
+          },
+          {
+            "origin": "EYW",
+            "destination": "SFB",
+            "opportunity": 18.4
+          }
+        ]
+      },
+      {
+        "id": "V122-ANALYSIS-R704-1-SFB-BHM",
+        "route": 704,
+        "line": "A",
+        "fleet": "MAX9",
+        "day": 4,
+        "sequenceWithinRoute": 9,
+        "pairing": 856,
+        "flight": 2121,
+        "origin": "SFB",
+        "destination": "BHM",
+        "departure": "20:19",
+        "arrival": "20:45",
+        "departureMinute": 1219,
+        "arrivalMinute": 1245,
+        "departureClock": "20:19",
+        "arrivalClock": "20:45",
+        "local": 38.31747793190416,
+        "connecting": 83.33044894477422,
+        "oneStop": 83.33044894477422,
+        "twoStop": 0,
+        "groups": {
+          "FLP": 83.33044894477422
+        },
+        "topMarkets": [
+          {
+            "origin": "SFB",
+            "destination": "XNA",
+            "opportunity": 29.32632547855264
+          },
+          {
+            "origin": "SFB",
+            "destination": "OKC",
+            "opportunity": 27.751369105911458
+          },
+          {
+            "origin": "SFB",
+            "destination": "SAT",
+            "opportunity": 10.91181349293674
+          },
+          {
+            "origin": "SFB",
+            "destination": "HOU",
+            "opportunity": 8.260029053398128
+          },
+          {
+            "origin": "SFB",
+            "destination": "SGF",
+            "opportunity": 6.727307606641229
+          },
+          {
+            "origin": "SFB",
+            "destination": "VPS",
+            "opportunity": 0.3536042073340293
+          }
+        ]
+      },
+      {
+        "id": "V122-ANALYSIS-R704-2-BHM-SFB",
+        "route": 704,
+        "line": "A",
+        "fleet": "MAX9",
+        "day": 4,
+        "sequenceWithinRoute": 10,
+        "pairing": 855,
+        "flight": 2122,
+        "origin": "BHM",
+        "destination": "SFB",
+        "departure": "23:15",
+        "arrival": "01:41",
+        "departureMinute": 1395,
+        "arrivalMinute": 1541,
+        "departureClock": "23:15",
+        "arrivalClock": "01:41 +1",
+        "local": 37.09266740523191,
+        "connecting": 548.9254930748097,
+        "oneStop": 257.6428320035166,
+        "twoStop": 291.28266107129303,
+        "groups": {
+          "GLC": 24.9552598306792,
+          "TEX": 164.06233829199968,
+          "HUB": 5.4143711047044345,
+          "OZK": 157.88681852578532,
+          "UMP": 194.3816375134048,
+          "APP": 0.3643989038326041,
+          "GCP": 1.860668904403641
+        },
+        "topMarkets": [
+          {
+            "origin": "BLV",
+            "destination": "SFB",
+            "opportunity": 193.0
+          },
+          {
+            "origin": "AUS",
+            "destination": "SFB",
+            "opportunity": 70.5849412519776
+          },
+          {
+            "origin": "OKC",
+            "destination": "SFB",
+            "opportunity": 60.79999999999999
+          },
+          {
+            "origin": "DAL",
+            "destination": "SFB",
+            "opportunity": 44.205521455037044
+          },
+          {
+            "origin": "MEM",
+            "destination": "SFB",
+            "opportunity": 37.3186884537673
+          },
+          {
+            "origin": "XNA",
+            "destination": "SFB",
+            "opportunity": 31.000000000000004
+          },
+          {
+            "origin": "SGF",
+            "destination": "SFB",
+            "opportunity": 17.0
+          },
+          {
+            "origin": "MKE",
+            "destination": "SFB",
+            "opportunity": 15.660165278178043
+          }
+        ]
+      },
+      {
+        "id": "V122-ANALYSIS-R341-1-MSY-JAX",
+        "route": 341,
+        "line": "AL",
+        "fleet": "CRJ700",
+        "day": 5,
+        "sequenceWithinRoute": 5,
+        "pairing": 392,
+        "flight": 2123,
+        "origin": "MSY",
+        "destination": "JAX",
+        "departure": "18:24",
+        "arrival": "20:59",
+        "departureMinute": 1104,
+        "arrivalMinute": 1259,
+        "departureClock": "18:24",
+        "arrivalClock": "20:59",
+        "local": 12.9,
+        "connecting": 205.4,
+        "oneStop": 205.4,
+        "twoStop": 0,
+        "groups": {
+          "FLP": 205.4
+        },
+        "topMarkets": [
+          {
+            "origin": "MSY",
+            "destination": "SFB",
+            "opportunity": 205.4
+          }
+        ]
+      },
+      {
+        "id": "V122-ANALYSIS-R341-2-JAX-MSY",
+        "route": 341,
+        "line": "AL",
+        "fleet": "CRJ700",
+        "day": 5,
+        "sequenceWithinRoute": 6,
+        "pairing": 391,
+        "flight": 2124,
+        "origin": "JAX",
+        "destination": "MSY",
+        "departure": "21:39",
+        "arrival": "22:14",
+        "departureMinute": 1299,
+        "arrivalMinute": 1334,
+        "departureClock": "21:39",
+        "arrivalClock": "22:14",
+        "local": 12.8,
+        "connecting": 628.4231967179905,
+        "oneStop": 605.5444396843504,
+        "twoStop": 22.878757033640184,
+        "groups": {
+          "GLC": 17.818674124324943,
+          "HUB": 0.7572629721601204,
+          "CGI": 69.85886061180076,
+          "NEC": 0.7205176853723458,
+          "MAC": 7.330646154053621,
+          "LEC": 21.83087884801709,
+          "APP": 23.706356322261726,
+          "FLP": 486.4
+        },
+        "topMarkets": [
+          {
+            "origin": "SFB",
+            "destination": "MSY",
+            "opportunity": 205.0
+          },
+          {
+            "origin": "FLL",
+            "destination": "MSY",
+            "opportunity": 162.6
+          },
+          {
+            "origin": "PIE",
+            "destination": "MSY",
+            "opportunity": 98.39999999999999
+          },
+          {
+            "origin": "CLT",
+            "destination": "MSY",
+            "opportunity": 24.31233766699124
+          },
+          {
+            "origin": "CMH",
+            "destination": "MSY",
+            "opportunity": 21.83087884801709
+          },
+          {
+            "origin": "SDF",
+            "destination": "MSY",
+            "opportunity": 17.8
+          },
+          {
+            "origin": "SAV",
+            "destination": "MSY",
+            "opportunity": 16.4
+          },
+          {
+            "origin": "IND",
+            "destination": "MSY",
+            "opportunity": 13.894738701419058
+          }
+        ]
+      },
+      {
+        "id": "V122-ANALYSIS-R338-1-SAV-JAX",
+        "route": 338,
+        "line": "AL",
+        "fleet": "CRJ700",
+        "day": 2,
+        "sequenceWithinRoute": 6,
+        "pairing": 388,
+        "flight": 2125,
+        "origin": "SAV",
+        "destination": "JAX",
+        "departure": "20:00",
+        "arrival": "20:45",
+        "departureMinute": 1200,
+        "arrivalMinute": 1245,
+        "departureClock": "20:00",
+        "arrivalClock": "20:45",
+        "local": 0.9286543802070184,
+        "connecting": 24.502856940149982,
+        "oneStop": 24.502856940149982,
+        "twoStop": 0,
+        "groups": {
+          "CGI": 5.1636942675159245,
+          "FLP": 2.939162672634058,
+          "GCP": 16.4
+        },
+        "topMarkets": [
+          {
+            "origin": "SAV",
+            "destination": "MSY",
+            "opportunity": 16.4
+          },
+          {
+            "origin": "SAV",
+            "destination": "CLT",
+            "opportunity": 5.1636942675159245
+          },
+          {
+            "origin": "SAV",
+            "destination": "SFB",
+            "opportunity": 2.939162672634058
+          }
+        ]
+      },
+      {
+        "id": "V122-ANALYSIS-R338-2-JAX-SAV",
+        "route": 338,
+        "line": "AL",
+        "fleet": "CRJ700",
+        "day": 2,
+        "sequenceWithinRoute": 7,
+        "pairing": 171,
+        "flight": 2126,
+        "origin": "JAX",
+        "destination": "SAV",
+        "departure": "21:25",
+        "arrival": "22:10",
+        "departureMinute": 1285,
+        "arrivalMinute": 1330,
+        "departureClock": "21:25",
+        "arrivalClock": "22:10",
+        "local": 0.9775309265337037,
+        "connecting": 106.67836872176713,
+        "oneStop": 81.4161502596597,
+        "twoStop": 25.26221846210744,
+        "groups": {
+          "GLC": 22.474273302799062,
+          "NEC": 4.6076833555611,
+          "TEX": 17.338709297045938,
+          "MAC": 2.082698020312111,
+          "HUB": 1.356583089369454,
+          "CGI": 9.9,
+          "LEC": 11.447433067566415,
+          "APP": 13.231164453493776,
+          "FLP": 21.339824135619292,
+          "GCP": 2.9
+        },
+        "topMarkets": [
+          {
+            "origin": "AUS",
+            "destination": "SAV",
+            "opportunity": 15.373417737972439
+          },
+          {
+            "origin": "CMH",
+            "destination": "SAV",
+            "opportunity": 11.447433067566415
+          },
+          {
+            "origin": "SDF",
+            "destination": "SAV",
+            "opportunity": 11.3
+          },
+          {
+            "origin": "IND",
+            "destination": "SAV",
+            "opportunity": 10.812042941990201
+          },
+          {
+            "origin": "FLL",
+            "destination": "SAV",
+            "opportunity": 9.939824135619293
+          },
+          {
+            "origin": "CLT",
+            "destination": "SAV",
+            "opportunity": 6.8
+          },
+          {
+            "origin": "MKE",
+            "destination": "SAV",
+            "opportunity": 5.848635308527806
+          },
+          {
+            "origin": "PGD",
+            "destination": "SAV",
+            "opportunity": 4.3
+          }
+        ]
+      },
+      {
+        "id": "V122-ANALYSIS-R504-1-CLT-JAX",
+        "route": 504,
+        "line": "AB",
+        "fleet": "CRJ900",
+        "day": 4,
+        "sequenceWithinRoute": 6,
+        "pairing": 596,
+        "flight": 2127,
+        "origin": "CLT",
+        "destination": "JAX",
+        "departure": "19:34",
+        "arrival": "20:45",
+        "departureMinute": 1174,
+        "arrivalMinute": 1245,
+        "departureClock": "19:34",
+        "arrivalClock": "20:45",
+        "local": 13.666666666666668,
+        "connecting": 48.063482481311354,
+        "oneStop": 48.06348248131136,
+        "twoStop": 0,
+        "groups": {
+          "FLP": 18.105467119549576,
+          "GCP": 24.31233766699124,
+          "CGI": 5.645677694770544
+        },
+        "topMarkets": [
+          {
+            "origin": "CLT",
+            "destination": "MSY",
+            "opportunity": 24.31233766699124
+          },
+          {
+            "origin": "CLT",
+            "destination": "SFB",
+            "opportunity": 18.105467119549576
+          },
+          {
+            "origin": "CLT",
+            "destination": "SAV",
+            "opportunity": 5.645677694770544
+          }
+        ]
+      },
+      {
+        "id": "V122-ANALYSIS-R504-2-JAX-CLT",
+        "route": 504,
+        "line": "AB",
+        "fleet": "CRJ900",
+        "day": 4,
+        "sequenceWithinRoute": 7,
+        "pairing": 565,
+        "flight": 2128,
+        "origin": "JAX",
+        "destination": "CLT",
+        "departure": "21:25",
+        "arrival": "22:36",
+        "departureMinute": 1285,
+        "arrivalMinute": 1356,
+        "departureClock": "21:25",
+        "arrivalClock": "22:36",
+        "local": 13.3,
+        "connecting": 147.4411911541617,
+        "oneStop": 140.60839397889762,
+        "twoStop": 6.832797175264024,
+        "groups": {
+          "GLC": 4.477919687736742,
+          "FLP": 108.92533601409254,
+          "HUB": 0.026494827604696087,
+          "NEC": 0.555461538099961,
+          "TEX": 16.69228481911179,
+          "GCP": 11.6,
+          "CGI": 5.1636942675159245
+        },
+        "topMarkets": [
+          {
+            "origin": "FLL",
+            "destination": "CLT",
+            "opportunity": 30.15850988182938
+          },
+          {
+            "origin": "SFB",
+            "destination": "CLT",
+            "opportunity": 29.365296920586815
+          },
+          {
+            "origin": "PGD",
+            "destination": "CLT",
+            "opportunity": 20.195567944027562
+          },
+          {
+            "origin": "EYW",
+            "destination": "CLT",
+            "opportunity": 17.8
+          },
+          {
+            "origin": "AUS",
+            "destination": "CLT",
+            "opportunity": 14.726390569022787
+          },
+          {
+            "origin": "JAN",
+            "destination": "CLT",
+            "opportunity": 11.6
+          },
+          {
+            "origin": "MLB",
+            "destination": "CLT",
+            "opportunity": 11.405961267648777
+          },
+          {
+            "origin": "SAV",
+            "destination": "CLT",
+            "opportunity": 5.1636942675159245
+          }
+        ]
+      },
+      {
+        "id": "V122-ANALYSIS-R514-1-PIE-JAX",
+        "route": 514,
+        "line": "AG",
+        "fleet": "CRJ900",
+        "day": 4,
+        "sequenceWithinRoute": 5,
+        "pairing": 292,
+        "flight": 2129,
+        "origin": "PIE",
+        "destination": "JAX",
+        "departure": "20:14",
+        "arrival": "21:08",
+        "departureMinute": 1214,
+        "arrivalMinute": 1268,
+        "departureClock": "20:14",
+        "arrivalClock": "21:08",
+        "local": 2.25,
+        "connecting": 98.39999999999999,
+        "oneStop": 98.39999999999999,
+        "twoStop": 0,
+        "groups": {
+          "GCP": 98.39999999999999
+        },
+        "topMarkets": [
+          {
+            "origin": "PIE",
+            "destination": "MSY",
+            "opportunity": 98.39999999999999
+          }
+        ]
+      },
+      {
+        "id": "V122-ANALYSIS-R515-1-JAX-PIE",
+        "route": 515,
+        "line": "AG",
+        "fleet": "CRJ900",
+        "day": 5,
+        "sequenceWithinRoute": 1,
+        "pairing": 291,
+        "flight": 2130,
+        "origin": "JAX",
+        "destination": "PIE",
+        "departure": "06:20",
+        "arrival": "07:14",
+        "departureMinute": 380,
+        "arrivalMinute": 434,
+        "departureClock": "06:20",
+        "arrivalClock": "07:14",
+        "local": 2.45,
+        "connecting": 242.59862019657405,
+        "oneStop": 242.59862019657407,
+        "twoStop": 0,
+        "groups": {
+          "TEX": 46.57892913118722,
+          "CGI": 172.4012135119039,
+          "APP": 22.30773769612445,
+          "FLP": 0.8254108201850662,
+          "GCP": 0.48532903717342296
+        },
+        "topMarkets": [
+          {
+            "origin": "RDU",
+            "destination": "PIE",
+            "opportunity": 107.45551614926477
+          },
+          {
+            "origin": "CLT",
+            "destination": "PIE",
+            "opportunity": 64.94569736263914
+          },
+          {
+            "origin": "SAT",
+            "destination": "PIE",
+            "opportunity": 35.691097705120484
+          },
+          {
+            "origin": "TYS",
+            "destination": "PIE",
+            "opportunity": 22.30773769612445
+          },
+          {
+            "origin": "ELP",
+            "destination": "PIE",
+            "opportunity": 10.887831426066738
+          },
+          {
+            "origin": "DAB",
+            "destination": "PIE",
+            "opportunity": 0.5
+          },
+          {
+            "origin": "TLH",
+            "destination": "PIE",
+            "opportunity": 0.48532903717342296
+          },
+          {
+            "origin": "GNV",
+            "destination": "PIE",
+            "opportunity": 0.3254108201850662
+          }
+        ]
+      }
+    ],
+    "rationale": "Keep the 06:20 JAX departure to capture the 05:50 RDU and TYS arrivals. Move Route 515 PIE–SYR and SYR–PIE nine minutes later, giving 50 minutes at PIE. SYR departure is 11:29, just inside Bank 3 ending at 11:30. A 15-minute shift fails that bank. The 16:05 PIE–SYR and remaining flights stay unchanged."
+  }
+}

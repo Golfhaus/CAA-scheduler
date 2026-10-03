@@ -1,0 +1,60 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "schedule-7-v1.2.2-approved-sfb-extensions",
+  "baseSchedule": {
+    "scheduleId": "schedule_7_v1_2_1"
+  },
+  "schedule": {
+    "id": "schedule_7_v1_2_2_draft",
+    "version": "1.2.2",
+    "label": "Schedule 7 v1.2.2 unpublished plan",
+    "status": "draft"
+  },
+  "insertLegs": [
+    {
+      "id": "V122-ANALYSIS-R702-1-SFB-JAX",
+      "origin": "SFB",
+      "destination": "JAX",
+      "departureMinute": 1205,
+      "arrivalMinute": 1253,
+      "route": 702
+    },
+    {
+      "id": "V122-ANALYSIS-R702-2-JAX-SFB",
+      "origin": "JAX",
+      "destination": "SFB",
+      "departureMinute": 1293,
+      "arrivalMinute": 1341,
+      "route": 702
+    },
+    {
+      "id": "V122-ANALYSIS-R704-1-SFB-BHM",
+      "origin": "SFB",
+      "destination": "BHM",
+      "departureMinute": 1219,
+      "arrivalMinute": 1245,
+      "route": 704
+    },
+    {
+      "id": "V122-ANALYSIS-R704-2-BHM-SFB",
+      "origin": "BHM",
+      "destination": "SFB",
+      "departureMinute": 1395,
+      "arrivalMinute": 1541,
+      "route": 704
+    }
+  ],
+  "bankAssignmentsToAdd": [],
+  "operatingOverrides": [],
+  "approval": {
+    "status": "approved-for-plan",
+    "scope": "Both SFB extensions only; publication reserved to user",
+    "instruction": "Store both the BHM and JAX extensions.",
+    "date": "2026-10-03"
+  },
+  "pendingDecisions": [
+    "JAX late-bank timing and bank-count policy",
+    "Additional feeders and overnight originators",
+    "Publication"
+  ]
+}
