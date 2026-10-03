@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#092a53">
     <meta name="description" content="Coastal American Airways schedule operations console">
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="styles.css?v=console-ui-20261003-1">
+    <link rel="stylesheet" href="styles.css?v=console-ui-20261003-2">
     <title>CAA Scheduler</title>
   </head>
   <body>
@@ -418,6 +418,7 @@
           <div class="stats-tabbar" role="tablist" aria-label="Schedule statistics">
             <button class="stats-tab is-active" type="button" role="tab" data-stats-tab="deps-hubs" aria-controls="stats-deps-hubs" aria-selected="true">Dept to Hubs</button>
             <button class="stats-tab" type="button" role="tab" data-stats-tab="extension-opps" aria-controls="stats-extension-opps" aria-selected="false" tabindex="-1">Extension Opps</button>
+            <button class="stats-tab" type="button" role="tab" data-stats-tab="hub-bank-breakdown" aria-controls="stats-hub-bank-breakdown" aria-selected="false" tabindex="-1">Hub Bank Breakdown</button>
           </div>
           <div id="stats-deps-hubs" data-stats-view="deps-hubs" role="tabpanel">
             <p class="stats-note">Each count is the number of non-stop departures from the city in that row to the hub or focus city in that column. Select a count to open those flights in Timetable.</p>
@@ -427,6 +428,24 @@
                 <tbody id="deps-hub-rows"></tbody>
               </table>
             </div>
+          </div>
+          <div id="stats-hub-bank-breakdown" data-stats-view="hub-bank-breakdown" role="tabpanel" hidden>
+            <div class="bank-breakdown-toolbar">
+              <div><h2>Hub Bank Breakdown</h2><p class="stats-note">Compare inbound origins and outbound destinations by geographic group. Select a bank or a group’s bars to explore its cities and flights.</p></div>
+              <label class="airport-picker"><span>Hub or focus city</span><select id="bank-breakdown-airport"></select></label>
+            </div>
+            <div class="metric-grid bank-breakdown-metrics" id="bank-breakdown-metrics"></div>
+            <p class="stats-note" id="bank-breakdown-note"></p>
+            <section class="panel bank-chart-panel" aria-labelledby="bank-chart-title">
+              <div class="panel-heading"><div><p class="eyebrow">Geographic coverage</p><h2 id="bank-chart-title" tabindex="-1">Flights by bank and group</h2></div><div class="bank-chart-legend"><span class="bank-inbound-key">Inbound</span><span class="bank-outbound-key">Outbound</span></div></div>
+              <p class="bank-chart-help" id="bank-chart-help">Each cell has two bars and exact flight counts. All bars use the same scale. An empty bar means no flights for that group; HUB contains service to other hubs.</p>
+              <div class="table-shell bank-chart-shell"><table class="bank-coverage-chart" aria-describedby="bank-chart-help"><thead><tr id="bank-breakdown-head"></tr></thead><tbody id="bank-breakdown-rows"></tbody></table></div>
+            </section>
+            <section class="panel bank-detail-panel" aria-labelledby="bank-detail-title" hidden id="bank-breakdown-detail">
+              <div class="panel-heading"><div><p class="eyebrow">Cities and flights</p><h2 id="bank-detail-title" tabindex="-1"></h2></div><button type="button" class="source-link" id="bank-chart-back">Back to bank chart</button></div>
+              <div class="bank-detail-toolbar"><p id="bank-detail-summary"></p><label><span>Geographic group</span><select id="bank-breakdown-group"></select></label></div>
+              <div class="bank-detail-columns" id="bank-breakdown-flights"></div>
+            </section>
           </div>
           <div id="stats-extension-opps" data-stats-view="extension-opps" role="tabpanel" hidden>
             <p class="stats-note">Route endpoints surface late originators and early terminators, with red-eyes last. Turns and RODs include holds of at least two hours; RONs are excluded.</p>
@@ -496,6 +515,6 @@
       </div>
     </main>
 
-    <script type="module" src="app.mjs?v=console-ui-20261003-1"></script>
+    <script type="module" src="app.mjs?v=console-ui-20261003-2"></script>
   </body>
 </html>

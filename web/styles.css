@@ -445,6 +445,7 @@ tbody tr:hover { background: #f6f9fc; }
 
 .stats-tabbar {
   display: flex;
+  flex-wrap: wrap;
   gap: 0.35rem;
   margin-bottom: 0.85rem;
   border-bottom: 1px solid #b9c9dc;
@@ -474,6 +475,57 @@ tbody tr:hover { background: #f6f9fc; }
 .extension-table-shell { max-height: 26rem; border: 0; border-radius: 0; box-shadow: none; }
 .extension-table-shell th { z-index: 3; }
 .extension-table-shell td { font-variant-numeric: tabular-nums; }
+
+.bank-breakdown-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; margin-bottom: 1rem; }
+.bank-breakdown-toolbar h2 { margin: 0 0 0.4rem; color: var(--navy-900); font-size: 1.15rem; }
+.bank-breakdown-toolbar .stats-note { max-width: 42rem; margin: 0; }
+.bank-breakdown-metrics { grid-template-columns: repeat(4, minmax(0, 1fr)); margin-bottom: 0.8rem; }
+.bank-chart-panel, .bank-detail-panel { overflow: hidden; margin-bottom: 1rem; }
+.bank-chart-legend { display: flex; gap: 1rem; flex-wrap: wrap; font-size: 0.78rem; font-weight: 750; }
+.bank-chart-legend span::before { content: ""; display: inline-block; width: 0.75rem; height: 0.75rem; margin-right: 0.35rem; border-radius: 0.15rem; vertical-align: -0.1rem; }
+.bank-inbound-key::before { background: #2c70b8; }
+.bank-outbound-key::before { background: #b55a18; }
+.bank-chart-help { margin: 0; padding: 0 1rem 0.8rem; color: var(--muted); font-size: 0.78rem; line-height: 1.5; }
+.bank-chart-shell { max-height: 34rem; border: 0; border-radius: 0; box-shadow: none; }
+.bank-coverage-chart { min-width: 68rem; width: 100%; table-layout: fixed; }
+.bank-coverage-chart th:first-child { width: 11rem; position: sticky; left: 0; z-index: 2; background: #f4f7fb; }
+.bank-coverage-chart thead th:first-child { z-index: 4; }
+.bank-coverage-chart thead th { text-align: center; padding: 0.65rem 0.3rem; }
+.bank-coverage-chart tbody th, .bank-coverage-chart td { padding: 0; border-right: 1px solid #edf1f5; }
+.bank-row-button { display: grid; gap: 0.15rem; width: 100%; padding: 0.6rem 0.8rem; border: 0; background: transparent; text-align: left; color: var(--navy-900); }
+.bank-row-button strong { font-size: 0.84rem; }
+.bank-row-button span { color: var(--muted); font-size: 0.68rem; font-weight: 600; }
+.bank-group-cell { display: grid; gap: 0.25rem; width: 100%; padding: 0.5rem 0.35rem; border: 0; background: transparent; }
+.bank-group-cell:hover, .bank-row-button:hover { background: #e7f0fb; }
+.bank-group-cell:focus-visible, .bank-row-button:focus-visible { outline: 2px solid var(--blue-700); outline-offset: -2px; }
+.bank-group-cell.is-empty { cursor: default; opacity: 0.65; }
+.bank-count-bar { position: relative; display: block; height: 1.1rem; border-radius: 0.2rem; background: #f0f3f7; overflow: hidden; text-align: right; }
+.bank-count-bar i { position: absolute; inset: 0 auto 0 0; border-radius: 0.2rem; }
+.bank-count-bar.inbound i { background: #bad6f5; border-left: 2px solid #2c70b8; }
+.bank-count-bar.outbound i { background: #f5cba8; border-left: 2px solid #b55a18; }
+.bank-count-bar i[style="width:0%"] { border: 0; }
+.bank-count-bar b { position: relative; display: block; padding-right: 0.22rem; font-size: 0.7rem; line-height: 1.1rem; color: #183450; font-variant-numeric: tabular-nums; }
+.bank-count-bar.outbound b { color: #763808; }
+.bank-coverage-chart tr.is-selected > th { background: #e1ecfa; box-shadow: inset 3px 0 var(--blue-700); }
+.bank-coverage-chart tr.is-selected > td { background: #f4f8fe; }
+#bank-chart-title, #bank-detail-title { scroll-margin-top: 7rem; }
+.bank-detail-toolbar { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 0 1rem 1rem; }
+.bank-detail-toolbar p { margin: 0; max-width: 48rem; color: var(--muted); font-size: 0.8rem; line-height: 1.5; }
+.bank-detail-toolbar select { min-width: 12rem; }
+.bank-detail-columns { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; padding: 0 1rem 1rem; }
+.bank-direction { min-width: 0; border: 1px solid #d7e3f1; border-top: 3px solid #2c70b8; border-radius: 0.5rem; padding: 0.8rem; }
+.bank-direction.outbound { border-top-color: #b55a18; }
+.bank-direction h3 { margin: 0 0 0.8rem; font-size: 0.9rem; color: #245b96; }
+.bank-direction.outbound h3 { color: #97470f; }
+.bank-flight-group { border-top: 1px solid var(--line); }
+.bank-flight-group > summary, .bank-city-detail > summary { cursor: pointer; padding: 0.65rem 0.2rem; font-size: 0.8rem; }
+.bank-flight-group summary span { margin-left: 0.5rem; color: var(--muted); font-size: 0.74rem; }
+.bank-city-detail { margin-left: 0.5rem; }
+.bank-flight-table-shell { border-radius: 0.4rem; margin-bottom: 0.5rem; box-shadow: none; }
+.bank-flight-table-shell table { min-width: 40rem; }
+.bank-flight-table-shell th { position: static; font-size: 0.65rem; }
+.bank-flight-table-shell td { font-size: 0.74rem; white-space: nowrap; }
+.bank-empty-direction { color: var(--muted); font-size: 0.8rem; }
 
 .planning-fleet-panel { margin-bottom: 1rem; }
 .planning-demand-panel { margin-bottom: 1rem; }
@@ -669,6 +721,9 @@ tbody tr:hover { background: #f6f9fc; }
 }
 
 @media (max-width: 48rem) {
+  .bank-breakdown-toolbar, .bank-detail-toolbar { align-items: stretch; flex-direction: column; }
+  .bank-breakdown-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .bank-detail-columns { grid-template-columns: 1fr; }
   .setup-layout { grid-template-columns: 1fr; }
   .setup-notes-panel, .preflight-panel { grid-column: 1; grid-row: auto; }
   .network-setup-row { grid-template-columns: 1fr 1fr; }

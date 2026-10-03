@@ -13,6 +13,7 @@ WEB_ASSETS = (
     "styles.css",
     "app.mjs",
     "build-config.mjs",
+    "hub-bank-breakdown.mjs",
     "favicon.svg",
     "coastal-american-logo.png",
 )

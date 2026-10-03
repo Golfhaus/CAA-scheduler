@@ -26,11 +26,11 @@ class WebBuildTests(unittest.TestCase):
         self.assertIn('id="preview-warning"', html)
         self.assertIn("previewNotice", script)
         self.assertIn(
-            'src="app.mjs?v=console-ui-20261003-1"',
+            'src="app.mjs?v=console-ui-20261003-2"',
             html,
         )
         self.assertIn(
-            'href="styles.css?v=console-ui-20261003-1"',
+            'href="styles.css?v=console-ui-20261003-2"',
             html,
         )
         self.assertNotIn('`${auditHub} target cities`', script)
@@ -56,6 +56,7 @@ class WebBuildTests(unittest.TestCase):
         self.assertIn('data-deps-origin', script)
         self.assertIn('data-stats-tab="deps-hubs"', html)
         self.assertIn('data-stats-tab="extension-opps"', html)
+        self.assertIn('data-stats-tab="hub-bank-breakdown"', html)
         self.assertIn('id="extension-originator-rows"', html)
         self.assertIn('id="extension-terminator-rows"', html)
         self.assertIn('id="extension-hold-rows"', html)
@@ -76,6 +77,7 @@ class WebBuildTests(unittest.TestCase):
             self.assertTrue((output / "favicon.svg").is_file())
             self.assertTrue((output / "coastal-american-logo.png").is_file())
             self.assertTrue((output / "build-config.mjs").is_file())
+            self.assertEqual((output / "hub-bank-breakdown.mjs").read_text(), (REPO_ROOT / "web" / "hub-bank-breakdown.mjs").read_text())
             manifest = json.loads((output / "schedules.json").read_text())
             self.assertEqual(
                 manifest["defaultScheduleId"], SCHEDULE_ID

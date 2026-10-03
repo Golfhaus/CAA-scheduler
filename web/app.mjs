@@ -5,6 +5,7 @@ import {
   serializeBuildConfig,
   validateBuildConfig,
 } from "./build-config.mjs";
+import { bankBreakdownAirports, buildHubBankBreakdown } from "./hub-bank-breakdown.mjs";
 
 const DEFAULT_PAGE_SIZE = 50;
 const GATE_WINDOW_START = 180;
@@ -38,6 +39,9 @@ const state = {
   routingPageSize: DEFAULT_PAGE_SIZE,
   timetablePage: 1,
   scheduleStatsTab: "deps-hubs",
+  bankBreakdown: null,
+  bankBreakdownBankId: null,
+  bankBreakdownGroup: "",
   itineraryCache: new Map(),
 };
 
@@ -644,7 +648,7 @@ function activateTab(tab, updateHash = true) {
 }
 
 function activateScheduleStatsTab(tab) {
-  const valid = ["deps-hubs", "extension-opps"];
+  const valid = ["deps-hubs", "extension-opps", "hub-bank-breakdown"];
   state.scheduleStatsTab = valid.includes(tab) ? tab : "deps-hubs";
   $$('[data-stats-tab]').forEach((button) => {
     const active = button.dataset.statsTab === state.scheduleStatsTab;
@@ -751,6 +755,8 @@ function renderAll() {
   renderTimetable();
   renderDepartureHubMatrix();
   renderExtensionOpportunities();
+  populateBankBreakdownAirports();
+  renderHubBankBreakdown();
   activateScheduleStatsTab(state.scheduleStatsTab);
   renderGates();
 }
@@ -1111,6 +1117,76 @@ function renderExtensionOpportunities() {
   $("#extension-hold-rows").innerHTML = opportunities.holds.length
     ? opportunities.holds.map((hold) => `<tr><td class="route-number">${escapeHtml(hold.route)}</td><td><span class="fleet-badge">${escapeHtml(hold.fleet)}</span></td><td><strong>${escapeHtml(hold.airport)}</strong></td><td>${escapeHtml(hold.kind)}</td><td>${formatMinute24(hold.start)}–${formatMinute24(hold.end)}</td><td>${escapeHtml(formatDuration(hold.duration))}</td><td>${escapeHtml(hold.arrivalCity)} -> ${escapeHtml(hold.airport)} -> ${escapeHtml(hold.departureCity)}</td><td>${escapeHtml(hold.path)}</td></tr>`).join("")
     : `<tr class="empty-row"><td colspan="8">No turns or RODs last two hours or more.</td></tr>`;
+}
+
+function populateBankBreakdownAirports() {
+  const select = $("#bank-breakdown-airport");
+  const previous = select.value;
+  const airports = bankBreakdownAirports(state.canonical);
+  select.innerHTML = airports.map((city) => `<option value="${escapeHtml(city.code)}">${escapeHtml(city.code)} · ${escapeHtml(city.displayName || city.name)} · ${city.isHub ? "Hub" : "Focus city"}</option>`).join("");
+  select.value = airports.some((city) => city.code === previous) ? previous
+    : airports.some((city) => city.code === "PHF") ? "PHF" : airports[0]?.code || "";
+  select.disabled = !airports.length;
+}
+
+function renderHubBankBreakdown() {
+  const hub = $("#bank-breakdown-airport").value;
+  const breakdown = buildHubBankBreakdown(state.canonical, hub);
+  state.bankBreakdown = breakdown;
+  state.bankBreakdownBankId = null;
+  state.bankBreakdownGroup = "";
+  $("#bank-breakdown-detail").hidden = true;
+  const unassignedCount = breakdown.unassigned.inbound.length + breakdown.unassigned.outbound.length;
+  $("#bank-breakdown-metrics").innerHTML = [
+    metricCard("Defined banks", breakdown.banks.length, `${hub || "No hub selected"} · published bank windows`),
+    metricCard("Inbound flights", breakdown.inbound, "Origins feeding this airport"),
+    metricCard("Outbound flights", breakdown.outbound, "Destinations served from this airport"),
+    metricCard("Unassigned flights", unassignedCount, "No bank assignment recorded"),
+  ].join("");
+  $("#bank-breakdown-note").textContent = !breakdown.banks.length
+    ? `${hub || "This schedule"} has no defined banks. All flights are shown under Unassigned to a bank; no bank windows have been inferred.`
+    : "Published bank assignments determine membership, including flights assigned outside the window. Coverage shows flight presence, not guaranteed connections; check connection times in Timetable.";
+  $("#bank-breakdown-head").innerHTML = `<th scope="col">Bank / local time</th>${breakdown.groups.map((group) => `<th scope="col">${escapeHtml(group)}</th>`).join("")}`;
+  const rows = [...breakdown.banks, ...(unassignedCount || !breakdown.banks.length ? [breakdown.unassigned] : [])];
+  $("#bank-breakdown-rows").innerHTML = rows.length ? rows.map((bank) => {
+    const time = bank.id === "unassigned" ? "No bank window" : `${formatMinute24(bank.startMinute)}–${formatMinute24(bank.endMinute)}`;
+    return `<tr data-bank-row="${escapeHtml(bank.id)}"><th scope="row"><button type="button" class="bank-row-button" data-bank-select="${escapeHtml(bank.id)}" aria-controls="bank-breakdown-detail" aria-label="Explore ${escapeHtml(bank.label)}, ${bank.inbound.length} inbound and ${bank.outbound.length} outbound flights"><strong>${escapeHtml(bank.label)}</strong><span>${time}</span><span>${bank.inbound.length} in · ${bank.outbound.length} out</span></button></th>${bank.groups.map((group) => {
+      const inbound = group.inbound.length;
+      const outbound = group.outbound.length;
+      const label = `${bank.label}, ${group.code}: ${inbound} inbound and ${outbound} outbound flights${inbound || outbound ? "; explore cities and flights" : "; no flights"}`;
+      return `<td><button type="button" class="bank-group-cell${inbound || outbound ? "" : " is-empty"}" data-bank-select="${escapeHtml(bank.id)}" data-bank-group="${escapeHtml(group.code)}" aria-controls="bank-breakdown-detail" aria-label="${escapeHtml(label)}" ${inbound || outbound ? "" : "disabled"}><span class="bank-count-bar inbound" aria-hidden="true"><i style="width:${inbound / breakdown.maxGroupCount * 100}%"></i><b>${inbound || "—"}</b></span><span class="bank-count-bar outbound" aria-hidden="true"><i style="width:${outbound / breakdown.maxGroupCount * 100}%"></i><b>${outbound || "—"}</b></span></button></td>`;
+    }).join("")}</tr>`;
+  }).join("") : `<tr class="empty-row"><td colspan="${breakdown.groups.length + 1}">No bank or flight data is available.</td></tr>`;
+}
+
+function renderBankFlightGroups(bank, direction) {
+  const groups = bank.groups.filter((group) => group[direction].length
+    && (!state.bankBreakdownGroup || group.code === state.bankBreakdownGroup));
+  const heading = direction === "inbound" ? "Inbound origins" : "Outbound destinations";
+  const content = groups.map((group) => {
+    const flights = group[direction];
+    const cityCodes = [...new Set(flights.map((flight) => flight.city))].sort();
+    return `<details class="bank-flight-group" ${state.bankBreakdownGroup ? "open" : ""}><summary><strong>${escapeHtml(group.code)}</strong><span>${flights.length} flights · ${cityCodes.length} cities</span></summary>${cityCodes.map((code) => {
+      const cityFlights = flights.filter((flight) => flight.city === code);
+      return `<details class="bank-city-detail"><summary><strong>${escapeHtml(code)}</strong><span>${escapeHtml(cityFlights[0].cityName)} · ${cityFlights.length} flight${cityFlights.length === 1 ? "" : "s"}</span></summary><div class="table-shell bank-flight-table-shell"><table><thead><tr><th>Flight</th><th>Departs</th><th>Arrives</th><th>Fleet</th><th>Route</th><th>Line / day</th><th>Assignment</th></tr></thead><tbody>${cityFlights.map((flight) => `<tr><td class="flight-number">${escapeHtml(flight.flight)}</td><td>${escapeHtml(flight.origin)} ${escapeHtml(flight.departure)}</td><td>${escapeHtml(flight.destination)} ${escapeHtml(flight.arrival)}</td><td>${escapeHtml(flight.fleet)}</td><td>${escapeHtml(flight.route)}</td><td>${escapeHtml(flight.line)} / ${escapeHtml(flight.day)}</td><td>${flight.outsideWindow ? "Outside bank window" : bank.id === "unassigned" ? "Unassigned" : "Inside bank window"}</td></tr>`).join("")}</tbody></table></div></details>`;
+    }).join("")}</details>`;
+  }).join("");
+  return `<div class="bank-direction ${direction}"><h3>${heading}</h3>${content || `<p class="bank-empty-direction">No ${direction} flights${state.bankBreakdownGroup ? ` for ${escapeHtml(state.bankBreakdownGroup)}` : ""} in this bank.</p>`}</div>`;
+}
+
+function renderBankBreakdownDetail() {
+  const breakdown = state.bankBreakdown;
+  const bank = [...breakdown.banks, breakdown.unassigned].find((item) => item.id === state.bankBreakdownBankId);
+  if (!bank) return;
+  const represented = bank.groups.filter((group) => group.inbound.length || group.outbound.length);
+  const select = $("#bank-breakdown-group");
+  select.innerHTML = `<option value="">All represented groups</option>${represented.map((group) => `<option value="${escapeHtml(group.code)}">${escapeHtml(group.code)}</option>`).join("")}`;
+  select.value = state.bankBreakdownGroup;
+  $("#bank-breakdown-detail").hidden = false;
+  $("#bank-detail-title").textContent = `${breakdown.hub} · ${bank.label}${bank.id === "unassigned" ? "" : ` · ${formatMinute24(bank.startMinute)}–${formatMinute24(bank.endMinute)}`}`;
+  $("#bank-detail-summary").textContent = `${bank.inbound.length} inbound across ${bank.inboundGroups} groups · ${bank.outbound.length} outbound across ${bank.outboundGroups} groups · ${bank.bothGroups} groups in both directions.${bank.outsideWindow ? ` ${bank.outsideWindow} flights assigned outside the bank window.` : ""} Times are local to each airport. Expand a group, then a city, to see flights.`;
+  $("#bank-breakdown-flights").innerHTML = renderBankFlightGroups(bank, "inbound") + renderBankFlightGroups(bank, "outbound");
+  $$('[data-bank-row]').forEach((row) => row.classList.toggle("is-selected", row.dataset.bankRow === bank.id));
 }
 
 function openTimetableMarket(origin, destination) {
@@ -1606,6 +1682,14 @@ function bindEvents() {
       activateScheduleStatsTab(statsTab.dataset.statsTab);
       return;
     }
+    const bankSelect = event.target.closest("[data-bank-select]");
+    if (bankSelect) {
+      state.bankBreakdownBankId = bankSelect.dataset.bankSelect;
+      state.bankBreakdownGroup = bankSelect.dataset.bankGroup || "";
+      renderBankBreakdownDetail();
+      $("#bank-detail-title").focus();
+      return;
+    }
     const tab = event.target.closest("[data-tab]");
     if (tab) activateTab(tab.dataset.tab);
     const openTab = event.target.closest("[data-open-tab]");
@@ -1692,6 +1776,12 @@ function bindEvents() {
     $(selector).addEventListener(selector === "#timetable-search" ? "input" : "change", () => { state.timetablePage = 1; renderTimetable(); });
   });
   $("#gate-airport").addEventListener("change", renderGates);
+  $("#bank-breakdown-airport").addEventListener("change", renderHubBankBreakdown);
+  $("#bank-breakdown-group").addEventListener("change", (event) => {
+    state.bankBreakdownGroup = event.target.value;
+    renderBankBreakdownDetail();
+  });
+  $("#bank-chart-back").addEventListener("click", () => $("#bank-chart-title").focus());
   $("#retry-button").addEventListener("click", () => location.reload());
   window.addEventListener("hashchange", () => activateTab(location.hash.slice(1), false));
 }

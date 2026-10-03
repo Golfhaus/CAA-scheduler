@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
+import { bankBreakdownAirports, buildHubBankBreakdown } from "../web/hub-bank-breakdown.mjs";
 
 import {
   buildItineraries,
@@ -158,6 +159,63 @@ test("extension opportunities sort endpoints and combine long physical holds", (
     index === 0 || values[index - 1].duration >= hold.duration
   )));
   assert.equal(formatDuration(761), "12h 41m");
+});
+
+test("bank breakdown conserves every hub touch and groups flights by the opposite endpoint", () => {
+  assert.deepEqual(bankBreakdownAirports(canonical).map((city) => city.code), ["DAY", "JAX", "MCI", "PHF", "SYR", "BHM"]);
+  for (const hub of canonical.operatingPolicy.hubs) {
+    const breakdown = buildHubBankBreakdown(canonical, hub);
+    assert.equal(breakdown.inbound, canonical.legs.filter((leg) => leg.destination === hub).length);
+    assert.equal(breakdown.outbound, canonical.legs.filter((leg) => leg.origin === hub).length);
+    assert.equal(breakdown.unassigned.inbound.length + breakdown.unassigned.outbound.length, 0);
+    for (const bank of breakdown.banks) {
+      assert.equal(bank.groups.reduce((total, group) => total + group.inbound.length, 0), bank.inbound.length);
+      assert.equal(bank.groups.reduce((total, group) => total + group.outbound.length, 0), bank.outbound.length);
+      for (const flight of [...bank.inbound, ...bank.outbound]) {
+        assert.equal(flight.group, canonical.cities.find((city) => city.code === flight.city).group);
+      }
+    }
+  }
+  const phf = buildHubBankBreakdown(canonical, "PHF");
+  assert.ok(phf.banks.some((bank) => bank.outsideWindow > 0));
+  const bhm = buildHubBankBreakdown(canonical, "BHM");
+  assert.equal(bhm.banks.length, 0);
+  assert.equal(bhm.unassigned.inbound.length + bhm.unassigned.outbound.length, 92);
+});
+
+test("bank breakdown preserves explicit assignments without inferring missing banks or duplicating hub-to-hub flights", () => {
+  const legs = [
+    {id: "out", flight: 1, origin: "DAY", destination: "JAX", departureMinute: 290, arrivalMinute: 400},
+    {id: "in", flight: 2, origin: "ALB", destination: "DAY", departureMinute: 280, arrivalMinute: 330},
+    {id: "missing", flight: 3, origin: "DAY", destination: "ALB", departureMinute: 320, arrivalMinute: 420},
+    {id: "unknown", flight: 4, origin: "XXX", destination: "DAY", departureMinute: 280, arrivalMinute: 350},
+    {id: "wrap", flight: 5, origin: "ALB", destination: "DAY", departureMinute: 1300, arrivalMinute: 20},
+  ];
+  const fixture = {operatingPolicy: {hubs: ["DAY", "JAX"], focusCities: []}, cities: [
+    {code: "DAY", group: "HUB"}, {code: "JAX", group: "HUB"}, {code: "ALB", group: "NEC"},
+  ], legs, hubBanks: [
+    {id: "DAY-B1", hub: "DAY", startMinute: 300, endMinute: 360},
+    {id: "DAY-B2", hub: "DAY", startMinute: 1380, endMinute: 60},
+    {id: "JAX-B1", hub: "JAX", startMinute: 380, endMinute: 440},
+  ], bankAssignments: [
+    {legId: "out", operation: "departure", bankId: "DAY-B1"},
+    {legId: "out", operation: "departure", bankId: "DAY-B1"},
+    {legId: "out", operation: "arrival", bankId: "JAX-B1"},
+    {legId: "in", operation: "arrival", bankId: "DAY-B1"},
+    {legId: "unknown", operation: "arrival", bankId: "obsolete"},
+    {legId: "wrap", operation: "arrival", bankId: "DAY-B2"},
+  ]};
+  const result = buildHubBankBreakdown(fixture, "DAY");
+  assert.equal(result.banks[0].outbound.length, 1);
+  assert.equal(result.banks[0].outbound[0].group, "HUB");
+  assert.equal(result.banks[0].outbound[0].outsideWindow, true);
+  assert.equal(result.banks[0].inbound[0].group, "NEC");
+  assert.equal(result.banks[1].inbound[0].outsideWindow, false);
+  assert.equal(result.unassigned.outbound[0].id, "missing");
+  assert.equal(result.unassigned.inbound[0].group, "Unknown");
+  assert.equal(result.inbound, 3);
+  assert.equal(result.outbound, 2);
+  assert.equal(buildHubBankBreakdown(fixture, "JAX").banks[0].inbound.length, 1);
 });
 
 test("terminators keep red-eyes last and after-midnight arrivals late in the operating day", () => {
