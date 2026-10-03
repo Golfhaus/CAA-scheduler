@@ -3,13 +3,17 @@ from __future__ import annotations
 import json
 import sys
 import unittest
+from collections import defaultdict
+from types import SimpleNamespace
 from pathlib import Path
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO_ROOT / "src"))
+sys.path.insert(0, str(REPO_ROOT / "scripts"))
 
 from caa_scheduler.spacing import pairing_spacing_rule
+from analyze_schedule_7_v1_2_1_holds import HoldSearch
 
 
 class PairingSpacingRuleTests(unittest.TestCase):
@@ -54,6 +58,41 @@ class PairingSpacingRuleTests(unittest.TestCase):
         )
         self.assertEqual(rule["targetMinutes"], 240.0)
         self.assertEqual(rule["minimumGapMinutes"], 216.0)
+
+    def extension_search(self):
+        search = HoldSearch.__new__(HoldSearch)
+        search.base = {"legs": [], "operatingPolicy": {"section26": self.section26}}
+        search.screen = SimpleNamespace(hubs={"JAX"})
+        search.pairs = defaultdict(list)
+        return search
+
+    def test_first_daily_round_trip_in_unserved_market_is_spacing_valid(self) -> None:
+        search = self.extension_search()
+        self.assertTrue(search.spacing([
+            {"origin": "HRL", "destination": "JAX", "departureMinute": 1222},
+            {"origin": "JAX", "destination": "HRL", "departureMinute": 440},
+        ]))
+
+    def test_duplicate_departures_still_fail_extension_screen(self) -> None:
+        search = self.extension_search()
+        self.assertFalse(search.spacing([
+            {"origin": "HRL", "destination": "JAX", "departureMinute": 1222},
+            {"origin": "HRL", "destination": "JAX", "departureMinute": 1222},
+        ]))
+
+    def test_second_low_frequency_departure_cannot_cluster_at_originator(self) -> None:
+        search = self.extension_search()
+        search.base["legs"] = [{"origin": "JAX", "destination": "RDU", "departureMinute": 390}]
+        search.pairs["JAX", "RDU"] = [390]
+        self.assertFalse(search.spacing([
+            {"origin": "JAX", "destination": "RDU", "departureMinute": 355},
+        ]))
+
+    def test_extension_bank_lookup_normalizes_after_midnight_arrivals(self) -> None:
+        search = self.extension_search()
+        search.base["hubBanks"] = [{"id": "JAX-T1", "hub": "JAX", "startMinute": 120, "endMinute": 180}]
+        self.assertEqual(search.bank("JAX", 1590), "JAX-T1")
+        self.assertIsNone(search.bank("JAX", 1620))
 
 
 if __name__ == "__main__":

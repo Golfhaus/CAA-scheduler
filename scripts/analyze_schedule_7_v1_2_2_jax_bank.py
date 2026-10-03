@@ -29,6 +29,19 @@ BANK = {'id': 'JAX-B15', 'hub': 'JAX', 'startMinute': 1245, 'endMinute': 1305}
 def check(search, plans, retimings=None):
     changes = overlay(search, plans)
     changes['retimeLegs'] = retimings or []
+    replacements = []
+    for retiming in changes['retimeLegs']:
+        original = search.legs[retiming['legId']]
+        for assignment in search.base['bankAssignments']:
+            if assignment['legId'] != retiming['legId']:
+                continue
+            operation = assignment['operation']
+            city = original['destination'] if operation == 'arrival' else original['origin']
+            minute = retiming['arrivalMinute'] if operation == 'arrival' else retiming['departureMinute']
+            bank = search.bank(city, minute)
+            if bank and bank != assignment['bankId']:
+                replacements.append({'legId': original['id'], 'operation': operation, 'bankId': bank})
+    changes['bankAssignmentReplacements'] = replacements
     trial = apply_optimization_overlay(search.base, changes)
     retimed_ids = {r['legId'] for r in changes['retimeLegs']}
     old = {leg['id']: leg for leg in search.base['legs']}
@@ -41,6 +54,7 @@ def check(search, plans, retimings=None):
     op = validate_operating_rules(trial)
     overnight = validate_overnight_turns(trial)
     result = {'structural': validate_schedule(trial)['status'],
+              'bankAssignmentReplacements': replacements,
               'operatingErrors': op['summary']['effectiveErrorFindings'],
               'hardStopFailures': [c['id'] for c in op['checks'] if c['hardStop'] and c['status'] == 'fail'],
               'blocking': [{'check': c['id'], 'findings': c['findings']} for c in op['checks']

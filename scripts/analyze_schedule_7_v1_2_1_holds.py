@@ -65,6 +65,7 @@ class HoldSearch:
     def bank(self, city, minute):
         if city not in self.screen.hubs or city == "BHM":
             return ""
+        minute %= 1440
         banks = [b["id"] for b in self.base["hubBanks"]
                  if b["hub"] == city and b["startMinute"] <= minute < b["endMinute"]]
         return banks[0] if len(banks) == 1 else None
@@ -86,7 +87,9 @@ class HoldSearch:
             times = sorted(self.pairs[a, b] + new)
             rule = pairing_spacing_rule(a, b, len(times), stations[a], self.screen.hubs,
                                         self.base["operatingPolicy"]["section26"])
-            gaps = [(y - x) % 1440 for x, y in zip(times, times[1:] + times[:1])]
+            # One daily departure repeats after 24 hours; modulo arithmetic
+            # would incorrectly turn that sole cyclic gap into zero.
+            gaps = [1440] if len(times) == 1 else [(y - x) % 1440 for x, y in zip(times, times[1:] + times[:1])]
             if min(gaps) < 30 or sum(g < rule["minimumGapMinutes"] for g in gaps) > rule["allowedExceptions"]:
                 return False
         return True

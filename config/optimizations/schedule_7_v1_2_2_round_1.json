@@ -1,0 +1,202 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "schedule-7-v1.2.2-jax-bank-round-1",
+  "baseSchedule": {
+    "scheduleId": "schedule_7_v1_2_1",
+    "canonical": "data/schedules/schedule_7_v1_2_1/canonical_schedule.json",
+    "sha256": "2a6a5741da5e2f6c570d1d629875ccd1c90372b2e946ba5b99d6e9e285e0f01e"
+  },
+  "schedule": {
+    "id": "schedule_7_v1_2_2_draft",
+    "version": "1.2.2",
+    "label": "Schedule 7 v1.2.2 unpublished draft",
+    "status": "draft"
+  },
+  "approval": {
+    "status": "approved-for-draft",
+    "date": "2026-10-03",
+    "instruction": "Add as you suggest.",
+    "scope": "Prior SFB extensions, JAX 20:45–21:45 bank, Routes 341/504/338 evening turns, Route 514/515 PIE overnight group and nine-minute Route 515 retiming.",
+    "publication": "Reserved to user decision"
+  },
+  "hubBanksToAdd": [
+    {
+      "id": "JAX-B15",
+      "hub": "JAX",
+      "startMinute": 1245,
+      "endMinute": 1305
+    }
+  ],
+  "hubBankCountOverrides": {
+    "JAX": 15
+  },
+  "insertLegs": [
+    {
+      "id": "V122-R702-1-SFB-JAX",
+      "origin": "SFB",
+      "destination": "JAX",
+      "departureMinute": 1205,
+      "arrivalMinute": 1253,
+      "route": 702
+    },
+    {
+      "id": "V122-R702-2-JAX-SFB",
+      "origin": "JAX",
+      "destination": "SFB",
+      "departureMinute": 1293,
+      "arrivalMinute": 1341,
+      "route": 702
+    },
+    {
+      "id": "V122-R704-1-SFB-BHM",
+      "origin": "SFB",
+      "destination": "BHM",
+      "departureMinute": 1219,
+      "arrivalMinute": 1245,
+      "route": 704
+    },
+    {
+      "id": "V122-R704-2-BHM-SFB",
+      "origin": "BHM",
+      "destination": "SFB",
+      "departureMinute": 1395,
+      "arrivalMinute": 1541,
+      "route": 704
+    },
+    {
+      "id": "V122-R341-1-MSY-JAX",
+      "origin": "MSY",
+      "destination": "JAX",
+      "departureMinute": 1104,
+      "arrivalMinute": 1259,
+      "route": 341
+    },
+    {
+      "id": "V122-R341-2-JAX-MSY",
+      "origin": "JAX",
+      "destination": "MSY",
+      "departureMinute": 1299,
+      "arrivalMinute": 1334,
+      "route": 341
+    },
+    {
+      "id": "V122-R504-1-CLT-JAX",
+      "origin": "CLT",
+      "destination": "JAX",
+      "departureMinute": 1174,
+      "arrivalMinute": 1245,
+      "route": 504
+    },
+    {
+      "id": "V122-R504-2-JAX-CLT",
+      "origin": "JAX",
+      "destination": "CLT",
+      "departureMinute": 1285,
+      "arrivalMinute": 1356,
+      "route": 504
+    },
+    {
+      "id": "V122-R338-1-SAV-JAX",
+      "origin": "SAV",
+      "destination": "JAX",
+      "departureMinute": 1200,
+      "arrivalMinute": 1245,
+      "route": 338
+    },
+    {
+      "id": "V122-R338-2-JAX-SAV",
+      "origin": "JAX",
+      "destination": "SAV",
+      "departureMinute": 1285,
+      "arrivalMinute": 1330,
+      "route": 338
+    },
+    {
+      "id": "V122-R514-1-PIE-JAX",
+      "origin": "PIE",
+      "destination": "JAX",
+      "departureMinute": 1214,
+      "arrivalMinute": 1268,
+      "route": 514
+    },
+    {
+      "id": "V122-R515-1-JAX-PIE",
+      "origin": "JAX",
+      "destination": "PIE",
+      "departureMinute": 380,
+      "arrivalMinute": 434,
+      "route": 515
+    }
+  ],
+  "retimeLegs": [
+    {
+      "legId": "PIE-SYR-CRJ900-02-OUT",
+      "expectedDepartureMinute": 475,
+      "expectedArrivalMinute": 639,
+      "departureMinute": 484,
+      "arrivalMinute": 648,
+      "reason": "Provide 50 minutes at PIE after the JAX morning return while preserving the SYR bank."
+    },
+    {
+      "legId": "PIE-SYR-CRJ900-03-IN",
+      "expectedDepartureMinute": 680,
+      "expectedArrivalMinute": 844,
+      "departureMinute": 689,
+      "arrivalMinute": 853,
+      "reason": "Provide 50 minutes at PIE after the JAX morning return while preserving the SYR bank."
+    }
+  ],
+  "bankAssignmentsToAdd": [
+    {
+      "legId": "V122-R702-1-SFB-JAX",
+      "operation": "arrival",
+      "bankId": "JAX-B15"
+    },
+    {
+      "legId": "V122-R702-2-JAX-SFB",
+      "operation": "departure",
+      "bankId": "JAX-B15"
+    },
+    {
+      "legId": "V122-R341-1-MSY-JAX",
+      "operation": "arrival",
+      "bankId": "JAX-B15"
+    },
+    {
+      "legId": "V122-R341-2-JAX-MSY",
+      "operation": "departure",
+      "bankId": "JAX-B15"
+    },
+    {
+      "legId": "V122-R504-1-CLT-JAX",
+      "operation": "arrival",
+      "bankId": "JAX-B15"
+    },
+    {
+      "legId": "V122-R504-2-JAX-CLT",
+      "operation": "departure",
+      "bankId": "JAX-B15"
+    },
+    {
+      "legId": "V122-R338-1-SAV-JAX",
+      "operation": "arrival",
+      "bankId": "JAX-B15"
+    },
+    {
+      "legId": "V122-R338-2-JAX-SAV",
+      "operation": "departure",
+      "bankId": "JAX-B15"
+    },
+    {
+      "legId": "V122-R514-1-PIE-JAX",
+      "operation": "arrival",
+      "bankId": "JAX-B15"
+    },
+    {
+      "legId": "V122-R515-1-JAX-PIE",
+      "operation": "departure",
+      "bankId": "JAX-B2"
+    }
+  ],
+  "operatingOverrides": []
+}
