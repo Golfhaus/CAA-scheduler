@@ -1,0 +1,1462 @@
+{
+  "id": "overnight_minimum_turn_time",
+  "title": "Minimum next-day turn time",
+  "section": "§2.5 / §2.8",
+  "severity": "error",
+  "hardStop": true,
+  "status": "pass",
+  "message": "Every next-day turn is at least 40 minutes",
+  "metrics": {
+    "transitions": [
+      {
+        "line": "A",
+        "fromRoute": 701,
+        "toRoute": 702,
+        "city": "FLL",
+        "minutes": 263,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "A",
+        "fromRoute": 702,
+        "toRoute": 703,
+        "city": "SFB",
+        "minutes": 369,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "A",
+        "fromRoute": 703,
+        "toRoute": 704,
+        "city": "DAY",
+        "minutes": 524,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "A",
+        "fromRoute": 704,
+        "toRoute": 705,
+        "city": "SFB",
+        "minutes": 224,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "A",
+        "fromRoute": 705,
+        "toRoute": 706,
+        "city": "FLL",
+        "minutes": 271,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "A",
+        "fromRoute": 706,
+        "toRoute": 707,
+        "city": "PIE",
+        "minutes": 258,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "A",
+        "fromRoute": 707,
+        "toRoute": 708,
+        "city": "RFD",
+        "minutes": 316,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "A",
+        "fromRoute": 708,
+        "toRoute": 709,
+        "city": "PHF",
+        "minutes": 481,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "A",
+        "fromRoute": 709,
+        "toRoute": 710,
+        "city": "AUS",
+        "minutes": 533,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "A",
+        "fromRoute": 710,
+        "toRoute": 711,
+        "city": "PIE",
+        "minutes": 43,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "A",
+        "fromRoute": 711,
+        "toRoute": 712,
+        "city": "SFB",
+        "minutes": 261,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "A",
+        "fromRoute": 712,
+        "toRoute": 713,
+        "city": "MCI",
+        "minutes": 528,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "A",
+        "fromRoute": 713,
+        "toRoute": 701,
+        "city": "CLT",
+        "minutes": 285,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AA",
+        "fromRoute": 301,
+        "toRoute": 302,
+        "city": "AUS",
+        "minutes": 456,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AA",
+        "fromRoute": 302,
+        "toRoute": 303,
+        "city": "BHM",
+        "minutes": 473,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AA",
+        "fromRoute": 303,
+        "toRoute": 304,
+        "city": "PNS",
+        "minutes": 395,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AA",
+        "fromRoute": 304,
+        "toRoute": 305,
+        "city": "HRL",
+        "minutes": 848,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AA",
+        "fromRoute": 305,
+        "toRoute": 306,
+        "city": "CLT",
+        "minutes": 428,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AA",
+        "fromRoute": 306,
+        "toRoute": 307,
+        "city": "BUF",
+        "minutes": 321,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AA",
+        "fromRoute": 307,
+        "toRoute": 308,
+        "city": "CHS",
+        "minutes": 690,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AA",
+        "fromRoute": 308,
+        "toRoute": 309,
+        "city": "CLT",
+        "minutes": 709,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AA",
+        "fromRoute": 309,
+        "toRoute": 310,
+        "city": "MEM",
+        "minutes": 540,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AA",
+        "fromRoute": 310,
+        "toRoute": 311,
+        "city": "JAX",
+        "minutes": 42,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AA",
+        "fromRoute": 311,
+        "toRoute": 301,
+        "city": "LIT",
+        "minutes": 422,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AB",
+        "fromRoute": 501,
+        "toRoute": 502,
+        "city": "SAT",
+        "minutes": 465,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AB",
+        "fromRoute": 502,
+        "toRoute": 503,
+        "city": "MKE",
+        "minutes": 431,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AB",
+        "fromRoute": 503,
+        "toRoute": 504,
+        "city": "IND",
+        "minutes": 426,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AB",
+        "fromRoute": 504,
+        "toRoute": 505,
+        "city": "CLT",
+        "minutes": 354,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AB",
+        "fromRoute": 505,
+        "toRoute": 506,
+        "city": "RDU",
+        "minutes": 376,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AB",
+        "fromRoute": 506,
+        "toRoute": 507,
+        "city": "BWI",
+        "minutes": 304,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AB",
+        "fromRoute": 507,
+        "toRoute": 508,
+        "city": "MCI",
+        "minutes": 560,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AB",
+        "fromRoute": 508,
+        "toRoute": 509,
+        "city": "SAT",
+        "minutes": 474,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AB",
+        "fromRoute": 509,
+        "toRoute": 510,
+        "city": "MCI",
+        "minutes": 415,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AB",
+        "fromRoute": 510,
+        "toRoute": 501,
+        "city": "ABE",
+        "minutes": 313,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AC",
+        "fromRoute": 101,
+        "toRoute": 102,
+        "city": "ATW",
+        "minutes": 458,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AC",
+        "fromRoute": 102,
+        "toRoute": 103,
+        "city": "AVL",
+        "minutes": 503,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AC",
+        "fromRoute": 103,
+        "toRoute": 104,
+        "city": "TTN",
+        "minutes": 440,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AC",
+        "fromRoute": 104,
+        "toRoute": 105,
+        "city": "BUF",
+        "minutes": 564,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AC",
+        "fromRoute": 105,
+        "toRoute": 106,
+        "city": "BGR",
+        "minutes": 580,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AC",
+        "fromRoute": 106,
+        "toRoute": 107,
+        "city": "BTV",
+        "minutes": 633,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AC",
+        "fromRoute": 107,
+        "toRoute": 108,
+        "city": "CAK",
+        "minutes": 594,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AC",
+        "fromRoute": 108,
+        "toRoute": 109,
+        "city": "MDT",
+        "minutes": 529,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AC",
+        "fromRoute": 109,
+        "toRoute": 110,
+        "city": "ROC",
+        "minutes": 402,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AC",
+        "fromRoute": 110,
+        "toRoute": 101,
+        "city": "TOL",
+        "minutes": 441,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AD",
+        "fromRoute": 111,
+        "toRoute": 112,
+        "city": "ACY",
+        "minutes": 451,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AD",
+        "fromRoute": 112,
+        "toRoute": 113,
+        "city": "AVP",
+        "minutes": 422,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AD",
+        "fromRoute": 113,
+        "toRoute": 114,
+        "city": "AGS",
+        "minutes": 575,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AD",
+        "fromRoute": 114,
+        "toRoute": 115,
+        "city": "ROA",
+        "minutes": 626,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AD",
+        "fromRoute": 115,
+        "toRoute": 116,
+        "city": "GNV",
+        "minutes": 548,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AD",
+        "fromRoute": 116,
+        "toRoute": 117,
+        "city": "MCI",
+        "minutes": 630,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AD",
+        "fromRoute": 117,
+        "toRoute": 118,
+        "city": "PIA",
+        "minutes": 456,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AD",
+        "fromRoute": 118,
+        "toRoute": 119,
+        "city": "MFE",
+        "minutes": 460,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AD",
+        "fromRoute": 119,
+        "toRoute": 120,
+        "city": "DAB",
+        "minutes": 275,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AD",
+        "fromRoute": 120,
+        "toRoute": 121,
+        "city": "ISP",
+        "minutes": 622,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AD",
+        "fromRoute": 121,
+        "toRoute": 122,
+        "city": "PWM",
+        "minutes": 502,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AD",
+        "fromRoute": 122,
+        "toRoute": 123,
+        "city": "SWF",
+        "minutes": 606,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AD",
+        "fromRoute": 123,
+        "toRoute": 124,
+        "city": "ILM",
+        "minutes": 443,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AD",
+        "fromRoute": 124,
+        "toRoute": 125,
+        "city": "HVN",
+        "minutes": 322,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AD",
+        "fromRoute": 125,
+        "toRoute": 126,
+        "city": "DAY",
+        "minutes": 607,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AD",
+        "fromRoute": 126,
+        "toRoute": 127,
+        "city": "MLB",
+        "minutes": 583,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AD",
+        "fromRoute": 127,
+        "toRoute": 128,
+        "city": "TUL",
+        "minutes": 372,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AD",
+        "fromRoute": 128,
+        "toRoute": 129,
+        "city": "SGF",
+        "minutes": 323,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AD",
+        "fromRoute": 129,
+        "toRoute": 130,
+        "city": "CID",
+        "minutes": 619,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AD",
+        "fromRoute": 130,
+        "toRoute": 131,
+        "city": "CRP",
+        "minutes": 421,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AD",
+        "fromRoute": 131,
+        "toRoute": 132,
+        "city": "JAN",
+        "minutes": 539,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AD",
+        "fromRoute": 132,
+        "toRoute": 133,
+        "city": "SHV",
+        "minutes": 612,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AD",
+        "fromRoute": 133,
+        "toRoute": 134,
+        "city": "MCI",
+        "minutes": 572,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AD",
+        "fromRoute": 134,
+        "toRoute": 135,
+        "city": "FSD",
+        "minutes": 559,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AD",
+        "fromRoute": 135,
+        "toRoute": 136,
+        "city": "MCI",
+        "minutes": 540,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AD",
+        "fromRoute": 136,
+        "toRoute": 137,
+        "city": "DAY",
+        "minutes": 604,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AD",
+        "fromRoute": 137,
+        "toRoute": 138,
+        "city": "HSV",
+        "minutes": 484,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AD",
+        "fromRoute": 138,
+        "toRoute": 139,
+        "city": "DAY",
+        "minutes": 690,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AD",
+        "fromRoute": 139,
+        "toRoute": 140,
+        "city": "TRI",
+        "minutes": 522,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AD",
+        "fromRoute": 140,
+        "toRoute": 141,
+        "city": "DLH",
+        "minutes": 398,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AD",
+        "fromRoute": 141,
+        "toRoute": 142,
+        "city": "EYW",
+        "minutes": 222,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AD",
+        "fromRoute": 142,
+        "toRoute": 143,
+        "city": "CAE",
+        "minutes": 410,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AD",
+        "fromRoute": 143,
+        "toRoute": 144,
+        "city": "MYR",
+        "minutes": 429,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AD",
+        "fromRoute": 144,
+        "toRoute": 145,
+        "city": "PWM",
+        "minutes": 602,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AD",
+        "fromRoute": 145,
+        "toRoute": 146,
+        "city": "ORH",
+        "minutes": 622,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AD",
+        "fromRoute": 146,
+        "toRoute": 147,
+        "city": "MSN",
+        "minutes": 500,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AD",
+        "fromRoute": 147,
+        "toRoute": 148,
+        "city": "MHT",
+        "minutes": 620,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AD",
+        "fromRoute": 148,
+        "toRoute": 149,
+        "city": "DAY",
+        "minutes": 482,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AD",
+        "fromRoute": 149,
+        "toRoute": 150,
+        "city": "GRR",
+        "minutes": 577,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AD",
+        "fromRoute": 150,
+        "toRoute": 111,
+        "city": "ALB",
+        "minutes": 336,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AE",
+        "fromRoute": 151,
+        "toRoute": 152,
+        "city": "MCI",
+        "minutes": 581,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AE",
+        "fromRoute": 152,
+        "toRoute": 153,
+        "city": "MCI",
+        "minutes": 570,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AE",
+        "fromRoute": 153,
+        "toRoute": 154,
+        "city": "VPS",
+        "minutes": 338,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AE",
+        "fromRoute": 154,
+        "toRoute": 155,
+        "city": "TLH",
+        "minutes": 520,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AE",
+        "fromRoute": 155,
+        "toRoute": 156,
+        "city": "BTR",
+        "minutes": 540,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AE",
+        "fromRoute": 156,
+        "toRoute": 157,
+        "city": "ECP",
+        "minutes": 355,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AE",
+        "fromRoute": 157,
+        "toRoute": 158,
+        "city": "OMA",
+        "minutes": 601,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AE",
+        "fromRoute": 158,
+        "toRoute": 159,
+        "city": "DSM",
+        "minutes": 640,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AE",
+        "fromRoute": 159,
+        "toRoute": 160,
+        "city": "MCI",
+        "minutes": 535,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AE",
+        "fromRoute": 160,
+        "toRoute": 161,
+        "city": "FAR",
+        "minutes": 398,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AE",
+        "fromRoute": 161,
+        "toRoute": 162,
+        "city": "COU",
+        "minutes": 538,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AE",
+        "fromRoute": 162,
+        "toRoute": 163,
+        "city": "DSM",
+        "minutes": 639,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AE",
+        "fromRoute": 163,
+        "toRoute": 164,
+        "city": "JAN",
+        "minutes": 627,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AE",
+        "fromRoute": 164,
+        "toRoute": 151,
+        "city": "MAF",
+        "minutes": 262,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AF",
+        "fromRoute": 165,
+        "toRoute": 166,
+        "city": "SYR",
+        "minutes": 496,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AF",
+        "fromRoute": 166,
+        "toRoute": 167,
+        "city": "CHA",
+        "minutes": 500,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AF",
+        "fromRoute": 167,
+        "toRoute": 168,
+        "city": "CRW",
+        "minutes": 543,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AF",
+        "fromRoute": 168,
+        "toRoute": 169,
+        "city": "SBN",
+        "minutes": 549,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AF",
+        "fromRoute": 169,
+        "toRoute": 165,
+        "city": "FWA",
+        "minutes": 580,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AG",
+        "fromRoute": 511,
+        "toRoute": 512,
+        "city": "PIT",
+        "minutes": 456,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AG",
+        "fromRoute": 512,
+        "toRoute": 513,
+        "city": "BLV",
+        "minutes": 480,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AG",
+        "fromRoute": 513,
+        "toRoute": 514,
+        "city": "PIE",
+        "minutes": 601,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AG",
+        "fromRoute": 514,
+        "toRoute": 515,
+        "city": "JAX",
+        "minutes": 552,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AG",
+        "fromRoute": 515,
+        "toRoute": 516,
+        "city": "GSO",
+        "minutes": 282,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AG",
+        "fromRoute": 516,
+        "toRoute": 517,
+        "city": "FLL",
+        "minutes": 391,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AG",
+        "fromRoute": 517,
+        "toRoute": 518,
+        "city": "PHF",
+        "minutes": 596,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AG",
+        "fromRoute": 518,
+        "toRoute": 519,
+        "city": "SYR",
+        "minutes": 606,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AG",
+        "fromRoute": 519,
+        "toRoute": 511,
+        "city": "CMH",
+        "minutes": 530,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AH",
+        "fromRoute": 312,
+        "toRoute": 313,
+        "city": "BDL",
+        "minutes": 293,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AH",
+        "fromRoute": 313,
+        "toRoute": 314,
+        "city": "SAV",
+        "minutes": 399,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AH",
+        "fromRoute": 314,
+        "toRoute": 315,
+        "city": "PHF",
+        "minutes": 563,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AH",
+        "fromRoute": 315,
+        "toRoute": 316,
+        "city": "MSY",
+        "minutes": 556,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AH",
+        "fromRoute": 316,
+        "toRoute": 317,
+        "city": "LEX",
+        "minutes": 545,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AH",
+        "fromRoute": 317,
+        "toRoute": 318,
+        "city": "GSO",
+        "minutes": 654,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AH",
+        "fromRoute": 318,
+        "toRoute": 319,
+        "city": "JAX",
+        "minutes": 44,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AH",
+        "fromRoute": 319,
+        "toRoute": 320,
+        "city": "PVD",
+        "minutes": 392,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AH",
+        "fromRoute": 320,
+        "toRoute": 321,
+        "city": "BNA",
+        "minutes": 433,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AH",
+        "fromRoute": 321,
+        "toRoute": 322,
+        "city": "PIT",
+        "minutes": 299,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AH",
+        "fromRoute": 322,
+        "toRoute": 323,
+        "city": "SRQ",
+        "minutes": 554,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AH",
+        "fromRoute": 323,
+        "toRoute": 324,
+        "city": "ABE",
+        "minutes": 313,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AH",
+        "fromRoute": 324,
+        "toRoute": 312,
+        "city": "BDL",
+        "minutes": 438,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AI",
+        "fromRoute": 170,
+        "toRoute": 171,
+        "city": "MOB",
+        "minutes": 524,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AI",
+        "fromRoute": 171,
+        "toRoute": 170,
+        "city": "XNA",
+        "minutes": 283,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AJ",
+        "fromRoute": 520,
+        "toRoute": 521,
+        "city": "HOU",
+        "minutes": 221,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AJ",
+        "fromRoute": 521,
+        "toRoute": 522,
+        "city": "LBB",
+        "minutes": 513,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AJ",
+        "fromRoute": 522,
+        "toRoute": 523,
+        "city": "PIE",
+        "minutes": 376,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AJ",
+        "fromRoute": 523,
+        "toRoute": 524,
+        "city": "GSP",
+        "minutes": 379,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AJ",
+        "fromRoute": 524,
+        "toRoute": 525,
+        "city": "ORH",
+        "minutes": 306,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AJ",
+        "fromRoute": 525,
+        "toRoute": 526,
+        "city": "DAL",
+        "minutes": 632,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AJ",
+        "fromRoute": 526,
+        "toRoute": 527,
+        "city": "DAL",
+        "minutes": 384,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AJ",
+        "fromRoute": 527,
+        "toRoute": 528,
+        "city": "BDL",
+        "minutes": 527,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AJ",
+        "fromRoute": 528,
+        "toRoute": 520,
+        "city": "BHM",
+        "minutes": 359,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AK",
+        "fromRoute": 325,
+        "toRoute": 326,
+        "city": "RFD",
+        "minutes": 512,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AK",
+        "fromRoute": 326,
+        "toRoute": 327,
+        "city": "PGD",
+        "minutes": 526,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AK",
+        "fromRoute": 327,
+        "toRoute": 328,
+        "city": "SDF",
+        "minutes": 606,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AK",
+        "fromRoute": 328,
+        "toRoute": 329,
+        "city": "PHF",
+        "minutes": 529,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AK",
+        "fromRoute": 329,
+        "toRoute": 330,
+        "city": "PHF",
+        "minutes": 394,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AK",
+        "fromRoute": 330,
+        "toRoute": 331,
+        "city": "BWI",
+        "minutes": 767,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AK",
+        "fromRoute": 331,
+        "toRoute": 332,
+        "city": "BWI",
+        "minutes": 753,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AK",
+        "fromRoute": 332,
+        "toRoute": 333,
+        "city": "DAL",
+        "minutes": 492,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AK",
+        "fromRoute": 333,
+        "toRoute": 334,
+        "city": "RDU",
+        "minutes": 733,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AK",
+        "fromRoute": 334,
+        "toRoute": 335,
+        "city": "RDU",
+        "minutes": 483,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AK",
+        "fromRoute": 335,
+        "toRoute": 336,
+        "city": "FLL",
+        "minutes": 297,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AK",
+        "fromRoute": 336,
+        "toRoute": 325,
+        "city": "OKC",
+        "minutes": 325,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AL",
+        "fromRoute": 337,
+        "toRoute": 338,
+        "city": "PHF",
+        "minutes": 519,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AL",
+        "fromRoute": 338,
+        "toRoute": 339,
+        "city": "SAV",
+        "minutes": 380,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AL",
+        "fromRoute": 339,
+        "toRoute": 340,
+        "city": "CHS",
+        "minutes": 410,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AL",
+        "fromRoute": 340,
+        "toRoute": 341,
+        "city": "CLT",
+        "minutes": 709,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AL",
+        "fromRoute": 341,
+        "toRoute": 342,
+        "city": "MSY",
+        "minutes": 411,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AL",
+        "fromRoute": 342,
+        "toRoute": 343,
+        "city": "HOU",
+        "minutes": 612,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AL",
+        "fromRoute": 343,
+        "toRoute": 344,
+        "city": "SRQ",
+        "minutes": 434,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AL",
+        "fromRoute": 344,
+        "toRoute": 345,
+        "city": "MCI",
+        "minutes": 480,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AL",
+        "fromRoute": 345,
+        "toRoute": 346,
+        "city": "MCI",
+        "minutes": 675,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AL",
+        "fromRoute": 346,
+        "toRoute": 347,
+        "city": "HRL",
+        "minutes": 598,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AL",
+        "fromRoute": 347,
+        "toRoute": 348,
+        "city": "PHF",
+        "minutes": 548,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AL",
+        "fromRoute": 348,
+        "toRoute": 349,
+        "city": "PVD",
+        "minutes": 672,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AL",
+        "fromRoute": 349,
+        "toRoute": 337,
+        "city": "HOU",
+        "minutes": 332,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AM",
+        "fromRoute": 172,
+        "toRoute": 173,
+        "city": "MCN",
+        "minutes": 576,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AM",
+        "fromRoute": 173,
+        "toRoute": 174,
+        "city": "ICT",
+        "minutes": 592,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AM",
+        "fromRoute": 174,
+        "toRoute": 172,
+        "city": "GPT",
+        "minutes": 572,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AN",
+        "fromRoute": 175,
+        "toRoute": 175,
+        "city": "ERI",
+        "minutes": 522,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AO",
+        "fromRoute": 350,
+        "toRoute": 350,
+        "city": "ELP",
+        "minutes": 674,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AQ",
+        "fromRoute": 351,
+        "toRoute": 351,
+        "city": "TYS",
+        "minutes": 465,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AR",
+        "fromRoute": 176,
+        "toRoute": 176,
+        "city": "SYR",
+        "minutes": 500,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AS",
+        "fromRoute": 352,
+        "toRoute": 353,
+        "city": "PHF",
+        "minutes": 416,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AS",
+        "fromRoute": 353,
+        "toRoute": 354,
+        "city": "PHF",
+        "minutes": 396,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "AS",
+        "fromRoute": 354,
+        "toRoute": 352,
+        "city": "PHF",
+        "minutes": 383,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "B",
+        "fromRoute": 714,
+        "toRoute": 715,
+        "city": "BWI",
+        "minutes": 436,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "B",
+        "fromRoute": 715,
+        "toRoute": 716,
+        "city": "MCI",
+        "minutes": 537,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "B",
+        "fromRoute": 716,
+        "toRoute": 717,
+        "city": "HPN",
+        "minutes": 364,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "B",
+        "fromRoute": 717,
+        "toRoute": 718,
+        "city": "PGD",
+        "minutes": 44,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "B",
+        "fromRoute": 718,
+        "toRoute": 719,
+        "city": "FLL",
+        "minutes": 61,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "B",
+        "fromRoute": 719,
+        "toRoute": 720,
+        "city": "ALB",
+        "minutes": 313,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "B",
+        "fromRoute": 720,
+        "toRoute": 721,
+        "city": "MSY",
+        "minutes": 321,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "B",
+        "fromRoute": 721,
+        "toRoute": 722,
+        "city": "SFB",
+        "minutes": 247,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "B",
+        "fromRoute": 722,
+        "toRoute": 723,
+        "city": "PHF",
+        "minutes": 475,
+        "minimumMinutes": 40
+      },
+      {
+        "line": "B",
+        "fromRoute": 723,
+        "toRoute": 714,
+        "city": "BNA",
+        "minutes": 386,
+        "minimumMinutes": 40
+      }
+    ]
+  },
+  "findings": []
+}

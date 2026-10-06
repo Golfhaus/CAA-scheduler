@@ -65,7 +65,7 @@ function towPieces(label, start, end) {
 
 test("overview metrics reflect the frozen schedule", () => {
   assert.deepEqual(scheduleMetrics(canonical), {
-    flights: 1116,
+    flights: 1128,
     cities: 105,
     routes: 181,
     lines: 20,
@@ -180,7 +180,7 @@ test("bank breakdown conserves every hub touch and groups flights by the opposit
   assert.ok(phf.banks.some((bank) => bank.outsideWindow > 0));
   const bhm = buildHubBankBreakdown(canonical, "BHM");
   assert.equal(bhm.banks.length, 0);
-  assert.equal(bhm.unassigned.inbound.length + bhm.unassigned.outbound.length, 92);
+  assert.equal(bhm.unassigned.inbound.length + bhm.unassigned.outbound.length, 94);
 });
 
 test("bank breakdown preserves explicit assignments without inferring missing banks or duplicating hub-to-hub flights", () => {

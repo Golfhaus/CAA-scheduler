@@ -22,9 +22,9 @@ class TwoDayGrowthTests(unittest.TestCase):
         cls.candidate = CANONICAL
 
     def test_released_sequence_and_consolidated_lines(self):
-        self.assertEqual(SCHEDULE_ID, "schedule_7_v1_2_1")
+        self.assertEqual(SCHEDULE_ID, "schedule_7_v1_2_2")
         self.assertEqual(self.candidate["schedule"]["status"], "released")
-        self.assertEqual(len(self.candidate["legs"]), 1116)
+        self.assertEqual(len(self.candidate["legs"]), 1128)
         new = sorted((l for l in self.candidate["legs"] if l["id"].startswith("V120-2MAX-")),
                      key=lambda l: l["flight"])
         self.assertEqual([l["flight"] for l in new], list(range(2083, 2099)))
@@ -50,8 +50,9 @@ class TwoDayGrowthTests(unittest.TestCase):
         self.assertEqual(count["DAY", "JAX"], 4)
         self.assertEqual(count["JAX", "DAY"], 4)
         for hub, city in (("JAX", "SFB"), ("JAX", "FLL"), ("DAY", "CMH"), ("DAY", "CAK"), ("DAY", "IND")):
-            self.assertEqual(count[hub, city], 2)
-            self.assertEqual(count[city, hub], 2)
+            expected = 3 if (hub, city) == ("JAX", "SFB") else 2
+            self.assertEqual(count[hub, city], expected)
+            self.assertEqual(count[city, hub], expected)
         self.assertEqual(count["DAY", "RFD"], 3)
         self.assertEqual(count["RFD", "DAY"], 3)
         for origin, destination in (("DAY", "JAX"), ("JAX", "DAY")):

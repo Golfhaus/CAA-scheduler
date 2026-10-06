@@ -1,0 +1,62 @@
+{
+  "schemaVersion": "1.0.0",
+  "scheduleId": "schedule_7_v1_2_2",
+  "status": "released",
+  "sourceScheduleId": "schedule_7_v1_2_1",
+  "overlayIds": [
+    "schedule-7-v1.2.2-jax-bank-round-1"
+  ],
+  "summary": {
+    "legs": 1128,
+    "routes": 181,
+    "lines": 20,
+    "effectiveOperatingErrors": 0,
+    "hardStopFailures": 0,
+    "overnightTurnFailures": 0,
+    "directRoundTripCities": 10,
+    "connectedDirectionalPairs": 29,
+    "standClaims": 15,
+    "standMinutes": 4277,
+    "hubStandClaims": 0,
+    "hubStandMinutes": 0
+  },
+  "validation": {
+    "structural": "pass",
+    "operating": "review",
+    "overnightTurns": "pass",
+    "planningReconstruction": "pass"
+  },
+  "connectionFinding": "10/10 target cities have direct JAX round trips, and 29/48 directional cross-group pairs meet the configured connection window.",
+  "connectionScopeDecision": {
+    "status": "approved",
+    "approvedBy": "user",
+    "model": "existing_hub_timetable_policy_with_two_stop_growth_analysis",
+    "description": "Load resumed at user instruction on October 6, 2026, using the previously approved v1.2.2 draft only. Demand analysis describes relative connection opportunities, not passenger-load forecasts."
+  },
+  "patchScope": {
+    "kind": "sfb_extensions_and_jax_evening_bank",
+    "timetableChanged": true,
+    "routingChanged": true,
+    "approvedRoutes": [
+      702,
+      704,
+      341,
+      504,
+      338,
+      514,
+      515
+    ],
+    "description": "Add the twelve approved flights, JAX-B15 20:45–21:45, and the nine-minute retiming of the first two existing Route 515 flights. Further late-originator proposals are excluded."
+  },
+  "artifacts": [
+    "canonical_schedule.json",
+    "connection_audit.json",
+    "gates.json",
+    "operating_validation_report.json",
+    "overnight_turn_validation.json",
+    "planning_snapshot.json",
+    "planning_validation_report.json",
+    "timetable.json",
+    "validation_report.json"
+  ]
+}

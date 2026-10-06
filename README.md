@@ -75,9 +75,9 @@ including the v1.1 series. The manually dispatched **Latest Schedule
 Regression** workflow runs the same checks. See
 [`docs/regression_policy.md`](docs/regression_policy.md).
 
-The app defaults to **Schedule 7 v1.2.1**, released October 2, 2026. It adds
-20 daily flights on the ten approved routes using existing aircraft. See
-[`docs/schedule_7_v1_2_1_release.md`](docs/schedule_7_v1_2_1_release.md) for
+The app defaults to **Schedule 7 v1.2.2**, released October 6, 2026. It adds
+12 daily flights using existing aircraft and a JAX evening bank. See
+[`docs/schedule_7_v1_2_2_release.md`](docs/schedule_7_v1_2_2_release.md) for
 the approved flying, timing adjustments, validation and reproduction command.
 
 ## Build the web console

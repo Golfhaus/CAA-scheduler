@@ -1,0 +1,919 @@
+{
+  "schemaVersion": "1.0.0",
+  "scheduleId": "schedule_7_v1_2_2",
+  "hub": "JAX",
+  "connectionWindowMinutes": {
+    "minimum": 30,
+    "maximum": 240
+  },
+  "groups": {
+    "eveningFeeders": [
+      "CLT",
+      "MSY",
+      "SAV",
+      "PIE"
+    ],
+    "network": [
+      "DAY",
+      "MCI",
+      "PHF",
+      "SYR",
+      "SFB",
+      "BHM"
+    ]
+  },
+  "summary": {
+    "targetCities": 10,
+    "directRoundTripCities": 10,
+    "directionalPairs": 48,
+    "connectedDirectionalPairs": 29,
+    "missingDirectionalPairs": 19,
+    "connectionCoverage": 0.604167,
+    "bySourceGroup": {
+      "eveningFeeders": {
+        "directionalPairs": 24,
+        "connectedDirectionalPairs": 14,
+        "missingDirectionalPairs": 10
+      },
+      "network": {
+        "directionalPairs": 24,
+        "connectedDirectionalPairs": 15,
+        "missingDirectionalPairs": 9
+      }
+    }
+  },
+  "directCoverage": [
+    {
+      "city": "CLT",
+      "group": "eveningFeeders",
+      "toHubLegs": 3,
+      "fromHubLegs": 3,
+      "roundTripCovered": true
+    },
+    {
+      "city": "MSY",
+      "group": "eveningFeeders",
+      "toHubLegs": 2,
+      "fromHubLegs": 2,
+      "roundTripCovered": true
+    },
+    {
+      "city": "SAV",
+      "group": "eveningFeeders",
+      "toHubLegs": 2,
+      "fromHubLegs": 2,
+      "roundTripCovered": true
+    },
+    {
+      "city": "PIE",
+      "group": "eveningFeeders",
+      "toHubLegs": 2,
+      "fromHubLegs": 2,
+      "roundTripCovered": true
+    },
+    {
+      "city": "DAY",
+      "group": "network",
+      "toHubLegs": 4,
+      "fromHubLegs": 4,
+      "roundTripCovered": true
+    },
+    {
+      "city": "MCI",
+      "group": "network",
+      "toHubLegs": 1,
+      "fromHubLegs": 1,
+      "roundTripCovered": true
+    },
+    {
+      "city": "PHF",
+      "group": "network",
+      "toHubLegs": 4,
+      "fromHubLegs": 4,
+      "roundTripCovered": true
+    },
+    {
+      "city": "SYR",
+      "group": "network",
+      "toHubLegs": 1,
+      "fromHubLegs": 1,
+      "roundTripCovered": true
+    },
+    {
+      "city": "SFB",
+      "group": "network",
+      "toHubLegs": 3,
+      "fromHubLegs": 3,
+      "roundTripCovered": true
+    },
+    {
+      "city": "BHM",
+      "group": "network",
+      "toHubLegs": 1,
+      "fromHubLegs": 1,
+      "roundTripCovered": true
+    }
+  ],
+  "directionalPairs": [
+    {
+      "source": "CLT",
+      "sourceGroup": "eveningFeeders",
+      "destination": "DAY",
+      "destinationGroup": "network",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "CLT-JAX-CRJ900-01-OUT",
+          "inboundFlight": 1213,
+          "hubArrival": "05:41",
+          "outboundLegId": "V120-2MAX-D1-2-JAX-DAY",
+          "outboundFlight": 2084,
+          "hubDeparture": "06:15",
+          "waitMinutes": 34
+        },
+        {
+          "inboundLegId": "CLT-JAX-CRJ900-02-OUT",
+          "inboundFlight": 1214,
+          "hubArrival": "17:36",
+          "outboundLegId": "V120-2MAX-D1-8-JAX-DAY",
+          "outboundFlight": 2090,
+          "hubDeparture": "18:36",
+          "waitMinutes": 60
+        },
+        {
+          "inboundLegId": "CLT-JAX-CRJ900-01-OUT",
+          "inboundFlight": 1213,
+          "hubArrival": "05:41",
+          "outboundLegId": "V120-2MAX-D2-2-JAX-DAY",
+          "outboundFlight": 2092,
+          "hubDeparture": "07:38",
+          "waitMinutes": 117
+        }
+      ]
+    },
+    {
+      "source": "CLT",
+      "sourceGroup": "eveningFeeders",
+      "destination": "MCI",
+      "destinationGroup": "network",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "CLT",
+      "sourceGroup": "eveningFeeders",
+      "destination": "PHF",
+      "destinationGroup": "network",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "CLT-JAX-CRJ900-01-OUT",
+          "inboundFlight": 1213,
+          "hubArrival": "05:41",
+          "outboundLegId": "V116-R719-JAX-PHF",
+          "outboundFlight": 2082,
+          "hubDeparture": "06:46",
+          "waitMinutes": 65
+        }
+      ]
+    },
+    {
+      "source": "CLT",
+      "sourceGroup": "eveningFeeders",
+      "destination": "SYR",
+      "destinationGroup": "network",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "CLT-JAX-CRJ900-01-OUT",
+          "inboundFlight": 1213,
+          "hubArrival": "05:41",
+          "outboundLegId": "JAX-SYR-CRJ700-01-OUT",
+          "outboundFlight": 1408,
+          "hubDeparture": "08:10",
+          "waitMinutes": 149
+        }
+      ]
+    },
+    {
+      "source": "CLT",
+      "sourceGroup": "eveningFeeders",
+      "destination": "SFB",
+      "destinationGroup": "network",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V122-R504-1-CLT-JAX",
+          "inboundFlight": 2125,
+          "hubArrival": "20:45",
+          "outboundLegId": "V122-R702-2-JAX-SFB",
+          "outboundFlight": 2120,
+          "hubDeparture": "21:33",
+          "waitMinutes": 48
+        },
+        {
+          "inboundLegId": "CLT-JAX-CRJ900-02-OUT",
+          "inboundFlight": 1214,
+          "hubArrival": "17:36",
+          "outboundLegId": "V120-2MAX-D2-8-JAX-SFB",
+          "outboundFlight": 2098,
+          "hubDeparture": "18:47",
+          "waitMinutes": 71
+        },
+        {
+          "inboundLegId": "CLT-JAX-CRJ900-02-OUT",
+          "inboundFlight": 1214,
+          "hubArrival": "17:36",
+          "outboundLegId": "V122-R702-2-JAX-SFB",
+          "outboundFlight": 2120,
+          "hubDeparture": "21:33",
+          "waitMinutes": 237
+        }
+      ]
+    },
+    {
+      "source": "CLT",
+      "sourceGroup": "eveningFeeders",
+      "destination": "BHM",
+      "destinationGroup": "network",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "MSY",
+      "sourceGroup": "eveningFeeders",
+      "destination": "DAY",
+      "destinationGroup": "network",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "MSY",
+      "sourceGroup": "eveningFeeders",
+      "destination": "MCI",
+      "destinationGroup": "network",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "JAX-MSY-CRJ700-01-IN",
+          "inboundFlight": 1334,
+          "hubArrival": "07:55",
+          "outboundLegId": "JAX-MCI-CRJ900-01-OUT",
+          "outboundFlight": 1253,
+          "hubDeparture": "11:50",
+          "waitMinutes": 235
+        }
+      ]
+    },
+    {
+      "source": "MSY",
+      "sourceGroup": "eveningFeeders",
+      "destination": "PHF",
+      "destinationGroup": "network",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "MSY",
+      "sourceGroup": "eveningFeeders",
+      "destination": "SYR",
+      "destinationGroup": "network",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "MSY",
+      "sourceGroup": "eveningFeeders",
+      "destination": "SFB",
+      "destinationGroup": "network",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V122-R341-1-MSY-JAX",
+          "inboundFlight": 2123,
+          "hubArrival": "20:59",
+          "outboundLegId": "V122-R702-2-JAX-SFB",
+          "outboundFlight": 2120,
+          "hubDeparture": "21:33",
+          "waitMinutes": 34
+        }
+      ]
+    },
+    {
+      "source": "MSY",
+      "sourceGroup": "eveningFeeders",
+      "destination": "BHM",
+      "destinationGroup": "network",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "SAV",
+      "sourceGroup": "eveningFeeders",
+      "destination": "DAY",
+      "destinationGroup": "network",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "JAX-SAV-CRJ200-01-IN",
+          "inboundFlight": 1630,
+          "hubArrival": "14:24",
+          "outboundLegId": "DAY-JAX-CRJ700-01-IN",
+          "outboundFlight": 1451,
+          "hubDeparture": "15:45",
+          "waitMinutes": 81
+        }
+      ]
+    },
+    {
+      "source": "SAV",
+      "sourceGroup": "eveningFeeders",
+      "destination": "MCI",
+      "destinationGroup": "network",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "SAV",
+      "sourceGroup": "eveningFeeders",
+      "destination": "PHF",
+      "destinationGroup": "network",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "JAX-SAV-CRJ200-01-IN",
+          "inboundFlight": 1630,
+          "hubArrival": "14:24",
+          "outboundLegId": "JAX-PHF-CRJ900-02-OUT",
+          "outboundFlight": 1160,
+          "hubDeparture": "16:10",
+          "waitMinutes": 106
+        },
+        {
+          "inboundLegId": "JAX-SAV-CRJ200-01-IN",
+          "inboundFlight": 1630,
+          "hubArrival": "14:24",
+          "outboundLegId": "V115-R718-JAX-PHF",
+          "outboundFlight": 2026,
+          "hubDeparture": "16:50",
+          "waitMinutes": 146
+        }
+      ]
+    },
+    {
+      "source": "SAV",
+      "sourceGroup": "eveningFeeders",
+      "destination": "SYR",
+      "destinationGroup": "network",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "SAV",
+      "sourceGroup": "eveningFeeders",
+      "destination": "SFB",
+      "destinationGroup": "network",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V122-R338-1-SAV-JAX",
+          "inboundFlight": 2127,
+          "hubArrival": "20:45",
+          "outboundLegId": "V122-R702-2-JAX-SFB",
+          "outboundFlight": 2120,
+          "hubDeparture": "21:33",
+          "waitMinutes": 48
+        },
+        {
+          "inboundLegId": "JAX-SAV-CRJ200-01-IN",
+          "inboundFlight": 1630,
+          "hubArrival": "14:24",
+          "outboundLegId": "JAX-SFB-CRJ700-01-OUT",
+          "outboundFlight": 1437,
+          "hubDeparture": "16:15",
+          "waitMinutes": 111
+        }
+      ]
+    },
+    {
+      "source": "SAV",
+      "sourceGroup": "eveningFeeders",
+      "destination": "BHM",
+      "destinationGroup": "network",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "JAX-SAV-CRJ200-01-IN",
+          "inboundFlight": 1630,
+          "hubArrival": "14:24",
+          "outboundLegId": "BHM-JAX-CRJ700-01-IN",
+          "outboundFlight": 1422,
+          "hubDeparture": "17:20",
+          "waitMinutes": 176
+        }
+      ]
+    },
+    {
+      "source": "PIE",
+      "sourceGroup": "eveningFeeders",
+      "destination": "DAY",
+      "destinationGroup": "network",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "JAX-PIE-CRJ200-01-IN",
+          "inboundFlight": 1536,
+          "hubArrival": "14:24",
+          "outboundLegId": "DAY-JAX-CRJ700-01-IN",
+          "outboundFlight": 1451,
+          "hubDeparture": "15:45",
+          "waitMinutes": 81
+        }
+      ]
+    },
+    {
+      "source": "PIE",
+      "sourceGroup": "eveningFeeders",
+      "destination": "MCI",
+      "destinationGroup": "network",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "PIE",
+      "sourceGroup": "eveningFeeders",
+      "destination": "PHF",
+      "destinationGroup": "network",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "JAX-PIE-CRJ200-01-IN",
+          "inboundFlight": 1536,
+          "hubArrival": "14:24",
+          "outboundLegId": "JAX-PHF-CRJ900-02-OUT",
+          "outboundFlight": 1160,
+          "hubDeparture": "16:10",
+          "waitMinutes": 106
+        },
+        {
+          "inboundLegId": "JAX-PIE-CRJ200-01-IN",
+          "inboundFlight": 1536,
+          "hubArrival": "14:24",
+          "outboundLegId": "V115-R718-JAX-PHF",
+          "outboundFlight": 2026,
+          "hubDeparture": "16:50",
+          "waitMinutes": 146
+        }
+      ]
+    },
+    {
+      "source": "PIE",
+      "sourceGroup": "eveningFeeders",
+      "destination": "SYR",
+      "destinationGroup": "network",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "PIE",
+      "sourceGroup": "eveningFeeders",
+      "destination": "SFB",
+      "destinationGroup": "network",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "JAX-PIE-CRJ200-01-IN",
+          "inboundFlight": 1536,
+          "hubArrival": "14:24",
+          "outboundLegId": "JAX-SFB-CRJ700-01-OUT",
+          "outboundFlight": 1437,
+          "hubDeparture": "16:15",
+          "waitMinutes": 111
+        }
+      ]
+    },
+    {
+      "source": "PIE",
+      "sourceGroup": "eveningFeeders",
+      "destination": "BHM",
+      "destinationGroup": "network",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "JAX-PIE-CRJ200-01-IN",
+          "inboundFlight": 1536,
+          "hubArrival": "14:24",
+          "outboundLegId": "BHM-JAX-CRJ700-01-IN",
+          "outboundFlight": 1422,
+          "hubDeparture": "17:20",
+          "waitMinutes": 176
+        }
+      ]
+    },
+    {
+      "source": "DAY",
+      "sourceGroup": "network",
+      "destination": "CLT",
+      "destinationGroup": "eveningFeeders",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V120-2MAX-D1-5-DAY-JAX",
+          "inboundFlight": 2087,
+          "hubArrival": "14:03",
+          "outboundLegId": "CLT-JAX-CRJ900-02-IN",
+          "outboundFlight": 1212,
+          "hubDeparture": "17:15",
+          "waitMinutes": 192
+        },
+        {
+          "inboundLegId": "V120-2MAX-D2-7-DAY-JAX",
+          "inboundFlight": 2097,
+          "hubArrival": "18:05",
+          "outboundLegId": "V122-R504-2-JAX-CLT",
+          "outboundFlight": 2126,
+          "hubDeparture": "21:25",
+          "waitMinutes": 200
+        }
+      ]
+    },
+    {
+      "source": "DAY",
+      "sourceGroup": "network",
+      "destination": "MSY",
+      "destinationGroup": "eveningFeeders",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V120-2MAX-D2-7-DAY-JAX",
+          "inboundFlight": 2097,
+          "hubArrival": "18:05",
+          "outboundLegId": "V122-R341-2-JAX-MSY",
+          "outboundFlight": 2124,
+          "hubDeparture": "21:39",
+          "waitMinutes": 214
+        }
+      ]
+    },
+    {
+      "source": "DAY",
+      "sourceGroup": "network",
+      "destination": "SAV",
+      "destinationGroup": "eveningFeeders",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "DAY-JAX-CRJ700-01-OUT",
+          "inboundFlight": 1452,
+          "hubArrival": "09:55",
+          "outboundLegId": "JAX-SAV-CRJ200-01-OUT",
+          "outboundFlight": 1625,
+          "hubDeparture": "11:50",
+          "waitMinutes": 115
+        },
+        {
+          "inboundLegId": "V120-2MAX-D2-7-DAY-JAX",
+          "inboundFlight": 2097,
+          "hubArrival": "18:05",
+          "outboundLegId": "V122-R338-2-JAX-SAV",
+          "outboundFlight": 2128,
+          "hubDeparture": "21:25",
+          "waitMinutes": 200
+        }
+      ]
+    },
+    {
+      "source": "DAY",
+      "sourceGroup": "network",
+      "destination": "PIE",
+      "destinationGroup": "eveningFeeders",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "DAY-JAX-CRJ700-01-OUT",
+          "inboundFlight": 1452,
+          "hubArrival": "09:55",
+          "outboundLegId": "JAX-PIE-CRJ200-01-OUT",
+          "outboundFlight": 1535,
+          "hubDeparture": "11:50",
+          "waitMinutes": 115
+        }
+      ]
+    },
+    {
+      "source": "MCI",
+      "sourceGroup": "network",
+      "destination": "CLT",
+      "destinationGroup": "eveningFeeders",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "MCI",
+      "sourceGroup": "network",
+      "destination": "MSY",
+      "destinationGroup": "eveningFeeders",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "MCI",
+      "sourceGroup": "network",
+      "destination": "SAV",
+      "destinationGroup": "eveningFeeders",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "JAX-MCI-CRJ900-01-IN",
+          "inboundFlight": 1254,
+          "hubArrival": "09:00",
+          "outboundLegId": "JAX-SAV-CRJ200-01-OUT",
+          "outboundFlight": 1625,
+          "hubDeparture": "11:50",
+          "waitMinutes": 170
+        }
+      ]
+    },
+    {
+      "source": "MCI",
+      "sourceGroup": "network",
+      "destination": "PIE",
+      "destinationGroup": "eveningFeeders",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "JAX-MCI-CRJ900-01-IN",
+          "inboundFlight": 1254,
+          "hubArrival": "09:00",
+          "outboundLegId": "JAX-PIE-CRJ200-01-OUT",
+          "outboundFlight": 1535,
+          "hubDeparture": "11:50",
+          "waitMinutes": 170
+        }
+      ]
+    },
+    {
+      "source": "PHF",
+      "sourceGroup": "network",
+      "destination": "CLT",
+      "destinationGroup": "eveningFeeders",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "JAX-PHF-CRJ900-02-IN",
+          "inboundFlight": 1162,
+          "hubArrival": "13:12",
+          "outboundLegId": "CLT-JAX-CRJ900-01-IN",
+          "outboundFlight": 1211,
+          "hubDeparture": "14:00",
+          "waitMinutes": 48
+        },
+        {
+          "inboundLegId": "V115-R718-PHF-JAX",
+          "inboundFlight": 2025,
+          "hubArrival": "15:32",
+          "outboundLegId": "CLT-JAX-CRJ900-02-IN",
+          "outboundFlight": 1212,
+          "hubDeparture": "17:15",
+          "waitMinutes": 103
+        },
+        {
+          "inboundLegId": "JAX-PHF-CRJ900-01-IN",
+          "inboundFlight": 1161,
+          "hubArrival": "10:52",
+          "outboundLegId": "CLT-JAX-CRJ900-01-IN",
+          "outboundFlight": 1211,
+          "hubDeparture": "14:00",
+          "waitMinutes": 188
+        }
+      ]
+    },
+    {
+      "source": "PHF",
+      "sourceGroup": "network",
+      "destination": "MSY",
+      "destinationGroup": "eveningFeeders",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "PHF",
+      "sourceGroup": "network",
+      "destination": "SAV",
+      "destinationGroup": "eveningFeeders",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "JAX-PHF-CRJ900-01-IN",
+          "inboundFlight": 1161,
+          "hubArrival": "10:52",
+          "outboundLegId": "JAX-SAV-CRJ200-01-OUT",
+          "outboundFlight": 1625,
+          "hubDeparture": "11:50",
+          "waitMinutes": 58
+        }
+      ]
+    },
+    {
+      "source": "PHF",
+      "sourceGroup": "network",
+      "destination": "PIE",
+      "destinationGroup": "eveningFeeders",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "JAX-PHF-CRJ900-01-IN",
+          "inboundFlight": 1161,
+          "hubArrival": "10:52",
+          "outboundLegId": "JAX-PIE-CRJ200-01-OUT",
+          "outboundFlight": 1535,
+          "hubDeparture": "11:50",
+          "waitMinutes": 58
+        }
+      ]
+    },
+    {
+      "source": "SYR",
+      "sourceGroup": "network",
+      "destination": "CLT",
+      "destinationGroup": "eveningFeeders",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "JAX-SYR-CRJ700-01-IN",
+          "inboundFlight": 1407,
+          "hubArrival": "16:38",
+          "outboundLegId": "CLT-JAX-CRJ900-02-IN",
+          "outboundFlight": 1212,
+          "hubDeparture": "17:15",
+          "waitMinutes": 37
+        }
+      ]
+    },
+    {
+      "source": "SYR",
+      "sourceGroup": "network",
+      "destination": "MSY",
+      "destinationGroup": "eveningFeeders",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "SYR",
+      "sourceGroup": "network",
+      "destination": "SAV",
+      "destinationGroup": "eveningFeeders",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "SYR",
+      "sourceGroup": "network",
+      "destination": "PIE",
+      "destinationGroup": "eveningFeeders",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "SFB",
+      "sourceGroup": "network",
+      "destination": "CLT",
+      "destinationGroup": "eveningFeeders",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V122-R702-1-SFB-JAX",
+          "inboundFlight": 2119,
+          "hubArrival": "20:53",
+          "outboundLegId": "V122-R504-2-JAX-CLT",
+          "outboundFlight": 2126,
+          "hubDeparture": "21:25",
+          "waitMinutes": 32
+        },
+        {
+          "inboundLegId": "JAX-SFB-CRJ700-01-IN",
+          "inboundFlight": 1438,
+          "hubArrival": "18:45",
+          "outboundLegId": "V122-R504-2-JAX-CLT",
+          "outboundFlight": 2126,
+          "hubDeparture": "21:25",
+          "waitMinutes": 160
+        }
+      ]
+    },
+    {
+      "source": "SFB",
+      "sourceGroup": "network",
+      "destination": "MSY",
+      "destinationGroup": "eveningFeeders",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V122-R702-1-SFB-JAX",
+          "inboundFlight": 2119,
+          "hubArrival": "20:53",
+          "outboundLegId": "V122-R341-2-JAX-MSY",
+          "outboundFlight": 2124,
+          "hubDeparture": "21:39",
+          "waitMinutes": 46
+        },
+        {
+          "inboundLegId": "JAX-SFB-CRJ700-01-IN",
+          "inboundFlight": 1438,
+          "hubArrival": "18:45",
+          "outboundLegId": "V122-R341-2-JAX-MSY",
+          "outboundFlight": 2124,
+          "hubDeparture": "21:39",
+          "waitMinutes": 174
+        }
+      ]
+    },
+    {
+      "source": "SFB",
+      "sourceGroup": "network",
+      "destination": "SAV",
+      "destinationGroup": "eveningFeeders",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V122-R702-1-SFB-JAX",
+          "inboundFlight": 2119,
+          "hubArrival": "20:53",
+          "outboundLegId": "V122-R338-2-JAX-SAV",
+          "outboundFlight": 2128,
+          "hubDeparture": "21:25",
+          "waitMinutes": 32
+        },
+        {
+          "inboundLegId": "JAX-SFB-CRJ700-01-IN",
+          "inboundFlight": 1438,
+          "hubArrival": "18:45",
+          "outboundLegId": "V122-R338-2-JAX-SAV",
+          "outboundFlight": 2128,
+          "hubDeparture": "21:25",
+          "waitMinutes": 160
+        }
+      ]
+    },
+    {
+      "source": "SFB",
+      "sourceGroup": "network",
+      "destination": "PIE",
+      "destinationGroup": "eveningFeeders",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V120-2MAX-D1-1-SFB-JAX",
+          "inboundFlight": 2083,
+          "hubArrival": "05:18",
+          "outboundLegId": "V122-R515-1-JAX-PIE",
+          "outboundFlight": 2130,
+          "hubDeparture": "06:20",
+          "waitMinutes": 62
+        }
+      ]
+    },
+    {
+      "source": "BHM",
+      "sourceGroup": "network",
+      "destination": "CLT",
+      "destinationGroup": "eveningFeeders",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "BHM-JAX-CRJ700-01-OUT",
+          "inboundFlight": 1421,
+          "hubArrival": "16:31",
+          "outboundLegId": "CLT-JAX-CRJ900-02-IN",
+          "outboundFlight": 1212,
+          "hubDeparture": "17:15",
+          "waitMinutes": 44
+        }
+      ]
+    },
+    {
+      "source": "BHM",
+      "sourceGroup": "network",
+      "destination": "MSY",
+      "destinationGroup": "eveningFeeders",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "BHM",
+      "sourceGroup": "network",
+      "destination": "SAV",
+      "destinationGroup": "eveningFeeders",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "BHM",
+      "sourceGroup": "network",
+      "destination": "PIE",
+      "destinationGroup": "eveningFeeders",
+      "status": "not_connected",
+      "options": []
+    }
+  ]
+}
