@@ -1,0 +1,147 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "schedule-7-v1.2.3-bwi-round-1-proposal",
+  "baseSchedule": {
+    "scheduleId": "schedule_7_v1_2_2",
+    "canonical": "data/schedules/schedule_7_v1_2_2/canonical_schedule.json",
+    "sha256": "750a112257e3829f9f831a258257cc753aed35e4e9e4ef0e8791143739524499"
+  },
+  "schedule": {
+    "id": "schedule_7_v1_2_3_draft",
+    "version": "1.2.3",
+    "label": "Schedule 7 v1.2.3 proposed draft; unpublished",
+    "status": "draft"
+  },
+  "approval": {
+    "status": "proposed; not approved for publication",
+    "scope": "Two added Route 331 round trips, CLT/SDF late-DAY feeders, one DAY bank. All existing flights and Route 332 originator preserved.",
+    "userInstruction": "Begin work on v1.2.3; holistic schedule changes open as an option.",
+    "pendingDecisions": [
+      "Choose PHF or DAY morning turn on Route 331",
+      "DAY-B9 and two supporting feeders",
+      "Publication"
+    ]
+  },
+  "hubBanksToAdd": [
+    {
+      "id": "DAY-B9",
+      "hub": "DAY",
+      "startMinute": 1265,
+      "endMinute": 1325
+    }
+  ],
+  "hubBankCountOverrides": {
+    "DAY": 9
+  },
+  "insertLegs": [
+    {
+      "id": "V123-R331-1-BWI-PHF",
+      "origin": "BWI",
+      "destination": "PHF",
+      "departureMinute": 335,
+      "arrivalMinute": 383,
+      "route": 331
+    },
+    {
+      "id": "V123-R331-2-PHF-BWI",
+      "origin": "PHF",
+      "destination": "BWI",
+      "departureMinute": 423,
+      "arrivalMinute": 471,
+      "route": 331
+    },
+    {
+      "id": "V123-R331-3-BWI-DAY",
+      "origin": "BWI",
+      "destination": "DAY",
+      "departureMinute": 1192,
+      "arrivalMinute": 1274,
+      "route": 331
+    },
+    {
+      "id": "V123-R331-4-DAY-BWI",
+      "origin": "DAY",
+      "destination": "BWI",
+      "departureMinute": 1314,
+      "arrivalMinute": 1396,
+      "route": 331
+    },
+    {
+      "id": "V123-R340-1-CLT-DAY",
+      "origin": "CLT",
+      "destination": "DAY",
+      "departureMinute": 1188,
+      "arrivalMinute": 1265,
+      "route": 340
+    },
+    {
+      "id": "V123-R340-2-DAY-CLT",
+      "origin": "DAY",
+      "destination": "CLT",
+      "departureMinute": 1315,
+      "arrivalMinute": 1392,
+      "route": 340
+    },
+    {
+      "id": "V123-R327-1-SDF-DAY",
+      "origin": "SDF",
+      "destination": "DAY",
+      "departureMinute": 1217,
+      "arrivalMinute": 1265,
+      "route": 327
+    },
+    {
+      "id": "V123-R327-2-DAY-SDF",
+      "origin": "DAY",
+      "destination": "SDF",
+      "departureMinute": 1315,
+      "arrivalMinute": 1363,
+      "route": 327
+    }
+  ],
+  "retimeLegs": [],
+  "bankAssignmentsToAdd": [
+    {
+      "legId": "V123-R331-1-BWI-PHF",
+      "operation": "arrival",
+      "bankId": "PHF-B1"
+    },
+    {
+      "legId": "V123-R331-2-PHF-BWI",
+      "operation": "departure",
+      "bankId": "PHF-B1"
+    },
+    {
+      "legId": "V123-R331-3-BWI-DAY",
+      "operation": "arrival",
+      "bankId": "DAY-B9"
+    },
+    {
+      "legId": "V123-R331-4-DAY-BWI",
+      "operation": "departure",
+      "bankId": "DAY-B9"
+    },
+    {
+      "legId": "V123-R340-1-CLT-DAY",
+      "operation": "arrival",
+      "bankId": "DAY-B9"
+    },
+    {
+      "legId": "V123-R340-2-DAY-CLT",
+      "operation": "departure",
+      "bankId": "DAY-B9"
+    },
+    {
+      "legId": "V123-R327-1-SDF-DAY",
+      "operation": "arrival",
+      "bankId": "DAY-B9"
+    },
+    {
+      "legId": "V123-R327-2-DAY-SDF",
+      "operation": "departure",
+      "bankId": "DAY-B9"
+    }
+  ],
+  "bankAssignmentReplacements": [],
+  "operatingOverrides": []
+}
