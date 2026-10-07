@@ -1,0 +1,228 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "schedule-7-v1.2.3-rounds-1-and-2-day-morning-proposal",
+  "baseSchedule": {
+    "scheduleId": "schedule_7_v1_2_2",
+    "canonical": "data/schedules/schedule_7_v1_2_2/canonical_schedule.json",
+    "sha256": "750a112257e3829f9f831a258257cc753aed35e4e9e4ef0e8791143739524499"
+  },
+  "schedule": {
+    "id": "schedule_7_v1_2_3_cumulative_draft",
+    "version": "1.2.3",
+    "label": "Schedule 7 v1.2.3 proposed rounds 1 and 2; DAY morning on 331; unpublished",
+    "status": "draft"
+  },
+  "approval": {
+    "status": "proposed; unpublished",
+    "publication": "Reserved to user decision",
+    "scope": "Round 1 with DAY morning alternative on 331, plus Route 327 buffered PGD–JAX and Route 145 PWM–PHF/SYR–BUF; Flight 1853 five minutes later. Route 305 unchanged."
+  },
+  "hubBanksToAdd": [
+    {
+      "id": "DAY-B9",
+      "hub": "DAY",
+      "startMinute": 1265,
+      "endMinute": 1325
+    }
+  ],
+  "hubBankCountOverrides": {
+    "DAY": 9
+  },
+  "insertLegs": [
+    {
+      "id": "V123-R331-1-BWI-DAY",
+      "origin": "BWI",
+      "destination": "DAY",
+      "departureMinute": 343,
+      "arrivalMinute": 425,
+      "route": 331
+    },
+    {
+      "id": "V123-R331-2-DAY-BWI",
+      "origin": "DAY",
+      "destination": "BWI",
+      "departureMinute": 473,
+      "arrivalMinute": 555,
+      "route": 331
+    },
+    {
+      "id": "V123-R331-3-BWI-DAY",
+      "origin": "BWI",
+      "destination": "DAY",
+      "departureMinute": 1192,
+      "arrivalMinute": 1274,
+      "route": 331
+    },
+    {
+      "id": "V123-R331-4-DAY-BWI",
+      "origin": "DAY",
+      "destination": "BWI",
+      "departureMinute": 1314,
+      "arrivalMinute": 1396,
+      "route": 331
+    },
+    {
+      "id": "V123-R340-1-CLT-DAY",
+      "origin": "CLT",
+      "destination": "DAY",
+      "departureMinute": 1188,
+      "arrivalMinute": 1265,
+      "route": 340
+    },
+    {
+      "id": "V123-R340-2-DAY-CLT",
+      "origin": "DAY",
+      "destination": "CLT",
+      "departureMinute": 1315,
+      "arrivalMinute": 1392,
+      "route": 340
+    },
+    {
+      "id": "V123-R327-1-SDF-DAY",
+      "origin": "SDF",
+      "destination": "DAY",
+      "departureMinute": 1217,
+      "arrivalMinute": 1265,
+      "route": 327
+    },
+    {
+      "id": "V123-R327-2-DAY-SDF",
+      "origin": "DAY",
+      "destination": "SDF",
+      "departureMinute": 1315,
+      "arrivalMinute": 1363,
+      "route": 327
+    },
+    {
+      "id": "V123-R327-3-PGD-JAX",
+      "origin": "PGD",
+      "destination": "JAX",
+      "departureMinute": 355,
+      "arrivalMinute": 417,
+      "route": 327
+    },
+    {
+      "id": "V123-R327-4-JAX-PGD",
+      "origin": "JAX",
+      "destination": "PGD",
+      "departureMinute": 480,
+      "arrivalMinute": 542,
+      "route": 327
+    },
+    {
+      "id": "V123-R145-1-PWM-PHF",
+      "origin": "PWM",
+      "destination": "PHF",
+      "departureMinute": 280,
+      "arrivalMinute": 384,
+      "route": 145
+    },
+    {
+      "id": "V123-R145-2-PHF-PWM",
+      "origin": "PHF",
+      "destination": "PWM",
+      "departureMinute": 424,
+      "arrivalMinute": 528,
+      "route": 145
+    },
+    {
+      "id": "V123-R145-3-SYR-BUF",
+      "origin": "SYR",
+      "destination": "BUF",
+      "departureMinute": 678,
+      "arrivalMinute": 724,
+      "route": 145
+    },
+    {
+      "id": "V123-R145-4-BUF-SYR",
+      "origin": "BUF",
+      "destination": "SYR",
+      "departureMinute": 764,
+      "arrivalMinute": 810,
+      "route": 145
+    }
+  ],
+  "retimeLegs": [
+    {
+      "legId": "HPN-SYR-CRJ200-03-IN",
+      "expectedDepartureMinute": 845,
+      "expectedArrivalMinute": 899,
+      "departureMinute": 850,
+      "arrivalMinute": 904
+    }
+  ],
+  "bankAssignmentsToAdd": [
+    {
+      "legId": "V123-R331-1-BWI-DAY",
+      "operation": "arrival",
+      "bankId": "DAY-B2"
+    },
+    {
+      "legId": "V123-R331-2-DAY-BWI",
+      "operation": "departure",
+      "bankId": "DAY-B2"
+    },
+    {
+      "legId": "V123-R331-3-BWI-DAY",
+      "operation": "arrival",
+      "bankId": "DAY-B9"
+    },
+    {
+      "legId": "V123-R331-4-DAY-BWI",
+      "operation": "departure",
+      "bankId": "DAY-B9"
+    },
+    {
+      "legId": "V123-R340-1-CLT-DAY",
+      "operation": "arrival",
+      "bankId": "DAY-B9"
+    },
+    {
+      "legId": "V123-R340-2-DAY-CLT",
+      "operation": "departure",
+      "bankId": "DAY-B9"
+    },
+    {
+      "legId": "V123-R327-1-SDF-DAY",
+      "operation": "arrival",
+      "bankId": "DAY-B9"
+    },
+    {
+      "legId": "V123-R327-2-DAY-SDF",
+      "operation": "departure",
+      "bankId": "DAY-B9"
+    },
+    {
+      "legId": "V123-R327-3-PGD-JAX",
+      "operation": "arrival",
+      "bankId": "JAX-B3"
+    },
+    {
+      "legId": "V123-R327-4-JAX-PGD",
+      "operation": "departure",
+      "bankId": "JAX-B4"
+    },
+    {
+      "legId": "V123-R145-1-PWM-PHF",
+      "operation": "arrival",
+      "bankId": "PHF-B1"
+    },
+    {
+      "legId": "V123-R145-2-PHF-PWM",
+      "operation": "departure",
+      "bankId": "PHF-B1"
+    },
+    {
+      "legId": "V123-R145-3-SYR-BUF",
+      "operation": "departure",
+      "bankId": "SYR-B3"
+    },
+    {
+      "legId": "V123-R145-4-BUF-SYR",
+      "operation": "arrival",
+      "bankId": "SYR-B4"
+    }
+  ],
+  "bankAssignmentReplacements": [],
+  "operatingOverrides": []
+}

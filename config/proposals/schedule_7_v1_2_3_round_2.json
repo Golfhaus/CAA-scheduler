@@ -1,0 +1,115 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "schedule-7-v1.2.3-utilization-round-2-proposal",
+  "baseSchedule": {
+    "scheduleId": "schedule_7_v1_2_2",
+    "canonical": "data/schedules/schedule_7_v1_2_2/canonical_schedule.json",
+    "sha256": "750a112257e3829f9f831a258257cc753aed35e4e9e4ef0e8791143739524499"
+  },
+  "schedule": {
+    "id": "schedule_7_v1_2_3_utilization_round_2",
+    "version": "1.2.3",
+    "label": "Schedule 7 v1.2.3 utilization round 2; unpublished",
+    "status": "draft"
+  },
+  "approval": {
+    "status": "proposed; unpublished",
+    "publication": "Reserved to user decision",
+    "scope": "PGD–JAX on 327; PWM–PHF and SYR–BUF on 145; five-minute delay to Flight 1853. Route 305 conditional rebuild stored separately."
+  },
+  "hubBanksToAdd": [],
+  "hubBankCountOverrides": {},
+  "insertLegs": [
+    {
+      "id": "V123-R327-1-PGD-JAX",
+      "origin": "PGD",
+      "destination": "JAX",
+      "departureMinute": 355,
+      "arrivalMinute": 417,
+      "route": 327
+    },
+    {
+      "id": "V123-R327-2-JAX-PGD",
+      "origin": "JAX",
+      "destination": "PGD",
+      "departureMinute": 480,
+      "arrivalMinute": 542,
+      "route": 327
+    },
+    {
+      "id": "V123-R145-1-PWM-PHF",
+      "origin": "PWM",
+      "destination": "PHF",
+      "departureMinute": 280,
+      "arrivalMinute": 384,
+      "route": 145
+    },
+    {
+      "id": "V123-R145-2-PHF-PWM",
+      "origin": "PHF",
+      "destination": "PWM",
+      "departureMinute": 424,
+      "arrivalMinute": 528,
+      "route": 145
+    },
+    {
+      "id": "V123-R145-3-SYR-BUF",
+      "origin": "SYR",
+      "destination": "BUF",
+      "departureMinute": 678,
+      "arrivalMinute": 724,
+      "route": 145
+    },
+    {
+      "id": "V123-R145-4-BUF-SYR",
+      "origin": "BUF",
+      "destination": "SYR",
+      "departureMinute": 764,
+      "arrivalMinute": 810,
+      "route": 145
+    }
+  ],
+  "retimeLegs": [
+    {
+      "legId": "HPN-SYR-CRJ200-03-IN",
+      "expectedDepartureMinute": 845,
+      "expectedArrivalMinute": 899,
+      "departureMinute": 850,
+      "arrivalMinute": 904
+    }
+  ],
+  "bankAssignmentsToAdd": [
+    {
+      "legId": "V123-R327-1-PGD-JAX",
+      "operation": "arrival",
+      "bankId": "JAX-B3"
+    },
+    {
+      "legId": "V123-R327-2-JAX-PGD",
+      "operation": "departure",
+      "bankId": "JAX-B4"
+    },
+    {
+      "legId": "V123-R145-1-PWM-PHF",
+      "operation": "arrival",
+      "bankId": "PHF-B1"
+    },
+    {
+      "legId": "V123-R145-2-PHF-PWM",
+      "operation": "departure",
+      "bankId": "PHF-B1"
+    },
+    {
+      "legId": "V123-R145-3-SYR-BUF",
+      "operation": "departure",
+      "bankId": "SYR-B3"
+    },
+    {
+      "legId": "V123-R145-4-BUF-SYR",
+      "operation": "arrival",
+      "bankId": "SYR-B4"
+    }
+  ],
+  "bankAssignmentReplacements": [],
+  "operatingOverrides": []
+}

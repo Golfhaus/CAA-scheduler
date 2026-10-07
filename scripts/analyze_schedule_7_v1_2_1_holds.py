@@ -18,7 +18,7 @@ HOLDS = {701: (2, 3), 123: (1, 2), 321: (3, 4), 129: (3, 4)}
 
 
 class HoldSearch:
-    def __init__(self, base=None):
+    def __init__(self, base=None, *, allocate_gates=True):
         self.base = base if base is not None else read_json(ROOT / BASE)
         self.screen = TwoStopScreen(self.base)
         self.profiles = {p["fleet"]: p for p in read_json(ROOT / "config/policies/planning_rules_v7.json")
@@ -46,6 +46,10 @@ class HoldSearch:
                                   "elapsed": self.clocks[first["id"]][2] + wait + self.clocks[last["id"]][2]}
                         self.one_from[first["origin"]].append(choice)
                         self.one_to[last["destination"]].append(choice)
+        # Retimed intermediate screens can overfill a hold that added flying
+        # will resolve. Final candidates still require full gate validation.
+        if not allocate_gates:
+            return
         self.gates = export_gate_schedule(self.base)
         self.occupancy = {}
         self.gate_capacity = {}

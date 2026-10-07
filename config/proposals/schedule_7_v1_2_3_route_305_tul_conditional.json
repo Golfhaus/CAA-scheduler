@@ -1,0 +1,78 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "schedule-7-v1.2.3-route-305-tul-conditional",
+  "baseSchedule": {
+    "scheduleId": "schedule_7_v1_2_2",
+    "canonical": "data/schedules/schedule_7_v1_2_2/canonical_schedule.json",
+    "sha256": "750a112257e3829f9f831a258257cc753aed35e4e9e4ef0e8791143739524499"
+  },
+  "schedule": {
+    "id": "schedule_7_v1_2_3_route_305_tul_conditional",
+    "version": "1.2.3",
+    "label": "Schedule 7 v1.2.3 Route 305 TUL conditional; unpublished",
+    "status": "draft"
+  },
+  "approval": {
+    "status": "conditional; not included in recommended round 2",
+    "publication": "Reserved to user decision",
+    "requiredDecision": "Accept earlier HRL departure and longer city departure gap; eight modeled lost connections and 17 slower best itineraries; two-minute MCI-B3 shift."
+  },
+  "hubBanksToAdd": [],
+  "hubBankCountOverrides": {},
+  "insertLegs": [
+    {
+      "id": "V123-R305-1-MCI-TUL",
+      "origin": "MCI",
+      "destination": "TUL",
+      "departureMinute": 586,
+      "arrivalMinute": 644,
+      "route": 305
+    },
+    {
+      "id": "V123-R305-2-TUL-MCI",
+      "origin": "TUL",
+      "destination": "MCI",
+      "departureMinute": 685,
+      "arrivalMinute": 743,
+      "route": 305
+    }
+  ],
+  "retimeLegs": [
+    {
+      "legId": "HRL-MCI-CRJ700-02-OUT",
+      "expectedDepartureMinute": 590,
+      "expectedArrivalMinute": 737,
+      "departureMinute": 399,
+      "arrivalMinute": 546
+    }
+  ],
+  "bankAssignmentsToAdd": [
+    {
+      "legId": "V123-R305-1-MCI-TUL",
+      "operation": "departure",
+      "bankId": "MCI-B4"
+    },
+    {
+      "legId": "V123-R305-2-TUL-MCI",
+      "operation": "arrival",
+      "bankId": "MCI-B5"
+    }
+  ],
+  "bankAssignmentReplacements": [
+    {
+      "legId": "HRL-MCI-CRJ700-02-OUT",
+      "operation": "arrival",
+      "bankId": "MCI-B3"
+    }
+  ],
+  "operatingOverrides": [],
+  "hubBankChanges": [
+    {
+      "bankId": "MCI-B3",
+      "expectedStartMinute": 485,
+      "expectedEndMinute": 545,
+      "startMinute": 487,
+      "endMinute": 547
+    }
+  ]
+}
