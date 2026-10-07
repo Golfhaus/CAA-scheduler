@@ -1,5 +1,7 @@
 # Schedule 7 v1.2.3: BWI aircraft utilization and a late DAY bank
 
+**Publication update, October 7, 2026:** v1.2.3 is released with all approved changes, including 114 PHF and 169 DAY. Optional 350 and 163 extensions remain proposals. This document preserves the earlier analysis; the authoritative release and next working baseline are described in [the release notes](schedule_7_v1_2_3_release.md).
+
 Proposal dated October 6, 2026. Baseline: released Schedule 7 v1.2.2
 (1,128 flights). This work is unpublished; the app and main remain on v1.2.2.
 

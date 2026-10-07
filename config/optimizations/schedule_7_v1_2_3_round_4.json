@@ -1,0 +1,88 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "schedule-7-v1.2.3-approved-evening-extensions",
+  "baseSchedule": {
+    "scheduleId": "schedule_7_v1_2_3_draft",
+    "canonical": "data/schedules/schedule_7_v1_2_3_draft/canonical_schedule.json",
+    "sha256": "f8fcebfbe746f4a8e85d3b066e4b9abc397ae6d797c3bbf9cd5a029a0ac85965"
+  },
+  "schedule": {
+    "id": "schedule_7_v1_2_3_accepted_all",
+    "version": "1.2.3",
+    "label": "Schedule 7 v1.2.3 approved release input",
+    "status": "draft"
+  },
+  "approval": {
+    "status": "approved for implementation and publication",
+    "userInstruction": "Publish the suggested changes as v1.2.3 in the main branch of the app.",
+    "scope": "Recommended ROA–PHF on 114 and FWA–DAY on 169. Optional 350 MCI is excluded. All previously approved v1.2.3 changes retained.",
+    "publication": "Approved by user October 7, 2026"
+  },
+  "hubBanksToAdd": [],
+  "hubBankCountOverrides": {},
+  "insertLegs": [
+    {
+      "id": "V123-R4-R114-1-ROA-PHF",
+      "origin": "ROA",
+      "destination": "PHF",
+      "departureMinute": 1170,
+      "arrivalMinute": 1224,
+      "route": 114
+    },
+    {
+      "id": "V123-R4-R114-2-PHF-ROA",
+      "origin": "PHF",
+      "destination": "ROA",
+      "departureMinute": 1305,
+      "arrivalMinute": 1359,
+      "route": 114
+    },
+    {
+      "id": "V123-R4-R169-1-FWA-DAY",
+      "origin": "FWA",
+      "destination": "DAY",
+      "departureMinute": 1225,
+      "arrivalMinute": 1265,
+      "route": 169
+    },
+    {
+      "id": "V123-R4-R169-2-DAY-FWA",
+      "origin": "DAY",
+      "destination": "FWA",
+      "departureMinute": 1315,
+      "arrivalMinute": 1355,
+      "route": 169
+    }
+  ],
+  "retimeLegs": [],
+  "bankAssignmentsToAdd": [
+    {
+      "legId": "V123-R4-R114-1-ROA-PHF",
+      "operation": "arrival",
+      "bankId": "PHF-B7"
+    },
+    {
+      "legId": "V123-R4-R114-2-PHF-ROA",
+      "operation": "departure",
+      "bankId": "PHF-M7"
+    },
+    {
+      "legId": "V123-R4-R169-1-FWA-DAY",
+      "operation": "arrival",
+      "bankId": "DAY-B9"
+    },
+    {
+      "legId": "V123-R4-R169-2-DAY-FWA",
+      "operation": "departure",
+      "bankId": "DAY-B9"
+    }
+  ],
+  "bankAssignmentReplacements": [],
+  "operatingOverrides": [
+    {
+      "checkId": "tiered_service_minimums",
+      "findingId": "ROA",
+      "reason": "User-approved useful additional PHF service at ROA under standing hub-count exception authorization; approved for v1.2.3 publication October 7, 2026. No minimum service, gate, turn, curfew or bank constraint is waived."
+    }
+  ]
+}

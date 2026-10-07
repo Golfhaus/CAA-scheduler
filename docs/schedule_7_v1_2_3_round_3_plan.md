@@ -1,5 +1,7 @@
 # Schedule 7 v1.2.3: accepted changes and Routes 526, 163, 509 review
 
+**Publication update, October 7, 2026:** v1.2.3 is released with all approved changes, including 114 PHF and 169 DAY. Optional 350 and 163 extensions remain proposals. This document preserves the earlier analysis; the authoritative release and next working baseline are described in [the release notes](schedule_7_v1_2_3_release.md).
+
 **October 7 implementation update:** The user subsequently approved the 526 and 509 extensions. Both are now in the 1148-flight accepted unpublished draft, including Flight 1206's +12-minute shift. The current accepted master is `config/optimizations/schedule_7_v1_2_3_accepted_rounds_1_3.json`. The report below preserves the original proposal comparison; see [the current evening-extension review](schedule_7_v1_2_3_round_4_plan.md) for the latest state. Main/app remain v1.2.2.
 
 ## State and recommendation

@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "defaultScheduleId": "schedule_7_v1_2_2",
+  "defaultScheduleId": "schedule_7_v1_2_3",
   "repositoryUrl": "https://github.com/Golfhaus/CAA-scheduler",
   "instructions": {
     "version": "2.0 with turn-on-stand hard-stop addition",
@@ -202,6 +202,22 @@
         "connectionAudit": "data/schedules/schedule_7_v1_2_2/connection_audit.json",
         "optimizationRelease": "data/schedules/schedule_7_v1_2_2/release_report.json",
         "overnightValidation": "data/schedules/schedule_7_v1_2_2/overnight_turn_validation.json"
+      }
+    },
+    {
+      "id": "schedule_7_v1_2_3",
+      "label": "Schedule 7 · v1.2.3",
+      "files": {
+        "canonical": "data/schedules/schedule_7_v1_2_3/canonical_schedule.json",
+        "structuralValidation": "data/schedules/schedule_7_v1_2_3/validation_report.json",
+        "operatingValidation": "data/schedules/schedule_7_v1_2_3/operating_validation_report.json",
+        "planning": "data/schedules/schedule_7_v1_2_3/planning_snapshot.json",
+        "planningValidation": "data/schedules/schedule_7_v1_2_3/planning_validation_report.json",
+        "timetable": "data/schedules/schedule_7_v1_2_3/timetable.json",
+        "gates": "data/schedules/schedule_7_v1_2_3/gates.json",
+        "connectionAudit": "data/schedules/schedule_7_v1_2_3/connection_audit.json",
+        "optimizationRelease": "data/schedules/schedule_7_v1_2_3/release_report.json",
+        "overnightValidation": "data/schedules/schedule_7_v1_2_3/overnight_turn_validation.json"
       }
     }
   ],

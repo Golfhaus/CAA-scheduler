@@ -1,5 +1,7 @@
 # Schedule 7 v1.2.3: approved 526/509 additions and evening extensions
 
+**Publication update, October 7, 2026:** v1.2.3 is released with all approved changes, including 114 PHF and 169 DAY. Optional 350 and 163 extensions remain proposals. This document preserves the earlier analysis; the authoritative release and next working baseline are described in [the release notes](schedule_7_v1_2_3_release.md).
+
 ## Implemented state
 
 On October 7, 2026, the user approved adding the 526 and 509 extensions. They are now implemented in the **unpublished accepted draft, with 1148 flights**:

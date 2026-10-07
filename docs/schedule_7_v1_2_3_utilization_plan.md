@@ -1,5 +1,7 @@
 # Schedule 7 v1.2.3: Routes 327, 305 and 145 utilization review
 
+**Publication update, October 7, 2026:** v1.2.3 is released with all approved changes, including 114 PHF and 169 DAY. Optional 350 and 163 extensions remain proposals. This document preserves the earlier analysis; the authoritative release and next working baseline are described in [the release notes](schedule_7_v1_2_3_release.md).
+
 Status: proposed and unpublished. Main/app remain on released v1.2.2. This review preserves the original round-one proposal and treats its additions as unapproved options.
 
 ## Recommendation

@@ -1,0 +1,619 @@
+{
+  "schemaVersion": "1.0.0",
+  "scheduleId": "schedule_7_v1_2_3",
+  "hub": "DAY",
+  "connectionWindowMinutes": {
+    "minimum": 30,
+    "maximum": 240
+  },
+  "groups": {
+    "lateBankFeeders": [
+      "BWI",
+      "CLT",
+      "SDF",
+      "FWA"
+    ],
+    "hubNetwork": [
+      "JAX",
+      "PHF",
+      "SYR",
+      "MCI"
+    ]
+  },
+  "summary": {
+    "targetCities": 8,
+    "directRoundTripCities": 8,
+    "directionalPairs": 32,
+    "connectedDirectionalPairs": 17,
+    "missingDirectionalPairs": 15,
+    "connectionCoverage": 0.53125,
+    "bySourceGroup": {
+      "lateBankFeeders": {
+        "directionalPairs": 16,
+        "connectedDirectionalPairs": 5,
+        "missingDirectionalPairs": 11
+      },
+      "hubNetwork": {
+        "directionalPairs": 16,
+        "connectedDirectionalPairs": 12,
+        "missingDirectionalPairs": 4
+      }
+    }
+  },
+  "directCoverage": [
+    {
+      "city": "BWI",
+      "group": "lateBankFeeders",
+      "toHubLegs": 2,
+      "fromHubLegs": 2,
+      "roundTripCovered": true
+    },
+    {
+      "city": "CLT",
+      "group": "lateBankFeeders",
+      "toHubLegs": 1,
+      "fromHubLegs": 1,
+      "roundTripCovered": true
+    },
+    {
+      "city": "SDF",
+      "group": "lateBankFeeders",
+      "toHubLegs": 2,
+      "fromHubLegs": 2,
+      "roundTripCovered": true
+    },
+    {
+      "city": "FWA",
+      "group": "lateBankFeeders",
+      "toHubLegs": 4,
+      "fromHubLegs": 4,
+      "roundTripCovered": true
+    },
+    {
+      "city": "JAX",
+      "group": "hubNetwork",
+      "toHubLegs": 4,
+      "fromHubLegs": 4,
+      "roundTripCovered": true
+    },
+    {
+      "city": "PHF",
+      "group": "hubNetwork",
+      "toHubLegs": 4,
+      "fromHubLegs": 4,
+      "roundTripCovered": true
+    },
+    {
+      "city": "SYR",
+      "group": "hubNetwork",
+      "toHubLegs": 1,
+      "fromHubLegs": 1,
+      "roundTripCovered": true
+    },
+    {
+      "city": "MCI",
+      "group": "hubNetwork",
+      "toHubLegs": 2,
+      "fromHubLegs": 2,
+      "roundTripCovered": true
+    }
+  ],
+  "directionalPairs": [
+    {
+      "source": "BWI",
+      "sourceGroup": "lateBankFeeders",
+      "destination": "JAX",
+      "destinationGroup": "hubNetwork",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V123-R331-1-BWI-DAY",
+          "inboundFlight": 2131,
+          "hubArrival": "07:05",
+          "outboundLegId": "DAY-JAX-CRJ700-01-OUT",
+          "outboundFlight": 1452,
+          "hubDeparture": "08:00",
+          "waitMinutes": 55
+        }
+      ]
+    },
+    {
+      "source": "BWI",
+      "sourceGroup": "lateBankFeeders",
+      "destination": "PHF",
+      "destinationGroup": "hubNetwork",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "BWI",
+      "sourceGroup": "lateBankFeeders",
+      "destination": "SYR",
+      "destinationGroup": "hubNetwork",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "BWI",
+      "sourceGroup": "lateBankFeeders",
+      "destination": "MCI",
+      "destinationGroup": "hubNetwork",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "CLT",
+      "sourceGroup": "lateBankFeeders",
+      "destination": "JAX",
+      "destinationGroup": "hubNetwork",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "CLT",
+      "sourceGroup": "lateBankFeeders",
+      "destination": "PHF",
+      "destinationGroup": "hubNetwork",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "CLT",
+      "sourceGroup": "lateBankFeeders",
+      "destination": "SYR",
+      "destinationGroup": "hubNetwork",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "CLT",
+      "sourceGroup": "lateBankFeeders",
+      "destination": "MCI",
+      "destinationGroup": "hubNetwork",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "SDF",
+      "sourceGroup": "lateBankFeeders",
+      "destination": "JAX",
+      "destinationGroup": "hubNetwork",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "SDF",
+      "sourceGroup": "lateBankFeeders",
+      "destination": "PHF",
+      "destinationGroup": "hubNetwork",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "SDF",
+      "sourceGroup": "lateBankFeeders",
+      "destination": "SYR",
+      "destinationGroup": "hubNetwork",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "SDF",
+      "sourceGroup": "lateBankFeeders",
+      "destination": "MCI",
+      "destinationGroup": "hubNetwork",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "FWA",
+      "sourceGroup": "lateBankFeeders",
+      "destination": "JAX",
+      "destinationGroup": "hubNetwork",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "DAY-FWA-CRJ200-02-IN",
+          "inboundFlight": 1872,
+          "hubArrival": "11:25",
+          "outboundLegId": "V120-2MAX-D1-5-DAY-JAX",
+          "outboundFlight": 2087,
+          "hubDeparture": "12:14",
+          "waitMinutes": 49
+        },
+        {
+          "inboundLegId": "DAY-FWA-CRJ200-01-IN",
+          "inboundFlight": 1871,
+          "hubArrival": "05:10",
+          "outboundLegId": "DAY-JAX-CRJ700-01-OUT",
+          "outboundFlight": 1452,
+          "hubDeparture": "08:00",
+          "waitMinutes": 170
+        }
+      ]
+    },
+    {
+      "source": "FWA",
+      "sourceGroup": "lateBankFeeders",
+      "destination": "PHF",
+      "destinationGroup": "hubNetwork",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "DAY-FWA-CRJ200-02-IN",
+          "inboundFlight": 1872,
+          "hubArrival": "11:25",
+          "outboundLegId": "DAY-PHF-CRJ200-01-OUT",
+          "outboundFlight": 1567,
+          "hubDeparture": "12:05",
+          "waitMinutes": 40
+        },
+        {
+          "inboundLegId": "DAY-FWA-CRJ200-01-IN",
+          "inboundFlight": 1871,
+          "hubArrival": "05:10",
+          "outboundLegId": "V116-R330-DAY-PHF",
+          "outboundFlight": 2078,
+          "hubDeparture": "06:51",
+          "waitMinutes": 101
+        },
+        {
+          "inboundLegId": "DAY-FWA-CRJ200-02-IN",
+          "inboundFlight": 1872,
+          "hubArrival": "11:25",
+          "outboundLegId": "DAY-PHF-CRJ200-02-OUT",
+          "outboundFlight": 1568,
+          "hubDeparture": "14:05",
+          "waitMinutes": 160
+        }
+      ]
+    },
+    {
+      "source": "FWA",
+      "sourceGroup": "lateBankFeeders",
+      "destination": "SYR",
+      "destinationGroup": "hubNetwork",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "DAY-FWA-CRJ200-02-IN",
+          "inboundFlight": 1872,
+          "hubArrival": "11:25",
+          "outboundLegId": "DAY-SYR-CRJ200-01-OUT",
+          "outboundFlight": 1657,
+          "hubDeparture": "12:05",
+          "waitMinutes": 40
+        }
+      ]
+    },
+    {
+      "source": "FWA",
+      "sourceGroup": "lateBankFeeders",
+      "destination": "MCI",
+      "destinationGroup": "hubNetwork",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V114-R169-FWA-DAY",
+          "inboundFlight": 2009,
+          "hubArrival": "17:30",
+          "outboundLegId": "V121-R129-2-DAY-MCI",
+          "outboundFlight": 2106,
+          "hubDeparture": "18:15",
+          "waitMinutes": 45
+        },
+        {
+          "inboundLegId": "DAY-FWA-CRJ200-02-IN",
+          "inboundFlight": 1872,
+          "hubArrival": "11:25",
+          "outboundLegId": "DAY-MCI-CRJ200-01-OUT",
+          "outboundFlight": 1538,
+          "hubDeparture": "14:10",
+          "waitMinutes": 165
+        }
+      ]
+    },
+    {
+      "source": "JAX",
+      "sourceGroup": "hubNetwork",
+      "destination": "BWI",
+      "destinationGroup": "lateBankFeeders",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V120-2MAX-D1-8-JAX-DAY",
+          "inboundFlight": 2090,
+          "hubArrival": "20:25",
+          "outboundLegId": "V123-R331-4-DAY-BWI",
+          "outboundFlight": 2134,
+          "hubDeparture": "21:54",
+          "waitMinutes": 89
+        }
+      ]
+    },
+    {
+      "source": "JAX",
+      "sourceGroup": "hubNetwork",
+      "destination": "CLT",
+      "destinationGroup": "lateBankFeeders",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V120-2MAX-D1-8-JAX-DAY",
+          "inboundFlight": 2090,
+          "hubArrival": "20:25",
+          "outboundLegId": "V123-R340-2-DAY-CLT",
+          "outboundFlight": 2136,
+          "hubDeparture": "21:55",
+          "waitMinutes": 90
+        }
+      ]
+    },
+    {
+      "source": "JAX",
+      "sourceGroup": "hubNetwork",
+      "destination": "SDF",
+      "destinationGroup": "lateBankFeeders",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V120-2MAX-D1-8-JAX-DAY",
+          "inboundFlight": 2090,
+          "hubArrival": "20:25",
+          "outboundLegId": "V123-R327-2-DAY-SDF",
+          "outboundFlight": 2138,
+          "hubDeparture": "21:55",
+          "waitMinutes": 90
+        }
+      ]
+    },
+    {
+      "source": "JAX",
+      "sourceGroup": "hubNetwork",
+      "destination": "FWA",
+      "destinationGroup": "lateBankFeeders",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "DAY-JAX-CRJ700-01-IN",
+          "inboundFlight": 1451,
+          "hubArrival": "17:40",
+          "outboundLegId": "V114-R169-DAY-FWA",
+          "outboundFlight": 2010,
+          "hubDeparture": "18:10",
+          "waitMinutes": 30
+        },
+        {
+          "inboundLegId": "V120-2MAX-D2-2-JAX-DAY",
+          "inboundFlight": 2092,
+          "hubArrival": "09:27",
+          "outboundLegId": "DAY-FWA-CRJ200-02-OUT",
+          "outboundFlight": 1874,
+          "hubDeparture": "10:00",
+          "waitMinutes": 33
+        },
+        {
+          "inboundLegId": "V120-2MAX-D1-8-JAX-DAY",
+          "inboundFlight": 2090,
+          "hubArrival": "20:25",
+          "outboundLegId": "V123-R4-R169-2-DAY-FWA",
+          "outboundFlight": 2154,
+          "hubDeparture": "21:55",
+          "waitMinutes": 90
+        },
+        {
+          "inboundLegId": "V120-2MAX-D1-2-JAX-DAY",
+          "inboundFlight": 2084,
+          "hubArrival": "08:04",
+          "outboundLegId": "DAY-FWA-CRJ200-02-OUT",
+          "outboundFlight": 1874,
+          "hubDeparture": "10:00",
+          "waitMinutes": 116
+        }
+      ]
+    },
+    {
+      "source": "PHF",
+      "sourceGroup": "hubNetwork",
+      "destination": "BWI",
+      "destinationGroup": "lateBankFeeders",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V116-R330-PHF-DAY",
+          "inboundFlight": 2077,
+          "hubArrival": "05:59",
+          "outboundLegId": "V123-R331-2-DAY-BWI",
+          "outboundFlight": 2132,
+          "hubDeparture": "07:53",
+          "waitMinutes": 114
+        },
+        {
+          "inboundLegId": "DAY-PHF-CRJ200-03-IN",
+          "inboundFlight": 1572,
+          "hubArrival": "19:46",
+          "outboundLegId": "V123-R331-4-DAY-BWI",
+          "outboundFlight": 2134,
+          "hubDeparture": "21:54",
+          "waitMinutes": 128
+        }
+      ]
+    },
+    {
+      "source": "PHF",
+      "sourceGroup": "hubNetwork",
+      "destination": "CLT",
+      "destinationGroup": "lateBankFeeders",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "DAY-PHF-CRJ200-03-IN",
+          "inboundFlight": 1572,
+          "hubArrival": "19:46",
+          "outboundLegId": "V123-R340-2-DAY-CLT",
+          "outboundFlight": 2136,
+          "hubDeparture": "21:55",
+          "waitMinutes": 129
+        }
+      ]
+    },
+    {
+      "source": "PHF",
+      "sourceGroup": "hubNetwork",
+      "destination": "SDF",
+      "destinationGroup": "lateBankFeeders",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "DAY-PHF-CRJ200-01-IN",
+          "inboundFlight": 1570,
+          "hubArrival": "15:31",
+          "outboundLegId": "DAY-SDF-CRJ200-01-OUT",
+          "outboundFlight": 1849,
+          "hubDeparture": "16:20",
+          "waitMinutes": 49
+        },
+        {
+          "inboundLegId": "DAY-PHF-CRJ200-03-IN",
+          "inboundFlight": 1572,
+          "hubArrival": "19:46",
+          "outboundLegId": "V123-R327-2-DAY-SDF",
+          "outboundFlight": 2138,
+          "hubDeparture": "21:55",
+          "waitMinutes": 129
+        }
+      ]
+    },
+    {
+      "source": "PHF",
+      "sourceGroup": "hubNetwork",
+      "destination": "FWA",
+      "destinationGroup": "lateBankFeeders",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "DAY-PHF-CRJ200-03-IN",
+          "inboundFlight": 1572,
+          "hubArrival": "19:46",
+          "outboundLegId": "V123-R4-R169-2-DAY-FWA",
+          "outboundFlight": 2154,
+          "hubDeparture": "21:55",
+          "waitMinutes": 129
+        },
+        {
+          "inboundLegId": "DAY-PHF-CRJ200-01-IN",
+          "inboundFlight": 1570,
+          "hubArrival": "15:31",
+          "outboundLegId": "V114-R169-DAY-FWA",
+          "outboundFlight": 2010,
+          "hubDeparture": "18:10",
+          "waitMinutes": 159
+        }
+      ]
+    },
+    {
+      "source": "SYR",
+      "sourceGroup": "hubNetwork",
+      "destination": "BWI",
+      "destinationGroup": "lateBankFeeders",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "SYR",
+      "sourceGroup": "hubNetwork",
+      "destination": "CLT",
+      "destinationGroup": "lateBankFeeders",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "SYR",
+      "sourceGroup": "hubNetwork",
+      "destination": "SDF",
+      "destinationGroup": "lateBankFeeders",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "DAY-SYR-CRJ200-01-IN",
+          "inboundFlight": 1658,
+          "hubArrival": "15:38",
+          "outboundLegId": "DAY-SDF-CRJ200-01-OUT",
+          "outboundFlight": 1849,
+          "hubDeparture": "16:20",
+          "waitMinutes": 42
+        }
+      ]
+    },
+    {
+      "source": "SYR",
+      "sourceGroup": "hubNetwork",
+      "destination": "FWA",
+      "destinationGroup": "lateBankFeeders",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "DAY-SYR-CRJ200-01-IN",
+          "inboundFlight": 1658,
+          "hubArrival": "15:38",
+          "outboundLegId": "V114-R169-DAY-FWA",
+          "outboundFlight": 2010,
+          "hubDeparture": "18:10",
+          "waitMinutes": 152
+        }
+      ]
+    },
+    {
+      "source": "MCI",
+      "sourceGroup": "hubNetwork",
+      "destination": "BWI",
+      "destinationGroup": "lateBankFeeders",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "MCI",
+      "sourceGroup": "hubNetwork",
+      "destination": "CLT",
+      "destinationGroup": "lateBankFeeders",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "MCI",
+      "sourceGroup": "hubNetwork",
+      "destination": "SDF",
+      "destinationGroup": "lateBankFeeders",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "DAY-MCI-CRJ200-01-IN",
+          "inboundFlight": 1537,
+          "hubArrival": "13:25",
+          "outboundLegId": "DAY-SDF-CRJ200-01-OUT",
+          "outboundFlight": 1849,
+          "hubDeparture": "16:20",
+          "waitMinutes": 175
+        }
+      ]
+    },
+    {
+      "source": "MCI",
+      "sourceGroup": "hubNetwork",
+      "destination": "FWA",
+      "destinationGroup": "lateBankFeeders",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V121-R129-1-MCI-DAY",
+          "inboundFlight": 2105,
+          "hubArrival": "17:35",
+          "outboundLegId": "V114-R169-DAY-FWA",
+          "outboundFlight": 2010,
+          "hubDeparture": "18:10",
+          "waitMinutes": 35
+        }
+      ]
+    }
+  ]
+}

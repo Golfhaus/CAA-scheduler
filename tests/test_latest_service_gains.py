@@ -22,9 +22,9 @@ class TwoDayGrowthTests(unittest.TestCase):
         cls.candidate = CANONICAL
 
     def test_released_sequence_and_consolidated_lines(self):
-        self.assertEqual(SCHEDULE_ID, "schedule_7_v1_2_2")
+        self.assertEqual(SCHEDULE_ID, "schedule_7_v1_2_3")
         self.assertEqual(self.candidate["schedule"]["status"], "released")
-        self.assertEqual(len(self.candidate["legs"]), 1128)
+        self.assertEqual(len(self.candidate["legs"]), 1152)
         new = sorted((l for l in self.candidate["legs"] if l["id"].startswith("V120-2MAX-")),
                      key=lambda l: l["flight"])
         self.assertEqual([l["flight"] for l in new], list(range(2083, 2099)))
@@ -71,7 +71,7 @@ class TwoDayGrowthTests(unittest.TestCase):
         self.assertTrue(any(f["evidence"]["line"] == "A" and f["evidence"]["routes"] == 13 for f in counts["findings"]))
         for schedule in (self.candidate,):
             stands = [p for city in export_gate_schedule(schedule)["cities"] for p in city["claims"] if p["rowType"] == "stand"]
-            self.assertEqual((len(stands), sum(p["end"] - p["start"] for p in stands)), (15, 4277))
+            self.assertEqual((len(stands), sum(p["end"] - p["start"] for p in stands)), (15, 3771))
 
     def test_two_stop_middle_leg_is_counted_once_and_demand_reconciles(self):
         screen = TwoStopScreen(self.candidate)

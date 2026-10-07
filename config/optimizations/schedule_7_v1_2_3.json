@@ -1,0 +1,74 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "schedule-7-v1.2.3-release",
+  "sourceScheduleId": "schedule_7_v1_2_2",
+  "baseCanonical": "data/schedules/schedule_7_v1_2_2/canonical_schedule.json",
+  "overlays": [
+    "config/optimizations/schedule_7_v1_2_3_accepted_rounds_1_3.json",
+    "config/optimizations/schedule_7_v1_2_3_round_4.json"
+  ],
+  "outputDirectory": "data/schedules/schedule_7_v1_2_3",
+  "rejoinAvoidableTows": true,
+  "demandDataVersion": "bts-db1c-6mo-jul2025-apr2026-v7",
+  "schedule": {
+    "id": "schedule_7_v1_2_3",
+    "number": 7,
+    "version": "1.2.3",
+    "label": "Schedule 7, Version 1.2.3",
+    "status": "released"
+  },
+  "patchScope": {
+    "kind": "aircraft_utilization_and_day_late_bank",
+    "timetableChanged": true,
+    "routingChanged": true,
+    "approvedRoutes": [
+      331,
+      340,
+      327,
+      145,
+      305,
+      526,
+      509,
+      114,
+      169
+    ],
+    "description": "Add 24 approved flights on existing aircraft; DAY-B9 21:05–22:05; MCI-B3 +2 minutes; approved retimings on 305, 145 and 526; ROA additional PHF hub exception. Optional 350 and 163 extensions excluded."
+  },
+  "connectionAudit": {
+    "hub": "DAY",
+    "groups": {
+      "lateBankFeeders": [
+        "BWI",
+        "CLT",
+        "SDF",
+        "FWA"
+      ],
+      "hubNetwork": [
+        "JAX",
+        "PHF",
+        "SYR",
+        "MCI"
+      ]
+    }
+  },
+  "connectionScopeDecision": {
+    "status": "approved",
+    "approvedBy": "user",
+    "model": "existing_hub_timetable_policy_with_one_and_two_stop_utilization_analysis",
+    "description": "User authorized v1.2.3 publication October 7, 2026. Include all prior approved changes and the recommended 114/169 evening extensions. Preserve 350 and 163 optional cases as analysis only. Connection audit is whole-timetable coverage; demand reports describe seat-uncapped opportunities rather than load forecasts."
+  },
+  "expectedRelease": {
+    "legs": 1152,
+    "routes": 181,
+    "lines": 20,
+    "effectiveOperatingErrors": 0,
+    "hardStopFailures": 0,
+    "overnightTurnFailures": 0,
+    "directRoundTripCities": 8,
+    "connectedDirectionalPairs": 17,
+    "standClaims": 15,
+    "standMinutes": 3771,
+    "hubStandClaims": 0,
+    "hubStandMinutes": 0
+  }
+}
