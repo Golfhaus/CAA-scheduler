@@ -177,9 +177,9 @@ def finalize():
     write_json(ROOT/'config/proposals/schedule_7_v1_2_3_round_2.json',c)
     r['recommendedRound2']=x
     # Evaluate cumulatively, while leaving the saved round-one proposal intact.
-    draftpath='data/schedules/schedule_7_v1_2_3_draft/canonical_schedule.json'
-    ds=HoldSearch(read_json(ROOT/draftpath));dc=make_overlay(ds,plans,retimings=changes)
-    dc['baseSchedule'].update(canonical=draftpath,sha256=sha256_file(ROOT/draftpath))
+    # Reconstruct the historical round-one snapshot: the working draft moves on.
+    prior=read_json(ROOT/'config/proposals/schedule_7_v1_2_3_round_1.json')
+    ds=HoldSearch(apply_optimization_overlay(s.base,prior));dc=make_overlay(ds,plans,retimings=changes)
     dc['id']='schedule-7-v1.2.3-utilization-cumulative-round-2'
     dc['schedule'].update(id='schedule_7_v1_2_3_cumulative_draft',version='1.2.3',label='Schedule 7 v1.2.3 rounds 1 and 2 proposed; unpublished')
     dc['approval']=deepcopy(c['approval'])

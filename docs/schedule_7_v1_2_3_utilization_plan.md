@@ -69,3 +69,5 @@ Aircraft utilization does not prove crew-duty feasibility. The combined 327 airc
 - Conditional Route 305 overlay: `config/proposals/schedule_7_v1_2_3_route_305_tul_conditional.json`.
 - All shortlisted timings, failed gates, demand allocations and itinerary audits: `config/proposals/schedule_7_v1_2_3_utilization_screen.json`.
 - Reproduction: `python scripts/analyze_schedule_7_v1_2_3_utilization.py`; use `--fresh` to rescreen rather than resume the pinned checkpoint. The generated combined canonical is written to ignored build output. Neither the default manifest nor main/app release files are changed.
+
+> Update, October 7, 2026: The user approved the combined recommendation, including Route 305. Implementation is captured in `config/optimizations/schedule_7_v1_2_3_accepted_rounds_1_2.json` and the current v1.2.3 draft canonical. This report retains the pre-approval analysis; see `docs/schedule_7_v1_2_3_round_3_plan.md` for current state. Publication remains reserved to the user.

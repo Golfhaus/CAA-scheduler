@@ -1,0 +1,80 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "schedule-7-v1.2.3-round-3-proposal",
+  "baseSchedule": {
+    "scheduleId": "schedule_7_v1_2_3_draft",
+    "canonical": "data/schedules/schedule_7_v1_2_3_draft/canonical_schedule.json",
+    "sha256": "3c71db1402cd79d6206a4e030e165458c9ce20eb8108e0b8f1e6d744c61b0ee3"
+  },
+  "schedule": {
+    "id": "schedule_7_v1_2_3_round_3_proposed",
+    "version": "1.2.3",
+    "label": "Schedule 7 v1.2.3 round 3 proposed; unpublished",
+    "status": "draft"
+  },
+  "approval": {
+    "status": "proposed; not yet approved for implementation",
+    "userInstruction": "Perform the same action for routes 526, 163, and 509; retaining current flying is acceptable where useful extensions do not develop.",
+    "publication": "Reserved to user decision",
+    "scope": "Morning DAL–MCI on 526; Flight 1206 +12 minutes; SAT–DAL on 509; retain 163. Full accepted rounds 1/2, including 305, form the base."
+  },
+  "hubBanksToAdd": [],
+  "hubBankCountOverrides": {},
+  "insertLegs": [
+    {
+      "id": "V123-R3-R526-1-DAL-MCI",
+      "origin": "DAL",
+      "destination": "MCI",
+      "departureMinute": 298,
+      "arrivalMinute": 385,
+      "route": 526
+    },
+    {
+      "id": "V123-R3-R526-2-MCI-DAL",
+      "origin": "MCI",
+      "destination": "DAL",
+      "departureMinute": 435,
+      "arrivalMinute": 522,
+      "route": 526
+    },
+    {
+      "id": "V123-R3-R509-1-SAT-DAL",
+      "origin": "SAT",
+      "destination": "DAL",
+      "departureMinute": 300,
+      "arrivalMinute": 361,
+      "route": 509
+    },
+    {
+      "id": "V123-R3-R509-2-DAL-SAT",
+      "origin": "DAL",
+      "destination": "SAT",
+      "departureMinute": 411,
+      "arrivalMinute": 472,
+      "route": 509
+    }
+  ],
+  "retimeLegs": [
+    {
+      "legId": "DAL-PHF-CRJ900-03-OUT",
+      "expectedDepartureMinute": 560,
+      "expectedArrivalMinute": 793,
+      "departureMinute": 572,
+      "arrivalMinute": 805
+    }
+  ],
+  "bankAssignmentsToAdd": [
+    {
+      "legId": "V123-R3-R526-1-DAL-MCI",
+      "operation": "arrival",
+      "bankId": "MCI-B2"
+    },
+    {
+      "legId": "V123-R3-R526-2-MCI-DAL",
+      "operation": "departure",
+      "bankId": "MCI-B2"
+    }
+  ],
+  "bankAssignmentReplacements": [],
+  "operatingOverrides": []
+}

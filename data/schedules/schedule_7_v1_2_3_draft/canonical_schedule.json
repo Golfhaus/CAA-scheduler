@@ -4,7 +4,7 @@
     "id": "schedule_7_v1_2_3_draft",
     "number": 7,
     "version": "1.2.3",
-    "label": "Schedule 7 v1.2.3 proposed draft; unpublished",
+    "label": "Schedule 7 v1.2.3 accepted working draft; unpublished",
     "status": "draft",
     "fleetCounts": {
       "MAX9": 35,
@@ -64,7 +64,7 @@
     }
   },
   "gatePlan": {
-    "label": "Schedule 7 v1.2.3 proposed draft; unpublished",
+    "label": "Schedule 7 v1.2.3 accepted working draft; unpublished",
     "forcedStandSplits": {},
     "fixedPhysicalInventory": true
   },
@@ -464,8 +464,8 @@
     {
       "id": "MCI-B3",
       "hub": "MCI",
-      "startMinute": 485,
-      "endMinute": 545
+      "startMinute": 487,
+      "endMinute": 547
     },
     {
       "id": "MCI-B4",
@@ -2873,7 +2873,7 @@
     {
       "legId": "HRL-MCI-CRJ700-02-OUT",
       "operation": "arrival",
-      "bankId": "MCI-B5"
+      "bankId": "MCI-B3"
     },
     {
       "legId": "HSV-JAX-CRJ700-01-IN",
@@ -5696,14 +5696,14 @@
       "bankId": "JAX-B2"
     },
     {
-      "legId": "V123-R331-1-BWI-PHF",
+      "legId": "V123-R331-1-BWI-DAY",
       "operation": "arrival",
-      "bankId": "PHF-B1"
+      "bankId": "DAY-B2"
     },
     {
-      "legId": "V123-R331-2-PHF-BWI",
+      "legId": "V123-R331-2-DAY-BWI",
       "operation": "departure",
-      "bankId": "PHF-B1"
+      "bankId": "DAY-B2"
     },
     {
       "legId": "V123-R331-3-BWI-DAY",
@@ -5734,6 +5734,46 @@
       "legId": "V123-R327-2-DAY-SDF",
       "operation": "departure",
       "bankId": "DAY-B9"
+    },
+    {
+      "legId": "V123-R327-3-PGD-JAX",
+      "operation": "arrival",
+      "bankId": "JAX-B3"
+    },
+    {
+      "legId": "V123-R327-4-JAX-PGD",
+      "operation": "departure",
+      "bankId": "JAX-B4"
+    },
+    {
+      "legId": "V123-R145-1-PWM-PHF",
+      "operation": "arrival",
+      "bankId": "PHF-B1"
+    },
+    {
+      "legId": "V123-R145-2-PHF-PWM",
+      "operation": "departure",
+      "bankId": "PHF-B1"
+    },
+    {
+      "legId": "V123-R145-3-SYR-BUF",
+      "operation": "departure",
+      "bankId": "SYR-B3"
+    },
+    {
+      "legId": "V123-R145-4-BUF-SYR",
+      "operation": "arrival",
+      "bankId": "SYR-B4"
+    },
+    {
+      "legId": "V123-R305-1-MCI-TUL",
+      "operation": "departure",
+      "bankId": "MCI-B4"
+    },
+    {
+      "legId": "V123-R305-2-TUL-MCI",
+      "operation": "arrival",
+      "bankId": "MCI-B5"
     }
   ],
   "cities": [
@@ -12903,7 +12943,7 @@
       "line": "AA",
       "fleet": "CRJ700",
       "day": 5,
-      "sequenceWithinRoute": 3,
+      "sequenceWithinRoute": 5,
       "pairing": 457,
       "flight": 1308,
       "origin": "SYR",
@@ -13943,7 +13983,7 @@
       "line": "AK",
       "fleet": "CRJ700",
       "day": 3,
-      "sequenceWithinRoute": 5,
+      "sequenceWithinRoute": 7,
       "pairing": 204,
       "flight": 1373,
       "origin": "JAX",
@@ -14711,7 +14751,7 @@
       "line": "AK",
       "fleet": "CRJ700",
       "day": 3,
-      "sequenceWithinRoute": 4,
+      "sequenceWithinRoute": 6,
       "pairing": 653,
       "flight": 1421,
       "origin": "BHM",
@@ -14999,7 +15039,7 @@
       "line": "AA",
       "fleet": "CRJ700",
       "day": 5,
-      "sequenceWithinRoute": 2,
+      "sequenceWithinRoute": 4,
       "pairing": 678,
       "flight": 1439,
       "origin": "MCI",
@@ -15148,10 +15188,10 @@
       "flight": 1448,
       "origin": "HRL",
       "destination": "MCI",
-      "departure": "09:50",
-      "arrival": "12:17",
-      "departureMinute": 590,
-      "arrivalMinute": 737
+      "departure": "06:39",
+      "arrival": "09:06",
+      "departureMinute": 399,
+      "arrivalMinute": 546
     },
     {
       "id": "HRL-MCI-CRJ700-01-IN",
@@ -15287,7 +15327,7 @@
       "line": "AK",
       "fleet": "CRJ700",
       "day": 3,
-      "sequenceWithinRoute": 1,
+      "sequenceWithinRoute": 3,
       "pairing": 550,
       "flight": 1457,
       "origin": "PGD",
@@ -15303,7 +15343,7 @@
       "line": "AK",
       "fleet": "CRJ700",
       "day": 3,
-      "sequenceWithinRoute": 2,
+      "sequenceWithinRoute": 4,
       "pairing": 551,
       "flight": 1458,
       "origin": "PIE",
@@ -15495,7 +15535,7 @@
       "line": "AK",
       "fleet": "CRJ700",
       "day": 3,
-      "sequenceWithinRoute": 3,
+      "sequenceWithinRoute": 5,
       "pairing": 517,
       "flight": 1470,
       "origin": "PGD",
@@ -19223,7 +19263,7 @@
       "line": "AD",
       "fleet": "CRJ200",
       "day": 35,
-      "sequenceWithinRoute": 1,
+      "sequenceWithinRoute": 3,
       "pairing": 180,
       "flight": 1703,
       "origin": "PWM",
@@ -21623,15 +21663,15 @@
       "line": "AD",
       "fleet": "CRJ200",
       "day": 35,
-      "sequenceWithinRoute": 2,
+      "sequenceWithinRoute": 6,
       "pairing": 175,
       "flight": 1853,
       "origin": "SYR",
       "destination": "HPN",
-      "departure": "14:05",
-      "arrival": "14:59",
-      "departureMinute": 845,
-      "arrivalMinute": 899
+      "departure": "14:10",
+      "arrival": "15:04",
+      "departureMinute": 850,
+      "arrivalMinute": 904
     },
     {
       "id": "HPN-SYR-CRJ200-01-OUT",
@@ -21671,7 +21711,7 @@
       "line": "AD",
       "fleet": "CRJ200",
       "day": 35,
-      "sequenceWithinRoute": 3,
+      "sequenceWithinRoute": 7,
       "pairing": 176,
       "flight": 1856,
       "origin": "HPN",
@@ -22087,7 +22127,7 @@
       "line": "AD",
       "fleet": "CRJ200",
       "day": 35,
-      "sequenceWithinRoute": 4,
+      "sequenceWithinRoute": 8,
       "pairing": 189,
       "flight": 1882,
       "origin": "SYR",
@@ -26066,36 +26106,36 @@
       "arrivalMinute": 434
     },
     {
-      "id": "V123-R331-1-BWI-PHF",
+      "id": "V123-R331-1-BWI-DAY",
       "route": 331,
       "line": "AK",
       "fleet": "CRJ700",
       "day": 7,
       "sequenceWithinRoute": 1,
-      "pairing": 622,
+      "pairing": 885,
       "flight": 2131,
       "origin": "BWI",
-      "destination": "PHF",
-      "departure": "05:35",
-      "arrival": "06:23",
-      "departureMinute": 335,
-      "arrivalMinute": 383
+      "destination": "DAY",
+      "departure": "05:43",
+      "arrival": "07:05",
+      "departureMinute": 343,
+      "arrivalMinute": 425
     },
     {
-      "id": "V123-R331-2-PHF-BWI",
+      "id": "V123-R331-2-DAY-BWI",
       "route": 331,
       "line": "AK",
       "fleet": "CRJ700",
       "day": 7,
       "sequenceWithinRoute": 2,
-      "pairing": 623,
+      "pairing": 886,
       "flight": 2132,
-      "origin": "PHF",
+      "origin": "DAY",
       "destination": "BWI",
-      "departure": "07:03",
-      "arrival": "07:51",
-      "departureMinute": 423,
-      "arrivalMinute": 471
+      "departure": "07:53",
+      "arrival": "09:15",
+      "departureMinute": 473,
+      "arrivalMinute": 555
     },
     {
       "id": "V123-R331-3-BWI-DAY",
@@ -26167,7 +26207,7 @@
       "line": "AK",
       "fleet": "CRJ700",
       "day": 3,
-      "sequenceWithinRoute": 6,
+      "sequenceWithinRoute": 8,
       "pairing": 812,
       "flight": 2137,
       "origin": "SDF",
@@ -26183,7 +26223,7 @@
       "line": "AK",
       "fleet": "CRJ700",
       "day": 3,
-      "sequenceWithinRoute": 7,
+      "sequenceWithinRoute": 9,
       "pairing": 632,
       "flight": 2138,
       "origin": "DAY",
@@ -26192,6 +26232,134 @@
       "arrival": "22:43",
       "departureMinute": 1315,
       "arrivalMinute": 1363
+    },
+    {
+      "id": "V123-R327-3-PGD-JAX",
+      "route": 327,
+      "line": "AK",
+      "fleet": "CRJ700",
+      "day": 3,
+      "sequenceWithinRoute": 1,
+      "pairing": 533,
+      "flight": 2139,
+      "origin": "PGD",
+      "destination": "JAX",
+      "departure": "05:55",
+      "arrival": "06:57",
+      "departureMinute": 355,
+      "arrivalMinute": 417
+    },
+    {
+      "id": "V123-R327-4-JAX-PGD",
+      "route": 327,
+      "line": "AK",
+      "fleet": "CRJ700",
+      "day": 3,
+      "sequenceWithinRoute": 2,
+      "pairing": 445,
+      "flight": 2140,
+      "origin": "JAX",
+      "destination": "PGD",
+      "departure": "08:00",
+      "arrival": "09:02",
+      "departureMinute": 480,
+      "arrivalMinute": 542
+    },
+    {
+      "id": "V123-R145-1-PWM-PHF",
+      "route": 145,
+      "line": "AD",
+      "fleet": "CRJ200",
+      "day": 35,
+      "sequenceWithinRoute": 1,
+      "pairing": 824,
+      "flight": 2141,
+      "origin": "PWM",
+      "destination": "PHF",
+      "departure": "04:40",
+      "arrival": "06:24",
+      "departureMinute": 280,
+      "arrivalMinute": 384
+    },
+    {
+      "id": "V123-R145-2-PHF-PWM",
+      "route": 145,
+      "line": "AD",
+      "fleet": "CRJ200",
+      "day": 35,
+      "sequenceWithinRoute": 2,
+      "pairing": 823,
+      "flight": 2142,
+      "origin": "PHF",
+      "destination": "PWM",
+      "departure": "07:04",
+      "arrival": "08:48",
+      "departureMinute": 424,
+      "arrivalMinute": 528
+    },
+    {
+      "id": "V123-R145-3-SYR-BUF",
+      "route": 145,
+      "line": "AD",
+      "fleet": "CRJ200",
+      "day": 35,
+      "sequenceWithinRoute": 4,
+      "pairing": 627,
+      "flight": 2143,
+      "origin": "SYR",
+      "destination": "BUF",
+      "departure": "11:18",
+      "arrival": "12:04",
+      "departureMinute": 678,
+      "arrivalMinute": 724
+    },
+    {
+      "id": "V123-R145-4-BUF-SYR",
+      "route": 145,
+      "line": "AD",
+      "fleet": "CRJ200",
+      "day": 35,
+      "sequenceWithinRoute": 5,
+      "pairing": 626,
+      "flight": 2144,
+      "origin": "BUF",
+      "destination": "SYR",
+      "departure": "12:44",
+      "arrival": "13:30",
+      "departureMinute": 764,
+      "arrivalMinute": 810
+    },
+    {
+      "id": "V123-R305-1-MCI-TUL",
+      "route": 305,
+      "line": "AA",
+      "fleet": "CRJ700",
+      "day": 5,
+      "sequenceWithinRoute": 2,
+      "pairing": 123,
+      "flight": 2145,
+      "origin": "MCI",
+      "destination": "TUL",
+      "departure": "09:46",
+      "arrival": "10:44",
+      "departureMinute": 586,
+      "arrivalMinute": 644
+    },
+    {
+      "id": "V123-R305-2-TUL-MCI",
+      "route": 305,
+      "line": "AA",
+      "fleet": "CRJ700",
+      "day": 5,
+      "sequenceWithinRoute": 3,
+      "pairing": 124,
+      "flight": 2146,
+      "origin": "TUL",
+      "destination": "MCI",
+      "departure": "11:25",
+      "arrival": "12:23",
+      "departureMinute": 685,
+      "arrivalMinute": 743
     }
   ]
 }
