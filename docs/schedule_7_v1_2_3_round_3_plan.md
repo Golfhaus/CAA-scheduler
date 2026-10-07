@@ -1,5 +1,7 @@
 # Schedule 7 v1.2.3: accepted changes and Routes 526, 163, 509 review
 
+**October 7 implementation update:** The user subsequently approved the 526 and 509 extensions. Both are now in the 1148-flight accepted unpublished draft, including Flight 1206's +12-minute shift. The current accepted master is `config/optimizations/schedule_7_v1_2_3_accepted_rounds_1_3.json`. The report below preserves the original proposal comparison; see [the current evening-extension review](schedule_7_v1_2_3_round_4_plan.md) for the latest state. Main/app remain v1.2.2.
+
 ## State and recommendation
 
 The user approved the preceding recommendation on October 7, 2026, **including Route 305**. All those changes are implemented together in the unpublished working draft: Route 331's DAY morning/evening turns, DAY-B9 and CLT/SDF feeders, Route 327's PGD–JAX morning turn, Route 145's PWM–PHF/SYR–BUF turns and five-minute HPN shift, plus Route 305's MCI–TUL turn, HRL 06:39 originator and two-minute MCI-B3 shift. They pass jointly with 1144 flights. Publication remains reserved to the user's decision; main/app remain released v1.2.2.

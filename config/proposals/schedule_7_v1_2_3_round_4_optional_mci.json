@@ -1,0 +1,114 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "schedule-7-v1.2.3-round-4-optional-350-MCI",
+  "baseSchedule": {
+    "scheduleId": "schedule_7_v1_2_3_draft",
+    "canonical": "data/schedules/schedule_7_v1_2_3_draft/canonical_schedule.json",
+    "sha256": "f8fcebfbe746f4a8e85d3b066e4b9abc397ae6d797c3bbf9cd5a029a0ac85965"
+  },
+  "schedule": {
+    "id": "schedule_7_v1_2_3_round_4_optional_350_MCI",
+    "version": "1.2.3",
+    "label": "Schedule 7 v1.2.3 evening extensions optional 350 MCI; unpublished",
+    "status": "draft"
+  },
+  "approval": {
+    "status": "proposed; not yet approved for implementation",
+    "publication": "Reserved to user decision",
+    "userInstruction": "Look into extending routes 340, 350, 114, 169, and 327 past their current early terminating points.",
+    "scope": "optional 350 MCI; existing 340 and 327 DAY extensions retained; no existing clocks changed."
+  },
+  "hubBanksToAdd": [],
+  "hubBankCountOverrides": {},
+  "insertLegs": [
+    {
+      "id": "V123-R4-R114-1-ROA-PHF",
+      "origin": "ROA",
+      "destination": "PHF",
+      "departureMinute": 1170,
+      "arrivalMinute": 1224,
+      "route": 114
+    },
+    {
+      "id": "V123-R4-R114-2-PHF-ROA",
+      "origin": "PHF",
+      "destination": "ROA",
+      "departureMinute": 1305,
+      "arrivalMinute": 1359,
+      "route": 114
+    },
+    {
+      "id": "V123-R4-R169-1-FWA-DAY",
+      "origin": "FWA",
+      "destination": "DAY",
+      "departureMinute": 1225,
+      "arrivalMinute": 1265,
+      "route": 169
+    },
+    {
+      "id": "V123-R4-R169-2-DAY-FWA",
+      "origin": "DAY",
+      "destination": "FWA",
+      "departureMinute": 1315,
+      "arrivalMinute": 1355,
+      "route": 169
+    },
+    {
+      "id": "V123-R4-R350-1-ELP-MCI",
+      "origin": "ELP",
+      "destination": "MCI",
+      "departureMinute": 1107,
+      "arrivalMinute": 1303,
+      "route": 350
+    },
+    {
+      "id": "V123-R4-R350-2-MCI-ELP",
+      "origin": "MCI",
+      "destination": "ELP",
+      "departureMinute": 1353,
+      "arrivalMinute": 1429,
+      "route": 350
+    }
+  ],
+  "retimeLegs": [],
+  "bankAssignmentsToAdd": [
+    {
+      "legId": "V123-R4-R114-1-ROA-PHF",
+      "operation": "arrival",
+      "bankId": "PHF-B7"
+    },
+    {
+      "legId": "V123-R4-R114-2-PHF-ROA",
+      "operation": "departure",
+      "bankId": "PHF-M7"
+    },
+    {
+      "legId": "V123-R4-R169-1-FWA-DAY",
+      "operation": "arrival",
+      "bankId": "DAY-B9"
+    },
+    {
+      "legId": "V123-R4-R169-2-DAY-FWA",
+      "operation": "departure",
+      "bankId": "DAY-B9"
+    },
+    {
+      "legId": "V123-R4-R350-1-ELP-MCI",
+      "operation": "arrival",
+      "bankId": "MCI-M11"
+    },
+    {
+      "legId": "V123-R4-R350-2-MCI-ELP",
+      "operation": "departure",
+      "bankId": "MCI-M12"
+    }
+  ],
+  "bankAssignmentReplacements": [],
+  "operatingOverrides": [
+    {
+      "checkId": "tiered_service_minimums",
+      "findingId": "ROA",
+      "reason": "Standing user instruction permits an additional hub when useful to the initiative. Conditional evening extension analysis; publication remains reserved to user."
+    }
+  ]
+}

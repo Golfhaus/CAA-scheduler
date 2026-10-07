@@ -1,0 +1,5616 @@
+{
+  "baseCanonical": "data/schedules/schedule_7_v1_2_3_draft/canonical_schedule.json",
+  "baseSha256": "f8fcebfbe746f4a8e85d3b066e4b9abc397ae6d797c3bbf9cd5a029a0ac85965",
+  "acceptedValidation": {
+    "structural": "pass",
+    "operatingErrors": 0,
+    "operatingWarnings": 182,
+    "hardStopFailures": [],
+    "blocking": [],
+    "overnight": "pass",
+    "overnightFindings": [],
+    "planning": "pass",
+    "gates": "pass",
+    "standClaims": 15,
+    "standMinutes": 3771,
+    "affectedStations": [
+      {
+        "code": "PHF",
+        "name": "Newport News VA",
+        "isHub": true,
+        "isFocusCity": false,
+        "nGates": 16,
+        "nStands": 8,
+        "peakUsed": 18,
+        "standClaims": 2,
+        "standMinutes": 142
+      },
+      {
+        "code": "SYR",
+        "name": "Syracuse NY",
+        "isHub": true,
+        "isFocusCity": false,
+        "nGates": 16,
+        "nStands": 8,
+        "peakUsed": 18,
+        "standClaims": 2,
+        "standMinutes": 464
+      },
+      {
+        "code": "DAY",
+        "name": "Dayton OH",
+        "isHub": true,
+        "isFocusCity": false,
+        "nGates": 16,
+        "nStands": 8,
+        "peakUsed": 16,
+        "standClaims": 0,
+        "standMinutes": 0
+      },
+      {
+        "code": "JAX",
+        "name": "Jacksonville FL",
+        "isHub": true,
+        "isFocusCity": false,
+        "nGates": 16,
+        "nStands": 12,
+        "peakUsed": 16,
+        "standClaims": 0,
+        "standMinutes": 0
+      },
+      {
+        "code": "BHM",
+        "name": "Birmingham AL",
+        "isHub": false,
+        "isFocusCity": true,
+        "nGates": 6,
+        "nStands": 4,
+        "peakUsed": 8,
+        "standClaims": 4,
+        "standMinutes": 290
+      },
+      {
+        "code": "BWI",
+        "name": "Baltimore MD",
+        "isHub": false,
+        "isFocusCity": false,
+        "nGates": 2,
+        "nStands": 2,
+        "peakUsed": 4,
+        "standClaims": 2,
+        "standMinutes": 804
+      }
+    ]
+  },
+  "status": "analysis-only; new extensions not implemented; publication reserved to user",
+  "model": "Pinned O-D, seat-uncapped relative-choice opportunity, not forecast loads or incremental passengers",
+  "inventory": [
+    {
+      "route": 340,
+      "line": "AL",
+      "day": 4,
+      "fleet": "CRJ700",
+      "terminator": "CLT",
+      "finishMinute": 1392,
+      "arrival": "23:12",
+      "nextOriginator": {
+        "route": 341,
+        "flight": 1377,
+        "origin": "CLT",
+        "departure": "05:10",
+        "departureMinute": 310,
+        "line": "AL",
+        "day": 5
+      },
+      "legs": [
+        {
+          "id": "CHS-PHF-CRJ700-02-OUT",
+          "route": 340,
+          "line": "AL",
+          "fleet": "CRJ700",
+          "day": 4,
+          "sequenceWithinRoute": 1,
+          "pairing": 756,
+          "flight": 1391,
+          "origin": "CHS",
+          "destination": "PHF",
+          "departure": "05:00",
+          "arrival": "06:15",
+          "departureMinute": 300,
+          "arrivalMinute": 375
+        },
+        {
+          "id": "CHS-PHF-CRJ700-02-IN",
+          "route": 340,
+          "line": "AL",
+          "fleet": "CRJ700",
+          "day": 4,
+          "sequenceWithinRoute": 2,
+          "pairing": 796,
+          "flight": 1397,
+          "origin": "PHF",
+          "destination": "CHS",
+          "departure": "06:55",
+          "arrival": "08:10",
+          "departureMinute": 415,
+          "arrivalMinute": 490
+        },
+        {
+          "id": "CHS-PHF-CRJ700-04-OUT",
+          "route": 340,
+          "line": "AL",
+          "fleet": "CRJ700",
+          "day": 4,
+          "sequenceWithinRoute": 3,
+          "pairing": 756,
+          "flight": 1393,
+          "origin": "CHS",
+          "destination": "PHF",
+          "departure": "09:40",
+          "arrival": "10:55",
+          "departureMinute": 580,
+          "arrivalMinute": 655
+        },
+        {
+          "id": "CHS-PHF-CRJ700-04-IN",
+          "route": 340,
+          "line": "AL",
+          "fleet": "CRJ700",
+          "day": 4,
+          "sequenceWithinRoute": 4,
+          "pairing": 796,
+          "flight": 1399,
+          "origin": "PHF",
+          "destination": "CHS",
+          "departure": "11:35",
+          "arrival": "12:50",
+          "departureMinute": 695,
+          "arrivalMinute": 770
+        },
+        {
+          "id": "CHS-PHF-CRJ700-06-OUT",
+          "route": 340,
+          "line": "AL",
+          "fleet": "CRJ700",
+          "day": 4,
+          "sequenceWithinRoute": 5,
+          "pairing": 756,
+          "flight": 1395,
+          "origin": "CHS",
+          "destination": "PHF",
+          "departure": "14:15",
+          "arrival": "15:30",
+          "departureMinute": 855,
+          "arrivalMinute": 930
+        },
+        {
+          "id": "CLT-PHF-CRJ700-05-IN",
+          "route": 340,
+          "line": "AL",
+          "fleet": "CRJ700",
+          "day": 4,
+          "sequenceWithinRoute": 6,
+          "pairing": 797,
+          "flight": 1387,
+          "origin": "PHF",
+          "destination": "CLT",
+          "departure": "16:15",
+          "arrival": "17:21",
+          "departureMinute": 975,
+          "arrivalMinute": 1041
+        },
+        {
+          "id": "V123-R340-1-CLT-DAY",
+          "route": 340,
+          "line": "AL",
+          "fleet": "CRJ700",
+          "day": 4,
+          "sequenceWithinRoute": 7,
+          "pairing": 887,
+          "flight": 2135,
+          "origin": "CLT",
+          "destination": "DAY",
+          "departure": "19:48",
+          "arrival": "21:05",
+          "departureMinute": 1188,
+          "arrivalMinute": 1265
+        },
+        {
+          "id": "V123-R340-2-DAY-CLT",
+          "route": 340,
+          "line": "AL",
+          "fleet": "CRJ700",
+          "day": 4,
+          "sequenceWithinRoute": 8,
+          "pairing": 888,
+          "flight": 2136,
+          "origin": "DAY",
+          "destination": "CLT",
+          "departure": "21:55",
+          "arrival": "23:12",
+          "departureMinute": 1315,
+          "arrivalMinute": 1392
+        }
+      ],
+      "alreadyAddedEveningFlying": [
+        {
+          "id": "V123-R340-1-CLT-DAY",
+          "route": 340,
+          "line": "AL",
+          "fleet": "CRJ700",
+          "day": 4,
+          "sequenceWithinRoute": 7,
+          "pairing": 887,
+          "flight": 2135,
+          "origin": "CLT",
+          "destination": "DAY",
+          "departure": "19:48",
+          "arrival": "21:05",
+          "departureMinute": 1188,
+          "arrivalMinute": 1265
+        },
+        {
+          "id": "V123-R340-2-DAY-CLT",
+          "route": 340,
+          "line": "AL",
+          "fleet": "CRJ700",
+          "day": 4,
+          "sequenceWithinRoute": 8,
+          "pairing": 888,
+          "flight": 2136,
+          "origin": "DAY",
+          "destination": "CLT",
+          "departure": "21:55",
+          "arrival": "23:12",
+          "departureMinute": 1315,
+          "arrivalMinute": 1392
+        }
+      ],
+      "blockMinutes": 595
+    },
+    {
+      "route": 350,
+      "line": "AO",
+      "day": 1,
+      "fleet": "CRJ700",
+      "terminator": "ELP",
+      "finishMinute": 1061,
+      "arrival": "17:41",
+      "nextOriginator": {
+        "route": 350,
+        "flight": 1403,
+        "origin": "ELP",
+        "departure": "04:55",
+        "departureMinute": 295,
+        "line": "AO",
+        "day": 1
+      },
+      "legs": [
+        {
+          "id": "ELP-MCI-CRJ700-01-OUT",
+          "route": 350,
+          "line": "AO",
+          "fleet": "CRJ700",
+          "day": 1,
+          "sequenceWithinRoute": 1,
+          "pairing": 769,
+          "flight": 1403,
+          "origin": "ELP",
+          "destination": "MCI",
+          "departure": "04:55",
+          "arrival": "08:11",
+          "departureMinute": 295,
+          "arrivalMinute": 491
+        },
+        {
+          "id": "ELP-MCI-CRJ700-02-IN",
+          "route": 350,
+          "line": "AO",
+          "fleet": "CRJ700",
+          "day": 1,
+          "sequenceWithinRoute": 2,
+          "pairing": 782,
+          "flight": 1406,
+          "origin": "MCI",
+          "destination": "ELP",
+          "departure": "08:55",
+          "arrival": "10:11",
+          "departureMinute": 535,
+          "arrivalMinute": 611
+        },
+        {
+          "id": "V112-R350-ELP-MCI-02",
+          "route": 350,
+          "line": "AO",
+          "fleet": "CRJ700",
+          "day": 1,
+          "sequenceWithinRoute": 3,
+          "pairing": 769,
+          "flight": 1955,
+          "origin": "ELP",
+          "destination": "MCI",
+          "departure": "12:10",
+          "arrival": "15:26",
+          "departureMinute": 730,
+          "arrivalMinute": 926
+        },
+        {
+          "id": "V112-R350-MCI-ELP-02",
+          "route": 350,
+          "line": "AO",
+          "fleet": "CRJ700",
+          "day": 1,
+          "sequenceWithinRoute": 4,
+          "pairing": 782,
+          "flight": 1956,
+          "origin": "MCI",
+          "destination": "ELP",
+          "departure": "16:25",
+          "arrival": "17:41",
+          "departureMinute": 985,
+          "arrivalMinute": 1061
+        }
+      ],
+      "alreadyAddedEveningFlying": [],
+      "blockMinutes": 544
+    },
+    {
+      "route": 114,
+      "line": "AD",
+      "day": 4,
+      "fleet": "CRJ200",
+      "terminator": "ROA",
+      "finishMinute": 1129,
+      "arrival": "18:49",
+      "nextOriginator": {
+        "route": 115,
+        "flight": 1561,
+        "origin": "ROA",
+        "departure": "05:15",
+        "departureMinute": 315,
+        "line": "AD",
+        "day": 5
+      },
+      "legs": [
+        {
+          "id": "AGS-JAX-CRJ200-01-OUT",
+          "route": 114,
+          "line": "AD",
+          "fleet": "CRJ200",
+          "day": 4,
+          "sequenceWithinRoute": 1,
+          "pairing": 331,
+          "flight": 1779,
+          "origin": "AGS",
+          "destination": "JAX",
+          "departure": "05:55",
+          "arrival": "06:50",
+          "departureMinute": 355,
+          "arrivalMinute": 410
+        },
+        {
+          "id": "BTR-JAX-CRJ200-02-IN",
+          "route": 114,
+          "line": "AD",
+          "fleet": "CRJ200",
+          "day": 4,
+          "sequenceWithinRoute": 2,
+          "pairing": 210,
+          "flight": 1583,
+          "origin": "JAX",
+          "destination": "BTR",
+          "departure": "07:30",
+          "arrival": "08:15",
+          "departureMinute": 450,
+          "arrivalMinute": 495
+        },
+        {
+          "id": "BTR-JAX-CRJ200-02-OUT",
+          "route": 114,
+          "line": "AD",
+          "fleet": "CRJ200",
+          "day": 4,
+          "sequenceWithinRoute": 3,
+          "pairing": 211,
+          "flight": 1586,
+          "origin": "BTR",
+          "destination": "JAX",
+          "departure": "09:30",
+          "arrival": "12:15",
+          "departureMinute": 570,
+          "arrivalMinute": 735
+        },
+        {
+          "id": "AVL-JAX-CRJ200-02-IN",
+          "route": 114,
+          "line": "AD",
+          "fleet": "CRJ200",
+          "day": 4,
+          "sequenceWithinRoute": 4,
+          "pairing": 281,
+          "flight": 1544,
+          "origin": "JAX",
+          "destination": "AVL",
+          "departure": "12:55",
+          "arrival": "14:10",
+          "departureMinute": 775,
+          "arrivalMinute": 850
+        },
+        {
+          "id": "AVL-JAX-CRJ200-02-OUT",
+          "route": 114,
+          "line": "AD",
+          "fleet": "CRJ200",
+          "day": 4,
+          "sequenceWithinRoute": 5,
+          "pairing": 282,
+          "flight": 1546,
+          "origin": "AVL",
+          "destination": "JAX",
+          "departure": "15:20",
+          "arrival": "16:35",
+          "departureMinute": 920,
+          "arrivalMinute": 995
+        },
+        {
+          "id": "JAX-ROA-CRJ200-02-OUT",
+          "route": 114,
+          "line": "AD",
+          "fleet": "CRJ200",
+          "day": 4,
+          "sequenceWithinRoute": 6,
+          "pairing": 214,
+          "flight": 1560,
+          "origin": "JAX",
+          "destination": "ROA",
+          "departure": "17:15",
+          "arrival": "18:49",
+          "departureMinute": 1035,
+          "arrivalMinute": 1129
+        }
+      ],
+      "alreadyAddedEveningFlying": [],
+      "blockMinutes": 509
+    },
+    {
+      "route": 169,
+      "line": "AF",
+      "day": 5,
+      "fleet": "CRJ200",
+      "terminator": "FWA",
+      "finishMinute": 1130,
+      "arrival": "18:50",
+      "nextOriginator": {
+        "route": 165,
+        "flight": 1871,
+        "origin": "FWA",
+        "departure": "04:30",
+        "departureMinute": 270,
+        "line": "AF",
+        "day": 1
+      },
+      "legs": [
+        {
+          "id": "DAY-SBN-CRJ200-01-IN",
+          "route": 169,
+          "line": "AF",
+          "fleet": "CRJ200",
+          "day": 5,
+          "sequenceWithinRoute": 1,
+          "pairing": 253,
+          "flight": 1857,
+          "origin": "SBN",
+          "destination": "DAY",
+          "departure": "06:25",
+          "arrival": "07:16",
+          "departureMinute": 385,
+          "arrivalMinute": 436
+        },
+        {
+          "id": "DAY-FWA-CRJ200-02-OUT",
+          "route": 169,
+          "line": "AF",
+          "fleet": "CRJ200",
+          "day": 5,
+          "sequenceWithinRoute": 2,
+          "pairing": 318,
+          "flight": 1874,
+          "origin": "DAY",
+          "destination": "FWA",
+          "departure": "10:00",
+          "arrival": "10:40",
+          "departureMinute": 600,
+          "arrivalMinute": 640
+        },
+        {
+          "id": "V114-R169-FWA-SYR",
+          "route": 169,
+          "line": "AF",
+          "fleet": "CRJ200",
+          "day": 5,
+          "sequenceWithinRoute": 3,
+          "pairing": 871,
+          "flight": 2007,
+          "origin": "FWA",
+          "destination": "SYR",
+          "departure": "12:20",
+          "arrival": "13:55",
+          "departureMinute": 740,
+          "arrivalMinute": 835
+        },
+        {
+          "id": "V114-R169-SYR-FWA",
+          "route": 169,
+          "line": "AF",
+          "fleet": "CRJ200",
+          "day": 5,
+          "sequenceWithinRoute": 4,
+          "pairing": 872,
+          "flight": 2008,
+          "origin": "SYR",
+          "destination": "FWA",
+          "departure": "14:35",
+          "arrival": "16:10",
+          "departureMinute": 875,
+          "arrivalMinute": 970
+        },
+        {
+          "id": "V114-R169-FWA-DAY",
+          "route": 169,
+          "line": "AF",
+          "fleet": "CRJ200",
+          "day": 5,
+          "sequenceWithinRoute": 5,
+          "pairing": 160,
+          "flight": 2009,
+          "origin": "FWA",
+          "destination": "DAY",
+          "departure": "16:50",
+          "arrival": "17:30",
+          "departureMinute": 1010,
+          "arrivalMinute": 1050
+        },
+        {
+          "id": "V114-R169-DAY-FWA",
+          "route": 169,
+          "line": "AF",
+          "fleet": "CRJ200",
+          "day": 5,
+          "sequenceWithinRoute": 6,
+          "pairing": 318,
+          "flight": 2010,
+          "origin": "DAY",
+          "destination": "FWA",
+          "departure": "18:10",
+          "arrival": "18:50",
+          "departureMinute": 1090,
+          "arrivalMinute": 1130
+        }
+      ],
+      "alreadyAddedEveningFlying": [],
+      "blockMinutes": 361
+    },
+    {
+      "route": 327,
+      "line": "AK",
+      "day": 3,
+      "fleet": "CRJ700",
+      "terminator": "SDF",
+      "finishMinute": 1363,
+      "arrival": "22:43",
+      "nextOriginator": {
+        "route": 328,
+        "flight": 1374,
+        "origin": "SDF",
+        "departure": "05:05",
+        "departureMinute": 305,
+        "line": "AK",
+        "day": 4
+      },
+      "legs": [
+        {
+          "id": "V123-R327-3-PGD-JAX",
+          "route": 327,
+          "line": "AK",
+          "fleet": "CRJ700",
+          "day": 3,
+          "sequenceWithinRoute": 1,
+          "pairing": 533,
+          "flight": 2139,
+          "origin": "PGD",
+          "destination": "JAX",
+          "departure": "05:55",
+          "arrival": "06:57",
+          "departureMinute": 355,
+          "arrivalMinute": 417
+        },
+        {
+          "id": "V123-R327-4-JAX-PGD",
+          "route": 327,
+          "line": "AK",
+          "fleet": "CRJ700",
+          "day": 3,
+          "sequenceWithinRoute": 2,
+          "pairing": 445,
+          "flight": 2140,
+          "origin": "JAX",
+          "destination": "PGD",
+          "departure": "08:00",
+          "arrival": "09:02",
+          "departureMinute": 480,
+          "arrivalMinute": 542
+        },
+        {
+          "id": "PGD-PIE-CRJ700-01-OUT",
+          "route": 327,
+          "line": "AK",
+          "fleet": "CRJ700",
+          "day": 3,
+          "sequenceWithinRoute": 3,
+          "pairing": 550,
+          "flight": 1457,
+          "origin": "PGD",
+          "destination": "PIE",
+          "departure": "09:55",
+          "arrival": "10:35",
+          "departureMinute": 595,
+          "arrivalMinute": 635
+        },
+        {
+          "id": "PGD-PIE-CRJ700-01-IN",
+          "route": 327,
+          "line": "AK",
+          "fleet": "CRJ700",
+          "day": 3,
+          "sequenceWithinRoute": 4,
+          "pairing": 551,
+          "flight": 1458,
+          "origin": "PIE",
+          "destination": "PGD",
+          "departure": "11:15",
+          "arrival": "11:55",
+          "departureMinute": 675,
+          "arrivalMinute": 715
+        },
+        {
+          "id": "BHM-PGD-CRJ700-01-IN",
+          "route": 327,
+          "line": "AK",
+          "fleet": "CRJ700",
+          "day": 3,
+          "sequenceWithinRoute": 5,
+          "pairing": 517,
+          "flight": 1470,
+          "origin": "PGD",
+          "destination": "BHM",
+          "departure": "12:35",
+          "arrival": "13:14",
+          "departureMinute": 755,
+          "arrivalMinute": 794
+        },
+        {
+          "id": "BHM-JAX-CRJ700-01-OUT",
+          "route": 327,
+          "line": "AK",
+          "fleet": "CRJ700",
+          "day": 3,
+          "sequenceWithinRoute": 6,
+          "pairing": 653,
+          "flight": 1421,
+          "origin": "BHM",
+          "destination": "JAX",
+          "departure": "14:15",
+          "arrival": "16:31",
+          "departureMinute": 855,
+          "arrivalMinute": 991
+        },
+        {
+          "id": "JAX-SDF-CRJ700-03-OUT",
+          "route": 327,
+          "line": "AK",
+          "fleet": "CRJ700",
+          "day": 3,
+          "sequenceWithinRoute": 7,
+          "pairing": 204,
+          "flight": 1373,
+          "origin": "JAX",
+          "destination": "SDF",
+          "departure": "17:15",
+          "arrival": "18:59",
+          "departureMinute": 1035,
+          "arrivalMinute": 1139
+        },
+        {
+          "id": "V123-R327-1-SDF-DAY",
+          "route": 327,
+          "line": "AK",
+          "fleet": "CRJ700",
+          "day": 3,
+          "sequenceWithinRoute": 8,
+          "pairing": 812,
+          "flight": 2137,
+          "origin": "SDF",
+          "destination": "DAY",
+          "departure": "20:17",
+          "arrival": "21:05",
+          "departureMinute": 1217,
+          "arrivalMinute": 1265
+        },
+        {
+          "id": "V123-R327-2-DAY-SDF",
+          "route": 327,
+          "line": "AK",
+          "fleet": "CRJ700",
+          "day": 3,
+          "sequenceWithinRoute": 9,
+          "pairing": 632,
+          "flight": 2138,
+          "origin": "DAY",
+          "destination": "SDF",
+          "departure": "21:55",
+          "arrival": "22:43",
+          "departureMinute": 1315,
+          "arrivalMinute": 1363
+        }
+      ],
+      "alreadyAddedEveningFlying": [
+        {
+          "id": "V123-R327-1-SDF-DAY",
+          "route": 327,
+          "line": "AK",
+          "fleet": "CRJ700",
+          "day": 3,
+          "sequenceWithinRoute": 8,
+          "pairing": 812,
+          "flight": 2137,
+          "origin": "SDF",
+          "destination": "DAY",
+          "departure": "20:17",
+          "arrival": "21:05",
+          "departureMinute": 1217,
+          "arrivalMinute": 1265
+        },
+        {
+          "id": "V123-R327-2-DAY-SDF",
+          "route": 327,
+          "line": "AK",
+          "fleet": "CRJ700",
+          "day": 3,
+          "sequenceWithinRoute": 9,
+          "pairing": 632,
+          "flight": 2138,
+          "origin": "DAY",
+          "destination": "SDF",
+          "departure": "21:55",
+          "arrival": "22:43",
+          "departureMinute": 1315,
+          "arrivalMinute": 1363
+        }
+      ],
+      "blockMinutes": 579
+    }
+  ],
+  "screens": [
+    {
+      "name": "340 evening, unchanged existing clocks",
+      "route": 340,
+      "station": "CLT",
+      "window": [
+        1432,
+        1560
+      ],
+      "retimings": [],
+      "retainedTimings": 0,
+      "gridMinutes": 5,
+      "rankingModel": "full marginal one/two-stop",
+      "selected": [],
+      "rejected": [],
+      "validatedTimingsByMarket": {}
+    },
+    {
+      "name": "350 evening, unchanged existing clocks",
+      "route": 350,
+      "station": "ELP",
+      "window": [
+        1101,
+        1560
+      ],
+      "retimings": [],
+      "retainedTimings": 9,
+      "gridMinutes": 15,
+      "rankingModel": "one-stop marginal for wide holds; full one/two-stop final comparison",
+      "selected": [
+        {
+          "plans": [
+            {
+              "route": 350,
+              "city": "MCI",
+              "legs": [
+                {
+                  "id": "NEW",
+                  "origin": "ELP",
+                  "destination": "MCI",
+                  "departureMinute": 1101,
+                  "arrivalMinute": 1297
+                },
+                {
+                  "id": "NEW",
+                  "origin": "MCI",
+                  "destination": "ELP",
+                  "departureMinute": 1337,
+                  "arrivalMinute": 1413
+                }
+              ],
+              "score": 154.74262334277037,
+              "legScores": [
+                3.3,
+                151.44262334277036
+              ]
+            }
+          ],
+          "retimings": [],
+          "score": 154.74262334277037,
+          "validation": {
+            "structural": "pass",
+            "operatingErrors": 0,
+            "operatingWarnings": 182,
+            "hardStopFailures": [],
+            "blocking": [],
+            "overnight": "pass",
+            "overnightFindings": [],
+            "planning": "pass",
+            "gates": "pass",
+            "standClaims": 15,
+            "standMinutes": 3771,
+            "affectedStations": [
+              {
+                "code": "PHF",
+                "name": "Newport News VA",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 8,
+                "peakUsed": 18,
+                "standClaims": 2,
+                "standMinutes": 142
+              },
+              {
+                "code": "SYR",
+                "name": "Syracuse NY",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 8,
+                "peakUsed": 18,
+                "standClaims": 2,
+                "standMinutes": 464
+              },
+              {
+                "code": "DAY",
+                "name": "Dayton OH",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 8,
+                "peakUsed": 16,
+                "standClaims": 0,
+                "standMinutes": 0
+              },
+              {
+                "code": "JAX",
+                "name": "Jacksonville FL",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 12,
+                "peakUsed": 16,
+                "standClaims": 0,
+                "standMinutes": 0
+              },
+              {
+                "code": "BHM",
+                "name": "Birmingham AL",
+                "isHub": false,
+                "isFocusCity": true,
+                "nGates": 6,
+                "nStands": 4,
+                "peakUsed": 8,
+                "standClaims": 4,
+                "standMinutes": 290
+              },
+              {
+                "code": "BWI",
+                "name": "Baltimore MD",
+                "isHub": false,
+                "isFocusCity": false,
+                "nGates": 2,
+                "nStands": 2,
+                "peakUsed": 4,
+                "standClaims": 2,
+                "standMinutes": 804
+              }
+            ]
+          },
+          "demand": {
+            "flights": [
+              {
+                "id": "V123-R4-R350-1-ELP-MCI",
+                "route": 350,
+                "line": "AO",
+                "fleet": "CRJ700",
+                "day": 1,
+                "sequenceWithinRoute": 5,
+                "pairing": 769,
+                "flight": 2151,
+                "origin": "ELP",
+                "destination": "MCI",
+                "departure": "18:21",
+                "arrival": "21:37",
+                "departureMinute": 1101,
+                "arrivalMinute": 1297,
+                "departureClock": "18:21",
+                "arrivalClock": "21:37",
+                "blockMinutes": 136,
+                "currentPairFrequency": 3,
+                "routeLocalOd": 13.2,
+                "local": 3.3,
+                "connecting": 0,
+                "total": 3.3,
+                "oneStop": 0,
+                "twoStop": 0,
+                "groups": {},
+                "connectingFlights": [],
+                "topMarkets": []
+              },
+              {
+                "id": "V123-R4-R350-2-MCI-ELP",
+                "route": 350,
+                "line": "AO",
+                "fleet": "CRJ700",
+                "day": 1,
+                "sequenceWithinRoute": 6,
+                "pairing": 782,
+                "flight": 2152,
+                "origin": "MCI",
+                "destination": "ELP",
+                "departure": "22:17",
+                "arrival": "23:33",
+                "departureMinute": 1337,
+                "arrivalMinute": 1413,
+                "departureClock": "22:17",
+                "arrivalClock": "23:33",
+                "blockMinutes": 136,
+                "currentPairFrequency": 3,
+                "routeLocalOd": 12.7,
+                "local": 3.175,
+                "connecting": 165.02417010796003,
+                "total": 168.19917010796004,
+                "oneStop": 147.27827347821173,
+                "twoStop": 17.74589662974835,
+                "groups": {
+                  "HUB": 4.086137003508423,
+                  "GLC": 23.830643217243292,
+                  "FLP": 23.529001632447283,
+                  "APP": 21.047691212121126,
+                  "CGI": 5.818680744475193,
+                  "TEX": 45.7,
+                  "MAC": 1.5622332928654283,
+                  "GCP": 15.359020427593496,
+                  "LEC": 7.697398208165481,
+                  "OZK": 12.642469947833975,
+                  "UMP": 3.7508944217063673
+                },
+                "connectingFlights": [
+                  {
+                    "flight": 1320,
+                    "origin": "CMH",
+                    "destination": "MCI",
+                    "departure": "19:10",
+                    "arrival": "20:00"
+                  },
+                  {
+                    "flight": 1080,
+                    "origin": "BNA",
+                    "destination": "MCI",
+                    "departure": "18:25",
+                    "arrival": "19:54"
+                  },
+                  {
+                    "flight": 1100,
+                    "origin": "HOU",
+                    "destination": "MCI",
+                    "departure": "18:05",
+                    "arrival": "19:54"
+                  },
+                  {
+                    "flight": 1652,
+                    "origin": "ICT",
+                    "destination": "MCI",
+                    "departure": "19:00",
+                    "arrival": "19:53"
+                  },
+                  {
+                    "flight": 1534,
+                    "origin": "LIT",
+                    "destination": "MCI",
+                    "departure": "18:40",
+                    "arrival": "19:55"
+                  },
+                  {
+                    "flight": 1189,
+                    "origin": "MSY",
+                    "destination": "MCI",
+                    "departure": "16:30",
+                    "arrival": "18:24"
+                  },
+                  {
+                    "flight": 1190,
+                    "origin": "MSY",
+                    "destination": "MCI",
+                    "departure": "17:55",
+                    "arrival": "19:49"
+                  },
+                  {
+                    "flight": 1640,
+                    "origin": "OMA",
+                    "destination": "MCI",
+                    "departure": "20:38",
+                    "arrival": "21:27"
+                  },
+                  {
+                    "flight": 1198,
+                    "origin": "PGD",
+                    "destination": "MCI",
+                    "departure": "18:20",
+                    "arrival": "20:05"
+                  },
+                  {
+                    "flight": 1074,
+                    "origin": "PIE",
+                    "destination": "MCI",
+                    "departure": "18:25",
+                    "arrival": "19:57"
+                  },
+                  {
+                    "flight": 1034,
+                    "origin": "RFD",
+                    "destination": "MCI",
+                    "departure": "17:05",
+                    "arrival": "18:19"
+                  },
+                  {
+                    "flight": 1038,
+                    "origin": "SFB",
+                    "destination": "MCI",
+                    "departure": "19:05",
+                    "arrival": "20:38"
+                  },
+                  {
+                    "flight": 1724,
+                    "origin": "SGF",
+                    "destination": "MCI",
+                    "departure": "19:50",
+                    "arrival": "20:40"
+                  },
+                  {
+                    "flight": 1662,
+                    "origin": "TUL",
+                    "destination": "MCI",
+                    "departure": "18:55",
+                    "arrival": "19:54"
+                  },
+                  {
+                    "flight": 1959,
+                    "origin": "MSN",
+                    "destination": "MCI",
+                    "departure": "17:34",
+                    "arrival": "18:55"
+                  },
+                  {
+                    "flight": 1974,
+                    "origin": "BHM",
+                    "destination": "MCI",
+                    "departure": "18:18",
+                    "arrival": "20:07"
+                  },
+                  {
+                    "flight": 1980,
+                    "origin": "BHM",
+                    "destination": "MCI",
+                    "departure": "19:07",
+                    "arrival": "20:56"
+                  },
+                  {
+                    "flight": 2018,
+                    "origin": "CAK",
+                    "destination": "MCI",
+                    "departure": "19:40",
+                    "arrival": "20:45"
+                  },
+                  {
+                    "flight": 2016,
+                    "origin": "CLT",
+                    "destination": "MCI",
+                    "departure": "18:44",
+                    "arrival": "20:03"
+                  },
+                  {
+                    "flight": 2020,
+                    "origin": "PNS",
+                    "destination": "MCI",
+                    "departure": "18:25",
+                    "arrival": "20:35"
+                  },
+                  {
+                    "flight": 2022,
+                    "origin": "IND",
+                    "destination": "MCI",
+                    "departure": "19:35",
+                    "arrival": "20:05"
+                  },
+                  {
+                    "flight": 2024,
+                    "origin": "MKE",
+                    "destination": "MCI",
+                    "departure": "20:10",
+                    "arrival": "21:35"
+                  },
+                  {
+                    "flight": 2062,
+                    "origin": "MKE",
+                    "destination": "MCI",
+                    "departure": "17:36",
+                    "arrival": "19:04"
+                  },
+                  {
+                    "flight": 2106,
+                    "origin": "DAY",
+                    "destination": "MCI",
+                    "departure": "18:15",
+                    "arrival": "19:00"
+                  },
+                  {
+                    "flight": 2117,
+                    "origin": "JAN",
+                    "destination": "MCI",
+                    "departure": "19:05",
+                    "arrival": "20:48"
+                  }
+                ],
+                "topMarkets": [
+                  {
+                    "origin": "HOU",
+                    "destination": "ELP",
+                    "opportunity": 45.7
+                  },
+                  {
+                    "origin": "BNA",
+                    "destination": "ELP",
+                    "opportunity": 18.701572092750563
+                  },
+                  {
+                    "origin": "RFD",
+                    "destination": "ELP",
+                    "opportunity": 14.626407958314793
+                  },
+                  {
+                    "origin": "SFB",
+                    "destination": "ELP",
+                    "opportunity": 11.594636114928234
+                  },
+                  {
+                    "origin": "MSY",
+                    "destination": "ELP",
+                    "opportunity": 10.8
+                  },
+                  {
+                    "origin": "PIE",
+                    "destination": "ELP",
+                    "opportunity": 9.70338473378129
+                  },
+                  {
+                    "origin": "TUL",
+                    "destination": "ELP",
+                    "opportunity": 5.7
+                  },
+                  {
+                    "origin": "CAK",
+                    "destination": "ELP",
+                    "opportunity": 4.007916039589187
+                  },
+                  {
+                    "origin": "OMA",
+                    "destination": "ELP",
+                    "opportunity": 3.7508944217063673
+                  },
+                  {
+                    "origin": "CMH",
+                    "destination": "ELP",
+                    "opportunity": 3.6894821685762937
+                  }
+                ]
+              }
+            ],
+            "newlyConnectedMarketDemand": 68.2,
+            "marketsWithFasterBestItinerary": 7
+          },
+          "reviewAudit": {
+            "marketsWithSlowerBestItinerary": [],
+            "marketsLosingAllConnections": [],
+            "lostUnderlyingOd": 0,
+            "marketsWithFasterBestItinerary": 7
+          }
+        }
+      ],
+      "rejected": [
+        {
+          "plan": {
+            "route": 350,
+            "city": "BHM",
+            "legs": [
+              {
+                "id": "NEW",
+                "origin": "ELP",
+                "destination": "BHM",
+                "departureMinute": 1125,
+                "arrivalMinute": 1361
+              },
+              {
+                "id": "NEW",
+                "origin": "BHM",
+                "destination": "ELP",
+                "departureMinute": 1401,
+                "arrivalMinute": 1517
+              }
+            ],
+            "score": 57.04850296644783,
+            "legScores": [
+              30.528227846117478,
+              26.520275120330354
+            ]
+          },
+          "validation": {
+            "structural": "pass",
+            "operatingErrors": 1,
+            "operatingWarnings": 182,
+            "hardStopFailures": [],
+            "blocking": [
+              {
+                "check": "tiered_service_minimums",
+                "findings": [
+                  {
+                    "id": "ELP",
+                    "message": "ELP does not satisfy its percentile-tier service envelope",
+                    "evidence": {
+                      "city": "ELP",
+                      "percentile": 67.0,
+                      "totalFlights": 12,
+                      "hubOrFocusFlights": 10,
+                      "minimumFlights": 6,
+                      "connectedHubs": [
+                        "BHM",
+                        "JAX",
+                        "MCI"
+                      ],
+                      "hubCountCap": 2
+                    }
+                  }
+                ]
+              }
+            ],
+            "overnight": "pass",
+            "overnightFindings": [],
+            "planning": "pass",
+            "gates": "pass",
+            "standClaims": 15,
+            "standMinutes": 3771,
+            "affectedStations": [
+              {
+                "code": "PHF",
+                "name": "Newport News VA",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 8,
+                "peakUsed": 18,
+                "standClaims": 2,
+                "standMinutes": 142
+              },
+              {
+                "code": "SYR",
+                "name": "Syracuse NY",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 8,
+                "peakUsed": 18,
+                "standClaims": 2,
+                "standMinutes": 464
+              },
+              {
+                "code": "DAY",
+                "name": "Dayton OH",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 8,
+                "peakUsed": 16,
+                "standClaims": 0,
+                "standMinutes": 0
+              },
+              {
+                "code": "JAX",
+                "name": "Jacksonville FL",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 12,
+                "peakUsed": 16,
+                "standClaims": 0,
+                "standMinutes": 0
+              },
+              {
+                "code": "BHM",
+                "name": "Birmingham AL",
+                "isHub": false,
+                "isFocusCity": true,
+                "nGates": 6,
+                "nStands": 4,
+                "peakUsed": 8,
+                "standClaims": 4,
+                "standMinutes": 290
+              },
+              {
+                "code": "BWI",
+                "name": "Baltimore MD",
+                "isHub": false,
+                "isFocusCity": false,
+                "nGates": 2,
+                "nStands": 2,
+                "peakUsed": 4,
+                "standClaims": 2,
+                "standMinutes": 804
+              }
+            ]
+          }
+        },
+        {
+          "plan": {
+            "route": 350,
+            "city": "BHM",
+            "legs": [
+              {
+                "id": "NEW",
+                "origin": "ELP",
+                "destination": "BHM",
+                "departureMinute": 1110,
+                "arrivalMinute": 1346
+              },
+              {
+                "id": "NEW",
+                "origin": "BHM",
+                "destination": "ELP",
+                "departureMinute": 1386,
+                "arrivalMinute": 1502
+              }
+            ],
+            "score": 56.89907448365496,
+            "legScores": [
+              29.621783371573887,
+              27.277291112081066
+            ]
+          },
+          "validation": {
+            "structural": "pass",
+            "operatingErrors": 1,
+            "operatingWarnings": 182,
+            "hardStopFailures": [],
+            "blocking": [
+              {
+                "check": "tiered_service_minimums",
+                "findings": [
+                  {
+                    "id": "ELP",
+                    "message": "ELP does not satisfy its percentile-tier service envelope",
+                    "evidence": {
+                      "city": "ELP",
+                      "percentile": 67.0,
+                      "totalFlights": 12,
+                      "hubOrFocusFlights": 10,
+                      "minimumFlights": 6,
+                      "connectedHubs": [
+                        "BHM",
+                        "JAX",
+                        "MCI"
+                      ],
+                      "hubCountCap": 2
+                    }
+                  }
+                ]
+              }
+            ],
+            "overnight": "pass",
+            "overnightFindings": [],
+            "planning": "pass",
+            "gates": "pass",
+            "standClaims": 15,
+            "standMinutes": 3771,
+            "affectedStations": [
+              {
+                "code": "PHF",
+                "name": "Newport News VA",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 8,
+                "peakUsed": 18,
+                "standClaims": 2,
+                "standMinutes": 142
+              },
+              {
+                "code": "SYR",
+                "name": "Syracuse NY",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 8,
+                "peakUsed": 18,
+                "standClaims": 2,
+                "standMinutes": 464
+              },
+              {
+                "code": "DAY",
+                "name": "Dayton OH",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 8,
+                "peakUsed": 16,
+                "standClaims": 0,
+                "standMinutes": 0
+              },
+              {
+                "code": "JAX",
+                "name": "Jacksonville FL",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 12,
+                "peakUsed": 16,
+                "standClaims": 0,
+                "standMinutes": 0
+              },
+              {
+                "code": "BHM",
+                "name": "Birmingham AL",
+                "isHub": false,
+                "isFocusCity": true,
+                "nGates": 6,
+                "nStands": 4,
+                "peakUsed": 8,
+                "standClaims": 4,
+                "standMinutes": 290
+              },
+              {
+                "code": "BWI",
+                "name": "Baltimore MD",
+                "isHub": false,
+                "isFocusCity": false,
+                "nGates": 2,
+                "nStands": 2,
+                "peakUsed": 4,
+                "standClaims": 2,
+                "standMinutes": 804
+              }
+            ]
+          }
+        }
+      ],
+      "validatedTimingsByMarket": {
+        "MCI": 1,
+        "BHM": 2
+      }
+    },
+    {
+      "name": "114 evening, unchanged existing clocks",
+      "route": 114,
+      "station": "ROA",
+      "window": [
+        1169,
+        1560
+      ],
+      "retimings": [],
+      "retainedTimings": 52,
+      "gridMinutes": 15,
+      "rankingModel": "one-stop marginal for wide holds; full one/two-stop final comparison",
+      "selected": [
+        {
+          "plans": [
+            {
+              "route": 114,
+              "city": "JAX",
+              "legs": [
+                {
+                  "id": "NEW",
+                  "origin": "ROA",
+                  "destination": "JAX",
+                  "departureMinute": 1169,
+                  "arrivalMinute": 1263
+                },
+                {
+                  "id": "NEW",
+                  "origin": "JAX",
+                  "destination": "ROA",
+                  "departureMinute": 1303,
+                  "arrivalMinute": 1397
+                }
+              ],
+              "score": 47.012208350408365,
+              "legScores": [
+                12.83750172080191,
+                34.174706629606455
+              ]
+            }
+          ],
+          "retimings": [],
+          "score": 47.012208350408365,
+          "validation": {
+            "structural": "pass",
+            "operatingErrors": 0,
+            "operatingWarnings": 182,
+            "hardStopFailures": [],
+            "blocking": [],
+            "overnight": "pass",
+            "overnightFindings": [],
+            "planning": "pass",
+            "gates": "pass",
+            "standClaims": 15,
+            "standMinutes": 3771,
+            "affectedStations": [
+              {
+                "code": "PHF",
+                "name": "Newport News VA",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 8,
+                "peakUsed": 18,
+                "standClaims": 2,
+                "standMinutes": 142
+              },
+              {
+                "code": "SYR",
+                "name": "Syracuse NY",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 8,
+                "peakUsed": 18,
+                "standClaims": 2,
+                "standMinutes": 464
+              },
+              {
+                "code": "DAY",
+                "name": "Dayton OH",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 8,
+                "peakUsed": 16,
+                "standClaims": 0,
+                "standMinutes": 0
+              },
+              {
+                "code": "JAX",
+                "name": "Jacksonville FL",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 12,
+                "peakUsed": 16,
+                "standClaims": 0,
+                "standMinutes": 0
+              },
+              {
+                "code": "BHM",
+                "name": "Birmingham AL",
+                "isHub": false,
+                "isFocusCity": true,
+                "nGates": 6,
+                "nStands": 4,
+                "peakUsed": 8,
+                "standClaims": 4,
+                "standMinutes": 290
+              },
+              {
+                "code": "BWI",
+                "name": "Baltimore MD",
+                "isHub": false,
+                "isFocusCity": false,
+                "nGates": 2,
+                "nStands": 2,
+                "peakUsed": 4,
+                "standClaims": 2,
+                "standMinutes": 804
+              }
+            ]
+          },
+          "demand": {
+            "flights": [
+              {
+                "id": "V123-R4-R114-1-ROA-JAX",
+                "route": 114,
+                "line": "AD",
+                "fleet": "CRJ200",
+                "day": 4,
+                "sequenceWithinRoute": 7,
+                "pairing": 215,
+                "flight": 2151,
+                "origin": "ROA",
+                "destination": "JAX",
+                "departure": "19:29",
+                "arrival": "21:03",
+                "departureMinute": 1169,
+                "arrivalMinute": 1263,
+                "departureClock": "19:29",
+                "arrivalClock": "21:03",
+                "blockMinutes": 94,
+                "currentPairFrequency": 2,
+                "routeLocalOd": 4.1,
+                "local": 1.3666666666666665,
+                "connecting": 11.470835054135243,
+                "total": 12.83750172080191,
+                "oneStop": 11.470835054135243,
+                "twoStop": 0,
+                "groups": {
+                  "FLP": 8.576661256482325,
+                  "GCP": 2.8941737976529183
+                },
+                "connectingFlights": [
+                  {
+                    "flight": 2124,
+                    "origin": "JAX",
+                    "destination": "MSY",
+                    "departure": "21:39",
+                    "arrival": "22:14"
+                  },
+                  {
+                    "flight": 2120,
+                    "origin": "JAX",
+                    "destination": "SFB",
+                    "departure": "21:33",
+                    "arrival": "22:21"
+                  }
+                ],
+                "topMarkets": [
+                  {
+                    "origin": "ROA",
+                    "destination": "SFB",
+                    "opportunity": 8.576661256482325
+                  },
+                  {
+                    "origin": "ROA",
+                    "destination": "MSY",
+                    "opportunity": 2.8941737976529183
+                  }
+                ]
+              },
+              {
+                "id": "V123-R4-R114-2-JAX-ROA",
+                "route": 114,
+                "line": "AD",
+                "fleet": "CRJ200",
+                "day": 4,
+                "sequenceWithinRoute": 8,
+                "pairing": 214,
+                "flight": 2152,
+                "origin": "JAX",
+                "destination": "ROA",
+                "departure": "21:43",
+                "arrival": "23:17",
+                "departureMinute": 1303,
+                "arrivalMinute": 1397,
+                "departureClock": "21:43",
+                "arrivalClock": "23:17",
+                "blockMinutes": 94,
+                "currentPairFrequency": 2,
+                "routeLocalOd": 4.0,
+                "local": 1.3333333333333333,
+                "connecting": 34.941481395507026,
+                "total": 36.27481472884036,
+                "oneStop": 32.67071843429644,
+                "twoStop": 2.2707629612105893,
+                "groups": {
+                  "TEX": 4.6132095021074315,
+                  "FLP": 24.64026214639117,
+                  "CGI": 0.9954084444113486,
+                  "GCP": 4.0,
+                  "HUB": 0.6926013025970725
+                },
+                "connectingFlights": [
+                  {
+                    "flight": 1150,
+                    "origin": "AUS",
+                    "destination": "JAX",
+                    "departure": "15:20",
+                    "arrival": "18:45"
+                  },
+                  {
+                    "flight": 1556,
+                    "origin": "EYW",
+                    "destination": "JAX",
+                    "departure": "17:20",
+                    "arrival": "18:44"
+                  },
+                  {
+                    "flight": 1438,
+                    "origin": "SFB",
+                    "destination": "JAX",
+                    "departure": "18:00",
+                    "arrival": "18:45"
+                  },
+                  {
+                    "flight": 2089,
+                    "origin": "FLL",
+                    "destination": "JAX",
+                    "departure": "16:40",
+                    "arrival": "17:50"
+                  },
+                  {
+                    "flight": 2097,
+                    "origin": "DAY",
+                    "destination": "JAX",
+                    "departure": "16:16",
+                    "arrival": "18:05"
+                  },
+                  {
+                    "flight": 2127,
+                    "origin": "SAV",
+                    "destination": "JAX",
+                    "departure": "20:00",
+                    "arrival": "20:45"
+                  },
+                  {
+                    "flight": 2123,
+                    "origin": "MSY",
+                    "destination": "JAX",
+                    "departure": "18:24",
+                    "arrival": "20:59"
+                  },
+                  {
+                    "flight": 2129,
+                    "origin": "PIE",
+                    "destination": "JAX",
+                    "departure": "20:14",
+                    "arrival": "21:08"
+                  },
+                  {
+                    "flight": 2119,
+                    "origin": "SFB",
+                    "destination": "JAX",
+                    "departure": "20:05",
+                    "arrival": "20:53"
+                  }
+                ],
+                "topMarkets": [
+                  {
+                    "origin": "SFB",
+                    "destination": "ROA",
+                    "opportunity": 11.4
+                  },
+                  {
+                    "origin": "PIE",
+                    "destination": "ROA",
+                    "opportunity": 6.640262146391173
+                  },
+                  {
+                    "origin": "FLL",
+                    "destination": "ROA",
+                    "opportunity": 5.2
+                  },
+                  {
+                    "origin": "MSY",
+                    "destination": "ROA",
+                    "opportunity": 4.0
+                  },
+                  {
+                    "origin": "AUS",
+                    "destination": "ROA",
+                    "opportunity": 3.3917208354381065
+                  },
+                  {
+                    "origin": "EYW",
+                    "destination": "ROA",
+                    "opportunity": 1.4
+                  },
+                  {
+                    "origin": "HOU",
+                    "destination": "ROA",
+                    "opportunity": 1.2214886666693252
+                  },
+                  {
+                    "origin": "SAV",
+                    "destination": "ROA",
+                    "opportunity": 0.9954084444113486
+                  },
+                  {
+                    "origin": "MCI",
+                    "destination": "ROA",
+                    "opportunity": 0.6926013025970725
+                  }
+                ]
+              }
+            ],
+            "newlyConnectedMarketDemand": 22.0,
+            "marketsWithFasterBestItinerary": 4
+          },
+          "reviewAudit": {
+            "marketsWithSlowerBestItinerary": [],
+            "marketsLosingAllConnections": [],
+            "lostUnderlyingOd": 0,
+            "marketsWithFasterBestItinerary": 4
+          }
+        },
+        {
+          "plans": [
+            {
+              "route": 114,
+              "city": "BNA",
+              "legs": [
+                {
+                  "id": "NEW",
+                  "origin": "ROA",
+                  "destination": "BNA",
+                  "departureMinute": 1169,
+                  "arrivalMinute": 1189
+                },
+                {
+                  "id": "NEW",
+                  "origin": "BNA",
+                  "destination": "ROA",
+                  "departureMinute": 1229,
+                  "arrivalMinute": 1369
+                }
+              ],
+              "score": 8.3,
+              "legScores": [
+                4.2,
+                4.1
+              ]
+            }
+          ],
+          "retimings": [],
+          "score": 8.3,
+          "validation": {
+            "structural": "pass",
+            "operatingErrors": 0,
+            "operatingWarnings": 182,
+            "hardStopFailures": [],
+            "blocking": [],
+            "overnight": "pass",
+            "overnightFindings": [],
+            "planning": "pass",
+            "gates": "pass",
+            "standClaims": 15,
+            "standMinutes": 3771,
+            "affectedStations": [
+              {
+                "code": "PHF",
+                "name": "Newport News VA",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 8,
+                "peakUsed": 18,
+                "standClaims": 2,
+                "standMinutes": 142
+              },
+              {
+                "code": "SYR",
+                "name": "Syracuse NY",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 8,
+                "peakUsed": 18,
+                "standClaims": 2,
+                "standMinutes": 464
+              },
+              {
+                "code": "DAY",
+                "name": "Dayton OH",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 8,
+                "peakUsed": 16,
+                "standClaims": 0,
+                "standMinutes": 0
+              },
+              {
+                "code": "JAX",
+                "name": "Jacksonville FL",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 12,
+                "peakUsed": 16,
+                "standClaims": 0,
+                "standMinutes": 0
+              },
+              {
+                "code": "BHM",
+                "name": "Birmingham AL",
+                "isHub": false,
+                "isFocusCity": true,
+                "nGates": 6,
+                "nStands": 4,
+                "peakUsed": 8,
+                "standClaims": 4,
+                "standMinutes": 290
+              },
+              {
+                "code": "BWI",
+                "name": "Baltimore MD",
+                "isHub": false,
+                "isFocusCity": false,
+                "nGates": 2,
+                "nStands": 2,
+                "peakUsed": 4,
+                "standClaims": 2,
+                "standMinutes": 804
+              }
+            ]
+          },
+          "demand": {
+            "flights": [
+              {
+                "id": "V123-R4-R114-1-ROA-BNA",
+                "route": 114,
+                "line": "AD",
+                "fleet": "CRJ200",
+                "day": 4,
+                "sequenceWithinRoute": 7,
+                "pairing": 891,
+                "flight": 2151,
+                "origin": "ROA",
+                "destination": "BNA",
+                "departure": "19:29",
+                "arrival": "19:49",
+                "departureMinute": 1169,
+                "arrivalMinute": 1189,
+                "departureClock": "19:29",
+                "arrivalClock": "19:49",
+                "blockMinutes": 80,
+                "currentPairFrequency": 0,
+                "routeLocalOd": 4.2,
+                "local": 4.2,
+                "connecting": 0,
+                "total": 4.2,
+                "oneStop": 0,
+                "twoStop": 0,
+                "groups": {},
+                "connectingFlights": [],
+                "topMarkets": []
+              },
+              {
+                "id": "V123-R4-R114-2-BNA-ROA",
+                "route": 114,
+                "line": "AD",
+                "fleet": "CRJ200",
+                "day": 4,
+                "sequenceWithinRoute": 8,
+                "pairing": 892,
+                "flight": 2152,
+                "origin": "BNA",
+                "destination": "ROA",
+                "departure": "20:29",
+                "arrival": "22:49",
+                "departureMinute": 1229,
+                "arrivalMinute": 1369,
+                "departureClock": "20:29",
+                "arrivalClock": "22:49",
+                "blockMinutes": 80,
+                "currentPairFrequency": 0,
+                "routeLocalOd": 4.1,
+                "local": 4.1,
+                "connecting": 0,
+                "total": 4.1,
+                "oneStop": 0,
+                "twoStop": 0,
+                "groups": {},
+                "connectingFlights": [],
+                "topMarkets": []
+              }
+            ],
+            "newlyConnectedMarketDemand": 8.3,
+            "marketsWithFasterBestItinerary": 0
+          },
+          "reviewAudit": {
+            "marketsWithSlowerBestItinerary": [],
+            "marketsLosingAllConnections": [],
+            "lostUnderlyingOd": 0,
+            "marketsWithFasterBestItinerary": 0
+          }
+        },
+        {
+          "plans": [
+            {
+              "route": 114,
+              "city": "BLV",
+              "legs": [
+                {
+                  "id": "NEW",
+                  "origin": "ROA",
+                  "destination": "BLV",
+                  "departureMinute": 1169,
+                  "arrivalMinute": 1212
+                },
+                {
+                  "id": "NEW",
+                  "origin": "BLV",
+                  "destination": "ROA",
+                  "departureMinute": 1252,
+                  "arrivalMinute": 1415
+                }
+              ],
+              "score": 5.843685582664443,
+              "legScores": [
+                2.9650370057635773,
+                2.8786485769008654
+              ]
+            }
+          ],
+          "retimings": [],
+          "score": 5.843685582664443,
+          "validation": {
+            "structural": "pass",
+            "operatingErrors": 0,
+            "operatingWarnings": 182,
+            "hardStopFailures": [],
+            "blocking": [],
+            "overnight": "pass",
+            "overnightFindings": [],
+            "planning": "pass",
+            "gates": "pass",
+            "standClaims": 15,
+            "standMinutes": 3771,
+            "affectedStations": [
+              {
+                "code": "PHF",
+                "name": "Newport News VA",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 8,
+                "peakUsed": 18,
+                "standClaims": 2,
+                "standMinutes": 142
+              },
+              {
+                "code": "SYR",
+                "name": "Syracuse NY",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 8,
+                "peakUsed": 18,
+                "standClaims": 2,
+                "standMinutes": 464
+              },
+              {
+                "code": "DAY",
+                "name": "Dayton OH",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 8,
+                "peakUsed": 16,
+                "standClaims": 0,
+                "standMinutes": 0
+              },
+              {
+                "code": "JAX",
+                "name": "Jacksonville FL",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 12,
+                "peakUsed": 16,
+                "standClaims": 0,
+                "standMinutes": 0
+              },
+              {
+                "code": "BHM",
+                "name": "Birmingham AL",
+                "isHub": false,
+                "isFocusCity": true,
+                "nGates": 6,
+                "nStands": 4,
+                "peakUsed": 8,
+                "standClaims": 4,
+                "standMinutes": 290
+              },
+              {
+                "code": "BWI",
+                "name": "Baltimore MD",
+                "isHub": false,
+                "isFocusCity": false,
+                "nGates": 2,
+                "nStands": 2,
+                "peakUsed": 4,
+                "standClaims": 2,
+                "standMinutes": 804
+              }
+            ]
+          },
+          "demand": {
+            "flights": [
+              {
+                "id": "V123-R4-R114-1-ROA-BLV",
+                "route": 114,
+                "line": "AD",
+                "fleet": "CRJ200",
+                "day": 4,
+                "sequenceWithinRoute": 7,
+                "pairing": 891,
+                "flight": 2151,
+                "origin": "ROA",
+                "destination": "BLV",
+                "departure": "19:29",
+                "arrival": "20:12",
+                "departureMinute": 1169,
+                "arrivalMinute": 1212,
+                "departureClock": "19:29",
+                "arrivalClock": "20:12",
+                "blockMinutes": 103,
+                "currentPairFrequency": 0,
+                "routeLocalOd": 3.0,
+                "local": 2.9650370057635773,
+                "connecting": 0,
+                "total": 2.9650370057635773,
+                "oneStop": 0,
+                "twoStop": 0,
+                "groups": {},
+                "connectingFlights": [],
+                "topMarkets": []
+              },
+              {
+                "id": "V123-R4-R114-2-BLV-ROA",
+                "route": 114,
+                "line": "AD",
+                "fleet": "CRJ200",
+                "day": 4,
+                "sequenceWithinRoute": 8,
+                "pairing": 892,
+                "flight": 2152,
+                "origin": "BLV",
+                "destination": "ROA",
+                "departure": "20:52",
+                "arrival": "23:35",
+                "departureMinute": 1252,
+                "arrivalMinute": 1415,
+                "departureClock": "20:52",
+                "arrivalClock": "23:35",
+                "blockMinutes": 103,
+                "currentPairFrequency": 0,
+                "routeLocalOd": 2.9,
+                "local": 2.8786485769008654,
+                "connecting": 0,
+                "total": 2.8786485769008654,
+                "oneStop": 0,
+                "twoStop": 0,
+                "groups": {},
+                "connectingFlights": [],
+                "topMarkets": []
+              }
+            ],
+            "newlyConnectedMarketDemand": 0,
+            "marketsWithFasterBestItinerary": 2
+          },
+          "reviewAudit": {
+            "marketsWithSlowerBestItinerary": [],
+            "marketsLosingAllConnections": [],
+            "lostUnderlyingOd": 0,
+            "marketsWithFasterBestItinerary": 2
+          }
+        },
+        {
+          "plans": [
+            {
+              "route": 114,
+              "city": "MEM",
+              "legs": [
+                {
+                  "id": "NEW",
+                  "origin": "ROA",
+                  "destination": "MEM",
+                  "departureMinute": 1169,
+                  "arrivalMinute": 1216
+                },
+                {
+                  "id": "NEW",
+                  "origin": "MEM",
+                  "destination": "ROA",
+                  "departureMinute": 1256,
+                  "arrivalMinute": 1423
+                }
+              ],
+              "score": 4.8,
+              "legScores": [
+                2.4,
+                2.4
+              ]
+            }
+          ],
+          "retimings": [],
+          "score": 4.8,
+          "validation": {
+            "structural": "pass",
+            "operatingErrors": 0,
+            "operatingWarnings": 182,
+            "hardStopFailures": [],
+            "blocking": [],
+            "overnight": "pass",
+            "overnightFindings": [],
+            "planning": "pass",
+            "gates": "pass",
+            "standClaims": 15,
+            "standMinutes": 3771,
+            "affectedStations": [
+              {
+                "code": "PHF",
+                "name": "Newport News VA",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 8,
+                "peakUsed": 18,
+                "standClaims": 2,
+                "standMinutes": 142
+              },
+              {
+                "code": "SYR",
+                "name": "Syracuse NY",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 8,
+                "peakUsed": 18,
+                "standClaims": 2,
+                "standMinutes": 464
+              },
+              {
+                "code": "DAY",
+                "name": "Dayton OH",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 8,
+                "peakUsed": 16,
+                "standClaims": 0,
+                "standMinutes": 0
+              },
+              {
+                "code": "JAX",
+                "name": "Jacksonville FL",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 12,
+                "peakUsed": 16,
+                "standClaims": 0,
+                "standMinutes": 0
+              },
+              {
+                "code": "BHM",
+                "name": "Birmingham AL",
+                "isHub": false,
+                "isFocusCity": true,
+                "nGates": 6,
+                "nStands": 4,
+                "peakUsed": 8,
+                "standClaims": 4,
+                "standMinutes": 290
+              },
+              {
+                "code": "BWI",
+                "name": "Baltimore MD",
+                "isHub": false,
+                "isFocusCity": false,
+                "nGates": 2,
+                "nStands": 2,
+                "peakUsed": 4,
+                "standClaims": 2,
+                "standMinutes": 804
+              }
+            ]
+          }
+        },
+        {
+          "plans": [
+            {
+              "route": 114,
+              "city": "MKE",
+              "legs": [
+                {
+                  "id": "NEW",
+                  "origin": "ROA",
+                  "destination": "MKE",
+                  "departureMinute": 1169,
+                  "arrivalMinute": 1215
+                },
+                {
+                  "id": "NEW",
+                  "origin": "MKE",
+                  "destination": "ROA",
+                  "departureMinute": 1255,
+                  "arrivalMinute": 1421
+                }
+              ],
+              "score": 4.1,
+              "legScores": [
+                2.1,
+                2.0
+              ]
+            }
+          ],
+          "retimings": [],
+          "score": 4.1,
+          "validation": {
+            "structural": "pass",
+            "operatingErrors": 0,
+            "operatingWarnings": 182,
+            "hardStopFailures": [],
+            "blocking": [],
+            "overnight": "pass",
+            "overnightFindings": [],
+            "planning": "pass",
+            "gates": "pass",
+            "standClaims": 15,
+            "standMinutes": 3771,
+            "affectedStations": [
+              {
+                "code": "PHF",
+                "name": "Newport News VA",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 8,
+                "peakUsed": 18,
+                "standClaims": 2,
+                "standMinutes": 142
+              },
+              {
+                "code": "SYR",
+                "name": "Syracuse NY",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 8,
+                "peakUsed": 18,
+                "standClaims": 2,
+                "standMinutes": 464
+              },
+              {
+                "code": "DAY",
+                "name": "Dayton OH",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 8,
+                "peakUsed": 16,
+                "standClaims": 0,
+                "standMinutes": 0
+              },
+              {
+                "code": "JAX",
+                "name": "Jacksonville FL",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 12,
+                "peakUsed": 16,
+                "standClaims": 0,
+                "standMinutes": 0
+              },
+              {
+                "code": "BHM",
+                "name": "Birmingham AL",
+                "isHub": false,
+                "isFocusCity": true,
+                "nGates": 6,
+                "nStands": 4,
+                "peakUsed": 8,
+                "standClaims": 4,
+                "standMinutes": 290
+              },
+              {
+                "code": "BWI",
+                "name": "Baltimore MD",
+                "isHub": false,
+                "isFocusCity": false,
+                "nGates": 2,
+                "nStands": 2,
+                "peakUsed": 4,
+                "standClaims": 2,
+                "standMinutes": 804
+              }
+            ]
+          }
+        }
+      ],
+      "rejected": [
+        {
+          "plan": {
+            "route": 114,
+            "city": "BHM",
+            "legs": [
+              {
+                "id": "NEW",
+                "origin": "ROA",
+                "destination": "BHM",
+                "departureMinute": 1170,
+                "arrivalMinute": 1201
+              },
+              {
+                "id": "NEW",
+                "origin": "BHM",
+                "destination": "ROA",
+                "departureMinute": 1350,
+                "arrivalMinute": 1501
+              }
+            ],
+            "score": 79.4374209902128,
+            "legScores": [
+              32.66126712183057,
+              46.77615386838223
+            ]
+          },
+          "validation": {
+            "structural": "pass",
+            "operatingErrors": 5,
+            "operatingWarnings": 182,
+            "hardStopFailures": [
+              "passenger_touch_on_stand",
+              "fixed_physical_inventory"
+            ],
+            "blocking": [
+              {
+                "check": "passenger_touch_on_stand",
+                "findings": [
+                  {
+                    "id": "BHM-171-1272-1335",
+                    "message": "BHM claim 171 requires passenger handling on stand 1",
+                    "evidence": {
+                      "city": "BHM",
+                      "label": "171",
+                      "kind": "turn",
+                      "start": 1272,
+                      "end": 1335,
+                      "stand": 1
+                    }
+                  },
+                  {
+                    "id": "BHM-149-392-452",
+                    "message": "BHM claim 149 requires passenger handling on stand 2",
+                    "evidence": {
+                      "city": "BHM",
+                      "label": "149",
+                      "kind": "turn",
+                      "start": 392,
+                      "end": 452,
+                      "stand": 2
+                    }
+                  },
+                  {
+                    "id": "BHM-302 -> 303-1770-1830",
+                    "message": "BHM claim 302 -> 303 requires passenger handling on stand 3",
+                    "evidence": {
+                      "city": "BHM",
+                      "label": "302 -> 303",
+                      "kind": "ron",
+                      "start": 1770,
+                      "end": 1830,
+                      "stand": 3
+                    }
+                  }
+                ]
+              },
+              {
+                "check": "fixed_physical_inventory",
+                "findings": [
+                  {
+                    "id": "BHM",
+                    "message": "BHM cannot fit its claims into the configured physical inventory: 3 passenger touch(es) remain off-gate",
+                    "evidence": {
+                      "city": "BHM",
+                      "requiredGates": 7,
+                      "configuredGates": 6,
+                      "requiredStands": 3,
+                      "configuredStands": 4,
+                      "strandedPassengerTouches": 3
+                    }
+                  }
+                ]
+              },
+              {
+                "check": "tiered_service_minimums",
+                "findings": [
+                  {
+                    "id": "ROA",
+                    "message": "ROA does not satisfy its percentile-tier service envelope",
+                    "evidence": {
+                      "city": "ROA",
+                      "percentile": 22.0,
+                      "totalFlights": 6,
+                      "hubOrFocusFlights": 6,
+                      "minimumFlights": 3,
+                      "connectedHubs": [
+                        "BHM",
+                        "JAX"
+                      ],
+                      "hubCountCap": 1
+                    }
+                  }
+                ]
+              }
+            ],
+            "overnight": "pass",
+            "overnightFindings": [],
+            "planning": "pass",
+            "gates": "fail",
+            "gateFailure": "3 passenger touch(es) remain off-gate"
+          }
+        },
+        {
+          "plan": {
+            "route": 114,
+            "city": "PHF",
+            "legs": [
+              {
+                "id": "NEW",
+                "origin": "ROA",
+                "destination": "PHF",
+                "departureMinute": 1170,
+                "arrivalMinute": 1224
+              },
+              {
+                "id": "NEW",
+                "origin": "PHF",
+                "destination": "ROA",
+                "departureMinute": 1305,
+                "arrivalMinute": 1359
+              }
+            ],
+            "score": 77.97975208799653,
+            "legScores": [
+              34.3212753746396,
+              43.65847671335694
+            ]
+          },
+          "validation": {
+            "structural": "pass",
+            "operatingErrors": 1,
+            "operatingWarnings": 182,
+            "hardStopFailures": [],
+            "blocking": [
+              {
+                "check": "tiered_service_minimums",
+                "findings": [
+                  {
+                    "id": "ROA",
+                    "message": "ROA does not satisfy its percentile-tier service envelope",
+                    "evidence": {
+                      "city": "ROA",
+                      "percentile": 22.0,
+                      "totalFlights": 6,
+                      "hubOrFocusFlights": 6,
+                      "minimumFlights": 3,
+                      "connectedHubs": [
+                        "JAX",
+                        "PHF"
+                      ],
+                      "hubCountCap": 1
+                    }
+                  }
+                ]
+              }
+            ],
+            "overnight": "pass",
+            "overnightFindings": [],
+            "planning": "pass",
+            "gates": "pass",
+            "standClaims": 15,
+            "standMinutes": 3771,
+            "affectedStations": [
+              {
+                "code": "PHF",
+                "name": "Newport News VA",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 8,
+                "peakUsed": 18,
+                "standClaims": 2,
+                "standMinutes": 142
+              },
+              {
+                "code": "SYR",
+                "name": "Syracuse NY",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 8,
+                "peakUsed": 18,
+                "standClaims": 2,
+                "standMinutes": 464
+              },
+              {
+                "code": "DAY",
+                "name": "Dayton OH",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 8,
+                "peakUsed": 16,
+                "standClaims": 0,
+                "standMinutes": 0
+              },
+              {
+                "code": "JAX",
+                "name": "Jacksonville FL",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 12,
+                "peakUsed": 16,
+                "standClaims": 0,
+                "standMinutes": 0
+              },
+              {
+                "code": "BHM",
+                "name": "Birmingham AL",
+                "isHub": false,
+                "isFocusCity": true,
+                "nGates": 6,
+                "nStands": 4,
+                "peakUsed": 8,
+                "standClaims": 4,
+                "standMinutes": 290
+              },
+              {
+                "code": "BWI",
+                "name": "Baltimore MD",
+                "isHub": false,
+                "isFocusCity": false,
+                "nGates": 2,
+                "nStands": 2,
+                "peakUsed": 4,
+                "standClaims": 2,
+                "standMinutes": 804
+              }
+            ]
+          }
+        },
+        {
+          "plan": {
+            "route": 114,
+            "city": "PHF",
+            "legs": [
+              {
+                "id": "NEW",
+                "origin": "ROA",
+                "destination": "PHF",
+                "departureMinute": 1169,
+                "arrivalMinute": 1223
+              },
+              {
+                "id": "NEW",
+                "origin": "PHF",
+                "destination": "ROA",
+                "departureMinute": 1263,
+                "arrivalMinute": 1317
+              }
+            ],
+            "score": 73.55391738504116,
+            "legScores": [
+              34.30262060793176,
+              39.2512967771094
+            ]
+          },
+          "validation": {
+            "structural": "pass",
+            "operatingErrors": 1,
+            "operatingWarnings": 182,
+            "hardStopFailures": [],
+            "blocking": [
+              {
+                "check": "tiered_service_minimums",
+                "findings": [
+                  {
+                    "id": "ROA",
+                    "message": "ROA does not satisfy its percentile-tier service envelope",
+                    "evidence": {
+                      "city": "ROA",
+                      "percentile": 22.0,
+                      "totalFlights": 6,
+                      "hubOrFocusFlights": 6,
+                      "minimumFlights": 3,
+                      "connectedHubs": [
+                        "JAX",
+                        "PHF"
+                      ],
+                      "hubCountCap": 1
+                    }
+                  }
+                ]
+              }
+            ],
+            "overnight": "pass",
+            "overnightFindings": [],
+            "planning": "pass",
+            "gates": "pass",
+            "standClaims": 15,
+            "standMinutes": 3771,
+            "affectedStations": [
+              {
+                "code": "PHF",
+                "name": "Newport News VA",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 8,
+                "peakUsed": 18,
+                "standClaims": 2,
+                "standMinutes": 142
+              },
+              {
+                "code": "SYR",
+                "name": "Syracuse NY",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 8,
+                "peakUsed": 18,
+                "standClaims": 2,
+                "standMinutes": 464
+              },
+              {
+                "code": "DAY",
+                "name": "Dayton OH",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 8,
+                "peakUsed": 16,
+                "standClaims": 0,
+                "standMinutes": 0
+              },
+              {
+                "code": "JAX",
+                "name": "Jacksonville FL",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 12,
+                "peakUsed": 16,
+                "standClaims": 0,
+                "standMinutes": 0
+              },
+              {
+                "code": "BHM",
+                "name": "Birmingham AL",
+                "isHub": false,
+                "isFocusCity": true,
+                "nGates": 6,
+                "nStands": 4,
+                "peakUsed": 8,
+                "standClaims": 4,
+                "standMinutes": 290
+              },
+              {
+                "code": "BWI",
+                "name": "Baltimore MD",
+                "isHub": false,
+                "isFocusCity": false,
+                "nGates": 2,
+                "nStands": 2,
+                "peakUsed": 4,
+                "standClaims": 2,
+                "standMinutes": 804
+              }
+            ]
+          }
+        },
+        {
+          "plan": {
+            "route": 114,
+            "city": "BHM",
+            "legs": [
+              {
+                "id": "NEW",
+                "origin": "ROA",
+                "destination": "BHM",
+                "departureMinute": 1170,
+                "arrivalMinute": 1201
+              },
+              {
+                "id": "NEW",
+                "origin": "BHM",
+                "destination": "ROA",
+                "departureMinute": 1320,
+                "arrivalMinute": 1471
+              }
+            ],
+            "score": 72.75610011199792,
+            "legScores": [
+              32.66126712183057,
+              40.094832990167355
+            ]
+          },
+          "validation": {
+            "structural": "pass",
+            "operatingErrors": 5,
+            "operatingWarnings": 182,
+            "hardStopFailures": [
+              "passenger_touch_on_stand",
+              "fixed_physical_inventory"
+            ],
+            "blocking": [
+              {
+                "check": "passenger_touch_on_stand",
+                "findings": [
+                  {
+                    "id": "BHM-171-1272-1335",
+                    "message": "BHM claim 171 requires passenger handling on stand 1",
+                    "evidence": {
+                      "city": "BHM",
+                      "label": "171",
+                      "kind": "turn",
+                      "start": 1272,
+                      "end": 1335,
+                      "stand": 1
+                    }
+                  },
+                  {
+                    "id": "BHM-149-392-452",
+                    "message": "BHM claim 149 requires passenger handling on stand 2",
+                    "evidence": {
+                      "city": "BHM",
+                      "label": "149",
+                      "kind": "turn",
+                      "start": 392,
+                      "end": 452,
+                      "stand": 2
+                    }
+                  },
+                  {
+                    "id": "BHM-302 -> 303-1770-1830",
+                    "message": "BHM claim 302 -> 303 requires passenger handling on stand 3",
+                    "evidence": {
+                      "city": "BHM",
+                      "label": "302 -> 303",
+                      "kind": "ron",
+                      "start": 1770,
+                      "end": 1830,
+                      "stand": 3
+                    }
+                  }
+                ]
+              },
+              {
+                "check": "fixed_physical_inventory",
+                "findings": [
+                  {
+                    "id": "BHM",
+                    "message": "BHM cannot fit its claims into the configured physical inventory: 3 passenger touch(es) remain off-gate",
+                    "evidence": {
+                      "city": "BHM",
+                      "requiredGates": 7,
+                      "configuredGates": 6,
+                      "requiredStands": 3,
+                      "configuredStands": 4,
+                      "strandedPassengerTouches": 3
+                    }
+                  }
+                ]
+              },
+              {
+                "check": "tiered_service_minimums",
+                "findings": [
+                  {
+                    "id": "ROA",
+                    "message": "ROA does not satisfy its percentile-tier service envelope",
+                    "evidence": {
+                      "city": "ROA",
+                      "percentile": 22.0,
+                      "totalFlights": 6,
+                      "hubOrFocusFlights": 6,
+                      "minimumFlights": 3,
+                      "connectedHubs": [
+                        "BHM",
+                        "JAX"
+                      ],
+                      "hubCountCap": 1
+                    }
+                  }
+                ]
+              }
+            ],
+            "overnight": "pass",
+            "overnightFindings": [],
+            "planning": "pass",
+            "gates": "fail",
+            "gateFailure": "3 passenger touch(es) remain off-gate"
+          }
+        },
+        {
+          "plan": {
+            "route": 114,
+            "city": "MCI",
+            "legs": [
+              {
+                "id": "NEW",
+                "origin": "ROA",
+                "destination": "MCI",
+                "departureMinute": 1169,
+                "arrivalMinute": 1248
+              },
+              {
+                "id": "NEW",
+                "origin": "MCI",
+                "destination": "ROA",
+                "departureMinute": 1288,
+                "arrivalMinute": 1487
+              }
+            ],
+            "score": 64.64895265878573,
+            "legScores": [
+              9.74050600357736,
+              54.908446655208365
+            ]
+          },
+          "validation": {
+            "structural": "pass",
+            "operatingErrors": 1,
+            "operatingWarnings": 182,
+            "hardStopFailures": [],
+            "blocking": [
+              {
+                "check": "tiered_service_minimums",
+                "findings": [
+                  {
+                    "id": "ROA",
+                    "message": "ROA does not satisfy its percentile-tier service envelope",
+                    "evidence": {
+                      "city": "ROA",
+                      "percentile": 22.0,
+                      "totalFlights": 6,
+                      "hubOrFocusFlights": 6,
+                      "minimumFlights": 3,
+                      "connectedHubs": [
+                        "JAX",
+                        "MCI"
+                      ],
+                      "hubCountCap": 1
+                    }
+                  }
+                ]
+              }
+            ],
+            "overnight": "pass",
+            "overnightFindings": [],
+            "planning": "pass",
+            "gates": "pass",
+            "standClaims": 15,
+            "standMinutes": 3771,
+            "affectedStations": [
+              {
+                "code": "PHF",
+                "name": "Newport News VA",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 8,
+                "peakUsed": 18,
+                "standClaims": 2,
+                "standMinutes": 142
+              },
+              {
+                "code": "SYR",
+                "name": "Syracuse NY",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 8,
+                "peakUsed": 18,
+                "standClaims": 2,
+                "standMinutes": 464
+              },
+              {
+                "code": "DAY",
+                "name": "Dayton OH",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 8,
+                "peakUsed": 16,
+                "standClaims": 0,
+                "standMinutes": 0
+              },
+              {
+                "code": "JAX",
+                "name": "Jacksonville FL",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 12,
+                "peakUsed": 16,
+                "standClaims": 0,
+                "standMinutes": 0
+              },
+              {
+                "code": "BHM",
+                "name": "Birmingham AL",
+                "isHub": false,
+                "isFocusCity": true,
+                "nGates": 6,
+                "nStands": 4,
+                "peakUsed": 8,
+                "standClaims": 4,
+                "standMinutes": 290
+              },
+              {
+                "code": "BWI",
+                "name": "Baltimore MD",
+                "isHub": false,
+                "isFocusCity": false,
+                "nGates": 2,
+                "nStands": 2,
+                "peakUsed": 4,
+                "standClaims": 2,
+                "standMinutes": 804
+              }
+            ]
+          }
+        },
+        {
+          "plan": {
+            "route": 114,
+            "city": "MCI",
+            "legs": [
+              {
+                "id": "NEW",
+                "origin": "ROA",
+                "destination": "MCI",
+                "departureMinute": 1170,
+                "arrivalMinute": 1249
+              },
+              {
+                "id": "NEW",
+                "origin": "MCI",
+                "destination": "ROA",
+                "departureMinute": 1335,
+                "arrivalMinute": 1534
+              }
+            ],
+            "score": 64.4431248745058,
+            "legScores": [
+              9.741760193508233,
+              54.701364680997564
+            ]
+          },
+          "validation": {
+            "structural": "pass",
+            "operatingErrors": 1,
+            "operatingWarnings": 182,
+            "hardStopFailures": [],
+            "blocking": [
+              {
+                "check": "tiered_service_minimums",
+                "findings": [
+                  {
+                    "id": "ROA",
+                    "message": "ROA does not satisfy its percentile-tier service envelope",
+                    "evidence": {
+                      "city": "ROA",
+                      "percentile": 22.0,
+                      "totalFlights": 6,
+                      "hubOrFocusFlights": 6,
+                      "minimumFlights": 3,
+                      "connectedHubs": [
+                        "JAX",
+                        "MCI"
+                      ],
+                      "hubCountCap": 1
+                    }
+                  }
+                ]
+              }
+            ],
+            "overnight": "pass",
+            "overnightFindings": [],
+            "planning": "pass",
+            "gates": "pass",
+            "standClaims": 15,
+            "standMinutes": 3771,
+            "affectedStations": [
+              {
+                "code": "PHF",
+                "name": "Newport News VA",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 8,
+                "peakUsed": 18,
+                "standClaims": 2,
+                "standMinutes": 142
+              },
+              {
+                "code": "SYR",
+                "name": "Syracuse NY",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 8,
+                "peakUsed": 18,
+                "standClaims": 2,
+                "standMinutes": 464
+              },
+              {
+                "code": "DAY",
+                "name": "Dayton OH",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 8,
+                "peakUsed": 16,
+                "standClaims": 0,
+                "standMinutes": 0
+              },
+              {
+                "code": "JAX",
+                "name": "Jacksonville FL",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 12,
+                "peakUsed": 16,
+                "standClaims": 0,
+                "standMinutes": 0
+              },
+              {
+                "code": "BHM",
+                "name": "Birmingham AL",
+                "isHub": false,
+                "isFocusCity": true,
+                "nGates": 6,
+                "nStands": 4,
+                "peakUsed": 8,
+                "standClaims": 4,
+                "standMinutes": 290
+              },
+              {
+                "code": "BWI",
+                "name": "Baltimore MD",
+                "isHub": false,
+                "isFocusCity": false,
+                "nGates": 2,
+                "nStands": 2,
+                "peakUsed": 4,
+                "standClaims": 2,
+                "standMinutes": 804
+              }
+            ]
+          }
+        },
+        {
+          "plan": {
+            "route": 114,
+            "city": "DAY",
+            "legs": [
+              {
+                "id": "NEW",
+                "origin": "ROA",
+                "destination": "DAY",
+                "departureMinute": 1200,
+                "arrivalMinute": 1268
+              },
+              {
+                "id": "NEW",
+                "origin": "DAY",
+                "destination": "ROA",
+                "departureMinute": 1308,
+                "arrivalMinute": 1376
+              }
+            ],
+            "score": 48.28448036383967,
+            "legScores": [
+              1.4000000000000001,
+              46.88448036383967
+            ]
+          },
+          "validation": {
+            "structural": "pass",
+            "operatingErrors": 1,
+            "operatingWarnings": 182,
+            "hardStopFailures": [],
+            "blocking": [
+              {
+                "check": "tiered_service_minimums",
+                "findings": [
+                  {
+                    "id": "ROA",
+                    "message": "ROA does not satisfy its percentile-tier service envelope",
+                    "evidence": {
+                      "city": "ROA",
+                      "percentile": 22.0,
+                      "totalFlights": 6,
+                      "hubOrFocusFlights": 6,
+                      "minimumFlights": 3,
+                      "connectedHubs": [
+                        "DAY",
+                        "JAX"
+                      ],
+                      "hubCountCap": 1
+                    }
+                  }
+                ]
+              }
+            ],
+            "overnight": "pass",
+            "overnightFindings": [],
+            "planning": "pass",
+            "gates": "pass",
+            "standClaims": 15,
+            "standMinutes": 3771,
+            "affectedStations": [
+              {
+                "code": "PHF",
+                "name": "Newport News VA",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 8,
+                "peakUsed": 18,
+                "standClaims": 2,
+                "standMinutes": 142
+              },
+              {
+                "code": "SYR",
+                "name": "Syracuse NY",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 8,
+                "peakUsed": 18,
+                "standClaims": 2,
+                "standMinutes": 464
+              },
+              {
+                "code": "DAY",
+                "name": "Dayton OH",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 8,
+                "peakUsed": 16,
+                "standClaims": 0,
+                "standMinutes": 0
+              },
+              {
+                "code": "JAX",
+                "name": "Jacksonville FL",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 12,
+                "peakUsed": 16,
+                "standClaims": 0,
+                "standMinutes": 0
+              },
+              {
+                "code": "BHM",
+                "name": "Birmingham AL",
+                "isHub": false,
+                "isFocusCity": true,
+                "nGates": 6,
+                "nStands": 4,
+                "peakUsed": 8,
+                "standClaims": 4,
+                "standMinutes": 290
+              },
+              {
+                "code": "BWI",
+                "name": "Baltimore MD",
+                "isHub": false,
+                "isFocusCity": false,
+                "nGates": 2,
+                "nStands": 2,
+                "peakUsed": 4,
+                "standClaims": 2,
+                "standMinutes": 804
+              }
+            ]
+          }
+        },
+        {
+          "plan": {
+            "route": 114,
+            "city": "DAY",
+            "legs": [
+              {
+                "id": "NEW",
+                "origin": "ROA",
+                "destination": "DAY",
+                "departureMinute": 1200,
+                "arrivalMinute": 1268
+              },
+              {
+                "id": "NEW",
+                "origin": "DAY",
+                "destination": "ROA",
+                "departureMinute": 1320,
+                "arrivalMinute": 1388
+              }
+            ],
+            "score": 47.985681099692336,
+            "legScores": [
+              1.4000000000000001,
+              46.58568109969234
+            ]
+          },
+          "validation": {
+            "structural": "pass",
+            "operatingErrors": 1,
+            "operatingWarnings": 182,
+            "hardStopFailures": [],
+            "blocking": [
+              {
+                "check": "tiered_service_minimums",
+                "findings": [
+                  {
+                    "id": "ROA",
+                    "message": "ROA does not satisfy its percentile-tier service envelope",
+                    "evidence": {
+                      "city": "ROA",
+                      "percentile": 22.0,
+                      "totalFlights": 6,
+                      "hubOrFocusFlights": 6,
+                      "minimumFlights": 3,
+                      "connectedHubs": [
+                        "DAY",
+                        "JAX"
+                      ],
+                      "hubCountCap": 1
+                    }
+                  }
+                ]
+              }
+            ],
+            "overnight": "pass",
+            "overnightFindings": [],
+            "planning": "pass",
+            "gates": "pass",
+            "standClaims": 15,
+            "standMinutes": 3771,
+            "affectedStations": [
+              {
+                "code": "PHF",
+                "name": "Newport News VA",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 8,
+                "peakUsed": 18,
+                "standClaims": 2,
+                "standMinutes": 142
+              },
+              {
+                "code": "SYR",
+                "name": "Syracuse NY",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 8,
+                "peakUsed": 18,
+                "standClaims": 2,
+                "standMinutes": 464
+              },
+              {
+                "code": "DAY",
+                "name": "Dayton OH",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 8,
+                "peakUsed": 16,
+                "standClaims": 0,
+                "standMinutes": 0
+              },
+              {
+                "code": "JAX",
+                "name": "Jacksonville FL",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 12,
+                "peakUsed": 16,
+                "standClaims": 0,
+                "standMinutes": 0
+              },
+              {
+                "code": "BHM",
+                "name": "Birmingham AL",
+                "isHub": false,
+                "isFocusCity": true,
+                "nGates": 6,
+                "nStands": 4,
+                "peakUsed": 8,
+                "standClaims": 4,
+                "standMinutes": 290
+              },
+              {
+                "code": "BWI",
+                "name": "Baltimore MD",
+                "isHub": false,
+                "isFocusCity": false,
+                "nGates": 2,
+                "nStands": 2,
+                "peakUsed": 4,
+                "standClaims": 2,
+                "standMinutes": 804
+              }
+            ]
+          }
+        },
+        {
+          "plan": {
+            "route": 114,
+            "city": "SYR",
+            "legs": [
+              {
+                "id": "NEW",
+                "origin": "ROA",
+                "destination": "SYR",
+                "departureMinute": 1215,
+                "arrivalMinute": 1304
+              },
+              {
+                "id": "NEW",
+                "origin": "SYR",
+                "destination": "ROA",
+                "departureMinute": 1344,
+                "arrivalMinute": 1433
+              }
+            ],
+            "score": 40.3,
+            "legScores": [
+              4.4,
+              35.9
+            ]
+          },
+          "validation": {
+            "structural": "pass",
+            "operatingErrors": 1,
+            "operatingWarnings": 182,
+            "hardStopFailures": [],
+            "blocking": [
+              {
+                "check": "tiered_service_minimums",
+                "findings": [
+                  {
+                    "id": "ROA",
+                    "message": "ROA does not satisfy its percentile-tier service envelope",
+                    "evidence": {
+                      "city": "ROA",
+                      "percentile": 22.0,
+                      "totalFlights": 6,
+                      "hubOrFocusFlights": 6,
+                      "minimumFlights": 3,
+                      "connectedHubs": [
+                        "JAX",
+                        "SYR"
+                      ],
+                      "hubCountCap": 1
+                    }
+                  }
+                ]
+              }
+            ],
+            "overnight": "pass",
+            "overnightFindings": [],
+            "planning": "pass",
+            "gates": "pass",
+            "standClaims": 15,
+            "standMinutes": 3771,
+            "affectedStations": [
+              {
+                "code": "PHF",
+                "name": "Newport News VA",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 8,
+                "peakUsed": 18,
+                "standClaims": 2,
+                "standMinutes": 142
+              },
+              {
+                "code": "SYR",
+                "name": "Syracuse NY",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 8,
+                "peakUsed": 18,
+                "standClaims": 2,
+                "standMinutes": 464
+              },
+              {
+                "code": "DAY",
+                "name": "Dayton OH",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 8,
+                "peakUsed": 16,
+                "standClaims": 0,
+                "standMinutes": 0
+              },
+              {
+                "code": "JAX",
+                "name": "Jacksonville FL",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 12,
+                "peakUsed": 16,
+                "standClaims": 0,
+                "standMinutes": 0
+              },
+              {
+                "code": "BHM",
+                "name": "Birmingham AL",
+                "isHub": false,
+                "isFocusCity": true,
+                "nGates": 6,
+                "nStands": 4,
+                "peakUsed": 8,
+                "standClaims": 4,
+                "standMinutes": 290
+              },
+              {
+                "code": "BWI",
+                "name": "Baltimore MD",
+                "isHub": false,
+                "isFocusCity": false,
+                "nGates": 2,
+                "nStands": 2,
+                "peakUsed": 4,
+                "standClaims": 2,
+                "standMinutes": 804
+              }
+            ]
+          }
+        },
+        {
+          "plan": {
+            "route": 114,
+            "city": "RFD",
+            "legs": [
+              {
+                "id": "NEW",
+                "origin": "ROA",
+                "destination": "RFD",
+                "departureMinute": 1169,
+                "arrivalMinute": 1218
+              },
+              {
+                "id": "NEW",
+                "origin": "RFD",
+                "destination": "ROA",
+                "departureMinute": 1258,
+                "arrivalMinute": 1427
+              }
+            ],
+            "score": 38.8,
+            "legScores": [
+              19.2,
+              19.6
+            ]
+          },
+          "validation": {
+            "structural": "pass",
+            "operatingErrors": 2,
+            "operatingWarnings": 182,
+            "hardStopFailures": [
+              "passenger_touch_on_stand",
+              "fixed_physical_inventory"
+            ],
+            "blocking": [
+              {
+                "check": "passenger_touch_on_stand",
+                "findings": [
+                  {
+                    "id": "RFD-325 -> 326-1233-1278",
+                    "message": "RFD claim 325 -> 326 requires passenger handling on stand 1",
+                    "evidence": {
+                      "city": "RFD",
+                      "label": "325 -> 326",
+                      "kind": "ron",
+                      "start": 1233,
+                      "end": 1278,
+                      "stand": 1
+                    }
+                  }
+                ]
+              },
+              {
+                "check": "fixed_physical_inventory",
+                "findings": [
+                  {
+                    "id": "RFD",
+                    "message": "RFD cannot fit its claims into the configured physical inventory: 1 passenger touch(es) remain off-gate",
+                    "evidence": {
+                      "city": "RFD",
+                      "requiredGates": 5,
+                      "configuredGates": 4,
+                      "requiredStands": 2,
+                      "configuredStands": 2,
+                      "strandedPassengerTouches": 1
+                    }
+                  }
+                ]
+              }
+            ],
+            "overnight": "pass",
+            "overnightFindings": [],
+            "planning": "pass",
+            "gates": "fail",
+            "gateFailure": "1 passenger touch(es) remain off-gate"
+          }
+        }
+      ],
+      "validatedTimingsByMarket": {
+        "BHM": 2,
+        "PHF": 2,
+        "MCI": 2,
+        "DAY": 2,
+        "JAX": 1,
+        "SYR": 1,
+        "RFD": 1,
+        "BNA": 1,
+        "BLV": 1,
+        "MEM": 1,
+        "MKE": 1
+      }
+    },
+    {
+      "name": "169 evening, unchanged existing clocks",
+      "route": 169,
+      "station": "FWA",
+      "window": [
+        1170,
+        1560
+      ],
+      "retimings": [],
+      "retainedTimings": 112,
+      "gridMinutes": 15,
+      "rankingModel": "one-stop marginal for wide holds; full one/two-stop final comparison",
+      "selected": [
+        {
+          "plans": [
+            {
+              "route": 169,
+              "city": "DAY",
+              "legs": [
+                {
+                  "id": "NEW",
+                  "origin": "FWA",
+                  "destination": "DAY",
+                  "departureMinute": 1230,
+                  "arrivalMinute": 1270
+                },
+                {
+                  "id": "NEW",
+                  "origin": "DAY",
+                  "destination": "FWA",
+                  "departureMinute": 1310,
+                  "arrivalMinute": 1350
+                }
+              ],
+              "score": 36.85759195135938,
+              "legScores": [
+                10.144330627576542,
+                26.71326132378284
+              ]
+            }
+          ],
+          "retimings": [],
+          "score": 36.85759195135938,
+          "validation": {
+            "structural": "pass",
+            "operatingErrors": 0,
+            "operatingWarnings": 182,
+            "hardStopFailures": [],
+            "blocking": [],
+            "overnight": "pass",
+            "overnightFindings": [],
+            "planning": "pass",
+            "gates": "pass",
+            "standClaims": 15,
+            "standMinutes": 3771,
+            "affectedStations": [
+              {
+                "code": "PHF",
+                "name": "Newport News VA",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 8,
+                "peakUsed": 18,
+                "standClaims": 2,
+                "standMinutes": 142
+              },
+              {
+                "code": "SYR",
+                "name": "Syracuse NY",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 8,
+                "peakUsed": 18,
+                "standClaims": 2,
+                "standMinutes": 464
+              },
+              {
+                "code": "DAY",
+                "name": "Dayton OH",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 8,
+                "peakUsed": 16,
+                "standClaims": 0,
+                "standMinutes": 0
+              },
+              {
+                "code": "JAX",
+                "name": "Jacksonville FL",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 12,
+                "peakUsed": 16,
+                "standClaims": 0,
+                "standMinutes": 0
+              },
+              {
+                "code": "BHM",
+                "name": "Birmingham AL",
+                "isHub": false,
+                "isFocusCity": true,
+                "nGates": 6,
+                "nStands": 4,
+                "peakUsed": 8,
+                "standClaims": 4,
+                "standMinutes": 290
+              },
+              {
+                "code": "BWI",
+                "name": "Baltimore MD",
+                "isHub": false,
+                "isFocusCity": false,
+                "nGates": 2,
+                "nStands": 2,
+                "peakUsed": 4,
+                "standClaims": 2,
+                "standMinutes": 804
+              }
+            ]
+          },
+          "demand": {
+            "flights": [
+              {
+                "id": "V123-R4-R169-1-FWA-DAY",
+                "route": 169,
+                "line": "AF",
+                "fleet": "CRJ200",
+                "day": 5,
+                "sequenceWithinRoute": 7,
+                "pairing": 160,
+                "flight": 2151,
+                "origin": "FWA",
+                "destination": "DAY",
+                "departure": "20:30",
+                "arrival": "21:10",
+                "departureMinute": 1230,
+                "arrivalMinute": 1270,
+                "departureClock": "20:30",
+                "arrivalClock": "21:10",
+                "blockMinutes": 40,
+                "currentPairFrequency": 3,
+                "routeLocalOd": 0.0,
+                "local": 0.0,
+                "connecting": 10.144330627576542,
+                "total": 10.144330627576542,
+                "oneStop": 10.144330627576542,
+                "twoStop": 0,
+                "groups": {
+                  "MAC": 1.2429884615286695,
+                  "CGI": 8.701342166047873,
+                  "APP": 0.2
+                },
+                "connectingFlights": [
+                  {
+                    "flight": 2138,
+                    "origin": "DAY",
+                    "destination": "SDF",
+                    "departure": "21:55",
+                    "arrival": "22:43"
+                  },
+                  {
+                    "flight": 2134,
+                    "origin": "DAY",
+                    "destination": "BWI",
+                    "departure": "21:54",
+                    "arrival": "23:16"
+                  },
+                  {
+                    "flight": 2136,
+                    "origin": "DAY",
+                    "destination": "CLT",
+                    "departure": "21:55",
+                    "arrival": "23:12"
+                  }
+                ],
+                "topMarkets": [
+                  {
+                    "origin": "FWA",
+                    "destination": "CLT",
+                    "opportunity": 8.701342166047873
+                  },
+                  {
+                    "origin": "FWA",
+                    "destination": "BWI",
+                    "opportunity": 1.2429884615286695
+                  },
+                  {
+                    "origin": "FWA",
+                    "destination": "SDF",
+                    "opportunity": 0.2
+                  }
+                ]
+              },
+              {
+                "id": "V123-R4-R169-2-DAY-FWA",
+                "route": 169,
+                "line": "AF",
+                "fleet": "CRJ200",
+                "day": 5,
+                "sequenceWithinRoute": 8,
+                "pairing": 318,
+                "flight": 2152,
+                "origin": "DAY",
+                "destination": "FWA",
+                "departure": "21:50",
+                "arrival": "22:30",
+                "departureMinute": 1310,
+                "arrivalMinute": 1350,
+                "departureClock": "21:50",
+                "arrivalClock": "22:30",
+                "blockMinutes": 40,
+                "currentPairFrequency": 3,
+                "routeLocalOd": 0.1,
+                "local": 0.025,
+                "connecting": 48.019622785381785,
+                "total": 48.04462278538178,
+                "oneStop": 26.614785029725237,
+                "twoStop": 21.404837755656537,
+                "groups": {
+                  "HUB": 1.6347812566974134,
+                  "GLC": 4.88192860097758,
+                  "TEX": 6.858736669431024,
+                  "CGI": 12.27380864742094,
+                  "LEC": 1.0462602457848158,
+                  "APP": 0.2,
+                  "GCP": 4.24779799157276,
+                  "MAC": 1.94503666310059,
+                  "FLP": 13.721818138686515,
+                  "NEC": 0.009454571710134252,
+                  "OZK": 1.2
+                },
+                "connectingFlights": [
+                  {
+                    "flight": 1790,
+                    "origin": "ATW",
+                    "destination": "DAY",
+                    "departure": "17:25",
+                    "arrival": "19:44"
+                  },
+                  {
+                    "flight": 1479,
+                    "origin": "AUS",
+                    "destination": "DAY",
+                    "departure": "16:05",
+                    "arrival": "19:44"
+                  },
+                  {
+                    "flight": 1770,
+                    "origin": "BUF",
+                    "destination": "DAY",
+                    "departure": "18:25",
+                    "arrival": "19:41"
+                  },
+                  {
+                    "flight": 1813,
+                    "origin": "CAK",
+                    "destination": "DAY",
+                    "departure": "18:55",
+                    "arrival": "19:45"
+                  },
+                  {
+                    "flight": 1668,
+                    "origin": "CMH",
+                    "destination": "DAY",
+                    "departure": "19:05",
+                    "arrival": "19:43"
+                  },
+                  {
+                    "flight": 1368,
+                    "origin": "DAL",
+                    "destination": "DAY",
+                    "departure": "16:25",
+                    "arrival": "19:44"
+                  },
+                  {
+                    "flight": 1510,
+                    "origin": "HOU",
+                    "destination": "DAY",
+                    "departure": "16:05",
+                    "arrival": "19:43"
+                  },
+                  {
+                    "flight": 1820,
+                    "origin": "IND",
+                    "destination": "DAY",
+                    "departure": "19:00",
+                    "arrival": "19:43"
+                  },
+                  {
+                    "flight": 1698,
+                    "origin": "MSN",
+                    "destination": "DAY",
+                    "departure": "17:30",
+                    "arrival": "19:45"
+                  },
+                  {
+                    "flight": 1572,
+                    "origin": "PHF",
+                    "destination": "DAY",
+                    "departure": "18:15",
+                    "arrival": "19:46"
+                  },
+                  {
+                    "flight": 1794,
+                    "origin": "PIT",
+                    "destination": "DAY",
+                    "departure": "18:45",
+                    "arrival": "19:42"
+                  },
+                  {
+                    "flight": 1468,
+                    "origin": "RDU",
+                    "destination": "DAY",
+                    "departure": "18:25",
+                    "arrival": "19:47"
+                  },
+                  {
+                    "flight": 1850,
+                    "origin": "SDF",
+                    "destination": "DAY",
+                    "departure": "18:55",
+                    "arrival": "19:43"
+                  },
+                  {
+                    "flight": 1982,
+                    "origin": "BHM",
+                    "destination": "DAY",
+                    "departure": "17:54",
+                    "arrival": "20:25"
+                  },
+                  {
+                    "flight": 2072,
+                    "origin": "RFD",
+                    "destination": "DAY",
+                    "departure": "18:19",
+                    "arrival": "20:28"
+                  },
+                  {
+                    "flight": 2090,
+                    "origin": "JAX",
+                    "destination": "DAY",
+                    "departure": "18:36",
+                    "arrival": "20:25"
+                  },
+                  {
+                    "flight": 2137,
+                    "origin": "SDF",
+                    "destination": "DAY",
+                    "departure": "20:17",
+                    "arrival": "21:05"
+                  },
+                  {
+                    "flight": 2133,
+                    "origin": "BWI",
+                    "destination": "DAY",
+                    "departure": "19:52",
+                    "arrival": "21:14"
+                  },
+                  {
+                    "flight": 2135,
+                    "origin": "CLT",
+                    "destination": "DAY",
+                    "departure": "19:48",
+                    "arrival": "21:05"
+                  }
+                ],
+                "topMarkets": [
+                  {
+                    "origin": "CLT",
+                    "destination": "FWA",
+                    "opportunity": 9.409091648045646
+                  },
+                  {
+                    "origin": "FLL",
+                    "destination": "FWA",
+                    "opportunity": 5.942888064885105
+                  },
+                  {
+                    "origin": "PGD",
+                    "destination": "FWA",
+                    "opportunity": 5.923550815707281
+                  },
+                  {
+                    "origin": "DAL",
+                    "destination": "FWA",
+                    "opportunity": 4.2743595258611276
+                  },
+                  {
+                    "origin": "RFD",
+                    "destination": "FWA",
+                    "opportunity": 3.845133177528411
+                  },
+                  {
+                    "origin": "PNS",
+                    "destination": "FWA",
+                    "opportunity": 1.7
+                  },
+                  {
+                    "origin": "BWI",
+                    "destination": "FWA",
+                    "opportunity": 1.64503666310059
+                  },
+                  {
+                    "origin": "ICT",
+                    "destination": "FWA",
+                    "opportunity": 1.2
+                  },
+                  {
+                    "origin": "HOU",
+                    "destination": "FWA",
+                    "opportunity": 1.1741891285632675
+                  },
+                  {
+                    "origin": "CHS",
+                    "destination": "FWA",
+                    "opportunity": 1.1247701105500116
+                  }
+                ]
+              }
+            ],
+            "newlyConnectedMarketDemand": 5.4,
+            "marketsWithFasterBestItinerary": 14
+          },
+          "reviewAudit": {
+            "marketsWithSlowerBestItinerary": [],
+            "marketsLosingAllConnections": [],
+            "lostUnderlyingOd": 0,
+            "marketsWithFasterBestItinerary": 14
+          }
+        },
+        {
+          "plans": [
+            {
+              "route": 169,
+              "city": "SYR",
+              "legs": [
+                {
+                  "id": "NEW",
+                  "origin": "FWA",
+                  "destination": "SYR",
+                  "departureMinute": 1200,
+                  "arrivalMinute": 1295
+                },
+                {
+                  "id": "NEW",
+                  "origin": "SYR",
+                  "destination": "FWA",
+                  "departureMinute": 1335,
+                  "arrivalMinute": 1430
+                }
+              ],
+              "score": 17.439973165619545,
+              "legScores": [
+                1.8317207871540337,
+                15.608252378465512
+              ]
+            }
+          ],
+          "retimings": [],
+          "score": 17.439973165619545,
+          "validation": {
+            "structural": "pass",
+            "operatingErrors": 0,
+            "operatingWarnings": 182,
+            "hardStopFailures": [],
+            "blocking": [],
+            "overnight": "pass",
+            "overnightFindings": [],
+            "planning": "pass",
+            "gates": "pass",
+            "standClaims": 15,
+            "standMinutes": 3771,
+            "affectedStations": [
+              {
+                "code": "PHF",
+                "name": "Newport News VA",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 8,
+                "peakUsed": 18,
+                "standClaims": 2,
+                "standMinutes": 142
+              },
+              {
+                "code": "SYR",
+                "name": "Syracuse NY",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 8,
+                "peakUsed": 18,
+                "standClaims": 2,
+                "standMinutes": 464
+              },
+              {
+                "code": "DAY",
+                "name": "Dayton OH",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 8,
+                "peakUsed": 16,
+                "standClaims": 0,
+                "standMinutes": 0
+              },
+              {
+                "code": "JAX",
+                "name": "Jacksonville FL",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 12,
+                "peakUsed": 16,
+                "standClaims": 0,
+                "standMinutes": 0
+              },
+              {
+                "code": "BHM",
+                "name": "Birmingham AL",
+                "isHub": false,
+                "isFocusCity": true,
+                "nGates": 6,
+                "nStands": 4,
+                "peakUsed": 8,
+                "standClaims": 4,
+                "standMinutes": 290
+              },
+              {
+                "code": "BWI",
+                "name": "Baltimore MD",
+                "isHub": false,
+                "isFocusCity": false,
+                "nGates": 2,
+                "nStands": 2,
+                "peakUsed": 4,
+                "standClaims": 2,
+                "standMinutes": 804
+              }
+            ]
+          },
+          "demand": {
+            "flights": [
+              {
+                "id": "V123-R4-R169-1-FWA-SYR",
+                "route": 169,
+                "line": "AF",
+                "fleet": "CRJ200",
+                "day": 5,
+                "sequenceWithinRoute": 7,
+                "pairing": 871,
+                "flight": 2151,
+                "origin": "FWA",
+                "destination": "SYR",
+                "departure": "20:00",
+                "arrival": "21:35",
+                "departureMinute": 1200,
+                "arrivalMinute": 1295,
+                "departureClock": "20:00",
+                "arrivalClock": "21:35",
+                "blockMinutes": 95,
+                "currentPairFrequency": 1,
+                "routeLocalOd": 0.8,
+                "local": 0.3840130452441806,
+                "connecting": 1.447707741909853,
+                "total": 1.8317207871540335,
+                "oneStop": 1.447707741909853,
+                "twoStop": 0,
+                "groups": {
+                  "LEC": 0.1601839510311691,
+                  "NEC": 1.1041325473115329,
+                  "MAC": 0.18339124356715109
+                },
+                "connectingFlights": [
+                  {
+                    "flight": 2052,
+                    "origin": "SYR",
+                    "destination": "PWM",
+                    "departure": "22:20",
+                    "arrival": "23:28"
+                  },
+                  {
+                    "flight": 2054,
+                    "origin": "SYR",
+                    "destination": "ALB",
+                    "departure": "22:10",
+                    "arrival": "22:54"
+                  },
+                  {
+                    "flight": 2045,
+                    "origin": "SYR",
+                    "destination": "BUF",
+                    "departure": "22:22",
+                    "arrival": "23:09"
+                  },
+                  {
+                    "flight": 2043,
+                    "origin": "SYR",
+                    "destination": "ABE",
+                    "departure": "22:25",
+                    "arrival": "23:17"
+                  }
+                ],
+                "topMarkets": [
+                  {
+                    "origin": "FWA",
+                    "destination": "PWM",
+                    "opportunity": 0.6
+                  },
+                  {
+                    "origin": "FWA",
+                    "destination": "ALB",
+                    "opportunity": 0.5041325473115329
+                  },
+                  {
+                    "origin": "FWA",
+                    "destination": "ABE",
+                    "opportunity": 0.18339124356715109
+                  },
+                  {
+                    "origin": "FWA",
+                    "destination": "BUF",
+                    "opportunity": 0.1601839510311691
+                  }
+                ]
+              },
+              {
+                "id": "V123-R4-R169-2-SYR-FWA",
+                "route": 169,
+                "line": "AF",
+                "fleet": "CRJ200",
+                "day": 5,
+                "sequenceWithinRoute": 8,
+                "pairing": 872,
+                "flight": 2152,
+                "origin": "SYR",
+                "destination": "FWA",
+                "departure": "22:15",
+                "arrival": "23:50",
+                "departureMinute": 1335,
+                "arrivalMinute": 1430,
+                "departureClock": "22:15",
+                "arrivalClock": "23:50",
+                "blockMinutes": 95,
+                "currentPairFrequency": 1,
+                "routeLocalOd": 0.7,
+                "local": 0.3449760828506362,
+                "connecting": 15.263276295614876,
+                "total": 15.608252378465512,
+                "oneStop": 15.263276295614874,
+                "twoStop": 0,
+                "groups": {
+                  "MAC": 1.40881836318071,
+                  "FLP": 10.847038591428516,
+                  "LEC": 0.5194548592195893,
+                  "NEC": 2.4879644817860584
+                },
+                "connectingFlights": [
+                  {
+                    "flight": 1863,
+                    "origin": "ABE",
+                    "destination": "SYR",
+                    "departure": "18:00",
+                    "arrival": "18:52"
+                  },
+                  {
+                    "flight": 1756,
+                    "origin": "ALB",
+                    "destination": "SYR",
+                    "departure": "18:10",
+                    "arrival": "18:54"
+                  },
+                  {
+                    "flight": 1791,
+                    "origin": "BDL",
+                    "destination": "SYR",
+                    "departure": "18:00",
+                    "arrival": "18:54"
+                  },
+                  {
+                    "flight": 1776,
+                    "origin": "BGR",
+                    "destination": "SYR",
+                    "departure": "17:35",
+                    "arrival": "18:55"
+                  },
+                  {
+                    "flight": 1830,
+                    "origin": "BTV",
+                    "destination": "SYR",
+                    "departure": "18:00",
+                    "arrival": "18:52"
+                  },
+                  {
+                    "flight": 1684,
+                    "origin": "BWI",
+                    "destination": "SYR",
+                    "departure": "17:50",
+                    "arrival": "18:55"
+                  },
+                  {
+                    "flight": 1131,
+                    "origin": "FLL",
+                    "destination": "SYR",
+                    "departure": "16:00",
+                    "arrival": "18:54"
+                  },
+                  {
+                    "flight": 1856,
+                    "origin": "HPN",
+                    "destination": "SYR",
+                    "departure": "18:00",
+                    "arrival": "18:54"
+                  },
+                  {
+                    "flight": 1231,
+                    "origin": "PIE",
+                    "destination": "SYR",
+                    "departure": "16:05",
+                    "arrival": "18:49"
+                  },
+                  {
+                    "flight": 1232,
+                    "origin": "PIE",
+                    "destination": "SYR",
+                    "departure": "16:35",
+                    "arrival": "19:19"
+                  },
+                  {
+                    "flight": 1304,
+                    "origin": "SRQ",
+                    "destination": "SYR",
+                    "departure": "15:55",
+                    "arrival": "18:51"
+                  },
+                  {
+                    "flight": 2051,
+                    "origin": "BUF",
+                    "destination": "SYR",
+                    "departure": "20:51",
+                    "arrival": "21:37"
+                  },
+                  {
+                    "flight": 2049,
+                    "origin": "PWM",
+                    "destination": "SYR",
+                    "departure": "17:37",
+                    "arrival": "18:45"
+                  },
+                  {
+                    "flight": 2053,
+                    "origin": "ALB",
+                    "destination": "SYR",
+                    "departure": "20:46",
+                    "arrival": "21:30"
+                  },
+                  {
+                    "flight": 2040,
+                    "origin": "ROC",
+                    "destination": "SYR",
+                    "departure": "20:55",
+                    "arrival": "21:34"
+                  },
+                  {
+                    "flight": 2114,
+                    "origin": "BWI",
+                    "destination": "SYR",
+                    "departure": "20:40",
+                    "arrival": "21:45"
+                  }
+                ],
+                "topMarkets": [
+                  {
+                    "origin": "SRQ",
+                    "destination": "FWA",
+                    "opportunity": 4.779832373554107
+                  },
+                  {
+                    "origin": "PIE",
+                    "destination": "FWA",
+                    "opportunity": 3.4702747544802524
+                  },
+                  {
+                    "origin": "FLL",
+                    "destination": "FWA",
+                    "opportunity": 2.596931463394158
+                  },
+                  {
+                    "origin": "BWI",
+                    "destination": "FWA",
+                    "opportunity": 1.156406910138059
+                  },
+                  {
+                    "origin": "BDL",
+                    "destination": "FWA",
+                    "opportunity": 0.9552075023588655
+                  },
+                  {
+                    "origin": "ALB",
+                    "destination": "FWA",
+                    "opportunity": 0.577788175959138
+                  },
+                  {
+                    "origin": "BTV",
+                    "destination": "FWA",
+                    "opportunity": 0.3
+                  },
+                  {
+                    "origin": "PWM",
+                    "destination": "FWA",
+                    "opportunity": 0.29585671087483073
+                  },
+                  {
+                    "origin": "ROC",
+                    "destination": "FWA",
+                    "opportunity": 0.279125047113014
+                  },
+                  {
+                    "origin": "ABE",
+                    "destination": "FWA",
+                    "opportunity": 0.25241145304265117
+                  }
+                ]
+              }
+            ],
+            "newlyConnectedMarketDemand": 1.1,
+            "marketsWithFasterBestItinerary": 11
+          },
+          "reviewAudit": {
+            "marketsWithSlowerBestItinerary": [],
+            "marketsLosingAllConnections": [],
+            "lostUnderlyingOd": 0,
+            "marketsWithFasterBestItinerary": 11
+          }
+        },
+        {
+          "plans": [
+            {
+              "route": 169,
+              "city": "BNA",
+              "legs": [
+                {
+                  "id": "NEW",
+                  "origin": "FWA",
+                  "destination": "BNA",
+                  "departureMinute": 1170,
+                  "arrivalMinute": 1185
+                },
+                {
+                  "id": "NEW",
+                  "origin": "BNA",
+                  "destination": "FWA",
+                  "departureMinute": 1225,
+                  "arrivalMinute": 1360
+                }
+              ],
+              "score": 4.769577847745889,
+              "legScores": [
+                2.434608671329567,
+                2.334969176416323
+              ]
+            }
+          ],
+          "retimings": [],
+          "score": 4.769577847745889,
+          "validation": {
+            "structural": "pass",
+            "operatingErrors": 0,
+            "operatingWarnings": 182,
+            "hardStopFailures": [],
+            "blocking": [],
+            "overnight": "pass",
+            "overnightFindings": [],
+            "planning": "pass",
+            "gates": "pass",
+            "standClaims": 15,
+            "standMinutes": 3771,
+            "affectedStations": [
+              {
+                "code": "PHF",
+                "name": "Newport News VA",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 8,
+                "peakUsed": 18,
+                "standClaims": 2,
+                "standMinutes": 142
+              },
+              {
+                "code": "SYR",
+                "name": "Syracuse NY",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 8,
+                "peakUsed": 18,
+                "standClaims": 2,
+                "standMinutes": 464
+              },
+              {
+                "code": "DAY",
+                "name": "Dayton OH",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 8,
+                "peakUsed": 16,
+                "standClaims": 0,
+                "standMinutes": 0
+              },
+              {
+                "code": "JAX",
+                "name": "Jacksonville FL",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 12,
+                "peakUsed": 16,
+                "standClaims": 0,
+                "standMinutes": 0
+              },
+              {
+                "code": "BHM",
+                "name": "Birmingham AL",
+                "isHub": false,
+                "isFocusCity": true,
+                "nGates": 6,
+                "nStands": 4,
+                "peakUsed": 8,
+                "standClaims": 4,
+                "standMinutes": 290
+              },
+              {
+                "code": "BWI",
+                "name": "Baltimore MD",
+                "isHub": false,
+                "isFocusCity": false,
+                "nGates": 2,
+                "nStands": 2,
+                "peakUsed": 4,
+                "standClaims": 2,
+                "standMinutes": 804
+              }
+            ]
+          },
+          "demand": {
+            "flights": [
+              {
+                "id": "V123-R4-R169-1-FWA-BNA",
+                "route": 169,
+                "line": "AF",
+                "fleet": "CRJ200",
+                "day": 5,
+                "sequenceWithinRoute": 7,
+                "pairing": 891,
+                "flight": 2151,
+                "origin": "FWA",
+                "destination": "BNA",
+                "departure": "19:30",
+                "arrival": "19:45",
+                "departureMinute": 1170,
+                "arrivalMinute": 1185,
+                "departureClock": "19:30",
+                "arrivalClock": "19:45",
+                "blockMinutes": 75,
+                "currentPairFrequency": 0,
+                "routeLocalOd": 2.6,
+                "local": 2.434608671329567,
+                "connecting": 0,
+                "total": 2.434608671329567,
+                "oneStop": 0,
+                "twoStop": 0,
+                "groups": {},
+                "connectingFlights": [],
+                "topMarkets": []
+              },
+              {
+                "id": "V123-R4-R169-2-BNA-FWA",
+                "route": 169,
+                "line": "AF",
+                "fleet": "CRJ200",
+                "day": 5,
+                "sequenceWithinRoute": 8,
+                "pairing": 892,
+                "flight": 2152,
+                "origin": "BNA",
+                "destination": "FWA",
+                "departure": "20:25",
+                "arrival": "22:40",
+                "departureMinute": 1225,
+                "arrivalMinute": 1360,
+                "departureClock": "20:25",
+                "arrivalClock": "22:40",
+                "blockMinutes": 75,
+                "currentPairFrequency": 0,
+                "routeLocalOd": 2.5,
+                "local": 2.334969176416323,
+                "connecting": 0,
+                "total": 2.334969176416323,
+                "oneStop": 0,
+                "twoStop": 0,
+                "groups": {},
+                "connectingFlights": [],
+                "topMarkets": []
+              }
+            ],
+            "newlyConnectedMarketDemand": 0,
+            "marketsWithFasterBestItinerary": 2
+          },
+          "reviewAudit": {
+            "marketsWithSlowerBestItinerary": [],
+            "marketsLosingAllConnections": [],
+            "lostUnderlyingOd": 0,
+            "marketsWithFasterBestItinerary": 2
+          }
+        },
+        {
+          "plans": [
+            {
+              "route": 169,
+              "city": "MEM",
+              "legs": [
+                {
+                  "id": "NEW",
+                  "origin": "FWA",
+                  "destination": "MEM",
+                  "departureMinute": 1170,
+                  "arrivalMinute": 1205
+                },
+                {
+                  "id": "NEW",
+                  "origin": "MEM",
+                  "destination": "FWA",
+                  "departureMinute": 1245,
+                  "arrivalMinute": 1400
+                }
+              ],
+              "score": 3.4955596413844336,
+              "legScores": [
+                1.6989745875801672,
+                1.7965850538042663
+              ]
+            }
+          ],
+          "retimings": [],
+          "score": 3.4955596413844336,
+          "validation": {
+            "structural": "pass",
+            "operatingErrors": 0,
+            "operatingWarnings": 182,
+            "hardStopFailures": [],
+            "blocking": [],
+            "overnight": "pass",
+            "overnightFindings": [],
+            "planning": "pass",
+            "gates": "pass",
+            "standClaims": 15,
+            "standMinutes": 3771,
+            "affectedStations": [
+              {
+                "code": "PHF",
+                "name": "Newport News VA",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 8,
+                "peakUsed": 18,
+                "standClaims": 2,
+                "standMinutes": 142
+              },
+              {
+                "code": "SYR",
+                "name": "Syracuse NY",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 8,
+                "peakUsed": 18,
+                "standClaims": 2,
+                "standMinutes": 464
+              },
+              {
+                "code": "DAY",
+                "name": "Dayton OH",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 8,
+                "peakUsed": 16,
+                "standClaims": 0,
+                "standMinutes": 0
+              },
+              {
+                "code": "JAX",
+                "name": "Jacksonville FL",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 12,
+                "peakUsed": 16,
+                "standClaims": 0,
+                "standMinutes": 0
+              },
+              {
+                "code": "BHM",
+                "name": "Birmingham AL",
+                "isHub": false,
+                "isFocusCity": true,
+                "nGates": 6,
+                "nStands": 4,
+                "peakUsed": 8,
+                "standClaims": 4,
+                "standMinutes": 290
+              },
+              {
+                "code": "BWI",
+                "name": "Baltimore MD",
+                "isHub": false,
+                "isFocusCity": false,
+                "nGates": 2,
+                "nStands": 2,
+                "peakUsed": 4,
+                "standClaims": 2,
+                "standMinutes": 804
+              }
+            ]
+          }
+        },
+        {
+          "plans": [
+            {
+              "route": 169,
+              "city": "XNA",
+              "legs": [
+                {
+                  "id": "NEW",
+                  "origin": "FWA",
+                  "destination": "XNA",
+                  "departureMinute": 1170,
+                  "arrivalMinute": 1219
+                },
+                {
+                  "id": "NEW",
+                  "origin": "XNA",
+                  "destination": "FWA",
+                  "departureMinute": 1259,
+                  "arrivalMinute": 1428
+                }
+              ],
+              "score": 2.3977816124944065,
+              "legScores": [
+                1.1977816124944065,
+                1.2
+              ]
+            }
+          ],
+          "retimings": [],
+          "score": 2.3977816124944065,
+          "validation": {
+            "structural": "pass",
+            "operatingErrors": 0,
+            "operatingWarnings": 182,
+            "hardStopFailures": [],
+            "blocking": [],
+            "overnight": "pass",
+            "overnightFindings": [],
+            "planning": "pass",
+            "gates": "pass",
+            "standClaims": 15,
+            "standMinutes": 3771,
+            "affectedStations": [
+              {
+                "code": "PHF",
+                "name": "Newport News VA",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 8,
+                "peakUsed": 18,
+                "standClaims": 2,
+                "standMinutes": 142
+              },
+              {
+                "code": "SYR",
+                "name": "Syracuse NY",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 8,
+                "peakUsed": 18,
+                "standClaims": 2,
+                "standMinutes": 464
+              },
+              {
+                "code": "DAY",
+                "name": "Dayton OH",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 8,
+                "peakUsed": 16,
+                "standClaims": 0,
+                "standMinutes": 0
+              },
+              {
+                "code": "JAX",
+                "name": "Jacksonville FL",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 12,
+                "peakUsed": 16,
+                "standClaims": 0,
+                "standMinutes": 0
+              },
+              {
+                "code": "BHM",
+                "name": "Birmingham AL",
+                "isHub": false,
+                "isFocusCity": true,
+                "nGates": 6,
+                "nStands": 4,
+                "peakUsed": 8,
+                "standClaims": 4,
+                "standMinutes": 290
+              },
+              {
+                "code": "BWI",
+                "name": "Baltimore MD",
+                "isHub": false,
+                "isFocusCity": false,
+                "nGates": 2,
+                "nStands": 2,
+                "peakUsed": 4,
+                "standClaims": 2,
+                "standMinutes": 804
+              }
+            ]
+          }
+        }
+      ],
+      "rejected": [
+        {
+          "plan": {
+            "route": 169,
+            "city": "BHM",
+            "legs": [
+              {
+                "id": "NEW",
+                "origin": "FWA",
+                "destination": "BHM",
+                "departureMinute": 1215,
+                "arrivalMinute": 1254
+              },
+              {
+                "id": "NEW",
+                "origin": "BHM",
+                "destination": "FWA",
+                "departureMinute": 1395,
+                "arrivalMinute": 1554
+              }
+            ],
+            "score": 73.55206983227703,
+            "legScores": [
+              30.723773301231937,
+              42.82829653104509
+            ]
+          },
+          "validation": {
+            "structural": "pass",
+            "operatingErrors": 4,
+            "operatingWarnings": 182,
+            "hardStopFailures": [
+              "passenger_touch_on_stand",
+              "fixed_physical_inventory"
+            ],
+            "blocking": [
+              {
+                "check": "passenger_touch_on_stand",
+                "findings": [
+                  {
+                    "id": "BHM-171-1272-1335",
+                    "message": "BHM claim 171 requires passenger handling on stand 1",
+                    "evidence": {
+                      "city": "BHM",
+                      "label": "171",
+                      "kind": "turn",
+                      "start": 1272,
+                      "end": 1335,
+                      "stand": 1
+                    }
+                  },
+                  {
+                    "id": "BHM-149-392-452",
+                    "message": "BHM claim 149 requires passenger handling on stand 2",
+                    "evidence": {
+                      "city": "BHM",
+                      "label": "149",
+                      "kind": "turn",
+                      "start": 392,
+                      "end": 452,
+                      "stand": 2
+                    }
+                  },
+                  {
+                    "id": "BHM-302 -> 303-1770-1830",
+                    "message": "BHM claim 302 -> 303 requires passenger handling on stand 3",
+                    "evidence": {
+                      "city": "BHM",
+                      "label": "302 -> 303",
+                      "kind": "ron",
+                      "start": 1770,
+                      "end": 1830,
+                      "stand": 3
+                    }
+                  }
+                ]
+              },
+              {
+                "check": "fixed_physical_inventory",
+                "findings": [
+                  {
+                    "id": "BHM",
+                    "message": "BHM cannot fit its claims into the configured physical inventory: 3 passenger touch(es) remain off-gate",
+                    "evidence": {
+                      "city": "BHM",
+                      "requiredGates": 7,
+                      "configuredGates": 6,
+                      "requiredStands": 3,
+                      "configuredStands": 4,
+                      "strandedPassengerTouches": 3
+                    }
+                  }
+                ]
+              }
+            ],
+            "overnight": "pass",
+            "overnightFindings": [],
+            "planning": "pass",
+            "gates": "fail",
+            "gateFailure": "3 passenger touch(es) remain off-gate"
+          }
+        },
+        {
+          "plan": {
+            "route": 169,
+            "city": "BHM",
+            "legs": [
+              {
+                "id": "NEW",
+                "origin": "FWA",
+                "destination": "BHM",
+                "departureMinute": 1185,
+                "arrivalMinute": 1224
+              },
+              {
+                "id": "NEW",
+                "origin": "BHM",
+                "destination": "FWA",
+                "departureMinute": 1275,
+                "arrivalMinute": 1434
+              }
+            ],
+            "score": 73.52305301449141,
+            "legScores": [
+              31.961788068304386,
+              41.56126494618702
+            ]
+          },
+          "validation": {
+            "structural": "pass",
+            "operatingErrors": 4,
+            "operatingWarnings": 182,
+            "hardStopFailures": [
+              "passenger_touch_on_stand",
+              "fixed_physical_inventory"
+            ],
+            "blocking": [
+              {
+                "check": "passenger_touch_on_stand",
+                "findings": [
+                  {
+                    "id": "BHM-171-1272-1335",
+                    "message": "BHM claim 171 requires passenger handling on stand 1",
+                    "evidence": {
+                      "city": "BHM",
+                      "label": "171",
+                      "kind": "turn",
+                      "start": 1272,
+                      "end": 1335,
+                      "stand": 1
+                    }
+                  },
+                  {
+                    "id": "BHM-149-392-452",
+                    "message": "BHM claim 149 requires passenger handling on stand 2",
+                    "evidence": {
+                      "city": "BHM",
+                      "label": "149",
+                      "kind": "turn",
+                      "start": 392,
+                      "end": 452,
+                      "stand": 2
+                    }
+                  },
+                  {
+                    "id": "BHM-302 -> 303-1770-1830",
+                    "message": "BHM claim 302 -> 303 requires passenger handling on stand 3",
+                    "evidence": {
+                      "city": "BHM",
+                      "label": "302 -> 303",
+                      "kind": "ron",
+                      "start": 1770,
+                      "end": 1830,
+                      "stand": 3
+                    }
+                  }
+                ]
+              },
+              {
+                "check": "fixed_physical_inventory",
+                "findings": [
+                  {
+                    "id": "BHM",
+                    "message": "BHM cannot fit its claims into the configured physical inventory: 3 passenger touch(es) remain off-gate",
+                    "evidence": {
+                      "city": "BHM",
+                      "requiredGates": 7,
+                      "configuredGates": 6,
+                      "requiredStands": 3,
+                      "configuredStands": 4,
+                      "strandedPassengerTouches": 3
+                    }
+                  }
+                ]
+              }
+            ],
+            "overnight": "pass",
+            "overnightFindings": [],
+            "planning": "pass",
+            "gates": "fail",
+            "gateFailure": "3 passenger touch(es) remain off-gate"
+          }
+        },
+        {
+          "plan": {
+            "route": 169,
+            "city": "MCI",
+            "legs": [
+              {
+                "id": "NEW",
+                "origin": "FWA",
+                "destination": "MCI",
+                "departureMinute": 1170,
+                "arrivalMinute": 1209
+              },
+              {
+                "id": "NEW",
+                "origin": "MCI",
+                "destination": "FWA",
+                "departureMinute": 1275,
+                "arrivalMinute": 1434
+              }
+            ],
+            "score": 48.515889708278905,
+            "legScores": [
+              12.5222669391084,
+              35.99362276917051
+            ]
+          },
+          "validation": {
+            "structural": "pass",
+            "operatingErrors": 2,
+            "operatingWarnings": 182,
+            "hardStopFailures": [
+              "passenger_touch_on_stand",
+              "fixed_physical_inventory"
+            ],
+            "blocking": [
+              {
+                "check": "passenger_touch_on_stand",
+                "findings": [
+                  {
+                    "id": "MCI-152 -> 153-1205-1250",
+                    "message": "MCI claim 152 -> 153 requires passenger handling on stand 1",
+                    "evidence": {
+                      "city": "MCI",
+                      "label": "152 -> 153",
+                      "kind": "ron",
+                      "start": 1205,
+                      "end": 1250,
+                      "stand": 1
+                    }
+                  }
+                ]
+              },
+              {
+                "check": "fixed_physical_inventory",
+                "findings": [
+                  {
+                    "id": "MCI",
+                    "message": "MCI cannot fit its claims into the configured physical inventory: 1 passenger touch(es) remain off-gate",
+                    "evidence": {
+                      "city": "MCI",
+                      "requiredGates": 17,
+                      "configuredGates": 16,
+                      "requiredStands": 8,
+                      "configuredStands": 8,
+                      "strandedPassengerTouches": 1
+                    }
+                  }
+                ]
+              }
+            ],
+            "overnight": "pass",
+            "overnightFindings": [],
+            "planning": "pass",
+            "gates": "fail",
+            "gateFailure": "1 passenger touch(es) remain off-gate"
+          }
+        },
+        {
+          "plan": {
+            "route": 169,
+            "city": "MCI",
+            "legs": [
+              {
+                "id": "NEW",
+                "origin": "FWA",
+                "destination": "MCI",
+                "departureMinute": 1170,
+                "arrivalMinute": 1209
+              },
+              {
+                "id": "NEW",
+                "origin": "MCI",
+                "destination": "FWA",
+                "departureMinute": 1290,
+                "arrivalMinute": 1449
+              }
+            ],
+            "score": 48.02154642242507,
+            "legScores": [
+              12.5222669391084,
+              35.49927948331667
+            ]
+          },
+          "validation": {
+            "structural": "pass",
+            "operatingErrors": 2,
+            "operatingWarnings": 182,
+            "hardStopFailures": [
+              "passenger_touch_on_stand",
+              "fixed_physical_inventory"
+            ],
+            "blocking": [
+              {
+                "check": "passenger_touch_on_stand",
+                "findings": [
+                  {
+                    "id": "MCI-152 -> 153-1205-1250",
+                    "message": "MCI claim 152 -> 153 requires passenger handling on stand 1",
+                    "evidence": {
+                      "city": "MCI",
+                      "label": "152 -> 153",
+                      "kind": "ron",
+                      "start": 1205,
+                      "end": 1250,
+                      "stand": 1
+                    }
+                  }
+                ]
+              },
+              {
+                "check": "fixed_physical_inventory",
+                "findings": [
+                  {
+                    "id": "MCI",
+                    "message": "MCI cannot fit its claims into the configured physical inventory: 1 passenger touch(es) remain off-gate",
+                    "evidence": {
+                      "city": "MCI",
+                      "requiredGates": 17,
+                      "configuredGates": 16,
+                      "requiredStands": 8,
+                      "configuredStands": 8,
+                      "strandedPassengerTouches": 1
+                    }
+                  }
+                ]
+              }
+            ],
+            "overnight": "pass",
+            "overnightFindings": [],
+            "planning": "pass",
+            "gates": "fail",
+            "gateFailure": "1 passenger touch(es) remain off-gate"
+          }
+        },
+        {
+          "plan": {
+            "route": 169,
+            "city": "RFD",
+            "legs": [
+              {
+                "id": "NEW",
+                "origin": "FWA",
+                "destination": "RFD",
+                "departureMinute": 1170,
+                "arrivalMinute": 1168
+              },
+              {
+                "id": "NEW",
+                "origin": "RFD",
+                "destination": "FWA",
+                "departureMinute": 1208,
+                "arrivalMinute": 1326
+              }
+            ],
+            "score": 10.848359537506305,
+            "legScores": [
+              5.176098385359958,
+              5.672261152146346
+            ]
+          },
+          "validation": {
+            "structural": "fail",
+            "operatingErrors": 0,
+            "operatingWarnings": 182,
+            "hardStopFailures": [],
+            "blocking": [],
+            "overnight": "pass",
+            "overnightFindings": [],
+            "planning": "pass",
+            "gates": "pass",
+            "standClaims": 15,
+            "standMinutes": 3771,
+            "affectedStations": [
+              {
+                "code": "PHF",
+                "name": "Newport News VA",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 8,
+                "peakUsed": 18,
+                "standClaims": 2,
+                "standMinutes": 142
+              },
+              {
+                "code": "SYR",
+                "name": "Syracuse NY",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 8,
+                "peakUsed": 18,
+                "standClaims": 2,
+                "standMinutes": 464
+              },
+              {
+                "code": "DAY",
+                "name": "Dayton OH",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 8,
+                "peakUsed": 16,
+                "standClaims": 0,
+                "standMinutes": 0
+              },
+              {
+                "code": "JAX",
+                "name": "Jacksonville FL",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 12,
+                "peakUsed": 16,
+                "standClaims": 0,
+                "standMinutes": 0
+              },
+              {
+                "code": "BHM",
+                "name": "Birmingham AL",
+                "isHub": false,
+                "isFocusCity": true,
+                "nGates": 6,
+                "nStands": 4,
+                "peakUsed": 8,
+                "standClaims": 4,
+                "standMinutes": 290
+              },
+              {
+                "code": "BWI",
+                "name": "Baltimore MD",
+                "isHub": false,
+                "isFocusCity": false,
+                "nGates": 2,
+                "nStands": 2,
+                "peakUsed": 4,
+                "standClaims": 2,
+                "standMinutes": 804
+              }
+            ]
+          }
+        },
+        {
+          "plan": {
+            "route": 169,
+            "city": "RFD",
+            "legs": [
+              {
+                "id": "NEW",
+                "origin": "FWA",
+                "destination": "RFD",
+                "departureMinute": 1170,
+                "arrivalMinute": 1168
+              },
+              {
+                "id": "NEW",
+                "origin": "RFD",
+                "destination": "FWA",
+                "departureMinute": 1230,
+                "arrivalMinute": 1348
+              }
+            ],
+            "score": 10.848359537506305,
+            "legScores": [
+              5.176098385359958,
+              5.672261152146346
+            ]
+          },
+          "validation": {
+            "structural": "fail",
+            "operatingErrors": 0,
+            "operatingWarnings": 182,
+            "hardStopFailures": [],
+            "blocking": [],
+            "overnight": "pass",
+            "overnightFindings": [],
+            "planning": "pass",
+            "gates": "pass",
+            "standClaims": 15,
+            "standMinutes": 3771,
+            "affectedStations": [
+              {
+                "code": "PHF",
+                "name": "Newport News VA",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 8,
+                "peakUsed": 18,
+                "standClaims": 2,
+                "standMinutes": 142
+              },
+              {
+                "code": "SYR",
+                "name": "Syracuse NY",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 8,
+                "peakUsed": 18,
+                "standClaims": 2,
+                "standMinutes": 464
+              },
+              {
+                "code": "DAY",
+                "name": "Dayton OH",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 8,
+                "peakUsed": 16,
+                "standClaims": 0,
+                "standMinutes": 0
+              },
+              {
+                "code": "JAX",
+                "name": "Jacksonville FL",
+                "isHub": true,
+                "isFocusCity": false,
+                "nGates": 16,
+                "nStands": 12,
+                "peakUsed": 16,
+                "standClaims": 0,
+                "standMinutes": 0
+              },
+              {
+                "code": "BHM",
+                "name": "Birmingham AL",
+                "isHub": false,
+                "isFocusCity": true,
+                "nGates": 6,
+                "nStands": 4,
+                "peakUsed": 8,
+                "standClaims": 4,
+                "standMinutes": 290
+              },
+              {
+                "code": "BWI",
+                "name": "Baltimore MD",
+                "isHub": false,
+                "isFocusCity": false,
+                "nGates": 2,
+                "nStands": 2,
+                "peakUsed": 4,
+                "standClaims": 2,
+                "standMinutes": 804
+              }
+            ]
+          }
+        },
+        {
+          "plan": {
+            "route": 169,
+            "city": "OMA",
+            "legs": [
+              {
+                "id": "NEW",
+                "origin": "FWA",
+                "destination": "OMA",
+                "departureMinute": 1170,
+                "arrivalMinute": 1214
+              },
+              {
+                "id": "NEW",
+                "origin": "OMA",
+                "destination": "FWA",
+                "departureMinute": 1254,
+                "arrivalMinute": 1418
+              }
+            ],
+            "score": 3.396980709341066,
+            "legScores": [
+              1.6969807093410658,
+              1.7
+            ]
+          },
+          "validation": {
+            "structural": "pass",
+            "operatingErrors": 2,
+            "operatingWarnings": 182,
+            "hardStopFailures": [
+              "passenger_touch_on_stand",
+              "fixed_physical_inventory"
+            ],
+            "blocking": [
+              {
+                "check": "passenger_touch_on_stand",
+                "findings": [
+                  {
+                    "id": "OMA-157 -> 158-1184-1229",
+                    "message": "OMA claim 157 -> 158 requires passenger handling on stand 1",
+                    "evidence": {
+                      "city": "OMA",
+                      "label": "157 -> 158",
+                      "kind": "ron",
+                      "start": 1184,
+                      "end": 1229,
+                      "stand": 1
+                    }
+                  }
+                ]
+              },
+              {
+                "check": "fixed_physical_inventory",
+                "findings": [
+                  {
+                    "id": "OMA",
+                    "message": "OMA cannot fit its claims into the configured physical inventory: 1 passenger touch(es) remain off-gate",
+                    "evidence": {
+                      "city": "OMA",
+                      "requiredGates": 3,
+                      "configuredGates": 2,
+                      "requiredStands": 1,
+                      "configuredStands": 2,
+                      "strandedPassengerTouches": 1
+                    }
+                  }
+                ]
+              }
+            ],
+            "overnight": "pass",
+            "overnightFindings": [],
+            "planning": "pass",
+            "gates": "fail",
+            "gateFailure": "1 passenger touch(es) remain off-gate"
+          }
+        }
+      ],
+      "validatedTimingsByMarket": {
+        "BHM": 2,
+        "MCI": 2,
+        "DAY": 1,
+        "SYR": 1,
+        "RFD": 2,
+        "BNA": 1,
+        "MEM": 1,
+        "OMA": 1,
+        "XNA": 1
+      }
+    },
+    {
+      "name": "327 evening, unchanged existing clocks",
+      "route": 327,
+      "station": "SDF",
+      "window": [
+        1403,
+        1560
+      ],
+      "retimings": [],
+      "retainedTimings": 0,
+      "gridMinutes": 5,
+      "rankingModel": "full marginal one/two-stop",
+      "selected": [],
+      "rejected": [],
+      "validatedTimingsByMarket": {}
+    }
+  ]
+}
