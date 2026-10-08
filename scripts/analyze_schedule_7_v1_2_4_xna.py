@@ -1,4 +1,4 @@
-"""Accept 126/308, then assess 116/117 XNA RON against maintenance cadence.
+"""Historical round-two acceptance and XNA RON maintenance review.
 
 XNA scenarios are proposals only. Preserve the round-one comparison snapshot
 so its demand report and historic overlay remain hash-replayable.
@@ -18,7 +18,7 @@ from caa_scheduler.optimization_overlay import apply_optimization_overlay
 
 RELEASE=previous.RELEASE
 ROUND1='data/schedules/schedule_7_v1_2_4_round_1/canonical_schedule.json'
-BASE='data/schedules/schedule_7_v1_2_4_draft/canonical_schedule.json'
+BASE='data/schedules/schedule_7_v1_2_4_round_2/canonical_schedule.json'
 ACCEPTED='config/optimizations/schedule_7_v1_2_4_accepted_rounds_1_2.json'
 OUT='config/proposals/schedule_7_v1_2_4_xna_review.json'
 
@@ -53,7 +53,7 @@ def accept():
     assert all(now[i]==l for i,l in old.items()) and len(t['legs'])==1158
     assert t['hubBanks']==released['hubBanks'] and t['operatingPolicy']==released['operatingPolicy']
     write_json(ROOT/ACCEPTED,c);write_json(ROOT/BASE,t)
-    write_json(ROOT/'data/schedules/schedule_7_v1_2_4_draft/draft_report.json',{
+    write_json(ROOT/'data/schedules/schedule_7_v1_2_4_round_2/draft_report.json',{
         'status':'unpublished working draft','acceptedRoutes':[350,126,308],
         'proposedRoutes':[],'retainedRoutes':[518],
         'baseCanonical':RELEASE,'baseSha256':sha256_file(ROOT/RELEASE),

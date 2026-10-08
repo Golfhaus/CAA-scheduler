@@ -3,33 +3,37 @@
   "acceptedRoutes": [
     350,
     126,
-    308
-  ],
-  "proposedRoutes": [],
-  "retainedRoutes": [
+    308,
+    115,
+    116,
+    117,
+    517,
     518
   ],
   "baseCanonical": "data/schedules/schedule_7_v1_2_3/canonical_schedule.json",
   "baseSha256": "ad73563cd508331ac8d5e860a8361e2acdc3da97d0d40f3f87a5be6c31026b90",
-  "acceptedOverlay": "config/optimizations/schedule_7_v1_2_4_accepted_rounds_1_2.json",
-  "acceptedOverlaySha256": "f706d49daa2e4b3463def989bb9da572579b72bce7a78a37289c35aa45001916",
-  "canonicalSha256": "c5cbe3d514448d9bc2da93073bf7b634d4961939bd3946874367b317584438f5",
+  "acceptedOverlay": "config/optimizations/schedule_7_v1_2_4_accepted_rounds_1_3.json",
+  "acceptedOverlaySha256": "030a1bb4e2fbf2dfb3da634f945c63475e1df7ef8965ccd485ee35ccb3d55aa2",
+  "canonicalSha256": "8025e0cbab9b2a3a1ac577e8b749d984b76e80c6ee1a672226614e89930e1f7d",
   "summary": {
-    "flights": 1158,
+    "flights": 1164,
     "routes": 181,
     "lines": 20,
-    "addedFlights": 6,
-    "unchangedReleasedFlights": 1152
+    "addedFlights": 12,
+    "retimedReleasedFlights": [
+      1739
+    ],
+    "unchangedReleasedFlightClocks": 1151
   },
   "checks": {
     "exactAcceptedReplay": "pass",
-    "releasedFlightPreservation": "pass",
+    "releasedFlightIdentityPreservation": "pass",
     "latestReleasedRegression": "49 checks passed against v1.2.3"
   },
   "validation": {
     "structural": "pass",
     "operatingErrors": 0,
-    "operatingWarnings": 182,
+    "operatingWarnings": 183,
     "hardStopFailures": [],
     "blocking": [],
     "overnight": "pass",
@@ -106,6 +110,344 @@
         "standMinutes": 804
       }
     ]
+  },
+  "newWarningFindings": [
+    {
+      "check": "section_26_city_departure_gap",
+      "id": "GNV",
+      "message": "GNV has no departure for more than 240 minutes",
+      "evidence": {
+        "city": "GNV",
+        "departures": [
+          270,
+          347,
+          505,
+          1242
+        ],
+        "excessiveGaps": [
+          {
+            "from": 505,
+            "to": 1242,
+            "minutes": 737
+          }
+        ],
+        "serviceWindowMinutes": {
+          "start": 270,
+          "end": 1260
+        },
+        "includesOvernightWrap": false
+      }
+    }
+  ],
+  "maintenance": {
+    "AD": {
+      "line": "AD",
+      "maximumConsecutiveNonTargetRons": 9,
+      "limit": 10,
+      "grace": 1,
+      "longestRun": [
+        {
+          "day": 6,
+          "route": 116,
+          "city": "XNA",
+          "targetRon": false,
+          "hubOrFocusRon": false
+        },
+        {
+          "day": 7,
+          "route": 117,
+          "city": "PIA",
+          "targetRon": false,
+          "hubOrFocusRon": false
+        },
+        {
+          "day": 8,
+          "route": 118,
+          "city": "MFE",
+          "targetRon": false,
+          "hubOrFocusRon": false
+        },
+        {
+          "day": 9,
+          "route": 119,
+          "city": "DAB",
+          "targetRon": false,
+          "hubOrFocusRon": false
+        },
+        {
+          "day": 10,
+          "route": 120,
+          "city": "ISP",
+          "targetRon": false,
+          "hubOrFocusRon": false
+        },
+        {
+          "day": 11,
+          "route": 121,
+          "city": "PWM",
+          "targetRon": false,
+          "hubOrFocusRon": false
+        },
+        {
+          "day": 12,
+          "route": 122,
+          "city": "SWF",
+          "targetRon": false,
+          "hubOrFocusRon": false
+        },
+        {
+          "day": 13,
+          "route": 123,
+          "city": "ILM",
+          "targetRon": false,
+          "hubOrFocusRon": false
+        },
+        {
+          "day": 14,
+          "route": 124,
+          "city": "HVN",
+          "targetRon": false,
+          "hubOrFocusRon": false
+        }
+      ],
+      "targetRons": [
+        {
+          "day": 5,
+          "route": 115,
+          "city": "JAX",
+          "targetRon": true,
+          "hubOrFocusRon": true
+        },
+        {
+          "day": 15,
+          "route": 125,
+          "city": "DAY",
+          "targetRon": true,
+          "hubOrFocusRon": true
+        },
+        {
+          "day": 23,
+          "route": 133,
+          "city": "MCI",
+          "targetRon": true,
+          "hubOrFocusRon": true
+        },
+        {
+          "day": 25,
+          "route": 135,
+          "city": "MCI",
+          "targetRon": true,
+          "hubOrFocusRon": true
+        },
+        {
+          "day": 26,
+          "route": 136,
+          "city": "DAY",
+          "targetRon": true,
+          "hubOrFocusRon": true
+        },
+        {
+          "day": 28,
+          "route": 138,
+          "city": "DAY",
+          "targetRon": true,
+          "hubOrFocusRon": true
+        },
+        {
+          "day": 38,
+          "route": 148,
+          "city": "DAY",
+          "targetRon": true,
+          "hubOrFocusRon": true
+        }
+      ],
+      "hubOrFocusRons": [
+        {
+          "day": 5,
+          "route": 115,
+          "city": "JAX",
+          "targetRon": true,
+          "hubOrFocusRon": true
+        },
+        {
+          "day": 15,
+          "route": 125,
+          "city": "DAY",
+          "targetRon": true,
+          "hubOrFocusRon": true
+        },
+        {
+          "day": 23,
+          "route": 133,
+          "city": "MCI",
+          "targetRon": true,
+          "hubOrFocusRon": true
+        },
+        {
+          "day": 25,
+          "route": 135,
+          "city": "MCI",
+          "targetRon": true,
+          "hubOrFocusRon": true
+        },
+        {
+          "day": 26,
+          "route": 136,
+          "city": "DAY",
+          "targetRon": true,
+          "hubOrFocusRon": true
+        },
+        {
+          "day": 28,
+          "route": 138,
+          "city": "DAY",
+          "targetRon": true,
+          "hubOrFocusRon": true
+        },
+        {
+          "day": 38,
+          "route": 148,
+          "city": "DAY",
+          "targetRon": true,
+          "hubOrFocusRon": true
+        }
+      ]
+    },
+    "AG": {
+      "line": "AG",
+      "maximumConsecutiveNonTargetRons": 3,
+      "limit": 10,
+      "grace": 1,
+      "longestRun": [
+        {
+          "day": 9,
+          "route": 519,
+          "city": "CMH",
+          "targetRon": false,
+          "hubOrFocusRon": false
+        },
+        {
+          "day": 1,
+          "route": 511,
+          "city": "PIT",
+          "targetRon": false,
+          "hubOrFocusRon": false
+        },
+        {
+          "day": 2,
+          "route": 512,
+          "city": "BLV",
+          "targetRon": false,
+          "hubOrFocusRon": false
+        }
+      ],
+      "targetRons": [
+        {
+          "day": 3,
+          "route": 513,
+          "city": "PIE",
+          "targetRon": true,
+          "hubOrFocusRon": false
+        },
+        {
+          "day": 4,
+          "route": 514,
+          "city": "JAX",
+          "targetRon": true,
+          "hubOrFocusRon": true
+        },
+        {
+          "day": 6,
+          "route": 516,
+          "city": "FLL",
+          "targetRon": true,
+          "hubOrFocusRon": false
+        },
+        {
+          "day": 8,
+          "route": 518,
+          "city": "SYR",
+          "targetRon": true,
+          "hubOrFocusRon": true
+        }
+      ],
+      "hubOrFocusRons": [
+        {
+          "day": 4,
+          "route": 514,
+          "city": "JAX",
+          "targetRon": true,
+          "hubOrFocusRon": true
+        },
+        {
+          "day": 8,
+          "route": 518,
+          "city": "SYR",
+          "targetRon": true,
+          "hubOrFocusRon": true
+        }
+      ]
+    }
+  },
+  "connectionTradeoff": {
+    "marketsWithSlowerBestItinerary": [
+      {
+        "origin": "GNV",
+        "destination": "PIT",
+        "od": 2.8,
+        "oldFastestMinutes": 189,
+        "newFastestMinutes": 282,
+        "differenceMinutes": 93
+      },
+      {
+        "origin": "GNV",
+        "destination": "ALB",
+        "od": 1.4,
+        "oldFastestMinutes": 418,
+        "newFastestMinutes": 542,
+        "differenceMinutes": 124
+      },
+      {
+        "origin": "GNV",
+        "destination": "ABE",
+        "od": 0.7,
+        "oldFastestMinutes": 307,
+        "newFastestMinutes": 347,
+        "differenceMinutes": 40
+      },
+      {
+        "origin": "GNV",
+        "destination": "PIE",
+        "od": 0.4,
+        "oldFastestMinutes": 124,
+        "newFastestMinutes": 259,
+        "differenceMinutes": 135
+      }
+    ],
+    "marketsLosingAllConnections": [
+      {
+        "origin": "GNV",
+        "destination": "RDU",
+        "od": 4.3
+      },
+      {
+        "origin": "GNV",
+        "destination": "LEX",
+        "od": 2.7
+      },
+      {
+        "origin": "GNV",
+        "destination": "AVP",
+        "od": 0.3
+      },
+      {
+        "origin": "GNV",
+        "destination": "TTN",
+        "od": 0.0
+      }
+    ],
+    "lostUnderlyingOd": 7.3,
+    "marketsWithFasterBestItinerary": 74
   },
   "publication": "Reserved to user decision"
 }

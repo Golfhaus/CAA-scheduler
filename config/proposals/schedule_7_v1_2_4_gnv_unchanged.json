@@ -1,0 +1,121 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "schedule-7-v1.2.4-xna-gnv-joint-review",
+  "baseSchedule": {
+    "scheduleId": "schedule_7_v1_2_4_draft",
+    "canonical": "data/schedules/schedule_7_v1_2_4_round_2/canonical_schedule.json",
+    "sha256": "c5cbe3d514448d9bc2da93073bf7b634d4961939bd3946874367b317584438f5"
+  },
+  "schedule": {
+    "id": "schedule_7_v1_2_4_gnv_analysis",
+    "version": "1.2.4",
+    "label": "Schedule 7 v1.2.4 joint GNV/XNA review; unpublished",
+    "status": "draft"
+  },
+  "approval": {
+    "status": "reviewed joint candidate; unpublished",
+    "scope": "517/518 GNV replacement; unchanged PHF 06:55 originator",
+    "publication": "Reserved to user decision"
+  },
+  "hubBanksToAdd": [],
+  "hubBankCountOverrides": {},
+  "insertLegs": [
+    {
+      "id": "V124-R3-R115-1-GNV-JAX",
+      "origin": "GNV",
+      "destination": "JAX",
+      "departureMinute": 1242,
+      "arrivalMinute": 1279,
+      "route": 115
+    },
+    {
+      "id": "V124-R3-R116-1-JAX-GNV",
+      "origin": "JAX",
+      "destination": "GNV",
+      "departureMinute": 270,
+      "arrivalMinute": 307,
+      "route": 116
+    },
+    {
+      "id": "V124-R3-R116-2-MCI-XNA",
+      "origin": "MCI",
+      "destination": "XNA",
+      "departureMinute": 1285,
+      "arrivalMinute": 1342,
+      "route": 116
+    },
+    {
+      "id": "V124-R3-R117-1-XNA-MCI",
+      "origin": "XNA",
+      "destination": "MCI",
+      "departureMinute": 330,
+      "arrivalMinute": 387,
+      "route": 117
+    },
+    {
+      "id": "V124-R3-R517-1-PHF-GNV",
+      "origin": "PHF",
+      "destination": "GNV",
+      "departureMinute": 1305,
+      "arrivalMinute": 1410,
+      "route": 517
+    },
+    {
+      "id": "V124-R3-R518-1-GNV-PHF",
+      "origin": "GNV",
+      "destination": "PHF",
+      "departureMinute": 270,
+      "arrivalMinute": 375,
+      "route": 518
+    }
+  ],
+  "retimeLegs": [
+    {
+      "legId": "GNV-JAX-CRJ200-01-OUT",
+      "expectedDepartureMinute": 310,
+      "expectedArrivalMinute": 347,
+      "departureMinute": 347,
+      "arrivalMinute": 384
+    }
+  ],
+  "bankAssignmentsToAdd": [
+    {
+      "legId": "V124-R3-R115-1-GNV-JAX",
+      "operation": "arrival",
+      "bankId": "JAX-B15"
+    },
+    {
+      "legId": "V124-R3-R116-1-JAX-GNV",
+      "operation": "departure",
+      "bankId": "JAX-B1"
+    },
+    {
+      "legId": "V124-R3-R116-2-MCI-XNA",
+      "operation": "departure",
+      "bankId": "MCI-M11"
+    },
+    {
+      "legId": "V124-R3-R117-1-XNA-MCI",
+      "operation": "arrival",
+      "bankId": "MCI-B2"
+    },
+    {
+      "legId": "V124-R3-R517-1-PHF-GNV",
+      "operation": "departure",
+      "bankId": "PHF-M7"
+    },
+    {
+      "legId": "V124-R3-R518-1-GNV-PHF",
+      "operation": "arrival",
+      "bankId": "PHF-B1"
+    }
+  ],
+  "bankAssignmentReplacements": [],
+  "operatingOverrides": [
+    {
+      "checkId": "tiered_service_minimums",
+      "findingId": "GNV",
+      "reason": "Standing user authorization permits useful additional hub service. Analysis remains unpublished; all physical and timing constraints remain enforced."
+    }
+  ]
+}

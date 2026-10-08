@@ -1,0 +1,200 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "schedule-7-v1.2.4-accepted-rounds-1-3",
+  "baseSchedule": {
+    "scheduleId": "schedule_7_v1_2_3",
+    "canonical": "data/schedules/schedule_7_v1_2_3/canonical_schedule.json",
+    "sha256": "ad73563cd508331ac8d5e860a8361e2acdc3da97d0d40f3f87a5be6c31026b90"
+  },
+  "schedule": {
+    "id": "schedule_7_v1_2_4_draft",
+    "version": "1.2.4",
+    "label": "Schedule 7 v1.2.4 working draft; unpublished",
+    "status": "draft"
+  },
+  "approval": {
+    "status": "approved for draft implementation; unpublished",
+    "userInstruction": "Can we make that change to 115/116/117, and then send a current PHF terminator to GNV, with the intention of having GNV-PHF as the GNV originating service?",
+    "scope": "Earlier approved 350, 126 and 308 additions; 115 JAX RON; 116 early JAX–GNV and evening MCI–XNA; 117 early XNA–MCI; 517 PHF–GNV RON and 518 GNV–PHF originator. Flight 1739 +37 minutes; other clocks retained.",
+    "publication": "Reserved to user decision"
+  },
+  "hubBanksToAdd": [],
+  "hubBankCountOverrides": {},
+  "insertLegs": [
+    {
+      "id": "V124-R350-1-ELP-MCI",
+      "origin": "ELP",
+      "destination": "MCI",
+      "departureMinute": 1107,
+      "arrivalMinute": 1303,
+      "route": 350
+    },
+    {
+      "id": "V124-R350-2-MCI-ELP",
+      "origin": "MCI",
+      "destination": "ELP",
+      "departureMinute": 1353,
+      "arrivalMinute": 1429,
+      "route": 350
+    },
+    {
+      "id": "V124-R126-1-MLB-JAX",
+      "origin": "MLB",
+      "destination": "JAX",
+      "departureMinute": 1200,
+      "arrivalMinute": 1252,
+      "route": 126
+    },
+    {
+      "id": "V124-R126-2-JAX-MLB",
+      "origin": "JAX",
+      "destination": "MLB",
+      "departureMinute": 1302,
+      "arrivalMinute": 1354,
+      "route": 126
+    },
+    {
+      "id": "V124-R308-1-CLT-MCI",
+      "origin": "CLT",
+      "destination": "MCI",
+      "departureMinute": 1230,
+      "arrivalMinute": 1303,
+      "route": 308
+    },
+    {
+      "id": "V124-R308-2-MCI-CLT",
+      "origin": "MCI",
+      "destination": "CLT",
+      "departureMinute": 1365,
+      "arrivalMinute": 1558,
+      "route": 308
+    },
+    {
+      "id": "V124-R3-R115-1-GNV-JAX",
+      "origin": "GNV",
+      "destination": "JAX",
+      "departureMinute": 1242,
+      "arrivalMinute": 1279,
+      "route": 115
+    },
+    {
+      "id": "V124-R3-R116-1-JAX-GNV",
+      "origin": "JAX",
+      "destination": "GNV",
+      "departureMinute": 270,
+      "arrivalMinute": 307,
+      "route": 116
+    },
+    {
+      "id": "V124-R3-R116-2-MCI-XNA",
+      "origin": "MCI",
+      "destination": "XNA",
+      "departureMinute": 1285,
+      "arrivalMinute": 1342,
+      "route": 116
+    },
+    {
+      "id": "V124-R3-R117-1-XNA-MCI",
+      "origin": "XNA",
+      "destination": "MCI",
+      "departureMinute": 330,
+      "arrivalMinute": 387,
+      "route": 117
+    },
+    {
+      "id": "V124-R3-R517-1-PHF-GNV",
+      "origin": "PHF",
+      "destination": "GNV",
+      "departureMinute": 1305,
+      "arrivalMinute": 1410,
+      "route": 517
+    },
+    {
+      "id": "V124-R3-R518-1-GNV-PHF",
+      "origin": "GNV",
+      "destination": "PHF",
+      "departureMinute": 270,
+      "arrivalMinute": 375,
+      "route": 518
+    }
+  ],
+  "retimeLegs": [
+    {
+      "legId": "GNV-JAX-CRJ200-01-OUT",
+      "expectedDepartureMinute": 310,
+      "expectedArrivalMinute": 347,
+      "departureMinute": 347,
+      "arrivalMinute": 384
+    }
+  ],
+  "bankAssignmentsToAdd": [
+    {
+      "legId": "V124-R350-1-ELP-MCI",
+      "operation": "arrival",
+      "bankId": "MCI-M11"
+    },
+    {
+      "legId": "V124-R350-2-MCI-ELP",
+      "operation": "departure",
+      "bankId": "MCI-M12"
+    },
+    {
+      "legId": "V124-R126-1-MLB-JAX",
+      "operation": "arrival",
+      "bankId": "JAX-B15"
+    },
+    {
+      "legId": "V124-R126-2-JAX-MLB",
+      "operation": "departure",
+      "bankId": "JAX-B15"
+    },
+    {
+      "legId": "V124-R308-1-CLT-MCI",
+      "operation": "arrival",
+      "bankId": "MCI-M11"
+    },
+    {
+      "legId": "V124-R308-2-MCI-CLT",
+      "operation": "departure",
+      "bankId": "MCI-M12"
+    },
+    {
+      "legId": "V124-R3-R115-1-GNV-JAX",
+      "operation": "arrival",
+      "bankId": "JAX-B15"
+    },
+    {
+      "legId": "V124-R3-R116-1-JAX-GNV",
+      "operation": "departure",
+      "bankId": "JAX-B1"
+    },
+    {
+      "legId": "V124-R3-R116-2-MCI-XNA",
+      "operation": "departure",
+      "bankId": "MCI-M11"
+    },
+    {
+      "legId": "V124-R3-R117-1-XNA-MCI",
+      "operation": "arrival",
+      "bankId": "MCI-B2"
+    },
+    {
+      "legId": "V124-R3-R517-1-PHF-GNV",
+      "operation": "departure",
+      "bankId": "PHF-M7"
+    },
+    {
+      "legId": "V124-R3-R518-1-GNV-PHF",
+      "operation": "arrival",
+      "bankId": "PHF-B1"
+    }
+  ],
+  "bankAssignmentReplacements": [],
+  "operatingOverrides": [
+    {
+      "checkId": "tiered_service_minimums",
+      "findingId": "GNV",
+      "reason": "User explicitly requested PHF–GNV overnight/originator service as the replacement GNV RON. Useful second-hub coverage is authorized; all physical, maintenance and timing rules remain enforced."
+    }
+  ]
+}

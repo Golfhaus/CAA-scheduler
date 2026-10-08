@@ -1,8 +1,8 @@
 # Schedule 7 v1.2.4 — working draft
 
-**Unpublished.** Routes 350, 126 and 308 are implemented at the user's instruction. Route 518 is retained. Main and the live app remain on v1.2.3. Work is saved on `codex/v1.2.4-utilization`. The subsequent 116/117 XNA maintenance review is in `docs/schedule_7_v1_2_4_xna.md`.
+**Unpublished.** Routes 350, 126 and 308 are implemented at the user's instruction. Subsequent approved work adds the 115/116/117 JAX/XNA overnight changes and 517/518 PHF–GNV overnight/originator service, described in `docs/schedule_7_v1_2_4_gnv.md`. Route 518's original four flights retain their clocks. Main and the live app remain on v1.2.3. Work is saved on `codex/v1.2.4-utilization`.
 
-The base is the **released v1.2.3 canonical (1152 flights)**, not the older v1.2.3 draft. The accepted v1.2.4 canonical now has **1158 flights**, with every pre-existing flight, clock, fleet, route, line and day unchanged. Aircraft inventory, gate inventory and bank windows remain unchanged. Authoritative replay input is `config/optimizations/schedule_7_v1_2_4_accepted_rounds_1_2.json`; the initial 1154-flight comparison snapshot is preserved under `data/schedules/schedule_7_v1_2_4_round_1/`.
+The base is the **released v1.2.3 canonical (1152 flights)**, not the older v1.2.3 draft. The accepted v1.2.4 canonical now has **1164 flights**. All existing identities, fleets, routes, lines and days remain; Flight 1739 GNV–JAX moves 37 minutes later under the subsequent approved overnight plan. Aircraft inventory, gate inventory and bank windows remain unchanged. Current replay input is `config/optimizations/schedule_7_v1_2_4_accepted_rounds_1_3.json`. The 1154-flight round-one and 1158-flight round-two comparison snapshots are preserved in their named folders.
 
 ## Implemented: Route 350
 
@@ -88,4 +88,6 @@ python scripts/analyze_schedule_7_v1_2_4.py --audit
 python scripts/analyze_schedule_7_v1_2_4.py --joint
 python scripts/analyze_schedule_7_v1_2_4_xna.py --accept
 python scripts/analyze_schedule_7_v1_2_4_xna.py --alternative
+python scripts/analyze_schedule_7_v1_2_4_gnv.py
+python scripts/analyze_schedule_7_v1_2_4_gnv.py --accept
 ```
