@@ -1,0 +1,80 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "schedule-7-v1.2.4-proposed-125-157",
+  "baseSchedule": {
+    "scheduleId": "schedule_7_v1_2_4_draft",
+    "canonical": "data/schedules/schedule_7_v1_2_4_round_3/canonical_schedule.json",
+    "sha256": "8025e0cbab9b2a3a1ac577e8b749d984b76e80c6ee1a672226614e89930e1f7d"
+  },
+  "schedule": {
+    "id": "schedule_7_v1_2_4_extensions_proposed",
+    "version": "1.2.4",
+    "label": "Schedule 7 v1.2.4 proposed 125/157 extensions; unpublished",
+    "status": "draft"
+  },
+  "approval": {
+    "status": "proposed; not implemented",
+    "userInstruction": "Look at routes 304, 125, and 157 for extension.",
+    "scope": "125 SYR–ROC morning turn, Flight 1811 +9 minutes; 157 OMA–BHM evening turn; retain 304.",
+    "publication": "Reserved to user decision"
+  },
+  "hubBanksToAdd": [],
+  "hubBankCountOverrides": {},
+  "insertLegs": [
+    {
+      "id": "V124-R4-R125-1-SYR-ROC",
+      "origin": "SYR",
+      "destination": "ROC",
+      "departureMinute": 366,
+      "arrivalMinute": 405,
+      "route": 125
+    },
+    {
+      "id": "V124-R4-R125-2-ROC-SYR",
+      "origin": "ROC",
+      "destination": "SYR",
+      "departureMinute": 445,
+      "arrivalMinute": 484,
+      "route": 125
+    },
+    {
+      "id": "V124-R4-R157-1-OMA-BHM",
+      "origin": "OMA",
+      "destination": "BHM",
+      "departureMinute": 1230,
+      "arrivalMinute": 1358,
+      "route": 157
+    },
+    {
+      "id": "V124-R4-R157-2-BHM-OMA",
+      "origin": "BHM",
+      "destination": "OMA",
+      "departureMinute": 1403,
+      "arrivalMinute": 1531,
+      "route": 157
+    }
+  ],
+  "retimeLegs": [
+    {
+      "legId": "PVD-SYR-CRJ200-01-IN",
+      "expectedDepartureMinute": 515,
+      "expectedArrivalMinute": 578,
+      "departureMinute": 524,
+      "arrivalMinute": 587
+    }
+  ],
+  "bankAssignmentsToAdd": [
+    {
+      "legId": "V124-R4-R125-1-SYR-ROC",
+      "operation": "departure",
+      "bankId": "SYR-B1"
+    },
+    {
+      "legId": "V124-R4-R125-2-ROC-SYR",
+      "operation": "arrival",
+      "bankId": "SYR-B2"
+    }
+  ],
+  "bankAssignmentReplacements": [],
+  "operatingOverrides": []
+}
