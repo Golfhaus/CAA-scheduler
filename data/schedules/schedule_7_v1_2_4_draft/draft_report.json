@@ -1,0 +1,33 @@
+{
+  "status": "unpublished working draft",
+  "acceptedRoutes": [
+    350
+  ],
+  "proposedRoutes": [
+    126,
+    308
+  ],
+  "retainedRoutes": [
+    518
+  ],
+  "baseCanonical": "data/schedules/schedule_7_v1_2_3/canonical_schedule.json",
+  "baseSha256": "ad73563cd508331ac8d5e860a8361e2acdc3da97d0d40f3f87a5be6c31026b90",
+  "acceptedOverlay": "config/optimizations/schedule_7_v1_2_4_accepted_350.json",
+  "acceptedOverlaySha256": "383a7320ffdbfe4f7d2fd8eaf693cbff40c8d7c2953fbcdc046104d776f20111",
+  "canonicalSha256": "7cb0e93b9e9d0d2326a9cdad04ef21e978c96962062bf66f9b52e34fa513992e",
+  "summary": {
+    "flights": 1154,
+    "routes": 181,
+    "lines": 20,
+    "addedFlights": 2,
+    "unchangedReleasedFlights": 1152
+  },
+  "checks": {
+    "exactAcceptedReplay": "pass",
+    "releasedFlightPreservation": "pass",
+    "latestReleasedRegression": "49 passed against v1.2.3",
+    "physicalAndOperatingValidation": "pass; 0 effective errors; no hard-stop failures"
+  },
+  "proposal": "config/proposals/schedule_7_v1_2_4_proposed_126_308.json",
+  "publication": "Reserved to user decision"
+}

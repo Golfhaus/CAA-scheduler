@@ -1,0 +1,404 @@
+{
+  "name": "350 approved buffered evening MCI turn",
+  "plans": [
+    {
+      "route": 350,
+      "city": "MCI",
+      "legs": [
+        {
+          "id": "NEW",
+          "origin": "ELP",
+          "destination": "MCI",
+          "departureMinute": 1107,
+          "arrivalMinute": 1303
+        },
+        {
+          "id": "NEW",
+          "origin": "MCI",
+          "destination": "ELP",
+          "departureMinute": 1353,
+          "arrivalMinute": 1429
+        }
+      ]
+    }
+  ],
+  "retimings": [],
+  "banks": [],
+  "validation": {
+    "structural": "pass",
+    "operatingErrors": 0,
+    "operatingWarnings": 182,
+    "hardStopFailures": [],
+    "blocking": [],
+    "overnight": "pass",
+    "overnightFindings": [],
+    "planning": "pass",
+    "gates": "pass",
+    "standClaims": 15,
+    "standMinutes": 3771,
+    "affectedStations": [
+      {
+        "code": "PHF",
+        "name": "Newport News VA",
+        "isHub": true,
+        "isFocusCity": false,
+        "nGates": 16,
+        "nStands": 8,
+        "peakUsed": 18,
+        "standClaims": 2,
+        "standMinutes": 142
+      },
+      {
+        "code": "SYR",
+        "name": "Syracuse NY",
+        "isHub": true,
+        "isFocusCity": false,
+        "nGates": 16,
+        "nStands": 8,
+        "peakUsed": 18,
+        "standClaims": 2,
+        "standMinutes": 464
+      },
+      {
+        "code": "DAY",
+        "name": "Dayton OH",
+        "isHub": true,
+        "isFocusCity": false,
+        "nGates": 16,
+        "nStands": 8,
+        "peakUsed": 16,
+        "standClaims": 0,
+        "standMinutes": 0
+      },
+      {
+        "code": "JAX",
+        "name": "Jacksonville FL",
+        "isHub": true,
+        "isFocusCity": false,
+        "nGates": 16,
+        "nStands": 12,
+        "peakUsed": 16,
+        "standClaims": 0,
+        "standMinutes": 0
+      },
+      {
+        "code": "BHM",
+        "name": "Birmingham AL",
+        "isHub": false,
+        "isFocusCity": true,
+        "nGates": 6,
+        "nStands": 4,
+        "peakUsed": 8,
+        "standClaims": 4,
+        "standMinutes": 290
+      },
+      {
+        "code": "BWI",
+        "name": "Baltimore MD",
+        "isHub": false,
+        "isFocusCity": false,
+        "nGates": 2,
+        "nStands": 2,
+        "peakUsed": 4,
+        "standClaims": 2,
+        "standMinutes": 804
+      }
+    ]
+  },
+  "demand": {
+    "flights": [
+      {
+        "id": "V124-R350-1-ELP-MCI",
+        "route": 350,
+        "line": "AO",
+        "fleet": "CRJ700",
+        "day": 1,
+        "sequenceWithinRoute": 5,
+        "pairing": 769,
+        "flight": 2155,
+        "origin": "ELP",
+        "destination": "MCI",
+        "departure": "18:27",
+        "arrival": "21:43",
+        "departureMinute": 1107,
+        "arrivalMinute": 1303,
+        "departureClock": "18:27",
+        "arrivalClock": "21:43",
+        "blockMinutes": 136,
+        "currentPairFrequency": 3,
+        "routeLocalOd": 13.2,
+        "local": 3.3,
+        "connecting": 0,
+        "total": 3.3,
+        "oneStop": 0,
+        "twoStop": 0,
+        "groups": {},
+        "connectingFlights": [],
+        "topMarkets": []
+      },
+      {
+        "id": "V124-R350-2-MCI-ELP",
+        "route": 350,
+        "line": "AO",
+        "fleet": "CRJ700",
+        "day": 1,
+        "sequenceWithinRoute": 6,
+        "pairing": 782,
+        "flight": 2156,
+        "origin": "MCI",
+        "destination": "ELP",
+        "departure": "22:33",
+        "arrival": "23:49",
+        "departureMinute": 1353,
+        "arrivalMinute": 1429,
+        "departureClock": "22:33",
+        "arrivalClock": "23:49",
+        "blockMinutes": 136,
+        "currentPairFrequency": 3,
+        "routeLocalOd": 12.7,
+        "local": 3.175,
+        "connecting": 147.97302659656683,
+        "total": 151.14802659656684,
+        "oneStop": 130.85462501937238,
+        "twoStop": 17.118401577194444,
+        "groups": {
+          "HUB": 3.9399948850525033,
+          "FLP": 22.732442284562055,
+          "APP": 20.945233144748006,
+          "CGI": 5.545653075208367,
+          "TEX": 45.7,
+          "MAC": 1.4910785251887868,
+          "GCP": 15.14453362686178,
+          "GLC": 8.790126153056004,
+          "LEC": 7.521503732606931,
+          "OZK": 12.583869866270176,
+          "UMP": 3.578591303012223
+        },
+        "connectingFlights": [
+          {
+            "flight": 1320,
+            "origin": "CMH",
+            "destination": "MCI",
+            "departure": "19:10",
+            "arrival": "20:00"
+          },
+          {
+            "flight": 1080,
+            "origin": "BNA",
+            "destination": "MCI",
+            "departure": "18:25",
+            "arrival": "19:54"
+          },
+          {
+            "flight": 1100,
+            "origin": "HOU",
+            "destination": "MCI",
+            "departure": "18:05",
+            "arrival": "19:54"
+          },
+          {
+            "flight": 1652,
+            "origin": "ICT",
+            "destination": "MCI",
+            "departure": "19:00",
+            "arrival": "19:53"
+          },
+          {
+            "flight": 1534,
+            "origin": "LIT",
+            "destination": "MCI",
+            "departure": "18:40",
+            "arrival": "19:55"
+          },
+          {
+            "flight": 1190,
+            "origin": "MSY",
+            "destination": "MCI",
+            "departure": "17:55",
+            "arrival": "19:49"
+          },
+          {
+            "flight": 1640,
+            "origin": "OMA",
+            "destination": "MCI",
+            "departure": "20:38",
+            "arrival": "21:27"
+          },
+          {
+            "flight": 1198,
+            "origin": "PGD",
+            "destination": "MCI",
+            "departure": "18:20",
+            "arrival": "20:05"
+          },
+          {
+            "flight": 1074,
+            "origin": "PIE",
+            "destination": "MCI",
+            "departure": "18:25",
+            "arrival": "19:57"
+          },
+          {
+            "flight": 1038,
+            "origin": "SFB",
+            "destination": "MCI",
+            "departure": "19:05",
+            "arrival": "20:38"
+          },
+          {
+            "flight": 1724,
+            "origin": "SGF",
+            "destination": "MCI",
+            "departure": "19:50",
+            "arrival": "20:40"
+          },
+          {
+            "flight": 1662,
+            "origin": "TUL",
+            "destination": "MCI",
+            "departure": "18:55",
+            "arrival": "19:54"
+          },
+          {
+            "flight": 1959,
+            "origin": "MSN",
+            "destination": "MCI",
+            "departure": "17:34",
+            "arrival": "18:55"
+          },
+          {
+            "flight": 1974,
+            "origin": "BHM",
+            "destination": "MCI",
+            "departure": "18:18",
+            "arrival": "20:07"
+          },
+          {
+            "flight": 1980,
+            "origin": "BHM",
+            "destination": "MCI",
+            "departure": "19:07",
+            "arrival": "20:56"
+          },
+          {
+            "flight": 2018,
+            "origin": "CAK",
+            "destination": "MCI",
+            "departure": "19:40",
+            "arrival": "20:45"
+          },
+          {
+            "flight": 2016,
+            "origin": "CLT",
+            "destination": "MCI",
+            "departure": "18:44",
+            "arrival": "20:03"
+          },
+          {
+            "flight": 2020,
+            "origin": "PNS",
+            "destination": "MCI",
+            "departure": "18:25",
+            "arrival": "20:35"
+          },
+          {
+            "flight": 2022,
+            "origin": "IND",
+            "destination": "MCI",
+            "departure": "19:35",
+            "arrival": "20:05"
+          },
+          {
+            "flight": 2024,
+            "origin": "MKE",
+            "destination": "MCI",
+            "departure": "20:10",
+            "arrival": "21:35"
+          },
+          {
+            "flight": 2062,
+            "origin": "MKE",
+            "destination": "MCI",
+            "departure": "17:36",
+            "arrival": "19:04"
+          },
+          {
+            "flight": 2106,
+            "origin": "DAY",
+            "destination": "MCI",
+            "departure": "18:15",
+            "arrival": "19:00"
+          },
+          {
+            "flight": 2117,
+            "origin": "JAN",
+            "destination": "MCI",
+            "departure": "19:05",
+            "arrival": "20:48"
+          }
+        ],
+        "topMarkets": [
+          {
+            "origin": "HOU",
+            "destination": "ELP",
+            "opportunity": 45.7
+          },
+          {
+            "origin": "BNA",
+            "destination": "ELP",
+            "opportunity": 18.658537182631928
+          },
+          {
+            "origin": "SFB",
+            "destination": "ELP",
+            "opportunity": 11.0005965802429
+          },
+          {
+            "origin": "MSY",
+            "destination": "ELP",
+            "opportunity": 10.8
+          },
+          {
+            "origin": "PIE",
+            "destination": "ELP",
+            "opportunity": 9.59462814026377
+          },
+          {
+            "origin": "TUL",
+            "destination": "ELP",
+            "opportunity": 5.7
+          },
+          {
+            "origin": "CAK",
+            "destination": "ELP",
+            "opportunity": 3.960655325033713
+          },
+          {
+            "origin": "OMA",
+            "destination": "ELP",
+            "opportunity": 3.578591303012223
+          },
+          {
+            "origin": "CMH",
+            "destination": "ELP",
+            "opportunity": 3.5608484075732174
+          },
+          {
+            "origin": "LIT",
+            "destination": "ELP",
+            "opportunity": 3.3
+          }
+        ]
+      }
+    ],
+    "newlyConnectedMarketDemand": 68.2,
+    "marketsWithFasterBestItinerary": 6
+  },
+  "reviewAudit": {
+    "marketsWithSlowerBestItinerary": [],
+    "marketsLosingAllConnections": [],
+    "lostUnderlyingOd": 0,
+    "marketsWithFasterBestItinerary": 6
+  },
+  "changedFlightConnections": []
+}

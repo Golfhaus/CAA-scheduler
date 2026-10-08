@@ -1,0 +1,81 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "schedule-7-v1.2.4-proposed-126-308",
+  "baseSchedule": {
+    "scheduleId": "schedule_7_v1_2_4_draft",
+    "canonical": "data/schedules/schedule_7_v1_2_4_draft/canonical_schedule.json",
+    "sha256": "7cb0e93b9e9d0d2326a9cdad04ef21e978c96962062bf66f9b52e34fa513992e"
+  },
+  "schedule": {
+    "id": "schedule_7_v1_2_4_analysis",
+    "version": "1.2.4",
+    "label": "Schedule 7 v1.2.4 utilization analysis; unpublished",
+    "status": "draft"
+  },
+  "approval": {
+    "status": "proposed; not implemented",
+    "scope": "126 buffered MLB–JAX; 308 late CLT–MCI; retain 518.",
+    "publication": "Reserved to user decision"
+  },
+  "hubBanksToAdd": [],
+  "hubBankCountOverrides": {},
+  "insertLegs": [
+    {
+      "id": "V124-R126-1-MLB-JAX",
+      "origin": "MLB",
+      "destination": "JAX",
+      "departureMinute": 1200,
+      "arrivalMinute": 1252,
+      "route": 126
+    },
+    {
+      "id": "V124-R126-2-JAX-MLB",
+      "origin": "JAX",
+      "destination": "MLB",
+      "departureMinute": 1302,
+      "arrivalMinute": 1354,
+      "route": 126
+    },
+    {
+      "id": "V124-R308-1-CLT-MCI",
+      "origin": "CLT",
+      "destination": "MCI",
+      "departureMinute": 1230,
+      "arrivalMinute": 1303,
+      "route": 308
+    },
+    {
+      "id": "V124-R308-2-MCI-CLT",
+      "origin": "MCI",
+      "destination": "CLT",
+      "departureMinute": 1365,
+      "arrivalMinute": 1558,
+      "route": 308
+    }
+  ],
+  "retimeLegs": [],
+  "bankAssignmentsToAdd": [
+    {
+      "legId": "V124-R126-1-MLB-JAX",
+      "operation": "arrival",
+      "bankId": "JAX-B15"
+    },
+    {
+      "legId": "V124-R126-2-JAX-MLB",
+      "operation": "departure",
+      "bankId": "JAX-B15"
+    },
+    {
+      "legId": "V124-R308-1-CLT-MCI",
+      "operation": "arrival",
+      "bankId": "MCI-M11"
+    },
+    {
+      "legId": "V124-R308-2-MCI-CLT",
+      "operation": "departure",
+      "bankId": "MCI-M12"
+    }
+  ],
+  "bankAssignmentReplacements": [],
+  "operatingOverrides": []
+}

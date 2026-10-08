@@ -1,0 +1,56 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "schedule-7-v1.2.4-accepted-350",
+  "baseSchedule": {
+    "scheduleId": "schedule_7_v1_2_3",
+    "canonical": "data/schedules/schedule_7_v1_2_3/canonical_schedule.json",
+    "sha256": "ad73563cd508331ac8d5e860a8361e2acdc3da97d0d40f3f87a5be6c31026b90"
+  },
+  "schedule": {
+    "id": "schedule_7_v1_2_4_draft",
+    "version": "1.2.4",
+    "label": "Schedule 7 v1.2.4 working draft; unpublished",
+    "status": "draft"
+  },
+  "approval": {
+    "status": "approved for draft implementation; unpublished",
+    "userInstruction": "Begin work on 1.2.4. Implement the addition to route 350; ELP's closest other MCI flight is midday.",
+    "scope": "Route 350 ELP–MCI evening round trip; existing clocks retained.",
+    "publication": "Reserved to user decision"
+  },
+  "hubBanksToAdd": [],
+  "hubBankCountOverrides": {},
+  "insertLegs": [
+    {
+      "id": "V124-R350-1-ELP-MCI",
+      "origin": "ELP",
+      "destination": "MCI",
+      "departureMinute": 1107,
+      "arrivalMinute": 1303,
+      "route": 350
+    },
+    {
+      "id": "V124-R350-2-MCI-ELP",
+      "origin": "MCI",
+      "destination": "ELP",
+      "departureMinute": 1353,
+      "arrivalMinute": 1429,
+      "route": 350
+    }
+  ],
+  "retimeLegs": [],
+  "bankAssignmentsToAdd": [
+    {
+      "legId": "V124-R350-1-ELP-MCI",
+      "operation": "arrival",
+      "bankId": "MCI-M11"
+    },
+    {
+      "legId": "V124-R350-2-MCI-ELP",
+      "operation": "departure",
+      "bankId": "MCI-M12"
+    }
+  ],
+  "bankAssignmentReplacements": [],
+  "operatingOverrides": []
+}
