@@ -5824,26 +5824,6 @@
       "legId": "V124-R350-2-MCI-ELP",
       "operation": "departure",
       "bankId": "MCI-M12"
-    },
-    {
-      "legId": "V124-R126-1-MLB-JAX",
-      "operation": "arrival",
-      "bankId": "JAX-B15"
-    },
-    {
-      "legId": "V124-R126-2-JAX-MLB",
-      "operation": "departure",
-      "bankId": "JAX-B15"
-    },
-    {
-      "legId": "V124-R308-1-CLT-MCI",
-      "operation": "arrival",
-      "bankId": "MCI-M11"
-    },
-    {
-      "legId": "V124-R308-2-MCI-CLT",
-      "operation": "departure",
-      "bankId": "MCI-M12"
     }
   ],
   "cities": [
@@ -26590,70 +26570,6 @@
       "arrival": "23:49",
       "departureMinute": 1353,
       "arrivalMinute": 1429
-    },
-    {
-      "id": "V124-R126-1-MLB-JAX",
-      "route": 126,
-      "line": "AD",
-      "fleet": "CRJ200",
-      "day": 16,
-      "sequenceWithinRoute": 6,
-      "pairing": 387,
-      "flight": 2157,
-      "origin": "MLB",
-      "destination": "JAX",
-      "departure": "20:00",
-      "arrival": "20:52",
-      "departureMinute": 1200,
-      "arrivalMinute": 1252
-    },
-    {
-      "id": "V124-R126-2-JAX-MLB",
-      "route": 126,
-      "line": "AD",
-      "fleet": "CRJ200",
-      "day": 16,
-      "sequenceWithinRoute": 7,
-      "pairing": 386,
-      "flight": 2158,
-      "origin": "JAX",
-      "destination": "MLB",
-      "departure": "21:42",
-      "arrival": "22:34",
-      "departureMinute": 1302,
-      "arrivalMinute": 1354
-    },
-    {
-      "id": "V124-R308-1-CLT-MCI",
-      "route": 308,
-      "line": "AA",
-      "fleet": "CRJ700",
-      "day": 8,
-      "sequenceWithinRoute": 7,
-      "pairing": 458,
-      "flight": 2159,
-      "origin": "CLT",
-      "destination": "MCI",
-      "departure": "20:30",
-      "arrival": "21:43",
-      "departureMinute": 1230,
-      "arrivalMinute": 1303
-    },
-    {
-      "id": "V124-R308-2-MCI-CLT",
-      "route": 308,
-      "line": "AA",
-      "fleet": "CRJ700",
-      "day": 8,
-      "sequenceWithinRoute": 8,
-      "pairing": 536,
-      "flight": 2160,
-      "origin": "MCI",
-      "destination": "CLT",
-      "departure": "22:45",
-      "arrival": "01:58",
-      "departureMinute": 1365,
-      "arrivalMinute": 1558
     }
   ]
 }

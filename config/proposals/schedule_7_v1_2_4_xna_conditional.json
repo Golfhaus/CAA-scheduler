@@ -1,0 +1,55 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "schedule-7-v1.2.4-xna-overnight-analysis",
+  "baseSchedule": {
+    "scheduleId": "schedule_7_v1_2_4_draft",
+    "canonical": "data/schedules/schedule_7_v1_2_4_draft/canonical_schedule.json",
+    "sha256": "c5cbe3d514448d9bc2da93073bf7b634d4961939bd3946874367b317584438f5"
+  },
+  "schedule": {
+    "id": "schedule_7_v1_2_4_xna_analysis",
+    "version": "1.2.4",
+    "label": "Schedule 7 v1.2.4 XNA RON analysis; unpublished",
+    "status": "draft"
+  },
+  "approval": {
+    "status": "conditional analysis; blocked by rolling maintenance-base RON rule",
+    "publication": "Reserved to user decision",
+    "scope": "116 MCI–XNA 21:25; 117 XNA–MCI 05:30"
+  },
+  "hubBanksToAdd": [],
+  "hubBankCountOverrides": {},
+  "insertLegs": [
+    {
+      "id": "V124-XNA-R116-1-MCI-XNA",
+      "origin": "MCI",
+      "destination": "XNA",
+      "departureMinute": 1285,
+      "arrivalMinute": 1342,
+      "route": 116
+    },
+    {
+      "id": "V124-XNA-R117-1-XNA-MCI",
+      "origin": "XNA",
+      "destination": "MCI",
+      "departureMinute": 330,
+      "arrivalMinute": 387,
+      "route": 117
+    }
+  ],
+  "retimeLegs": [],
+  "bankAssignmentsToAdd": [
+    {
+      "legId": "V124-XNA-R116-1-MCI-XNA",
+      "operation": "departure",
+      "bankId": "MCI-M11"
+    },
+    {
+      "legId": "V124-XNA-R117-1-XNA-MCI",
+      "operation": "arrival",
+      "bankId": "MCI-B2"
+    }
+  ],
+  "bankAssignmentReplacements": [],
+  "operatingOverrides": []
+}

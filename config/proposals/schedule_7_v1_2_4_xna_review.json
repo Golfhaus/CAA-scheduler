@@ -1,0 +1,1376 @@
+{
+  "baseCanonical": "data/schedules/schedule_7_v1_2_4_draft/canonical_schedule.json",
+  "baseSha256": "c5cbe3d514448d9bc2da93073bf7b634d4961939bd3946874367b317584438f5",
+  "status": "XNA scenarios analysis only; no 116/117 changes implemented",
+  "model": "Pinned O-D, seat-uncapped full-capture relative-choice opportunities; not forecasts",
+  "baselineMaintenance": {
+    "line": "AD",
+    "maximumConsecutiveNonTargetRons": 9,
+    "limit": 10,
+    "grace": 1,
+    "longestRun": [
+      {
+        "day": 29,
+        "route": 139,
+        "city": "TRI",
+        "targetRon": false,
+        "hubOrFocusRon": false
+      },
+      {
+        "day": 30,
+        "route": 140,
+        "city": "DLH",
+        "targetRon": false,
+        "hubOrFocusRon": false
+      },
+      {
+        "day": 31,
+        "route": 141,
+        "city": "EYW",
+        "targetRon": false,
+        "hubOrFocusRon": false
+      },
+      {
+        "day": 32,
+        "route": 142,
+        "city": "CAE",
+        "targetRon": false,
+        "hubOrFocusRon": false
+      },
+      {
+        "day": 33,
+        "route": 143,
+        "city": "MYR",
+        "targetRon": false,
+        "hubOrFocusRon": false
+      },
+      {
+        "day": 34,
+        "route": 144,
+        "city": "PWM",
+        "targetRon": false,
+        "hubOrFocusRon": false
+      },
+      {
+        "day": 35,
+        "route": 145,
+        "city": "ORH",
+        "targetRon": false,
+        "hubOrFocusRon": false
+      },
+      {
+        "day": 36,
+        "route": 146,
+        "city": "MSN",
+        "targetRon": false,
+        "hubOrFocusRon": false
+      },
+      {
+        "day": 37,
+        "route": 147,
+        "city": "MHT",
+        "targetRon": false,
+        "hubOrFocusRon": false
+      }
+    ],
+    "targetRons": [
+      {
+        "day": 6,
+        "route": 116,
+        "city": "MCI",
+        "targetRon": true,
+        "hubOrFocusRon": true
+      },
+      {
+        "day": 15,
+        "route": 125,
+        "city": "DAY",
+        "targetRon": true,
+        "hubOrFocusRon": true
+      },
+      {
+        "day": 23,
+        "route": 133,
+        "city": "MCI",
+        "targetRon": true,
+        "hubOrFocusRon": true
+      },
+      {
+        "day": 25,
+        "route": 135,
+        "city": "MCI",
+        "targetRon": true,
+        "hubOrFocusRon": true
+      },
+      {
+        "day": 26,
+        "route": 136,
+        "city": "DAY",
+        "targetRon": true,
+        "hubOrFocusRon": true
+      },
+      {
+        "day": 28,
+        "route": 138,
+        "city": "DAY",
+        "targetRon": true,
+        "hubOrFocusRon": true
+      },
+      {
+        "day": 38,
+        "route": 148,
+        "city": "DAY",
+        "targetRon": true,
+        "hubOrFocusRon": true
+      }
+    ],
+    "hubOrFocusRons": [
+      {
+        "day": 6,
+        "route": 116,
+        "city": "MCI",
+        "targetRon": true,
+        "hubOrFocusRon": true
+      },
+      {
+        "day": 15,
+        "route": 125,
+        "city": "DAY",
+        "targetRon": true,
+        "hubOrFocusRon": true
+      },
+      {
+        "day": 23,
+        "route": 133,
+        "city": "MCI",
+        "targetRon": true,
+        "hubOrFocusRon": true
+      },
+      {
+        "day": 25,
+        "route": 135,
+        "city": "MCI",
+        "targetRon": true,
+        "hubOrFocusRon": true
+      },
+      {
+        "day": 26,
+        "route": 136,
+        "city": "DAY",
+        "targetRon": true,
+        "hubOrFocusRon": true
+      },
+      {
+        "day": 28,
+        "route": 138,
+        "city": "DAY",
+        "targetRon": true,
+        "hubOrFocusRon": true
+      },
+      {
+        "day": 38,
+        "route": 148,
+        "city": "DAY",
+        "targetRon": true,
+        "hubOrFocusRon": true
+      }
+    ]
+  },
+  "trials": [
+    {
+      "name": "116 MCI–XNA 21:25; 117 XNA–MCI 05:30",
+      "plans": [
+        {
+          "route": 116,
+          "legs": [
+            {
+              "id": "NEW",
+              "origin": "MCI",
+              "destination": "XNA",
+              "departureMinute": 1285,
+              "arrivalMinute": 1342
+            }
+          ]
+        },
+        {
+          "route": 117,
+          "legs": [
+            {
+              "id": "NEW",
+              "origin": "XNA",
+              "destination": "MCI",
+              "departureMinute": 330,
+              "arrivalMinute": 387
+            }
+          ]
+        }
+      ],
+      "retimings": [],
+      "validation": {
+        "structural": "pass",
+        "operatingErrors": 1,
+        "operatingWarnings": 182,
+        "hardStopFailures": [],
+        "blocking": [
+          {
+            "check": "rolling_ron_window",
+            "findings": [
+              {
+                "id": "AD",
+                "message": "Line AD has 16 consecutive days without a target-city RON",
+                "evidence": {
+                  "line": "AD",
+                  "longestRunWithoutTargetRon": 16,
+                  "limit": 10,
+                  "grace": 1
+                }
+              }
+            ]
+          }
+        ],
+        "overnight": "pass",
+        "overnightFindings": [],
+        "planning": "pass",
+        "gates": "pass",
+        "standClaims": 16,
+        "standMinutes": 3717,
+        "affectedStations": [
+          {
+            "code": "PHF",
+            "name": "Newport News VA",
+            "isHub": true,
+            "isFocusCity": false,
+            "nGates": 16,
+            "nStands": 8,
+            "peakUsed": 18,
+            "standClaims": 2,
+            "standMinutes": 142
+          },
+          {
+            "code": "SYR",
+            "name": "Syracuse NY",
+            "isHub": true,
+            "isFocusCity": false,
+            "nGates": 16,
+            "nStands": 8,
+            "peakUsed": 18,
+            "standClaims": 2,
+            "standMinutes": 464
+          },
+          {
+            "code": "DAY",
+            "name": "Dayton OH",
+            "isHub": true,
+            "isFocusCity": false,
+            "nGates": 16,
+            "nStands": 8,
+            "peakUsed": 16,
+            "standClaims": 0,
+            "standMinutes": 0
+          },
+          {
+            "code": "JAX",
+            "name": "Jacksonville FL",
+            "isHub": true,
+            "isFocusCity": false,
+            "nGates": 16,
+            "nStands": 12,
+            "peakUsed": 16,
+            "standClaims": 0,
+            "standMinutes": 0
+          },
+          {
+            "code": "BHM",
+            "name": "Birmingham AL",
+            "isHub": false,
+            "isFocusCity": true,
+            "nGates": 6,
+            "nStands": 4,
+            "peakUsed": 8,
+            "standClaims": 4,
+            "standMinutes": 290
+          },
+          {
+            "code": "BWI",
+            "name": "Baltimore MD",
+            "isHub": false,
+            "isFocusCity": false,
+            "nGates": 2,
+            "nStands": 2,
+            "peakUsed": 4,
+            "standClaims": 2,
+            "standMinutes": 804
+          }
+        ]
+      },
+      "maintenance": {
+        "line": "AD",
+        "maximumConsecutiveNonTargetRons": 16,
+        "limit": 10,
+        "grace": 1,
+        "longestRun": [
+          {
+            "day": 39,
+            "route": 149,
+            "city": "GRR",
+            "targetRon": false,
+            "hubOrFocusRon": false
+          },
+          {
+            "day": 40,
+            "route": 150,
+            "city": "ALB",
+            "targetRon": false,
+            "hubOrFocusRon": false
+          },
+          {
+            "day": 1,
+            "route": 111,
+            "city": "ACY",
+            "targetRon": false,
+            "hubOrFocusRon": false
+          },
+          {
+            "day": 2,
+            "route": 112,
+            "city": "AVP",
+            "targetRon": false,
+            "hubOrFocusRon": false
+          },
+          {
+            "day": 3,
+            "route": 113,
+            "city": "AGS",
+            "targetRon": false,
+            "hubOrFocusRon": false
+          },
+          {
+            "day": 4,
+            "route": 114,
+            "city": "ROA",
+            "targetRon": false,
+            "hubOrFocusRon": false
+          },
+          {
+            "day": 5,
+            "route": 115,
+            "city": "GNV",
+            "targetRon": false,
+            "hubOrFocusRon": false
+          },
+          {
+            "day": 6,
+            "route": 116,
+            "city": "XNA",
+            "targetRon": false,
+            "hubOrFocusRon": false
+          },
+          {
+            "day": 7,
+            "route": 117,
+            "city": "PIA",
+            "targetRon": false,
+            "hubOrFocusRon": false
+          },
+          {
+            "day": 8,
+            "route": 118,
+            "city": "MFE",
+            "targetRon": false,
+            "hubOrFocusRon": false
+          },
+          {
+            "day": 9,
+            "route": 119,
+            "city": "DAB",
+            "targetRon": false,
+            "hubOrFocusRon": false
+          },
+          {
+            "day": 10,
+            "route": 120,
+            "city": "ISP",
+            "targetRon": false,
+            "hubOrFocusRon": false
+          },
+          {
+            "day": 11,
+            "route": 121,
+            "city": "PWM",
+            "targetRon": false,
+            "hubOrFocusRon": false
+          },
+          {
+            "day": 12,
+            "route": 122,
+            "city": "SWF",
+            "targetRon": false,
+            "hubOrFocusRon": false
+          },
+          {
+            "day": 13,
+            "route": 123,
+            "city": "ILM",
+            "targetRon": false,
+            "hubOrFocusRon": false
+          },
+          {
+            "day": 14,
+            "route": 124,
+            "city": "HVN",
+            "targetRon": false,
+            "hubOrFocusRon": false
+          }
+        ],
+        "targetRons": [
+          {
+            "day": 15,
+            "route": 125,
+            "city": "DAY",
+            "targetRon": true,
+            "hubOrFocusRon": true
+          },
+          {
+            "day": 23,
+            "route": 133,
+            "city": "MCI",
+            "targetRon": true,
+            "hubOrFocusRon": true
+          },
+          {
+            "day": 25,
+            "route": 135,
+            "city": "MCI",
+            "targetRon": true,
+            "hubOrFocusRon": true
+          },
+          {
+            "day": 26,
+            "route": 136,
+            "city": "DAY",
+            "targetRon": true,
+            "hubOrFocusRon": true
+          },
+          {
+            "day": 28,
+            "route": 138,
+            "city": "DAY",
+            "targetRon": true,
+            "hubOrFocusRon": true
+          },
+          {
+            "day": 38,
+            "route": 148,
+            "city": "DAY",
+            "targetRon": true,
+            "hubOrFocusRon": true
+          }
+        ],
+        "hubOrFocusRons": [
+          {
+            "day": 15,
+            "route": 125,
+            "city": "DAY",
+            "targetRon": true,
+            "hubOrFocusRon": true
+          },
+          {
+            "day": 23,
+            "route": 133,
+            "city": "MCI",
+            "targetRon": true,
+            "hubOrFocusRon": true
+          },
+          {
+            "day": 25,
+            "route": 135,
+            "city": "MCI",
+            "targetRon": true,
+            "hubOrFocusRon": true
+          },
+          {
+            "day": 26,
+            "route": 136,
+            "city": "DAY",
+            "targetRon": true,
+            "hubOrFocusRon": true
+          },
+          {
+            "day": 28,
+            "route": 138,
+            "city": "DAY",
+            "targetRon": true,
+            "hubOrFocusRon": true
+          },
+          {
+            "day": 38,
+            "route": 148,
+            "city": "DAY",
+            "targetRon": true,
+            "hubOrFocusRon": true
+          }
+        ]
+      },
+      "demand": {
+        "flights": [
+          {
+            "id": "V124-XNA-R116-1-MCI-XNA",
+            "route": 116,
+            "line": "AD",
+            "fleet": "CRJ200",
+            "day": 6,
+            "sequenceWithinRoute": 8,
+            "pairing": 131,
+            "flight": 2161,
+            "origin": "MCI",
+            "destination": "XNA",
+            "departure": "21:25",
+            "arrival": "22:22",
+            "departureMinute": 1285,
+            "arrivalMinute": 1342,
+            "departureClock": "21:25",
+            "arrivalClock": "22:22",
+            "blockMinutes": 57,
+            "currentPairFrequency": 2,
+            "routeLocalOd": 0.6,
+            "local": 0.19999999999999998,
+            "connecting": 139.35844189598177,
+            "total": 139.55844189598176,
+            "oneStop": 118.32108783146158,
+            "twoStop": 21.037354064520144,
+            "groups": {
+              "GCP": 11.503139384955828,
+              "FLP": 29.72614909427966,
+              "HUB": 3.0845341877777455,
+              "GLC": 19.23062712759995,
+              "APP": 18.324938518404895,
+              "TEX": 37.086354928286546,
+              "CGI": 6.994504084695452,
+              "LEC": 9.639816962399458,
+              "UMP": 0.28849239432865287,
+              "OZK": 0.14827341412707268,
+              "MAC": 3.3316117991264704
+            },
+            "connectingFlights": [
+              {
+                "flight": 1320,
+                "origin": "CMH",
+                "destination": "MCI",
+                "departure": "19:10",
+                "arrival": "20:00"
+              },
+              {
+                "flight": 1680,
+                "origin": "FSD",
+                "destination": "MCI",
+                "departure": "17:05",
+                "arrival": "18:16"
+              },
+              {
+                "flight": 1080,
+                "origin": "BNA",
+                "destination": "MCI",
+                "departure": "18:25",
+                "arrival": "19:54"
+              },
+              {
+                "flight": 1100,
+                "origin": "HOU",
+                "destination": "MCI",
+                "departure": "18:05",
+                "arrival": "19:54"
+              },
+              {
+                "flight": 1652,
+                "origin": "ICT",
+                "destination": "MCI",
+                "departure": "19:00",
+                "arrival": "19:53"
+              },
+              {
+                "flight": 1524,
+                "origin": "LBB",
+                "destination": "MCI",
+                "departure": "18:10",
+                "arrival": "19:54"
+              },
+              {
+                "flight": 1580,
+                "origin": "MAF",
+                "destination": "MCI",
+                "departure": "16:15",
+                "arrival": "18:13"
+              },
+              {
+                "flight": 1590,
+                "origin": "MFE",
+                "destination": "MCI",
+                "departure": "15:40",
+                "arrival": "18:15"
+              },
+              {
+                "flight": 1189,
+                "origin": "MSY",
+                "destination": "MCI",
+                "departure": "16:30",
+                "arrival": "18:24"
+              },
+              {
+                "flight": 1190,
+                "origin": "MSY",
+                "destination": "MCI",
+                "departure": "17:55",
+                "arrival": "19:49"
+              },
+              {
+                "flight": 1198,
+                "origin": "PGD",
+                "destination": "MCI",
+                "departure": "18:20",
+                "arrival": "20:05"
+              },
+              {
+                "flight": 1073,
+                "origin": "PIE",
+                "destination": "MCI",
+                "departure": "16:35",
+                "arrival": "18:07"
+              },
+              {
+                "flight": 1074,
+                "origin": "PIE",
+                "destination": "MCI",
+                "departure": "18:25",
+                "arrival": "19:57"
+              },
+              {
+                "flight": 1346,
+                "origin": "PNS",
+                "destination": "MCI",
+                "departure": "16:10",
+                "arrival": "18:15"
+              },
+              {
+                "flight": 1034,
+                "origin": "RFD",
+                "destination": "MCI",
+                "departure": "17:05",
+                "arrival": "18:19"
+              },
+              {
+                "flight": 1038,
+                "origin": "SFB",
+                "destination": "MCI",
+                "departure": "19:05",
+                "arrival": "20:38"
+              },
+              {
+                "flight": 1959,
+                "origin": "MSN",
+                "destination": "MCI",
+                "departure": "17:34",
+                "arrival": "18:55"
+              },
+              {
+                "flight": 1970,
+                "origin": "ATW",
+                "destination": "MCI",
+                "departure": "16:38",
+                "arrival": "18:05"
+              },
+              {
+                "flight": 1974,
+                "origin": "BHM",
+                "destination": "MCI",
+                "departure": "18:18",
+                "arrival": "20:07"
+              },
+              {
+                "flight": 2018,
+                "origin": "CAK",
+                "destination": "MCI",
+                "departure": "19:40",
+                "arrival": "20:45"
+              },
+              {
+                "flight": 2016,
+                "origin": "CLT",
+                "destination": "MCI",
+                "departure": "18:44",
+                "arrival": "20:03"
+              },
+              {
+                "flight": 2020,
+                "origin": "PNS",
+                "destination": "MCI",
+                "departure": "18:25",
+                "arrival": "20:35"
+              },
+              {
+                "flight": 2022,
+                "origin": "IND",
+                "destination": "MCI",
+                "departure": "19:35",
+                "arrival": "20:05"
+              },
+              {
+                "flight": 2001,
+                "origin": "AUS",
+                "destination": "MCI",
+                "departure": "18:10",
+                "arrival": "19:57"
+              },
+              {
+                "flight": 2062,
+                "origin": "MKE",
+                "destination": "MCI",
+                "departure": "17:36",
+                "arrival": "19:04"
+              },
+              {
+                "flight": 2108,
+                "origin": "BLV",
+                "destination": "MCI",
+                "departure": "17:10",
+                "arrival": "18:15"
+              },
+              {
+                "flight": 2106,
+                "origin": "DAY",
+                "destination": "MCI",
+                "departure": "18:15",
+                "arrival": "19:00"
+              },
+              {
+                "flight": 2117,
+                "origin": "JAN",
+                "destination": "MCI",
+                "departure": "19:05",
+                "arrival": "20:48"
+              }
+            ],
+            "topMarkets": [
+              {
+                "origin": "HOU",
+                "destination": "XNA",
+                "opportunity": 24.1
+              },
+              {
+                "origin": "BNA",
+                "destination": "XNA",
+                "opportunity": 12.924938518404893
+              },
+              {
+                "origin": "SFB",
+                "destination": "XNA",
+                "opportunity": 12.142513803055818
+              },
+              {
+                "origin": "AUS",
+                "destination": "XNA",
+                "opportunity": 11.250541516245487
+              },
+              {
+                "origin": "PIE",
+                "destination": "XNA",
+                "opportunity": 10.79144839687029
+              },
+              {
+                "origin": "RFD",
+                "destination": "XNA",
+                "opportunity": 7.713971171584907
+              },
+              {
+                "origin": "IND",
+                "destination": "XNA",
+                "opportunity": 7.000000000000001
+              },
+              {
+                "origin": "MSY",
+                "destination": "XNA",
+                "opportunity": 6.353650400287471
+              },
+              {
+                "origin": "CLT",
+                "destination": "XNA",
+                "opportunity": 5.992437565745697
+              },
+              {
+                "origin": "CMH",
+                "destination": "XNA",
+                "opportunity": 5.32668171710784
+              }
+            ]
+          },
+          {
+            "id": "V124-XNA-R117-1-XNA-MCI",
+            "route": 117,
+            "line": "AD",
+            "fleet": "CRJ200",
+            "day": 7,
+            "sequenceWithinRoute": 1,
+            "pairing": 132,
+            "flight": 2162,
+            "origin": "XNA",
+            "destination": "MCI",
+            "departure": "05:30",
+            "arrival": "06:27",
+            "departureMinute": 330,
+            "arrivalMinute": 387,
+            "departureClock": "05:30",
+            "arrivalClock": "06:27",
+            "blockMinutes": 57,
+            "currentPairFrequency": 2,
+            "routeLocalOd": 0.6,
+            "local": 0.19999999999999998,
+            "connecting": 30.161080826662733,
+            "total": 30.361080826662732,
+            "oneStop": 28.774680717437867,
+            "twoStop": 1.3864001092248661,
+            "groups": {
+              "GCP": 0.04195742839369955,
+              "FLP": 11.439373555292468,
+              "TEX": 2.15377318113262,
+              "UMP": 4.772711065756137,
+              "OZK": 0.05303269491467691,
+              "GLC": 8.100232901173134,
+              "APP": 3.5999999999999996
+            },
+            "connectingFlights": [
+              {
+                "flight": 1411,
+                "origin": "MCI",
+                "destination": "BHM",
+                "departure": "07:15",
+                "arrival": "09:01"
+              },
+              {
+                "flight": 1355,
+                "origin": "MCI",
+                "destination": "BLV",
+                "departure": "07:15",
+                "arrival": "08:19"
+              },
+              {
+                "flight": 1716,
+                "origin": "MCI",
+                "destination": "CID",
+                "departure": "08:55",
+                "arrival": "09:56"
+              },
+              {
+                "flight": 1549,
+                "origin": "MCI",
+                "destination": "CRP",
+                "departure": "08:55",
+                "arrival": "11:14"
+              },
+              {
+                "flight": 1689,
+                "origin": "MCI",
+                "destination": "DLH",
+                "departure": "07:15",
+                "arrival": "08:57"
+              },
+              {
+                "flight": 1731,
+                "origin": "MCI",
+                "destination": "DSM",
+                "departure": "08:55",
+                "arrival": "09:45"
+              },
+              {
+                "flight": 1406,
+                "origin": "MCI",
+                "destination": "ELP",
+                "departure": "08:55",
+                "arrival": "10:11"
+              },
+              {
+                "flight": 1563,
+                "origin": "MCI",
+                "destination": "FAR",
+                "departure": "08:55",
+                "arrival": "10:37"
+              },
+              {
+                "flight": 1057,
+                "origin": "MCI",
+                "destination": "FLL",
+                "departure": "07:15",
+                "arrival": "11:09"
+              },
+              {
+                "flight": 1676,
+                "origin": "MCI",
+                "destination": "FSD",
+                "departure": "08:55",
+                "arrival": "10:06"
+              },
+              {
+                "flight": 1648,
+                "origin": "MCI",
+                "destination": "ICT",
+                "departure": "10:15",
+                "arrival": "11:08"
+              },
+              {
+                "flight": 1221,
+                "origin": "MCI",
+                "destination": "IND",
+                "departure": "07:20",
+                "arrival": "09:45"
+              },
+              {
+                "flight": 1587,
+                "origin": "MCI",
+                "destination": "MFE",
+                "departure": "08:55",
+                "arrival": "11:30"
+              },
+              {
+                "flight": 1261,
+                "origin": "MCI",
+                "destination": "MKE",
+                "departure": "07:15",
+                "arrival": "08:39"
+              },
+              {
+                "flight": 1634,
+                "origin": "MCI",
+                "destination": "OMA",
+                "departure": "07:15",
+                "arrival": "08:04"
+              },
+              {
+                "flight": 1635,
+                "origin": "MCI",
+                "destination": "OMA",
+                "departure": "08:55",
+                "arrival": "09:44"
+              },
+              {
+                "flight": 1764,
+                "origin": "MCI",
+                "destination": "PIA",
+                "departure": "08:55",
+                "arrival": "10:02"
+              },
+              {
+                "flight": 1961,
+                "origin": "MCI",
+                "destination": "SDF",
+                "departure": "09:04",
+                "arrival": "11:39"
+              },
+              {
+                "flight": 1967,
+                "origin": "MCI",
+                "destination": "MSN",
+                "departure": "09:45",
+                "arrival": "11:03"
+              },
+              {
+                "flight": 2058,
+                "origin": "MCI",
+                "destination": "ATW",
+                "departure": "09:45",
+                "arrival": "11:17"
+              }
+            ],
+            "topMarkets": [
+              {
+                "origin": "XNA",
+                "destination": "FLL",
+                "opportunity": 10.94590690504571
+              },
+              {
+                "origin": "XNA",
+                "destination": "IND",
+                "opportunity": 4.09685098631733
+              },
+              {
+                "origin": "XNA",
+                "destination": "SDF",
+                "opportunity": 3.5999999999999996
+              },
+              {
+                "origin": "XNA",
+                "destination": "MSN",
+                "opportunity": 2.4
+              },
+              {
+                "origin": "XNA",
+                "destination": "BLV",
+                "opportunity": 1.2
+              },
+              {
+                "origin": "XNA",
+                "destination": "OMA",
+                "opportunity": 1.0466810936499156
+              },
+              {
+                "origin": "XNA",
+                "destination": "MKE",
+                "opportunity": 0.9685402032168292
+              },
+              {
+                "origin": "XNA",
+                "destination": "ELP",
+                "opportunity": 0.9301804939510967
+              },
+              {
+                "origin": "XNA",
+                "destination": "CRP",
+                "opportunity": 0.7395964102298074
+              },
+              {
+                "origin": "XNA",
+                "destination": "ATW",
+                "opportunity": 0.6348417116389751
+              }
+            ]
+          }
+        ],
+        "newlyConnectedMarketDemand": 47.1,
+        "marketsWithFasterBestItinerary": 21
+      },
+      "reviewAudit": {
+        "marketsWithSlowerBestItinerary": [],
+        "marketsLosingAllConnections": [],
+        "lostUnderlyingOd": 0,
+        "marketsWithFasterBestItinerary": 21
+      }
+    },
+    {
+      "name": "XNA overnight plus replacement 115 JAX maintenance RON",
+      "plans": [
+        {
+          "route": 116,
+          "legs": [
+            {
+              "id": "NEW",
+              "origin": "MCI",
+              "destination": "XNA",
+              "departureMinute": 1285,
+              "arrivalMinute": 1342
+            }
+          ]
+        },
+        {
+          "route": 117,
+          "legs": [
+            {
+              "id": "NEW",
+              "origin": "XNA",
+              "destination": "MCI",
+              "departureMinute": 330,
+              "arrivalMinute": 387
+            }
+          ]
+        },
+        {
+          "route": 115,
+          "legs": [
+            {
+              "id": "NEW",
+              "origin": "GNV",
+              "destination": "JAX",
+              "departureMinute": 1242,
+              "arrivalMinute": 1279
+            }
+          ]
+        },
+        {
+          "route": 116,
+          "legs": [
+            {
+              "id": "NEW",
+              "origin": "JAX",
+              "destination": "GNV",
+              "departureMinute": 270,
+              "arrivalMinute": 307
+            }
+          ]
+        }
+      ],
+      "retimings": [
+        {
+          "legId": "GNV-JAX-CRJ200-01-OUT",
+          "expectedDepartureMinute": 310,
+          "expectedArrivalMinute": 347,
+          "departureMinute": 347,
+          "arrivalMinute": 384
+        }
+      ],
+      "validation": {
+        "structural": "pass",
+        "operatingErrors": 1,
+        "operatingWarnings": 183,
+        "hardStopFailures": [],
+        "blocking": [
+          {
+            "check": "destination_ron_coverage",
+            "findings": [
+              {
+                "id": "GNV",
+                "message": "Destination GNV has no terminating route",
+                "evidence": {
+                  "city": "GNV",
+                  "terminators": 0
+                }
+              }
+            ]
+          }
+        ],
+        "overnight": "pass",
+        "overnightFindings": [],
+        "planning": "pass",
+        "gates": "pass",
+        "standClaims": 16,
+        "standMinutes": 3717,
+        "affectedStations": [
+          {
+            "code": "PHF",
+            "name": "Newport News VA",
+            "isHub": true,
+            "isFocusCity": false,
+            "nGates": 16,
+            "nStands": 8,
+            "peakUsed": 18,
+            "standClaims": 2,
+            "standMinutes": 142
+          },
+          {
+            "code": "SYR",
+            "name": "Syracuse NY",
+            "isHub": true,
+            "isFocusCity": false,
+            "nGates": 16,
+            "nStands": 8,
+            "peakUsed": 18,
+            "standClaims": 2,
+            "standMinutes": 464
+          },
+          {
+            "code": "DAY",
+            "name": "Dayton OH",
+            "isHub": true,
+            "isFocusCity": false,
+            "nGates": 16,
+            "nStands": 8,
+            "peakUsed": 16,
+            "standClaims": 0,
+            "standMinutes": 0
+          },
+          {
+            "code": "JAX",
+            "name": "Jacksonville FL",
+            "isHub": true,
+            "isFocusCity": false,
+            "nGates": 16,
+            "nStands": 12,
+            "peakUsed": 16,
+            "standClaims": 0,
+            "standMinutes": 0
+          },
+          {
+            "code": "BHM",
+            "name": "Birmingham AL",
+            "isHub": false,
+            "isFocusCity": true,
+            "nGates": 6,
+            "nStands": 4,
+            "peakUsed": 8,
+            "standClaims": 4,
+            "standMinutes": 290
+          },
+          {
+            "code": "BWI",
+            "name": "Baltimore MD",
+            "isHub": false,
+            "isFocusCity": false,
+            "nGates": 2,
+            "nStands": 2,
+            "peakUsed": 4,
+            "standClaims": 2,
+            "standMinutes": 804
+          }
+        ]
+      },
+      "maintenance": {
+        "line": "AD",
+        "maximumConsecutiveNonTargetRons": 9,
+        "limit": 10,
+        "grace": 1,
+        "longestRun": [
+          {
+            "day": 6,
+            "route": 116,
+            "city": "XNA",
+            "targetRon": false,
+            "hubOrFocusRon": false
+          },
+          {
+            "day": 7,
+            "route": 117,
+            "city": "PIA",
+            "targetRon": false,
+            "hubOrFocusRon": false
+          },
+          {
+            "day": 8,
+            "route": 118,
+            "city": "MFE",
+            "targetRon": false,
+            "hubOrFocusRon": false
+          },
+          {
+            "day": 9,
+            "route": 119,
+            "city": "DAB",
+            "targetRon": false,
+            "hubOrFocusRon": false
+          },
+          {
+            "day": 10,
+            "route": 120,
+            "city": "ISP",
+            "targetRon": false,
+            "hubOrFocusRon": false
+          },
+          {
+            "day": 11,
+            "route": 121,
+            "city": "PWM",
+            "targetRon": false,
+            "hubOrFocusRon": false
+          },
+          {
+            "day": 12,
+            "route": 122,
+            "city": "SWF",
+            "targetRon": false,
+            "hubOrFocusRon": false
+          },
+          {
+            "day": 13,
+            "route": 123,
+            "city": "ILM",
+            "targetRon": false,
+            "hubOrFocusRon": false
+          },
+          {
+            "day": 14,
+            "route": 124,
+            "city": "HVN",
+            "targetRon": false,
+            "hubOrFocusRon": false
+          }
+        ],
+        "targetRons": [
+          {
+            "day": 5,
+            "route": 115,
+            "city": "JAX",
+            "targetRon": true,
+            "hubOrFocusRon": true
+          },
+          {
+            "day": 15,
+            "route": 125,
+            "city": "DAY",
+            "targetRon": true,
+            "hubOrFocusRon": true
+          },
+          {
+            "day": 23,
+            "route": 133,
+            "city": "MCI",
+            "targetRon": true,
+            "hubOrFocusRon": true
+          },
+          {
+            "day": 25,
+            "route": 135,
+            "city": "MCI",
+            "targetRon": true,
+            "hubOrFocusRon": true
+          },
+          {
+            "day": 26,
+            "route": 136,
+            "city": "DAY",
+            "targetRon": true,
+            "hubOrFocusRon": true
+          },
+          {
+            "day": 28,
+            "route": 138,
+            "city": "DAY",
+            "targetRon": true,
+            "hubOrFocusRon": true
+          },
+          {
+            "day": 38,
+            "route": 148,
+            "city": "DAY",
+            "targetRon": true,
+            "hubOrFocusRon": true
+          }
+        ],
+        "hubOrFocusRons": [
+          {
+            "day": 5,
+            "route": 115,
+            "city": "JAX",
+            "targetRon": true,
+            "hubOrFocusRon": true
+          },
+          {
+            "day": 15,
+            "route": 125,
+            "city": "DAY",
+            "targetRon": true,
+            "hubOrFocusRon": true
+          },
+          {
+            "day": 23,
+            "route": 133,
+            "city": "MCI",
+            "targetRon": true,
+            "hubOrFocusRon": true
+          },
+          {
+            "day": 25,
+            "route": 135,
+            "city": "MCI",
+            "targetRon": true,
+            "hubOrFocusRon": true
+          },
+          {
+            "day": 26,
+            "route": 136,
+            "city": "DAY",
+            "targetRon": true,
+            "hubOrFocusRon": true
+          },
+          {
+            "day": 28,
+            "route": 138,
+            "city": "DAY",
+            "targetRon": true,
+            "hubOrFocusRon": true
+          },
+          {
+            "day": 38,
+            "route": 148,
+            "city": "DAY",
+            "targetRon": true,
+            "hubOrFocusRon": true
+          }
+        ]
+      }
+    }
+  ]
+}

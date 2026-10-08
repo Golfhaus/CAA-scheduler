@@ -1,8 +1,8 @@
 # Schedule 7 v1.2.4 — working draft
 
-**Unpublished.** Route 350 is implemented at the user's instruction. Routes 126 and 308 remain proposals; Route 518 is retained. Main and the live app remain on v1.2.3. Work is saved on `codex/v1.2.4-utilization`.
+**Unpublished.** Routes 350, 126 and 308 are implemented at the user's instruction. Route 518 is retained. Main and the live app remain on v1.2.3. Work is saved on `codex/v1.2.4-utilization`. The subsequent 116/117 XNA maintenance review is in `docs/schedule_7_v1_2_4_xna.md`.
 
-The base is the **released v1.2.3 canonical (1152 flights)**, not the older v1.2.3 draft. The accepted v1.2.4 canonical has **1154 flights**, with every pre-existing flight, clock, fleet, route, line and day unchanged. Aircraft inventory, gate inventory and bank windows remain unchanged.
+The base is the **released v1.2.3 canonical (1152 flights)**, not the older v1.2.3 draft. The accepted v1.2.4 canonical now has **1158 flights**, with every pre-existing flight, clock, fleet, route, line and day unchanged. Aircraft inventory, gate inventory and bank windows remain unchanged. Authoritative replay input is `config/optimizations/schedule_7_v1_2_4_accepted_rounds_1_2.json`; the initial 1154-flight comparison snapshot is preserved under `data/schedules/schedule_7_v1_2_4_round_1/`.
 
 ## Implemented: Route 350
 
@@ -19,9 +19,9 @@ At 21:43, none of MCI's remaining onward departures forms a qualifying connectio
 
 Replay input: `config/optimizations/schedule_7_v1_2_4_accepted_350.json`. Working canonical: `data/schedules/schedule_7_v1_2_4_draft/canonical_schedule.json`. Detailed validation and demand: `config/proposals/schedule_7_v1_2_4_accepted_350_review.json`.
 
-## Recommended proposals
+## Accepted round two: Routes 126 and 308
 
-These are **not added to the accepted canonical**. Flight numbers are provisional assignments from the combined proposal. Times and scores use the complete timetable including the approved Route 350 turn.
+The user subsequently approved these with "Add the proposals to the 1.2.4 draft as suggested." Both turns are now in the accepted canonical with flight numbers 2157–2160. Times and scores use the complete timetable including the approved Route 350 turn.
 
 | Route / line-day | Fleet | Proposed flight | Local departure → arrival | Current frequency → proposed | Local allocation | Connecting opportunity | Total opportunity |
 |---|---|---|---|---|---:|---:|---:|
@@ -34,9 +34,9 @@ These are **not added to the accepted canonical**. Flight numbers are provisiona
 
 **308: the strongest extension in this review.** CLT–MCI has pinned directional local O-D of 62.3 / 62.7. Existing competing flights and connection choices reduce the added flights' local allocations to about 14.5 / 14.9. The new CLT arrival connects to MAF, SAT and the newly approved ELP return. The late MCI departure collects TEX, GLC, OZK and UMP flows, led by SAT, MKE, DAL and OMA. Route 350's ELP arrival also feeds this CLT departure. This adds **4h26 block**, taking the aircraft from **7h03 to 11h29**. Turns are **49 minutes at CLT and 62 minutes at MCI**. Route 309 still starts CLT at 07:30, leaving **5h32 aircraft RON**. The SAT arrival at 22:15 connects to the 22:45 departure at the **30-minute minimum**; the MAF connection from the new CLT arrival is **32 minutes**. Those are material delay-sensitive connections.
 
-The combined 126/308 proposal passes structural, operating, minimum-turn, overnight, planning and physical gate/stand checks with **zero effective operating errors and no hard-stop failures**. It preserves every existing clock, loses no connected market and slows no fastest itinerary; eleven markets improve relative to the accepted draft. Stand use becomes **16 claims / 3717 minutes**, versus 15 / 3771 in the accepted draft; no passenger handling occurs on stands. Existing 182 operating warnings remain. If approved, the combined schedule would have **1158 flights**.
+The combined 126/308 addition passes structural, operating, minimum-turn, overnight, planning and physical gate/stand checks with **zero effective operating errors and no hard-stop failures**. It preserves every existing clock, loses no connected market and slows no fastest itinerary; eleven markets improve relative to the round-one draft. Stand use is **16 claims / 3717 minutes**, versus 15 / 3771 in round one; no passenger handling occurs on stands. Existing 182 operating warnings remain. The combined accepted schedule has **1158 flights**.
 
-Proposal replay input: `config/proposals/schedule_7_v1_2_4_proposed_126_308.json`, based on the hash-pinned v1.2.4 accepted draft. It does not modify main or the accepted canonical.
+Historical proposal replay input: `config/proposals/schedule_7_v1_2_4_proposed_126_308.json`, repinned to the unchanged round-one snapshot. Current accepted replay is the cumulative rounds-1–2 overlay above. No main or live-app publication has occurred.
 
 ## Route 518: retain the current schedule
 
@@ -73,7 +73,7 @@ Demand uses `bts-db1c-6mo-jul2025-apr2026-v7`, 30–240-minute connections and t
 
 Aircraft-day validation is separate from crew staffing. The 350 day spans 04:55–23:49 with 13h36 block; 308 would end after midnight. Both need a crew plan, and the quoted aircraft RONs do not establish legal crew rest. Marginal flight cost, realistic demand capture and connection reliability remain decision factors, especially for 126 and the weak 350 outbound.
 
-Accepted 350 and combined proposed 126/308 changes pass all full constraint checks. No gates, stands, bank boundaries, frequency limits, minimum turns or curfews are waived. Latest-release regression passed **49 checks (13 Python + 36 JavaScript)** against v1.2.3 only. The draft's replay verification independently confirms exactly two added 350 flights and no changes to the 1152 released legs. Main/app publication remains reserved to the user.
+Accepted 350/126/308 changes pass all full constraint checks. No gates, stands, bank boundaries, frequency limits, minimum turns or curfews are waived. Latest-release regression passed **49 checks (13 Python + 36 JavaScript)** against v1.2.3 only. The draft's replay verification independently confirms exactly six added flights and no changes to the 1152 released legs. Main/app publication remains reserved to the user.
 
 Detailed screening, rejected constraints, geography, flight-level connecting choices, fastest-itinerary audits and retimed-flight impacts are in `config/proposals/schedule_7_v1_2_4_evening_screen.json`. Resume tools read a base SHA checkpoint and do not reapply older v1.2.3 work.
 
@@ -86,4 +86,6 @@ python scripts/analyze_schedule_7_v1_2_4.py --holistic
 python scripts/analyze_schedule_7_v1_2_4.py --holistic2
 python scripts/analyze_schedule_7_v1_2_4.py --audit
 python scripts/analyze_schedule_7_v1_2_4.py --joint
+python scripts/analyze_schedule_7_v1_2_4_xna.py --accept
+python scripts/analyze_schedule_7_v1_2_4_xna.py --alternative
 ```

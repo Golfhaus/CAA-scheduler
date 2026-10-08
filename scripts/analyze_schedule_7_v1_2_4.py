@@ -1,7 +1,8 @@
 """Start unpublished v1.2.4 and screen evening utilization on 126/518/308.
 
-350 is user-approved. All other flying is analysis only. Immutable released
-v1.2.3 is the replay base; checkpoint hashes prevent resuming stale analysis.
+Historical round-one screen. 350 is user-approved here; 126/308 were accepted
+subsequently by analyze_schedule_7_v1_2_4_xna.py. Immutable released v1.2.3 is
+the replay base; round-one comparisons never overwrite the current draft.
 """
 from copy import deepcopy
 from pathlib import Path
@@ -19,7 +20,7 @@ from caa_scheduler.optimization_overlay import apply_optimization_overlay
 from caa_scheduler.operating_validation import validate_operating_rules
 
 RELEASE='data/schedules/schedule_7_v1_2_3/canonical_schedule.json'
-BASE='data/schedules/schedule_7_v1_2_4_draft/canonical_schedule.json'
+BASE='data/schedules/schedule_7_v1_2_4_round_1/canonical_schedule.json'
 ACCEPTED='config/optimizations/schedule_7_v1_2_4_accepted_350.json'
 OUT='config/proposals/schedule_7_v1_2_4_evening_screen.json'
 

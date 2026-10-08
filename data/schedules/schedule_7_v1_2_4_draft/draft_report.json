@@ -1,33 +1,111 @@
 {
   "status": "unpublished working draft",
   "acceptedRoutes": [
-    350
-  ],
-  "proposedRoutes": [
+    350,
     126,
     308
   ],
+  "proposedRoutes": [],
   "retainedRoutes": [
     518
   ],
   "baseCanonical": "data/schedules/schedule_7_v1_2_3/canonical_schedule.json",
   "baseSha256": "ad73563cd508331ac8d5e860a8361e2acdc3da97d0d40f3f87a5be6c31026b90",
-  "acceptedOverlay": "config/optimizations/schedule_7_v1_2_4_accepted_350.json",
-  "acceptedOverlaySha256": "383a7320ffdbfe4f7d2fd8eaf693cbff40c8d7c2953fbcdc046104d776f20111",
-  "canonicalSha256": "7cb0e93b9e9d0d2326a9cdad04ef21e978c96962062bf66f9b52e34fa513992e",
+  "acceptedOverlay": "config/optimizations/schedule_7_v1_2_4_accepted_rounds_1_2.json",
+  "acceptedOverlaySha256": "f706d49daa2e4b3463def989bb9da572579b72bce7a78a37289c35aa45001916",
+  "canonicalSha256": "c5cbe3d514448d9bc2da93073bf7b634d4961939bd3946874367b317584438f5",
   "summary": {
-    "flights": 1154,
+    "flights": 1158,
     "routes": 181,
     "lines": 20,
-    "addedFlights": 2,
+    "addedFlights": 6,
     "unchangedReleasedFlights": 1152
   },
   "checks": {
     "exactAcceptedReplay": "pass",
     "releasedFlightPreservation": "pass",
-    "latestReleasedRegression": "49 passed against v1.2.3",
-    "physicalAndOperatingValidation": "pass; 0 effective errors; no hard-stop failures"
+    "latestReleasedRegression": "49 checks passed against v1.2.3"
   },
-  "proposal": "config/proposals/schedule_7_v1_2_4_proposed_126_308.json",
+  "validation": {
+    "structural": "pass",
+    "operatingErrors": 0,
+    "operatingWarnings": 182,
+    "hardStopFailures": [],
+    "blocking": [],
+    "overnight": "pass",
+    "overnightFindings": [],
+    "planning": "pass",
+    "gates": "pass",
+    "standClaims": 16,
+    "standMinutes": 3717,
+    "affectedStations": [
+      {
+        "code": "PHF",
+        "name": "Newport News VA",
+        "isHub": true,
+        "isFocusCity": false,
+        "nGates": 16,
+        "nStands": 8,
+        "peakUsed": 18,
+        "standClaims": 2,
+        "standMinutes": 142
+      },
+      {
+        "code": "SYR",
+        "name": "Syracuse NY",
+        "isHub": true,
+        "isFocusCity": false,
+        "nGates": 16,
+        "nStands": 8,
+        "peakUsed": 18,
+        "standClaims": 2,
+        "standMinutes": 464
+      },
+      {
+        "code": "DAY",
+        "name": "Dayton OH",
+        "isHub": true,
+        "isFocusCity": false,
+        "nGates": 16,
+        "nStands": 8,
+        "peakUsed": 16,
+        "standClaims": 0,
+        "standMinutes": 0
+      },
+      {
+        "code": "JAX",
+        "name": "Jacksonville FL",
+        "isHub": true,
+        "isFocusCity": false,
+        "nGates": 16,
+        "nStands": 12,
+        "peakUsed": 16,
+        "standClaims": 0,
+        "standMinutes": 0
+      },
+      {
+        "code": "BHM",
+        "name": "Birmingham AL",
+        "isHub": false,
+        "isFocusCity": true,
+        "nGates": 6,
+        "nStands": 4,
+        "peakUsed": 8,
+        "standClaims": 4,
+        "standMinutes": 290
+      },
+      {
+        "code": "BWI",
+        "name": "Baltimore MD",
+        "isHub": false,
+        "isFocusCity": false,
+        "nGates": 2,
+        "nStands": 2,
+        "peakUsed": 4,
+        "standClaims": 2,
+        "standMinutes": 804
+      }
+    ]
+  },
   "publication": "Reserved to user decision"
 }
