@@ -1,0 +1,3598 @@
+{
+  "baseCanonical": "data/schedules/schedule_7_v1_2_4_round_4/canonical_schedule.json",
+  "baseSha256": "1d6e8fd937524657116664ee8fb0423b90e1b81099513c0c29387c532b393438",
+  "status": "Recommendations only. Accepted draft and main are unchanged.",
+  "method": "Prioritize second directional departures on currently one-flight pairs. Compare full one/two-stop opportunities and distinct newly connected/faster markets. Jointly reallocate demand before choosing a compatible set. No synthetic weighted score or load-factor forecast.",
+  "portfolios": [
+    {
+      "options": [
+        "337-344",
+        "159-165"
+      ],
+      "validation": {
+        "structural": "pass",
+        "operatingErrors": 0,
+        "operatingWarnings": 178,
+        "hardStopFailures": [],
+        "blocking": [],
+        "overnight": "pass",
+        "overnightFindings": [],
+        "planning": "pass",
+        "gates": "pass",
+        "standClaims": 15,
+        "standMinutes": 3661,
+        "affectedStations": [
+          {
+            "code": "PHF",
+            "name": "Newport News VA",
+            "isHub": true,
+            "isFocusCity": false,
+            "nGates": 16,
+            "nStands": 8,
+            "peakUsed": 18,
+            "standClaims": 2,
+            "standMinutes": 142
+          },
+          {
+            "code": "SYR",
+            "name": "Syracuse NY",
+            "isHub": true,
+            "isFocusCity": false,
+            "nGates": 16,
+            "nStands": 8,
+            "peakUsed": 18,
+            "standClaims": 2,
+            "standMinutes": 464
+          },
+          {
+            "code": "DAY",
+            "name": "Dayton OH",
+            "isHub": true,
+            "isFocusCity": false,
+            "nGates": 16,
+            "nStands": 8,
+            "peakUsed": 16,
+            "standClaims": 0,
+            "standMinutes": 0
+          },
+          {
+            "code": "JAX",
+            "name": "Jacksonville FL",
+            "isHub": true,
+            "isFocusCity": false,
+            "nGates": 16,
+            "nStands": 12,
+            "peakUsed": 16,
+            "standClaims": 0,
+            "standMinutes": 0
+          },
+          {
+            "code": "BHM",
+            "name": "Birmingham AL",
+            "isHub": false,
+            "isFocusCity": true,
+            "nGates": 6,
+            "nStands": 4,
+            "peakUsed": 8,
+            "standClaims": 4,
+            "standMinutes": 290
+          },
+          {
+            "code": "BWI",
+            "name": "Baltimore MD",
+            "isHub": false,
+            "isFocusCity": false,
+            "nGates": 2,
+            "nStands": 2,
+            "peakUsed": 4,
+            "standClaims": 2,
+            "standMinutes": 804
+          }
+        ]
+      },
+      "lineLengths": {
+        "AL": 9,
+        "AH": 9,
+        "AE": 10,
+        "AA": 10,
+        "AP": 9,
+        "AF": 9
+      },
+      "maintenance": {
+        "AA": {
+          "line": "AA",
+          "maximumConsecutiveNonTargetRons": 3,
+          "limit": 10,
+          "grace": 1,
+          "longestRun": [
+            {
+              "day": 6,
+              "route": 306,
+              "city": "MSY",
+              "targetRon": false,
+              "hubOrFocusRon": false
+            },
+            {
+              "day": 7,
+              "route": 307,
+              "city": "LEX",
+              "targetRon": false,
+              "hubOrFocusRon": false
+            },
+            {
+              "day": 8,
+              "route": 308,
+              "city": "GSO",
+              "targetRon": false,
+              "hubOrFocusRon": false
+            }
+          ],
+          "targetRons": [
+            {
+              "day": 2,
+              "route": 302,
+              "city": "BHM",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            },
+            {
+              "day": 5,
+              "route": 305,
+              "city": "PHF",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            },
+            {
+              "day": 9,
+              "route": 309,
+              "city": "JAX",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            }
+          ],
+          "hubOrFocusRons": [
+            {
+              "day": 2,
+              "route": 302,
+              "city": "BHM",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            },
+            {
+              "day": 5,
+              "route": 305,
+              "city": "PHF",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            },
+            {
+              "day": 9,
+              "route": 309,
+              "city": "JAX",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            }
+          ]
+        },
+        "AE": {
+          "line": "AE",
+          "maximumConsecutiveNonTargetRons": 8,
+          "limit": 10,
+          "grace": 1,
+          "longestRun": [
+            {
+              "day": 3,
+              "route": 153,
+              "city": "VPS",
+              "targetRon": false,
+              "hubOrFocusRon": false
+            },
+            {
+              "day": 4,
+              "route": 154,
+              "city": "TLH",
+              "targetRon": false,
+              "hubOrFocusRon": false
+            },
+            {
+              "day": 5,
+              "route": 155,
+              "city": "BTR",
+              "targetRon": false,
+              "hubOrFocusRon": false
+            },
+            {
+              "day": 6,
+              "route": 156,
+              "city": "ECP",
+              "targetRon": false,
+              "hubOrFocusRon": false
+            },
+            {
+              "day": 7,
+              "route": 157,
+              "city": "OMA",
+              "targetRon": false,
+              "hubOrFocusRon": false
+            },
+            {
+              "day": 8,
+              "route": 158,
+              "city": "DSM",
+              "targetRon": false,
+              "hubOrFocusRon": false
+            },
+            {
+              "day": 9,
+              "route": 159,
+              "city": "JAN",
+              "targetRon": false,
+              "hubOrFocusRon": false
+            },
+            {
+              "day": 10,
+              "route": 160,
+              "city": "MAF",
+              "targetRon": false,
+              "hubOrFocusRon": false
+            }
+          ],
+          "targetRons": [
+            {
+              "day": 1,
+              "route": 151,
+              "city": "MCI",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            },
+            {
+              "day": 2,
+              "route": 152,
+              "city": "MCI",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            }
+          ],
+          "hubOrFocusRons": [
+            {
+              "day": 1,
+              "route": 151,
+              "city": "MCI",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            },
+            {
+              "day": 2,
+              "route": 152,
+              "city": "MCI",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            }
+          ]
+        },
+        "AF": {
+          "line": "AF",
+          "maximumConsecutiveNonTargetRons": 4,
+          "limit": 10,
+          "grace": 1,
+          "longestRun": [
+            {
+              "day": 2,
+              "route": 162,
+              "city": "CHA",
+              "targetRon": false,
+              "hubOrFocusRon": false
+            },
+            {
+              "day": 3,
+              "route": 163,
+              "city": "CRW",
+              "targetRon": false,
+              "hubOrFocusRon": false
+            },
+            {
+              "day": 4,
+              "route": 164,
+              "city": "SBN",
+              "targetRon": false,
+              "hubOrFocusRon": false
+            },
+            {
+              "day": 5,
+              "route": 165,
+              "city": "FWA",
+              "targetRon": false,
+              "hubOrFocusRon": false
+            }
+          ],
+          "targetRons": [
+            {
+              "day": 1,
+              "route": 161,
+              "city": "SYR",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            },
+            {
+              "day": 6,
+              "route": 166,
+              "city": "MCI",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            }
+          ],
+          "hubOrFocusRons": [
+            {
+              "day": 1,
+              "route": 161,
+              "city": "SYR",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            },
+            {
+              "day": 6,
+              "route": 166,
+              "city": "MCI",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            }
+          ]
+        },
+        "AH": {
+          "line": "AH",
+          "maximumConsecutiveNonTargetRons": 7,
+          "limit": 10,
+          "grace": 1,
+          "longestRun": [
+            {
+              "day": 9,
+              "route": 319,
+              "city": "HRL",
+              "targetRon": false,
+              "hubOrFocusRon": false
+            },
+            {
+              "day": 1,
+              "route": 311,
+              "city": "CLT",
+              "targetRon": false,
+              "hubOrFocusRon": false
+            },
+            {
+              "day": 2,
+              "route": 312,
+              "city": "BUF",
+              "targetRon": false,
+              "hubOrFocusRon": false
+            },
+            {
+              "day": 3,
+              "route": 313,
+              "city": "CHS",
+              "targetRon": false,
+              "hubOrFocusRon": false
+            },
+            {
+              "day": 4,
+              "route": 314,
+              "city": "CLT",
+              "targetRon": false,
+              "hubOrFocusRon": false
+            },
+            {
+              "day": 5,
+              "route": 315,
+              "city": "MSY",
+              "targetRon": false,
+              "hubOrFocusRon": false
+            },
+            {
+              "day": 6,
+              "route": 316,
+              "city": "HOU",
+              "targetRon": false,
+              "hubOrFocusRon": false
+            }
+          ],
+          "targetRons": [
+            {
+              "day": 7,
+              "route": 317,
+              "city": "MCI",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            },
+            {
+              "day": 8,
+              "route": 318,
+              "city": "MCI",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            }
+          ],
+          "hubOrFocusRons": [
+            {
+              "day": 7,
+              "route": 317,
+              "city": "MCI",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            },
+            {
+              "day": 8,
+              "route": 318,
+              "city": "MCI",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            }
+          ]
+        },
+        "AL": {
+          "line": "AL",
+          "maximumConsecutiveNonTargetRons": 4,
+          "limit": 10,
+          "grace": 1,
+          "longestRun": [
+            {
+              "day": 7,
+              "route": 338,
+              "city": "SAV",
+              "targetRon": false,
+              "hubOrFocusRon": false
+            },
+            {
+              "day": 8,
+              "route": 339,
+              "city": "CHS",
+              "targetRon": false,
+              "hubOrFocusRon": false
+            },
+            {
+              "day": 9,
+              "route": 340,
+              "city": "CLT",
+              "targetRon": false,
+              "hubOrFocusRon": false
+            },
+            {
+              "day": 1,
+              "route": 320,
+              "city": "MEM",
+              "targetRon": false,
+              "hubOrFocusRon": false
+            }
+          ],
+          "targetRons": [
+            {
+              "day": 2,
+              "route": 321,
+              "city": "JAX",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            },
+            {
+              "day": 6,
+              "route": 337,
+              "city": "PHF",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            }
+          ],
+          "hubOrFocusRons": [
+            {
+              "day": 2,
+              "route": 321,
+              "city": "JAX",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            },
+            {
+              "day": 6,
+              "route": 337,
+              "city": "PHF",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            }
+          ]
+        },
+        "AP": {
+          "line": "AP",
+          "maximumConsecutiveNonTargetRons": 6,
+          "limit": 10,
+          "grace": 1,
+          "longestRun": [
+            {
+              "day": 6,
+              "route": 346,
+              "city": "PIT",
+              "targetRon": false,
+              "hubOrFocusRon": false
+            },
+            {
+              "day": 7,
+              "route": 347,
+              "city": "SRQ",
+              "targetRon": false,
+              "hubOrFocusRon": false
+            },
+            {
+              "day": 8,
+              "route": 348,
+              "city": "ABE",
+              "targetRon": false,
+              "hubOrFocusRon": false
+            },
+            {
+              "day": 9,
+              "route": 349,
+              "city": "BDL",
+              "targetRon": false,
+              "hubOrFocusRon": false
+            },
+            {
+              "day": 1,
+              "route": 341,
+              "city": "BDL",
+              "targetRon": false,
+              "hubOrFocusRon": false
+            },
+            {
+              "day": 2,
+              "route": 342,
+              "city": "SAV",
+              "targetRon": false,
+              "hubOrFocusRon": false
+            }
+          ],
+          "targetRons": [
+            {
+              "day": 3,
+              "route": 343,
+              "city": "PHF",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            },
+            {
+              "day": 5,
+              "route": 345,
+              "city": "BNA",
+              "targetRon": true,
+              "hubOrFocusRon": false
+            }
+          ],
+          "hubOrFocusRons": [
+            {
+              "day": 3,
+              "route": 343,
+              "city": "PHF",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            }
+          ]
+        }
+      },
+      "banks": [
+        {
+          "id": "PHF-SWAP-337-344-N1",
+          "hub": "PHF",
+          "startMinute": 120,
+          "endMinute": 180
+        },
+        {
+          "id": "SYR-SWAP-159-165-N1",
+          "hub": "SYR",
+          "startMinute": 120,
+          "endMinute": 180
+        },
+        {
+          "id": "MCI-SWAP-159-165-N2",
+          "hub": "MCI",
+          "startMinute": 0,
+          "endMinute": 60
+        }
+      ],
+      "demand": {
+        "flights": [
+          {
+            "id": "V124-SWAP-337-344-R337-1-PHF-MCI",
+            "route": 317,
+            "line": "AH",
+            "fleet": "CRJ700",
+            "day": 7,
+            "sequenceWithinRoute": 6,
+            "pairing": 497,
+            "flight": 2171,
+            "origin": "PHF",
+            "destination": "MCI",
+            "departure": "20:45",
+            "arrival": "22:22",
+            "departureMinute": 1245,
+            "arrivalMinute": 1342,
+            "departureClock": "20:45",
+            "arrivalClock": "22:22",
+            "blockMinutes": 157,
+            "currentPairFrequency": 1,
+            "routeLocalOd": 14.0,
+            "local": 5.705270084599648,
+            "connecting": 81.34658293052182,
+            "total": 87.05185301512147,
+            "oneStop": 41.74448799059007,
+            "twoStop": 39.602094939931746,
+            "groups": {
+              "HUB": 43.11147606596742,
+              "TEX": 38.235106864554396
+            },
+            "connectingFlights": [
+              {
+                "flight": 2116,
+                "origin": "MCI",
+                "destination": "SAT",
+                "departure": "22:55",
+                "arrival": "00:51"
+              }
+            ],
+            "topMarkets": [
+              {
+                "origin": "MDT",
+                "destination": "SAT",
+                "opportunity": 9.0
+              },
+              {
+                "origin": "MDT",
+                "destination": "MCI",
+                "opportunity": 7.262497285142383
+              },
+              {
+                "origin": "PIT",
+                "destination": "MCI",
+                "opportunity": 6.769042414848322
+              },
+              {
+                "origin": "CHS",
+                "destination": "MCI",
+                "opportunity": 6.567488376485025
+              },
+              {
+                "origin": "PVD",
+                "destination": "MCI",
+                "opportunity": 5.747728059380289
+              },
+              {
+                "origin": "PHF",
+                "destination": "SAT",
+                "opportunity": 5.096070285793954
+              },
+              {
+                "origin": "RDU",
+                "destination": "SAT",
+                "opportunity": 4.303129356894865
+              },
+              {
+                "origin": "PWM",
+                "destination": "SAT",
+                "opportunity": 3.6942822719254336
+              },
+              {
+                "origin": "CHS",
+                "destination": "SAT",
+                "opportunity": 3.2361021208819447
+              },
+              {
+                "origin": "BUF",
+                "destination": "SAT",
+                "opportunity": 3.006905246512655
+              }
+            ],
+            "feederFlightCount": 20,
+            "onwardFlightCount": 1,
+            "originGroups": {
+              "FLP": 4.065657397168322,
+              "CGI": 23.082244543521714,
+              "HUB": 7.182716125843746,
+              "LEC": 13.766955041411759,
+              "NEC": 14.522064486793816,
+              "MAC": 18.72694533578247
+            },
+            "destinationGroups": {
+              "HUB": 43.11147606596742,
+              "TEX": 38.235106864554396
+            }
+          },
+          {
+            "id": "V124-SWAP-337-344-R344-1-MCI-PHF",
+            "route": 337,
+            "line": "AL",
+            "fleet": "CRJ700",
+            "day": 6,
+            "sequenceWithinRoute": 7,
+            "pairing": 688,
+            "flight": 2172,
+            "origin": "MCI",
+            "destination": "PHF",
+            "departure": "22:45",
+            "arrival": "02:22",
+            "departureMinute": 1365,
+            "arrivalMinute": 1582,
+            "departureClock": "22:45",
+            "arrivalClock": "02:22 +1",
+            "blockMinutes": 157,
+            "currentPairFrequency": 1,
+            "routeLocalOd": 13.7,
+            "local": 5.6483562118171395,
+            "connecting": 109.95458773929175,
+            "total": 115.6029439511089,
+            "oneStop": 32.854494149587886,
+            "twoStop": 77.10009358970387,
+            "groups": {
+              "FLP": 56.71086831747128,
+              "MAC": 0.07960125419430145,
+              "HUB": 39.69342586716148,
+              "NEC": 5.975941494980384,
+              "LEC": 4.427221506866526,
+              "GCP": 0.9577324830622878,
+              "CGI": 2.1097968155554856
+            },
+            "connectingFlights": [
+              {
+                "flight": 1933,
+                "origin": "PHF",
+                "destination": "PGD",
+                "departure": "04:37",
+                "arrival": "06:46"
+              },
+              {
+                "flight": 1939,
+                "origin": "PHF",
+                "destination": "SRQ",
+                "departure": "04:41",
+                "arrival": "06:48"
+              },
+              {
+                "flight": 1945,
+                "origin": "PHF",
+                "destination": "PNS",
+                "departure": "04:39",
+                "arrival": "05:47"
+              },
+              {
+                "flight": 2006,
+                "origin": "PHF",
+                "destination": "FLL",
+                "departure": "06:05",
+                "arrival": "08:08"
+              },
+              {
+                "flight": 2077,
+                "origin": "PHF",
+                "destination": "DAY",
+                "departure": "04:30",
+                "arrival": "05:59"
+              },
+              {
+                "flight": 2079,
+                "origin": "PHF",
+                "destination": "SYR",
+                "departure": "04:30",
+                "arrival": "05:53"
+              },
+              {
+                "flight": 2081,
+                "origin": "PHF",
+                "destination": "JAX",
+                "departure": "04:30",
+                "arrival": "06:06"
+              }
+            ],
+            "topMarkets": [
+              {
+                "origin": "MKE",
+                "destination": "SRQ",
+                "opportunity": 16.0
+              },
+              {
+                "origin": "SAT",
+                "destination": "PHF",
+                "opportunity": 8.536984004768467
+              },
+              {
+                "origin": "SAT",
+                "destination": "FLL",
+                "opportunity": 5.423464807910396
+              },
+              {
+                "origin": "MCI",
+                "destination": "SRQ",
+                "opportunity": 5.375488477538808
+              },
+              {
+                "origin": "ICT",
+                "destination": "PGD",
+                "opportunity": 4.4
+              },
+              {
+                "origin": "MKE",
+                "destination": "PGD",
+                "opportunity": 3.986991526850515
+              },
+              {
+                "origin": "MCI",
+                "destination": "PIT",
+                "opportunity": 3.7639915095494403
+              },
+              {
+                "origin": "OMA",
+                "destination": "PHF",
+                "opportunity": 3.3283348365457024
+              },
+              {
+                "origin": "TUL",
+                "destination": "JAX",
+                "opportunity": 3.1342285803899617
+              },
+              {
+                "origin": "TUL",
+                "destination": "PHF",
+                "opportunity": 2.867853488940874
+              }
+            ],
+            "feederFlightCount": 23,
+            "onwardFlightCount": 7,
+            "originGroups": {
+              "HUB": 20.984991103247626,
+              "TEX": 32.53134552556147,
+              "FLP": 0.12366216746783742,
+              "GCP": 2.055528774236901,
+              "GLC": 25.509243748144563,
+              "OZK": 20.35381776619137,
+              "UMP": 8.39599865444199
+            },
+            "destinationGroups": {
+              "FLP": 56.71086831747128,
+              "MAC": 0.07960125419430145,
+              "HUB": 39.69342586716148,
+              "NEC": 5.975941494980384,
+              "LEC": 4.427221506866526,
+              "GCP": 0.9577324830622878,
+              "CGI": 2.1097968155554856
+            }
+          },
+          {
+            "id": "V124-SWAP-159-165-R159-1-MCI-SYR",
+            "route": 161,
+            "line": "AF",
+            "fleet": "CRJ200",
+            "day": 1,
+            "sequenceWithinRoute": 6,
+            "pairing": 678,
+            "flight": 2173,
+            "origin": "MCI",
+            "destination": "SYR",
+            "departure": "22:15",
+            "arrival": "02:00",
+            "departureMinute": 1335,
+            "arrivalMinute": 1560,
+            "departureClock": "22:15",
+            "arrivalClock": "02:00 +1",
+            "blockMinutes": 165,
+            "currentPairFrequency": 1,
+            "routeLocalOd": 7.9,
+            "local": 3.6919391292860273,
+            "connecting": 95.79104593405071,
+            "total": 99.48298506333674,
+            "oneStop": 42.08215996280855,
+            "twoStop": 53.70888597124217,
+            "groups": {
+              "HUB": 34.933969481321604,
+              "FLP": 1.437479491920947,
+              "CGI": 1.5504025433089315,
+              "NEC": 57.86919441749924
+            },
+            "connectingFlights": [
+              {
+                "flight": 1749,
+                "origin": "SYR",
+                "destination": "ALB",
+                "departure": "05:50",
+                "arrival": "06:34"
+              },
+              {
+                "flight": 1305,
+                "origin": "SYR",
+                "destination": "CLT",
+                "departure": "05:57",
+                "arrival": "07:44"
+              },
+              {
+                "flight": 1875,
+                "origin": "SYR",
+                "destination": "HVN",
+                "departure": "05:50",
+                "arrival": "06:46"
+              },
+              {
+                "flight": 1223,
+                "origin": "SYR",
+                "destination": "PIE",
+                "departure": "05:25",
+                "arrival": "08:09"
+              },
+              {
+                "flight": 1885,
+                "origin": "SYR",
+                "destination": "SWF",
+                "departure": "05:50",
+                "arrival": "06:39"
+              }
+            ],
+            "topMarkets": [
+              {
+                "origin": "MCI",
+                "destination": "ALB",
+                "opportunity": 7.8422794440568095
+              },
+              {
+                "origin": "AUS",
+                "destination": "ALB",
+                "opportunity": 7.617315276981906
+              },
+              {
+                "origin": "MKE",
+                "destination": "ALB",
+                "opportunity": 5.0
+              },
+              {
+                "origin": "PNS",
+                "destination": "SYR",
+                "opportunity": 4.6303385781502415
+              },
+              {
+                "origin": "AUS",
+                "destination": "SYR",
+                "opportunity": 4.357591737832139
+              },
+              {
+                "origin": "MEM",
+                "destination": "SYR",
+                "opportunity": 4.3
+              },
+              {
+                "origin": "MEM",
+                "destination": "ALB",
+                "opportunity": 4.3
+              },
+              {
+                "origin": "BLV",
+                "destination": "ALB",
+                "opportunity": 4.223382042806249
+              },
+              {
+                "origin": "OMA",
+                "destination": "ALB",
+                "opportunity": 3.6
+              },
+              {
+                "origin": "HOU",
+                "destination": "SYR",
+                "opportunity": 2.9768037768766855
+              }
+            ],
+            "feederFlightCount": 30,
+            "onwardFlightCount": 5,
+            "originGroups": {
+              "FLP": 5.724549762629739,
+              "HUB": 8.264042505104673,
+              "GLC": 6.101169566672829,
+              "APP": 0.45436857382557067,
+              "TEX": 28.895041004950897,
+              "UMP": 12.963742439539905,
+              "GCP": 13.11467515039078,
+              "OZK": 20.273456930936323
+            },
+            "destinationGroups": {
+              "HUB": 34.933969481321604,
+              "FLP": 1.437479491920947,
+              "CGI": 1.5504025433089315,
+              "NEC": 57.86919441749924
+            }
+          },
+          {
+            "id": "V124-SWAP-159-165-R165-1-SYR-MCI",
+            "route": 166,
+            "line": "AF",
+            "fleet": "CRJ200",
+            "day": 6,
+            "sequenceWithinRoute": 10,
+            "pairing": 679,
+            "flight": 2174,
+            "origin": "SYR",
+            "destination": "MCI",
+            "departure": "22:15",
+            "arrival": "00:00",
+            "departureMinute": 1335,
+            "arrivalMinute": 1440,
+            "departureClock": "22:15",
+            "arrivalClock": "00:00 +1",
+            "blockMinutes": 165,
+            "currentPairFrequency": 1,
+            "routeLocalOd": 8.0,
+            "local": 3.482170132578517,
+            "connecting": 27.9701959922406,
+            "total": 31.452366124819118,
+            "oneStop": 27.970195992240605,
+            "twoStop": 0,
+            "groups": {
+              "HUB": 27.9701959922406
+            },
+            "connectingFlights": [],
+            "topMarkets": [
+              {
+                "origin": "BDL",
+                "destination": "MCI",
+                "opportunity": 6.895956746084727
+              },
+              {
+                "origin": "ALB",
+                "destination": "MCI",
+                "opportunity": 5.858393891978165
+              },
+              {
+                "origin": "BWI",
+                "destination": "MCI",
+                "opportunity": 3.115688327822634
+              },
+              {
+                "origin": "BUF",
+                "destination": "MCI",
+                "opportunity": 2.75697336525098
+              },
+              {
+                "origin": "PWM",
+                "destination": "MCI",
+                "opportunity": 2.013947966112802
+              },
+              {
+                "origin": "ROC",
+                "destination": "MCI",
+                "opportunity": 1.8969311507529663
+              },
+              {
+                "origin": "HPN",
+                "destination": "MCI",
+                "opportunity": 1.3231412965128988
+              },
+              {
+                "origin": "BTV",
+                "destination": "MCI",
+                "opportunity": 1.12759674213143
+              },
+              {
+                "origin": "BGR",
+                "destination": "MCI",
+                "opportunity": 0.7736104255464803
+              },
+              {
+                "origin": "PIE",
+                "destination": "MCI",
+                "opportunity": 0.5793670087193139
+              }
+            ],
+            "feederFlightCount": 18,
+            "onwardFlightCount": 0,
+            "originGroups": {
+              "FLP": 1.460400900205043,
+              "CGI": 0.10176640332675431,
+              "MAC": 3.598753062827976,
+              "LEC": 4.816628557514326,
+              "NEC": 17.9926470683665
+            },
+            "destinationGroups": {
+              "HUB": 27.9701959922406
+            }
+          }
+        ],
+        "newlyConnectedMarketDemand": 80.2,
+        "marketsWithFasterBestItinerary": 27
+      },
+      "connectionAudit": {
+        "marketsWithSlowerBestItinerary": [],
+        "marketsLosingAllConnections": [],
+        "lostUnderlyingOd": 0,
+        "marketsWithFasterBestItinerary": 27
+      },
+      "newConnectedMarkets": [
+        {
+          "origin": "MKE",
+          "destination": "SRQ",
+          "od": 16.0
+        },
+        {
+          "origin": "MDT",
+          "destination": "SAT",
+          "od": 9.0
+        },
+        {
+          "origin": "MCI",
+          "destination": "ALB",
+          "od": 8.7
+        },
+        {
+          "origin": "MKE",
+          "destination": "ALB",
+          "od": 5.0
+        },
+        {
+          "origin": "PNS",
+          "destination": "SYR",
+          "od": 4.9
+        },
+        {
+          "origin": "ICT",
+          "destination": "PGD",
+          "od": 4.4
+        },
+        {
+          "origin": "MEM",
+          "destination": "SYR",
+          "od": 4.3
+        },
+        {
+          "origin": "MEM",
+          "destination": "ALB",
+          "od": 4.3
+        },
+        {
+          "origin": "OMA",
+          "destination": "ALB",
+          "od": 3.6
+        },
+        {
+          "origin": "TUL",
+          "destination": "ALB",
+          "od": 2.6
+        },
+        {
+          "origin": "LBB",
+          "destination": "JAX",
+          "od": 2.4
+        },
+        {
+          "origin": "MCI",
+          "destination": "HPN",
+          "od": 2.1
+        },
+        {
+          "origin": "LIT",
+          "destination": "ALB",
+          "od": 1.9
+        },
+        {
+          "origin": "SGF",
+          "destination": "ALB",
+          "od": 1.7
+        },
+        {
+          "origin": "ELP",
+          "destination": "SRQ",
+          "od": 1.6
+        },
+        {
+          "origin": "ICT",
+          "destination": "ALB",
+          "od": 1.5
+        },
+        {
+          "origin": "JAN",
+          "destination": "ALB",
+          "od": 1.2
+        },
+        {
+          "origin": "LBB",
+          "destination": "PGD",
+          "od": 1.0
+        },
+        {
+          "origin": "FSD",
+          "destination": "ALB",
+          "od": 1.0
+        },
+        {
+          "origin": "MFE",
+          "destination": "SYR",
+          "od": 0.7
+        },
+        {
+          "origin": "LBB",
+          "destination": "ALB",
+          "od": 0.7
+        },
+        {
+          "origin": "LBB",
+          "destination": "SYR",
+          "od": 0.5
+        },
+        {
+          "origin": "LBB",
+          "destination": "SRQ",
+          "od": 0.5
+        },
+        {
+          "origin": "MFE",
+          "destination": "ALB",
+          "od": 0.4
+        },
+        {
+          "origin": "ACY",
+          "destination": "SAT",
+          "od": 0.2
+        },
+        {
+          "origin": "MCI",
+          "destination": "HVN",
+          "od": 0.0
+        },
+        {
+          "origin": "PNS",
+          "destination": "HVN",
+          "od": 0.0
+        },
+        {
+          "origin": "PNS",
+          "destination": "SWF",
+          "od": 0.0
+        },
+        {
+          "origin": "MEM",
+          "destination": "HVN",
+          "od": 0.0
+        },
+        {
+          "origin": "MEM",
+          "destination": "SWF",
+          "od": 0.0
+        },
+        {
+          "origin": "LBB",
+          "destination": "HVN",
+          "od": 0.0
+        },
+        {
+          "origin": "LBB",
+          "destination": "SWF",
+          "od": 0.0
+        },
+        {
+          "origin": "LIT",
+          "destination": "HVN",
+          "od": 0.0
+        },
+        {
+          "origin": "MFE",
+          "destination": "HVN",
+          "od": 0.0
+        },
+        {
+          "origin": "MFE",
+          "destination": "SWF",
+          "od": 0.0
+        },
+        {
+          "origin": "OMA",
+          "destination": "HVN",
+          "od": 0.0
+        },
+        {
+          "origin": "ICT",
+          "destination": "HVN",
+          "od": 0.0
+        },
+        {
+          "origin": "TUL",
+          "destination": "HVN",
+          "od": 0.0
+        },
+        {
+          "origin": "FSD",
+          "destination": "HVN",
+          "od": 0.0
+        },
+        {
+          "origin": "SGF",
+          "destination": "HVN",
+          "od": 0.0
+        },
+        {
+          "origin": "SGF",
+          "destination": "SWF",
+          "od": 0.0
+        },
+        {
+          "origin": "MKE",
+          "destination": "HVN",
+          "od": 0.0
+        },
+        {
+          "origin": "MKE",
+          "destination": "SWF",
+          "od": 0.0
+        },
+        {
+          "origin": "JAN",
+          "destination": "HVN",
+          "od": 0.0
+        }
+      ],
+      "fasterMarkets": [
+        {
+          "origin": "SAT",
+          "destination": "PHF",
+          "od": 21.5,
+          "oldMinutes": 382,
+          "newMinutes": 303
+        },
+        {
+          "origin": "CHS",
+          "destination": "MCI",
+          "od": 20.4,
+          "oldMinutes": 345,
+          "newMinutes": 262
+        },
+        {
+          "origin": "BDL",
+          "destination": "MCI",
+          "od": 15.5,
+          "oldMinutes": 435,
+          "newMinutes": 420
+        },
+        {
+          "origin": "AUS",
+          "destination": "SYR",
+          "od": 13.2,
+          "oldMinutes": 418,
+          "newMinutes": 410
+        },
+        {
+          "origin": "BUF",
+          "destination": "SAT",
+          "od": 11.9,
+          "oldMinutes": 518,
+          "newMinutes": 443
+        },
+        {
+          "origin": "PVD",
+          "destination": "MCI",
+          "od": 11.4,
+          "oldMinutes": 372,
+          "newMinutes": 272
+        },
+        {
+          "origin": "BUF",
+          "destination": "MCI",
+          "od": 10.6,
+          "oldMinutes": 252,
+          "newMinutes": 249
+        },
+        {
+          "origin": "ALB",
+          "destination": "MCI",
+          "od": 8.8,
+          "oldMinutes": 407,
+          "newMinutes": 254
+        },
+        {
+          "origin": "MDT",
+          "destination": "MCI",
+          "od": 8.5,
+          "oldMinutes": 436,
+          "newMinutes": 247
+        },
+        {
+          "origin": "OMA",
+          "destination": "PHF",
+          "od": 7.1,
+          "oldMinutes": 331,
+          "newMinutes": 284
+        },
+        {
+          "origin": "PWM",
+          "destination": "SAT",
+          "od": 6.4,
+          "oldMinutes": 746,
+          "newMinutes": 565
+        },
+        {
+          "origin": "ELP",
+          "destination": "PHF",
+          "od": 6.0,
+          "oldMinutes": 407,
+          "newMinutes": 355
+        },
+        {
+          "origin": "TUL",
+          "destination": "PHF",
+          "od": 4.3,
+          "oldMinutes": 445,
+          "newMinutes": 387
+        },
+        {
+          "origin": "OMA",
+          "destination": "SYR",
+          "od": 3.4,
+          "oldMinutes": 347,
+          "newMinutes": 262
+        },
+        {
+          "origin": "JAN",
+          "destination": "PHF",
+          "od": 3.4,
+          "oldMinutes": 386,
+          "newMinutes": 377
+        },
+        {
+          "origin": "ICT",
+          "destination": "SRQ",
+          "od": 3.1,
+          "oldMinutes": 701,
+          "newMinutes": 648
+        },
+        {
+          "origin": "ELP",
+          "destination": "SYR",
+          "od": 2.8,
+          "oldMinutes": 578,
+          "newMinutes": 333
+        },
+        {
+          "origin": "SGF",
+          "destination": "PHF",
+          "od": 2.7,
+          "oldMinutes": 486,
+          "newMinutes": 332
+        },
+        {
+          "origin": "ABE",
+          "destination": "MCI",
+          "od": 2.6,
+          "oldMinutes": 407,
+          "newMinutes": 252
+        },
+        {
+          "origin": "ELP",
+          "destination": "ALB",
+          "od": 2.2,
+          "oldMinutes": 668,
+          "newMinutes": 607
+        },
+        {
+          "origin": "HPN",
+          "destination": "MCI",
+          "od": 2.0,
+          "oldMinutes": 450,
+          "newMinutes": 420
+        },
+        {
+          "origin": "SGF",
+          "destination": "SYR",
+          "od": 1.5,
+          "oldMinutes": 488,
+          "newMinutes": 310
+        },
+        {
+          "origin": "ICT",
+          "destination": "SYR",
+          "od": 1.4,
+          "oldMinutes": 402,
+          "newMinutes": 360
+        },
+        {
+          "origin": "JAN",
+          "destination": "SYR",
+          "od": 0.8,
+          "oldMinutes": 452,
+          "newMinutes": 355
+        },
+        {
+          "origin": "ACY",
+          "destination": "MCI",
+          "od": 0.2,
+          "oldMinutes": 436,
+          "newMinutes": 242
+        },
+        {
+          "origin": "HVN",
+          "destination": "MCI",
+          "od": 0.0,
+          "oldMinutes": 407,
+          "newMinutes": 266
+        },
+        {
+          "origin": "ELP",
+          "destination": "HVN",
+          "od": 0.0,
+          "oldMinutes": 676,
+          "newMinutes": 619
+        }
+      ],
+      "section26": {
+        "checkA": "pass",
+        "newCheckBFindings": 0,
+        "worsenedCheckBGaps": 0
+      },
+      "overlay": "config/proposals/schedule_7_v1_2_4_hub_swap_portfolio_337_344__159_165.json"
+    },
+    {
+      "options": [
+        "337-344",
+        "159-165",
+        "703-715"
+      ],
+      "validation": {
+        "structural": "pass",
+        "operatingErrors": 0,
+        "operatingWarnings": 177,
+        "hardStopFailures": [],
+        "blocking": [],
+        "overnight": "pass",
+        "overnightFindings": [],
+        "planning": "pass",
+        "gates": "pass",
+        "standClaims": 15,
+        "standMinutes": 3661,
+        "affectedStations": [
+          {
+            "code": "PHF",
+            "name": "Newport News VA",
+            "isHub": true,
+            "isFocusCity": false,
+            "nGates": 16,
+            "nStands": 8,
+            "peakUsed": 18,
+            "standClaims": 2,
+            "standMinutes": 142
+          },
+          {
+            "code": "SYR",
+            "name": "Syracuse NY",
+            "isHub": true,
+            "isFocusCity": false,
+            "nGates": 16,
+            "nStands": 8,
+            "peakUsed": 18,
+            "standClaims": 2,
+            "standMinutes": 464
+          },
+          {
+            "code": "DAY",
+            "name": "Dayton OH",
+            "isHub": true,
+            "isFocusCity": false,
+            "nGates": 16,
+            "nStands": 8,
+            "peakUsed": 16,
+            "standClaims": 0,
+            "standMinutes": 0
+          },
+          {
+            "code": "JAX",
+            "name": "Jacksonville FL",
+            "isHub": true,
+            "isFocusCity": false,
+            "nGates": 16,
+            "nStands": 12,
+            "peakUsed": 16,
+            "standClaims": 0,
+            "standMinutes": 0
+          },
+          {
+            "code": "BHM",
+            "name": "Birmingham AL",
+            "isHub": false,
+            "isFocusCity": true,
+            "nGates": 6,
+            "nStands": 4,
+            "peakUsed": 8,
+            "standClaims": 4,
+            "standMinutes": 290
+          },
+          {
+            "code": "BWI",
+            "name": "Baltimore MD",
+            "isHub": false,
+            "isFocusCity": false,
+            "nGates": 2,
+            "nStands": 2,
+            "peakUsed": 4,
+            "standClaims": 2,
+            "standMinutes": 804
+          }
+        ]
+      },
+      "lineLengths": {
+        "A": 11,
+        "AL": 9,
+        "AH": 9,
+        "AE": 10,
+        "AA": 10,
+        "AP": 9,
+        "AF": 9,
+        "B": 12
+      },
+      "maintenance": {
+        "A": {
+          "line": "A",
+          "maximumConsecutiveNonTargetRons": 1,
+          "limit": 10,
+          "grace": 1,
+          "longestRun": [
+            {
+              "day": 7,
+              "route": 707,
+              "city": "AUS",
+              "targetRon": false,
+              "hubOrFocusRon": false
+            }
+          ],
+          "targetRons": [
+            {
+              "day": 1,
+              "route": 701,
+              "city": "FLL",
+              "targetRon": true,
+              "hubOrFocusRon": false
+            },
+            {
+              "day": 2,
+              "route": 702,
+              "city": "SFB",
+              "targetRon": true,
+              "hubOrFocusRon": false
+            },
+            {
+              "day": 3,
+              "route": 703,
+              "city": "FLL",
+              "targetRon": true,
+              "hubOrFocusRon": false
+            },
+            {
+              "day": 4,
+              "route": 704,
+              "city": "PIE",
+              "targetRon": true,
+              "hubOrFocusRon": false
+            },
+            {
+              "day": 5,
+              "route": 705,
+              "city": "RFD",
+              "targetRon": true,
+              "hubOrFocusRon": false
+            },
+            {
+              "day": 6,
+              "route": 706,
+              "city": "PHF",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            },
+            {
+              "day": 8,
+              "route": 708,
+              "city": "PIE",
+              "targetRon": true,
+              "hubOrFocusRon": false
+            },
+            {
+              "day": 9,
+              "route": 709,
+              "city": "SFB",
+              "targetRon": true,
+              "hubOrFocusRon": false
+            },
+            {
+              "day": 10,
+              "route": 710,
+              "city": "MCI",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            }
+          ],
+          "hubOrFocusRons": [
+            {
+              "day": 6,
+              "route": 706,
+              "city": "PHF",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            },
+            {
+              "day": 10,
+              "route": 710,
+              "city": "MCI",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            }
+          ]
+        },
+        "AA": {
+          "line": "AA",
+          "maximumConsecutiveNonTargetRons": 3,
+          "limit": 10,
+          "grace": 1,
+          "longestRun": [
+            {
+              "day": 6,
+              "route": 306,
+              "city": "MSY",
+              "targetRon": false,
+              "hubOrFocusRon": false
+            },
+            {
+              "day": 7,
+              "route": 307,
+              "city": "LEX",
+              "targetRon": false,
+              "hubOrFocusRon": false
+            },
+            {
+              "day": 8,
+              "route": 308,
+              "city": "GSO",
+              "targetRon": false,
+              "hubOrFocusRon": false
+            }
+          ],
+          "targetRons": [
+            {
+              "day": 2,
+              "route": 302,
+              "city": "BHM",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            },
+            {
+              "day": 5,
+              "route": 305,
+              "city": "PHF",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            },
+            {
+              "day": 9,
+              "route": 309,
+              "city": "JAX",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            }
+          ],
+          "hubOrFocusRons": [
+            {
+              "day": 2,
+              "route": 302,
+              "city": "BHM",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            },
+            {
+              "day": 5,
+              "route": 305,
+              "city": "PHF",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            },
+            {
+              "day": 9,
+              "route": 309,
+              "city": "JAX",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            }
+          ]
+        },
+        "AE": {
+          "line": "AE",
+          "maximumConsecutiveNonTargetRons": 8,
+          "limit": 10,
+          "grace": 1,
+          "longestRun": [
+            {
+              "day": 3,
+              "route": 153,
+              "city": "VPS",
+              "targetRon": false,
+              "hubOrFocusRon": false
+            },
+            {
+              "day": 4,
+              "route": 154,
+              "city": "TLH",
+              "targetRon": false,
+              "hubOrFocusRon": false
+            },
+            {
+              "day": 5,
+              "route": 155,
+              "city": "BTR",
+              "targetRon": false,
+              "hubOrFocusRon": false
+            },
+            {
+              "day": 6,
+              "route": 156,
+              "city": "ECP",
+              "targetRon": false,
+              "hubOrFocusRon": false
+            },
+            {
+              "day": 7,
+              "route": 157,
+              "city": "OMA",
+              "targetRon": false,
+              "hubOrFocusRon": false
+            },
+            {
+              "day": 8,
+              "route": 158,
+              "city": "DSM",
+              "targetRon": false,
+              "hubOrFocusRon": false
+            },
+            {
+              "day": 9,
+              "route": 159,
+              "city": "JAN",
+              "targetRon": false,
+              "hubOrFocusRon": false
+            },
+            {
+              "day": 10,
+              "route": 160,
+              "city": "MAF",
+              "targetRon": false,
+              "hubOrFocusRon": false
+            }
+          ],
+          "targetRons": [
+            {
+              "day": 1,
+              "route": 151,
+              "city": "MCI",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            },
+            {
+              "day": 2,
+              "route": 152,
+              "city": "MCI",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            }
+          ],
+          "hubOrFocusRons": [
+            {
+              "day": 1,
+              "route": 151,
+              "city": "MCI",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            },
+            {
+              "day": 2,
+              "route": 152,
+              "city": "MCI",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            }
+          ]
+        },
+        "AF": {
+          "line": "AF",
+          "maximumConsecutiveNonTargetRons": 4,
+          "limit": 10,
+          "grace": 1,
+          "longestRun": [
+            {
+              "day": 2,
+              "route": 162,
+              "city": "CHA",
+              "targetRon": false,
+              "hubOrFocusRon": false
+            },
+            {
+              "day": 3,
+              "route": 163,
+              "city": "CRW",
+              "targetRon": false,
+              "hubOrFocusRon": false
+            },
+            {
+              "day": 4,
+              "route": 164,
+              "city": "SBN",
+              "targetRon": false,
+              "hubOrFocusRon": false
+            },
+            {
+              "day": 5,
+              "route": 165,
+              "city": "FWA",
+              "targetRon": false,
+              "hubOrFocusRon": false
+            }
+          ],
+          "targetRons": [
+            {
+              "day": 1,
+              "route": 161,
+              "city": "SYR",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            },
+            {
+              "day": 6,
+              "route": 166,
+              "city": "MCI",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            }
+          ],
+          "hubOrFocusRons": [
+            {
+              "day": 1,
+              "route": 161,
+              "city": "SYR",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            },
+            {
+              "day": 6,
+              "route": 166,
+              "city": "MCI",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            }
+          ]
+        },
+        "AH": {
+          "line": "AH",
+          "maximumConsecutiveNonTargetRons": 7,
+          "limit": 10,
+          "grace": 1,
+          "longestRun": [
+            {
+              "day": 9,
+              "route": 319,
+              "city": "HRL",
+              "targetRon": false,
+              "hubOrFocusRon": false
+            },
+            {
+              "day": 1,
+              "route": 311,
+              "city": "CLT",
+              "targetRon": false,
+              "hubOrFocusRon": false
+            },
+            {
+              "day": 2,
+              "route": 312,
+              "city": "BUF",
+              "targetRon": false,
+              "hubOrFocusRon": false
+            },
+            {
+              "day": 3,
+              "route": 313,
+              "city": "CHS",
+              "targetRon": false,
+              "hubOrFocusRon": false
+            },
+            {
+              "day": 4,
+              "route": 314,
+              "city": "CLT",
+              "targetRon": false,
+              "hubOrFocusRon": false
+            },
+            {
+              "day": 5,
+              "route": 315,
+              "city": "MSY",
+              "targetRon": false,
+              "hubOrFocusRon": false
+            },
+            {
+              "day": 6,
+              "route": 316,
+              "city": "HOU",
+              "targetRon": false,
+              "hubOrFocusRon": false
+            }
+          ],
+          "targetRons": [
+            {
+              "day": 7,
+              "route": 317,
+              "city": "MCI",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            },
+            {
+              "day": 8,
+              "route": 318,
+              "city": "MCI",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            }
+          ],
+          "hubOrFocusRons": [
+            {
+              "day": 7,
+              "route": 317,
+              "city": "MCI",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            },
+            {
+              "day": 8,
+              "route": 318,
+              "city": "MCI",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            }
+          ]
+        },
+        "AL": {
+          "line": "AL",
+          "maximumConsecutiveNonTargetRons": 4,
+          "limit": 10,
+          "grace": 1,
+          "longestRun": [
+            {
+              "day": 7,
+              "route": 338,
+              "city": "SAV",
+              "targetRon": false,
+              "hubOrFocusRon": false
+            },
+            {
+              "day": 8,
+              "route": 339,
+              "city": "CHS",
+              "targetRon": false,
+              "hubOrFocusRon": false
+            },
+            {
+              "day": 9,
+              "route": 340,
+              "city": "CLT",
+              "targetRon": false,
+              "hubOrFocusRon": false
+            },
+            {
+              "day": 1,
+              "route": 320,
+              "city": "MEM",
+              "targetRon": false,
+              "hubOrFocusRon": false
+            }
+          ],
+          "targetRons": [
+            {
+              "day": 2,
+              "route": 321,
+              "city": "JAX",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            },
+            {
+              "day": 6,
+              "route": 337,
+              "city": "PHF",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            }
+          ],
+          "hubOrFocusRons": [
+            {
+              "day": 2,
+              "route": 321,
+              "city": "JAX",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            },
+            {
+              "day": 6,
+              "route": 337,
+              "city": "PHF",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            }
+          ]
+        },
+        "AP": {
+          "line": "AP",
+          "maximumConsecutiveNonTargetRons": 6,
+          "limit": 10,
+          "grace": 1,
+          "longestRun": [
+            {
+              "day": 6,
+              "route": 346,
+              "city": "PIT",
+              "targetRon": false,
+              "hubOrFocusRon": false
+            },
+            {
+              "day": 7,
+              "route": 347,
+              "city": "SRQ",
+              "targetRon": false,
+              "hubOrFocusRon": false
+            },
+            {
+              "day": 8,
+              "route": 348,
+              "city": "ABE",
+              "targetRon": false,
+              "hubOrFocusRon": false
+            },
+            {
+              "day": 9,
+              "route": 349,
+              "city": "BDL",
+              "targetRon": false,
+              "hubOrFocusRon": false
+            },
+            {
+              "day": 1,
+              "route": 341,
+              "city": "BDL",
+              "targetRon": false,
+              "hubOrFocusRon": false
+            },
+            {
+              "day": 2,
+              "route": 342,
+              "city": "SAV",
+              "targetRon": false,
+              "hubOrFocusRon": false
+            }
+          ],
+          "targetRons": [
+            {
+              "day": 3,
+              "route": 343,
+              "city": "PHF",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            },
+            {
+              "day": 5,
+              "route": 345,
+              "city": "BNA",
+              "targetRon": true,
+              "hubOrFocusRon": false
+            }
+          ],
+          "hubOrFocusRons": [
+            {
+              "day": 3,
+              "route": 343,
+              "city": "PHF",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            }
+          ]
+        },
+        "B": {
+          "line": "B",
+          "maximumConsecutiveNonTargetRons": 2,
+          "limit": 10,
+          "grace": 1,
+          "longestRun": [
+            {
+              "day": 2,
+              "route": 713,
+              "city": "HPN",
+              "targetRon": false,
+              "hubOrFocusRon": false
+            },
+            {
+              "day": 3,
+              "route": 714,
+              "city": "PGD",
+              "targetRon": false,
+              "hubOrFocusRon": false
+            }
+          ],
+          "targetRons": [
+            {
+              "day": 1,
+              "route": 712,
+              "city": "MCI",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            },
+            {
+              "day": 4,
+              "route": 715,
+              "city": "FLL",
+              "targetRon": true,
+              "hubOrFocusRon": false
+            },
+            {
+              "day": 7,
+              "route": 718,
+              "city": "SFB",
+              "targetRon": true,
+              "hubOrFocusRon": false
+            },
+            {
+              "day": 8,
+              "route": 719,
+              "city": "PHF",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            },
+            {
+              "day": 9,
+              "route": 720,
+              "city": "BNA",
+              "targetRon": true,
+              "hubOrFocusRon": false
+            },
+            {
+              "day": 11,
+              "route": 722,
+              "city": "DAY",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            },
+            {
+              "day": 12,
+              "route": 723,
+              "city": "SFB",
+              "targetRon": true,
+              "hubOrFocusRon": false
+            }
+          ],
+          "hubOrFocusRons": [
+            {
+              "day": 1,
+              "route": 712,
+              "city": "MCI",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            },
+            {
+              "day": 8,
+              "route": 719,
+              "city": "PHF",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            },
+            {
+              "day": 11,
+              "route": 722,
+              "city": "DAY",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            }
+          ]
+        }
+      },
+      "banks": [
+        {
+          "id": "PHF-SWAP-337-344-N1",
+          "hub": "PHF",
+          "startMinute": 120,
+          "endMinute": 180
+        },
+        {
+          "id": "SYR-SWAP-159-165-N1",
+          "hub": "SYR",
+          "startMinute": 120,
+          "endMinute": 180
+        },
+        {
+          "id": "MCI-SWAP-159-165-N2",
+          "hub": "MCI",
+          "startMinute": 0,
+          "endMinute": 60
+        },
+        {
+          "id": "DAY-SWAP-703-715-N1",
+          "hub": "DAY",
+          "startMinute": 60,
+          "endMinute": 120
+        }
+      ],
+      "demand": {
+        "flights": [
+          {
+            "id": "V124-SWAP-337-344-R337-1-PHF-MCI",
+            "route": 317,
+            "line": "AH",
+            "fleet": "CRJ700",
+            "day": 7,
+            "sequenceWithinRoute": 6,
+            "pairing": 497,
+            "flight": 2171,
+            "origin": "PHF",
+            "destination": "MCI",
+            "departure": "20:45",
+            "arrival": "22:22",
+            "departureMinute": 1245,
+            "arrivalMinute": 1342,
+            "departureClock": "20:45",
+            "arrivalClock": "22:22",
+            "blockMinutes": 157,
+            "currentPairFrequency": 1,
+            "routeLocalOd": 14.0,
+            "local": 5.491270637172507,
+            "connecting": 73.6755882051102,
+            "total": 79.1668588422827,
+            "oneStop": 36.73144247098231,
+            "twoStop": 36.9441457341279,
+            "groups": {
+              "HUB": 37.814623913087665,
+              "TEX": 35.860964292022544
+            },
+            "connectingFlights": [
+              {
+                "flight": 2116,
+                "origin": "MCI",
+                "destination": "SAT",
+                "departure": "22:55",
+                "arrival": "00:51"
+              }
+            ],
+            "topMarkets": [
+              {
+                "origin": "MDT",
+                "destination": "SAT",
+                "opportunity": 9.0
+              },
+              {
+                "origin": "MDT",
+                "destination": "MCI",
+                "opportunity": 7.262497285142383
+              },
+              {
+                "origin": "CHS",
+                "destination": "MCI",
+                "opportunity": 6.137152269215523
+              },
+              {
+                "origin": "PVD",
+                "destination": "MCI",
+                "opportunity": 5.695517226472433
+              },
+              {
+                "origin": "PHF",
+                "destination": "SAT",
+                "opportunity": 4.916734585752813
+              },
+              {
+                "origin": "RDU",
+                "destination": "SAT",
+                "opportunity": 3.880852518164525
+              },
+              {
+                "origin": "PWM",
+                "destination": "SAT",
+                "opportunity": 3.6942822719254336
+              },
+              {
+                "origin": "CHS",
+                "destination": "SAT",
+                "opportunity": 3.2361021208819447
+              },
+              {
+                "origin": "PIT",
+                "destination": "MCI",
+                "opportunity": 2.4938236809070604
+              },
+              {
+                "origin": "SAV",
+                "destination": "MCI",
+                "opportunity": 2.2997782522065857
+              }
+            ],
+            "feederFlightCount": 20,
+            "onwardFlightCount": 1,
+            "originGroups": {
+              "FLP": 4.000307789266242,
+              "CGI": 22.000712825504515,
+              "HUB": 6.871424652506957,
+              "LEC": 7.6477917043390145,
+              "NEC": 14.428405897711013,
+              "MAC": 18.72694533578247
+            },
+            "destinationGroups": {
+              "HUB": 37.814623913087665,
+              "TEX": 35.860964292022544
+            }
+          },
+          {
+            "id": "V124-SWAP-337-344-R344-1-MCI-PHF",
+            "route": 337,
+            "line": "AL",
+            "fleet": "CRJ700",
+            "day": 6,
+            "sequenceWithinRoute": 7,
+            "pairing": 688,
+            "flight": 2172,
+            "origin": "MCI",
+            "destination": "PHF",
+            "departure": "22:45",
+            "arrival": "02:22",
+            "departureMinute": 1365,
+            "arrivalMinute": 1582,
+            "departureClock": "22:45",
+            "arrivalClock": "02:22 +1",
+            "blockMinutes": 157,
+            "currentPairFrequency": 1,
+            "routeLocalOd": 13.7,
+            "local": 5.6483562118171395,
+            "connecting": 105.5455277900912,
+            "total": 111.19388400190834,
+            "oneStop": 32.44344512388167,
+            "twoStop": 73.10208266620953,
+            "groups": {
+              "FLP": 56.30659790949246,
+              "MAC": 0.07960125419430145,
+              "HUB": 36.186478307774735,
+              "NEC": 5.938913024950169,
+              "LEC": 4.427221506866526,
+              "GCP": 0.8224873193075912,
+              "CGI": 1.7842284675054114
+            },
+            "connectingFlights": [
+              {
+                "flight": 1933,
+                "origin": "PHF",
+                "destination": "PGD",
+                "departure": "04:37",
+                "arrival": "06:46"
+              },
+              {
+                "flight": 1939,
+                "origin": "PHF",
+                "destination": "SRQ",
+                "departure": "04:41",
+                "arrival": "06:48"
+              },
+              {
+                "flight": 1945,
+                "origin": "PHF",
+                "destination": "PNS",
+                "departure": "04:39",
+                "arrival": "05:47"
+              },
+              {
+                "flight": 2006,
+                "origin": "PHF",
+                "destination": "FLL",
+                "departure": "06:05",
+                "arrival": "08:08"
+              },
+              {
+                "flight": 2077,
+                "origin": "PHF",
+                "destination": "DAY",
+                "departure": "04:30",
+                "arrival": "05:59"
+              },
+              {
+                "flight": 2079,
+                "origin": "PHF",
+                "destination": "SYR",
+                "departure": "04:30",
+                "arrival": "05:53"
+              },
+              {
+                "flight": 2081,
+                "origin": "PHF",
+                "destination": "JAX",
+                "departure": "04:30",
+                "arrival": "06:06"
+              }
+            ],
+            "topMarkets": [
+              {
+                "origin": "MKE",
+                "destination": "SRQ",
+                "opportunity": 16.0
+              },
+              {
+                "origin": "SAT",
+                "destination": "PHF",
+                "opportunity": 8.536984004768467
+              },
+              {
+                "origin": "SAT",
+                "destination": "FLL",
+                "opportunity": 5.423464807910396
+              },
+              {
+                "origin": "MCI",
+                "destination": "SRQ",
+                "opportunity": 4.979097612723122
+              },
+              {
+                "origin": "ICT",
+                "destination": "PGD",
+                "opportunity": 4.4
+              },
+              {
+                "origin": "MKE",
+                "destination": "PGD",
+                "opportunity": 3.986991526850515
+              },
+              {
+                "origin": "MCI",
+                "destination": "PIT",
+                "opportunity": 3.7639915095494403
+              },
+              {
+                "origin": "OMA",
+                "destination": "PHF",
+                "opportunity": 3.3283348365457024
+              },
+              {
+                "origin": "TUL",
+                "destination": "PHF",
+                "opportunity": 2.867853488940874
+              },
+              {
+                "origin": "AUS",
+                "destination": "FLL",
+                "opportunity": 2.8193402985473845
+              }
+            ],
+            "feederFlightCount": 23,
+            "onwardFlightCount": 7,
+            "originGroups": {
+              "HUB": 20.071660391786338,
+              "TEX": 31.00421200885661,
+              "FLP": 0.12366216746783742,
+              "GCP": 2.055528774236901,
+              "GLC": 25.500322040403944,
+              "OZK": 18.405131615520073,
+              "UMP": 8.385010791819495
+            },
+            "destinationGroups": {
+              "FLP": 56.30659790949246,
+              "MAC": 0.07960125419430145,
+              "HUB": 36.186478307774735,
+              "NEC": 5.938913024950169,
+              "LEC": 4.427221506866526,
+              "GCP": 0.8224873193075912,
+              "CGI": 1.7842284675054114
+            }
+          },
+          {
+            "id": "V124-SWAP-159-165-R159-1-MCI-SYR",
+            "route": 161,
+            "line": "AF",
+            "fleet": "CRJ200",
+            "day": 1,
+            "sequenceWithinRoute": 6,
+            "pairing": 678,
+            "flight": 2173,
+            "origin": "MCI",
+            "destination": "SYR",
+            "departure": "22:15",
+            "arrival": "02:00",
+            "departureMinute": 1335,
+            "arrivalMinute": 1560,
+            "departureClock": "22:15",
+            "arrivalClock": "02:00 +1",
+            "blockMinutes": 165,
+            "currentPairFrequency": 1,
+            "routeLocalOd": 7.9,
+            "local": 3.689020258938525,
+            "connecting": 95.79043452851984,
+            "total": 99.47945478745837,
+            "oneStop": 42.081548557277664,
+            "twoStop": 53.70888597124217,
+            "groups": {
+              "HUB": 34.933969481321604,
+              "FLP": 1.4369036955175034,
+              "CGI": 1.5503669341814958,
+              "NEC": 57.86919441749924
+            },
+            "connectingFlights": [
+              {
+                "flight": 1749,
+                "origin": "SYR",
+                "destination": "ALB",
+                "departure": "05:50",
+                "arrival": "06:34"
+              },
+              {
+                "flight": 1305,
+                "origin": "SYR",
+                "destination": "CLT",
+                "departure": "05:57",
+                "arrival": "07:44"
+              },
+              {
+                "flight": 1875,
+                "origin": "SYR",
+                "destination": "HVN",
+                "departure": "05:50",
+                "arrival": "06:46"
+              },
+              {
+                "flight": 1223,
+                "origin": "SYR",
+                "destination": "PIE",
+                "departure": "05:25",
+                "arrival": "08:09"
+              },
+              {
+                "flight": 1885,
+                "origin": "SYR",
+                "destination": "SWF",
+                "departure": "05:50",
+                "arrival": "06:39"
+              }
+            ],
+            "topMarkets": [
+              {
+                "origin": "MCI",
+                "destination": "ALB",
+                "opportunity": 7.8422794440568095
+              },
+              {
+                "origin": "AUS",
+                "destination": "ALB",
+                "opportunity": 7.617315276981906
+              },
+              {
+                "origin": "MKE",
+                "destination": "ALB",
+                "opportunity": 5.0
+              },
+              {
+                "origin": "PNS",
+                "destination": "SYR",
+                "opportunity": 4.6303385781502415
+              },
+              {
+                "origin": "AUS",
+                "destination": "SYR",
+                "opportunity": 4.357591737832139
+              },
+              {
+                "origin": "MEM",
+                "destination": "SYR",
+                "opportunity": 4.3
+              },
+              {
+                "origin": "MEM",
+                "destination": "ALB",
+                "opportunity": 4.3
+              },
+              {
+                "origin": "BLV",
+                "destination": "ALB",
+                "opportunity": 4.223382042806249
+              },
+              {
+                "origin": "OMA",
+                "destination": "ALB",
+                "opportunity": 3.6
+              },
+              {
+                "origin": "HOU",
+                "destination": "SYR",
+                "opportunity": 2.9768037768766855
+              }
+            ],
+            "feederFlightCount": 30,
+            "onwardFlightCount": 5,
+            "originGroups": {
+              "FLP": 5.724549762629739,
+              "HUB": 8.263431099573793,
+              "GLC": 6.101169566672829,
+              "APP": 0.45436857382557067,
+              "TEX": 28.895041004950897,
+              "UMP": 12.963742439539905,
+              "GCP": 13.11467515039078,
+              "OZK": 20.273456930936323
+            },
+            "destinationGroups": {
+              "HUB": 34.933969481321604,
+              "FLP": 1.4369036955175034,
+              "CGI": 1.5503669341814958,
+              "NEC": 57.86919441749924
+            }
+          },
+          {
+            "id": "V124-SWAP-159-165-R165-1-SYR-MCI",
+            "route": 166,
+            "line": "AF",
+            "fleet": "CRJ200",
+            "day": 6,
+            "sequenceWithinRoute": 10,
+            "pairing": 679,
+            "flight": 2174,
+            "origin": "SYR",
+            "destination": "MCI",
+            "departure": "22:15",
+            "arrival": "00:00",
+            "departureMinute": 1335,
+            "arrivalMinute": 1440,
+            "departureClock": "22:15",
+            "arrivalClock": "00:00 +1",
+            "blockMinutes": 165,
+            "currentPairFrequency": 1,
+            "routeLocalOd": 8.0,
+            "local": 3.463842670089796,
+            "connecting": 26.588777087659047,
+            "total": 30.052619757748843,
+            "oneStop": 26.588777087659047,
+            "twoStop": 0,
+            "groups": {
+              "HUB": 26.588777087659047
+            },
+            "connectingFlights": [],
+            "topMarkets": [
+              {
+                "origin": "BDL",
+                "destination": "MCI",
+                "opportunity": 6.519072034261562
+              },
+              {
+                "origin": "ALB",
+                "destination": "MCI",
+                "opportunity": 5.858393891978165
+              },
+              {
+                "origin": "BWI",
+                "destination": "MCI",
+                "opportunity": 2.7385290829493005
+              },
+              {
+                "origin": "BUF",
+                "destination": "MCI",
+                "opportunity": 2.148184909347561
+              },
+              {
+                "origin": "PWM",
+                "destination": "MCI",
+                "opportunity": 2.013947966112802
+              },
+              {
+                "origin": "ROC",
+                "destination": "MCI",
+                "opportunity": 1.8969311507529663
+              },
+              {
+                "origin": "HPN",
+                "destination": "MCI",
+                "opportunity": 1.3231412965128988
+              },
+              {
+                "origin": "BTV",
+                "destination": "MCI",
+                "opportunity": 1.12759674213143
+              },
+              {
+                "origin": "BGR",
+                "destination": "MCI",
+                "opportunity": 0.7736104255464803
+              },
+              {
+                "origin": "PIE",
+                "destination": "MCI",
+                "opportunity": 0.5785768055579139
+              }
+            ],
+            "feederFlightCount": 18,
+            "onwardFlightCount": 0,
+            "originGroups": {
+              "FLP": 1.4547339586942387,
+              "CGI": 0.09933844371712248,
+              "MAC": 3.2215938179546426,
+              "LEC": 4.1973485107497055,
+              "NEC": 17.615762356543335
+            },
+            "destinationGroups": {
+              "HUB": 26.588777087659047
+            }
+          },
+          {
+            "id": "V124-SWAP-703-715-R703-1-DAY-MCI",
+            "route": 712,
+            "line": "B",
+            "fleet": "MAX9",
+            "day": 1,
+            "sequenceWithinRoute": 9,
+            "pairing": 609,
+            "flight": 2175,
+            "origin": "DAY",
+            "destination": "MCI",
+            "departure": "21:44",
+            "arrival": "22:21",
+            "departureMinute": 1304,
+            "arrivalMinute": 1341,
+            "departureClock": "21:44",
+            "arrivalClock": "22:21",
+            "blockMinutes": 97,
+            "currentPairFrequency": 2,
+            "routeLocalOd": 4.7,
+            "local": 1.7172707378709005,
+            "connecting": 120.61183546226351,
+            "total": 122.3291062001344,
+            "oneStop": 42.03628730100535,
+            "twoStop": 78.57554816125814,
+            "groups": {
+              "HUB": 46.7089681294199,
+              "TEX": 73.90286733284361
+            },
+            "connectingFlights": [
+              {
+                "flight": 2116,
+                "origin": "MCI",
+                "destination": "SAT",
+                "departure": "22:55",
+                "arrival": "00:51"
+              }
+            ],
+            "topMarkets": [
+              {
+                "origin": "BWI",
+                "destination": "SAT",
+                "opportunity": 15.042027512206129
+              },
+              {
+                "origin": "PIT",
+                "destination": "MCI",
+                "opportunity": 13.452738726115568
+              },
+              {
+                "origin": "RFD",
+                "destination": "SAT",
+                "opportunity": 11.845040343507666
+              },
+              {
+                "origin": "PIT",
+                "destination": "SAT",
+                "opportunity": 5.893410553746495
+              },
+              {
+                "origin": "CMH",
+                "destination": "SAT",
+                "opportunity": 5.667347875936513
+              },
+              {
+                "origin": "GRR",
+                "destination": "MCI",
+                "opportunity": 5.659526913502321
+              },
+              {
+                "origin": "BWI",
+                "destination": "MCI",
+                "opportunity": 5.519955706944209
+              },
+              {
+                "origin": "GRR",
+                "destination": "SAT",
+                "opportunity": 5.487318712794944
+              },
+              {
+                "origin": "DAY",
+                "destination": "SAT",
+                "opportunity": 5.429567943263274
+              },
+              {
+                "origin": "RDU",
+                "destination": "SAT",
+                "opportunity": 3.5916494754605734
+              }
+            ],
+            "feederFlightCount": 19,
+            "onwardFlightCount": 1,
+            "originGroups": {
+              "FLP": 4.116795856682195,
+              "CGI": 13.605092208250442,
+              "MAC": 20.951989444443846,
+              "GLC": 32.0539425470694,
+              "HUB": 8.068395854487566,
+              "LEC": 37.054777204985,
+              "GCP": 0.0616860622884184,
+              "APP": 3.5601063332269747,
+              "NEC": 1.1390499508296577
+            },
+            "destinationGroups": {
+              "HUB": 46.7089681294199,
+              "TEX": 73.90286733284361
+            }
+          },
+          {
+            "id": "V124-SWAP-703-715-R715-1-MCI-DAY",
+            "route": 722,
+            "line": "B",
+            "fleet": "MAX9",
+            "day": 11,
+            "sequenceWithinRoute": 7,
+            "pairing": 543,
+            "flight": 2176,
+            "origin": "MCI",
+            "destination": "DAY",
+            "departure": "22:45",
+            "arrival": "01:22",
+            "departureMinute": 1365,
+            "arrivalMinute": 1522,
+            "departureClock": "22:45",
+            "arrivalClock": "01:22 +1",
+            "blockMinutes": 97,
+            "currentPairFrequency": 2,
+            "routeLocalOd": 4.7,
+            "local": 1.727637359965933,
+            "connecting": 36.44235804769686,
+            "total": 38.169995407662796,
+            "oneStop": 16.335195988939734,
+            "twoStop": 20.107162058757122,
+            "groups": {
+              "FLP": 2.0467322884008716,
+              "CGI": 6.642949434097834,
+              "HUB": 25.214257423983987,
+              "GCP": 1.9364300555413922,
+              "NEC": 0.5250934918847957,
+              "APP": 0.07689535378798187
+            },
+            "connectingFlights": [
+              {
+                "flight": 2069,
+                "origin": "DAY",
+                "destination": "BHM",
+                "departure": "04:30",
+                "arrival": "05:01"
+              },
+              {
+                "flight": 2091,
+                "origin": "DAY",
+                "destination": "JAX",
+                "departure": "05:09",
+                "arrival": "06:58"
+              }
+            ],
+            "topMarkets": [
+              {
+                "origin": "SAT",
+                "destination": "DAY",
+                "opportunity": 6.17961092381702
+              },
+              {
+                "origin": "TUL",
+                "destination": "JAX",
+                "opportunity": 2.663163265352234
+              },
+              {
+                "origin": "MCI",
+                "destination": "GSO",
+                "opportunity": 2.2425950450546273
+              },
+              {
+                "origin": "SGF",
+                "destination": "JAX",
+                "opportunity": 1.9853059333083818
+              },
+              {
+                "origin": "LIT",
+                "destination": "DAY",
+                "opportunity": 1.6
+              },
+              {
+                "origin": "OMA",
+                "destination": "DAY",
+                "opportunity": 1.3431273532536934
+              },
+              {
+                "origin": "LBB",
+                "destination": "JAX",
+                "opportunity": 1.306648981708218
+              },
+              {
+                "origin": "MCI",
+                "destination": "SRQ",
+                "opportunity": 1.268335501660569
+              },
+              {
+                "origin": "ELP",
+                "destination": "DAY",
+                "opportunity": 1.2183015286946848
+              },
+              {
+                "origin": "MCI",
+                "destination": "CAE",
+                "opportunity": 1.1803510344543982
+              }
+            ],
+            "feederFlightCount": 22,
+            "onwardFlightCount": 2,
+            "originGroups": {
+              "HUB": 11.585561209294017,
+              "TEX": 10.403614932600703,
+              "UMP": 1.7592413898535575,
+              "OZK": 8.828736715386835,
+              "FLP": 1.2330752953414932,
+              "GCP": 2.090827713188688,
+              "GLC": 0.5413007920315642
+            },
+            "destinationGroups": {
+              "FLP": 2.0467322884008716,
+              "CGI": 6.642949434097834,
+              "HUB": 25.214257423983987,
+              "GCP": 1.9364300555413922,
+              "NEC": 0.5250934918847957,
+              "APP": 0.07689535378798187
+            }
+          }
+        ],
+        "newlyConnectedMarketDemand": 81.8,
+        "marketsWithFasterBestItinerary": 42
+      },
+      "connectionAudit": {
+        "marketsWithSlowerBestItinerary": [],
+        "marketsLosingAllConnections": [],
+        "lostUnderlyingOd": 0,
+        "marketsWithFasterBestItinerary": 42
+      },
+      "newConnectedMarkets": [
+        {
+          "origin": "MKE",
+          "destination": "SRQ",
+          "od": 16.0
+        },
+        {
+          "origin": "MDT",
+          "destination": "SAT",
+          "od": 9.0
+        },
+        {
+          "origin": "MCI",
+          "destination": "ALB",
+          "od": 8.7
+        },
+        {
+          "origin": "MKE",
+          "destination": "ALB",
+          "od": 5.0
+        },
+        {
+          "origin": "PNS",
+          "destination": "SYR",
+          "od": 4.9
+        },
+        {
+          "origin": "ICT",
+          "destination": "PGD",
+          "od": 4.4
+        },
+        {
+          "origin": "MEM",
+          "destination": "SYR",
+          "od": 4.3
+        },
+        {
+          "origin": "MEM",
+          "destination": "ALB",
+          "od": 4.3
+        },
+        {
+          "origin": "OMA",
+          "destination": "ALB",
+          "od": 3.6
+        },
+        {
+          "origin": "TUL",
+          "destination": "ALB",
+          "od": 2.6
+        },
+        {
+          "origin": "LBB",
+          "destination": "JAX",
+          "od": 2.4
+        },
+        {
+          "origin": "MCI",
+          "destination": "HPN",
+          "od": 2.1
+        },
+        {
+          "origin": "LIT",
+          "destination": "ALB",
+          "od": 1.9
+        },
+        {
+          "origin": "SGF",
+          "destination": "ALB",
+          "od": 1.7
+        },
+        {
+          "origin": "LIT",
+          "destination": "DAY",
+          "od": 1.6
+        },
+        {
+          "origin": "ELP",
+          "destination": "SRQ",
+          "od": 1.6
+        },
+        {
+          "origin": "ICT",
+          "destination": "ALB",
+          "od": 1.5
+        },
+        {
+          "origin": "JAN",
+          "destination": "ALB",
+          "od": 1.2
+        },
+        {
+          "origin": "LBB",
+          "destination": "PGD",
+          "od": 1.0
+        },
+        {
+          "origin": "FSD",
+          "destination": "ALB",
+          "od": 1.0
+        },
+        {
+          "origin": "MFE",
+          "destination": "SYR",
+          "od": 0.7
+        },
+        {
+          "origin": "LBB",
+          "destination": "ALB",
+          "od": 0.7
+        },
+        {
+          "origin": "LBB",
+          "destination": "SYR",
+          "od": 0.5
+        },
+        {
+          "origin": "LBB",
+          "destination": "SRQ",
+          "od": 0.5
+        },
+        {
+          "origin": "MFE",
+          "destination": "ALB",
+          "od": 0.4
+        },
+        {
+          "origin": "ACY",
+          "destination": "SAT",
+          "od": 0.2
+        },
+        {
+          "origin": "MCI",
+          "destination": "HVN",
+          "od": 0.0
+        },
+        {
+          "origin": "PNS",
+          "destination": "HVN",
+          "od": 0.0
+        },
+        {
+          "origin": "PNS",
+          "destination": "SWF",
+          "od": 0.0
+        },
+        {
+          "origin": "MEM",
+          "destination": "HVN",
+          "od": 0.0
+        },
+        {
+          "origin": "MEM",
+          "destination": "SWF",
+          "od": 0.0
+        },
+        {
+          "origin": "LBB",
+          "destination": "HVN",
+          "od": 0.0
+        },
+        {
+          "origin": "LBB",
+          "destination": "SWF",
+          "od": 0.0
+        },
+        {
+          "origin": "LIT",
+          "destination": "HVN",
+          "od": 0.0
+        },
+        {
+          "origin": "MFE",
+          "destination": "HVN",
+          "od": 0.0
+        },
+        {
+          "origin": "MFE",
+          "destination": "SWF",
+          "od": 0.0
+        },
+        {
+          "origin": "OMA",
+          "destination": "HVN",
+          "od": 0.0
+        },
+        {
+          "origin": "ICT",
+          "destination": "HVN",
+          "od": 0.0
+        },
+        {
+          "origin": "TUL",
+          "destination": "HVN",
+          "od": 0.0
+        },
+        {
+          "origin": "FSD",
+          "destination": "HVN",
+          "od": 0.0
+        },
+        {
+          "origin": "SGF",
+          "destination": "HVN",
+          "od": 0.0
+        },
+        {
+          "origin": "SGF",
+          "destination": "SWF",
+          "od": 0.0
+        },
+        {
+          "origin": "MKE",
+          "destination": "HVN",
+          "od": 0.0
+        },
+        {
+          "origin": "MKE",
+          "destination": "SWF",
+          "od": 0.0
+        },
+        {
+          "origin": "JAN",
+          "destination": "HVN",
+          "od": 0.0
+        }
+      ],
+      "fasterMarkets": [
+        {
+          "origin": "BWI",
+          "destination": "SAT",
+          "od": 58.3,
+          "oldMinutes": 383,
+          "newMinutes": 359
+        },
+        {
+          "origin": "PIT",
+          "destination": "SAT",
+          "od": 23.7,
+          "oldMinutes": 443,
+          "newMinutes": 426
+        },
+        {
+          "origin": "SAT",
+          "destination": "PHF",
+          "od": 21.5,
+          "oldMinutes": 382,
+          "newMinutes": 303
+        },
+        {
+          "origin": "PIT",
+          "destination": "MCI",
+          "od": 21.3,
+          "oldMinutes": 300,
+          "newMinutes": 276
+        },
+        {
+          "origin": "CHS",
+          "destination": "MCI",
+          "od": 20.4,
+          "oldMinutes": 345,
+          "newMinutes": 262
+        },
+        {
+          "origin": "BDL",
+          "destination": "MCI",
+          "od": 15.5,
+          "oldMinutes": 435,
+          "newMinutes": 420
+        },
+        {
+          "origin": "GRR",
+          "destination": "MCI",
+          "od": 13.7,
+          "oldMinutes": 325,
+          "newMinutes": 276
+        },
+        {
+          "origin": "AUS",
+          "destination": "SYR",
+          "od": 13.2,
+          "oldMinutes": 418,
+          "newMinutes": 410
+        },
+        {
+          "origin": "GRR",
+          "destination": "SAT",
+          "od": 13.0,
+          "oldMinutes": 503,
+          "newMinutes": 426
+        },
+        {
+          "origin": "SAT",
+          "destination": "DAY",
+          "od": 12.2,
+          "oldMinutes": 364,
+          "newMinutes": 243
+        },
+        {
+          "origin": "DAY",
+          "destination": "SAT",
+          "od": 11.9,
+          "oldMinutes": 361,
+          "newMinutes": 247
+        },
+        {
+          "origin": "BUF",
+          "destination": "SAT",
+          "od": 11.9,
+          "oldMinutes": 518,
+          "newMinutes": 443
+        },
+        {
+          "origin": "PVD",
+          "destination": "MCI",
+          "od": 11.4,
+          "oldMinutes": 372,
+          "newMinutes": 272
+        },
+        {
+          "origin": "BUF",
+          "destination": "MCI",
+          "od": 10.6,
+          "oldMinutes": 252,
+          "newMinutes": 249
+        },
+        {
+          "origin": "ALB",
+          "destination": "MCI",
+          "od": 8.8,
+          "oldMinutes": 407,
+          "newMinutes": 254
+        },
+        {
+          "origin": "MDT",
+          "destination": "MCI",
+          "od": 8.5,
+          "oldMinutes": 436,
+          "newMinutes": 247
+        },
+        {
+          "origin": "OMA",
+          "destination": "PHF",
+          "od": 7.1,
+          "oldMinutes": 331,
+          "newMinutes": 284
+        },
+        {
+          "origin": "PWM",
+          "destination": "SAT",
+          "od": 6.4,
+          "oldMinutes": 746,
+          "newMinutes": 565
+        },
+        {
+          "origin": "ELP",
+          "destination": "PHF",
+          "od": 6.0,
+          "oldMinutes": 407,
+          "newMinutes": 355
+        },
+        {
+          "origin": "CAE",
+          "destination": "MCI",
+          "od": 6.0,
+          "oldMinutes": 456,
+          "newMinutes": 401
+        },
+        {
+          "origin": "FWA",
+          "destination": "SAT",
+          "od": 5.1,
+          "oldMinutes": 483,
+          "newMinutes": 326
+        },
+        {
+          "origin": "MCI",
+          "destination": "DAY",
+          "od": 4.7,
+          "oldMinutes": 105,
+          "newMinutes": 97
+        },
+        {
+          "origin": "DAY",
+          "destination": "MCI",
+          "od": 4.7,
+          "oldMinutes": 105,
+          "newMinutes": 97
+        },
+        {
+          "origin": "TUL",
+          "destination": "PHF",
+          "od": 4.3,
+          "oldMinutes": 445,
+          "newMinutes": 387
+        },
+        {
+          "origin": "OMA",
+          "destination": "SYR",
+          "od": 3.4,
+          "oldMinutes": 347,
+          "newMinutes": 262
+        },
+        {
+          "origin": "JAN",
+          "destination": "PHF",
+          "od": 3.4,
+          "oldMinutes": 386,
+          "newMinutes": 377
+        },
+        {
+          "origin": "FWA",
+          "destination": "MCI",
+          "od": 3.3,
+          "oldMinutes": 190,
+          "newMinutes": 176
+        },
+        {
+          "origin": "ICT",
+          "destination": "SRQ",
+          "od": 3.1,
+          "oldMinutes": 701,
+          "newMinutes": 648
+        },
+        {
+          "origin": "ELP",
+          "destination": "SYR",
+          "od": 2.8,
+          "oldMinutes": 578,
+          "newMinutes": 333
+        },
+        {
+          "origin": "SGF",
+          "destination": "PHF",
+          "od": 2.7,
+          "oldMinutes": 486,
+          "newMinutes": 332
+        },
+        {
+          "origin": "ABE",
+          "destination": "MCI",
+          "od": 2.6,
+          "oldMinutes": 407,
+          "newMinutes": 252
+        },
+        {
+          "origin": "ELP",
+          "destination": "DAY",
+          "od": 2.4,
+          "oldMinutes": 390,
+          "newMinutes": 295
+        },
+        {
+          "origin": "ELP",
+          "destination": "ALB",
+          "od": 2.2,
+          "oldMinutes": 668,
+          "newMinutes": 607
+        },
+        {
+          "origin": "MLB",
+          "destination": "MCI",
+          "od": 2.2,
+          "oldMinutes": 507,
+          "newMinutes": 391
+        },
+        {
+          "origin": "HPN",
+          "destination": "MCI",
+          "od": 2.0,
+          "oldMinutes": 450,
+          "newMinutes": 420
+        },
+        {
+          "origin": "SGF",
+          "destination": "SYR",
+          "od": 1.5,
+          "oldMinutes": 488,
+          "newMinutes": 310
+        },
+        {
+          "origin": "ICT",
+          "destination": "SYR",
+          "od": 1.4,
+          "oldMinutes": 402,
+          "newMinutes": 360
+        },
+        {
+          "origin": "JAN",
+          "destination": "SYR",
+          "od": 0.8,
+          "oldMinutes": 452,
+          "newMinutes": 355
+        },
+        {
+          "origin": "SGF",
+          "destination": "DAY",
+          "od": 0.8,
+          "oldMinutes": 273,
+          "newMinutes": 272
+        },
+        {
+          "origin": "ACY",
+          "destination": "MCI",
+          "od": 0.2,
+          "oldMinutes": 436,
+          "newMinutes": 242
+        },
+        {
+          "origin": "HVN",
+          "destination": "MCI",
+          "od": 0.0,
+          "oldMinutes": 407,
+          "newMinutes": 266
+        },
+        {
+          "origin": "ELP",
+          "destination": "HVN",
+          "od": 0.0,
+          "oldMinutes": 676,
+          "newMinutes": 619
+        }
+      ],
+      "section26": {
+        "checkA": "pass",
+        "newCheckBFindings": 0,
+        "worsenedCheckBGaps": 0
+      },
+      "overlay": "config/proposals/schedule_7_v1_2_4_hub_swap_portfolio_337_344__159_165__703_715.json"
+    }
+  ],
+  "recommendation": {
+    "firstPriority": [
+      "337-344",
+      "159-165"
+    ],
+    "optionalLater": [
+      "703-715"
+    ],
+    "fallbackFor337_344": "314-345 if the 2h08 PHF overnight cannot support the required maintenance/crew plan. It has lower demand and requires another bank window.",
+    "defer": [
+      "115-136__125-135"
+    ],
+    "decline": [
+      "Other PHF-MCI alternatives once 337-344 is selected",
+      "703-708",
+      "703-722",
+      "CRJ900 exchanges without a proved line cover"
+    ],
+    "rationale": "The two first-priority swaps upgrade PHF-MCI and MCI-SYR from one to two departures each way, have complementary geographic benefits, and pass together. The optional MAX9 adds a third DAY-MCI flight, but a much weaker return and little genuinely new market coverage make it secondary. AD adds fifth DAY-JAX flights and needs a weak JAX-DAY leg to support the package."
+  }
+}
