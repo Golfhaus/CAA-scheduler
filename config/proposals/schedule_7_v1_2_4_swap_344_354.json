@@ -1,0 +1,350 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "schedule-7-v1.2.4-hub-swap-344-354",
+  "baseSchedule": {
+    "scheduleId": "schedule_7_v1_2_4_draft",
+    "canonical": "data/schedules/schedule_7_v1_2_4_round_4/canonical_schedule.json",
+    "sha256": "1d6e8fd937524657116664ee8fb0423b90e1b81099513c0c29387c532b393438"
+  },
+  "schedule": {
+    "id": "schedule_7_v1_2_4_swap_344_354",
+    "version": "1.2.4",
+    "label": "Unapproved reciprocal hub-swap candidate 344-354",
+    "status": "draft"
+  },
+  "approval": {
+    "status": "analysis only; bank/line changes not approved",
+    "publication": "Reserved to user decision",
+    "scope": "2 reciprocal extension legs with explicit line rebuilding and additional bank windows. Original clocks retained."
+  },
+  "hubBanksToAdd": [
+    {
+      "id": "PHF-SWAP-344-354-N1",
+      "hub": "PHF",
+      "startMinute": 120,
+      "endMinute": 180
+    },
+    {
+      "id": "PHF-SWAP-344-354-N2",
+      "hub": "PHF",
+      "startMinute": 1335,
+      "endMinute": 1395
+    },
+    {
+      "id": "MCI-SWAP-344-354-N3",
+      "hub": "MCI",
+      "startMinute": 0,
+      "endMinute": 60
+    }
+  ],
+  "hubBankCountOverrides": {
+    "PHF": 15,
+    "MCI": 13
+  },
+  "insertLegs": [
+    {
+      "id": "V124-SWAP-344-354-R344-1-MCI-PHF",
+      "origin": "MCI",
+      "destination": "PHF",
+      "departureMinute": 1365,
+      "arrivalMinute": 1582,
+      "route": 341
+    },
+    {
+      "id": "V124-SWAP-344-354-R354-1-PHF-MCI",
+      "origin": "PHF",
+      "destination": "MCI",
+      "departureMinute": 1374,
+      "arrivalMinute": 1471,
+      "route": 344
+    }
+  ],
+  "retimeLegs": [],
+  "bankAssignmentsToAdd": [
+    {
+      "legId": "V124-SWAP-344-354-R344-1-MCI-PHF",
+      "operation": "departure",
+      "bankId": "MCI-M12"
+    },
+    {
+      "legId": "V124-SWAP-344-354-R344-1-MCI-PHF",
+      "operation": "arrival",
+      "bankId": "PHF-SWAP-344-354-N1"
+    },
+    {
+      "legId": "V124-SWAP-344-354-R354-1-PHF-MCI",
+      "operation": "departure",
+      "bankId": "PHF-SWAP-344-354-N2"
+    },
+    {
+      "legId": "V124-SWAP-344-354-R354-1-PHF-MCI",
+      "operation": "arrival",
+      "bankId": "MCI-SWAP-344-354-N3"
+    }
+  ],
+  "bankAssignmentReplacements": [],
+  "operatingOverrides": [],
+  "routeReassignments": [
+    {
+      "sourceRoute": 312,
+      "expectedLine": "AH",
+      "expectedDay": 1,
+      "expectedFleet": "CRJ700",
+      "targetRoute": 312,
+      "line": "AH",
+      "day": 1
+    },
+    {
+      "sourceRoute": 313,
+      "expectedLine": "AH",
+      "expectedDay": 2,
+      "expectedFleet": "CRJ700",
+      "targetRoute": 313,
+      "line": "AH",
+      "day": 2
+    },
+    {
+      "sourceRoute": 314,
+      "expectedLine": "AH",
+      "expectedDay": 3,
+      "expectedFleet": "CRJ700",
+      "targetRoute": 314,
+      "line": "AH",
+      "day": 3
+    },
+    {
+      "sourceRoute": 353,
+      "expectedLine": "AS",
+      "expectedDay": 2,
+      "expectedFleet": "CRJ700",
+      "targetRoute": 315,
+      "line": "AH",
+      "day": 4
+    },
+    {
+      "sourceRoute": 348,
+      "expectedLine": "AL",
+      "expectedDay": 12,
+      "expectedFleet": "CRJ700",
+      "targetRoute": 316,
+      "line": "AH",
+      "day": 5
+    },
+    {
+      "sourceRoute": 320,
+      "expectedLine": "AH",
+      "expectedDay": 9,
+      "expectedFleet": "CRJ700",
+      "targetRoute": 317,
+      "line": "AH",
+      "day": 6
+    },
+    {
+      "sourceRoute": 321,
+      "expectedLine": "AH",
+      "expectedDay": 10,
+      "expectedFleet": "CRJ700",
+      "targetRoute": 318,
+      "line": "AH",
+      "day": 7
+    },
+    {
+      "sourceRoute": 322,
+      "expectedLine": "AH",
+      "expectedDay": 11,
+      "expectedFleet": "CRJ700",
+      "targetRoute": 319,
+      "line": "AH",
+      "day": 8
+    },
+    {
+      "sourceRoute": 323,
+      "expectedLine": "AH",
+      "expectedDay": 12,
+      "expectedFleet": "CRJ700",
+      "targetRoute": 320,
+      "line": "AH",
+      "day": 9
+    },
+    {
+      "sourceRoute": 324,
+      "expectedLine": "AH",
+      "expectedDay": 13,
+      "expectedFleet": "CRJ700",
+      "targetRoute": 321,
+      "line": "AH",
+      "day": 10
+    },
+    {
+      "sourceRoute": 315,
+      "expectedLine": "AH",
+      "expectedDay": 4,
+      "expectedFleet": "CRJ700",
+      "targetRoute": 322,
+      "line": "AL",
+      "day": 1
+    },
+    {
+      "sourceRoute": 316,
+      "expectedLine": "AH",
+      "expectedDay": 5,
+      "expectedFleet": "CRJ700",
+      "targetRoute": 323,
+      "line": "AL",
+      "day": 2
+    },
+    {
+      "sourceRoute": 317,
+      "expectedLine": "AH",
+      "expectedDay": 6,
+      "expectedFleet": "CRJ700",
+      "targetRoute": 324,
+      "line": "AL",
+      "day": 3
+    },
+    {
+      "sourceRoute": 318,
+      "expectedLine": "AH",
+      "expectedDay": 7,
+      "expectedFleet": "CRJ700",
+      "targetRoute": 337,
+      "line": "AL",
+      "day": 4
+    },
+    {
+      "sourceRoute": 319,
+      "expectedLine": "AH",
+      "expectedDay": 8,
+      "expectedFleet": "CRJ700",
+      "targetRoute": 338,
+      "line": "AL",
+      "day": 5
+    },
+    {
+      "sourceRoute": 349,
+      "expectedLine": "AL",
+      "expectedDay": 13,
+      "expectedFleet": "CRJ700",
+      "targetRoute": 339,
+      "line": "AL",
+      "day": 6
+    },
+    {
+      "sourceRoute": 343,
+      "expectedLine": "AL",
+      "expectedDay": 7,
+      "expectedFleet": "CRJ700",
+      "targetRoute": 340,
+      "line": "AL",
+      "day": 7
+    },
+    {
+      "sourceRoute": 344,
+      "expectedLine": "AL",
+      "expectedDay": 8,
+      "expectedFleet": "CRJ700",
+      "targetRoute": 341,
+      "line": "AL",
+      "day": 8
+    },
+    {
+      "sourceRoute": 352,
+      "expectedLine": "AS",
+      "expectedDay": 1,
+      "expectedFleet": "CRJ700",
+      "targetRoute": 342,
+      "line": "AL",
+      "day": 9
+    },
+    {
+      "sourceRoute": 337,
+      "expectedLine": "AL",
+      "expectedDay": 1,
+      "expectedFleet": "CRJ700",
+      "targetRoute": 343,
+      "line": "AS",
+      "day": 1
+    },
+    {
+      "sourceRoute": 354,
+      "expectedLine": "AS",
+      "expectedDay": 3,
+      "expectedFleet": "CRJ700",
+      "targetRoute": 344,
+      "line": "AS",
+      "day": 2
+    },
+    {
+      "sourceRoute": 345,
+      "expectedLine": "AL",
+      "expectedDay": 9,
+      "expectedFleet": "CRJ700",
+      "targetRoute": 345,
+      "line": "AS",
+      "day": 3
+    },
+    {
+      "sourceRoute": 346,
+      "expectedLine": "AL",
+      "expectedDay": 10,
+      "expectedFleet": "CRJ700",
+      "targetRoute": 346,
+      "line": "AS",
+      "day": 4
+    },
+    {
+      "sourceRoute": 347,
+      "expectedLine": "AL",
+      "expectedDay": 11,
+      "expectedFleet": "CRJ700",
+      "targetRoute": 347,
+      "line": "AS",
+      "day": 5
+    },
+    {
+      "sourceRoute": 338,
+      "expectedLine": "AL",
+      "expectedDay": 2,
+      "expectedFleet": "CRJ700",
+      "targetRoute": 348,
+      "line": "AS",
+      "day": 6
+    },
+    {
+      "sourceRoute": 339,
+      "expectedLine": "AL",
+      "expectedDay": 3,
+      "expectedFleet": "CRJ700",
+      "targetRoute": 349,
+      "line": "AS",
+      "day": 7
+    },
+    {
+      "sourceRoute": 340,
+      "expectedLine": "AL",
+      "expectedDay": 4,
+      "expectedFleet": "CRJ700",
+      "targetRoute": 352,
+      "line": "AS",
+      "day": 8
+    },
+    {
+      "sourceRoute": 341,
+      "expectedLine": "AL",
+      "expectedDay": 5,
+      "expectedFleet": "CRJ700",
+      "targetRoute": 353,
+      "line": "AS",
+      "day": 9
+    },
+    {
+      "sourceRoute": 342,
+      "expectedLine": "AL",
+      "expectedDay": 6,
+      "expectedFleet": "CRJ700",
+      "targetRoute": 354,
+      "line": "AS",
+      "day": 10
+    }
+  ]
+}

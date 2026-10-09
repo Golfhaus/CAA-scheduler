@@ -1,0 +1,290 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "schedule-7-v1.2.4-hub-swap-703-722",
+  "baseSchedule": {
+    "scheduleId": "schedule_7_v1_2_4_draft",
+    "canonical": "data/schedules/schedule_7_v1_2_4_round_4/canonical_schedule.json",
+    "sha256": "1d6e8fd937524657116664ee8fb0423b90e1b81099513c0c29387c532b393438"
+  },
+  "schedule": {
+    "id": "schedule_7_v1_2_4_swap_703_722",
+    "version": "1.2.4",
+    "label": "Unapproved reciprocal hub-swap candidate 703-722",
+    "status": "draft"
+  },
+  "approval": {
+    "status": "analysis only; bank/line changes not approved",
+    "publication": "Reserved to user decision",
+    "scope": "2 reciprocal extension legs with explicit line rebuilding and additional bank windows. Original clocks retained."
+  },
+  "hubBanksToAdd": [
+    {
+      "id": "PHF-SWAP-703-722-N1",
+      "hub": "PHF",
+      "startMinute": 1335,
+      "endMinute": 1395
+    },
+    {
+      "id": "DAY-SWAP-703-722-N2",
+      "hub": "DAY",
+      "startMinute": 1380,
+      "endMinute": 1440
+    }
+  ],
+  "hubBankCountOverrides": {
+    "PHF": 14,
+    "DAY": 10
+  },
+  "insertLegs": [
+    {
+      "id": "V124-SWAP-703-722-R703-1-DAY-PHF",
+      "origin": "DAY",
+      "destination": "PHF",
+      "departureMinute": 1265,
+      "arrivalMinute": 1351,
+      "route": 712
+    },
+    {
+      "id": "V124-SWAP-703-722-R722-1-PHF-DAY",
+      "origin": "PHF",
+      "destination": "DAY",
+      "departureMinute": 1322,
+      "arrivalMinute": 1408,
+      "route": 722
+    }
+  ],
+  "retimeLegs": [],
+  "bankAssignmentsToAdd": [
+    {
+      "legId": "V124-SWAP-703-722-R703-1-DAY-PHF",
+      "operation": "departure",
+      "bankId": "DAY-B9"
+    },
+    {
+      "legId": "V124-SWAP-703-722-R703-1-DAY-PHF",
+      "operation": "arrival",
+      "bankId": "PHF-SWAP-703-722-N1"
+    },
+    {
+      "legId": "V124-SWAP-703-722-R722-1-PHF-DAY",
+      "operation": "departure",
+      "bankId": "PHF-M7"
+    },
+    {
+      "legId": "V124-SWAP-703-722-R722-1-PHF-DAY",
+      "operation": "arrival",
+      "bankId": "DAY-SWAP-703-722-N2"
+    }
+  ],
+  "bankAssignmentReplacements": [],
+  "operatingOverrides": [],
+  "routeReassignments": [
+    {
+      "sourceRoute": 701,
+      "expectedLine": "A",
+      "expectedDay": 1,
+      "expectedFleet": "MAX9",
+      "targetRoute": 701,
+      "line": "A",
+      "day": 1
+    },
+    {
+      "sourceRoute": 702,
+      "expectedLine": "A",
+      "expectedDay": 2,
+      "expectedFleet": "MAX9",
+      "targetRoute": 702,
+      "line": "A",
+      "day": 2
+    },
+    {
+      "sourceRoute": 705,
+      "expectedLine": "A",
+      "expectedDay": 5,
+      "expectedFleet": "MAX9",
+      "targetRoute": 703,
+      "line": "A",
+      "day": 3
+    },
+    {
+      "sourceRoute": 706,
+      "expectedLine": "A",
+      "expectedDay": 6,
+      "expectedFleet": "MAX9",
+      "targetRoute": 704,
+      "line": "A",
+      "day": 4
+    },
+    {
+      "sourceRoute": 707,
+      "expectedLine": "A",
+      "expectedDay": 7,
+      "expectedFleet": "MAX9",
+      "targetRoute": 705,
+      "line": "A",
+      "day": 5
+    },
+    {
+      "sourceRoute": 708,
+      "expectedLine": "A",
+      "expectedDay": 8,
+      "expectedFleet": "MAX9",
+      "targetRoute": 706,
+      "line": "A",
+      "day": 6
+    },
+    {
+      "sourceRoute": 709,
+      "expectedLine": "A",
+      "expectedDay": 9,
+      "expectedFleet": "MAX9",
+      "targetRoute": 707,
+      "line": "A",
+      "day": 7
+    },
+    {
+      "sourceRoute": 710,
+      "expectedLine": "A",
+      "expectedDay": 10,
+      "expectedFleet": "MAX9",
+      "targetRoute": 708,
+      "line": "A",
+      "day": 8
+    },
+    {
+      "sourceRoute": 711,
+      "expectedLine": "A",
+      "expectedDay": 11,
+      "expectedFleet": "MAX9",
+      "targetRoute": 709,
+      "line": "A",
+      "day": 9
+    },
+    {
+      "sourceRoute": 712,
+      "expectedLine": "A",
+      "expectedDay": 12,
+      "expectedFleet": "MAX9",
+      "targetRoute": 710,
+      "line": "A",
+      "day": 10
+    },
+    {
+      "sourceRoute": 713,
+      "expectedLine": "A",
+      "expectedDay": 13,
+      "expectedFleet": "MAX9",
+      "targetRoute": 711,
+      "line": "A",
+      "day": 11
+    },
+    {
+      "sourceRoute": 703,
+      "expectedLine": "A",
+      "expectedDay": 3,
+      "expectedFleet": "MAX9",
+      "targetRoute": 712,
+      "line": "B",
+      "day": 1
+    },
+    {
+      "sourceRoute": 723,
+      "expectedLine": "B",
+      "expectedDay": 10,
+      "expectedFleet": "MAX9",
+      "targetRoute": 713,
+      "line": "B",
+      "day": 2
+    },
+    {
+      "sourceRoute": 714,
+      "expectedLine": "B",
+      "expectedDay": 1,
+      "expectedFleet": "MAX9",
+      "targetRoute": 714,
+      "line": "B",
+      "day": 3
+    },
+    {
+      "sourceRoute": 715,
+      "expectedLine": "B",
+      "expectedDay": 2,
+      "expectedFleet": "MAX9",
+      "targetRoute": 715,
+      "line": "B",
+      "day": 4
+    },
+    {
+      "sourceRoute": 716,
+      "expectedLine": "B",
+      "expectedDay": 3,
+      "expectedFleet": "MAX9",
+      "targetRoute": 716,
+      "line": "B",
+      "day": 5
+    },
+    {
+      "sourceRoute": 717,
+      "expectedLine": "B",
+      "expectedDay": 4,
+      "expectedFleet": "MAX9",
+      "targetRoute": 717,
+      "line": "B",
+      "day": 6
+    },
+    {
+      "sourceRoute": 718,
+      "expectedLine": "B",
+      "expectedDay": 5,
+      "expectedFleet": "MAX9",
+      "targetRoute": 718,
+      "line": "B",
+      "day": 7
+    },
+    {
+      "sourceRoute": 719,
+      "expectedLine": "B",
+      "expectedDay": 6,
+      "expectedFleet": "MAX9",
+      "targetRoute": 719,
+      "line": "B",
+      "day": 8
+    },
+    {
+      "sourceRoute": 720,
+      "expectedLine": "B",
+      "expectedDay": 7,
+      "expectedFleet": "MAX9",
+      "targetRoute": 720,
+      "line": "B",
+      "day": 9
+    },
+    {
+      "sourceRoute": 721,
+      "expectedLine": "B",
+      "expectedDay": 8,
+      "expectedFleet": "MAX9",
+      "targetRoute": 721,
+      "line": "B",
+      "day": 10
+    },
+    {
+      "sourceRoute": 722,
+      "expectedLine": "B",
+      "expectedDay": 9,
+      "expectedFleet": "MAX9",
+      "targetRoute": 722,
+      "line": "B",
+      "day": 11
+    },
+    {
+      "sourceRoute": 704,
+      "expectedLine": "A",
+      "expectedDay": 4,
+      "expectedFleet": "MAX9",
+      "targetRoute": 723,
+      "line": "B",
+      "day": 12
+    }
+  ]
+}

@@ -1,0 +1,254 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "schedule-7-v1.2.4-hub-swap-159-165",
+  "baseSchedule": {
+    "scheduleId": "schedule_7_v1_2_4_draft",
+    "canonical": "data/schedules/schedule_7_v1_2_4_round_4/canonical_schedule.json",
+    "sha256": "1d6e8fd937524657116664ee8fb0423b90e1b81099513c0c29387c532b393438"
+  },
+  "schedule": {
+    "id": "schedule_7_v1_2_4_swap_159_165",
+    "version": "1.2.4",
+    "label": "Unapproved reciprocal hub-swap candidate 159-165",
+    "status": "draft"
+  },
+  "approval": {
+    "status": "analysis only; bank/line changes not approved",
+    "publication": "Reserved to user decision",
+    "scope": "2 reciprocal extension legs with explicit line rebuilding and additional bank windows. Original clocks retained."
+  },
+  "hubBanksToAdd": [
+    {
+      "id": "SYR-SWAP-159-165-N1",
+      "hub": "SYR",
+      "startMinute": 120,
+      "endMinute": 180
+    },
+    {
+      "id": "MCI-SWAP-159-165-N2",
+      "hub": "MCI",
+      "startMinute": 0,
+      "endMinute": 60
+    }
+  ],
+  "hubBankCountOverrides": {
+    "SYR": 8,
+    "MCI": 13
+  },
+  "insertLegs": [
+    {
+      "id": "V124-SWAP-159-165-R159-1-MCI-SYR",
+      "origin": "MCI",
+      "destination": "SYR",
+      "departureMinute": 1335,
+      "arrivalMinute": 1560,
+      "route": 161
+    },
+    {
+      "id": "V124-SWAP-159-165-R165-1-SYR-MCI",
+      "origin": "SYR",
+      "destination": "MCI",
+      "departureMinute": 1335,
+      "arrivalMinute": 1440,
+      "route": 166
+    }
+  ],
+  "retimeLegs": [],
+  "bankAssignmentsToAdd": [
+    {
+      "legId": "V124-SWAP-159-165-R159-1-MCI-SYR",
+      "operation": "departure",
+      "bankId": "MCI-M12"
+    },
+    {
+      "legId": "V124-SWAP-159-165-R159-1-MCI-SYR",
+      "operation": "arrival",
+      "bankId": "SYR-SWAP-159-165-N1"
+    },
+    {
+      "legId": "V124-SWAP-159-165-R165-1-SYR-MCI",
+      "operation": "departure",
+      "bankId": "SYR-B7"
+    },
+    {
+      "legId": "V124-SWAP-159-165-R165-1-SYR-MCI",
+      "operation": "arrival",
+      "bankId": "MCI-SWAP-159-165-N2"
+    }
+  ],
+  "bankAssignmentReplacements": [],
+  "operatingOverrides": [],
+  "routeReassignments": [
+    {
+      "sourceRoute": 151,
+      "expectedLine": "AE",
+      "expectedDay": 1,
+      "expectedFleet": "CRJ200",
+      "targetRoute": 151,
+      "line": "AE",
+      "day": 1
+    },
+    {
+      "sourceRoute": 152,
+      "expectedLine": "AE",
+      "expectedDay": 2,
+      "expectedFleet": "CRJ200",
+      "targetRoute": 152,
+      "line": "AE",
+      "day": 2
+    },
+    {
+      "sourceRoute": 153,
+      "expectedLine": "AE",
+      "expectedDay": 3,
+      "expectedFleet": "CRJ200",
+      "targetRoute": 153,
+      "line": "AE",
+      "day": 3
+    },
+    {
+      "sourceRoute": 154,
+      "expectedLine": "AE",
+      "expectedDay": 4,
+      "expectedFleet": "CRJ200",
+      "targetRoute": 154,
+      "line": "AE",
+      "day": 4
+    },
+    {
+      "sourceRoute": 155,
+      "expectedLine": "AE",
+      "expectedDay": 5,
+      "expectedFleet": "CRJ200",
+      "targetRoute": 155,
+      "line": "AE",
+      "day": 5
+    },
+    {
+      "sourceRoute": 156,
+      "expectedLine": "AE",
+      "expectedDay": 6,
+      "expectedFleet": "CRJ200",
+      "targetRoute": 156,
+      "line": "AE",
+      "day": 6
+    },
+    {
+      "sourceRoute": 157,
+      "expectedLine": "AE",
+      "expectedDay": 7,
+      "expectedFleet": "CRJ200",
+      "targetRoute": 157,
+      "line": "AE",
+      "day": 7
+    },
+    {
+      "sourceRoute": 158,
+      "expectedLine": "AE",
+      "expectedDay": 8,
+      "expectedFleet": "CRJ200",
+      "targetRoute": 158,
+      "line": "AE",
+      "day": 8
+    },
+    {
+      "sourceRoute": 163,
+      "expectedLine": "AE",
+      "expectedDay": 13,
+      "expectedFleet": "CRJ200",
+      "targetRoute": 159,
+      "line": "AE",
+      "day": 9
+    },
+    {
+      "sourceRoute": 164,
+      "expectedLine": "AE",
+      "expectedDay": 14,
+      "expectedFleet": "CRJ200",
+      "targetRoute": 160,
+      "line": "AE",
+      "day": 10
+    },
+    {
+      "sourceRoute": 159,
+      "expectedLine": "AE",
+      "expectedDay": 9,
+      "expectedFleet": "CRJ200",
+      "targetRoute": 161,
+      "line": "AF",
+      "day": 1
+    },
+    {
+      "sourceRoute": 166,
+      "expectedLine": "AF",
+      "expectedDay": 2,
+      "expectedFleet": "CRJ200",
+      "targetRoute": 162,
+      "line": "AF",
+      "day": 2
+    },
+    {
+      "sourceRoute": 167,
+      "expectedLine": "AF",
+      "expectedDay": 3,
+      "expectedFleet": "CRJ200",
+      "targetRoute": 163,
+      "line": "AF",
+      "day": 3
+    },
+    {
+      "sourceRoute": 168,
+      "expectedLine": "AF",
+      "expectedDay": 4,
+      "expectedFleet": "CRJ200",
+      "targetRoute": 164,
+      "line": "AF",
+      "day": 4
+    },
+    {
+      "sourceRoute": 169,
+      "expectedLine": "AF",
+      "expectedDay": 5,
+      "expectedFleet": "CRJ200",
+      "targetRoute": 165,
+      "line": "AF",
+      "day": 5
+    },
+    {
+      "sourceRoute": 165,
+      "expectedLine": "AF",
+      "expectedDay": 1,
+      "expectedFleet": "CRJ200",
+      "targetRoute": 166,
+      "line": "AF",
+      "day": 6
+    },
+    {
+      "sourceRoute": 160,
+      "expectedLine": "AE",
+      "expectedDay": 10,
+      "expectedFleet": "CRJ200",
+      "targetRoute": 167,
+      "line": "AF",
+      "day": 7
+    },
+    {
+      "sourceRoute": 161,
+      "expectedLine": "AE",
+      "expectedDay": 11,
+      "expectedFleet": "CRJ200",
+      "targetRoute": 168,
+      "line": "AF",
+      "day": 8
+    },
+    {
+      "sourceRoute": 162,
+      "expectedLine": "AE",
+      "expectedDay": 12,
+      "expectedFleet": "CRJ200",
+      "targetRoute": 169,
+      "line": "AF",
+      "day": 9
+    }
+  ]
+}
