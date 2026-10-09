@@ -1,8 +1,8 @@
 # Schedule 7 v1.2.4 — Routes 304, 125 and 157 extension review
 
-Status: **proposals only, not implemented or published**. The accepted working draft remains at 1,164 flights. The four proposed flights would produce 1,168 flights. Main remains v1.2.3.
+Status: **approved and implemented in the unpublished v1.2.4 draft** following the instruction “Add the suggested additions from the last few messages to 1.2.4.” The accepted working draft now has **1,168 flights**. Route 304 remains unchanged; main remains v1.2.3.
 
-This review uses the immutable accepted round-three snapshot in `data/schedules/schedule_7_v1_2_4_round_3/canonical_schedule.json`. The replayable joint proposal is `config/proposals/schedule_7_v1_2_4_proposed_125_157.json`; the full screen and audit are `config/proposals/schedule_7_v1_2_4_extensions_review.json`. Its provisional flight numbers assume both proposed turns are accepted together.
+This review uses the immutable accepted round-three snapshot in `data/schedules/schedule_7_v1_2_4_round_3/canonical_schedule.json`. The original reviewed joint proposal is preserved in `config/proposals/schedule_7_v1_2_4_proposed_125_157.json`. Accepted incremental replay is `config/optimizations/schedule_7_v1_2_4_accepted_round_4.json`; cumulative replay from released v1.2.3 is `config/optimizations/schedule_7_v1_2_4_accepted_rounds_1_4.json`. The full screen and audit are `config/proposals/schedule_7_v1_2_4_extensions_review.json`. Flights 2167–2170 are now in the draft.
 
 ## Recommendation
 
@@ -20,7 +20,7 @@ This review uses the immutable accepted round-three snapshot in `data/schedules/
 
 All clocks are local; +1 means the following calendar day. Opportunities are from the existing pinned O-D and relative-choice connection model. **They are not forecast passengers, seat-capped loads, or net new demand.** Both proposed routes are CRJ200; modeled opportunities exceeding aircraft capacity demonstrate connectivity strength, not an achievable load. The same passenger opportunity can be represented on multiple legs.
 
-| Provisional flight | Route / line / day | Flight | Departure–arrival | Local opportunity | Connecting opportunity | Total opportunity | Pair frequency, each way |
+| Flight | Route / line / day | Flight | Departure–arrival | Local opportunity | Connecting opportunity | Total opportunity | Pair frequency, each way |
 |---|---|---|---|---:|---:|---:|---|
 | 2167 | 125 / AD / 15 | SYR–ROC | 06:06–06:45 ET | 0.3 | 0.9 | 1.2 | 3 → 4 |
 | 2168 | 125 / AD / 15 | ROC–SYR | 07:25–08:04 ET | 0.3 | 82.9 | 83.1 | 3 → 4 |
@@ -78,4 +78,4 @@ Combined audit: **no markets lose all qualifying connections**, five best itiner
 
 Screens use a bounded 5/15-minute grid, rank wide windows with one-stop marginal opportunities, then fully enumerate one/two-stop demand and validate selected options. Both the weak outbound demand and the effects of retiming are included. This is an aircraft schedule feasibility review, not crew legality, a fleet-capacity forecast, or an exhaustive network optimization.
 
-The accepted v1.2.4 canonical and main branch were not changed by this review.
+The accepted v1.2.4 canonical now includes both turns. The prior round-three canonical and draft report remain saved as an immutable comparison snapshot. Exact cumulative replay, all released identities and the two authorized released clock changes (1739 and 1811) were verified. Latest-release regression remains **49 checks passed against v1.2.3**. Main and the live app were not changed.

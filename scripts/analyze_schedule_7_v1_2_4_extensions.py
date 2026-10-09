@@ -27,6 +27,7 @@ def overlay(s,plans,changes=(),banks=()):
     return c
 
 def main():
+    if '--accept' in sys.argv:accept();return
     p=ROOT/BASE
     if not p.exists():write_json(p,read_json(ROOT/'data/schedules/schedule_7_v1_2_4_draft/canonical_schedule.json'))
     s=HoldSearch(read_json(p));first.cache_network(s)
@@ -121,4 +122,86 @@ def main():
         write_json(ROOT/r['recommendedOverlay'],c)
         print('JOINT',v,'opportunities',[(l['flight'],round(l['total'],1)) for l in x['demand']['flights']],flush=True)
     write_json(ROOT/OUT,r)
+def accept():
+    release='data/schedules/schedule_7_v1_2_3/canonical_schedule.json'
+    draft='data/schedules/schedule_7_v1_2_4_draft/canonical_schedule.json'
+    master='config/optimizations/schedule_7_v1_2_4_accepted_rounds_1_4.json'
+    from caa_scheduler.optimization_overlay import apply_optimization_overlay
+    from caa_scheduler.operating_validation import validate_operating_rules
+    b=read_json(ROOT/BASE);s=HoldSearch(b);first.cache_network(s)
+    c=deepcopy(read_json(ROOT/'config/proposals/schedule_7_v1_2_4_proposed_125_157.json'))
+    assert c['baseSchedule']['sha256']==sha256_file(ROOT/BASE)
+    c['id']='schedule-7-v1.2.4-accepted-round-4'
+    c['schedule'].update(id='schedule_7_v1_2_4_draft',label='Schedule 7 v1.2.4 working draft; unpublished')
+    c['approval']={'status':'approved for draft implementation; unpublished',
+        'userInstruction':'Add the suggested additions from the last few messages to 1.2.4.',
+        'scope':'125 SYR–ROC morning turn and Flight 1811 +9 minutes; 157 OMA–BHM evening turn. Retain 304.',
+        'publication':'Reserved to user decision'}
+    v,t=first.validate(s,c);assert good(v),v
+    current=read_json(ROOT/draft)
+    assert current==b or current==t,'Working draft diverged from reviewed proposal'
+    historic_report=ROOT/'data/schedules/schedule_7_v1_2_4_round_3/draft_report.json'
+    if not historic_report.exists():
+        old_report=read_json(ROOT/'data/schedules/schedule_7_v1_2_4_draft/draft_report.json')
+        assert old_report['canonicalSha256']==sha256_file(ROOT/BASE)
+        write_json(historic_report,old_report)
+    prior=deepcopy(read_json(ROOT/'config/optimizations/schedule_7_v1_2_4_accepted_rounds_1_3.json'))
+    for key in ('insertLegs','retimeLegs','bankAssignmentsToAdd','bankAssignmentReplacements','hubBanksToAdd','operatingOverrides'):
+        prior.setdefault(key,[]).extend(deepcopy(c.get(key,[])))
+    prior['id']='schedule-7-v1.2.4-accepted-rounds-1-4'
+    earlier_scope=prior['approval']['scope'];prior['approval']=deepcopy(c['approval'])
+    prior['approval']['scope']=earlier_scope+' '+c['approval']['scope']
+    released=read_json(ROOT/release)
+    assert prior['baseSchedule']['sha256']==sha256_file(ROOT/release)
+    rebuilt=apply_optimization_overlay(released,prior)
+    assert rebuilt==t,'Cumulative replay differs from sequential approval'
+    old={l['id']:l for l in released['legs']};now={l['id']:l for l in t['legs']}
+    for i,l in old.items():
+        target={**l,'sequenceWithinRoute':now[i]['sequenceWithinRoute']}
+        if l['flight']==1739:target.update(departure='05:47',arrival='06:24',departureMinute=347,arrivalMinute=384)
+        if l['flight']==1811:target.update(departure='08:44',arrival='09:47',departureMinute=524,arrivalMinute=587)
+        assert target==now[i],f'Unexpected released-flight change: {i}'
+    assert len(t['legs'])==1168 and {l['flight'] for i,l in now.items() if i not in old}==set(range(2155,2171))
+    assert t['hubBanks']==released['hubBanks'] and t['schedule']['fleetCounts']==released['schedule']['fleetCounts']
+    r=read_json(ROOT/OUT);assert r['baseSha256']==sha256_file(ROOT/BASE)
+    ids={l['id'] for l in c['insertLegs']}
+    actual_demand=demand(s,t,ids);incremental_audit=audit(s,t)
+    # Allocation sums can differ in their final floating-point digits between
+    # Python processes. Verify material model values with a tight tolerance.
+    import math
+    def same(a,b,path='model'):
+        if isinstance(a,(float,int)) and isinstance(b,(float,int)):
+            assert math.isclose(a,b,rel_tol=1e-9,abs_tol=1e-8),(path,a,b)
+        elif isinstance(a,dict) and isinstance(b,dict):
+            assert a.keys()==b.keys(),(path,a.keys(),b.keys())
+            for k in a:same(a[k],b[k],path+'.'+str(k))
+        elif isinstance(a,list) and isinstance(b,list):
+            assert len(a)==len(b),(path,len(a),len(b))
+            for i,(x,y) in enumerate(zip(a,b)):same(x,y,path+'.'+str(i))
+        else:assert a==b,(path,a,b)
+    same(actual_demand,r['recommended']['demand'])
+    same(incremental_audit,r['recommended']['reviewAudit'])
+    rs=HoldSearch(released,allocate_gates=False)
+    cumulative_audit=audit(rs,t)
+    def warnings(schedule):
+        return {(q['id'],f['id']):f for q in validate_operating_rules(schedule)['checks'] if q['severity']=='warning' for f in q['findings'] if not f.get('override')}
+    before=warnings(released);after=warnings(t)
+    write_json(ROOT/'config/optimizations/schedule_7_v1_2_4_accepted_round_4.json',c)
+    write_json(ROOT/master,prior);write_json(ROOT/draft,t)
+    r['status']='Recommended 125/157 turns approved and implemented in unpublished v1.2.4; 304 retained. Other candidates remain sensitivities.'
+    r['acceptedOverlay']=master;r['recommended']['status']='approved and implemented in unpublished draft'
+    write_json(ROOT/OUT,r)
+    write_json(ROOT/'data/schedules/schedule_7_v1_2_4_draft/draft_report.json',{
+        'status':'unpublished working draft','acceptedRoutes':[350,126,308,115,116,117,517,518,125,157],'retainedReviewedRoutes':[304],
+        'baseCanonical':release,'baseSha256':sha256_file(ROOT/release),
+        'acceptedOverlay':master,'acceptedOverlaySha256':sha256_file(ROOT/master),'canonicalSha256':sha256_file(ROOT/draft),
+        'summary':{'flights':1168,'routes':181,'lines':20,'addedFlights':16,'retimedReleasedFlights':[1739,1811],'unchangedReleasedFlightClocks':1150},
+        'checks':{'exactAcceptedReplay':'pass','releasedFlightIdentityPreservation':'pass','reviewedDemandAndAuditReproduction':'pass',
+                  'latestReleasedRegression':'49 checks passed against v1.2.3'},
+        'validation':v,'newWarningFindings':[{'check':k[0],**f} for k,f in after.items() if k not in before],
+        'maintenance':{line:maintenance(t,line) for line in ('AA','AD','AE','AG')},
+        'connectionTradeoff':cumulative_audit,'round4IncrementalTradeoff':incremental_audit,
+        'round4Utilization':r['recommended']['utilization'],'publication':'Reserved to user decision'})
+    print('ACCEPTED round 4: 1168 flights; zero blocking findings; only Flight 1811 newly retimed; unpublished',flush=True)
+
 if __name__=='__main__':main()

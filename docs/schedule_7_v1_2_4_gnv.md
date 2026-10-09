@@ -2,6 +2,8 @@
 
 **Implemented in the unpublished draft at the user's instruction.** Route 517 is the best current PHF terminator for the GNV overnight: it maintains ample MX coverage on line AG and returns in time for Route 518's unchanged 06:55 PHF–PIE flight. This resolves GNV overnight coverage and allows the 115/116/117 JAX/XNA plan to operate without a maintenance exception.
 
+This document records approved round-three flying and its 1,164-flight comparison state. Subsequent approved 125/157 additions bring the current unpublished draft to **1,168 flights**, with Flight 1811 also retimed by nine minutes. See `docs/schedule_7_v1_2_4_extensions.md`; current cumulative replay is `config/optimizations/schedule_7_v1_2_4_accepted_rounds_1_4.json`. All flying described here is retained.
+
 ## Added flying and the one existing-flight change
 
 | Flight | Route / line-day | Fleet | Added flying, local times | Modeled total opportunity |

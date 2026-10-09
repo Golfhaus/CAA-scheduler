@@ -8,39 +8,32 @@
     116,
     117,
     517,
-    518,
-    125,
-    157
-  ],
-  "retainedReviewedRoutes": [
-    304
+    518
   ],
   "baseCanonical": "data/schedules/schedule_7_v1_2_3/canonical_schedule.json",
   "baseSha256": "ad73563cd508331ac8d5e860a8361e2acdc3da97d0d40f3f87a5be6c31026b90",
-  "acceptedOverlay": "config/optimizations/schedule_7_v1_2_4_accepted_rounds_1_4.json",
-  "acceptedOverlaySha256": "05ad8b50d66ebcd2462db248423030548bd0ccefd24857865ff27451c28fca0c",
-  "canonicalSha256": "1d6e8fd937524657116664ee8fb0423b90e1b81099513c0c29387c532b393438",
+  "acceptedOverlay": "config/optimizations/schedule_7_v1_2_4_accepted_rounds_1_3.json",
+  "acceptedOverlaySha256": "030a1bb4e2fbf2dfb3da634f945c63475e1df7ef8965ccd485ee35ccb3d55aa2",
+  "canonicalSha256": "8025e0cbab9b2a3a1ac577e8b749d984b76e80c6ee1a672226614e89930e1f7d",
   "summary": {
-    "flights": 1168,
+    "flights": 1164,
     "routes": 181,
     "lines": 20,
-    "addedFlights": 16,
+    "addedFlights": 12,
     "retimedReleasedFlights": [
-      1739,
-      1811
+      1739
     ],
-    "unchangedReleasedFlightClocks": 1150
+    "unchangedReleasedFlightClocks": 1151
   },
   "checks": {
     "exactAcceptedReplay": "pass",
     "releasedFlightIdentityPreservation": "pass",
-    "reviewedDemandAndAuditReproduction": "pass",
     "latestReleasedRegression": "49 checks passed against v1.2.3"
   },
   "validation": {
     "structural": "pass",
     "operatingErrors": 0,
-    "operatingWarnings": 182,
+    "operatingWarnings": 183,
     "hardStopFailures": [],
     "blocking": [],
     "overnight": "pass",
@@ -147,95 +140,6 @@
     }
   ],
   "maintenance": {
-    "AA": {
-      "line": "AA",
-      "maximumConsecutiveNonTargetRons": 7,
-      "limit": 10,
-      "grace": 1,
-      "longestRun": [
-        {
-          "day": 3,
-          "route": 303,
-          "city": "PNS",
-          "targetRon": false,
-          "hubOrFocusRon": false
-        },
-        {
-          "day": 4,
-          "route": 304,
-          "city": "HRL",
-          "targetRon": false,
-          "hubOrFocusRon": false
-        },
-        {
-          "day": 5,
-          "route": 305,
-          "city": "CLT",
-          "targetRon": false,
-          "hubOrFocusRon": false
-        },
-        {
-          "day": 6,
-          "route": 306,
-          "city": "BUF",
-          "targetRon": false,
-          "hubOrFocusRon": false
-        },
-        {
-          "day": 7,
-          "route": 307,
-          "city": "CHS",
-          "targetRon": false,
-          "hubOrFocusRon": false
-        },
-        {
-          "day": 8,
-          "route": 308,
-          "city": "CLT",
-          "targetRon": false,
-          "hubOrFocusRon": false
-        },
-        {
-          "day": 9,
-          "route": 309,
-          "city": "MEM",
-          "targetRon": false,
-          "hubOrFocusRon": false
-        }
-      ],
-      "targetRons": [
-        {
-          "day": 2,
-          "route": 302,
-          "city": "BHM",
-          "targetRon": true,
-          "hubOrFocusRon": true
-        },
-        {
-          "day": 10,
-          "route": 310,
-          "city": "JAX",
-          "targetRon": true,
-          "hubOrFocusRon": true
-        }
-      ],
-      "hubOrFocusRons": [
-        {
-          "day": 2,
-          "route": 302,
-          "city": "BHM",
-          "targetRon": true,
-          "hubOrFocusRon": true
-        },
-        {
-          "day": 10,
-          "route": 310,
-          "city": "JAX",
-          "targetRon": true,
-          "hubOrFocusRon": true
-        }
-      ]
-    },
     "AD": {
       "line": "AD",
       "maximumConsecutiveNonTargetRons": 9,
@@ -409,102 +313,6 @@
         }
       ]
     },
-    "AE": {
-      "line": "AE",
-      "maximumConsecutiveNonTargetRons": 6,
-      "limit": 10,
-      "grace": 1,
-      "longestRun": [
-        {
-          "day": 3,
-          "route": 153,
-          "city": "VPS",
-          "targetRon": false,
-          "hubOrFocusRon": false
-        },
-        {
-          "day": 4,
-          "route": 154,
-          "city": "TLH",
-          "targetRon": false,
-          "hubOrFocusRon": false
-        },
-        {
-          "day": 5,
-          "route": 155,
-          "city": "BTR",
-          "targetRon": false,
-          "hubOrFocusRon": false
-        },
-        {
-          "day": 6,
-          "route": 156,
-          "city": "ECP",
-          "targetRon": false,
-          "hubOrFocusRon": false
-        },
-        {
-          "day": 7,
-          "route": 157,
-          "city": "OMA",
-          "targetRon": false,
-          "hubOrFocusRon": false
-        },
-        {
-          "day": 8,
-          "route": 158,
-          "city": "DSM",
-          "targetRon": false,
-          "hubOrFocusRon": false
-        }
-      ],
-      "targetRons": [
-        {
-          "day": 1,
-          "route": 151,
-          "city": "MCI",
-          "targetRon": true,
-          "hubOrFocusRon": true
-        },
-        {
-          "day": 2,
-          "route": 152,
-          "city": "MCI",
-          "targetRon": true,
-          "hubOrFocusRon": true
-        },
-        {
-          "day": 9,
-          "route": 159,
-          "city": "MCI",
-          "targetRon": true,
-          "hubOrFocusRon": true
-        }
-      ],
-      "hubOrFocusRons": [
-        {
-          "day": 1,
-          "route": 151,
-          "city": "MCI",
-          "targetRon": true,
-          "hubOrFocusRon": true
-        },
-        {
-          "day": 2,
-          "route": 152,
-          "city": "MCI",
-          "targetRon": true,
-          "hubOrFocusRon": true
-        },
-        {
-          "day": 9,
-          "route": 159,
-          "city": "MCI",
-          "targetRon": true,
-          "hubOrFocusRon": true
-        }
-      ]
-    },
     "AG": {
       "line": "AG",
       "maximumConsecutiveNonTargetRons": 3,
@@ -584,36 +392,12 @@
   "connectionTradeoff": {
     "marketsWithSlowerBestItinerary": [
       {
-        "origin": "SRQ",
-        "destination": "PVD",
-        "od": 33.5,
-        "oldFastestMinutes": 283,
-        "newFastestMinutes": 292,
-        "differenceMinutes": 9
-      },
-      {
-        "origin": "CAK",
-        "destination": "PVD",
-        "od": 5.1,
-        "oldFastestMinutes": 178,
-        "newFastestMinutes": 187,
-        "differenceMinutes": 9
-      },
-      {
         "origin": "GNV",
         "destination": "PIT",
         "od": 2.8,
         "oldFastestMinutes": 189,
         "newFastestMinutes": 282,
         "differenceMinutes": 93
-      },
-      {
-        "origin": "BUF",
-        "destination": "PVD",
-        "od": 2.6,
-        "oldFastestMinutes": 153,
-        "newFastestMinutes": 162,
-        "differenceMinutes": 9
       },
       {
         "origin": "GNV",
@@ -638,22 +422,6 @@
         "oldFastestMinutes": 124,
         "newFastestMinutes": 259,
         "differenceMinutes": 135
-      },
-      {
-        "origin": "BTV",
-        "destination": "PVD",
-        "od": 0.2,
-        "oldFastestMinutes": 158,
-        "newFastestMinutes": 167,
-        "differenceMinutes": 9
-      },
-      {
-        "origin": "ABE",
-        "destination": "PVD",
-        "od": 0.1,
-        "oldFastestMinutes": 308,
-        "newFastestMinutes": 317,
-        "differenceMinutes": 9
       }
     ],
     "marketsLosingAllConnections": [
@@ -679,123 +447,7 @@
       }
     ],
     "lostUnderlyingOd": 7.3,
-    "marketsWithFasterBestItinerary": 119
+    "marketsWithFasterBestItinerary": 74
   },
-  "round4IncrementalTradeoff": {
-    "marketsWithSlowerBestItinerary": [
-      {
-        "origin": "SRQ",
-        "destination": "PVD",
-        "od": 33.5,
-        "oldFastestMinutes": 283,
-        "newFastestMinutes": 292,
-        "differenceMinutes": 9
-      },
-      {
-        "origin": "CAK",
-        "destination": "PVD",
-        "od": 5.1,
-        "oldFastestMinutes": 178,
-        "newFastestMinutes": 187,
-        "differenceMinutes": 9
-      },
-      {
-        "origin": "BUF",
-        "destination": "PVD",
-        "od": 2.6,
-        "oldFastestMinutes": 153,
-        "newFastestMinutes": 162,
-        "differenceMinutes": 9
-      },
-      {
-        "origin": "BTV",
-        "destination": "PVD",
-        "od": 0.2,
-        "oldFastestMinutes": 158,
-        "newFastestMinutes": 167,
-        "differenceMinutes": 9
-      },
-      {
-        "origin": "ABE",
-        "destination": "PVD",
-        "od": 0.1,
-        "oldFastestMinutes": 308,
-        "newFastestMinutes": 317,
-        "differenceMinutes": 9
-      }
-    ],
-    "marketsLosingAllConnections": [],
-    "lostUnderlyingOd": 0,
-    "marketsWithFasterBestItinerary": 28
-  },
-  "round4Utilization": [
-    {
-      "route": 304,
-      "line": "AA",
-      "day": 4,
-      "oldBlockMinutes": 528,
-      "newBlockMinutes": 528,
-      "oldFinish": "19:42",
-      "newFinish": "19:42",
-      "nextOriginator": {
-        "route": 305,
-        "flight": 1448,
-        "origin": "HRL",
-        "departure": "06:39",
-        "departureMinute": 399,
-        "line": "AA",
-        "day": 5
-      },
-      "ronMinutes": 657,
-      "addedAircraftTurnsMinutes": []
-    },
-    {
-      "route": 125,
-      "line": "AD",
-      "day": 15,
-      "oldBlockMinutes": 371,
-      "newBlockMinutes": 449,
-      "oldFinish": "19:43",
-      "newFinish": "19:43",
-      "nextOriginator": {
-        "route": 126,
-        "flight": 1503,
-        "origin": "DAY",
-        "departure": "05:50",
-        "departureMinute": 350,
-        "line": "AD",
-        "day": 16
-      },
-      "ronMinutes": 607,
-      "addedAircraftTurnsMinutes": [
-        40,
-        40,
-        40
-      ]
-    },
-    {
-      "route": 157,
-      "line": "AE",
-      "day": 7,
-      "oldBlockMinutes": 613,
-      "newBlockMinutes": 869,
-      "oldFinish": "19:44",
-      "newFinish": "01:31",
-      "nextOriginator": {
-        "route": 158,
-        "flight": 1637,
-        "origin": "OMA",
-        "departure": "05:45",
-        "departureMinute": 345,
-        "line": "AE",
-        "day": 8
-      },
-      "ronMinutes": 254,
-      "addedAircraftTurnsMinutes": [
-        46,
-        45
-      ]
-    }
-  ],
   "publication": "Reserved to user decision"
 }

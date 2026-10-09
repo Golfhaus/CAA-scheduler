@@ -5879,6 +5879,16 @@
       "legId": "V124-R3-R518-1-GNV-PHF",
       "operation": "arrival",
       "bankId": "PHF-B1"
+    },
+    {
+      "legId": "V124-R4-R125-1-SYR-ROC",
+      "operation": "departure",
+      "bankId": "SYR-B1"
+    },
+    {
+      "legId": "V124-R4-R125-2-ROC-SYR",
+      "operation": "arrival",
+      "bankId": "SYR-B2"
     }
   ],
   "cities": [
@@ -18648,7 +18658,7 @@
       "line": "AD",
       "fleet": "CRJ200",
       "day": 15,
-      "sequenceWithinRoute": 4,
+      "sequenceWithinRoute": 6,
       "pairing": 515,
       "flight": 1658,
       "origin": "SYR",
@@ -21096,15 +21106,15 @@
       "line": "AD",
       "fleet": "CRJ200",
       "day": 15,
-      "sequenceWithinRoute": 2,
+      "sequenceWithinRoute": 4,
       "pairing": 490,
       "flight": 1811,
       "origin": "SYR",
       "destination": "PVD",
-      "departure": "08:35",
-      "arrival": "09:38",
-      "departureMinute": 515,
-      "arrivalMinute": 578
+      "departure": "08:44",
+      "arrival": "09:47",
+      "departureMinute": 524,
+      "arrivalMinute": 587
     },
     {
       "id": "PVD-SYR-CRJ200-01-OUT",
@@ -21112,7 +21122,7 @@
       "line": "AD",
       "fleet": "CRJ200",
       "day": 15,
-      "sequenceWithinRoute": 3,
+      "sequenceWithinRoute": 5,
       "pairing": 491,
       "flight": 1812,
       "origin": "PVD",
@@ -21704,7 +21714,7 @@
       "line": "AD",
       "fleet": "CRJ200",
       "day": 15,
-      "sequenceWithinRoute": 5,
+      "sequenceWithinRoute": 7,
       "pairing": 632,
       "flight": 1849,
       "origin": "DAY",
@@ -21720,7 +21730,7 @@
       "line": "AD",
       "fleet": "CRJ200",
       "day": 15,
-      "sequenceWithinRoute": 6,
+      "sequenceWithinRoute": 8,
       "pairing": 812,
       "flight": 1850,
       "origin": "SDF",
@@ -26785,6 +26795,70 @@
       "arrival": "06:15",
       "departureMinute": 270,
       "arrivalMinute": 375
+    },
+    {
+      "id": "V124-R4-R125-1-SYR-ROC",
+      "route": 125,
+      "line": "AD",
+      "fleet": "CRJ200",
+      "day": 15,
+      "sequenceWithinRoute": 2,
+      "pairing": 815,
+      "flight": 2167,
+      "origin": "SYR",
+      "destination": "ROC",
+      "departure": "06:06",
+      "arrival": "06:45",
+      "departureMinute": 366,
+      "arrivalMinute": 405
+    },
+    {
+      "id": "V124-R4-R125-2-ROC-SYR",
+      "route": 125,
+      "line": "AD",
+      "fleet": "CRJ200",
+      "day": 15,
+      "sequenceWithinRoute": 3,
+      "pairing": 810,
+      "flight": 2168,
+      "origin": "ROC",
+      "destination": "SYR",
+      "departure": "07:25",
+      "arrival": "08:04",
+      "departureMinute": 445,
+      "arrivalMinute": 484
+    },
+    {
+      "id": "V124-R4-R157-1-OMA-BHM",
+      "route": 157,
+      "line": "AE",
+      "fleet": "CRJ200",
+      "day": 7,
+      "sequenceWithinRoute": 7,
+      "pairing": 863,
+      "flight": 2169,
+      "origin": "OMA",
+      "destination": "BHM",
+      "departure": "20:30",
+      "arrival": "22:38",
+      "departureMinute": 1230,
+      "arrivalMinute": 1358
+    },
+    {
+      "id": "V124-R4-R157-2-BHM-OMA",
+      "route": 157,
+      "line": "AE",
+      "fleet": "CRJ200",
+      "day": 7,
+      "sequenceWithinRoute": 8,
+      "pairing": 864,
+      "flight": 2170,
+      "origin": "BHM",
+      "destination": "OMA",
+      "departure": "23:23",
+      "arrival": "01:31",
+      "departureMinute": 1403,
+      "arrivalMinute": 1531
     }
   ]
 }

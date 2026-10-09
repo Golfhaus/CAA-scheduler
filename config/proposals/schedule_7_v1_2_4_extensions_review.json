@@ -1,7 +1,7 @@
 {
   "baseCanonical": "data/schedules/schedule_7_v1_2_4_round_3/canonical_schedule.json",
   "baseSha256": "8025e0cbab9b2a3a1ac577e8b749d984b76e80c6ee1a672226614e89930e1f7d",
-  "status": "Analysis only; proposed flying not implemented. Publication reserved to user.",
+  "status": "Recommended 125/157 turns approved and implemented in unpublished v1.2.4; 304 retained. Other candidates remain sensitivities.",
   "model": "Pinned O-D; seat-uncapped full-capture relative-choice one/two-stop opportunities, not forecast loads or incremental passengers",
   "inventory": [
     {
@@ -6312,8 +6312,10 @@
           45
         ]
       }
-    ]
+    ],
+    "status": "approved and implemented in unpublished draft"
   },
   "recommendedOverlay": "config/proposals/schedule_7_v1_2_4_proposed_125_157.json",
-  "searchScope": "Bounded 5/15-minute timing screens for same-city evening returns; modest route retiming; 125 SYR morning hold. No new banks, fleet swaps, or network-wide exhaustive rebuilding."
+  "searchScope": "Bounded 5/15-minute timing screens for same-city evening returns; modest route retiming; 125 SYR morning hold. No new banks, fleet swaps, or network-wide exhaustive rebuilding.",
+  "acceptedOverlay": "config/optimizations/schedule_7_v1_2_4_accepted_rounds_1_4.json"
 }
