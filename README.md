@@ -2,6 +2,21 @@
 
 CAA Scheduler is the migration target for Coastal American Airways schedule construction. It moves the durable schedule state and deterministic processing out of an LLM conversation and into version-controlled code and data.
 
+## Latest published release
+
+The app defaults to **Schedule 7 v1.2.4**, published October 10, 2026, with
+**1,170 flights across 181 routes and 20 routing lines**. This release supersedes
+v1.2.2 and v1.2.3. Release validation reports **zero effective operating errors**
+and **49 passing checks** in the latest-only regression suite.
+
+See the [v1.2.4 release notes](docs/schedule_7_v1_2_4_release.md) for approved
+flying, timing and line changes, validation, and reproduction commands. The
+[released v1.2.4 canonical schedule](data/schedules/schedule_7_v1_2_4/canonical_schedule.json)
+is the authoritative starting point for future schedule work; its pinned
+[release configuration](config/optimizations/schedule_7_v1_2_4.json) reproduces
+the published package. Earlier releases and draft snapshots remain available
+for historical reference.
+
 ## Milestone 0.7 — planning foundation
 
 The migration baseline now proves this pipeline:
@@ -37,7 +52,7 @@ v2.2.5 workbook + pinned city data
 
 The workbook remains a source for this one-time migration and will later become an export. The canonical JSON is the authoritative schedule representation going forward.
 
-## Run the baseline build
+## Run the historical migration baseline build
 
 From the repository root:
 
@@ -74,11 +89,6 @@ schedule. Superseded schedules and feasibility alternatives are excluded,
 including the v1.1 series. The manually dispatched **Latest Schedule
 Regression** workflow runs the same checks. See
 [`docs/regression_policy.md`](docs/regression_policy.md).
-
-The app defaults to **Schedule 7 v1.2.2**, released October 6, 2026. It adds
-12 daily flights using existing aircraft and a JAX evening bank. See
-[`docs/schedule_7_v1_2_2_release.md`](docs/schedule_7_v1_2_2_release.md) for
-the approved flying, timing adjustments, validation and reproduction command.
 
 ## Build the web console
 
@@ -165,7 +175,11 @@ For a previous-schedule start, the compiler resolves the pinned canonical baseli
 
 If Python preflight fails, blank-start planning is requested, or an airport addition lacks the future planning stage, no candidate is emitted. If any non-waivable hard-stop check fails—including curfew enforcement—the diagnostic reports are written but the canonical, timetable, and gate outputs are suppressed. Other operating findings produce a review-required candidate rather than being silently waived.
 
-## Current boundary
+## Migration engine boundary (Milestone 0.7.10)
+
+This section records the historical migration planning proposal and engine
+baseline. Use the released v1.2.4 canonical linked above for current schedule
+work.
 
 Milestone 0.7.10 adds construction-time Section 2.6 pairing spacing to the strict, auditable planning, demand, bank, topology-repair, exact-materialization, and canonicalization pipeline. Python reconstructs the historical plan, processes the complete pinned 105-city demand data, reproduces all 100 non-hub qualifications, and applies the current percentile-tier service caps before frequency allocation. Aircraft quantities still come only from each schedule's build configuration; no fleet count is inferred from policy or silently added by repair.
 
