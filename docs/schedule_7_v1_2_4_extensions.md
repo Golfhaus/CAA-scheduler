@@ -1,8 +1,8 @@
 # Schedule 7 v1.2.4 — Routes 304, 125 and 157 extension review
 
-Status: **approved and implemented in the unpublished v1.2.4 draft** following the instruction “Add the suggested additions from the last few messages to 1.2.4.” The accepted working draft now has **1,168 flights**. Route 304 remains unchanged; main remains v1.2.3.
+Status: **approved and implemented in the unpublished v1.2.4 draft** following the instruction “Add the suggested additions from the last few messages to 1.2.4.” At round-four acceptance the working draft had **1,168 flights**. Round five subsequently added the approved PHF–MCI exchange, bringing it to **1,170**; see `docs/schedule_7_v1_2_4_midnight_swap.md`. Route 304 remains unchanged; main remains v1.2.3.
 
-This review uses the immutable accepted round-three snapshot in `data/schedules/schedule_7_v1_2_4_round_3/canonical_schedule.json`. The original reviewed joint proposal is preserved in `config/proposals/schedule_7_v1_2_4_proposed_125_157.json`. Accepted incremental replay is `config/optimizations/schedule_7_v1_2_4_accepted_round_4.json`; cumulative replay from released v1.2.3 is `config/optimizations/schedule_7_v1_2_4_accepted_rounds_1_4.json`. The full screen and audit are `config/proposals/schedule_7_v1_2_4_extensions_review.json`. Flights 2167–2170 are now in the draft.
+This review uses the immutable accepted round-three snapshot in `data/schedules/schedule_7_v1_2_4_round_3/canonical_schedule.json`. The original reviewed joint proposal is preserved in `config/proposals/schedule_7_v1_2_4_proposed_125_157.json`. Accepted incremental replay is `config/optimizations/schedule_7_v1_2_4_accepted_round_4.json`; round-four cumulative replay from released v1.2.3 is `config/optimizations/schedule_7_v1_2_4_accepted_rounds_1_4.json`. The full screen and audit are `config/proposals/schedule_7_v1_2_4_extensions_review.json`. Flights 2167–2170 are now in the draft.
 
 ## Recommendation
 

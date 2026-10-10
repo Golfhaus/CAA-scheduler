@@ -1,6 +1,6 @@
 # Hub exchanges finishing by 00:01 local
 
-Recommendation only. No additions, retimings, bank changes or line changes have been applied to the accepted v1.2.4 draft. The 1,168-flight input remains unchanged; main remains v1.2.3.
+This is the original pre-approval review against the immutable 1,168-flight input. The user subsequently approved the repaired 337/345 CRJ700 option for the draft. It is now implemented in the 1,170-flight unpublished draft; see `docs/schedule_7_v1_2_4_midnight_swap.md`. Other alternatives remain unapproved. Main remains v1.2.3.
 
 ## Preferred revised option: routes 337 / 345, CRJ700
 
@@ -58,4 +58,4 @@ Scripts: `scripts/analyze_schedule_7_v1_2_4_midnight_swaps.py` and `scripts/anal
 
 Machine-readable reviews: `config/proposals/schedule_7_v1_2_4_00_01_swaps_review.json` and `config/proposals/schedule_7_v1_2_4_midnight_retimings_review.json`. Preferred analysis overlay: `config/proposals/schedule_7_v1_2_4_mid_retime_337_345_preserve.json`.
 
-No schedule changes are approved or published by this review.
+The repaired 337/345 option was subsequently approved and implemented in the unpublished draft. This review retains the original analysis; publication remains reserved to the user.

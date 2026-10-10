@@ -1,0 +1,801 @@
+{
+  "status": "unpublished working draft",
+  "acceptedRoutes": [
+    350,
+    126,
+    308,
+    115,
+    116,
+    117,
+    517,
+    518,
+    125,
+    157
+  ],
+  "retainedReviewedRoutes": [
+    304
+  ],
+  "baseCanonical": "data/schedules/schedule_7_v1_2_3/canonical_schedule.json",
+  "baseSha256": "ad73563cd508331ac8d5e860a8361e2acdc3da97d0d40f3f87a5be6c31026b90",
+  "acceptedOverlay": "config/optimizations/schedule_7_v1_2_4_accepted_rounds_1_4.json",
+  "acceptedOverlaySha256": "05ad8b50d66ebcd2462db248423030548bd0ccefd24857865ff27451c28fca0c",
+  "canonicalSha256": "1d6e8fd937524657116664ee8fb0423b90e1b81099513c0c29387c532b393438",
+  "summary": {
+    "flights": 1168,
+    "routes": 181,
+    "lines": 20,
+    "addedFlights": 16,
+    "retimedReleasedFlights": [
+      1739,
+      1811
+    ],
+    "unchangedReleasedFlightClocks": 1150
+  },
+  "checks": {
+    "exactAcceptedReplay": "pass",
+    "releasedFlightIdentityPreservation": "pass",
+    "reviewedDemandAndAuditReproduction": "pass",
+    "latestReleasedRegression": "49 checks passed against v1.2.3"
+  },
+  "validation": {
+    "structural": "pass",
+    "operatingErrors": 0,
+    "operatingWarnings": 182,
+    "hardStopFailures": [],
+    "blocking": [],
+    "overnight": "pass",
+    "overnightFindings": [],
+    "planning": "pass",
+    "gates": "pass",
+    "standClaims": 16,
+    "standMinutes": 3717,
+    "affectedStations": [
+      {
+        "code": "PHF",
+        "name": "Newport News VA",
+        "isHub": true,
+        "isFocusCity": false,
+        "nGates": 16,
+        "nStands": 8,
+        "peakUsed": 18,
+        "standClaims": 2,
+        "standMinutes": 142
+      },
+      {
+        "code": "SYR",
+        "name": "Syracuse NY",
+        "isHub": true,
+        "isFocusCity": false,
+        "nGates": 16,
+        "nStands": 8,
+        "peakUsed": 18,
+        "standClaims": 2,
+        "standMinutes": 464
+      },
+      {
+        "code": "DAY",
+        "name": "Dayton OH",
+        "isHub": true,
+        "isFocusCity": false,
+        "nGates": 16,
+        "nStands": 8,
+        "peakUsed": 16,
+        "standClaims": 0,
+        "standMinutes": 0
+      },
+      {
+        "code": "JAX",
+        "name": "Jacksonville FL",
+        "isHub": true,
+        "isFocusCity": false,
+        "nGates": 16,
+        "nStands": 12,
+        "peakUsed": 16,
+        "standClaims": 0,
+        "standMinutes": 0
+      },
+      {
+        "code": "BHM",
+        "name": "Birmingham AL",
+        "isHub": false,
+        "isFocusCity": true,
+        "nGates": 6,
+        "nStands": 4,
+        "peakUsed": 8,
+        "standClaims": 4,
+        "standMinutes": 290
+      },
+      {
+        "code": "BWI",
+        "name": "Baltimore MD",
+        "isHub": false,
+        "isFocusCity": false,
+        "nGates": 2,
+        "nStands": 2,
+        "peakUsed": 4,
+        "standClaims": 2,
+        "standMinutes": 804
+      }
+    ]
+  },
+  "newWarningFindings": [
+    {
+      "check": "section_26_city_departure_gap",
+      "id": "GNV",
+      "message": "GNV has no departure for more than 240 minutes",
+      "evidence": {
+        "city": "GNV",
+        "departures": [
+          270,
+          347,
+          505,
+          1242
+        ],
+        "excessiveGaps": [
+          {
+            "from": 505,
+            "to": 1242,
+            "minutes": 737
+          }
+        ],
+        "serviceWindowMinutes": {
+          "start": 270,
+          "end": 1260
+        },
+        "includesOvernightWrap": false
+      }
+    }
+  ],
+  "maintenance": {
+    "AA": {
+      "line": "AA",
+      "maximumConsecutiveNonTargetRons": 7,
+      "limit": 10,
+      "grace": 1,
+      "longestRun": [
+        {
+          "day": 3,
+          "route": 303,
+          "city": "PNS",
+          "targetRon": false,
+          "hubOrFocusRon": false
+        },
+        {
+          "day": 4,
+          "route": 304,
+          "city": "HRL",
+          "targetRon": false,
+          "hubOrFocusRon": false
+        },
+        {
+          "day": 5,
+          "route": 305,
+          "city": "CLT",
+          "targetRon": false,
+          "hubOrFocusRon": false
+        },
+        {
+          "day": 6,
+          "route": 306,
+          "city": "BUF",
+          "targetRon": false,
+          "hubOrFocusRon": false
+        },
+        {
+          "day": 7,
+          "route": 307,
+          "city": "CHS",
+          "targetRon": false,
+          "hubOrFocusRon": false
+        },
+        {
+          "day": 8,
+          "route": 308,
+          "city": "CLT",
+          "targetRon": false,
+          "hubOrFocusRon": false
+        },
+        {
+          "day": 9,
+          "route": 309,
+          "city": "MEM",
+          "targetRon": false,
+          "hubOrFocusRon": false
+        }
+      ],
+      "targetRons": [
+        {
+          "day": 2,
+          "route": 302,
+          "city": "BHM",
+          "targetRon": true,
+          "hubOrFocusRon": true
+        },
+        {
+          "day": 10,
+          "route": 310,
+          "city": "JAX",
+          "targetRon": true,
+          "hubOrFocusRon": true
+        }
+      ],
+      "hubOrFocusRons": [
+        {
+          "day": 2,
+          "route": 302,
+          "city": "BHM",
+          "targetRon": true,
+          "hubOrFocusRon": true
+        },
+        {
+          "day": 10,
+          "route": 310,
+          "city": "JAX",
+          "targetRon": true,
+          "hubOrFocusRon": true
+        }
+      ]
+    },
+    "AD": {
+      "line": "AD",
+      "maximumConsecutiveNonTargetRons": 9,
+      "limit": 10,
+      "grace": 1,
+      "longestRun": [
+        {
+          "day": 6,
+          "route": 116,
+          "city": "XNA",
+          "targetRon": false,
+          "hubOrFocusRon": false
+        },
+        {
+          "day": 7,
+          "route": 117,
+          "city": "PIA",
+          "targetRon": false,
+          "hubOrFocusRon": false
+        },
+        {
+          "day": 8,
+          "route": 118,
+          "city": "MFE",
+          "targetRon": false,
+          "hubOrFocusRon": false
+        },
+        {
+          "day": 9,
+          "route": 119,
+          "city": "DAB",
+          "targetRon": false,
+          "hubOrFocusRon": false
+        },
+        {
+          "day": 10,
+          "route": 120,
+          "city": "ISP",
+          "targetRon": false,
+          "hubOrFocusRon": false
+        },
+        {
+          "day": 11,
+          "route": 121,
+          "city": "PWM",
+          "targetRon": false,
+          "hubOrFocusRon": false
+        },
+        {
+          "day": 12,
+          "route": 122,
+          "city": "SWF",
+          "targetRon": false,
+          "hubOrFocusRon": false
+        },
+        {
+          "day": 13,
+          "route": 123,
+          "city": "ILM",
+          "targetRon": false,
+          "hubOrFocusRon": false
+        },
+        {
+          "day": 14,
+          "route": 124,
+          "city": "HVN",
+          "targetRon": false,
+          "hubOrFocusRon": false
+        }
+      ],
+      "targetRons": [
+        {
+          "day": 5,
+          "route": 115,
+          "city": "JAX",
+          "targetRon": true,
+          "hubOrFocusRon": true
+        },
+        {
+          "day": 15,
+          "route": 125,
+          "city": "DAY",
+          "targetRon": true,
+          "hubOrFocusRon": true
+        },
+        {
+          "day": 23,
+          "route": 133,
+          "city": "MCI",
+          "targetRon": true,
+          "hubOrFocusRon": true
+        },
+        {
+          "day": 25,
+          "route": 135,
+          "city": "MCI",
+          "targetRon": true,
+          "hubOrFocusRon": true
+        },
+        {
+          "day": 26,
+          "route": 136,
+          "city": "DAY",
+          "targetRon": true,
+          "hubOrFocusRon": true
+        },
+        {
+          "day": 28,
+          "route": 138,
+          "city": "DAY",
+          "targetRon": true,
+          "hubOrFocusRon": true
+        },
+        {
+          "day": 38,
+          "route": 148,
+          "city": "DAY",
+          "targetRon": true,
+          "hubOrFocusRon": true
+        }
+      ],
+      "hubOrFocusRons": [
+        {
+          "day": 5,
+          "route": 115,
+          "city": "JAX",
+          "targetRon": true,
+          "hubOrFocusRon": true
+        },
+        {
+          "day": 15,
+          "route": 125,
+          "city": "DAY",
+          "targetRon": true,
+          "hubOrFocusRon": true
+        },
+        {
+          "day": 23,
+          "route": 133,
+          "city": "MCI",
+          "targetRon": true,
+          "hubOrFocusRon": true
+        },
+        {
+          "day": 25,
+          "route": 135,
+          "city": "MCI",
+          "targetRon": true,
+          "hubOrFocusRon": true
+        },
+        {
+          "day": 26,
+          "route": 136,
+          "city": "DAY",
+          "targetRon": true,
+          "hubOrFocusRon": true
+        },
+        {
+          "day": 28,
+          "route": 138,
+          "city": "DAY",
+          "targetRon": true,
+          "hubOrFocusRon": true
+        },
+        {
+          "day": 38,
+          "route": 148,
+          "city": "DAY",
+          "targetRon": true,
+          "hubOrFocusRon": true
+        }
+      ]
+    },
+    "AE": {
+      "line": "AE",
+      "maximumConsecutiveNonTargetRons": 6,
+      "limit": 10,
+      "grace": 1,
+      "longestRun": [
+        {
+          "day": 3,
+          "route": 153,
+          "city": "VPS",
+          "targetRon": false,
+          "hubOrFocusRon": false
+        },
+        {
+          "day": 4,
+          "route": 154,
+          "city": "TLH",
+          "targetRon": false,
+          "hubOrFocusRon": false
+        },
+        {
+          "day": 5,
+          "route": 155,
+          "city": "BTR",
+          "targetRon": false,
+          "hubOrFocusRon": false
+        },
+        {
+          "day": 6,
+          "route": 156,
+          "city": "ECP",
+          "targetRon": false,
+          "hubOrFocusRon": false
+        },
+        {
+          "day": 7,
+          "route": 157,
+          "city": "OMA",
+          "targetRon": false,
+          "hubOrFocusRon": false
+        },
+        {
+          "day": 8,
+          "route": 158,
+          "city": "DSM",
+          "targetRon": false,
+          "hubOrFocusRon": false
+        }
+      ],
+      "targetRons": [
+        {
+          "day": 1,
+          "route": 151,
+          "city": "MCI",
+          "targetRon": true,
+          "hubOrFocusRon": true
+        },
+        {
+          "day": 2,
+          "route": 152,
+          "city": "MCI",
+          "targetRon": true,
+          "hubOrFocusRon": true
+        },
+        {
+          "day": 9,
+          "route": 159,
+          "city": "MCI",
+          "targetRon": true,
+          "hubOrFocusRon": true
+        }
+      ],
+      "hubOrFocusRons": [
+        {
+          "day": 1,
+          "route": 151,
+          "city": "MCI",
+          "targetRon": true,
+          "hubOrFocusRon": true
+        },
+        {
+          "day": 2,
+          "route": 152,
+          "city": "MCI",
+          "targetRon": true,
+          "hubOrFocusRon": true
+        },
+        {
+          "day": 9,
+          "route": 159,
+          "city": "MCI",
+          "targetRon": true,
+          "hubOrFocusRon": true
+        }
+      ]
+    },
+    "AG": {
+      "line": "AG",
+      "maximumConsecutiveNonTargetRons": 3,
+      "limit": 10,
+      "grace": 1,
+      "longestRun": [
+        {
+          "day": 9,
+          "route": 519,
+          "city": "CMH",
+          "targetRon": false,
+          "hubOrFocusRon": false
+        },
+        {
+          "day": 1,
+          "route": 511,
+          "city": "PIT",
+          "targetRon": false,
+          "hubOrFocusRon": false
+        },
+        {
+          "day": 2,
+          "route": 512,
+          "city": "BLV",
+          "targetRon": false,
+          "hubOrFocusRon": false
+        }
+      ],
+      "targetRons": [
+        {
+          "day": 3,
+          "route": 513,
+          "city": "PIE",
+          "targetRon": true,
+          "hubOrFocusRon": false
+        },
+        {
+          "day": 4,
+          "route": 514,
+          "city": "JAX",
+          "targetRon": true,
+          "hubOrFocusRon": true
+        },
+        {
+          "day": 6,
+          "route": 516,
+          "city": "FLL",
+          "targetRon": true,
+          "hubOrFocusRon": false
+        },
+        {
+          "day": 8,
+          "route": 518,
+          "city": "SYR",
+          "targetRon": true,
+          "hubOrFocusRon": true
+        }
+      ],
+      "hubOrFocusRons": [
+        {
+          "day": 4,
+          "route": 514,
+          "city": "JAX",
+          "targetRon": true,
+          "hubOrFocusRon": true
+        },
+        {
+          "day": 8,
+          "route": 518,
+          "city": "SYR",
+          "targetRon": true,
+          "hubOrFocusRon": true
+        }
+      ]
+    }
+  },
+  "connectionTradeoff": {
+    "marketsWithSlowerBestItinerary": [
+      {
+        "origin": "SRQ",
+        "destination": "PVD",
+        "od": 33.5,
+        "oldFastestMinutes": 283,
+        "newFastestMinutes": 292,
+        "differenceMinutes": 9
+      },
+      {
+        "origin": "CAK",
+        "destination": "PVD",
+        "od": 5.1,
+        "oldFastestMinutes": 178,
+        "newFastestMinutes": 187,
+        "differenceMinutes": 9
+      },
+      {
+        "origin": "GNV",
+        "destination": "PIT",
+        "od": 2.8,
+        "oldFastestMinutes": 189,
+        "newFastestMinutes": 282,
+        "differenceMinutes": 93
+      },
+      {
+        "origin": "BUF",
+        "destination": "PVD",
+        "od": 2.6,
+        "oldFastestMinutes": 153,
+        "newFastestMinutes": 162,
+        "differenceMinutes": 9
+      },
+      {
+        "origin": "GNV",
+        "destination": "ALB",
+        "od": 1.4,
+        "oldFastestMinutes": 418,
+        "newFastestMinutes": 542,
+        "differenceMinutes": 124
+      },
+      {
+        "origin": "GNV",
+        "destination": "ABE",
+        "od": 0.7,
+        "oldFastestMinutes": 307,
+        "newFastestMinutes": 347,
+        "differenceMinutes": 40
+      },
+      {
+        "origin": "GNV",
+        "destination": "PIE",
+        "od": 0.4,
+        "oldFastestMinutes": 124,
+        "newFastestMinutes": 259,
+        "differenceMinutes": 135
+      },
+      {
+        "origin": "BTV",
+        "destination": "PVD",
+        "od": 0.2,
+        "oldFastestMinutes": 158,
+        "newFastestMinutes": 167,
+        "differenceMinutes": 9
+      },
+      {
+        "origin": "ABE",
+        "destination": "PVD",
+        "od": 0.1,
+        "oldFastestMinutes": 308,
+        "newFastestMinutes": 317,
+        "differenceMinutes": 9
+      }
+    ],
+    "marketsLosingAllConnections": [
+      {
+        "origin": "GNV",
+        "destination": "RDU",
+        "od": 4.3
+      },
+      {
+        "origin": "GNV",
+        "destination": "LEX",
+        "od": 2.7
+      },
+      {
+        "origin": "GNV",
+        "destination": "AVP",
+        "od": 0.3
+      },
+      {
+        "origin": "GNV",
+        "destination": "TTN",
+        "od": 0.0
+      }
+    ],
+    "lostUnderlyingOd": 7.3,
+    "marketsWithFasterBestItinerary": 119
+  },
+  "round4IncrementalTradeoff": {
+    "marketsWithSlowerBestItinerary": [
+      {
+        "origin": "SRQ",
+        "destination": "PVD",
+        "od": 33.5,
+        "oldFastestMinutes": 283,
+        "newFastestMinutes": 292,
+        "differenceMinutes": 9
+      },
+      {
+        "origin": "CAK",
+        "destination": "PVD",
+        "od": 5.1,
+        "oldFastestMinutes": 178,
+        "newFastestMinutes": 187,
+        "differenceMinutes": 9
+      },
+      {
+        "origin": "BUF",
+        "destination": "PVD",
+        "od": 2.6,
+        "oldFastestMinutes": 153,
+        "newFastestMinutes": 162,
+        "differenceMinutes": 9
+      },
+      {
+        "origin": "BTV",
+        "destination": "PVD",
+        "od": 0.2,
+        "oldFastestMinutes": 158,
+        "newFastestMinutes": 167,
+        "differenceMinutes": 9
+      },
+      {
+        "origin": "ABE",
+        "destination": "PVD",
+        "od": 0.1,
+        "oldFastestMinutes": 308,
+        "newFastestMinutes": 317,
+        "differenceMinutes": 9
+      }
+    ],
+    "marketsLosingAllConnections": [],
+    "lostUnderlyingOd": 0,
+    "marketsWithFasterBestItinerary": 28
+  },
+  "round4Utilization": [
+    {
+      "route": 304,
+      "line": "AA",
+      "day": 4,
+      "oldBlockMinutes": 528,
+      "newBlockMinutes": 528,
+      "oldFinish": "19:42",
+      "newFinish": "19:42",
+      "nextOriginator": {
+        "route": 305,
+        "flight": 1448,
+        "origin": "HRL",
+        "departure": "06:39",
+        "departureMinute": 399,
+        "line": "AA",
+        "day": 5
+      },
+      "ronMinutes": 657,
+      "addedAircraftTurnsMinutes": []
+    },
+    {
+      "route": 125,
+      "line": "AD",
+      "day": 15,
+      "oldBlockMinutes": 371,
+      "newBlockMinutes": 449,
+      "oldFinish": "19:43",
+      "newFinish": "19:43",
+      "nextOriginator": {
+        "route": 126,
+        "flight": 1503,
+        "origin": "DAY",
+        "departure": "05:50",
+        "departureMinute": 350,
+        "line": "AD",
+        "day": 16
+      },
+      "ronMinutes": 607,
+      "addedAircraftTurnsMinutes": [
+        40,
+        40,
+        40
+      ]
+    },
+    {
+      "route": 157,
+      "line": "AE",
+      "day": 7,
+      "oldBlockMinutes": 613,
+      "newBlockMinutes": 869,
+      "oldFinish": "19:44",
+      "newFinish": "01:31",
+      "nextOriginator": {
+        "route": 158,
+        "flight": 1637,
+        "origin": "OMA",
+        "departure": "05:45",
+        "departureMinute": 345,
+        "line": "AE",
+        "day": 8
+      },
+      "ronMinutes": 254,
+      "addedAircraftTurnsMinutes": [
+        46,
+        45
+      ]
+    }
+  ],
+  "publication": "Reserved to user decision"
+}
