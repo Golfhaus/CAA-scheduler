@@ -1,5 +1,7 @@
 # Schedule 7 v1.2.4 — approved XNA/JAX/GNV overnight plan
 
+> Release update, October 10, 2026: accepted work below is published as v1.2.4. See [release notes](schedule_7_v1_2_4_release.md). Draft-stage status statements and source-route references below are historical. Start future work from the released v1.2.4 canonical.
+
 **Implemented in the unpublished draft at the user's instruction.** Route 517 is the best current PHF terminator for the GNV overnight: it maintains ample MX coverage on line AG and returns in time for Route 518's unchanged 06:55 PHF–PIE flight. This resolves GNV overnight coverage and allows the 115/116/117 JAX/XNA plan to operate without a maintenance exception.
 
 This document records approved round-three flying and its 1,164-flight comparison state. Subsequent approved 125/157 additions bring the current unpublished draft to **1,168 flights**, with Flight 1811 also retimed by nine minutes. See `docs/schedule_7_v1_2_4_extensions.md`; current cumulative replay is `config/optimizations/schedule_7_v1_2_4_accepted_rounds_1_4.json`. All flying described here is retained.

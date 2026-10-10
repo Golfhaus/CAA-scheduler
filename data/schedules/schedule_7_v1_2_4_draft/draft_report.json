@@ -1,5 +1,5 @@
 {
-  "status": "unpublished working draft",
+  "status": "accepted working draft; subsequently released as v1.2.4",
   "acceptedRoutes": [
     350,
     126,
@@ -42,7 +42,7 @@
     "exactAcceptedReplay": "pass",
     "releasedFlightIdentityPreservation": "pass",
     "reviewedDemandAndAuditReproduction": "pass",
-    "latestReleasedRegression": "49 checks passed against v1.2.3",
+    "latestReleasedRegression": "49 checks passed against v1.2.4",
     "round5ReviewedDemandAndAuditReproduction": "pass",
     "approvedRouteReconstructionAndFlightIdentityPreservation": "pass"
   },
@@ -1018,7 +1018,7 @@
       ]
     }
   ],
-  "publication": "Reserved to user decision",
+  "publication": "User authorized main publication October 10, 2026",
   "round5IncrementalTradeoff": {
     "marketsWithSlowerBestItinerary": [
       {
@@ -2371,5 +2371,6 @@
         "includesOvernightWrap": false
       }
     }
-  ]
+  ],
+  "releasedCanonical": "data/schedules/schedule_7_v1_2_4/canonical_schedule.json"
 }

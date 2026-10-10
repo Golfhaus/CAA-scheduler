@@ -1,5 +1,7 @@
 # Schedule 7 v1.2.4 — accepted midnight PHF/MCI exchange
 
+> Release update, October 10, 2026: accepted work below is published as v1.2.4. See [release notes](schedule_7_v1_2_4_release.md). Draft-stage status statements and source-route references below are historical. Start future work from the released v1.2.4 canonical.
+
 Approved for the unpublished draft by “Add the current recommendations to the draft.” This accepts the repaired CRJ700 source-route 337/345 exchange from the 00:01 review. SYR and the weak MAX9/CRJ200 alternatives remain deferred. Main and the live app remain v1.2.3.
 
 The draft has **1,170 flights**, including **18 additions** since released v1.2.3. Incremental replay is `config/optimizations/schedule_7_v1_2_4_accepted_round_5.json`; exact cumulative replay from v1.2.3 is `config/optimizations/schedule_7_v1_2_4_accepted_rounds_1_5.json`. The previous 1,168-flight canonical and report remain immutable in `data/schedules/schedule_7_v1_2_4_round_4/`.

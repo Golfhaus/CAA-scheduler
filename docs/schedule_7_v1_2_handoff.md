@@ -1,5 +1,7 @@
 # Schedule 7 v1.2 handoff
 
+> Current release, October 10, 2026: **v1.2.4** is the app default. Read `docs/schedule_7_v1_2_4_release.md` and `docs/regression_policy.md` first. Start future work from `data/schedules/schedule_7_v1_2_4/canonical_schedule.json` on main. Earlier baseline statements below are historical.
+
 > Release update, October 1, 2026: the approved cumulative changes are now
 > published as v1.2.0. See `schedule_7_v1_2_0_release.md` and
 > `regression_policy.md` for current release and testing policy. The

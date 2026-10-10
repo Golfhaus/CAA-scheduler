@@ -1,0 +1,67 @@
+{
+  "schemaVersion": "1.0.0",
+  "scheduleId": "schedule_7_v1_2_4",
+  "status": "released",
+  "sourceScheduleId": "schedule_7_v1_2_3",
+  "overlayIds": [
+    "schedule-7-v1.2.4-accepted-rounds-1-5"
+  ],
+  "summary": {
+    "legs": 1170,
+    "routes": 181,
+    "lines": 20,
+    "effectiveOperatingErrors": 0,
+    "hardStopFailures": 0,
+    "overnightTurnFailures": 0,
+    "directRoundTripCities": 5,
+    "connectedDirectionalPairs": 4,
+    "standClaims": 16,
+    "standMinutes": 3717,
+    "hubStandClaims": 2,
+    "hubStandMinutes": 142
+  },
+  "validation": {
+    "structural": "pass",
+    "operating": "review",
+    "overnightTurns": "pass",
+    "planningReconstruction": "pass"
+  },
+  "connectionFinding": "5/5 target cities have direct PHF round trips, and 4/8 directional cross-group pairs meet the configured connection window.",
+  "connectionScopeDecision": {
+    "status": "approved",
+    "approvedBy": "user",
+    "model": "existing_hub_timetable_policy_with_one_and_two_stop_utilization_analysis",
+    "description": "User authorized publication of the accepted v1.2.4 draft October 10, 2026. The repaired PHF exchange has 25 faster and 31 slower best journeys (1–16 minutes) relative to round four; no previously connected market loses all valid itineraries. The PHF audit is whole-timetable one-stop coverage, not solely midnight-bank demand. Opportunity estimates are seat-uncapped comparisons, not passenger forecasts."
+  },
+  "patchScope": {
+    "kind": "aircraft_utilization_and_overnight_hub_exchange",
+    "timetableChanged": true,
+    "routingChanged": true,
+    "approvedSourceRoutes": [
+      350,
+      126,
+      308,
+      115,
+      116,
+      117,
+      517,
+      518,
+      125,
+      157,
+      337,
+      345
+    ],
+    "description": "18 approved flights; earlier accepted turns and JAX/XNA/GNV overnight service; repaired PHF–MCI exchange arriving by 00:01 local; five small advances; two MCI banks -1 minute; PHF midnight arrival bank; 41 CRJ700 aircraft-days rebuilt into 9/9/12/11-day lines. SYR and other hub-swap alternatives deferred."
+  },
+  "artifacts": [
+    "canonical_schedule.json",
+    "connection_audit.json",
+    "gates.json",
+    "operating_validation_report.json",
+    "overnight_turn_validation.json",
+    "planning_snapshot.json",
+    "planning_validation_report.json",
+    "timetable.json",
+    "validation_report.json"
+  ]
+}

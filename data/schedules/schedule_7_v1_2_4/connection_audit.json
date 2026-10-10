@@ -1,0 +1,210 @@
+{
+  "schemaVersion": "1.0.0",
+  "scheduleId": "schedule_7_v1_2_4",
+  "hub": "PHF",
+  "connectionWindowMinutes": {
+    "minimum": 30,
+    "maximum": 240
+  },
+  "groups": {
+    "easternFeeders": [
+      "MDT",
+      "PIT",
+      "CHS",
+      "PVD"
+    ],
+    "westernGateway": [
+      "MCI"
+    ]
+  },
+  "summary": {
+    "targetCities": 5,
+    "directRoundTripCities": 5,
+    "directionalPairs": 8,
+    "connectedDirectionalPairs": 4,
+    "missingDirectionalPairs": 4,
+    "connectionCoverage": 0.5,
+    "bySourceGroup": {
+      "easternFeeders": {
+        "directionalPairs": 4,
+        "connectedDirectionalPairs": 4,
+        "missingDirectionalPairs": 0
+      },
+      "westernGateway": {
+        "directionalPairs": 4,
+        "connectedDirectionalPairs": 0,
+        "missingDirectionalPairs": 4
+      }
+    }
+  },
+  "directCoverage": [
+    {
+      "city": "MDT",
+      "group": "easternFeeders",
+      "toHubLegs": 2,
+      "fromHubLegs": 2,
+      "roundTripCovered": true
+    },
+    {
+      "city": "PIT",
+      "group": "easternFeeders",
+      "toHubLegs": 2,
+      "fromHubLegs": 2,
+      "roundTripCovered": true
+    },
+    {
+      "city": "CHS",
+      "group": "easternFeeders",
+      "toHubLegs": 6,
+      "fromHubLegs": 6,
+      "roundTripCovered": true
+    },
+    {
+      "city": "PVD",
+      "group": "easternFeeders",
+      "toHubLegs": 6,
+      "fromHubLegs": 6,
+      "roundTripCovered": true
+    },
+    {
+      "city": "MCI",
+      "group": "westernGateway",
+      "toHubLegs": 2,
+      "fromHubLegs": 2,
+      "roundTripCovered": true
+    }
+  ],
+  "directionalPairs": [
+    {
+      "source": "MDT",
+      "sourceGroup": "easternFeeders",
+      "destination": "MCI",
+      "destinationGroup": "westernGateway",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "MDT-PHF-CRJ200-01-OUT",
+          "inboundFlight": 1710,
+          "hubArrival": "20:12",
+          "outboundLegId": "V124-SWAP-MID-RETIME-337-345-PRESERVE-R337-1-PHF-MCI",
+          "outboundFlight": 2171,
+          "hubDeparture": "20:45",
+          "waitMinutes": 33
+        }
+      ]
+    },
+    {
+      "source": "PIT",
+      "sourceGroup": "easternFeeders",
+      "destination": "MCI",
+      "destinationGroup": "westernGateway",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V110-R307-PIT-PHF",
+          "inboundFlight": 1918,
+          "hubArrival": "17:55",
+          "outboundLegId": "V124-SWAP-MID-RETIME-337-345-PRESERVE-R337-1-PHF-MCI",
+          "outboundFlight": 2171,
+          "hubDeparture": "20:45",
+          "waitMinutes": 170
+        }
+      ]
+    },
+    {
+      "source": "CHS",
+      "sourceGroup": "easternFeeders",
+      "destination": "MCI",
+      "destinationGroup": "westernGateway",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "CHS-PHF-CRJ700-01-OUT",
+          "inboundFlight": 1396,
+          "hubArrival": "20:15",
+          "outboundLegId": "V124-SWAP-MID-RETIME-337-345-PRESERVE-R337-1-PHF-MCI",
+          "outboundFlight": 2171,
+          "hubDeparture": "20:45",
+          "waitMinutes": 30
+        },
+        {
+          "inboundLegId": "CHS-PHF-CRJ700-03-OUT",
+          "inboundFlight": 1392,
+          "hubArrival": "08:35",
+          "outboundLegId": "MCI-PHF-CRJ700-01-IN",
+          "outboundFlight": 1389,
+          "hubDeparture": "10:45",
+          "waitMinutes": 130
+        }
+      ]
+    },
+    {
+      "source": "PVD",
+      "sourceGroup": "easternFeeders",
+      "destination": "MCI",
+      "destinationGroup": "westernGateway",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "PHF-PVD-CRJ700-06-IN",
+          "inboundFlight": 1290,
+          "hubArrival": "20:13",
+          "outboundLegId": "V124-SWAP-MID-RETIME-337-345-PRESERVE-R337-1-PHF-MCI",
+          "outboundFlight": 2171,
+          "hubDeparture": "20:45",
+          "waitMinutes": 32
+        },
+        {
+          "inboundLegId": "PHF-PVD-CRJ700-02-IN",
+          "inboundFlight": 1286,
+          "hubArrival": "08:33",
+          "outboundLegId": "MCI-PHF-CRJ700-01-IN",
+          "outboundFlight": 1389,
+          "hubDeparture": "10:45",
+          "waitMinutes": 132
+        },
+        {
+          "inboundLegId": "PHF-PVD-CRJ700-05-IN",
+          "inboundFlight": 1289,
+          "hubArrival": "17:53",
+          "outboundLegId": "V124-SWAP-MID-RETIME-337-345-PRESERVE-R337-1-PHF-MCI",
+          "outboundFlight": 2171,
+          "hubDeparture": "20:45",
+          "waitMinutes": 172
+        }
+      ]
+    },
+    {
+      "source": "MCI",
+      "sourceGroup": "westernGateway",
+      "destination": "MDT",
+      "destinationGroup": "easternFeeders",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "MCI",
+      "sourceGroup": "westernGateway",
+      "destination": "PIT",
+      "destinationGroup": "easternFeeders",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "MCI",
+      "sourceGroup": "westernGateway",
+      "destination": "CHS",
+      "destinationGroup": "easternFeeders",
+      "status": "not_connected",
+      "options": []
+    },
+    {
+      "source": "MCI",
+      "sourceGroup": "westernGateway",
+      "destination": "PVD",
+      "destinationGroup": "easternFeeders",
+      "status": "not_connected",
+      "options": []
+    }
+  ]
+}
