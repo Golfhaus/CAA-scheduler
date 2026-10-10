@@ -6,6 +6,7 @@ import {
   validateBuildConfig,
 } from "./build-config.mjs";
 import { bankBreakdownAirports, buildHubBankBreakdown } from "./hub-bank-breakdown.mjs";
+import { routingDetailOptions, buildRoutingDetails } from "./routing-details.mjs";
 
 const DEFAULT_PAGE_SIZE = 50;
 const GATE_WINDOW_START = 180;
@@ -37,6 +38,9 @@ const state = {
   routingPage: 1,
   planningPage: 1,
   routingPageSize: DEFAULT_PAGE_SIZE,
+  routingTab: "all",
+  routingDetailRoute: "",
+  routingDetail: null,
   timetablePage: 1,
   scheduleStatsTab: "deps-hubs",
   bankBreakdown: null,
@@ -662,6 +666,18 @@ function activateScheduleStatsTab(tab) {
   });
 }
 
+function activateRoutingTab(tab) {
+  state.routingTab = tab === "details" ? "details" : "all";
+  $$("[data-routing-tab]").forEach((button) => {
+    const active = button.dataset.routingTab === state.routingTab;
+    button.classList.toggle("is-active", active);
+    button.setAttribute("aria-selected", String(active));
+    button.tabIndex = active ? 0 : -1;
+  });
+  $$("[data-routing-view]").forEach((view) => { view.hidden = view.dataset.routingView !== state.routingTab; });
+  $("#routing-result-count").hidden = state.routingTab !== "all";
+}
+
 async function fetchJson(path) {
   const response = await fetch(path, { cache: "no-store" });
   if (!response.ok) throw new Error(`${path} returned ${response.status}`);
@@ -692,6 +708,8 @@ async function loadSchedule(scheduleId) {
     timetable: data.timetable,
     gates: data.gates,
     routingPage: 1,
+    routingTab: "all",
+    routingDetailRoute: "",
     planningPage: 1,
     timetablePage: 1,
     scheduleStatsTab: "deps-hubs",
@@ -750,6 +768,8 @@ function renderAll() {
   populateFilters(planningAvailable);
   if (planningAvailable) renderPlanning();
   renderRoutings();
+  renderRoutingDetails();
+  activateRoutingTab(state.routingTab);
   renderValidation();
   renderInstructions();
   renderTimetable();
@@ -1298,6 +1318,41 @@ function renderCheck(check, query, forceOpen) {
   return `<details class="check-card status-${check.status}" id="check-${escapeHtml(check.id)}" ${forceOpen ? "open" : ""}><summary><span class="check-title"><strong>${escapeHtml(check.title)}</strong><span>${renderInstructionReferences(check.section)} · ${effectiveCount} effective findings</span></span><span class="check-badges">${check.hardStop ? '<span class="hard-stop-badge">Hard stop</span>' : ""}<span class="check-status">${escapeHtml(statusLabel(check.status))}</span></span></summary><div class="check-body"><p class="check-message">${escapeHtml(check.message)}</p>${findings}</div></details>`;
 }
 
+function renderRoutingDetails() {
+  const options = routingDetailOptions(state.canonical);
+  if (!options.some((option) => option.id === state.routingDetailRoute)) state.routingDetailRoute = options[0]?.id || "";
+  const select = $("#routing-detail-route");
+  select.innerHTML = options.map((option) => `<option value="${escapeHtml(option.id)}">Route ${escapeHtml(option.route)} · Day ${option.day} / Line ${escapeHtml(option.line)} · ${escapeHtml(option.fleet)}</option>`).join("");
+  select.value = state.routingDetailRoute;
+  const detail = buildRoutingDetails(state.canonical, state.gates, state.routingDetailRoute);
+  state.routingDetail = detail;
+  $("#routing-block-title").textContent = "Flight and ground details";
+  $("#routing-block-copy").textContent = "Hover, focus, or tap a time block to see its details.";
+  if (!detail) {
+    $("#routing-detail-summary").textContent = "No routes available.";
+    $("#routing-detail-timezone").textContent = "";
+    $("#routing-detail-timeline").innerHTML = "";
+    return;
+  }
+  $("#routing-detail-summary").textContent = `${detail.fleet} · ${detail.flights.length} flights · ${formatDuration(detail.blockMinutes)} inflight · ${detail.flights[0].leg.origin} → ${detail.flights.at(-1).leg.destination}`;
+  $("#routing-detail-timezone").textContent = `Chart times: ${detail.referenceCity} (${detail.zone}). Tooltips show local airport times. Ground assignments include overnight portions within the displayed day.${detail.unassigned ? " Some ground activity has no assigned gate or stand." : ""}`;
+  const duration = detail.end - detail.start;
+  const percent = (minute) => ((minute - detail.start) / duration) * 100;
+  const ticks = [detail.start];
+  for (let minute = detail.start + 240; minute < detail.end; minute += 240) ticks.push(minute);
+  ticks.push(detail.end);
+  const guides = ticks.map((minute) => `<i class="routing-time-guide" aria-hidden="true" style="left:${percent(minute)}%"></i>`).join("");
+  const fleetColor = state.gates?.fleetColors?.[detail.fleet] || "#93b9e0";
+  $("#routing-detail-timeline").innerHTML = `<div class="time-axis"><span>${escapeHtml(detail.zone)}</span><div class="axis-track">${ticks.map((minute) => `<span class="axis-label" style="left:${percent(minute)}%">${formatMinute24(minute)}${minute >= 1440 ? " +1" : ""}</span>`).join("")}</div></div>${[["inflight", "Inflight"], ["gate", "Gate"], ["stand", "Stand"]].map(([kind, label]) => `<div class="timeline-row routing-detail-row"><span class="lane-label">${label}</span><div class="lane-track routing-lane-track">${guides}${detail.blocks.map((block, index) => block.kind !== kind ? "" : `<button type="button" class="claim-bar routing-activity kind-${kind}" data-routing-block="${index}" title="${escapeHtml(`${block.title}\n${block.detail}`)}" aria-label="${escapeHtml(`${block.title}. ${block.detail}`)}" aria-controls="routing-block-details" style="left:${percent(block.start)}%;width:${((block.end - block.start) / duration) * 100}%;--fleet-color:${escapeHtml(fleetColor)}">${escapeHtml(block.label)}</button>`).join("")}</div></div>`).join("")}`;
+}
+
+function showRoutingBlockDetails(button) {
+  const block = state.routingDetail?.blocks[Number(button.dataset.routingBlock)];
+  if (!block) return;
+  $("#routing-block-title").textContent = block.title;
+  $("#routing-block-copy").textContent = block.detail;
+}
+
 function renderGates() {
   closeGateClaimDetails();
   const code = $("#gate-airport").value;
@@ -1631,6 +1686,7 @@ function handleReference(button) {
   }
   state.routingPage = 1;
   renderRoutings();
+  activateRoutingTab("all");
   activateTab("routings");
 }
 
@@ -1680,6 +1736,16 @@ function bindEvents() {
     const statsTab = event.target.closest("[data-stats-tab]");
     if (statsTab) {
       activateScheduleStatsTab(statsTab.dataset.statsTab);
+      return;
+    }
+    const routingTab = event.target.closest("[data-routing-tab]");
+    if (routingTab) {
+      activateRoutingTab(routingTab.dataset.routingTab);
+      return;
+    }
+    const routingBlock = event.target.closest("[data-routing-block]");
+    if (routingBlock) {
+      showRoutingBlockDetails(routingBlock);
       return;
     }
     const bankSelect = event.target.closest("[data-bank-select]");
@@ -1748,6 +1814,23 @@ function bindEvents() {
   });
 
   $("#routing-search").addEventListener("input", () => { state.routingPage = 1; renderRoutings(); });
+  $("#routing-detail-route").addEventListener("change", (event) => {
+    state.routingDetailRoute = event.target.value;
+    renderRoutingDetails();
+  });
+  ["mouseover", "focusin"].forEach((type) => $("#routing-detail-timeline").addEventListener(type, (event) => {
+    const block = event.target.closest("[data-routing-block]");
+    if (block) showRoutingBlockDetails(block);
+  }));
+  document.querySelector('[aria-label="Routing views"]').addEventListener("keydown", (event) => {
+    const tabs = $$("[data-routing-tab]");
+    const index = tabs.indexOf(event.target);
+    if (index < 0 || !["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
+    event.preventDefault();
+    const next = event.key === "Home" ? 0 : event.key === "End" ? tabs.length - 1 : (index + (event.key === "ArrowRight" ? 1 : -1) + tabs.length) % tabs.length;
+    activateRoutingTab(tabs[next].dataset.routingTab);
+    tabs[next].focus();
+  });
   ["#routing-fleet", "#routing-line", "#routing-origin", "#routing-destination"].forEach((selector) => {
     $(selector).addEventListener("change", () => { state.routingPage = 1; renderRoutings(); });
   });

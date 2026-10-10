@@ -652,6 +652,20 @@ tbody tr:hover { background: #f6f9fc; }
 .bank-label { position: absolute; z-index: 1; top: 50%; transform: translate(-50%, -50%); font-size: 0.65rem; font-weight: 750; white-space: nowrap; color: #385574; }
 .claim-bar { position: absolute; z-index: 1; top: 0.16rem; height: 1.12rem; overflow: hidden; appearance: none; border: 1px solid rgba(6, 26, 51, 0.18); border-radius: 0.23rem; padding: 0.05rem 0.2rem; color: #10223a; font-size: 0.63rem; font-weight: 750; line-height: 1; text-align: left; white-space: nowrap; text-overflow: ellipsis; touch-action: manipulation; }
 .claim-bar.kind-stand { border-style: dashed; }
+.routing-detail-toolbar { display: flex; align-items: end; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem; }
+.routing-detail-toolbar .airport-picker { min-width: min(100%, 22rem); }
+.routing-detail-toolbar .stats-note { margin: 0 0 0.45rem; }
+.routing-detail-timeline { margin-top: 1.3rem; }
+.routing-detail-row { min-height: 4rem; }
+.routing-detail-row .lane-label { font-size: 0.85rem; }
+.routing-lane-track { height: 3rem; background: #f7f9fc; }
+.routing-time-guide { position: absolute; z-index: 0; top: 0; bottom: 0; border-left: 1px solid #dde5ef; pointer-events: none; }
+.routing-activity { top: 0.38rem; height: 2.2rem; font-size: 0.75rem; padding: 0.3rem; background: color-mix(in srgb, var(--fleet-color) 25%, white); }
+.routing-activity.kind-inflight { background: var(--fleet-color); border-color: var(--fleet-color); }
+.routing-activity.kind-stand { background: #fff3e6; }
+.routing-activity:hover, .routing-activity:focus-visible { z-index: 2; outline: 2px solid var(--navy-900); outline-offset: 1px; }
+.routing-block-details { display: grid; gap: 0.25rem; min-height: 4.5rem; margin-top: 1rem; padding: 0.8rem 1rem; border-left: 4px solid var(--blue-700); border-radius: 0.4rem; background: #f5f9fe; }
+.routing-block-details span { color: var(--muted); font-size: 0.85rem; }
 .claim-bar.kind-overflow { border: 2px solid var(--danger); background: var(--danger-soft) !important; color: var(--danger); font-weight: 900; }
 .claim-bar.is-related { z-index: 3; outline: 2px solid #111827; outline-offset: 2px; }
 .claim-bar[aria-expanded="true"] { z-index: 4; outline: 3px solid rgba(245, 130, 32, 0.62); outline-offset: 2px; }

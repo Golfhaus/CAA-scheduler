@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#092a53">
     <meta name="description" content="Coastal American Airways schedule operations console">
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="styles.css?v=console-ui-20261003-3">
+    <link rel="stylesheet" href="styles.css?v=console-ui-20261010-routing-details">
     <title>CAA Scheduler</title>
   </head>
   <body>
@@ -271,10 +271,15 @@
             <div>
               <p class="eyebrow">Canonical construction data</p>
               <h1 id="routings-title">Routings</h1>
-              <p class="page-note">Line, day, route, pairing and sequence remain intact.</p>
+              <p class="page-note">Browse all flights or explore a single route’s aircraft activity.</p>
             </div>
             <span class="result-count" id="routing-result-count"></span>
           </div>
+          <div class="stats-tabbar" role="tablist" aria-label="Routing views">
+            <button class="stats-tab is-active" id="routing-tab-all" type="button" role="tab" data-routing-tab="all" aria-controls="routing-view-all" aria-selected="true">All Routings</button>
+            <button class="stats-tab" id="routing-tab-details" type="button" role="tab" data-routing-tab="details" aria-controls="routing-view-details" aria-selected="false" tabindex="-1">Routing Details</button>
+          </div>
+          <div id="routing-view-all" data-routing-view="all" role="tabpanel" aria-labelledby="routing-tab-all">
           <div class="filter-bar routing-filters">
             <label class="search-field">
               <span>Search routings</span>
@@ -314,6 +319,21 @@
             </table>
           </div>
           <div class="pagination" id="routing-pagination"></div>
+          </div>
+          <div id="routing-view-details" data-routing-view="details" role="tabpanel" aria-labelledby="routing-tab-details" hidden>
+            <div class="routing-detail-toolbar">
+              <label class="airport-picker"><span>Route · day / line</span><select id="routing-detail-route"></select></label>
+              <p class="stats-note" id="routing-detail-summary"></p>
+            </div>
+            <section class="panel gate-panel routing-detail-panel" aria-label="Selected route activity">
+              <p class="stats-note" id="routing-detail-timezone"></p>
+              <div class="gate-timeline routing-detail-timeline" id="routing-detail-timeline"></div>
+              <div class="routing-block-details" id="routing-block-details" role="status" aria-live="polite">
+                <strong id="routing-block-title">Flight and ground details</strong>
+                <span id="routing-block-copy">Hover, focus, or tap a time block to see its details.</span>
+              </div>
+            </section>
+          </div>
         </section>
 
         <section class="view" id="view-validation" data-view="validation" aria-labelledby="validation-title" hidden>
@@ -515,6 +535,6 @@
       </div>
     </main>
 
-    <script type="module" src="app.mjs?v=console-ui-20261003-3"></script>
+    <script type="module" src="app.mjs?v=console-ui-20261010-routing-details"></script>
   </body>
 </html>

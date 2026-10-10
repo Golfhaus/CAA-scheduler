@@ -26,11 +26,11 @@ class WebBuildTests(unittest.TestCase):
         self.assertIn('id="preview-warning"', html)
         self.assertIn("previewNotice", script)
         self.assertIn(
-            'src="app.mjs?v=console-ui-20261003-3"',
+            'src="app.mjs?v=console-ui-20261010-routing-details"',
             html,
         )
         self.assertIn(
-            'href="styles.css?v=console-ui-20261003-3"',
+            'href="styles.css?v=console-ui-20261010-routing-details"',
             html,
         )
         self.assertNotIn('`${auditHub} target cities`', script)
@@ -51,6 +51,10 @@ class WebBuildTests(unittest.TestCase):
             ],
         )
         self.assertIn('id="routing-reset"', html)
+        self.assertIn('data-routing-tab="all"', html)
+        self.assertIn('data-routing-tab="details"', html)
+        self.assertIn('id="routing-detail-route"', html)
+        self.assertIn('id="routing-detail-timeline"', html)
         self.assertIn('$("#routing-reset").addEventListener', script)
         self.assertIn('id="deps-hub-rows"', html)
         self.assertIn('data-deps-origin', script)
@@ -77,6 +81,7 @@ class WebBuildTests(unittest.TestCase):
             self.assertTrue((output / "favicon.svg").is_file())
             self.assertTrue((output / "coastal-american-logo.png").is_file())
             self.assertTrue((output / "build-config.mjs").is_file())
+            self.assertEqual((output / "routing-details.mjs").read_text(), (REPO_ROOT / "web/routing-details.mjs").read_text())
             self.assertEqual((output / "hub-bank-breakdown.mjs").read_text(), (REPO_ROOT / "web" / "hub-bank-breakdown.mjs").read_text())
             manifest = json.loads((output / "schedules.json").read_text())
             self.assertEqual(
