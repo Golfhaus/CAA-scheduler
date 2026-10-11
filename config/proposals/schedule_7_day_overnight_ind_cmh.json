@@ -1,0 +1,90 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "day-overnight-IND_CMH",
+  "baseSchedule": {
+    "scheduleId": "schedule_7_crj200_alignment",
+    "canonical": "builds/crj200-line-alignment/canonical_schedule.json",
+    "sha256": "a7a12a39869c3f72bcb43d2560eaad8059017e44e6469f4de2130c4555a1da99",
+    "alignmentOverlay": "config/optimizations/schedule_7_crj200_line_alignment.json",
+    "alignmentOverlaySha256": "95c7a3b4fe62a2a344865665c6b50fbb0185d0c00eccc709212c249a03928e55"
+  },
+  "schedule": {
+    "id": "schedule_7_day_overnight_IND_CMH",
+    "version": "1.2.4-day-overnight",
+    "label": "Unpublished DAY overnight candidate IND_CMH",
+    "status": "draft"
+  },
+  "approval": {
+    "status": "reviewed proposal; not implemented",
+    "publication": "Reserved to user decision"
+  },
+  "hubBanksToAdd": [],
+  "hubBankCountOverrides": {},
+  "insertLegs": [
+    {
+      "id": "DAY-RON-IND_CMH-R125-1-DAY-IND",
+      "origin": "DAY",
+      "destination": "IND",
+      "departureMinute": 1295,
+      "arrivalMinute": 1338,
+      "route": 125
+    },
+    {
+      "id": "DAY-RON-IND_CMH-R126-1-IND-DAY",
+      "origin": "IND",
+      "destination": "DAY",
+      "departureMinute": 270,
+      "arrivalMinute": 313,
+      "route": 126
+    },
+    {
+      "id": "DAY-RON-IND_CMH-R136-1-DAY-CMH",
+      "origin": "DAY",
+      "destination": "CMH",
+      "departureMinute": 1295,
+      "arrivalMinute": 1333,
+      "route": 136
+    },
+    {
+      "id": "DAY-RON-IND_CMH-R137-1-CMH-DAY",
+      "origin": "CMH",
+      "destination": "DAY",
+      "departureMinute": 270,
+      "arrivalMinute": 308,
+      "route": 137
+    }
+  ],
+  "retimeLegs": [
+    {
+      "legId": "DAY-HOU-CRJ200-01-OUT",
+      "expectedDepartureMinute": 350,
+      "expectedArrivalMinute": 448,
+      "departureMinute": 353,
+      "arrivalMinute": 451
+    }
+  ],
+  "bankAssignmentsToAdd": [
+    {
+      "legId": "DAY-RON-IND_CMH-R125-1-DAY-IND",
+      "operation": "departure",
+      "bankId": "DAY-B9"
+    },
+    {
+      "legId": "DAY-RON-IND_CMH-R126-1-IND-DAY",
+      "operation": "arrival",
+      "bankId": "DAY-B1"
+    },
+    {
+      "legId": "DAY-RON-IND_CMH-R136-1-DAY-CMH",
+      "operation": "departure",
+      "bankId": "DAY-B9"
+    },
+    {
+      "legId": "DAY-RON-IND_CMH-R137-1-CMH-DAY",
+      "operation": "arrival",
+      "bankId": "DAY-B1"
+    }
+  ],
+  "bankAssignmentReplacements": [],
+  "operatingOverrides": []
+}

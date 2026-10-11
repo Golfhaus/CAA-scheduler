@@ -1,0 +1,5495 @@
+{
+  "status": "review only; new flying not implemented",
+  "baseCanonical": "builds/crj200-line-alignment/canonical_schedule.json",
+  "baseSha256": "a7a12a39869c3f72bcb43d2560eaad8059017e44e6469f4de2130c4555a1da99",
+  "alignmentOverlay": "config/optimizations/schedule_7_crj200_line_alignment.json",
+  "alignmentOverlaySha256": "95c7a3b4fe62a2a344865665c6b50fbb0185d0c00eccc709212c249a03928e55",
+  "model": "Pinned BTS O-D; full-capture seat-uncapped relative-choice one/two-stop opportunity units, not forecast passengers, loads or profit. 30\u2013240 minute transfers and circuity \u22642.25.",
+  "recommendedCandidate": "IND_CAK",
+  "candidates": [
+    {
+      "id": "IND_CMH",
+      "destinations": [
+        "IND",
+        "CMH"
+      ],
+      "originatorDelays": [
+        3,
+        0
+      ],
+      "validation": {
+        "structural": "pass",
+        "operatingErrors": 0,
+        "operatingWarnings": 172,
+        "hardStopFailures": [],
+        "blocking": [],
+        "overnight": "pass",
+        "overnightFindings": [],
+        "planning": "pass",
+        "gates": "pass",
+        "standClaims": 16,
+        "standMinutes": 3717
+      },
+      "hubBankChanges": [],
+      "demand": {
+        "flights": [
+          {
+            "id": "DAY-RON-IND_CMH-R125-1-DAY-IND",
+            "route": 125,
+            "line": "AE",
+            "fleet": "CRJ200",
+            "day": 4,
+            "sequenceWithinRoute": 9,
+            "pairing": 471,
+            "flight": 2173,
+            "origin": "DAY",
+            "destination": "IND",
+            "departure": "21:35",
+            "arrival": "22:18",
+            "departureMinute": 1295,
+            "arrivalMinute": 1338,
+            "departureClock": "21:35",
+            "arrivalClock": "22:18",
+            "blockMinutes": 43,
+            "currentPairFrequency": 2,
+            "routeLocalOd": 0.3,
+            "local": 0.10574437529918619,
+            "connecting": 389.7297561273122,
+            "total": 389.8355005026114,
+            "oneStop": 214.0377973295216,
+            "twoStop": 175.6919587977906,
+            "groups": {
+              "HUB": 7.77530181693107,
+              "FLP": 92.57288428931962,
+              "GCP": 39.29228070283337,
+              "TEX": 76.54886794693736,
+              "UMP": 1.8002877479497297,
+              "OZK": 4.3436357135121195,
+              "NEC": 5.96736290811476,
+              "CGI": 93.67455299723372,
+              "GLC": 36.66572528006949,
+              "LEC": 15.789663708952094,
+              "MAC": 15.29919301545886
+            },
+            "topMarkets": [
+              {
+                "origin": "CLT",
+                "destination": "IND",
+                "opportunity": 61.068777025858935
+              },
+              {
+                "origin": "PIE",
+                "destination": "IND",
+                "opportunity": 40.781286944644265
+              },
+              {
+                "origin": "FLL",
+                "destination": "IND",
+                "opportunity": 37.65504961102517
+              },
+              {
+                "origin": "RFD",
+                "destination": "IND",
+                "opportunity": 32.37692385090327
+              },
+              {
+                "origin": "DAL",
+                "destination": "IND",
+                "opportunity": 29.152330201060114
+              }
+            ],
+            "connectingFlightCount": 24,
+            "connectingFlightNumbers": [
+              1790,
+              1478,
+              1479,
+              1770,
+              1813,
+              1668,
+              1368,
+              1806,
+              1509,
+              1510,
+              1451,
+              1698,
+              1571,
+              1572,
+              1794,
+              1467,
+              1468,
+              1859,
+              1982,
+              2072,
+              2090,
+              2105,
+              2135,
+              2153
+            ]
+          },
+          {
+            "id": "DAY-RON-IND_CMH-R126-1-IND-DAY",
+            "route": 126,
+            "line": "AE",
+            "fleet": "CRJ200",
+            "day": 5,
+            "sequenceWithinRoute": 1,
+            "pairing": 478,
+            "flight": 2174,
+            "origin": "IND",
+            "destination": "DAY",
+            "departure": "04:30",
+            "arrival": "05:13",
+            "departureMinute": 270,
+            "arrivalMinute": 313,
+            "departureClock": "04:30",
+            "arrivalClock": "05:13",
+            "blockMinutes": 43,
+            "currentPairFrequency": 2,
+            "routeLocalOd": 0.3,
+            "local": 0.10574437529918619,
+            "connecting": 258.4820731891632,
+            "total": 258.5878175644624,
+            "oneStop": 121.64005634007003,
+            "twoStop": 136.8420168490932,
+            "groups": {
+              "HUB": 12.702172330806643,
+              "FLP": 62.36238330338282,
+              "TEX": 69.11407932118524,
+              "NEC": 19.81192874413388,
+              "GCP": 13.576577536110065,
+              "CGI": 23.206647740626604,
+              "GLC": 3.5412883207303922,
+              "LEC": 11.680712119395528,
+              "MAC": 26.68628377279206,
+              "APP": 15.799999999999999
+            },
+            "topMarkets": [
+              {
+                "origin": "IND",
+                "destination": "HOU",
+                "opportunity": 52.45354439450867
+              },
+              {
+                "origin": "IND",
+                "destination": "PIE",
+                "opportunity": 24.396875058488263
+              },
+              {
+                "origin": "IND",
+                "destination": "BWI",
+                "opportunity": 23.6964171967753
+              },
+              {
+                "origin": "IND",
+                "destination": "SFB",
+                "opportunity": 20.649684303199862
+              },
+              {
+                "origin": "IND",
+                "destination": "AUS",
+                "opportunity": 16.42083577033791
+              }
+            ],
+            "connectingFlightCount": 18,
+            "connectingFlightNumbers": [
+              1785,
+              1786,
+              1480,
+              1617,
+              1771,
+              1899,
+              1873,
+              1807,
+              1503,
+              1504,
+              1452,
+              1867,
+              1693,
+              1793,
+              1860,
+              2078,
+              2085,
+              2132
+            ]
+          },
+          {
+            "id": "DAY-RON-IND_CMH-R136-1-DAY-CMH",
+            "route": 136,
+            "line": "AF",
+            "fleet": "CRJ200",
+            "day": 4,
+            "sequenceWithinRoute": 6,
+            "pairing": 519,
+            "flight": 2175,
+            "origin": "DAY",
+            "destination": "CMH",
+            "departure": "21:35",
+            "arrival": "22:13",
+            "departureMinute": 1295,
+            "arrivalMinute": 1333,
+            "departureClock": "21:35",
+            "arrivalClock": "22:13",
+            "blockMinutes": 38,
+            "currentPairFrequency": 2,
+            "routeLocalOd": 1.4,
+            "local": 0.49670152855993555,
+            "connecting": 326.99280683662266,
+            "total": 327.4895083651826,
+            "oneStop": 208.62563251845415,
+            "twoStop": 118.36717431816845,
+            "groups": {
+              "HUB": 8.193084790815078,
+              "FLP": 70.38187791495605,
+              "TEX": 58.976945671737774,
+              "OZK": 2.97488931954878,
+              "UMP": 1.852841185514062,
+              "GCP": 18.264593924357786,
+              "CGI": 61.39614066609898,
+              "GLC": 88.13530100274978,
+              "LEC": 4.0,
+              "APP": 1.1,
+              "MAC": 3.935926964278245,
+              "NEC": 7.781205396566106
+            },
+            "topMarkets": [
+              {
+                "origin": "RFD",
+                "destination": "CMH",
+                "opportunity": 80.76995459480845
+              },
+              {
+                "origin": "CLT",
+                "destination": "CMH",
+                "opportunity": 41.4
+              },
+              {
+                "origin": "DAL",
+                "destination": "CMH",
+                "opportunity": 27.593290197145215
+              },
+              {
+                "origin": "FLL",
+                "destination": "CMH",
+                "opportunity": 25.879639296170772
+              },
+              {
+                "origin": "PIE",
+                "destination": "CMH",
+                "opportunity": 17.14375895475805
+              }
+            ],
+            "connectingFlightCount": 25,
+            "connectingFlightNumbers": [
+              1790,
+              1478,
+              1479,
+              1770,
+              1368,
+              1806,
+              1509,
+              1510,
+              1820,
+              1451,
+              1698,
+              1571,
+              1572,
+              1794,
+              1467,
+              1468,
+              1859,
+              1850,
+              1982,
+              2072,
+              2090,
+              2105,
+              2137,
+              2135,
+              2153
+            ]
+          },
+          {
+            "id": "DAY-RON-IND_CMH-R137-1-CMH-DAY",
+            "route": 137,
+            "line": "AF",
+            "fleet": "CRJ200",
+            "day": 5,
+            "sequenceWithinRoute": 1,
+            "pairing": 520,
+            "flight": 2176,
+            "origin": "CMH",
+            "destination": "DAY",
+            "departure": "04:30",
+            "arrival": "05:08",
+            "departureMinute": 270,
+            "arrivalMinute": 308,
+            "departureClock": "04:30",
+            "arrivalClock": "05:08",
+            "blockMinutes": 38,
+            "currentPairFrequency": 2,
+            "routeLocalOd": 1.4,
+            "local": 0.49670152855993555,
+            "connecting": 282.47965182934513,
+            "total": 282.97635335790505,
+            "oneStop": 122.63409281497444,
+            "twoStop": 159.84555901437068,
+            "groups": {
+              "HUB": 8.152000467053623,
+              "FLP": 106.950893814413,
+              "TEX": 56.543419741193446,
+              "CGI": 7.589018896091462,
+              "GCP": 9.877242510605711,
+              "GLC": 7.660653963111635,
+              "LEC": 2.6947442810536613,
+              "MAC": 18.45058283583483,
+              "APP": 38.599999999999994,
+              "NEC": 25.961095319987763
+            },
+            "topMarkets": [
+              {
+                "origin": "CMH",
+                "destination": "HOU",
+                "opportunity": 40.334667676370984
+              },
+              {
+                "origin": "CMH",
+                "destination": "BNA",
+                "opportunity": 38.199999999999996
+              },
+              {
+                "origin": "CMH",
+                "destination": "FLL",
+                "opportunity": 34.08730146197746
+              },
+              {
+                "origin": "CMH",
+                "destination": "PIE",
+                "opportunity": 29.985498633373663
+              },
+              {
+                "origin": "CMH",
+                "destination": "SFB",
+                "opportunity": 28.047993942429294
+              }
+            ],
+            "connectingFlightCount": 16,
+            "connectingFlightNumbers": [
+              1785,
+              1786,
+              1480,
+              1617,
+              1771,
+              1873,
+              1807,
+              1503,
+              1504,
+              1452,
+              1867,
+              1693,
+              1793,
+              1860,
+              2078,
+              2132
+            ]
+          }
+        ],
+        "newlyConnectedMarketDemand": 198.4,
+        "marketsWithFasterBestItinerary": 18
+      },
+      "audit": {
+        "marketsWithSlowerBestItinerary": [
+          {
+            "origin": "TOL",
+            "destination": "HOU",
+            "od": 0.0,
+            "oldFastestMinutes": 238,
+            "newFastestMinutes": 241,
+            "differenceMinutes": 3
+          }
+        ],
+        "marketsLosingAllConnections": [],
+        "lostUnderlyingOd": 0,
+        "marketsWithFasterBestItinerary": 18
+      },
+      "addedFlyingOpportunityUnits": 1258.8891797901615,
+      "earlyReturnConnections": {},
+      "changedFlights": [
+        {
+          "flight": 1503,
+          "beforeDeparture": "05:50",
+          "afterDeparture": "05:53",
+          "lostConnectingChoices": 0,
+          "addedConnectingChoices": 2,
+          "oldOpportunity": 3.0609924809383404,
+          "newOpportunity": 65.19140870197522
+        }
+      ],
+      "maintenance": {
+        "AE": {
+          "line": "AE",
+          "maximumConsecutiveNonTargetRons": 10,
+          "limit": 10,
+          "grace": 1,
+          "targetRons": [
+            {
+              "day": 8,
+              "route": 129,
+              "city": "SYR",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            }
+          ],
+          "hubOrFocusRons": [
+            {
+              "day": 8,
+              "route": 129,
+              "city": "SYR",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            }
+          ]
+        },
+        "AF": {
+          "line": "AF",
+          "maximumConsecutiveNonTargetRons": 7,
+          "limit": 10,
+          "grace": 1,
+          "targetRons": [
+            {
+              "day": 3,
+              "route": 135,
+              "city": "MCI",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            },
+            {
+              "day": 6,
+              "route": 138,
+              "city": "DAY",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            }
+          ],
+          "hubOrFocusRons": [
+            {
+              "day": 3,
+              "route": 135,
+              "city": "MCI",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            },
+            {
+              "day": 6,
+              "route": 138,
+              "city": "DAY",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            }
+          ]
+        }
+      },
+      "connections": {
+        "2174": [
+          {
+            "flight": 1785,
+            "destination": "ATW",
+            "departure": "05:50",
+            "departureMinute": 350
+          },
+          {
+            "flight": 1873,
+            "destination": "FWA",
+            "departure": "05:50",
+            "departureMinute": 350
+          },
+          {
+            "flight": 1503,
+            "destination": "HOU",
+            "departure": "05:53",
+            "departureMinute": 353
+          },
+          {
+            "flight": 1617,
+            "destination": "BNA",
+            "departure": "05:55",
+            "departureMinute": 355
+          },
+          {
+            "flight": 2078,
+            "destination": "PHF",
+            "departure": "06:51",
+            "departureMinute": 411
+          },
+          {
+            "flight": 2132,
+            "destination": "BWI",
+            "departure": "07:53",
+            "departureMinute": 473
+          },
+          {
+            "flight": 1480,
+            "destination": "AUS",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1504,
+            "destination": "HOU",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1693,
+            "destination": "MSN",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1771,
+            "destination": "BUF",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1786,
+            "destination": "ATW",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1793,
+            "destination": "PIT",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1807,
+            "destination": "GRR",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1860,
+            "destination": "SBN",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1867,
+            "destination": "LEX",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1899,
+            "destination": "ERI",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1903,
+            "destination": "TOL",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1452,
+            "destination": "JAX",
+            "departure": "08:00",
+            "departureMinute": 480
+          },
+          {
+            "flight": 2085,
+            "destination": "CAK",
+            "departure": "09:10",
+            "departureMinute": 550
+          }
+        ],
+        "2176": [
+          {
+            "flight": 1785,
+            "destination": "ATW",
+            "departure": "05:50",
+            "departureMinute": 350
+          },
+          {
+            "flight": 1873,
+            "destination": "FWA",
+            "departure": "05:50",
+            "departureMinute": 350
+          },
+          {
+            "flight": 1503,
+            "destination": "HOU",
+            "departure": "05:53",
+            "departureMinute": 353
+          },
+          {
+            "flight": 1617,
+            "destination": "BNA",
+            "departure": "05:55",
+            "departureMinute": 355
+          },
+          {
+            "flight": 2078,
+            "destination": "PHF",
+            "departure": "06:51",
+            "departureMinute": 411
+          },
+          {
+            "flight": 2132,
+            "destination": "BWI",
+            "departure": "07:53",
+            "departureMinute": 473
+          },
+          {
+            "flight": 1480,
+            "destination": "AUS",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1504,
+            "destination": "HOU",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1693,
+            "destination": "MSN",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1771,
+            "destination": "BUF",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1786,
+            "destination": "ATW",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1793,
+            "destination": "PIT",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1807,
+            "destination": "GRR",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1860,
+            "destination": "SBN",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1867,
+            "destination": "LEX",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1899,
+            "destination": "ERI",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1903,
+            "destination": "TOL",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1452,
+            "destination": "JAX",
+            "departure": "08:00",
+            "departureMinute": 480
+          }
+        ]
+      }
+    },
+    {
+      "id": "LEX_IND",
+      "destinations": [
+        "LEX",
+        "IND"
+      ],
+      "originatorDelays": [
+        6,
+        3
+      ],
+      "validation": {
+        "structural": "pass",
+        "operatingErrors": 0,
+        "operatingWarnings": 172,
+        "hardStopFailures": [],
+        "blocking": [],
+        "overnight": "pass",
+        "overnightFindings": [],
+        "planning": "pass",
+        "gates": "pass",
+        "standClaims": 16,
+        "standMinutes": 3717
+      },
+      "hubBankChanges": [],
+      "demand": {
+        "flights": [
+          {
+            "id": "DAY-RON-LEX_IND-R125-1-DAY-LEX",
+            "route": 125,
+            "line": "AE",
+            "fleet": "CRJ200",
+            "day": 4,
+            "sequenceWithinRoute": 9,
+            "pairing": 766,
+            "flight": 2173,
+            "origin": "DAY",
+            "destination": "LEX",
+            "departure": "21:35",
+            "arrival": "22:21",
+            "departureMinute": 1295,
+            "arrivalMinute": 1341,
+            "departureClock": "21:35",
+            "arrivalClock": "22:21",
+            "blockMinutes": 46,
+            "currentPairFrequency": 1,
+            "routeLocalOd": 0.1,
+            "local": 0.05,
+            "connecting": 108.82598213061385,
+            "total": 108.87598213061385,
+            "oneStop": 70.95064118602862,
+            "twoStop": 37.87534094458524,
+            "groups": {
+              "HUB": 9.288366625102682,
+              "TEX": 29.854324506140035,
+              "NEC": 4.26850332005662,
+              "CGI": 15.086865864759178,
+              "FLP": 10.95021221755053,
+              "GCP": 9.614391111143187,
+              "GLC": 14.706816901211,
+              "LEC": 6.6,
+              "MAC": 1.0565015846506371,
+              "OZK": 3.3,
+              "UMP": 4.1
+            },
+            "topMarkets": [
+              {
+                "origin": "DAL",
+                "destination": "LEX",
+                "opportunity": 14.4
+              },
+              {
+                "origin": "RFD",
+                "destination": "LEX",
+                "opportunity": 13.087058823529409
+              },
+              {
+                "origin": "CLT",
+                "destination": "LEX",
+                "opportunity": 11.2
+              },
+              {
+                "origin": "AUS",
+                "destination": "LEX",
+                "opportunity": 7.572109658733783
+              },
+              {
+                "origin": "HOU",
+                "destination": "LEX",
+                "opportunity": 7.3
+              }
+            ],
+            "connectingFlightCount": 25,
+            "connectingFlightNumbers": [
+              1790,
+              1478,
+              1479,
+              1770,
+              1813,
+              1668,
+              1368,
+              1806,
+              1509,
+              1510,
+              1820,
+              1451,
+              1698,
+              1571,
+              1572,
+              1794,
+              1467,
+              1468,
+              1859,
+              1982,
+              2072,
+              2090,
+              2105,
+              2135,
+              2153
+            ]
+          },
+          {
+            "id": "DAY-RON-LEX_IND-R126-1-LEX-DAY",
+            "route": 126,
+            "line": "AE",
+            "fleet": "CRJ200",
+            "day": 5,
+            "sequenceWithinRoute": 1,
+            "pairing": 779,
+            "flight": 2174,
+            "origin": "LEX",
+            "destination": "DAY",
+            "departure": "04:30",
+            "arrival": "05:16",
+            "departureMinute": 270,
+            "arrivalMinute": 316,
+            "departureClock": "04:30",
+            "arrivalClock": "05:16",
+            "blockMinutes": 46,
+            "currentPairFrequency": 1,
+            "routeLocalOd": 0.1,
+            "local": 0.05,
+            "connecting": 33.32418778278227,
+            "total": 33.374187782782265,
+            "oneStop": 18.987190997921918,
+            "twoStop": 14.336996784860343,
+            "groups": {
+              "HUB": 0.9969214487556728,
+              "TEX": 6.430184298395698,
+              "NEC": 2.3717206048137314,
+              "FLP": 8.67744654342941,
+              "CGI": 0.3681292946090227,
+              "GCP": 0.12157991159939065,
+              "GLC": 3.560765539731863,
+              "LEC": 6.223479086277266,
+              "MAC": 4.573961055170208
+            },
+            "topMarkets": [
+              {
+                "origin": "LEX",
+                "destination": "SFB",
+                "opportunity": 4.4251519766906435
+              },
+              {
+                "origin": "LEX",
+                "destination": "HOU",
+                "opportunity": 4.311099608842984
+              },
+              {
+                "origin": "LEX",
+                "destination": "BWI",
+                "opportunity": 4.089830619905055
+              },
+              {
+                "origin": "LEX",
+                "destination": "FLL",
+                "opportunity": 3.1402432902557216
+              },
+              {
+                "origin": "LEX",
+                "destination": "PIT",
+                "opportunity": 2.3
+              }
+            ],
+            "connectingFlightCount": 16,
+            "connectingFlightNumbers": [
+              1785,
+              1786,
+              1480,
+              1771,
+              1899,
+              1873,
+              1807,
+              1503,
+              1504,
+              1452,
+              1693,
+              1793,
+              1860,
+              2078,
+              2085,
+              2132
+            ]
+          },
+          {
+            "id": "DAY-RON-LEX_IND-R136-1-DAY-IND",
+            "route": 136,
+            "line": "AF",
+            "fleet": "CRJ200",
+            "day": 4,
+            "sequenceWithinRoute": 6,
+            "pairing": 471,
+            "flight": 2175,
+            "origin": "DAY",
+            "destination": "IND",
+            "departure": "21:35",
+            "arrival": "22:18",
+            "departureMinute": 1295,
+            "arrivalMinute": 1338,
+            "departureClock": "21:35",
+            "arrivalClock": "22:18",
+            "blockMinutes": 43,
+            "currentPairFrequency": 2,
+            "routeLocalOd": 0.3,
+            "local": 0.10574437529918619,
+            "connecting": 389.7297561273122,
+            "total": 389.8355005026114,
+            "oneStop": 214.0377973295216,
+            "twoStop": 175.6919587977906,
+            "groups": {
+              "HUB": 7.77530181693107,
+              "FLP": 92.57288428931962,
+              "GCP": 39.29228070283337,
+              "TEX": 76.54886794693736,
+              "UMP": 1.8002877479497297,
+              "OZK": 4.3436357135121195,
+              "NEC": 5.96736290811476,
+              "CGI": 93.67455299723372,
+              "GLC": 36.66572528006949,
+              "LEC": 15.789663708952094,
+              "MAC": 15.29919301545886
+            },
+            "topMarkets": [
+              {
+                "origin": "CLT",
+                "destination": "IND",
+                "opportunity": 61.068777025858935
+              },
+              {
+                "origin": "PIE",
+                "destination": "IND",
+                "opportunity": 40.781286944644265
+              },
+              {
+                "origin": "FLL",
+                "destination": "IND",
+                "opportunity": 37.65504961102517
+              },
+              {
+                "origin": "RFD",
+                "destination": "IND",
+                "opportunity": 32.37692385090327
+              },
+              {
+                "origin": "DAL",
+                "destination": "IND",
+                "opportunity": 29.152330201060114
+              }
+            ],
+            "connectingFlightCount": 24,
+            "connectingFlightNumbers": [
+              1790,
+              1478,
+              1479,
+              1770,
+              1813,
+              1668,
+              1368,
+              1806,
+              1509,
+              1510,
+              1451,
+              1698,
+              1571,
+              1572,
+              1794,
+              1467,
+              1468,
+              1859,
+              1982,
+              2072,
+              2090,
+              2105,
+              2135,
+              2153
+            ]
+          },
+          {
+            "id": "DAY-RON-LEX_IND-R137-1-IND-DAY",
+            "route": 137,
+            "line": "AF",
+            "fleet": "CRJ200",
+            "day": 5,
+            "sequenceWithinRoute": 1,
+            "pairing": 478,
+            "flight": 2176,
+            "origin": "IND",
+            "destination": "DAY",
+            "departure": "04:30",
+            "arrival": "05:13",
+            "departureMinute": 270,
+            "arrivalMinute": 313,
+            "departureClock": "04:30",
+            "arrivalClock": "05:13",
+            "blockMinutes": 43,
+            "currentPairFrequency": 2,
+            "routeLocalOd": 0.3,
+            "local": 0.10574437529918619,
+            "connecting": 258.3114639427989,
+            "total": 258.4172083180981,
+            "oneStop": 121.43998309739617,
+            "twoStop": 136.87148084540274,
+            "groups": {
+              "HUB": 12.702172330806643,
+              "FLP": 62.36238330338282,
+              "TEX": 69.07674222616114,
+              "NEC": 19.81192874413388,
+              "GCP": 13.576577536110065,
+              "CGI": 23.206647740626604,
+              "GLC": 3.5298726131726896,
+              "LEC": 11.680712119395528,
+              "MAC": 26.68628377279206,
+              "APP": 15.678143556217481
+            },
+            "topMarkets": [
+              {
+                "origin": "IND",
+                "destination": "HOU",
+                "opportunity": 52.416207299484554
+              },
+              {
+                "origin": "IND",
+                "destination": "PIE",
+                "opportunity": 24.396875058488263
+              },
+              {
+                "origin": "IND",
+                "destination": "BWI",
+                "opportunity": 23.6964171967753
+              },
+              {
+                "origin": "IND",
+                "destination": "SFB",
+                "opportunity": 20.649684303199862
+              },
+              {
+                "origin": "IND",
+                "destination": "AUS",
+                "opportunity": 16.42083577033791
+              }
+            ],
+            "connectingFlightCount": 18,
+            "connectingFlightNumbers": [
+              1785,
+              1786,
+              1480,
+              1617,
+              1771,
+              1899,
+              1873,
+              1807,
+              1503,
+              1504,
+              1452,
+              1867,
+              1693,
+              1793,
+              1860,
+              2078,
+              2085,
+              2132
+            ]
+          }
+        ],
+        "newlyConnectedMarketDemand": 161.8,
+        "marketsWithFasterBestItinerary": 16
+      },
+      "audit": {
+        "marketsWithSlowerBestItinerary": [
+          {
+            "origin": "TOL",
+            "destination": "HOU",
+            "od": 0.0,
+            "oldFastestMinutes": 238,
+            "newFastestMinutes": 244,
+            "differenceMinutes": 6
+          }
+        ],
+        "marketsLosingAllConnections": [],
+        "lostUnderlyingOd": 0,
+        "marketsWithFasterBestItinerary": 16
+      },
+      "addedFlyingOpportunityUnits": 790.5028787341056,
+      "earlyReturnConnections": {},
+      "changedFlights": [
+        {
+          "flight": 1503,
+          "beforeDeparture": "05:50",
+          "afterDeparture": "05:56",
+          "lostConnectingChoices": 0,
+          "addedConnectingChoices": 2,
+          "oldOpportunity": 3.0609924809383404,
+          "newOpportunity": 40.6762163050671
+        },
+        {
+          "flight": 1873,
+          "beforeDeparture": "05:50",
+          "afterDeparture": "05:53",
+          "lostConnectingChoices": 0,
+          "addedConnectingChoices": 2,
+          "oldOpportunity": 0.025,
+          "newOpportunity": 0.7565119257209995
+        }
+      ],
+      "maintenance": {
+        "AE": {
+          "line": "AE",
+          "maximumConsecutiveNonTargetRons": 10,
+          "limit": 10,
+          "grace": 1,
+          "targetRons": [
+            {
+              "day": 8,
+              "route": 129,
+              "city": "SYR",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            }
+          ],
+          "hubOrFocusRons": [
+            {
+              "day": 8,
+              "route": 129,
+              "city": "SYR",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            }
+          ]
+        },
+        "AF": {
+          "line": "AF",
+          "maximumConsecutiveNonTargetRons": 7,
+          "limit": 10,
+          "grace": 1,
+          "targetRons": [
+            {
+              "day": 3,
+              "route": 135,
+              "city": "MCI",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            },
+            {
+              "day": 6,
+              "route": 138,
+              "city": "DAY",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            }
+          ],
+          "hubOrFocusRons": [
+            {
+              "day": 3,
+              "route": 135,
+              "city": "MCI",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            },
+            {
+              "day": 6,
+              "route": 138,
+              "city": "DAY",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            }
+          ]
+        }
+      },
+      "connections": {
+        "2174": [
+          {
+            "flight": 1785,
+            "destination": "ATW",
+            "departure": "05:50",
+            "departureMinute": 350
+          },
+          {
+            "flight": 1873,
+            "destination": "FWA",
+            "departure": "05:53",
+            "departureMinute": 353
+          },
+          {
+            "flight": 1617,
+            "destination": "BNA",
+            "departure": "05:55",
+            "departureMinute": 355
+          },
+          {
+            "flight": 1503,
+            "destination": "HOU",
+            "departure": "05:56",
+            "departureMinute": 356
+          },
+          {
+            "flight": 2078,
+            "destination": "PHF",
+            "departure": "06:51",
+            "departureMinute": 411
+          },
+          {
+            "flight": 2132,
+            "destination": "BWI",
+            "departure": "07:53",
+            "departureMinute": 473
+          },
+          {
+            "flight": 1480,
+            "destination": "AUS",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1504,
+            "destination": "HOU",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1693,
+            "destination": "MSN",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1771,
+            "destination": "BUF",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1786,
+            "destination": "ATW",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1793,
+            "destination": "PIT",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1807,
+            "destination": "GRR",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1860,
+            "destination": "SBN",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1867,
+            "destination": "LEX",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1899,
+            "destination": "ERI",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1903,
+            "destination": "TOL",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1452,
+            "destination": "JAX",
+            "departure": "08:00",
+            "departureMinute": 480
+          },
+          {
+            "flight": 2085,
+            "destination": "CAK",
+            "departure": "09:10",
+            "departureMinute": 550
+          }
+        ],
+        "2176": [
+          {
+            "flight": 1785,
+            "destination": "ATW",
+            "departure": "05:50",
+            "departureMinute": 350
+          },
+          {
+            "flight": 1873,
+            "destination": "FWA",
+            "departure": "05:53",
+            "departureMinute": 353
+          },
+          {
+            "flight": 1617,
+            "destination": "BNA",
+            "departure": "05:55",
+            "departureMinute": 355
+          },
+          {
+            "flight": 1503,
+            "destination": "HOU",
+            "departure": "05:56",
+            "departureMinute": 356
+          },
+          {
+            "flight": 2078,
+            "destination": "PHF",
+            "departure": "06:51",
+            "departureMinute": 411
+          },
+          {
+            "flight": 2132,
+            "destination": "BWI",
+            "departure": "07:53",
+            "departureMinute": 473
+          },
+          {
+            "flight": 1480,
+            "destination": "AUS",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1504,
+            "destination": "HOU",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1693,
+            "destination": "MSN",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1771,
+            "destination": "BUF",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1786,
+            "destination": "ATW",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1793,
+            "destination": "PIT",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1807,
+            "destination": "GRR",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1860,
+            "destination": "SBN",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1867,
+            "destination": "LEX",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1899,
+            "destination": "ERI",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1903,
+            "destination": "TOL",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1452,
+            "destination": "JAX",
+            "departure": "08:00",
+            "departureMinute": 480
+          },
+          {
+            "flight": 2085,
+            "destination": "CAK",
+            "departure": "09:10",
+            "departureMinute": 550
+          }
+        ]
+      }
+    },
+    {
+      "id": "LEX_CMH",
+      "destinations": [
+        "LEX",
+        "CMH"
+      ],
+      "originatorDelays": [
+        6,
+        0
+      ],
+      "validation": {
+        "structural": "pass",
+        "operatingErrors": 0,
+        "operatingWarnings": 172,
+        "hardStopFailures": [],
+        "blocking": [],
+        "overnight": "pass",
+        "overnightFindings": [],
+        "planning": "pass",
+        "gates": "pass",
+        "standClaims": 16,
+        "standMinutes": 3717
+      },
+      "hubBankChanges": [],
+      "demand": {
+        "flights": [
+          {
+            "id": "DAY-RON-LEX_CMH-R125-1-DAY-LEX",
+            "route": 125,
+            "line": "AE",
+            "fleet": "CRJ200",
+            "day": 4,
+            "sequenceWithinRoute": 9,
+            "pairing": 766,
+            "flight": 2173,
+            "origin": "DAY",
+            "destination": "LEX",
+            "departure": "21:35",
+            "arrival": "22:21",
+            "departureMinute": 1295,
+            "arrivalMinute": 1341,
+            "departureClock": "21:35",
+            "arrivalClock": "22:21",
+            "blockMinutes": 46,
+            "currentPairFrequency": 1,
+            "routeLocalOd": 0.1,
+            "local": 0.05,
+            "connecting": 108.75260868277877,
+            "total": 108.80260868277877,
+            "oneStop": 70.87726773819352,
+            "twoStop": 37.87534094458524,
+            "groups": {
+              "HUB": 9.288366625102682,
+              "TEX": 29.854324506140035,
+              "NEC": 4.26850332005662,
+              "CGI": 15.086865864759178,
+              "FLP": 10.95021221755053,
+              "GCP": 9.614391111143187,
+              "GLC": 14.78496045742848,
+              "LEC": 6.448482995947425,
+              "MAC": 1.0565015846506371,
+              "OZK": 3.3,
+              "UMP": 4.1
+            },
+            "topMarkets": [
+              {
+                "origin": "DAL",
+                "destination": "LEX",
+                "opportunity": 14.4
+              },
+              {
+                "origin": "RFD",
+                "destination": "LEX",
+                "opportunity": 13.087058823529409
+              },
+              {
+                "origin": "CLT",
+                "destination": "LEX",
+                "opportunity": 11.2
+              },
+              {
+                "origin": "AUS",
+                "destination": "LEX",
+                "opportunity": 7.572109658733783
+              },
+              {
+                "origin": "HOU",
+                "destination": "LEX",
+                "opportunity": 7.3
+              }
+            ],
+            "connectingFlightCount": 25,
+            "connectingFlightNumbers": [
+              1790,
+              1478,
+              1479,
+              1770,
+              1813,
+              1668,
+              1368,
+              1806,
+              1509,
+              1510,
+              1820,
+              1451,
+              1698,
+              1571,
+              1572,
+              1794,
+              1467,
+              1468,
+              1859,
+              1982,
+              2072,
+              2090,
+              2105,
+              2135,
+              2153
+            ]
+          },
+          {
+            "id": "DAY-RON-LEX_CMH-R126-1-LEX-DAY",
+            "route": 126,
+            "line": "AE",
+            "fleet": "CRJ200",
+            "day": 5,
+            "sequenceWithinRoute": 1,
+            "pairing": 779,
+            "flight": 2174,
+            "origin": "LEX",
+            "destination": "DAY",
+            "departure": "04:30",
+            "arrival": "05:16",
+            "departureMinute": 270,
+            "arrivalMinute": 316,
+            "departureClock": "04:30",
+            "arrivalClock": "05:16",
+            "blockMinutes": 46,
+            "currentPairFrequency": 1,
+            "routeLocalOd": 0.1,
+            "local": 0.05,
+            "connecting": 33.32418778278227,
+            "total": 33.374187782782265,
+            "oneStop": 18.987190997921918,
+            "twoStop": 14.336996784860343,
+            "groups": {
+              "HUB": 0.9969214487556728,
+              "TEX": 6.430184298395698,
+              "NEC": 2.3717206048137314,
+              "FLP": 8.67744654342941,
+              "CGI": 0.3681292946090227,
+              "GCP": 0.12157991159939065,
+              "GLC": 3.560765539731863,
+              "LEC": 6.223479086277266,
+              "MAC": 4.573961055170208
+            },
+            "topMarkets": [
+              {
+                "origin": "LEX",
+                "destination": "SFB",
+                "opportunity": 4.4251519766906435
+              },
+              {
+                "origin": "LEX",
+                "destination": "HOU",
+                "opportunity": 4.311099608842984
+              },
+              {
+                "origin": "LEX",
+                "destination": "BWI",
+                "opportunity": 4.089830619905055
+              },
+              {
+                "origin": "LEX",
+                "destination": "FLL",
+                "opportunity": 3.1402432902557216
+              },
+              {
+                "origin": "LEX",
+                "destination": "PIT",
+                "opportunity": 2.3
+              }
+            ],
+            "connectingFlightCount": 16,
+            "connectingFlightNumbers": [
+              1785,
+              1786,
+              1480,
+              1771,
+              1899,
+              1873,
+              1807,
+              1503,
+              1504,
+              1452,
+              1693,
+              1793,
+              1860,
+              2078,
+              2085,
+              2132
+            ]
+          },
+          {
+            "id": "DAY-RON-LEX_CMH-R136-1-DAY-CMH",
+            "route": 136,
+            "line": "AF",
+            "fleet": "CRJ200",
+            "day": 4,
+            "sequenceWithinRoute": 6,
+            "pairing": 519,
+            "flight": 2175,
+            "origin": "DAY",
+            "destination": "CMH",
+            "departure": "21:35",
+            "arrival": "22:13",
+            "departureMinute": 1295,
+            "arrivalMinute": 1333,
+            "departureClock": "21:35",
+            "arrivalClock": "22:13",
+            "blockMinutes": 38,
+            "currentPairFrequency": 2,
+            "routeLocalOd": 1.4,
+            "local": 0.49670152855993555,
+            "connecting": 326.99280683662266,
+            "total": 327.4895083651826,
+            "oneStop": 208.62563251845415,
+            "twoStop": 118.36717431816845,
+            "groups": {
+              "HUB": 8.193084790815078,
+              "FLP": 70.38187791495605,
+              "TEX": 58.976945671737774,
+              "OZK": 2.97488931954878,
+              "UMP": 1.852841185514062,
+              "GCP": 18.264593924357786,
+              "CGI": 61.39614066609898,
+              "GLC": 88.13530100274978,
+              "LEC": 4.0,
+              "APP": 1.1,
+              "MAC": 3.935926964278245,
+              "NEC": 7.781205396566106
+            },
+            "topMarkets": [
+              {
+                "origin": "RFD",
+                "destination": "CMH",
+                "opportunity": 80.76995459480845
+              },
+              {
+                "origin": "CLT",
+                "destination": "CMH",
+                "opportunity": 41.4
+              },
+              {
+                "origin": "DAL",
+                "destination": "CMH",
+                "opportunity": 27.593290197145215
+              },
+              {
+                "origin": "FLL",
+                "destination": "CMH",
+                "opportunity": 25.879639296170772
+              },
+              {
+                "origin": "PIE",
+                "destination": "CMH",
+                "opportunity": 17.14375895475805
+              }
+            ],
+            "connectingFlightCount": 25,
+            "connectingFlightNumbers": [
+              1790,
+              1478,
+              1479,
+              1770,
+              1368,
+              1806,
+              1509,
+              1510,
+              1820,
+              1451,
+              1698,
+              1571,
+              1572,
+              1794,
+              1467,
+              1468,
+              1859,
+              1850,
+              1982,
+              2072,
+              2090,
+              2105,
+              2137,
+              2135,
+              2153
+            ]
+          },
+          {
+            "id": "DAY-RON-LEX_CMH-R137-1-CMH-DAY",
+            "route": 137,
+            "line": "AF",
+            "fleet": "CRJ200",
+            "day": 5,
+            "sequenceWithinRoute": 1,
+            "pairing": 520,
+            "flight": 2176,
+            "origin": "CMH",
+            "destination": "DAY",
+            "departure": "04:30",
+            "arrival": "05:08",
+            "departureMinute": 270,
+            "arrivalMinute": 308,
+            "departureClock": "04:30",
+            "arrivalClock": "05:08",
+            "blockMinutes": 38,
+            "currentPairFrequency": 2,
+            "routeLocalOd": 1.4,
+            "local": 0.49670152855993555,
+            "connecting": 282.1925122555849,
+            "total": 282.68921378414484,
+            "oneStop": 122.3252996717487,
+            "twoStop": 159.86721258383622,
+            "groups": {
+              "HUB": 8.152000467053623,
+              "FLP": 106.950893814413,
+              "TEX": 56.504763163380694,
+              "CGI": 7.589018896091462,
+              "GCP": 9.877242510605711,
+              "GLC": 7.660653963111635,
+              "LEC": 2.6947442810536613,
+              "MAC": 18.45058283583483,
+              "APP": 38.35151700405257,
+              "NEC": 25.961095319987763
+            },
+            "topMarkets": [
+              {
+                "origin": "CMH",
+                "destination": "HOU",
+                "opportunity": 40.296011098558225
+              },
+              {
+                "origin": "CMH",
+                "destination": "BNA",
+                "opportunity": 38.199999999999996
+              },
+              {
+                "origin": "CMH",
+                "destination": "FLL",
+                "opportunity": 34.08730146197746
+              },
+              {
+                "origin": "CMH",
+                "destination": "PIE",
+                "opportunity": 29.985498633373663
+              },
+              {
+                "origin": "CMH",
+                "destination": "SFB",
+                "opportunity": 28.047993942429294
+              }
+            ],
+            "connectingFlightCount": 16,
+            "connectingFlightNumbers": [
+              1785,
+              1786,
+              1480,
+              1617,
+              1771,
+              1873,
+              1807,
+              1503,
+              1504,
+              1452,
+              1867,
+              1693,
+              1793,
+              1860,
+              2078,
+              2132
+            ]
+          }
+        ],
+        "newlyConnectedMarketDemand": 193.8,
+        "marketsWithFasterBestItinerary": 16
+      },
+      "audit": {
+        "marketsWithSlowerBestItinerary": [
+          {
+            "origin": "TOL",
+            "destination": "HOU",
+            "od": 0.0,
+            "oldFastestMinutes": 238,
+            "newFastestMinutes": 244,
+            "differenceMinutes": 6
+          }
+        ],
+        "marketsLosingAllConnections": [],
+        "lostUnderlyingOd": 0,
+        "marketsWithFasterBestItinerary": 16
+      },
+      "addedFlyingOpportunityUnits": 752.3555186148884,
+      "earlyReturnConnections": {},
+      "changedFlights": [
+        {
+          "flight": 1503,
+          "beforeDeparture": "05:50",
+          "afterDeparture": "05:56",
+          "lostConnectingChoices": 0,
+          "addedConnectingChoices": 2,
+          "oldOpportunity": 3.0609924809383404,
+          "newOpportunity": 32.65754330599924
+        }
+      ],
+      "maintenance": {
+        "AE": {
+          "line": "AE",
+          "maximumConsecutiveNonTargetRons": 10,
+          "limit": 10,
+          "grace": 1,
+          "targetRons": [
+            {
+              "day": 8,
+              "route": 129,
+              "city": "SYR",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            }
+          ],
+          "hubOrFocusRons": [
+            {
+              "day": 8,
+              "route": 129,
+              "city": "SYR",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            }
+          ]
+        },
+        "AF": {
+          "line": "AF",
+          "maximumConsecutiveNonTargetRons": 7,
+          "limit": 10,
+          "grace": 1,
+          "targetRons": [
+            {
+              "day": 3,
+              "route": 135,
+              "city": "MCI",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            },
+            {
+              "day": 6,
+              "route": 138,
+              "city": "DAY",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            }
+          ],
+          "hubOrFocusRons": [
+            {
+              "day": 3,
+              "route": 135,
+              "city": "MCI",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            },
+            {
+              "day": 6,
+              "route": 138,
+              "city": "DAY",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            }
+          ]
+        }
+      },
+      "connections": {
+        "2174": [
+          {
+            "flight": 1785,
+            "destination": "ATW",
+            "departure": "05:50",
+            "departureMinute": 350
+          },
+          {
+            "flight": 1873,
+            "destination": "FWA",
+            "departure": "05:50",
+            "departureMinute": 350
+          },
+          {
+            "flight": 1617,
+            "destination": "BNA",
+            "departure": "05:55",
+            "departureMinute": 355
+          },
+          {
+            "flight": 1503,
+            "destination": "HOU",
+            "departure": "05:56",
+            "departureMinute": 356
+          },
+          {
+            "flight": 2078,
+            "destination": "PHF",
+            "departure": "06:51",
+            "departureMinute": 411
+          },
+          {
+            "flight": 2132,
+            "destination": "BWI",
+            "departure": "07:53",
+            "departureMinute": 473
+          },
+          {
+            "flight": 1480,
+            "destination": "AUS",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1504,
+            "destination": "HOU",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1693,
+            "destination": "MSN",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1771,
+            "destination": "BUF",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1786,
+            "destination": "ATW",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1793,
+            "destination": "PIT",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1807,
+            "destination": "GRR",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1860,
+            "destination": "SBN",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1867,
+            "destination": "LEX",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1899,
+            "destination": "ERI",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1903,
+            "destination": "TOL",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1452,
+            "destination": "JAX",
+            "departure": "08:00",
+            "departureMinute": 480
+          },
+          {
+            "flight": 2085,
+            "destination": "CAK",
+            "departure": "09:10",
+            "departureMinute": 550
+          }
+        ],
+        "2176": [
+          {
+            "flight": 1785,
+            "destination": "ATW",
+            "departure": "05:50",
+            "departureMinute": 350
+          },
+          {
+            "flight": 1873,
+            "destination": "FWA",
+            "departure": "05:50",
+            "departureMinute": 350
+          },
+          {
+            "flight": 1617,
+            "destination": "BNA",
+            "departure": "05:55",
+            "departureMinute": 355
+          },
+          {
+            "flight": 1503,
+            "destination": "HOU",
+            "departure": "05:56",
+            "departureMinute": 356
+          },
+          {
+            "flight": 2078,
+            "destination": "PHF",
+            "departure": "06:51",
+            "departureMinute": 411
+          },
+          {
+            "flight": 2132,
+            "destination": "BWI",
+            "departure": "07:53",
+            "departureMinute": 473
+          },
+          {
+            "flight": 1480,
+            "destination": "AUS",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1504,
+            "destination": "HOU",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1693,
+            "destination": "MSN",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1771,
+            "destination": "BUF",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1786,
+            "destination": "ATW",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1793,
+            "destination": "PIT",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1807,
+            "destination": "GRR",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1860,
+            "destination": "SBN",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1867,
+            "destination": "LEX",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1899,
+            "destination": "ERI",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1903,
+            "destination": "TOL",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1452,
+            "destination": "JAX",
+            "departure": "08:00",
+            "departureMinute": 480
+          }
+        ]
+      }
+    },
+    {
+      "id": "CMH_IND",
+      "destinations": [
+        "CMH",
+        "IND"
+      ],
+      "originatorDelays": [
+        0,
+        3
+      ],
+      "validation": {
+        "structural": "pass",
+        "operatingErrors": 0,
+        "operatingWarnings": 172,
+        "hardStopFailures": [],
+        "blocking": [],
+        "overnight": "pass",
+        "overnightFindings": [],
+        "planning": "pass",
+        "gates": "pass",
+        "standClaims": 16,
+        "standMinutes": 3717
+      },
+      "hubBankChanges": [],
+      "demand": {
+        "flights": [
+          {
+            "id": "DAY-RON-CMH_IND-R125-1-DAY-CMH",
+            "route": 125,
+            "line": "AE",
+            "fleet": "CRJ200",
+            "day": 4,
+            "sequenceWithinRoute": 9,
+            "pairing": 519,
+            "flight": 2173,
+            "origin": "DAY",
+            "destination": "CMH",
+            "departure": "21:35",
+            "arrival": "22:13",
+            "departureMinute": 1295,
+            "arrivalMinute": 1333,
+            "departureClock": "21:35",
+            "arrivalClock": "22:13",
+            "blockMinutes": 38,
+            "currentPairFrequency": 2,
+            "routeLocalOd": 1.4,
+            "local": 0.49670152855993555,
+            "connecting": 326.99280683662266,
+            "total": 327.4895083651826,
+            "oneStop": 208.62563251845415,
+            "twoStop": 118.36717431816845,
+            "groups": {
+              "HUB": 8.193084790815078,
+              "FLP": 70.38187791495605,
+              "TEX": 58.976945671737774,
+              "OZK": 2.97488931954878,
+              "UMP": 1.852841185514062,
+              "GCP": 18.264593924357786,
+              "CGI": 61.39614066609898,
+              "GLC": 88.13530100274978,
+              "LEC": 4.0,
+              "APP": 1.1,
+              "MAC": 3.935926964278245,
+              "NEC": 7.781205396566106
+            },
+            "topMarkets": [
+              {
+                "origin": "RFD",
+                "destination": "CMH",
+                "opportunity": 80.76995459480845
+              },
+              {
+                "origin": "CLT",
+                "destination": "CMH",
+                "opportunity": 41.4
+              },
+              {
+                "origin": "DAL",
+                "destination": "CMH",
+                "opportunity": 27.593290197145215
+              },
+              {
+                "origin": "FLL",
+                "destination": "CMH",
+                "opportunity": 25.879639296170772
+              },
+              {
+                "origin": "PIE",
+                "destination": "CMH",
+                "opportunity": 17.14375895475805
+              }
+            ],
+            "connectingFlightCount": 25,
+            "connectingFlightNumbers": [
+              1790,
+              1478,
+              1479,
+              1770,
+              1368,
+              1806,
+              1509,
+              1510,
+              1820,
+              1451,
+              1698,
+              1571,
+              1572,
+              1794,
+              1467,
+              1468,
+              1859,
+              1850,
+              1982,
+              2072,
+              2090,
+              2105,
+              2137,
+              2135,
+              2153
+            ]
+          },
+          {
+            "id": "DAY-RON-CMH_IND-R126-1-CMH-DAY",
+            "route": 126,
+            "line": "AE",
+            "fleet": "CRJ200",
+            "day": 5,
+            "sequenceWithinRoute": 1,
+            "pairing": 520,
+            "flight": 2174,
+            "origin": "CMH",
+            "destination": "DAY",
+            "departure": "04:30",
+            "arrival": "05:08",
+            "departureMinute": 270,
+            "arrivalMinute": 308,
+            "departureClock": "04:30",
+            "arrivalClock": "05:08",
+            "blockMinutes": 38,
+            "currentPairFrequency": 2,
+            "routeLocalOd": 1.4,
+            "local": 0.49670152855993555,
+            "connecting": 282.51668107429913,
+            "total": 283.01338260285905,
+            "oneStop": 122.69290354516754,
+            "twoStop": 159.82377752913158,
+            "groups": {
+              "HUB": 8.152000467053623,
+              "FLP": 106.950893814413,
+              "TEX": 56.58230467794084,
+              "CGI": 7.589018896091462,
+              "GCP": 9.877242510605711,
+              "GLC": 7.658798271318243,
+              "LEC": 2.6947442810536613,
+              "MAC": 18.45058283583483,
+              "APP": 38.599999999999994,
+              "NEC": 25.961095319987763
+            },
+            "topMarkets": [
+              {
+                "origin": "CMH",
+                "destination": "HOU",
+                "opportunity": 40.37355261311838
+              },
+              {
+                "origin": "CMH",
+                "destination": "BNA",
+                "opportunity": 38.199999999999996
+              },
+              {
+                "origin": "CMH",
+                "destination": "FLL",
+                "opportunity": 34.08730146197746
+              },
+              {
+                "origin": "CMH",
+                "destination": "PIE",
+                "opportunity": 29.985498633373663
+              },
+              {
+                "origin": "CMH",
+                "destination": "SFB",
+                "opportunity": 28.047993942429294
+              }
+            ],
+            "connectingFlightCount": 16,
+            "connectingFlightNumbers": [
+              1785,
+              1786,
+              1480,
+              1617,
+              1771,
+              1873,
+              1807,
+              1503,
+              1504,
+              1452,
+              1867,
+              1693,
+              1793,
+              1860,
+              2078,
+              2132
+            ]
+          },
+          {
+            "id": "DAY-RON-CMH_IND-R136-1-DAY-IND",
+            "route": 136,
+            "line": "AF",
+            "fleet": "CRJ200",
+            "day": 4,
+            "sequenceWithinRoute": 6,
+            "pairing": 471,
+            "flight": 2175,
+            "origin": "DAY",
+            "destination": "IND",
+            "departure": "21:35",
+            "arrival": "22:18",
+            "departureMinute": 1295,
+            "arrivalMinute": 1338,
+            "departureClock": "21:35",
+            "arrivalClock": "22:18",
+            "blockMinutes": 43,
+            "currentPairFrequency": 2,
+            "routeLocalOd": 0.3,
+            "local": 0.10574437529918619,
+            "connecting": 389.7297561273122,
+            "total": 389.8355005026114,
+            "oneStop": 214.0377973295216,
+            "twoStop": 175.6919587977906,
+            "groups": {
+              "HUB": 7.77530181693107,
+              "FLP": 92.57288428931962,
+              "GCP": 39.29228070283337,
+              "TEX": 76.54886794693736,
+              "UMP": 1.8002877479497297,
+              "OZK": 4.3436357135121195,
+              "NEC": 5.96736290811476,
+              "CGI": 93.67455299723372,
+              "GLC": 36.66572528006949,
+              "LEC": 15.789663708952094,
+              "MAC": 15.29919301545886
+            },
+            "topMarkets": [
+              {
+                "origin": "CLT",
+                "destination": "IND",
+                "opportunity": 61.068777025858935
+              },
+              {
+                "origin": "PIE",
+                "destination": "IND",
+                "opportunity": 40.781286944644265
+              },
+              {
+                "origin": "FLL",
+                "destination": "IND",
+                "opportunity": 37.65504961102517
+              },
+              {
+                "origin": "RFD",
+                "destination": "IND",
+                "opportunity": 32.37692385090327
+              },
+              {
+                "origin": "DAL",
+                "destination": "IND",
+                "opportunity": 29.152330201060114
+              }
+            ],
+            "connectingFlightCount": 24,
+            "connectingFlightNumbers": [
+              1790,
+              1478,
+              1479,
+              1770,
+              1813,
+              1668,
+              1368,
+              1806,
+              1509,
+              1510,
+              1451,
+              1698,
+              1571,
+              1572,
+              1794,
+              1467,
+              1468,
+              1859,
+              1982,
+              2072,
+              2090,
+              2105,
+              2135,
+              2153
+            ]
+          },
+          {
+            "id": "DAY-RON-CMH_IND-R137-1-IND-DAY",
+            "route": 137,
+            "line": "AF",
+            "fleet": "CRJ200",
+            "day": 5,
+            "sequenceWithinRoute": 1,
+            "pairing": 478,
+            "flight": 2176,
+            "origin": "IND",
+            "destination": "DAY",
+            "departure": "04:30",
+            "arrival": "05:13",
+            "departureMinute": 270,
+            "arrivalMinute": 313,
+            "departureClock": "04:30",
+            "arrivalClock": "05:13",
+            "blockMinutes": 43,
+            "currentPairFrequency": 2,
+            "routeLocalOd": 0.3,
+            "local": 0.10574437529918619,
+            "connecting": 258.50819793611834,
+            "total": 258.61394231141753,
+            "oneStop": 121.69580556135855,
+            "twoStop": 136.81239237475984,
+            "groups": {
+              "HUB": 12.702172330806643,
+              "FLP": 62.36238330338282,
+              "TEX": 69.15161977569811,
+              "NEC": 19.81192874413388,
+              "GCP": 13.576577536110065,
+              "CGI": 23.206647740626604,
+              "GLC": 3.5298726131726896,
+              "LEC": 11.680712119395528,
+              "MAC": 26.68628377279206,
+              "APP": 15.799999999999999
+            },
+            "topMarkets": [
+              {
+                "origin": "IND",
+                "destination": "HOU",
+                "opportunity": 52.49108484902152
+              },
+              {
+                "origin": "IND",
+                "destination": "PIE",
+                "opportunity": 24.396875058488263
+              },
+              {
+                "origin": "IND",
+                "destination": "BWI",
+                "opportunity": 23.6964171967753
+              },
+              {
+                "origin": "IND",
+                "destination": "SFB",
+                "opportunity": 20.649684303199862
+              },
+              {
+                "origin": "IND",
+                "destination": "AUS",
+                "opportunity": 16.42083577033791
+              }
+            ],
+            "connectingFlightCount": 18,
+            "connectingFlightNumbers": [
+              1785,
+              1786,
+              1480,
+              1617,
+              1771,
+              1899,
+              1873,
+              1807,
+              1503,
+              1504,
+              1452,
+              1867,
+              1693,
+              1793,
+              1860,
+              2078,
+              2085,
+              2132
+            ]
+          }
+        ],
+        "newlyConnectedMarketDemand": 198.4,
+        "marketsWithFasterBestItinerary": 18
+      },
+      "audit": {
+        "marketsWithSlowerBestItinerary": [],
+        "marketsLosingAllConnections": [],
+        "lostUnderlyingOd": 0,
+        "marketsWithFasterBestItinerary": 18
+      },
+      "addedFlyingOpportunityUnits": 1258.9523337820706,
+      "earlyReturnConnections": {},
+      "changedFlights": [
+        {
+          "flight": 1873,
+          "beforeDeparture": "05:50",
+          "afterDeparture": "05:53",
+          "lostConnectingChoices": 0,
+          "addedConnectingChoices": 2,
+          "oldOpportunity": 0.025,
+          "newOpportunity": 0.805425464696839
+        }
+      ],
+      "maintenance": {
+        "AE": {
+          "line": "AE",
+          "maximumConsecutiveNonTargetRons": 10,
+          "limit": 10,
+          "grace": 1,
+          "targetRons": [
+            {
+              "day": 8,
+              "route": 129,
+              "city": "SYR",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            }
+          ],
+          "hubOrFocusRons": [
+            {
+              "day": 8,
+              "route": 129,
+              "city": "SYR",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            }
+          ]
+        },
+        "AF": {
+          "line": "AF",
+          "maximumConsecutiveNonTargetRons": 7,
+          "limit": 10,
+          "grace": 1,
+          "targetRons": [
+            {
+              "day": 3,
+              "route": 135,
+              "city": "MCI",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            },
+            {
+              "day": 6,
+              "route": 138,
+              "city": "DAY",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            }
+          ],
+          "hubOrFocusRons": [
+            {
+              "day": 3,
+              "route": 135,
+              "city": "MCI",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            },
+            {
+              "day": 6,
+              "route": 138,
+              "city": "DAY",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            }
+          ]
+        }
+      },
+      "connections": {
+        "2174": [
+          {
+            "flight": 1503,
+            "destination": "HOU",
+            "departure": "05:50",
+            "departureMinute": 350
+          },
+          {
+            "flight": 1785,
+            "destination": "ATW",
+            "departure": "05:50",
+            "departureMinute": 350
+          },
+          {
+            "flight": 1873,
+            "destination": "FWA",
+            "departure": "05:53",
+            "departureMinute": 353
+          },
+          {
+            "flight": 1617,
+            "destination": "BNA",
+            "departure": "05:55",
+            "departureMinute": 355
+          },
+          {
+            "flight": 2078,
+            "destination": "PHF",
+            "departure": "06:51",
+            "departureMinute": 411
+          },
+          {
+            "flight": 2132,
+            "destination": "BWI",
+            "departure": "07:53",
+            "departureMinute": 473
+          },
+          {
+            "flight": 1480,
+            "destination": "AUS",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1504,
+            "destination": "HOU",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1693,
+            "destination": "MSN",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1771,
+            "destination": "BUF",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1786,
+            "destination": "ATW",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1793,
+            "destination": "PIT",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1807,
+            "destination": "GRR",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1860,
+            "destination": "SBN",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1867,
+            "destination": "LEX",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1899,
+            "destination": "ERI",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1903,
+            "destination": "TOL",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1452,
+            "destination": "JAX",
+            "departure": "08:00",
+            "departureMinute": 480
+          }
+        ],
+        "2176": [
+          {
+            "flight": 1503,
+            "destination": "HOU",
+            "departure": "05:50",
+            "departureMinute": 350
+          },
+          {
+            "flight": 1785,
+            "destination": "ATW",
+            "departure": "05:50",
+            "departureMinute": 350
+          },
+          {
+            "flight": 1873,
+            "destination": "FWA",
+            "departure": "05:53",
+            "departureMinute": 353
+          },
+          {
+            "flight": 1617,
+            "destination": "BNA",
+            "departure": "05:55",
+            "departureMinute": 355
+          },
+          {
+            "flight": 2078,
+            "destination": "PHF",
+            "departure": "06:51",
+            "departureMinute": 411
+          },
+          {
+            "flight": 2132,
+            "destination": "BWI",
+            "departure": "07:53",
+            "departureMinute": 473
+          },
+          {
+            "flight": 1480,
+            "destination": "AUS",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1504,
+            "destination": "HOU",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1693,
+            "destination": "MSN",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1771,
+            "destination": "BUF",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1786,
+            "destination": "ATW",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1793,
+            "destination": "PIT",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1807,
+            "destination": "GRR",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1860,
+            "destination": "SBN",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1867,
+            "destination": "LEX",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1899,
+            "destination": "ERI",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1903,
+            "destination": "TOL",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1452,
+            "destination": "JAX",
+            "departure": "08:00",
+            "departureMinute": 480
+          },
+          {
+            "flight": 2085,
+            "destination": "CAK",
+            "departure": "09:10",
+            "departureMinute": 550
+          }
+        ]
+      }
+    },
+    {
+      "id": "IND_CAK",
+      "destinations": [
+        "IND",
+        "CAK"
+      ],
+      "originatorDelays": [
+        3,
+        10
+      ],
+      "validation": {
+        "structural": "pass",
+        "operatingErrors": 0,
+        "operatingWarnings": 172,
+        "hardStopFailures": [],
+        "blocking": [],
+        "overnight": "pass",
+        "overnightFindings": [],
+        "planning": "pass",
+        "gates": "pass",
+        "standClaims": 16,
+        "standMinutes": 3717
+      },
+      "hubBankChanges": [
+        {
+          "bankId": "DAY-B1",
+          "expectedStartMinute": 300,
+          "expectedEndMinute": 360,
+          "startMinute": 301,
+          "endMinute": 361
+        }
+      ],
+      "demand": {
+        "flights": [
+          {
+            "id": "DAY-RON-IND_CAK-R125-1-DAY-IND",
+            "route": 125,
+            "line": "AE",
+            "fleet": "CRJ200",
+            "day": 4,
+            "sequenceWithinRoute": 9,
+            "pairing": 471,
+            "flight": 2173,
+            "origin": "DAY",
+            "destination": "IND",
+            "departure": "21:35",
+            "arrival": "22:18",
+            "departureMinute": 1295,
+            "arrivalMinute": 1338,
+            "departureClock": "21:35",
+            "arrivalClock": "22:18",
+            "blockMinutes": 43,
+            "currentPairFrequency": 2,
+            "routeLocalOd": 0.3,
+            "local": 0.10574437529918619,
+            "connecting": 389.7297561273122,
+            "total": 389.8355005026114,
+            "oneStop": 214.0377973295216,
+            "twoStop": 175.6919587977906,
+            "groups": {
+              "HUB": 7.77530181693107,
+              "FLP": 92.57288428931962,
+              "GCP": 39.29228070283337,
+              "TEX": 76.54886794693736,
+              "UMP": 1.8002877479497297,
+              "OZK": 4.3436357135121195,
+              "NEC": 5.96736290811476,
+              "CGI": 93.67455299723372,
+              "GLC": 36.66572528006949,
+              "LEC": 15.789663708952094,
+              "MAC": 15.29919301545886
+            },
+            "topMarkets": [
+              {
+                "origin": "CLT",
+                "destination": "IND",
+                "opportunity": 61.068777025858935
+              },
+              {
+                "origin": "PIE",
+                "destination": "IND",
+                "opportunity": 40.781286944644265
+              },
+              {
+                "origin": "FLL",
+                "destination": "IND",
+                "opportunity": 37.65504961102517
+              },
+              {
+                "origin": "RFD",
+                "destination": "IND",
+                "opportunity": 32.37692385090327
+              },
+              {
+                "origin": "DAL",
+                "destination": "IND",
+                "opportunity": 29.152330201060114
+              }
+            ],
+            "connectingFlightCount": 24,
+            "connectingFlightNumbers": [
+              1790,
+              1478,
+              1479,
+              1770,
+              1813,
+              1668,
+              1368,
+              1806,
+              1509,
+              1510,
+              1451,
+              1698,
+              1571,
+              1572,
+              1794,
+              1467,
+              1468,
+              1859,
+              1982,
+              2072,
+              2090,
+              2105,
+              2135,
+              2153
+            ]
+          },
+          {
+            "id": "DAY-RON-IND_CAK-R126-1-IND-DAY",
+            "route": 126,
+            "line": "AE",
+            "fleet": "CRJ200",
+            "day": 5,
+            "sequenceWithinRoute": 1,
+            "pairing": 478,
+            "flight": 2174,
+            "origin": "IND",
+            "destination": "DAY",
+            "departure": "04:30",
+            "arrival": "05:13",
+            "departureMinute": 270,
+            "arrivalMinute": 313,
+            "departureClock": "04:30",
+            "arrivalClock": "05:13",
+            "blockMinutes": 43,
+            "currentPairFrequency": 2,
+            "routeLocalOd": 0.3,
+            "local": 0.10574437529918619,
+            "connecting": 258.2597753667881,
+            "total": 258.3655197420873,
+            "oneStop": 121.41775851769495,
+            "twoStop": 136.8420168490932,
+            "groups": {
+              "HUB": 12.702172330806643,
+              "FLP": 62.36238330338282,
+              "TEX": 69.11407932118524,
+              "NEC": 19.81192874413388,
+              "GCP": 13.576577536110065,
+              "CGI": 23.206647740626604,
+              "GLC": 3.503758653287795,
+              "LEC": 11.49594396446304,
+              "MAC": 26.68628377279206,
+              "APP": 15.799999999999999
+            },
+            "topMarkets": [
+              {
+                "origin": "IND",
+                "destination": "HOU",
+                "opportunity": 52.45354439450867
+              },
+              {
+                "origin": "IND",
+                "destination": "PIE",
+                "opportunity": 24.396875058488263
+              },
+              {
+                "origin": "IND",
+                "destination": "BWI",
+                "opportunity": 23.6964171967753
+              },
+              {
+                "origin": "IND",
+                "destination": "SFB",
+                "opportunity": 20.649684303199862
+              },
+              {
+                "origin": "IND",
+                "destination": "AUS",
+                "opportunity": 16.42083577033791
+              }
+            ],
+            "connectingFlightCount": 18,
+            "connectingFlightNumbers": [
+              1785,
+              1786,
+              1480,
+              1617,
+              1771,
+              1899,
+              1873,
+              1807,
+              1503,
+              1504,
+              1452,
+              1867,
+              1693,
+              1793,
+              1860,
+              2078,
+              2085,
+              2132
+            ]
+          },
+          {
+            "id": "DAY-RON-IND_CAK-R136-1-DAY-CAK",
+            "route": 136,
+            "line": "AF",
+            "fleet": "CRJ200",
+            "day": 4,
+            "sequenceWithinRoute": 6,
+            "pairing": 475,
+            "flight": 2175,
+            "origin": "DAY",
+            "destination": "CAK",
+            "departure": "21:35",
+            "arrival": "22:25",
+            "departureMinute": 1295,
+            "arrivalMinute": 1345,
+            "departureClock": "21:35",
+            "arrivalClock": "22:25",
+            "blockMinutes": 50,
+            "currentPairFrequency": 2,
+            "routeLocalOd": 0.3,
+            "local": 0.10257966616084976,
+            "connecting": 431.9352769186481,
+            "total": 432.037856584809,
+            "oneStop": 216.85309330481303,
+            "twoStop": 215.08218361383513,
+            "groups": {
+              "HUB": 12.852041825120853,
+              "FLP": 126.75004001867867,
+              "OZK": 2.3981514083296496,
+              "TEX": 83.60830607713916,
+              "UMP": 29.84720565811072,
+              "NEC": 0.1839395475663187,
+              "GLC": 63.59059558126685,
+              "CGI": 78.30860009113118,
+              "APP": 2.9999999999999996,
+              "GCP": 31.396396711304767
+            },
+            "topMarkets": [
+              {
+                "origin": "PGD",
+                "destination": "CAK",
+                "opportunity": 76.0568520411646
+              },
+              {
+                "origin": "RFD",
+                "destination": "CAK",
+                "opportunity": 58.23136563954869
+              },
+              {
+                "origin": "DAL",
+                "destination": "CAK",
+                "opportunity": 52.210541824312024
+              },
+              {
+                "origin": "CLT",
+                "destination": "CAK",
+                "opportunity": 48.1
+              },
+              {
+                "origin": "FLL",
+                "destination": "CAK",
+                "opportunity": 27.02723716983825
+              }
+            ],
+            "connectingFlightCount": 23,
+            "connectingFlightNumbers": [
+              1790,
+              1478,
+              1479,
+              1368,
+              1806,
+              1509,
+              1510,
+              1820,
+              1451,
+              1698,
+              1571,
+              1572,
+              1467,
+              1468,
+              1859,
+              1850,
+              1982,
+              2072,
+              2090,
+              2105,
+              2137,
+              2135,
+              2153
+            ]
+          },
+          {
+            "id": "DAY-RON-IND_CAK-R137-1-CAK-DAY",
+            "route": 137,
+            "line": "AF",
+            "fleet": "CRJ200",
+            "day": 5,
+            "sequenceWithinRoute": 1,
+            "pairing": 449,
+            "flight": 2176,
+            "origin": "CAK",
+            "destination": "DAY",
+            "departure": "04:30",
+            "arrival": "05:20",
+            "departureMinute": 270,
+            "arrivalMinute": 320,
+            "departureClock": "04:30",
+            "arrivalClock": "05:20",
+            "blockMinutes": 50,
+            "currentPairFrequency": 2,
+            "routeLocalOd": 0.4,
+            "local": 0.13677288821446637,
+            "connecting": 289.0627862271442,
+            "total": 289.1995591153587,
+            "oneStop": 101.78825589378688,
+            "twoStop": 187.27453033335735,
+            "groups": {
+              "TEX": 35.94159764335912,
+              "FLP": 154.66484020055972,
+              "NEC": 0.2725025875666168,
+              "HUB": 8.122836542630415,
+              "MAC": 7.11241828585517,
+              "GLC": 4.4599906506856986,
+              "CGI": 12.384497217752703,
+              "APP": 51.1,
+              "GCP": 15.0041030987348
+            },
+            "topMarkets": [
+              {
+                "origin": "CAK",
+                "destination": "PGD",
+                "opportunity": 103.6
+              },
+              {
+                "origin": "CAK",
+                "destination": "BNA",
+                "opportunity": 49.9
+              },
+              {
+                "origin": "CAK",
+                "destination": "HOU",
+                "opportunity": 27.418867857933684
+              },
+              {
+                "origin": "CAK",
+                "destination": "SFB",
+                "opportunity": 19.497233321972946
+              },
+              {
+                "origin": "CAK",
+                "destination": "FLL",
+                "opportunity": 14.268713234176262
+              }
+            ],
+            "connectingFlightCount": 14,
+            "connectingFlightNumbers": [
+              1785,
+              1786,
+              1480,
+              1617,
+              1873,
+              1807,
+              1503,
+              1504,
+              1452,
+              1867,
+              1693,
+              1860,
+              2078,
+              2132
+            ]
+          }
+        ],
+        "newlyConnectedMarketDemand": 339.1,
+        "marketsWithFasterBestItinerary": 21
+      },
+      "audit": {
+        "marketsWithSlowerBestItinerary": [
+          {
+            "origin": "TOL",
+            "destination": "HOU",
+            "od": 0.0,
+            "oldFastestMinutes": 238,
+            "newFastestMinutes": 241,
+            "differenceMinutes": 3
+          }
+        ],
+        "marketsLosingAllConnections": [],
+        "lostUnderlyingOd": 0,
+        "marketsWithFasterBestItinerary": 21
+      },
+      "addedFlyingOpportunityUnits": 1369.4384359448663,
+      "earlyReturnConnections": {},
+      "changedFlights": [
+        {
+          "flight": 1503,
+          "beforeDeparture": "05:50",
+          "afterDeparture": "05:53",
+          "lostConnectingChoices": 0,
+          "addedConnectingChoices": 2,
+          "oldOpportunity": 3.0609924809383404,
+          "newOpportunity": 56.48890585470908
+        },
+        {
+          "flight": 1873,
+          "beforeDeparture": "05:50",
+          "afterDeparture": "06:00",
+          "lostConnectingChoices": 0,
+          "addedConnectingChoices": 2,
+          "oldOpportunity": 0.025,
+          "newOpportunity": 0.7045174145344204
+        }
+      ],
+      "maintenance": {
+        "AE": {
+          "line": "AE",
+          "maximumConsecutiveNonTargetRons": 10,
+          "limit": 10,
+          "grace": 1,
+          "targetRons": [
+            {
+              "day": 8,
+              "route": 129,
+              "city": "SYR",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            }
+          ],
+          "hubOrFocusRons": [
+            {
+              "day": 8,
+              "route": 129,
+              "city": "SYR",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            }
+          ]
+        },
+        "AF": {
+          "line": "AF",
+          "maximumConsecutiveNonTargetRons": 7,
+          "limit": 10,
+          "grace": 1,
+          "targetRons": [
+            {
+              "day": 3,
+              "route": 135,
+              "city": "MCI",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            },
+            {
+              "day": 6,
+              "route": 138,
+              "city": "DAY",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            }
+          ],
+          "hubOrFocusRons": [
+            {
+              "day": 3,
+              "route": 135,
+              "city": "MCI",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            },
+            {
+              "day": 6,
+              "route": 138,
+              "city": "DAY",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            }
+          ]
+        }
+      },
+      "connections": {
+        "2174": [
+          {
+            "flight": 1785,
+            "destination": "ATW",
+            "departure": "05:50",
+            "departureMinute": 350
+          },
+          {
+            "flight": 1503,
+            "destination": "HOU",
+            "departure": "05:53",
+            "departureMinute": 353
+          },
+          {
+            "flight": 1617,
+            "destination": "BNA",
+            "departure": "05:55",
+            "departureMinute": 355
+          },
+          {
+            "flight": 1873,
+            "destination": "FWA",
+            "departure": "06:00",
+            "departureMinute": 360
+          },
+          {
+            "flight": 2078,
+            "destination": "PHF",
+            "departure": "06:51",
+            "departureMinute": 411
+          },
+          {
+            "flight": 2132,
+            "destination": "BWI",
+            "departure": "07:53",
+            "departureMinute": 473
+          },
+          {
+            "flight": 1480,
+            "destination": "AUS",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1504,
+            "destination": "HOU",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1693,
+            "destination": "MSN",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1771,
+            "destination": "BUF",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1786,
+            "destination": "ATW",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1793,
+            "destination": "PIT",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1807,
+            "destination": "GRR",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1860,
+            "destination": "SBN",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1867,
+            "destination": "LEX",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1899,
+            "destination": "ERI",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1903,
+            "destination": "TOL",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1452,
+            "destination": "JAX",
+            "departure": "08:00",
+            "departureMinute": 480
+          },
+          {
+            "flight": 2085,
+            "destination": "CAK",
+            "departure": "09:10",
+            "departureMinute": 550
+          }
+        ],
+        "2176": [
+          {
+            "flight": 1785,
+            "destination": "ATW",
+            "departure": "05:50",
+            "departureMinute": 350
+          },
+          {
+            "flight": 1503,
+            "destination": "HOU",
+            "departure": "05:53",
+            "departureMinute": 353
+          },
+          {
+            "flight": 1617,
+            "destination": "BNA",
+            "departure": "05:55",
+            "departureMinute": 355
+          },
+          {
+            "flight": 1873,
+            "destination": "FWA",
+            "departure": "06:00",
+            "departureMinute": 360
+          },
+          {
+            "flight": 2078,
+            "destination": "PHF",
+            "departure": "06:51",
+            "departureMinute": 411
+          },
+          {
+            "flight": 2132,
+            "destination": "BWI",
+            "departure": "07:53",
+            "departureMinute": 473
+          },
+          {
+            "flight": 1480,
+            "destination": "AUS",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1504,
+            "destination": "HOU",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1693,
+            "destination": "MSN",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1771,
+            "destination": "BUF",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1786,
+            "destination": "ATW",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1793,
+            "destination": "PIT",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1807,
+            "destination": "GRR",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1860,
+            "destination": "SBN",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1867,
+            "destination": "LEX",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1899,
+            "destination": "ERI",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1903,
+            "destination": "TOL",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1452,
+            "destination": "JAX",
+            "departure": "08:00",
+            "departureMinute": 480
+          },
+          {
+            "flight": 2085,
+            "destination": "CAK",
+            "departure": "09:10",
+            "departureMinute": 550
+          }
+        ]
+      }
+    },
+    {
+      "id": "CMH_CAK",
+      "destinations": [
+        "CMH",
+        "CAK"
+      ],
+      "originatorDelays": [
+        0,
+        10
+      ],
+      "validation": {
+        "structural": "pass",
+        "operatingErrors": 0,
+        "operatingWarnings": 172,
+        "hardStopFailures": [],
+        "blocking": [],
+        "overnight": "pass",
+        "overnightFindings": [],
+        "planning": "pass",
+        "gates": "pass",
+        "standClaims": 16,
+        "standMinutes": 3717
+      },
+      "hubBankChanges": [
+        {
+          "bankId": "DAY-B1",
+          "expectedStartMinute": 300,
+          "expectedEndMinute": 360,
+          "startMinute": 301,
+          "endMinute": 361
+        }
+      ],
+      "demand": {
+        "flights": [
+          {
+            "id": "DAY-RON-CMH_CAK-R125-1-DAY-CMH",
+            "route": 125,
+            "line": "AE",
+            "fleet": "CRJ200",
+            "day": 4,
+            "sequenceWithinRoute": 9,
+            "pairing": 519,
+            "flight": 2173,
+            "origin": "DAY",
+            "destination": "CMH",
+            "departure": "21:35",
+            "arrival": "22:13",
+            "departureMinute": 1295,
+            "arrivalMinute": 1333,
+            "departureClock": "21:35",
+            "arrivalClock": "22:13",
+            "blockMinutes": 38,
+            "currentPairFrequency": 2,
+            "routeLocalOd": 1.4,
+            "local": 0.49670152855993555,
+            "connecting": 326.99280683662266,
+            "total": 327.4895083651826,
+            "oneStop": 208.62563251845415,
+            "twoStop": 118.36717431816845,
+            "groups": {
+              "HUB": 8.193084790815078,
+              "FLP": 70.38187791495605,
+              "TEX": 58.976945671737774,
+              "OZK": 2.97488931954878,
+              "UMP": 1.852841185514062,
+              "GCP": 18.264593924357786,
+              "CGI": 61.39614066609898,
+              "GLC": 88.13530100274978,
+              "LEC": 4.0,
+              "APP": 1.1,
+              "MAC": 3.935926964278245,
+              "NEC": 7.781205396566106
+            },
+            "topMarkets": [
+              {
+                "origin": "RFD",
+                "destination": "CMH",
+                "opportunity": 80.76995459480845
+              },
+              {
+                "origin": "CLT",
+                "destination": "CMH",
+                "opportunity": 41.4
+              },
+              {
+                "origin": "DAL",
+                "destination": "CMH",
+                "opportunity": 27.593290197145215
+              },
+              {
+                "origin": "FLL",
+                "destination": "CMH",
+                "opportunity": 25.879639296170772
+              },
+              {
+                "origin": "PIE",
+                "destination": "CMH",
+                "opportunity": 17.14375895475805
+              }
+            ],
+            "connectingFlightCount": 25,
+            "connectingFlightNumbers": [
+              1790,
+              1478,
+              1479,
+              1770,
+              1368,
+              1806,
+              1509,
+              1510,
+              1820,
+              1451,
+              1698,
+              1571,
+              1572,
+              1794,
+              1467,
+              1468,
+              1859,
+              1850,
+              1982,
+              2072,
+              2090,
+              2105,
+              2137,
+              2135,
+              2153
+            ]
+          },
+          {
+            "id": "DAY-RON-CMH_CAK-R126-1-CMH-DAY",
+            "route": 126,
+            "line": "AE",
+            "fleet": "CRJ200",
+            "day": 5,
+            "sequenceWithinRoute": 1,
+            "pairing": 520,
+            "flight": 2174,
+            "origin": "CMH",
+            "destination": "DAY",
+            "departure": "04:30",
+            "arrival": "05:08",
+            "departureMinute": 270,
+            "arrivalMinute": 308,
+            "departureClock": "04:30",
+            "arrivalClock": "05:08",
+            "blockMinutes": 38,
+            "currentPairFrequency": 2,
+            "routeLocalOd": 1.4,
+            "local": 0.49670152855993555,
+            "connecting": 282.5123576992577,
+            "total": 283.0090592278176,
+            "oneStop": 122.68858017012612,
+            "twoStop": 159.82377752913158,
+            "groups": {
+              "HUB": 8.152000467053623,
+              "FLP": 106.950893814413,
+              "TEX": 56.58230467794084,
+              "CGI": 7.589018896091462,
+              "GCP": 9.877242510605711,
+              "GLC": 7.654474896276831,
+              "LEC": 2.6947442810536613,
+              "MAC": 18.45058283583483,
+              "APP": 38.599999999999994,
+              "NEC": 25.961095319987763
+            },
+            "topMarkets": [
+              {
+                "origin": "CMH",
+                "destination": "HOU",
+                "opportunity": 40.37355261311838
+              },
+              {
+                "origin": "CMH",
+                "destination": "BNA",
+                "opportunity": 38.199999999999996
+              },
+              {
+                "origin": "CMH",
+                "destination": "FLL",
+                "opportunity": 34.08730146197746
+              },
+              {
+                "origin": "CMH",
+                "destination": "PIE",
+                "opportunity": 29.985498633373663
+              },
+              {
+                "origin": "CMH",
+                "destination": "SFB",
+                "opportunity": 28.047993942429294
+              }
+            ],
+            "connectingFlightCount": 16,
+            "connectingFlightNumbers": [
+              1785,
+              1786,
+              1480,
+              1617,
+              1771,
+              1873,
+              1807,
+              1503,
+              1504,
+              1452,
+              1867,
+              1693,
+              1793,
+              1860,
+              2078,
+              2132
+            ]
+          },
+          {
+            "id": "DAY-RON-CMH_CAK-R136-1-DAY-CAK",
+            "route": 136,
+            "line": "AF",
+            "fleet": "CRJ200",
+            "day": 4,
+            "sequenceWithinRoute": 6,
+            "pairing": 475,
+            "flight": 2175,
+            "origin": "DAY",
+            "destination": "CAK",
+            "departure": "21:35",
+            "arrival": "22:25",
+            "departureMinute": 1295,
+            "arrivalMinute": 1345,
+            "departureClock": "21:35",
+            "arrivalClock": "22:25",
+            "blockMinutes": 50,
+            "currentPairFrequency": 2,
+            "routeLocalOd": 0.3,
+            "local": 0.10257966616084976,
+            "connecting": 432.0843945160915,
+            "total": 432.18697418225236,
+            "oneStop": 217.00221090225637,
+            "twoStop": 215.08218361383513,
+            "groups": {
+              "HUB": 12.852041825120853,
+              "FLP": 126.75004001867867,
+              "OZK": 2.3981514083296496,
+              "TEX": 83.60830607713916,
+              "UMP": 29.84720565811072,
+              "NEC": 0.1839395475663187,
+              "GLC": 63.73971317871018,
+              "CGI": 78.30860009113118,
+              "APP": 2.9999999999999996,
+              "GCP": 31.396396711304767
+            },
+            "topMarkets": [
+              {
+                "origin": "PGD",
+                "destination": "CAK",
+                "opportunity": 76.0568520411646
+              },
+              {
+                "origin": "RFD",
+                "destination": "CAK",
+                "opportunity": 58.23136563954869
+              },
+              {
+                "origin": "DAL",
+                "destination": "CAK",
+                "opportunity": 52.210541824312024
+              },
+              {
+                "origin": "CLT",
+                "destination": "CAK",
+                "opportunity": 48.1
+              },
+              {
+                "origin": "FLL",
+                "destination": "CAK",
+                "opportunity": 27.02723716983825
+              }
+            ],
+            "connectingFlightCount": 23,
+            "connectingFlightNumbers": [
+              1790,
+              1478,
+              1479,
+              1368,
+              1806,
+              1509,
+              1510,
+              1820,
+              1451,
+              1698,
+              1571,
+              1572,
+              1467,
+              1468,
+              1859,
+              1850,
+              1982,
+              2072,
+              2090,
+              2105,
+              2137,
+              2135,
+              2153
+            ]
+          },
+          {
+            "id": "DAY-RON-CMH_CAK-R137-1-CAK-DAY",
+            "route": 137,
+            "line": "AF",
+            "fleet": "CRJ200",
+            "day": 5,
+            "sequenceWithinRoute": 1,
+            "pairing": 449,
+            "flight": 2176,
+            "origin": "CAK",
+            "destination": "DAY",
+            "departure": "04:30",
+            "arrival": "05:20",
+            "departureMinute": 270,
+            "arrivalMinute": 320,
+            "departureClock": "04:30",
+            "arrivalClock": "05:20",
+            "blockMinutes": 50,
+            "currentPairFrequency": 2,
+            "routeLocalOd": 0.4,
+            "local": 0.13677288821446637,
+            "connecting": 289.2580748596125,
+            "total": 289.394847747827,
+            "oneStop": 101.99325561811787,
+            "twoStop": 187.26481924149468,
+            "groups": {
+              "TEX": 36.13688627582742,
+              "FLP": 154.66484020055972,
+              "NEC": 0.2725025875666168,
+              "HUB": 8.122836542630415,
+              "MAC": 7.11241828585517,
+              "GLC": 4.4599906506856986,
+              "CGI": 12.384497217752703,
+              "APP": 51.1,
+              "GCP": 15.0041030987348
+            },
+            "topMarkets": [
+              {
+                "origin": "CAK",
+                "destination": "PGD",
+                "opportunity": 103.6
+              },
+              {
+                "origin": "CAK",
+                "destination": "BNA",
+                "opportunity": 49.9
+              },
+              {
+                "origin": "CAK",
+                "destination": "HOU",
+                "opportunity": 27.61415649040199
+              },
+              {
+                "origin": "CAK",
+                "destination": "SFB",
+                "opportunity": 19.497233321972946
+              },
+              {
+                "origin": "CAK",
+                "destination": "FLL",
+                "opportunity": 14.268713234176262
+              }
+            ],
+            "connectingFlightCount": 14,
+            "connectingFlightNumbers": [
+              1785,
+              1786,
+              1480,
+              1617,
+              1873,
+              1807,
+              1503,
+              1504,
+              1452,
+              1867,
+              1693,
+              1860,
+              2078,
+              2132
+            ]
+          }
+        ],
+        "newlyConnectedMarketDemand": 371.3,
+        "marketsWithFasterBestItinerary": 22
+      },
+      "audit": {
+        "marketsWithSlowerBestItinerary": [],
+        "marketsLosingAllConnections": [],
+        "lostUnderlyingOd": 0,
+        "marketsWithFasterBestItinerary": 22
+      },
+      "addedFlyingOpportunityUnits": 1332.0803895230795,
+      "earlyReturnConnections": {},
+      "changedFlights": [
+        {
+          "flight": 1873,
+          "beforeDeparture": "05:50",
+          "afterDeparture": "06:00",
+          "lostConnectingChoices": 0,
+          "addedConnectingChoices": 2,
+          "oldOpportunity": 0.025,
+          "newOpportunity": 0.24370961263274168
+        }
+      ],
+      "maintenance": {
+        "AE": {
+          "line": "AE",
+          "maximumConsecutiveNonTargetRons": 10,
+          "limit": 10,
+          "grace": 1,
+          "targetRons": [
+            {
+              "day": 8,
+              "route": 129,
+              "city": "SYR",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            }
+          ],
+          "hubOrFocusRons": [
+            {
+              "day": 8,
+              "route": 129,
+              "city": "SYR",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            }
+          ]
+        },
+        "AF": {
+          "line": "AF",
+          "maximumConsecutiveNonTargetRons": 7,
+          "limit": 10,
+          "grace": 1,
+          "targetRons": [
+            {
+              "day": 3,
+              "route": 135,
+              "city": "MCI",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            },
+            {
+              "day": 6,
+              "route": 138,
+              "city": "DAY",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            }
+          ],
+          "hubOrFocusRons": [
+            {
+              "day": 3,
+              "route": 135,
+              "city": "MCI",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            },
+            {
+              "day": 6,
+              "route": 138,
+              "city": "DAY",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            }
+          ]
+        }
+      },
+      "connections": {
+        "2174": [
+          {
+            "flight": 1503,
+            "destination": "HOU",
+            "departure": "05:50",
+            "departureMinute": 350
+          },
+          {
+            "flight": 1785,
+            "destination": "ATW",
+            "departure": "05:50",
+            "departureMinute": 350
+          },
+          {
+            "flight": 1617,
+            "destination": "BNA",
+            "departure": "05:55",
+            "departureMinute": 355
+          },
+          {
+            "flight": 1873,
+            "destination": "FWA",
+            "departure": "06:00",
+            "departureMinute": 360
+          },
+          {
+            "flight": 2078,
+            "destination": "PHF",
+            "departure": "06:51",
+            "departureMinute": 411
+          },
+          {
+            "flight": 2132,
+            "destination": "BWI",
+            "departure": "07:53",
+            "departureMinute": 473
+          },
+          {
+            "flight": 1480,
+            "destination": "AUS",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1504,
+            "destination": "HOU",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1693,
+            "destination": "MSN",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1771,
+            "destination": "BUF",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1786,
+            "destination": "ATW",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1793,
+            "destination": "PIT",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1807,
+            "destination": "GRR",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1860,
+            "destination": "SBN",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1867,
+            "destination": "LEX",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1899,
+            "destination": "ERI",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1903,
+            "destination": "TOL",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1452,
+            "destination": "JAX",
+            "departure": "08:00",
+            "departureMinute": 480
+          }
+        ],
+        "2176": [
+          {
+            "flight": 1503,
+            "destination": "HOU",
+            "departure": "05:50",
+            "departureMinute": 350
+          },
+          {
+            "flight": 1785,
+            "destination": "ATW",
+            "departure": "05:50",
+            "departureMinute": 350
+          },
+          {
+            "flight": 1617,
+            "destination": "BNA",
+            "departure": "05:55",
+            "departureMinute": 355
+          },
+          {
+            "flight": 1873,
+            "destination": "FWA",
+            "departure": "06:00",
+            "departureMinute": 360
+          },
+          {
+            "flight": 2078,
+            "destination": "PHF",
+            "departure": "06:51",
+            "departureMinute": 411
+          },
+          {
+            "flight": 2132,
+            "destination": "BWI",
+            "departure": "07:53",
+            "departureMinute": 473
+          },
+          {
+            "flight": 1480,
+            "destination": "AUS",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1504,
+            "destination": "HOU",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1693,
+            "destination": "MSN",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1771,
+            "destination": "BUF",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1786,
+            "destination": "ATW",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1793,
+            "destination": "PIT",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1807,
+            "destination": "GRR",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1860,
+            "destination": "SBN",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1867,
+            "destination": "LEX",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1899,
+            "destination": "ERI",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1903,
+            "destination": "TOL",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1452,
+            "destination": "JAX",
+            "departure": "08:00",
+            "departureMinute": 480
+          },
+          {
+            "flight": 2085,
+            "destination": "CAK",
+            "departure": "09:10",
+            "departureMinute": 550
+          }
+        ]
+      }
+    },
+    {
+      "id": "LEX_CAK",
+      "destinations": [
+        "LEX",
+        "CAK"
+      ],
+      "originatorDelays": [
+        6,
+        10
+      ],
+      "validation": {
+        "structural": "pass",
+        "operatingErrors": 0,
+        "operatingWarnings": 172,
+        "hardStopFailures": [],
+        "blocking": [],
+        "overnight": "pass",
+        "overnightFindings": [],
+        "planning": "pass",
+        "gates": "pass",
+        "standClaims": 16,
+        "standMinutes": 3717
+      },
+      "hubBankChanges": [
+        {
+          "bankId": "DAY-B1",
+          "expectedStartMinute": 300,
+          "expectedEndMinute": 360,
+          "startMinute": 301,
+          "endMinute": 361
+        }
+      ],
+      "demand": {
+        "flights": [
+          {
+            "id": "DAY-RON-LEX_CAK-R125-1-DAY-LEX",
+            "route": 125,
+            "line": "AE",
+            "fleet": "CRJ200",
+            "day": 4,
+            "sequenceWithinRoute": 9,
+            "pairing": 766,
+            "flight": 2173,
+            "origin": "DAY",
+            "destination": "LEX",
+            "departure": "21:35",
+            "arrival": "22:21",
+            "departureMinute": 1295,
+            "arrivalMinute": 1341,
+            "departureClock": "21:35",
+            "arrivalClock": "22:21",
+            "blockMinutes": 46,
+            "currentPairFrequency": 1,
+            "routeLocalOd": 0.1,
+            "local": 0.05,
+            "connecting": 108.42115291636178,
+            "total": 108.47115291636177,
+            "oneStop": 70.54581197177653,
+            "twoStop": 37.87534094458524,
+            "groups": {
+              "HUB": 9.288366625102682,
+              "TEX": 29.854324506140035,
+              "NEC": 4.26850332005662,
+              "CGI": 15.086865864759178,
+              "FLP": 10.95021221755053,
+              "GCP": 9.614391111143187,
+              "GLC": 14.78496045742848,
+              "LEC": 6.1170272295304295,
+              "MAC": 1.0565015846506371,
+              "OZK": 3.3,
+              "UMP": 4.1
+            },
+            "topMarkets": [
+              {
+                "origin": "DAL",
+                "destination": "LEX",
+                "opportunity": 14.4
+              },
+              {
+                "origin": "RFD",
+                "destination": "LEX",
+                "opportunity": 13.087058823529409
+              },
+              {
+                "origin": "CLT",
+                "destination": "LEX",
+                "opportunity": 11.2
+              },
+              {
+                "origin": "AUS",
+                "destination": "LEX",
+                "opportunity": 7.572109658733783
+              },
+              {
+                "origin": "HOU",
+                "destination": "LEX",
+                "opportunity": 7.3
+              }
+            ],
+            "connectingFlightCount": 25,
+            "connectingFlightNumbers": [
+              1790,
+              1478,
+              1479,
+              1770,
+              1813,
+              1668,
+              1368,
+              1806,
+              1509,
+              1510,
+              1820,
+              1451,
+              1698,
+              1571,
+              1572,
+              1794,
+              1467,
+              1468,
+              1859,
+              1982,
+              2072,
+              2090,
+              2105,
+              2135,
+              2153
+            ]
+          },
+          {
+            "id": "DAY-RON-LEX_CAK-R126-1-LEX-DAY",
+            "route": 126,
+            "line": "AE",
+            "fleet": "CRJ200",
+            "day": 5,
+            "sequenceWithinRoute": 1,
+            "pairing": 779,
+            "flight": 2174,
+            "origin": "LEX",
+            "destination": "DAY",
+            "departure": "04:30",
+            "arrival": "05:16",
+            "departureMinute": 270,
+            "arrivalMinute": 316,
+            "departureClock": "04:30",
+            "arrivalClock": "05:16",
+            "blockMinutes": 46,
+            "currentPairFrequency": 1,
+            "routeLocalOd": 0.1,
+            "local": 0.05,
+            "connecting": 33.32418778278227,
+            "total": 33.374187782782265,
+            "oneStop": 18.987190997921918,
+            "twoStop": 14.336996784860343,
+            "groups": {
+              "HUB": 0.9969214487556728,
+              "TEX": 6.430184298395698,
+              "NEC": 2.3717206048137314,
+              "FLP": 8.67744654342941,
+              "CGI": 0.3681292946090227,
+              "GCP": 0.12157991159939065,
+              "GLC": 3.560765539731863,
+              "LEC": 6.223479086277266,
+              "MAC": 4.573961055170208
+            },
+            "topMarkets": [
+              {
+                "origin": "LEX",
+                "destination": "SFB",
+                "opportunity": 4.4251519766906435
+              },
+              {
+                "origin": "LEX",
+                "destination": "HOU",
+                "opportunity": 4.311099608842984
+              },
+              {
+                "origin": "LEX",
+                "destination": "BWI",
+                "opportunity": 4.089830619905055
+              },
+              {
+                "origin": "LEX",
+                "destination": "FLL",
+                "opportunity": 3.1402432902557216
+              },
+              {
+                "origin": "LEX",
+                "destination": "PIT",
+                "opportunity": 2.3
+              }
+            ],
+            "connectingFlightCount": 16,
+            "connectingFlightNumbers": [
+              1785,
+              1786,
+              1480,
+              1771,
+              1899,
+              1873,
+              1807,
+              1503,
+              1504,
+              1452,
+              1693,
+              1793,
+              1860,
+              2078,
+              2085,
+              2132
+            ]
+          },
+          {
+            "id": "DAY-RON-LEX_CAK-R136-1-DAY-CAK",
+            "route": 136,
+            "line": "AF",
+            "fleet": "CRJ200",
+            "day": 4,
+            "sequenceWithinRoute": 6,
+            "pairing": 475,
+            "flight": 2175,
+            "origin": "DAY",
+            "destination": "CAK",
+            "departure": "21:35",
+            "arrival": "22:25",
+            "departureMinute": 1295,
+            "arrivalMinute": 1345,
+            "departureClock": "21:35",
+            "arrivalClock": "22:25",
+            "blockMinutes": 50,
+            "currentPairFrequency": 2,
+            "routeLocalOd": 0.3,
+            "local": 0.10257966616084976,
+            "connecting": 432.0843945160915,
+            "total": 432.18697418225236,
+            "oneStop": 217.00221090225637,
+            "twoStop": 215.08218361383513,
+            "groups": {
+              "HUB": 12.852041825120853,
+              "FLP": 126.75004001867867,
+              "OZK": 2.3981514083296496,
+              "TEX": 83.60830607713916,
+              "UMP": 29.84720565811072,
+              "NEC": 0.1839395475663187,
+              "GLC": 63.73971317871018,
+              "CGI": 78.30860009113118,
+              "APP": 2.9999999999999996,
+              "GCP": 31.396396711304767
+            },
+            "topMarkets": [
+              {
+                "origin": "PGD",
+                "destination": "CAK",
+                "opportunity": 76.0568520411646
+              },
+              {
+                "origin": "RFD",
+                "destination": "CAK",
+                "opportunity": 58.23136563954869
+              },
+              {
+                "origin": "DAL",
+                "destination": "CAK",
+                "opportunity": 52.210541824312024
+              },
+              {
+                "origin": "CLT",
+                "destination": "CAK",
+                "opportunity": 48.1
+              },
+              {
+                "origin": "FLL",
+                "destination": "CAK",
+                "opportunity": 27.02723716983825
+              }
+            ],
+            "connectingFlightCount": 23,
+            "connectingFlightNumbers": [
+              1790,
+              1478,
+              1479,
+              1368,
+              1806,
+              1509,
+              1510,
+              1820,
+              1451,
+              1698,
+              1571,
+              1572,
+              1467,
+              1468,
+              1859,
+              1850,
+              1982,
+              2072,
+              2090,
+              2105,
+              2137,
+              2135,
+              2153
+            ]
+          },
+          {
+            "id": "DAY-RON-LEX_CAK-R137-1-CAK-DAY",
+            "route": 137,
+            "line": "AF",
+            "fleet": "CRJ200",
+            "day": 5,
+            "sequenceWithinRoute": 1,
+            "pairing": 449,
+            "flight": 2176,
+            "origin": "CAK",
+            "destination": "DAY",
+            "departure": "04:30",
+            "arrival": "05:20",
+            "departureMinute": 270,
+            "arrivalMinute": 320,
+            "departureClock": "04:30",
+            "arrivalClock": "05:20",
+            "blockMinutes": 50,
+            "currentPairFrequency": 2,
+            "routeLocalOd": 0.4,
+            "local": 0.13677288821446637,
+            "connecting": 288.15398578845304,
+            "total": 288.2907586766675,
+            "oneStop": 100.86991917422044,
+            "twoStop": 187.2840666142326,
+            "groups": {
+              "TEX": 35.74982443419834,
+              "FLP": 154.66484020055972,
+              "NEC": 0.2725025875666168,
+              "HUB": 8.122836542630415,
+              "MAC": 7.11241828585517,
+              "GLC": 4.4599906506856986,
+              "APP": 50.38297277046957,
+              "CGI": 12.384497217752703,
+              "GCP": 15.0041030987348
+            },
+            "topMarkets": [
+              {
+                "origin": "CAK",
+                "destination": "PGD",
+                "opportunity": 103.6
+              },
+              {
+                "origin": "CAK",
+                "destination": "BNA",
+                "opportunity": 49.9
+              },
+              {
+                "origin": "CAK",
+                "destination": "HOU",
+                "opportunity": 27.227094648772912
+              },
+              {
+                "origin": "CAK",
+                "destination": "SFB",
+                "opportunity": 19.497233321972946
+              },
+              {
+                "origin": "CAK",
+                "destination": "FLL",
+                "opportunity": 14.268713234176262
+              }
+            ],
+            "connectingFlightCount": 14,
+            "connectingFlightNumbers": [
+              1785,
+              1786,
+              1480,
+              1617,
+              1873,
+              1807,
+              1503,
+              1504,
+              1452,
+              1867,
+              1693,
+              1860,
+              2078,
+              2132
+            ]
+          }
+        ],
+        "newlyConnectedMarketDemand": 333.7,
+        "marketsWithFasterBestItinerary": 19
+      },
+      "audit": {
+        "marketsWithSlowerBestItinerary": [
+          {
+            "origin": "TOL",
+            "destination": "HOU",
+            "od": 0.0,
+            "oldFastestMinutes": 238,
+            "newFastestMinutes": 244,
+            "differenceMinutes": 6
+          }
+        ],
+        "marketsLosingAllConnections": [],
+        "lostUnderlyingOd": 0,
+        "marketsWithFasterBestItinerary": 19
+      },
+      "addedFlyingOpportunityUnits": 862.3230735580639,
+      "earlyReturnConnections": {},
+      "changedFlights": [
+        {
+          "flight": 1503,
+          "beforeDeparture": "05:50",
+          "afterDeparture": "05:56",
+          "lostConnectingChoices": 0,
+          "addedConnectingChoices": 2,
+          "oldOpportunity": 3.0609924809383404,
+          "newOpportunity": 23.924109742060423
+        },
+        {
+          "flight": 1873,
+          "beforeDeparture": "05:50",
+          "afterDeparture": "06:00",
+          "lostConnectingChoices": 0,
+          "addedConnectingChoices": 2,
+          "oldOpportunity": 0.025,
+          "newOpportunity": 0.19911944869831547
+        }
+      ],
+      "maintenance": {
+        "AE": {
+          "line": "AE",
+          "maximumConsecutiveNonTargetRons": 10,
+          "limit": 10,
+          "grace": 1,
+          "targetRons": [
+            {
+              "day": 8,
+              "route": 129,
+              "city": "SYR",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            }
+          ],
+          "hubOrFocusRons": [
+            {
+              "day": 8,
+              "route": 129,
+              "city": "SYR",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            }
+          ]
+        },
+        "AF": {
+          "line": "AF",
+          "maximumConsecutiveNonTargetRons": 7,
+          "limit": 10,
+          "grace": 1,
+          "targetRons": [
+            {
+              "day": 3,
+              "route": 135,
+              "city": "MCI",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            },
+            {
+              "day": 6,
+              "route": 138,
+              "city": "DAY",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            }
+          ],
+          "hubOrFocusRons": [
+            {
+              "day": 3,
+              "route": 135,
+              "city": "MCI",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            },
+            {
+              "day": 6,
+              "route": 138,
+              "city": "DAY",
+              "targetRon": true,
+              "hubOrFocusRon": true
+            }
+          ]
+        }
+      },
+      "connections": {
+        "2174": [
+          {
+            "flight": 1785,
+            "destination": "ATW",
+            "departure": "05:50",
+            "departureMinute": 350
+          },
+          {
+            "flight": 1617,
+            "destination": "BNA",
+            "departure": "05:55",
+            "departureMinute": 355
+          },
+          {
+            "flight": 1503,
+            "destination": "HOU",
+            "departure": "05:56",
+            "departureMinute": 356
+          },
+          {
+            "flight": 1873,
+            "destination": "FWA",
+            "departure": "06:00",
+            "departureMinute": 360
+          },
+          {
+            "flight": 2078,
+            "destination": "PHF",
+            "departure": "06:51",
+            "departureMinute": 411
+          },
+          {
+            "flight": 2132,
+            "destination": "BWI",
+            "departure": "07:53",
+            "departureMinute": 473
+          },
+          {
+            "flight": 1480,
+            "destination": "AUS",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1504,
+            "destination": "HOU",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1693,
+            "destination": "MSN",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1771,
+            "destination": "BUF",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1786,
+            "destination": "ATW",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1793,
+            "destination": "PIT",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1807,
+            "destination": "GRR",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1860,
+            "destination": "SBN",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1867,
+            "destination": "LEX",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1899,
+            "destination": "ERI",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1903,
+            "destination": "TOL",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1452,
+            "destination": "JAX",
+            "departure": "08:00",
+            "departureMinute": 480
+          },
+          {
+            "flight": 2085,
+            "destination": "CAK",
+            "departure": "09:10",
+            "departureMinute": 550
+          }
+        ],
+        "2176": [
+          {
+            "flight": 1785,
+            "destination": "ATW",
+            "departure": "05:50",
+            "departureMinute": 350
+          },
+          {
+            "flight": 1617,
+            "destination": "BNA",
+            "departure": "05:55",
+            "departureMinute": 355
+          },
+          {
+            "flight": 1503,
+            "destination": "HOU",
+            "departure": "05:56",
+            "departureMinute": 356
+          },
+          {
+            "flight": 1873,
+            "destination": "FWA",
+            "departure": "06:00",
+            "departureMinute": 360
+          },
+          {
+            "flight": 2078,
+            "destination": "PHF",
+            "departure": "06:51",
+            "departureMinute": 411
+          },
+          {
+            "flight": 2132,
+            "destination": "BWI",
+            "departure": "07:53",
+            "departureMinute": 473
+          },
+          {
+            "flight": 1480,
+            "destination": "AUS",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1504,
+            "destination": "HOU",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1693,
+            "destination": "MSN",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1771,
+            "destination": "BUF",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1786,
+            "destination": "ATW",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1793,
+            "destination": "PIT",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1807,
+            "destination": "GRR",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1860,
+            "destination": "SBN",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1867,
+            "destination": "LEX",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1899,
+            "destination": "ERI",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1903,
+            "destination": "TOL",
+            "departure": "07:55",
+            "departureMinute": 475
+          },
+          {
+            "flight": 1452,
+            "destination": "JAX",
+            "departure": "08:00",
+            "departureMinute": 480
+          },
+          {
+            "flight": 2085,
+            "destination": "CAK",
+            "departure": "09:10",
+            "departureMinute": 550
+          }
+        ]
+      }
+    }
+  ],
+  "screen": {
+    "base": "aligned draft",
+    "destinations": [
+      {
+        "city": "CAK",
+        "name": "Akron-Canton OH",
+        "blockMinutes": 50,
+        "dayReturn": 320,
+        "originatorDelay": 10,
+        "frequencyBefore": 2,
+        "localOdOut": 0.3,
+        "localOdIn": 0.4,
+        "existingToDayDepartures": [
+          "18:55",
+          "10:42"
+        ],
+        "timings": [
+          {
+            "route": 125,
+            "outbound": {
+              "id": "NEW",
+              "origin": "DAY",
+              "destination": "CAK",
+              "departureMinute": 1295,
+              "arrivalMinute": 1345
+            },
+            "inbound": {
+              "id": "NEW",
+              "origin": "CAK",
+              "destination": "DAY",
+              "departureMinute": 270,
+              "arrivalMinute": 320
+            },
+            "score": 721.5847725450753,
+            "scores": [
+              432.18697418225236,
+              289.397798362823
+            ]
+          },
+          {
+            "route": 136,
+            "outbound": {
+              "id": "NEW",
+              "origin": "DAY",
+              "destination": "CAK",
+              "departureMinute": 1295,
+              "arrivalMinute": 1345
+            },
+            "inbound": {
+              "id": "NEW",
+              "origin": "CAK",
+              "destination": "DAY",
+              "departureMinute": 270,
+              "arrivalMinute": 320
+            },
+            "score": 721.5847725450753,
+            "scores": [
+              432.18697418225236,
+              289.397798362823
+            ]
+          }
+        ]
+      },
+      {
+        "city": "CMH",
+        "name": "Columbus OH",
+        "blockMinutes": 38,
+        "dayReturn": 308,
+        "originatorDelay": 0,
+        "frequencyBefore": 2,
+        "localOdOut": 1.4,
+        "localOdIn": 1.4,
+        "existingToDayDepartures": [
+          "19:05",
+          "11:29"
+        ],
+        "timings": [
+          {
+            "route": 125,
+            "outbound": {
+              "id": "NEW",
+              "origin": "DAY",
+              "destination": "CMH",
+              "departureMinute": 1295,
+              "arrivalMinute": 1333
+            },
+            "inbound": {
+              "id": "NEW",
+              "origin": "CMH",
+              "destination": "DAY",
+              "departureMinute": 270,
+              "arrivalMinute": 308
+            },
+            "score": 610.5047466598351,
+            "scores": [
+              327.4895083651826,
+              283.0152382946525
+            ]
+          },
+          {
+            "route": 136,
+            "outbound": {
+              "id": "NEW",
+              "origin": "DAY",
+              "destination": "CMH",
+              "departureMinute": 1295,
+              "arrivalMinute": 1333
+            },
+            "inbound": {
+              "id": "NEW",
+              "origin": "CMH",
+              "destination": "DAY",
+              "departureMinute": 270,
+              "arrivalMinute": 308
+            },
+            "score": 610.5047466598351,
+            "scores": [
+              327.4895083651826,
+              283.0152382946525
+            ]
+          }
+        ]
+      },
+      {
+        "city": "CRW",
+        "name": "Charleston WV",
+        "blockMinutes": 52,
+        "dayReturn": 322,
+        "originatorDelay": 12,
+        "frequencyBefore": 2,
+        "localOdOut": 0.0,
+        "localOdIn": 0.0,
+        "existingToDayDepartures": [
+          "06:20",
+          "14:45"
+        ],
+        "timings": [],
+        "rejection": "No evening departure within current DAY banks satisfies section 2.6 spacing"
+      },
+      {
+        "city": "FWA",
+        "name": "Fort Wayne IN",
+        "blockMinutes": 40,
+        "dayReturn": 310,
+        "originatorDelay": 0,
+        "frequencyBefore": 4,
+        "localOdOut": 0.1,
+        "localOdIn": 0.0,
+        "existingToDayDepartures": [
+          "04:30",
+          "10:45",
+          "16:50",
+          "20:25"
+        ],
+        "timings": [],
+        "rejection": "04:30 return duplicates an existing originator within the 30-minute hard spacing floor"
+      },
+      {
+        "city": "GRR",
+        "name": "Grand Rapids MI",
+        "blockMinutes": 58,
+        "dayReturn": 328,
+        "originatorDelay": 18,
+        "frequencyBefore": 4,
+        "localOdOut": 0.4,
+        "localOdIn": 0.4,
+        "existingToDayDepartures": [
+          "06:15",
+          "10:25",
+          "14:35",
+          "18:45"
+        ],
+        "timings": [
+          {
+            "route": 125,
+            "outbound": {
+              "id": "NEW",
+              "origin": "DAY",
+              "destination": "GRR",
+              "departureMinute": 1295,
+              "arrivalMinute": 1353
+            },
+            "inbound": {
+              "id": "NEW",
+              "origin": "GRR",
+              "destination": "DAY",
+              "departureMinute": 270,
+              "arrivalMinute": 328
+            },
+            "score": 327.6163687385382,
+            "scores": [
+              204.56601281334179,
+              123.0503559251964
+            ]
+          },
+          {
+            "route": 136,
+            "outbound": {
+              "id": "NEW",
+              "origin": "DAY",
+              "destination": "GRR",
+              "departureMinute": 1295,
+              "arrivalMinute": 1353
+            },
+            "inbound": {
+              "id": "NEW",
+              "origin": "GRR",
+              "destination": "DAY",
+              "departureMinute": 270,
+              "arrivalMinute": 328
+            },
+            "score": 327.6163687385382,
+            "scores": [
+              204.56601281334179,
+              123.0503559251964
+            ]
+          }
+        ]
+      },
+      {
+        "city": "IND",
+        "name": "Indianapolis IN",
+        "blockMinutes": 43,
+        "dayReturn": 313,
+        "originatorDelay": 3,
+        "frequencyBefore": 2,
+        "localOdOut": 0.3,
+        "localOdIn": 0.3,
+        "existingToDayDepartures": [
+          "19:00",
+          "14:47"
+        ],
+        "timings": [
+          {
+            "route": 125,
+            "outbound": {
+              "id": "NEW",
+              "origin": "DAY",
+              "destination": "IND",
+              "departureMinute": 1295,
+              "arrivalMinute": 1338
+            },
+            "inbound": {
+              "id": "NEW",
+              "origin": "IND",
+              "destination": "DAY",
+              "departureMinute": 270,
+              "arrivalMinute": 313
+            },
+            "score": 648.4608585215866,
+            "scores": [
+              389.83550050261135,
+              258.62535801897525
+            ]
+          },
+          {
+            "route": 136,
+            "outbound": {
+              "id": "NEW",
+              "origin": "DAY",
+              "destination": "IND",
+              "departureMinute": 1295,
+              "arrivalMinute": 1338
+            },
+            "inbound": {
+              "id": "NEW",
+              "origin": "IND",
+              "destination": "DAY",
+              "departureMinute": 270,
+              "arrivalMinute": 313
+            },
+            "score": 648.4608585215866,
+            "scores": [
+              389.83550050261135,
+              258.62535801897525
+            ]
+          }
+        ]
+      },
+      {
+        "city": "LEX",
+        "name": "Lexington KY",
+        "blockMinutes": 46,
+        "dayReturn": 316,
+        "originatorDelay": 6,
+        "frequencyBefore": 1,
+        "localOdOut": 0.1,
+        "localOdIn": 0.1,
+        "existingToDayDepartures": [
+          "10:35"
+        ],
+        "timings": [
+          {
+            "route": 125,
+            "outbound": {
+              "id": "NEW",
+              "origin": "DAY",
+              "destination": "LEX",
+              "departureMinute": 1295,
+              "arrivalMinute": 1341
+            },
+            "inbound": {
+              "id": "NEW",
+              "origin": "LEX",
+              "destination": "DAY",
+              "departureMinute": 270,
+              "arrivalMinute": 316
+            },
+            "score": 142.38695393958733,
+            "scores": [
+              108.95412568683135,
+              33.432828252755996
+            ]
+          },
+          {
+            "route": 136,
+            "outbound": {
+              "id": "NEW",
+              "origin": "DAY",
+              "destination": "LEX",
+              "departureMinute": 1295,
+              "arrivalMinute": 1341
+            },
+            "inbound": {
+              "id": "NEW",
+              "origin": "LEX",
+              "destination": "DAY",
+              "departureMinute": 270,
+              "arrivalMinute": 316
+            },
+            "score": 142.38695393958733,
+            "scores": [
+              108.95412568683135,
+              33.432828252755996
+            ]
+          }
+        ]
+      },
+      {
+        "city": "PIT",
+        "name": "Pittsburgh PA",
+        "blockMinutes": 57,
+        "dayReturn": 327,
+        "originatorDelay": 17,
+        "frequencyBefore": 1,
+        "localOdOut": 0.6,
+        "localOdIn": 0.6,
+        "existingToDayDepartures": [
+          "18:45"
+        ],
+        "timings": [
+          {
+            "route": 125,
+            "outbound": {
+              "id": "NEW",
+              "origin": "DAY",
+              "destination": "PIT",
+              "departureMinute": 1265,
+              "arrivalMinute": 1322
+            },
+            "inbound": {
+              "id": "NEW",
+              "origin": "PIT",
+              "destination": "DAY",
+              "departureMinute": 270,
+              "arrivalMinute": 327
+            },
+            "score": 453.04877364091175,
+            "scores": [
+              366.05131546118935,
+              86.99745817972239
+            ]
+          },
+          {
+            "route": 136,
+            "outbound": {
+              "id": "NEW",
+              "origin": "DAY",
+              "destination": "PIT",
+              "departureMinute": 1265,
+              "arrivalMinute": 1322
+            },
+            "inbound": {
+              "id": "NEW",
+              "origin": "PIT",
+              "destination": "DAY",
+              "departureMinute": 270,
+              "arrivalMinute": 327
+            },
+            "score": 453.04877364091175,
+            "scores": [
+              366.05131546118935,
+              86.99745817972239
+            ]
+          }
+        ]
+      },
+      {
+        "city": "SBN",
+        "name": "South Bend IN",
+        "blockMinutes": 51,
+        "dayReturn": 321,
+        "originatorDelay": 11,
+        "frequencyBefore": 3,
+        "localOdOut": 0.1,
+        "localOdIn": 0.1,
+        "existingToDayDepartures": [
+          "06:25",
+          "10:35",
+          "18:50"
+        ],
+        "timings": [
+          {
+            "route": 125,
+            "outbound": {
+              "id": "NEW",
+              "origin": "DAY",
+              "destination": "SBN",
+              "departureMinute": 1295,
+              "arrivalMinute": 1346
+            },
+            "inbound": {
+              "id": "NEW",
+              "origin": "SBN",
+              "destination": "DAY",
+              "departureMinute": 270,
+              "arrivalMinute": 321
+            },
+            "score": 116.25194911011424,
+            "scores": [
+              69.28106120335411,
+              46.970887906760126
+            ]
+          },
+          {
+            "route": 136,
+            "outbound": {
+              "id": "NEW",
+              "origin": "DAY",
+              "destination": "SBN",
+              "departureMinute": 1295,
+              "arrivalMinute": 1346
+            },
+            "inbound": {
+              "id": "NEW",
+              "origin": "SBN",
+              "destination": "DAY",
+              "departureMinute": 270,
+              "arrivalMinute": 321
+            },
+            "score": 116.25194911011424,
+            "scores": [
+              69.28106120335411,
+              46.970887906760126
+            ]
+          }
+        ]
+      },
+      {
+        "city": "SDF",
+        "name": "Louisville KY",
+        "blockMinutes": 48,
+        "dayReturn": 318,
+        "originatorDelay": 8,
+        "frequencyBefore": 2,
+        "localOdOut": 0.1,
+        "localOdIn": 0.2,
+        "existingToDayDepartures": [
+          "18:55",
+          "20:17"
+        ],
+        "timings": [],
+        "rejection": "No evening departure within current DAY banks satisfies section 2.6 spacing"
+      },
+      {
+        "city": "TOL",
+        "name": "Toledo OH",
+        "blockMinutes": 44,
+        "dayReturn": 314,
+        "originatorDelay": 4,
+        "frequencyBefore": 2,
+        "localOdOut": 0.0,
+        "localOdIn": 0.0,
+        "existingToDayDepartures": [
+          "04:30",
+          "10:38"
+        ],
+        "timings": [],
+        "rejection": "04:30 return duplicates an existing originator within the 30-minute hard spacing floor"
+      }
+    ],
+    "model": "Pinned O-D; seat-uncapped marginal one/two-stop choice comparison, not forecast passengers",
+    "baseCanonical": "builds/crj200-line-alignment/canonical_schedule.json",
+    "baseSha256": "a7a12a39869c3f72bcb43d2560eaad8059017e44e6469f4de2130c4555a1da99",
+    "screenOriginatorDelayCeiling": 20,
+    "recommendationOriginatorDelayCeiling": 10
+  }
+}
