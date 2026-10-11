@@ -1,0 +1,1189 @@
+{
+  "status": "validated unpublished v1.2.5 draft",
+  "version": "1.2.5",
+  "acceptedRound": 1,
+  "acceptedOverlay": "config/optimizations/schedule_7_v1_2_5_accepted_round_1.json",
+  "acceptedOverlaySha256": "c59109601b51d8ead1c79af5af4b3fb2921e438ed8c2668368b08c05b9701684",
+  "baseCanonical": "data/schedules/schedule_7_v1_2_4/canonical_schedule.json",
+  "baseCanonicalSha256": "56130a0fe8626ffb3d5c783d89ce9e6f06c30005031974aeab515198ea59de11",
+  "canonicalSha256": "ce182870262e895d45f725f9406b919d61cb24f97bab83ee22902dd1710b06f5",
+  "approval": {
+    "status": "approved for draft implementation; unpublished",
+    "userInstruction": "Add these suggestions to a new 1.2.5 draft. We'll make additional changes before publishing the version.",
+    "scope": "CRJ200 line alignment plus IND overnight on routes 125/126 and CAK overnight on routes 136/137. Flights 1503 and 1873 delayed 3 and 10 minutes respectively; DAY B1 shifted one minute later. Other destination alternatives excluded.",
+    "publication": "Reserved to user decision"
+  },
+  "summary": {
+    "flights": 1174,
+    "routes": 181,
+    "lines": 19,
+    "addedFlights": 4,
+    "addedFlightNumbers": [
+      2173,
+      2174,
+      2175,
+      2176
+    ],
+    "retimedReleasedFlights": [
+      1503,
+      1873
+    ],
+    "unchangedReleasedFlightClocks": 1168,
+    "selectedAircraftDays": 66,
+    "fleetInventoryChanged": false,
+    "effectiveOperatingErrors": 0,
+    "operatingWarnings": 172,
+    "standClaims": 16,
+    "standMinutes": 3717
+  },
+  "validation": {
+    "structural": "pass",
+    "operatingErrors": 0,
+    "operatingWarnings": 172,
+    "hardStopFailures": [],
+    "blocking": [],
+    "overnight": "pass",
+    "overnightFindings": [],
+    "planning": "pass",
+    "gates": "pass",
+    "standClaims": 16,
+    "standMinutes": 3717
+  },
+  "lineProof": [
+    {
+      "line": "AD",
+      "fleet": "CRJ200",
+      "routes": 11,
+      "routeRange": [
+        111,
+        121
+      ],
+      "independentHubOrFocusRons": [
+        {
+          "route": 112,
+          "day": 2,
+          "city": "MCI"
+        },
+        {
+          "route": 113,
+          "day": 3,
+          "city": "MCI"
+        }
+      ],
+      "maximumNonMxRunExcluding125And136": 9
+    },
+    {
+      "line": "AE",
+      "fleet": "CRJ200",
+      "routes": 11,
+      "routeRange": [
+        122,
+        132
+      ],
+      "independentHubOrFocusRons": [
+        {
+          "route": 129,
+          "day": 8,
+          "city": "SYR"
+        }
+      ],
+      "maximumNonMxRunExcluding125And136": 10
+    },
+    {
+      "line": "AF",
+      "fleet": "CRJ200",
+      "routes": 11,
+      "routeRange": [
+        133,
+        143
+      ],
+      "independentHubOrFocusRons": [
+        {
+          "route": 135,
+          "day": 3,
+          "city": "MCI"
+        },
+        {
+          "route": 138,
+          "day": 6,
+          "city": "DAY"
+        }
+      ],
+      "maximumNonMxRunExcluding125And136": 7
+    },
+    {
+      "line": "AI",
+      "fleet": "CRJ200",
+      "routes": 12,
+      "routeRange": [
+        144,
+        155
+      ],
+      "independentHubOrFocusRons": [
+        {
+          "route": 145,
+          "day": 2,
+          "city": "MCI"
+        },
+        {
+          "route": 154,
+          "day": 11,
+          "city": "MCI"
+        }
+      ],
+      "maximumNonMxRunExcluding125And136": 8
+    },
+    {
+      "line": "AM",
+      "fleet": "CRJ200",
+      "routes": 12,
+      "routeRange": [
+        156,
+        167
+      ],
+      "independentHubOrFocusRons": [
+        {
+          "route": 156,
+          "day": 1,
+          "city": "DAY"
+        },
+        {
+          "route": 166,
+          "day": 11,
+          "city": "SYR"
+        }
+      ],
+      "maximumNonMxRunExcluding125And136": 9
+    },
+    {
+      "line": "AN",
+      "fleet": "CRJ200",
+      "routes": 9,
+      "routeRange": [
+        168,
+        176
+      ],
+      "independentHubOrFocusRons": [
+        {
+          "route": 169,
+          "day": 2,
+          "city": "JAX"
+        }
+      ],
+      "maximumNonMxRunExcluding125And136": 8
+    }
+  ],
+  "routeMapping": [
+    {
+      "sourceRoute": 164,
+      "targetRoute": 111,
+      "line": "AD",
+      "day": 1,
+      "expectedLine": "AE",
+      "expectedDay": 14,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 151,
+      "targetRoute": 112,
+      "line": "AD",
+      "day": 2,
+      "expectedLine": "AE",
+      "expectedDay": 1,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 152,
+      "targetRoute": 113,
+      "line": "AD",
+      "day": 3,
+      "expectedLine": "AE",
+      "expectedDay": 2,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 153,
+      "targetRoute": 114,
+      "line": "AD",
+      "day": 4,
+      "expectedLine": "AE",
+      "expectedDay": 3,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 154,
+      "targetRoute": 115,
+      "line": "AD",
+      "day": 5,
+      "expectedLine": "AE",
+      "expectedDay": 4,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 155,
+      "targetRoute": 116,
+      "line": "AD",
+      "day": 6,
+      "expectedLine": "AE",
+      "expectedDay": 5,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 156,
+      "targetRoute": 117,
+      "line": "AD",
+      "day": 7,
+      "expectedLine": "AE",
+      "expectedDay": 6,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 157,
+      "targetRoute": 118,
+      "line": "AD",
+      "day": 8,
+      "expectedLine": "AE",
+      "expectedDay": 7,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 158,
+      "targetRoute": 119,
+      "line": "AD",
+      "day": 9,
+      "expectedLine": "AE",
+      "expectedDay": 8,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 172,
+      "targetRoute": 120,
+      "line": "AD",
+      "day": 10,
+      "expectedLine": "AM",
+      "expectedDay": 1,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 171,
+      "targetRoute": 121,
+      "line": "AD",
+      "day": 11,
+      "expectedLine": "AI",
+      "expectedDay": 2,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 167,
+      "targetRoute": 122,
+      "line": "AE",
+      "day": 1,
+      "expectedLine": "AF",
+      "expectedDay": 3,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 168,
+      "targetRoute": 123,
+      "line": "AE",
+      "day": 2,
+      "expectedLine": "AF",
+      "expectedDay": 4,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 147,
+      "targetRoute": 124,
+      "line": "AE",
+      "day": 3,
+      "expectedLine": "AD",
+      "expectedDay": 37,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 125,
+      "targetRoute": 125,
+      "line": "AE",
+      "day": 4,
+      "expectedLine": "AD",
+      "expectedDay": 15,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 126,
+      "targetRoute": 126,
+      "line": "AE",
+      "day": 5,
+      "expectedLine": "AD",
+      "expectedDay": 16,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 127,
+      "targetRoute": 127,
+      "line": "AE",
+      "day": 6,
+      "expectedLine": "AD",
+      "expectedDay": 17,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 143,
+      "targetRoute": 128,
+      "line": "AE",
+      "day": 7,
+      "expectedLine": "AD",
+      "expectedDay": 33,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 144,
+      "targetRoute": 129,
+      "line": "AE",
+      "day": 8,
+      "expectedLine": "AD",
+      "expectedDay": 34,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 176,
+      "targetRoute": 130,
+      "line": "AE",
+      "day": 9,
+      "expectedLine": "AR",
+      "expectedDay": 1,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 145,
+      "targetRoute": 131,
+      "line": "AE",
+      "day": 10,
+      "expectedLine": "AD",
+      "expectedDay": 35,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 146,
+      "targetRoute": 132,
+      "line": "AE",
+      "day": 11,
+      "expectedLine": "AD",
+      "expectedDay": 36,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 129,
+      "targetRoute": 133,
+      "line": "AF",
+      "day": 1,
+      "expectedLine": "AD",
+      "expectedDay": 19,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 130,
+      "targetRoute": 134,
+      "line": "AF",
+      "day": 2,
+      "expectedLine": "AD",
+      "expectedDay": 20,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 131,
+      "targetRoute": 135,
+      "line": "AF",
+      "day": 3,
+      "expectedLine": "AD",
+      "expectedDay": 21,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 136,
+      "targetRoute": 136,
+      "line": "AF",
+      "day": 4,
+      "expectedLine": "AD",
+      "expectedDay": 26,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 137,
+      "targetRoute": 137,
+      "line": "AF",
+      "day": 5,
+      "expectedLine": "AD",
+      "expectedDay": 27,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 138,
+      "targetRoute": 138,
+      "line": "AF",
+      "day": 6,
+      "expectedLine": "AD",
+      "expectedDay": 28,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 139,
+      "targetRoute": 139,
+      "line": "AF",
+      "day": 7,
+      "expectedLine": "AD",
+      "expectedDay": 29,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 140,
+      "targetRoute": 140,
+      "line": "AF",
+      "day": 8,
+      "expectedLine": "AD",
+      "expectedDay": 30,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 141,
+      "targetRoute": 141,
+      "line": "AF",
+      "day": 9,
+      "expectedLine": "AD",
+      "expectedDay": 31,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 142,
+      "targetRoute": 142,
+      "line": "AF",
+      "day": 10,
+      "expectedLine": "AD",
+      "expectedDay": 32,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 128,
+      "targetRoute": 143,
+      "line": "AF",
+      "day": 11,
+      "expectedLine": "AD",
+      "expectedDay": 18,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 132,
+      "targetRoute": 144,
+      "line": "AI",
+      "day": 1,
+      "expectedLine": "AD",
+      "expectedDay": 22,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 133,
+      "targetRoute": 145,
+      "line": "AI",
+      "day": 2,
+      "expectedLine": "AD",
+      "expectedDay": 23,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 134,
+      "targetRoute": 146,
+      "line": "AI",
+      "day": 3,
+      "expectedLine": "AD",
+      "expectedDay": 24,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 135,
+      "targetRoute": 147,
+      "line": "AI",
+      "day": 4,
+      "expectedLine": "AD",
+      "expectedDay": 25,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 161,
+      "targetRoute": 148,
+      "line": "AI",
+      "day": 5,
+      "expectedLine": "AE",
+      "expectedDay": 11,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 162,
+      "targetRoute": 149,
+      "line": "AI",
+      "day": 6,
+      "expectedLine": "AE",
+      "expectedDay": 12,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 163,
+      "targetRoute": 150,
+      "line": "AI",
+      "day": 7,
+      "expectedLine": "AE",
+      "expectedDay": 13,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 170,
+      "targetRoute": 151,
+      "line": "AI",
+      "day": 8,
+      "expectedLine": "AI",
+      "expectedDay": 1,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 173,
+      "targetRoute": 152,
+      "line": "AI",
+      "day": 9,
+      "expectedLine": "AM",
+      "expectedDay": 2,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 174,
+      "targetRoute": 153,
+      "line": "AI",
+      "day": 10,
+      "expectedLine": "AM",
+      "expectedDay": 3,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 159,
+      "targetRoute": 154,
+      "line": "AI",
+      "day": 11,
+      "expectedLine": "AE",
+      "expectedDay": 9,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 160,
+      "targetRoute": 155,
+      "line": "AI",
+      "day": 12,
+      "expectedLine": "AE",
+      "expectedDay": 10,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 175,
+      "targetRoute": 156,
+      "line": "AM",
+      "day": 1,
+      "expectedLine": "AN",
+      "expectedDay": 1,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 149,
+      "targetRoute": 157,
+      "line": "AM",
+      "day": 2,
+      "expectedLine": "AD",
+      "expectedDay": 39,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 150,
+      "targetRoute": 158,
+      "line": "AM",
+      "day": 3,
+      "expectedLine": "AD",
+      "expectedDay": 40,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 111,
+      "targetRoute": 159,
+      "line": "AM",
+      "day": 4,
+      "expectedLine": "AD",
+      "expectedDay": 1,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 112,
+      "targetRoute": 160,
+      "line": "AM",
+      "day": 5,
+      "expectedLine": "AD",
+      "expectedDay": 2,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 122,
+      "targetRoute": 161,
+      "line": "AM",
+      "day": 6,
+      "expectedLine": "AD",
+      "expectedDay": 12,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 123,
+      "targetRoute": 162,
+      "line": "AM",
+      "day": 7,
+      "expectedLine": "AD",
+      "expectedDay": 13,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 124,
+      "targetRoute": 163,
+      "line": "AM",
+      "day": 8,
+      "expectedLine": "AD",
+      "expectedDay": 14,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 148,
+      "targetRoute": 164,
+      "line": "AM",
+      "day": 9,
+      "expectedLine": "AD",
+      "expectedDay": 38,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 169,
+      "targetRoute": 165,
+      "line": "AM",
+      "day": 10,
+      "expectedLine": "AF",
+      "expectedDay": 5,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 165,
+      "targetRoute": 166,
+      "line": "AM",
+      "day": 11,
+      "expectedLine": "AF",
+      "expectedDay": 1,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 166,
+      "targetRoute": 167,
+      "line": "AM",
+      "day": 12,
+      "expectedLine": "AF",
+      "expectedDay": 2,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 114,
+      "targetRoute": 168,
+      "line": "AN",
+      "day": 1,
+      "expectedLine": "AD",
+      "expectedDay": 4,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 115,
+      "targetRoute": 169,
+      "line": "AN",
+      "day": 2,
+      "expectedLine": "AD",
+      "expectedDay": 5,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 116,
+      "targetRoute": 170,
+      "line": "AN",
+      "day": 3,
+      "expectedLine": "AD",
+      "expectedDay": 6,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 117,
+      "targetRoute": 171,
+      "line": "AN",
+      "day": 4,
+      "expectedLine": "AD",
+      "expectedDay": 7,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 118,
+      "targetRoute": 172,
+      "line": "AN",
+      "day": 5,
+      "expectedLine": "AD",
+      "expectedDay": 8,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 119,
+      "targetRoute": 173,
+      "line": "AN",
+      "day": 6,
+      "expectedLine": "AD",
+      "expectedDay": 9,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 120,
+      "targetRoute": 174,
+      "line": "AN",
+      "day": 7,
+      "expectedLine": "AD",
+      "expectedDay": 10,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 121,
+      "targetRoute": 175,
+      "line": "AN",
+      "day": 8,
+      "expectedLine": "AD",
+      "expectedDay": 11,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 113,
+      "targetRoute": 176,
+      "line": "AN",
+      "day": 9,
+      "expectedLine": "AD",
+      "expectedDay": 3,
+      "expectedFleet": "CRJ200"
+    }
+  ],
+  "demandModel": "Pinned BTS O-D; full-capture seat-uncapped relative-choice one/two-stop opportunity units, not forecast passengers, loads or profit. 30–240 minute transfers and circuity ≤2.25.",
+  "addedFlightDemand": {
+    "flights": [
+      {
+        "id": "DAY-RON-IND_CAK-R125-1-DAY-IND",
+        "route": 125,
+        "line": "AE",
+        "fleet": "CRJ200",
+        "day": 4,
+        "sequenceWithinRoute": 9,
+        "pairing": 471,
+        "flight": 2173,
+        "origin": "DAY",
+        "destination": "IND",
+        "departure": "21:35",
+        "arrival": "22:18",
+        "departureMinute": 1295,
+        "arrivalMinute": 1338,
+        "departureClock": "21:35",
+        "arrivalClock": "22:18",
+        "blockMinutes": 43,
+        "currentPairFrequency": 2,
+        "routeLocalOd": 0.3,
+        "local": 0.10574437529918619,
+        "connecting": 389.7297561273122,
+        "total": 389.8355005026114,
+        "oneStop": 214.0377973295216,
+        "twoStop": 175.6919587977906,
+        "groups": {
+          "HUB": 7.77530181693107,
+          "FLP": 92.57288428931962,
+          "GCP": 39.29228070283337,
+          "TEX": 76.54886794693736,
+          "UMP": 1.8002877479497297,
+          "OZK": 4.3436357135121195,
+          "NEC": 5.96736290811476,
+          "CGI": 93.67455299723372,
+          "GLC": 36.66572528006949,
+          "LEC": 15.789663708952094,
+          "MAC": 15.29919301545886
+        },
+        "topMarkets": [
+          {
+            "origin": "CLT",
+            "destination": "IND",
+            "opportunity": 61.068777025858935
+          },
+          {
+            "origin": "PIE",
+            "destination": "IND",
+            "opportunity": 40.781286944644265
+          },
+          {
+            "origin": "FLL",
+            "destination": "IND",
+            "opportunity": 37.65504961102517
+          },
+          {
+            "origin": "RFD",
+            "destination": "IND",
+            "opportunity": 32.37692385090327
+          },
+          {
+            "origin": "DAL",
+            "destination": "IND",
+            "opportunity": 29.152330201060114
+          }
+        ],
+        "connectingFlightCount": 24,
+        "connectingFlightNumbers": [
+          1790,
+          1478,
+          1479,
+          1770,
+          1813,
+          1668,
+          1368,
+          1806,
+          1509,
+          1510,
+          1451,
+          1698,
+          1571,
+          1572,
+          1794,
+          1467,
+          1468,
+          1859,
+          1982,
+          2072,
+          2090,
+          2105,
+          2135,
+          2153
+        ]
+      },
+      {
+        "id": "DAY-RON-IND_CAK-R126-1-IND-DAY",
+        "route": 126,
+        "line": "AE",
+        "fleet": "CRJ200",
+        "day": 5,
+        "sequenceWithinRoute": 1,
+        "pairing": 478,
+        "flight": 2174,
+        "origin": "IND",
+        "destination": "DAY",
+        "departure": "04:30",
+        "arrival": "05:13",
+        "departureMinute": 270,
+        "arrivalMinute": 313,
+        "departureClock": "04:30",
+        "arrivalClock": "05:13",
+        "blockMinutes": 43,
+        "currentPairFrequency": 2,
+        "routeLocalOd": 0.3,
+        "local": 0.10574437529918619,
+        "connecting": 258.2597753667881,
+        "total": 258.3655197420873,
+        "oneStop": 121.41775851769495,
+        "twoStop": 136.8420168490932,
+        "groups": {
+          "HUB": 12.702172330806643,
+          "FLP": 62.36238330338282,
+          "TEX": 69.11407932118524,
+          "NEC": 19.81192874413388,
+          "GCP": 13.576577536110065,
+          "CGI": 23.206647740626604,
+          "GLC": 3.503758653287795,
+          "LEC": 11.49594396446304,
+          "MAC": 26.68628377279206,
+          "APP": 15.799999999999999
+        },
+        "topMarkets": [
+          {
+            "origin": "IND",
+            "destination": "HOU",
+            "opportunity": 52.45354439450867
+          },
+          {
+            "origin": "IND",
+            "destination": "PIE",
+            "opportunity": 24.396875058488263
+          },
+          {
+            "origin": "IND",
+            "destination": "BWI",
+            "opportunity": 23.6964171967753
+          },
+          {
+            "origin": "IND",
+            "destination": "SFB",
+            "opportunity": 20.649684303199862
+          },
+          {
+            "origin": "IND",
+            "destination": "AUS",
+            "opportunity": 16.42083577033791
+          }
+        ],
+        "connectingFlightCount": 18,
+        "connectingFlightNumbers": [
+          1785,
+          1786,
+          1480,
+          1617,
+          1771,
+          1899,
+          1873,
+          1807,
+          1503,
+          1504,
+          1452,
+          1867,
+          1693,
+          1793,
+          1860,
+          2078,
+          2085,
+          2132
+        ]
+      },
+      {
+        "id": "DAY-RON-IND_CAK-R136-1-DAY-CAK",
+        "route": 136,
+        "line": "AF",
+        "fleet": "CRJ200",
+        "day": 4,
+        "sequenceWithinRoute": 6,
+        "pairing": 475,
+        "flight": 2175,
+        "origin": "DAY",
+        "destination": "CAK",
+        "departure": "21:35",
+        "arrival": "22:25",
+        "departureMinute": 1295,
+        "arrivalMinute": 1345,
+        "departureClock": "21:35",
+        "arrivalClock": "22:25",
+        "blockMinutes": 50,
+        "currentPairFrequency": 2,
+        "routeLocalOd": 0.3,
+        "local": 0.10257966616084976,
+        "connecting": 431.9352769186481,
+        "total": 432.037856584809,
+        "oneStop": 216.85309330481303,
+        "twoStop": 215.08218361383513,
+        "groups": {
+          "HUB": 12.852041825120853,
+          "FLP": 126.75004001867867,
+          "NEC": 0.1839395475663187,
+          "OZK": 2.3981514083296496,
+          "TEX": 83.60830607713916,
+          "UMP": 29.84720565811072,
+          "GLC": 63.59059558126685,
+          "CGI": 78.30860009113118,
+          "APP": 2.9999999999999996,
+          "GCP": 31.396396711304767
+        },
+        "topMarkets": [
+          {
+            "origin": "PGD",
+            "destination": "CAK",
+            "opportunity": 76.0568520411646
+          },
+          {
+            "origin": "RFD",
+            "destination": "CAK",
+            "opportunity": 58.23136563954869
+          },
+          {
+            "origin": "DAL",
+            "destination": "CAK",
+            "opportunity": 52.210541824312024
+          },
+          {
+            "origin": "CLT",
+            "destination": "CAK",
+            "opportunity": 48.1
+          },
+          {
+            "origin": "FLL",
+            "destination": "CAK",
+            "opportunity": 27.02723716983825
+          }
+        ],
+        "connectingFlightCount": 23,
+        "connectingFlightNumbers": [
+          1790,
+          1478,
+          1479,
+          1368,
+          1806,
+          1509,
+          1510,
+          1820,
+          1451,
+          1698,
+          1571,
+          1572,
+          1467,
+          1468,
+          1859,
+          1850,
+          1982,
+          2072,
+          2090,
+          2105,
+          2137,
+          2135,
+          2153
+        ]
+      },
+      {
+        "id": "DAY-RON-IND_CAK-R137-1-CAK-DAY",
+        "route": 137,
+        "line": "AF",
+        "fleet": "CRJ200",
+        "day": 5,
+        "sequenceWithinRoute": 1,
+        "pairing": 449,
+        "flight": 2176,
+        "origin": "CAK",
+        "destination": "DAY",
+        "departure": "04:30",
+        "arrival": "05:20",
+        "departureMinute": 270,
+        "arrivalMinute": 320,
+        "departureClock": "04:30",
+        "arrivalClock": "05:20",
+        "blockMinutes": 50,
+        "currentPairFrequency": 2,
+        "routeLocalOd": 0.4,
+        "local": 0.13677288821446637,
+        "connecting": 289.0627862271442,
+        "total": 289.1995591153587,
+        "oneStop": 101.78825589378688,
+        "twoStop": 187.27453033335735,
+        "groups": {
+          "FLP": 154.66484020055972,
+          "NEC": 0.2725025875666168,
+          "HUB": 8.122836542630415,
+          "MAC": 7.11241828585517,
+          "TEX": 35.94159764335912,
+          "GLC": 4.4599906506856986,
+          "CGI": 12.384497217752703,
+          "APP": 51.1,
+          "GCP": 15.0041030987348
+        },
+        "topMarkets": [
+          {
+            "origin": "CAK",
+            "destination": "PGD",
+            "opportunity": 103.6
+          },
+          {
+            "origin": "CAK",
+            "destination": "BNA",
+            "opportunity": 49.9
+          },
+          {
+            "origin": "CAK",
+            "destination": "HOU",
+            "opportunity": 27.418867857933684
+          },
+          {
+            "origin": "CAK",
+            "destination": "SFB",
+            "opportunity": 19.497233321972946
+          },
+          {
+            "origin": "CAK",
+            "destination": "FLL",
+            "opportunity": 14.268713234176262
+          }
+        ],
+        "connectingFlightCount": 14,
+        "connectingFlightNumbers": [
+          1785,
+          1786,
+          1480,
+          1617,
+          1873,
+          1807,
+          1503,
+          1504,
+          1452,
+          1867,
+          1693,
+          1860,
+          2078,
+          2132
+        ]
+      }
+    ],
+    "newlyConnectedMarketDemand": 339.1,
+    "marketsWithFasterBestItinerary": 21
+  },
+  "changedFlightConnections": [
+    {
+      "flight": 1503,
+      "beforeDeparture": "05:50",
+      "afterDeparture": "05:53",
+      "lostConnectingChoices": 0,
+      "addedConnectingChoices": 2,
+      "oldOpportunity": 3.0609924809383404,
+      "newOpportunity": 56.48890585470908
+    },
+    {
+      "flight": 1873,
+      "beforeDeparture": "05:50",
+      "afterDeparture": "06:00",
+      "lostConnectingChoices": 0,
+      "addedConnectingChoices": 2,
+      "oldOpportunity": 0.025,
+      "newOpportunity": 0.7045174145344204
+    }
+  ],
+  "connectionTradeoff": {
+    "marketsWithSlowerBestItinerary": [
+      {
+        "origin": "TOL",
+        "destination": "HOU",
+        "od": 0.0,
+        "oldFastestMinutes": 238,
+        "newFastestMinutes": 241,
+        "differenceMinutes": 3
+      }
+    ],
+    "marketsLosingAllConnections": [],
+    "lostUnderlyingOd": 0,
+    "marketsWithFasterBestItinerary": 21
+  },
+  "hubBankChanges": [
+    {
+      "bankId": "DAY-B1",
+      "expectedStartMinute": 300,
+      "expectedEndMinute": 360,
+      "startMinute": 301,
+      "endMinute": 361
+    }
+  ],
+  "checks": {
+    "shaPinnedSourceReplay": "pass",
+    "cumulativeEqualsSequential": "pass",
+    "reviewReproduction": "pass",
+    "originalFlightPreservationAndOnlyTwoRetimings": "pass",
+    "independentMaintenanceWithout125And136": "pass",
+    "noNewOperatingExceptions": "pass",
+    "appManifestUnchanged": "pass"
+  },
+  "publication": "Unpublished; main branch and app default remain released v1.2.4",
+  "limitations": [
+    "Both return aircraft turns are exactly the 40-minute minimum.",
+    "Aircraft overnight feasibility does not establish a crew duty/rest plan.",
+    "TOL-HOU's fastest modeled itinerary increases three minutes; pinned O-D is zero."
+  ]
+}

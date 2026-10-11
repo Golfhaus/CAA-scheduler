@@ -1,5 +1,7 @@
 # Schedule 7 CRJ200 line alignment draft
 
+**Current status:** This alignment is now incorporated into the [unpublished v1.2.5 draft](schedule_7_v1_2_5_draft.md), together with the IND/CAK overnight extensions. The analysis below records the earlier alignment-only checkpoint.
+
 Prepared October 10, 2026 from **released v1.2.4** at commit `944ed86165ddfd55b517873392b3e94a8f78f02c`. This is an **unpublished working draft**. The app continues to use released v1.2.4; no next release number is assigned. Future DAY destination overnights are not yet implemented.
 
 ## Fleet verification and scope

@@ -1,5 +1,7 @@
 # DAY overnight destinations for aligned routes 125 and 136
 
+**Current status:** The recommended IND/CAK portfolio is accepted into the [unpublished v1.2.5 draft](schedule_7_v1_2_5_draft.md). Other portfolios remain alternatives. The review below and its pinned proposal files record the pre-acceptance analysis.
+
 Prepared October 10, 2026 local time from the **unpublished CRJ200 alignment** of released v1.2.4. **These are reviewed proposals only: no destination extensions, retimings or bank changes have been added to the working schedule or published.** The alignment remains the working baseline; the app remains on released v1.2.4.
 
 ## Recommended: route 125 to IND; route 136 to CAK
