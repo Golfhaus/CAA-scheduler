@@ -1,0 +1,233 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "v1.2.5-mci-FOUR_ALL_CONNECT",
+  "baseSchedule": {
+    "scheduleId": "schedule_7_v1_2_5_draft",
+    "canonical": "data/schedules/schedule_7_v1_2_5_draft/canonical_schedule.json",
+    "sha256": "ce182870262e895d45f725f9406b919d61cb24f97bab83ee22902dd1710b06f5"
+  },
+  "schedule": {
+    "id": "schedule_7_v1_2_5_mci_FOUR_ALL_CONNECT",
+    "version": "1.2.5-analysis",
+    "label": "Unpublished v1.2.5 MCI B1 proposal FOUR_ALL_CONNECT",
+    "status": "draft"
+  },
+  "approval": {
+    "status": "reviewed proposal only; not implemented",
+    "publication": "Reserved to user decision",
+    "scope": "MCI overnight feeders; FOUR_ALL_CONNECT"
+  },
+  "hubBanksToAdd": [],
+  "hubBankCountOverrides": {},
+  "insertLegs": [
+    {
+      "id": "V125-MCI-FOUR_ALL_CONNECT-R112-1-MCI-SDF",
+      "origin": "MCI",
+      "destination": "SDF",
+      "departureMinute": 1270,
+      "arrivalMinute": 1425,
+      "route": 112
+    },
+    {
+      "id": "V125-MCI-FOUR_ALL_CONNECT-R113-1-SDF-MCI",
+      "origin": "SDF",
+      "destination": "MCI",
+      "departureMinute": 270,
+      "arrivalMinute": 305,
+      "route": 113
+    },
+    {
+      "id": "V125-MCI-FOUR_ALL_CONNECT-R135-1-MCI-SBN",
+      "origin": "MCI",
+      "destination": "SBN",
+      "departureMinute": 1285,
+      "arrivalMinute": 1438,
+      "route": 135
+    },
+    {
+      "id": "V125-MCI-FOUR_ALL_CONNECT-R136-1-SBN-MCI",
+      "origin": "SBN",
+      "destination": "MCI",
+      "departureMinute": 270,
+      "arrivalMinute": 303,
+      "route": 136
+    },
+    {
+      "id": "V125-MCI-FOUR_ALL_CONNECT-R715-1-MCI-GRR",
+      "origin": "MCI",
+      "destination": "GRR",
+      "departureMinute": 1283,
+      "arrivalMinute": 1438,
+      "route": 715
+    },
+    {
+      "id": "V125-MCI-FOUR_ALL_CONNECT-R716-1-GRR-MCI",
+      "origin": "GRR",
+      "destination": "MCI",
+      "departureMinute": 270,
+      "arrivalMinute": 305,
+      "route": 716
+    },
+    {
+      "id": "V125-MCI-FOUR_ALL_CONNECT-R323-1-MCI-SGF",
+      "origin": "MCI",
+      "destination": "SGF",
+      "departureMinute": 1390,
+      "arrivalMinute": 1440,
+      "route": 323
+    },
+    {
+      "id": "V125-MCI-FOUR_ALL_CONNECT-R324-1-SGF-MCI",
+      "origin": "SGF",
+      "destination": "MCI",
+      "departureMinute": 270,
+      "arrivalMinute": 320,
+      "route": 324
+    }
+  ],
+  "retimeLegs": [
+    {
+      "legId": "MCI-SHV-CRJ200-02-OUT",
+      "expectedDepartureMinute": 335,
+      "expectedArrivalMinute": 428,
+      "departureMinute": 350,
+      "arrivalMinute": 443
+    },
+    {
+      "legId": "CID-MCI-CRJ200-02-IN",
+      "expectedDepartureMinute": 335,
+      "expectedArrivalMinute": 396,
+      "departureMinute": 350,
+      "arrivalMinute": 411
+    },
+    {
+      "legId": "MCI-SFB-MAX9-01-OUT",
+      "expectedDepartureMinute": 335,
+      "expectedArrivalMinute": 548,
+      "departureMinute": 350,
+      "arrivalMinute": 563
+    },
+    {
+      "legId": "V114-R704-MCI-AUS",
+      "expectedDepartureMinute": 285,
+      "expectedArrivalMinute": 392,
+      "departureMinute": 350,
+      "arrivalMinute": 457
+    },
+    {
+      "legId": "AUS-MCI-MAX9-01-OUT",
+      "expectedDepartureMinute": 435,
+      "expectedArrivalMinute": 542,
+      "departureMinute": 497,
+      "arrivalMinute": 604
+    },
+    {
+      "legId": "MCI-RDU-CRJ900-02-OUT",
+      "expectedDepartureMinute": 335,
+      "expectedArrivalMinute": 534,
+      "departureMinute": 350,
+      "arrivalMinute": 549
+    },
+    {
+      "legId": "ELP-MCI-CRJ700-01-IN",
+      "expectedDepartureMinute": 335,
+      "expectedArrivalMinute": 411,
+      "departureMinute": 350,
+      "arrivalMinute": 426
+    },
+    {
+      "legId": "MCI-OMA-CRJ200-02-OUT",
+      "expectedDepartureMinute": 335,
+      "expectedArrivalMinute": 384,
+      "departureMinute": 350,
+      "arrivalMinute": 399
+    },
+    {
+      "legId": "ICT-MCI-CRJ200-02-IN",
+      "expectedDepartureMinute": 335,
+      "expectedArrivalMinute": 388,
+      "departureMinute": 350,
+      "arrivalMinute": 403
+    },
+    {
+      "legId": "FSD-MCI-CRJ200-02-IN",
+      "expectedDepartureMinute": 335,
+      "expectedArrivalMinute": 406,
+      "departureMinute": 350,
+      "arrivalMinute": 421
+    },
+    {
+      "legId": "MCI-SFB-MAX9-02-OUT",
+      "expectedDepartureMinute": 635,
+      "expectedArrivalMinute": 848,
+      "departureMinute": 644,
+      "arrivalMinute": 857
+    },
+    {
+      "legId": "AUS-MCI-MAX9-02-OUT",
+      "expectedDepartureMinute": 490,
+      "expectedArrivalMinute": 597,
+      "departureMinute": 527,
+      "arrivalMinute": 634
+    }
+  ],
+  "bankAssignmentsToAdd": [
+    {
+      "legId": "V125-MCI-FOUR_ALL_CONNECT-R112-1-MCI-SDF",
+      "operation": "departure",
+      "bankId": "MCI-M11"
+    },
+    {
+      "legId": "V125-MCI-FOUR_ALL_CONNECT-R113-1-SDF-MCI",
+      "operation": "arrival",
+      "bankId": "MCI-B1"
+    },
+    {
+      "legId": "V125-MCI-FOUR_ALL_CONNECT-R135-1-MCI-SBN",
+      "operation": "departure",
+      "bankId": "MCI-M11"
+    },
+    {
+      "legId": "V125-MCI-FOUR_ALL_CONNECT-R136-1-SBN-MCI",
+      "operation": "arrival",
+      "bankId": "MCI-B1"
+    },
+    {
+      "legId": "V125-MCI-FOUR_ALL_CONNECT-R715-1-MCI-GRR",
+      "operation": "departure",
+      "bankId": "MCI-M11"
+    },
+    {
+      "legId": "V125-MCI-FOUR_ALL_CONNECT-R716-1-GRR-MCI",
+      "operation": "arrival",
+      "bankId": "MCI-B1"
+    },
+    {
+      "legId": "V125-MCI-FOUR_ALL_CONNECT-R323-1-MCI-SGF",
+      "operation": "departure",
+      "bankId": "MCI-M12"
+    },
+    {
+      "legId": "V125-MCI-FOUR_ALL_CONNECT-R324-1-SGF-MCI",
+      "operation": "arrival",
+      "bankId": "MCI-B1"
+    }
+  ],
+  "bankAssignmentReplacements": [
+    {
+      "legId": "AUS-MCI-MAX9-01-OUT",
+      "operation": "arrival",
+      "bankId": "MCI-B4"
+    }
+  ],
+  "operatingOverrides": [],
+  "hubBankChanges": [
+    {
+      "bankId": "MCI-B1",
+      "expectedStartMinute": 285,
+      "expectedEndMinute": 345,
+      "startMinute": 291,
+      "endMinute": 351
+    }
+  ]
+}

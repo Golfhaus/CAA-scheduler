@@ -2,6 +2,8 @@
 
 The first accepted round incorporates the CRJ200 line alignment and the recommended IND/CAK destination overnights. **This version is unpublished.** Additional changes will accumulate here before the user decides to publish. Main and the app continue to use released v1.2.4.
 
+The [MCI B1 review](schedule_7_v1_2_5_mci_b1_review.md) now records proposed SDF/SBN/GRR/SGF destination overnights and a six-minute bank shift. These MCI proposals have **not** been added to this accepted draft.
+
 ## Added flying
 
 All four additions use CRJ200 aircraft. Times below are local Eastern time. Each market grows from two to three flights daily in each direction.
