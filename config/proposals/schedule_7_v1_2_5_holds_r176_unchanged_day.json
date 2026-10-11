@@ -1,0 +1,54 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "schedule-7-v1.2.5-long-holds-analysis",
+  "baseSchedule": {
+    "scheduleId": "schedule_7_v1_2_5_draft",
+    "canonical": "data/schedules/schedule_7_v1_2_5_draft/canonical_schedule.json",
+    "sha256": "b4ea43f7300048381a095a8a662e71c7bcd4032bbd0fb5ceee44ed72d69ef873"
+  },
+  "schedule": {
+    "id": "schedule_7_v1_2_5_holds_analysis",
+    "version": "1.2.5-analysis",
+    "label": "Unpublished v1.2.5 long-hold proposal",
+    "status": "draft"
+  },
+  "approval": {
+    "status": "analysis only; not added to draft",
+    "publication": "Reserved to user decision"
+  },
+  "hubBanksToAdd": [],
+  "hubBankCountOverrides": {},
+  "insertLegs": [
+    {
+      "id": "V125-HOLDS-R130-1-SWF-DAY",
+      "origin": "SWF",
+      "destination": "DAY",
+      "departureMinute": 450,
+      "arrivalMinute": 552,
+      "route": 130
+    },
+    {
+      "id": "V125-HOLDS-R130-2-DAY-SWF",
+      "origin": "DAY",
+      "destination": "SWF",
+      "departureMinute": 592,
+      "arrivalMinute": 694,
+      "route": 130
+    }
+  ],
+  "retimeLegs": [],
+  "bankAssignmentsToAdd": [
+    {
+      "legId": "V125-HOLDS-R130-1-SWF-DAY",
+      "operation": "arrival",
+      "bankId": "DAY-B3"
+    },
+    {
+      "legId": "V125-HOLDS-R130-2-DAY-SWF",
+      "operation": "departure",
+      "bankId": "DAY-B3"
+    }
+  ],
+  "bankAssignmentReplacements": [],
+  "operatingOverrides": []
+}

@@ -10,7 +10,7 @@
     "notEvaluated": 1,
     "overridden": 2,
     "effectiveErrorFindings": 0,
-    "effectiveWarningFindings": 172
+    "effectiveWarningFindings": 170
   },
   "checks": [
     {
@@ -114,10 +114,10 @@
       "severity": "warning",
       "hardStop": false,
       "status": "warning",
-      "message": "90 finding(s)",
+      "message": "88 finding(s)",
       "metrics": {
-        "findingCount": 90,
-        "effectiveFindingCount": 90,
+        "findingCount": 88,
+        "effectiveFindingCount": 88,
         "overriddenFindingCount": 0
       },
       "findings": [
@@ -231,14 +231,14 @@
         },
         {
           "id": "AB-10-1139-1138",
-          "message": "Hold at RDU is 181 minutes and needs deliberate-hold review",
+          "message": "Hold at RDU is 166 minutes and needs deliberate-hold review",
           "evidence": {
             "line": "AB",
             "day": 10,
             "city": "RDU",
             "arrivalFlight": 1139,
             "departureFlight": 1138,
-            "minutes": 181
+            "minutes": 166
           }
         },
         {
@@ -483,14 +483,14 @@
         },
         {
           "id": "AL-8-1405-1404",
-          "message": "Hold at ELP is 277 minutes and needs deliberate-hold review",
+          "message": "Hold at ELP is 262 minutes and needs deliberate-hold review",
           "evidence": {
             "line": "AL",
             "day": 8,
             "city": "ELP",
             "arrivalFlight": 1405,
             "departureFlight": 1404,
-            "minutes": 277
+            "minutes": 262
           }
         },
         {
@@ -591,14 +591,14 @@
         },
         {
           "id": "AI-12-1675-1679",
-          "message": "Hold at FSD is 219 minutes and needs deliberate-hold review",
+          "message": "Hold at FSD is 204 minutes and needs deliberate-hold review",
           "evidence": {
             "line": "AI",
             "day": 12,
             "city": "FSD",
             "arrivalFlight": 1675,
             "departureFlight": 1679,
-            "minutes": 219
+            "minutes": 204
           }
         },
         {
@@ -758,18 +758,6 @@
           }
         },
         {
-          "id": "AI-3-1647-1651",
-          "message": "Hold at ICT is 152 minutes and needs deliberate-hold review",
-          "evidence": {
-            "line": "AI",
-            "day": 3,
-            "city": "ICT",
-            "arrivalFlight": 1647,
-            "departureFlight": 1651,
-            "minutes": 152
-          }
-        },
-        {
           "id": "AF-4-1568-1572",
           "message": "Hold at PHF is 159 minutes and needs deliberate-hold review",
           "evidence": {
@@ -827,18 +815,6 @@
             "arrivalFlight": 1709,
             "departureFlight": 1823,
             "minutes": 178
-          }
-        },
-        {
-          "id": "AD-4-1633-1638",
-          "message": "Hold at OMA is 161 minutes and needs deliberate-hold review",
-          "evidence": {
-            "line": "AD",
-            "day": 4,
-            "city": "OMA",
-            "arrivalFlight": 1633,
-            "departureFlight": 1638,
-            "minutes": 161
           }
         },
         {
@@ -1310,8 +1286,8 @@
       "message": "Point-to-point flying is within the 10% cap",
       "metrics": {
         "flights": 97,
-        "totalFlights": 1174,
-        "share": 0.08262350936967632,
+        "totalFlights": 1182,
+        "share": 0.08206429780033841,
         "findingCount": 0,
         "effectiveFindingCount": 0,
         "overriddenFindingCount": 0
@@ -2229,6 +2205,7 @@
           "evidence": {
             "city": "GRR",
             "departures": [
+              270,
               375,
               625,
               875,
@@ -3217,6 +3194,7 @@
           "evidence": {
             "city": "SBN",
             "departures": [
+              270,
               385,
               635,
               878,
@@ -3252,6 +3230,7 @@
           "evidence": {
             "city": "SDF",
             "departures": [
+              270,
               305,
               765,
               805,
@@ -3280,6 +3259,7 @@
           "evidence": {
             "city": "SGF",
             "departures": [
+              270,
               270,
               1190,
               1230

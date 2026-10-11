@@ -1,5 +1,6 @@
 # Schedule 7 v1.2.5: MCI B1 connecting-bank review
 
+**Accepted into the unpublished v1.2.5 draft:** FOUR_BUFFERED, by the user’s instruction “Add these suggestions to the draft.” Historical comparisons use the preserved round-one checkpoint. Other alternatives remain unimplemented.
 **Recommendation: add SDF on 112/113, SBN on 135/136, GRR on 715/716 and SGF on 323/324; move B1 six minutes later and eight 05:35 departures to 05:50.** These are saved proposals only. The accepted v1.2.5 draft, main branch and app are unchanged.
 
 The review starts from the current 1,174-flight v1.2.5 draft, including the accepted CRJ200 alignment and DAY IND/CAK overnights. It examined all 11 MCI overnight aircraft chains, screened 98 route/destination options across existing low-frequency and new markets, and fully reviewed 22 configurations. Times below are local: MCI and SGF are Central; SDF, SBN and GRR are Eastern.

@@ -4,8 +4,8 @@
   "sourceKind": "canonical_reconstruction",
   "demandDataVersion": null,
   "summary": {
-    "legCount": 1174,
-    "marketRows": 650,
+    "legCount": 1182,
+    "marketRows": 654,
     "stationCount": 105,
     "fleetTypes": 4
   },
@@ -13,10 +13,10 @@
     "MAX9": {
       "aircraftCount": 35,
       "aircraftDaysUsed": 23,
-      "legCount": 162,
-      "blockMinutes": 17726,
-      "minimumTurnMinutes": 5560,
-      "requiredAircraftMinutes": 23286
+      "legCount": 164,
+      "blockMinutes": 17916,
+      "minimumTurnMinutes": 5640,
+      "requiredAircraftMinutes": 23556
     },
     "CRJ900": {
       "aircraftCount": 45,
@@ -29,18 +29,18 @@
     "CRJ700": {
       "aircraftCount": 65,
       "aircraftDaysUsed": 54,
-      "legCount": 328,
-      "blockMinutes": 34170,
-      "minimumTurnMinutes": 10960,
-      "requiredAircraftMinutes": 45130
+      "legCount": 330,
+      "blockMinutes": 34270,
+      "minimumTurnMinutes": 11040,
+      "requiredAircraftMinutes": 45310
     },
     "CRJ200": {
       "aircraftCount": 80,
       "aircraftDaysUsed": 76,
-      "legCount": 520,
-      "blockMinutes": 38666,
-      "minimumTurnMinutes": 17760,
-      "requiredAircraftMinutes": 56426
+      "legCount": 524,
+      "blockMinutes": 39042,
+      "minimumTurnMinutes": 17920,
+      "requiredAircraftMinutes": 56962
     }
   },
   "markets": [
@@ -1122,13 +1122,13 @@
       "fleet": "CRJ200",
       "origin": "MCI",
       "destination": "SBN",
-      "legs": 1
+      "legs": 2
     },
     {
       "fleet": "CRJ200",
       "origin": "MCI",
       "destination": "SDF",
-      "legs": 2
+      "legs": 3
     },
     {
       "fleet": "CRJ200",
@@ -1476,7 +1476,7 @@
       "fleet": "CRJ200",
       "origin": "SBN",
       "destination": "MCI",
-      "legs": 1
+      "legs": 2
     },
     {
       "fleet": "CRJ200",
@@ -1488,7 +1488,7 @@
       "fleet": "CRJ200",
       "origin": "SDF",
       "destination": "MCI",
-      "legs": 2
+      "legs": 3
     },
     {
       "fleet": "CRJ200",
@@ -2321,6 +2321,12 @@
     {
       "fleet": "CRJ700",
       "origin": "MCI",
+      "destination": "SGF",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ700",
+      "origin": "MCI",
       "destination": "SYR",
       "legs": 1
     },
@@ -2694,6 +2700,12 @@
       "fleet": "CRJ700",
       "origin": "SFB",
       "destination": "JAX",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ700",
+      "origin": "SGF",
+      "destination": "MCI",
       "legs": 1
     },
     {
@@ -3538,6 +3550,12 @@
     },
     {
       "fleet": "MAX9",
+      "origin": "GRR",
+      "destination": "MCI",
+      "legs": 1
+    },
+    {
+      "fleet": "MAX9",
       "origin": "GSP",
       "destination": "RFD",
       "legs": 1
@@ -3637,6 +3655,12 @@
       "origin": "MCI",
       "destination": "FLL",
       "legs": 2
+    },
+    {
+      "fleet": "MAX9",
+      "origin": "MCI",
+      "destination": "GRR",
+      "legs": 1
     },
     {
       "fleet": "MAX9",
@@ -3988,7 +4012,7 @@
     "FWA": 5,
     "GNV": 4,
     "GPT": 2,
-    "GRR": 4,
+    "GRR": 5,
     "GSO": 4,
     "GSP": 6,
     "HOU": 17,
@@ -4006,7 +4030,7 @@
     "LEX": 3,
     "LIT": 4,
     "MAF": 3,
-    "MCI": 124,
+    "MCI": 128,
     "MCN": 2,
     "MDT": 3,
     "MEM": 4,
@@ -4035,10 +4059,10 @@
     "ROC": 6,
     "SAT": 7,
     "SAV": 7,
-    "SBN": 4,
-    "SDF": 7,
+    "SBN": 5,
+    "SDF": 8,
     "SFB": 29,
-    "SGF": 3,
+    "SGF": 4,
     "SHV": 2,
     "SRQ": 8,
     "SWF": 4,

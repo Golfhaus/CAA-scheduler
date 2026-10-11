@@ -15,7 +15,7 @@ from analyze_schedule_7_v1_2_4 import cache_network
 from analyze_schedule_7_v1_2_4_xna import maintenance
 from review_crj200_line_alignment import routes, longest_gap
 
-BASE = "data/schedules/schedule_7_v1_2_5_draft/canonical_schedule.json"
+BASE = "data/schedules/schedule_7_v1_2_5_round_1/canonical_schedule.json"
 SCREEN = "config/proposals/schedule_7_v1_2_5_mci_screen.json"
 REPORT = "config/proposals/schedule_7_v1_2_5_mci_review.json"
 
