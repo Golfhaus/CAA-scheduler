@@ -1,0 +1,1272 @@
+{
+  "status": "validated unpublished working draft",
+  "baseCanonical": "data/schedules/schedule_7_v1_2_4/canonical_schedule.json",
+  "baseSha256": "56130a0fe8626ffb3d5c783d89ce9e6f06c30005031974aeab515198ea59de11",
+  "overlay": "config/optimizations/schedule_7_crj200_line_alignment.json",
+  "overlaySha256": "95c7a3b4fe62a2a344865665c6b50fbb0185d0c00eccc709212c249a03928e55",
+  "fleetVerification": [
+    {
+      "line": "AD",
+      "fleets": [
+        "CRJ200"
+      ],
+      "routeCount": 40
+    },
+    {
+      "line": "AE",
+      "fleets": [
+        "CRJ200"
+      ],
+      "routeCount": 14
+    },
+    {
+      "line": "AF",
+      "fleets": [
+        "CRJ200"
+      ],
+      "routeCount": 5
+    },
+    {
+      "line": "AI",
+      "fleets": [
+        "CRJ200"
+      ],
+      "routeCount": 2
+    },
+    {
+      "line": "AM",
+      "fleets": [
+        "CRJ200"
+      ],
+      "routeCount": 3
+    },
+    {
+      "line": "AN",
+      "fleets": [
+        "CRJ200"
+      ],
+      "routeCount": 1
+    },
+    {
+      "line": "AR",
+      "fleets": [
+        "CRJ200"
+      ],
+      "routeCount": 1
+    }
+  ],
+  "discardedLines": [],
+  "resultLines": [
+    {
+      "line": "AD",
+      "fleet": "CRJ200",
+      "routes": 11,
+      "routeRange": [
+        111,
+        121
+      ],
+      "hubOrFocusRons": [
+        {
+          "day": 2,
+          "route": 112,
+          "city": "MCI",
+          "arrival": "19:54",
+          "arrivalMinute": 1194
+        },
+        {
+          "day": 3,
+          "route": 113,
+          "city": "MCI",
+          "arrival": "20:05",
+          "arrivalMinute": 1205
+        }
+      ],
+      "independentHubOrFocusRons": [
+        {
+          "day": 2,
+          "route": 112,
+          "city": "MCI",
+          "arrival": "19:54",
+          "arrivalMinute": 1194
+        },
+        {
+          "day": 3,
+          "route": 113,
+          "city": "MCI",
+          "arrival": "20:05",
+          "arrivalMinute": 1205
+        }
+      ],
+      "maximumNonMxRunExcluding125And136": 9,
+      "sourceRouteOrder": [
+        164,
+        151,
+        152,
+        153,
+        154,
+        155,
+        156,
+        157,
+        158,
+        172,
+        171
+      ]
+    },
+    {
+      "line": "AE",
+      "fleet": "CRJ200",
+      "routes": 11,
+      "routeRange": [
+        122,
+        132
+      ],
+      "hubOrFocusRons": [
+        {
+          "day": 4,
+          "route": 125,
+          "city": "DAY",
+          "arrival": "19:43",
+          "arrivalMinute": 1183
+        },
+        {
+          "day": 8,
+          "route": 129,
+          "city": "SYR",
+          "arrival": "21:30",
+          "arrivalMinute": 1290
+        }
+      ],
+      "independentHubOrFocusRons": [
+        {
+          "day": 8,
+          "route": 129,
+          "city": "SYR",
+          "arrival": "21:30",
+          "arrivalMinute": 1290
+        }
+      ],
+      "maximumNonMxRunExcluding125And136": 10,
+      "sourceRouteOrder": [
+        167,
+        168,
+        147,
+        125,
+        126,
+        127,
+        143,
+        144,
+        176,
+        145,
+        146
+      ]
+    },
+    {
+      "line": "AF",
+      "fleet": "CRJ200",
+      "routes": 11,
+      "routeRange": [
+        133,
+        143
+      ],
+      "hubOrFocusRons": [
+        {
+          "day": 3,
+          "route": 135,
+          "city": "MCI",
+          "arrival": "20:35",
+          "arrivalMinute": 1235
+        },
+        {
+          "day": 4,
+          "route": 136,
+          "city": "DAY",
+          "arrival": "19:46",
+          "arrivalMinute": 1186
+        },
+        {
+          "day": 6,
+          "route": 138,
+          "city": "DAY",
+          "arrival": "20:25",
+          "arrivalMinute": 1225
+        }
+      ],
+      "independentHubOrFocusRons": [
+        {
+          "day": 3,
+          "route": 135,
+          "city": "MCI",
+          "arrival": "20:35",
+          "arrivalMinute": 1235
+        },
+        {
+          "day": 6,
+          "route": 138,
+          "city": "DAY",
+          "arrival": "20:25",
+          "arrivalMinute": 1225
+        }
+      ],
+      "maximumNonMxRunExcluding125And136": 7,
+      "sourceRouteOrder": [
+        129,
+        130,
+        131,
+        136,
+        137,
+        138,
+        139,
+        140,
+        141,
+        142,
+        128
+      ]
+    },
+    {
+      "line": "AI",
+      "fleet": "CRJ200",
+      "routes": 12,
+      "routeRange": [
+        144,
+        155
+      ],
+      "hubOrFocusRons": [
+        {
+          "day": 2,
+          "route": 145,
+          "city": "MCI",
+          "arrival": "20:03",
+          "arrivalMinute": 1203
+        },
+        {
+          "day": 11,
+          "route": 154,
+          "city": "MCI",
+          "arrival": "20:40",
+          "arrivalMinute": 1240
+        }
+      ],
+      "independentHubOrFocusRons": [
+        {
+          "day": 2,
+          "route": 145,
+          "city": "MCI",
+          "arrival": "20:03",
+          "arrivalMinute": 1203
+        },
+        {
+          "day": 11,
+          "route": 154,
+          "city": "MCI",
+          "arrival": "20:40",
+          "arrivalMinute": 1240
+        }
+      ],
+      "maximumNonMxRunExcluding125And136": 8,
+      "sourceRouteOrder": [
+        132,
+        133,
+        134,
+        135,
+        161,
+        162,
+        163,
+        170,
+        173,
+        174,
+        159,
+        160
+      ]
+    },
+    {
+      "line": "AM",
+      "fleet": "CRJ200",
+      "routes": 12,
+      "routeRange": [
+        156,
+        167
+      ],
+      "hubOrFocusRons": [
+        {
+          "day": 1,
+          "route": 156,
+          "city": "DAY",
+          "arrival": "20:28",
+          "arrivalMinute": 1228
+        },
+        {
+          "day": 11,
+          "route": 166,
+          "city": "SYR",
+          "arrival": "21:34",
+          "arrivalMinute": 1294
+        }
+      ],
+      "independentHubOrFocusRons": [
+        {
+          "day": 1,
+          "route": 156,
+          "city": "DAY",
+          "arrival": "20:28",
+          "arrivalMinute": 1228
+        },
+        {
+          "day": 11,
+          "route": 166,
+          "city": "SYR",
+          "arrival": "21:34",
+          "arrivalMinute": 1294
+        }
+      ],
+      "maximumNonMxRunExcluding125And136": 9,
+      "sourceRouteOrder": [
+        175,
+        149,
+        150,
+        111,
+        112,
+        122,
+        123,
+        124,
+        148,
+        169,
+        165,
+        166
+      ]
+    },
+    {
+      "line": "AN",
+      "fleet": "CRJ200",
+      "routes": 9,
+      "routeRange": [
+        168,
+        176
+      ],
+      "hubOrFocusRons": [
+        {
+          "day": 2,
+          "route": 169,
+          "city": "JAX",
+          "arrival": "21:19",
+          "arrivalMinute": 1279
+        }
+      ],
+      "independentHubOrFocusRons": [
+        {
+          "day": 2,
+          "route": 169,
+          "city": "JAX",
+          "arrival": "21:19",
+          "arrivalMinute": 1279
+        }
+      ],
+      "maximumNonMxRunExcluding125And136": 8,
+      "sourceRouteOrder": [
+        114,
+        115,
+        116,
+        117,
+        118,
+        119,
+        120,
+        121,
+        113
+      ]
+    }
+  ],
+  "retiredLine": "AR",
+  "routeMapping": [
+    {
+      "sourceRoute": 164,
+      "targetRoute": 111,
+      "line": "AD",
+      "day": 1,
+      "expectedLine": "AE",
+      "expectedDay": 14,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 151,
+      "targetRoute": 112,
+      "line": "AD",
+      "day": 2,
+      "expectedLine": "AE",
+      "expectedDay": 1,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 152,
+      "targetRoute": 113,
+      "line": "AD",
+      "day": 3,
+      "expectedLine": "AE",
+      "expectedDay": 2,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 153,
+      "targetRoute": 114,
+      "line": "AD",
+      "day": 4,
+      "expectedLine": "AE",
+      "expectedDay": 3,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 154,
+      "targetRoute": 115,
+      "line": "AD",
+      "day": 5,
+      "expectedLine": "AE",
+      "expectedDay": 4,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 155,
+      "targetRoute": 116,
+      "line": "AD",
+      "day": 6,
+      "expectedLine": "AE",
+      "expectedDay": 5,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 156,
+      "targetRoute": 117,
+      "line": "AD",
+      "day": 7,
+      "expectedLine": "AE",
+      "expectedDay": 6,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 157,
+      "targetRoute": 118,
+      "line": "AD",
+      "day": 8,
+      "expectedLine": "AE",
+      "expectedDay": 7,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 158,
+      "targetRoute": 119,
+      "line": "AD",
+      "day": 9,
+      "expectedLine": "AE",
+      "expectedDay": 8,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 172,
+      "targetRoute": 120,
+      "line": "AD",
+      "day": 10,
+      "expectedLine": "AM",
+      "expectedDay": 1,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 171,
+      "targetRoute": 121,
+      "line": "AD",
+      "day": 11,
+      "expectedLine": "AI",
+      "expectedDay": 2,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 167,
+      "targetRoute": 122,
+      "line": "AE",
+      "day": 1,
+      "expectedLine": "AF",
+      "expectedDay": 3,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 168,
+      "targetRoute": 123,
+      "line": "AE",
+      "day": 2,
+      "expectedLine": "AF",
+      "expectedDay": 4,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 147,
+      "targetRoute": 124,
+      "line": "AE",
+      "day": 3,
+      "expectedLine": "AD",
+      "expectedDay": 37,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 125,
+      "targetRoute": 125,
+      "line": "AE",
+      "day": 4,
+      "expectedLine": "AD",
+      "expectedDay": 15,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 126,
+      "targetRoute": 126,
+      "line": "AE",
+      "day": 5,
+      "expectedLine": "AD",
+      "expectedDay": 16,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 127,
+      "targetRoute": 127,
+      "line": "AE",
+      "day": 6,
+      "expectedLine": "AD",
+      "expectedDay": 17,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 143,
+      "targetRoute": 128,
+      "line": "AE",
+      "day": 7,
+      "expectedLine": "AD",
+      "expectedDay": 33,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 144,
+      "targetRoute": 129,
+      "line": "AE",
+      "day": 8,
+      "expectedLine": "AD",
+      "expectedDay": 34,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 176,
+      "targetRoute": 130,
+      "line": "AE",
+      "day": 9,
+      "expectedLine": "AR",
+      "expectedDay": 1,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 145,
+      "targetRoute": 131,
+      "line": "AE",
+      "day": 10,
+      "expectedLine": "AD",
+      "expectedDay": 35,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 146,
+      "targetRoute": 132,
+      "line": "AE",
+      "day": 11,
+      "expectedLine": "AD",
+      "expectedDay": 36,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 129,
+      "targetRoute": 133,
+      "line": "AF",
+      "day": 1,
+      "expectedLine": "AD",
+      "expectedDay": 19,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 130,
+      "targetRoute": 134,
+      "line": "AF",
+      "day": 2,
+      "expectedLine": "AD",
+      "expectedDay": 20,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 131,
+      "targetRoute": 135,
+      "line": "AF",
+      "day": 3,
+      "expectedLine": "AD",
+      "expectedDay": 21,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 136,
+      "targetRoute": 136,
+      "line": "AF",
+      "day": 4,
+      "expectedLine": "AD",
+      "expectedDay": 26,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 137,
+      "targetRoute": 137,
+      "line": "AF",
+      "day": 5,
+      "expectedLine": "AD",
+      "expectedDay": 27,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 138,
+      "targetRoute": 138,
+      "line": "AF",
+      "day": 6,
+      "expectedLine": "AD",
+      "expectedDay": 28,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 139,
+      "targetRoute": 139,
+      "line": "AF",
+      "day": 7,
+      "expectedLine": "AD",
+      "expectedDay": 29,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 140,
+      "targetRoute": 140,
+      "line": "AF",
+      "day": 8,
+      "expectedLine": "AD",
+      "expectedDay": 30,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 141,
+      "targetRoute": 141,
+      "line": "AF",
+      "day": 9,
+      "expectedLine": "AD",
+      "expectedDay": 31,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 142,
+      "targetRoute": 142,
+      "line": "AF",
+      "day": 10,
+      "expectedLine": "AD",
+      "expectedDay": 32,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 128,
+      "targetRoute": 143,
+      "line": "AF",
+      "day": 11,
+      "expectedLine": "AD",
+      "expectedDay": 18,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 132,
+      "targetRoute": 144,
+      "line": "AI",
+      "day": 1,
+      "expectedLine": "AD",
+      "expectedDay": 22,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 133,
+      "targetRoute": 145,
+      "line": "AI",
+      "day": 2,
+      "expectedLine": "AD",
+      "expectedDay": 23,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 134,
+      "targetRoute": 146,
+      "line": "AI",
+      "day": 3,
+      "expectedLine": "AD",
+      "expectedDay": 24,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 135,
+      "targetRoute": 147,
+      "line": "AI",
+      "day": 4,
+      "expectedLine": "AD",
+      "expectedDay": 25,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 161,
+      "targetRoute": 148,
+      "line": "AI",
+      "day": 5,
+      "expectedLine": "AE",
+      "expectedDay": 11,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 162,
+      "targetRoute": 149,
+      "line": "AI",
+      "day": 6,
+      "expectedLine": "AE",
+      "expectedDay": 12,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 163,
+      "targetRoute": 150,
+      "line": "AI",
+      "day": 7,
+      "expectedLine": "AE",
+      "expectedDay": 13,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 170,
+      "targetRoute": 151,
+      "line": "AI",
+      "day": 8,
+      "expectedLine": "AI",
+      "expectedDay": 1,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 173,
+      "targetRoute": 152,
+      "line": "AI",
+      "day": 9,
+      "expectedLine": "AM",
+      "expectedDay": 2,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 174,
+      "targetRoute": 153,
+      "line": "AI",
+      "day": 10,
+      "expectedLine": "AM",
+      "expectedDay": 3,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 159,
+      "targetRoute": 154,
+      "line": "AI",
+      "day": 11,
+      "expectedLine": "AE",
+      "expectedDay": 9,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 160,
+      "targetRoute": 155,
+      "line": "AI",
+      "day": 12,
+      "expectedLine": "AE",
+      "expectedDay": 10,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 175,
+      "targetRoute": 156,
+      "line": "AM",
+      "day": 1,
+      "expectedLine": "AN",
+      "expectedDay": 1,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 149,
+      "targetRoute": 157,
+      "line": "AM",
+      "day": 2,
+      "expectedLine": "AD",
+      "expectedDay": 39,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 150,
+      "targetRoute": 158,
+      "line": "AM",
+      "day": 3,
+      "expectedLine": "AD",
+      "expectedDay": 40,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 111,
+      "targetRoute": 159,
+      "line": "AM",
+      "day": 4,
+      "expectedLine": "AD",
+      "expectedDay": 1,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 112,
+      "targetRoute": 160,
+      "line": "AM",
+      "day": 5,
+      "expectedLine": "AD",
+      "expectedDay": 2,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 122,
+      "targetRoute": 161,
+      "line": "AM",
+      "day": 6,
+      "expectedLine": "AD",
+      "expectedDay": 12,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 123,
+      "targetRoute": 162,
+      "line": "AM",
+      "day": 7,
+      "expectedLine": "AD",
+      "expectedDay": 13,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 124,
+      "targetRoute": 163,
+      "line": "AM",
+      "day": 8,
+      "expectedLine": "AD",
+      "expectedDay": 14,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 148,
+      "targetRoute": 164,
+      "line": "AM",
+      "day": 9,
+      "expectedLine": "AD",
+      "expectedDay": 38,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 169,
+      "targetRoute": 165,
+      "line": "AM",
+      "day": 10,
+      "expectedLine": "AF",
+      "expectedDay": 5,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 165,
+      "targetRoute": 166,
+      "line": "AM",
+      "day": 11,
+      "expectedLine": "AF",
+      "expectedDay": 1,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 166,
+      "targetRoute": 167,
+      "line": "AM",
+      "day": 12,
+      "expectedLine": "AF",
+      "expectedDay": 2,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 114,
+      "targetRoute": 168,
+      "line": "AN",
+      "day": 1,
+      "expectedLine": "AD",
+      "expectedDay": 4,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 115,
+      "targetRoute": 169,
+      "line": "AN",
+      "day": 2,
+      "expectedLine": "AD",
+      "expectedDay": 5,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 116,
+      "targetRoute": 170,
+      "line": "AN",
+      "day": 3,
+      "expectedLine": "AD",
+      "expectedDay": 6,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 117,
+      "targetRoute": 171,
+      "line": "AN",
+      "day": 4,
+      "expectedLine": "AD",
+      "expectedDay": 7,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 118,
+      "targetRoute": 172,
+      "line": "AN",
+      "day": 5,
+      "expectedLine": "AD",
+      "expectedDay": 8,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 119,
+      "targetRoute": 173,
+      "line": "AN",
+      "day": 6,
+      "expectedLine": "AD",
+      "expectedDay": 9,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 120,
+      "targetRoute": 174,
+      "line": "AN",
+      "day": 7,
+      "expectedLine": "AD",
+      "expectedDay": 10,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 121,
+      "targetRoute": 175,
+      "line": "AN",
+      "day": 8,
+      "expectedLine": "AD",
+      "expectedDay": 11,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 113,
+      "targetRoute": 176,
+      "line": "AN",
+      "day": 9,
+      "expectedLine": "AD",
+      "expectedDay": 3,
+      "expectedFleet": "CRJ200"
+    }
+  ],
+  "changedDaytimeHandoffs": [
+    {
+      "city": "DAY",
+      "inboundFlight": 1802,
+      "arrival": "15:32",
+      "outboundFlight": 1809,
+      "departure": "16:15",
+      "oldOutboundFlight": 2071,
+      "newRoute": 164,
+      "turnMinutes": 43
+    },
+    {
+      "city": "DAY",
+      "inboundFlight": 1508,
+      "arrival": "15:33",
+      "outboundFlight": 2071,
+      "departure": "17:30",
+      "oldOutboundFlight": 1809,
+      "newRoute": 156,
+      "turnMinutes": 117
+    },
+    {
+      "city": "DAY",
+      "inboundFlight": 1571,
+      "arrival": "17:41",
+      "outboundFlight": 1695,
+      "departure": "20:25",
+      "oldOutboundFlight": 1862,
+      "newRoute": 123,
+      "turnMinutes": 164
+    },
+    {
+      "city": "DAY",
+      "inboundFlight": 1820,
+      "arrival": "19:43",
+      "outboundFlight": 1796,
+      "departure": "20:25",
+      "oldOutboundFlight": 1695,
+      "newRoute": 132,
+      "turnMinutes": 42
+    },
+    {
+      "city": "DAY",
+      "inboundFlight": 1806,
+      "arrival": "19:43",
+      "outboundFlight": 1862,
+      "departure": "20:25",
+      "oldOutboundFlight": 1900,
+      "newRoute": 164,
+      "turnMinutes": 42
+    },
+    {
+      "city": "DAY",
+      "inboundFlight": 1813,
+      "arrival": "19:45",
+      "outboundFlight": 1900,
+      "departure": "20:25",
+      "oldOutboundFlight": 1796,
+      "newRoute": 167,
+      "turnMinutes": 40
+    },
+    {
+      "city": "JAX",
+      "inboundFlight": 1847,
+      "arrival": "05:47",
+      "outboundFlight": 1515,
+      "departure": "07:30",
+      "oldOutboundFlight": 1653,
+      "newRoute": 127,
+      "turnMinutes": 103
+    },
+    {
+      "city": "JAX",
+      "inboundFlight": 1555,
+      "arrival": "06:49",
+      "outboundFlight": 1653,
+      "departure": "07:30",
+      "oldOutboundFlight": 1515,
+      "newRoute": 142,
+      "turnMinutes": 41
+    },
+    {
+      "city": "JAX",
+      "inboundFlight": 1721,
+      "arrival": "11:08",
+      "outboundFlight": 1535,
+      "departure": "11:50",
+      "oldOutboundFlight": 1625,
+      "newRoute": 151,
+      "turnMinutes": 42
+    },
+    {
+      "city": "JAX",
+      "inboundFlight": 1916,
+      "arrival": "11:09",
+      "outboundFlight": 1625,
+      "departure": "11:50",
+      "oldOutboundFlight": 1535,
+      "newRoute": 120,
+      "turnMinutes": 41
+    },
+    {
+      "city": "JAX",
+      "inboundFlight": 1606,
+      "arrival": "17:40",
+      "outboundFlight": 1726,
+      "departure": "19:25",
+      "oldOutboundFlight": 1517,
+      "newRoute": 150,
+      "turnMinutes": 105
+    },
+    {
+      "city": "JAX",
+      "inboundFlight": 1562,
+      "arrival": "18:44",
+      "outboundFlight": 1517,
+      "departure": "19:25",
+      "oldOutboundFlight": 1726,
+      "newRoute": 121,
+      "turnMinutes": 41
+    },
+    {
+      "city": "MCI",
+      "inboundFlight": 1650,
+      "arrival": "06:33",
+      "outboundFlight": 1529,
+      "departure": "07:15",
+      "oldOutboundFlight": 1831,
+      "newRoute": 153,
+      "turnMinutes": 42
+    },
+    {
+      "city": "MCI",
+      "inboundFlight": 1637,
+      "arrival": "06:34",
+      "outboundFlight": 1831,
+      "departure": "07:15",
+      "oldOutboundFlight": 1529,
+      "newRoute": 119,
+      "turnMinutes": 41
+    },
+    {
+      "city": "MCI",
+      "inboundFlight": 1678,
+      "arrival": "06:36",
+      "outboundFlight": 1549,
+      "departure": "08:55",
+      "oldOutboundFlight": 1587,
+      "newRoute": 147,
+      "turnMinutes": 139
+    },
+    {
+      "city": "MCI",
+      "inboundFlight": 1551,
+      "arrival": "08:14",
+      "outboundFlight": 1587,
+      "departure": "08:55",
+      "oldOutboundFlight": 1549,
+      "newRoute": 135,
+      "turnMinutes": 41
+    },
+    {
+      "city": "MCI",
+      "inboundFlight": 1679,
+      "arrival": "11:36",
+      "outboundFlight": 1502,
+      "departure": "15:35",
+      "oldOutboundFlight": 1531,
+      "newRoute": 155,
+      "turnMinutes": 239
+    },
+    {
+      "city": "MCI",
+      "inboundFlight": 1552,
+      "arrival": "14:54",
+      "outboundFlight": 1531,
+      "departure": "15:35",
+      "oldOutboundFlight": 1502,
+      "newRoute": 147,
+      "turnMinutes": 41
+    },
+    {
+      "city": "SYR",
+      "inboundFlight": 1818,
+      "arrival": "10:36",
+      "outboundFlight": 2111,
+      "departure": "11:18",
+      "oldOutboundFlight": 1852,
+      "newRoute": 163,
+      "turnMinutes": 42
+    },
+    {
+      "city": "SYR",
+      "inboundFlight": 1607,
+      "arrival": "10:38",
+      "outboundFlight": 1852,
+      "departure": "11:20",
+      "oldOutboundFlight": 2111,
+      "newRoute": 124,
+      "turnMinutes": 42
+    },
+    {
+      "city": "SYR",
+      "inboundFlight": 1706,
+      "arrival": "13:24",
+      "outboundFlight": 2037,
+      "departure": "16:30",
+      "oldOutboundFlight": 1700,
+      "newRoute": 129,
+      "turnMinutes": 186
+    },
+    {
+      "city": "SYR",
+      "inboundFlight": 1888,
+      "arrival": "13:24",
+      "outboundFlight": 1700,
+      "departure": "14:05",
+      "oldOutboundFlight": 2037,
+      "newRoute": 130,
+      "turnMinutes": 41
+    },
+    {
+      "city": "SYR",
+      "inboundFlight": 1829,
+      "arrival": "16:07",
+      "outboundFlight": 1701,
+      "departure": "19:00",
+      "oldOutboundFlight": 1907,
+      "newRoute": 160,
+      "turnMinutes": 173
+    },
+    {
+      "city": "SYR",
+      "inboundFlight": 1704,
+      "arrival": "16:08",
+      "outboundFlight": 1907,
+      "departure": "16:50",
+      "oldOutboundFlight": 1701,
+      "newRoute": 175,
+      "turnMinutes": 42
+    }
+  ],
+  "preservedOvernightHandoffs": 181,
+  "reassignedLegs": 80,
+  "futureDayExtensions": [
+    {
+      "terminatorRoute": 125,
+      "line": "AE",
+      "day": 4,
+      "terminatorFlight": 1850,
+      "dayArrival": "19:43",
+      "nextRoute": 126,
+      "nextDay": 5,
+      "nextFlight": 1503,
+      "nextDeparture": "05:50",
+      "returnToDayDeadlineMinute": 310,
+      "returnToDayDeadline": "05:10",
+      "extensionsImplemented": false
+    },
+    {
+      "terminatorRoute": 136,
+      "line": "AF",
+      "day": 4,
+      "terminatorFlight": 1572,
+      "dayArrival": "19:46",
+      "nextRoute": 137,
+      "nextDay": 5,
+      "nextFlight": 1873,
+      "nextDeparture": "05:50",
+      "returnToDayDeadlineMinute": 310,
+      "returnToDayDeadline": "05:10",
+      "extensionsImplemented": false
+    }
+  ],
+  "summary": {
+    "flights": 1170,
+    "routes": 181,
+    "lines": 19,
+    "selectedAircraftDays": 66,
+    "changedFlightTimes": 0,
+    "newFlights": 0,
+    "effectiveOperatingErrors": 0,
+    "operatingWarnings": 172,
+    "standClaims": 16,
+    "standMinutes": 3717
+  },
+  "checks": {
+    "structure": "pass",
+    "operatingHardStops": "pass",
+    "overnightTurns": "pass",
+    "planning": "pass",
+    "gatesAndStands": "pass",
+    "flightAndClockPreservation": "pass",
+    "independentMaintenanceWithout125And136": "pass",
+    "newRollingRonGrace": false,
+    "section26": "unchanged passenger schedule; existing spacing findings unchanged"
+  },
+  "publication": "Reserved to user decision; app default remains released v1.2.4"
+}

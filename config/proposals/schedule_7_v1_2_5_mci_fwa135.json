@@ -1,0 +1,86 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "v1.2.5-mci-FWA135",
+  "baseSchedule": {
+    "scheduleId": "schedule_7_v1_2_5_draft",
+    "canonical": "data/schedules/schedule_7_v1_2_5_draft/canonical_schedule.json",
+    "sha256": "ce182870262e895d45f725f9406b919d61cb24f97bab83ee22902dd1710b06f5"
+  },
+  "schedule": {
+    "id": "schedule_7_v1_2_5_mci_FWA135",
+    "version": "1.2.5-analysis",
+    "label": "Unpublished v1.2.5 MCI B1 proposal FWA135",
+    "status": "draft"
+  },
+  "approval": {
+    "status": "reviewed proposal only; not implemented",
+    "publication": "Reserved to user decision",
+    "scope": "MCI overnight feeders; FWA135"
+  },
+  "hubBanksToAdd": [],
+  "hubBankCountOverrides": {},
+  "insertLegs": [
+    {
+      "id": "V125-MCI-FWA135-R135-1-MCI-FWA",
+      "origin": "MCI",
+      "destination": "FWA",
+      "departureMinute": 1275,
+      "arrivalMinute": 1434,
+      "route": 135
+    },
+    {
+      "id": "V125-MCI-FWA135-R136-1-FWA-MCI",
+      "origin": "FWA",
+      "destination": "MCI",
+      "departureMinute": 270,
+      "arrivalMinute": 309,
+      "route": 136
+    }
+  ],
+  "retimeLegs": [
+    {
+      "legId": "CID-MCI-CRJ200-02-IN",
+      "expectedDepartureMinute": 335,
+      "expectedArrivalMinute": 396,
+      "departureMinute": 349,
+      "arrivalMinute": 410
+    },
+    {
+      "legId": "V114-R704-MCI-AUS",
+      "expectedDepartureMinute": 285,
+      "expectedArrivalMinute": 392,
+      "departureMinute": 290,
+      "arrivalMinute": 397
+    },
+    {
+      "legId": "AUS-MCI-MAX9-01-OUT",
+      "expectedDepartureMinute": 435,
+      "expectedArrivalMinute": 542,
+      "departureMinute": 437,
+      "arrivalMinute": 544
+    }
+  ],
+  "bankAssignmentsToAdd": [
+    {
+      "legId": "V125-MCI-FWA135-R135-1-MCI-FWA",
+      "operation": "departure",
+      "bankId": "MCI-M11"
+    },
+    {
+      "legId": "V125-MCI-FWA135-R136-1-FWA-MCI",
+      "operation": "arrival",
+      "bankId": "MCI-B1"
+    }
+  ],
+  "bankAssignmentReplacements": [],
+  "operatingOverrides": [],
+  "hubBankChanges": [
+    {
+      "bankId": "MCI-B1",
+      "expectedStartMinute": 285,
+      "expectedEndMinute": 345,
+      "startMinute": 290,
+      "endMinute": 350
+    }
+  ]
+}

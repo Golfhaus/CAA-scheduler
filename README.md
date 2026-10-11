@@ -4,18 +4,19 @@ CAA Scheduler is the migration target for Coastal American Airways schedule cons
 
 ## Latest published release
 
-The app defaults to **Schedule 7 v1.2.4**, published October 10, 2026, with
-**1,170 flights across 181 routes and 20 routing lines**. This release supersedes
-v1.2.2 and v1.2.3. Release validation reports **zero effective operating errors**
-and **49 passing checks** in the latest-only regression suite.
+The app defaults to **Schedule 7 v1.2.5**, published October 11, 2026, with
+**1,190 flights across 181 routes and 19 routing lines**. This release adds
+20 flights, aligns the CRJ200 rotations, and improves DAY/MCI morning feed
+and four long daytime holds. Validation reports **zero effective operating
+errors** and **52 passing checks** in the latest-only regression suite.
 
-See the [v1.2.4 release notes](docs/schedule_7_v1_2_4_release.md) for approved
+See the [v1.2.5 release notes](docs/schedule_7_v1_2_5_release.md) for approved
 flying, timing and line changes, validation, and reproduction commands. The
-[released v1.2.4 canonical schedule](data/schedules/schedule_7_v1_2_4/canonical_schedule.json)
+[released v1.2.5 canonical schedule](data/schedules/schedule_7_v1_2_5/canonical_schedule.json)
 is the authoritative starting point for future schedule work; its pinned
-[release configuration](config/optimizations/schedule_7_v1_2_4.json) reproduces
-the published package. Earlier releases and draft snapshots remain available
-for historical reference.
+[release configuration](config/optimizations/schedule_7_v1_2_5_release.json)
+reproduces the published package. Earlier releases and draft snapshots remain
+available for historical reference; routine regression targets only v1.2.5.
 
 ## Milestone 0.7 — planning foundation
 

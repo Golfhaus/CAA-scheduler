@@ -1,0 +1,62 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "schedule-7-v1.2.5-long-holds-analysis",
+  "baseSchedule": {
+    "scheduleId": "schedule_7_v1_2_5_draft",
+    "canonical": "data/schedules/schedule_7_v1_2_5_draft/canonical_schedule.json",
+    "sha256": "b4ea43f7300048381a095a8a662e71c7bcd4032bbd0fb5ceee44ed72d69ef873"
+  },
+  "schedule": {
+    "id": "schedule_7_v1_2_5_holds_analysis",
+    "version": "1.2.5-analysis",
+    "label": "Unpublished v1.2.5 long-hold proposal",
+    "status": "draft"
+  },
+  "approval": {
+    "status": "analysis only; not added to draft",
+    "publication": "Reserved to user decision"
+  },
+  "hubBanksToAdd": [],
+  "hubBankCountOverrides": {},
+  "insertLegs": [
+    {
+      "id": "V125-HOLDS-R318-1-SYR-MHT",
+      "origin": "SYR",
+      "destination": "MHT",
+      "departureMinute": 485,
+      "arrivalMinute": 545,
+      "route": 318
+    },
+    {
+      "id": "V125-HOLDS-R318-2-MHT-SYR",
+      "origin": "MHT",
+      "destination": "SYR",
+      "departureMinute": 585,
+      "arrivalMinute": 645,
+      "route": 318
+    }
+  ],
+  "retimeLegs": [
+    {
+      "legId": "SRQ-SYR-CRJ700-05-IN",
+      "expectedDepartureMinute": 680,
+      "expectedArrivalMinute": 856,
+      "departureMinute": 685,
+      "arrivalMinute": 861
+    }
+  ],
+  "bankAssignmentsToAdd": [
+    {
+      "legId": "V125-HOLDS-R318-1-SYR-MHT",
+      "operation": "departure",
+      "bankId": "SYR-B2"
+    },
+    {
+      "legId": "V125-HOLDS-R318-2-MHT-SYR",
+      "operation": "arrival",
+      "bankId": "SYR-B3"
+    }
+  ],
+  "bankAssignmentReplacements": [],
+  "operatingOverrides": []
+}

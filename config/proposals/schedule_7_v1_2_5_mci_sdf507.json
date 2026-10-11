@@ -1,0 +1,63 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "v1.2.5-mci-SDF507",
+  "baseSchedule": {
+    "scheduleId": "schedule_7_v1_2_5_draft",
+    "canonical": "data/schedules/schedule_7_v1_2_5_draft/canonical_schedule.json",
+    "sha256": "ce182870262e895d45f725f9406b919d61cb24f97bab83ee22902dd1710b06f5"
+  },
+  "schedule": {
+    "id": "schedule_7_v1_2_5_mci_SDF507",
+    "version": "1.2.5-analysis",
+    "label": "Unpublished v1.2.5 MCI B1 proposal SDF507",
+    "status": "draft"
+  },
+  "approval": {
+    "status": "reviewed proposal only; not implemented",
+    "publication": "Reserved to user decision",
+    "scope": "MCI overnight feeders; SDF507"
+  },
+  "hubBanksToAdd": [],
+  "hubBankCountOverrides": {},
+  "insertLegs": [
+    {
+      "id": "V125-MCI-SDF507-R507-1-MCI-SDF",
+      "origin": "MCI",
+      "destination": "SDF",
+      "departureMinute": 1270,
+      "arrivalMinute": 1420,
+      "route": 507
+    },
+    {
+      "id": "V125-MCI-SDF507-R508-1-SDF-MCI",
+      "origin": "SDF",
+      "destination": "MCI",
+      "departureMinute": 270,
+      "arrivalMinute": 300,
+      "route": 508
+    }
+  ],
+  "retimeLegs": [
+    {
+      "legId": "MCI-PGD-CRJ900-01-OUT",
+      "expectedDepartureMinute": 325,
+      "expectedArrivalMinute": 550,
+      "departureMinute": 340,
+      "arrivalMinute": 565
+    }
+  ],
+  "bankAssignmentsToAdd": [
+    {
+      "legId": "V125-MCI-SDF507-R507-1-MCI-SDF",
+      "operation": "departure",
+      "bankId": "MCI-M11"
+    },
+    {
+      "legId": "V125-MCI-SDF507-R508-1-SDF-MCI",
+      "operation": "arrival",
+      "bankId": "MCI-B1"
+    }
+  ],
+  "bankAssignmentReplacements": [],
+  "operatingOverrides": []
+}

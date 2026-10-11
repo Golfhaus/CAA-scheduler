@@ -1,0 +1,84 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "v1.2.5-mci-SBN145_MX153",
+  "baseSchedule": {
+    "scheduleId": "schedule_7_v1_2_5_draft",
+    "canonical": "data/schedules/schedule_7_v1_2_5_draft/canonical_schedule.json",
+    "sha256": "ce182870262e895d45f725f9406b919d61cb24f97bab83ee22902dd1710b06f5"
+  },
+  "schedule": {
+    "id": "schedule_7_v1_2_5_mci_SBN145_MX153",
+    "version": "1.2.5-analysis",
+    "label": "Unpublished v1.2.5 MCI B1 proposal SBN145_MX153",
+    "status": "draft"
+  },
+  "approval": {
+    "status": "reviewed proposal only; not implemented",
+    "publication": "Reserved to user decision",
+    "scope": "MCI overnight feeders; SBN145_MX153"
+  },
+  "hubBanksToAdd": [],
+  "hubBankCountOverrides": {},
+  "insertLegs": [
+    {
+      "id": "V125-MCI-SBN145_MX153-R145-1-MCI-SBN",
+      "origin": "MCI",
+      "destination": "SBN",
+      "departureMinute": 1245,
+      "arrivalMinute": 1398,
+      "route": 145
+    },
+    {
+      "id": "V125-MCI-SBN145_MX153-R146-1-SBN-MCI",
+      "origin": "SBN",
+      "destination": "MCI",
+      "departureMinute": 270,
+      "arrivalMinute": 303,
+      "route": 146
+    }
+  ],
+  "retimeLegs": [
+    {
+      "legId": "ICT-MCI-CRJ200-02-IN",
+      "expectedDepartureMinute": 335,
+      "expectedArrivalMinute": 388,
+      "departureMinute": 343,
+      "arrivalMinute": 396
+    },
+    {
+      "legId": "DSM-MCI-CRJ200-01-IN",
+      "expectedDepartureMinute": 1195,
+      "expectedArrivalMinute": 1245,
+      "departureMinute": 335,
+      "arrivalMinute": 385
+    }
+  ],
+  "bankAssignmentsToAdd": [
+    {
+      "legId": "V125-MCI-SBN145_MX153-R145-1-MCI-SBN",
+      "operation": "departure",
+      "bankId": "MCI-M11"
+    },
+    {
+      "legId": "V125-MCI-SBN145_MX153-R146-1-SBN-MCI",
+      "operation": "arrival",
+      "bankId": "MCI-B1"
+    }
+  ],
+  "bankAssignmentReplacements": [
+    {
+      "legId": "DSM-MCI-CRJ200-01-IN",
+      "operation": "departure",
+      "bankId": "MCI-B1"
+    }
+  ],
+  "operatingOverrides": [],
+  "legReassignments": [
+    {
+      "legId": "DSM-MCI-CRJ200-01-IN",
+      "expectedRoute": 153,
+      "expectedSequenceWithinRoute": 8,
+      "targetRoute": 154
+    }
+  ]
+}

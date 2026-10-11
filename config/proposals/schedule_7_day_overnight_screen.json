@@ -1,0 +1,1113 @@
+{
+  "base": "aligned draft",
+  "destinations": [
+    {
+      "city": "CAK",
+      "name": "Akron-Canton OH",
+      "blockMinutes": 50,
+      "dayReturn": 320,
+      "originatorDelay": 10,
+      "frequencyBefore": 2,
+      "localOdOut": 0.3,
+      "localOdIn": 0.4,
+      "existingToDayDepartures": [
+        "18:55",
+        "10:42"
+      ],
+      "timings": [
+        {
+          "route": 125,
+          "outbound": {
+            "id": "NEW",
+            "origin": "DAY",
+            "destination": "CAK",
+            "departureMinute": 1295,
+            "arrivalMinute": 1345
+          },
+          "inbound": {
+            "id": "NEW",
+            "origin": "CAK",
+            "destination": "DAY",
+            "departureMinute": 270,
+            "arrivalMinute": 320
+          },
+          "score": 721.5847725450753,
+          "scores": [
+            432.18697418225236,
+            289.397798362823
+          ]
+        },
+        {
+          "route": 125,
+          "outbound": {
+            "id": "NEW",
+            "origin": "DAY",
+            "destination": "CAK",
+            "departureMinute": 1265,
+            "arrivalMinute": 1315
+          },
+          "inbound": {
+            "id": "NEW",
+            "origin": "CAK",
+            "destination": "DAY",
+            "departureMinute": 270,
+            "arrivalMinute": 320
+          },
+          "score": 706.4176905530559,
+          "scores": [
+            417.0198921902329,
+            289.397798362823
+          ]
+        },
+        {
+          "route": 125,
+          "outbound": {
+            "id": "NEW",
+            "origin": "DAY",
+            "destination": "CAK",
+            "departureMinute": 1270,
+            "arrivalMinute": 1320
+          },
+          "inbound": {
+            "id": "NEW",
+            "origin": "CAK",
+            "destination": "DAY",
+            "departureMinute": 270,
+            "arrivalMinute": 320
+          },
+          "score": 700.6137401147723,
+          "scores": [
+            411.21594175194934,
+            289.397798362823
+          ]
+        },
+        {
+          "route": 136,
+          "outbound": {
+            "id": "NEW",
+            "origin": "DAY",
+            "destination": "CAK",
+            "departureMinute": 1295,
+            "arrivalMinute": 1345
+          },
+          "inbound": {
+            "id": "NEW",
+            "origin": "CAK",
+            "destination": "DAY",
+            "departureMinute": 270,
+            "arrivalMinute": 320
+          },
+          "score": 721.5847725450753,
+          "scores": [
+            432.18697418225236,
+            289.397798362823
+          ]
+        },
+        {
+          "route": 136,
+          "outbound": {
+            "id": "NEW",
+            "origin": "DAY",
+            "destination": "CAK",
+            "departureMinute": 1265,
+            "arrivalMinute": 1315
+          },
+          "inbound": {
+            "id": "NEW",
+            "origin": "CAK",
+            "destination": "DAY",
+            "departureMinute": 270,
+            "arrivalMinute": 320
+          },
+          "score": 706.4176905530559,
+          "scores": [
+            417.0198921902329,
+            289.397798362823
+          ]
+        },
+        {
+          "route": 136,
+          "outbound": {
+            "id": "NEW",
+            "origin": "DAY",
+            "destination": "CAK",
+            "departureMinute": 1270,
+            "arrivalMinute": 1320
+          },
+          "inbound": {
+            "id": "NEW",
+            "origin": "CAK",
+            "destination": "DAY",
+            "departureMinute": 270,
+            "arrivalMinute": 320
+          },
+          "score": 700.6137401147723,
+          "scores": [
+            411.21594175194934,
+            289.397798362823
+          ]
+        }
+      ]
+    },
+    {
+      "city": "CMH",
+      "name": "Columbus OH",
+      "blockMinutes": 38,
+      "dayReturn": 308,
+      "originatorDelay": 0,
+      "frequencyBefore": 2,
+      "localOdOut": 1.4,
+      "localOdIn": 1.4,
+      "existingToDayDepartures": [
+        "19:05",
+        "11:29"
+      ],
+      "timings": [
+        {
+          "route": 125,
+          "outbound": {
+            "id": "NEW",
+            "origin": "DAY",
+            "destination": "CMH",
+            "departureMinute": 1295,
+            "arrivalMinute": 1333
+          },
+          "inbound": {
+            "id": "NEW",
+            "origin": "CMH",
+            "destination": "DAY",
+            "departureMinute": 270,
+            "arrivalMinute": 308
+          },
+          "score": 610.5047466598351,
+          "scores": [
+            327.4895083651826,
+            283.0152382946525
+          ]
+        },
+        {
+          "route": 125,
+          "outbound": {
+            "id": "NEW",
+            "origin": "DAY",
+            "destination": "CMH",
+            "departureMinute": 1265,
+            "arrivalMinute": 1303
+          },
+          "inbound": {
+            "id": "NEW",
+            "origin": "CMH",
+            "destination": "DAY",
+            "departureMinute": 270,
+            "arrivalMinute": 308
+          },
+          "score": 606.8439556322134,
+          "scores": [
+            323.8287173375609,
+            283.0152382946525
+          ]
+        },
+        {
+          "route": 125,
+          "outbound": {
+            "id": "NEW",
+            "origin": "DAY",
+            "destination": "CMH",
+            "departureMinute": 1270,
+            "arrivalMinute": 1308
+          },
+          "inbound": {
+            "id": "NEW",
+            "origin": "CMH",
+            "destination": "DAY",
+            "departureMinute": 270,
+            "arrivalMinute": 308
+          },
+          "score": 600.1582521231499,
+          "scores": [
+            317.14301382849743,
+            283.0152382946525
+          ]
+        },
+        {
+          "route": 136,
+          "outbound": {
+            "id": "NEW",
+            "origin": "DAY",
+            "destination": "CMH",
+            "departureMinute": 1295,
+            "arrivalMinute": 1333
+          },
+          "inbound": {
+            "id": "NEW",
+            "origin": "CMH",
+            "destination": "DAY",
+            "departureMinute": 270,
+            "arrivalMinute": 308
+          },
+          "score": 610.5047466598351,
+          "scores": [
+            327.4895083651826,
+            283.0152382946525
+          ]
+        },
+        {
+          "route": 136,
+          "outbound": {
+            "id": "NEW",
+            "origin": "DAY",
+            "destination": "CMH",
+            "departureMinute": 1265,
+            "arrivalMinute": 1303
+          },
+          "inbound": {
+            "id": "NEW",
+            "origin": "CMH",
+            "destination": "DAY",
+            "departureMinute": 270,
+            "arrivalMinute": 308
+          },
+          "score": 606.8439556322134,
+          "scores": [
+            323.8287173375609,
+            283.0152382946525
+          ]
+        },
+        {
+          "route": 136,
+          "outbound": {
+            "id": "NEW",
+            "origin": "DAY",
+            "destination": "CMH",
+            "departureMinute": 1270,
+            "arrivalMinute": 1308
+          },
+          "inbound": {
+            "id": "NEW",
+            "origin": "CMH",
+            "destination": "DAY",
+            "departureMinute": 270,
+            "arrivalMinute": 308
+          },
+          "score": 600.1582521231499,
+          "scores": [
+            317.14301382849743,
+            283.0152382946525
+          ]
+        }
+      ]
+    },
+    {
+      "city": "CRW",
+      "name": "Charleston WV",
+      "blockMinutes": 52,
+      "dayReturn": 322,
+      "originatorDelay": 12,
+      "frequencyBefore": 2,
+      "localOdOut": 0.0,
+      "localOdIn": 0.0,
+      "existingToDayDepartures": [
+        "06:20",
+        "14:45"
+      ],
+      "timings": [],
+      "rejection": "No evening departure within current DAY banks satisfies section 2.6 spacing"
+    },
+    {
+      "city": "FWA",
+      "name": "Fort Wayne IN",
+      "blockMinutes": 40,
+      "dayReturn": 310,
+      "originatorDelay": 0,
+      "frequencyBefore": 4,
+      "localOdOut": 0.1,
+      "localOdIn": 0.0,
+      "existingToDayDepartures": [
+        "04:30",
+        "10:45",
+        "16:50",
+        "20:25"
+      ],
+      "timings": [],
+      "rejection": "04:30 return duplicates an existing originator within the 30-minute hard spacing floor"
+    },
+    {
+      "city": "GRR",
+      "name": "Grand Rapids MI",
+      "blockMinutes": 58,
+      "dayReturn": 328,
+      "originatorDelay": 18,
+      "frequencyBefore": 4,
+      "localOdOut": 0.4,
+      "localOdIn": 0.4,
+      "existingToDayDepartures": [
+        "06:15",
+        "10:25",
+        "14:35",
+        "18:45"
+      ],
+      "timings": [
+        {
+          "route": 125,
+          "outbound": {
+            "id": "NEW",
+            "origin": "DAY",
+            "destination": "GRR",
+            "departureMinute": 1295,
+            "arrivalMinute": 1353
+          },
+          "inbound": {
+            "id": "NEW",
+            "origin": "GRR",
+            "destination": "DAY",
+            "departureMinute": 270,
+            "arrivalMinute": 328
+          },
+          "score": 327.6163687385382,
+          "scores": [
+            204.56601281334179,
+            123.0503559251964
+          ]
+        },
+        {
+          "route": 125,
+          "outbound": {
+            "id": "NEW",
+            "origin": "DAY",
+            "destination": "GRR",
+            "departureMinute": 1265,
+            "arrivalMinute": 1323
+          },
+          "inbound": {
+            "id": "NEW",
+            "origin": "GRR",
+            "destination": "DAY",
+            "departureMinute": 270,
+            "arrivalMinute": 328
+          },
+          "score": 323.55134569757803,
+          "scores": [
+            200.50098977238164,
+            123.0503559251964
+          ]
+        },
+        {
+          "route": 125,
+          "outbound": {
+            "id": "NEW",
+            "origin": "DAY",
+            "destination": "GRR",
+            "departureMinute": 1270,
+            "arrivalMinute": 1328
+          },
+          "inbound": {
+            "id": "NEW",
+            "origin": "GRR",
+            "destination": "DAY",
+            "departureMinute": 270,
+            "arrivalMinute": 328
+          },
+          "score": 320.79120786049543,
+          "scores": [
+            197.74085193529902,
+            123.0503559251964
+          ]
+        },
+        {
+          "route": 136,
+          "outbound": {
+            "id": "NEW",
+            "origin": "DAY",
+            "destination": "GRR",
+            "departureMinute": 1295,
+            "arrivalMinute": 1353
+          },
+          "inbound": {
+            "id": "NEW",
+            "origin": "GRR",
+            "destination": "DAY",
+            "departureMinute": 270,
+            "arrivalMinute": 328
+          },
+          "score": 327.6163687385382,
+          "scores": [
+            204.56601281334179,
+            123.0503559251964
+          ]
+        },
+        {
+          "route": 136,
+          "outbound": {
+            "id": "NEW",
+            "origin": "DAY",
+            "destination": "GRR",
+            "departureMinute": 1265,
+            "arrivalMinute": 1323
+          },
+          "inbound": {
+            "id": "NEW",
+            "origin": "GRR",
+            "destination": "DAY",
+            "departureMinute": 270,
+            "arrivalMinute": 328
+          },
+          "score": 323.55134569757803,
+          "scores": [
+            200.50098977238164,
+            123.0503559251964
+          ]
+        },
+        {
+          "route": 136,
+          "outbound": {
+            "id": "NEW",
+            "origin": "DAY",
+            "destination": "GRR",
+            "departureMinute": 1270,
+            "arrivalMinute": 1328
+          },
+          "inbound": {
+            "id": "NEW",
+            "origin": "GRR",
+            "destination": "DAY",
+            "departureMinute": 270,
+            "arrivalMinute": 328
+          },
+          "score": 320.79120786049543,
+          "scores": [
+            197.74085193529902,
+            123.0503559251964
+          ]
+        }
+      ]
+    },
+    {
+      "city": "IND",
+      "name": "Indianapolis IN",
+      "blockMinutes": 43,
+      "dayReturn": 313,
+      "originatorDelay": 3,
+      "frequencyBefore": 2,
+      "localOdOut": 0.3,
+      "localOdIn": 0.3,
+      "existingToDayDepartures": [
+        "19:00",
+        "14:47"
+      ],
+      "timings": [
+        {
+          "route": 125,
+          "outbound": {
+            "id": "NEW",
+            "origin": "DAY",
+            "destination": "IND",
+            "departureMinute": 1295,
+            "arrivalMinute": 1338
+          },
+          "inbound": {
+            "id": "NEW",
+            "origin": "IND",
+            "destination": "DAY",
+            "departureMinute": 270,
+            "arrivalMinute": 313
+          },
+          "score": 648.4608585215866,
+          "scores": [
+            389.83550050261135,
+            258.62535801897525
+          ]
+        },
+        {
+          "route": 125,
+          "outbound": {
+            "id": "NEW",
+            "origin": "DAY",
+            "destination": "IND",
+            "departureMinute": 1300,
+            "arrivalMinute": 1343
+          },
+          "inbound": {
+            "id": "NEW",
+            "origin": "IND",
+            "destination": "DAY",
+            "departureMinute": 270,
+            "arrivalMinute": 313
+          },
+          "score": 622.0953421604129,
+          "scores": [
+            363.4699841414376,
+            258.62535801897525
+          ]
+        },
+        {
+          "route": 125,
+          "outbound": {
+            "id": "NEW",
+            "origin": "DAY",
+            "destination": "IND",
+            "departureMinute": 1265,
+            "arrivalMinute": 1308
+          },
+          "inbound": {
+            "id": "NEW",
+            "origin": "IND",
+            "destination": "DAY",
+            "departureMinute": 270,
+            "arrivalMinute": 313
+          },
+          "score": 621.0067070499056,
+          "scores": [
+            362.3813490309304,
+            258.62535801897525
+          ]
+        },
+        {
+          "route": 136,
+          "outbound": {
+            "id": "NEW",
+            "origin": "DAY",
+            "destination": "IND",
+            "departureMinute": 1295,
+            "arrivalMinute": 1338
+          },
+          "inbound": {
+            "id": "NEW",
+            "origin": "IND",
+            "destination": "DAY",
+            "departureMinute": 270,
+            "arrivalMinute": 313
+          },
+          "score": 648.4608585215866,
+          "scores": [
+            389.83550050261135,
+            258.62535801897525
+          ]
+        },
+        {
+          "route": 136,
+          "outbound": {
+            "id": "NEW",
+            "origin": "DAY",
+            "destination": "IND",
+            "departureMinute": 1300,
+            "arrivalMinute": 1343
+          },
+          "inbound": {
+            "id": "NEW",
+            "origin": "IND",
+            "destination": "DAY",
+            "departureMinute": 270,
+            "arrivalMinute": 313
+          },
+          "score": 622.0953421604129,
+          "scores": [
+            363.4699841414376,
+            258.62535801897525
+          ]
+        },
+        {
+          "route": 136,
+          "outbound": {
+            "id": "NEW",
+            "origin": "DAY",
+            "destination": "IND",
+            "departureMinute": 1265,
+            "arrivalMinute": 1308
+          },
+          "inbound": {
+            "id": "NEW",
+            "origin": "IND",
+            "destination": "DAY",
+            "departureMinute": 270,
+            "arrivalMinute": 313
+          },
+          "score": 621.0067070499056,
+          "scores": [
+            362.3813490309304,
+            258.62535801897525
+          ]
+        }
+      ]
+    },
+    {
+      "city": "LEX",
+      "name": "Lexington KY",
+      "blockMinutes": 46,
+      "dayReturn": 316,
+      "originatorDelay": 6,
+      "frequencyBefore": 1,
+      "localOdOut": 0.1,
+      "localOdIn": 0.1,
+      "existingToDayDepartures": [
+        "10:35"
+      ],
+      "timings": [
+        {
+          "route": 125,
+          "outbound": {
+            "id": "NEW",
+            "origin": "DAY",
+            "destination": "LEX",
+            "departureMinute": 1295,
+            "arrivalMinute": 1341
+          },
+          "inbound": {
+            "id": "NEW",
+            "origin": "LEX",
+            "destination": "DAY",
+            "departureMinute": 270,
+            "arrivalMinute": 316
+          },
+          "score": 142.38695393958733,
+          "scores": [
+            108.95412568683135,
+            33.432828252755996
+          ]
+        },
+        {
+          "route": 125,
+          "outbound": {
+            "id": "NEW",
+            "origin": "DAY",
+            "destination": "LEX",
+            "departureMinute": 1265,
+            "arrivalMinute": 1311
+          },
+          "inbound": {
+            "id": "NEW",
+            "origin": "LEX",
+            "destination": "DAY",
+            "departureMinute": 270,
+            "arrivalMinute": 316
+          },
+          "score": 136.37848558439458,
+          "scores": [
+            102.94565733163859,
+            33.432828252755996
+          ]
+        },
+        {
+          "route": 125,
+          "outbound": {
+            "id": "NEW",
+            "origin": "DAY",
+            "destination": "LEX",
+            "departureMinute": 1270,
+            "arrivalMinute": 1316
+          },
+          "inbound": {
+            "id": "NEW",
+            "origin": "LEX",
+            "destination": "DAY",
+            "departureMinute": 270,
+            "arrivalMinute": 316
+          },
+          "score": 135.43791039957597,
+          "scores": [
+            102.00508214681999,
+            33.432828252755996
+          ]
+        },
+        {
+          "route": 136,
+          "outbound": {
+            "id": "NEW",
+            "origin": "DAY",
+            "destination": "LEX",
+            "departureMinute": 1295,
+            "arrivalMinute": 1341
+          },
+          "inbound": {
+            "id": "NEW",
+            "origin": "LEX",
+            "destination": "DAY",
+            "departureMinute": 270,
+            "arrivalMinute": 316
+          },
+          "score": 142.38695393958733,
+          "scores": [
+            108.95412568683135,
+            33.432828252755996
+          ]
+        },
+        {
+          "route": 136,
+          "outbound": {
+            "id": "NEW",
+            "origin": "DAY",
+            "destination": "LEX",
+            "departureMinute": 1265,
+            "arrivalMinute": 1311
+          },
+          "inbound": {
+            "id": "NEW",
+            "origin": "LEX",
+            "destination": "DAY",
+            "departureMinute": 270,
+            "arrivalMinute": 316
+          },
+          "score": 136.37848558439458,
+          "scores": [
+            102.94565733163859,
+            33.432828252755996
+          ]
+        },
+        {
+          "route": 136,
+          "outbound": {
+            "id": "NEW",
+            "origin": "DAY",
+            "destination": "LEX",
+            "departureMinute": 1270,
+            "arrivalMinute": 1316
+          },
+          "inbound": {
+            "id": "NEW",
+            "origin": "LEX",
+            "destination": "DAY",
+            "departureMinute": 270,
+            "arrivalMinute": 316
+          },
+          "score": 135.43791039957597,
+          "scores": [
+            102.00508214681999,
+            33.432828252755996
+          ]
+        }
+      ]
+    },
+    {
+      "city": "PIT",
+      "name": "Pittsburgh PA",
+      "blockMinutes": 57,
+      "dayReturn": 327,
+      "originatorDelay": 17,
+      "frequencyBefore": 1,
+      "localOdOut": 0.6,
+      "localOdIn": 0.6,
+      "existingToDayDepartures": [
+        "18:45"
+      ],
+      "timings": [
+        {
+          "route": 125,
+          "outbound": {
+            "id": "NEW",
+            "origin": "DAY",
+            "destination": "PIT",
+            "departureMinute": 1265,
+            "arrivalMinute": 1322
+          },
+          "inbound": {
+            "id": "NEW",
+            "origin": "PIT",
+            "destination": "DAY",
+            "departureMinute": 270,
+            "arrivalMinute": 327
+          },
+          "score": 453.04877364091175,
+          "scores": [
+            366.05131546118935,
+            86.99745817972239
+          ]
+        },
+        {
+          "route": 125,
+          "outbound": {
+            "id": "NEW",
+            "origin": "DAY",
+            "destination": "PIT",
+            "departureMinute": 1270,
+            "arrivalMinute": 1327
+          },
+          "inbound": {
+            "id": "NEW",
+            "origin": "PIT",
+            "destination": "DAY",
+            "departureMinute": 270,
+            "arrivalMinute": 327
+          },
+          "score": 447.84667842313394,
+          "scores": [
+            360.84922024341154,
+            86.99745817972239
+          ]
+        },
+        {
+          "route": 125,
+          "outbound": {
+            "id": "NEW",
+            "origin": "DAY",
+            "destination": "PIT",
+            "departureMinute": 1275,
+            "arrivalMinute": 1332
+          },
+          "inbound": {
+            "id": "NEW",
+            "origin": "PIT",
+            "destination": "DAY",
+            "departureMinute": 270,
+            "arrivalMinute": 327
+          },
+          "score": 442.7867777425198,
+          "scores": [
+            355.7893195627974,
+            86.99745817972239
+          ]
+        },
+        {
+          "route": 136,
+          "outbound": {
+            "id": "NEW",
+            "origin": "DAY",
+            "destination": "PIT",
+            "departureMinute": 1265,
+            "arrivalMinute": 1322
+          },
+          "inbound": {
+            "id": "NEW",
+            "origin": "PIT",
+            "destination": "DAY",
+            "departureMinute": 270,
+            "arrivalMinute": 327
+          },
+          "score": 453.04877364091175,
+          "scores": [
+            366.05131546118935,
+            86.99745817972239
+          ]
+        },
+        {
+          "route": 136,
+          "outbound": {
+            "id": "NEW",
+            "origin": "DAY",
+            "destination": "PIT",
+            "departureMinute": 1270,
+            "arrivalMinute": 1327
+          },
+          "inbound": {
+            "id": "NEW",
+            "origin": "PIT",
+            "destination": "DAY",
+            "departureMinute": 270,
+            "arrivalMinute": 327
+          },
+          "score": 447.84667842313394,
+          "scores": [
+            360.84922024341154,
+            86.99745817972239
+          ]
+        },
+        {
+          "route": 136,
+          "outbound": {
+            "id": "NEW",
+            "origin": "DAY",
+            "destination": "PIT",
+            "departureMinute": 1275,
+            "arrivalMinute": 1332
+          },
+          "inbound": {
+            "id": "NEW",
+            "origin": "PIT",
+            "destination": "DAY",
+            "departureMinute": 270,
+            "arrivalMinute": 327
+          },
+          "score": 442.7867777425198,
+          "scores": [
+            355.7893195627974,
+            86.99745817972239
+          ]
+        }
+      ]
+    },
+    {
+      "city": "SBN",
+      "name": "South Bend IN",
+      "blockMinutes": 51,
+      "dayReturn": 321,
+      "originatorDelay": 11,
+      "frequencyBefore": 3,
+      "localOdOut": 0.1,
+      "localOdIn": 0.1,
+      "existingToDayDepartures": [
+        "06:25",
+        "10:35",
+        "18:50"
+      ],
+      "timings": [
+        {
+          "route": 125,
+          "outbound": {
+            "id": "NEW",
+            "origin": "DAY",
+            "destination": "SBN",
+            "departureMinute": 1295,
+            "arrivalMinute": 1346
+          },
+          "inbound": {
+            "id": "NEW",
+            "origin": "SBN",
+            "destination": "DAY",
+            "departureMinute": 270,
+            "arrivalMinute": 321
+          },
+          "score": 116.25194911011424,
+          "scores": [
+            69.28106120335411,
+            46.970887906760126
+          ]
+        },
+        {
+          "route": 125,
+          "outbound": {
+            "id": "NEW",
+            "origin": "DAY",
+            "destination": "SBN",
+            "departureMinute": 1265,
+            "arrivalMinute": 1316
+          },
+          "inbound": {
+            "id": "NEW",
+            "origin": "SBN",
+            "destination": "DAY",
+            "departureMinute": 270,
+            "arrivalMinute": 321
+          },
+          "score": 115.59413849098591,
+          "scores": [
+            68.62325058422579,
+            46.970887906760126
+          ]
+        },
+        {
+          "route": 125,
+          "outbound": {
+            "id": "NEW",
+            "origin": "DAY",
+            "destination": "SBN",
+            "departureMinute": 1270,
+            "arrivalMinute": 1321
+          },
+          "inbound": {
+            "id": "NEW",
+            "origin": "SBN",
+            "destination": "DAY",
+            "departureMinute": 270,
+            "arrivalMinute": 321
+          },
+          "score": 114.75197234475883,
+          "scores": [
+            67.7810844379987,
+            46.970887906760126
+          ]
+        },
+        {
+          "route": 136,
+          "outbound": {
+            "id": "NEW",
+            "origin": "DAY",
+            "destination": "SBN",
+            "departureMinute": 1295,
+            "arrivalMinute": 1346
+          },
+          "inbound": {
+            "id": "NEW",
+            "origin": "SBN",
+            "destination": "DAY",
+            "departureMinute": 270,
+            "arrivalMinute": 321
+          },
+          "score": 116.25194911011424,
+          "scores": [
+            69.28106120335411,
+            46.970887906760126
+          ]
+        },
+        {
+          "route": 136,
+          "outbound": {
+            "id": "NEW",
+            "origin": "DAY",
+            "destination": "SBN",
+            "departureMinute": 1265,
+            "arrivalMinute": 1316
+          },
+          "inbound": {
+            "id": "NEW",
+            "origin": "SBN",
+            "destination": "DAY",
+            "departureMinute": 270,
+            "arrivalMinute": 321
+          },
+          "score": 115.59413849098591,
+          "scores": [
+            68.62325058422579,
+            46.970887906760126
+          ]
+        },
+        {
+          "route": 136,
+          "outbound": {
+            "id": "NEW",
+            "origin": "DAY",
+            "destination": "SBN",
+            "departureMinute": 1270,
+            "arrivalMinute": 1321
+          },
+          "inbound": {
+            "id": "NEW",
+            "origin": "SBN",
+            "destination": "DAY",
+            "departureMinute": 270,
+            "arrivalMinute": 321
+          },
+          "score": 114.75197234475883,
+          "scores": [
+            67.7810844379987,
+            46.970887906760126
+          ]
+        }
+      ]
+    },
+    {
+      "city": "SDF",
+      "name": "Louisville KY",
+      "blockMinutes": 48,
+      "dayReturn": 318,
+      "originatorDelay": 8,
+      "frequencyBefore": 2,
+      "localOdOut": 0.1,
+      "localOdIn": 0.2,
+      "existingToDayDepartures": [
+        "18:55",
+        "20:17"
+      ],
+      "timings": [],
+      "rejection": "No evening departure within current DAY banks satisfies section 2.6 spacing"
+    },
+    {
+      "city": "TOL",
+      "name": "Toledo OH",
+      "blockMinutes": 44,
+      "dayReturn": 314,
+      "originatorDelay": 4,
+      "frequencyBefore": 2,
+      "localOdOut": 0.0,
+      "localOdIn": 0.0,
+      "existingToDayDepartures": [
+        "04:30",
+        "10:38"
+      ],
+      "timings": [],
+      "rejection": "04:30 return duplicates an existing originator within the 30-minute hard spacing floor"
+    }
+  ],
+  "model": "Pinned O-D; seat-uncapped marginal one/two-stop choice comparison, not forecast passengers",
+  "baseCanonical": "builds/crj200-line-alignment/canonical_schedule.json",
+  "baseSha256": "a7a12a39869c3f72bcb43d2560eaad8059017e44e6469f4de2130c4555a1da99",
+  "screenOriginatorDelayCeiling": 20,
+  "recommendationOriginatorDelayCeiling": 10
+}

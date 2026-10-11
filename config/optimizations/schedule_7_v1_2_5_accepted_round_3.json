@@ -1,0 +1,182 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "schedule-7-v1.2.5-accepted-long-holds-round-3",
+  "baseSchedule": {
+    "scheduleId": "schedule_7_v1_2_5_draft",
+    "canonical": "data/schedules/schedule_7_v1_2_5_round_2/canonical_schedule.json",
+    "sha256": "b4ea43f7300048381a095a8a662e71c7bcd4032bbd0fb5ceee44ed72d69ef873"
+  },
+  "schedule": {
+    "id": "schedule_7_v1_2_5_draft",
+    "version": "1.2.5",
+    "label": "Schedule 7, Version 1.2.5 working draft; unpublished",
+    "status": "draft"
+  },
+  "approval": {
+    "status": "approved for implementation and publication",
+    "userInstruction": "Continue with adding the ROD extensions, and publishing the v1.2.5 schedule to the main branch of the app.",
+    "scope": "JOINT_HPN_EARLY: ALB–PHF on 159, SWF–PHF on 130, SYR–BTV on 318 and SYR–HPN on 161; DAY B5 and four original flights +2 minutes. Broader Florida retimings remain excluded.",
+    "publication": "Authorized by user October 11, 2026"
+  },
+  "hubBanksToAdd": [],
+  "hubBankCountOverrides": {},
+  "insertLegs": [
+    {
+      "id": "V125-HOLDS-R159-1-ALB-PHF",
+      "origin": "ALB",
+      "destination": "PHF",
+      "departureMinute": 615,
+      "arrivalMinute": 700,
+      "route": 159
+    },
+    {
+      "id": "V125-HOLDS-R159-2-PHF-ALB",
+      "origin": "PHF",
+      "destination": "ALB",
+      "departureMinute": 800,
+      "arrivalMinute": 885,
+      "route": 159
+    },
+    {
+      "id": "V125-HOLDS-R130-1-SWF-PHF",
+      "origin": "SWF",
+      "destination": "PHF",
+      "departureMinute": 480,
+      "arrivalMinute": 553,
+      "route": 130
+    },
+    {
+      "id": "V125-HOLDS-R130-2-PHF-SWF",
+      "origin": "PHF",
+      "destination": "SWF",
+      "departureMinute": 605,
+      "arrivalMinute": 678,
+      "route": 130
+    },
+    {
+      "id": "V125-HOLDS-R318-1-SYR-BTV",
+      "origin": "SYR",
+      "destination": "BTV",
+      "departureMinute": 465,
+      "arrivalMinute": 517,
+      "route": 318
+    },
+    {
+      "id": "V125-HOLDS-R318-2-BTV-SYR",
+      "origin": "BTV",
+      "destination": "SYR",
+      "departureMinute": 588,
+      "arrivalMinute": 640,
+      "route": 318
+    },
+    {
+      "id": "V125-HOLDS-R161-1-SYR-HPN",
+      "origin": "SYR",
+      "destination": "HPN",
+      "departureMinute": 465,
+      "arrivalMinute": 519,
+      "route": 161
+    },
+    {
+      "id": "V125-HOLDS-R161-2-HPN-SYR",
+      "origin": "HPN",
+      "destination": "SYR",
+      "departureMinute": 576,
+      "arrivalMinute": 630,
+      "route": 161
+    }
+  ],
+  "retimeLegs": [
+    {
+      "legId": "SWF-SYR-CRJ200-02-IN",
+      "expectedDepartureMinute": 668,
+      "expectedArrivalMinute": 717,
+      "departureMinute": 670,
+      "arrivalMinute": 719
+    },
+    {
+      "legId": "V114-R122-SWF-DAY",
+      "expectedDepartureMinute": 757,
+      "expectedArrivalMinute": 859,
+      "departureMinute": 759,
+      "arrivalMinute": 861
+    },
+    {
+      "legId": "V120-2MAX-D2-5-DAY-IND",
+      "expectedDepartureMinute": 800,
+      "expectedArrivalMinute": 847,
+      "departureMinute": 802,
+      "arrivalMinute": 849
+    },
+    {
+      "legId": "V120-2MAX-D2-6-IND-DAY",
+      "expectedDepartureMinute": 887,
+      "expectedArrivalMinute": 934,
+      "departureMinute": 889,
+      "arrivalMinute": 936
+    }
+  ],
+  "bankAssignmentsToAdd": [
+    {
+      "legId": "V125-HOLDS-R159-1-ALB-PHF",
+      "operation": "arrival",
+      "bankId": "PHF-B3"
+    },
+    {
+      "legId": "V125-HOLDS-R159-2-PHF-ALB",
+      "operation": "departure",
+      "bankId": "PHF-B4"
+    },
+    {
+      "legId": "V125-HOLDS-R130-1-SWF-PHF",
+      "operation": "arrival",
+      "bankId": "PHF-B2"
+    },
+    {
+      "legId": "V125-HOLDS-R130-2-PHF-SWF",
+      "operation": "departure",
+      "bankId": "PHF-M1"
+    },
+    {
+      "legId": "V125-HOLDS-R318-1-SYR-BTV",
+      "operation": "departure",
+      "bankId": "SYR-B2"
+    },
+    {
+      "legId": "V125-HOLDS-R318-2-BTV-SYR",
+      "operation": "arrival",
+      "bankId": "SYR-B3"
+    },
+    {
+      "legId": "V125-HOLDS-R161-1-SYR-HPN",
+      "operation": "departure",
+      "bankId": "SYR-B2"
+    },
+    {
+      "legId": "V125-HOLDS-R161-2-HPN-SYR",
+      "operation": "arrival",
+      "bankId": "SYR-B3"
+    }
+  ],
+  "bankAssignmentReplacements": [],
+  "operatingOverrides": [],
+  "hubBankChanges": [
+    {
+      "bankId": "DAY-B5",
+      "expectedStartMinute": 800,
+      "expectedEndMinute": 860,
+      "startMinute": 802,
+      "endMinute": 862
+    }
+  ],
+  "sourceProposals": [
+    {
+      "path": "config/proposals/schedule_7_v1_2_5_holds_joint_hpn_early.json",
+      "sha256": "1db54886138ff20340514c1cc6d9bb2f3cda203e0f67082b4c16551c89e1e76b"
+    },
+    {
+      "path": "config/proposals/schedule_7_v1_2_5_holds_review.json",
+      "sha256": "72c4ffe2820e1aae1def4d2a52a90b9155082e2477856b7afdb6e90e87595397"
+    }
+  ]
+}

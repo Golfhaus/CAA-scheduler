@@ -1,0 +1,969 @@
+{
+  "schemaVersion": "1.0.0",
+  "scheduleId": "schedule_7_v1_2_5",
+  "hub": "SYR",
+  "connectionWindowMinutes": {
+    "minimum": 30,
+    "maximum": 240
+  },
+  "groups": {
+    "morningFeeders": [
+      "BTV",
+      "HPN"
+    ],
+    "florida": [
+      "SFB",
+      "FLL",
+      "SRQ",
+      "PIE"
+    ]
+  },
+  "summary": {
+    "targetCities": 6,
+    "directRoundTripCities": 6,
+    "directionalPairs": 16,
+    "connectedDirectionalPairs": 16,
+    "missingDirectionalPairs": 0,
+    "connectionCoverage": 1.0,
+    "bySourceGroup": {
+      "morningFeeders": {
+        "directionalPairs": 8,
+        "connectedDirectionalPairs": 8,
+        "missingDirectionalPairs": 0
+      },
+      "florida": {
+        "directionalPairs": 8,
+        "connectedDirectionalPairs": 8,
+        "missingDirectionalPairs": 0
+      }
+    }
+  },
+  "directCoverage": [
+    {
+      "city": "BTV",
+      "group": "morningFeeders",
+      "toHubLegs": 4,
+      "fromHubLegs": 4,
+      "roundTripCovered": true
+    },
+    {
+      "city": "HPN",
+      "group": "morningFeeders",
+      "toHubLegs": 4,
+      "fromHubLegs": 4,
+      "roundTripCovered": true
+    },
+    {
+      "city": "SFB",
+      "group": "florida",
+      "toHubLegs": 4,
+      "fromHubLegs": 4,
+      "roundTripCovered": true
+    },
+    {
+      "city": "FLL",
+      "group": "florida",
+      "toHubLegs": 5,
+      "fromHubLegs": 5,
+      "roundTripCovered": true
+    },
+    {
+      "city": "SRQ",
+      "group": "florida",
+      "toHubLegs": 5,
+      "fromHubLegs": 5,
+      "roundTripCovered": true
+    },
+    {
+      "city": "PIE",
+      "group": "florida",
+      "toHubLegs": 5,
+      "fromHubLegs": 5,
+      "roundTripCovered": true
+    }
+  ],
+  "directionalPairs": [
+    {
+      "source": "BTV",
+      "sourceGroup": "morningFeeders",
+      "destination": "SFB",
+      "destinationGroup": "florida",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V125-HOLDS-R318-2-BTV-SYR",
+          "inboundFlight": 2190,
+          "hubArrival": "10:40",
+          "outboundLegId": "SFB-SYR-MAX9-02-IN",
+          "outboundFlight": 1054,
+          "hubDeparture": "11:10",
+          "waitMinutes": 30
+        },
+        {
+          "inboundLegId": "BTV-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1828,
+          "hubArrival": "07:52",
+          "outboundLegId": "SFB-SYR-MAX9-01-IN",
+          "outboundFlight": 1053,
+          "hubDeparture": "08:35",
+          "waitMinutes": 43
+        },
+        {
+          "inboundLegId": "BTV-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1829,
+          "hubArrival": "16:07",
+          "outboundLegId": "SFB-SYR-MAX9-04-IN",
+          "outboundFlight": 1056,
+          "hubDeparture": "16:55",
+          "waitMinutes": 48
+        },
+        {
+          "inboundLegId": "BTV-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1828,
+          "hubArrival": "07:52",
+          "outboundLegId": "SFB-SYR-MAX9-02-IN",
+          "outboundFlight": 1054,
+          "hubDeparture": "11:10",
+          "waitMinutes": 198
+        },
+        {
+          "inboundLegId": "V125-HOLDS-R318-2-BTV-SYR",
+          "inboundFlight": 2190,
+          "hubArrival": "10:40",
+          "outboundLegId": "SFB-SYR-MAX9-03-IN",
+          "outboundFlight": 1055,
+          "hubDeparture": "14:05",
+          "waitMinutes": 205
+        }
+      ]
+    },
+    {
+      "source": "BTV",
+      "sourceGroup": "morningFeeders",
+      "destination": "FLL",
+      "destinationGroup": "florida",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V125-HOLDS-R318-2-BTV-SYR",
+          "inboundFlight": 2190,
+          "hubArrival": "10:40",
+          "outboundLegId": "FLL-SYR-CRJ900-04-IN",
+          "outboundFlight": 1134,
+          "hubDeparture": "11:20",
+          "waitMinutes": 40
+        },
+        {
+          "inboundLegId": "BTV-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1828,
+          "hubArrival": "07:52",
+          "outboundLegId": "FLL-SYR-CRJ900-03-IN",
+          "outboundFlight": 1133,
+          "hubDeparture": "08:35",
+          "waitMinutes": 43
+        },
+        {
+          "inboundLegId": "BTV-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1829,
+          "hubArrival": "16:07",
+          "outboundLegId": "FLL-SYR-CRJ900-05-IN",
+          "outboundFlight": 1135,
+          "hubDeparture": "16:50",
+          "waitMinutes": 43
+        },
+        {
+          "inboundLegId": "BTV-SYR-CRJ200-03-OUT",
+          "inboundFlight": 1830,
+          "hubArrival": "18:52",
+          "outboundLegId": "FLL-SYR-CRJ900-01-IN",
+          "outboundFlight": 1136,
+          "hubDeparture": "19:35",
+          "waitMinutes": 43
+        },
+        {
+          "inboundLegId": "BTV-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1828,
+          "hubArrival": "07:52",
+          "outboundLegId": "FLL-SYR-CRJ900-04-IN",
+          "outboundFlight": 1134,
+          "hubDeparture": "11:20",
+          "waitMinutes": 208
+        },
+        {
+          "inboundLegId": "BTV-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1829,
+          "hubArrival": "16:07",
+          "outboundLegId": "FLL-SYR-CRJ900-01-IN",
+          "outboundFlight": 1136,
+          "hubDeparture": "19:35",
+          "waitMinutes": 208
+        }
+      ]
+    },
+    {
+      "source": "BTV",
+      "sourceGroup": "morningFeeders",
+      "destination": "SRQ",
+      "destinationGroup": "florida",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V125-HOLDS-R318-2-BTV-SYR",
+          "inboundFlight": 2190,
+          "hubArrival": "10:40",
+          "outboundLegId": "SRQ-SYR-CRJ700-05-IN",
+          "outboundFlight": 1297,
+          "hubDeparture": "11:20",
+          "waitMinutes": 40
+        },
+        {
+          "inboundLegId": "BTV-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1828,
+          "hubArrival": "07:52",
+          "outboundLegId": "SRQ-SYR-CRJ700-04-IN",
+          "outboundFlight": 1296,
+          "hubDeparture": "08:35",
+          "waitMinutes": 43
+        },
+        {
+          "inboundLegId": "BTV-SYR-CRJ200-03-OUT",
+          "inboundFlight": 1830,
+          "hubArrival": "18:52",
+          "outboundLegId": "SRQ-SYR-CRJ700-02-IN",
+          "outboundFlight": 1299,
+          "hubDeparture": "19:35",
+          "waitMinutes": 43
+        },
+        {
+          "inboundLegId": "BTV-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1829,
+          "hubArrival": "16:07",
+          "outboundLegId": "SRQ-SYR-CRJ700-01-IN",
+          "outboundFlight": 1298,
+          "hubDeparture": "18:45",
+          "waitMinutes": 158
+        },
+        {
+          "inboundLegId": "BTV-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1828,
+          "hubArrival": "07:52",
+          "outboundLegId": "SRQ-SYR-CRJ700-05-IN",
+          "outboundFlight": 1297,
+          "hubDeparture": "11:20",
+          "waitMinutes": 208
+        },
+        {
+          "inboundLegId": "BTV-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1829,
+          "hubArrival": "16:07",
+          "outboundLegId": "SRQ-SYR-CRJ700-02-IN",
+          "outboundFlight": 1299,
+          "hubDeparture": "19:35",
+          "waitMinutes": 208
+        }
+      ]
+    },
+    {
+      "source": "BTV",
+      "sourceGroup": "morningFeeders",
+      "destination": "PIE",
+      "destinationGroup": "florida",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "BTV-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1828,
+          "hubArrival": "07:52",
+          "outboundLegId": "PIE-SYR-CRJ900-02-IN",
+          "outboundFlight": 1224,
+          "hubDeparture": "08:35",
+          "waitMinutes": 43
+        },
+        {
+          "inboundLegId": "BTV-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1829,
+          "hubArrival": "16:07",
+          "outboundLegId": "PIE-SYR-CRJ900-05-IN",
+          "outboundFlight": 1227,
+          "hubDeparture": "16:50",
+          "waitMinutes": 43
+        },
+        {
+          "inboundLegId": "V125-HOLDS-R318-2-BTV-SYR",
+          "inboundFlight": 2190,
+          "hubArrival": "10:40",
+          "outboundLegId": "PIE-SYR-CRJ900-03-IN",
+          "outboundFlight": 1225,
+          "hubDeparture": "11:29",
+          "waitMinutes": 49
+        },
+        {
+          "inboundLegId": "V125-HOLDS-R318-2-BTV-SYR",
+          "inboundFlight": 2190,
+          "hubArrival": "10:40",
+          "outboundLegId": "PIE-SYR-CRJ900-04-IN",
+          "outboundFlight": 1226,
+          "hubDeparture": "14:05",
+          "waitMinutes": 205
+        },
+        {
+          "inboundLegId": "BTV-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1828,
+          "hubArrival": "07:52",
+          "outboundLegId": "PIE-SYR-CRJ900-03-IN",
+          "outboundFlight": 1225,
+          "hubDeparture": "11:29",
+          "waitMinutes": 217
+        }
+      ]
+    },
+    {
+      "source": "HPN",
+      "sourceGroup": "morningFeeders",
+      "destination": "SFB",
+      "destinationGroup": "florida",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V125-HOLDS-R161-2-HPN-SYR",
+          "inboundFlight": 2192,
+          "hubArrival": "10:30",
+          "outboundLegId": "SFB-SYR-MAX9-02-IN",
+          "outboundFlight": 1054,
+          "hubDeparture": "11:10",
+          "waitMinutes": 40
+        },
+        {
+          "inboundLegId": "HPN-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1854,
+          "hubArrival": "13:24",
+          "outboundLegId": "SFB-SYR-MAX9-03-IN",
+          "outboundFlight": 1055,
+          "hubDeparture": "14:05",
+          "waitMinutes": 41
+        },
+        {
+          "inboundLegId": "HPN-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1855,
+          "hubArrival": "16:09",
+          "outboundLegId": "SFB-SYR-MAX9-04-IN",
+          "outboundFlight": 1056,
+          "hubDeparture": "16:55",
+          "waitMinutes": 46
+        },
+        {
+          "inboundLegId": "HPN-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1854,
+          "hubArrival": "13:24",
+          "outboundLegId": "SFB-SYR-MAX9-04-IN",
+          "outboundFlight": 1056,
+          "hubDeparture": "16:55",
+          "waitMinutes": 211
+        },
+        {
+          "inboundLegId": "V125-HOLDS-R161-2-HPN-SYR",
+          "inboundFlight": 2192,
+          "hubArrival": "10:30",
+          "outboundLegId": "SFB-SYR-MAX9-03-IN",
+          "outboundFlight": 1055,
+          "hubDeparture": "14:05",
+          "waitMinutes": 215
+        }
+      ]
+    },
+    {
+      "source": "HPN",
+      "sourceGroup": "morningFeeders",
+      "destination": "FLL",
+      "destinationGroup": "florida",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "HPN-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1855,
+          "hubArrival": "16:09",
+          "outboundLegId": "FLL-SYR-CRJ900-05-IN",
+          "outboundFlight": 1135,
+          "hubDeparture": "16:50",
+          "waitMinutes": 41
+        },
+        {
+          "inboundLegId": "HPN-SYR-CRJ200-03-OUT",
+          "inboundFlight": 1856,
+          "hubArrival": "18:54",
+          "outboundLegId": "FLL-SYR-CRJ900-01-IN",
+          "outboundFlight": 1136,
+          "hubDeparture": "19:35",
+          "waitMinutes": 41
+        },
+        {
+          "inboundLegId": "V125-HOLDS-R161-2-HPN-SYR",
+          "inboundFlight": 2192,
+          "hubArrival": "10:30",
+          "outboundLegId": "FLL-SYR-CRJ900-04-IN",
+          "outboundFlight": 1134,
+          "hubDeparture": "11:20",
+          "waitMinutes": 50
+        },
+        {
+          "inboundLegId": "HPN-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1854,
+          "hubArrival": "13:24",
+          "outboundLegId": "FLL-SYR-CRJ900-05-IN",
+          "outboundFlight": 1135,
+          "hubDeparture": "16:50",
+          "waitMinutes": 206
+        },
+        {
+          "inboundLegId": "HPN-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1855,
+          "hubArrival": "16:09",
+          "outboundLegId": "FLL-SYR-CRJ900-01-IN",
+          "outboundFlight": 1136,
+          "hubDeparture": "19:35",
+          "waitMinutes": 206
+        }
+      ]
+    },
+    {
+      "source": "HPN",
+      "sourceGroup": "morningFeeders",
+      "destination": "SRQ",
+      "destinationGroup": "florida",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "HPN-SYR-CRJ200-03-OUT",
+          "inboundFlight": 1856,
+          "hubArrival": "18:54",
+          "outboundLegId": "SRQ-SYR-CRJ700-02-IN",
+          "outboundFlight": 1299,
+          "hubDeparture": "19:35",
+          "waitMinutes": 41
+        },
+        {
+          "inboundLegId": "V125-HOLDS-R161-2-HPN-SYR",
+          "inboundFlight": 2192,
+          "hubArrival": "10:30",
+          "outboundLegId": "SRQ-SYR-CRJ700-05-IN",
+          "outboundFlight": 1297,
+          "hubDeparture": "11:20",
+          "waitMinutes": 50
+        },
+        {
+          "inboundLegId": "HPN-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1855,
+          "hubArrival": "16:09",
+          "outboundLegId": "SRQ-SYR-CRJ700-01-IN",
+          "outboundFlight": 1298,
+          "hubDeparture": "18:45",
+          "waitMinutes": 156
+        },
+        {
+          "inboundLegId": "HPN-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1855,
+          "hubArrival": "16:09",
+          "outboundLegId": "SRQ-SYR-CRJ700-02-IN",
+          "outboundFlight": 1299,
+          "hubDeparture": "19:35",
+          "waitMinutes": 206
+        }
+      ]
+    },
+    {
+      "source": "HPN",
+      "sourceGroup": "morningFeeders",
+      "destination": "PIE",
+      "destinationGroup": "florida",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "HPN-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1854,
+          "hubArrival": "13:24",
+          "outboundLegId": "PIE-SYR-CRJ900-04-IN",
+          "outboundFlight": 1226,
+          "hubDeparture": "14:05",
+          "waitMinutes": 41
+        },
+        {
+          "inboundLegId": "HPN-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1855,
+          "hubArrival": "16:09",
+          "outboundLegId": "PIE-SYR-CRJ900-05-IN",
+          "outboundFlight": 1227,
+          "hubDeparture": "16:50",
+          "waitMinutes": 41
+        },
+        {
+          "inboundLegId": "V125-HOLDS-R161-2-HPN-SYR",
+          "inboundFlight": 2192,
+          "hubArrival": "10:30",
+          "outboundLegId": "PIE-SYR-CRJ900-03-IN",
+          "outboundFlight": 1225,
+          "hubDeparture": "11:29",
+          "waitMinutes": 59
+        },
+        {
+          "inboundLegId": "HPN-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1854,
+          "hubArrival": "13:24",
+          "outboundLegId": "PIE-SYR-CRJ900-05-IN",
+          "outboundFlight": 1227,
+          "hubDeparture": "16:50",
+          "waitMinutes": 206
+        },
+        {
+          "inboundLegId": "V125-HOLDS-R161-2-HPN-SYR",
+          "inboundFlight": 2192,
+          "hubArrival": "10:30",
+          "outboundLegId": "PIE-SYR-CRJ900-04-IN",
+          "outboundFlight": 1226,
+          "hubDeparture": "14:05",
+          "waitMinutes": 215
+        }
+      ]
+    },
+    {
+      "source": "SFB",
+      "sourceGroup": "florida",
+      "destination": "BTV",
+      "destinationGroup": "morningFeeders",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "SFB-SYR-MAX9-03-OUT",
+          "inboundFlight": 1051,
+          "hubArrival": "13:25",
+          "outboundLegId": "BTV-SYR-CRJ200-03-IN",
+          "outboundFlight": 1826,
+          "hubDeparture": "14:05",
+          "waitMinutes": 40
+        },
+        {
+          "inboundLegId": "SFB-SYR-MAX9-02-OUT",
+          "inboundFlight": 1050,
+          "hubArrival": "10:30",
+          "outboundLegId": "BTV-SYR-CRJ200-02-IN",
+          "outboundFlight": 1825,
+          "hubDeparture": "11:20",
+          "waitMinutes": 50
+        },
+        {
+          "inboundLegId": "SFB-SYR-MAX9-04-OUT",
+          "inboundFlight": 1052,
+          "hubArrival": "16:15",
+          "outboundLegId": "BTV-SYR-CRJ200-01-IN",
+          "outboundFlight": 1827,
+          "hubDeparture": "19:35",
+          "waitMinutes": 200
+        },
+        {
+          "inboundLegId": "SFB-SYR-MAX9-01-OUT",
+          "inboundFlight": 1049,
+          "hubArrival": "07:55",
+          "outboundLegId": "BTV-SYR-CRJ200-02-IN",
+          "outboundFlight": 1825,
+          "hubDeparture": "11:20",
+          "waitMinutes": 205
+        },
+        {
+          "inboundLegId": "SFB-SYR-MAX9-02-OUT",
+          "inboundFlight": 1050,
+          "hubArrival": "10:30",
+          "outboundLegId": "BTV-SYR-CRJ200-03-IN",
+          "outboundFlight": 1826,
+          "hubDeparture": "14:05",
+          "waitMinutes": 215
+        }
+      ]
+    },
+    {
+      "source": "SFB",
+      "sourceGroup": "florida",
+      "destination": "HPN",
+      "destinationGroup": "morningFeeders",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "SFB-SYR-MAX9-01-OUT",
+          "inboundFlight": 1049,
+          "hubArrival": "07:55",
+          "outboundLegId": "HPN-SYR-CRJ200-01-IN",
+          "outboundFlight": 1851,
+          "hubDeparture": "08:35",
+          "waitMinutes": 40
+        },
+        {
+          "inboundLegId": "SFB-SYR-MAX9-03-OUT",
+          "inboundFlight": 1051,
+          "hubArrival": "13:25",
+          "outboundLegId": "HPN-SYR-CRJ200-03-IN",
+          "outboundFlight": 1853,
+          "hubDeparture": "14:10",
+          "waitMinutes": 45
+        },
+        {
+          "inboundLegId": "SFB-SYR-MAX9-02-OUT",
+          "inboundFlight": 1050,
+          "hubArrival": "10:30",
+          "outboundLegId": "HPN-SYR-CRJ200-02-IN",
+          "outboundFlight": 1852,
+          "hubDeparture": "11:20",
+          "waitMinutes": 50
+        },
+        {
+          "inboundLegId": "SFB-SYR-MAX9-01-OUT",
+          "inboundFlight": 1049,
+          "hubArrival": "07:55",
+          "outboundLegId": "HPN-SYR-CRJ200-02-IN",
+          "outboundFlight": 1852,
+          "hubDeparture": "11:20",
+          "waitMinutes": 205
+        },
+        {
+          "inboundLegId": "SFB-SYR-MAX9-02-OUT",
+          "inboundFlight": 1050,
+          "hubArrival": "10:30",
+          "outboundLegId": "HPN-SYR-CRJ200-03-IN",
+          "outboundFlight": 1853,
+          "hubDeparture": "14:10",
+          "waitMinutes": 220
+        }
+      ]
+    },
+    {
+      "source": "FLL",
+      "sourceGroup": "florida",
+      "destination": "BTV",
+      "destinationGroup": "morningFeeders",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "FLL-SYR-CRJ900-02-OUT",
+          "inboundFlight": 1128,
+          "hubArrival": "10:39",
+          "outboundLegId": "BTV-SYR-CRJ200-02-IN",
+          "outboundFlight": 1825,
+          "hubDeparture": "11:20",
+          "waitMinutes": 41
+        },
+        {
+          "inboundLegId": "FLL-SYR-CRJ900-03-OUT",
+          "inboundFlight": 1129,
+          "hubArrival": "13:24",
+          "outboundLegId": "BTV-SYR-CRJ200-03-IN",
+          "outboundFlight": 1826,
+          "hubDeparture": "14:05",
+          "waitMinutes": 41
+        },
+        {
+          "inboundLegId": "FLL-SYR-CRJ900-05-OUT",
+          "inboundFlight": 1131,
+          "hubArrival": "18:54",
+          "outboundLegId": "BTV-SYR-CRJ200-01-IN",
+          "outboundFlight": 1827,
+          "hubDeparture": "19:35",
+          "waitMinutes": 41
+        },
+        {
+          "inboundLegId": "FLL-SYR-CRJ900-01-OUT",
+          "inboundFlight": 1127,
+          "hubArrival": "07:54",
+          "outboundLegId": "BTV-SYR-CRJ200-02-IN",
+          "outboundFlight": 1825,
+          "hubDeparture": "11:20",
+          "waitMinutes": 206
+        },
+        {
+          "inboundLegId": "FLL-SYR-CRJ900-02-OUT",
+          "inboundFlight": 1128,
+          "hubArrival": "10:39",
+          "outboundLegId": "BTV-SYR-CRJ200-03-IN",
+          "outboundFlight": 1826,
+          "hubDeparture": "14:05",
+          "waitMinutes": 206
+        },
+        {
+          "inboundLegId": "FLL-SYR-CRJ900-04-OUT",
+          "inboundFlight": 1130,
+          "hubArrival": "16:09",
+          "outboundLegId": "BTV-SYR-CRJ200-01-IN",
+          "outboundFlight": 1827,
+          "hubDeparture": "19:35",
+          "waitMinutes": 206
+        }
+      ]
+    },
+    {
+      "source": "FLL",
+      "sourceGroup": "florida",
+      "destination": "HPN",
+      "destinationGroup": "morningFeeders",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "FLL-SYR-CRJ900-01-OUT",
+          "inboundFlight": 1127,
+          "hubArrival": "07:54",
+          "outboundLegId": "HPN-SYR-CRJ200-01-IN",
+          "outboundFlight": 1851,
+          "hubDeparture": "08:35",
+          "waitMinutes": 41
+        },
+        {
+          "inboundLegId": "FLL-SYR-CRJ900-02-OUT",
+          "inboundFlight": 1128,
+          "hubArrival": "10:39",
+          "outboundLegId": "HPN-SYR-CRJ200-02-IN",
+          "outboundFlight": 1852,
+          "hubDeparture": "11:20",
+          "waitMinutes": 41
+        },
+        {
+          "inboundLegId": "FLL-SYR-CRJ900-03-OUT",
+          "inboundFlight": 1129,
+          "hubArrival": "13:24",
+          "outboundLegId": "HPN-SYR-CRJ200-03-IN",
+          "outboundFlight": 1853,
+          "hubDeparture": "14:10",
+          "waitMinutes": 46
+        },
+        {
+          "inboundLegId": "FLL-SYR-CRJ900-01-OUT",
+          "inboundFlight": 1127,
+          "hubArrival": "07:54",
+          "outboundLegId": "HPN-SYR-CRJ200-02-IN",
+          "outboundFlight": 1852,
+          "hubDeparture": "11:20",
+          "waitMinutes": 206
+        },
+        {
+          "inboundLegId": "FLL-SYR-CRJ900-02-OUT",
+          "inboundFlight": 1128,
+          "hubArrival": "10:39",
+          "outboundLegId": "HPN-SYR-CRJ200-03-IN",
+          "outboundFlight": 1853,
+          "hubDeparture": "14:10",
+          "waitMinutes": 211
+        }
+      ]
+    },
+    {
+      "source": "SRQ",
+      "sourceGroup": "florida",
+      "destination": "BTV",
+      "destinationGroup": "morningFeeders",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "SRQ-SYR-CRJ700-02-OUT",
+          "inboundFlight": 1301,
+          "hubArrival": "10:41",
+          "outboundLegId": "BTV-SYR-CRJ200-02-IN",
+          "outboundFlight": 1825,
+          "hubDeparture": "11:20",
+          "waitMinutes": 39
+        },
+        {
+          "inboundLegId": "SRQ-SYR-CRJ700-03-OUT",
+          "inboundFlight": 1302,
+          "hubArrival": "13:21",
+          "outboundLegId": "BTV-SYR-CRJ200-03-IN",
+          "outboundFlight": 1826,
+          "hubDeparture": "14:05",
+          "waitMinutes": 44
+        },
+        {
+          "inboundLegId": "SRQ-SYR-CRJ700-05-OUT",
+          "inboundFlight": 1304,
+          "hubArrival": "18:51",
+          "outboundLegId": "BTV-SYR-CRJ200-01-IN",
+          "outboundFlight": 1827,
+          "hubDeparture": "19:35",
+          "waitMinutes": 44
+        },
+        {
+          "inboundLegId": "SRQ-SYR-CRJ700-02-OUT",
+          "inboundFlight": 1301,
+          "hubArrival": "10:41",
+          "outboundLegId": "BTV-SYR-CRJ200-03-IN",
+          "outboundFlight": 1826,
+          "hubDeparture": "14:05",
+          "waitMinutes": 204
+        },
+        {
+          "inboundLegId": "SRQ-SYR-CRJ700-01-OUT",
+          "inboundFlight": 1300,
+          "hubArrival": "07:51",
+          "outboundLegId": "BTV-SYR-CRJ200-02-IN",
+          "outboundFlight": 1825,
+          "hubDeparture": "11:20",
+          "waitMinutes": 209
+        },
+        {
+          "inboundLegId": "SRQ-SYR-CRJ700-04-OUT",
+          "inboundFlight": 1303,
+          "hubArrival": "16:06",
+          "outboundLegId": "BTV-SYR-CRJ200-01-IN",
+          "outboundFlight": 1827,
+          "hubDeparture": "19:35",
+          "waitMinutes": 209
+        }
+      ]
+    },
+    {
+      "source": "SRQ",
+      "sourceGroup": "florida",
+      "destination": "HPN",
+      "destinationGroup": "morningFeeders",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "SRQ-SYR-CRJ700-02-OUT",
+          "inboundFlight": 1301,
+          "hubArrival": "10:41",
+          "outboundLegId": "HPN-SYR-CRJ200-02-IN",
+          "outboundFlight": 1852,
+          "hubDeparture": "11:20",
+          "waitMinutes": 39
+        },
+        {
+          "inboundLegId": "SRQ-SYR-CRJ700-01-OUT",
+          "inboundFlight": 1300,
+          "hubArrival": "07:51",
+          "outboundLegId": "HPN-SYR-CRJ200-01-IN",
+          "outboundFlight": 1851,
+          "hubDeparture": "08:35",
+          "waitMinutes": 44
+        },
+        {
+          "inboundLegId": "SRQ-SYR-CRJ700-03-OUT",
+          "inboundFlight": 1302,
+          "hubArrival": "13:21",
+          "outboundLegId": "HPN-SYR-CRJ200-03-IN",
+          "outboundFlight": 1853,
+          "hubDeparture": "14:10",
+          "waitMinutes": 49
+        },
+        {
+          "inboundLegId": "SRQ-SYR-CRJ700-01-OUT",
+          "inboundFlight": 1300,
+          "hubArrival": "07:51",
+          "outboundLegId": "HPN-SYR-CRJ200-02-IN",
+          "outboundFlight": 1852,
+          "hubDeparture": "11:20",
+          "waitMinutes": 209
+        },
+        {
+          "inboundLegId": "SRQ-SYR-CRJ700-02-OUT",
+          "inboundFlight": 1301,
+          "hubArrival": "10:41",
+          "outboundLegId": "HPN-SYR-CRJ200-03-IN",
+          "outboundFlight": 1853,
+          "hubDeparture": "14:10",
+          "waitMinutes": 209
+        }
+      ]
+    },
+    {
+      "source": "PIE",
+      "sourceGroup": "florida",
+      "destination": "BTV",
+      "destinationGroup": "morningFeeders",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "PIE-SYR-CRJ900-02-OUT",
+          "inboundFlight": 1229,
+          "hubArrival": "10:48",
+          "outboundLegId": "BTV-SYR-CRJ200-02-IN",
+          "outboundFlight": 1825,
+          "hubDeparture": "11:20",
+          "waitMinutes": 32
+        },
+        {
+          "inboundLegId": "PIE-SYR-CRJ900-04-OUT",
+          "inboundFlight": 1231,
+          "hubArrival": "18:49",
+          "outboundLegId": "BTV-SYR-CRJ200-01-IN",
+          "outboundFlight": 1827,
+          "hubDeparture": "19:35",
+          "waitMinutes": 46
+        },
+        {
+          "inboundLegId": "PIE-SYR-CRJ900-02-OUT",
+          "inboundFlight": 1229,
+          "hubArrival": "10:48",
+          "outboundLegId": "BTV-SYR-CRJ200-03-IN",
+          "outboundFlight": 1826,
+          "hubDeparture": "14:05",
+          "waitMinutes": 197
+        },
+        {
+          "inboundLegId": "PIE-SYR-CRJ900-01-OUT",
+          "inboundFlight": 1228,
+          "hubArrival": "07:54",
+          "outboundLegId": "BTV-SYR-CRJ200-02-IN",
+          "outboundFlight": 1825,
+          "hubDeparture": "11:20",
+          "waitMinutes": 206
+        },
+        {
+          "inboundLegId": "PIE-SYR-CRJ900-03-OUT",
+          "inboundFlight": 1230,
+          "hubArrival": "16:09",
+          "outboundLegId": "BTV-SYR-CRJ200-01-IN",
+          "outboundFlight": 1827,
+          "hubDeparture": "19:35",
+          "waitMinutes": 206
+        }
+      ]
+    },
+    {
+      "source": "PIE",
+      "sourceGroup": "florida",
+      "destination": "HPN",
+      "destinationGroup": "morningFeeders",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "PIE-SYR-CRJ900-02-OUT",
+          "inboundFlight": 1229,
+          "hubArrival": "10:48",
+          "outboundLegId": "HPN-SYR-CRJ200-02-IN",
+          "outboundFlight": 1852,
+          "hubDeparture": "11:20",
+          "waitMinutes": 32
+        },
+        {
+          "inboundLegId": "PIE-SYR-CRJ900-01-OUT",
+          "inboundFlight": 1228,
+          "hubArrival": "07:54",
+          "outboundLegId": "HPN-SYR-CRJ200-01-IN",
+          "outboundFlight": 1851,
+          "hubDeparture": "08:35",
+          "waitMinutes": 41
+        },
+        {
+          "inboundLegId": "PIE-SYR-CRJ900-02-OUT",
+          "inboundFlight": 1229,
+          "hubArrival": "10:48",
+          "outboundLegId": "HPN-SYR-CRJ200-03-IN",
+          "outboundFlight": 1853,
+          "hubDeparture": "14:10",
+          "waitMinutes": 202
+        },
+        {
+          "inboundLegId": "PIE-SYR-CRJ900-01-OUT",
+          "inboundFlight": 1228,
+          "hubArrival": "07:54",
+          "outboundLegId": "HPN-SYR-CRJ200-02-IN",
+          "outboundFlight": 1852,
+          "hubDeparture": "11:20",
+          "waitMinutes": 206
+        }
+      ]
+    }
+  ]
+}

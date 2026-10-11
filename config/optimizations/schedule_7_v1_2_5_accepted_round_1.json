@@ -1,0 +1,1238 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "schedule-7-v1.2.5-accepted-round-1",
+  "baseSchedule": {
+    "scheduleId": "schedule_7_v1_2_4",
+    "canonical": "data/schedules/schedule_7_v1_2_4/canonical_schedule.json",
+    "sha256": "56130a0fe8626ffb3d5c783d89ce9e6f06c30005031974aeab515198ea59de11",
+    "commit": "944ed86165ddfd55b517873392b3e94a8f78f02c"
+  },
+  "schedule": {
+    "id": "schedule_7_v1_2_5_draft",
+    "version": "1.2.5",
+    "label": "Schedule 7, Version 1.2.5 working draft; unpublished",
+    "status": "draft"
+  },
+  "legReassignments": [
+    {
+      "legId": "LIT-MCI-CRJ200-01-IN",
+      "expectedRoute": 158,
+      "expectedSequenceWithinRoute": 2,
+      "targetRoute": 174
+    },
+    {
+      "legId": "LIT-MCI-CRJ200-02-OUT",
+      "expectedRoute": 158,
+      "expectedSequenceWithinRoute": 3,
+      "targetRoute": 174
+    },
+    {
+      "legId": "V115-R158-MCI-RFD",
+      "expectedRoute": 158,
+      "expectedSequenceWithinRoute": 4,
+      "targetRoute": 174
+    },
+    {
+      "legId": "V115-R158-RFD-MCI",
+      "expectedRoute": 158,
+      "expectedSequenceWithinRoute": 5,
+      "targetRoute": 174
+    },
+    {
+      "legId": "V115-R158-MCI-MKE",
+      "expectedRoute": 158,
+      "expectedSequenceWithinRoute": 6,
+      "targetRoute": 174
+    },
+    {
+      "legId": "V115-R158-MKE-MCI",
+      "expectedRoute": 158,
+      "expectedSequenceWithinRoute": 7,
+      "targetRoute": 174
+    },
+    {
+      "legId": "DSM-MCI-CRJ200-01-IN",
+      "expectedRoute": 158,
+      "expectedSequenceWithinRoute": 8,
+      "targetRoute": 174
+    },
+    {
+      "legId": "MCI-MFE-CRJ200-02-OUT",
+      "expectedRoute": 135,
+      "expectedSequenceWithinRoute": 2,
+      "targetRoute": 131
+    },
+    {
+      "legId": "MCI-MFE-CRJ200-01-IN",
+      "expectedRoute": 135,
+      "expectedSequenceWithinRoute": 3,
+      "targetRoute": 131
+    },
+    {
+      "legId": "V114-R135-MCI-PNS",
+      "expectedRoute": 135,
+      "expectedSequenceWithinRoute": 4,
+      "targetRoute": 131
+    },
+    {
+      "legId": "V114-R135-PNS-MCI",
+      "expectedRoute": 135,
+      "expectedSequenceWithinRoute": 5,
+      "targetRoute": 131
+    },
+    {
+      "legId": "V116-R148-DAY-RFD",
+      "expectedRoute": 148,
+      "expectedSequenceWithinRoute": 6,
+      "targetRoute": 175
+    },
+    {
+      "legId": "V116-R148-RFD-DAY",
+      "expectedRoute": 148,
+      "expectedSequenceWithinRoute": 7,
+      "targetRoute": 175
+    },
+    {
+      "legId": "V115-R176-SYR-BNA",
+      "expectedRoute": 176,
+      "expectedSequenceWithinRoute": 3,
+      "targetRoute": 144
+    },
+    {
+      "legId": "V115-R176-BNA-SYR",
+      "expectedRoute": 176,
+      "expectedSequenceWithinRoute": 4,
+      "targetRoute": 144
+    },
+    {
+      "legId": "JAX-MOB-CRJ200-02-OUT",
+      "expectedRoute": 127,
+      "expectedSequenceWithinRoute": 2,
+      "targetRoute": 142
+    },
+    {
+      "legId": "JAX-MOB-CRJ200-02-IN",
+      "expectedRoute": 127,
+      "expectedSequenceWithinRoute": 3,
+      "targetRoute": 142
+    },
+    {
+      "legId": "JAX-PNS-CRJ200-01-OUT",
+      "expectedRoute": 127,
+      "expectedSequenceWithinRoute": 4,
+      "targetRoute": 142
+    },
+    {
+      "legId": "JAX-PNS-CRJ200-01-IN",
+      "expectedRoute": 127,
+      "expectedSequenceWithinRoute": 5,
+      "targetRoute": 142
+    },
+    {
+      "legId": "JAX-SRQ-CRJ200-01-OUT",
+      "expectedRoute": 127,
+      "expectedSequenceWithinRoute": 6,
+      "targetRoute": 142
+    },
+    {
+      "legId": "BHM-SRQ-CRJ200-01-IN",
+      "expectedRoute": 127,
+      "expectedSequenceWithinRoute": 7,
+      "targetRoute": 142
+    },
+    {
+      "legId": "BHM-TUL-CRJ200-02-OUT",
+      "expectedRoute": 127,
+      "expectedSequenceWithinRoute": 8,
+      "targetRoute": 142
+    },
+    {
+      "legId": "JAX-VPS-CRJ200-01-OUT",
+      "expectedRoute": 171,
+      "expectedSequenceWithinRoute": 6,
+      "targetRoute": 163
+    },
+    {
+      "legId": "BHM-VPS-CRJ200-01-IN",
+      "expectedRoute": 171,
+      "expectedSequenceWithinRoute": 7,
+      "targetRoute": 163
+    },
+    {
+      "legId": "BHM-XNA-CRJ200-01-OUT",
+      "expectedRoute": 171,
+      "expectedSequenceWithinRoute": 8,
+      "targetRoute": 163
+    },
+    {
+      "legId": "CHS-JAX-CRJ200-01-IN",
+      "expectedRoute": 142,
+      "expectedSequenceWithinRoute": 2,
+      "targetRoute": 127
+    },
+    {
+      "legId": "CHS-DAY-CRJ200-01-OUT",
+      "expectedRoute": 142,
+      "expectedSequenceWithinRoute": 3,
+      "targetRoute": 127
+    },
+    {
+      "legId": "CRW-DAY-CRJ200-02-IN",
+      "expectedRoute": 142,
+      "expectedSequenceWithinRoute": 4,
+      "targetRoute": 127
+    },
+    {
+      "legId": "CRW-DAY-CRJ200-02-OUT",
+      "expectedRoute": 142,
+      "expectedSequenceWithinRoute": 5,
+      "targetRoute": 127
+    },
+    {
+      "legId": "DAY-PHF-CRJ200-03-OUT",
+      "expectedRoute": 142,
+      "expectedSequenceWithinRoute": 6,
+      "targetRoute": 127
+    },
+    {
+      "legId": "CAE-PHF-CRJ200-01-IN",
+      "expectedRoute": 142,
+      "expectedSequenceWithinRoute": 7,
+      "targetRoute": 127
+    },
+    {
+      "legId": "JAX-PIE-CRJ200-01-OUT",
+      "expectedRoute": 172,
+      "expectedSequenceWithinRoute": 4,
+      "targetRoute": 170
+    },
+    {
+      "legId": "JAX-PIE-CRJ200-01-IN",
+      "expectedRoute": 172,
+      "expectedSequenceWithinRoute": 5,
+      "targetRoute": 170
+    },
+    {
+      "legId": "JAX-MLB-CRJ200-01-OUT",
+      "expectedRoute": 172,
+      "expectedSequenceWithinRoute": 6,
+      "targetRoute": 170
+    },
+    {
+      "legId": "JAX-MLB-CRJ200-02-IN",
+      "expectedRoute": 172,
+      "expectedSequenceWithinRoute": 7,
+      "targetRoute": 170
+    },
+    {
+      "legId": "JAX-MCN-CRJ200-01-OUT",
+      "expectedRoute": 172,
+      "expectedSequenceWithinRoute": 8,
+      "targetRoute": 170
+    },
+    {
+      "legId": "COU-MCI-CRJ200-02-IN",
+      "expectedRoute": 174,
+      "expectedSequenceWithinRoute": 2,
+      "targetRoute": 158
+    },
+    {
+      "legId": "COU-MCI-CRJ200-02-OUT",
+      "expectedRoute": 174,
+      "expectedSequenceWithinRoute": 3,
+      "targetRoute": 158
+    },
+    {
+      "legId": "JAN-MCI-CRJ200-01-IN",
+      "expectedRoute": 174,
+      "expectedSequenceWithinRoute": 4,
+      "targetRoute": 158
+    },
+    {
+      "legId": "JAN-JAX-CRJ200-01-OUT",
+      "expectedRoute": 174,
+      "expectedSequenceWithinRoute": 5,
+      "targetRoute": 158
+    },
+    {
+      "legId": "GPT-JAX-CRJ200-01-IN",
+      "expectedRoute": 174,
+      "expectedSequenceWithinRoute": 6,
+      "targetRoute": 158
+    },
+    {
+      "legId": "JAN-MCI-CRJ200-02-IN",
+      "expectedRoute": 131,
+      "expectedSequenceWithinRoute": 4,
+      "targetRoute": 160
+    },
+    {
+      "legId": "V121-R131-1-JAN-MCI",
+      "expectedRoute": 131,
+      "expectedSequenceWithinRoute": 5,
+      "targetRoute": 160
+    },
+    {
+      "legId": "V121-R131-2-MCI-JAN",
+      "expectedRoute": 131,
+      "expectedSequenceWithinRoute": 6,
+      "targetRoute": 160
+    },
+    {
+      "legId": "JAX-SAV-CRJ200-01-OUT",
+      "expectedRoute": 170,
+      "expectedSequenceWithinRoute": 4,
+      "targetRoute": 172
+    },
+    {
+      "legId": "JAX-SAV-CRJ200-01-IN",
+      "expectedRoute": 170,
+      "expectedSequenceWithinRoute": 5,
+      "targetRoute": 172
+    },
+    {
+      "legId": "JAX-MYR-CRJ200-02-OUT",
+      "expectedRoute": 170,
+      "expectedSequenceWithinRoute": 6,
+      "targetRoute": 172
+    },
+    {
+      "legId": "JAX-MYR-CRJ200-02-IN",
+      "expectedRoute": 170,
+      "expectedSequenceWithinRoute": 7,
+      "targetRoute": 172
+    },
+    {
+      "legId": "JAX-MOB-CRJ200-01-OUT",
+      "expectedRoute": 170,
+      "expectedSequenceWithinRoute": 8,
+      "targetRoute": 172
+    },
+    {
+      "legId": "JAN-JAX-CRJ200-01-IN",
+      "expectedRoute": 163,
+      "expectedSequenceWithinRoute": 4,
+      "targetRoute": 171
+    },
+    {
+      "legId": "DAY-MSN-CRJ200-01-OUT",
+      "expectedRoute": 146,
+      "expectedSequenceWithinRoute": 8,
+      "targetRoute": 168
+    },
+    {
+      "legId": "CRP-MCI-CRJ200-02-IN",
+      "expectedRoute": 131,
+      "expectedSequenceWithinRoute": 2,
+      "targetRoute": 135
+    },
+    {
+      "legId": "CRP-MCI-CRJ200-02-OUT",
+      "expectedRoute": 131,
+      "expectedSequenceWithinRoute": 3,
+      "targetRoute": 135
+    },
+    {
+      "legId": "LIT-MCI-CRJ200-03-IN",
+      "expectedRoute": 160,
+      "expectedSequenceWithinRoute": 3,
+      "targetRoute": 135
+    },
+    {
+      "legId": "LIT-MCI-CRJ200-01-OUT",
+      "expectedRoute": 160,
+      "expectedSequenceWithinRoute": 4,
+      "targetRoute": 135
+    },
+    {
+      "legId": "FAR-MCI-CRJ200-01-IN",
+      "expectedRoute": 160,
+      "expectedSequenceWithinRoute": 5,
+      "targetRoute": 135
+    },
+    {
+      "legId": "HPN-SYR-CRJ200-02-IN",
+      "expectedRoute": 124,
+      "expectedSequenceWithinRoute": 4,
+      "targetRoute": 147
+    },
+    {
+      "legId": "HPN-SYR-CRJ200-02-OUT",
+      "expectedRoute": 124,
+      "expectedSequenceWithinRoute": 5,
+      "targetRoute": 147
+    },
+    {
+      "legId": "HVN-SYR-CRJ200-03-IN",
+      "expectedRoute": 124,
+      "expectedSequenceWithinRoute": 6,
+      "targetRoute": 147
+    },
+    {
+      "legId": "V115-R124-HVN-SYR",
+      "expectedRoute": 124,
+      "expectedSequenceWithinRoute": 7,
+      "targetRoute": 147
+    },
+    {
+      "legId": "V115-R124-SYR-HVN",
+      "expectedRoute": 124,
+      "expectedSequenceWithinRoute": 8,
+      "targetRoute": 147
+    },
+    {
+      "legId": "CHA-DAY-CRJ200-01-IN",
+      "expectedRoute": 166,
+      "expectedSequenceWithinRoute": 7,
+      "targetRoute": 146
+    },
+    {
+      "legId": "DAY-ERI-CRJ200-01-OUT",
+      "expectedRoute": 175,
+      "expectedSequenceWithinRoute": 6,
+      "targetRoute": 166
+    },
+    {
+      "legId": "ACY-SYR-CRJ200-01-IN",
+      "expectedRoute": 112,
+      "expectedSequenceWithinRoute": 6,
+      "targetRoute": 121
+    },
+    {
+      "legId": "ACY-PHF-CRJ200-01-OUT",
+      "expectedRoute": 112,
+      "expectedSequenceWithinRoute": 7,
+      "targetRoute": 121
+    },
+    {
+      "legId": "AVP-PHF-CRJ200-01-IN",
+      "expectedRoute": 112,
+      "expectedSequenceWithinRoute": 8,
+      "targetRoute": 121
+    },
+    {
+      "legId": "DAY-GRR-CRJ200-04-OUT",
+      "expectedRoute": 175,
+      "expectedSequenceWithinRoute": 4,
+      "targetRoute": 148
+    },
+    {
+      "legId": "DAY-GRR-CRJ200-04-IN",
+      "expectedRoute": 175,
+      "expectedSequenceWithinRoute": 5,
+      "targetRoute": 148
+    },
+    {
+      "legId": "DAY-SBN-CRJ200-01-OUT",
+      "expectedRoute": 168,
+      "expectedSequenceWithinRoute": 6,
+      "targetRoute": 148
+    },
+    {
+      "legId": "V121-R147-1-SYR-PIT",
+      "expectedRoute": 147,
+      "expectedSequenceWithinRoute": 4,
+      "targetRoute": 124
+    },
+    {
+      "legId": "V121-R147-2-PIT-SYR",
+      "expectedRoute": 147,
+      "expectedSequenceWithinRoute": 5,
+      "targetRoute": 124
+    },
+    {
+      "legId": "BWI-SYR-CRJ200-01-IN",
+      "expectedRoute": 147,
+      "expectedSequenceWithinRoute": 6,
+      "targetRoute": 124
+    },
+    {
+      "legId": "BWI-SYR-CRJ200-01-OUT",
+      "expectedRoute": 147,
+      "expectedSequenceWithinRoute": 7,
+      "targetRoute": 124
+    },
+    {
+      "legId": "MHT-SYR-CRJ200-01-IN",
+      "expectedRoute": 147,
+      "expectedSequenceWithinRoute": 8,
+      "targetRoute": 124
+    },
+    {
+      "legId": "PWM-SYR-CRJ200-01-IN",
+      "expectedRoute": 121,
+      "expectedSequenceWithinRoute": 4,
+      "targetRoute": 112
+    },
+    {
+      "legId": "PWM-SYR-CRJ200-03-IN",
+      "expectedRoute": 144,
+      "expectedSequenceWithinRoute": 5,
+      "targetRoute": 176
+    },
+    {
+      "legId": "V115-R144-PWM-SYR",
+      "expectedRoute": 144,
+      "expectedSequenceWithinRoute": 6,
+      "targetRoute": 176
+    },
+    {
+      "legId": "V115-R144-SYR-BUF",
+      "expectedRoute": 144,
+      "expectedSequenceWithinRoute": 7,
+      "targetRoute": 176
+    },
+    {
+      "legId": "V115-R144-BUF-SYR",
+      "expectedRoute": 144,
+      "expectedSequenceWithinRoute": 8,
+      "targetRoute": 176
+    },
+    {
+      "legId": "V115-R144-SYR-PWM",
+      "expectedRoute": 144,
+      "expectedSequenceWithinRoute": 9,
+      "targetRoute": 176
+    }
+  ],
+  "routeReassignments": [
+    {
+      "sourceRoute": 164,
+      "targetRoute": 111,
+      "line": "AD",
+      "day": 1,
+      "expectedLine": "AE",
+      "expectedDay": 14,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 151,
+      "targetRoute": 112,
+      "line": "AD",
+      "day": 2,
+      "expectedLine": "AE",
+      "expectedDay": 1,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 152,
+      "targetRoute": 113,
+      "line": "AD",
+      "day": 3,
+      "expectedLine": "AE",
+      "expectedDay": 2,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 153,
+      "targetRoute": 114,
+      "line": "AD",
+      "day": 4,
+      "expectedLine": "AE",
+      "expectedDay": 3,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 154,
+      "targetRoute": 115,
+      "line": "AD",
+      "day": 5,
+      "expectedLine": "AE",
+      "expectedDay": 4,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 155,
+      "targetRoute": 116,
+      "line": "AD",
+      "day": 6,
+      "expectedLine": "AE",
+      "expectedDay": 5,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 156,
+      "targetRoute": 117,
+      "line": "AD",
+      "day": 7,
+      "expectedLine": "AE",
+      "expectedDay": 6,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 157,
+      "targetRoute": 118,
+      "line": "AD",
+      "day": 8,
+      "expectedLine": "AE",
+      "expectedDay": 7,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 158,
+      "targetRoute": 119,
+      "line": "AD",
+      "day": 9,
+      "expectedLine": "AE",
+      "expectedDay": 8,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 172,
+      "targetRoute": 120,
+      "line": "AD",
+      "day": 10,
+      "expectedLine": "AM",
+      "expectedDay": 1,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 171,
+      "targetRoute": 121,
+      "line": "AD",
+      "day": 11,
+      "expectedLine": "AI",
+      "expectedDay": 2,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 167,
+      "targetRoute": 122,
+      "line": "AE",
+      "day": 1,
+      "expectedLine": "AF",
+      "expectedDay": 3,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 168,
+      "targetRoute": 123,
+      "line": "AE",
+      "day": 2,
+      "expectedLine": "AF",
+      "expectedDay": 4,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 147,
+      "targetRoute": 124,
+      "line": "AE",
+      "day": 3,
+      "expectedLine": "AD",
+      "expectedDay": 37,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 125,
+      "targetRoute": 125,
+      "line": "AE",
+      "day": 4,
+      "expectedLine": "AD",
+      "expectedDay": 15,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 126,
+      "targetRoute": 126,
+      "line": "AE",
+      "day": 5,
+      "expectedLine": "AD",
+      "expectedDay": 16,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 127,
+      "targetRoute": 127,
+      "line": "AE",
+      "day": 6,
+      "expectedLine": "AD",
+      "expectedDay": 17,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 143,
+      "targetRoute": 128,
+      "line": "AE",
+      "day": 7,
+      "expectedLine": "AD",
+      "expectedDay": 33,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 144,
+      "targetRoute": 129,
+      "line": "AE",
+      "day": 8,
+      "expectedLine": "AD",
+      "expectedDay": 34,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 176,
+      "targetRoute": 130,
+      "line": "AE",
+      "day": 9,
+      "expectedLine": "AR",
+      "expectedDay": 1,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 145,
+      "targetRoute": 131,
+      "line": "AE",
+      "day": 10,
+      "expectedLine": "AD",
+      "expectedDay": 35,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 146,
+      "targetRoute": 132,
+      "line": "AE",
+      "day": 11,
+      "expectedLine": "AD",
+      "expectedDay": 36,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 129,
+      "targetRoute": 133,
+      "line": "AF",
+      "day": 1,
+      "expectedLine": "AD",
+      "expectedDay": 19,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 130,
+      "targetRoute": 134,
+      "line": "AF",
+      "day": 2,
+      "expectedLine": "AD",
+      "expectedDay": 20,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 131,
+      "targetRoute": 135,
+      "line": "AF",
+      "day": 3,
+      "expectedLine": "AD",
+      "expectedDay": 21,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 136,
+      "targetRoute": 136,
+      "line": "AF",
+      "day": 4,
+      "expectedLine": "AD",
+      "expectedDay": 26,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 137,
+      "targetRoute": 137,
+      "line": "AF",
+      "day": 5,
+      "expectedLine": "AD",
+      "expectedDay": 27,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 138,
+      "targetRoute": 138,
+      "line": "AF",
+      "day": 6,
+      "expectedLine": "AD",
+      "expectedDay": 28,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 139,
+      "targetRoute": 139,
+      "line": "AF",
+      "day": 7,
+      "expectedLine": "AD",
+      "expectedDay": 29,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 140,
+      "targetRoute": 140,
+      "line": "AF",
+      "day": 8,
+      "expectedLine": "AD",
+      "expectedDay": 30,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 141,
+      "targetRoute": 141,
+      "line": "AF",
+      "day": 9,
+      "expectedLine": "AD",
+      "expectedDay": 31,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 142,
+      "targetRoute": 142,
+      "line": "AF",
+      "day": 10,
+      "expectedLine": "AD",
+      "expectedDay": 32,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 128,
+      "targetRoute": 143,
+      "line": "AF",
+      "day": 11,
+      "expectedLine": "AD",
+      "expectedDay": 18,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 132,
+      "targetRoute": 144,
+      "line": "AI",
+      "day": 1,
+      "expectedLine": "AD",
+      "expectedDay": 22,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 133,
+      "targetRoute": 145,
+      "line": "AI",
+      "day": 2,
+      "expectedLine": "AD",
+      "expectedDay": 23,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 134,
+      "targetRoute": 146,
+      "line": "AI",
+      "day": 3,
+      "expectedLine": "AD",
+      "expectedDay": 24,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 135,
+      "targetRoute": 147,
+      "line": "AI",
+      "day": 4,
+      "expectedLine": "AD",
+      "expectedDay": 25,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 161,
+      "targetRoute": 148,
+      "line": "AI",
+      "day": 5,
+      "expectedLine": "AE",
+      "expectedDay": 11,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 162,
+      "targetRoute": 149,
+      "line": "AI",
+      "day": 6,
+      "expectedLine": "AE",
+      "expectedDay": 12,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 163,
+      "targetRoute": 150,
+      "line": "AI",
+      "day": 7,
+      "expectedLine": "AE",
+      "expectedDay": 13,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 170,
+      "targetRoute": 151,
+      "line": "AI",
+      "day": 8,
+      "expectedLine": "AI",
+      "expectedDay": 1,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 173,
+      "targetRoute": 152,
+      "line": "AI",
+      "day": 9,
+      "expectedLine": "AM",
+      "expectedDay": 2,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 174,
+      "targetRoute": 153,
+      "line": "AI",
+      "day": 10,
+      "expectedLine": "AM",
+      "expectedDay": 3,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 159,
+      "targetRoute": 154,
+      "line": "AI",
+      "day": 11,
+      "expectedLine": "AE",
+      "expectedDay": 9,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 160,
+      "targetRoute": 155,
+      "line": "AI",
+      "day": 12,
+      "expectedLine": "AE",
+      "expectedDay": 10,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 175,
+      "targetRoute": 156,
+      "line": "AM",
+      "day": 1,
+      "expectedLine": "AN",
+      "expectedDay": 1,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 149,
+      "targetRoute": 157,
+      "line": "AM",
+      "day": 2,
+      "expectedLine": "AD",
+      "expectedDay": 39,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 150,
+      "targetRoute": 158,
+      "line": "AM",
+      "day": 3,
+      "expectedLine": "AD",
+      "expectedDay": 40,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 111,
+      "targetRoute": 159,
+      "line": "AM",
+      "day": 4,
+      "expectedLine": "AD",
+      "expectedDay": 1,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 112,
+      "targetRoute": 160,
+      "line": "AM",
+      "day": 5,
+      "expectedLine": "AD",
+      "expectedDay": 2,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 122,
+      "targetRoute": 161,
+      "line": "AM",
+      "day": 6,
+      "expectedLine": "AD",
+      "expectedDay": 12,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 123,
+      "targetRoute": 162,
+      "line": "AM",
+      "day": 7,
+      "expectedLine": "AD",
+      "expectedDay": 13,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 124,
+      "targetRoute": 163,
+      "line": "AM",
+      "day": 8,
+      "expectedLine": "AD",
+      "expectedDay": 14,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 148,
+      "targetRoute": 164,
+      "line": "AM",
+      "day": 9,
+      "expectedLine": "AD",
+      "expectedDay": 38,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 169,
+      "targetRoute": 165,
+      "line": "AM",
+      "day": 10,
+      "expectedLine": "AF",
+      "expectedDay": 5,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 165,
+      "targetRoute": 166,
+      "line": "AM",
+      "day": 11,
+      "expectedLine": "AF",
+      "expectedDay": 1,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 166,
+      "targetRoute": 167,
+      "line": "AM",
+      "day": 12,
+      "expectedLine": "AF",
+      "expectedDay": 2,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 114,
+      "targetRoute": 168,
+      "line": "AN",
+      "day": 1,
+      "expectedLine": "AD",
+      "expectedDay": 4,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 115,
+      "targetRoute": 169,
+      "line": "AN",
+      "day": 2,
+      "expectedLine": "AD",
+      "expectedDay": 5,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 116,
+      "targetRoute": 170,
+      "line": "AN",
+      "day": 3,
+      "expectedLine": "AD",
+      "expectedDay": 6,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 117,
+      "targetRoute": 171,
+      "line": "AN",
+      "day": 4,
+      "expectedLine": "AD",
+      "expectedDay": 7,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 118,
+      "targetRoute": 172,
+      "line": "AN",
+      "day": 5,
+      "expectedLine": "AD",
+      "expectedDay": 8,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 119,
+      "targetRoute": 173,
+      "line": "AN",
+      "day": 6,
+      "expectedLine": "AD",
+      "expectedDay": 9,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 120,
+      "targetRoute": 174,
+      "line": "AN",
+      "day": 7,
+      "expectedLine": "AD",
+      "expectedDay": 10,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 121,
+      "targetRoute": 175,
+      "line": "AN",
+      "day": 8,
+      "expectedLine": "AD",
+      "expectedDay": 11,
+      "expectedFleet": "CRJ200"
+    },
+    {
+      "sourceRoute": 113,
+      "targetRoute": 176,
+      "line": "AN",
+      "day": 9,
+      "expectedLine": "AD",
+      "expectedDay": 3,
+      "expectedFleet": "CRJ200"
+    }
+  ],
+  "approval": {
+    "status": "approved for draft implementation; unpublished",
+    "userInstruction": "Add these suggestions to a new 1.2.5 draft. We'll make additional changes before publishing the version.",
+    "scope": "CRJ200 line alignment plus IND overnight on routes 125/126 and CAK overnight on routes 136/137. Flights 1503 and 1873 delayed 3 and 10 minutes respectively; DAY B1 shifted one minute later. Other destination alternatives excluded.",
+    "publication": "Reserved to user decision"
+  },
+  "initiative": {
+    "kind": "crj200_line_alignment",
+    "sourceLines": [
+      "AD",
+      "AE",
+      "AF",
+      "AI",
+      "AM",
+      "AN",
+      "AR"
+    ],
+    "resultLines": [
+      "AD",
+      "AE",
+      "AF",
+      "AI",
+      "AM",
+      "AN"
+    ],
+    "lineLengths": [
+      11,
+      11,
+      11,
+      12,
+      12,
+      9
+    ],
+    "protectedRoutes": [
+      125,
+      136
+    ],
+    "protectedNextRoutes": [
+      126,
+      137
+    ],
+    "passengerScheduleChanges": false,
+    "fleetInventoryChanges": false,
+    "method": "Reassign existing same-station flight suffixes, preserving every passenger flight and every overnight flight-to-flight handoff; sequentially renumber other route days."
+  },
+  "insertLegs": [
+    {
+      "id": "DAY-RON-IND_CAK-R125-1-DAY-IND",
+      "origin": "DAY",
+      "destination": "IND",
+      "departureMinute": 1295,
+      "arrivalMinute": 1338,
+      "route": 125
+    },
+    {
+      "id": "DAY-RON-IND_CAK-R126-1-IND-DAY",
+      "origin": "IND",
+      "destination": "DAY",
+      "departureMinute": 270,
+      "arrivalMinute": 313,
+      "route": 126
+    },
+    {
+      "id": "DAY-RON-IND_CAK-R136-1-DAY-CAK",
+      "origin": "DAY",
+      "destination": "CAK",
+      "departureMinute": 1295,
+      "arrivalMinute": 1345,
+      "route": 136
+    },
+    {
+      "id": "DAY-RON-IND_CAK-R137-1-CAK-DAY",
+      "origin": "CAK",
+      "destination": "DAY",
+      "departureMinute": 270,
+      "arrivalMinute": 320,
+      "route": 137
+    }
+  ],
+  "retimeLegs": [
+    {
+      "legId": "DAY-HOU-CRJ200-01-OUT",
+      "expectedDepartureMinute": 350,
+      "expectedArrivalMinute": 448,
+      "departureMinute": 353,
+      "arrivalMinute": 451
+    },
+    {
+      "legId": "DAY-FWA-CRJ200-01-OUT",
+      "expectedDepartureMinute": 350,
+      "expectedArrivalMinute": 390,
+      "departureMinute": 360,
+      "arrivalMinute": 400
+    }
+  ],
+  "bankAssignmentsToAdd": [
+    {
+      "legId": "DAY-RON-IND_CAK-R125-1-DAY-IND",
+      "operation": "departure",
+      "bankId": "DAY-B9"
+    },
+    {
+      "legId": "DAY-RON-IND_CAK-R126-1-IND-DAY",
+      "operation": "arrival",
+      "bankId": "DAY-B1"
+    },
+    {
+      "legId": "DAY-RON-IND_CAK-R136-1-DAY-CAK",
+      "operation": "departure",
+      "bankId": "DAY-B9"
+    },
+    {
+      "legId": "DAY-RON-IND_CAK-R137-1-CAK-DAY",
+      "operation": "arrival",
+      "bankId": "DAY-B1"
+    }
+  ],
+  "bankAssignmentReplacements": [],
+  "operatingOverrides": [],
+  "hubBankChanges": [
+    {
+      "bankId": "DAY-B1",
+      "expectedStartMinute": 300,
+      "expectedEndMinute": 360,
+      "startMinute": 301,
+      "endMinute": 361
+    }
+  ],
+  "hubBanksToAdd": [],
+  "hubBankCountOverrides": {},
+  "sourceProposals": [
+    {
+      "path": "config/optimizations/schedule_7_crj200_line_alignment.json",
+      "sha256": "95c7a3b4fe62a2a344865665c6b50fbb0185d0c00eccc709212c249a03928e55"
+    },
+    {
+      "path": "config/proposals/schedule_7_day_overnight_ind_cak.json",
+      "sha256": "bf108645b3543210b7317243bf56eba3d20341fc9fe15eb59111f19da814dd40"
+    },
+    {
+      "path": "config/proposals/schedule_7_day_overnight_review.json",
+      "sha256": "b9399286a1945ac2fbcfe340270202028ab91792565add555d96a805358c5c23"
+    }
+  ]
+}

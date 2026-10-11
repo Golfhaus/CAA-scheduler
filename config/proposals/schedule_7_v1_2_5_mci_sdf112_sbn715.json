@@ -1,0 +1,112 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "v1.2.5-mci-SDF112_SBN715",
+  "baseSchedule": {
+    "scheduleId": "schedule_7_v1_2_5_draft",
+    "canonical": "data/schedules/schedule_7_v1_2_5_draft/canonical_schedule.json",
+    "sha256": "ce182870262e895d45f725f9406b919d61cb24f97bab83ee22902dd1710b06f5"
+  },
+  "schedule": {
+    "id": "schedule_7_v1_2_5_mci_SDF112_SBN715",
+    "version": "1.2.5-analysis",
+    "label": "Unpublished v1.2.5 MCI B1 proposal SDF112_SBN715",
+    "status": "draft"
+  },
+  "approval": {
+    "status": "reviewed proposal only; not implemented",
+    "publication": "Reserved to user decision",
+    "scope": "MCI overnight feeders; SDF112_SBN715"
+  },
+  "hubBanksToAdd": [],
+  "hubBankCountOverrides": {},
+  "insertLegs": [
+    {
+      "id": "V125-MCI-SDF112_SBN715-R112-1-MCI-SDF",
+      "origin": "MCI",
+      "destination": "SDF",
+      "departureMinute": 1245,
+      "arrivalMinute": 1400,
+      "route": 112
+    },
+    {
+      "id": "V125-MCI-SDF112_SBN715-R113-1-SDF-MCI",
+      "origin": "SDF",
+      "destination": "MCI",
+      "departureMinute": 270,
+      "arrivalMinute": 305,
+      "route": 113
+    },
+    {
+      "id": "V125-MCI-SDF112_SBN715-R715-1-MCI-SBN",
+      "origin": "MCI",
+      "destination": "SBN",
+      "departureMinute": 1280,
+      "arrivalMinute": 1427,
+      "route": 715
+    },
+    {
+      "id": "V125-MCI-SDF112_SBN715-R716-1-SBN-MCI",
+      "origin": "SBN",
+      "destination": "MCI",
+      "departureMinute": 270,
+      "arrivalMinute": 297,
+      "route": 716
+    }
+  ],
+  "retimeLegs": [
+    {
+      "legId": "MCI-SHV-CRJ200-02-OUT",
+      "expectedDepartureMinute": 335,
+      "expectedArrivalMinute": 428,
+      "departureMinute": 345,
+      "arrivalMinute": 438
+    },
+    {
+      "legId": "MCI-SFB-MAX9-01-OUT",
+      "expectedDepartureMinute": 335,
+      "expectedArrivalMinute": 548,
+      "departureMinute": 337,
+      "arrivalMinute": 550
+    },
+    {
+      "legId": "V114-R704-MCI-AUS",
+      "expectedDepartureMinute": 285,
+      "expectedArrivalMinute": 392,
+      "departureMinute": 286,
+      "arrivalMinute": 393
+    }
+  ],
+  "bankAssignmentsToAdd": [
+    {
+      "legId": "V125-MCI-SDF112_SBN715-R112-1-MCI-SDF",
+      "operation": "departure",
+      "bankId": "MCI-M11"
+    },
+    {
+      "legId": "V125-MCI-SDF112_SBN715-R113-1-SDF-MCI",
+      "operation": "arrival",
+      "bankId": "MCI-B1"
+    },
+    {
+      "legId": "V125-MCI-SDF112_SBN715-R715-1-MCI-SBN",
+      "operation": "departure",
+      "bankId": "MCI-M11"
+    },
+    {
+      "legId": "V125-MCI-SDF112_SBN715-R716-1-SBN-MCI",
+      "operation": "arrival",
+      "bankId": "MCI-B1"
+    }
+  ],
+  "bankAssignmentReplacements": [],
+  "operatingOverrides": [],
+  "hubBankChanges": [
+    {
+      "bankId": "MCI-B1",
+      "expectedStartMinute": 285,
+      "expectedEndMinute": 345,
+      "startMinute": 286,
+      "endMinute": 346
+    }
+  ]
+}

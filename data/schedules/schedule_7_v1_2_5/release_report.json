@@ -1,0 +1,311 @@
+{
+  "schemaVersion": "1.0.0",
+  "scheduleId": "schedule_7_v1_2_5",
+  "status": "released",
+  "sourceScheduleId": "schedule_7_v1_2_4",
+  "overlayIds": [
+    "schedule-7-v1.2.5-accepted-rounds-1-3"
+  ],
+  "summary": {
+    "legs": 1190,
+    "routes": 181,
+    "lines": 19,
+    "effectiveOperatingErrors": 0,
+    "hardStopFailures": 0,
+    "overnightTurnFailures": 0,
+    "directRoundTripCities": 6,
+    "connectedDirectionalPairs": 16,
+    "standClaims": 14,
+    "standMinutes": 3253,
+    "hubStandClaims": 0,
+    "hubStandMinutes": 0
+  },
+  "validation": {
+    "structural": "pass",
+    "operating": "review",
+    "overnightTurns": "pass",
+    "planningReconstruction": "pass"
+  },
+  "connectionFinding": "6/6 target cities have direct SYR round trips, and 16/16 directional cross-group pairs meet the configured connection window.",
+  "connectionScopeDecision": {
+    "status": "approved",
+    "approvedBy": "user",
+    "userInstruction": "Continue with adding the ROD extensions, and publishing the v1.2.5 schedule to the main branch of the app.",
+    "model": "existing_hub_timetable_policy_with_one_and_two_stop_utilization_analysis",
+    "description": "Publication authorized October 11, 2026. BTV/HPN additions are directional B3 feeders with weak outbound positioning demand. Opportunity is seat-uncapped, not a passenger or profit forecast. The SYR one-stop audit covers the whole timetable; the full multi-hub itinerary comparison is recorded separately below.",
+    "networkItineraryAudit": {
+      "marketsWithSlowerBestItinerary": [
+        {
+          "origin": "IND",
+          "destination": "SFB",
+          "od": 247.1,
+          "oldFastestMinutes": 278,
+          "newFastestMinutes": 286,
+          "differenceMinutes": 8
+        },
+        {
+          "origin": "CHS",
+          "destination": "IND",
+          "od": 21.8,
+          "oldFastestMinutes": 267,
+          "newFastestMinutes": 269,
+          "differenceMinutes": 2
+        },
+        {
+          "origin": "SFB",
+          "destination": "SWF",
+          "od": 16.6,
+          "oldFastestMinutes": 237,
+          "newFastestMinutes": 239,
+          "differenceMinutes": 2
+        },
+        {
+          "origin": "OKC",
+          "destination": "IND",
+          "od": 13.4,
+          "oldFastestMinutes": 517,
+          "newFastestMinutes": 519,
+          "differenceMinutes": 2
+        },
+        {
+          "origin": "IND",
+          "destination": "OMA",
+          "od": 11.3,
+          "oldFastestMinutes": 174,
+          "newFastestMinutes": 189,
+          "differenceMinutes": 15
+        },
+        {
+          "origin": "IND",
+          "destination": "ELP",
+          "od": 9.8,
+          "oldFastestMinutes": 261,
+          "newFastestMinutes": 276,
+          "differenceMinutes": 15
+        },
+        {
+          "origin": "TUL",
+          "destination": "IND",
+          "od": 7.9,
+          "oldFastestMinutes": 517,
+          "newFastestMinutes": 519,
+          "differenceMinutes": 2
+        },
+        {
+          "origin": "ROC",
+          "destination": "IND",
+          "od": 5.4,
+          "oldFastestMinutes": 247,
+          "newFastestMinutes": 249,
+          "differenceMinutes": 2
+        },
+        {
+          "origin": "IND",
+          "destination": "ICT",
+          "od": 5.2,
+          "oldFastestMinutes": 178,
+          "newFastestMinutes": 193,
+          "differenceMinutes": 15
+        },
+        {
+          "origin": "IND",
+          "destination": "FSD",
+          "od": 5.2,
+          "oldFastestMinutes": 196,
+          "newFastestMinutes": 211,
+          "differenceMinutes": 15
+        },
+        {
+          "origin": "IND",
+          "destination": "SHV",
+          "od": 2.7,
+          "oldFastestMinutes": 218,
+          "newFastestMinutes": 233,
+          "differenceMinutes": 15
+        },
+        {
+          "origin": "CMH",
+          "destination": "IND",
+          "od": 2.1,
+          "oldFastestMinutes": 158,
+          "newFastestMinutes": 160,
+          "differenceMinutes": 2
+        },
+        {
+          "origin": "IND",
+          "destination": "CID",
+          "od": 1.9,
+          "oldFastestMinutes": 186,
+          "newFastestMinutes": 201,
+          "differenceMinutes": 15
+        },
+        {
+          "origin": "LEX",
+          "destination": "IND",
+          "od": 0.3,
+          "oldFastestMinutes": 212,
+          "newFastestMinutes": 214,
+          "differenceMinutes": 2
+        },
+        {
+          "origin": "ERI",
+          "destination": "IND",
+          "od": 0.2,
+          "oldFastestMinutes": 227,
+          "newFastestMinutes": 229,
+          "differenceMinutes": 2
+        },
+        {
+          "origin": "TOL",
+          "destination": "HOU",
+          "od": 0.0,
+          "oldFastestMinutes": 238,
+          "newFastestMinutes": 241,
+          "differenceMinutes": 3
+        },
+        {
+          "origin": "TOL",
+          "destination": "IND",
+          "od": 0.0,
+          "oldFastestMinutes": 209,
+          "newFastestMinutes": 211,
+          "differenceMinutes": 2
+        },
+        {
+          "origin": "BNA",
+          "destination": "SWF",
+          "od": 0.0,
+          "oldFastestMinutes": 367,
+          "newFastestMinutes": 369,
+          "differenceMinutes": 2
+        },
+        {
+          "origin": "JAX",
+          "destination": "SWF",
+          "od": 0.0,
+          "oldFastestMinutes": 227,
+          "newFastestMinutes": 229,
+          "differenceMinutes": 2
+        },
+        {
+          "origin": "PIT",
+          "destination": "SWF",
+          "od": 0.0,
+          "oldFastestMinutes": 145,
+          "newFastestMinutes": 147,
+          "differenceMinutes": 2
+        },
+        {
+          "origin": "PWM",
+          "destination": "SWF",
+          "od": 0.0,
+          "oldFastestMinutes": 147,
+          "newFastestMinutes": 149,
+          "differenceMinutes": 2
+        },
+        {
+          "origin": "MDT",
+          "destination": "SWF",
+          "od": 0.0,
+          "oldFastestMinutes": 137,
+          "newFastestMinutes": 139,
+          "differenceMinutes": 2
+        },
+        {
+          "origin": "BLV",
+          "destination": "SWF",
+          "od": 0.0,
+          "oldFastestMinutes": 377,
+          "newFastestMinutes": 379,
+          "differenceMinutes": 2
+        },
+        {
+          "origin": "EYW",
+          "destination": "SWF",
+          "od": 0.0,
+          "oldFastestMinutes": 392,
+          "newFastestMinutes": 394,
+          "differenceMinutes": 2
+        },
+        {
+          "origin": "MOB",
+          "destination": "SWF",
+          "od": 0.0,
+          "oldFastestMinutes": 387,
+          "newFastestMinutes": 389,
+          "differenceMinutes": 2
+        },
+        {
+          "origin": "GNV",
+          "destination": "SWF",
+          "od": 0.0,
+          "oldFastestMinutes": 370,
+          "newFastestMinutes": 372,
+          "differenceMinutes": 2
+        },
+        {
+          "origin": "ECP",
+          "destination": "SWF",
+          "od": 0.0,
+          "oldFastestMinutes": 367,
+          "newFastestMinutes": 369,
+          "differenceMinutes": 2
+        },
+        {
+          "origin": "AGS",
+          "destination": "SWF",
+          "od": 0.0,
+          "oldFastestMinutes": 362,
+          "newFastestMinutes": 364,
+          "differenceMinutes": 2
+        },
+        {
+          "origin": "MCN",
+          "destination": "SWF",
+          "od": 0.0,
+          "oldFastestMinutes": 362,
+          "newFastestMinutes": 364,
+          "differenceMinutes": 2
+        }
+      ],
+      "marketsLosingAllConnections": [],
+      "lostUnderlyingOd": 0,
+      "marketsWithFasterBestItinerary": 222
+    }
+  },
+  "patchScope": {
+    "kind": "aircraft_utilization_line_alignment_and_hub_feed",
+    "timetableChanged": true,
+    "routingChanged": true,
+    "approvedSourceRoutes": [
+      125,
+      126,
+      136,
+      137,
+      112,
+      113,
+      135,
+      715,
+      716,
+      323,
+      324,
+      159,
+      130,
+      318,
+      161,
+      704
+    ],
+    "description": "20 approved flights, 16 retimed original flights, CRJ200 alignment into six 9–12-day lines, DAY IND/CAK overnights, MCI SDF/SBN/GRR/SGF feeders and B1 +6 minutes, ALB/SWF PHF turns and SYR BTV/HPN feeders, DAY B5 +2 minutes. Broader Florida retimings excluded."
+  },
+  "artifacts": [
+    "canonical_schedule.json",
+    "connection_audit.json",
+    "gates.json",
+    "operating_validation_report.json",
+    "overnight_turn_validation.json",
+    "planning_snapshot.json",
+    "planning_validation_report.json",
+    "timetable.json",
+    "validation_report.json"
+  ]
+}
