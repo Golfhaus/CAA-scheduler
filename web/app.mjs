@@ -7,6 +7,9 @@ import {
 } from "./build-config.mjs";
 import { bankBreakdownAirports, buildHubBankBreakdown } from "./hub-bank-breakdown.mjs";
 import { routingDetailOptions, buildRoutingDetails } from "./routing-details.mjs";
+import { createOpportunityUI } from "./opportunity-ui.mjs";
+
+let opportunityUI = null;
 
 const DEFAULT_PAGE_SIZE = 50;
 const GATE_WINDOW_START = 180;
@@ -652,7 +655,7 @@ function activateTab(tab, updateHash = true) {
 }
 
 function activateScheduleStatsTab(tab) {
-  const valid = ["deps-hubs", "extension-opps", "hub-bank-breakdown"];
+  const valid = ["deps-hubs", "extension-opps", "hub-bank-breakdown", "service-coverage", "connection-misses", "bank-effectiveness"];
   state.scheduleStatsTab = valid.includes(tab) ? tab : "deps-hubs";
   $$('[data-stats-tab]').forEach((button) => {
     const active = button.dataset.statsTab === state.scheduleStatsTab;
@@ -664,6 +667,7 @@ function activateScheduleStatsTab(tab) {
     const active = view.dataset.statsView === state.scheduleStatsTab;
     view.hidden = !active;
   });
+  void opportunityUI?.activate(state.scheduleStatsTab);
 }
 
 function activateRoutingTab(tab) {
@@ -685,6 +689,7 @@ async function fetchJson(path) {
 }
 
 async function loadSchedule(scheduleId) {
+  opportunityUI?.reset();
   const entry = state.manifest.schedules.find((item) => item.id === scheduleId);
   if (!entry) throw new Error(`Schedule ${scheduleId} is not in the site manifest.`);
   const fileEntries = Object.entries(entry.files);
@@ -1691,6 +1696,35 @@ function handleReference(button) {
 }
 
 function bindEvents() {
+  document.querySelector('.stats-tabbar').addEventListener('keydown', (event) => {
+    if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key) || !event.target.matches('[data-stats-tab]')) return;
+    event.preventDefault();
+    const buttons = $$('[data-stats-tab]'); const at = buttons.indexOf(event.target);
+    const next = event.key === 'Home' ? 0 : event.key === 'End' ? buttons.length - 1 : (at + (event.key === 'ArrowRight' ? 1 : -1) + buttons.length) % buttons.length;
+    activateScheduleStatsTab(buttons[next].dataset.statsTab); buttons[next].focus();
+  });
+  opportunityUI = createOpportunityUI({
+    getCanonical: () => state.canonical,
+    getManifest: () => state.manifest,
+    enumerate: buildItineraries,
+    duration: formatDuration,
+    openMarket: (origin, destination) => {
+      openTimetableMarket(origin, destination);
+      $("#timetable-connections").value = "all";
+      renderTimetable();
+    },
+    openRoute: (route) => {
+      state.routingDetailRoute = String(route);
+      renderRoutingDetails();
+      activateRoutingTab("details");
+      activateTab("routings");
+    },
+    openGate: (city) => {
+      $("#gate-airport").value = city;
+      renderGates();
+      activateTab("gates");
+    },
+  });
   document.addEventListener("click", (event) => {
     const removeFleet = event.target.closest("[data-remove-fleet]");
     if (removeFleet) {
@@ -1873,3 +1907,4 @@ if (typeof window !== "undefined" && typeof document !== "undefined") {
   bindEvents();
   initialize();
 }
+

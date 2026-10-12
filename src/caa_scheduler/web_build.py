@@ -15,6 +15,8 @@ WEB_ASSETS = (
     "build-config.mjs",
     "hub-bank-breakdown.mjs",
     "routing-details.mjs",
+    "opportunity-analysis.mjs",
+    "opportunity-ui.mjs",
     "favicon.svg",
     "coastal-american-logo.png",
 )
@@ -132,3 +134,4 @@ def build_web_console(
         "dataFileCount": len(copied_data),
         "instructionEntryCount": len(catalog["entries"]),
     }
+

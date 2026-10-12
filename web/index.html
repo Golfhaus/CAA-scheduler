@@ -439,6 +439,65 @@
             <button class="stats-tab is-active" type="button" role="tab" data-stats-tab="deps-hubs" aria-controls="stats-deps-hubs" aria-selected="true">Dept to Hubs</button>
             <button class="stats-tab" type="button" role="tab" data-stats-tab="extension-opps" aria-controls="stats-extension-opps" aria-selected="false" tabindex="-1">Extension Opps</button>
             <button class="stats-tab" type="button" role="tab" data-stats-tab="hub-bank-breakdown" aria-controls="stats-hub-bank-breakdown" aria-selected="false" tabindex="-1">Hub Bank Breakdown</button>
+            <button class="stats-tab" type="button" role="tab" data-stats-tab="service-coverage" aria-controls="stats-service-coverage" aria-selected="false" tabindex="-1">Service Coverage</button>
+            <button class="stats-tab" type="button" role="tab" data-stats-tab="connection-misses" aria-controls="stats-connection-misses" aria-selected="false" tabindex="-1">Connection Near-Misses</button>
+            <button class="stats-tab" type="button" role="tab" data-stats-tab="bank-effectiveness" aria-controls="stats-bank-effectiveness" aria-selected="false" tabindex="-1">Bank Effectiveness</button>
+          </div>
+          <p id="analysis-status" class="stats-note" role="status" aria-live="polite"></p>
+          <div id="stats-service-coverage" data-stats-view="service-coverage" role="tabpanel" hidden>
+            <h2>Service Coverage Explorer</h2>
+            <p class="stats-note">Find directional gaps and compare fastest travel options. All-day coverage uses the schedule’s connection window, including midnight. City-pair links open Timetable.</p>
+            <div class="analysis-filters">
+              <label><span>City or airport</span><input id="coverage-search" type="search" placeholder="CAK, Punta Gorda…"></label>
+              <label><span>Coverage</span><select id="coverage-gap"><option value="any">Missing in either direction</option><option value="both">Missing in both directions</option><option value="one">Missing in one direction</option><option value="all">All city pairs</option></select></label>
+              <label><span>Connections</span><select id="coverage-geography"><option value="current">Current timetable</option><option value="reasonable">Reasonable detours (≤2.25× distance)</option></select></label>
+              <label><span>Minimum O-D/day</span><input id="coverage-demand" type="number" value="0.1" min="0" step="0.1"></label>
+            </div>
+            <p id="coverage-summary" class="analysis-summary" aria-live="polite"></p>
+            <p id="coverage-demand-note" class="stats-note"></p>
+            <div class="table-shell analysis-table-shell"><table><thead><tr><th>City pair</th><th>Demand/day</th><th>First → second</th><th>Second → first</th><th>Existing shared hubs</th></tr></thead><tbody id="coverage-rows"></tbody></table></div>
+            <div id="coverage-pagination" class="pagination"></div>
+          </div>
+          <div id="stats-connection-misses" data-stats-view="connection-misses" role="tabpanel" hidden>
+            <h2>Connection Near-Misses</h2>
+            <p class="stats-note">The closest missed transfer for each missing direction. Preview either an arrival or departure adjustment and inspect its effect on service. Times are local to the hub.</p>
+            <div class="analysis-filters">
+              <label><span>City or airport</span><input id="near-search" type="search" placeholder="BLV, Sanford…"></label>
+              <label><span>Hub / focus city</span><select id="near-hub"></select></label>
+              <label><span>Maximum adjustment</span><select id="near-limit"><option value="5">5 minutes</option><option value="10">10 minutes</option><option value="15" selected>15 minutes</option><option value="30">30 minutes</option><option value="60">60 minutes</option><option value="1440">All misses</option></select></label>
+              <label><span>Connections</span><select id="near-geography"><option value="current">Current timetable gaps</option><option value="reasonable">Reasonable-detour gaps</option></select></label>
+              <label><span>Minimum O-D/day</span><input id="near-demand" type="number" value="0.1" min="0" step="0.1"></label>
+              <label><span>Sort</span><select id="near-sort"><option value="demand">Demand, highest first</option><option value="change">Smallest adjustment first</option></select></label>
+            </div>
+            <p id="near-summary" class="analysis-summary" aria-live="polite"></p>
+            <p id="near-demand-note" class="stats-note"></p>
+            <div class="table-shell analysis-table-shell"><table><thead><tr><th>Missing direction</th><th>O-D/day</th><th>Hub</th><th>Arriving flight</th><th>Departing flight</th><th>Current wait</th><th>Possible repair</th></tr></thead><tbody id="near-rows"></tbody></table></div>
+            <div id="near-pagination" class="pagination"></div>
+            <section id="near-preview" class="panel analysis-preview" hidden aria-labelledby="near-preview-title">
+              <h3 id="near-preview-title" tabindex="-1"></h3>
+              <label class="analysis-change-picker"><span>Timing option</span><select id="near-change"></select></label>
+              <div id="near-constraints"></div>
+              <div id="near-impact" aria-live="polite"></div>
+            </section>
+          </div>
+          <div id="stats-bank-effectiveness" data-stats-view="bank-effectiveness" role="tabpanel" hidden>
+            <h2>Bank Connection Effectiveness</h2>
+            <p class="stats-note">Inspect real transfers through a hub or focus city. An arrival can feed departures in other banks; a departure can receive arrivals from other banks. Useful transfers meet the timing window and 2.25× distance limit.</p>
+            <div class="analysis-filters">
+              <label><span>Hub / focus city</span><select id="effectiveness-hub"></select></label>
+              <label><span>Bank</span><select id="effectiveness-bank"></select></label>
+            </div>
+            <p id="effectiveness-summary" class="analysis-summary" aria-live="polite"></p>
+            <p id="effectiveness-warning" class="stats-note"></p>
+            <p id="effectiveness-demand-note" class="stats-note"></p>
+            <div class="analysis-bank-columns">
+              <section><h3>Arrivals and onward destinations</h3><div class="table-shell"><table><thead><tr><th>Flight</th><th>Origin</th><th>Arrives</th><th>Onward cities</th><th>Routing</th></tr></thead><tbody id="effectiveness-inbound"></tbody></table></div></section>
+              <section><h3>Departures and inbound origins</h3><div class="table-shell"><table><thead><tr><th>Flight</th><th>Destination</th><th>Departs</th><th>Feed cities</th><th>Routing</th></tr></thead><tbody id="effectiveness-outbound"></tbody></table></div></section>
+            </div>
+            <h3>Arrival-to-departure matrix</h3>
+            <p class="stats-note">Cells show transfer minutes. Select a cell for flights, routes, travel options and hub gates. A bank matrix shows the selected bank’s flights; feed counts above also include other banks.</p>
+            <div id="effectiveness-matrix"></div>
+            <section id="effectiveness-detail" class="panel analysis-preview" hidden></section>
           </div>
           <div id="stats-deps-hubs" data-stats-view="deps-hubs" role="tabpanel">
             <p class="stats-note">Each count is the number of non-stop departures from the city in that row to the hub or focus city in that column. Select a count to open those flights in Timetable.</p>
@@ -538,3 +597,4 @@
     <script type="module" src="app.mjs?v=console-ui-20261010-routing-details"></script>
   </body>
 </html>
+
