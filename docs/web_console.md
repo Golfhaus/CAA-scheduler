@@ -17,6 +17,16 @@ Milestone 0.5 extends the responsive GitHub Pages application with local schedul
 
 The interface uses the airline's navy, blue, and orange palette, remains usable on phone-sized screens, provides visible keyboard focus, honors reduced-motion preferences, and keeps status meaning in text rather than color alone.
 
+## Opportunity tools in Sked Stats
+
+**Service Coverage** ranks city pairs by pinned daily O-D demand in missing directions. It distinguishes one-way and two-way gaps, fastest available trips, missing shared hubs and timing gaps. An optional 2.25× great-circle-distance screen separates impractical detours from the current timetable's listed connections. Missing demand remains unavailable rather than becoming zero; schedules whose demand pin differs from the served snapshot retain coverage analysis without demand ranking.
+
+**Connection Near-Misses** identifies the closest missed transfer for each missing direction, with 5/10/15/30-minute filters and larger options. Arrival and departure repair choices expose basic aircraft-turn, overnight, assigned-bank, departure-window and spacing-floor constraints. A read-only preview recomputes all direct/one/two-stop service and reports coverage gains/losses, lost itinerary choices and faster/slower journeys. It explicitly distinguishes a new one-stop trip from a faster trip. Previews are timing screens, not complete gate, spacing or maintenance validation; they never mutate the selected schedule.
+
+**Bank Effectiveness** counts actual timed, geographically reasonable transfers. Per-flight onward/feed counts include other banks inside the connection window. Unique directional market O-D is counted once, not once per flight combination, and is not a passenger forecast. The bank arrival/departure matrix explains valid and missed transfers. BHM's unassigned flying remains inspectable without inventing bank assignments. Large whole-day matrices ask for a bank selection while retaining full-day feed counts.
+
+City-pair, route and gate buttons connect these views to Timetable, Routing Details and Gates. Analysis loads only when requested, is cached per selected schedule and resets on schedule changes. The existing published schedule manifest and default remain unchanged by these UI features.
+
 ## Data flow
 
 `web/schedules.json` lists each published schedule and its fourteen source files: canonical schedule, structural report, operating report, planning snapshot, planning validation, demand plan, frequency/fleet plan, hub-bank plan, aircraft-route plan, routing repair, bank-materialization diagnostic, exact materialization plan, timetable, and gate plan. It also pins the primary build-instruction Markdown, any additions, the demand-data manifest, and the generated catalog destination. The build command verifies and copies the demand manifest and all three fingerprinted sources, then rebuilds the instruction catalog directly from its Markdown sources.
@@ -42,3 +52,4 @@ The authoritative portable format is defined by `schemas/build_config.schema.jso
 Preflight currently verifies schedule identity, mode, baseline selection, fleet counts, connection limits, pinned instruction/city/policy/demand inputs, and the structural validity of airport changes. Airport additions receive a warning until metadata, demand, and runway screening are completed. Curfew compliance cannot be evaluated before flights exist, but the operating-policy pin is mandatory and curfew violations remain hard stops once construction runs.
 
 Browser storage is intentionally a convenience layer, not an authoritative database. Export the JSON to move or review a draft; importing and re-exporting produces the same normalized document.
+

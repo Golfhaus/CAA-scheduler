@@ -802,3 +802,37 @@ tbody tr:hover { background: #f6f9fc; }
 .danger-text {
   color: var(--danger);
 }
+
+:root { --analysis-good: #e3f1e9; --analysis-good-ink: #1e6241; }
+.analysis-filters { display: flex; flex-wrap: wrap; gap: 14px; align-items: end; margin: 20px 0; }
+.analysis-filters label, .analysis-change-picker { display: grid; gap: 6px; font-size: .85rem; font-weight: 600; }
+.analysis-filters input, .analysis-filters select, .analysis-change-picker select { min-height: 42px; border: 1px solid #ccd6df; background: #fff; border-radius: 8px; padding: 8px 12px; color: #16354c; font: inherit; max-width: 100%; }
+.analysis-filters input[type=number] { width: 125px; }
+.analysis-summary { font-weight: 600; color: #204762; line-height: 1.6; }
+.analysis-table-shell { margin-top: 18px; }
+.analysis-table-shell table { min-width: 930px; }
+.analysis-table-shell small, .analysis-bank-columns small, .transfer-matrix small { display: block; font-weight: 400; font-size: .78rem; color: #50697b; margin-top: 5px; white-space: normal; }
+.analysis-link { background: transparent; border: 0; color: #195c87; text-decoration: underline; cursor: pointer; padding: 4px 3px; font: inherit; font-weight: 600; }
+.analysis-link:hover { color: #0c3752; }
+.analysis-link:disabled { color: #8a9aa5; cursor: default; text-decoration: none; }
+.analysis-link:focus-visible, .transfer-cell:focus-visible { outline: 3px solid #e7a56b; outline-offset: 2px; }
+.analysis-preview { margin-top: 24px; padding: 24px; line-height: 1.6; }
+.analysis-preview h3 { margin-top: 0; }
+.analysis-preview ul { max-height: 320px; overflow: auto; padding-left: 24px; }
+.analysis-preview details { margin: 14px 0; }
+.analysis-change-picker { width: min(100%, 430px); margin: 16px 0; }
+.analysis-bank-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin: 22px 0; min-width: 0; }
+.analysis-bank-columns section { min-width: 0; }
+.transfer-matrix { width: max-content; min-width: 100%; }
+.transfer-matrix th { min-width: 100px; }
+.transfer-cell { width: 100%; min-width: 70px; border: 1px solid #cbd5dc; border-radius: 6px; padding: 9px; cursor: pointer; font: inherit; }
+.transfer-valid { background: var(--analysis-good); color: var(--analysis-good-ink); border-color: #9bc3aa; }
+.transfer-invalid { background: #f4f6f8; color: #536573; }
+#analysis-status:empty { display: none; }
+@media (max-width: 760px) {
+  .analysis-bank-columns { grid-template-columns: 1fr; }
+  .analysis-filters { gap: 10px; }
+  .analysis-filters label { flex: 1 1 145px; min-width: 0; }
+  .analysis-filters input, .analysis-filters select { width: 100%; }
+  .analysis-preview { padding: 16px; }
+}
