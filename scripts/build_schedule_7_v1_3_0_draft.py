@@ -16,7 +16,8 @@ base=json.loads(source.read_text());draft=apply_optimization_overlay(base,config
 changed={x['legId'] for x in config['retimeLegs']}
 before={l['id']:l for l in base['legs']};after={l['id']:l for l in draft['legs']}
 assert before.keys()==after.keys()
-assert len(changed)==2
+assert len(changed)==3
+assert {after[x]['flight'] for x in changed}=={1437,1036,2017}
 for identifier,leg in after.items():
  if identifier not in changed:assert leg==before[identifier]
  else:

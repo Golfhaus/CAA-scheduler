@@ -4,10 +4,59 @@
   "lostOneStopMarkets": [],
   "newOneStopMarkets": [
     "BLV-SFB",
+    "DSM-CAK",
+    "FSD-CAK",
     "GPT-SFB",
-    "MKE-SFB"
+    "MKE-SFB",
+    "PGD-CAK"
   ],
   "lostChoiceMarkets": [],
   "slowerFastest": [],
-  "fasterFastest": 21
+  "fasterFastest": 34,
+  "newChoices": 16,
+  "geographic": {
+    "lostChoices": 0,
+    "lostMarkets": [],
+    "lostOneStopMarkets": [],
+    "newOneStopMarkets": [
+      "BLV-SFB",
+      "DSM-CAK",
+      "FSD-CAK",
+      "GPT-SFB",
+      "MKE-SFB",
+      "PGD-CAK"
+    ],
+    "lostChoiceMarkets": [],
+    "slowerFastest": [],
+    "fasterFastest": 31
+  },
+  "targets": {
+    "BLV-SFB": [
+      {
+        "flights": "1218,1437",
+        "a": "BLV",
+        "b": "SFB",
+        "minutes": 403,
+        "stops": 1
+      }
+    ],
+    "MKE-SFB": [
+      {
+        "flights": "1264,1036",
+        "a": "MKE",
+        "b": "SFB",
+        "minutes": 477,
+        "stops": 1
+      }
+    ],
+    "PGD-CAK": [
+      {
+        "flights": "1197,2017",
+        "a": "PGD",
+        "b": "CAK",
+        "minutes": 530,
+        "stops": 1
+      }
+    ]
+  }
 }

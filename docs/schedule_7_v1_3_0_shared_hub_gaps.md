@@ -1,6 +1,6 @@
 # Schedule 7 v1.3.0 — shared-hub bidirectional gap effort
 
-Reviewed October 12, 2026 against the accepted round-one draft. This is analysis only. The two approved Sanford advances remain the only accepted v1.3.0 changes. Demand, inventories, roster and the 30–240-minute transfer window are unchanged.
+Reviewed October 12, 2026 against the earlier two-flight round-one draft. The user subsequently accepted F2017's two-minute advance for PGD→CAK; it is now included alongside F1437/F1036 and jointly validated in the [current draft](schedule_7_v1_3_0_draft.md). All other scenarios below remain analysis only. Saved trial reports retain their original two-flight baseline; demand, inventories, roster and the 30–240-minute transfer window are unchanged.
 
 ## Timing lower bounds
 
@@ -41,4 +41,4 @@ All times are local. Each individual proposal passes structural, operating, over
 
 The review writes isolated trial inputs; it checks that the accepted canonical's hash is unchanged. Native proposal overlays under `config/proposals/schedule_7_v1_3_0_*.json` exactly reproduce the reviewed flying, banks and policy; they are distinct from the accepted optimization overlay. `outputs/schedule_7_v1_3_0_shared_hub_gaps/review.json` records the screen and validation. `connection_review.json` records the full market losses, slower journeys and app/geographic comparisons. The accepted draft's own connection audit is `data/schedules/schedule_7_v1_3_0_draft/connection_review.json`.
 
-Recommended next review: the three isolated small repairs, followed by demand-led additions for the harder directions. None of these six new scenarios is accepted yet.
+Recommended next review: the remaining BLV→HOU and OMA→BNA small repairs, followed by demand-led additions for the harder directions. Only `pgd_cak_2` is accepted from these six scenarios. Run `node scripts/audit_schedule_7_v1_3_0_connections.mjs --accepted-only` for the current accepted draft. The proposal overlays and saved trial reports are historical evidence pinned to the earlier two-flight draft (SHA256 `b87c9c4aa438538a217e38fabf955b257c322a2205795f0e69665862f4178104`); their results should not be treated as joint validation against the current three-flight draft.
