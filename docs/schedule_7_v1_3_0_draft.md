@@ -23,6 +23,6 @@ The joint whole-timetable comparison loses no existing direct/one/two-stop itine
 
 `python scripts/build_schedule_7_v1_3_0_draft.py` replays `config/optimizations/schedule_7_v1_3_0_round_1.json` from the SHA-pinned v1.2.5 canonical and regenerates the isolated draft package. Source identity, stale-input guards, all unchanged flights, fleet, policies and banks are checked before full validation.
 
-The current next task is a read-only effort review for shared-hub timing gaps in the top ten bidirectional markets: CAK–PGD, BLV–HOU, MYR–RFD and BNA–OMA. Those changes are not authorized for implementation. Save the quantified findings and proposals separately from the accepted draft.
+The completed [shared-hub effort review](schedule_7_v1_3_0_shared_hub_gaps.md) covers CAK–PGD, BLV–HOU, MYR–RFD and BNA–OMA. It identifies three additional small one-way repairs and quantifies the significant tradeoffs in larger trials. All six new scenarios remain analysis-only proposals; the accepted draft still contains only flights 1437/1036's advances. The next decision is whether to adopt the three isolated small repairs or investigate additions for the harder directions.
 
 Main and `web/schedules.json` remain on released v1.2.5. Publication of v1.3.0 requires a later explicit user instruction. Current regression policy is latest-only; do not reconstruct superseded releases for regression.

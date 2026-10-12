@@ -1,0 +1,799 @@
+{
+  "baseCanonical": "data/schedules/schedule_7_v1_3_0_draft/canonical_schedule.json",
+  "baseSha256": "b87c9c4aa438538a217e38fabf955b257c322a2205795f0e69665862f4178104",
+  "status": "Proposals only; accepted draft is unchanged",
+  "screen": [
+    {
+      "origin": "CAK",
+      "destination": "PGD",
+      "closest": [
+        {
+          "origin": "CAK",
+          "destination": "PGD",
+          "hub": "MCI",
+          "firstFlight": 2018,
+          "firstRoute": 170,
+          "arrival": "20:45",
+          "secondFlight": 1195,
+          "secondRoute": 508,
+          "departure": "05:25",
+          "waitMinutes": 520,
+          "outboundClockShiftMinutes": -280,
+          "minimumTotalClockAdjustment": 280
+        },
+        {
+          "origin": "CAK",
+          "destination": "PGD",
+          "hub": "MCI",
+          "firstFlight": 2018,
+          "firstRoute": 170,
+          "arrival": "20:45",
+          "secondFlight": 1196,
+          "secondRoute": 507,
+          "departure": "13:55",
+          "waitMinutes": 1030,
+          "outboundClockShiftMinutes": 440,
+          "minimumTotalClockAdjustment": 440
+        }
+      ]
+    },
+    {
+      "origin": "PGD",
+      "destination": "CAK",
+      "closest": [
+        {
+          "origin": "PGD",
+          "destination": "CAK",
+          "hub": "MCI",
+          "firstFlight": 1197,
+          "firstRoute": 508,
+          "arrival": "11:35",
+          "secondFlight": 2017,
+          "secondRoute": 170,
+          "departure": "15:37",
+          "waitMinutes": 242,
+          "outboundClockShiftMinutes": -2,
+          "minimumTotalClockAdjustment": 2
+        },
+        {
+          "origin": "PGD",
+          "destination": "CAK",
+          "hub": "MCI",
+          "firstFlight": 1198,
+          "firstRoute": 507,
+          "arrival": "20:05",
+          "secondFlight": 2017,
+          "secondRoute": 170,
+          "departure": "15:37",
+          "waitMinutes": 1172,
+          "outboundClockShiftMinutes": 298,
+          "minimumTotalClockAdjustment": 298
+        }
+      ]
+    },
+    {
+      "origin": "BLV",
+      "destination": "HOU",
+      "closest": [
+        {
+          "origin": "BLV",
+          "destination": "HOU",
+          "hub": "MCI",
+          "firstFlight": 1357,
+          "firstRoute": 304,
+          "arrival": "11:29",
+          "secondFlight": 1099,
+          "secondRoute": 723,
+          "departure": "15:35",
+          "waitMinutes": 246,
+          "outboundClockShiftMinutes": -6,
+          "minimumTotalClockAdjustment": 6
+        },
+        {
+          "origin": "BLV",
+          "destination": "HOU",
+          "hub": "MCI",
+          "firstFlight": 1358,
+          "firstRoute": 304,
+          "arrival": "16:34",
+          "secondFlight": 1099,
+          "secondRoute": 723,
+          "departure": "15:35",
+          "waitMinutes": 1381,
+          "outboundClockShiftMinutes": 89,
+          "minimumTotalClockAdjustment": 89
+        },
+        {
+          "origin": "BLV",
+          "destination": "HOU",
+          "hub": "MCI",
+          "firstFlight": 2108,
+          "firstRoute": 172,
+          "arrival": "18:15",
+          "secondFlight": 1099,
+          "secondRoute": 723,
+          "departure": "15:35",
+          "waitMinutes": 1280,
+          "outboundClockShiftMinutes": 190,
+          "minimumTotalClockAdjustment": 190
+        }
+      ]
+    },
+    {
+      "origin": "HOU",
+      "destination": "BLV",
+      "closest": [
+        {
+          "origin": "HOU",
+          "destination": "BLV",
+          "hub": "MCI",
+          "firstFlight": 1100,
+          "firstRoute": 723,
+          "arrival": "19:54",
+          "secondFlight": 2107,
+          "secondRoute": 172,
+          "departure": "15:25",
+          "waitMinutes": 1171,
+          "outboundClockShiftMinutes": 299,
+          "minimumTotalClockAdjustment": 299
+        },
+        {
+          "origin": "HOU",
+          "destination": "BLV",
+          "hub": "MCI",
+          "firstFlight": 1100,
+          "firstRoute": 723,
+          "arrival": "19:54",
+          "secondFlight": 1355,
+          "secondRoute": 304,
+          "departure": "07:15",
+          "waitMinutes": 681,
+          "outboundClockShiftMinutes": -441,
+          "minimumTotalClockAdjustment": 441
+        },
+        {
+          "origin": "HOU",
+          "destination": "BLV",
+          "hub": "MCI",
+          "firstFlight": 1100,
+          "firstRoute": 723,
+          "arrival": "19:54",
+          "secondFlight": 1356,
+          "secondRoute": 304,
+          "departure": "12:15",
+          "waitMinutes": 981,
+          "outboundClockShiftMinutes": 489,
+          "minimumTotalClockAdjustment": 489
+        }
+      ]
+    },
+    {
+      "origin": "MYR",
+      "destination": "RFD",
+      "closest": [
+        {
+          "origin": "MYR",
+          "destination": "RFD",
+          "hub": "PHF",
+          "firstFlight": 1713,
+          "firstRoute": 129,
+          "arrival": "06:16",
+          "secondFlight": 1120,
+          "secondRoute": 709,
+          "departure": "11:35",
+          "waitMinutes": 319,
+          "outboundClockShiftMinutes": -79,
+          "minimumTotalClockAdjustment": 79
+        },
+        {
+          "origin": "MYR",
+          "destination": "RFD",
+          "hub": "PHF",
+          "firstFlight": 1713,
+          "firstRoute": 129,
+          "arrival": "06:16",
+          "secondFlight": 2029,
+          "secondRoute": 329,
+          "departure": "14:51",
+          "waitMinutes": 515,
+          "outboundClockShiftMinutes": -275,
+          "minimumTotalClockAdjustment": 275
+        },
+        {
+          "origin": "MYR",
+          "destination": "RFD",
+          "hub": "PHF",
+          "firstFlight": 1713,
+          "firstRoute": 129,
+          "arrival": "06:16",
+          "secondFlight": 1121,
+          "secondRoute": 707,
+          "departure": "16:15",
+          "waitMinutes": 599,
+          "outboundClockShiftMinutes": -359,
+          "minimumTotalClockAdjustment": 359
+        },
+        {
+          "origin": "MYR",
+          "destination": "RFD",
+          "hub": "PHF",
+          "firstFlight": 1713,
+          "firstRoute": 129,
+          "arrival": "06:16",
+          "secondFlight": 1122,
+          "secondRoute": 719,
+          "departure": "18:35",
+          "waitMinutes": 739,
+          "outboundClockShiftMinutes": -499,
+          "minimumTotalClockAdjustment": 499
+        }
+      ]
+    },
+    {
+      "origin": "RFD",
+      "destination": "MYR",
+      "closest": [
+        {
+          "origin": "RFD",
+          "destination": "MYR",
+          "hub": "PHF",
+          "firstFlight": 1119,
+          "firstRoute": 711,
+          "arrival": "15:34",
+          "secondFlight": 1714,
+          "secondRoute": 128,
+          "departure": "20:55",
+          "waitMinutes": 321,
+          "outboundClockShiftMinutes": -81,
+          "minimumTotalClockAdjustment": 81
+        },
+        {
+          "origin": "RFD",
+          "destination": "MYR",
+          "hub": "PHF",
+          "firstFlight": 2030,
+          "firstRoute": 329,
+          "arrival": "22:14",
+          "secondFlight": 1714,
+          "secondRoute": 128,
+          "departure": "20:55",
+          "waitMinutes": 1361,
+          "outboundClockShiftMinutes": 109,
+          "minimumTotalClockAdjustment": 109
+        },
+        {
+          "origin": "RFD",
+          "destination": "MYR",
+          "hub": "PHF",
+          "firstFlight": 1118,
+          "firstRoute": 717,
+          "arrival": "13:14",
+          "secondFlight": 1714,
+          "secondRoute": 128,
+          "departure": "20:55",
+          "waitMinutes": 461,
+          "outboundClockShiftMinutes": -221,
+          "minimumTotalClockAdjustment": 221
+        },
+        {
+          "origin": "RFD",
+          "destination": "MYR",
+          "hub": "PHF",
+          "firstFlight": 1117,
+          "firstRoute": 719,
+          "arrival": "11:04",
+          "secondFlight": 1714,
+          "secondRoute": 128,
+          "departure": "20:55",
+          "waitMinutes": 591,
+          "outboundClockShiftMinutes": -351,
+          "minimumTotalClockAdjustment": 351
+        }
+      ]
+    },
+    {
+      "origin": "BNA",
+      "destination": "OMA",
+      "closest": [
+        {
+          "origin": "BNA",
+          "destination": "OMA",
+          "hub": "MCI",
+          "firstFlight": 1079,
+          "firstRoute": 720,
+          "arrival": "09:49",
+          "secondFlight": 1635,
+          "secondRoute": 111,
+          "departure": "08:55",
+          "waitMinutes": 1386,
+          "outboundClockShiftMinutes": 84,
+          "minimumTotalClockAdjustment": 84
+        },
+        {
+          "origin": "BNA",
+          "destination": "OMA",
+          "hub": "MCI",
+          "firstFlight": 1080,
+          "firstRoute": 705,
+          "arrival": "19:54",
+          "secondFlight": 1636,
+          "secondRoute": 118,
+          "departure": "18:55",
+          "waitMinutes": 1381,
+          "outboundClockShiftMinutes": 89,
+          "minimumTotalClockAdjustment": 89
+        },
+        {
+          "origin": "BNA",
+          "destination": "OMA",
+          "hub": "MCI",
+          "firstFlight": 1079,
+          "firstRoute": 720,
+          "arrival": "09:49",
+          "secondFlight": 1634,
+          "secondRoute": 171,
+          "departure": "07:15",
+          "waitMinutes": 1286,
+          "outboundClockShiftMinutes": 184,
+          "minimumTotalClockAdjustment": 184
+        },
+        {
+          "origin": "BNA",
+          "destination": "OMA",
+          "hub": "MCI",
+          "firstFlight": 1079,
+          "firstRoute": 720,
+          "arrival": "09:49",
+          "secondFlight": 1633,
+          "secondRoute": 114,
+          "departure": "05:50",
+          "waitMinutes": 1201,
+          "outboundClockShiftMinutes": 269,
+          "minimumTotalClockAdjustment": 269
+        },
+        {
+          "origin": "BNA",
+          "destination": "OMA",
+          "hub": "MCI",
+          "firstFlight": 1079,
+          "firstRoute": 720,
+          "arrival": "09:49",
+          "secondFlight": 1636,
+          "secondRoute": 118,
+          "departure": "18:55",
+          "waitMinutes": 546,
+          "outboundClockShiftMinutes": -306,
+          "minimumTotalClockAdjustment": 306
+        },
+        {
+          "origin": "BNA",
+          "destination": "OMA",
+          "hub": "MCI",
+          "firstFlight": 1080,
+          "firstRoute": 705,
+          "arrival": "19:54",
+          "secondFlight": 1633,
+          "secondRoute": 114,
+          "departure": "05:50",
+          "waitMinutes": 596,
+          "outboundClockShiftMinutes": -356,
+          "minimumTotalClockAdjustment": 356
+        }
+      ]
+    },
+    {
+      "origin": "OMA",
+      "destination": "BNA",
+      "closest": [
+        {
+          "origin": "OMA",
+          "destination": "BNA",
+          "hub": "MCI",
+          "firstFlight": 1639,
+          "firstRoute": 171,
+          "arrival": "10:44",
+          "secondFlight": 1077,
+          "secondRoute": 705,
+          "departure": "14:55",
+          "waitMinutes": 251,
+          "outboundClockShiftMinutes": -11,
+          "minimumTotalClockAdjustment": 11
+        },
+        {
+          "origin": "OMA",
+          "destination": "BNA",
+          "hub": "MCI",
+          "firstFlight": 1638,
+          "firstRoute": 114,
+          "arrival": "09:54",
+          "secondFlight": 1077,
+          "secondRoute": 705,
+          "departure": "14:55",
+          "waitMinutes": 301,
+          "outboundClockShiftMinutes": -61,
+          "minimumTotalClockAdjustment": 61
+        },
+        {
+          "origin": "OMA",
+          "destination": "BNA",
+          "hub": "MCI",
+          "firstFlight": 1640,
+          "firstRoute": 111,
+          "arrival": "21:27",
+          "secondFlight": 1078,
+          "secondRoute": 723,
+          "departure": "20:35",
+          "waitMinutes": 1388,
+          "outboundClockShiftMinutes": 82,
+          "minimumTotalClockAdjustment": 82
+        },
+        {
+          "origin": "OMA",
+          "destination": "BNA",
+          "hub": "MCI",
+          "firstFlight": 1637,
+          "firstRoute": 119,
+          "arrival": "06:34",
+          "secondFlight": 1077,
+          "secondRoute": 705,
+          "departure": "14:55",
+          "waitMinutes": 501,
+          "outboundClockShiftMinutes": -261,
+          "minimumTotalClockAdjustment": 261
+        },
+        {
+          "origin": "OMA",
+          "destination": "BNA",
+          "hub": "MCI",
+          "firstFlight": 1639,
+          "firstRoute": 171,
+          "arrival": "10:44",
+          "secondFlight": 1078,
+          "secondRoute": 723,
+          "departure": "20:35",
+          "waitMinutes": 591,
+          "outboundClockShiftMinutes": -351,
+          "minimumTotalClockAdjustment": 351
+        },
+        {
+          "origin": "OMA",
+          "destination": "BNA",
+          "hub": "MCI",
+          "firstFlight": 1638,
+          "firstRoute": 114,
+          "arrival": "09:54",
+          "secondFlight": 1078,
+          "secondRoute": 723,
+          "departure": "20:35",
+          "waitMinutes": 641,
+          "outboundClockShiftMinutes": -401,
+          "minimumTotalClockAdjustment": 401
+        }
+      ]
+    }
+  ],
+  "cases": {
+    "pgd_cak_2": {
+      "changes": [
+        {
+          "flight": 2017,
+          "route": 170,
+          "origin": "MCI",
+          "destination": "CAK",
+          "departure": "15:35",
+          "arrival": "18:40",
+          "shift": -2
+        }
+      ],
+      "newBanks": [],
+      "bankReassignments": [],
+      "structural": {
+        "checks": 18,
+        "passed": 18,
+        "failed": 0
+      },
+      "operating": {
+        "checks": 25,
+        "passed": 19,
+        "failed": 0,
+        "warnings": 3,
+        "notEvaluated": 1,
+        "overridden": 2,
+        "effectiveErrorFindings": 0,
+        "effectiveWarningFindings": 166
+      },
+      "overnight": {
+        "status": "pass",
+        "findings": []
+      },
+      "physical": {
+        "pass": true,
+        "standClaims": 14,
+        "standMinutes": 3253
+      },
+      "errors": []
+    },
+    "blv_hou_6": {
+      "changes": [
+        {
+          "flight": 1357,
+          "route": 304,
+          "origin": "BLV",
+          "destination": "MCI",
+          "departure": "10:31",
+          "arrival": "11:35",
+          "shift": 6
+        }
+      ],
+      "newBanks": [],
+      "bankReassignments": [],
+      "structural": {
+        "checks": 18,
+        "passed": 18,
+        "failed": 0
+      },
+      "operating": {
+        "checks": 25,
+        "passed": 19,
+        "failed": 0,
+        "warnings": 3,
+        "notEvaluated": 1,
+        "overridden": 2,
+        "effectiveErrorFindings": 0,
+        "effectiveWarningFindings": 166
+      },
+      "overnight": {
+        "status": "pass",
+        "findings": []
+      },
+      "physical": {
+        "pass": true,
+        "standClaims": 14,
+        "standMinutes": 3253
+      },
+      "errors": []
+    },
+    "oma_bna_11": {
+      "changes": [
+        {
+          "flight": 1077,
+          "route": 705,
+          "origin": "MCI",
+          "destination": "BNA",
+          "departure": "14:44",
+          "arrival": "16:13",
+          "shift": -11
+        }
+      ],
+      "newBanks": [],
+      "bankReassignments": [],
+      "structural": {
+        "checks": 18,
+        "passed": 18,
+        "failed": 0
+      },
+      "operating": {
+        "checks": 25,
+        "passed": 19,
+        "failed": 0,
+        "warnings": 3,
+        "notEvaluated": 1,
+        "overridden": 2,
+        "effectiveErrorFindings": 0,
+        "effectiveWarningFindings": 166
+      },
+      "overnight": {
+        "status": "pass",
+        "findings": []
+      },
+      "physical": {
+        "pass": true,
+        "standClaims": 14,
+        "standMinutes": 3253
+      },
+      "errors": []
+    },
+    "bna_oma_both": {
+      "changes": [
+        {
+          "flight": 1077,
+          "route": 705,
+          "origin": "MCI",
+          "destination": "BNA",
+          "departure": "14:44",
+          "arrival": "16:13",
+          "shift": -11
+        },
+        {
+          "flight": 1080,
+          "route": 705,
+          "origin": "BNA",
+          "destination": "MCI",
+          "departure": "16:56",
+          "arrival": "18:25",
+          "shift": -89
+        }
+      ],
+      "newBanks": [],
+      "bankReassignments": [
+        {
+          "flight": 1080,
+          "operation": "arrival",
+          "from": "MCI-B10",
+          "to": "MCI-B9"
+        }
+      ],
+      "structural": {
+        "checks": 18,
+        "passed": 18,
+        "failed": 0
+      },
+      "operating": {
+        "checks": 25,
+        "passed": 19,
+        "failed": 0,
+        "warnings": 3,
+        "notEvaluated": 1,
+        "overridden": 2,
+        "effectiveErrorFindings": 0,
+        "effectiveWarningFindings": 166
+      },
+      "overnight": {
+        "status": "pass",
+        "findings": []
+      },
+      "physical": {
+        "pass": true,
+        "standClaims": 14,
+        "standMinutes": 3253
+      },
+      "errors": []
+    },
+    "rfd_myr_2_flights": {
+      "changes": [
+        {
+          "flight": 1660,
+          "route": 128,
+          "origin": "RDU",
+          "destination": "PHF",
+          "departure": "17:44",
+          "arrival": "18:33",
+          "shift": -101
+        },
+        {
+          "flight": 1714,
+          "route": 128,
+          "origin": "PHF",
+          "destination": "MYR",
+          "departure": "19:34",
+          "arrival": "20:40",
+          "shift": -81
+        }
+      ],
+      "newBanks": [],
+      "bankReassignments": [
+        {
+          "flight": 1660,
+          "operation": "arrival",
+          "from": "PHF-B7",
+          "to": "PHF-B6"
+        },
+        {
+          "flight": 1714,
+          "operation": "departure",
+          "from": "PHF-B7",
+          "to": "PHF-M6"
+        }
+      ],
+      "structural": {
+        "checks": 18,
+        "passed": 18,
+        "failed": 0
+      },
+      "operating": {
+        "checks": 25,
+        "passed": 19,
+        "failed": 0,
+        "warnings": 3,
+        "notEvaluated": 1,
+        "overridden": 2,
+        "effectiveErrorFindings": 0,
+        "effectiveWarningFindings": 166
+      },
+      "overnight": {
+        "status": "pass",
+        "findings": []
+      },
+      "physical": {
+        "pass": true,
+        "standClaims": 14,
+        "standMinutes": 3253
+      },
+      "errors": []
+    },
+    "myr_rfd_both_new_bank": {
+      "changes": [
+        {
+          "flight": 1660,
+          "route": 128,
+          "origin": "RDU",
+          "destination": "PHF",
+          "departure": "17:44",
+          "arrival": "18:33",
+          "shift": -101
+        },
+        {
+          "flight": 1713,
+          "route": 129,
+          "origin": "MYR",
+          "destination": "PHF",
+          "departure": "06:29",
+          "arrival": "07:35",
+          "shift": 79
+        },
+        {
+          "flight": 1714,
+          "route": 128,
+          "origin": "PHF",
+          "destination": "MYR",
+          "departure": "19:34",
+          "arrival": "20:40",
+          "shift": -81
+        }
+      ],
+      "newBanks": [
+        {
+          "id": "PHF-V130-PROPOSED-MORNING",
+          "hub": "PHF",
+          "startMinute": 435,
+          "endMinute": 495
+        }
+      ],
+      "bankReassignments": [
+        {
+          "flight": 1660,
+          "operation": "arrival",
+          "from": "PHF-B7",
+          "to": "PHF-B6"
+        },
+        {
+          "flight": 1713,
+          "operation": "arrival",
+          "from": "PHF-B1",
+          "to": "PHF-V130-PROPOSED-MORNING"
+        },
+        {
+          "flight": 1714,
+          "operation": "departure",
+          "from": "PHF-B7",
+          "to": "PHF-M6"
+        }
+      ],
+      "structural": {
+        "checks": 18,
+        "passed": 18,
+        "failed": 0
+      },
+      "operating": {
+        "checks": 25,
+        "passed": 19,
+        "failed": 0,
+        "warnings": 3,
+        "notEvaluated": 1,
+        "overridden": 2,
+        "effectiveErrorFindings": 0,
+        "effectiveWarningFindings": 165
+      },
+      "overnight": {
+        "status": "pass",
+        "findings": []
+      },
+      "physical": {
+        "pass": true,
+        "standClaims": 14,
+        "standMinutes": 3253
+      },
+      "errors": []
+    }
+  }
+}

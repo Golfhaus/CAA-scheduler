@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "schedule-7-v1.3.0-proposed-pgd_cak_2",
+  "baseSchedule": {
+    "scheduleId": "schedule_7_v1_3_0_draft",
+    "canonical": "data/schedules/schedule_7_v1_3_0_draft/canonical_schedule.json",
+    "sha256": "b87c9c4aa438538a217e38fabf955b257c322a2205795f0e69665862f4178104"
+  },
+  "schedule": {
+    "id": "schedule_7_v1_3_0_proposal_pgd_cak_2",
+    "version": "1.3.0-analysis",
+    "label": "Unpublished v1.3.0 proposal pgd_cak_2",
+    "status": "draft"
+  },
+  "approval": {
+    "status": "analysis only; not approved for implementation",
+    "publication": "Not authorized"
+  },
+  "retimeLegs": [
+    {
+      "legId": "V114-R116-MCI-CAK",
+      "expectedDepartureMinute": 937,
+      "expectedArrivalMinute": 1122,
+      "departureMinute": 935,
+      "arrivalMinute": 1120
+    }
+  ],
+  "bankAssignmentReplacements": [],
+  "hubBanksToAdd": [],
+  "hubBankCountOverrides": {}
+}

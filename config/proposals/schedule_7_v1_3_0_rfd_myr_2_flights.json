@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "schedule-7-v1.3.0-proposed-rfd_myr_2_flights",
+  "baseSchedule": {
+    "scheduleId": "schedule_7_v1_3_0_draft",
+    "canonical": "data/schedules/schedule_7_v1_3_0_draft/canonical_schedule.json",
+    "sha256": "b87c9c4aa438538a217e38fabf955b257c322a2205795f0e69665862f4178104"
+  },
+  "schedule": {
+    "id": "schedule_7_v1_3_0_proposal_rfd_myr_2_flights",
+    "version": "1.3.0-analysis",
+    "label": "Unpublished v1.3.0 proposal rfd_myr_2_flights",
+    "status": "draft"
+  },
+  "approval": {
+    "status": "analysis only; not approved for implementation",
+    "publication": "Not authorized"
+  },
+  "retimeLegs": [
+    {
+      "legId": "PHF-RDU-CRJ200-01-IN",
+      "expectedDepartureMinute": 1165,
+      "expectedArrivalMinute": 1214,
+      "departureMinute": 1064,
+      "arrivalMinute": 1113
+    },
+    {
+      "legId": "MYR-PHF-CRJ200-01-IN",
+      "expectedDepartureMinute": 1255,
+      "expectedArrivalMinute": 1321,
+      "departureMinute": 1174,
+      "arrivalMinute": 1240
+    }
+  ],
+  "bankAssignmentReplacements": [
+    {
+      "legId": "PHF-RDU-CRJ200-01-IN",
+      "operation": "arrival",
+      "bankId": "PHF-B6"
+    },
+    {
+      "legId": "MYR-PHF-CRJ200-01-IN",
+      "operation": "departure",
+      "bankId": "PHF-M6"
+    }
+  ],
+  "hubBanksToAdd": [],
+  "hubBankCountOverrides": {}
+}

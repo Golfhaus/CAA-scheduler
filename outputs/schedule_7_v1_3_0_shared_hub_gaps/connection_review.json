@@ -1,0 +1,1689 @@
+{
+  "pgd_cak_2": {
+    "app": {
+      "lostChoices": 0,
+      "lostMarkets": [],
+      "lostOneStopMarkets": [],
+      "newOneStopMarkets": [
+        "DSM-CAK",
+        "FSD-CAK",
+        "PGD-CAK"
+      ],
+      "lostChoiceMarkets": [],
+      "slowerFastest": [],
+      "fasterFastest": 13
+    },
+    "geographic": {
+      "lostChoices": 0,
+      "lostMarkets": [],
+      "lostOneStopMarkets": [],
+      "newOneStopMarkets": [
+        "DSM-CAK",
+        "FSD-CAK",
+        "PGD-CAK"
+      ],
+      "lostChoiceMarkets": [],
+      "slowerFastest": [],
+      "fasterFastest": 12
+    },
+    "targets": {
+      "CAK-PGD": [],
+      "PGD-CAK": [
+        {
+          "flights": "1197,2017",
+          "a": "PGD",
+          "b": "CAK",
+          "minutes": 530,
+          "stops": 1
+        }
+      ],
+      "BLV-HOU": [],
+      "HOU-BLV": [],
+      "MYR-RFD": [],
+      "RFD-MYR": [],
+      "BNA-OMA": [],
+      "OMA-BNA": []
+    }
+  },
+  "blv_hou_6": {
+    "app": {
+      "lostChoices": 0,
+      "lostMarkets": [],
+      "lostOneStopMarkets": [],
+      "newOneStopMarkets": [
+        "BLV-HOU"
+      ],
+      "lostChoiceMarkets": [],
+      "slowerFastest": [],
+      "fasterFastest": 23
+    },
+    "geographic": {
+      "lostChoices": 0,
+      "lostMarkets": [],
+      "lostOneStopMarkets": [],
+      "newOneStopMarkets": [
+        "BLV-HOU"
+      ],
+      "lostChoiceMarkets": [],
+      "slowerFastest": [],
+      "fasterFastest": 20
+    },
+    "targets": {
+      "CAK-PGD": [],
+      "PGD-CAK": [],
+      "BLV-HOU": [
+        {
+          "flights": "1357,1099",
+          "a": "BLV",
+          "b": "HOU",
+          "minutes": 413,
+          "stops": 1
+        }
+      ],
+      "HOU-BLV": [],
+      "MYR-RFD": [],
+      "RFD-MYR": [],
+      "BNA-OMA": [],
+      "OMA-BNA": []
+    }
+  },
+  "oma_bna_11": {
+    "app": {
+      "lostChoices": 0,
+      "lostMarkets": [],
+      "lostOneStopMarkets": [],
+      "newOneStopMarkets": [
+        "OMA-BNA"
+      ],
+      "lostChoiceMarkets": [],
+      "slowerFastest": [],
+      "fasterFastest": 21
+    },
+    "geographic": {
+      "lostChoices": 0,
+      "lostMarkets": [],
+      "lostOneStopMarkets": [],
+      "newOneStopMarkets": [
+        "OMA-BNA"
+      ],
+      "lostChoiceMarkets": [],
+      "slowerFastest": [],
+      "fasterFastest": 8
+    },
+    "targets": {
+      "CAK-PGD": [],
+      "PGD-CAK": [],
+      "BLV-HOU": [],
+      "HOU-BLV": [],
+      "MYR-RFD": [],
+      "RFD-MYR": [],
+      "BNA-OMA": [],
+      "OMA-BNA": [
+        {
+          "flights": "1639,1077",
+          "a": "OMA",
+          "b": "BNA",
+          "minutes": 378,
+          "stops": 1
+        }
+      ]
+    }
+  },
+  "bna_oma_both": {
+    "app": {
+      "lostChoices": 4,
+      "lostMarkets": [],
+      "lostOneStopMarkets": [
+        "BNA-SAT",
+        "BNA-ELP",
+        "BNA-SGF"
+      ],
+      "newOneStopMarkets": [
+        "BNA-MFE",
+        "BNA-SHV",
+        "BNA-OMA",
+        "BNA-ICT",
+        "BNA-FSD",
+        "BNA-CID",
+        "BNA-COU",
+        "OMA-BNA"
+      ],
+      "lostChoiceMarkets": [
+        {
+          "market": "BNA-SAT",
+          "od": 68.4
+        },
+        {
+          "market": "BNA-ELP",
+          "od": 19.2
+        },
+        {
+          "market": "BNA-CLT",
+          "od": 127
+        },
+        {
+          "market": "BNA-SGF",
+          "od": 4
+        }
+      ],
+      "slowerFastest": [
+        {
+          "market": "BNA-MKE",
+          "oldMinutes": 214,
+          "newMinutes": 303,
+          "od": 52.5
+        },
+        {
+          "market": "BNA-JAN",
+          "oldMinutes": 286,
+          "newMinutes": 338,
+          "od": 11.3
+        },
+        {
+          "market": "BNA-GRR",
+          "oldMinutes": 273,
+          "newMinutes": 293,
+          "od": 35
+        },
+        {
+          "market": "BNA-SDF",
+          "oldMinutes": 260,
+          "newMinutes": 300,
+          "od": 2.9
+        },
+        {
+          "market": "BNA-SBN",
+          "oldMinutes": 273,
+          "newMinutes": 278,
+          "od": 3.3
+        },
+        {
+          "market": "BNA-CRP",
+          "oldMinutes": 269,
+          "newMinutes": 358,
+          "od": 6.2
+        },
+        {
+          "market": "BNA-FAR",
+          "oldMinutes": 232,
+          "newMinutes": 321,
+          "od": 17.6
+        },
+        {
+          "market": "BNA-DLH",
+          "oldMinutes": 232,
+          "newMinutes": 321,
+          "od": 2.6
+        },
+        {
+          "market": "BNA-PIA",
+          "oldMinutes": 209,
+          "newMinutes": 298,
+          "od": 7.5
+        },
+        {
+          "market": "BNA-SAT",
+          "oldMinutes": 386,
+          "newMinutes": 394,
+          "od": 68.4
+        },
+        {
+          "market": "BNA-ELP",
+          "oldMinutes": 384,
+          "newMinutes": 686,
+          "od": 19.2
+        },
+        {
+          "market": "BNA-SGF",
+          "oldMinutes": 335,
+          "newMinutes": 371,
+          "od": 4
+        }
+      ],
+      "fasterFastest": 33
+    },
+    "geographic": {
+      "lostChoices": 3,
+      "lostMarkets": [
+        "BNA-SGF"
+      ],
+      "lostOneStopMarkets": [
+        "BNA-SAT",
+        "BNA-ELP",
+        "BNA-SGF"
+      ],
+      "newOneStopMarkets": [
+        "BNA-MFE",
+        "BNA-SHV",
+        "BNA-OMA",
+        "BNA-ICT",
+        "BNA-FSD",
+        "BNA-CID",
+        "BNA-COU",
+        "OMA-BNA"
+      ],
+      "lostChoiceMarkets": [
+        {
+          "market": "BNA-SAT",
+          "od": 68.4
+        },
+        {
+          "market": "BNA-ELP",
+          "od": 19.2
+        },
+        {
+          "market": "BNA-SGF",
+          "od": 4
+        }
+      ],
+      "slowerFastest": [
+        {
+          "market": "BNA-MKE",
+          "oldMinutes": 214,
+          "newMinutes": 303,
+          "od": 52.5
+        },
+        {
+          "market": "BNA-CRP",
+          "oldMinutes": 269,
+          "newMinutes": 358,
+          "od": 6.2
+        },
+        {
+          "market": "BNA-FAR",
+          "oldMinutes": 232,
+          "newMinutes": 321,
+          "od": 17.6
+        },
+        {
+          "market": "BNA-DLH",
+          "oldMinutes": 232,
+          "newMinutes": 321,
+          "od": 2.6
+        },
+        {
+          "market": "BNA-PIA",
+          "oldMinutes": 209,
+          "newMinutes": 298,
+          "od": 7.5
+        },
+        {
+          "market": "BNA-SAT",
+          "oldMinutes": 386,
+          "newMinutes": 394,
+          "od": 68.4
+        },
+        {
+          "market": "BNA-ELP",
+          "oldMinutes": 384,
+          "newMinutes": 686,
+          "od": 19.2
+        },
+        {
+          "market": "BNA-GRR",
+          "oldMinutes": 273,
+          "newMinutes": 293,
+          "od": 35
+        }
+      ],
+      "fasterFastest": 12
+    },
+    "targets": {
+      "CAK-PGD": [],
+      "PGD-CAK": [],
+      "BLV-HOU": [],
+      "HOU-BLV": [],
+      "MYR-RFD": [],
+      "RFD-MYR": [],
+      "BNA-OMA": [
+        {
+          "flights": "1080,1636",
+          "a": "BNA",
+          "b": "OMA",
+          "minutes": 168,
+          "stops": 1
+        }
+      ],
+      "OMA-BNA": [
+        {
+          "flights": "1639,1077",
+          "a": "OMA",
+          "b": "BNA",
+          "minutes": 378,
+          "stops": 1
+        }
+      ]
+    }
+  },
+  "rfd_myr_2_flights": {
+    "app": {
+      "lostChoices": 23,
+      "lostMarkets": [
+        "FSD-MYR",
+        "ICT-MYR",
+        "OMA-MYR"
+      ],
+      "lostOneStopMarkets": [
+        "ACY-MYR",
+        "BHM-MYR",
+        "BNA-MYR",
+        "BUF-MYR",
+        "CHS-MYR",
+        "DAL-MYR",
+        "MDT-MYR"
+      ],
+      "newOneStopMarkets": [
+        "RFD-MYR",
+        "TTN-MYR"
+      ],
+      "lostChoiceMarkets": [
+        {
+          "market": "ABE-MYR",
+          "od": 31.7
+        },
+        {
+          "market": "ACY-MYR",
+          "od": 10.2
+        },
+        {
+          "market": "BHM-MYR",
+          "od": 2.3
+        },
+        {
+          "market": "BNA-MYR",
+          "od": 22.3
+        },
+        {
+          "market": "BUF-MYR",
+          "od": 7.5
+        },
+        {
+          "market": "BWI-MYR",
+          "od": 42
+        },
+        {
+          "market": "CHS-MYR",
+          "od": 1.5
+        },
+        {
+          "market": "DAB-MYR",
+          "od": 0.6
+        },
+        {
+          "market": "DAL-MYR",
+          "od": 16.8
+        },
+        {
+          "market": "EYW-MYR",
+          "od": 2.5
+        },
+        {
+          "market": "FSD-MYR",
+          "od": 1
+        },
+        {
+          "market": "HOU-MYR",
+          "od": 6.3
+        },
+        {
+          "market": "ICT-MYR",
+          "od": 1.7
+        },
+        {
+          "market": "MCI-MYR",
+          "od": 11
+        },
+        {
+          "market": "MDT-MYR",
+          "od": 9
+        },
+        {
+          "market": "MSY-MYR",
+          "od": 10.2
+        },
+        {
+          "market": "OMA-MYR",
+          "od": 6.3
+        },
+        {
+          "market": "PGD-MYR",
+          "od": 3.2
+        },
+        {
+          "market": "PIE-MYR",
+          "od": 16.5
+        },
+        {
+          "market": "PVD-MYR",
+          "od": 31.4
+        },
+        {
+          "market": "ROA-MYR",
+          "od": 0.4
+        }
+      ],
+      "slowerFastest": [
+        {
+          "market": "ACY-MYR",
+          "oldMinutes": 161,
+          "newMinutes": 665,
+          "od": 10.2
+        },
+        {
+          "market": "BHM-MYR",
+          "oldMinutes": 241,
+          "newMinutes": 387,
+          "od": 2.3
+        },
+        {
+          "market": "BNA-MYR",
+          "oldMinutes": 211,
+          "newMinutes": 480,
+          "od": 22.3
+        },
+        {
+          "market": "BUF-MYR",
+          "oldMinutes": 213,
+          "newMinutes": 360,
+          "od": 7.5
+        },
+        {
+          "market": "CHS-MYR",
+          "oldMinutes": 181,
+          "newMinutes": 390,
+          "od": 1.5
+        },
+        {
+          "market": "DAB-MYR",
+          "oldMinutes": 456,
+          "newMinutes": 503,
+          "od": 0.6
+        },
+        {
+          "market": "DAL-MYR",
+          "oldMinutes": 281,
+          "newMinutes": 425,
+          "od": 16.8
+        },
+        {
+          "market": "HOU-MYR",
+          "oldMinutes": 291,
+          "newMinutes": 350,
+          "od": 6.3
+        },
+        {
+          "market": "MDT-MYR",
+          "oldMinutes": 166,
+          "newMinutes": 660,
+          "od": 9
+        },
+        {
+          "market": "MSY-MYR",
+          "oldMinutes": 256,
+          "newMinutes": 315,
+          "od": 10.2
+        },
+        {
+          "market": "PVD-MYR",
+          "oldMinutes": 191,
+          "newMinutes": 250,
+          "od": 31.4
+        },
+        {
+          "market": "RDU-FLL",
+          "oldMinutes": 292,
+          "newMinutes": 361,
+          "od": 168.3
+        },
+        {
+          "market": "RDU-CHS",
+          "oldMinutes": 165,
+          "newMinutes": 234,
+          "od": 5.4
+        },
+        {
+          "market": "RDU-BNA",
+          "oldMinutes": 192,
+          "newMinutes": 293,
+          "od": 121.6
+        },
+        {
+          "market": "RDU-HOU",
+          "oldMinutes": 273,
+          "newMinutes": 278,
+          "od": 77.3
+        },
+        {
+          "market": "RDU-SGF",
+          "oldMinutes": 335,
+          "newMinutes": 390,
+          "od": 6.8
+        },
+        {
+          "market": "RDU-PVD",
+          "oldMinutes": 173,
+          "newMinutes": 274,
+          "od": 42.7
+        },
+        {
+          "market": "RDU-CAE",
+          "oldMinutes": 165,
+          "newMinutes": 241,
+          "od": 1.2
+        },
+        {
+          "market": "RDU-SAV",
+          "oldMinutes": 176,
+          "newMinutes": 277,
+          "od": 4.7
+        },
+        {
+          "market": "RDU-AVP",
+          "oldMinutes": 158,
+          "newMinutes": 259,
+          "od": 2.6
+        },
+        {
+          "market": "RDU-TTN",
+          "oldMinutes": 150,
+          "newMinutes": 251,
+          "od": 0.1
+        },
+        {
+          "market": "RDU-ILM",
+          "oldMinutes": 147,
+          "newMinutes": 248,
+          "od": 1.8
+        },
+        {
+          "market": "RDU-MYR",
+          "oldMinutes": 156,
+          "newMinutes": 176,
+          "od": 1
+        },
+        {
+          "market": "RDU-ACY",
+          "oldMinutes": 144,
+          "newMinutes": 245,
+          "od": 0.6
+        },
+        {
+          "market": "RDU-ROA",
+          "oldMinutes": 194,
+          "newMinutes": 295,
+          "od": 0.3
+        },
+        {
+          "market": "ROA-MYR",
+          "oldMinutes": 151,
+          "newMinutes": 395,
+          "od": 0.4
+        }
+      ],
+      "fasterFastest": 15
+    },
+    "geographic": {
+      "lostChoices": 18,
+      "lostMarkets": [
+        "BHM-MYR",
+        "BNA-MYR",
+        "FSD-MYR",
+        "ICT-MYR",
+        "OMA-MYR",
+        "ROA-MYR"
+      ],
+      "lostOneStopMarkets": [
+        "ACY-MYR",
+        "BHM-MYR",
+        "BNA-MYR",
+        "BUF-MYR",
+        "DAL-MYR",
+        "MDT-MYR",
+        "ROA-MYR"
+      ],
+      "newOneStopMarkets": [
+        "RDU-BWI",
+        "RFD-MYR",
+        "TTN-MYR"
+      ],
+      "lostChoiceMarkets": [
+        {
+          "market": "ABE-MYR",
+          "od": 31.7
+        },
+        {
+          "market": "ACY-MYR",
+          "od": 10.2
+        },
+        {
+          "market": "BHM-MYR",
+          "od": 2.3
+        },
+        {
+          "market": "BNA-MYR",
+          "od": 22.3
+        },
+        {
+          "market": "BUF-MYR",
+          "od": 7.5
+        },
+        {
+          "market": "DAL-MYR",
+          "od": 16.8
+        },
+        {
+          "market": "FSD-MYR",
+          "od": 1
+        },
+        {
+          "market": "HOU-MYR",
+          "od": 6.3
+        },
+        {
+          "market": "ICT-MYR",
+          "od": 1.7
+        },
+        {
+          "market": "MCI-MYR",
+          "od": 11
+        },
+        {
+          "market": "MDT-MYR",
+          "od": 9
+        },
+        {
+          "market": "MSY-MYR",
+          "od": 10.2
+        },
+        {
+          "market": "OMA-MYR",
+          "od": 6.3
+        },
+        {
+          "market": "PIE-MYR",
+          "od": 16.5
+        },
+        {
+          "market": "PVD-MYR",
+          "od": 31.4
+        },
+        {
+          "market": "ROA-MYR",
+          "od": 0.4
+        }
+      ],
+      "slowerFastest": [
+        {
+          "market": "ACY-MYR",
+          "oldMinutes": 161,
+          "newMinutes": 665,
+          "od": 10.2
+        },
+        {
+          "market": "BUF-MYR",
+          "oldMinutes": 213,
+          "newMinutes": 360,
+          "od": 7.5
+        },
+        {
+          "market": "DAL-MYR",
+          "oldMinutes": 281,
+          "newMinutes": 425,
+          "od": 16.8
+        },
+        {
+          "market": "HOU-MYR",
+          "oldMinutes": 291,
+          "newMinutes": 350,
+          "od": 6.3
+        },
+        {
+          "market": "MDT-MYR",
+          "oldMinutes": 166,
+          "newMinutes": 660,
+          "od": 9
+        },
+        {
+          "market": "MSY-MYR",
+          "oldMinutes": 256,
+          "newMinutes": 315,
+          "od": 10.2
+        },
+        {
+          "market": "PVD-MYR",
+          "oldMinutes": 191,
+          "newMinutes": 250,
+          "od": 31.4
+        },
+        {
+          "market": "RDU-HOU",
+          "oldMinutes": 273,
+          "newMinutes": 278,
+          "od": 77.3
+        },
+        {
+          "market": "RDU-FLL",
+          "oldMinutes": 292,
+          "newMinutes": 361,
+          "od": 168.3
+        },
+        {
+          "market": "RDU-SGF",
+          "oldMinutes": 335,
+          "newMinutes": 390,
+          "od": 6.8
+        },
+        {
+          "market": "RDU-PVD",
+          "oldMinutes": 173,
+          "newMinutes": 274,
+          "od": 42.7
+        },
+        {
+          "market": "RDU-BNA",
+          "oldMinutes": 192,
+          "newMinutes": 293,
+          "od": 121.6
+        },
+        {
+          "market": "RDU-SAV",
+          "oldMinutes": 176,
+          "newMinutes": 277,
+          "od": 4.7
+        },
+        {
+          "market": "RDU-AVP",
+          "oldMinutes": 158,
+          "newMinutes": 259,
+          "od": 2.6
+        },
+        {
+          "market": "RDU-ACY",
+          "oldMinutes": 144,
+          "newMinutes": 245,
+          "od": 0.6
+        },
+        {
+          "market": "RDU-TTN",
+          "oldMinutes": 150,
+          "newMinutes": 251,
+          "od": 0.1
+        }
+      ],
+      "fasterFastest": 13
+    },
+    "targets": {
+      "CAK-PGD": [],
+      "PGD-CAK": [],
+      "BLV-HOU": [],
+      "HOU-BLV": [],
+      "MYR-RFD": [],
+      "RFD-MYR": [
+        {
+          "flights": "1119,1714",
+          "a": "RFD",
+          "b": "MYR",
+          "minutes": 425,
+          "stops": 1
+        }
+      ],
+      "BNA-OMA": [],
+      "OMA-BNA": []
+    }
+  },
+  "myr_rfd_both_new_bank": {
+    "app": {
+      "lostChoices": 56,
+      "lostMarkets": [
+        "FSD-MYR",
+        "ICT-MYR",
+        "MYR-MDT",
+        "MYR-DAB",
+        "OMA-MYR"
+      ],
+      "lostOneStopMarkets": [
+        "ACY-MYR",
+        "BHM-MYR",
+        "BNA-MYR",
+        "BUF-MYR",
+        "CHS-MYR",
+        "DAL-MYR",
+        "MDT-MYR",
+        "MYR-MDT",
+        "MYR-ACY",
+        "MYR-PWM"
+      ],
+      "newOneStopMarkets": [
+        "MYR-RFD",
+        "MYR-DAL",
+        "MYR-MCI",
+        "MYR-AVP",
+        "MYR-TTN",
+        "MYR-MHT",
+        "MYR-ALB",
+        "MYR-ROC",
+        "RFD-MYR",
+        "TTN-MYR"
+      ],
+      "lostChoiceMarkets": [
+        {
+          "market": "ABE-MYR",
+          "od": 31.7
+        },
+        {
+          "market": "ACY-MYR",
+          "od": 10.2
+        },
+        {
+          "market": "BHM-MYR",
+          "od": 2.3
+        },
+        {
+          "market": "BNA-MYR",
+          "od": 22.3
+        },
+        {
+          "market": "BUF-MYR",
+          "od": 7.5
+        },
+        {
+          "market": "BWI-MYR",
+          "od": 42
+        },
+        {
+          "market": "CHS-MYR",
+          "od": 1.5
+        },
+        {
+          "market": "DAB-MYR",
+          "od": 0.6
+        },
+        {
+          "market": "DAL-MYR",
+          "od": 16.8
+        },
+        {
+          "market": "EYW-MYR",
+          "od": 2.5
+        },
+        {
+          "market": "FSD-MYR",
+          "od": 1
+        },
+        {
+          "market": "HOU-MYR",
+          "od": 6.3
+        },
+        {
+          "market": "ICT-MYR",
+          "od": 1.7
+        },
+        {
+          "market": "MCI-MYR",
+          "od": 11
+        },
+        {
+          "market": "MDT-MYR",
+          "od": 9
+        },
+        {
+          "market": "MSY-MYR",
+          "od": 10.2
+        },
+        {
+          "market": "MYR-PIE",
+          "od": 16.6
+        },
+        {
+          "market": "MYR-MSY",
+          "od": 10.3
+        },
+        {
+          "market": "MYR-PVD",
+          "od": 32
+        },
+        {
+          "market": "MYR-HOU",
+          "od": 6.4
+        },
+        {
+          "market": "MYR-CLT",
+          "od": 3.6
+        },
+        {
+          "market": "MYR-CHS",
+          "od": 1.7
+        },
+        {
+          "market": "MYR-SYR",
+          "od": 10.9
+        },
+        {
+          "market": "MYR-SFB",
+          "od": 28.2
+        },
+        {
+          "market": "MYR-FLL",
+          "od": 46
+        },
+        {
+          "market": "MYR-SRQ",
+          "od": 2.5
+        },
+        {
+          "market": "MYR-CAK",
+          "od": 18.7
+        },
+        {
+          "market": "MYR-ROC",
+          "od": 10.3
+        },
+        {
+          "market": "MYR-BTV",
+          "od": 3.4
+        },
+        {
+          "market": "MYR-MHT",
+          "od": 11.6
+        },
+        {
+          "market": "MYR-HPN",
+          "od": 18.3
+        },
+        {
+          "market": "MYR-HVN",
+          "od": 28.6
+        },
+        {
+          "market": "MYR-SWF",
+          "od": 21.7
+        },
+        {
+          "market": "MYR-ISP",
+          "od": 15.2
+        },
+        {
+          "market": "MYR-PIT",
+          "od": 38.1
+        },
+        {
+          "market": "MYR-BUF",
+          "od": 7.6
+        },
+        {
+          "market": "MYR-GSP",
+          "od": 0.6
+        },
+        {
+          "market": "MYR-MDT",
+          "od": 8.5
+        },
+        {
+          "market": "MYR-GSO",
+          "od": 0.3
+        },
+        {
+          "market": "MYR-ACY",
+          "od": 10.3
+        },
+        {
+          "market": "MYR-BHM",
+          "od": 2.5
+        },
+        {
+          "market": "MYR-DAL",
+          "od": 17
+        },
+        {
+          "market": "MYR-MCI",
+          "od": 11.1
+        },
+        {
+          "market": "MYR-XNA",
+          "od": 2.4
+        },
+        {
+          "market": "MYR-DAB",
+          "od": 0.6
+        },
+        {
+          "market": "MYR-PWM",
+          "od": 4.1
+        },
+        {
+          "market": "OMA-MYR",
+          "od": 6.3
+        },
+        {
+          "market": "PGD-MYR",
+          "od": 3.2
+        },
+        {
+          "market": "PIE-MYR",
+          "od": 16.5
+        },
+        {
+          "market": "PVD-MYR",
+          "od": 31.4
+        },
+        {
+          "market": "ROA-MYR",
+          "od": 0.4
+        }
+      ],
+      "slowerFastest": [
+        {
+          "market": "ACY-MYR",
+          "oldMinutes": 161,
+          "newMinutes": 665,
+          "od": 10.2
+        },
+        {
+          "market": "BHM-MYR",
+          "oldMinutes": 241,
+          "newMinutes": 387,
+          "od": 2.3
+        },
+        {
+          "market": "BNA-MYR",
+          "oldMinutes": 211,
+          "newMinutes": 480,
+          "od": 22.3
+        },
+        {
+          "market": "BUF-MYR",
+          "oldMinutes": 213,
+          "newMinutes": 360,
+          "od": 7.5
+        },
+        {
+          "market": "CHS-MYR",
+          "oldMinutes": 181,
+          "newMinutes": 390,
+          "od": 1.5
+        },
+        {
+          "market": "DAB-MYR",
+          "oldMinutes": 456,
+          "newMinutes": 503,
+          "od": 0.6
+        },
+        {
+          "market": "DAL-MYR",
+          "oldMinutes": 281,
+          "newMinutes": 425,
+          "od": 16.8
+        },
+        {
+          "market": "HOU-MYR",
+          "oldMinutes": 291,
+          "newMinutes": 350,
+          "od": 6.3
+        },
+        {
+          "market": "MDT-MYR",
+          "oldMinutes": 166,
+          "newMinutes": 660,
+          "od": 9
+        },
+        {
+          "market": "MSY-MYR",
+          "oldMinutes": 256,
+          "newMinutes": 315,
+          "od": 10.2
+        },
+        {
+          "market": "MYR-PIE",
+          "oldMinutes": 224,
+          "newMinutes": 285,
+          "od": 16.6
+        },
+        {
+          "market": "MYR-DAL",
+          "oldMinutes": 356,
+          "newMinutes": 439,
+          "od": 17
+        },
+        {
+          "market": "MYR-MSY",
+          "oldMinutes": 254,
+          "newMinutes": 315,
+          "od": 10.3
+        },
+        {
+          "market": "MYR-PVD",
+          "oldMinutes": 188,
+          "newMinutes": 249,
+          "od": 32
+        },
+        {
+          "market": "MYR-HOU",
+          "oldMinutes": 293,
+          "newMinutes": 349,
+          "od": 6.4
+        },
+        {
+          "market": "MYR-CLT",
+          "oldMinutes": 171,
+          "newMinutes": 232,
+          "od": 3.6
+        },
+        {
+          "market": "MYR-CHS",
+          "oldMinutes": 180,
+          "newMinutes": 241,
+          "od": 1.7
+        },
+        {
+          "market": "MYR-ACY",
+          "oldMinutes": 159,
+          "newMinutes": 509,
+          "od": 10.3
+        },
+        {
+          "market": "MYR-BHM",
+          "oldMinutes": 215,
+          "newMinutes": 316,
+          "od": 2.5
+        },
+        {
+          "market": "MYR-GSO",
+          "oldMinutes": 161,
+          "newMinutes": 186,
+          "od": 0.3
+        },
+        {
+          "market": "MYR-SYR",
+          "oldMinutes": 190,
+          "newMinutes": 251,
+          "od": 10.9
+        },
+        {
+          "market": "MYR-PWM",
+          "oldMinutes": 218,
+          "newMinutes": 524,
+          "od": 4.1
+        },
+        {
+          "market": "MYR-XNA",
+          "oldMinutes": 472,
+          "newMinutes": 553,
+          "od": 2.4
+        },
+        {
+          "market": "PVD-MYR",
+          "oldMinutes": 191,
+          "newMinutes": 250,
+          "od": 31.4
+        },
+        {
+          "market": "RDU-FLL",
+          "oldMinutes": 292,
+          "newMinutes": 361,
+          "od": 168.3
+        },
+        {
+          "market": "RDU-CHS",
+          "oldMinutes": 165,
+          "newMinutes": 234,
+          "od": 5.4
+        },
+        {
+          "market": "RDU-BNA",
+          "oldMinutes": 192,
+          "newMinutes": 293,
+          "od": 121.6
+        },
+        {
+          "market": "RDU-HOU",
+          "oldMinutes": 273,
+          "newMinutes": 278,
+          "od": 77.3
+        },
+        {
+          "market": "RDU-SGF",
+          "oldMinutes": 335,
+          "newMinutes": 390,
+          "od": 6.8
+        },
+        {
+          "market": "RDU-PVD",
+          "oldMinutes": 173,
+          "newMinutes": 274,
+          "od": 42.7
+        },
+        {
+          "market": "RDU-CAE",
+          "oldMinutes": 165,
+          "newMinutes": 241,
+          "od": 1.2
+        },
+        {
+          "market": "RDU-SAV",
+          "oldMinutes": 176,
+          "newMinutes": 277,
+          "od": 4.7
+        },
+        {
+          "market": "RDU-AVP",
+          "oldMinutes": 158,
+          "newMinutes": 259,
+          "od": 2.6
+        },
+        {
+          "market": "RDU-TTN",
+          "oldMinutes": 150,
+          "newMinutes": 251,
+          "od": 0.1
+        },
+        {
+          "market": "RDU-ILM",
+          "oldMinutes": 147,
+          "newMinutes": 248,
+          "od": 1.8
+        },
+        {
+          "market": "RDU-MYR",
+          "oldMinutes": 156,
+          "newMinutes": 176,
+          "od": 1
+        },
+        {
+          "market": "RDU-ACY",
+          "oldMinutes": 144,
+          "newMinutes": 245,
+          "od": 0.6
+        },
+        {
+          "market": "RDU-ROA",
+          "oldMinutes": 194,
+          "newMinutes": 295,
+          "od": 0.3
+        },
+        {
+          "market": "ROA-MYR",
+          "oldMinutes": 151,
+          "newMinutes": 395,
+          "od": 0.4
+        }
+      ],
+      "fasterFastest": 40
+    },
+    "geographic": {
+      "lostChoices": 40,
+      "lostMarkets": [
+        "BHM-MYR",
+        "BNA-MYR",
+        "FSD-MYR",
+        "ICT-MYR",
+        "MYR-MDT",
+        "OMA-MYR",
+        "ROA-MYR"
+      ],
+      "lostOneStopMarkets": [
+        "ACY-MYR",
+        "BHM-MYR",
+        "BNA-MYR",
+        "BUF-MYR",
+        "DAL-MYR",
+        "MDT-MYR",
+        "MYR-MDT",
+        "MYR-ACY",
+        "MYR-PWM",
+        "ROA-MYR"
+      ],
+      "newOneStopMarkets": [
+        "MYR-RFD",
+        "MYR-DAL",
+        "MYR-MCI",
+        "MYR-AVP",
+        "MYR-TTN",
+        "MYR-MHT",
+        "MYR-ALB",
+        "MYR-ROC",
+        "RDU-BWI",
+        "RFD-MYR",
+        "TTN-MYR"
+      ],
+      "lostChoiceMarkets": [
+        {
+          "market": "ABE-MYR",
+          "od": 31.7
+        },
+        {
+          "market": "ACY-MYR",
+          "od": 10.2
+        },
+        {
+          "market": "BHM-MYR",
+          "od": 2.3
+        },
+        {
+          "market": "BNA-MYR",
+          "od": 22.3
+        },
+        {
+          "market": "BUF-MYR",
+          "od": 7.5
+        },
+        {
+          "market": "DAL-MYR",
+          "od": 16.8
+        },
+        {
+          "market": "FSD-MYR",
+          "od": 1
+        },
+        {
+          "market": "HOU-MYR",
+          "od": 6.3
+        },
+        {
+          "market": "ICT-MYR",
+          "od": 1.7
+        },
+        {
+          "market": "MCI-MYR",
+          "od": 11
+        },
+        {
+          "market": "MDT-MYR",
+          "od": 9
+        },
+        {
+          "market": "MSY-MYR",
+          "od": 10.2
+        },
+        {
+          "market": "MYR-PIE",
+          "od": 16.6
+        },
+        {
+          "market": "MYR-MSY",
+          "od": 10.3
+        },
+        {
+          "market": "MYR-PVD",
+          "od": 32
+        },
+        {
+          "market": "MYR-HOU",
+          "od": 6.4
+        },
+        {
+          "market": "MYR-SYR",
+          "od": 10.9
+        },
+        {
+          "market": "MYR-CAK",
+          "od": 18.7
+        },
+        {
+          "market": "MYR-ROC",
+          "od": 10.3
+        },
+        {
+          "market": "MYR-BTV",
+          "od": 3.4
+        },
+        {
+          "market": "MYR-MHT",
+          "od": 11.6
+        },
+        {
+          "market": "MYR-HPN",
+          "od": 18.3
+        },
+        {
+          "market": "MYR-HVN",
+          "od": 28.6
+        },
+        {
+          "market": "MYR-SWF",
+          "od": 21.7
+        },
+        {
+          "market": "MYR-ISP",
+          "od": 15.2
+        },
+        {
+          "market": "MYR-PIT",
+          "od": 38.1
+        },
+        {
+          "market": "MYR-BUF",
+          "od": 7.6
+        },
+        {
+          "market": "MYR-MDT",
+          "od": 8.5
+        },
+        {
+          "market": "MYR-ACY",
+          "od": 10.3
+        },
+        {
+          "market": "MYR-BHM",
+          "od": 2.5
+        },
+        {
+          "market": "MYR-DAL",
+          "od": 17
+        },
+        {
+          "market": "MYR-MCI",
+          "od": 11.1
+        },
+        {
+          "market": "MYR-XNA",
+          "od": 2.4
+        },
+        {
+          "market": "MYR-PWM",
+          "od": 4.1
+        },
+        {
+          "market": "OMA-MYR",
+          "od": 6.3
+        },
+        {
+          "market": "PIE-MYR",
+          "od": 16.5
+        },
+        {
+          "market": "PVD-MYR",
+          "od": 31.4
+        },
+        {
+          "market": "ROA-MYR",
+          "od": 0.4
+        }
+      ],
+      "slowerFastest": [
+        {
+          "market": "ACY-MYR",
+          "oldMinutes": 161,
+          "newMinutes": 665,
+          "od": 10.2
+        },
+        {
+          "market": "BUF-MYR",
+          "oldMinutes": 213,
+          "newMinutes": 360,
+          "od": 7.5
+        },
+        {
+          "market": "DAL-MYR",
+          "oldMinutes": 281,
+          "newMinutes": 425,
+          "od": 16.8
+        },
+        {
+          "market": "HOU-MYR",
+          "oldMinutes": 291,
+          "newMinutes": 350,
+          "od": 6.3
+        },
+        {
+          "market": "MDT-MYR",
+          "oldMinutes": 166,
+          "newMinutes": 660,
+          "od": 9
+        },
+        {
+          "market": "MSY-MYR",
+          "oldMinutes": 256,
+          "newMinutes": 315,
+          "od": 10.2
+        },
+        {
+          "market": "MYR-DAL",
+          "oldMinutes": 356,
+          "newMinutes": 439,
+          "od": 17
+        },
+        {
+          "market": "MYR-PVD",
+          "oldMinutes": 188,
+          "newMinutes": 249,
+          "od": 32
+        },
+        {
+          "market": "MYR-HOU",
+          "oldMinutes": 293,
+          "newMinutes": 349,
+          "od": 6.4
+        },
+        {
+          "market": "MYR-ACY",
+          "oldMinutes": 159,
+          "newMinutes": 509,
+          "od": 10.3
+        },
+        {
+          "market": "MYR-BHM",
+          "oldMinutes": 215,
+          "newMinutes": 316,
+          "od": 2.5
+        },
+        {
+          "market": "MYR-MSY",
+          "oldMinutes": 254,
+          "newMinutes": 315,
+          "od": 10.3
+        },
+        {
+          "market": "MYR-PIE",
+          "oldMinutes": 224,
+          "newMinutes": 285,
+          "od": 16.6
+        },
+        {
+          "market": "MYR-SYR",
+          "oldMinutes": 190,
+          "newMinutes": 251,
+          "od": 10.9
+        },
+        {
+          "market": "MYR-PWM",
+          "oldMinutes": 218,
+          "newMinutes": 524,
+          "od": 4.1
+        },
+        {
+          "market": "MYR-XNA",
+          "oldMinutes": 472,
+          "newMinutes": 553,
+          "od": 2.4
+        },
+        {
+          "market": "PVD-MYR",
+          "oldMinutes": 191,
+          "newMinutes": 250,
+          "od": 31.4
+        },
+        {
+          "market": "RDU-HOU",
+          "oldMinutes": 273,
+          "newMinutes": 278,
+          "od": 77.3
+        },
+        {
+          "market": "RDU-FLL",
+          "oldMinutes": 292,
+          "newMinutes": 361,
+          "od": 168.3
+        },
+        {
+          "market": "RDU-SGF",
+          "oldMinutes": 335,
+          "newMinutes": 390,
+          "od": 6.8
+        },
+        {
+          "market": "RDU-PVD",
+          "oldMinutes": 173,
+          "newMinutes": 274,
+          "od": 42.7
+        },
+        {
+          "market": "RDU-BNA",
+          "oldMinutes": 192,
+          "newMinutes": 293,
+          "od": 121.6
+        },
+        {
+          "market": "RDU-SAV",
+          "oldMinutes": 176,
+          "newMinutes": 277,
+          "od": 4.7
+        },
+        {
+          "market": "RDU-AVP",
+          "oldMinutes": 158,
+          "newMinutes": 259,
+          "od": 2.6
+        },
+        {
+          "market": "RDU-ACY",
+          "oldMinutes": 144,
+          "newMinutes": 245,
+          "od": 0.6
+        },
+        {
+          "market": "RDU-TTN",
+          "oldMinutes": 150,
+          "newMinutes": 251,
+          "od": 0.1
+        }
+      ],
+      "fasterFastest": 36
+    },
+    "targets": {
+      "CAK-PGD": [],
+      "PGD-CAK": [],
+      "BLV-HOU": [],
+      "HOU-BLV": [],
+      "MYR-RFD": [
+        {
+          "flights": "1713,1120",
+          "a": "MYR",
+          "b": "RFD",
+          "minutes": 425,
+          "stops": 1
+        }
+      ],
+      "RFD-MYR": [
+        {
+          "flights": "1119,1714",
+          "a": "RFD",
+          "b": "MYR",
+          "minutes": 425,
+          "stops": 1
+        }
+      ],
+      "BNA-OMA": [],
+      "OMA-BNA": []
+    }
+  }
+}
