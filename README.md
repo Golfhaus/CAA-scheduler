@@ -4,33 +4,22 @@ CAA Scheduler is the migration target for Coastal American Airways schedule cons
 
 ## Latest published release
 
-The app defaults to **Schedule 7 v1.3.0**, published October 12, 2026, with
-**1,192 flights across 181 routes and 19 routing lines**. The release adds
-R307's PIT–DAY–PIT round trip and six requested timing repairs, with one
-supporting retiming to preserve a legal aircraft turn. Full validation reports
-**zero effective operating errors**, unchanged fleet and physical inventory,
-and passing latest-only native/browser-helper regression checks.
+The app defaults to **Schedule 7 v1.3.1**, published October 13, 2026, with
+**1,214 flights across 184 routes and 19 routing lines**. The release adds
+R724's RFD–JAX/MCI MAX9 day, northeast PGD/DAB one-stop service via SYR,
+and DSM afternoon service with a later RFD turn. It uses one additional MAX9
+and two CRJ700 aircraft-days; the DSM improvement uses existing CRJ200 capacity.
+All fixed inventories, bank windows and pinned demand data remain unchanged.
+Validation reports **zero effective operating errors**. Reviewed lower-demand
+connection losses and journey-time costs from the SYR changes are documented.
 
-See the [v1.3.0 release notes](docs/schedule_7_v1_3_0_release.md) for approved
-flying, connection gains, the small MFE timing tradeoff, validation and
-reproduction. The [released canonical](data/schedules/schedule_7_v1_3_0/canonical_schedule.json)
-is the starting point for future schedule work; its pinned
-[release configuration](config/optimizations/schedule_7_v1_3_0_release.json)
-reproduces the published package. Earlier releases and review snapshots remain
-historical references; routine regression targets only v1.3.0.
-
-## Current development draft
-
-[Schedule 7 v1.3.1](docs/schedule_7_v1_3_1_draft.md) starts from released
-v1.3.0 and includes R724's RFD–JAX/MCI MAX9 flying plus the accepted
-[northeast PGD/DAB connections over SYR](docs/schedule_7_v1_3_1_ne_service.md).
-The draft has **1,214 flights** and uses one additional MAX9 and two CRJ700
-aircraft-days. All five northeast cities gain one-stop service both ways to
-PGD/DAB and retain FLL/PIE/SFB/SRQ coverage. Fifteen existing clocks change;
-reviewed lower-demand connection losses and elapsed-time costs are documented.
-[DSM afternoon service and the later RFD turn](docs/schedule_7_v1_3_1_dsm_review.md) add two CRJ200 legs using the existing fleet, with no further network losses.
-Native validation has zero effective errors. It is **unpublished**; the app
-default remains v1.3.0.
+See the [v1.3.1 release notes](docs/schedule_7_v1_3_1_release.md) for flying,
+demand evidence, network tradeoffs and reproduction. The
+[released canonical](data/schedules/schedule_7_v1_3_1/canonical_schedule.json)
+is the starting point for future work, and the
+[release configuration](config/optimizations/schedule_7_v1_3_1_release.json)
+reproduces the published package. Earlier releases and planning snapshots remain
+historical references; routine regression targets only v1.3.1.
 
 ## Milestone 0.7 — planning foundation
 

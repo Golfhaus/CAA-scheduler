@@ -1,5 +1,7 @@
 # Schedule 7 v1.3.1 draft — northeast service to PGD and DAB
 
+Historical planning snapshot: the accepted changes were published as **v1.3.1 on October 13, 2026**. The [release notes](schedule_7_v1_3_1_release.md) and released canonical are authoritative; draft-status and default-schedule statements below describe the review checkpoint.
+
 Accepted into the **unpublished draft** October 13, 2026. Published v1.3.0 and the app default remain unchanged. This is cumulative round 3, following R724's accepted RFD/JAX/MCI flying.
 
 The totals and comparisons below describe the accepted round-3 checkpoint. Subsequent [DSM round-4 changes](schedule_7_v1_3_1_dsm_review.md) retain this coverage and raise the current draft to 1,214 flights.

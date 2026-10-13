@@ -1,5 +1,7 @@
 # Schedule 7 v1.3.1 draft — RFD and northeast/Florida connections
 
+Historical planning snapshot: the accepted changes were published as **v1.3.1 on October 13, 2026**. The [release notes](schedule_7_v1_3_1_release.md) and released canonical are authoritative; draft-status and default-schedule statements below describe the review checkpoint.
+
 Started October 12, 2026 from main commit `80185b5dd8464899a6f09cb8249e54e264185aa4`, the published v1.3.0 canonical. This is an **unpublished draft**, not a release. The app default and public manifest remain v1.3.0. The user authorized use of spare fleet where system demand supports it.
 
 Updated October 13, 2026: round 3 adds one-stop PGD/DAB service for HPN, HVN, ISP, BTV and ORH through SYR, using two additional CRJ700 aircraft-days. Round 3 has **1,212 flights / 184 routes / 19 lines**, with zero effective native errors. See the [accepted northeast service and tradeoffs](schedule_7_v1_3_1_ne_service.md). It changes 13 existing clocks and includes reviewed network losses; the original flight-preservation/no-loss statements below describe rounds 1–2 only.

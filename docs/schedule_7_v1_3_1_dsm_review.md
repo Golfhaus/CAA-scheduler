@@ -1,5 +1,7 @@
 # Schedule 7 v1.3.1 draft — DSM operating day
 
+Historical planning snapshot: the accepted changes were published as **v1.3.1 on October 13, 2026**. The [release notes](schedule_7_v1_3_1_release.md) and released canonical are authoritative; draft-status and default-schedule statements below describe the review checkpoint.
+
 Accepted into the unpublished draft October 13, 2026. Publication remains separate; the app default is v1.3.0. This round follows the accepted RFD and northeast/Florida work.
 
 ## Selected changes
