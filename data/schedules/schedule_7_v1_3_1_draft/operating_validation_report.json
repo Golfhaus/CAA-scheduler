@@ -114,10 +114,10 @@
       "severity": "warning",
       "hardStop": false,
       "status": "warning",
-      "message": "83 finding(s)",
+      "message": "82 finding(s)",
       "metrics": {
-        "findingCount": 83,
-        "effectiveFindingCount": 83,
+        "findingCount": 82,
+        "effectiveFindingCount": 82,
         "overriddenFindingCount": 0
       },
       "findings": [
@@ -734,18 +734,6 @@
           }
         },
         {
-          "id": "AI-11-1566-1723",
-          "message": "Hold at MCI is 237 minutes and needs deliberate-hold review",
-          "evidence": {
-            "line": "AI",
-            "day": 11,
-            "city": "MCI",
-            "arrivalFlight": 1566,
-            "departureFlight": 1723,
-            "minutes": 237
-          }
-        },
-        {
           "id": "AE-2-1567-1571",
           "message": "Hold at PHF is 154 minutes and needs deliberate-hold review",
           "evidence": {
@@ -1214,8 +1202,8 @@
       "message": "Point-to-point flying is within the 10% cap",
       "metrics": {
         "flights": 97,
-        "totalFlights": 1212,
-        "share": 0.08003300330033003,
+        "totalFlights": 1214,
+        "share": 0.07990115321252059,
         "findingCount": 0,
         "effectiveFindingCount": 0,
         "overriddenFindingCount": 0
@@ -1259,10 +1247,10 @@
       "severity": "warning",
       "hardStop": false,
       "status": "warning",
-      "message": "79 finding(s)",
+      "message": "80 finding(s)",
       "metrics": {
-        "findingCount": 79,
-        "effectiveFindingCount": 79,
+        "findingCount": 80,
+        "effectiveFindingCount": 80,
         "overriddenFindingCount": 0
       },
       "findings": [
@@ -1882,6 +1870,32 @@
                 "from": 295,
                 "to": 625,
                 "minutes": 330
+              }
+            ],
+            "serviceWindowMinutes": {
+              "start": 270,
+              "end": 1260
+            },
+            "includesOvernightWrap": false
+          }
+        },
+        {
+          "id": "DSM",
+          "message": "DSM has no departure for more than 240 minutes",
+          "evidence": {
+            "city": "DSM",
+            "departures": [
+              445,
+              535,
+              545,
+              645,
+              935
+            ],
+            "excessiveGaps": [
+              {
+                "from": 645,
+                "to": 935,
+                "minutes": 290
               }
             ],
             "serviceWindowMinutes": {

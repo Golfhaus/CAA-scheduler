@@ -2,7 +2,7 @@
   "label": "Schedule 7, Version 1.3.1 draft",
   "minConnect": 30,
   "maxConnect": 240,
-  "flightCount": 1212,
+  "flightCount": 1214,
   "cityCount": 105,
   "cities": [
     {
@@ -2288,16 +2288,16 @@
     {
       "origin": "DSM",
       "dest": "RFD",
-      "dep": "07:40",
-      "arr": "08:40",
+      "dep": "08:55",
+      "arr": "09:55",
       "flight": 1209,
       "fleet": "CRJ900"
     },
     {
       "origin": "RFD",
       "dest": "DSM",
-      "dep": "06:00",
-      "arr": "07:00",
+      "dep": "07:15",
+      "arr": "08:15",
       "flight": 1210,
       "fleet": "CRJ900"
     },
@@ -10332,6 +10332,22 @@
       "arr": "05:20",
       "flight": 2214,
       "fleet": "CRJ700"
+    },
+    {
+      "origin": "MCI",
+      "dest": "DSM",
+      "dep": "14:00",
+      "arr": "14:50",
+      "flight": 2215,
+      "fleet": "CRJ200"
+    },
+    {
+      "origin": "DSM",
+      "dest": "MCI",
+      "dep": "15:35",
+      "arr": "16:25",
+      "flight": 2216,
+      "fleet": "CRJ200"
     }
   ]
 }

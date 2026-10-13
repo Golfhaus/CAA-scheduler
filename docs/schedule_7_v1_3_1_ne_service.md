@@ -2,6 +2,8 @@
 
 Accepted into the **unpublished draft** October 13, 2026. Published v1.3.0 and the app default remain unchanged. This is cumulative round 3, following R724's accepted RFD/JAX/MCI flying.
 
+The totals and comparisons below describe the accepted round-3 checkpoint. Subsequent [DSM round-4 changes](schedule_7_v1_3_1_dsm_review.md) retain this coverage and raise the current draft to 1,214 flights.
+
 ## Result
 
 HPN, HVN, ISP, BTV and ORH now have timetable-valid, geographically suitable one-stop service in **both directions** to PGD and DAB through **SYR**. All 20 priority directions pass the existing 30–240-minute connection window and 2.25 distance screen. Their combined pinned directional O-D is **335.4/day**: PGD 278.9 and DAB 56.5. ISP–DAB and ORH–DAB have zero recorded demand, but fit the same bank without additional flying.
@@ -92,7 +94,7 @@ The raw app also loses one-stop BGR→PVD (0.2), ACY→HVN (0.0) and ISP→PVD (
 
 ## Validation and reproduction
 
-The current draft contains **1,212 flights, 184 routes and 19 lines**. Fleet use is MAX9 24/35, CRJ900 28/45, CRJ700 56/65 and CRJ200 76/80. Native structural, operating, planning, maintenance/overnight and gate exports pass with **zero effective errors and zero hard stops**. There are 164 existing/effective advisories; the unavailable runway-data check remains unavailable. Physical inventory, bank counts/windows and the 30–240-minute connection window remain unchanged. Existing useful additional-hub exceptions cover the authorized new SYR service at PGD/DAB; no new timing or physical exception is introduced.
+The round-3 checkpoint contains **1,212 flights, 184 routes and 19 lines**. Fleet use is MAX9 24/35, CRJ900 28/45, CRJ700 56/65 and CRJ200 76/80. Native structural, operating, planning, maintenance/overnight and gate exports pass with **zero effective errors and zero hard stops**. There are 164 existing/effective advisories; the unavailable runway-data check remains unavailable. Physical inventory, bank counts/windows and the 30–240-minute connection window remain unchanged. Existing useful additional-hub exceptions cover the authorized new SYR service at PGD/DAB; no new timing or physical exception is introduced.
 
 System stand use remains **16 claims / 3,595 minutes**, the same as round 2. All passenger handling takes place at gates.
 

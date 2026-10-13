@@ -2,7 +2,9 @@
 
 Started October 12, 2026 from main commit `80185b5dd8464899a6f09cb8249e54e264185aa4`, the published v1.3.0 canonical. This is an **unpublished draft**, not a release. The app default and public manifest remain v1.3.0. The user authorized use of spare fleet where system demand supports it.
 
-Updated October 13, 2026: round 3 adds one-stop PGD/DAB service for HPN, HVN, ISP, BTV and ORH through SYR, using two additional CRJ700 aircraft-days. The current draft has **1,212 flights / 184 routes / 19 lines**, with zero effective native errors. See the [accepted northeast service and tradeoffs](schedule_7_v1_3_1_ne_service.md). It changes 13 existing clocks and includes reviewed network losses; the original flight-preservation/no-loss statements below describe rounds 1–2 only.
+Updated October 13, 2026: round 3 adds one-stop PGD/DAB service for HPN, HVN, ISP, BTV and ORH through SYR, using two additional CRJ700 aircraft-days. Round 3 has **1,212 flights / 184 routes / 19 lines**, with zero effective native errors. See the [accepted northeast service and tradeoffs](schedule_7_v1_3_1_ne_service.md). It changes 13 existing clocks and includes reviewed network losses; the original flight-preservation/no-loss statements below describe rounds 1–2 only.
+
+Updated October 13, 2026: round 4 adds a demand-supported afternoon MCI–DSM turn on R154 and shifts R516’s RFD round trip 75 minutes later. The current draft has **1,214 flights / 184 routes / 19 lines**, with 15 original clocks changed. It uses no additional aircraft beyond round 3. This DSM round gains nine one-stop directional markets, improves 19 geographically suitable fastest journeys and loses no choices or coverage. R150 remains unchanged because the reviewed earlier DAY pattern has weak demand and worsens useful DSM journeys. See the [DSM review](schedule_7_v1_3_1_dsm_review.md).
 
 ## Historical RFD case: rounds 1–2
 
@@ -77,12 +79,12 @@ A narrowly scoped RFD hub-count override records the user-requested fifth useful
 ```bash
 python scripts/build_schedule_7_v1_3_1_draft.py
 node scripts/audit_schedule_7_v1_3_1_connections.mjs
-python scripts/review_schedule_7_v1_3_1_rfd.py
+node scripts/audit_schedule_7_v1_3_1_dsm.mjs --accepted
 ```
 
 The builder enforces the pinned v1.3.0 SHA and verifies original-flight preservation, the exact six new flights, legal 12-day lines, fleet use, fixed gates/stands and native hard stops. The historical round-2 comparison established all 12 requested timetable connections, 10 geographically suitable priority connections and zero losses. The current audit preserves those connections and additionally checks the accepted northeast priorities and explicitly reviewed round-3 coverage tradeoffs. No superseded release package is reconstructed. Published v1.3.0 remains the latest-only regression target until release authorization.
 
-Configuration: `config/optimizations/schedule_7_v1_3_1_round_2.json` (cumulative accepted flying). Round 1 is the historical four-leg checkpoint. Draft package: `data/schedules/schedule_7_v1_3_1_draft/`. Corridor/idle screen: `outputs/schedule_7_v1_3_1/corridor_screen.json`.
+Current configuration: cumulative rounds 1–3 in `config/optimizations/schedule_7_v1_3_1_round_3.json`, followed by `config/optimizations/schedule_7_v1_3_1_round_4.json` on the SHA-pinned round-3 draft. Round 2 records the historical accepted RFD flying. Round 1 is the historical four-leg checkpoint. Draft package: `data/schedules/schedule_7_v1_3_1_draft/`. Corridor/idle screen: `outputs/schedule_7_v1_3_1/corridor_screen.json`.
 
 ## Subsequent evening-utilization review
 

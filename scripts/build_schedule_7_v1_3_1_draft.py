@@ -1,7 +1,10 @@
 """Reproduce the unpublished v1.3.1 draft and pinned historical review inputs."""
 from pathlib import Path
-import hashlib,json,sys
+import hashlib,json,sys,subprocess
 ROOT=Path(__file__).resolve().parents[1]
+if not any(x in sys.argv for x in ['--round-1','--round-2','--round-3']) and (ROOT/'config/optimizations/schedule_7_v1_3_1_round_4.json').exists():
+ subprocess.run([sys.executable,str(ROOT/'scripts/build_schedule_7_v1_3_1_dsm.py')],check=True)
+ sys.exit(0)
 sys.path.insert(0,str(ROOT/'src'))
 from caa_scheduler.optimization_overlay import apply_optimization_overlay
 from caa_scheduler.validation import validate_schedule

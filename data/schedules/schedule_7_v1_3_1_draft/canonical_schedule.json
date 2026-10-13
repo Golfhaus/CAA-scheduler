@@ -69,6 +69,10 @@
         {
           "path": "config/optimizations/schedule_7_v1_3_1_round_3.json",
           "sha256": "040494dda3acbe1dac28b8bbfef9e595cb90fd113901a0dc688ce3e9946484b1"
+        },
+        {
+          "path": "config/optimizations/schedule_7_v1_3_1_round_4.json",
+          "sha256": "7f432ed23201af5cf2e00083daf958904290c0bdbe9235d1a675b622a64508a8"
         }
       ],
       "publication": "Not authorized; app default remains schedule_7_v1_3_0"
@@ -6147,6 +6151,16 @@
       "legId": "V131-NE-R326-RDU-PHF",
       "operation": "arrival",
       "bankId": "PHF-M0"
+    },
+    {
+      "legId": "V131-DSM-R154-MCI-DSM",
+      "operation": "departure",
+      "bankId": "MCI-B6"
+    },
+    {
+      "legId": "V131-DSM-R154-DSM-MCI",
+      "operation": "arrival",
+      "bankId": "MCI-B8"
     }
   ],
   "cities": [
@@ -11737,10 +11751,10 @@
       "flight": 1209,
       "origin": "DSM",
       "destination": "RFD",
-      "departure": "07:40",
-      "arrival": "08:40",
-      "departureMinute": 460,
-      "arrivalMinute": 520
+      "departure": "08:55",
+      "arrival": "09:55",
+      "departureMinute": 535,
+      "arrivalMinute": 595
     },
     {
       "id": "DSM-RFD-CRJ900-01-IN",
@@ -11753,10 +11767,10 @@
       "flight": 1210,
       "origin": "RFD",
       "destination": "DSM",
-      "departure": "06:00",
-      "arrival": "07:00",
-      "departureMinute": 360,
-      "arrivalMinute": 420
+      "departure": "07:15",
+      "arrival": "08:15",
+      "departureMinute": 435,
+      "arrivalMinute": 495
     },
     {
       "id": "CLT-JAX-CRJ900-01-IN",
@@ -19956,7 +19970,7 @@
       "line": "AI",
       "fleet": "CRJ200",
       "day": 11,
-      "sequenceWithinRoute": 4,
+      "sequenceWithinRoute": 6,
       "pairing": 143,
       "flight": 1723,
       "origin": "MCI",
@@ -19972,7 +19986,7 @@
       "line": "AI",
       "fleet": "CRJ200",
       "day": 11,
-      "sequenceWithinRoute": 5,
+      "sequenceWithinRoute": 7,
       "pairing": 144,
       "flight": 1724,
       "origin": "SGF",
@@ -27821,6 +27835,38 @@
       "arrival": "05:20",
       "departureMinute": 270,
       "arrivalMinute": 320
+    },
+    {
+      "id": "V131-DSM-R154-MCI-DSM",
+      "route": 154,
+      "line": "AI",
+      "fleet": "CRJ200",
+      "day": 11,
+      "sequenceWithinRoute": 4,
+      "pairing": 125,
+      "flight": 2215,
+      "origin": "MCI",
+      "destination": "DSM",
+      "departure": "14:00",
+      "arrival": "14:50",
+      "departureMinute": 840,
+      "arrivalMinute": 890
+    },
+    {
+      "id": "V131-DSM-R154-DSM-MCI",
+      "route": 154,
+      "line": "AI",
+      "fleet": "CRJ200",
+      "day": 11,
+      "sequenceWithinRoute": 5,
+      "pairing": 126,
+      "flight": 2216,
+      "origin": "DSM",
+      "destination": "MCI",
+      "departure": "15:35",
+      "arrival": "16:25",
+      "departureMinute": 935,
+      "arrivalMinute": 985
     }
   ]
 }

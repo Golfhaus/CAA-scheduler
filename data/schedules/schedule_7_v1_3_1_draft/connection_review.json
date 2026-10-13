@@ -1,9 +1,9 @@
 {
   "baseCanonicalSha256": "1d86a742daaec896e8a1aef4a3755ff98067eded0888ca08f0b0915fd548f4bd",
-  "draftCanonicalSha256": "ce1ece6d4305cffdc60150684bf26ecfbce8d3b87b0fd00090c0e0a0224f0b21",
+  "draftCanonicalSha256": "35585e20946f2a41b3d3b80cee2088b149311b9f91db3cd8fecefd887303d52a",
   "demandSha256": "49c04922ee0cebb3fef8aad923e04bd11874587a263c9511358ddb833b860bc6",
-  "newChoices": 1854,
-  "uniqueLocalAndNewOneStopMarketOd": 1952.9,
+  "newChoices": 1989,
+  "uniqueLocalAndNewOneStopMarketOd": 2001.2000000000003,
   "baseScheduleId": "schedule_7_v1_3_0",
   "draftScheduleId": "schedule_7_v1_3_1_draft",
   "app": {
@@ -266,12 +266,36 @@
         "afterMinutes": 244
       },
       {
+        "market": "RDU-DSM",
+        "origin": "RDU",
+        "destination": "DSM",
+        "demand": 12.1,
+        "beforeMinutes": 325,
+        "afterMinutes": 235
+      },
+      {
+        "market": "DSM-RDU",
+        "origin": "DSM",
+        "destination": "RDU",
+        "demand": 11.9,
+        "beforeMinutes": 327,
+        "afterMinutes": 327
+      },
+      {
         "market": "GSP-PGD",
         "origin": "GSP",
         "destination": "PGD",
         "demand": 11.8,
         "beforeMinutes": 327,
         "afterMinutes": 292
+      },
+      {
+        "market": "JAX-DSM",
+        "origin": "JAX",
+        "destination": "DSM",
+        "demand": 11.7,
+        "beforeMinutes": 360,
+        "afterMinutes": 240
       },
       {
         "market": "PGD-BTV",
@@ -522,6 +546,22 @@
         "afterMinutes": 338
       },
       {
+        "market": "PHF-DSM",
+        "origin": "PHF",
+        "destination": "DSM",
+        "demand": 3.6,
+        "beforeMinutes": 335,
+        "afterMinutes": 305
+      },
+      {
+        "market": "DSM-PHF",
+        "origin": "DSM",
+        "destination": "PHF",
+        "demand": 3.4,
+        "beforeMinutes": 331,
+        "afterMinutes": 262
+      },
+      {
         "market": "AUS-DAB",
         "origin": "AUS",
         "destination": "DAB",
@@ -544,6 +584,14 @@
         "demand": 3,
         "beforeMinutes": 370,
         "afterMinutes": 287
+      },
+      {
+        "market": "SYR-DSM",
+        "origin": "SYR",
+        "destination": "DSM",
+        "demand": 2.7,
+        "beforeMinutes": 460,
+        "afterMinutes": 430
       },
       {
         "market": "MLB-RFD",
@@ -666,6 +714,14 @@
         "afterMinutes": 277
       },
       {
+        "market": "DSM-SHV",
+        "origin": "DSM",
+        "destination": "SHV",
+        "demand": 0.8,
+        "beforeMinutes": null,
+        "afterMinutes": 293
+      },
+      {
         "market": "MHT-DAB",
         "origin": "MHT",
         "destination": "DAB",
@@ -722,6 +778,14 @@
         "afterMinutes": 465
       },
       {
+        "market": "DSM-SGF",
+        "origin": "DSM",
+        "destination": "SGF",
+        "demand": 0.4,
+        "beforeMinutes": 540,
+        "afterMinutes": 149
+      },
+      {
         "market": "MAF-DAB",
         "origin": "MAF",
         "destination": "DAB",
@@ -760,6 +824,14 @@
         "demand": 0,
         "beforeMinutes": null,
         "afterMinutes": 266
+      },
+      {
+        "market": "DSM-COU",
+        "origin": "DSM",
+        "destination": "COU",
+        "demand": 0,
+        "beforeMinutes": null,
+        "afterMinutes": 317
       },
       {
         "market": "ISP-DAB",
@@ -1094,6 +1166,14 @@
         "afterMinutes": 269
       },
       {
+        "market": "SFB-DSM",
+        "origin": "SFB",
+        "destination": "DSM",
+        "demand": 34.7,
+        "beforeMinutes": 261,
+        "afterMinutes": 245
+      },
+      {
         "market": "RDU-ALB",
         "origin": "RDU",
         "destination": "ALB",
@@ -1294,6 +1374,14 @@
         "afterMinutes": 297
       },
       {
+        "market": "CLT-DSM",
+        "origin": "CLT",
+        "destination": "DSM",
+        "demand": 18.8,
+        "beforeMinutes": 282,
+        "afterMinutes": 230
+      },
+      {
         "market": "PWM-BNA",
         "origin": "PWM",
         "destination": "BNA",
@@ -1430,6 +1518,14 @@
         "afterMinutes": 211
       },
       {
+        "market": "RDU-DSM",
+        "origin": "RDU",
+        "destination": "DSM",
+        "demand": 12.1,
+        "beforeMinutes": 325,
+        "afterMinutes": 235
+      },
+      {
         "market": "SRQ-HPN",
         "origin": "SRQ",
         "destination": "HPN",
@@ -1444,6 +1540,14 @@
         "demand": 11.8,
         "beforeMinutes": 327,
         "afterMinutes": 292
+      },
+      {
+        "market": "JAX-DSM",
+        "origin": "JAX",
+        "destination": "DSM",
+        "demand": 11.7,
+        "beforeMinutes": 360,
+        "afterMinutes": 240
       },
       {
         "market": "PGD-SFB",
@@ -1500,6 +1604,14 @@
         "demand": 10.3,
         "beforeMinutes": 366,
         "afterMinutes": 297
+      },
+      {
+        "market": "DSM-SAT",
+        "origin": "DSM",
+        "destination": "SAT",
+        "demand": 10,
+        "beforeMinutes": 311,
+        "afterMinutes": 216
       },
       {
         "market": "CAK-BDL",
@@ -1790,6 +1902,14 @@
         "afterMinutes": 158
       },
       {
+        "market": "MEM-DSM",
+        "origin": "MEM",
+        "destination": "DSM",
+        "demand": 3.8,
+        "beforeMinutes": 230,
+        "afterMinutes": 175
+      },
+      {
         "market": "DAB-BUF",
         "origin": "DAB",
         "destination": "BUF",
@@ -1820,6 +1940,22 @@
         "demand": 3.6,
         "beforeMinutes": 439,
         "afterMinutes": 284
+      },
+      {
+        "market": "PHF-DSM",
+        "origin": "PHF",
+        "destination": "DSM",
+        "demand": 3.6,
+        "beforeMinutes": 335,
+        "afterMinutes": 305
+      },
+      {
+        "market": "DSM-PHF",
+        "origin": "DSM",
+        "destination": "PHF",
+        "demand": 3.4,
+        "beforeMinutes": 331,
+        "afterMinutes": 262
       },
       {
         "market": "MYR-PGD",
@@ -1926,6 +2062,14 @@
         "afterMinutes": 413
       },
       {
+        "market": "SYR-DSM",
+        "origin": "SYR",
+        "destination": "DSM",
+        "demand": 2.7,
+        "beforeMinutes": 460,
+        "afterMinutes": 430
+      },
+      {
         "market": "BUF-PVD",
         "origin": "BUF",
         "destination": "PVD",
@@ -1948,6 +2092,14 @@
         "demand": 2.4,
         "beforeMinutes": 700,
         "afterMinutes": 696
+      },
+      {
+        "market": "MKE-DSM",
+        "origin": "MKE",
+        "destination": "DSM",
+        "demand": 2.3,
+        "beforeMinutes": 189,
+        "afterMinutes": 180
       },
       {
         "market": "SYR-AVL",
@@ -1988,6 +2140,14 @@
         "demand": 1.9,
         "beforeMinutes": 377,
         "afterMinutes": 191
+      },
+      {
+        "market": "DSM-HRL",
+        "origin": "DSM",
+        "destination": "HRL",
+        "demand": 1.9,
+        "beforeMinutes": 287,
+        "afterMinutes": 247
       },
       {
         "market": "ROC-AVL",
@@ -2038,12 +2198,36 @@
         "afterMinutes": 563
       },
       {
+        "market": "TUL-DSM",
+        "origin": "TUL",
+        "destination": "DSM",
+        "demand": 1.7,
+        "beforeMinutes": 211,
+        "afterMinutes": 205
+      },
+      {
         "market": "DAY-ALB",
         "origin": "DAY",
         "destination": "ALB",
         "demand": 1.6,
         "beforeMinutes": 317,
         "afterMinutes": 169
+      },
+      {
+        "market": "DSM-TUL",
+        "origin": "DSM",
+        "destination": "TUL",
+        "demand": 1.6,
+        "beforeMinutes": 199,
+        "afterMinutes": 159
+      },
+      {
+        "market": "FAR-DSM",
+        "origin": "FAR",
+        "destination": "DSM",
+        "demand": 1.6,
+        "beforeMinutes": 290,
+        "afterMinutes": 195
       },
       {
         "market": "GSP-DAB",
@@ -2118,6 +2302,14 @@
         "afterMinutes": 259
       },
       {
+        "market": "DAB-DSM",
+        "origin": "DAB",
+        "destination": "DSM",
+        "demand": 1,
+        "beforeMinutes": 541,
+        "afterMinutes": 483
+      },
+      {
         "market": "LEX-BNA",
         "origin": "LEX",
         "destination": "BNA",
@@ -2172,6 +2364,14 @@
         "demand": 0.9,
         "beforeMinutes": 510,
         "afterMinutes": 277
+      },
+      {
+        "market": "MSN-DSM",
+        "origin": "MSN",
+        "destination": "DSM",
+        "demand": 0.9,
+        "beforeMinutes": 191,
+        "afterMinutes": 183
       },
       {
         "market": "ABE-HSV",
@@ -2270,6 +2470,14 @@
         "afterMinutes": 327
       },
       {
+        "market": "DSM-SGF",
+        "origin": "DSM",
+        "destination": "SGF",
+        "demand": 0.4,
+        "beforeMinutes": 540,
+        "afterMinutes": 149
+      },
+      {
         "market": "ROC-MFE",
         "origin": "ROC",
         "destination": "MFE",
@@ -2324,6 +2532,14 @@
         "demand": 0.2,
         "beforeMinutes": 314,
         "afterMinutes": 127
+      },
+      {
+        "market": "DLH-DSM",
+        "origin": "DLH",
+        "destination": "DSM",
+        "demand": 0.2,
+        "beforeMinutes": 290,
+        "afterMinutes": 265
       },
       {
         "market": "MHT-BDL",
@@ -2412,6 +2628,14 @@
         "demand": 0.1,
         "beforeMinutes": 172,
         "afterMinutes": 159
+      },
+      {
+        "market": "PIA-DSM",
+        "origin": "PIA",
+        "destination": "DSM",
+        "demand": 0.1,
+        "beforeMinutes": 255,
+        "afterMinutes": 160
       },
       {
         "market": "PVD-HPN",
@@ -2564,6 +2788,14 @@
         "demand": 0,
         "beforeMinutes": 281,
         "afterMinutes": 194
+      },
+      {
+        "market": "SWF-DSM",
+        "origin": "SWF",
+        "destination": "DSM",
+        "demand": 0,
+        "beforeMinutes": 546,
+        "afterMinutes": 470
       },
       {
         "market": "SWF-HPN",
@@ -3981,12 +4213,36 @@
         "afterMinutes": 342
       },
       {
+        "market": "RDU-DSM",
+        "origin": "RDU",
+        "destination": "DSM",
+        "demand": 12.1,
+        "beforeMinutes": 325,
+        "afterMinutes": 235
+      },
+      {
+        "market": "DSM-RDU",
+        "origin": "DSM",
+        "destination": "RDU",
+        "demand": 11.9,
+        "beforeMinutes": 327,
+        "afterMinutes": 327
+      },
+      {
         "market": "GSP-PGD",
         "origin": "GSP",
         "destination": "PGD",
         "demand": 11.8,
         "beforeMinutes": 327,
         "afterMinutes": 292
+      },
+      {
+        "market": "JAX-DSM",
+        "origin": "JAX",
+        "destination": "DSM",
+        "demand": 11.7,
+        "beforeMinutes": 360,
+        "afterMinutes": 240
       },
       {
         "market": "PGD-BTV",
@@ -4229,6 +4485,22 @@
         "afterMinutes": 259
       },
       {
+        "market": "PHF-DSM",
+        "origin": "PHF",
+        "destination": "DSM",
+        "demand": 3.6,
+        "beforeMinutes": 335,
+        "afterMinutes": 305
+      },
+      {
+        "market": "DSM-PHF",
+        "origin": "DSM",
+        "destination": "PHF",
+        "demand": 3.4,
+        "beforeMinutes": 331,
+        "afterMinutes": 262
+      },
+      {
         "market": "AUS-DAB",
         "origin": "AUS",
         "destination": "DAB",
@@ -4251,6 +4523,14 @@
         "demand": 3,
         "beforeMinutes": 370,
         "afterMinutes": 287
+      },
+      {
+        "market": "SYR-DSM",
+        "origin": "SYR",
+        "destination": "DSM",
+        "demand": 2.7,
+        "beforeMinutes": 460,
+        "afterMinutes": 430
       },
       {
         "market": "MLB-RFD",
@@ -4389,6 +4669,14 @@
         "afterMinutes": 277
       },
       {
+        "market": "DSM-SHV",
+        "origin": "DSM",
+        "destination": "SHV",
+        "demand": 0.8,
+        "beforeMinutes": null,
+        "afterMinutes": 293
+      },
+      {
         "market": "MHT-DAB",
         "origin": "MHT",
         "destination": "DAB",
@@ -4461,6 +4749,14 @@
         "afterMinutes": 327
       },
       {
+        "market": "DSM-SGF",
+        "origin": "DSM",
+        "destination": "SGF",
+        "demand": 0.4,
+        "beforeMinutes": null,
+        "afterMinutes": 149
+      },
+      {
         "market": "FLL-DAB",
         "origin": "FLL",
         "destination": "DAB",
@@ -4507,6 +4803,14 @@
         "demand": 0,
         "beforeMinutes": null,
         "afterMinutes": 266
+      },
+      {
+        "market": "DSM-COU",
+        "origin": "DSM",
+        "destination": "COU",
+        "demand": 0,
+        "beforeMinutes": null,
+        "afterMinutes": 317
       },
       {
         "market": "ISP-DAB",
@@ -4777,6 +5081,14 @@
         "afterMinutes": 269
       },
       {
+        "market": "SFB-DSM",
+        "origin": "SFB",
+        "destination": "DSM",
+        "demand": 34.7,
+        "beforeMinutes": 261,
+        "afterMinutes": 245
+      },
+      {
         "market": "RDU-ALB",
         "origin": "RDU",
         "destination": "ALB",
@@ -4937,6 +5249,14 @@
         "afterMinutes": 297
       },
       {
+        "market": "CLT-DSM",
+        "origin": "CLT",
+        "destination": "DSM",
+        "demand": 18.8,
+        "beforeMinutes": 282,
+        "afterMinutes": 230
+      },
+      {
         "market": "PWM-BNA",
         "origin": "PWM",
         "destination": "BNA",
@@ -5057,6 +5377,14 @@
         "afterMinutes": 211
       },
       {
+        "market": "RDU-DSM",
+        "origin": "RDU",
+        "destination": "DSM",
+        "demand": 12.1,
+        "beforeMinutes": 325,
+        "afterMinutes": 235
+      },
+      {
         "market": "SRQ-HPN",
         "origin": "SRQ",
         "destination": "HPN",
@@ -5071,6 +5399,14 @@
         "demand": 11.8,
         "beforeMinutes": 327,
         "afterMinutes": 292
+      },
+      {
+        "market": "JAX-DSM",
+        "origin": "JAX",
+        "destination": "DSM",
+        "demand": 11.7,
+        "beforeMinutes": 360,
+        "afterMinutes": 240
       },
       {
         "market": "BTV-PGD",
@@ -5111,6 +5447,14 @@
         "demand": 10.3,
         "beforeMinutes": 366,
         "afterMinutes": 297
+      },
+      {
+        "market": "DSM-SAT",
+        "origin": "DSM",
+        "destination": "SAT",
+        "demand": 10,
+        "beforeMinutes": 311,
+        "afterMinutes": 216
       },
       {
         "market": "CAK-BDL",
@@ -5377,6 +5721,14 @@
         "afterMinutes": 158
       },
       {
+        "market": "MEM-DSM",
+        "origin": "MEM",
+        "destination": "DSM",
+        "demand": 3.8,
+        "beforeMinutes": 230,
+        "afterMinutes": 175
+      },
+      {
         "market": "DAB-BUF",
         "origin": "DAB",
         "destination": "BUF",
@@ -5407,6 +5759,22 @@
         "demand": 3.6,
         "beforeMinutes": 439,
         "afterMinutes": 284
+      },
+      {
+        "market": "PHF-DSM",
+        "origin": "PHF",
+        "destination": "DSM",
+        "demand": 3.6,
+        "beforeMinutes": 335,
+        "afterMinutes": 305
+      },
+      {
+        "market": "DSM-PHF",
+        "origin": "DSM",
+        "destination": "PHF",
+        "demand": 3.4,
+        "beforeMinutes": 331,
+        "afterMinutes": 262
       },
       {
         "market": "MYR-PGD",
@@ -5489,6 +5857,14 @@
         "afterMinutes": 413
       },
       {
+        "market": "SYR-DSM",
+        "origin": "SYR",
+        "destination": "DSM",
+        "demand": 2.7,
+        "beforeMinutes": 460,
+        "afterMinutes": 430
+      },
+      {
         "market": "BUF-PVD",
         "origin": "BUF",
         "destination": "PVD",
@@ -5503,6 +5879,14 @@
         "demand": 2.4,
         "beforeMinutes": 700,
         "afterMinutes": 696
+      },
+      {
+        "market": "MKE-DSM",
+        "origin": "MKE",
+        "destination": "DSM",
+        "demand": 2.3,
+        "beforeMinutes": 189,
+        "afterMinutes": 180
       },
       {
         "market": "SYR-AVL",
@@ -5529,6 +5913,14 @@
         "afterMinutes": 547
       },
       {
+        "market": "DSM-HRL",
+        "origin": "DSM",
+        "destination": "HRL",
+        "demand": 1.9,
+        "beforeMinutes": 287,
+        "afterMinutes": 247
+      },
+      {
         "market": "ROC-HSV",
         "origin": "ROC",
         "destination": "HSV",
@@ -5553,12 +5945,36 @@
         "afterMinutes": 522
       },
       {
+        "market": "TUL-DSM",
+        "origin": "TUL",
+        "destination": "DSM",
+        "demand": 1.7,
+        "beforeMinutes": 211,
+        "afterMinutes": 205
+      },
+      {
         "market": "DAY-ALB",
         "origin": "DAY",
         "destination": "ALB",
         "demand": 1.6,
         "beforeMinutes": 317,
         "afterMinutes": 169
+      },
+      {
+        "market": "DSM-TUL",
+        "origin": "DSM",
+        "destination": "TUL",
+        "demand": 1.6,
+        "beforeMinutes": 199,
+        "afterMinutes": 159
+      },
+      {
+        "market": "FAR-DSM",
+        "origin": "FAR",
+        "destination": "DSM",
+        "demand": 1.6,
+        "beforeMinutes": 290,
+        "afterMinutes": 195
       },
       {
         "market": "ROC-BDL",
@@ -5609,6 +6025,14 @@
         "afterMinutes": 259
       },
       {
+        "market": "DAB-DSM",
+        "origin": "DAB",
+        "destination": "DSM",
+        "demand": 1,
+        "beforeMinutes": 541,
+        "afterMinutes": 483
+      },
+      {
         "market": "BUF-MFE",
         "origin": "BUF",
         "destination": "MFE",
@@ -5623,6 +6047,14 @@
         "demand": 0.9,
         "beforeMinutes": 427,
         "afterMinutes": 425
+      },
+      {
+        "market": "MSN-DSM",
+        "origin": "MSN",
+        "destination": "DSM",
+        "demand": 0.9,
+        "beforeMinutes": 191,
+        "afterMinutes": 183
       },
       {
         "market": "ABE-HSV",
@@ -5713,6 +6145,14 @@
         "afterMinutes": 144
       },
       {
+        "market": "DLH-DSM",
+        "origin": "DLH",
+        "destination": "DSM",
+        "demand": 0.2,
+        "beforeMinutes": 290,
+        "afterMinutes": 265
+      },
+      {
         "market": "ABE-PVD",
         "origin": "ABE",
         "destination": "PVD",
@@ -5727,6 +6167,14 @@
         "demand": 0.1,
         "beforeMinutes": 135,
         "afterMinutes": 125
+      },
+      {
+        "market": "PIA-DSM",
+        "origin": "PIA",
+        "destination": "DSM",
+        "demand": 0.1,
+        "beforeMinutes": 255,
+        "afterMinutes": 160
       },
       {
         "market": "BGR-HVN",
@@ -5783,6 +6231,14 @@
         "demand": 0,
         "beforeMinutes": 281,
         "afterMinutes": 194
+      },
+      {
+        "market": "SWF-DSM",
+        "origin": "SWF",
+        "destination": "DSM",
+        "demand": 0,
+        "beforeMinutes": 546,
+        "afterMinutes": 470
       },
       {
         "market": "SWF-MAF",
@@ -12476,6 +12932,492 @@
           "equalChoiceShare": 0.5,
           "newOneStop": false,
           "group": "CGI"
+        }
+      ]
+    },
+    {
+      "competitiveMarketOd": 94.99999999999999,
+      "competitiveEqualChoiceIndex": 60.37,
+      "flight": 2215,
+      "origin": "MCI",
+      "destination": "DSM",
+      "departure": "14:00",
+      "arrival": "14:50",
+      "uniqueMarkets": 20,
+      "underlyingMarketOd": 175.1,
+      "newOneStopOd": 30.099999999999998,
+      "equalChoiceOpportunityIndex": 92.04499999999999,
+      "markets": [
+        {
+          "market": "SFB-DSM",
+          "demand": 34.7,
+          "stops": 1,
+          "minutes": 245,
+          "existingOneStop": true,
+          "oldFastestMinutes": 261,
+          "newFastestMinutes": 245,
+          "equalChoiceShare": 0.5,
+          "newOneStop": false,
+          "group": "FLP"
+        },
+        {
+          "market": "DAL-DSM",
+          "demand": 30.2,
+          "stops": 1,
+          "minutes": 285,
+          "existingOneStop": true,
+          "oldFastestMinutes": 236,
+          "newFastestMinutes": 236,
+          "equalChoiceShare": 0.3333333333333333,
+          "newOneStop": false,
+          "group": "TEX"
+        },
+        {
+          "market": "PGD-DSM",
+          "demand": 26.2,
+          "stops": 1,
+          "minutes": 360,
+          "existingOneStop": true,
+          "oldFastestMinutes": 306,
+          "newFastestMinutes": 306,
+          "equalChoiceShare": 0.5,
+          "newOneStop": false,
+          "group": "FLP"
+        },
+        {
+          "market": "CLT-DSM",
+          "demand": 18.8,
+          "stops": 1,
+          "minutes": 230,
+          "existingOneStop": true,
+          "oldFastestMinutes": 282,
+          "newFastestMinutes": 230,
+          "equalChoiceShare": 0.5,
+          "newOneStop": false,
+          "group": "CGI"
+        },
+        {
+          "market": "RDU-DSM",
+          "demand": 12.1,
+          "stops": 1,
+          "minutes": 235,
+          "existingOneStop": false,
+          "oldFastestMinutes": 325,
+          "newFastestMinutes": 235,
+          "equalChoiceShare": 1,
+          "newOneStop": true,
+          "group": "CGI"
+        },
+        {
+          "market": "JAX-DSM",
+          "demand": 11.7,
+          "stops": 1,
+          "minutes": 240,
+          "existingOneStop": false,
+          "oldFastestMinutes": 360,
+          "newFastestMinutes": 240,
+          "equalChoiceShare": 1,
+          "newOneStop": true,
+          "group": "HUB"
+        },
+        {
+          "market": "SAT-DSM",
+          "demand": 9.7,
+          "stops": 1,
+          "minutes": 365,
+          "existingOneStop": true,
+          "oldFastestMinutes": 205,
+          "newFastestMinutes": 205,
+          "equalChoiceShare": 0.5,
+          "newOneStop": false,
+          "group": "TEX"
+        },
+        {
+          "market": "BLV-DSM",
+          "demand": 8.8,
+          "stops": 1,
+          "minutes": 265,
+          "existingOneStop": true,
+          "oldFastestMinutes": 215,
+          "newFastestMinutes": 215,
+          "equalChoiceShare": 0.25,
+          "newOneStop": false,
+          "group": "UMP"
+        },
+        {
+          "market": "MEM-DSM",
+          "demand": 3.8,
+          "stops": 1,
+          "minutes": 175,
+          "existingOneStop": true,
+          "oldFastestMinutes": 230,
+          "newFastestMinutes": 175,
+          "equalChoiceShare": 0.2,
+          "newOneStop": false,
+          "group": "OZK"
+        },
+        {
+          "market": "PHF-DSM",
+          "demand": 3.6,
+          "stops": 1,
+          "minutes": 305,
+          "existingOneStop": false,
+          "oldFastestMinutes": 335,
+          "newFastestMinutes": 305,
+          "equalChoiceShare": 1,
+          "newOneStop": true,
+          "group": "HUB"
+        },
+        {
+          "market": "BHM-DSM",
+          "demand": 3.3,
+          "stops": 1,
+          "minutes": 300,
+          "existingOneStop": true,
+          "oldFastestMinutes": 195,
+          "newFastestMinutes": 195,
+          "equalChoiceShare": 0.25,
+          "newOneStop": false,
+          "group": "GCP"
+        },
+        {
+          "market": "SYR-DSM",
+          "demand": 2.7,
+          "stops": 1,
+          "minutes": 430,
+          "existingOneStop": false,
+          "oldFastestMinutes": 460,
+          "newFastestMinutes": 430,
+          "equalChoiceShare": 1,
+          "newOneStop": true,
+          "group": "HUB"
+        },
+        {
+          "market": "MKE-DSM",
+          "demand": 2.3,
+          "stops": 1,
+          "minutes": 180,
+          "existingOneStop": true,
+          "oldFastestMinutes": 189,
+          "newFastestMinutes": 180,
+          "equalChoiceShare": 0.2,
+          "newOneStop": false,
+          "group": "GLC"
+        },
+        {
+          "market": "LIT-DSM",
+          "demand": 1.9,
+          "stops": 1,
+          "minutes": 325,
+          "existingOneStop": true,
+          "oldFastestMinutes": 226,
+          "newFastestMinutes": 226,
+          "equalChoiceShare": 0.3333333333333333,
+          "newOneStop": false,
+          "group": "OZK"
+        },
+        {
+          "market": "TUL-DSM",
+          "demand": 1.7,
+          "stops": 1,
+          "minutes": 205,
+          "existingOneStop": true,
+          "oldFastestMinutes": 211,
+          "newFastestMinutes": 205,
+          "equalChoiceShare": 0.5,
+          "newOneStop": false,
+          "group": "OZK"
+        },
+        {
+          "market": "FAR-DSM",
+          "demand": 1.6,
+          "stops": 1,
+          "minutes": 195,
+          "existingOneStop": true,
+          "oldFastestMinutes": 290,
+          "newFastestMinutes": 195,
+          "equalChoiceShare": 0.5,
+          "newOneStop": false,
+          "group": "UMP"
+        },
+        {
+          "market": "MSN-DSM",
+          "demand": 0.9,
+          "stops": 1,
+          "minutes": 183,
+          "existingOneStop": true,
+          "oldFastestMinutes": 191,
+          "newFastestMinutes": 183,
+          "equalChoiceShare": 0.3333333333333333,
+          "newOneStop": false,
+          "group": "GLC"
+        },
+        {
+          "market": "MCI-DSM",
+          "demand": 0.8,
+          "stops": 0,
+          "minutes": 50,
+          "existingOneStop": true,
+          "oldFastestMinutes": 50,
+          "newFastestMinutes": 50,
+          "equalChoiceShare": 0.25,
+          "newOneStop": false,
+          "group": "HUB"
+        },
+        {
+          "market": "DLH-DSM",
+          "demand": 0.2,
+          "stops": 1,
+          "minutes": 265,
+          "existingOneStop": true,
+          "oldFastestMinutes": 290,
+          "newFastestMinutes": 265,
+          "equalChoiceShare": 0.5,
+          "newOneStop": false,
+          "group": "UMP"
+        },
+        {
+          "market": "PIA-DSM",
+          "demand": 0.1,
+          "stops": 1,
+          "minutes": 160,
+          "existingOneStop": true,
+          "oldFastestMinutes": 255,
+          "newFastestMinutes": 160,
+          "equalChoiceShare": 0.5,
+          "newOneStop": false,
+          "group": "UMP"
+        }
+      ]
+    },
+    {
+      "competitiveMarketOd": 62.599999999999994,
+      "competitiveEqualChoiceIndex": 33.58833333333333,
+      "flight": 2216,
+      "origin": "DSM",
+      "destination": "MCI",
+      "departure": "15:35",
+      "arrival": "16:25",
+      "uniqueMarkets": 18,
+      "underlyingMarketOd": 79.50000000000001,
+      "newOneStopOd": 16.5,
+      "equalChoiceOpportunityIndex": 37.73166666666667,
+      "markets": [
+        {
+          "market": "DSM-DAL",
+          "demand": 30.2,
+          "stops": 1,
+          "minutes": 281,
+          "existingOneStop": true,
+          "oldFastestMinutes": 266,
+          "newFastestMinutes": 266,
+          "equalChoiceShare": 0.3333333333333333,
+          "newOneStop": false,
+          "group": "UMP"
+        },
+        {
+          "market": "DSM-RDU",
+          "demand": 11.9,
+          "stops": 1,
+          "minutes": 339,
+          "existingOneStop": false,
+          "oldFastestMinutes": 327,
+          "newFastestMinutes": 327,
+          "equalChoiceShare": 1,
+          "newOneStop": true,
+          "group": "UMP"
+        },
+        {
+          "market": "DSM-SAT",
+          "demand": 10,
+          "stops": 1,
+          "minutes": 216,
+          "existingOneStop": true,
+          "oldFastestMinutes": 311,
+          "newFastestMinutes": 216,
+          "equalChoiceShare": 0.5,
+          "newOneStop": false,
+          "group": "UMP"
+        },
+        {
+          "market": "DSM-PNS",
+          "demand": 4,
+          "stops": 1,
+          "minutes": 380,
+          "existingOneStop": true,
+          "oldFastestMinutes": 215,
+          "newFastestMinutes": 215,
+          "equalChoiceShare": 0.25,
+          "newOneStop": false,
+          "group": "UMP"
+        },
+        {
+          "market": "DSM-MEM",
+          "demand": 3.8,
+          "stops": 1,
+          "minutes": 280,
+          "existingOneStop": true,
+          "oldFastestMinutes": 170,
+          "newFastestMinutes": 170,
+          "equalChoiceShare": 0.14285714285714285,
+          "newOneStop": false,
+          "group": "UMP"
+        },
+        {
+          "market": "DSM-PHF",
+          "demand": 3.4,
+          "stops": 1,
+          "minutes": 262,
+          "existingOneStop": false,
+          "oldFastestMinutes": 331,
+          "newFastestMinutes": 262,
+          "equalChoiceShare": 1,
+          "newOneStop": true,
+          "group": "UMP"
+        },
+        {
+          "market": "DSM-BHM",
+          "demand": 3.2,
+          "stops": 1,
+          "minutes": 306,
+          "existingOneStop": true,
+          "oldFastestMinutes": 192,
+          "newFastestMinutes": 192,
+          "equalChoiceShare": 0.14285714285714285,
+          "newOneStop": false,
+          "group": "UMP"
+        },
+        {
+          "market": "DSM-MFE",
+          "demand": 2.9,
+          "stops": 1,
+          "minutes": 355,
+          "existingOneStop": true,
+          "oldFastestMinutes": 245,
+          "newFastestMinutes": 245,
+          "equalChoiceShare": 0.5,
+          "newOneStop": false,
+          "group": "UMP"
+        },
+        {
+          "market": "DSM-MKE",
+          "demand": 2.3,
+          "stops": 1,
+          "minutes": 235,
+          "existingOneStop": true,
+          "oldFastestMinutes": 174,
+          "newFastestMinutes": 174,
+          "equalChoiceShare": 0.2,
+          "newOneStop": false,
+          "group": "UMP"
+        },
+        {
+          "market": "DSM-HRL",
+          "demand": 1.9,
+          "stops": 1,
+          "minutes": 247,
+          "existingOneStop": true,
+          "oldFastestMinutes": 287,
+          "newFastestMinutes": 247,
+          "equalChoiceShare": 0.2,
+          "newOneStop": false,
+          "group": "UMP"
+        },
+        {
+          "market": "DSM-TUL",
+          "demand": 1.6,
+          "stops": 1,
+          "minutes": 159,
+          "existingOneStop": true,
+          "oldFastestMinutes": 199,
+          "newFastestMinutes": 159,
+          "equalChoiceShare": 0.5,
+          "newOneStop": false,
+          "group": "UMP"
+        },
+        {
+          "market": "DSM-MCI",
+          "demand": 0.9,
+          "stops": 0,
+          "minutes": 50,
+          "existingOneStop": true,
+          "oldFastestMinutes": 50,
+          "newFastestMinutes": 50,
+          "equalChoiceShare": 0.25,
+          "newOneStop": false,
+          "group": "UMP"
+        },
+        {
+          "market": "DSM-SHV",
+          "demand": 0.8,
+          "stops": 1,
+          "minutes": 293,
+          "existingOneStop": false,
+          "oldFastestMinutes": null,
+          "newFastestMinutes": 293,
+          "equalChoiceShare": 1,
+          "newOneStop": true,
+          "group": "UMP"
+        },
+        {
+          "market": "DSM-XNA",
+          "demand": 0.8,
+          "stops": 1,
+          "minutes": 257,
+          "existingOneStop": true,
+          "oldFastestMinutes": 237,
+          "newFastestMinutes": 237,
+          "equalChoiceShare": 0.3333333333333333,
+          "newOneStop": false,
+          "group": "UMP"
+        },
+        {
+          "market": "DSM-ICT",
+          "demand": 0.7,
+          "stops": 1,
+          "minutes": 253,
+          "existingOneStop": true,
+          "oldFastestMinutes": 223,
+          "newFastestMinutes": 223,
+          "equalChoiceShare": 0.5,
+          "newOneStop": false,
+          "group": "UMP"
+        },
+        {
+          "market": "DSM-ATW",
+          "demand": 0.7,
+          "stops": 1,
+          "minutes": 342,
+          "existingOneStop": true,
+          "oldFastestMinutes": 232,
+          "newFastestMinutes": 232,
+          "equalChoiceShare": 0.3333333333333333,
+          "newOneStop": false,
+          "group": "UMP"
+        },
+        {
+          "market": "DSM-SGF",
+          "demand": 0.4,
+          "stops": 1,
+          "minutes": 149,
+          "existingOneStop": false,
+          "oldFastestMinutes": null,
+          "newFastestMinutes": 149,
+          "equalChoiceShare": 1,
+          "newOneStop": true,
+          "group": "UMP"
+        },
+        {
+          "market": "DSM-COU",
+          "demand": 0,
+          "stops": 1,
+          "minutes": 317,
+          "existingOneStop": false,
+          "oldFastestMinutes": null,
+          "newFastestMinutes": 317,
+          "equalChoiceShare": 1,
+          "newOneStop": true,
+          "group": "UMP"
         }
       ]
     }

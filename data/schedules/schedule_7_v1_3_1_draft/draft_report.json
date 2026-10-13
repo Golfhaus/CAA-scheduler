@@ -2,11 +2,11 @@
   "status": "draft; not published",
   "baseScheduleId": "schedule_7_v1_3_0",
   "scheduleId": "schedule_7_v1_3_1_draft",
-  "flights": 1212,
+  "flights": 1214,
   "routes": 184,
   "lines": 19,
-  "originalFlightClocksPreserved": 1179,
-  "originalFlightClocksChanged": 13,
+  "originalFlightClocksPreserved": 1177,
+  "originalFlightClocksChanged": 15,
   "newFlights": [
     {
       "id": "V131-R724-RFD-JAX-AM",
@@ -327,9 +327,41 @@
       "arrival": "05:20",
       "departureMinute": 270,
       "arrivalMinute": 320
+    },
+    {
+      "id": "V131-DSM-R154-MCI-DSM",
+      "route": 154,
+      "line": "AI",
+      "fleet": "CRJ200",
+      "day": 11,
+      "sequenceWithinRoute": 4,
+      "pairing": 125,
+      "flight": 2215,
+      "origin": "MCI",
+      "destination": "DSM",
+      "departure": "14:00",
+      "arrival": "14:50",
+      "departureMinute": 840,
+      "arrivalMinute": 890
+    },
+    {
+      "id": "V131-DSM-R154-DSM-MCI",
+      "route": 154,
+      "line": "AI",
+      "fleet": "CRJ200",
+      "day": 11,
+      "sequenceWithinRoute": 5,
+      "pairing": 126,
+      "flight": 2216,
+      "origin": "DSM",
+      "destination": "MCI",
+      "departure": "15:35",
+      "arrival": "16:25",
+      "departureMinute": 935,
+      "arrivalMinute": 985
     }
   ],
-  "newBlockMinutes": 2078,
+  "newBlockMinutes": 2178,
   "newRouteBlockMinutes": {
     "724": 692,
     "355": 717,
@@ -364,11 +396,35 @@
     "effectiveErrorFindings": 0,
     "effectiveWarningFindings": 164
   },
-  "standClaims": 16,
-  "standMinutes": 3595,
+  "standClaims": 15,
+  "standMinutes": 3061,
   "standChangeSinceRound2": {
-    "claims": 0,
-    "minutes": 0
+    "claims": -1,
+    "minutes": -534
   },
-  "publication": "Not authorized; manifest and app default unchanged"
+  "publication": "Not authorized; manifest and app default unchanged",
+  "dsmOptimization": {
+    "date": "2026-10-13",
+    "primaryGoal": "Spread DSM operating day with demand-supported service; R150 utilization is secondary",
+    "afternoonRoute": 154,
+    "newBlockMinutes": 100,
+    "rfdShiftMinutes": 75,
+    "fleetAdded": 0,
+    "r150Decision": "Leave unchanged: the tested DAY rerouting has a weak DSM-DAY competitive demand index of 9.4 and slows DSM-SFB by 100 minutes. Earlier direct MCI timing encounters physical gate conflicts and adds hold without spreading afternoon service.",
+    "reviewedOneStopGains": [
+      "RDU-DSM",
+      "DSM-RDU",
+      "JAX-DSM",
+      "PHF-DSM",
+      "DSM-PHF",
+      "SYR-DSM",
+      "DSM-SHV",
+      "DSM-SGF",
+      "DSM-COU"
+    ],
+    "reviewedOneStopLosses": [],
+    "fastestImproved": 19,
+    "fastestSlowed": 0,
+    "lostItineraryChoices": 0
+  }
 }

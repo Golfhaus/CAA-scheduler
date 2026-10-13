@@ -18,7 +18,8 @@ const before=buildServiceAnalysis(base,od,buildItineraries),after=buildServiceAn
 const raw=compareServiceAnalyses(before,after),geo=compareServiceAnalyses(before,after,true);
 const targets={};for(const code of ['MYR','EYW','ECP','ILM','ROA','TLH'])for(const [a,b]of[[code,'RFD'],['RFD',code]]){const r=after.records.get(a+'-'+b);targets[r.key]={demand:r.demand,before:coverageView(before.records.get(r.key),true),after:coverageView(r,true)};}
 const added=now.legs.filter(l=>!base.legs.some(b=>b.id===l.id)),profile=[];
-assert.equal(added.length,20);assert.deepEqual(added.map(l=>l.flight),Array.from({length:20},(_,i)=>2195+i));
+const addedCount=fs.existsSync(root+'/config/optimizations/schedule_7_v1_3_1_round_4.json')?22:20;
+assert.equal(added.length,addedCount);assert.deepEqual(added.map(l=>l.flight),Array.from({length:addedCount},(_,i)=>2195+i));
 for(const l of added){
  const markets=new Map();
  for(const [key,p]of after.paths){if(!p.reasonable||p.stops>1||!key.split('-').includes(String(l.flight)))continue;
