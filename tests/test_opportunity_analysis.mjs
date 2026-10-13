@@ -16,10 +16,10 @@ const retime = (flight, shift) => {
 
 test("directional coverage and pair gaps reproduce the independently audited current network", () => {
   assert.equal(baseline.records.size, 10920);
-  assert.equal([...baseline.records.values()].filter((r) => coverageView(r).gap).length, 5198);
+  assert.equal([...baseline.records.values()].filter((r) => coverageView(r).gap).length, 5097);
   const counts = baseline.pairs.map((p) => Number(coverageView(p.forward).gap) + Number(coverageView(p.reverse).gap));
-  assert.equal(counts.filter((n) => n === 2).length, 2174);
-  assert.equal(counts.filter((n) => n === 1).length, 850);
+  assert.equal(counts.filter((n) => n === 2).length, 2133);
+  assert.equal(counts.filter((n) => n === 1).length, 831);
   assert.equal(coverageView(baseline.records.get("BLV-SFB")).gap, false);
   assert.equal(coverageView(baseline.records.get("SFB-BLV")).stops, 1);
 });
@@ -90,4 +90,22 @@ test("midnight transfers and both connection-window boundaries are inclusive", (
   c.legs[1].departure="03:51";c.legs[1].departureMinute=231;
   assert.equal(coverageView(buildServiceAnalysis(c, null, buildItineraries).records.get("AAA-BBB")).gap, true);
   assert.equal(buildServiceAnalysis(c,null,buildItineraries).nearMisses[0].adjustment,1);
+});
+
+
+test("v1.3.1 closes northeast Florida and DSM priority gaps with suitable geography", () => {
+  for(const ne of ["HPN","HVN","ISP","BTV","ORH"]) for(const fl of ["PGD","DAB","FLL","PIE","SFB","SRQ"]) for(const [a,b]of[[ne,fl],[fl,ne]]){
+    const v=coverageView(baseline.records.get(`${a}-${b}`),true);assert.ok(v.stops!=null&&v.stops<=1,`${a}-${b}`);
+  }
+  for(const market of ["RDU-DSM","DSM-RDU","JAX-DSM","PHF-DSM","DSM-PHF","SYR-DSM"])assert.equal(coverageView(baseline.records.get(market),true).stops,1,market);
+  assert.equal(baseline.records.get("JAX-DSM").reasonableBest[1].totalMinutes,240);
+  assert.equal(baseline.records.get("RDU-DSM").reasonableBest[1].totalMinutes,235);
+});
+
+test("RFD priority service works both ways and retains the ROA detour distinction", () => {
+  for(const city of ["MYR","EYW","ECP","ILM","ROA","TLH"])for(const market of [`${city}-RFD`,`RFD-${city}`]){
+    assert.equal(coverageView(baseline.records.get(market)).stops,1,market);
+    if(city!=="ROA")assert.equal(coverageView(baseline.records.get(market),true).stops,1,market);
+  }
+  assert.equal(baseline.records.get("ROA-RFD").reasonableCounts[1],0);
 });

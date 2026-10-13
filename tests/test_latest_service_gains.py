@@ -22,9 +22,9 @@ class TwoDayGrowthTests(unittest.TestCase):
         cls.candidate = CANONICAL
 
     def test_released_sequence_and_consolidated_lines(self):
-        self.assertEqual(SCHEDULE_ID, "schedule_7_v1_3_0")
+        self.assertEqual(SCHEDULE_ID, "schedule_7_v1_3_1")
         self.assertEqual(self.candidate["schedule"]["status"], "released")
-        self.assertEqual(len(self.candidate["legs"]), 1192)
+        self.assertEqual(len(self.candidate["legs"]), 1214)
         new = sorted((l for l in self.candidate["legs"] if l["id"].startswith("V120-2MAX-")),
                      key=lambda l: l["flight"])
         self.assertEqual([l["flight"] for l in new], list(range(2083, 2099)))
@@ -39,8 +39,8 @@ class TwoDayGrowthTests(unittest.TestCase):
             ("05:09", "06:58"), ("07:38", "09:27"), ("10:07", "10:49"), ("11:29", "12:11"),
             ("13:22", "14:09"), ("14:49", "15:36"), ("16:16", "18:05"), ("18:47", "19:35")])
         self.assertTrue(all((l["fleet"], l["line"], l["route"], l["day"]) ==
-                            ("MAX9", "A", 703 + i // 8, 3 + i // 8) for i, l in enumerate(new)))
-        for fleet, expected in (("MAX9", {"A": 13, "B": 10}), ("CRJ900", {"AB": 10, "AG": 9, "AJ": 9})):
+                            ("MAX9", "B", 703 + i // 8, 9 + i // 8) for i, l in enumerate(new)))
+        for fleet, expected in (("MAX9", {"A": 12, "B": 12}), ("CRJ900", {"AB": 10, "AG": 9, "AJ": 9})):
             days = {(l["line"], l["day"]) for l in self.candidate["legs"] if l["fleet"] == fleet}
             self.assertEqual(Counter(line for line, _ in days), expected)
         self.assertEqual(self.candidate["schedule"]["fleetCounts"]["MAX9"], 35)
@@ -68,10 +68,10 @@ class TwoDayGrowthTests(unittest.TestCase):
         self.assertEqual(validate_overnight_turns(self.candidate)["status"], "pass")
         self.assertEqual(validate_planning_snapshot(reconstruct_planning_snapshot(self.candidate), self.candidate)["status"], "pass")
         counts = next(c for c in operating["checks"] if c["id"] == "line_route_count")
-        self.assertTrue(any(f["evidence"]["line"] == "A" and f["evidence"]["routes"] == 13 for f in counts["findings"]))
+        self.assertFalse(any(f["evidence"]["line"] in {"A", "B"} for f in counts["findings"]))
         for schedule in (self.candidate,):
             stands = [p for city in export_gate_schedule(schedule)["cities"] for p in city["claims"] if p["rowType"] == "stand"]
-            self.assertEqual((len(stands), sum(p["end"] - p["start"] for p in stands)), (14, 3253))
+            self.assertEqual((len(stands), sum(p["end"] - p["start"] for p in stands)), (15, 3061))
 
     def test_two_stop_middle_leg_is_counted_once_and_demand_reconciles(self):
         screen = TwoStopScreen(self.candidate)

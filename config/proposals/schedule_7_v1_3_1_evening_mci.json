@@ -1,0 +1,56 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "v131-evening-review-mci_buffered",
+  "baseSchedule": {
+    "scheduleId": "schedule_7_v1_3_1_draft",
+    "canonical": "outputs/schedule_7_v1_3_1_evening/base_four_leg_canonical.json",
+    "sha256": "448a9d9b15b871751d19371fad893d9313bf803f801775979aaecac985bbd23e",
+    "commit": "7824040d363817d9d681d19de98d59aeeb8a076a"
+  },
+  "schedule": {
+    "id": "schedule_7_v1_3_1_proposal_evening_mci_buffered",
+    "version": "1.3.1-analysis",
+    "label": "Unpublished v1.3.1 evening mci_buffered review",
+    "status": "draft"
+  },
+  "approval": {
+    "status": "Analysis only; user asked about an opportunity, not implementation",
+    "publication": "Not authorized"
+  },
+  "insertLegs": [
+    {
+      "id": "V131-EVENING-R724-RFD-MCI",
+      "route": 724,
+      "origin": "RFD",
+      "destination": "MCI",
+      "departureMinute": 1166,
+      "arrivalMinute": 1240
+    },
+    {
+      "id": "V131-EVENING-R724-MCI-RFD",
+      "route": 724,
+      "origin": "MCI",
+      "destination": "RFD",
+      "departureMinute": 1280,
+      "arrivalMinute": 1354
+    }
+  ],
+  "bankAssignmentsToAdd": [
+    {
+      "legId": "V131-EVENING-R724-RFD-MCI",
+      "operation": "arrival",
+      "bankId": "MCI-B10"
+    },
+    {
+      "legId": "V131-EVENING-R724-MCI-RFD",
+      "operation": "departure",
+      "bankId": "MCI-M11"
+    }
+  ],
+  "review": {
+    "recommendation": "Accepted October 13 via schedule_7_v1_3_1_round_2.json; this file preserves the reviewed historical alternative.",
+    "acceptedDraftUnchanged": true,
+    "report": "outputs/schedule_7_v1_3_1_evening/network_review.json",
+    "source": "Historical four-leg draft, reproduced by build_schedule_7_v1_3_1_draft.py --round-1; not the current six-leg draft."
+  }
+}

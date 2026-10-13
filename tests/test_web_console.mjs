@@ -65,17 +65,17 @@ function towPieces(label, start, end) {
 
 test("overview metrics reflect the frozen schedule", () => {
   assert.deepEqual(scheduleMetrics(canonical), {
-    flights: 1192,
+    flights: 1214,
     cities: 105,
-    routes: 181,
+    routes: 184,
     lines: 19,
-    markets: 566,
+    markets: 572,
   });
   assert.deepEqual(fleetUsage(canonical), {
     CRJ200: 76,
-    CRJ700: 54,
+    CRJ700: 56,
     CRJ900: 28,
-    MAX9: 23,
+    MAX9: 24,
   });
 });
 
@@ -117,8 +117,8 @@ test("routing search covers operational identifiers", () => {
   assert.equal(legMatches(leg, "flight:2087"), true);
   assert.equal(legMatches(leg, "route:2087"), false);
   assert.equal(legMatches(leg, "703", "CRJ200"), false);
-  assert.equal(legMatches(leg, "", {line: "A", origin: "DAY", destination: "JAX"}), true);
-  assert.equal(legMatches(leg, "", {line: "B"}), false);
+  assert.equal(legMatches(leg, "", {line: "B", origin: "DAY", destination: "JAX"}), true);
+  assert.equal(legMatches(leg, "", {line: "A"}), false);
 });
 
 test("routing pagination supports requested row counts and all rows", () => {
@@ -143,8 +143,8 @@ test("routing endpoints distinguish originators and terminators", () => {
 
 test("extension opportunities sort endpoints and combine long physical holds", () => {
   const opportunities = buildExtensionOpportunities(canonical, gates);
-  assert.equal(opportunities.originators.length, 181);
-  assert.equal(opportunities.terminators.length, 181);
+  assert.equal(opportunities.originators.length, 184);
+  assert.equal(opportunities.terminators.length, 184);
   assert.ok(opportunities.originators.every((leg, index, values) => (
     index === 0 || values[index - 1].departureMinute >= leg.departureMinute
   )));

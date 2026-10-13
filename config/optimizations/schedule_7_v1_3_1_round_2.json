@@ -1,0 +1,257 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "schedule-7-v1.3.1-accepted-rounds-1-2",
+  "baseSchedule": {
+    "scheduleId": "schedule_7_v1_3_0",
+    "canonical": "data/schedules/schedule_7_v1_3_0/canonical_schedule.json",
+    "sha256": "1d86a742daaec896e8a1aef4a3755ff98067eded0888ca08f0b0915fd548f4bd",
+    "commit": "80185b5dd8464899a6f09cb8249e54e264185aa4"
+  },
+  "schedule": {
+    "id": "schedule_7_v1_3_1_draft",
+    "version": "1.3.1-draft",
+    "label": "Schedule 7, Version 1.3.1 draft",
+    "status": "draft"
+  },
+  "approval": {
+    "status": "User authorized the RFD/JAX draft and supported spare fleet use October 12, then explicitly requested the reviewed MCI turn be added October 13, 2026. Draft implementation authorized; publication not authorized.",
+    "publication": "Not authorized"
+  },
+  "routeReassignments": [
+    {
+      "sourceRoute": 705,
+      "expectedLine": "A",
+      "expectedDay": 5,
+      "expectedFleet": "MAX9",
+      "line": "A",
+      "day": 3
+    },
+    {
+      "sourceRoute": 706,
+      "expectedLine": "A",
+      "expectedDay": 6,
+      "expectedFleet": "MAX9",
+      "line": "A",
+      "day": 4
+    },
+    {
+      "sourceRoute": 707,
+      "expectedLine": "A",
+      "expectedDay": 7,
+      "expectedFleet": "MAX9",
+      "line": "A",
+      "day": 5
+    },
+    {
+      "sourceRoute": 708,
+      "expectedLine": "A",
+      "expectedDay": 8,
+      "expectedFleet": "MAX9",
+      "line": "A",
+      "day": 7
+    },
+    {
+      "sourceRoute": 709,
+      "expectedLine": "A",
+      "expectedDay": 9,
+      "expectedFleet": "MAX9",
+      "line": "A",
+      "day": 8
+    },
+    {
+      "sourceRoute": 710,
+      "expectedLine": "A",
+      "expectedDay": 10,
+      "expectedFleet": "MAX9",
+      "line": "A",
+      "day": 9
+    },
+    {
+      "sourceRoute": 711,
+      "expectedLine": "A",
+      "expectedDay": 11,
+      "expectedFleet": "MAX9",
+      "line": "A",
+      "day": 10
+    },
+    {
+      "sourceRoute": 712,
+      "expectedLine": "A",
+      "expectedDay": 12,
+      "expectedFleet": "MAX9",
+      "line": "A",
+      "day": 11
+    },
+    {
+      "sourceRoute": 713,
+      "expectedLine": "A",
+      "expectedDay": 13,
+      "expectedFleet": "MAX9",
+      "line": "A",
+      "day": 12
+    },
+    {
+      "sourceRoute": 703,
+      "expectedLine": "A",
+      "expectedDay": 3,
+      "expectedFleet": "MAX9",
+      "line": "B",
+      "day": 9
+    },
+    {
+      "sourceRoute": 704,
+      "expectedLine": "A",
+      "expectedDay": 4,
+      "expectedFleet": "MAX9",
+      "line": "B",
+      "day": 10
+    },
+    {
+      "sourceRoute": 722,
+      "expectedLine": "B",
+      "expectedDay": 9,
+      "expectedFleet": "MAX9",
+      "line": "B",
+      "day": 11
+    },
+    {
+      "sourceRoute": 723,
+      "expectedLine": "B",
+      "expectedDay": 10,
+      "expectedFleet": "MAX9",
+      "line": "B",
+      "day": 12
+    }
+  ],
+  "addRoutes": [
+    {
+      "route": 724,
+      "line": "A",
+      "day": 6,
+      "fleet": "MAX9",
+      "legs": [
+        {
+          "id": "V131-R724-RFD-JAX-AM",
+          "origin": "RFD",
+          "destination": "JAX",
+          "departureMinute": 340,
+          "arrivalMinute": 536
+        },
+        {
+          "id": "V131-R724-JAX-RFD-AM",
+          "origin": "JAX",
+          "destination": "RFD",
+          "departureMinute": 580,
+          "arrivalMinute": 656
+        },
+        {
+          "id": "V131-R724-RFD-JAX-PM",
+          "origin": "RFD",
+          "destination": "JAX",
+          "departureMinute": 734,
+          "arrivalMinute": 930
+        },
+        {
+          "id": "V131-R724-JAX-RFD-PM",
+          "origin": "JAX",
+          "destination": "RFD",
+          "departureMinute": 970,
+          "arrivalMinute": 1046
+        },
+        {
+          "id": "V131-EVENING-R724-RFD-MCI",
+          "origin": "RFD",
+          "destination": "MCI",
+          "departureMinute": 1166,
+          "arrivalMinute": 1240
+        },
+        {
+          "id": "V131-EVENING-R724-MCI-RFD",
+          "origin": "MCI",
+          "destination": "RFD",
+          "departureMinute": 1280,
+          "arrivalMinute": 1354
+        }
+      ]
+    }
+  ],
+  "bankAssignmentsToAdd": [
+    {
+      "legId": "V131-R724-RFD-JAX-AM",
+      "operation": "arrival",
+      "bankId": "JAX-B5"
+    },
+    {
+      "legId": "V131-R724-JAX-RFD-AM",
+      "operation": "departure",
+      "bankId": "JAX-B5"
+    },
+    {
+      "legId": "V131-R724-RFD-JAX-PM",
+      "operation": "arrival",
+      "bankId": "JAX-B11"
+    },
+    {
+      "legId": "V131-R724-JAX-RFD-PM",
+      "operation": "departure",
+      "bankId": "JAX-B11"
+    },
+    {
+      "legId": "V131-EVENING-R724-RFD-MCI",
+      "operation": "arrival",
+      "bankId": "MCI-B10"
+    },
+    {
+      "legId": "V131-EVENING-R724-MCI-RFD",
+      "operation": "departure",
+      "bankId": "MCI-M11"
+    }
+  ],
+  "operatingOverrides": [
+    {
+      "checkId": "tiered_service_minimums",
+      "findingId": "RFD",
+      "reason": "User-requested v1.3.1 JAX\u2013RFD MAX9 service creates useful two-way connections for MYR, EYW, ECP, ILM, ROA and TLH. Standing useful additional hub-count exception applies. Roster unchanged; all service minimums, fleet, curfews, bank windows and physical inventory remain enforced.",
+      "approvedBy": "user"
+    }
+  ],
+  "draftRationale": {
+    "selectedHub": "JAX",
+    "alternativeHub": "BHM would need new two-way service to MYR, ILM, ROA and TLH; JAX already has all six feeders.",
+    "newFleetUse": {
+      "fleet": "MAX9",
+      "additionalAircraftDays": 1,
+      "usedAfter": 24,
+      "available": 35,
+      "sparesAfter": 11,
+      "addedBlockMinutes": 692
+    },
+    "preserveExistingFlights": "All 1,192 prior flights retain clocks, flight and route IDs, fleet and sequence. Only MAX9 line/day assignments change for the closed SFB\u2013DAY\u2013SFB segment and day reindexing.",
+    "priorityMarkets": [
+      "MYR",
+      "EYW",
+      "ECP",
+      "ILM",
+      "ROA",
+      "TLH"
+    ],
+    "geographicCaveat": "ROA via JAX is 2.35649\u00d7 great-circle distance, outside the unchanged 2.25 screen. Both directional connections exist in the timetable; this remains an unresolved quality opportunity.",
+    "gateTradeoff": "Two additional RFD stand middles totaling 342 minutes versus published v1.3.0; the accepted MCI extension saves 308 stand minutes versus the four-leg draft. Physical inventory unchanged and all passenger handling remains at gates.",
+    "publication": "Draft branch only. Do not append to public manifest or change v1.3.0 default without explicit release authorization.",
+    "acceptedEveningExtension": {
+      "route": 724,
+      "outbound": "RFD 19:26 CT\u2013MCI 20:40 CT",
+      "return": "MCI 21:20 CT\u2013RFD 22:34 CT",
+      "addedBlockMinutes": 148,
+      "additionalAircraftDays": 0,
+      "originalClockChanges": 0
+    }
+  },
+  "acceptedProposal": {
+    "path": "config/proposals/schedule_7_v1_3_1_evening_mci.json",
+    "commit": "b191826fc3ab6c8766ba368633f7b60e087973d4",
+    "sha256": "674688ea4aa2f6a3645931dedcd4408c0cd82b835e57d707bcd0c3fbab1fa510",
+    "decision": "Add the MCI turn to the new route in the draft.",
+    "date": "2026-10-13"
+  }
+}

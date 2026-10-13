@@ -1,0 +1,7895 @@
+{
+  "status": "Historical round-2 hypothesis validation before northeast service; round 3 is reviewed separately",
+  "date": "2026-10-13",
+  "sourceCanonical": "outputs/schedule_7_v1_3_1_ne_service/base_round_2_canonical.json",
+  "sourceSha256": "f0b475b7038c20a9e3bdd93110dfbc802ebe7726a12bcfba775a849bc9077546",
+  "publishedScheduleId": "schedule_7_v1_3_0",
+  "draftScheduleId": "schedule_7_v1_3_1_draft",
+  "publishedAndDraftCoverageIdentical": true,
+  "demandSha256": "49c04922ee0cebb3fef8aad923e04bd11874587a263c9511358ddb833b860bc6",
+  "northeastCities": [
+    "HPN",
+    "HVN",
+    "ISP",
+    "BTV",
+    "ORH"
+  ],
+  "flpCities": [
+    "DAB",
+    "EYW",
+    "FLL",
+    "GNV",
+    "MLB",
+    "PGD",
+    "PIE",
+    "SFB",
+    "SRQ"
+  ],
+  "summary": {
+    "directions": 90,
+    "nonstop": 2,
+    "oneConnection": 38,
+    "twoConnectionsOnly": 35,
+    "noItineraryUpToTwoConnections": 15,
+    "missingAtMostOneConnection": 50,
+    "gapUnderlyingOd": 361.6000000000001
+  },
+  "byNortheast": {
+    "HPN": {
+      "toFlorida": {
+        "directions": 9,
+        "nonstop": 1,
+        "oneConnection": 3,
+        "twoConnectionsOnly": 2,
+        "noItineraryUpToTwoConnections": 3,
+        "missingAtMostOneConnection": 5,
+        "gapUnderlyingOd": 60.7
+      },
+      "fromFlorida": {
+        "directions": 9,
+        "nonstop": 1,
+        "oneConnection": 3,
+        "twoConnectionsOnly": 5,
+        "noItineraryUpToTwoConnections": 0,
+        "missingAtMostOneConnection": 5,
+        "gapUnderlyingOd": 62.199999999999996
+      }
+    },
+    "HVN": {
+      "toFlorida": {
+        "directions": 9,
+        "nonstop": 0,
+        "oneConnection": 4,
+        "twoConnectionsOnly": 3,
+        "noItineraryUpToTwoConnections": 2,
+        "missingAtMostOneConnection": 5,
+        "gapUnderlyingOd": 58
+      },
+      "fromFlorida": {
+        "directions": 9,
+        "nonstop": 0,
+        "oneConnection": 4,
+        "twoConnectionsOnly": 5,
+        "noItineraryUpToTwoConnections": 0,
+        "missingAtMostOneConnection": 5,
+        "gapUnderlyingOd": 57.4
+      }
+    },
+    "ISP": {
+      "toFlorida": {
+        "directions": 9,
+        "nonstop": 0,
+        "oneConnection": 4,
+        "twoConnectionsOnly": 3,
+        "noItineraryUpToTwoConnections": 2,
+        "missingAtMostOneConnection": 5,
+        "gapUnderlyingOd": 35.8
+      },
+      "fromFlorida": {
+        "directions": 9,
+        "nonstop": 0,
+        "oneConnection": 4,
+        "twoConnectionsOnly": 5,
+        "noItineraryUpToTwoConnections": 0,
+        "missingAtMostOneConnection": 5,
+        "gapUnderlyingOd": 36.1
+      }
+    },
+    "BTV": {
+      "toFlorida": {
+        "directions": 9,
+        "nonstop": 0,
+        "oneConnection": 4,
+        "twoConnectionsOnly": 3,
+        "noItineraryUpToTwoConnections": 2,
+        "missingAtMostOneConnection": 5,
+        "gapUnderlyingOd": 14.799999999999999
+      },
+      "fromFlorida": {
+        "directions": 9,
+        "nonstop": 0,
+        "oneConnection": 4,
+        "twoConnectionsOnly": 5,
+        "noItineraryUpToTwoConnections": 0,
+        "missingAtMostOneConnection": 5,
+        "gapUnderlyingOd": 15.100000000000001
+      }
+    },
+    "ORH": {
+      "toFlorida": {
+        "directions": 9,
+        "nonstop": 0,
+        "oneConnection": 4,
+        "twoConnectionsOnly": 3,
+        "noItineraryUpToTwoConnections": 2,
+        "missingAtMostOneConnection": 5,
+        "gapUnderlyingOd": 10.6
+      },
+      "fromFlorida": {
+        "directions": 9,
+        "nonstop": 0,
+        "oneConnection": 4,
+        "twoConnectionsOnly": 1,
+        "noItineraryUpToTwoConnections": 4,
+        "missingAtMostOneConnection": 5,
+        "gapUnderlyingOd": 10.9
+      }
+    }
+  },
+  "pgd": [
+    {
+      "origin": "HPN",
+      "destination": "PGD",
+      "demand": 47.4,
+      "minimumConnections": null,
+      "counts": [
+        0,
+        0,
+        0
+      ],
+      "bestMinimumConnectionTrip": null,
+      "fastestTrip": null,
+      "geographicMinimumConnections": null,
+      "geographicCounts": [
+        0,
+        0,
+        0
+      ],
+      "sharedHubs": [],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "PGD",
+      "destination": "HPN",
+      "demand": 48.8,
+      "minimumConnections": 2,
+      "counts": [
+        0,
+        0,
+        2
+      ],
+      "bestMinimumConnectionTrip": {
+        "legs": [
+          {
+            "origin": "PGD",
+            "dest": "JAX",
+            "dep": "05:55",
+            "arr": "06:57",
+            "flight": 2139,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "JAX",
+            "dest": "SYR",
+            "dep": "08:10",
+            "arr": "10:38",
+            "flight": 1408,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "SYR",
+            "dest": "HPN",
+            "dep": "11:20",
+            "arr": "12:14",
+            "flight": 1852,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          73,
+          42
+        ],
+        "stops": 2,
+        "dest": "HPN",
+        "departureMinute": 355,
+        "totalMinutes": 379,
+        "circuity": 1.2523768364925545
+      },
+      "fastestTrip": {
+        "legs": [
+          {
+            "origin": "PGD",
+            "dest": "JAX",
+            "dep": "05:55",
+            "arr": "06:57",
+            "flight": 2139,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "JAX",
+            "dest": "SYR",
+            "dep": "08:10",
+            "arr": "10:38",
+            "flight": 1408,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "SYR",
+            "dest": "HPN",
+            "dep": "11:20",
+            "arr": "12:14",
+            "flight": 1852,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          73,
+          42
+        ],
+        "stops": 2,
+        "dest": "HPN",
+        "departureMinute": 355,
+        "totalMinutes": 379,
+        "circuity": 1.2523768364925545
+      },
+      "geographicMinimumConnections": 2,
+      "geographicCounts": [
+        0,
+        0,
+        2
+      ],
+      "sharedHubs": [],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "HVN",
+      "destination": "PGD",
+      "demand": 33.7,
+      "minimumConnections": 2,
+      "counts": [
+        0,
+        0,
+        2
+      ],
+      "bestMinimumConnectionTrip": {
+        "legs": [
+          {
+            "origin": "HVN",
+            "dest": "SYR",
+            "dep": "04:30",
+            "arr": "05:26",
+            "flight": 1878,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "SYR",
+            "dest": "PHF",
+            "dep": "07:02",
+            "arr": "08:25",
+            "flight": 2080,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "PHF",
+            "dest": "PGD",
+            "dep": "09:20",
+            "arr": "11:21",
+            "flight": 2099,
+            "fleet": "MAX9"
+          }
+        ],
+        "waits": [
+          96,
+          55
+        ],
+        "stops": 2,
+        "dest": "PGD",
+        "departureMinute": 270,
+        "totalMinutes": 411,
+        "circuity": 1.2497410175470467
+      },
+      "fastestTrip": {
+        "legs": [
+          {
+            "origin": "HVN",
+            "dest": "SYR",
+            "dep": "04:30",
+            "arr": "05:26",
+            "flight": 1878,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "SYR",
+            "dest": "PHF",
+            "dep": "07:02",
+            "arr": "08:25",
+            "flight": 2080,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "PHF",
+            "dest": "PGD",
+            "dep": "09:20",
+            "arr": "11:21",
+            "flight": 2099,
+            "fleet": "MAX9"
+          }
+        ],
+        "waits": [
+          96,
+          55
+        ],
+        "stops": 2,
+        "dest": "PGD",
+        "departureMinute": 270,
+        "totalMinutes": 411,
+        "circuity": 1.2497410175470467
+      },
+      "geographicMinimumConnections": 2,
+      "geographicCounts": [
+        0,
+        0,
+        2
+      ],
+      "sharedHubs": [],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "PGD",
+      "destination": "HVN",
+      "demand": 33,
+      "minimumConnections": 2,
+      "counts": [
+        0,
+        0,
+        1
+      ],
+      "bestMinimumConnectionTrip": {
+        "legs": [
+          {
+            "origin": "PGD",
+            "dest": "JAX",
+            "dep": "05:55",
+            "arr": "06:57",
+            "flight": 2139,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "JAX",
+            "dest": "SYR",
+            "dep": "08:10",
+            "arr": "10:38",
+            "flight": 1408,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "SYR",
+            "dest": "HVN",
+            "dep": "11:20",
+            "arr": "12:16",
+            "flight": 1876,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          73,
+          42
+        ],
+        "stops": 2,
+        "dest": "HVN",
+        "departureMinute": 355,
+        "totalMinutes": 381,
+        "circuity": 1.2345885619360288
+      },
+      "fastestTrip": {
+        "legs": [
+          {
+            "origin": "PGD",
+            "dest": "JAX",
+            "dep": "05:55",
+            "arr": "06:57",
+            "flight": 2139,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "JAX",
+            "dest": "SYR",
+            "dep": "08:10",
+            "arr": "10:38",
+            "flight": 1408,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "SYR",
+            "dest": "HVN",
+            "dep": "11:20",
+            "arr": "12:16",
+            "flight": 1876,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          73,
+          42
+        ],
+        "stops": 2,
+        "dest": "HVN",
+        "departureMinute": 355,
+        "totalMinutes": 381,
+        "circuity": 1.2345885619360288
+      },
+      "geographicMinimumConnections": 2,
+      "geographicCounts": [
+        0,
+        0,
+        1
+      ],
+      "sharedHubs": [],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "ISP",
+      "destination": "PGD",
+      "demand": 35.8,
+      "minimumConnections": 2,
+      "counts": [
+        0,
+        0,
+        1
+      ],
+      "bestMinimumConnectionTrip": {
+        "legs": [
+          {
+            "origin": "ISP",
+            "dest": "SYR",
+            "dep": "06:55",
+            "arr": "07:53",
+            "flight": 1892,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "SYR",
+            "dest": "MCI",
+            "dep": "08:40",
+            "arr": "10:17",
+            "flight": 1440,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "MCI",
+            "dest": "PGD",
+            "dep": "13:55",
+            "arr": "17:40",
+            "flight": 1196,
+            "fleet": "CRJ900"
+          }
+        ],
+        "waits": [
+          47,
+          218
+        ],
+        "stops": 2,
+        "dest": "PGD",
+        "departureMinute": 415,
+        "totalMinutes": 645,
+        "circuity": 2.165418378844762
+      },
+      "fastestTrip": {
+        "legs": [
+          {
+            "origin": "ISP",
+            "dest": "SYR",
+            "dep": "06:55",
+            "arr": "07:53",
+            "flight": 1892,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "SYR",
+            "dest": "MCI",
+            "dep": "08:40",
+            "arr": "10:17",
+            "flight": 1440,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "MCI",
+            "dest": "PGD",
+            "dep": "13:55",
+            "arr": "17:40",
+            "flight": 1196,
+            "fleet": "CRJ900"
+          }
+        ],
+        "waits": [
+          47,
+          218
+        ],
+        "stops": 2,
+        "dest": "PGD",
+        "departureMinute": 415,
+        "totalMinutes": 645,
+        "circuity": 2.165418378844762
+      },
+      "geographicMinimumConnections": 2,
+      "geographicCounts": [
+        0,
+        0,
+        1
+      ],
+      "sharedHubs": [],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "PGD",
+      "destination": "ISP",
+      "demand": 36.1,
+      "minimumConnections": 2,
+      "counts": [
+        0,
+        0,
+        3
+      ],
+      "bestMinimumConnectionTrip": {
+        "legs": [
+          {
+            "origin": "PGD",
+            "dest": "JAX",
+            "dep": "05:55",
+            "arr": "06:57",
+            "flight": 2139,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "JAX",
+            "dest": "SYR",
+            "dep": "08:10",
+            "arr": "10:38",
+            "flight": 1408,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "SYR",
+            "dest": "ISP",
+            "dep": "11:25",
+            "arr": "12:23",
+            "flight": 1890,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          73,
+          47
+        ],
+        "stops": 2,
+        "dest": "ISP",
+        "departureMinute": 355,
+        "totalMinutes": 388,
+        "circuity": 1.2855093539841211
+      },
+      "fastestTrip": {
+        "legs": [
+          {
+            "origin": "PGD",
+            "dest": "JAX",
+            "dep": "05:55",
+            "arr": "06:57",
+            "flight": 2139,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "JAX",
+            "dest": "SYR",
+            "dep": "08:10",
+            "arr": "10:38",
+            "flight": 1408,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "SYR",
+            "dest": "ISP",
+            "dep": "11:25",
+            "arr": "12:23",
+            "flight": 1890,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          73,
+          47
+        ],
+        "stops": 2,
+        "dest": "ISP",
+        "departureMinute": 355,
+        "totalMinutes": 388,
+        "circuity": 1.2855093539841211
+      },
+      "geographicMinimumConnections": 2,
+      "geographicCounts": [
+        0,
+        0,
+        3
+      ],
+      "sharedHubs": [],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "BTV",
+      "destination": "PGD",
+      "demand": 11.2,
+      "minimumConnections": 2,
+      "counts": [
+        0,
+        0,
+        1
+      ],
+      "bestMinimumConnectionTrip": {
+        "legs": [
+          {
+            "origin": "BTV",
+            "dest": "SYR",
+            "dep": "07:00",
+            "arr": "07:52",
+            "flight": 1828,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "SYR",
+            "dest": "MCI",
+            "dep": "08:40",
+            "arr": "10:17",
+            "flight": 1440,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "MCI",
+            "dest": "PGD",
+            "dep": "13:55",
+            "arr": "17:40",
+            "flight": 1196,
+            "fleet": "CRJ900"
+          }
+        ],
+        "waits": [
+          48,
+          218
+        ],
+        "stops": 2,
+        "dest": "PGD",
+        "departureMinute": 420,
+        "totalMinutes": 640,
+        "circuity": 1.7587650908216168
+      },
+      "fastestTrip": {
+        "legs": [
+          {
+            "origin": "BTV",
+            "dest": "SYR",
+            "dep": "07:00",
+            "arr": "07:52",
+            "flight": 1828,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "SYR",
+            "dest": "MCI",
+            "dep": "08:40",
+            "arr": "10:17",
+            "flight": 1440,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "MCI",
+            "dest": "PGD",
+            "dep": "13:55",
+            "arr": "17:40",
+            "flight": 1196,
+            "fleet": "CRJ900"
+          }
+        ],
+        "waits": [
+          48,
+          218
+        ],
+        "stops": 2,
+        "dest": "PGD",
+        "departureMinute": 420,
+        "totalMinutes": 640,
+        "circuity": 1.7587650908216168
+      },
+      "geographicMinimumConnections": 2,
+      "geographicCounts": [
+        0,
+        0,
+        1
+      ],
+      "sharedHubs": [],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "PGD",
+      "destination": "BTV",
+      "demand": 11.4,
+      "minimumConnections": 2,
+      "counts": [
+        0,
+        0,
+        4
+      ],
+      "bestMinimumConnectionTrip": {
+        "legs": [
+          {
+            "origin": "PGD",
+            "dest": "JAX",
+            "dep": "05:55",
+            "arr": "06:57",
+            "flight": 2139,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "JAX",
+            "dest": "SYR",
+            "dep": "08:10",
+            "arr": "10:38",
+            "flight": 1408,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "SYR",
+            "dest": "BTV",
+            "dep": "11:20",
+            "arr": "12:12",
+            "flight": 1825,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          73,
+          42
+        ],
+        "stops": 2,
+        "dest": "BTV",
+        "departureMinute": 355,
+        "totalMinutes": 377,
+        "circuity": 1.029315032288409
+      },
+      "fastestTrip": {
+        "legs": [
+          {
+            "origin": "PGD",
+            "dest": "JAX",
+            "dep": "05:55",
+            "arr": "06:57",
+            "flight": 2139,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "JAX",
+            "dest": "SYR",
+            "dep": "08:10",
+            "arr": "10:38",
+            "flight": 1408,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "SYR",
+            "dest": "BTV",
+            "dep": "11:20",
+            "arr": "12:12",
+            "flight": 1825,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          73,
+          42
+        ],
+        "stops": 2,
+        "dest": "BTV",
+        "departureMinute": 355,
+        "totalMinutes": 377,
+        "circuity": 1.029315032288409
+      },
+      "geographicMinimumConnections": 2,
+      "geographicCounts": [
+        0,
+        0,
+        4
+      ],
+      "sharedHubs": [],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "ORH",
+      "destination": "PGD",
+      "demand": 10.6,
+      "minimumConnections": 2,
+      "counts": [
+        0,
+        0,
+        3
+      ],
+      "bestMinimumConnectionTrip": {
+        "legs": [
+          {
+            "origin": "ORH",
+            "dest": "SYR",
+            "dep": "04:30",
+            "arr": "05:28",
+            "flight": 2048,
+            "fleet": "CRJ900"
+          },
+          {
+            "origin": "SYR",
+            "dest": "PHF",
+            "dep": "07:02",
+            "arr": "08:25",
+            "flight": 2080,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "PHF",
+            "dest": "PGD",
+            "dep": "09:20",
+            "arr": "11:21",
+            "flight": 2099,
+            "fleet": "MAX9"
+          }
+        ],
+        "waits": [
+          94,
+          55
+        ],
+        "stops": 2,
+        "dest": "PGD",
+        "departureMinute": 270,
+        "totalMinutes": 411,
+        "circuity": 1.1719989763554837
+      },
+      "fastestTrip": {
+        "legs": [
+          {
+            "origin": "ORH",
+            "dest": "SYR",
+            "dep": "04:30",
+            "arr": "05:28",
+            "flight": 2048,
+            "fleet": "CRJ900"
+          },
+          {
+            "origin": "SYR",
+            "dest": "PHF",
+            "dep": "07:02",
+            "arr": "08:25",
+            "flight": 2080,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "PHF",
+            "dest": "PGD",
+            "dep": "09:20",
+            "arr": "11:21",
+            "flight": 2099,
+            "fleet": "MAX9"
+          }
+        ],
+        "waits": [
+          94,
+          55
+        ],
+        "stops": 2,
+        "dest": "PGD",
+        "departureMinute": 270,
+        "totalMinutes": 411,
+        "circuity": 1.1719989763554837
+      },
+      "geographicMinimumConnections": 2,
+      "geographicCounts": [
+        0,
+        0,
+        3
+      ],
+      "sharedHubs": [],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "PGD",
+      "destination": "ORH",
+      "demand": 10.9,
+      "minimumConnections": 2,
+      "counts": [
+        0,
+        0,
+        2
+      ],
+      "bestMinimumConnectionTrip": {
+        "legs": [
+          {
+            "origin": "PGD",
+            "dest": "PHF",
+            "dep": "12:40",
+            "arr": "14:41",
+            "flight": 2100,
+            "fleet": "MAX9"
+          },
+          {
+            "origin": "PHF",
+            "dest": "SYR",
+            "dep": "15:25",
+            "arr": "16:50",
+            "flight": 1952,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "SYR",
+            "dest": "ORH",
+            "dep": "19:35",
+            "arr": "20:33",
+            "flight": 1882,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          44,
+          165
+        ],
+        "stops": 2,
+        "dest": "ORH",
+        "departureMinute": 760,
+        "totalMinutes": 473,
+        "circuity": 1.1719989763554837
+      },
+      "fastestTrip": {
+        "legs": [
+          {
+            "origin": "PGD",
+            "dest": "PHF",
+            "dep": "12:40",
+            "arr": "14:41",
+            "flight": 2100,
+            "fleet": "MAX9"
+          },
+          {
+            "origin": "PHF",
+            "dest": "SYR",
+            "dep": "15:25",
+            "arr": "16:50",
+            "flight": 1952,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "SYR",
+            "dest": "ORH",
+            "dep": "19:35",
+            "arr": "20:33",
+            "flight": 1882,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          44,
+          165
+        ],
+        "stops": 2,
+        "dest": "ORH",
+        "departureMinute": 760,
+        "totalMinutes": 473,
+        "circuity": 1.1719989763554837
+      },
+      "geographicMinimumConnections": 2,
+      "geographicCounts": [
+        0,
+        0,
+        2
+      ],
+      "sharedHubs": [],
+      "closestGeographicNearMiss": null
+    }
+  ],
+  "gapPairs": [
+    {
+      "northeast": "HPN",
+      "florida": "PGD",
+      "neToFloridaDemand": 47.4,
+      "floridaToNeDemand": 48.8,
+      "bidirectionalDemand": 96.19999999999999,
+      "neToFloridaConnections": null,
+      "floridaToNeConnections": 2,
+      "gapBoth": true,
+      "gapEither": true
+    },
+    {
+      "northeast": "ISP",
+      "florida": "PGD",
+      "neToFloridaDemand": 35.8,
+      "floridaToNeDemand": 36.1,
+      "bidirectionalDemand": 71.9,
+      "neToFloridaConnections": 2,
+      "floridaToNeConnections": 2,
+      "gapBoth": true,
+      "gapEither": true
+    },
+    {
+      "northeast": "HVN",
+      "florida": "PGD",
+      "neToFloridaDemand": 33.7,
+      "floridaToNeDemand": 33,
+      "bidirectionalDemand": 66.7,
+      "neToFloridaConnections": 2,
+      "floridaToNeConnections": 2,
+      "gapBoth": true,
+      "gapEither": true
+    },
+    {
+      "northeast": "HVN",
+      "florida": "DAB",
+      "neToFloridaDemand": 16.7,
+      "floridaToNeDemand": 17,
+      "bidirectionalDemand": 33.7,
+      "neToFloridaConnections": null,
+      "floridaToNeConnections": 2,
+      "gapBoth": true,
+      "gapEither": true
+    },
+    {
+      "northeast": "BTV",
+      "florida": "PGD",
+      "neToFloridaDemand": 11.2,
+      "floridaToNeDemand": 11.4,
+      "bidirectionalDemand": 22.6,
+      "neToFloridaConnections": 2,
+      "floridaToNeConnections": 2,
+      "gapBoth": true,
+      "gapEither": true
+    },
+    {
+      "northeast": "ORH",
+      "florida": "PGD",
+      "neToFloridaDemand": 10.6,
+      "floridaToNeDemand": 10.9,
+      "bidirectionalDemand": 21.5,
+      "neToFloridaConnections": 2,
+      "floridaToNeConnections": 2,
+      "gapBoth": true,
+      "gapEither": true
+    },
+    {
+      "northeast": "HPN",
+      "florida": "DAB",
+      "neToFloridaDemand": 10.5,
+      "floridaToNeDemand": 10.5,
+      "bidirectionalDemand": 21,
+      "neToFloridaConnections": null,
+      "floridaToNeConnections": 2,
+      "gapBoth": true,
+      "gapEither": true
+    },
+    {
+      "northeast": "HVN",
+      "florida": "EYW",
+      "neToFloridaDemand": 7.6,
+      "floridaToNeDemand": 7.4,
+      "bidirectionalDemand": 15,
+      "neToFloridaConnections": null,
+      "floridaToNeConnections": 2,
+      "gapBoth": true,
+      "gapEither": true
+    },
+    {
+      "northeast": "BTV",
+      "florida": "EYW",
+      "neToFloridaDemand": 1.6,
+      "floridaToNeDemand": 1.6,
+      "bidirectionalDemand": 3.2,
+      "neToFloridaConnections": null,
+      "floridaToNeConnections": 2,
+      "gapBoth": true,
+      "gapEither": true
+    },
+    {
+      "northeast": "HPN",
+      "florida": "GNV",
+      "neToFloridaDemand": 1.3,
+      "floridaToNeDemand": 1.4,
+      "bidirectionalDemand": 2.7,
+      "neToFloridaConnections": 2,
+      "floridaToNeConnections": 2,
+      "gapBoth": true,
+      "gapEither": true
+    },
+    {
+      "northeast": "HPN",
+      "florida": "EYW",
+      "neToFloridaDemand": 0.9,
+      "floridaToNeDemand": 0.9,
+      "bidirectionalDemand": 1.8,
+      "neToFloridaConnections": null,
+      "floridaToNeConnections": 2,
+      "gapBoth": true,
+      "gapEither": true
+    },
+    {
+      "northeast": "BTV",
+      "florida": "DAB",
+      "neToFloridaDemand": 0.9,
+      "floridaToNeDemand": 0.9,
+      "bidirectionalDemand": 1.8,
+      "neToFloridaConnections": null,
+      "floridaToNeConnections": 2,
+      "gapBoth": true,
+      "gapEither": true
+    },
+    {
+      "northeast": "HPN",
+      "florida": "MLB",
+      "neToFloridaDemand": 0.6,
+      "floridaToNeDemand": 0.6,
+      "bidirectionalDemand": 1.2,
+      "neToFloridaConnections": 2,
+      "floridaToNeConnections": 2,
+      "gapBoth": true,
+      "gapEither": true
+    },
+    {
+      "northeast": "BTV",
+      "florida": "GNV",
+      "neToFloridaDemand": 0.6,
+      "floridaToNeDemand": 0.6,
+      "bidirectionalDemand": 1.2,
+      "neToFloridaConnections": 2,
+      "floridaToNeConnections": 2,
+      "gapBoth": true,
+      "gapEither": true
+    },
+    {
+      "northeast": "BTV",
+      "florida": "MLB",
+      "neToFloridaDemand": 0.5,
+      "floridaToNeDemand": 0.6,
+      "bidirectionalDemand": 1.1,
+      "neToFloridaConnections": 2,
+      "floridaToNeConnections": 2,
+      "gapBoth": true,
+      "gapEither": true
+    },
+    {
+      "northeast": "HVN",
+      "florida": "GNV",
+      "neToFloridaDemand": 0,
+      "floridaToNeDemand": 0,
+      "bidirectionalDemand": 0,
+      "neToFloridaConnections": 2,
+      "floridaToNeConnections": 2,
+      "gapBoth": true,
+      "gapEither": true
+    },
+    {
+      "northeast": "HVN",
+      "florida": "MLB",
+      "neToFloridaDemand": 0,
+      "floridaToNeDemand": 0,
+      "bidirectionalDemand": 0,
+      "neToFloridaConnections": 2,
+      "floridaToNeConnections": 2,
+      "gapBoth": true,
+      "gapEither": true
+    },
+    {
+      "northeast": "ISP",
+      "florida": "DAB",
+      "neToFloridaDemand": 0,
+      "floridaToNeDemand": 0,
+      "bidirectionalDemand": 0,
+      "neToFloridaConnections": null,
+      "floridaToNeConnections": 2,
+      "gapBoth": true,
+      "gapEither": true
+    },
+    {
+      "northeast": "ISP",
+      "florida": "EYW",
+      "neToFloridaDemand": 0,
+      "floridaToNeDemand": 0,
+      "bidirectionalDemand": 0,
+      "neToFloridaConnections": null,
+      "floridaToNeConnections": 2,
+      "gapBoth": true,
+      "gapEither": true
+    },
+    {
+      "northeast": "ISP",
+      "florida": "GNV",
+      "neToFloridaDemand": 0,
+      "floridaToNeDemand": 0,
+      "bidirectionalDemand": 0,
+      "neToFloridaConnections": 2,
+      "floridaToNeConnections": 2,
+      "gapBoth": true,
+      "gapEither": true
+    },
+    {
+      "northeast": "ISP",
+      "florida": "MLB",
+      "neToFloridaDemand": 0,
+      "floridaToNeDemand": 0,
+      "bidirectionalDemand": 0,
+      "neToFloridaConnections": 2,
+      "floridaToNeConnections": 2,
+      "gapBoth": true,
+      "gapEither": true
+    },
+    {
+      "northeast": "ORH",
+      "florida": "DAB",
+      "neToFloridaDemand": 0,
+      "floridaToNeDemand": 0,
+      "bidirectionalDemand": 0,
+      "neToFloridaConnections": null,
+      "floridaToNeConnections": null,
+      "gapBoth": true,
+      "gapEither": true
+    },
+    {
+      "northeast": "ORH",
+      "florida": "EYW",
+      "neToFloridaDemand": 0,
+      "floridaToNeDemand": 0,
+      "bidirectionalDemand": 0,
+      "neToFloridaConnections": null,
+      "floridaToNeConnections": null,
+      "gapBoth": true,
+      "gapEither": true
+    },
+    {
+      "northeast": "ORH",
+      "florida": "GNV",
+      "neToFloridaDemand": 0,
+      "floridaToNeDemand": 0,
+      "bidirectionalDemand": 0,
+      "neToFloridaConnections": 2,
+      "floridaToNeConnections": null,
+      "gapBoth": true,
+      "gapEither": true
+    },
+    {
+      "northeast": "ORH",
+      "florida": "MLB",
+      "neToFloridaDemand": 0,
+      "floridaToNeDemand": 0,
+      "bidirectionalDemand": 0,
+      "neToFloridaConnections": 2,
+      "floridaToNeConnections": null,
+      "gapBoth": true,
+      "gapEither": true
+    }
+  ],
+  "rows": [
+    {
+      "origin": "HPN",
+      "destination": "DAB",
+      "demand": 10.5,
+      "minimumConnections": null,
+      "counts": [
+        0,
+        0,
+        0
+      ],
+      "bestMinimumConnectionTrip": null,
+      "fastestTrip": null,
+      "geographicMinimumConnections": null,
+      "geographicCounts": [
+        0,
+        0,
+        0
+      ],
+      "sharedHubs": [],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "DAB",
+      "destination": "HPN",
+      "demand": 10.5,
+      "minimumConnections": 2,
+      "counts": [
+        0,
+        0,
+        2
+      ],
+      "bestMinimumConnectionTrip": {
+        "legs": [
+          {
+            "origin": "DAB",
+            "dest": "JAX",
+            "dep": "05:05",
+            "arr": "05:46",
+            "flight": 1768,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "JAX",
+            "dest": "SYR",
+            "dep": "08:10",
+            "arr": "10:38",
+            "flight": 1408,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "SYR",
+            "dest": "HPN",
+            "dep": "11:20",
+            "arr": "12:14",
+            "flight": 1852,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          144,
+          42
+        ],
+        "stops": 2,
+        "dest": "HPN",
+        "departureMinute": 305,
+        "totalMinutes": 429,
+        "circuity": 1.3157688655440811
+      },
+      "fastestTrip": {
+        "legs": [
+          {
+            "origin": "DAB",
+            "dest": "JAX",
+            "dep": "05:05",
+            "arr": "05:46",
+            "flight": 1768,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "JAX",
+            "dest": "SYR",
+            "dep": "08:10",
+            "arr": "10:38",
+            "flight": 1408,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "SYR",
+            "dest": "HPN",
+            "dep": "11:20",
+            "arr": "12:14",
+            "flight": 1852,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          144,
+          42
+        ],
+        "stops": 2,
+        "dest": "HPN",
+        "departureMinute": 305,
+        "totalMinutes": 429,
+        "circuity": 1.3157688655440811
+      },
+      "geographicMinimumConnections": 2,
+      "geographicCounts": [
+        0,
+        0,
+        2
+      ],
+      "sharedHubs": [],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "HPN",
+      "destination": "EYW",
+      "demand": 0.9,
+      "minimumConnections": null,
+      "counts": [
+        0,
+        0,
+        0
+      ],
+      "bestMinimumConnectionTrip": null,
+      "fastestTrip": null,
+      "geographicMinimumConnections": null,
+      "geographicCounts": [
+        0,
+        0,
+        0
+      ],
+      "sharedHubs": [],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "EYW",
+      "destination": "HPN",
+      "demand": 0.9,
+      "minimumConnections": 2,
+      "counts": [
+        0,
+        0,
+        2
+      ],
+      "bestMinimumConnectionTrip": {
+        "legs": [
+          {
+            "origin": "EYW",
+            "dest": "JAX",
+            "dep": "05:25",
+            "arr": "06:49",
+            "flight": 1555,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "JAX",
+            "dest": "SYR",
+            "dep": "08:10",
+            "arr": "10:38",
+            "flight": 1408,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "SYR",
+            "dest": "HPN",
+            "dep": "11:20",
+            "arr": "12:14",
+            "flight": 1852,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          81,
+          42
+        ],
+        "stops": 2,
+        "dest": "HPN",
+        "departureMinute": 325,
+        "totalMinutes": 409,
+        "circuity": 1.2357692595318208
+      },
+      "fastestTrip": {
+        "legs": [
+          {
+            "origin": "EYW",
+            "dest": "JAX",
+            "dep": "05:25",
+            "arr": "06:49",
+            "flight": 1555,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "JAX",
+            "dest": "SYR",
+            "dep": "08:10",
+            "arr": "10:38",
+            "flight": 1408,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "SYR",
+            "dest": "HPN",
+            "dep": "11:20",
+            "arr": "12:14",
+            "flight": 1852,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          81,
+          42
+        ],
+        "stops": 2,
+        "dest": "HPN",
+        "departureMinute": 325,
+        "totalMinutes": 409,
+        "circuity": 1.2357692595318208
+      },
+      "geographicMinimumConnections": 2,
+      "geographicCounts": [
+        0,
+        0,
+        2
+      ],
+      "sharedHubs": [],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "HPN",
+      "destination": "FLL",
+      "demand": 108,
+      "minimumConnections": 1,
+      "counts": [
+        0,
+        5,
+        3
+      ],
+      "bestMinimumConnectionTrip": {
+        "legs": [
+          {
+            "origin": "HPN",
+            "dest": "SYR",
+            "dep": "15:15",
+            "arr": "16:09",
+            "flight": 1855,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "SYR",
+            "dest": "FLL",
+            "dep": "16:50",
+            "arr": "19:44",
+            "flight": 1135,
+            "fleet": "CRJ900"
+          }
+        ],
+        "waits": [
+          41
+        ],
+        "stops": 1,
+        "dest": "FLL",
+        "departureMinute": 915,
+        "totalMinutes": 269,
+        "circuity": 1.2608552019318395
+      },
+      "fastestTrip": {
+        "legs": [
+          {
+            "origin": "HPN",
+            "dest": "SYR",
+            "dep": "15:15",
+            "arr": "16:09",
+            "flight": 1855,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "SYR",
+            "dest": "FLL",
+            "dep": "16:50",
+            "arr": "19:44",
+            "flight": 1135,
+            "fleet": "CRJ900"
+          }
+        ],
+        "waits": [
+          41
+        ],
+        "stops": 1,
+        "dest": "FLL",
+        "departureMinute": 915,
+        "totalMinutes": 269,
+        "circuity": 1.2608552019318395
+      },
+      "geographicMinimumConnections": 1,
+      "geographicCounts": [
+        0,
+        5,
+        3
+      ],
+      "sharedHubs": [
+        "SYR"
+      ],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "FLL",
+      "destination": "HPN",
+      "demand": 108.4,
+      "minimumConnections": 1,
+      "counts": [
+        0,
+        5,
+        4
+      ],
+      "bestMinimumConnectionTrip": {
+        "legs": [
+          {
+            "origin": "FLL",
+            "dest": "SYR",
+            "dep": "05:00",
+            "arr": "07:54",
+            "flight": 1127,
+            "fleet": "CRJ900"
+          },
+          {
+            "origin": "SYR",
+            "dest": "HPN",
+            "dep": "08:35",
+            "arr": "09:29",
+            "flight": 1851,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          41
+        ],
+        "stops": 1,
+        "dest": "HPN",
+        "departureMinute": 300,
+        "totalMinutes": 269,
+        "circuity": 1.2608552019318395
+      },
+      "fastestTrip": {
+        "legs": [
+          {
+            "origin": "FLL",
+            "dest": "SYR",
+            "dep": "05:00",
+            "arr": "07:54",
+            "flight": 1127,
+            "fleet": "CRJ900"
+          },
+          {
+            "origin": "SYR",
+            "dest": "HPN",
+            "dep": "08:35",
+            "arr": "09:29",
+            "flight": 1851,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          41
+        ],
+        "stops": 1,
+        "dest": "HPN",
+        "departureMinute": 300,
+        "totalMinutes": 269,
+        "circuity": 1.2608552019318395
+      },
+      "geographicMinimumConnections": 1,
+      "geographicCounts": [
+        0,
+        5,
+        4
+      ],
+      "sharedHubs": [
+        "SYR"
+      ],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "HPN",
+      "destination": "GNV",
+      "demand": 1.3,
+      "minimumConnections": 2,
+      "counts": [
+        0,
+        0,
+        4
+      ],
+      "bestMinimumConnectionTrip": {
+        "legs": [
+          {
+            "origin": "HPN",
+            "dest": "SYR",
+            "dep": "12:30",
+            "arr": "13:24",
+            "flight": 1854,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "SYR",
+            "dest": "JAX",
+            "dep": "14:10",
+            "arr": "16:38",
+            "flight": 1407,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "JAX",
+            "dest": "GNV",
+            "dep": "19:25",
+            "arr": "20:02",
+            "flight": 1738,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          46,
+          167
+        ],
+        "stops": 2,
+        "dest": "GNV",
+        "departureMinute": 750,
+        "totalMinutes": 452,
+        "circuity": 1.2778335332339947
+      },
+      "fastestTrip": {
+        "legs": [
+          {
+            "origin": "HPN",
+            "dest": "SYR",
+            "dep": "12:30",
+            "arr": "13:24",
+            "flight": 1854,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "SYR",
+            "dest": "JAX",
+            "dep": "14:10",
+            "arr": "16:38",
+            "flight": 1407,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "JAX",
+            "dest": "GNV",
+            "dep": "19:25",
+            "arr": "20:02",
+            "flight": 1738,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          46,
+          167
+        ],
+        "stops": 2,
+        "dest": "GNV",
+        "departureMinute": 750,
+        "totalMinutes": 452,
+        "circuity": 1.2778335332339947
+      },
+      "geographicMinimumConnections": 2,
+      "geographicCounts": [
+        0,
+        0,
+        4
+      ],
+      "sharedHubs": [],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "GNV",
+      "destination": "HPN",
+      "demand": 1.4,
+      "minimumConnections": 2,
+      "counts": [
+        0,
+        0,
+        5
+      ],
+      "bestMinimumConnectionTrip": {
+        "legs": [
+          {
+            "origin": "GNV",
+            "dest": "JAX",
+            "dep": "05:47",
+            "arr": "06:24",
+            "flight": 1739,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "JAX",
+            "dest": "SYR",
+            "dep": "08:10",
+            "arr": "10:38",
+            "flight": 1408,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "SYR",
+            "dest": "HPN",
+            "dep": "11:20",
+            "arr": "12:14",
+            "flight": 1852,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          106,
+          42
+        ],
+        "stops": 2,
+        "dest": "HPN",
+        "departureMinute": 347,
+        "totalMinutes": 387,
+        "circuity": 1.277833533233995
+      },
+      "fastestTrip": {
+        "legs": [
+          {
+            "origin": "GNV",
+            "dest": "JAX",
+            "dep": "05:47",
+            "arr": "06:24",
+            "flight": 1739,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "JAX",
+            "dest": "SYR",
+            "dep": "08:10",
+            "arr": "10:38",
+            "flight": 1408,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "SYR",
+            "dest": "HPN",
+            "dep": "11:20",
+            "arr": "12:14",
+            "flight": 1852,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          106,
+          42
+        ],
+        "stops": 2,
+        "dest": "HPN",
+        "departureMinute": 347,
+        "totalMinutes": 387,
+        "circuity": 1.277833533233995
+      },
+      "geographicMinimumConnections": 2,
+      "geographicCounts": [
+        0,
+        0,
+        5
+      ],
+      "sharedHubs": [],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "HPN",
+      "destination": "MLB",
+      "demand": 0.6,
+      "minimumConnections": 2,
+      "counts": [
+        0,
+        0,
+        5
+      ],
+      "bestMinimumConnectionTrip": {
+        "legs": [
+          {
+            "origin": "HPN",
+            "dest": "SYR",
+            "dep": "12:30",
+            "arr": "13:24",
+            "flight": 1854,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "SYR",
+            "dest": "PHF",
+            "dep": "14:10",
+            "arr": "15:35",
+            "flight": 1511,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "PHF",
+            "dest": "MLB",
+            "dep": "17:15",
+            "arr": "19:10",
+            "flight": 1937,
+            "fleet": "CRJ700"
+          }
+        ],
+        "waits": [
+          46,
+          100
+        ],
+        "stops": 2,
+        "dest": "MLB",
+        "departureMinute": 750,
+        "totalMinutes": 400,
+        "circuity": 1.2983216923708283
+      },
+      "fastestTrip": {
+        "legs": [
+          {
+            "origin": "HPN",
+            "dest": "SYR",
+            "dep": "12:30",
+            "arr": "13:24",
+            "flight": 1854,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "SYR",
+            "dest": "PHF",
+            "dep": "14:10",
+            "arr": "15:35",
+            "flight": 1511,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "PHF",
+            "dest": "MLB",
+            "dep": "17:15",
+            "arr": "19:10",
+            "flight": 1937,
+            "fleet": "CRJ700"
+          }
+        ],
+        "waits": [
+          46,
+          100
+        ],
+        "stops": 2,
+        "dest": "MLB",
+        "departureMinute": 750,
+        "totalMinutes": 400,
+        "circuity": 1.2983216923708283
+      },
+      "geographicMinimumConnections": 2,
+      "geographicCounts": [
+        0,
+        0,
+        5
+      ],
+      "sharedHubs": [],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "MLB",
+      "destination": "HPN",
+      "demand": 0.6,
+      "minimumConnections": 2,
+      "counts": [
+        0,
+        0,
+        2
+      ],
+      "bestMinimumConnectionTrip": {
+        "legs": [
+          {
+            "origin": "MLB",
+            "dest": "JAX",
+            "dep": "04:55",
+            "arr": "05:47",
+            "flight": 1847,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "JAX",
+            "dest": "SYR",
+            "dep": "08:10",
+            "arr": "10:38",
+            "flight": 1408,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "SYR",
+            "dest": "HPN",
+            "dep": "11:20",
+            "arr": "12:14",
+            "flight": 1852,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          143,
+          42
+        ],
+        "stops": 2,
+        "dest": "HPN",
+        "departureMinute": 295,
+        "totalMinutes": 439,
+        "circuity": 1.3173100540902458
+      },
+      "fastestTrip": {
+        "legs": [
+          {
+            "origin": "MLB",
+            "dest": "JAX",
+            "dep": "04:55",
+            "arr": "05:47",
+            "flight": 1847,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "JAX",
+            "dest": "SYR",
+            "dep": "08:10",
+            "arr": "10:38",
+            "flight": 1408,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "SYR",
+            "dest": "HPN",
+            "dep": "11:20",
+            "arr": "12:14",
+            "flight": 1852,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          143,
+          42
+        ],
+        "stops": 2,
+        "dest": "HPN",
+        "departureMinute": 295,
+        "totalMinutes": 439,
+        "circuity": 1.3173100540902458
+      },
+      "geographicMinimumConnections": 2,
+      "geographicCounts": [
+        0,
+        0,
+        2
+      ],
+      "sharedHubs": [],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "HPN",
+      "destination": "PGD",
+      "demand": 47.4,
+      "minimumConnections": null,
+      "counts": [
+        0,
+        0,
+        0
+      ],
+      "bestMinimumConnectionTrip": null,
+      "fastestTrip": null,
+      "geographicMinimumConnections": null,
+      "geographicCounts": [
+        0,
+        0,
+        0
+      ],
+      "sharedHubs": [],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "PGD",
+      "destination": "HPN",
+      "demand": 48.8,
+      "minimumConnections": 2,
+      "counts": [
+        0,
+        0,
+        2
+      ],
+      "bestMinimumConnectionTrip": {
+        "legs": [
+          {
+            "origin": "PGD",
+            "dest": "JAX",
+            "dep": "05:55",
+            "arr": "06:57",
+            "flight": 2139,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "JAX",
+            "dest": "SYR",
+            "dep": "08:10",
+            "arr": "10:38",
+            "flight": 1408,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "SYR",
+            "dest": "HPN",
+            "dep": "11:20",
+            "arr": "12:14",
+            "flight": 1852,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          73,
+          42
+        ],
+        "stops": 2,
+        "dest": "HPN",
+        "departureMinute": 355,
+        "totalMinutes": 379,
+        "circuity": 1.2523768364925545
+      },
+      "fastestTrip": {
+        "legs": [
+          {
+            "origin": "PGD",
+            "dest": "JAX",
+            "dep": "05:55",
+            "arr": "06:57",
+            "flight": 2139,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "JAX",
+            "dest": "SYR",
+            "dep": "08:10",
+            "arr": "10:38",
+            "flight": 1408,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "SYR",
+            "dest": "HPN",
+            "dep": "11:20",
+            "arr": "12:14",
+            "flight": 1852,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          73,
+          42
+        ],
+        "stops": 2,
+        "dest": "HPN",
+        "departureMinute": 355,
+        "totalMinutes": 379,
+        "circuity": 1.2523768364925545
+      },
+      "geographicMinimumConnections": 2,
+      "geographicCounts": [
+        0,
+        0,
+        2
+      ],
+      "sharedHubs": [],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "HPN",
+      "destination": "PIE",
+      "demand": 37.2,
+      "minimumConnections": 1,
+      "counts": [
+        0,
+        5,
+        8
+      ],
+      "bestMinimumConnectionTrip": {
+        "legs": [
+          {
+            "origin": "HPN",
+            "dest": "SYR",
+            "dep": "12:30",
+            "arr": "13:24",
+            "flight": 1854,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "SYR",
+            "dest": "PIE",
+            "dep": "14:05",
+            "arr": "16:49",
+            "flight": 1226,
+            "fleet": "CRJ900"
+          }
+        ],
+        "waits": [
+          41
+        ],
+        "stops": 1,
+        "dest": "PIE",
+        "departureMinute": 750,
+        "totalMinutes": 259,
+        "circuity": 1.2480074106795906
+      },
+      "fastestTrip": {
+        "legs": [
+          {
+            "origin": "HPN",
+            "dest": "SYR",
+            "dep": "12:30",
+            "arr": "13:24",
+            "flight": 1854,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "SYR",
+            "dest": "PIE",
+            "dep": "14:05",
+            "arr": "16:49",
+            "flight": 1226,
+            "fleet": "CRJ900"
+          }
+        ],
+        "waits": [
+          41
+        ],
+        "stops": 1,
+        "dest": "PIE",
+        "departureMinute": 750,
+        "totalMinutes": 259,
+        "circuity": 1.2480074106795906
+      },
+      "geographicMinimumConnections": 1,
+      "geographicCounts": [
+        0,
+        5,
+        8
+      ],
+      "sharedHubs": [
+        "SYR"
+      ],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "PIE",
+      "destination": "HPN",
+      "demand": 36.4,
+      "minimumConnections": 1,
+      "counts": [
+        0,
+        4,
+        2
+      ],
+      "bestMinimumConnectionTrip": {
+        "legs": [
+          {
+            "origin": "PIE",
+            "dest": "SYR",
+            "dep": "08:04",
+            "arr": "10:48",
+            "flight": 1229,
+            "fleet": "CRJ900"
+          },
+          {
+            "origin": "SYR",
+            "dest": "HPN",
+            "dep": "11:20",
+            "arr": "12:14",
+            "flight": 1852,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          32
+        ],
+        "stops": 1,
+        "dest": "HPN",
+        "departureMinute": 484,
+        "totalMinutes": 250,
+        "circuity": 1.2480074106795906
+      },
+      "fastestTrip": {
+        "legs": [
+          {
+            "origin": "PIE",
+            "dest": "SYR",
+            "dep": "08:04",
+            "arr": "10:48",
+            "flight": 1229,
+            "fleet": "CRJ900"
+          },
+          {
+            "origin": "SYR",
+            "dest": "HPN",
+            "dep": "11:20",
+            "arr": "12:14",
+            "flight": 1852,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          32
+        ],
+        "stops": 1,
+        "dest": "HPN",
+        "departureMinute": 484,
+        "totalMinutes": 250,
+        "circuity": 1.2480074106795906
+      },
+      "geographicMinimumConnections": 1,
+      "geographicCounts": [
+        0,
+        4,
+        2
+      ],
+      "sharedHubs": [
+        "SYR"
+      ],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "HPN",
+      "destination": "SFB",
+      "demand": 106,
+      "minimumConnections": 0,
+      "counts": [
+        1,
+        5,
+        5
+      ],
+      "bestMinimumConnectionTrip": {
+        "legs": [
+          {
+            "origin": "HPN",
+            "dest": "SFB",
+            "dep": "04:30",
+            "arr": "06:51",
+            "flight": 1041,
+            "fleet": "MAX9"
+          }
+        ],
+        "waits": [],
+        "stops": 0,
+        "dest": "SFB",
+        "departureMinute": 270,
+        "totalMinutes": 141,
+        "circuity": 1
+      },
+      "fastestTrip": {
+        "legs": [
+          {
+            "origin": "HPN",
+            "dest": "SFB",
+            "dep": "04:30",
+            "arr": "06:51",
+            "flight": 1041,
+            "fleet": "MAX9"
+          }
+        ],
+        "waits": [],
+        "stops": 0,
+        "dest": "SFB",
+        "departureMinute": 270,
+        "totalMinutes": 141,
+        "circuity": 1
+      },
+      "geographicMinimumConnections": 0,
+      "geographicCounts": [
+        1,
+        5,
+        5
+      ],
+      "sharedHubs": [
+        "SYR"
+      ],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "SFB",
+      "destination": "HPN",
+      "demand": 107.6,
+      "minimumConnections": 0,
+      "counts": [
+        1,
+        5,
+        7
+      ],
+      "bestMinimumConnectionTrip": {
+        "legs": [
+          {
+            "origin": "SFB",
+            "dest": "HPN",
+            "dep": "20:05",
+            "arr": "22:26",
+            "flight": 1042,
+            "fleet": "MAX9"
+          }
+        ],
+        "waits": [],
+        "stops": 0,
+        "dest": "HPN",
+        "departureMinute": 1205,
+        "totalMinutes": 141,
+        "circuity": 1
+      },
+      "fastestTrip": {
+        "legs": [
+          {
+            "origin": "SFB",
+            "dest": "HPN",
+            "dep": "20:05",
+            "arr": "22:26",
+            "flight": 1042,
+            "fleet": "MAX9"
+          }
+        ],
+        "waits": [],
+        "stops": 0,
+        "dest": "HPN",
+        "departureMinute": 1205,
+        "totalMinutes": 141,
+        "circuity": 1
+      },
+      "geographicMinimumConnections": 0,
+      "geographicCounts": [
+        1,
+        5,
+        7
+      ],
+      "sharedHubs": [
+        "SYR"
+      ],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "HPN",
+      "destination": "SRQ",
+      "demand": 11.2,
+      "minimumConnections": 1,
+      "counts": [
+        0,
+        4,
+        2
+      ],
+      "bestMinimumConnectionTrip": {
+        "legs": [
+          {
+            "origin": "HPN",
+            "dest": "SYR",
+            "dep": "18:00",
+            "arr": "18:54",
+            "flight": 1856,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "SYR",
+            "dest": "SRQ",
+            "dep": "19:35",
+            "arr": "22:31",
+            "flight": 1299,
+            "fleet": "CRJ700"
+          }
+        ],
+        "waits": [
+          41
+        ],
+        "stops": 1,
+        "dest": "SRQ",
+        "departureMinute": 1080,
+        "totalMinutes": 271,
+        "circuity": 1.2445585659001819
+      },
+      "fastestTrip": {
+        "legs": [
+          {
+            "origin": "HPN",
+            "dest": "SYR",
+            "dep": "18:00",
+            "arr": "18:54",
+            "flight": 1856,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "SYR",
+            "dest": "SRQ",
+            "dep": "19:35",
+            "arr": "22:31",
+            "flight": 1299,
+            "fleet": "CRJ700"
+          }
+        ],
+        "waits": [
+          41
+        ],
+        "stops": 1,
+        "dest": "SRQ",
+        "departureMinute": 1080,
+        "totalMinutes": 271,
+        "circuity": 1.2445585659001819
+      },
+      "geographicMinimumConnections": 1,
+      "geographicCounts": [
+        0,
+        4,
+        2
+      ],
+      "sharedHubs": [
+        "SYR"
+      ],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "SRQ",
+      "destination": "HPN",
+      "demand": 12,
+      "minimumConnections": 1,
+      "counts": [
+        0,
+        5,
+        0
+      ],
+      "bestMinimumConnectionTrip": {
+        "legs": [
+          {
+            "origin": "SRQ",
+            "dest": "SYR",
+            "dep": "07:45",
+            "arr": "10:41",
+            "flight": 1301,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "SYR",
+            "dest": "HPN",
+            "dep": "11:20",
+            "arr": "12:14",
+            "flight": 1852,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          39
+        ],
+        "stops": 1,
+        "dest": "HPN",
+        "departureMinute": 465,
+        "totalMinutes": 269,
+        "circuity": 1.2445585659001819
+      },
+      "fastestTrip": {
+        "legs": [
+          {
+            "origin": "SRQ",
+            "dest": "SYR",
+            "dep": "07:45",
+            "arr": "10:41",
+            "flight": 1301,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "SYR",
+            "dest": "HPN",
+            "dep": "11:20",
+            "arr": "12:14",
+            "flight": 1852,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          39
+        ],
+        "stops": 1,
+        "dest": "HPN",
+        "departureMinute": 465,
+        "totalMinutes": 269,
+        "circuity": 1.2445585659001819
+      },
+      "geographicMinimumConnections": 1,
+      "geographicCounts": [
+        0,
+        5,
+        0
+      ],
+      "sharedHubs": [
+        "SYR"
+      ],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "HVN",
+      "destination": "DAB",
+      "demand": 16.7,
+      "minimumConnections": null,
+      "counts": [
+        0,
+        0,
+        0
+      ],
+      "bestMinimumConnectionTrip": null,
+      "fastestTrip": null,
+      "geographicMinimumConnections": null,
+      "geographicCounts": [
+        0,
+        0,
+        0
+      ],
+      "sharedHubs": [],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "DAB",
+      "destination": "HVN",
+      "demand": 17,
+      "minimumConnections": 2,
+      "counts": [
+        0,
+        0,
+        1
+      ],
+      "bestMinimumConnectionTrip": {
+        "legs": [
+          {
+            "origin": "DAB",
+            "dest": "JAX",
+            "dep": "05:05",
+            "arr": "05:46",
+            "flight": 1768,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "JAX",
+            "dest": "SYR",
+            "dep": "08:10",
+            "arr": "10:38",
+            "flight": 1408,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "SYR",
+            "dest": "HVN",
+            "dep": "11:20",
+            "arr": "12:16",
+            "flight": 1876,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          144,
+          42
+        ],
+        "stops": 2,
+        "dest": "HVN",
+        "departureMinute": 305,
+        "totalMinutes": 431,
+        "circuity": 1.2921032410055804
+      },
+      "fastestTrip": {
+        "legs": [
+          {
+            "origin": "DAB",
+            "dest": "JAX",
+            "dep": "05:05",
+            "arr": "05:46",
+            "flight": 1768,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "JAX",
+            "dest": "SYR",
+            "dep": "08:10",
+            "arr": "10:38",
+            "flight": 1408,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "SYR",
+            "dest": "HVN",
+            "dep": "11:20",
+            "arr": "12:16",
+            "flight": 1876,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          144,
+          42
+        ],
+        "stops": 2,
+        "dest": "HVN",
+        "departureMinute": 305,
+        "totalMinutes": 431,
+        "circuity": 1.2921032410055804
+      },
+      "geographicMinimumConnections": 2,
+      "geographicCounts": [
+        0,
+        0,
+        1
+      ],
+      "sharedHubs": [],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "HVN",
+      "destination": "EYW",
+      "demand": 7.6,
+      "minimumConnections": null,
+      "counts": [
+        0,
+        0,
+        0
+      ],
+      "bestMinimumConnectionTrip": null,
+      "fastestTrip": null,
+      "geographicMinimumConnections": null,
+      "geographicCounts": [
+        0,
+        0,
+        0
+      ],
+      "sharedHubs": [],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "EYW",
+      "destination": "HVN",
+      "demand": 7.4,
+      "minimumConnections": 2,
+      "counts": [
+        0,
+        0,
+        1
+      ],
+      "bestMinimumConnectionTrip": {
+        "legs": [
+          {
+            "origin": "EYW",
+            "dest": "JAX",
+            "dep": "05:25",
+            "arr": "06:49",
+            "flight": 1555,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "JAX",
+            "dest": "SYR",
+            "dep": "08:10",
+            "arr": "10:38",
+            "flight": 1408,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "SYR",
+            "dest": "HVN",
+            "dep": "11:20",
+            "arr": "12:16",
+            "flight": 1876,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          81,
+          42
+        ],
+        "stops": 2,
+        "dest": "HVN",
+        "departureMinute": 325,
+        "totalMinutes": 411,
+        "circuity": 1.2224788075610662
+      },
+      "fastestTrip": {
+        "legs": [
+          {
+            "origin": "EYW",
+            "dest": "JAX",
+            "dep": "05:25",
+            "arr": "06:49",
+            "flight": 1555,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "JAX",
+            "dest": "SYR",
+            "dep": "08:10",
+            "arr": "10:38",
+            "flight": 1408,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "SYR",
+            "dest": "HVN",
+            "dep": "11:20",
+            "arr": "12:16",
+            "flight": 1876,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          81,
+          42
+        ],
+        "stops": 2,
+        "dest": "HVN",
+        "departureMinute": 325,
+        "totalMinutes": 411,
+        "circuity": 1.2224788075610662
+      },
+      "geographicMinimumConnections": 2,
+      "geographicCounts": [
+        0,
+        0,
+        1
+      ],
+      "sharedHubs": [],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "HVN",
+      "destination": "FLL",
+      "demand": 67,
+      "minimumConnections": 1,
+      "counts": [
+        0,
+        5,
+        3
+      ],
+      "bestMinimumConnectionTrip": {
+        "legs": [
+          {
+            "origin": "HVN",
+            "dest": "SYR",
+            "dep": "09:45",
+            "arr": "10:41",
+            "flight": 1879,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "SYR",
+            "dest": "FLL",
+            "dep": "11:20",
+            "arr": "14:14",
+            "flight": 1134,
+            "fleet": "CRJ900"
+          }
+        ],
+        "waits": [
+          39
+        ],
+        "stops": 1,
+        "dest": "FLL",
+        "departureMinute": 585,
+        "totalMinutes": 269,
+        "circuity": 1.2471980787873602
+      },
+      "fastestTrip": {
+        "legs": [
+          {
+            "origin": "HVN",
+            "dest": "SYR",
+            "dep": "09:45",
+            "arr": "10:41",
+            "flight": 1879,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "SYR",
+            "dest": "FLL",
+            "dep": "11:20",
+            "arr": "14:14",
+            "flight": 1134,
+            "fleet": "CRJ900"
+          }
+        ],
+        "waits": [
+          39
+        ],
+        "stops": 1,
+        "dest": "FLL",
+        "departureMinute": 585,
+        "totalMinutes": 269,
+        "circuity": 1.2471980787873602
+      },
+      "geographicMinimumConnections": 1,
+      "geographicCounts": [
+        0,
+        5,
+        3
+      ],
+      "sharedHubs": [
+        "SYR"
+      ],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "FLL",
+      "destination": "HVN",
+      "demand": 65.7,
+      "minimumConnections": 1,
+      "counts": [
+        0,
+        5,
+        2
+      ],
+      "bestMinimumConnectionTrip": {
+        "legs": [
+          {
+            "origin": "FLL",
+            "dest": "SYR",
+            "dep": "07:45",
+            "arr": "10:39",
+            "flight": 1128,
+            "fleet": "CRJ900"
+          },
+          {
+            "origin": "SYR",
+            "dest": "HVN",
+            "dep": "11:20",
+            "arr": "12:16",
+            "flight": 1876,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          41
+        ],
+        "stops": 1,
+        "dest": "HVN",
+        "departureMinute": 465,
+        "totalMinutes": 271,
+        "circuity": 1.2471980787873602
+      },
+      "fastestTrip": {
+        "legs": [
+          {
+            "origin": "FLL",
+            "dest": "SYR",
+            "dep": "07:45",
+            "arr": "10:39",
+            "flight": 1128,
+            "fleet": "CRJ900"
+          },
+          {
+            "origin": "SYR",
+            "dest": "HVN",
+            "dep": "11:20",
+            "arr": "12:16",
+            "flight": 1876,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          41
+        ],
+        "stops": 1,
+        "dest": "HVN",
+        "departureMinute": 465,
+        "totalMinutes": 271,
+        "circuity": 1.2471980787873602
+      },
+      "geographicMinimumConnections": 1,
+      "geographicCounts": [
+        0,
+        5,
+        2
+      ],
+      "sharedHubs": [
+        "SYR"
+      ],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "HVN",
+      "destination": "GNV",
+      "demand": 0,
+      "minimumConnections": 2,
+      "counts": [
+        0,
+        0,
+        2
+      ],
+      "bestMinimumConnectionTrip": {
+        "legs": [
+          {
+            "origin": "HVN",
+            "dest": "SYR",
+            "dep": "15:15",
+            "arr": "16:11",
+            "flight": 1880,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "SYR",
+            "dest": "PHF",
+            "dep": "16:50",
+            "arr": "18:15",
+            "flight": 1512,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "PHF",
+            "dest": "GNV",
+            "dep": "21:45",
+            "arr": "23:30",
+            "flight": 2165,
+            "fleet": "CRJ900"
+          }
+        ],
+        "waits": [
+          39,
+          210
+        ],
+        "stops": 2,
+        "dest": "GNV",
+        "departureMinute": 915,
+        "totalMinutes": 495,
+        "circuity": 1.2900928491843695
+      },
+      "fastestTrip": {
+        "legs": [
+          {
+            "origin": "HVN",
+            "dest": "SYR",
+            "dep": "15:15",
+            "arr": "16:11",
+            "flight": 1880,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "SYR",
+            "dest": "PHF",
+            "dep": "16:50",
+            "arr": "18:15",
+            "flight": 1512,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "PHF",
+            "dest": "GNV",
+            "dep": "21:45",
+            "arr": "23:30",
+            "flight": 2165,
+            "fleet": "CRJ900"
+          }
+        ],
+        "waits": [
+          39,
+          210
+        ],
+        "stops": 2,
+        "dest": "GNV",
+        "departureMinute": 915,
+        "totalMinutes": 495,
+        "circuity": 1.2900928491843695
+      },
+      "geographicMinimumConnections": 2,
+      "geographicCounts": [
+        0,
+        0,
+        2
+      ],
+      "sharedHubs": [],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "GNV",
+      "destination": "HVN",
+      "demand": 0,
+      "minimumConnections": 2,
+      "counts": [
+        0,
+        0,
+        3
+      ],
+      "bestMinimumConnectionTrip": {
+        "legs": [
+          {
+            "origin": "GNV",
+            "dest": "JAX",
+            "dep": "05:47",
+            "arr": "06:24",
+            "flight": 1739,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "JAX",
+            "dest": "SYR",
+            "dep": "08:10",
+            "arr": "10:38",
+            "flight": 1408,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "SYR",
+            "dest": "HVN",
+            "dep": "11:20",
+            "arr": "12:16",
+            "flight": 1876,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          106,
+          42
+        ],
+        "stops": 2,
+        "dest": "HVN",
+        "departureMinute": 347,
+        "totalMinutes": 389,
+        "circuity": 1.2522615530667498
+      },
+      "fastestTrip": {
+        "legs": [
+          {
+            "origin": "GNV",
+            "dest": "JAX",
+            "dep": "05:47",
+            "arr": "06:24",
+            "flight": 1739,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "JAX",
+            "dest": "SYR",
+            "dep": "08:10",
+            "arr": "10:38",
+            "flight": 1408,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "SYR",
+            "dest": "HVN",
+            "dep": "11:20",
+            "arr": "12:16",
+            "flight": 1876,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          106,
+          42
+        ],
+        "stops": 2,
+        "dest": "HVN",
+        "departureMinute": 347,
+        "totalMinutes": 389,
+        "circuity": 1.2522615530667498
+      },
+      "geographicMinimumConnections": 2,
+      "geographicCounts": [
+        0,
+        0,
+        3
+      ],
+      "sharedHubs": [],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "HVN",
+      "destination": "MLB",
+      "demand": 0,
+      "minimumConnections": 2,
+      "counts": [
+        0,
+        0,
+        3
+      ],
+      "bestMinimumConnectionTrip": {
+        "legs": [
+          {
+            "origin": "HVN",
+            "dest": "SYR",
+            "dep": "09:45",
+            "arr": "10:41",
+            "flight": 1879,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "SYR",
+            "dest": "PHF",
+            "dep": "14:10",
+            "arr": "15:35",
+            "flight": 1511,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "PHF",
+            "dest": "MLB",
+            "dep": "17:15",
+            "arr": "19:10",
+            "flight": 1937,
+            "fleet": "CRJ700"
+          }
+        ],
+        "waits": [
+          209,
+          100
+        ],
+        "stops": 2,
+        "dest": "MLB",
+        "departureMinute": 585,
+        "totalMinutes": 565,
+        "circuity": 1.2787830889528613
+      },
+      "fastestTrip": {
+        "legs": [
+          {
+            "origin": "HVN",
+            "dest": "SYR",
+            "dep": "09:45",
+            "arr": "10:41",
+            "flight": 1879,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "SYR",
+            "dest": "PHF",
+            "dep": "14:10",
+            "arr": "15:35",
+            "flight": 1511,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "PHF",
+            "dest": "MLB",
+            "dep": "17:15",
+            "arr": "19:10",
+            "flight": 1937,
+            "fleet": "CRJ700"
+          }
+        ],
+        "waits": [
+          209,
+          100
+        ],
+        "stops": 2,
+        "dest": "MLB",
+        "departureMinute": 585,
+        "totalMinutes": 565,
+        "circuity": 1.2787830889528613
+      },
+      "geographicMinimumConnections": 2,
+      "geographicCounts": [
+        0,
+        0,
+        3
+      ],
+      "sharedHubs": [],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "MLB",
+      "destination": "HVN",
+      "demand": 0,
+      "minimumConnections": 2,
+      "counts": [
+        0,
+        0,
+        1
+      ],
+      "bestMinimumConnectionTrip": {
+        "legs": [
+          {
+            "origin": "MLB",
+            "dest": "JAX",
+            "dep": "04:55",
+            "arr": "05:47",
+            "flight": 1847,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "JAX",
+            "dest": "SYR",
+            "dep": "08:10",
+            "arr": "10:38",
+            "flight": 1408,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "SYR",
+            "dest": "HVN",
+            "dep": "11:20",
+            "arr": "12:16",
+            "flight": 1876,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          143,
+          42
+        ],
+        "stops": 2,
+        "dest": "HVN",
+        "departureMinute": 295,
+        "totalMinutes": 441,
+        "circuity": 1.297179398223326
+      },
+      "fastestTrip": {
+        "legs": [
+          {
+            "origin": "MLB",
+            "dest": "JAX",
+            "dep": "04:55",
+            "arr": "05:47",
+            "flight": 1847,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "JAX",
+            "dest": "SYR",
+            "dep": "08:10",
+            "arr": "10:38",
+            "flight": 1408,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "SYR",
+            "dest": "HVN",
+            "dep": "11:20",
+            "arr": "12:16",
+            "flight": 1876,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          143,
+          42
+        ],
+        "stops": 2,
+        "dest": "HVN",
+        "departureMinute": 295,
+        "totalMinutes": 441,
+        "circuity": 1.297179398223326
+      },
+      "geographicMinimumConnections": 2,
+      "geographicCounts": [
+        0,
+        0,
+        1
+      ],
+      "sharedHubs": [],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "HVN",
+      "destination": "PGD",
+      "demand": 33.7,
+      "minimumConnections": 2,
+      "counts": [
+        0,
+        0,
+        2
+      ],
+      "bestMinimumConnectionTrip": {
+        "legs": [
+          {
+            "origin": "HVN",
+            "dest": "SYR",
+            "dep": "04:30",
+            "arr": "05:26",
+            "flight": 1878,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "SYR",
+            "dest": "PHF",
+            "dep": "07:02",
+            "arr": "08:25",
+            "flight": 2080,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "PHF",
+            "dest": "PGD",
+            "dep": "09:20",
+            "arr": "11:21",
+            "flight": 2099,
+            "fleet": "MAX9"
+          }
+        ],
+        "waits": [
+          96,
+          55
+        ],
+        "stops": 2,
+        "dest": "PGD",
+        "departureMinute": 270,
+        "totalMinutes": 411,
+        "circuity": 1.2497410175470467
+      },
+      "fastestTrip": {
+        "legs": [
+          {
+            "origin": "HVN",
+            "dest": "SYR",
+            "dep": "04:30",
+            "arr": "05:26",
+            "flight": 1878,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "SYR",
+            "dest": "PHF",
+            "dep": "07:02",
+            "arr": "08:25",
+            "flight": 2080,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "PHF",
+            "dest": "PGD",
+            "dep": "09:20",
+            "arr": "11:21",
+            "flight": 2099,
+            "fleet": "MAX9"
+          }
+        ],
+        "waits": [
+          96,
+          55
+        ],
+        "stops": 2,
+        "dest": "PGD",
+        "departureMinute": 270,
+        "totalMinutes": 411,
+        "circuity": 1.2497410175470467
+      },
+      "geographicMinimumConnections": 2,
+      "geographicCounts": [
+        0,
+        0,
+        2
+      ],
+      "sharedHubs": [],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "PGD",
+      "destination": "HVN",
+      "demand": 33,
+      "minimumConnections": 2,
+      "counts": [
+        0,
+        0,
+        1
+      ],
+      "bestMinimumConnectionTrip": {
+        "legs": [
+          {
+            "origin": "PGD",
+            "dest": "JAX",
+            "dep": "05:55",
+            "arr": "06:57",
+            "flight": 2139,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "JAX",
+            "dest": "SYR",
+            "dep": "08:10",
+            "arr": "10:38",
+            "flight": 1408,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "SYR",
+            "dest": "HVN",
+            "dep": "11:20",
+            "arr": "12:16",
+            "flight": 1876,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          73,
+          42
+        ],
+        "stops": 2,
+        "dest": "HVN",
+        "departureMinute": 355,
+        "totalMinutes": 381,
+        "circuity": 1.2345885619360288
+      },
+      "fastestTrip": {
+        "legs": [
+          {
+            "origin": "PGD",
+            "dest": "JAX",
+            "dep": "05:55",
+            "arr": "06:57",
+            "flight": 2139,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "JAX",
+            "dest": "SYR",
+            "dep": "08:10",
+            "arr": "10:38",
+            "flight": 1408,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "SYR",
+            "dest": "HVN",
+            "dep": "11:20",
+            "arr": "12:16",
+            "flight": 1876,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          73,
+          42
+        ],
+        "stops": 2,
+        "dest": "HVN",
+        "departureMinute": 355,
+        "totalMinutes": 381,
+        "circuity": 1.2345885619360288
+      },
+      "geographicMinimumConnections": 2,
+      "geographicCounts": [
+        0,
+        0,
+        1
+      ],
+      "sharedHubs": [],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "HVN",
+      "destination": "PIE",
+      "demand": 33.6,
+      "minimumConnections": 1,
+      "counts": [
+        0,
+        4,
+        7
+      ],
+      "bestMinimumConnectionTrip": {
+        "legs": [
+          {
+            "origin": "HVN",
+            "dest": "SYR",
+            "dep": "15:15",
+            "arr": "16:11",
+            "flight": 1880,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "SYR",
+            "dest": "PIE",
+            "dep": "16:50",
+            "arr": "19:34",
+            "flight": 1227,
+            "fleet": "CRJ900"
+          }
+        ],
+        "waits": [
+          39
+        ],
+        "stops": 1,
+        "dest": "PIE",
+        "departureMinute": 915,
+        "totalMinutes": 259,
+        "circuity": 1.2274744495533876
+      },
+      "fastestTrip": {
+        "legs": [
+          {
+            "origin": "HVN",
+            "dest": "SYR",
+            "dep": "15:15",
+            "arr": "16:11",
+            "flight": 1880,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "SYR",
+            "dest": "PIE",
+            "dep": "16:50",
+            "arr": "19:34",
+            "flight": 1227,
+            "fleet": "CRJ900"
+          }
+        ],
+        "waits": [
+          39
+        ],
+        "stops": 1,
+        "dest": "PIE",
+        "departureMinute": 915,
+        "totalMinutes": 259,
+        "circuity": 1.2274744495533876
+      },
+      "geographicMinimumConnections": 1,
+      "geographicCounts": [
+        0,
+        4,
+        7
+      ],
+      "sharedHubs": [
+        "SYR"
+      ],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "PIE",
+      "destination": "HVN",
+      "demand": 32.4,
+      "minimumConnections": 1,
+      "counts": [
+        0,
+        5,
+        1
+      ],
+      "bestMinimumConnectionTrip": {
+        "legs": [
+          {
+            "origin": "PIE",
+            "dest": "SYR",
+            "dep": "08:04",
+            "arr": "10:48",
+            "flight": 1229,
+            "fleet": "CRJ900"
+          },
+          {
+            "origin": "SYR",
+            "dest": "HVN",
+            "dep": "11:20",
+            "arr": "12:16",
+            "flight": 1876,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          32
+        ],
+        "stops": 1,
+        "dest": "HVN",
+        "departureMinute": 484,
+        "totalMinutes": 252,
+        "circuity": 1.2274744495533876
+      },
+      "fastestTrip": {
+        "legs": [
+          {
+            "origin": "PIE",
+            "dest": "SYR",
+            "dep": "08:04",
+            "arr": "10:48",
+            "flight": 1229,
+            "fleet": "CRJ900"
+          },
+          {
+            "origin": "SYR",
+            "dest": "HVN",
+            "dep": "11:20",
+            "arr": "12:16",
+            "flight": 1876,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          32
+        ],
+        "stops": 1,
+        "dest": "HVN",
+        "departureMinute": 484,
+        "totalMinutes": 252,
+        "circuity": 1.2274744495533876
+      },
+      "geographicMinimumConnections": 1,
+      "geographicCounts": [
+        0,
+        5,
+        1
+      ],
+      "sharedHubs": [
+        "SYR"
+      ],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "HVN",
+      "destination": "SFB",
+      "demand": 78.5,
+      "minimumConnections": 1,
+      "counts": [
+        0,
+        3,
+        5
+      ],
+      "bestMinimumConnectionTrip": {
+        "legs": [
+          {
+            "origin": "HVN",
+            "dest": "SYR",
+            "dep": "15:15",
+            "arr": "16:11",
+            "flight": 1880,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "SYR",
+            "dest": "SFB",
+            "dep": "16:55",
+            "arr": "19:25",
+            "flight": 1056,
+            "fleet": "MAX9"
+          }
+        ],
+        "waits": [
+          44
+        ],
+        "stops": 1,
+        "dest": "SFB",
+        "departureMinute": 915,
+        "totalMinutes": 250,
+        "circuity": 1.2611780760438038
+      },
+      "fastestTrip": {
+        "legs": [
+          {
+            "origin": "HVN",
+            "dest": "SYR",
+            "dep": "15:15",
+            "arr": "16:11",
+            "flight": 1880,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "SYR",
+            "dest": "SFB",
+            "dep": "16:55",
+            "arr": "19:25",
+            "flight": 1056,
+            "fleet": "MAX9"
+          }
+        ],
+        "waits": [
+          44
+        ],
+        "stops": 1,
+        "dest": "SFB",
+        "departureMinute": 915,
+        "totalMinutes": 250,
+        "circuity": 1.2611780760438038
+      },
+      "geographicMinimumConnections": 1,
+      "geographicCounts": [
+        0,
+        3,
+        5
+      ],
+      "sharedHubs": [
+        "SYR"
+      ],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "SFB",
+      "destination": "HVN",
+      "demand": 78.1,
+      "minimumConnections": 1,
+      "counts": [
+        0,
+        4,
+        4
+      ],
+      "bestMinimumConnectionTrip": {
+        "legs": [
+          {
+            "origin": "SFB",
+            "dest": "SYR",
+            "dep": "13:45",
+            "arr": "16:15",
+            "flight": 1052,
+            "fleet": "MAX9"
+          },
+          {
+            "origin": "SYR",
+            "dest": "HVN",
+            "dep": "16:50",
+            "arr": "17:46",
+            "flight": 1877,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          35
+        ],
+        "stops": 1,
+        "dest": "HVN",
+        "departureMinute": 825,
+        "totalMinutes": 241,
+        "circuity": 1.2611780760438038
+      },
+      "fastestTrip": {
+        "legs": [
+          {
+            "origin": "SFB",
+            "dest": "SYR",
+            "dep": "13:45",
+            "arr": "16:15",
+            "flight": 1052,
+            "fleet": "MAX9"
+          },
+          {
+            "origin": "SYR",
+            "dest": "HVN",
+            "dep": "16:50",
+            "arr": "17:46",
+            "flight": 1877,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          35
+        ],
+        "stops": 1,
+        "dest": "HVN",
+        "departureMinute": 825,
+        "totalMinutes": 241,
+        "circuity": 1.2611780760438038
+      },
+      "geographicMinimumConnections": 1,
+      "geographicCounts": [
+        0,
+        4,
+        4
+      ],
+      "sharedHubs": [
+        "SYR"
+      ],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "HVN",
+      "destination": "SRQ",
+      "demand": 30.6,
+      "minimumConnections": 1,
+      "counts": [
+        0,
+        5,
+        1
+      ],
+      "bestMinimumConnectionTrip": {
+        "legs": [
+          {
+            "origin": "HVN",
+            "dest": "SYR",
+            "dep": "04:30",
+            "arr": "05:26",
+            "flight": 1878,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "SYR",
+            "dest": "SRQ",
+            "dep": "06:02",
+            "arr": "08:58",
+            "flight": 1295,
+            "fleet": "CRJ700"
+          }
+        ],
+        "waits": [
+          36
+        ],
+        "stops": 1,
+        "dest": "SRQ",
+        "departureMinute": 270,
+        "totalMinutes": 268,
+        "circuity": 1.2253599276618257
+      },
+      "fastestTrip": {
+        "legs": [
+          {
+            "origin": "HVN",
+            "dest": "SYR",
+            "dep": "04:30",
+            "arr": "05:26",
+            "flight": 1878,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "SYR",
+            "dest": "SRQ",
+            "dep": "06:02",
+            "arr": "08:58",
+            "flight": 1295,
+            "fleet": "CRJ700"
+          }
+        ],
+        "waits": [
+          36
+        ],
+        "stops": 1,
+        "dest": "SRQ",
+        "departureMinute": 270,
+        "totalMinutes": 268,
+        "circuity": 1.2253599276618257
+      },
+      "geographicMinimumConnections": 1,
+      "geographicCounts": [
+        0,
+        5,
+        1
+      ],
+      "sharedHubs": [
+        "SYR"
+      ],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "SRQ",
+      "destination": "HVN",
+      "demand": 29.5,
+      "minimumConnections": 1,
+      "counts": [
+        0,
+        5,
+        0
+      ],
+      "bestMinimumConnectionTrip": {
+        "legs": [
+          {
+            "origin": "SRQ",
+            "dest": "SYR",
+            "dep": "07:45",
+            "arr": "10:41",
+            "flight": 1301,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "SYR",
+            "dest": "HVN",
+            "dep": "11:20",
+            "arr": "12:16",
+            "flight": 1876,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          39
+        ],
+        "stops": 1,
+        "dest": "HVN",
+        "departureMinute": 465,
+        "totalMinutes": 271,
+        "circuity": 1.2253599276618257
+      },
+      "fastestTrip": {
+        "legs": [
+          {
+            "origin": "SRQ",
+            "dest": "SYR",
+            "dep": "07:45",
+            "arr": "10:41",
+            "flight": 1301,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "SYR",
+            "dest": "HVN",
+            "dep": "11:20",
+            "arr": "12:16",
+            "flight": 1876,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          39
+        ],
+        "stops": 1,
+        "dest": "HVN",
+        "departureMinute": 465,
+        "totalMinutes": 271,
+        "circuity": 1.2253599276618257
+      },
+      "geographicMinimumConnections": 1,
+      "geographicCounts": [
+        0,
+        5,
+        0
+      ],
+      "sharedHubs": [
+        "SYR"
+      ],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "ISP",
+      "destination": "DAB",
+      "demand": 0,
+      "minimumConnections": null,
+      "counts": [
+        0,
+        0,
+        0
+      ],
+      "bestMinimumConnectionTrip": null,
+      "fastestTrip": null,
+      "geographicMinimumConnections": null,
+      "geographicCounts": [
+        0,
+        0,
+        0
+      ],
+      "sharedHubs": [],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "DAB",
+      "destination": "ISP",
+      "demand": 0,
+      "minimumConnections": 2,
+      "counts": [
+        0,
+        0,
+        1
+      ],
+      "bestMinimumConnectionTrip": {
+        "legs": [
+          {
+            "origin": "DAB",
+            "dest": "JAX",
+            "dep": "05:05",
+            "arr": "05:46",
+            "flight": 1768,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "JAX",
+            "dest": "SYR",
+            "dep": "08:10",
+            "arr": "10:38",
+            "flight": 1408,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "SYR",
+            "dest": "ISP",
+            "dep": "11:25",
+            "arr": "12:23",
+            "flight": 1890,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          144,
+          47
+        ],
+        "stops": 2,
+        "dest": "ISP",
+        "departureMinute": 305,
+        "totalMinutes": 438,
+        "circuity": 1.3540941686602734
+      },
+      "fastestTrip": {
+        "legs": [
+          {
+            "origin": "DAB",
+            "dest": "JAX",
+            "dep": "05:05",
+            "arr": "05:46",
+            "flight": 1768,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "JAX",
+            "dest": "SYR",
+            "dep": "08:10",
+            "arr": "10:38",
+            "flight": 1408,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "SYR",
+            "dest": "ISP",
+            "dep": "11:25",
+            "arr": "12:23",
+            "flight": 1890,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          144,
+          47
+        ],
+        "stops": 2,
+        "dest": "ISP",
+        "departureMinute": 305,
+        "totalMinutes": 438,
+        "circuity": 1.3540941686602734
+      },
+      "geographicMinimumConnections": 2,
+      "geographicCounts": [
+        0,
+        0,
+        1
+      ],
+      "sharedHubs": [],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "ISP",
+      "destination": "EYW",
+      "demand": 0,
+      "minimumConnections": null,
+      "counts": [
+        0,
+        0,
+        0
+      ],
+      "bestMinimumConnectionTrip": null,
+      "fastestTrip": null,
+      "geographicMinimumConnections": null,
+      "geographicCounts": [
+        0,
+        0,
+        0
+      ],
+      "sharedHubs": [],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "EYW",
+      "destination": "ISP",
+      "demand": 0,
+      "minimumConnections": 2,
+      "counts": [
+        0,
+        0,
+        1
+      ],
+      "bestMinimumConnectionTrip": {
+        "legs": [
+          {
+            "origin": "EYW",
+            "dest": "JAX",
+            "dep": "05:25",
+            "arr": "06:49",
+            "flight": 1555,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "JAX",
+            "dest": "SYR",
+            "dep": "08:10",
+            "arr": "10:38",
+            "flight": 1408,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "SYR",
+            "dest": "ISP",
+            "dep": "11:25",
+            "arr": "12:23",
+            "flight": 1890,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          81,
+          47
+        ],
+        "stops": 2,
+        "dest": "ISP",
+        "departureMinute": 325,
+        "totalMinutes": 418,
+        "circuity": 1.2674987322596507
+      },
+      "fastestTrip": {
+        "legs": [
+          {
+            "origin": "EYW",
+            "dest": "JAX",
+            "dep": "05:25",
+            "arr": "06:49",
+            "flight": 1555,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "JAX",
+            "dest": "SYR",
+            "dep": "08:10",
+            "arr": "10:38",
+            "flight": 1408,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "SYR",
+            "dest": "ISP",
+            "dep": "11:25",
+            "arr": "12:23",
+            "flight": 1890,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          81,
+          47
+        ],
+        "stops": 2,
+        "dest": "ISP",
+        "departureMinute": 325,
+        "totalMinutes": 418,
+        "circuity": 1.2674987322596507
+      },
+      "geographicMinimumConnections": 2,
+      "geographicCounts": [
+        0,
+        0,
+        1
+      ],
+      "sharedHubs": [],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "ISP",
+      "destination": "FLL",
+      "demand": 58.4,
+      "minimumConnections": 1,
+      "counts": [
+        0,
+        5,
+        2
+      ],
+      "bestMinimumConnectionTrip": {
+        "legs": [
+          {
+            "origin": "ISP",
+            "dest": "SYR",
+            "dep": "06:55",
+            "arr": "07:53",
+            "flight": 1892,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "SYR",
+            "dest": "FLL",
+            "dep": "08:35",
+            "arr": "11:29",
+            "flight": 1133,
+            "fleet": "CRJ900"
+          }
+        ],
+        "waits": [
+          42
+        ],
+        "stops": 1,
+        "dest": "FLL",
+        "departureMinute": 415,
+        "totalMinutes": 274,
+        "circuity": 1.2986912360639864
+      },
+      "fastestTrip": {
+        "legs": [
+          {
+            "origin": "ISP",
+            "dest": "SYR",
+            "dep": "06:55",
+            "arr": "07:53",
+            "flight": 1892,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "SYR",
+            "dest": "FLL",
+            "dep": "08:35",
+            "arr": "11:29",
+            "flight": 1133,
+            "fleet": "CRJ900"
+          }
+        ],
+        "waits": [
+          42
+        ],
+        "stops": 1,
+        "dest": "FLL",
+        "departureMinute": 415,
+        "totalMinutes": 274,
+        "circuity": 1.2986912360639864
+      },
+      "geographicMinimumConnections": 1,
+      "geographicCounts": [
+        0,
+        5,
+        2
+      ],
+      "sharedHubs": [
+        "SYR"
+      ],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "FLL",
+      "destination": "ISP",
+      "demand": 57.5,
+      "minimumConnections": 1,
+      "counts": [
+        0,
+        5,
+        3
+      ],
+      "bestMinimumConnectionTrip": {
+        "legs": [
+          {
+            "origin": "FLL",
+            "dest": "SYR",
+            "dep": "05:00",
+            "arr": "07:54",
+            "flight": 1127,
+            "fleet": "CRJ900"
+          },
+          {
+            "origin": "SYR",
+            "dest": "ISP",
+            "dep": "08:35",
+            "arr": "09:33",
+            "flight": 1889,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          41
+        ],
+        "stops": 1,
+        "dest": "ISP",
+        "departureMinute": 300,
+        "totalMinutes": 273,
+        "circuity": 1.2986912360639864
+      },
+      "fastestTrip": {
+        "legs": [
+          {
+            "origin": "FLL",
+            "dest": "SYR",
+            "dep": "05:00",
+            "arr": "07:54",
+            "flight": 1127,
+            "fleet": "CRJ900"
+          },
+          {
+            "origin": "SYR",
+            "dest": "ISP",
+            "dep": "08:35",
+            "arr": "09:33",
+            "flight": 1889,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          41
+        ],
+        "stops": 1,
+        "dest": "ISP",
+        "departureMinute": 300,
+        "totalMinutes": 273,
+        "circuity": 1.2986912360639864
+      },
+      "geographicMinimumConnections": 1,
+      "geographicCounts": [
+        0,
+        5,
+        3
+      ],
+      "sharedHubs": [
+        "SYR"
+      ],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "ISP",
+      "destination": "GNV",
+      "demand": 0,
+      "minimumConnections": 2,
+      "counts": [
+        0,
+        0,
+        3
+      ],
+      "bestMinimumConnectionTrip": {
+        "legs": [
+          {
+            "origin": "ISP",
+            "dest": "SYR",
+            "dep": "12:25",
+            "arr": "13:23",
+            "flight": 1893,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "SYR",
+            "dest": "JAX",
+            "dep": "14:10",
+            "arr": "16:38",
+            "flight": 1407,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "JAX",
+            "dest": "GNV",
+            "dep": "19:25",
+            "arr": "20:02",
+            "flight": 1738,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          47,
+          167
+        ],
+        "stops": 2,
+        "dest": "GNV",
+        "departureMinute": 745,
+        "totalMinutes": 457,
+        "circuity": 1.311435651236439
+      },
+      "fastestTrip": {
+        "legs": [
+          {
+            "origin": "ISP",
+            "dest": "SYR",
+            "dep": "12:25",
+            "arr": "13:23",
+            "flight": 1893,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "SYR",
+            "dest": "JAX",
+            "dep": "14:10",
+            "arr": "16:38",
+            "flight": 1407,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "JAX",
+            "dest": "GNV",
+            "dep": "19:25",
+            "arr": "20:02",
+            "flight": 1738,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          47,
+          167
+        ],
+        "stops": 2,
+        "dest": "GNV",
+        "departureMinute": 745,
+        "totalMinutes": 457,
+        "circuity": 1.311435651236439
+      },
+      "geographicMinimumConnections": 2,
+      "geographicCounts": [
+        0,
+        0,
+        3
+      ],
+      "sharedHubs": [],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "GNV",
+      "destination": "ISP",
+      "demand": 0,
+      "minimumConnections": 2,
+      "counts": [
+        0,
+        0,
+        3
+      ],
+      "bestMinimumConnectionTrip": {
+        "legs": [
+          {
+            "origin": "GNV",
+            "dest": "JAX",
+            "dep": "05:47",
+            "arr": "06:24",
+            "flight": 1739,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "JAX",
+            "dest": "SYR",
+            "dep": "08:10",
+            "arr": "10:38",
+            "flight": 1408,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "SYR",
+            "dest": "ISP",
+            "dep": "11:25",
+            "arr": "12:23",
+            "flight": 1890,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          106,
+          47
+        ],
+        "stops": 2,
+        "dest": "ISP",
+        "departureMinute": 347,
+        "totalMinutes": 396,
+        "circuity": 1.3114356512364391
+      },
+      "fastestTrip": {
+        "legs": [
+          {
+            "origin": "GNV",
+            "dest": "JAX",
+            "dep": "05:47",
+            "arr": "06:24",
+            "flight": 1739,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "JAX",
+            "dest": "SYR",
+            "dep": "08:10",
+            "arr": "10:38",
+            "flight": 1408,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "SYR",
+            "dest": "ISP",
+            "dep": "11:25",
+            "arr": "12:23",
+            "flight": 1890,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          106,
+          47
+        ],
+        "stops": 2,
+        "dest": "ISP",
+        "departureMinute": 347,
+        "totalMinutes": 396,
+        "circuity": 1.3114356512364391
+      },
+      "geographicMinimumConnections": 2,
+      "geographicCounts": [
+        0,
+        0,
+        3
+      ],
+      "sharedHubs": [],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "ISP",
+      "destination": "MLB",
+      "demand": 0,
+      "minimumConnections": 2,
+      "counts": [
+        0,
+        0,
+        2
+      ],
+      "bestMinimumConnectionTrip": {
+        "legs": [
+          {
+            "origin": "ISP",
+            "dest": "SYR",
+            "dep": "12:25",
+            "arr": "13:23",
+            "flight": 1893,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "SYR",
+            "dest": "PHF",
+            "dep": "14:10",
+            "arr": "15:35",
+            "flight": 1511,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "PHF",
+            "dest": "MLB",
+            "dep": "17:15",
+            "arr": "19:10",
+            "flight": 1937,
+            "fleet": "CRJ700"
+          }
+        ],
+        "waits": [
+          47,
+          100
+        ],
+        "stops": 2,
+        "dest": "MLB",
+        "departureMinute": 745,
+        "totalMinutes": 405,
+        "circuity": 1.3372225076930369
+      },
+      "fastestTrip": {
+        "legs": [
+          {
+            "origin": "ISP",
+            "dest": "SYR",
+            "dep": "12:25",
+            "arr": "13:23",
+            "flight": 1893,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "SYR",
+            "dest": "PHF",
+            "dep": "14:10",
+            "arr": "15:35",
+            "flight": 1511,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "PHF",
+            "dest": "MLB",
+            "dep": "17:15",
+            "arr": "19:10",
+            "flight": 1937,
+            "fleet": "CRJ700"
+          }
+        ],
+        "waits": [
+          47,
+          100
+        ],
+        "stops": 2,
+        "dest": "MLB",
+        "departureMinute": 745,
+        "totalMinutes": 405,
+        "circuity": 1.3372225076930369
+      },
+      "geographicMinimumConnections": 2,
+      "geographicCounts": [
+        0,
+        0,
+        2
+      ],
+      "sharedHubs": [],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "MLB",
+      "destination": "ISP",
+      "demand": 0,
+      "minimumConnections": 2,
+      "counts": [
+        0,
+        0,
+        1
+      ],
+      "bestMinimumConnectionTrip": {
+        "legs": [
+          {
+            "origin": "MLB",
+            "dest": "JAX",
+            "dep": "04:55",
+            "arr": "05:47",
+            "flight": 1847,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "JAX",
+            "dest": "SYR",
+            "dep": "08:10",
+            "arr": "10:38",
+            "flight": 1408,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "SYR",
+            "dest": "ISP",
+            "dep": "11:25",
+            "arr": "12:23",
+            "flight": 1890,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          143,
+          47
+        ],
+        "stops": 2,
+        "dest": "ISP",
+        "departureMinute": 295,
+        "totalMinutes": 448,
+        "circuity": 1.3562544683526552
+      },
+      "fastestTrip": {
+        "legs": [
+          {
+            "origin": "MLB",
+            "dest": "JAX",
+            "dep": "04:55",
+            "arr": "05:47",
+            "flight": 1847,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "JAX",
+            "dest": "SYR",
+            "dep": "08:10",
+            "arr": "10:38",
+            "flight": 1408,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "SYR",
+            "dest": "ISP",
+            "dep": "11:25",
+            "arr": "12:23",
+            "flight": 1890,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          143,
+          47
+        ],
+        "stops": 2,
+        "dest": "ISP",
+        "departureMinute": 295,
+        "totalMinutes": 448,
+        "circuity": 1.3562544683526552
+      },
+      "geographicMinimumConnections": 2,
+      "geographicCounts": [
+        0,
+        0,
+        1
+      ],
+      "sharedHubs": [],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "ISP",
+      "destination": "PGD",
+      "demand": 35.8,
+      "minimumConnections": 2,
+      "counts": [
+        0,
+        0,
+        1
+      ],
+      "bestMinimumConnectionTrip": {
+        "legs": [
+          {
+            "origin": "ISP",
+            "dest": "SYR",
+            "dep": "06:55",
+            "arr": "07:53",
+            "flight": 1892,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "SYR",
+            "dest": "MCI",
+            "dep": "08:40",
+            "arr": "10:17",
+            "flight": 1440,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "MCI",
+            "dest": "PGD",
+            "dep": "13:55",
+            "arr": "17:40",
+            "flight": 1196,
+            "fleet": "CRJ900"
+          }
+        ],
+        "waits": [
+          47,
+          218
+        ],
+        "stops": 2,
+        "dest": "PGD",
+        "departureMinute": 415,
+        "totalMinutes": 645,
+        "circuity": 2.165418378844762
+      },
+      "fastestTrip": {
+        "legs": [
+          {
+            "origin": "ISP",
+            "dest": "SYR",
+            "dep": "06:55",
+            "arr": "07:53",
+            "flight": 1892,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "SYR",
+            "dest": "MCI",
+            "dep": "08:40",
+            "arr": "10:17",
+            "flight": 1440,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "MCI",
+            "dest": "PGD",
+            "dep": "13:55",
+            "arr": "17:40",
+            "flight": 1196,
+            "fleet": "CRJ900"
+          }
+        ],
+        "waits": [
+          47,
+          218
+        ],
+        "stops": 2,
+        "dest": "PGD",
+        "departureMinute": 415,
+        "totalMinutes": 645,
+        "circuity": 2.165418378844762
+      },
+      "geographicMinimumConnections": 2,
+      "geographicCounts": [
+        0,
+        0,
+        1
+      ],
+      "sharedHubs": [],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "PGD",
+      "destination": "ISP",
+      "demand": 36.1,
+      "minimumConnections": 2,
+      "counts": [
+        0,
+        0,
+        3
+      ],
+      "bestMinimumConnectionTrip": {
+        "legs": [
+          {
+            "origin": "PGD",
+            "dest": "JAX",
+            "dep": "05:55",
+            "arr": "06:57",
+            "flight": 2139,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "JAX",
+            "dest": "SYR",
+            "dep": "08:10",
+            "arr": "10:38",
+            "flight": 1408,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "SYR",
+            "dest": "ISP",
+            "dep": "11:25",
+            "arr": "12:23",
+            "flight": 1890,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          73,
+          47
+        ],
+        "stops": 2,
+        "dest": "ISP",
+        "departureMinute": 355,
+        "totalMinutes": 388,
+        "circuity": 1.2855093539841211
+      },
+      "fastestTrip": {
+        "legs": [
+          {
+            "origin": "PGD",
+            "dest": "JAX",
+            "dep": "05:55",
+            "arr": "06:57",
+            "flight": 2139,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "JAX",
+            "dest": "SYR",
+            "dep": "08:10",
+            "arr": "10:38",
+            "flight": 1408,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "SYR",
+            "dest": "ISP",
+            "dep": "11:25",
+            "arr": "12:23",
+            "flight": 1890,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          73,
+          47
+        ],
+        "stops": 2,
+        "dest": "ISP",
+        "departureMinute": 355,
+        "totalMinutes": 388,
+        "circuity": 1.2855093539841211
+      },
+      "geographicMinimumConnections": 2,
+      "geographicCounts": [
+        0,
+        0,
+        3
+      ],
+      "sharedHubs": [],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "ISP",
+      "destination": "PIE",
+      "demand": 65.3,
+      "minimumConnections": 1,
+      "counts": [
+        0,
+        5,
+        5
+      ],
+      "bestMinimumConnectionTrip": {
+        "legs": [
+          {
+            "origin": "ISP",
+            "dest": "SYR",
+            "dep": "06:55",
+            "arr": "07:53",
+            "flight": 1892,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "SYR",
+            "dest": "PIE",
+            "dep": "08:35",
+            "arr": "11:19",
+            "flight": 1224,
+            "fleet": "CRJ900"
+          }
+        ],
+        "waits": [
+          42
+        ],
+        "stops": 1,
+        "dest": "PIE",
+        "departureMinute": 415,
+        "totalMinutes": 264,
+        "circuity": 1.2795772781984789
+      },
+      "fastestTrip": {
+        "legs": [
+          {
+            "origin": "ISP",
+            "dest": "SYR",
+            "dep": "06:55",
+            "arr": "07:53",
+            "flight": 1892,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "SYR",
+            "dest": "PIE",
+            "dep": "08:35",
+            "arr": "11:19",
+            "flight": 1224,
+            "fleet": "CRJ900"
+          }
+        ],
+        "waits": [
+          42
+        ],
+        "stops": 1,
+        "dest": "PIE",
+        "departureMinute": 415,
+        "totalMinutes": 264,
+        "circuity": 1.2795772781984789
+      },
+      "geographicMinimumConnections": 1,
+      "geographicCounts": [
+        0,
+        5,
+        5
+      ],
+      "sharedHubs": [
+        "SYR"
+      ],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "PIE",
+      "destination": "ISP",
+      "demand": 64.9,
+      "minimumConnections": 1,
+      "counts": [
+        0,
+        5,
+        2
+      ],
+      "bestMinimumConnectionTrip": {
+        "legs": [
+          {
+            "origin": "PIE",
+            "dest": "SYR",
+            "dep": "08:04",
+            "arr": "10:48",
+            "flight": 1229,
+            "fleet": "CRJ900"
+          },
+          {
+            "origin": "SYR",
+            "dest": "ISP",
+            "dep": "11:25",
+            "arr": "12:23",
+            "flight": 1890,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          37
+        ],
+        "stops": 1,
+        "dest": "ISP",
+        "departureMinute": 484,
+        "totalMinutes": 259,
+        "circuity": 1.2795772781984789
+      },
+      "fastestTrip": {
+        "legs": [
+          {
+            "origin": "PIE",
+            "dest": "SYR",
+            "dep": "08:04",
+            "arr": "10:48",
+            "flight": 1229,
+            "fleet": "CRJ900"
+          },
+          {
+            "origin": "SYR",
+            "dest": "ISP",
+            "dep": "11:25",
+            "arr": "12:23",
+            "flight": 1890,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          37
+        ],
+        "stops": 1,
+        "dest": "ISP",
+        "departureMinute": 484,
+        "totalMinutes": 259,
+        "circuity": 1.2795772781984789
+      },
+      "geographicMinimumConnections": 1,
+      "geographicCounts": [
+        0,
+        5,
+        2
+      ],
+      "sharedHubs": [
+        "SYR"
+      ],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "ISP",
+      "destination": "SFB",
+      "demand": 166.7,
+      "minimumConnections": 1,
+      "counts": [
+        0,
+        5,
+        2
+      ],
+      "bestMinimumConnectionTrip": {
+        "legs": [
+          {
+            "origin": "ISP",
+            "dest": "SYR",
+            "dep": "06:55",
+            "arr": "07:53",
+            "flight": 1892,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "SYR",
+            "dest": "SFB",
+            "dep": "08:35",
+            "arr": "11:05",
+            "flight": 1053,
+            "fleet": "MAX9"
+          }
+        ],
+        "waits": [
+          42
+        ],
+        "stops": 1,
+        "dest": "SFB",
+        "departureMinute": 415,
+        "totalMinutes": 250,
+        "circuity": 1.3201766027972197
+      },
+      "fastestTrip": {
+        "legs": [
+          {
+            "origin": "ISP",
+            "dest": "SYR",
+            "dep": "06:55",
+            "arr": "07:53",
+            "flight": 1892,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "SYR",
+            "dest": "SFB",
+            "dep": "08:35",
+            "arr": "11:05",
+            "flight": 1053,
+            "fleet": "MAX9"
+          }
+        ],
+        "waits": [
+          42
+        ],
+        "stops": 1,
+        "dest": "SFB",
+        "departureMinute": 415,
+        "totalMinutes": 250,
+        "circuity": 1.3201766027972197
+      },
+      "geographicMinimumConnections": 1,
+      "geographicCounts": [
+        0,
+        5,
+        2
+      ],
+      "sharedHubs": [
+        "SYR"
+      ],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "SFB",
+      "destination": "ISP",
+      "demand": 165,
+      "minimumConnections": 1,
+      "counts": [
+        0,
+        4,
+        5
+      ],
+      "bestMinimumConnectionTrip": {
+        "legs": [
+          {
+            "origin": "SFB",
+            "dest": "SYR",
+            "dep": "05:25",
+            "arr": "07:55",
+            "flight": 1049,
+            "fleet": "MAX9"
+          },
+          {
+            "origin": "SYR",
+            "dest": "ISP",
+            "dep": "08:35",
+            "arr": "09:33",
+            "flight": 1889,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          40
+        ],
+        "stops": 1,
+        "dest": "ISP",
+        "departureMinute": 325,
+        "totalMinutes": 248,
+        "circuity": 1.3201766027972197
+      },
+      "fastestTrip": {
+        "legs": [
+          {
+            "origin": "SFB",
+            "dest": "SYR",
+            "dep": "05:25",
+            "arr": "07:55",
+            "flight": 1049,
+            "fleet": "MAX9"
+          },
+          {
+            "origin": "SYR",
+            "dest": "ISP",
+            "dep": "08:35",
+            "arr": "09:33",
+            "flight": 1889,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          40
+        ],
+        "stops": 1,
+        "dest": "ISP",
+        "departureMinute": 325,
+        "totalMinutes": 248,
+        "circuity": 1.3201766027972197
+      },
+      "geographicMinimumConnections": 1,
+      "geographicCounts": [
+        0,
+        4,
+        5
+      ],
+      "sharedHubs": [
+        "SYR"
+      ],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "ISP",
+      "destination": "SRQ",
+      "demand": 13.5,
+      "minimumConnections": 1,
+      "counts": [
+        0,
+        4,
+        1
+      ],
+      "bestMinimumConnectionTrip": {
+        "legs": [
+          {
+            "origin": "ISP",
+            "dest": "SYR",
+            "dep": "06:55",
+            "arr": "07:53",
+            "flight": 1892,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "SYR",
+            "dest": "SRQ",
+            "dep": "08:35",
+            "arr": "11:31",
+            "flight": 1296,
+            "fleet": "CRJ700"
+          }
+        ],
+        "waits": [
+          42
+        ],
+        "stops": 1,
+        "dest": "SRQ",
+        "departureMinute": 415,
+        "totalMinutes": 276,
+        "circuity": 1.2762874033527392
+      },
+      "fastestTrip": {
+        "legs": [
+          {
+            "origin": "ISP",
+            "dest": "SYR",
+            "dep": "06:55",
+            "arr": "07:53",
+            "flight": 1892,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "SYR",
+            "dest": "SRQ",
+            "dep": "08:35",
+            "arr": "11:31",
+            "flight": 1296,
+            "fleet": "CRJ700"
+          }
+        ],
+        "waits": [
+          42
+        ],
+        "stops": 1,
+        "dest": "SRQ",
+        "departureMinute": 415,
+        "totalMinutes": 276,
+        "circuity": 1.2762874033527392
+      },
+      "geographicMinimumConnections": 1,
+      "geographicCounts": [
+        0,
+        4,
+        1
+      ],
+      "sharedHubs": [
+        "SYR"
+      ],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "SRQ",
+      "destination": "ISP",
+      "demand": 12.7,
+      "minimumConnections": 1,
+      "counts": [
+        0,
+        5,
+        0
+      ],
+      "bestMinimumConnectionTrip": {
+        "legs": [
+          {
+            "origin": "SRQ",
+            "dest": "SYR",
+            "dep": "04:55",
+            "arr": "07:51",
+            "flight": 1300,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "SYR",
+            "dest": "ISP",
+            "dep": "08:35",
+            "arr": "09:33",
+            "flight": 1889,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          44
+        ],
+        "stops": 1,
+        "dest": "ISP",
+        "departureMinute": 295,
+        "totalMinutes": 278,
+        "circuity": 1.2762874033527392
+      },
+      "fastestTrip": {
+        "legs": [
+          {
+            "origin": "SRQ",
+            "dest": "SYR",
+            "dep": "04:55",
+            "arr": "07:51",
+            "flight": 1300,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "SYR",
+            "dest": "ISP",
+            "dep": "08:35",
+            "arr": "09:33",
+            "flight": 1889,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          44
+        ],
+        "stops": 1,
+        "dest": "ISP",
+        "departureMinute": 295,
+        "totalMinutes": 278,
+        "circuity": 1.2762874033527392
+      },
+      "geographicMinimumConnections": 1,
+      "geographicCounts": [
+        0,
+        5,
+        0
+      ],
+      "sharedHubs": [
+        "SYR"
+      ],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "BTV",
+      "destination": "DAB",
+      "demand": 0.9,
+      "minimumConnections": null,
+      "counts": [
+        0,
+        0,
+        0
+      ],
+      "bestMinimumConnectionTrip": null,
+      "fastestTrip": null,
+      "geographicMinimumConnections": null,
+      "geographicCounts": [
+        0,
+        0,
+        0
+      ],
+      "sharedHubs": [],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "DAB",
+      "destination": "BTV",
+      "demand": 0.9,
+      "minimumConnections": 2,
+      "counts": [
+        0,
+        0,
+        2
+      ],
+      "bestMinimumConnectionTrip": {
+        "legs": [
+          {
+            "origin": "DAB",
+            "dest": "JAX",
+            "dep": "05:05",
+            "arr": "05:46",
+            "flight": 1768,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "JAX",
+            "dest": "SYR",
+            "dep": "08:10",
+            "arr": "10:38",
+            "flight": 1408,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "SYR",
+            "dest": "BTV",
+            "dep": "11:20",
+            "arr": "12:12",
+            "flight": 1825,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          144,
+          42
+        ],
+        "stops": 2,
+        "dest": "BTV",
+        "departureMinute": 305,
+        "totalMinutes": 427,
+        "circuity": 1.0483656914564405
+      },
+      "fastestTrip": {
+        "legs": [
+          {
+            "origin": "DAB",
+            "dest": "JAX",
+            "dep": "05:05",
+            "arr": "05:46",
+            "flight": 1768,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "JAX",
+            "dest": "SYR",
+            "dep": "08:10",
+            "arr": "10:38",
+            "flight": 1408,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "SYR",
+            "dest": "BTV",
+            "dep": "11:20",
+            "arr": "12:12",
+            "flight": 1825,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          144,
+          42
+        ],
+        "stops": 2,
+        "dest": "BTV",
+        "departureMinute": 305,
+        "totalMinutes": 427,
+        "circuity": 1.0483656914564405
+      },
+      "geographicMinimumConnections": 2,
+      "geographicCounts": [
+        0,
+        0,
+        2
+      ],
+      "sharedHubs": [],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "BTV",
+      "destination": "EYW",
+      "demand": 1.6,
+      "minimumConnections": null,
+      "counts": [
+        0,
+        0,
+        0
+      ],
+      "bestMinimumConnectionTrip": null,
+      "fastestTrip": null,
+      "geographicMinimumConnections": null,
+      "geographicCounts": [
+        0,
+        0,
+        0
+      ],
+      "sharedHubs": [],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "EYW",
+      "destination": "BTV",
+      "demand": 1.6,
+      "minimumConnections": 2,
+      "counts": [
+        0,
+        0,
+        2
+      ],
+      "bestMinimumConnectionTrip": {
+        "legs": [
+          {
+            "origin": "EYW",
+            "dest": "JAX",
+            "dep": "05:25",
+            "arr": "06:49",
+            "flight": 1555,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "JAX",
+            "dest": "SYR",
+            "dep": "08:10",
+            "arr": "10:38",
+            "flight": 1408,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "SYR",
+            "dest": "BTV",
+            "dep": "11:20",
+            "arr": "12:12",
+            "flight": 1825,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          81,
+          42
+        ],
+        "stops": 2,
+        "dest": "BTV",
+        "departureMinute": 325,
+        "totalMinutes": 407,
+        "circuity": 1.0347216107492034
+      },
+      "fastestTrip": {
+        "legs": [
+          {
+            "origin": "EYW",
+            "dest": "JAX",
+            "dep": "05:25",
+            "arr": "06:49",
+            "flight": 1555,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "JAX",
+            "dest": "SYR",
+            "dep": "08:10",
+            "arr": "10:38",
+            "flight": 1408,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "SYR",
+            "dest": "BTV",
+            "dep": "11:20",
+            "arr": "12:12",
+            "flight": 1825,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          81,
+          42
+        ],
+        "stops": 2,
+        "dest": "BTV",
+        "departureMinute": 325,
+        "totalMinutes": 407,
+        "circuity": 1.0347216107492034
+      },
+      "geographicMinimumConnections": 2,
+      "geographicCounts": [
+        0,
+        0,
+        2
+      ],
+      "sharedHubs": [],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "BTV",
+      "destination": "FLL",
+      "demand": 7.6,
+      "minimumConnections": 1,
+      "counts": [
+        0,
+        6,
+        2
+      ],
+      "bestMinimumConnectionTrip": {
+        "legs": [
+          {
+            "origin": "BTV",
+            "dest": "SYR",
+            "dep": "09:48",
+            "arr": "10:40",
+            "flight": 2190,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "SYR",
+            "dest": "FLL",
+            "dep": "11:20",
+            "arr": "14:14",
+            "flight": 1134,
+            "fleet": "CRJ900"
+          }
+        ],
+        "waits": [
+          40
+        ],
+        "stops": 1,
+        "dest": "FLL",
+        "departureMinute": 588,
+        "totalMinutes": 266,
+        "circuity": 1.0330783659033376
+      },
+      "fastestTrip": {
+        "legs": [
+          {
+            "origin": "BTV",
+            "dest": "SYR",
+            "dep": "09:48",
+            "arr": "10:40",
+            "flight": 2190,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "SYR",
+            "dest": "FLL",
+            "dep": "11:20",
+            "arr": "14:14",
+            "flight": 1134,
+            "fleet": "CRJ900"
+          }
+        ],
+        "waits": [
+          40
+        ],
+        "stops": 1,
+        "dest": "FLL",
+        "departureMinute": 588,
+        "totalMinutes": 266,
+        "circuity": 1.0330783659033376
+      },
+      "geographicMinimumConnections": 1,
+      "geographicCounts": [
+        0,
+        6,
+        2
+      ],
+      "sharedHubs": [
+        "SYR"
+      ],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "FLL",
+      "destination": "BTV",
+      "demand": 7.8,
+      "minimumConnections": 1,
+      "counts": [
+        0,
+        6,
+        5
+      ],
+      "bestMinimumConnectionTrip": {
+        "legs": [
+          {
+            "origin": "FLL",
+            "dest": "SYR",
+            "dep": "07:45",
+            "arr": "10:39",
+            "flight": 1128,
+            "fleet": "CRJ900"
+          },
+          {
+            "origin": "SYR",
+            "dest": "BTV",
+            "dep": "11:20",
+            "arr": "12:12",
+            "flight": 1825,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          41
+        ],
+        "stops": 1,
+        "dest": "BTV",
+        "departureMinute": 465,
+        "totalMinutes": 267,
+        "circuity": 1.0330783659033376
+      },
+      "fastestTrip": {
+        "legs": [
+          {
+            "origin": "FLL",
+            "dest": "SYR",
+            "dep": "07:45",
+            "arr": "10:39",
+            "flight": 1128,
+            "fleet": "CRJ900"
+          },
+          {
+            "origin": "SYR",
+            "dest": "BTV",
+            "dep": "11:20",
+            "arr": "12:12",
+            "flight": 1825,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          41
+        ],
+        "stops": 1,
+        "dest": "BTV",
+        "departureMinute": 465,
+        "totalMinutes": 267,
+        "circuity": 1.0330783659033376
+      },
+      "geographicMinimumConnections": 1,
+      "geographicCounts": [
+        0,
+        6,
+        5
+      ],
+      "sharedHubs": [
+        "SYR"
+      ],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "BTV",
+      "destination": "GNV",
+      "demand": 0.6,
+      "minimumConnections": 2,
+      "counts": [
+        0,
+        0,
+        2
+      ],
+      "bestMinimumConnectionTrip": {
+        "legs": [
+          {
+            "origin": "BTV",
+            "dest": "SYR",
+            "dep": "15:15",
+            "arr": "16:07",
+            "flight": 1829,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "SYR",
+            "dest": "PHF",
+            "dep": "16:50",
+            "arr": "18:15",
+            "flight": 1512,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "PHF",
+            "dest": "GNV",
+            "dep": "21:45",
+            "arr": "23:30",
+            "flight": 2165,
+            "fleet": "CRJ900"
+          }
+        ],
+        "waits": [
+          43,
+          210
+        ],
+        "stops": 2,
+        "dest": "GNV",
+        "departureMinute": 915,
+        "totalMinutes": 495,
+        "circuity": 1.0565213328162355
+      },
+      "fastestTrip": {
+        "legs": [
+          {
+            "origin": "BTV",
+            "dest": "SYR",
+            "dep": "15:15",
+            "arr": "16:07",
+            "flight": 1829,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "SYR",
+            "dest": "PHF",
+            "dep": "16:50",
+            "arr": "18:15",
+            "flight": 1512,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "PHF",
+            "dest": "GNV",
+            "dep": "21:45",
+            "arr": "23:30",
+            "flight": 2165,
+            "fleet": "CRJ900"
+          }
+        ],
+        "waits": [
+          43,
+          210
+        ],
+        "stops": 2,
+        "dest": "GNV",
+        "departureMinute": 915,
+        "totalMinutes": 495,
+        "circuity": 1.0565213328162355
+      },
+      "geographicMinimumConnections": 2,
+      "geographicCounts": [
+        0,
+        0,
+        2
+      ],
+      "sharedHubs": [],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "GNV",
+      "destination": "BTV",
+      "demand": 0.6,
+      "minimumConnections": 2,
+      "counts": [
+        0,
+        0,
+        5
+      ],
+      "bestMinimumConnectionTrip": {
+        "legs": [
+          {
+            "origin": "GNV",
+            "dest": "JAX",
+            "dep": "05:47",
+            "arr": "06:24",
+            "flight": 1739,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "JAX",
+            "dest": "SYR",
+            "dep": "08:10",
+            "arr": "10:38",
+            "flight": 1408,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "SYR",
+            "dest": "BTV",
+            "dep": "11:20",
+            "arr": "12:12",
+            "flight": 1825,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          106,
+          42
+        ],
+        "stops": 2,
+        "dest": "BTV",
+        "departureMinute": 347,
+        "totalMinutes": 385,
+        "circuity": 1.0246701370226925
+      },
+      "fastestTrip": {
+        "legs": [
+          {
+            "origin": "GNV",
+            "dest": "JAX",
+            "dep": "05:47",
+            "arr": "06:24",
+            "flight": 1739,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "JAX",
+            "dest": "SYR",
+            "dep": "08:10",
+            "arr": "10:38",
+            "flight": 1408,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "SYR",
+            "dest": "BTV",
+            "dep": "11:20",
+            "arr": "12:12",
+            "flight": 1825,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          106,
+          42
+        ],
+        "stops": 2,
+        "dest": "BTV",
+        "departureMinute": 347,
+        "totalMinutes": 385,
+        "circuity": 1.0246701370226925
+      },
+      "geographicMinimumConnections": 2,
+      "geographicCounts": [
+        0,
+        0,
+        5
+      ],
+      "sharedHubs": [],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "BTV",
+      "destination": "MLB",
+      "demand": 0.5,
+      "minimumConnections": 2,
+      "counts": [
+        0,
+        0,
+        3
+      ],
+      "bestMinimumConnectionTrip": {
+        "legs": [
+          {
+            "origin": "BTV",
+            "dest": "SYR",
+            "dep": "09:48",
+            "arr": "10:40",
+            "flight": 2190,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "SYR",
+            "dest": "PHF",
+            "dep": "14:10",
+            "arr": "15:35",
+            "flight": 1511,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "PHF",
+            "dest": "MLB",
+            "dep": "17:15",
+            "arr": "19:10",
+            "flight": 1937,
+            "fleet": "CRJ700"
+          }
+        ],
+        "waits": [
+          210,
+          100
+        ],
+        "stops": 2,
+        "dest": "MLB",
+        "departureMinute": 588,
+        "totalMinutes": 562,
+        "circuity": 1.043991979073997
+      },
+      "fastestTrip": {
+        "legs": [
+          {
+            "origin": "BTV",
+            "dest": "SYR",
+            "dep": "09:48",
+            "arr": "10:40",
+            "flight": 2190,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "SYR",
+            "dest": "PHF",
+            "dep": "14:10",
+            "arr": "15:35",
+            "flight": 1511,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "PHF",
+            "dest": "MLB",
+            "dep": "17:15",
+            "arr": "19:10",
+            "flight": 1937,
+            "fleet": "CRJ700"
+          }
+        ],
+        "waits": [
+          210,
+          100
+        ],
+        "stops": 2,
+        "dest": "MLB",
+        "departureMinute": 588,
+        "totalMinutes": 562,
+        "circuity": 1.043991979073997
+      },
+      "geographicMinimumConnections": 2,
+      "geographicCounts": [
+        0,
+        0,
+        3
+      ],
+      "sharedHubs": [],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "MLB",
+      "destination": "BTV",
+      "demand": 0.6,
+      "minimumConnections": 2,
+      "counts": [
+        0,
+        0,
+        2
+      ],
+      "bestMinimumConnectionTrip": {
+        "legs": [
+          {
+            "origin": "MLB",
+            "dest": "JAX",
+            "dep": "04:55",
+            "arr": "05:47",
+            "flight": 1847,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "JAX",
+            "dest": "SYR",
+            "dep": "08:10",
+            "arr": "10:38",
+            "flight": 1408,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "SYR",
+            "dest": "BTV",
+            "dep": "11:20",
+            "arr": "12:12",
+            "flight": 1825,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          143,
+          42
+        ],
+        "stops": 2,
+        "dest": "BTV",
+        "departureMinute": 295,
+        "totalMinutes": 437,
+        "circuity": 1.0594131147274477
+      },
+      "fastestTrip": {
+        "legs": [
+          {
+            "origin": "MLB",
+            "dest": "JAX",
+            "dep": "04:55",
+            "arr": "05:47",
+            "flight": 1847,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "JAX",
+            "dest": "SYR",
+            "dep": "08:10",
+            "arr": "10:38",
+            "flight": 1408,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "SYR",
+            "dest": "BTV",
+            "dep": "11:20",
+            "arr": "12:12",
+            "flight": 1825,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          143,
+          42
+        ],
+        "stops": 2,
+        "dest": "BTV",
+        "departureMinute": 295,
+        "totalMinutes": 437,
+        "circuity": 1.0594131147274477
+      },
+      "geographicMinimumConnections": 2,
+      "geographicCounts": [
+        0,
+        0,
+        2
+      ],
+      "sharedHubs": [],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "BTV",
+      "destination": "PGD",
+      "demand": 11.2,
+      "minimumConnections": 2,
+      "counts": [
+        0,
+        0,
+        1
+      ],
+      "bestMinimumConnectionTrip": {
+        "legs": [
+          {
+            "origin": "BTV",
+            "dest": "SYR",
+            "dep": "07:00",
+            "arr": "07:52",
+            "flight": 1828,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "SYR",
+            "dest": "MCI",
+            "dep": "08:40",
+            "arr": "10:17",
+            "flight": 1440,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "MCI",
+            "dest": "PGD",
+            "dep": "13:55",
+            "arr": "17:40",
+            "flight": 1196,
+            "fleet": "CRJ900"
+          }
+        ],
+        "waits": [
+          48,
+          218
+        ],
+        "stops": 2,
+        "dest": "PGD",
+        "departureMinute": 420,
+        "totalMinutes": 640,
+        "circuity": 1.7587650908216168
+      },
+      "fastestTrip": {
+        "legs": [
+          {
+            "origin": "BTV",
+            "dest": "SYR",
+            "dep": "07:00",
+            "arr": "07:52",
+            "flight": 1828,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "SYR",
+            "dest": "MCI",
+            "dep": "08:40",
+            "arr": "10:17",
+            "flight": 1440,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "MCI",
+            "dest": "PGD",
+            "dep": "13:55",
+            "arr": "17:40",
+            "flight": 1196,
+            "fleet": "CRJ900"
+          }
+        ],
+        "waits": [
+          48,
+          218
+        ],
+        "stops": 2,
+        "dest": "PGD",
+        "departureMinute": 420,
+        "totalMinutes": 640,
+        "circuity": 1.7587650908216168
+      },
+      "geographicMinimumConnections": 2,
+      "geographicCounts": [
+        0,
+        0,
+        1
+      ],
+      "sharedHubs": [],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "PGD",
+      "destination": "BTV",
+      "demand": 11.4,
+      "minimumConnections": 2,
+      "counts": [
+        0,
+        0,
+        4
+      ],
+      "bestMinimumConnectionTrip": {
+        "legs": [
+          {
+            "origin": "PGD",
+            "dest": "JAX",
+            "dep": "05:55",
+            "arr": "06:57",
+            "flight": 2139,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "JAX",
+            "dest": "SYR",
+            "dep": "08:10",
+            "arr": "10:38",
+            "flight": 1408,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "SYR",
+            "dest": "BTV",
+            "dep": "11:20",
+            "arr": "12:12",
+            "flight": 1825,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          73,
+          42
+        ],
+        "stops": 2,
+        "dest": "BTV",
+        "departureMinute": 355,
+        "totalMinutes": 377,
+        "circuity": 1.029315032288409
+      },
+      "fastestTrip": {
+        "legs": [
+          {
+            "origin": "PGD",
+            "dest": "JAX",
+            "dep": "05:55",
+            "arr": "06:57",
+            "flight": 2139,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "JAX",
+            "dest": "SYR",
+            "dep": "08:10",
+            "arr": "10:38",
+            "flight": 1408,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "SYR",
+            "dest": "BTV",
+            "dep": "11:20",
+            "arr": "12:12",
+            "flight": 1825,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          73,
+          42
+        ],
+        "stops": 2,
+        "dest": "BTV",
+        "departureMinute": 355,
+        "totalMinutes": 377,
+        "circuity": 1.029315032288409
+      },
+      "geographicMinimumConnections": 2,
+      "geographicCounts": [
+        0,
+        0,
+        4
+      ],
+      "sharedHubs": [],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "BTV",
+      "destination": "PIE",
+      "demand": 20.6,
+      "minimumConnections": 1,
+      "counts": [
+        0,
+        5,
+        6
+      ],
+      "bestMinimumConnectionTrip": {
+        "legs": [
+          {
+            "origin": "BTV",
+            "dest": "SYR",
+            "dep": "07:00",
+            "arr": "07:52",
+            "flight": 1828,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "SYR",
+            "dest": "PIE",
+            "dep": "08:35",
+            "arr": "11:19",
+            "flight": 1224,
+            "fleet": "CRJ900"
+          }
+        ],
+        "waits": [
+          43
+        ],
+        "stops": 1,
+        "dest": "PIE",
+        "departureMinute": 420,
+        "totalMinutes": 259,
+        "circuity": 1.0220226487734423
+      },
+      "fastestTrip": {
+        "legs": [
+          {
+            "origin": "BTV",
+            "dest": "SYR",
+            "dep": "07:00",
+            "arr": "07:52",
+            "flight": 1828,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "SYR",
+            "dest": "PIE",
+            "dep": "08:35",
+            "arr": "11:19",
+            "flight": 1224,
+            "fleet": "CRJ900"
+          }
+        ],
+        "waits": [
+          43
+        ],
+        "stops": 1,
+        "dest": "PIE",
+        "departureMinute": 420,
+        "totalMinutes": 259,
+        "circuity": 1.0220226487734423
+      },
+      "geographicMinimumConnections": 1,
+      "geographicCounts": [
+        0,
+        5,
+        6
+      ],
+      "sharedHubs": [
+        "SYR"
+      ],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "PIE",
+      "destination": "BTV",
+      "demand": 20.8,
+      "minimumConnections": 1,
+      "counts": [
+        0,
+        5,
+        3
+      ],
+      "bestMinimumConnectionTrip": {
+        "legs": [
+          {
+            "origin": "PIE",
+            "dest": "SYR",
+            "dep": "08:04",
+            "arr": "10:48",
+            "flight": 1229,
+            "fleet": "CRJ900"
+          },
+          {
+            "origin": "SYR",
+            "dest": "BTV",
+            "dep": "11:20",
+            "arr": "12:12",
+            "flight": 1825,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          32
+        ],
+        "stops": 1,
+        "dest": "BTV",
+        "departureMinute": 484,
+        "totalMinutes": 248,
+        "circuity": 1.0220226487734423
+      },
+      "fastestTrip": {
+        "legs": [
+          {
+            "origin": "PIE",
+            "dest": "SYR",
+            "dep": "08:04",
+            "arr": "10:48",
+            "flight": 1229,
+            "fleet": "CRJ900"
+          },
+          {
+            "origin": "SYR",
+            "dest": "BTV",
+            "dep": "11:20",
+            "arr": "12:12",
+            "flight": 1825,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          32
+        ],
+        "stops": 1,
+        "dest": "BTV",
+        "departureMinute": 484,
+        "totalMinutes": 248,
+        "circuity": 1.0220226487734423
+      },
+      "geographicMinimumConnections": 1,
+      "geographicCounts": [
+        0,
+        5,
+        3
+      ],
+      "sharedHubs": [
+        "SYR"
+      ],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "BTV",
+      "destination": "SFB",
+      "demand": 26.3,
+      "minimumConnections": 1,
+      "counts": [
+        0,
+        5,
+        3
+      ],
+      "bestMinimumConnectionTrip": {
+        "legs": [
+          {
+            "origin": "BTV",
+            "dest": "SYR",
+            "dep": "09:48",
+            "arr": "10:40",
+            "flight": 2190,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "SYR",
+            "dest": "SFB",
+            "dep": "11:10",
+            "arr": "13:40",
+            "flight": 1054,
+            "fleet": "MAX9"
+          }
+        ],
+        "waits": [
+          30
+        ],
+        "stops": 1,
+        "dest": "SFB",
+        "departureMinute": 588,
+        "totalMinutes": 232,
+        "circuity": 1.0284936899215815
+      },
+      "fastestTrip": {
+        "legs": [
+          {
+            "origin": "BTV",
+            "dest": "SYR",
+            "dep": "09:48",
+            "arr": "10:40",
+            "flight": 2190,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "SYR",
+            "dest": "SFB",
+            "dep": "11:10",
+            "arr": "13:40",
+            "flight": 1054,
+            "fleet": "MAX9"
+          }
+        ],
+        "waits": [
+          30
+        ],
+        "stops": 1,
+        "dest": "SFB",
+        "departureMinute": 588,
+        "totalMinutes": 232,
+        "circuity": 1.0284936899215815
+      },
+      "geographicMinimumConnections": 1,
+      "geographicCounts": [
+        0,
+        5,
+        3
+      ],
+      "sharedHubs": [
+        "SYR"
+      ],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "SFB",
+      "destination": "BTV",
+      "demand": 25.6,
+      "minimumConnections": 1,
+      "counts": [
+        0,
+        5,
+        8
+      ],
+      "bestMinimumConnectionTrip": {
+        "legs": [
+          {
+            "origin": "SFB",
+            "dest": "SYR",
+            "dep": "10:55",
+            "arr": "13:25",
+            "flight": 1051,
+            "fleet": "MAX9"
+          },
+          {
+            "origin": "SYR",
+            "dest": "BTV",
+            "dep": "14:05",
+            "arr": "14:57",
+            "flight": 1826,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          40
+        ],
+        "stops": 1,
+        "dest": "BTV",
+        "departureMinute": 655,
+        "totalMinutes": 242,
+        "circuity": 1.0284936899215815
+      },
+      "fastestTrip": {
+        "legs": [
+          {
+            "origin": "SFB",
+            "dest": "SYR",
+            "dep": "10:55",
+            "arr": "13:25",
+            "flight": 1051,
+            "fleet": "MAX9"
+          },
+          {
+            "origin": "SYR",
+            "dest": "BTV",
+            "dep": "14:05",
+            "arr": "14:57",
+            "flight": 1826,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          40
+        ],
+        "stops": 1,
+        "dest": "BTV",
+        "departureMinute": 655,
+        "totalMinutes": 242,
+        "circuity": 1.0284936899215815
+      },
+      "geographicMinimumConnections": 1,
+      "geographicCounts": [
+        0,
+        5,
+        8
+      ],
+      "sharedHubs": [
+        "SYR"
+      ],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "BTV",
+      "destination": "SRQ",
+      "demand": 3.1,
+      "minimumConnections": 1,
+      "counts": [
+        0,
+        6,
+        1
+      ],
+      "bestMinimumConnectionTrip": {
+        "legs": [
+          {
+            "origin": "BTV",
+            "dest": "SYR",
+            "dep": "09:48",
+            "arr": "10:40",
+            "flight": 2190,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "SYR",
+            "dest": "SRQ",
+            "dep": "11:20",
+            "arr": "14:16",
+            "flight": 1297,
+            "fleet": "CRJ700"
+          }
+        ],
+        "waits": [
+          40
+        ],
+        "stops": 1,
+        "dest": "SRQ",
+        "departureMinute": 588,
+        "totalMinutes": 268,
+        "circuity": 1.0227321655518387
+      },
+      "fastestTrip": {
+        "legs": [
+          {
+            "origin": "BTV",
+            "dest": "SYR",
+            "dep": "09:48",
+            "arr": "10:40",
+            "flight": 2190,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "SYR",
+            "dest": "SRQ",
+            "dep": "11:20",
+            "arr": "14:16",
+            "flight": 1297,
+            "fleet": "CRJ700"
+          }
+        ],
+        "waits": [
+          40
+        ],
+        "stops": 1,
+        "dest": "SRQ",
+        "departureMinute": 588,
+        "totalMinutes": 268,
+        "circuity": 1.0227321655518387
+      },
+      "geographicMinimumConnections": 1,
+      "geographicCounts": [
+        0,
+        6,
+        1
+      ],
+      "sharedHubs": [
+        "SYR"
+      ],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "SRQ",
+      "destination": "BTV",
+      "demand": 2.9,
+      "minimumConnections": 1,
+      "counts": [
+        0,
+        6,
+        0
+      ],
+      "bestMinimumConnectionTrip": {
+        "legs": [
+          {
+            "origin": "SRQ",
+            "dest": "SYR",
+            "dep": "07:45",
+            "arr": "10:41",
+            "flight": 1301,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "SYR",
+            "dest": "BTV",
+            "dep": "11:20",
+            "arr": "12:12",
+            "flight": 1825,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          39
+        ],
+        "stops": 1,
+        "dest": "BTV",
+        "departureMinute": 465,
+        "totalMinutes": 267,
+        "circuity": 1.0227321655518387
+      },
+      "fastestTrip": {
+        "legs": [
+          {
+            "origin": "SRQ",
+            "dest": "SYR",
+            "dep": "07:45",
+            "arr": "10:41",
+            "flight": 1301,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "SYR",
+            "dest": "BTV",
+            "dep": "11:20",
+            "arr": "12:12",
+            "flight": 1825,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          39
+        ],
+        "stops": 1,
+        "dest": "BTV",
+        "departureMinute": 465,
+        "totalMinutes": 267,
+        "circuity": 1.0227321655518387
+      },
+      "geographicMinimumConnections": 1,
+      "geographicCounts": [
+        0,
+        6,
+        0
+      ],
+      "sharedHubs": [
+        "SYR"
+      ],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "ORH",
+      "destination": "DAB",
+      "demand": 0,
+      "minimumConnections": null,
+      "counts": [
+        0,
+        0,
+        0
+      ],
+      "bestMinimumConnectionTrip": null,
+      "fastestTrip": null,
+      "geographicMinimumConnections": null,
+      "geographicCounts": [
+        0,
+        0,
+        0
+      ],
+      "sharedHubs": [],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "DAB",
+      "destination": "ORH",
+      "demand": 0,
+      "minimumConnections": null,
+      "counts": [
+        0,
+        0,
+        0
+      ],
+      "bestMinimumConnectionTrip": null,
+      "fastestTrip": null,
+      "geographicMinimumConnections": null,
+      "geographicCounts": [
+        0,
+        0,
+        0
+      ],
+      "sharedHubs": [],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "ORH",
+      "destination": "EYW",
+      "demand": 0,
+      "minimumConnections": null,
+      "counts": [
+        0,
+        0,
+        0
+      ],
+      "bestMinimumConnectionTrip": null,
+      "fastestTrip": null,
+      "geographicMinimumConnections": null,
+      "geographicCounts": [
+        0,
+        0,
+        0
+      ],
+      "sharedHubs": [],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "EYW",
+      "destination": "ORH",
+      "demand": 0,
+      "minimumConnections": null,
+      "counts": [
+        0,
+        0,
+        0
+      ],
+      "bestMinimumConnectionTrip": null,
+      "fastestTrip": null,
+      "geographicMinimumConnections": null,
+      "geographicCounts": [
+        0,
+        0,
+        0
+      ],
+      "sharedHubs": [],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "ORH",
+      "destination": "FLL",
+      "demand": 31,
+      "minimumConnections": 1,
+      "counts": [
+        0,
+        5,
+        2
+      ],
+      "bestMinimumConnectionTrip": {
+        "legs": [
+          {
+            "origin": "ORH",
+            "dest": "SYR",
+            "dep": "04:30",
+            "arr": "05:28",
+            "flight": 2048,
+            "fleet": "CRJ900"
+          },
+          {
+            "origin": "SYR",
+            "dest": "FLL",
+            "dep": "06:08",
+            "arr": "09:02",
+            "flight": 1132,
+            "fleet": "CRJ900"
+          }
+        ],
+        "waits": [
+          40
+        ],
+        "stops": 1,
+        "dest": "FLL",
+        "departureMinute": 270,
+        "totalMinutes": 272,
+        "circuity": 1.1717908652521078
+      },
+      "fastestTrip": {
+        "legs": [
+          {
+            "origin": "ORH",
+            "dest": "SYR",
+            "dep": "04:30",
+            "arr": "05:28",
+            "flight": 2048,
+            "fleet": "CRJ900"
+          },
+          {
+            "origin": "SYR",
+            "dest": "FLL",
+            "dep": "06:08",
+            "arr": "09:02",
+            "flight": 1132,
+            "fleet": "CRJ900"
+          }
+        ],
+        "waits": [
+          40
+        ],
+        "stops": 1,
+        "dest": "FLL",
+        "departureMinute": 270,
+        "totalMinutes": 272,
+        "circuity": 1.1717908652521078
+      },
+      "geographicMinimumConnections": 1,
+      "geographicCounts": [
+        0,
+        5,
+        2
+      ],
+      "sharedHubs": [
+        "SYR"
+      ],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "FLL",
+      "destination": "ORH",
+      "demand": 32,
+      "minimumConnections": 1,
+      "counts": [
+        0,
+        4,
+        1
+      ],
+      "bestMinimumConnectionTrip": {
+        "legs": [
+          {
+            "origin": "FLL",
+            "dest": "SYR",
+            "dep": "05:00",
+            "arr": "07:54",
+            "flight": 1127,
+            "fleet": "CRJ900"
+          },
+          {
+            "origin": "SYR",
+            "dest": "ORH",
+            "dep": "08:35",
+            "arr": "09:33",
+            "flight": 1881,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          41
+        ],
+        "stops": 1,
+        "dest": "ORH",
+        "departureMinute": 300,
+        "totalMinutes": 273,
+        "circuity": 1.1717908652521078
+      },
+      "fastestTrip": {
+        "legs": [
+          {
+            "origin": "FLL",
+            "dest": "SYR",
+            "dep": "05:00",
+            "arr": "07:54",
+            "flight": 1127,
+            "fleet": "CRJ900"
+          },
+          {
+            "origin": "SYR",
+            "dest": "ORH",
+            "dep": "08:35",
+            "arr": "09:33",
+            "flight": 1881,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          41
+        ],
+        "stops": 1,
+        "dest": "ORH",
+        "departureMinute": 300,
+        "totalMinutes": 273,
+        "circuity": 1.1717908652521078
+      },
+      "geographicMinimumConnections": 1,
+      "geographicCounts": [
+        0,
+        4,
+        1
+      ],
+      "sharedHubs": [
+        "SYR"
+      ],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "ORH",
+      "destination": "GNV",
+      "demand": 0,
+      "minimumConnections": 2,
+      "counts": [
+        0,
+        0,
+        2
+      ],
+      "bestMinimumConnectionTrip": {
+        "legs": [
+          {
+            "origin": "ORH",
+            "dest": "SYR",
+            "dep": "12:25",
+            "arr": "13:23",
+            "flight": 1884,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "SYR",
+            "dest": "JAX",
+            "dep": "14:10",
+            "arr": "16:38",
+            "flight": 1407,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "JAX",
+            "dest": "GNV",
+            "dep": "19:25",
+            "arr": "20:02",
+            "flight": 1738,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          47,
+          167
+        ],
+        "stops": 2,
+        "dest": "GNV",
+        "departureMinute": 745,
+        "totalMinutes": 457,
+        "circuity": 1.1617713649345818
+      },
+      "fastestTrip": {
+        "legs": [
+          {
+            "origin": "ORH",
+            "dest": "SYR",
+            "dep": "12:25",
+            "arr": "13:23",
+            "flight": 1884,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "SYR",
+            "dest": "JAX",
+            "dep": "14:10",
+            "arr": "16:38",
+            "flight": 1407,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "JAX",
+            "dest": "GNV",
+            "dep": "19:25",
+            "arr": "20:02",
+            "flight": 1738,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          47,
+          167
+        ],
+        "stops": 2,
+        "dest": "GNV",
+        "departureMinute": 745,
+        "totalMinutes": 457,
+        "circuity": 1.1617713649345818
+      },
+      "geographicMinimumConnections": 2,
+      "geographicCounts": [
+        0,
+        0,
+        2
+      ],
+      "sharedHubs": [],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "GNV",
+      "destination": "ORH",
+      "demand": 0,
+      "minimumConnections": null,
+      "counts": [
+        0,
+        0,
+        0
+      ],
+      "bestMinimumConnectionTrip": null,
+      "fastestTrip": null,
+      "geographicMinimumConnections": null,
+      "geographicCounts": [
+        0,
+        0,
+        0
+      ],
+      "sharedHubs": [],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "ORH",
+      "destination": "MLB",
+      "demand": 0,
+      "minimumConnections": 2,
+      "counts": [
+        0,
+        0,
+        2
+      ],
+      "bestMinimumConnectionTrip": {
+        "legs": [
+          {
+            "origin": "ORH",
+            "dest": "SYR",
+            "dep": "12:25",
+            "arr": "13:23",
+            "flight": 1884,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "SYR",
+            "dest": "PHF",
+            "dep": "14:10",
+            "arr": "15:35",
+            "flight": 1511,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "PHF",
+            "dest": "MLB",
+            "dep": "17:15",
+            "arr": "19:10",
+            "flight": 1937,
+            "fleet": "CRJ700"
+          }
+        ],
+        "waits": [
+          47,
+          100
+        ],
+        "stops": 2,
+        "dest": "MLB",
+        "departureMinute": 745,
+        "totalMinutes": 405,
+        "circuity": 1.1914755206297423
+      },
+      "fastestTrip": {
+        "legs": [
+          {
+            "origin": "ORH",
+            "dest": "SYR",
+            "dep": "12:25",
+            "arr": "13:23",
+            "flight": 1884,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "SYR",
+            "dest": "PHF",
+            "dep": "14:10",
+            "arr": "15:35",
+            "flight": 1511,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "PHF",
+            "dest": "MLB",
+            "dep": "17:15",
+            "arr": "19:10",
+            "flight": 1937,
+            "fleet": "CRJ700"
+          }
+        ],
+        "waits": [
+          47,
+          100
+        ],
+        "stops": 2,
+        "dest": "MLB",
+        "departureMinute": 745,
+        "totalMinutes": 405,
+        "circuity": 1.1914755206297423
+      },
+      "geographicMinimumConnections": 2,
+      "geographicCounts": [
+        0,
+        0,
+        2
+      ],
+      "sharedHubs": [],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "MLB",
+      "destination": "ORH",
+      "demand": 0,
+      "minimumConnections": null,
+      "counts": [
+        0,
+        0,
+        0
+      ],
+      "bestMinimumConnectionTrip": null,
+      "fastestTrip": null,
+      "geographicMinimumConnections": null,
+      "geographicCounts": [
+        0,
+        0,
+        0
+      ],
+      "sharedHubs": [],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "ORH",
+      "destination": "PGD",
+      "demand": 10.6,
+      "minimumConnections": 2,
+      "counts": [
+        0,
+        0,
+        3
+      ],
+      "bestMinimumConnectionTrip": {
+        "legs": [
+          {
+            "origin": "ORH",
+            "dest": "SYR",
+            "dep": "04:30",
+            "arr": "05:28",
+            "flight": 2048,
+            "fleet": "CRJ900"
+          },
+          {
+            "origin": "SYR",
+            "dest": "PHF",
+            "dep": "07:02",
+            "arr": "08:25",
+            "flight": 2080,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "PHF",
+            "dest": "PGD",
+            "dep": "09:20",
+            "arr": "11:21",
+            "flight": 2099,
+            "fleet": "MAX9"
+          }
+        ],
+        "waits": [
+          94,
+          55
+        ],
+        "stops": 2,
+        "dest": "PGD",
+        "departureMinute": 270,
+        "totalMinutes": 411,
+        "circuity": 1.1719989763554837
+      },
+      "fastestTrip": {
+        "legs": [
+          {
+            "origin": "ORH",
+            "dest": "SYR",
+            "dep": "04:30",
+            "arr": "05:28",
+            "flight": 2048,
+            "fleet": "CRJ900"
+          },
+          {
+            "origin": "SYR",
+            "dest": "PHF",
+            "dep": "07:02",
+            "arr": "08:25",
+            "flight": 2080,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "PHF",
+            "dest": "PGD",
+            "dep": "09:20",
+            "arr": "11:21",
+            "flight": 2099,
+            "fleet": "MAX9"
+          }
+        ],
+        "waits": [
+          94,
+          55
+        ],
+        "stops": 2,
+        "dest": "PGD",
+        "departureMinute": 270,
+        "totalMinutes": 411,
+        "circuity": 1.1719989763554837
+      },
+      "geographicMinimumConnections": 2,
+      "geographicCounts": [
+        0,
+        0,
+        3
+      ],
+      "sharedHubs": [],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "PGD",
+      "destination": "ORH",
+      "demand": 10.9,
+      "minimumConnections": 2,
+      "counts": [
+        0,
+        0,
+        2
+      ],
+      "bestMinimumConnectionTrip": {
+        "legs": [
+          {
+            "origin": "PGD",
+            "dest": "PHF",
+            "dep": "12:40",
+            "arr": "14:41",
+            "flight": 2100,
+            "fleet": "MAX9"
+          },
+          {
+            "origin": "PHF",
+            "dest": "SYR",
+            "dep": "15:25",
+            "arr": "16:50",
+            "flight": 1952,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "SYR",
+            "dest": "ORH",
+            "dep": "19:35",
+            "arr": "20:33",
+            "flight": 1882,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          44,
+          165
+        ],
+        "stops": 2,
+        "dest": "ORH",
+        "departureMinute": 760,
+        "totalMinutes": 473,
+        "circuity": 1.1719989763554837
+      },
+      "fastestTrip": {
+        "legs": [
+          {
+            "origin": "PGD",
+            "dest": "PHF",
+            "dep": "12:40",
+            "arr": "14:41",
+            "flight": 2100,
+            "fleet": "MAX9"
+          },
+          {
+            "origin": "PHF",
+            "dest": "SYR",
+            "dep": "15:25",
+            "arr": "16:50",
+            "flight": 1952,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "SYR",
+            "dest": "ORH",
+            "dep": "19:35",
+            "arr": "20:33",
+            "flight": 1882,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          44,
+          165
+        ],
+        "stops": 2,
+        "dest": "ORH",
+        "departureMinute": 760,
+        "totalMinutes": 473,
+        "circuity": 1.1719989763554837
+      },
+      "geographicMinimumConnections": 2,
+      "geographicCounts": [
+        0,
+        0,
+        2
+      ],
+      "sharedHubs": [],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "ORH",
+      "destination": "PIE",
+      "demand": 0.4,
+      "minimumConnections": 1,
+      "counts": [
+        0,
+        5,
+        6
+      ],
+      "bestMinimumConnectionTrip": {
+        "legs": [
+          {
+            "origin": "ORH",
+            "dest": "SYR",
+            "dep": "06:55",
+            "arr": "07:53",
+            "flight": 1883,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "SYR",
+            "dest": "PIE",
+            "dep": "08:35",
+            "arr": "11:19",
+            "flight": 1224,
+            "fleet": "CRJ900"
+          }
+        ],
+        "waits": [
+          42
+        ],
+        "stops": 1,
+        "dest": "PIE",
+        "departureMinute": 415,
+        "totalMinutes": 264,
+        "circuity": 1.1482033942713872
+      },
+      "fastestTrip": {
+        "legs": [
+          {
+            "origin": "ORH",
+            "dest": "SYR",
+            "dep": "06:55",
+            "arr": "07:53",
+            "flight": 1883,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "SYR",
+            "dest": "PIE",
+            "dep": "08:35",
+            "arr": "11:19",
+            "flight": 1224,
+            "fleet": "CRJ900"
+          }
+        ],
+        "waits": [
+          42
+        ],
+        "stops": 1,
+        "dest": "PIE",
+        "departureMinute": 415,
+        "totalMinutes": 264,
+        "circuity": 1.1482033942713872
+      },
+      "geographicMinimumConnections": 1,
+      "geographicCounts": [
+        0,
+        5,
+        6
+      ],
+      "sharedHubs": [
+        "SYR"
+      ],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "PIE",
+      "destination": "ORH",
+      "demand": 0.4,
+      "minimumConnections": 1,
+      "counts": [
+        0,
+        5,
+        1
+      ],
+      "bestMinimumConnectionTrip": {
+        "legs": [
+          {
+            "origin": "PIE",
+            "dest": "SYR",
+            "dep": "05:10",
+            "arr": "07:54",
+            "flight": 1228,
+            "fleet": "CRJ900"
+          },
+          {
+            "origin": "SYR",
+            "dest": "ORH",
+            "dep": "08:35",
+            "arr": "09:33",
+            "flight": 1881,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          41
+        ],
+        "stops": 1,
+        "dest": "ORH",
+        "departureMinute": 310,
+        "totalMinutes": 263,
+        "circuity": 1.1482033942713872
+      },
+      "fastestTrip": {
+        "legs": [
+          {
+            "origin": "PIE",
+            "dest": "SYR",
+            "dep": "05:10",
+            "arr": "07:54",
+            "flight": 1228,
+            "fleet": "CRJ900"
+          },
+          {
+            "origin": "SYR",
+            "dest": "ORH",
+            "dep": "08:35",
+            "arr": "09:33",
+            "flight": 1881,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          41
+        ],
+        "stops": 1,
+        "dest": "ORH",
+        "departureMinute": 310,
+        "totalMinutes": 263,
+        "circuity": 1.1482033942713872
+      },
+      "geographicMinimumConnections": 1,
+      "geographicCounts": [
+        0,
+        5,
+        1
+      ],
+      "sharedHubs": [
+        "SYR"
+      ],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "ORH",
+      "destination": "SFB",
+      "demand": 35.4,
+      "minimumConnections": 1,
+      "counts": [
+        0,
+        5,
+        4
+      ],
+      "bestMinimumConnectionTrip": {
+        "legs": [
+          {
+            "origin": "ORH",
+            "dest": "SYR",
+            "dep": "06:55",
+            "arr": "07:53",
+            "flight": 1883,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "SYR",
+            "dest": "SFB",
+            "dep": "08:35",
+            "arr": "11:05",
+            "flight": 1053,
+            "fleet": "MAX9"
+          }
+        ],
+        "waits": [
+          42
+        ],
+        "stops": 1,
+        "dest": "SFB",
+        "departureMinute": 415,
+        "totalMinutes": 250,
+        "circuity": 1.1725117773523672
+      },
+      "fastestTrip": {
+        "legs": [
+          {
+            "origin": "ORH",
+            "dest": "SYR",
+            "dep": "06:55",
+            "arr": "07:53",
+            "flight": 1883,
+            "fleet": "CRJ200"
+          },
+          {
+            "origin": "SYR",
+            "dest": "SFB",
+            "dep": "08:35",
+            "arr": "11:05",
+            "flight": 1053,
+            "fleet": "MAX9"
+          }
+        ],
+        "waits": [
+          42
+        ],
+        "stops": 1,
+        "dest": "SFB",
+        "departureMinute": 415,
+        "totalMinutes": 250,
+        "circuity": 1.1725117773523672
+      },
+      "geographicMinimumConnections": 1,
+      "geographicCounts": [
+        0,
+        5,
+        4
+      ],
+      "sharedHubs": [
+        "SYR"
+      ],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "SFB",
+      "destination": "ORH",
+      "demand": 33.5,
+      "minimumConnections": 1,
+      "counts": [
+        0,
+        2,
+        1
+      ],
+      "bestMinimumConnectionTrip": {
+        "legs": [
+          {
+            "origin": "SFB",
+            "dest": "SYR",
+            "dep": "05:25",
+            "arr": "07:55",
+            "flight": 1049,
+            "fleet": "MAX9"
+          },
+          {
+            "origin": "SYR",
+            "dest": "ORH",
+            "dep": "08:35",
+            "arr": "09:33",
+            "flight": 1881,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          40
+        ],
+        "stops": 1,
+        "dest": "ORH",
+        "departureMinute": 325,
+        "totalMinutes": 248,
+        "circuity": 1.1725117773523672
+      },
+      "fastestTrip": {
+        "legs": [
+          {
+            "origin": "SFB",
+            "dest": "SYR",
+            "dep": "05:25",
+            "arr": "07:55",
+            "flight": 1049,
+            "fleet": "MAX9"
+          },
+          {
+            "origin": "SYR",
+            "dest": "ORH",
+            "dep": "08:35",
+            "arr": "09:33",
+            "flight": 1881,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          40
+        ],
+        "stops": 1,
+        "dest": "ORH",
+        "departureMinute": 325,
+        "totalMinutes": 248,
+        "circuity": 1.1725117773523672
+      },
+      "geographicMinimumConnections": 1,
+      "geographicCounts": [
+        0,
+        2,
+        1
+      ],
+      "sharedHubs": [
+        "SYR"
+      ],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "ORH",
+      "destination": "SRQ",
+      "demand": 0,
+      "minimumConnections": 1,
+      "counts": [
+        0,
+        4,
+        1
+      ],
+      "bestMinimumConnectionTrip": {
+        "legs": [
+          {
+            "origin": "ORH",
+            "dest": "SYR",
+            "dep": "04:30",
+            "arr": "05:28",
+            "flight": 2048,
+            "fleet": "CRJ900"
+          },
+          {
+            "origin": "SYR",
+            "dest": "SRQ",
+            "dep": "06:02",
+            "arr": "08:58",
+            "flight": 1295,
+            "fleet": "CRJ700"
+          }
+        ],
+        "waits": [
+          34
+        ],
+        "stops": 1,
+        "dest": "SRQ",
+        "departureMinute": 270,
+        "totalMinutes": 268,
+        "circuity": 1.1481739112775964
+      },
+      "fastestTrip": {
+        "legs": [
+          {
+            "origin": "ORH",
+            "dest": "SYR",
+            "dep": "04:30",
+            "arr": "05:28",
+            "flight": 2048,
+            "fleet": "CRJ900"
+          },
+          {
+            "origin": "SYR",
+            "dest": "SRQ",
+            "dep": "06:02",
+            "arr": "08:58",
+            "flight": 1295,
+            "fleet": "CRJ700"
+          }
+        ],
+        "waits": [
+          34
+        ],
+        "stops": 1,
+        "dest": "SRQ",
+        "departureMinute": 270,
+        "totalMinutes": 268,
+        "circuity": 1.1481739112775964
+      },
+      "geographicMinimumConnections": 1,
+      "geographicCounts": [
+        0,
+        4,
+        1
+      ],
+      "sharedHubs": [
+        "SYR"
+      ],
+      "closestGeographicNearMiss": null
+    },
+    {
+      "origin": "SRQ",
+      "destination": "ORH",
+      "demand": 0,
+      "minimumConnections": 1,
+      "counts": [
+        0,
+        4,
+        0
+      ],
+      "bestMinimumConnectionTrip": {
+        "legs": [
+          {
+            "origin": "SRQ",
+            "dest": "SYR",
+            "dep": "04:55",
+            "arr": "07:51",
+            "flight": 1300,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "SYR",
+            "dest": "ORH",
+            "dep": "08:35",
+            "arr": "09:33",
+            "flight": 1881,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          44
+        ],
+        "stops": 1,
+        "dest": "ORH",
+        "departureMinute": 295,
+        "totalMinutes": 278,
+        "circuity": 1.1481739112775964
+      },
+      "fastestTrip": {
+        "legs": [
+          {
+            "origin": "SRQ",
+            "dest": "SYR",
+            "dep": "04:55",
+            "arr": "07:51",
+            "flight": 1300,
+            "fleet": "CRJ700"
+          },
+          {
+            "origin": "SYR",
+            "dest": "ORH",
+            "dep": "08:35",
+            "arr": "09:33",
+            "flight": 1881,
+            "fleet": "CRJ200"
+          }
+        ],
+        "waits": [
+          44
+        ],
+        "stops": 1,
+        "dest": "ORH",
+        "departureMinute": 295,
+        "totalMinutes": 278,
+        "circuity": 1.1481739112775964
+      },
+      "geographicMinimumConnections": 1,
+      "geographicCounts": [
+        0,
+        4,
+        0
+      ],
+      "sharedHubs": [
+        "SYR"
+      ],
+      "closestGeographicNearMiss": null
+    }
+  ],
+  "notes": [
+    "Counts use the same flight enumeration, hub/focus roster and 30–240 minute connection window as the app.",
+    "A no-itinerary entry means no path within the app maximum of two connections, not proof no three-or-more-connection chain exists.",
+    "Geographic results retain the separate unchanged 2.25 distance screen.",
+    "Minimum connection count and fastest elapsed itinerary are distinct; a faster two-stop option does not make a market without one-stop coverage when a valid one-stop exists.",
+    "O-D values are pinned directional market sizes, not forecast loads."
+  ]
+}
