@@ -16,11 +16,11 @@ const retime = (flight, shift) => {
 
 test("directional coverage and pair gaps reproduce the independently audited current network", () => {
   assert.equal(baseline.records.size, 10920);
-  assert.equal([...baseline.records.values()].filter((r) => coverageView(r).gap).length, 5210);
+  assert.equal([...baseline.records.values()].filter((r) => coverageView(r).gap).length, 5198);
   const counts = baseline.pairs.map((p) => Number(coverageView(p.forward).gap) + Number(coverageView(p.reverse).gap));
-  assert.equal(counts.filter((n) => n === 2).length, 2176);
-  assert.equal(counts.filter((n) => n === 1).length, 858);
-  assert.equal(coverageView(baseline.records.get("BLV-SFB")).gap, true);
+  assert.equal(counts.filter((n) => n === 2).length, 2174);
+  assert.equal(counts.filter((n) => n === 1).length, 850);
+  assert.equal(coverageView(baseline.records.get("BLV-SFB")).gap, false);
   assert.equal(coverageView(baseline.records.get("SFB-BLV")).stops, 1);
 });
 
@@ -34,10 +34,11 @@ test("demand parser preserves directionality, zero, quoted metadata and missing-
   assert.equal(missing.records.get("CAK-PGD").demand, null);
 });
 
-test("near-misses locate both tiny repairs and choose the aircraft-feasible side of a six-minute repair", () => {
-  const blv = baseline.nearMisses.find((r) => r.market === "BLV-SFB");
-  assert.equal(blv.adjustment, 2); assert.equal(blv.preferred.flight, 1437); assert.equal(blv.preferred.shift, -2);
-  const mke = baseline.nearMisses.find((r) => r.market === "MKE-SFB"); assert.equal(mke.adjustment, 1);
+test("completed repairs disappear from near-misses and remaining repairs retain aircraft screening", () => {
+  for (const market of ["BLV-SFB", "MKE-SFB", "PGD-CAK", "DAL-PNS", "VPS-BWI", "RDU-SGF", "PIT-BHM"]) {
+    assert.equal(baseline.nearMisses.some((r) => r.market === market), false);
+    assert.equal(coverageView(baseline.records.get(market)).stops, 1);
+  }
   const hou = baseline.nearMisses.find((r) => r.market === "BLV-HOU");
   assert.equal(hou.adjustment, 6); assert.equal(hou.preferred.flight, 1357); assert.equal(hou.preferred.shift, 6);
   assert.match(hou.options[0].screen.issues.join(" "), /34 min/);
@@ -45,13 +46,22 @@ test("near-misses locate both tiny repairs and choose the aircraft-feasible side
 
 test("preview finds gains and slower-one-stop distinction without mutating the original schedule", () => {
   const original = JSON.stringify(canonical);
-  const after = buildServiceAnalysis(retime(1437, -2), demand, buildItineraries);
+  const after = buildServiceAnalysis(retime(1357, 6), demand, buildItineraries);
   const impact = compareServiceAnalyses(baseline, after);
   assert.equal(impact.lostPaths, 0); assert.deepEqual(impact.lost, []); assert.deepEqual(impact.slower, []);
-  assert.deepEqual(new Set(impact.gained.map((r) => r.market)), new Set(["BLV-SFB", "GPT-SFB"]));
-  const mke = buildServiceAnalysis(retime(1036, -1), demand, buildItineraries).records.get("MKE-SFB");
+  assert.ok(impact.gained.some((r) => r.market === "BLV-HOU"));
+  const mke = baseline.records.get("MKE-SFB");
   assert.equal(mke.best[1].totalMinutes, 477); assert.equal(mke.best[2].totalMinutes, 310);
   assert.equal(JSON.stringify(canonical), original);
+});
+
+test("R307 DAY service creates useful one-stop coverage and preserves the fast Dallas journey", () => {
+  for (const [market, minutes] of [["PIT-BHM",306],["MCI-PIT",217],["PIT-GRR",275],["PIT-DAL",231]]) {
+    const r=baseline.records.get(market);
+    assert.equal(coverageView(r).stops,1);
+    assert.equal(r.best[1].totalMinutes,minutes);
+    assert.ok(r.reasonableBest[1]);
+  }
 });
 
 test("geographic coverage identifies app-listed detours instead of labeling them outright timetable gaps", () => {
@@ -79,4 +89,5 @@ test("midnight transfers and both connection-window boundaries are inclusive", (
   assert.equal(coverageView(buildServiceAnalysis(c, null, buildItineraries).records.get("AAA-BBB")).stops, 1);
   c.legs[1].departure="03:51";c.legs[1].departureMinute=231;
   assert.equal(coverageView(buildServiceAnalysis(c, null, buildItineraries).records.get("AAA-BBB")).gap, true);
+  assert.equal(buildServiceAnalysis(c,null,buildItineraries).nearMisses[0].adjustment,1);
 });

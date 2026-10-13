@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "schedule-7-v1.3.0-accepted-round-1",
+  "baseSchedule": {
+    "scheduleId": "schedule_7_v1_2_5",
+    "canonical": "data/schedules/schedule_7_v1_2_5/canonical_schedule.json",
+    "sha256": "b2fad35ec6010617b4a314ecb90f113aab5a990acb635983b4b1fba5c2adb37e",
+    "commit": "c5c3550a24080a91d1e5d0fcee9a97673c3fe8e3"
+  },
+  "schedule": {
+    "id": "schedule_7_v1_3_0_draft",
+    "version": "1.3.0",
+    "label": "Schedule 7, Version 1.3.0 working draft; unpublished",
+    "status": "draft"
+  },
+  "approval": {
+    "status": "approved for draft implementation",
+    "userInstruction": "Add F1437 -2 minutes, F1036 -1 minute, and F2017 -2 minutes to 1.3.0.",
+    "date": "2026-10-12",
+    "publication": "Not authorized"
+  },
+  "retimeLegs": [
+    {
+      "legId": "MCI-SFB-MAX9-02-OUT",
+      "expectedDepartureMinute": 635,
+      "expectedArrivalMinute": 848,
+      "departureMinute": 634,
+      "arrivalMinute": 847
+    },
+    {
+      "legId": "JAX-SFB-CRJ700-01-OUT",
+      "expectedDepartureMinute": 975,
+      "expectedArrivalMinute": 1020,
+      "departureMinute": 973,
+      "arrivalMinute": 1018
+    },
+    {
+      "legId": "V114-R116-MCI-CAK",
+      "expectedDepartureMinute": 937,
+      "expectedArrivalMinute": 1122,
+      "departureMinute": 935,
+      "arrivalMinute": 1120
+    }
+  ]
+}

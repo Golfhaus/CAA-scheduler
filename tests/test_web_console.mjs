@@ -65,7 +65,7 @@ function towPieces(label, start, end) {
 
 test("overview metrics reflect the frozen schedule", () => {
   assert.deepEqual(scheduleMetrics(canonical), {
-    flights: 1190,
+    flights: 1192,
     cities: 105,
     routes: 181,
     lines: 19,
@@ -470,3 +470,4 @@ test("only passenger-handling edges of a stand RON are highlighted", () => {
   assert.equal(claimMatchesPassengerStandFinding("ALB", overnight, findings), false);
   assert.equal(claimMatchesPassengerStandFinding("ALB", departure, findings), true);
 });
+

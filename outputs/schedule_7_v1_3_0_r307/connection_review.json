@@ -1,0 +1,689 @@
+{
+  "minimum": {
+    "app": {
+      "lostChoices": 19,
+      "lostMarkets": [],
+      "lostOneStopMarkets": [],
+      "newOneStopMarkets": [
+        "PIT-BHM",
+        "PIT-HRL",
+        "PIT-ATW",
+        "PIT-ICT",
+        "PIT-FSD"
+      ],
+      "lostChoiceMarkets": [
+        {
+          "market": "ACY-CHS",
+          "od": 0.5
+        },
+        {
+          "market": "ALB-CHS",
+          "od": 17.1
+        },
+        {
+          "market": "BDL-CHS",
+          "od": 36.9
+        },
+        {
+          "market": "BTV-CHS",
+          "od": 8
+        },
+        {
+          "market": "BUF-CHS",
+          "od": 11.5
+        },
+        {
+          "market": "CLT-CHS",
+          "od": 11
+        },
+        {
+          "market": "FLL-CHS",
+          "od": 63.1
+        },
+        {
+          "market": "HPN-CHS",
+          "od": 22.5
+        },
+        {
+          "market": "HVN-CHS",
+          "od": 21.1
+        },
+        {
+          "market": "JAX-CHS",
+          "od": 4.9
+        },
+        {
+          "market": "MDT-CHS",
+          "od": 6
+        },
+        {
+          "market": "PGD-CHS",
+          "od": 13.9
+        },
+        {
+          "market": "PIE-CHS",
+          "od": 40.2
+        },
+        {
+          "market": "PIT-CHS",
+          "od": 37.9
+        },
+        {
+          "market": "PIT-DAL",
+          "od": 80.5
+        },
+        {
+          "market": "PWM-CHS",
+          "od": 16.3
+        },
+        {
+          "market": "SFB-CHS",
+          "od": 30.2
+        },
+        {
+          "market": "SRQ-CHS",
+          "od": 4.5
+        },
+        {
+          "market": "SYR-CHS",
+          "od": 13.9
+        }
+      ],
+      "slowerFastest": [
+        {
+          "market": "ATW-CHS",
+          "oldMinutes": 335,
+          "newMinutes": 352,
+          "od": 2.5
+        },
+        {
+          "market": "CHA-CHS",
+          "oldMinutes": 405,
+          "newMinutes": 422,
+          "od": 3.2
+        },
+        {
+          "market": "CRW-CHS",
+          "oldMinutes": 305,
+          "newMinutes": 322,
+          "od": 1.3
+        },
+        {
+          "market": "GRR-CHS",
+          "oldMinutes": 315,
+          "newMinutes": 327,
+          "od": 9
+        },
+        {
+          "market": "HSV-CHS",
+          "oldMinutes": 340,
+          "newMinutes": 357,
+          "od": 4.4
+        },
+        {
+          "market": "IND-CHS",
+          "oldMinutes": 301,
+          "newMinutes": 318,
+          "od": 21.5
+        },
+        {
+          "market": "MKE-CHS",
+          "oldMinutes": 325,
+          "newMinutes": 342,
+          "od": 10.5
+        },
+        {
+          "market": "PIT-CHS",
+          "oldMinutes": 184,
+          "newMinutes": 191,
+          "od": 37.9
+        },
+        {
+          "market": "PIT-DAL",
+          "oldMinutes": 272,
+          "newMinutes": 412,
+          "od": 80.5
+        },
+        {
+          "market": "TRI-CHS",
+          "oldMinutes": 320,
+          "newMinutes": 337,
+          "od": 0.7
+        }
+      ],
+      "fasterFastest": 24,
+      "newChoices": 121
+    },
+    "geographic": {
+      "lostChoices": 12,
+      "lostMarkets": [],
+      "lostOneStopMarkets": [],
+      "newOneStopMarkets": [
+        "PIT-BHM",
+        "PIT-HRL",
+        "PIT-ICT",
+        "PIT-FSD"
+      ],
+      "lostChoiceMarkets": [
+        {
+          "market": "ACY-CHS",
+          "od": 0.5
+        },
+        {
+          "market": "ALB-CHS",
+          "od": 17.1
+        },
+        {
+          "market": "BDL-CHS",
+          "od": 36.9
+        },
+        {
+          "market": "BTV-CHS",
+          "od": 8
+        },
+        {
+          "market": "BUF-CHS",
+          "od": 11.5
+        },
+        {
+          "market": "HPN-CHS",
+          "od": 22.5
+        },
+        {
+          "market": "HVN-CHS",
+          "od": 21.1
+        },
+        {
+          "market": "MDT-CHS",
+          "od": 6
+        },
+        {
+          "market": "PIT-CHS",
+          "od": 37.9
+        },
+        {
+          "market": "PIT-DAL",
+          "od": 80.5
+        },
+        {
+          "market": "PWM-CHS",
+          "od": 16.3
+        },
+        {
+          "market": "SYR-CHS",
+          "od": 13.9
+        }
+      ],
+      "slowerFastest": [
+        {
+          "market": "ATW-CHS",
+          "oldMinutes": 335,
+          "newMinutes": 352,
+          "od": 2.5
+        },
+        {
+          "market": "GRR-CHS",
+          "oldMinutes": 315,
+          "newMinutes": 327,
+          "od": 9
+        },
+        {
+          "market": "IND-CHS",
+          "oldMinutes": 301,
+          "newMinutes": 318,
+          "od": 21.5
+        },
+        {
+          "market": "MKE-CHS",
+          "oldMinutes": 325,
+          "newMinutes": 342,
+          "od": 10.5
+        },
+        {
+          "market": "PIT-CHS",
+          "oldMinutes": 184,
+          "newMinutes": 191,
+          "od": 37.9
+        },
+        {
+          "market": "PIT-DAL",
+          "oldMinutes": 272,
+          "newMinutes": 412,
+          "od": 80.5
+        }
+      ],
+      "fasterFastest": 20
+    },
+    "transfers": [
+      {
+        "flight": 2193,
+        "origin": "PIT",
+        "destination": "BHM",
+        "uniqueOneStopMarkets": 6,
+        "underlyingOdPerDay": 483.49999999999994,
+        "markets": [
+          "PIT-JAX",
+          "PIT-HRL",
+          "PIT-SFB",
+          "PIT-FLL",
+          "PIT-ICT",
+          "PIT-FSD"
+        ]
+      },
+      {
+        "flight": 2194,
+        "origin": "BHM",
+        "destination": "PIT",
+        "uniqueOneStopMarkets": 2,
+        "underlyingOdPerDay": 113.1,
+        "markets": [
+          "DAB-PIT",
+          "PIE-PIT"
+        ]
+      }
+    ]
+  },
+  "buffered": {
+    "app": {
+      "lostChoices": 26,
+      "lostMarkets": [],
+      "lostOneStopMarkets": [
+        "PIT-MSY"
+      ],
+      "newOneStopMarkets": [
+        "PIT-BHM",
+        "PIT-HRL",
+        "PIT-ATW",
+        "PIT-ICT",
+        "PIT-FSD"
+      ],
+      "lostChoiceMarkets": [
+        {
+          "market": "ACY-CHS",
+          "od": 0.5
+        },
+        {
+          "market": "ALB-CHS",
+          "od": 17.1
+        },
+        {
+          "market": "BDL-CHS",
+          "od": 36.9
+        },
+        {
+          "market": "BTV-CHS",
+          "od": 8
+        },
+        {
+          "market": "BUF-CHS",
+          "od": 11.5
+        },
+        {
+          "market": "CLT-CHS",
+          "od": 11
+        },
+        {
+          "market": "FLL-CHS",
+          "od": 63.1
+        },
+        {
+          "market": "HPN-CHS",
+          "od": 22.5
+        },
+        {
+          "market": "HVN-CHS",
+          "od": 21.1
+        },
+        {
+          "market": "JAX-CHS",
+          "od": 4.9
+        },
+        {
+          "market": "MDT-CHS",
+          "od": 6
+        },
+        {
+          "market": "PGD-CHS",
+          "od": 13.9
+        },
+        {
+          "market": "PIE-CHS",
+          "od": 40.2
+        },
+        {
+          "market": "PIT-CHS",
+          "od": 37.9
+        },
+        {
+          "market": "PIT-RFD",
+          "od": 135.9
+        },
+        {
+          "market": "PIT-PIE",
+          "od": 110
+        },
+        {
+          "market": "PIT-DAL",
+          "od": 80.5
+        },
+        {
+          "market": "PIT-MSY",
+          "od": 36
+        },
+        {
+          "market": "PIT-PVD",
+          "od": 15.9
+        },
+        {
+          "market": "PIT-HOU",
+          "od": 57.8
+        },
+        {
+          "market": "PIT-CLT",
+          "od": 48.8
+        },
+        {
+          "market": "PIT-BDL",
+          "od": 19.8
+        },
+        {
+          "market": "PWM-CHS",
+          "od": 16.3
+        },
+        {
+          "market": "SFB-CHS",
+          "od": 30.2
+        },
+        {
+          "market": "SRQ-CHS",
+          "od": 4.5
+        },
+        {
+          "market": "SYR-CHS",
+          "od": 13.9
+        }
+      ],
+      "slowerFastest": [
+        {
+          "market": "ATW-CHS",
+          "oldMinutes": 335,
+          "newMinutes": 360,
+          "od": 2.5
+        },
+        {
+          "market": "CHA-CHS",
+          "oldMinutes": 405,
+          "newMinutes": 430,
+          "od": 3.2
+        },
+        {
+          "market": "CRW-CHS",
+          "oldMinutes": 305,
+          "newMinutes": 330,
+          "od": 1.3
+        },
+        {
+          "market": "GRR-CHS",
+          "oldMinutes": 315,
+          "newMinutes": 327,
+          "od": 9
+        },
+        {
+          "market": "HSV-CHS",
+          "oldMinutes": 340,
+          "newMinutes": 365,
+          "od": 4.4
+        },
+        {
+          "market": "IND-CHS",
+          "oldMinutes": 301,
+          "newMinutes": 326,
+          "od": 21.5
+        },
+        {
+          "market": "MKE-CHS",
+          "oldMinutes": 325,
+          "newMinutes": 350,
+          "od": 10.5
+        },
+        {
+          "market": "PIT-BDL",
+          "oldMinutes": 190,
+          "newMinutes": 298,
+          "od": 19.8
+        },
+        {
+          "market": "PIT-PVD",
+          "oldMinutes": 192,
+          "newMinutes": 312,
+          "od": 15.9
+        },
+        {
+          "market": "PIT-CLT",
+          "oldMinutes": 175,
+          "newMinutes": 215,
+          "od": 48.8
+        },
+        {
+          "market": "PIT-CHS",
+          "oldMinutes": 184,
+          "newMinutes": 189,
+          "od": 37.9
+        },
+        {
+          "market": "PIT-HOU",
+          "oldMinutes": 292,
+          "newMinutes": 412,
+          "od": 57.8
+        },
+        {
+          "market": "PIT-DAL",
+          "oldMinutes": 272,
+          "newMinutes": 402,
+          "od": 80.5
+        },
+        {
+          "market": "PIT-MSY",
+          "oldMinutes": 258,
+          "newMinutes": 434,
+          "od": 36
+        },
+        {
+          "market": "TRI-CHS",
+          "oldMinutes": 320,
+          "newMinutes": 345,
+          "od": 0.7
+        }
+      ],
+      "fasterFastest": 18,
+      "newChoices": 137
+    },
+    "geographic": {
+      "lostChoices": 19,
+      "lostMarkets": [],
+      "lostOneStopMarkets": [
+        "PIT-MSY"
+      ],
+      "newOneStopMarkets": [
+        "PIT-BHM",
+        "PIT-HRL",
+        "PIT-ICT",
+        "PIT-FSD"
+      ],
+      "lostChoiceMarkets": [
+        {
+          "market": "ACY-CHS",
+          "od": 0.5
+        },
+        {
+          "market": "ALB-CHS",
+          "od": 17.1
+        },
+        {
+          "market": "BDL-CHS",
+          "od": 36.9
+        },
+        {
+          "market": "BTV-CHS",
+          "od": 8
+        },
+        {
+          "market": "BUF-CHS",
+          "od": 11.5
+        },
+        {
+          "market": "HPN-CHS",
+          "od": 22.5
+        },
+        {
+          "market": "HVN-CHS",
+          "od": 21.1
+        },
+        {
+          "market": "MDT-CHS",
+          "od": 6
+        },
+        {
+          "market": "PIT-CHS",
+          "od": 37.9
+        },
+        {
+          "market": "PIT-RFD",
+          "od": 135.9
+        },
+        {
+          "market": "PIT-PIE",
+          "od": 110
+        },
+        {
+          "market": "PIT-DAL",
+          "od": 80.5
+        },
+        {
+          "market": "PIT-MSY",
+          "od": 36
+        },
+        {
+          "market": "PIT-PVD",
+          "od": 15.9
+        },
+        {
+          "market": "PIT-HOU",
+          "od": 57.8
+        },
+        {
+          "market": "PIT-CLT",
+          "od": 48.8
+        },
+        {
+          "market": "PIT-BDL",
+          "od": 19.8
+        },
+        {
+          "market": "PWM-CHS",
+          "od": 16.3
+        },
+        {
+          "market": "SYR-CHS",
+          "od": 13.9
+        }
+      ],
+      "slowerFastest": [
+        {
+          "market": "ATW-CHS",
+          "oldMinutes": 335,
+          "newMinutes": 360,
+          "od": 2.5
+        },
+        {
+          "market": "GRR-CHS",
+          "oldMinutes": 315,
+          "newMinutes": 327,
+          "od": 9
+        },
+        {
+          "market": "IND-CHS",
+          "oldMinutes": 301,
+          "newMinutes": 326,
+          "od": 21.5
+        },
+        {
+          "market": "MKE-CHS",
+          "oldMinutes": 325,
+          "newMinutes": 350,
+          "od": 10.5
+        },
+        {
+          "market": "PIT-CHS",
+          "oldMinutes": 184,
+          "newMinutes": 189,
+          "od": 37.9
+        },
+        {
+          "market": "PIT-HOU",
+          "oldMinutes": 292,
+          "newMinutes": 412,
+          "od": 57.8
+        },
+        {
+          "market": "PIT-DAL",
+          "oldMinutes": 272,
+          "newMinutes": 402,
+          "od": 80.5
+        },
+        {
+          "market": "PIT-MSY",
+          "oldMinutes": 258,
+          "newMinutes": 434,
+          "od": 36
+        },
+        {
+          "market": "PIT-BDL",
+          "oldMinutes": 190,
+          "newMinutes": 304,
+          "od": 19.8
+        },
+        {
+          "market": "PIT-CLT",
+          "oldMinutes": 175,
+          "newMinutes": 267,
+          "od": 48.8
+        },
+        {
+          "market": "PIT-PVD",
+          "oldMinutes": 192,
+          "newMinutes": 312,
+          "od": 15.9
+        }
+      ],
+      "fasterFastest": 14
+    },
+    "transfers": [
+      {
+        "flight": 2193,
+        "origin": "PIT",
+        "destination": "BHM",
+        "uniqueOneStopMarkets": 6,
+        "underlyingOdPerDay": 483.49999999999994,
+        "markets": [
+          "PIT-JAX",
+          "PIT-HRL",
+          "PIT-SFB",
+          "PIT-FLL",
+          "PIT-ICT",
+          "PIT-FSD"
+        ]
+      },
+      {
+        "flight": 2194,
+        "origin": "BHM",
+        "destination": "PIT",
+        "uniqueOneStopMarkets": 1,
+        "underlyingOdPerDay": 108.1,
+        "markets": [
+          "PIE-PIT"
+        ]
+      }
+    ]
+  }
+}

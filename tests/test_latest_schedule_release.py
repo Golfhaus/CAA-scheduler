@@ -22,6 +22,26 @@ LATEST_RELEASE_DIRECTORY = DIRECTORY
 
 
 class LatestScheduleReleaseTests(unittest.TestCase):
+    def test_release_rejects_a_stale_base_pin(self) -> None:
+        config = read_json(LATEST_RELEASE_CONFIG)
+        config['baseCanonicalSha256'] = '0' * 64
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT) as directory:
+            config_path = Path(directory) / 'stale.json'
+            config_path.write_text(json.dumps(config))
+            with self.assertRaisesRegex(ValueError, 'base canonical fingerprint'):
+                build_optimization_release(config_path, REPO_ROOT, output_directory=Path(directory) / 'release')
+            self.assertFalse((Path(directory) / 'release').exists())
+
+    def test_release_rejects_a_changed_overlay_pin(self) -> None:
+        config = read_json(LATEST_RELEASE_CONFIG)
+        config['overlaySha256'][config['overlays'][0]] = '0' * 64
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT) as directory:
+            config_path = Path(directory) / 'stale.json'
+            config_path.write_text(json.dumps(config))
+            with self.assertRaisesRegex(ValueError, 'overlay fingerprint'):
+                build_optimization_release(config_path, REPO_ROOT, output_directory=Path(directory) / 'release')
+            self.assertFalse((Path(directory) / 'release').exists())
+
     @staticmethod
     def _normalize_interchangeable_gate_rows(gates: dict) -> dict:
         normalized = copy.deepcopy(gates)
@@ -50,7 +70,7 @@ class LatestScheduleReleaseTests(unittest.TestCase):
             )
             self.assertEqual(report["status"], "released")
             self.assertEqual(report["scheduleId"], LATEST_SCHEDULE_ID)
-            self.assertEqual(report["summary"]["legs"], 1190)
+            self.assertEqual(report["summary"]["legs"], 1192)
             self.assertEqual(report["summary"]["effectiveOperatingErrors"], 0)
             self.assertEqual(report["summary"]["hardStopFailures"], 0)
             self.assertEqual(report["summary"]["overnightTurnFailures"], 0)

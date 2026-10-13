@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "schedule-7-v1.3.0-proposed-r307-day-buffered",
+  "baseSchedule": {
+    "scheduleId": "schedule_7_v1_3_0_draft",
+    "canonical": "data/schedules/schedule_7_v1_3_0_draft/canonical_schedule.json",
+    "sha256": "0fcb6ac3b26e80646c6fdb101eb61150fb6530705ae6c688122417f5120674b7"
+  },
+  "schedule": {
+    "id": "schedule_7_v1_3_0_proposal_r307_day_buffered",
+    "version": "1.3.0-analysis",
+    "label": "R307 DAY round trip buffered; unpublished proposal",
+    "status": "draft"
+  },
+  "approval": {
+    "status": "analysis only; user asked for review",
+    "publication": "Not authorized"
+  },
+  "insertLegs": [
+    {
+      "id": "V130-R307-PIT-DAY",
+      "route": 307,
+      "origin": "PIT",
+      "destination": "DAY",
+      "departureMinute": 758,
+      "arrivalMinute": 815
+    },
+    {
+      "id": "V130-R307-DAY-PIT",
+      "route": 307,
+      "origin": "DAY",
+      "destination": "PIT",
+      "departureMinute": 860,
+      "arrivalMinute": 917
+    }
+  ],
+  "bankAssignmentsToAdd": [
+    {
+      "legId": "V130-R307-PIT-DAY",
+      "operation": "arrival",
+      "bankId": "DAY-B5"
+    },
+    {
+      "legId": "V130-R307-DAY-PIT",
+      "operation": "departure",
+      "bankId": "DAY-B5"
+    }
+  ]
+}
