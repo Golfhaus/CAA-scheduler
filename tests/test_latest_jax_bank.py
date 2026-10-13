@@ -1,79 +1,75 @@
-"""Latest approved additions, source preservation, alignment and bank changes."""
+"""Latest release: exact approved flying, source preservation and connections."""
 from collections import Counter
-import copy
 import json
 from pathlib import Path
+import sys
 import unittest
-from latest_schedule import CANONICAL,SCHEDULE_ID
 ROOT=Path(__file__).resolve().parents[1]
+sys.path.insert(0,str(ROOT/'src'))
+from latest_schedule import CANONICAL,SCHEDULE_ID
+from caa_scheduler.optimization_release import audit_hub_connections
 
 class LatestApprovedFlyingTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.base=json.loads((ROOT/'data/schedules/schedule_7_v1_2_4/canonical_schedule.json').read_text())
-        cls.overlay=json.loads((ROOT/'config/optimizations/schedule_7_v1_2_5_accepted_rounds_1_3.json').read_text())
+        cls.base=json.loads((ROOT/'data/schedules/schedule_7_v1_2_5/canonical_schedule.json').read_text())
+        cls.overlay=json.loads((ROOT/'config/optimizations/schedule_7_v1_3_0_round_3.json').read_text())
 
-    def test_exact_approved_additions(self):
-        self.assertEqual(SCHEDULE_ID,'schedule_7_v1_2_5')
+    def test_exact_approved_r307_additions(self):
+        self.assertEqual(SCHEDULE_ID,'schedule_7_v1_3_0')
         old_ids={l['id'] for l in self.base['legs']}
         added=sorted((l for l in CANONICAL['legs'] if l['id'] not in old_ids),key=lambda l:l['flight'])
-        self.assertEqual([l['flight'] for l in added],list(range(2173,2193)))
-        self.assertEqual([tuple(l[k] for k in ('route','line','day','origin','destination','departureMinute','arrivalMinute')) for l in added],[
-            (125,'AE',4,'DAY','IND',1295,1338),(126,'AE',5,'IND','DAY',270,313),
-            (136,'AF',4,'DAY','CAK',1295,1345),(137,'AF',5,'CAK','DAY',270,320),
-            (112,'AD',2,'MCI','SDF',1270,1425),(113,'AD',3,'SDF','MCI',270,305),
-            (135,'AF',3,'MCI','SBN',1285,1438),(136,'AF',4,'SBN','MCI',270,303),
-            (715,'B',2,'MCI','GRR',1283,1438),(716,'B',3,'GRR','MCI',270,305),
-            (323,'AK',3,'MCI','SGF',1390,1440),(324,'AK',4,'SGF','MCI',270,320),
-            (159,'AM',4,'ALB','PHF',615,700),(159,'AM',4,'PHF','ALB',800,885),
-            (130,'AE',9,'SWF','PHF',480,553),(130,'AE',9,'PHF','SWF',605,678),
-            (318,'AH',7,'SYR','BTV',465,517),(318,'AH',7,'BTV','SYR',588,640),
-            (161,'AM',6,'SYR','HPN',465,519),(161,'AM',6,'HPN','SYR',576,630)])
+        self.assertEqual([tuple(l[k] for k in ('flight','route','line','day','origin','destination','departureMinute','arrivalMinute')) for l in added],
+                         [(2193,307,'AA',7,'PIT','DAY',758,815),(2194,307,'AA',7,'DAY','PIT',860,917)])
         count=Counter((l['origin'],l['destination']) for l in CANONICAL['legs'])
-        for hub,city,n in [('MCI','SDF',3),('MCI','SBN',2),('MCI','GRR',1),('MCI','SGF',2),('ALB','PHF',2),('SWF','PHF',1),('SYR','BTV',4),('SYR','HPN',4)]:
-            self.assertEqual((count[hub,city],count[city,hub]),(n,n))
-        for route in (159,130,318,161):
-            legs=sorted((l for l in CANONICAL['legs'] if l['route']==route),key=lambda l:l['sequenceWithinRoute'])
-            self.assertLess(max(b['departureMinute']-a['arrivalMinute'] for a,b in zip(legs,legs[1:])),330)
-
-    def test_only_authorized_retimings_and_no_aircraft_changes(self):
-        after={l['id']:l for l in CANONICAL['legs']};changes={r['legId']:r for r in self.overlay['retimeLegs']}
-        self.assertEqual({after[i]['flight']:r['departureMinute']-r['expectedDepartureMinute'] for i,r in changes.items()},
-            {1503:3,1873:10,1595:15,1715:15,1035:15,2002:6,1083:3,1139:15,1405:15,1633:15,1647:15,1675:15,1886:2,2011:2,2095:2,2096:2})
-        moved={r['legId']:r for r in self.overlay['legReassignments']};mapping={r['sourceRoute']:r for r in self.overlay['routeReassignments']}
-        identities={l['route']:(l['line'],l['day'],l['fleet']) for l in self.base['legs']}
-        for before in self.base['legs']:
-            old,new=dict(before),dict(after[before['id']]);old.pop('sequenceWithinRoute');new.pop('sequenceWithinRoute')
-            if before['id'] in moved:
-                target=moved[before['id']]['targetRoute'];line,day,fleet=identities[target];old.update(route=target,line=line,day=day,fleet=fleet)
-            if old['route'] in mapping:
-                m=mapping[old['route']];old.update(route=m['targetRoute'],line=m['line'],day=m['day'])
-            if before['id'] in changes:
-                for key in ('departureMinute','arrivalMinute'):self.assertEqual(new[key],changes[before['id']][key])
-                for key in ('departureMinute','arrivalMinute','departure','arrival'):old.pop(key);new.pop(key)
-            self.assertEqual(new,old)
-        self.assertEqual(CANONICAL['cities'],self.base['cities']);self.assertEqual(CANONICAL['schedule']['fleetCounts'],self.base['schedule']['fleetCounts'])
-        for fleet in CANONICAL['schedule']['fleetCounts']:
-            self.assertEqual(len({(l['line'],l['day']) for l in CANONICAL['legs'] if l['fleet']==fleet}),len({(l['line'],l['day']) for l in self.base['legs'] if l['fleet']==fleet}))
-        lengths={line:len({l['day'] for l in CANONICAL['legs'] if l['line']==line}) for line in ('AD','AE','AF','AI','AM','AN')}
-        self.assertEqual(lengths,{'AD':11,'AE':11,'AF':11,'AI':12,'AM':12,'AN':9})
-        self.assertFalse(any(l['line']=='AR' for l in CANONICAL['legs']))
-        self.assertEqual({k:v for k,v in CANONICAL['gatePlan'].items() if k!='label'},{k:v for k,v in self.base['gatePlan'].items() if k!='label'})
-
-    def test_only_approved_bank_and_policy_change(self):
-        expected_banks=copy.deepcopy(self.base['hubBanks'])
-        for bank_id,start,end in [('DAY-B1',301,361),('MCI-B1',291,351),('DAY-B5',802,862)]:
-            next(b for b in expected_banks if b['id']==bank_id).update(startMinute=start,endMinute=end)
-        self.assertEqual(CANONICAL['hubBanks'],expected_banks)
-        expected=copy.deepcopy(self.base['operatingPolicy']);expected['overrides']+=self.overlay['operatingOverrides'];self.assertEqual(CANONICAL['operatingPolicy'],expected)
-        self.assertEqual([(o['checkId'],o['findingId']) for o in self.overlay['operatingOverrides']],[])
+        self.assertEqual((count['PIT','DAY'],count['DAY','PIT']),(2,2))
         legs={l['flight']:l for l in CANONICAL['legs']}
-        self.assertEqual(legs[1886]['departureMinute']-legs[2192]['arrivalMinute'],40)
-        self.assertEqual(legs[1297]['departureMinute']-legs[2190]['arrivalMinute'],40)
-        self.assertEqual(legs[2097]['departureMinute']-legs[2096]['arrivalMinute'],40)
-        for number in (2178,2180,2182,2184):
-            self.assertEqual([a['bankId'] for a in CANONICAL['bankAssignments'] if a['legId']==legs[number]['id'] and a['operation']=='arrival'],['MCI-B1'])
-        rons={route:max((l for l in CANONICAL['legs'] if l['route']==route),key=lambda l:l['sequenceWithinRoute'])['destination'] for route in (125,136,113,138)}
-        self.assertEqual(rons,{125:'IND',136:'CAK',113:'MCI',138:'DAY'})
+        self.assertEqual([legs[2193]['departureMinute']-legs[1917]['arrivalMinute'],
+                          legs[2194]['departureMinute']-legs[2193]['arrivalMinute'],
+                          legs[1918]['departureMinute']-legs[2194]['arrivalMinute']],[74,45,89])
+        self.assertEqual((legs[1918]['departure'],legs[1401]['departure']),('16:46','18:35'))
+
+    def test_only_authorized_retimings_and_unchanged_aircraft_days(self):
+        after={l['id']:l for l in CANONICAL['legs']}
+        changes={r['legId']:r for r in self.overlay['retimeLegs']}
+        self.assertEqual({after[i]['flight']:r['departureMinute']-r['expectedDepartureMinute'] for i,r in changes.items()},
+                         {1437:-2,1036:-1,2017:-2,2019:-4,1727:8,1723:-1,1589:-3})
+        for before in self.base['legs']:
+            expected=dict(before)
+            if before['id'] in changes:
+                r=changes[before['id']]
+                expected.update(departureMinute=r['departureMinute'],arrivalMinute=r['arrivalMinute'],
+                                departure=after[before['id']]['departure'],arrival=after[before['id']]['arrival'])
+            if before['route']==307 and before['sequenceWithinRoute']>=5:
+                expected['sequenceWithinRoute']+=2
+            self.assertEqual(after[before['id']],expected,before['id'])
+        self.assertEqual(CANONICAL['cities'],self.base['cities'])
+        self.assertEqual(CANONICAL['schedule']['fleetCounts'],self.base['schedule']['fleetCounts'])
+        for fleet in CANONICAL['schedule']['fleetCounts']:
+            self.assertEqual({(l['route'],l['line'],l['day']) for l in CANONICAL['legs'] if l['fleet']==fleet},
+                             {(l['route'],l['line'],l['day']) for l in self.base['legs'] if l['fleet']==fleet})
+        legs={l['flight']:l for l in CANONICAL['legs']}
+        self.assertEqual(legs[2019]['departureMinute']-legs[1589]['arrivalMinute'],40)
+
+    def test_banks_policies_and_physical_inventory_are_preserved(self):
+        self.assertEqual(CANONICAL['hubBanks'],self.base['hubBanks'])
+        self.assertEqual(CANONICAL['operatingPolicy'],self.base['operatingPolicy'])
+        self.assertEqual(CANONICAL['bankAssignments'],self.base['bankAssignments']+self.overlay['bankAssignmentsToAdd'])
+        self.assertEqual([a['bankId'] for a in self.overlay['bankAssignmentsToAdd']],['DAY-B5','DAY-B5'])
+        self.assertEqual({k:v for k,v in CANONICAL['gatePlan'].items() if k!='label'},
+                         {k:v for k,v in self.base['gatePlan'].items() if k!='label'})
+
+    def test_requested_one_stop_connections_exist_with_exact_flights(self):
+        for origin,dest,hub,first,last,wait in [
+            ('BLV','SFB','JAX',1218,1437,240),('MKE','SFB','MCI',1264,1036,240),
+            ('PGD','CAK','MCI',1197,2017,240),('DAL','PNS','MCI',1045,2019,240),
+            ('VPS','BWI','JAX',1727,1088,240),('RDU','SGF','MCI',1138,1723,240),
+            ('PIT','BHM','DAY',2193,1981,158),('MCI','PIT','DAY',1537,2194,55),
+            ('PIT','GRR','DAY',2193,1809,160)]:
+            with self.subTest(market=f'{origin}-{dest}'):
+                audit=audit_hub_connections(CANONICAL,hub=hub,groups={'source':[origin],'destination':[dest]})
+                pair=next(p for p in audit['directionalPairs'] if p['source']==origin)
+                self.assertEqual(pair['status'],'connected')
+                self.assertTrue(any((p['inboundFlight'],p['outboundFlight'],p['waitMinutes'])==(first,last,wait) for p in pair['options']))
 
 if __name__=='__main__':unittest.main()

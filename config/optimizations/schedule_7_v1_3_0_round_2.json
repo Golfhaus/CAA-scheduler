@@ -1,0 +1,82 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "schedule-7-v1.3.0-accepted-rounds-1-2",
+  "baseSchedule": {
+    "scheduleId": "schedule_7_v1_2_5",
+    "canonical": "data/schedules/schedule_7_v1_2_5/canonical_schedule.json",
+    "sha256": "b2fad35ec6010617b4a314ecb90f113aab5a990acb635983b4b1fba5c2adb37e",
+    "commit": "c5c3550a24080a91d1e5d0fcee9a97673c3fe8e3"
+  },
+  "schedule": {
+    "id": "schedule_7_v1_3_0_draft",
+    "version": "1.3.0",
+    "label": "Schedule 7, Version 1.3.0 working draft; unpublished",
+    "status": "draft"
+  },
+  "approval": {
+    "status": "approved for draft implementation",
+    "userInstruction": "Retain approved round one; advance F2019 4 minutes, delay F1727 8 minutes, advance F1723 1 minute. Advance inbound F1589 3 minutes as required to keep F2019's MCI turn legal.",
+    "date": "2026-10-12",
+    "publication": "Not authorized"
+  },
+  "retimeLegs": [
+    {
+      "legId": "MCI-SFB-MAX9-02-OUT",
+      "expectedDepartureMinute": 635,
+      "expectedArrivalMinute": 848,
+      "departureMinute": 634,
+      "arrivalMinute": 847
+    },
+    {
+      "legId": "JAX-SFB-CRJ700-01-OUT",
+      "expectedDepartureMinute": 975,
+      "expectedArrivalMinute": 1020,
+      "departureMinute": 973,
+      "arrivalMinute": 1018
+    },
+    {
+      "legId": "V114-R116-MCI-CAK",
+      "expectedDepartureMinute": 937,
+      "expectedArrivalMinute": 1122,
+      "departureMinute": 935,
+      "arrivalMinute": 1120
+    },
+    {
+      "legId": "MCI-MFE-CRJ200-01-IN",
+      "expectedDepartureMinute": 739,
+      "expectedArrivalMinute": 894,
+      "departureMinute": 736,
+      "arrivalMinute": 891
+    },
+    {
+      "legId": "MCI-SGF-CRJ200-01-OUT",
+      "expectedDepartureMinute": 1035,
+      "expectedArrivalMinute": 1085,
+      "departureMinute": 1034,
+      "arrivalMinute": 1084
+    },
+    {
+      "legId": "JAX-VPS-CRJ200-01-IN",
+      "expectedDepartureMinute": 350,
+      "expectedArrivalMinute": 477,
+      "departureMinute": 358,
+      "arrivalMinute": 485
+    },
+    {
+      "legId": "V114-R135-MCI-PNS",
+      "expectedDepartureMinute": 935,
+      "expectedArrivalMinute": 1065,
+      "departureMinute": 931,
+      "arrivalMinute": 1061
+    }
+  ],
+  "initiative": {
+    "supportingRetiming": {
+      "flight": 1589,
+      "shiftMinutes": -3,
+      "reason": "The requested F2019 -4 leaves a 37-minute MCI turn. F1589 -3 restores the required 40 minutes and retains a 46-minute MFE turn."
+    },
+    "priorAcceptedOverlay": "config/optimizations/schedule_7_v1_3_0_round_1.json",
+    "r307": "Review only: BHM round trip does not fit the unchanged PIT hold."
+  }
+}

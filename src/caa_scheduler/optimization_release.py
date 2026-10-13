@@ -153,10 +153,15 @@ def build_optimization_release(
     config_path = config_path.resolve()
     config = read_json(config_path)
     base_path = (repo_root / config["baseCanonical"]).resolve()
+    if config.get("baseCanonicalSha256") and sha256_file(base_path) != config["baseCanonicalSha256"]:
+        raise ValueError("Optimization release base canonical fingerprint mismatch")
     canonical = read_json(base_path)
     overlay_pins = []
     for relative_path in config["overlays"]:
         overlay_path = (repo_root / relative_path).resolve()
+        expected_sha = config.get("overlaySha256", {}).get(relative_path)
+        if expected_sha and sha256_file(overlay_path) != expected_sha:
+            raise ValueError(f"Optimization release overlay fingerprint mismatch: {relative_path}")
         overlay = read_json(overlay_path)
         canonical = apply_optimization_overlay(canonical, overlay)
         overlay_pins.append(

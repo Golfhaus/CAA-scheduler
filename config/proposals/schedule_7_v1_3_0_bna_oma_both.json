@@ -1,0 +1,44 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "schedule-7-v1.3.0-proposed-bna_oma_both",
+  "baseSchedule": {
+    "scheduleId": "schedule_7_v1_3_0_draft",
+    "canonical": "data/schedules/schedule_7_v1_3_0_draft/canonical_schedule.json",
+    "sha256": "b87c9c4aa438538a217e38fabf955b257c322a2205795f0e69665862f4178104"
+  },
+  "schedule": {
+    "id": "schedule_7_v1_3_0_proposal_bna_oma_both",
+    "version": "1.3.0-analysis",
+    "label": "Unpublished v1.3.0 proposal bna_oma_both",
+    "status": "draft"
+  },
+  "approval": {
+    "status": "analysis only; not approved for implementation",
+    "publication": "Not authorized"
+  },
+  "retimeLegs": [
+    {
+      "legId": "GATE-RELIEF-MCI-BNA-MAX9-01-OUT",
+      "expectedDepartureMinute": 895,
+      "expectedArrivalMinute": 984,
+      "departureMinute": 884,
+      "arrivalMinute": 973
+    },
+    {
+      "legId": "GATE-RELIEF-MCI-BNA-MAX9-01-IN",
+      "expectedDepartureMinute": 1105,
+      "expectedArrivalMinute": 1194,
+      "departureMinute": 1016,
+      "arrivalMinute": 1105
+    }
+  ],
+  "bankAssignmentReplacements": [
+    {
+      "legId": "GATE-RELIEF-MCI-BNA-MAX9-01-IN",
+      "operation": "arrival",
+      "bankId": "MCI-B9"
+    }
+  ],
+  "hubBanksToAdd": [],
+  "hubBankCountOverrides": {}
+}

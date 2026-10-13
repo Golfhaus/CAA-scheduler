@@ -4,19 +4,20 @@ CAA Scheduler is the migration target for Coastal American Airways schedule cons
 
 ## Latest published release
 
-The app defaults to **Schedule 7 v1.2.5**, published October 11, 2026, with
-**1,190 flights across 181 routes and 19 routing lines**. This release adds
-20 flights, aligns the CRJ200 rotations, and improves DAY/MCI morning feed
-and four long daytime holds. Validation reports **zero effective operating
-errors** and **52 passing checks** in the latest-only regression suite.
+The app defaults to **Schedule 7 v1.3.0**, published October 12, 2026, with
+**1,192 flights across 181 routes and 19 routing lines**. The release adds
+R307's PIT–DAY–PIT round trip and six requested timing repairs, with one
+supporting retiming to preserve a legal aircraft turn. Full validation reports
+**zero effective operating errors**, unchanged fleet and physical inventory,
+and passing latest-only native/browser-helper regression checks.
 
-See the [v1.2.5 release notes](docs/schedule_7_v1_2_5_release.md) for approved
-flying, timing and line changes, validation, and reproduction commands. The
-[released v1.2.5 canonical schedule](data/schedules/schedule_7_v1_2_5/canonical_schedule.json)
-is the authoritative starting point for future schedule work; its pinned
-[release configuration](config/optimizations/schedule_7_v1_2_5_release.json)
-reproduces the published package. Earlier releases and draft snapshots remain
-available for historical reference; routine regression targets only v1.2.5.
+See the [v1.3.0 release notes](docs/schedule_7_v1_3_0_release.md) for approved
+flying, connection gains, the small MFE timing tradeoff, validation and
+reproduction. The [released canonical](data/schedules/schedule_7_v1_3_0/canonical_schedule.json)
+is the starting point for future schedule work; its pinned
+[release configuration](config/optimizations/schedule_7_v1_3_0_release.json)
+reproduces the published package. Earlier releases and review snapshots remain
+historical references; routine regression targets only v1.3.0.
 
 ## Milestone 0.7 — planning foundation
 
@@ -179,7 +180,7 @@ If Python preflight fails, blank-start planning is requested, or an airport addi
 ## Migration engine boundary (Milestone 0.7.10)
 
 This section records the historical migration planning proposal and engine
-baseline. Use the released v1.2.4 canonical linked above for current schedule
+baseline. Use the released v1.3.0 canonical linked above for current schedule
 work.
 
 Milestone 0.7.10 adds construction-time Section 2.6 pairing spacing to the strict, auditable planning, demand, bank, topology-repair, exact-materialization, and canonicalization pipeline. Python reconstructs the historical plan, processes the complete pinned 105-city demand data, reproduces all 100 non-hub qualifications, and applies the current percentile-tier service caps before frequency allocation. Aircraft quantities still come only from each schedule's build configuration; no fleet count is inferred from policy or silently added by repair.
