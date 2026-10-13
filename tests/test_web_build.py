@@ -75,7 +75,10 @@ class WebBuildTests(unittest.TestCase):
                 REPO_ROOT / "web" / "schedules.json", REPO_ROOT, output
             )
             self.assertEqual(result["scheduleCount"], len(MANIFEST["schedules"]))
-            self.assertEqual(result["dataFileCount"], 155)
+            self.assertEqual(result["dataFileCount"], len({
+                filename for schedule in MANIFEST["schedules"]
+                for filename in schedule["files"].values()
+            }))
             self.assertGreater(result["instructionEntryCount"], 40)
             self.assertTrue((output / "index.html").is_file())
             self.assertTrue((output / "favicon.svg").is_file())
