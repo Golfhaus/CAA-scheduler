@@ -1,0 +1,256 @@
+{
+  "status": "analysis only; draft not modified",
+  "baseSha256": "448a9d9b15b871751d19371fad893d9313bf803f801775979aaecac985bbd23e",
+  "alternatives": {
+    "mci": {
+      "valid": true,
+      "structural": {
+        "checks": 18,
+        "passed": 18,
+        "failed": 0
+      },
+      "operating": {
+        "checks": 25,
+        "passed": 19,
+        "failed": 0,
+        "warnings": 3,
+        "notEvaluated": 1,
+        "overridden": 2,
+        "effectiveErrorFindings": 0,
+        "effectiveWarningFindings": 164
+      },
+      "overnightStatus": "pass",
+      "planningStatus": "pass",
+      "standUse": {
+        "claims": 16,
+        "minutes": 3595
+      },
+      "newFlights": [
+        {
+          "id": "V131-EVENING-R724-RFD-MCI",
+          "route": 724,
+          "line": "A",
+          "fleet": "MAX9",
+          "day": 6,
+          "sequenceWithinRoute": 5,
+          "pairing": 687,
+          "flight": 2199,
+          "origin": "RFD",
+          "destination": "MCI",
+          "departure": "19:26",
+          "arrival": "20:40",
+          "departureMinute": 1166,
+          "arrivalMinute": 1240
+        },
+        {
+          "id": "V131-EVENING-R724-MCI-RFD",
+          "route": 724,
+          "line": "A",
+          "fleet": "MAX9",
+          "day": 6,
+          "sequenceWithinRoute": 6,
+          "pairing": 686,
+          "flight": 2200,
+          "origin": "MCI",
+          "destination": "RFD",
+          "departure": "21:20",
+          "arrival": "22:34",
+          "departureMinute": 1280,
+          "arrivalMinute": 1354
+        }
+      ],
+      "retimedFlights": [],
+      "overlaySha256": "674688ea4aa2f6a3645931dedcd4408c0cd82b835e57d707bcd0c3fbab1fa510",
+      "canonicalSha256": "bd79a07fb72034bfc28dd2486bc9a7e1c4972e35df789590d4735b6972d468c3"
+    },
+    "day": {
+      "valid": true,
+      "structural": {
+        "checks": 18,
+        "passed": 18,
+        "failed": 0
+      },
+      "operating": {
+        "checks": 25,
+        "passed": 19,
+        "failed": 0,
+        "warnings": 3,
+        "notEvaluated": 1,
+        "overridden": 2,
+        "effectiveErrorFindings": 0,
+        "effectiveWarningFindings": 164
+      },
+      "overnightStatus": "pass",
+      "planningStatus": "pass",
+      "standUse": {
+        "claims": 16,
+        "minutes": 3631
+      },
+      "newFlights": [
+        {
+          "id": "V131-EVENING-R724-RFD-DAY",
+          "route": 724,
+          "line": "A",
+          "fleet": "MAX9",
+          "day": 6,
+          "sequenceWithinRoute": 5,
+          "pairing": 317,
+          "flight": 2199,
+          "origin": "RFD",
+          "destination": "DAY",
+          "departure": "18:57",
+          "arrival": "21:05",
+          "departureMinute": 1137,
+          "arrivalMinute": 1265
+        },
+        {
+          "id": "V131-EVENING-R724-DAY-RFD",
+          "route": 724,
+          "line": "A",
+          "fleet": "MAX9",
+          "day": 6,
+          "sequenceWithinRoute": 6,
+          "pairing": 710,
+          "flight": 2200,
+          "origin": "DAY",
+          "destination": "RFD",
+          "departure": "21:50",
+          "arrival": "21:58",
+          "departureMinute": 1310,
+          "arrivalMinute": 1318
+        }
+      ],
+      "retimedFlights": [],
+      "overlaySha256": "1b8d7e1e60917a6a5a47878480e47bf40ebaab19a3b7b0daea2b4ea51edaed4a",
+      "canonicalSha256": "82c820bd9998cdb51419c294776571b28291c78326e6be5411e64d7c0b854959"
+    },
+    "bhm": {
+      "valid": true,
+      "structural": {
+        "checks": 18,
+        "passed": 18,
+        "failed": 0
+      },
+      "operating": {
+        "checks": 25,
+        "passed": 19,
+        "failed": 0,
+        "warnings": 3,
+        "notEvaluated": 1,
+        "overridden": 2,
+        "effectiveErrorFindings": 0,
+        "effectiveWarningFindings": 164
+      },
+      "overnightStatus": "pass",
+      "planningStatus": "pass",
+      "standUse": {
+        "claims": 16,
+        "minutes": 3597
+      },
+      "newFlights": [
+        {
+          "id": "V131-EVENING-R724-RFD-BHM",
+          "route": 724,
+          "line": "A",
+          "fleet": "MAX9",
+          "day": 6,
+          "sequenceWithinRoute": 5,
+          "pairing": 901,
+          "flight": 2199,
+          "origin": "RFD",
+          "destination": "BHM",
+          "departure": "18:06",
+          "arrival": "19:49",
+          "departureMinute": 1086,
+          "arrivalMinute": 1189
+        },
+        {
+          "id": "V131-EVENING-R724-BHM-RFD",
+          "route": 724,
+          "line": "A",
+          "fleet": "MAX9",
+          "day": 6,
+          "sequenceWithinRoute": 6,
+          "pairing": 902,
+          "flight": 2200,
+          "origin": "BHM",
+          "destination": "RFD",
+          "departure": "20:49",
+          "arrival": "22:32",
+          "departureMinute": 1249,
+          "arrivalMinute": 1352
+        }
+      ],
+      "retimedFlights": [],
+      "overlaySha256": "40d4da3cfbaeb982f65c2cb10c3f14c871ec3f9c120cb961af9688189cd6a871",
+      "canonicalSha256": "31545a5817f1d6f5020564b84457f290f27559a3388c3368616577d387269c72"
+    },
+    "phf": {
+      "valid": true,
+      "structural": {
+        "checks": 18,
+        "passed": 18,
+        "failed": 0
+      },
+      "operating": {
+        "checks": 25,
+        "passed": 19,
+        "failed": 0,
+        "warnings": 3,
+        "notEvaluated": 1,
+        "overridden": 2,
+        "effectiveErrorFindings": 0,
+        "effectiveWarningFindings": 164
+      },
+      "overnightStatus": "pass",
+      "planningStatus": "pass",
+      "standUse": {
+        "claims": 16,
+        "minutes": 3595
+      },
+      "newFlights": [
+        {
+          "id": "V131-EVENING-R724-RFD-PHF",
+          "route": 724,
+          "line": "A",
+          "fleet": "MAX9",
+          "day": 6,
+          "sequenceWithinRoute": 5,
+          "pairing": 711,
+          "flight": 2199,
+          "origin": "RFD",
+          "destination": "PHF",
+          "departure": "17:56",
+          "arrival": "20:55",
+          "departureMinute": 1076,
+          "arrivalMinute": 1255
+        },
+        {
+          "id": "V131-EVENING-R724-PHF-RFD",
+          "route": 724,
+          "line": "A",
+          "fleet": "MAX9",
+          "day": 6,
+          "sequenceWithinRoute": 6,
+          "pairing": 712,
+          "flight": 2200,
+          "origin": "PHF",
+          "destination": "RFD",
+          "departure": "21:35",
+          "arrival": "22:34",
+          "departureMinute": 1295,
+          "arrivalMinute": 1354
+        }
+      ],
+      "retimedFlights": [
+        1556,
+        1742,
+        1758,
+        2197,
+        2198
+      ],
+      "overlaySha256": "0b872aa233b2965b17e98cc66ebc038f0be6fa77150f1d76aac0d75a137cfdb0",
+      "canonicalSha256": "69947e866986ab5be26d094cbd27042521231a057552c5303100328c60d706e7"
+    }
+  }
+}

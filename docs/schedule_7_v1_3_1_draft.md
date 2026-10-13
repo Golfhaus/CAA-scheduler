@@ -75,3 +75,7 @@ python scripts/review_schedule_7_v1_3_1_rfd.py
 The builder enforces the pinned v1.3.0 SHA and verifies original-flight preservation, exact new flying, legal 12-day lines, fleet use, fixed gates/stands and native hard stops. The network audit enforces all 12 requested timetable connections, the 10 geographically suitable priority connections, zero itinerary/coverage losses and zero slower fastest journeys. No superseded release package is reconstructed. Published v1.3.0 remains the latest-only regression target until release authorization.
 
 Configuration: `config/optimizations/schedule_7_v1_3_1_round_1.json`. Draft package: `data/schedules/schedule_7_v1_3_1_draft/`. Corridor/idle screen: `outputs/schedule_7_v1_3_1/corridor_screen.json`.
+
+## Subsequent evening-utilization review
+
+The [October 13 R724 evening review](schedule_7_v1_3_1_evening_review.md) identifies feasible MCI, BHM and DAY extensions using the same aircraft-day, plus an unaccepted coordinated PHF option. These are saved proposals only. The four-leg draft above, its canonical package and app default remain unchanged pending selection of an extension.
