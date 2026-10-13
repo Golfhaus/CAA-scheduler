@@ -1,0 +1,341 @@
+{
+  "baseSha256": "0fcb6ac3b26e80646c6fdb101eb61150fb6530705ae6c688122417f5120674b7",
+  "status": "review only; not accepted",
+  "route": 307,
+  "fleet": "CRJ700",
+  "currentHold": {
+    "arrival": "11:24 ET",
+    "departure": "16:46 ET",
+    "minutes": 322
+  },
+  "blockModel": {
+    "distanceNm": 519.9001466188183,
+    "profile": {
+      "fleet": "CRJ700",
+      "sizeRank": 2,
+      "blockMinutesPerNauticalMile": 0.1467,
+      "blockMinutesIntercept": 29.96
+    },
+    "blockMinutesEachWay": 106
+  },
+  "minimumTurns": 40,
+  "requiredMinutes": 332,
+  "shortfallMinutes": 10,
+  "fitsUnchanged": false,
+  "directOdPerDay": {
+    "PIT-BHM": 12.8,
+    "BHM-PIT": 12.9
+  },
+  "trials": {
+    "minimum": {
+      "valid": true,
+      "newFlights": [
+        {
+          "id": "V130-R307-PIT-BHM",
+          "route": 307,
+          "line": "AA",
+          "fleet": "CRJ700",
+          "day": 7,
+          "sequenceWithinRoute": 5,
+          "pairing": 899,
+          "flight": 2193,
+          "origin": "PIT",
+          "destination": "BHM",
+          "departure": "12:04",
+          "arrival": "12:50",
+          "departureMinute": 724,
+          "arrivalMinute": 770
+        },
+        {
+          "id": "V130-R307-BHM-PIT",
+          "route": 307,
+          "line": "AA",
+          "fleet": "CRJ700",
+          "day": 7,
+          "sequenceWithinRoute": 6,
+          "pairing": 900,
+          "flight": 2194,
+          "origin": "BHM",
+          "destination": "PIT",
+          "departure": "13:30",
+          "arrival": "16:16",
+          "departureMinute": 810,
+          "arrivalMinute": 976
+        }
+      ],
+      "existingFlightChanges": [
+        {
+          "flight": 1918,
+          "before": {
+            "id": "V110-R307-PIT-PHF",
+            "route": 307,
+            "line": "AA",
+            "fleet": "CRJ700",
+            "day": 7,
+            "sequenceWithinRoute": 5,
+            "pairing": 818,
+            "flight": 1918,
+            "origin": "PIT",
+            "destination": "PHF",
+            "departure": "16:46",
+            "arrival": "17:55",
+            "departureMinute": 1006,
+            "arrivalMinute": 1075
+          },
+          "after": {
+            "id": "V110-R307-PIT-PHF",
+            "route": 307,
+            "line": "AA",
+            "fleet": "CRJ700",
+            "day": 7,
+            "sequenceWithinRoute": 7,
+            "pairing": 818,
+            "flight": 1918,
+            "origin": "PIT",
+            "destination": "PHF",
+            "departure": "16:56",
+            "arrival": "18:05",
+            "departureMinute": 1016,
+            "arrivalMinute": 1085
+          }
+        },
+        {
+          "flight": 1401,
+          "before": {
+            "id": "CHS-PHF-CRJ700-06-IN",
+            "route": 307,
+            "line": "AA",
+            "fleet": "CRJ700",
+            "day": 7,
+            "sequenceWithinRoute": 6,
+            "pairing": 796,
+            "flight": 1401,
+            "origin": "PHF",
+            "destination": "CHS",
+            "departure": "18:35",
+            "arrival": "19:50",
+            "departureMinute": 1115,
+            "arrivalMinute": 1190
+          },
+          "after": {
+            "id": "CHS-PHF-CRJ700-06-IN",
+            "route": 307,
+            "line": "AA",
+            "fleet": "CRJ700",
+            "day": 7,
+            "sequenceWithinRoute": 8,
+            "pairing": 796,
+            "flight": 1401,
+            "origin": "PHF",
+            "destination": "CHS",
+            "departure": "18:52",
+            "arrival": "20:07",
+            "departureMinute": 1132,
+            "arrivalMinute": 1207
+          }
+        }
+      ],
+      "groundMinutesPIT_BHM_PIT_PHF": [
+        40,
+        40,
+        40,
+        47
+      ],
+      "structural": {
+        "checks": 18,
+        "passed": 18,
+        "failed": 0
+      },
+      "operating": {
+        "checks": 25,
+        "passed": 19,
+        "failed": 0,
+        "warnings": 3,
+        "notEvaluated": 1,
+        "overridden": 2,
+        "effectiveErrorFindings": 0,
+        "effectiveWarningFindings": 165
+      },
+      "overnightStatus": "pass",
+      "planningStatus": "pass",
+      "failedChecks": [],
+      "standClaims": 14,
+      "standMinutes": 3253,
+      "stations": [
+        {
+          "code": "PHF",
+          "nGates": 16,
+          "nStands": 8,
+          "peakUsed": 18
+        },
+        {
+          "code": "BHM",
+          "nGates": 6,
+          "nStands": 4,
+          "peakUsed": 8
+        },
+        {
+          "code": "PIT",
+          "nGates": 4,
+          "nStands": 2,
+          "peakUsed": 2
+        }
+      ]
+    },
+    "buffered": {
+      "valid": true,
+      "newFlights": [
+        {
+          "id": "V130-R307-PIT-BHM",
+          "route": 307,
+          "line": "AA",
+          "fleet": "CRJ700",
+          "day": 7,
+          "sequenceWithinRoute": 5,
+          "pairing": 899,
+          "flight": 2193,
+          "origin": "PIT",
+          "destination": "BHM",
+          "departure": "12:09",
+          "arrival": "12:55",
+          "departureMinute": 729,
+          "arrivalMinute": 775
+        },
+        {
+          "id": "V130-R307-BHM-PIT",
+          "route": 307,
+          "line": "AA",
+          "fleet": "CRJ700",
+          "day": 7,
+          "sequenceWithinRoute": 6,
+          "pairing": 900,
+          "flight": 2194,
+          "origin": "BHM",
+          "destination": "PIT",
+          "departure": "13:40",
+          "arrival": "16:26",
+          "departureMinute": 820,
+          "arrivalMinute": 986
+        }
+      ],
+      "existingFlightChanges": [
+        {
+          "flight": 1918,
+          "before": {
+            "id": "V110-R307-PIT-PHF",
+            "route": 307,
+            "line": "AA",
+            "fleet": "CRJ700",
+            "day": 7,
+            "sequenceWithinRoute": 5,
+            "pairing": 818,
+            "flight": 1918,
+            "origin": "PIT",
+            "destination": "PHF",
+            "departure": "16:46",
+            "arrival": "17:55",
+            "departureMinute": 1006,
+            "arrivalMinute": 1075
+          },
+          "after": {
+            "id": "V110-R307-PIT-PHF",
+            "route": 307,
+            "line": "AA",
+            "fleet": "CRJ700",
+            "day": 7,
+            "sequenceWithinRoute": 7,
+            "pairing": 818,
+            "flight": 1918,
+            "origin": "PIT",
+            "destination": "PHF",
+            "departure": "17:06",
+            "arrival": "18:15",
+            "departureMinute": 1026,
+            "arrivalMinute": 1095
+          }
+        },
+        {
+          "flight": 1401,
+          "before": {
+            "id": "CHS-PHF-CRJ700-06-IN",
+            "route": 307,
+            "line": "AA",
+            "fleet": "CRJ700",
+            "day": 7,
+            "sequenceWithinRoute": 6,
+            "pairing": 796,
+            "flight": 1401,
+            "origin": "PHF",
+            "destination": "CHS",
+            "departure": "18:35",
+            "arrival": "19:50",
+            "departureMinute": 1115,
+            "arrivalMinute": 1190
+          },
+          "after": {
+            "id": "CHS-PHF-CRJ700-06-IN",
+            "route": 307,
+            "line": "AA",
+            "fleet": "CRJ700",
+            "day": 7,
+            "sequenceWithinRoute": 8,
+            "pairing": 796,
+            "flight": 1401,
+            "origin": "PHF",
+            "destination": "CHS",
+            "departure": "19:00",
+            "arrival": "20:15",
+            "departureMinute": 1140,
+            "arrivalMinute": 1215
+          }
+        }
+      ],
+      "groundMinutesPIT_BHM_PIT_PHF": [
+        45,
+        45,
+        40,
+        45
+      ],
+      "structural": {
+        "checks": 18,
+        "passed": 18,
+        "failed": 0
+      },
+      "operating": {
+        "checks": 25,
+        "passed": 19,
+        "failed": 0,
+        "warnings": 3,
+        "notEvaluated": 1,
+        "overridden": 2,
+        "effectiveErrorFindings": 0,
+        "effectiveWarningFindings": 165
+      },
+      "overnightStatus": "pass",
+      "planningStatus": "pass",
+      "failedChecks": [],
+      "standClaims": 14,
+      "standMinutes": 3253,
+      "stations": [
+        {
+          "code": "PHF",
+          "nGates": 16,
+          "nStands": 8,
+          "peakUsed": 18
+        },
+        {
+          "code": "BHM",
+          "nGates": 6,
+          "nStands": 4,
+          "peakUsed": 8
+        },
+        {
+          "code": "PIT",
+          "nGates": 4,
+          "nStands": 2,
+          "peakUsed": 2
+        }
+      ]
+    }
+  }
+}

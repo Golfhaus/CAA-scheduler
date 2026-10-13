@@ -7,7 +7,7 @@ const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const load=async p=>JSON.parse(await fs.readFile(path.join(root,p),'utf8'));
 const base=await load('data/schedules/schedule_7_v1_3_0_draft/canonical_schedule.json');
 const released=await load('data/schedules/schedule_7_v1_2_5/canonical_schedule.json');
-if(!process.argv.includes('--accepted-only')){
+if(!process.argv.includes('--accepted-only')&&!process.argv.includes('--r307')){
  const proposal=await load('config/proposals/schedule_7_v1_3_0_pgd_cak_2.json');
  const digest=createHash('sha256').update(await fs.readFile(path.join(root,'data/schedules/schedule_7_v1_3_0_draft/canonical_schedule.json'))).digest('hex');
  if(digest!==proposal.baseSchedule.sha256)throw new Error('Historical proposals use an earlier draft. Use --accepted-only for the current accepted schedule; re-review proposals before comparing them.');
@@ -27,16 +27,36 @@ const releasedPaths=scan(released),draftPaths=scan(base);
 accepted.newChoices=[...draftPaths.map.keys()].filter(k=>!releasedPaths.map.has(k)).length;
 accepted.geographic=acceptedGeo;
 accepted.targets={};
-for(const[a,b]of[['BLV','SFB'],['MKE','SFB'],['PGD','CAK']])accepted.targets[a+'-'+b]=[...draftPaths.map].filter(([,p])=>p.a===a&&p.b===b&&p.stops<=1).map(([flights,p])=>({flights,...p}));
+for(const[a,b]of[['BLV','SFB'],['MKE','SFB'],['PGD','CAK'],['DAL','PNS'],['VPS','BWI'],['RDU','SGF']])accepted.targets[a+'-'+b]=[...draftPaths.map].filter(([,p])=>p.a===a&&p.b===b&&p.stops<=1).map(([flights,p])=>({flights,...p}));
 if(process.argv.includes('--accepted-only')){
  for(const comparison of [accepted,acceptedGeo]){
-  if(comparison.lostChoices||comparison.lostMarkets.length||comparison.lostOneStopMarkets.length||comparison.slowerFastest.length)throw new Error('Accepted timing adjustments cause a service regression');
+  if(comparison.lostChoices||comparison.lostMarkets.length||comparison.lostOneStopMarkets.length)throw new Error('Accepted timing adjustments lose service');
+  if(comparison.slowerFastest.some(p=>!p.market.startsWith('MFE-')||p.newMinutes-p.oldMinutes>3))throw new Error('Slower journey exceeds the reviewed F1589 supporting-retiming tradeoff');
  }
- for(const market of ['BLV-SFB','MKE-SFB','PGD-CAK'])if(!accepted.targets[market].length)throw new Error(`Missing accepted one-stop market ${market}`);
+ for(const market of ['BLV-SFB','MKE-SFB','PGD-CAK','DAL-PNS','VPS-BWI','RDU-SGF'])if(!accepted.targets[market].length)throw new Error(`Missing accepted one-stop market ${market}`);
 }
 await fs.writeFile(path.join(root,'data/schedules/schedule_7_v1_3_0_draft/connection_review.json'),JSON.stringify(accepted,null,2)+'\n');
 console.log('Accepted draft',JSON.stringify(accepted));
 if(process.argv.includes('--accepted-only'))process.exit(0);
+if(process.argv.includes('--r307')){
+ const old=scan(base),oldGeo=scan(base,true),results={};
+ for(const name of ['minimum','buffered']){
+  const c=await load('outputs/schedule_7_v1_3_0_r307/'+name+'_canonical.json');
+  const now=scan(c),nowGeo=scan(c,true);
+  const all=compare(old,now),geo=compare(oldGeo,nowGeo);
+  all.newChoices=[...now.map.keys()].filter(k=>!old.map.has(k)).length;
+  const flights=c.legs.filter(l=>l.id.startsWith('V130-R307-'));
+  const transfers=flights.map(l=>{
+   const paths=[...nowGeo.map].filter(([key,p])=>p.stops===1&&key.split(',').includes(String(l.flight))).map(([,p])=>p);
+   const markets=[...new Set(paths.map(p=>p.a+'-'+p.b))];
+   return {flight:l.flight,origin:l.origin,destination:l.destination,uniqueOneStopMarkets:markets.length,underlyingOdPerDay:markets.reduce((s,k)=>{const[a,b]=k.split('-');return s+od[a][b]},0),markets};
+  });
+  results[name]={app:all,geographic:geo,transfers};
+  console.log('R307',name,JSON.stringify({lostChoices:all.lostChoices,lostOneStop:all.lostOneStopMarkets,lostMarkets:all.lostMarkets,newChoices:all.newChoices,newOneStop:all.newOneStopMarkets,slower:all.slowerFastest,transfers}));
+ }
+ await fs.writeFile(path.join(root,'outputs/schedule_7_v1_3_0_r307/connection_review.json'),JSON.stringify(results,null,2)+'\n');
+ process.exit(0);
+}
 const directory='outputs/schedule_7_v1_3_0_shared_hub_gaps';
 const old=scan(base),oldGeo=scan(base,true);const results={};
 for(const name of ['pgd_cak_2','blv_hou_6','oma_bna_11','bna_oma_both','rfd_myr_2_flights','myr_rfd_both_new_bank']){

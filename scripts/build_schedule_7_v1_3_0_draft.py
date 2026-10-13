@@ -9,15 +9,15 @@ from caa_scheduler.operating_validation import validate_operating_rules,validate
 from caa_scheduler.planning import reconstruct_planning_snapshot,validate_planning_snapshot
 from caa_scheduler.gate_export import export_gate_schedule
 from caa_scheduler.timetable import export_timetable
-CONFIG=ROOT/'config/optimizations/schedule_7_v1_3_0_round_1.json'
+CONFIG=ROOT/'config/optimizations/schedule_7_v1_3_0_round_2.json'
 config=json.loads(CONFIG.read_text());source=ROOT/config['baseSchedule']['canonical']
 assert hashlib.sha256(source.read_bytes()).hexdigest()==config['baseSchedule']['sha256'],'Stale canonical input'
 base=json.loads(source.read_text());draft=apply_optimization_overlay(base,config)
 changed={x['legId'] for x in config['retimeLegs']}
 before={l['id']:l for l in base['legs']};after={l['id']:l for l in draft['legs']}
 assert before.keys()==after.keys()
-assert len(changed)==3
-assert {after[x]['flight'] for x in changed}=={1437,1036,2017}
+assert len(changed)==7
+assert {after[x]['flight'] for x in changed}=={1437,1036,2017,2019,1727,1723,1589}
 for identifier,leg in after.items():
  if identifier not in changed:assert leg==before[identifier]
  else:
