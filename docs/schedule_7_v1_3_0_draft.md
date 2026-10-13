@@ -32,7 +32,7 @@ MKE→SFB's new one-stop option takes 7h57 versus the retained 5h10 two-stop opt
 
 ## R307 PIT hold review
 
-PIT's current 11:24–16:46 ET hold is ten minutes too short for PIT–BHM–PIT. A [validated modification proposal](schedule_7_v1_3_0_r307_review.md) exists, but the extension is not accepted: delaying the subsequent PHF flying costs 19 itinerary choices and makes PIT→DAL's fastest journey 140 minutes slower. The accepted draft has no added R307 legs or R307 clock changes.
+PIT's current 11:24–16:46 ET hold is ten minutes too short for PIT–BHM–PIT. A [validated modification proposal](schedule_7_v1_3_0_r307_review.md) exists, but the extension is not accepted: delaying the subsequent PHF flying costs 19 itinerary choices and makes PIT→DAL's fastest journey 140 minutes slower. The subsequent [PIT–DAY–PIT review](schedule_7_v1_3_0_r307_day_review.md) offers a validated alternative within the unchanged hold, creating PIT→BHM one-stop service and improving other markets without service losses. It remains a proposal; the accepted draft has no added R307 legs or R307 clock changes.
 
 ## Reproduction and pending work
 
