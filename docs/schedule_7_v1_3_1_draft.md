@@ -1,8 +1,12 @@
-# Schedule 7 v1.3.1 draft — RFD connections over JAX
+# Schedule 7 v1.3.1 draft — RFD and northeast/Florida connections
 
 Started October 12, 2026 from main commit `80185b5dd8464899a6f09cb8249e54e264185aa4`, the published v1.3.0 canonical. This is an **unpublished draft**, not a release. The app default and public manifest remain v1.3.0. The user authorized use of spare fleet where system demand supports it.
 
-Updated October 13, 2026: the reviewed MCI turn is accepted into R724. Northeast/FLP work is at the hypothesis-validation stage only.
+Updated October 13, 2026: round 3 adds one-stop PGD/DAB service for HPN, HVN, ISP, BTV and ORH through SYR, using two additional CRJ700 aircraft-days. The current draft has **1,212 flights / 184 routes / 19 lines**, with zero effective native errors. See the [accepted northeast service and tradeoffs](schedule_7_v1_3_1_ne_service.md). It changes 13 existing clocks and includes reviewed network losses; the original flight-preservation/no-loss statements below describe rounds 1–2 only.
+
+## Historical RFD case: rounds 1–2
+
+The following records the accepted RFD/JAX/MCI decision before northeast round 3. Its numeric totals and zero-loss comparisons are historical. Current reproduction uses round 3; the builder can regenerate the pinned round-2 comparison input with `--round-2`.
 
 ## Selected flying
 
@@ -76,7 +80,7 @@ node scripts/audit_schedule_7_v1_3_1_connections.mjs
 python scripts/review_schedule_7_v1_3_1_rfd.py
 ```
 
-The builder enforces the pinned v1.3.0 SHA and verifies original-flight preservation, the exact six new flights, legal 12-day lines, fleet use, fixed gates/stands and native hard stops. The network audit enforces all 12 requested timetable connections, the 10 geographically suitable priority connections, zero itinerary/coverage losses and zero slower fastest journeys. No superseded release package is reconstructed. Published v1.3.0 remains the latest-only regression target until release authorization.
+The builder enforces the pinned v1.3.0 SHA and verifies original-flight preservation, the exact six new flights, legal 12-day lines, fleet use, fixed gates/stands and native hard stops. The historical round-2 comparison established all 12 requested timetable connections, 10 geographically suitable priority connections and zero losses. The current audit preserves those connections and additionally checks the accepted northeast priorities and explicitly reviewed round-3 coverage tradeoffs. No superseded release package is reconstructed. Published v1.3.0 remains the latest-only regression target until release authorization.
 
 Configuration: `config/optimizations/schedule_7_v1_3_1_round_2.json` (cumulative accepted flying). Round 1 is the historical four-leg checkpoint. Draft package: `data/schedules/schedule_7_v1_3_1_draft/`. Corridor/idle screen: `outputs/schedule_7_v1_3_1/corridor_screen.json`.
 
@@ -86,4 +90,4 @@ The [October 13 R724 evening review](schedule_7_v1_3_1_evening_review.md) identi
 
 ## Northeast/FLP hypothesis validation
 
-The [current coverage audit](schedule_7_v1_3_1_ne_flp_coverage.md) confirms 25 of 45 northeast/FLP city pairs lack direct or one-stop service in both directions. PGD accounts for 77% of the recorded demand in those gaps. This is validation only: no northeast/Florida feeder or bank changes are accepted yet.
+The [current coverage audit](schedule_7_v1_3_1_ne_flp_coverage.md) confirms 25 of 45 northeast/FLP city pairs lack direct or one-stop service in both directions. PGD accounts for 77% of the recorded demand in those gaps. This is the historical starting evidence. The [round-3 service review](schedule_7_v1_3_1_ne_service.md) now records the accepted PGD/DAB design and current tradeoffs.

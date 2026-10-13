@@ -4,8 +4,8 @@
   "sourceKind": "canonical_reconstruction",
   "demandDataVersion": "bts-db1c-6mo-jul2025-apr2026-v7",
   "summary": {
-    "legCount": 1198,
-    "marketRows": 664,
+    "legCount": 1212,
+    "marketRows": 674,
     "stationCount": 105,
     "fleetTypes": 4
   },
@@ -28,11 +28,11 @@
     },
     "CRJ700": {
       "aircraftCount": 65,
-      "aircraftDaysUsed": 54,
-      "legCount": 334,
-      "blockMinutes": 34488,
-      "minimumTurnMinutes": 11200,
-      "requiredAircraftMinutes": 45688
+      "aircraftDaysUsed": 56,
+      "legCount": 348,
+      "blockMinutes": 35874,
+      "minimumTurnMinutes": 11680,
+      "requiredAircraftMinutes": 47554
     },
     "CRJ200": {
       "aircraftCount": 80,
@@ -1828,6 +1828,12 @@
     },
     {
       "fleet": "CRJ700",
+      "origin": "BDL",
+      "destination": "SYR",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ700",
       "origin": "BHM",
       "destination": "AUS",
       "legs": 1
@@ -2009,7 +2015,19 @@
     {
       "fleet": "CRJ700",
       "origin": "DAB",
+      "destination": "JAX",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ700",
+      "origin": "DAB",
       "destination": "PHF",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ700",
+      "origin": "DAB",
+      "destination": "SYR",
       "legs": 1
     },
     {
@@ -2183,6 +2201,12 @@
     {
       "fleet": "CRJ700",
       "origin": "JAX",
+      "destination": "DAB",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ700",
+      "origin": "JAX",
       "destination": "DAY",
       "legs": 1
     },
@@ -2232,7 +2256,7 @@
       "fleet": "CRJ700",
       "origin": "JAX",
       "destination": "PGD",
-      "legs": 1
+      "legs": 2
     },
     {
       "fleet": "CRJ700",
@@ -2268,7 +2292,7 @@
       "fleet": "CRJ700",
       "origin": "JAX",
       "destination": "SYR",
-      "legs": 1
+      "legs": 2
     },
     {
       "fleet": "CRJ700",
@@ -2430,7 +2454,7 @@
       "fleet": "CRJ700",
       "origin": "PGD",
       "destination": "JAX",
-      "legs": 1
+      "legs": 2
     },
     {
       "fleet": "CRJ700",
@@ -2442,6 +2466,12 @@
       "fleet": "CRJ700",
       "origin": "PGD",
       "destination": "PIE",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ700",
+      "origin": "PGD",
+      "destination": "SYR",
       "legs": 1
     },
     {
@@ -2573,6 +2603,12 @@
     {
       "fleet": "CRJ700",
       "origin": "PHF",
+      "destination": "RDU",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ700",
+      "origin": "PHF",
       "destination": "RFD",
       "legs": 1
     },
@@ -2665,6 +2701,12 @@
       "origin": "RDU",
       "destination": "DAY",
       "legs": 5
+    },
+    {
+      "fleet": "CRJ700",
+      "origin": "RDU",
+      "destination": "PHF",
+      "legs": 1
     },
     {
       "fleet": "CRJ700",
@@ -2771,6 +2813,12 @@
     {
       "fleet": "CRJ700",
       "origin": "SYR",
+      "destination": "BDL",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ700",
+      "origin": "SYR",
       "destination": "BNA",
       "legs": 1
     },
@@ -2801,13 +2849,25 @@
     {
       "fleet": "CRJ700",
       "origin": "SYR",
-      "destination": "JAX",
+      "destination": "DAB",
       "legs": 1
     },
     {
       "fleet": "CRJ700",
       "origin": "SYR",
+      "destination": "JAX",
+      "legs": 2
+    },
+    {
+      "fleet": "CRJ700",
+      "origin": "SYR",
       "destination": "MCI",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ700",
+      "origin": "SYR",
+      "destination": "PGD",
       "legs": 1
     },
     {
@@ -4038,7 +4098,7 @@
     "AUS": 14,
     "AVL": 3,
     "AVP": 2,
-    "BDL": 10,
+    "BDL": 11,
     "BGR": 2,
     "BHM": 48,
     "BLV": 7,
@@ -4057,7 +4117,7 @@
     "COU": 2,
     "CRP": 2,
     "CRW": 2,
-    "DAB": 5,
+    "DAB": 7,
     "DAL": 22,
     "DAY": 86,
     "DLH": 2,
@@ -4085,7 +4145,7 @@
     "IND": 7,
     "ISP": 3,
     "JAN": 4,
-    "JAX": 106,
+    "JAX": 109,
     "LBB": 4,
     "LEX": 3,
     "LIT": 4,
@@ -4105,15 +4165,15 @@
     "OKC": 4,
     "OMA": 7,
     "ORH": 3,
-    "PGD": 9,
-    "PHF": 122,
+    "PGD": 11,
+    "PHF": 123,
     "PIA": 2,
     "PIE": 19,
     "PIT": 10,
     "PNS": 5,
     "PVD": 9,
     "PWM": 6,
-    "RDU": 10,
+    "RDU": 11,
     "RFD": 32,
     "ROA": 3,
     "ROC": 6,
@@ -4126,7 +4186,7 @@
     "SHV": 2,
     "SRQ": 8,
     "SWF": 5,
-    "SYR": 95,
+    "SYR": 99,
     "TLH": 2,
     "TOL": 2,
     "TRI": 2,

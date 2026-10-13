@@ -21,14 +21,15 @@ historical references; routine regression targets only v1.3.0.
 
 ## Current development draft
 
-[Schedule 7 v1.3.1](docs/schedule_7_v1_3_1_draft.md) starts from the released
-v1.3.0 and drafts two RFD–JAX MAX9 round trips plus the accepted evening MCI
-turn using one spare aircraft-day. The current draft has 1,198 flights.
-It preserves all existing flight times, validates both directions for the six
-requested cities, and documents the ROA distance-screen and RFD stand tradeoffs.
-The [northeast/Florida coverage audit](docs/schedule_7_v1_3_1_ne_flp_coverage.md)
-is the starting evidence for the next planning effort. It is **unpublished**;
-the app default remains v1.3.0.
+[Schedule 7 v1.3.1](docs/schedule_7_v1_3_1_draft.md) starts from released
+v1.3.0 and includes R724's RFD–JAX/MCI MAX9 flying plus the accepted
+[northeast PGD/DAB connections over SYR](docs/schedule_7_v1_3_1_ne_service.md).
+The draft has **1,212 flights** and uses one additional MAX9 and two CRJ700
+aircraft-days. All five northeast cities gain one-stop service both ways to
+PGD/DAB and retain FLL/PIE/SFB/SRQ coverage. Thirteen existing clocks change;
+reviewed lower-demand connection losses and elapsed-time costs are documented.
+Native validation has zero effective errors. It is **unpublished**; the app
+default remains v1.3.0.
 
 ## Milestone 0.7 — planning foundation
 

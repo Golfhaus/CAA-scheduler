@@ -1,5 +1,7 @@
 # Northeast–Florida coverage hypothesis — v1.3.1
 
+This is the **historical round-2 hypothesis baseline**. The [accepted round-3 design](schedule_7_v1_3_1_ne_service.md) now closes the PGD/DAB priorities; its current service and tradeoffs are reviewed separately.
+
 Validated October 13, 2026, after adding the approved MCI turn to R724. **Hypothesis confirmed; no new northeast/Florida flying or bank changes have been designed or accepted in this step.** Published v1.3.0 and the current MCI-inclusive draft have identical coverage for all 90 directions audited here.
 
 ## Scope and conclusion
