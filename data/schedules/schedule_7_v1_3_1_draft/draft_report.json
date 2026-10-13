@@ -1,0 +1,120 @@
+{
+  "status": "draft; not published",
+  "baseScheduleId": "schedule_7_v1_3_0",
+  "scheduleId": "schedule_7_v1_3_1_draft",
+  "flights": 1196,
+  "routes": 182,
+  "lines": 19,
+  "originalFlightClocksPreserved": 1192,
+  "newFlights": [
+    {
+      "id": "V131-R724-RFD-JAX-AM",
+      "route": 724,
+      "line": "A",
+      "fleet": "MAX9",
+      "day": 6,
+      "sequenceWithinRoute": 1,
+      "pairing": 899,
+      "flight": 2195,
+      "origin": "RFD",
+      "destination": "JAX",
+      "departure": "05:40",
+      "arrival": "08:56",
+      "departureMinute": 340,
+      "arrivalMinute": 536
+    },
+    {
+      "id": "V131-R724-JAX-RFD-AM",
+      "route": 724,
+      "line": "A",
+      "fleet": "MAX9",
+      "day": 6,
+      "sequenceWithinRoute": 2,
+      "pairing": 900,
+      "flight": 2196,
+      "origin": "JAX",
+      "destination": "RFD",
+      "departure": "09:40",
+      "arrival": "10:56",
+      "departureMinute": 580,
+      "arrivalMinute": 656
+    },
+    {
+      "id": "V131-R724-RFD-JAX-PM",
+      "route": 724,
+      "line": "A",
+      "fleet": "MAX9",
+      "day": 6,
+      "sequenceWithinRoute": 3,
+      "pairing": 899,
+      "flight": 2197,
+      "origin": "RFD",
+      "destination": "JAX",
+      "departure": "12:14",
+      "arrival": "15:30",
+      "departureMinute": 734,
+      "arrivalMinute": 930
+    },
+    {
+      "id": "V131-R724-JAX-RFD-PM",
+      "route": 724,
+      "line": "A",
+      "fleet": "MAX9",
+      "day": 6,
+      "sequenceWithinRoute": 4,
+      "pairing": 900,
+      "flight": 2198,
+      "origin": "JAX",
+      "destination": "RFD",
+      "departure": "16:10",
+      "arrival": "17:26",
+      "departureMinute": 970,
+      "arrivalMinute": 1046
+    }
+  ],
+  "newBlockMinutes": 544,
+  "sameDayTurnsMinutes": [
+    44,
+    78,
+    40
+  ],
+  "fleetUsage": {
+    "MAX9": {
+      "used": 24,
+      "capacity": 35
+    },
+    "CRJ900": {
+      "used": 28,
+      "capacity": 45
+    },
+    "CRJ700": {
+      "used": 54,
+      "capacity": 65
+    },
+    "CRJ200": {
+      "used": 76,
+      "capacity": 80
+    },
+    "findingCount": 0,
+    "effectiveFindingCount": 0,
+    "overriddenFindingCount": 0
+  },
+  "operating": {
+    "checks": 25,
+    "passed": 19,
+    "failed": 0,
+    "warnings": 3,
+    "notEvaluated": 1,
+    "overridden": 2,
+    "effectiveErrorFindings": 0,
+    "effectiveWarningFindings": 164
+  },
+  "standClaims": 16,
+  "standMinutes": 3903,
+  "standChange": {
+    "additionalClaims": 2,
+    "additionalMinutes": 650,
+    "station": "RFD"
+  },
+  "publication": "Not authorized; manifest and app default unchanged"
+}

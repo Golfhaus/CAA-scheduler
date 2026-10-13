@@ -19,6 +19,14 @@ is the starting point for future schedule work; its pinned
 reproduces the published package. Earlier releases and review snapshots remain
 historical references; routine regression targets only v1.3.0.
 
+## Current development draft
+
+[Schedule 7 v1.3.1](docs/schedule_7_v1_3_1_draft.md) starts from the released
+v1.3.0 and drafts two RFD–JAX MAX9 round trips using one spare aircraft-day.
+It preserves all existing flight times, validates both directions for the six
+requested cities, and documents the ROA distance-screen and RFD stand tradeoffs.
+It is **unpublished**; the app default remains v1.3.0.
+
 ## Milestone 0.7 — planning foundation
 
 The migration baseline now proves this pipeline:

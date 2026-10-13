@@ -1,0 +1,444 @@
+{
+  "status": "draft analysis; publication not authorized",
+  "baseScheduleId": "schedule_7_v1_3_0",
+  "baseCanonicalSha256": "1d86a742daaec896e8a1aef4a3755ff98067eded0888ca08f0b0915fd548f4bd",
+  "hubs": {
+    "JAX": {
+      "blockMinutes": 136,
+      "hubToRfdOd": 135.6,
+      "rfdToHubOd": 133.4,
+      "feeders": {
+        "MYR": {
+          "cityToRfdOd": 42.0,
+          "rfdToCityOd": 41.5,
+          "intoHub": [
+            1628,
+            1629
+          ],
+          "fromHub": [
+            1626,
+            1627
+          ]
+        },
+        "EYW": {
+          "cityToRfdOd": 40.5,
+          "rfdToCityOd": 39.6,
+          "intoHub": [
+            1555,
+            1556
+          ],
+          "fromHub": [
+            1557,
+            1558
+          ]
+        },
+        "ECP": {
+          "cityToRfdOd": 32.8,
+          "rfdToCityOd": 32.0,
+          "intoHub": [
+            1743,
+            1744
+          ],
+          "fromHub": [
+            1741,
+            1742
+          ]
+        },
+        "ILM": {
+          "cityToRfdOd": 24.5,
+          "rfdToCityOd": 24.1,
+          "intoHub": [
+            1601,
+            1602
+          ],
+          "fromHub": [
+            1599,
+            1600
+          ]
+        },
+        "ROA": {
+          "cityToRfdOd": 19.2,
+          "rfdToCityOd": 19.6,
+          "intoHub": [
+            1561,
+            1562
+          ],
+          "fromHub": [
+            1559,
+            1560
+          ]
+        },
+        "TLH": {
+          "cityToRfdOd": 9.6,
+          "rfdToCityOd": 9.2,
+          "intoHub": [
+            1759,
+            1760
+          ],
+          "fromHub": [
+            1757,
+            1758
+          ]
+        }
+      },
+      "missingTwoWayFeeders": []
+    },
+    "BHM": {
+      "blockMinutes": 103,
+      "hubToRfdOd": 59.9,
+      "rfdToHubOd": 61.0,
+      "feeders": {
+        "MYR": {
+          "cityToRfdOd": 42.0,
+          "rfdToCityOd": 41.5,
+          "intoHub": [],
+          "fromHub": []
+        },
+        "EYW": {
+          "cityToRfdOd": 40.5,
+          "rfdToCityOd": 39.6,
+          "intoHub": [
+            1594
+          ],
+          "fromHub": [
+            1593
+          ]
+        },
+        "ECP": {
+          "cityToRfdOd": 32.8,
+          "rfdToCityOd": 32.0,
+          "intoHub": [
+            1798
+          ],
+          "fromHub": [
+            1797
+          ]
+        },
+        "ILM": {
+          "cityToRfdOd": 24.5,
+          "rfdToCityOd": 24.1,
+          "intoHub": [],
+          "fromHub": []
+        },
+        "ROA": {
+          "cityToRfdOd": 19.2,
+          "rfdToCityOd": 19.6,
+          "intoHub": [],
+          "fromHub": []
+        },
+        "TLH": {
+          "cityToRfdOd": 9.6,
+          "rfdToCityOd": 9.2,
+          "intoHub": [],
+          "fromHub": []
+        }
+      },
+      "missingTwoWayFeeders": [
+        "MYR",
+        "ILM",
+        "ROA",
+        "TLH"
+      ]
+    }
+  },
+  "existingMax9IdleScreen": [
+    {
+      "route": 708,
+      "kind": "before originator",
+      "station": "RFD",
+      "minutesAfter0430": 5,
+      "flight": 1001
+    },
+    {
+      "route": 708,
+      "kind": "same-day hold",
+      "station": "JAX",
+      "minutes": 78,
+      "afterFlight": 2025,
+      "beforeFlight": 2026
+    },
+    {
+      "route": 717,
+      "kind": "same-day hold",
+      "station": "RFD",
+      "minutes": 71,
+      "afterFlight": 1002,
+      "beforeFlight": 1118
+    },
+    {
+      "route": 717,
+      "kind": "same-day hold",
+      "station": "RFD",
+      "minutes": 162,
+      "afterFlight": 1019,
+      "beforeFlight": 1012
+    },
+    {
+      "route": 718,
+      "kind": "same-day hold",
+      "station": "RFD",
+      "minutes": 49,
+      "afterFlight": 1011,
+      "beforeFlight": 1025
+    },
+    {
+      "route": 718,
+      "kind": "same-day hold",
+      "station": "RFD",
+      "minutes": 78,
+      "afterFlight": 1017,
+      "beforeFlight": 1003
+    },
+    {
+      "route": 719,
+      "kind": "same-day hold",
+      "station": "RFD",
+      "minutes": 40,
+      "afterFlight": 1004,
+      "beforeFlight": 1117
+    },
+    {
+      "route": 719,
+      "kind": "same-day hold",
+      "station": "RFD",
+      "minutes": 41,
+      "afterFlight": 1122,
+      "beforeFlight": 1124
+    },
+    {
+      "route": 710,
+      "kind": "same-day hold",
+      "station": "RFD",
+      "minutes": 119,
+      "afterFlight": 1005,
+      "beforeFlight": 1008
+    },
+    {
+      "route": 721,
+      "kind": "same-day hold",
+      "station": "RFD",
+      "minutes": 41,
+      "afterFlight": 1032,
+      "beforeFlight": 1006
+    },
+    {
+      "route": 711,
+      "kind": "same-day hold",
+      "station": "RFD",
+      "minutes": 43,
+      "afterFlight": 1007,
+      "beforeFlight": 1104
+    },
+    {
+      "route": 711,
+      "kind": "same-day hold",
+      "station": "RFD",
+      "minutes": 56,
+      "afterFlight": 1103,
+      "beforeFlight": 1119
+    },
+    {
+      "route": 715,
+      "kind": "same-day hold",
+      "station": "JAX",
+      "minutes": 41,
+      "afterFlight": 1090,
+      "beforeFlight": 1087
+    },
+    {
+      "route": 715,
+      "kind": "same-day hold",
+      "station": "JAX",
+      "minutes": 41,
+      "afterFlight": 1091,
+      "beforeFlight": 1088
+    },
+    {
+      "route": 714,
+      "kind": "same-day hold",
+      "station": "JAX",
+      "minutes": 41,
+      "afterFlight": 1092,
+      "beforeFlight": 1089
+    },
+    {
+      "route": 707,
+      "kind": "same-day hold",
+      "station": "RFD",
+      "minutes": 46,
+      "afterFlight": 1121,
+      "beforeFlight": 1016
+    },
+    {
+      "route": 707,
+      "kind": "after terminator",
+      "station": "RFD",
+      "minutesUntilLatestDeparture": 0,
+      "flight": 1015
+    },
+    {
+      "route": 709,
+      "kind": "same-day hold",
+      "station": "RFD",
+      "minutes": 41,
+      "afterFlight": 1120,
+      "beforeFlight": 1076
+    },
+    {
+      "route": 709,
+      "kind": "same-day hold",
+      "station": "RFD",
+      "minutes": 41,
+      "afterFlight": 1075,
+      "beforeFlight": 1034
+    },
+    {
+      "route": 709,
+      "kind": "same-day hold",
+      "station": "RFD",
+      "minutes": 41,
+      "afterFlight": 1033,
+      "beforeFlight": 1018
+    },
+    {
+      "route": 720,
+      "kind": "same-day hold",
+      "station": "RFD",
+      "minutes": 43,
+      "afterFlight": 1123,
+      "beforeFlight": 1020
+    },
+    {
+      "route": 720,
+      "kind": "same-day hold",
+      "station": "RFD",
+      "minutes": 43,
+      "afterFlight": 1026,
+      "beforeFlight": 1040
+    },
+    {
+      "route": 720,
+      "kind": "same-day hold",
+      "station": "RFD",
+      "minutes": 42,
+      "afterFlight": 1039,
+      "beforeFlight": 1031
+    },
+    {
+      "route": 722,
+      "kind": "same-day hold",
+      "station": "BHM",
+      "minutes": 40,
+      "afterFlight": 1983,
+      "beforeFlight": 1984
+    },
+    {
+      "route": 722,
+      "kind": "same-day hold",
+      "station": "BHM",
+      "minutes": 40,
+      "afterFlight": 1985,
+      "beforeFlight": 1986
+    },
+    {
+      "route": 723,
+      "kind": "same-day hold",
+      "station": "JAX",
+      "minutes": 40,
+      "afterFlight": 2081,
+      "beforeFlight": 2082
+    },
+    {
+      "route": 702,
+      "kind": "same-day hold",
+      "station": "JAX",
+      "minutes": 40,
+      "afterFlight": 2119,
+      "beforeFlight": 2120
+    },
+    {
+      "route": 712,
+      "kind": "same-day hold",
+      "station": "BHM",
+      "minutes": 40,
+      "afterFlight": 1999,
+      "beforeFlight": 2000
+    },
+    {
+      "route": 703,
+      "kind": "same-day hold",
+      "station": "JAX",
+      "minutes": 57,
+      "afterFlight": 2083,
+      "beforeFlight": 2084
+    },
+    {
+      "route": 703,
+      "kind": "same-day hold",
+      "station": "JAX",
+      "minutes": 47,
+      "afterFlight": 2087,
+      "beforeFlight": 2088
+    },
+    {
+      "route": 703,
+      "kind": "same-day hold",
+      "station": "JAX",
+      "minutes": 46,
+      "afterFlight": 2089,
+      "beforeFlight": 2090
+    },
+    {
+      "route": 704,
+      "kind": "same-day hold",
+      "station": "JAX",
+      "minutes": 40,
+      "afterFlight": 2091,
+      "beforeFlight": 2092
+    },
+    {
+      "route": 704,
+      "kind": "same-day hold",
+      "station": "JAX",
+      "minutes": 42,
+      "afterFlight": 2097,
+      "beforeFlight": 2098
+    },
+    {
+      "route": 704,
+      "kind": "same-day hold",
+      "station": "BHM",
+      "minutes": 150,
+      "afterFlight": 2121,
+      "beforeFlight": 2122
+    }
+  ],
+  "timingBuffers": "TLH morning inbound and ECP/TLH evening outbound connections have 235-minute waits, five minutes inside the 240-minute maximum.",
+  "geographicCaveat": "ROA\u2013RFD via JAX has distance ratio 2.35649 and is excluded by the unchanged 2.25 opportunity screen, although the timetable accepts both connections.",
+  "minimumSameDayInsertionMinutes": {
+    "JAX": 392,
+    "BHM": 326,
+    "RFD_to_JAX": 392,
+    "RFD_to_BHM": 326
+  },
+  "maximumPriorityCitiesFedBySingleJaxDeparture": 4,
+  "selectedOutboundCoverage": [
+    {
+      "departureMinute": 580,
+      "covered": [
+        "EYW",
+        "ECP",
+        "ROA",
+        "TLH"
+      ]
+    },
+    {
+      "departureMinute": 970,
+      "covered": [
+        "MYR",
+        "ILM"
+      ]
+    }
+  ],
+  "singleRoundTripConstraint": "No bank-valid JAX departure can receive all six unchanged feeders; the maximum is four. Two departures receive all six, using one new four-leg MAX9 aircraft-day."
+}
