@@ -3,7 +3,7 @@
   "id": "v131-evening-review-day_spaced",
   "baseSchedule": {
     "scheduleId": "schedule_7_v1_3_1_draft",
-    "canonical": "data/schedules/schedule_7_v1_3_1_draft/canonical_schedule.json",
+    "canonical": "outputs/schedule_7_v1_3_1_evening/base_four_leg_canonical.json",
     "sha256": "448a9d9b15b871751d19371fad893d9313bf803f801775979aaecac985bbd23e",
     "commit": "7824040d363817d9d681d19de98d59aeeb8a076a"
   },
@@ -50,6 +50,7 @@
   "review": {
     "recommendation": "Feasible option; not implemented",
     "acceptedDraftUnchanged": true,
-    "report": "outputs/schedule_7_v1_3_1_evening/network_review.json"
+    "report": "outputs/schedule_7_v1_3_1_evening/network_review.json",
+    "source": "Historical four-leg draft, reproduced by build_schedule_7_v1_3_1_draft.py --round-1; not the current six-leg draft."
   }
 }

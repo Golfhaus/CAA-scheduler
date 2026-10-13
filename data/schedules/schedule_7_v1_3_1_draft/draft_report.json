@@ -2,7 +2,7 @@
   "status": "draft; not published",
   "baseScheduleId": "schedule_7_v1_3_0",
   "scheduleId": "schedule_7_v1_3_1_draft",
-  "flights": 1196,
+  "flights": 1198,
   "routes": 182,
   "lines": 19,
   "originalFlightClocksPreserved": 1192,
@@ -70,12 +70,46 @@
       "arrival": "17:26",
       "departureMinute": 970,
       "arrivalMinute": 1046
+    },
+    {
+      "id": "V131-EVENING-R724-RFD-MCI",
+      "route": 724,
+      "line": "A",
+      "fleet": "MAX9",
+      "day": 6,
+      "sequenceWithinRoute": 5,
+      "pairing": 687,
+      "flight": 2199,
+      "origin": "RFD",
+      "destination": "MCI",
+      "departure": "19:26",
+      "arrival": "20:40",
+      "departureMinute": 1166,
+      "arrivalMinute": 1240
+    },
+    {
+      "id": "V131-EVENING-R724-MCI-RFD",
+      "route": 724,
+      "line": "A",
+      "fleet": "MAX9",
+      "day": 6,
+      "sequenceWithinRoute": 6,
+      "pairing": 686,
+      "flight": 2200,
+      "origin": "MCI",
+      "destination": "RFD",
+      "departure": "21:20",
+      "arrival": "22:34",
+      "departureMinute": 1280,
+      "arrivalMinute": 1354
     }
   ],
-  "newBlockMinutes": 544,
+  "newBlockMinutes": 692,
   "sameDayTurnsMinutes": [
     44,
     78,
+    40,
+    120,
     40
   ],
   "fleetUsage": {
@@ -110,10 +144,10 @@
     "effectiveWarningFindings": 164
   },
   "standClaims": 16,
-  "standMinutes": 3903,
+  "standMinutes": 3595,
   "standChange": {
     "additionalClaims": 2,
-    "additionalMinutes": 650,
+    "additionalMinutes": 342,
     "station": "RFD"
   },
   "publication": "Not authorized; manifest and app default unchanged"

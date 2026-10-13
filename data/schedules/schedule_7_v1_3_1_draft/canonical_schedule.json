@@ -67,8 +67,8 @@
       "baseCanonicalSha256": "1d86a742daaec896e8a1aef4a3755ff98067eded0888ca08f0b0915fd548f4bd",
       "draftOverlays": [
         {
-          "path": "config/optimizations/schedule_7_v1_3_1_round_1.json",
-          "sha256": "81c81640ac7b820dbf2a2e1bac3947f6c4095878752081dd29da460fe6d17b24"
+          "path": "config/optimizations/schedule_7_v1_3_1_round_2.json",
+          "sha256": "6865366e334ebd3793674a9f8a1ab44edb9ce7d445be8ae8e6b00045e163e6db"
         }
       ],
       "publication": "Not authorized; app default remains schedule_7_v1_3_0"
@@ -6057,6 +6057,16 @@
       "legId": "V131-R724-JAX-RFD-PM",
       "operation": "departure",
       "bankId": "JAX-B11"
+    },
+    {
+      "legId": "V131-EVENING-R724-RFD-MCI",
+      "operation": "arrival",
+      "bankId": "MCI-B10"
+    },
+    {
+      "legId": "V131-EVENING-R724-MCI-RFD",
+      "operation": "departure",
+      "bankId": "MCI-M11"
     }
   ],
   "cities": [
@@ -27475,6 +27485,38 @@
       "arrival": "17:26",
       "departureMinute": 970,
       "arrivalMinute": 1046
+    },
+    {
+      "id": "V131-EVENING-R724-RFD-MCI",
+      "route": 724,
+      "line": "A",
+      "fleet": "MAX9",
+      "day": 6,
+      "sequenceWithinRoute": 5,
+      "pairing": 687,
+      "flight": 2199,
+      "origin": "RFD",
+      "destination": "MCI",
+      "departure": "19:26",
+      "arrival": "20:40",
+      "departureMinute": 1166,
+      "arrivalMinute": 1240
+    },
+    {
+      "id": "V131-EVENING-R724-MCI-RFD",
+      "route": 724,
+      "line": "A",
+      "fleet": "MAX9",
+      "day": 6,
+      "sequenceWithinRoute": 6,
+      "pairing": 686,
+      "flight": 2200,
+      "origin": "MCI",
+      "destination": "RFD",
+      "departure": "21:20",
+      "arrival": "22:34",
+      "departureMinute": 1280,
+      "arrivalMinute": 1354
     }
   ]
 }

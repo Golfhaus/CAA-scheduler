@@ -3,7 +3,8 @@ import {buildItineraries}from'../web/app.mjs';
 import {buildServiceAnalysis,parseAirportDemand,compareServiceAnalyses,coverageView}from'../web/opportunity-analysis.mjs';
 import path from 'node:path';import{fileURLToPath}from'node:url';import assert from'node:assert/strict';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..'),dir=root+'/outputs/schedule_7_v1_3_1_evening';
-const raw=fs.readFileSync(root+'/data/schedules/schedule_7_v1_3_1_draft/canonical_schedule.json');const base=JSON.parse(raw),demand=parseAirportDemand(fs.readFileSync(root+'/data/reference/airport_od_matrix_consolidated_v2.csv','utf8'));
+const activeSource=root+'/data/schedules/schedule_7_v1_3_1_draft/canonical_schedule.json',activeRaw=fs.readFileSync(activeSource);
+const raw=fs.readFileSync(root+'/outputs/schedule_7_v1_3_1_evening/base_four_leg_canonical.json');const base=JSON.parse(raw),demand=parseAirportDemand(fs.readFileSync(root+'/data/reference/airport_od_matrix_consolidated_v2.csv','utf8'));
 const before=buildServiceAnalysis(base,demand,buildItineraries),results={};
 const digest=p=>createHash('sha256').update(fs.readFileSync(p)).digest('hex');
 assert.equal(digest(root+'/data/reference/airport_od_matrix_consolidated_v2.csv'),'49c04922ee0cebb3fef8aad923e04bd11874587a263c9511358ddb833b860bc6');
@@ -28,5 +29,5 @@ for(const name of ['mci','day','bhm','phf']){
  if(name!=='phf'){assert.equal(app.lostPaths,0);assert.equal(app.lost.length,0);assert.equal(app.slower.length,0);assert.equal(geo.lostPaths,0);assert.equal(geo.lost.length,0);assert.equal(geo.slower.length,0);}
  console.log(name,JSON.stringify({newChoices:results[name].newChoices,newOneStops:app.gained.map(x=>x.market),lostPaths:app.lostPaths,lostCoverage:app.lost,slower:app.slower,faster:app.faster.length,geographicGains:geo.gained.map(x=>x.market),geoSlower:geo.slower,geoFaster:geo.faster.length,profile:profile.map(p=>({flight:p.flight,competitiveIndex:p.competitiveIndex}))}));
 }
-fs.writeFileSync(dir+'/network_review.json',JSON.stringify({status:'analysis only; accepted draft unchanged',baseSha256:createHash('sha256').update(raw).digest('hex'),alternatives:results,limitations:['O-D and equal-choice indices are opportunity indicators, not forecast passenger loads.','Connecting market demand excludes existing nonstop alternatives and applies a 2.25 distance screen.','Flight market totals overlap and must not be summed as unique passengers.']},null,2)+'\n');
-if(!raw.equals(fs.readFileSync(root+'/data/schedules/schedule_7_v1_3_1_draft/canonical_schedule.json')))throw Error('Accepted draft changed');
+fs.writeFileSync(dir+'/network_review.json',JSON.stringify({status:'Historical four-leg evening comparison; MCI accepted via round 2, other alternatives unaccepted',baseSha256:createHash('sha256').update(raw).digest('hex'),alternatives:results,limitations:['O-D and equal-choice indices are opportunity indicators, not forecast passenger loads.','Connecting market demand excludes existing nonstop alternatives and applies a 2.25 distance screen.','Flight market totals overlap and must not be summed as unique passengers.']},null,2)+'\n');
+if(!activeRaw.equals(fs.readFileSync(activeSource)))throw Error('Accepted draft changed');

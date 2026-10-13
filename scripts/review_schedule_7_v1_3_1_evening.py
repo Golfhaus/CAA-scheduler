@@ -1,13 +1,15 @@
 """Validate evening alternatives without modifying the accepted v1.3.1 draft."""
 from pathlib import Path
-import sys,json,hashlib
+import sys,json,hashlib,subprocess
 ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT/'src'))
 from caa_scheduler.optimization_overlay import apply_optimization_overlay
 from caa_scheduler.validation import validate_schedule
 from caa_scheduler.operating_validation import validate_operating_rules,validate_overnight_turns
 from caa_scheduler.planning import reconstruct_planning_snapshot,validate_planning_snapshot
 from caa_scheduler.gate_export import export_gate_schedule
-source=ROOT/'data/schedules/schedule_7_v1_3_1_draft/canonical_schedule.json';raw=source.read_bytes();base=json.loads(raw);output=ROOT/'outputs/schedule_7_v1_3_1_evening';output.mkdir(parents=True,exist_ok=True)
+active_source=ROOT/'data/schedules/schedule_7_v1_3_1_draft/canonical_schedule.json';active_raw=active_source.read_bytes()
+subprocess.run([sys.executable,str(ROOT/'scripts/build_schedule_7_v1_3_1_draft.py'),'--round-1'],check=True)
+source=ROOT/'outputs/schedule_7_v1_3_1_evening/base_four_leg_canonical.json';raw=source.read_bytes();base=json.loads(raw);output=ROOT/'outputs/schedule_7_v1_3_1_evening';output.mkdir(parents=True,exist_ok=True)
 def write(path,value):path.write_text(json.dumps(value,indent=2)+'\n')
 results={}
 for name in ['mci','day','bhm','phf']:
@@ -23,4 +25,4 @@ for name in ['mci','day','bhm','phf']:
  results[name]={'valid':True,'structural':structure['summary'],'operating':operating['summary'],'overnightStatus':overnight['status'],'planningStatus':planning['status'],'standUse':{'claims':len(stands),'minutes':sum(s['end']-s['start'] for s in stands)},'newFlights':[l for l in c['legs'] if l['id'] not in original],'retimedFlights':[l['flight'] for l in c['legs'] if l['id'] in changed],'overlaySha256':hashlib.sha256(config.read_bytes()).hexdigest(),'canonicalSha256':hashlib.sha256((json.dumps(c,indent=2)+'\n').encode()).hexdigest()}
  write(output/f'{name}_canonical.json',c)
  print(name,json.dumps({'valid':True,'standUse':results[name]['standUse'],'retimedFlights':results[name]['retimedFlights']}),flush=True)
-write(output/'native_review.json',{'status':'analysis only; draft not modified','baseSha256':hashlib.sha256(raw).hexdigest(),'alternatives':results});assert source.read_bytes()==raw
+write(output/'native_review.json',{'status':'Historical four-leg evening comparison; MCI accepted via round 2, others not implemented','baseSha256':hashlib.sha256(raw).hexdigest(),'alternatives':results});assert source.read_bytes()==raw and active_source.read_bytes()==active_raw

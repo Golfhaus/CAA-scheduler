@@ -10,7 +10,7 @@ const digest=p=>createHash('sha256').update(fs.readFileSync(root+'/'+p)).digest(
 const read=p=>JSON.parse(fs.readFileSync(root+'/'+p,'utf8'));
 const base=read('data/schedules/schedule_7_v1_3_0/canonical_schedule.json'),now=read('data/schedules/schedule_7_v1_3_1_draft/canonical_schedule.json');
 const od=parseAirportDemand(fs.readFileSync(root+'/data/reference/airport_od_matrix_consolidated_v2.csv','utf8'));
-const config=read('config/optimizations/schedule_7_v1_3_1_round_1.json');
+const config=read('config/optimizations/schedule_7_v1_3_1_round_2.json');
 assert.equal(digest(config.baseSchedule.canonical),config.baseSchedule.sha256);
 assert.equal(digest('data/reference/airport_od_matrix_consolidated_v2.csv'),'49c04922ee0cebb3fef8aad923e04bd11874587a263c9511358ddb833b860bc6');
 assert.equal(read('web/schedules.json').defaultScheduleId,'schedule_7_v1_3_0');
@@ -18,6 +18,7 @@ const before=buildServiceAnalysis(base,od,buildItineraries),after=buildServiceAn
 const raw=compareServiceAnalyses(before,after),geo=compareServiceAnalyses(before,after,true);
 const targets={};for(const code of ['MYR','EYW','ECP','ILM','ROA','TLH'])for(const [a,b]of[[code,'RFD'],['RFD',code]]){const r=after.records.get(a+'-'+b);targets[r.key]={demand:r.demand,before:coverageView(before.records.get(r.key),true),after:coverageView(r,true)};}
 const added=now.legs.filter(l=>l.route===724),profile=[];
+assert.equal(added.length,6);assert.deepEqual(added.map(l=>l.flight),[2195,2196,2197,2198,2199,2200]);
 for(const l of added){
  const markets=new Map();
  for(const [key,p]of after.paths){if(!p.reasonable||p.stops>1||!key.split('-').includes(String(l.flight)))continue;

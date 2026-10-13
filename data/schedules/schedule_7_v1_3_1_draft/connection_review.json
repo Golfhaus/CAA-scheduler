@@ -1,9 +1,9 @@
 {
   "baseCanonicalSha256": "1d86a742daaec896e8a1aef4a3755ff98067eded0888ca08f0b0915fd548f4bd",
-  "draftCanonicalSha256": "448a9d9b15b871751d19371fad893d9313bf803f801775979aaecac985bbd23e",
+  "draftCanonicalSha256": "f0b475b7038c20a9e3bdd93110dfbc802ebe7726a12bcfba775a849bc9077546",
   "demandSha256": "49c04922ee0cebb3fef8aad923e04bd11874587a263c9511358ddb833b860bc6",
-  "newChoices": 284,
-  "uniqueLocalAndNewOneStopMarketOd": 698.6999999999999,
+  "newChoices": 358,
+  "uniqueLocalAndNewOneStopMarketOd": 1132.8,
   "baseScheduleId": "schedule_7_v1_3_0",
   "draftScheduleId": "schedule_7_v1_3_1_draft",
   "app": {
@@ -106,6 +106,14 @@
         "afterMinutes": 392
       },
       {
+        "market": "SGF-RFD",
+        "origin": "SGF",
+        "destination": "RFD",
+        "demand": 26.2,
+        "beforeMinutes": 492,
+        "afterMinutes": 164
+      },
+      {
         "market": "ILM-RFD",
         "origin": "ILM",
         "destination": "RFD",
@@ -152,6 +160,14 @@
         "demand": 9.2,
         "beforeMinutes": 475,
         "afterMinutes": 421
+      },
+      {
+        "market": "LBB-RFD",
+        "origin": "LBB",
+        "destination": "RFD",
+        "demand": 7.9,
+        "beforeMinutes": 498,
+        "afterMinutes": 264
       },
       {
         "market": "AGS-RFD",
@@ -274,7 +290,7 @@
         "destination": "SAT",
         "demand": 134.3,
         "beforeMinutes": 343,
-        "afterMinutes": 334
+        "afterMinutes": 325
       },
       {
         "market": "RFD-JAX",
@@ -299,6 +315,22 @@
         "demand": 68.8,
         "beforeMinutes": 505,
         "afterMinutes": 451
+      },
+      {
+        "market": "BHM-RFD",
+        "origin": "BHM",
+        "destination": "RFD",
+        "demand": 59.9,
+        "beforeMinutes": 266,
+        "afterMinutes": 256
+      },
+      {
+        "market": "RFD-SDF",
+        "origin": "RFD",
+        "destination": "SDF",
+        "demand": 57.8,
+        "beforeMinutes": 204,
+        "afterMinutes": 199
       },
       {
         "market": "MYR-RFD",
@@ -333,6 +365,14 @@
         "afterMinutes": 255
       },
       {
+        "market": "ICT-RFD",
+        "origin": "ICT",
+        "destination": "RFD",
+        "demand": 34,
+        "beforeMinutes": 222,
+        "afterMinutes": 214
+      },
+      {
         "market": "VPS-RFD",
         "origin": "VPS",
         "destination": "RFD",
@@ -349,6 +389,14 @@
         "afterMinutes": 324
       },
       {
+        "market": "RFD-SGF",
+        "origin": "RFD",
+        "destination": "SGF",
+        "demand": 27.2,
+        "beforeMinutes": 276,
+        "afterMinutes": 274
+      },
+      {
         "market": "RFD-HSV",
         "origin": "RFD",
         "destination": "HSV",
@@ -363,6 +411,14 @@
         "demand": 26.8,
         "beforeMinutes": 318,
         "afterMinutes": 256
+      },
+      {
+        "market": "SGF-RFD",
+        "origin": "SGF",
+        "destination": "RFD",
+        "demand": 26.2,
+        "beforeMinutes": 492,
+        "afterMinutes": 164
       },
       {
         "market": "ILM-RFD",
@@ -389,12 +445,36 @@
         "afterMinutes": 335
       },
       {
+        "market": "JAN-RFD",
+        "origin": "JAN",
+        "destination": "RFD",
+        "demand": 15.4,
+        "beforeMinutes": 272,
+        "afterMinutes": 209
+      },
+      {
+        "market": "RFD-JAN",
+        "origin": "RFD",
+        "destination": "JAN",
+        "demand": 15.3,
+        "beforeMinutes": 230,
+        "afterMinutes": 225
+      },
+      {
         "market": "RFD-TLH",
         "origin": "RFD",
         "destination": "TLH",
         "demand": 9.2,
         "beforeMinutes": 475,
         "afterMinutes": 421
+      },
+      {
+        "market": "LBB-RFD",
+        "origin": "LBB",
+        "destination": "RFD",
+        "demand": 7.9,
+        "beforeMinutes": 498,
+        "afterMinutes": 264
       },
       {
         "market": "BTR-RFD",
@@ -419,6 +499,14 @@
         "demand": 6.8,
         "beforeMinutes": 530,
         "afterMinutes": 476
+      },
+      {
+        "market": "RFD-MAF",
+        "origin": "RFD",
+        "destination": "MAF",
+        "demand": 6.6,
+        "beforeMinutes": 428,
+        "afterMinutes": 287
       },
       {
         "market": "GNV-RFD",
@@ -539,6 +627,14 @@
         "afterMinutes": 298
       },
       {
+        "market": "SGF-RFD",
+        "origin": "SGF",
+        "destination": "RFD",
+        "demand": 26.2,
+        "beforeMinutes": null,
+        "afterMinutes": 164
+      },
+      {
         "market": "ILM-RFD",
         "origin": "ILM",
         "destination": "RFD",
@@ -569,6 +665,14 @@
         "demand": 9.2,
         "beforeMinutes": 475,
         "afterMinutes": 421
+      },
+      {
+        "market": "LBB-RFD",
+        "origin": "LBB",
+        "destination": "RFD",
+        "demand": 7.9,
+        "beforeMinutes": 498,
+        "afterMinutes": 264
       },
       {
         "market": "AGS-RFD",
@@ -691,7 +795,7 @@
         "destination": "SAT",
         "demand": 134.3,
         "beforeMinutes": 343,
-        "afterMinutes": 334
+        "afterMinutes": 325
       },
       {
         "market": "RFD-JAX",
@@ -708,6 +812,14 @@
         "demand": 123.6,
         "beforeMinutes": 326,
         "afterMinutes": 299
+      },
+      {
+        "market": "BHM-RFD",
+        "origin": "BHM",
+        "destination": "RFD",
+        "demand": 59.9,
+        "beforeMinutes": 266,
+        "afterMinutes": 256
       },
       {
         "market": "MYR-RFD",
@@ -742,12 +854,28 @@
         "afterMinutes": 255
       },
       {
+        "market": "ICT-RFD",
+        "origin": "ICT",
+        "destination": "RFD",
+        "demand": 34,
+        "beforeMinutes": 222,
+        "afterMinutes": 214
+      },
+      {
         "market": "VPS-RFD",
         "origin": "VPS",
         "destination": "RFD",
         "demand": 30.8,
         "beforeMinutes": 424,
         "afterMinutes": 298
+      },
+      {
+        "market": "RFD-SGF",
+        "origin": "RFD",
+        "destination": "SGF",
+        "demand": 27.2,
+        "beforeMinutes": 276,
+        "afterMinutes": 274
       },
       {
         "market": "ILM-RFD",
@@ -766,12 +894,36 @@
         "afterMinutes": 320
       },
       {
+        "market": "JAN-RFD",
+        "origin": "JAN",
+        "destination": "RFD",
+        "demand": 15.4,
+        "beforeMinutes": 272,
+        "afterMinutes": 209
+      },
+      {
+        "market": "RFD-JAN",
+        "origin": "RFD",
+        "destination": "JAN",
+        "demand": 15.3,
+        "beforeMinutes": 230,
+        "afterMinutes": 225
+      },
+      {
         "market": "RFD-TLH",
         "origin": "RFD",
         "destination": "TLH",
         "demand": 9.2,
         "beforeMinutes": 475,
         "afterMinutes": 421
+      },
+      {
+        "market": "LBB-RFD",
+        "origin": "LBB",
+        "destination": "RFD",
+        "demand": 7.9,
+        "beforeMinutes": 498,
+        "afterMinutes": 264
       },
       {
         "market": "BTR-RFD",
@@ -796,6 +948,14 @@
         "demand": 6.8,
         "beforeMinutes": 530,
         "afterMinutes": 476
+      },
+      {
+        "market": "RFD-MAF",
+        "origin": "RFD",
+        "destination": "MAF",
+        "demand": 6.6,
+        "beforeMinutes": 428,
+        "afterMinutes": 287
       },
       {
         "market": "GNV-RFD",
@@ -1334,7 +1494,7 @@
         "counts": [
           0,
           1,
-          2
+          3
         ],
         "best": [
           null,
@@ -3058,7 +3218,7 @@
       "uniqueMarkets": 11,
       "underlyingMarketOd": 611.7,
       "newOneStopOd": 144,
-      "equalChoiceOpportunityIndex": 307.4588095238096,
+      "equalChoiceOpportunityIndex": 306.35880952380955,
       "markets": [
         {
           "market": "RFD-JAX",
@@ -3187,8 +3347,8 @@
           "minutes": 570,
           "existingOneStop": true,
           "oldFastestMinutes": 428,
-          "newFastestMinutes": 428,
-          "equalChoiceShare": 0.5,
+          "newFastestMinutes": 287,
+          "equalChoiceShare": 0.3333333333333333,
           "newOneStop": false,
           "group": "TEX"
         }
@@ -3205,7 +3365,7 @@
       "uniqueMarkets": 16,
       "underlyingMarketOd": 639.0999999999998,
       "newOneStopOd": 147.5,
-      "equalChoiceOpportunityIndex": 249.65416666666667,
+      "equalChoiceOpportunityIndex": 247.72083333333333,
       "markets": [
         {
           "market": "RDU-RFD",
@@ -3287,7 +3447,7 @@
           "existingOneStop": true,
           "oldFastestMinutes": 274,
           "newFastestMinutes": 274,
-          "equalChoiceShare": 0.5,
+          "equalChoiceShare": 0.3333333333333333,
           "newOneStop": false,
           "group": "TEX"
         },
@@ -3403,7 +3563,7 @@
     },
     {
       "competitiveMarketOd": 465.2000000000001,
-      "competitiveEqualChoiceIndex": 268.4500000000001,
+      "competitiveEqualChoiceIndex": 246.06666666666666,
       "flight": 2197,
       "origin": "RFD",
       "destination": "JAX",
@@ -3412,7 +3572,7 @@
       "uniqueMarkets": 17,
       "underlyingMarketOd": 724.8,
       "newOneStopOd": 71.7,
-      "equalChoiceOpportunityIndex": 348.83000000000015,
+      "equalChoiceOpportunityIndex": 317.20500000000004,
       "markets": [
         {
           "market": "RFD-SAT",
@@ -3421,8 +3581,8 @@
           "minutes": 334,
           "existingOneStop": true,
           "oldFastestMinutes": 343,
-          "newFastestMinutes": 334,
-          "equalChoiceShare": 0.5,
+          "newFastestMinutes": 325,
+          "equalChoiceShare": 0.3333333333333333,
           "newOneStop": false,
           "group": "TEX"
         },
@@ -3482,7 +3642,7 @@
           "existingOneStop": true,
           "oldFastestMinutes": 313,
           "newFastestMinutes": 313,
-          "equalChoiceShare": 0.5,
+          "equalChoiceShare": 0.3333333333333333,
           "newOneStop": false,
           "group": "TEX"
         },
@@ -3517,8 +3677,8 @@
           "minutes": 469,
           "existingOneStop": true,
           "oldFastestMinutes": 230,
-          "newFastestMinutes": 230,
-          "equalChoiceShare": 0.3333333333333333,
+          "newFastestMinutes": 225,
+          "equalChoiceShare": 0.25,
           "newOneStop": false,
           "group": "GCP"
         },
@@ -3752,6 +3912,276 @@
           "equalChoiceShare": 0.5,
           "newOneStop": true,
           "group": "GCP"
+        }
+      ]
+    },
+    {
+      "competitiveMarketOd": 481.80000000000007,
+      "competitiveEqualChoiceIndex": 142.975,
+      "flight": 2199,
+      "origin": "RFD",
+      "destination": "MCI",
+      "departure": "19:26",
+      "arrival": "20:40",
+      "uniqueMarkets": 7,
+      "underlyingMarketOd": 481.80000000000007,
+      "newOneStopOd": 0,
+      "equalChoiceOpportunityIndex": 142.975,
+      "markets": [
+        {
+          "market": "RFD-MCI",
+          "demand": 200.4,
+          "stops": 0,
+          "minutes": 74,
+          "existingOneStop": true,
+          "oldFastestMinutes": 74,
+          "newFastestMinutes": 74,
+          "equalChoiceShare": 0.25,
+          "newOneStop": false,
+          "group": "HUB"
+        },
+        {
+          "market": "RFD-SAT",
+          "demand": 134.3,
+          "stops": 1,
+          "minutes": 325,
+          "existingOneStop": true,
+          "oldFastestMinutes": 343,
+          "newFastestMinutes": 325,
+          "equalChoiceShare": 0.3333333333333333,
+          "newOneStop": false,
+          "group": "TEX"
+        },
+        {
+          "market": "RFD-XNA",
+          "demand": 50.2,
+          "stops": 1,
+          "minutes": 176,
+          "existingOneStop": true,
+          "oldFastestMinutes": 167,
+          "newFastestMinutes": 167,
+          "equalChoiceShare": 0.25,
+          "newOneStop": false,
+          "group": "OZK"
+        },
+        {
+          "market": "RFD-ELP",
+          "demand": 47.8,
+          "stops": 1,
+          "minutes": 323,
+          "existingOneStop": true,
+          "oldFastestMinutes": 313,
+          "newFastestMinutes": 313,
+          "equalChoiceShare": 0.3333333333333333,
+          "newOneStop": false,
+          "group": "TEX"
+        },
+        {
+          "market": "RFD-SGF",
+          "demand": 27.2,
+          "stops": 1,
+          "minutes": 274,
+          "existingOneStop": true,
+          "oldFastestMinutes": 276,
+          "newFastestMinutes": 274,
+          "equalChoiceShare": 0.5,
+          "newOneStop": false,
+          "group": "OZK"
+        },
+        {
+          "market": "RFD-JAN",
+          "demand": 15.3,
+          "stops": 1,
+          "minutes": 225,
+          "existingOneStop": true,
+          "oldFastestMinutes": 230,
+          "newFastestMinutes": 225,
+          "equalChoiceShare": 0.25,
+          "newOneStop": false,
+          "group": "GCP"
+        },
+        {
+          "market": "RFD-MAF",
+          "demand": 6.6,
+          "stops": 1,
+          "minutes": 287,
+          "existingOneStop": true,
+          "oldFastestMinutes": 428,
+          "newFastestMinutes": 287,
+          "equalChoiceShare": 0.3333333333333333,
+          "newOneStop": false,
+          "group": "TEX"
+        }
+      ]
+    },
+    {
+      "competitiveMarketOd": 402.69999999999993,
+      "competitiveEqualChoiceIndex": 144.00833333333333,
+      "flight": 2200,
+      "origin": "MCI",
+      "destination": "RFD",
+      "departure": "21:20",
+      "arrival": "22:34",
+      "uniqueMarkets": 13,
+      "underlyingMarketOd": 613,
+      "newOneStopOd": 34.1,
+      "equalChoiceOpportunityIndex": 218.4333333333333,
+      "markets": [
+        {
+          "market": "MCI-RFD",
+          "demand": 199.6,
+          "stops": 0,
+          "minutes": 74,
+          "existingOneStop": true,
+          "oldFastestMinutes": 74,
+          "newFastestMinutes": 74,
+          "equalChoiceShare": 0.25,
+          "newOneStop": false,
+          "group": "HUB"
+        },
+        {
+          "market": "MEM-RFD",
+          "demand": 86.1,
+          "stops": 1,
+          "minutes": 339,
+          "existingOneStop": true,
+          "oldFastestMinutes": 199,
+          "newFastestMinutes": 199,
+          "equalChoiceShare": 0.3333333333333333,
+          "newOneStop": false,
+          "group": "OZK"
+        },
+        {
+          "market": "BHM-RFD",
+          "demand": 59.9,
+          "stops": 1,
+          "minutes": 256,
+          "existingOneStop": true,
+          "oldFastestMinutes": 266,
+          "newFastestMinutes": 256,
+          "equalChoiceShare": 0.25,
+          "newOneStop": false,
+          "group": "GCP"
+        },
+        {
+          "market": "PNS-RFD",
+          "demand": 59.7,
+          "stops": 1,
+          "minutes": 249,
+          "existingOneStop": true,
+          "oldFastestMinutes": 244,
+          "newFastestMinutes": 244,
+          "equalChoiceShare": 0.5,
+          "newOneStop": false,
+          "group": "GCP"
+        },
+        {
+          "market": "LIT-RFD",
+          "demand": 40.3,
+          "stops": 1,
+          "minutes": 234,
+          "existingOneStop": true,
+          "oldFastestMinutes": 197,
+          "newFastestMinutes": 197,
+          "equalChoiceShare": 0.25,
+          "newOneStop": false,
+          "group": "OZK"
+        },
+        {
+          "market": "TUL-RFD",
+          "demand": 39.5,
+          "stops": 1,
+          "minutes": 219,
+          "existingOneStop": true,
+          "oldFastestMinutes": 176,
+          "newFastestMinutes": 176,
+          "equalChoiceShare": 0.5,
+          "newOneStop": false,
+          "group": "OZK"
+        },
+        {
+          "market": "ICT-RFD",
+          "demand": 34,
+          "stops": 1,
+          "minutes": 214,
+          "existingOneStop": true,
+          "oldFastestMinutes": 222,
+          "newFastestMinutes": 214,
+          "equalChoiceShare": 0.3333333333333333,
+          "newOneStop": false,
+          "group": "OZK"
+        },
+        {
+          "market": "FSD-RFD",
+          "demand": 26.2,
+          "stops": 1,
+          "minutes": 329,
+          "existingOneStop": true,
+          "oldFastestMinutes": 189,
+          "newFastestMinutes": 189,
+          "equalChoiceShare": 0.3333333333333333,
+          "newOneStop": false,
+          "group": "UMP"
+        },
+        {
+          "market": "SGF-RFD",
+          "demand": 26.2,
+          "stops": 1,
+          "minutes": 164,
+          "existingOneStop": false,
+          "oldFastestMinutes": null,
+          "newFastestMinutes": 164,
+          "equalChoiceShare": 1,
+          "newOneStop": true,
+          "group": "OZK"
+        },
+        {
+          "market": "JAN-RFD",
+          "demand": 15.4,
+          "stops": 1,
+          "minutes": 209,
+          "existingOneStop": true,
+          "oldFastestMinutes": 272,
+          "newFastestMinutes": 209,
+          "equalChoiceShare": 0.25,
+          "newOneStop": false,
+          "group": "GCP"
+        },
+        {
+          "market": "MFE-RFD",
+          "demand": 11.6,
+          "stops": 1,
+          "minutes": 414,
+          "existingOneStop": true,
+          "oldFastestMinutes": 274,
+          "newFastestMinutes": 274,
+          "equalChoiceShare": 0.3333333333333333,
+          "newOneStop": false,
+          "group": "TEX"
+        },
+        {
+          "market": "LBB-RFD",
+          "demand": 7.9,
+          "stops": 1,
+          "minutes": 264,
+          "existingOneStop": false,
+          "oldFastestMinutes": 498,
+          "newFastestMinutes": 264,
+          "equalChoiceShare": 1,
+          "newOneStop": true,
+          "group": "TEX"
+        },
+        {
+          "market": "MAF-RFD",
+          "demand": 6.6,
+          "stops": 1,
+          "minutes": 379,
+          "existingOneStop": true,
+          "oldFastestMinutes": 239,
+          "newFastestMinutes": 239,
+          "equalChoiceShare": 0.5,
+          "newOneStop": false,
+          "group": "TEX"
         }
       ]
     }

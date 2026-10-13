@@ -1,10 +1,10 @@
 # R724 evening extension review — v1.3.1
 
-Reviewed October 13, 2026 in response to the question about extending the new MAX9 beyond its 17:26 RFD terminator. **Analysis only: no option is implemented.** The accepted four-leg draft and published v1.3.0 are unchanged. Source: draft commit `7824040d363817d9d681d19de98d59aeeb8a076a`; canonical SHA-256 `448a9d9b15b871751d19371fad893d9313bf803f801775979aaecac985bbd23e`.
+Reviewed October 13, 2026 in response to the question about extending the new MAX9 beyond its 17:26 RFD terminator. **Historical comparison. MCI was accepted into the draft October 13, 2026; BHM, DAY and PHF remain unaccepted alternatives.** The tables below compare each option with the original four-leg draft; the current six-leg draft is documented in `schedule_7_v1_3_1_draft.md`. Published v1.3.0 is unchanged. Source: draft commit `7824040d363817d9d681d19de98d59aeeb8a076a`; canonical SHA-256 `448a9d9b15b871751d19371fad893d9313bf803f801775979aaecac985bbd23e`.
 
 ## Straightforward options
 
-All three below fit the existing MAX9 aircraft-day, preserve all current flight times and all six original priority pairs' connections, return to RFD for the unchanged 04:35 SFB departure on R708, and pass native operating, curfew, bank, physical gate/stand, overnight and planning checks. They require no added aircraft, inventory or bank window. Prospective flight numbers F2199/F2200 are shared across mutually exclusive alternatives; they are not accepted scheduled flights yet.
+All three below fit the existing MAX9 aircraft-day, preserve all current flight times and all six original priority pairs' connections, return to RFD for the unchanged 04:35 SFB departure on R708, and pass native operating, curfew, bank, physical gate/stand, overnight and planning checks. They require no added aircraft, inventory or bank window. Prospective flight numbers F2199/F2200 are shared across mutually exclusive alternatives; F2199/F2200 now identify the accepted MCI flights. The other alternatives remain mutually exclusive historical proposals.
 
 | Via | RFD outbound, local | Return to RFD, local | Added block | Total R724 block |
 |---|---|---|---|---|
@@ -64,4 +64,4 @@ python scripts/review_schedule_7_v1_3_1_evening.py
 node scripts/audit_schedule_7_v1_3_1_evening.mjs
 ```
 
-The Python script enforces the unchanged draft fingerprint, validates four proposal overlays and original-flight preservation, and writes native evidence plus temporary candidate canonicals. The JavaScript script applies the app's full itinerary enumeration and geographic screen and asserts zero losses/slowdowns for the MCI, BHM and DAY options. PHF's losses are deliberately reported rather than treated as acceptable. The accepted draft is checked unchanged after both runs. Reports: `outputs/schedule_7_v1_3_1_evening/native_review.json` and `network_review.json`. Proposals: `config/proposals/schedule_7_v1_3_1_evening_{mci,bhm,day,phf}.json`.
+The Python script first reproduces the SHA-pinned historical four-leg input from round 1 without changing the current accepted draft, then enforces that historical fingerprint, validates four proposal overlays and original-flight preservation, and writes native evidence plus temporary candidate canonicals. The JavaScript script applies the app's full itinerary enumeration and geographic screen and asserts zero losses/slowdowns for the MCI, BHM and DAY options. PHF's losses are deliberately reported rather than treated as acceptable. The accepted draft is checked unchanged after both runs. Reports: `outputs/schedule_7_v1_3_1_evening/native_review.json` and `network_review.json`. Proposals: `config/proposals/schedule_7_v1_3_1_evening_{mci,bhm,day,phf}.json`.

@@ -753,7 +753,7 @@
           "arrivalCity": "ALB",
           "departureCity": "VPS",
           "moveTo": {
-            "row": 2,
+            "row": 1,
             "rowType": "stand"
           }
         },
@@ -768,7 +768,7 @@
           "arrivalCity": "MHT",
           "departureCity": "MLB",
           "moveTo": {
-            "row": 1,
+            "row": 2,
             "rowType": "stand"
           }
         },
@@ -800,7 +800,7 @@
           "label": "328",
           "fleet": "CRJ700",
           "kind": "turn",
-          "row": 2,
+          "row": 1,
           "rowType": "stand",
           "arrivalCity": "ALB",
           "departureCity": "VPS",
@@ -819,7 +819,7 @@
           "label": "327",
           "fleet": "CRJ700",
           "kind": "turn",
-          "row": 1,
+          "row": 2,
           "rowType": "stand",
           "arrivalCity": "MHT",
           "departureCity": "MLB",
@@ -986,7 +986,7 @@
           "arrivalCity": "ALB",
           "departureCity": "VPS",
           "moveFrom": {
-            "row": 2,
+            "row": 1,
             "rowType": "stand"
           }
         },
@@ -1001,7 +1001,7 @@
           "arrivalCity": "MHT",
           "departureCity": "MLB",
           "moveFrom": {
-            "row": 1,
+            "row": 2,
             "rowType": "stand"
           }
         },
@@ -4747,6 +4747,17 @@
         },
         {
           "start": 1240,
+          "end": 1280,
+          "label": "724",
+          "fleet": "MAX9",
+          "kind": "turn",
+          "row": 8,
+          "rowType": "gate",
+          "arrivalCity": "RFD",
+          "departureCity": "RFD"
+        },
+        {
+          "start": 1240,
           "end": 1790,
           "label": "154 -> 155",
           "fleet": "CRJ200",
@@ -4762,7 +4773,7 @@
           "label": "170",
           "fleet": "CRJ200",
           "kind": "turn",
-          "row": 8,
+          "row": 9,
           "rowType": "gate",
           "arrivalCity": "CAK",
           "departureCity": "XNA"
@@ -4773,7 +4784,7 @@
           "label": "155",
           "fleet": "CRJ200",
           "kind": "turn",
-          "row": 10,
+          "row": 11,
           "rowType": "gate",
           "arrivalCity": "JAN",
           "departureCity": "JAN"
@@ -4784,7 +4795,7 @@
           "label": "149",
           "fleet": "CRJ200",
           "kind": "turn",
-          "row": 9,
+          "row": 10,
           "rowType": "gate",
           "arrivalCity": "BHM",
           "departureCity": "DSM"
@@ -13246,18 +13257,14 @@
         },
         {
           "start": 1046,
-          "end": 1091,
-          "label": "724 -> 708",
+          "end": 1166,
+          "label": "724",
           "fleet": "MAX9",
-          "kind": "ron",
+          "kind": "turn",
           "row": 1,
           "rowType": "gate",
           "arrivalCity": "JAX",
-          "departureCity": "SFB",
-          "moveTo": {
-            "row": 1,
-            "rowType": "stand"
-          }
+          "departureCity": "MCI"
         },
         {
           "start": 1059,
@@ -13294,25 +13301,6 @@
           "moveFrom": {
             "row": 1,
             "rowType": "stand"
-          }
-        },
-        {
-          "start": 1091,
-          "end": 1655,
-          "label": "724 -> 708",
-          "fleet": "MAX9",
-          "kind": "ron",
-          "row": 1,
-          "rowType": "stand",
-          "arrivalCity": "JAX",
-          "departureCity": "SFB",
-          "moveFrom": {
-            "row": 1,
-            "rowType": "gate"
-          },
-          "moveTo": {
-            "row": 2,
-            "rowType": "gate"
           }
         },
         {
@@ -13370,7 +13358,7 @@
           "arrivalCity": "DAY",
           "departureCity": "DAY",
           "moveTo": {
-            "row": 2,
+            "row": 1,
             "rowType": "stand"
           }
         },
@@ -13380,7 +13368,7 @@
           "label": "342 -> 343",
           "fleet": "CRJ700",
           "kind": "ron",
-          "row": 2,
+          "row": 1,
           "rowType": "stand",
           "arrivalCity": "DAY",
           "departureCity": "DAY",
@@ -13389,7 +13377,7 @@
             "rowType": "gate"
           },
           "moveTo": {
-            "row": 3,
+            "row": 2,
             "rowType": "gate"
           }
         },
@@ -13403,6 +13391,21 @@
           "rowType": "gate",
           "arrivalCity": "BNA",
           "departureCity": "PGD"
+        },
+        {
+          "start": 1354,
+          "end": 1399,
+          "label": "724 -> 708",
+          "fleet": "MAX9",
+          "kind": "ron",
+          "row": 1,
+          "rowType": "gate",
+          "arrivalCity": "MCI",
+          "departureCity": "SFB",
+          "moveTo": {
+            "row": 2,
+            "rowType": "stand"
+          }
         },
         {
           "start": 1381,
@@ -13427,6 +13430,25 @@
           "departureCity": "JAX"
         },
         {
+          "start": 1399,
+          "end": 1655,
+          "label": "724 -> 708",
+          "fleet": "MAX9",
+          "kind": "ron",
+          "row": 2,
+          "rowType": "stand",
+          "arrivalCity": "MCI",
+          "departureCity": "SFB",
+          "moveFrom": {
+            "row": 1,
+            "rowType": "gate"
+          },
+          "moveTo": {
+            "row": 3,
+            "rowType": "gate"
+          }
+        },
+        {
           "start": 1402,
           "end": 1480,
           "label": "718",
@@ -13443,12 +13465,12 @@
           "label": "724 -> 708",
           "fleet": "MAX9",
           "kind": "ron",
-          "row": 2,
+          "row": 3,
           "rowType": "gate",
-          "arrivalCity": "JAX",
+          "arrivalCity": "MCI",
           "departureCity": "SFB",
           "moveFrom": {
-            "row": 1,
+            "row": 2,
             "rowType": "stand"
           }
         },
@@ -13458,12 +13480,12 @@
           "label": "342 -> 343",
           "fleet": "CRJ700",
           "kind": "ron",
-          "row": 3,
+          "row": 2,
           "rowType": "gate",
           "arrivalCity": "DAY",
           "departureCity": "DAY",
           "moveFrom": {
-            "row": 2,
+            "row": 1,
             "rowType": "stand"
           }
         }

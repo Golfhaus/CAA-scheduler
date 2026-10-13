@@ -4,7 +4,7 @@
   "sourceKind": "canonical_reconstruction",
   "demandDataVersion": "bts-db1c-6mo-jul2025-apr2026-v7",
   "summary": {
-    "legCount": 1196,
+    "legCount": 1198,
     "marketRows": 664,
     "stationCount": 105,
     "fleetTypes": 4
@@ -13,10 +13,10 @@
     "MAX9": {
       "aircraftCount": 35,
       "aircraftDaysUsed": 24,
-      "legCount": 168,
-      "blockMinutes": 18460,
-      "minimumTurnMinutes": 5760,
-      "requiredAircraftMinutes": 24220
+      "legCount": 170,
+      "blockMinutes": 18608,
+      "minimumTurnMinutes": 5840,
+      "requiredAircraftMinutes": 24448
     },
     "CRJ900": {
       "aircraftCount": 45,
@@ -3732,7 +3732,7 @@
       "fleet": "MAX9",
       "origin": "MCI",
       "destination": "RFD",
-      "legs": 1
+      "legs": 2
     },
     {
       "fleet": "MAX9",
@@ -3900,7 +3900,7 @@
       "fleet": "MAX9",
       "origin": "RFD",
       "destination": "MCI",
-      "legs": 1
+      "legs": 2
     },
     {
       "fleet": "MAX9",
@@ -4090,7 +4090,7 @@
     "LEX": 3,
     "LIT": 4,
     "MAF": 3,
-    "MCI": 128,
+    "MCI": 129,
     "MCN": 2,
     "MDT": 3,
     "MEM": 4,
@@ -4114,7 +4114,7 @@
     "PVD": 9,
     "PWM": 6,
     "RDU": 10,
-    "RFD": 31,
+    "RFD": 32,
     "ROA": 3,
     "ROC": 6,
     "SAT": 7,
