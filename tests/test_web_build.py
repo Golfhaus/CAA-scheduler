@@ -75,10 +75,15 @@ class WebBuildTests(unittest.TestCase):
                 REPO_ROOT / "web" / "schedules.json", REPO_ROOT, output
             )
             self.assertEqual(result["scheduleCount"], len(MANIFEST["schedules"]))
-            self.assertEqual(result["dataFileCount"], len({
+            expected_data = {
                 filename for schedule in MANIFEST["schedules"]
                 for filename in schedule["files"].values()
-            }))
+            }
+            demand_pin = MANIFEST["buildSetup"]["demandData"]["manifest"]
+            expected_data.add(demand_pin)
+            demand_source = json.loads((REPO_ROOT / demand_pin).read_text())
+            expected_data.update(s["filename"] for s in demand_source["sources"].values())
+            self.assertEqual(result["dataFileCount"], len(expected_data))
             self.assertGreater(result["instructionEntryCount"], 40)
             self.assertTrue((output / "index.html").is_file())
             self.assertTrue((output / "favicon.svg").is_file())
