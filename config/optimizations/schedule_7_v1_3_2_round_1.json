@@ -1,0 +1,489 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "schedule-7-v1.3.2-maintenance-repair",
+  "baseSchedule": {
+    "scheduleId": "schedule_7_v1_3_1",
+    "canonical": "data/schedules/schedule_7_v1_3_1/canonical_schedule.json",
+    "sha256": "a52e5d14734d80c02f231f8e87155bc4eeba38817f7eba8b5c68fee335e206f2",
+    "commit": "d0b728cab36c0d1f3e04d5140d755c8760b3809b"
+  },
+  "schedule": {
+    "id": "schedule_7_v1_3_2_draft",
+    "version": "1.3.2-draft",
+    "label": "Schedule 7, Version 1.3.2 draft",
+    "status": "draft"
+  },
+  "approval": {
+    "scope": "Repair repeating-line maintenance validation and AO/AQ/AC rotations",
+    "publication": "Not authorized"
+  },
+  "legReassignments": [
+    {
+      "legId": "V124-R350-2-MCI-ELP",
+      "expectedRoute": 350,
+      "targetRoute": 336
+    },
+    {
+      "legId": "JAX-TYS-CRJ700-01-OUT",
+      "expectedRoute": 351,
+      "targetRoute": 331
+    },
+    {
+      "legId": "GSO-JAX-CRJ700-01-IN",
+      "expectedRoute": 331,
+      "targetRoute": 351
+    },
+    {
+      "legId": "DAY-TOL-CRJ200-01-OUT",
+      "expectedRoute": 110,
+      "targetRoute": 156
+    },
+    {
+      "legId": "MDT-SYR-CRJ200-01-IN",
+      "expectedRoute": 108,
+      "targetRoute": 166
+    },
+    {
+      "legId": "V115-R165-SYR-ROC",
+      "expectedRoute": 166,
+      "targetRoute": 108
+    },
+    {
+      "legId": "V115-R165-ROC-SYR",
+      "expectedRoute": 166,
+      "targetRoute": 108
+    }
+  ],
+  "routeReassignments": [
+    {
+      "sourceRoute": 330,
+      "expectedLine": "AL",
+      "expectedDay": 1,
+      "expectedFleet": "CRJ700",
+      "line": "AL",
+      "day": 1
+    },
+    {
+      "sourceRoute": 331,
+      "expectedLine": "AL",
+      "expectedDay": 2,
+      "expectedFleet": "CRJ700",
+      "line": "AL",
+      "day": 2
+    },
+    {
+      "sourceRoute": 351,
+      "expectedLine": "AQ",
+      "expectedDay": 1,
+      "expectedFleet": "CRJ700",
+      "line": "AL",
+      "day": 3
+    },
+    {
+      "sourceRoute": 332,
+      "expectedLine": "AL",
+      "expectedDay": 3,
+      "expectedFleet": "CRJ700",
+      "line": "AL",
+      "day": 4
+    },
+    {
+      "sourceRoute": 333,
+      "expectedLine": "AL",
+      "expectedDay": 4,
+      "expectedFleet": "CRJ700",
+      "line": "AL",
+      "day": 5
+    },
+    {
+      "sourceRoute": 334,
+      "expectedLine": "AL",
+      "expectedDay": 5,
+      "expectedFleet": "CRJ700",
+      "line": "AL",
+      "day": 6
+    },
+    {
+      "sourceRoute": 335,
+      "expectedLine": "AL",
+      "expectedDay": 6,
+      "expectedFleet": "CRJ700",
+      "line": "AL",
+      "day": 7
+    },
+    {
+      "sourceRoute": 336,
+      "expectedLine": "AL",
+      "expectedDay": 7,
+      "expectedFleet": "CRJ700",
+      "line": "AL",
+      "day": 8
+    },
+    {
+      "sourceRoute": 350,
+      "expectedLine": "AO",
+      "expectedDay": 1,
+      "expectedFleet": "CRJ700",
+      "line": "AL",
+      "day": 9
+    },
+    {
+      "sourceRoute": 337,
+      "expectedLine": "AL",
+      "expectedDay": 8,
+      "expectedFleet": "CRJ700",
+      "line": "AL",
+      "day": 10
+    },
+    {
+      "sourceRoute": 327,
+      "expectedLine": "AK",
+      "expectedDay": 8,
+      "expectedFleet": "CRJ700",
+      "line": "AL",
+      "day": 11
+    },
+    {
+      "sourceRoute": 321,
+      "expectedLine": "AK",
+      "expectedDay": 1,
+      "expectedFleet": "CRJ700",
+      "line": "AL",
+      "day": 12
+    },
+    {
+      "sourceRoute": 338,
+      "expectedLine": "AL",
+      "expectedDay": 9,
+      "expectedFleet": "CRJ700",
+      "line": "AK",
+      "day": 1
+    },
+    {
+      "sourceRoute": 339,
+      "expectedLine": "AL",
+      "expectedDay": 10,
+      "expectedFleet": "CRJ700",
+      "line": "AK",
+      "day": 2
+    },
+    {
+      "sourceRoute": 340,
+      "expectedLine": "AL",
+      "expectedDay": 11,
+      "expectedFleet": "CRJ700",
+      "line": "AK",
+      "day": 3
+    },
+    {
+      "sourceRoute": 341,
+      "expectedLine": "AL",
+      "expectedDay": 12,
+      "expectedFleet": "CRJ700",
+      "line": "AK",
+      "day": 4
+    },
+    {
+      "sourceRoute": 322,
+      "expectedLine": "AK",
+      "expectedDay": 2,
+      "expectedFleet": "CRJ700",
+      "line": "AK",
+      "day": 5
+    },
+    {
+      "sourceRoute": 323,
+      "expectedLine": "AK",
+      "expectedDay": 3,
+      "expectedFleet": "CRJ700",
+      "line": "AK",
+      "day": 6
+    },
+    {
+      "sourceRoute": 324,
+      "expectedLine": "AK",
+      "expectedDay": 4,
+      "expectedFleet": "CRJ700",
+      "line": "AK",
+      "day": 7
+    },
+    {
+      "sourceRoute": 325,
+      "expectedLine": "AK",
+      "expectedDay": 5,
+      "expectedFleet": "CRJ700",
+      "line": "AK",
+      "day": 8
+    },
+    {
+      "sourceRoute": 352,
+      "expectedLine": "AK",
+      "expectedDay": 6,
+      "expectedFleet": "CRJ700",
+      "line": "AK",
+      "day": 9
+    },
+    {
+      "sourceRoute": 326,
+      "expectedLine": "AK",
+      "expectedDay": 7,
+      "expectedFleet": "CRJ700",
+      "line": "AK",
+      "day": 10
+    },
+    {
+      "sourceRoute": 328,
+      "expectedLine": "AK",
+      "expectedDay": 9,
+      "expectedFleet": "CRJ700",
+      "line": "AK",
+      "day": 11
+    },
+    {
+      "sourceRoute": 329,
+      "expectedLine": "AK",
+      "expectedDay": 10,
+      "expectedFleet": "CRJ700",
+      "line": "AK",
+      "day": 12
+    },
+    {
+      "sourceRoute": 101,
+      "expectedLine": "AC",
+      "expectedDay": 1,
+      "expectedFleet": "CRJ200",
+      "line": "AC",
+      "day": 1
+    },
+    {
+      "sourceRoute": 102,
+      "expectedLine": "AC",
+      "expectedDay": 2,
+      "expectedFleet": "CRJ200",
+      "line": "AC",
+      "day": 2
+    },
+    {
+      "sourceRoute": 103,
+      "expectedLine": "AC",
+      "expectedDay": 3,
+      "expectedFleet": "CRJ200",
+      "line": "AC",
+      "day": 3
+    },
+    {
+      "sourceRoute": 104,
+      "expectedLine": "AC",
+      "expectedDay": 4,
+      "expectedFleet": "CRJ200",
+      "line": "AC",
+      "day": 4
+    },
+    {
+      "sourceRoute": 105,
+      "expectedLine": "AC",
+      "expectedDay": 5,
+      "expectedFleet": "CRJ200",
+      "line": "AC",
+      "day": 5
+    },
+    {
+      "sourceRoute": 106,
+      "expectedLine": "AC",
+      "expectedDay": 6,
+      "expectedFleet": "CRJ200",
+      "line": "AC",
+      "day": 6
+    },
+    {
+      "sourceRoute": 107,
+      "expectedLine": "AC",
+      "expectedDay": 7,
+      "expectedFleet": "CRJ200",
+      "line": "AC",
+      "day": 7
+    },
+    {
+      "sourceRoute": 108,
+      "expectedLine": "AC",
+      "expectedDay": 8,
+      "expectedFleet": "CRJ200",
+      "line": "AC",
+      "day": 8
+    },
+    {
+      "sourceRoute": 167,
+      "expectedLine": "AM",
+      "expectedDay": 12,
+      "expectedFleet": "CRJ200",
+      "line": "AC",
+      "day": 9
+    },
+    {
+      "sourceRoute": 156,
+      "expectedLine": "AM",
+      "expectedDay": 1,
+      "expectedFleet": "CRJ200",
+      "line": "AC",
+      "day": 10
+    },
+    {
+      "sourceRoute": 157,
+      "expectedLine": "AM",
+      "expectedDay": 2,
+      "expectedFleet": "CRJ200",
+      "line": "AM",
+      "day": 1
+    },
+    {
+      "sourceRoute": 158,
+      "expectedLine": "AM",
+      "expectedDay": 3,
+      "expectedFleet": "CRJ200",
+      "line": "AM",
+      "day": 2
+    },
+    {
+      "sourceRoute": 159,
+      "expectedLine": "AM",
+      "expectedDay": 4,
+      "expectedFleet": "CRJ200",
+      "line": "AM",
+      "day": 3
+    },
+    {
+      "sourceRoute": 160,
+      "expectedLine": "AM",
+      "expectedDay": 5,
+      "expectedFleet": "CRJ200",
+      "line": "AM",
+      "day": 4
+    },
+    {
+      "sourceRoute": 161,
+      "expectedLine": "AM",
+      "expectedDay": 6,
+      "expectedFleet": "CRJ200",
+      "line": "AM",
+      "day": 5
+    },
+    {
+      "sourceRoute": 162,
+      "expectedLine": "AM",
+      "expectedDay": 7,
+      "expectedFleet": "CRJ200",
+      "line": "AM",
+      "day": 6
+    },
+    {
+      "sourceRoute": 163,
+      "expectedLine": "AM",
+      "expectedDay": 8,
+      "expectedFleet": "CRJ200",
+      "line": "AM",
+      "day": 7
+    },
+    {
+      "sourceRoute": 164,
+      "expectedLine": "AM",
+      "expectedDay": 9,
+      "expectedFleet": "CRJ200",
+      "line": "AM",
+      "day": 8
+    },
+    {
+      "sourceRoute": 165,
+      "expectedLine": "AM",
+      "expectedDay": 10,
+      "expectedFleet": "CRJ200",
+      "line": "AM",
+      "day": 9
+    },
+    {
+      "sourceRoute": 166,
+      "expectedLine": "AM",
+      "expectedDay": 11,
+      "expectedFleet": "CRJ200",
+      "line": "AM",
+      "day": 10
+    },
+    {
+      "sourceRoute": 109,
+      "expectedLine": "AC",
+      "expectedDay": 9,
+      "expectedFleet": "CRJ200",
+      "line": "AM",
+      "day": 11
+    },
+    {
+      "sourceRoute": 110,
+      "expectedLine": "AC",
+      "expectedDay": 10,
+      "expectedFleet": "CRJ200",
+      "line": "AM",
+      "day": 12
+    }
+  ],
+  "retimeLegs": [
+    {
+      "legId": "MDT-SYR-CRJ200-01-IN",
+      "expectedDepartureMinute": 1175,
+      "expectedArrivalMinute": 1231,
+      "departureMinute": 1176,
+      "arrivalMinute": 1232
+    },
+    {
+      "legId": "DAY-TOL-CRJ200-01-OUT",
+      "expectedDepartureMinute": 1225,
+      "expectedArrivalMinute": 1269,
+      "departureMinute": 1268,
+      "arrivalMinute": 1312
+    }
+  ],
+  "bankAssignmentReplacements": [
+    {
+      "legId": "DAY-TOL-CRJ200-01-OUT",
+      "operation": "departure",
+      "bankId": "DAY-B9"
+    }
+  ],
+  "maintenanceRepair": {
+    "date": "2026-10-14",
+    "validatorFix": "A repeating cycle with zero eligible RONs fails regardless of cycle length. Existing finite-run limits and the standing grace remain unchanged.",
+    "originalDefectiveLines": [
+      "AC",
+      "AO",
+      "AQ"
+    ],
+    "lineAbsorptions": {
+      "AO": "AL",
+      "AQ": "AL"
+    },
+    "newLineDays": {
+      "AC": 10,
+      "AM": 12,
+      "AL": 12,
+      "AK": 12
+    },
+    "timingChanges": {
+      "1817": 1,
+      "1904": 43
+    },
+    "extraAircraftDays": 0,
+    "extraFlights": 0,
+    "standingGrace": {
+      "line": "AM",
+      "consecutiveNonTargetOvernights": 11,
+      "normalLimit": 10,
+      "grace": 1
+    },
+    "network": {
+      "rawLostPaths": 0,
+      "geographicLostPaths": 0,
+      "coverageLost": [],
+      "fasterGeographicJourneys": 7,
+      "slowerGeographicJourneys": 57,
+      "priorityCoverageLosses": []
+    }
+  }
+}

@@ -13,6 +13,7 @@ sys.path.insert(0, str(REPO_ROOT / "src"))
 
 from caa_scheduler.io import read_json
 from caa_scheduler.optimization_release import build_optimization_release
+from caa_scheduler.operating_validation import validate_operating_rules
 from latest_schedule import SCHEDULE_ID, RELEASE_CONFIG, DIRECTORY
 
 
@@ -63,6 +64,17 @@ class LatestScheduleReleaseTests(unittest.TestCase):
 
         with tempfile.TemporaryDirectory(dir=REPO_ROOT) as directory:
             output = Path(directory) / "release"
+            if LATEST_SCHEDULE_ID == "schedule_7_v1_3_1" and (REPO_ROOT / "config/optimizations/schedule_7_v1_3_2_round_1.json").exists():
+                # The corrected validator must reject this known-invalid historical
+                # snapshot; reproducing its former false pass would restore the bug.
+                current = validate_operating_rules(read_json(LATEST_RELEASE_DIRECTORY / "canonical_schedule.json"))
+                check = next(c for c in current["checks"] if c["id"] == "rolling_ron_window")
+                self.assertEqual({f["id"] for f in check["findings"]}, {"AC", "AO", "AQ"})
+                self.assertEqual(current["summary"]["effectiveErrorFindings"], 3)
+                with self.assertRaisesRegex(ValueError, "effectiveOperatingErrors|effective operating errors"):
+                    build_optimization_release(LATEST_RELEASE_CONFIG, REPO_ROOT, output_directory=output)
+                self.assertFalse(output.exists())
+                return
             report = build_optimization_release(
                 LATEST_RELEASE_CONFIG,
                 REPO_ROOT,

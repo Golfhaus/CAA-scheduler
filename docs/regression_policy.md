@@ -23,3 +23,16 @@ Old data remains available in the app for reference. Superseded regression
 classes remain skipped as historical documentation. The former full-history
 workflow now runs latest-only checks and no longer runs automatically for
 major-version tags.
+
+
+## Known v1.3.1 maintenance defect during v1.3.2 review
+
+The corrected validator must report exactly AC/AO/AQ as never reaching a
+qualifying RON and reject rebuilding v1.3.1 as a valid new release. Latest
+regression explicitly tests this rejection instead of recreating the false
+pass in its historical report. All other native, physical and UI checks remain
+in force. The same CI command additionally reproduces and validates the pinned
+v1.3.2 maintenance draft with zero effective errors, verifies unchanged flying
+and inventory, and audits itinerary preservation. Historical release files are
+not rewritten. At publication, the latest fixtures must move to v1.3.2 and full
+release-artifact reproduction resumes against the corrected release.

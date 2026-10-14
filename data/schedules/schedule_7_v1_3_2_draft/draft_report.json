@@ -1,0 +1,113 @@
+{
+  "status": "draft; not published",
+  "flights": 1214,
+  "routes": 184,
+  "lines": 17,
+  "retimedFlights": [
+    1817,
+    1904
+  ],
+  "newFlights": 0,
+  "operating": {
+    "checks": 25,
+    "passed": 19,
+    "failed": 0,
+    "warnings": 3,
+    "notEvaluated": 1,
+    "overridden": 2,
+    "effectiveErrorFindings": 0,
+    "effectiveWarningFindings": 163
+  },
+  "beforeMaintenanceFindings": [
+    {
+      "id": "AC",
+      "message": "Line AC never reaches a target-city RON in its repeating cycle",
+      "evidence": {
+        "line": "AC",
+        "cycleDays": 10,
+        "targetRonCount": 0,
+        "longestRunWithoutTargetRon": null,
+        "unbounded": true,
+        "limit": 10,
+        "grace": 1
+      }
+    },
+    {
+      "id": "AO",
+      "message": "Line AO never reaches a target-city RON in its repeating cycle",
+      "evidence": {
+        "line": "AO",
+        "cycleDays": 1,
+        "targetRonCount": 0,
+        "longestRunWithoutTargetRon": null,
+        "unbounded": true,
+        "limit": 10,
+        "grace": 1
+      }
+    },
+    {
+      "id": "AQ",
+      "message": "Line AQ never reaches a target-city RON in its repeating cycle",
+      "evidence": {
+        "line": "AQ",
+        "cycleDays": 1,
+        "targetRonCount": 0,
+        "longestRunWithoutTargetRon": null,
+        "unbounded": true,
+        "limit": 10,
+        "grace": 1
+      }
+    }
+  ],
+  "standingGrace": [
+    {
+      "id": "AM",
+      "message": "Line AM uses the one-day rolling RON grace",
+      "evidence": {
+        "line": "AM",
+        "longestRunWithoutTargetRon": 11,
+        "limit": 10,
+        "grace": 1
+      }
+    }
+  ],
+  "lineCounts": {
+    "A": 12,
+    "AA": 11,
+    "AB": 10,
+    "AC": 10,
+    "AD": 11,
+    "AE": 11,
+    "AF": 11,
+    "AG": 9,
+    "AH": 9,
+    "AI": 12,
+    "AJ": 9,
+    "AK": 12,
+    "AL": 12,
+    "AM": 12,
+    "AN": 9,
+    "AS": 12,
+    "B": 12
+  },
+  "standClaims": 15,
+  "standMinutes": 3061,
+  "fleetUse": {
+    "MAX9": {
+      "used": 24,
+      "capacity": 35
+    },
+    "CRJ900": {
+      "used": 28,
+      "capacity": 45
+    },
+    "CRJ700": {
+      "used": 56,
+      "capacity": 65
+    },
+    "CRJ200": {
+      "used": 76,
+      "capacity": 80
+    }
+  }
+}

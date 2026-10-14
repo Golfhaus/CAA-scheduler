@@ -21,6 +21,17 @@ is the starting point for future work, and the
 reproduces the published package. Earlier releases and planning snapshots remain
 historical references; routine regression targets only v1.3.1.
 
+## Maintenance correction in development
+
+The v1.3.1 stored zero-error report predates a discovered repeating-line RON
+validation defect. The corrected validator identifies **AC, AO and AQ** as
+never reaching an eligible MX-base overnight; their short cycle lengths do not
+make the absence finite. The [unpublished v1.3.2 repair](docs/schedule_7_v1_3_2_maintenance.md)
+preserves all 1,214 flights and aircraft requirements, consolidates AO/AQ into
+compliant rotations, and corrects AC with two flight retimings. It passes the
+corrected checks, with AM's standing one-day grace explicitly reported.
+The app default remains v1.3.1 until separate release approval.
+
 ## Milestone 0.7 — planning foundation
 
 The migration baseline now proves this pipeline:
