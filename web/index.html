@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#092a53">
     <meta name="description" content="Coastal American Airways schedule operations console">
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="styles.css?v=console-ui-20261010-routing-details">
+    <link rel="stylesheet" href="styles.css?v=console-ui-20261015-hourly-timelines">
     <title>CAA Scheduler</title>
   </head>
   <body>
@@ -327,7 +327,7 @@
             </div>
             <section class="panel gate-panel routing-detail-panel" aria-label="Selected route activity">
               <p class="stats-note" id="routing-detail-timezone"></p>
-              <div class="gate-timeline routing-detail-timeline" id="routing-detail-timeline"></div>
+              <div class="operating-day-timeline gate-timeline routing-detail-timeline" id="routing-detail-timeline"></div>
               <div class="routing-block-details" id="routing-block-details" role="status" aria-live="polite">
                 <strong id="routing-block-title">Flight and ground details</strong>
                 <span id="routing-block-copy">Hover, focus, or tap a time block to see its details.</span>
@@ -588,13 +588,13 @@
               </div>
               <button type="button" class="claim-tooltip-close" id="claim-tooltip-close" aria-label="Close claim details">×</button>
             </div>
-            <div class="gate-timeline" id="gate-timeline"></div>
+            <div class="operating-day-timeline gate-timeline" id="gate-timeline"></div>
           </section>
         </section>
       </div>
     </main>
 
-    <script type="module" src="app.mjs?v=console-ui-20261015-bank-labels"></script>
+    <script type="module" src="app.mjs?v=console-ui-20261015-hourly-timelines"></script>
   </body>
 </html>
 

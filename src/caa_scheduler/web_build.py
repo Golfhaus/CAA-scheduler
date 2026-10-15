@@ -15,6 +15,7 @@ WEB_ASSETS = (
     "build-config.mjs",
     "hub-bank-breakdown.mjs",
     "routing-details.mjs",
+    "operating-day-timeline.mjs",
     "opportunity-analysis.mjs",
     "opportunity-ui.mjs",
     "favicon.svg",

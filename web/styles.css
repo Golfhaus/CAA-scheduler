@@ -636,16 +636,17 @@ tbody tr:hover { background: #f6f9fc; }
 .claim-tooltip-copy .claim-tooltip-warning { margin-top: 0.18rem; color: var(--danger); font-weight: 850; }
 .claim-tooltip-close { flex: 0 0 auto; width: 2.25rem; height: 2.25rem; display: grid; place-items: center; border: 0; border-radius: 50%; background: transparent; color: var(--navy-900); font-size: 1.35rem; line-height: 1; }
 .claim-tooltip-close:hover { background: rgba(9, 42, 83, 0.08); }
-.gate-timeline { min-width: 54rem; overflow-x: auto; }
-.time-axis, .timeline-row { display: grid; grid-template-columns: 5.7rem minmax(45rem, 1fr); gap: 0.65rem; }
+.operating-day-timeline { --timeline-hour-width: 1.5rem; min-width: calc(6.4rem + var(--timeline-hours, 24) * var(--timeline-hour-width)); }
+.time-axis, .timeline-row { display: grid; grid-template-columns: 4.8rem minmax(0, 1fr); gap: 0.6rem; }
 .time-axis { margin-bottom: 0.35rem; color: var(--muted); font-size: 0.7rem; }
 .axis-track { position: relative; height: 1.2rem; }
-.axis-label { position: absolute; transform: translateX(-50%); }
-.axis-label:first-child { transform: none; }
-.axis-label:last-child { transform: translateX(-100%); }
+.axis-track, .lane-track { margin-inline: 0.5rem; }
+.axis-label { position: absolute; transform: translateX(-50%); font-variant-numeric: tabular-nums; white-space: nowrap; }
 .timeline-row { align-items: center; min-height: 2rem; }
 .lane-label { color: var(--muted); font-size: 0.72rem; font-weight: 750; text-align: right; }
-.lane-track { position: relative; height: 1.45rem; border-bottom: 1px solid #e4eaf1; background: repeating-linear-gradient(90deg, transparent 0, transparent calc(16.6667% - 1px), #edf1f5 calc(16.6667% - 1px), #edf1f5 16.6667%); }
+.lane-track { position: relative; height: 1.45rem; border-bottom: 1px solid #e4eaf1; }
+.timeline-hour-band { position: absolute; z-index: 0; top: -0.28rem; bottom: -0.28rem; border-left: 1px solid #e0e7f0; pointer-events: none; }
+.timeline-hour-band.is-shaded { background: rgba(42, 83, 126, 0.055); }
 .bank-boundary { position: absolute; z-index: 0; top: -0.28rem; bottom: -0.28rem; border-left: 1px solid #9fb5ce; pointer-events: none; }
 .timeline-bank-row { margin: 0.35rem 0; min-height: 1.85rem; }
 .bank-label-track { height: 1.85rem; background: #edf3f9; border-top: 1px solid #c6d4e3; border-bottom: 1px solid #c6d4e3; }
@@ -658,8 +659,8 @@ tbody tr:hover { background: #f6f9fc; }
 .routing-detail-timeline { margin-top: 1.3rem; }
 .routing-detail-row { min-height: 4rem; }
 .routing-detail-row .lane-label { font-size: 0.85rem; }
-.routing-lane-track { height: 3rem; background: #f7f9fc; }
-.routing-time-guide { position: absolute; z-index: 0; top: 0; bottom: 0; border-left: 1px solid #dde5ef; pointer-events: none; }
+.routing-lane-track { height: 3rem; }
+.routing-lane-track .timeline-hour-band { top: -0.5rem; bottom: -0.5rem; }
 .routing-activity { top: 0.38rem; height: 2.2rem; font-size: 0.75rem; padding: 0.3rem; background: color-mix(in srgb, var(--fleet-color) 25%, white); }
 .routing-activity.kind-inflight { background: var(--fleet-color); border-color: var(--fleet-color); }
 .routing-activity.kind-stand { background: #fff3e6; }
@@ -772,6 +773,7 @@ tbody tr:hover { background: #f6f9fc; }
   .gate-heading .airport-picker { width: 100%; align-items: flex-start; flex-direction: column; }
   .airport-picker select { width: 100%; min-width: 0; }
   .gate-panel { overflow-x: auto; padding: 0.75rem; }
+  .operating-day-timeline { --timeline-hour-width: 1.25rem; }
   .timeline-key { margin-left: 0; }
   .claim-tooltip { margin-left: 0; }
   .itinerary-leg { grid-template-columns: 3.5rem minmax(8rem, 1fr); }
