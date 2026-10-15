@@ -23,6 +23,22 @@
           "afterMinutes": 248
         },
         {
+          "market": "BWI-PVD",
+          "origin": "BWI",
+          "destination": "PVD",
+          "demand": 41.3,
+          "beforeMinutes": 173,
+          "afterMinutes": 73
+        },
+        {
+          "market": "PVD-BWI",
+          "origin": "PVD",
+          "destination": "BWI",
+          "demand": 40.3,
+          "beforeMinutes": 173,
+          "afterMinutes": 73
+        },
+        {
           "market": "BWI-PWM",
           "origin": "BWI",
           "destination": "PWM",
@@ -465,6 +481,14 @@
           "afterMinutes": 162
         },
         {
+          "market": "MDT-BWI",
+          "origin": "MDT",
+          "destination": "BWI",
+          "demand": 0.7,
+          "beforeMinutes": 283,
+          "afterMinutes": 285
+        },
+        {
           "market": "BGR-MDT",
           "origin": "BGR",
           "destination": "MDT",
@@ -553,6 +577,14 @@
           "afterMinutes": 441
         },
         {
+          "market": "ACY-BWI",
+          "origin": "ACY",
+          "destination": "BWI",
+          "demand": 0.1,
+          "beforeMinutes": 283,
+          "afterMinutes": 285
+        },
+        {
           "market": "ISP-JAN",
           "origin": "ISP",
           "destination": "JAN",
@@ -599,6 +631,14 @@
           "demand": 0,
           "beforeMinutes": 244,
           "afterMinutes": 287
+        },
+        {
+          "market": "AVP-BWI",
+          "origin": "AVP",
+          "destination": "BWI",
+          "demand": 0,
+          "beforeMinutes": 298,
+          "afterMinutes": 300
         },
         {
           "market": "AVP-TOL",
@@ -961,6 +1001,14 @@
           "afterMinutes": 462
         },
         {
+          "market": "TTN-BWI",
+          "origin": "TTN",
+          "destination": "BWI",
+          "demand": 0,
+          "beforeMinutes": 288,
+          "afterMinutes": 290
+        },
+        {
           "market": "TTN-TOL",
           "origin": "TTN",
           "destination": "TOL",
@@ -1007,6 +1055,22 @@
           "demand": 58,
           "beforeMinutes": 256,
           "afterMinutes": 248
+        },
+        {
+          "market": "BWI-PVD",
+          "origin": "BWI",
+          "destination": "PVD",
+          "demand": 41.3,
+          "beforeMinutes": 173,
+          "afterMinutes": 73
+        },
+        {
+          "market": "PVD-BWI",
+          "origin": "PVD",
+          "destination": "BWI",
+          "demand": 40.3,
+          "beforeMinutes": 173,
+          "afterMinutes": 73
         },
         {
           "market": "BWI-PWM",
@@ -1179,12 +1243,28 @@
       ],
       "slower": [
         {
+          "market": "RDU-BWI",
+          "origin": "RDU",
+          "destination": "BWI",
+          "demand": 58.1,
+          "beforeMinutes": 333,
+          "afterMinutes": 335
+        },
+        {
           "market": "RFD-MDT",
           "origin": "RFD",
           "destination": "MDT",
           "demand": 46.7,
           "beforeMinutes": 206,
           "afterMinutes": 207
+        },
+        {
+          "market": "MYR-BWI",
+          "origin": "MYR",
+          "destination": "BWI",
+          "demand": 41.7,
+          "beforeMinutes": 293,
+          "afterMinutes": 295
         },
         {
           "market": "CHS-SFB",
@@ -1217,6 +1297,14 @@
           "demand": 13.5,
           "beforeMinutes": 276,
           "afterMinutes": 284
+        },
+        {
+          "market": "ILM-BWI",
+          "origin": "ILM",
+          "destination": "BWI",
+          "demand": 13.2,
+          "beforeMinutes": 288,
+          "afterMinutes": 290
         },
         {
           "market": "SAT-MDT",
@@ -1829,7 +1917,7 @@
       ]
     },
     "priorityCoverageLosses": [],
-    "newChoices": 33,
+    "newChoices": 35,
     "r175Impact": {
       "raw": {
         "lostPaths": 0,
@@ -2506,9 +2594,117 @@
         ]
       }
     },
+    "r125Impact": {
+      "raw": {
+        "lostPaths": 0,
+        "gained": [],
+        "lost": [],
+        "faster": [
+          {
+            "market": "BWI-PVD",
+            "origin": "BWI",
+            "destination": "PVD",
+            "demand": 41.3,
+            "beforeMinutes": 173,
+            "afterMinutes": 73
+          },
+          {
+            "market": "PVD-BWI",
+            "origin": "PVD",
+            "destination": "BWI",
+            "demand": 40.3,
+            "beforeMinutes": 173,
+            "afterMinutes": 73
+          }
+        ],
+        "slower": [
+          {
+            "market": "MDT-BWI",
+            "origin": "MDT",
+            "destination": "BWI",
+            "demand": 0.7,
+            "beforeMinutes": 283,
+            "afterMinutes": 285
+          },
+          {
+            "market": "ACY-BWI",
+            "origin": "ACY",
+            "destination": "BWI",
+            "demand": 0.1,
+            "beforeMinutes": 283,
+            "afterMinutes": 285
+          },
+          {
+            "market": "AVP-BWI",
+            "origin": "AVP",
+            "destination": "BWI",
+            "demand": 0,
+            "beforeMinutes": 298,
+            "afterMinutes": 300
+          },
+          {
+            "market": "TTN-BWI",
+            "origin": "TTN",
+            "destination": "BWI",
+            "demand": 0,
+            "beforeMinutes": 288,
+            "afterMinutes": 290
+          }
+        ]
+      },
+      "geo": {
+        "lostPaths": 0,
+        "gained": [],
+        "lost": [],
+        "faster": [
+          {
+            "market": "BWI-PVD",
+            "origin": "BWI",
+            "destination": "PVD",
+            "demand": 41.3,
+            "beforeMinutes": 173,
+            "afterMinutes": 73
+          },
+          {
+            "market": "PVD-BWI",
+            "origin": "PVD",
+            "destination": "BWI",
+            "demand": 40.3,
+            "beforeMinutes": 173,
+            "afterMinutes": 73
+          }
+        ],
+        "slower": [
+          {
+            "market": "RDU-BWI",
+            "origin": "RDU",
+            "destination": "BWI",
+            "demand": 58.1,
+            "beforeMinutes": 333,
+            "afterMinutes": 335
+          },
+          {
+            "market": "MYR-BWI",
+            "origin": "MYR",
+            "destination": "BWI",
+            "demand": 41.7,
+            "beforeMinutes": 293,
+            "afterMinutes": 295
+          },
+          {
+            "market": "ILM-BWI",
+            "origin": "ILM",
+            "destination": "BWI",
+            "demand": 13.2,
+            "beforeMinutes": 288,
+            "afterMinutes": 290
+          }
+        ]
+      }
+    },
     "provenance": {
       "baseSha256": "a52e5d14734d80c02f231f8e87155bc4eeba38817f7eba8b5c68fee335e206f2",
-      "draftSha256": "bd8aa5abd219ade2186d63a3cd01b61b3c66162a9f97d5be25712e91199d1cbf",
+      "draftSha256": "ecf5306874c274135e8d6b3bbfbd33bfb5ef6e7ed8b2dc2a1bd731bc435e733f",
       "demandSha256": "49c04922ee0cebb3fef8aad923e04bd11874587a263c9511358ddb833b860bc6"
     }
   }

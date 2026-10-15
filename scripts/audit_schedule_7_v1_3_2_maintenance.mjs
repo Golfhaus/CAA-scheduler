@@ -13,13 +13,19 @@ for(const name of Object.keys(native)){
   assert.equal(raw.lostPaths,2);assert.equal(geo.lostPaths,2);assert.deepEqual(raw.lost,[]);assert.deepEqual(geo.lost,[]);assert.deepEqual(targets,[]);
   for(const [key,p]of before.paths)if(!after.paths.has(key))assert.ok(['1257','1258'].includes(key));
   const approvedChs={'CHS-SFB':170,'SFB-CHS':234};
-  assert.ok(geo.slower.every(x=>approvedChs[x.market]===x.afterMinutes||[1,43].includes(x.afterMinutes-x.beforeMinutes)||x.origin==='ISP'&&x.afterMinutes-x.beforeMinutes===8));
-  const prior=buildServiceAnalysis(read(root+'/outputs/schedule_7_v1_3_2_r175/base_round_2_canonical.json'),od,buildItineraries),r175Raw=compareServiceAnalyses(prior,after),r175Geo=compareServiceAnalyses(prior,after,true);
+  assert.ok(geo.slower.every(x=>approvedChs[x.market]===x.afterMinutes||[1,43].includes(x.afterMinutes-x.beforeMinutes)||x.origin==='ISP'&&x.afterMinutes-x.beforeMinutes===8||['RDU','MYR','ILM'].includes(x.origin)&&x.destination==='BWI'&&x.afterMinutes-x.beforeMinutes===2));
+  const prior=buildServiceAnalysis(read(root+'/outputs/schedule_7_v1_3_2_r175/base_round_2_canonical.json'),od,buildItineraries),round3=buildServiceAnalysis(read(root+'/outputs/schedule_7_v1_3_2_r125/base_round_3_canonical.json'),od,buildItineraries),r175Raw=compareServiceAnalyses(prior,round3),r175Geo=compareServiceAnalyses(prior,round3,true);
   assert.equal(r175Raw.lostPaths,0);assert.equal(r175Geo.lostPaths,0);assert.deepEqual(r175Geo.lost,[]);
   assert.equal(r175Geo.faster.length,15);assert.equal(r175Geo.slower.length,22);
   assert.ok(r175Geo.slower.every(x=>x.origin==='ISP'&&x.afterMinutes-x.beforeMinutes===8));
   for(const market of ['PWM-BWI','BWI-PWM'])assert.equal(coverageView(after.records.get(market),true).stops,0);
   reports[name].r175Impact={raw:r175Raw,geo:r175Geo};
+  const r125Raw=compareServiceAnalyses(round3,after),r125Geo=compareServiceAnalyses(round3,after,true);
+  assert.equal(r125Raw.lostPaths,0);assert.equal(r125Geo.lostPaths,0);assert.deepEqual(r125Geo.lost,[]);
+  assert.equal(r125Geo.faster.length,2);assert.equal(r125Geo.slower.length,3);
+  assert.ok(r125Geo.slower.every(x=>['RDU','MYR','ILM'].includes(x.origin)&&x.destination==='BWI'&&x.afterMinutes-x.beforeMinutes===2));
+  for(const market of ['PVD-BWI','BWI-PVD'])assert.equal(coverageView(after.records.get(market),true).fastest.totalMinutes,73);
+  reports[name].r125Impact={raw:r125Raw,geo:r125Geo};
   const sha=p=>createHash('sha256').update(fs.readFileSync(p)).digest('hex');
   reports[name].provenance={baseSha256:sha(root+'/data/schedules/schedule_7_v1_3_1/canonical_schedule.json'),draftSha256:sha(root+'/data/schedules/schedule_7_v1_3_2_draft/canonical_schedule.json'),demandSha256:sha(root+'/data/reference/airport_od_matrix_consolidated_v2.csv')};
  }

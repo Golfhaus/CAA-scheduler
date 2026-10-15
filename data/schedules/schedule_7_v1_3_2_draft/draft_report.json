@@ -1,17 +1,18 @@
 {
   "status": "draft; not published",
-  "flights": 1216,
+  "flights": 1218,
   "routes": 184,
   "lines": 17,
   "retimedFlights": [
     1219,
     1256,
+    1418,
     1699,
     1817,
     1892,
     1904
   ],
-  "newFlights": 4,
+  "newFlights": 6,
   "operating": {
     "checks": 25,
     "passed": 19,
@@ -20,7 +21,7 @@
     "notEvaluated": 1,
     "overridden": 2,
     "effectiveErrorFindings": 0,
-    "effectiveWarningFindings": 161
+    "effectiveWarningFindings": 160
   },
   "beforeMaintenanceFindings": [
     {
@@ -182,9 +183,41 @@
       "arrival": "13:53",
       "departureMinute": 743,
       "arrivalMinute": 833
+    },
+    {
+      "id": "R125-REVIEW-PVD-BWI",
+      "route": 125,
+      "line": "AE",
+      "fleet": "CRJ200",
+      "day": 4,
+      "sequenceWithinRoute": 3,
+      "pairing": 907,
+      "flight": 2221,
+      "origin": "PVD",
+      "destination": "BWI",
+      "departure": "08:30",
+      "arrival": "09:43",
+      "departureMinute": 510,
+      "arrivalMinute": 583
+    },
+    {
+      "id": "R125-REVIEW-BWI-PVD",
+      "route": 125,
+      "line": "AE",
+      "fleet": "CRJ200",
+      "day": 4,
+      "sequenceWithinRoute": 4,
+      "pairing": 908,
+      "flight": 2222,
+      "origin": "BWI",
+      "destination": "PVD",
+      "departure": "10:25",
+      "arrival": "11:38",
+      "departureMinute": 625,
+      "arrivalMinute": 698
     }
   ],
-  "netFlightChange": 2,
+  "netFlightChange": 4,
   "acceptedR501": {
     "option": "rfd_later_turn",
     "removedFlights": [
@@ -217,6 +250,18 @@
     },
     "newBlockMinutes": 180,
     "maximumTurnMinutes": 86,
+    "preservesExistingItineraryChoices": true
+  },
+  "acceptedR125": {
+    "addedFlights": [
+      2221,
+      2222
+    ],
+    "retimingMinutes": {
+      "1418": 2
+    },
+    "newBlockMinutes": 146,
+    "maximumTurnMinutes": 112,
     "preservesExistingItineraryChoices": true
   }
 }

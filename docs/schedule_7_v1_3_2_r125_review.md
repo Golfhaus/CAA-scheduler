@@ -1,6 +1,6 @@
 # R125 PVD hold investigation
 
-Reviewed October 14, 2026 against cumulative v1.3.2 draft commit `64c4ab402a22a6813ce230d1c5e9a8bb30300d07`, including accepted R501/R175 changes. **This recommendation is not applied.** The canonical draft remains at 1,216 flights and publication remains unauthorized.
+Reviewed October 14, 2026 against cumulative v1.3.2 draft commit `64c4ab402a22a6813ce230d1c5e9a8bb30300d07`, including accepted R501/R175 changes. **Accepted into the v1.3.2 draft by the user on October 14, 2026.** The authoritative overlay is `config/optimizations/schedule_7_v1_3_2_round_4.json`; the cumulative draft contains 1,218 flights and publication remains unauthorized.
 
 ## Recommendation
 
@@ -63,4 +63,4 @@ python scripts/review_schedule_7_v1_3_2_r125.py
 node scripts/audit_schedule_7_v1_3_2_r125.mjs
 ```
 
-The proposed overlay is `config/proposals/schedule_7_v1_3_2_r125_bwi.json`; the build does not apply it. Evidence is recorded in `data/analyses/schedule_7_v1_3_2_r125_review.json`. The source canonical SHA is pinned in the native screen. Nothing in R125, R346 or the published app has been changed by this investigation.
+The original proposal is retained as historical evidence in `config/proposals/schedule_7_v1_3_2_r125_bwi.json`. The default build applies the accepted round-four optimization overlay. Evidence is recorded in `data/analyses/schedule_7_v1_3_2_r125_review.json`. The source canonical SHA is pinned in the native screen. The review scripts use the pinned pre-R125 checkpoint. The selected BWI insertion and R346 adjustment are now applied to the cumulative draft; published v1.3.1 remains unchanged.

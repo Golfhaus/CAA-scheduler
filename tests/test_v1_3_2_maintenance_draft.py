@@ -20,12 +20,12 @@ class MaintenanceRepairTests(unittest.TestCase):
   self.assertEqual([f['id']for f in grace['findings']],['AM'])
   self.assertEqual(grace['findings'][0]['evidence']['longestRunWithoutTargetRon'],11)
  def test_only_approved_flying_changes_and_no_extra_inventory(self):
-  old={l['id']:l for l in self.base['legs']};now={l['id']:l for l in self.now['legs']};self.assertEqual(len(old)+2,len(now))
+  old={l['id']:l for l in self.base['legs']};now={l['id']:l for l in self.now['legs']};self.assertEqual(len(old)+4,len(now))
   self.assertEqual({old[i]['flight']for i in old.keys()-now.keys()},{1257,1258})
-  self.assertEqual({now[i]['flight']for i in now.keys()-old.keys()},{2217,2218,2219,2220})
+  self.assertEqual({now[i]['flight']for i in now.keys()-old.keys()},{2217,2218,2219,2220,2221,2222})
   for i in old.keys()&now.keys():self.assertEqual(tuple(old[i][k]for k in ['flight','fleet','pairing','origin','destination']),tuple(now[i][k]for k in ['flight','fleet','pairing','origin','destination']))
   changes={old[i]['flight']:now[i]['departureMinute']-old[i]['departureMinute']for i in old.keys()&now.keys()if now[i]['departureMinute']!=old[i]['departureMinute']}
-  self.assertEqual(changes,{1817:1,1904:43,1256:-165,1219:-165,1892:-8,1699:-10})
+  self.assertEqual(changes,{1817:1,1904:43,1256:-165,1219:-165,1892:-8,1699:-10,1418:2})
   for key in ['cities','hubBanks','operatingPolicy']:self.assertEqual(self.now[key],self.base[key])
   self.assertEqual(self.now['schedule']['fleetCounts'],self.base['schedule']['fleetCounts'])
  def test_accepted_r501_has_no_long_same_day_hold(self):
@@ -45,4 +45,13 @@ class MaintenanceRepairTests(unittest.TestCase):
   self.assertEqual(max(b['departureMinute']-a['arrivalMinute']for a,b in zip(ls,ls[1:])),86)
   old={l['flight']:l for l in self.base['legs']}
   for l in ls[4:]:self.assertEqual((l['departure'],l['arrival']),(old[l['flight']]['departure'],old[l['flight']]['arrival']))
+ def test_accepted_r125_preserves_its_existing_clocks(self):
+  ls=sorted([l for l in self.now['legs']if l['route']==125],key=lambda l:l['sequenceWithinRoute'])
+  self.assertEqual(len(ls),9)
+  self.assertEqual([(l['flight'],l['departure'],l['arrival'])for l in ls[2:4]],[(2221,'08:30','09:43'),(2222,'10:25','11:38')])
+  old={l['flight']:l for l in self.base['legs']if l['route']==125}
+  for l in ls:
+   if l['flight']in old:self.assertEqual((l['departure'],l['arrival']),(old[l['flight']]['departure'],old[l['flight']]['arrival']))
+  self.assertEqual(max(b['departureMinute']-a['arrivalMinute']for a,b in zip(ls,ls[1:])),112)
+  l=next(l for l in self.now['legs']if l['flight']==1418);self.assertEqual((l['route'],l['departure'],l['arrival']),(346,'09:17','10:05'))
 if __name__=='__main__':unittest.main()

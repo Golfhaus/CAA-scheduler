@@ -10,7 +10,7 @@
     "notEvaluated": 1,
     "overridden": 2,
     "effectiveErrorFindings": 0,
-    "effectiveWarningFindings": 161
+    "effectiveWarningFindings": 160
   },
   "checks": [
     {
@@ -114,10 +114,10 @@
       "severity": "warning",
       "hardStop": false,
       "status": "warning",
-      "message": "80 finding(s)",
+      "message": "79 finding(s)",
       "metrics": {
-        "findingCount": 80,
-        "effectiveFindingCount": 80,
+        "findingCount": 79,
+        "effectiveFindingCount": 79,
         "overriddenFindingCount": 0
       },
       "findings": [
@@ -854,18 +854,6 @@
           }
         },
         {
-          "id": "AE-4-1811-1812",
-          "message": "Hold at PVD is 311 minutes and needs deliberate-hold review",
-          "evidence": {
-            "line": "AE",
-            "day": 4,
-            "city": "PVD",
-            "arrivalFlight": 1811,
-            "departureFlight": 1812,
-            "minutes": 311
-          }
-        },
-        {
           "id": "AC-8-1881-1884",
           "message": "Hold at ORH is 172 minutes and needs deliberate-hold review",
           "evidence": {
@@ -1163,9 +1151,9 @@
       "status": "pass",
       "message": "Point-to-point flying is within the 10% cap",
       "metrics": {
-        "flights": 99,
-        "totalFlights": 1216,
-        "share": 0.08141447368421052,
+        "flights": 101,
+        "totalFlights": 1218,
+        "share": 0.08292282430213464,
         "findingCount": 0,
         "effectiveFindingCount": 0,
         "overriddenFindingCount": 0
@@ -3620,7 +3608,7 @@
           "evidence": {
             "city": "BWI",
             "percentile": 94.0,
-            "totalFlights": 32,
+            "totalFlights": 34,
             "hubOrFocusFlights": 28,
             "minimumFlights": 8,
             "connectedHubs": [

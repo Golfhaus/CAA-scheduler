@@ -4,8 +4,8 @@
   "sourceKind": "canonical_reconstruction",
   "demandDataVersion": "bts-db1c-6mo-jul2025-apr2026-v7",
   "summary": {
-    "legCount": 1216,
-    "marketRows": 676,
+    "legCount": 1218,
+    "marketRows": 678,
     "stationCount": 105,
     "fleetTypes": 4
   },
@@ -37,10 +37,10 @@
     "CRJ200": {
       "aircraftCount": 80,
       "aircraftDaysUsed": 76,
-      "legCount": 534,
-      "blockMinutes": 39746,
-      "minimumTurnMinutes": 18320,
-      "requiredAircraftMinutes": 58066
+      "legCount": 536,
+      "blockMinutes": 39892,
+      "minimumTurnMinutes": 18400,
+      "requiredAircraftMinutes": 58292
     }
   },
   "markets": [
@@ -283,6 +283,12 @@
       "origin": "BUF",
       "destination": "SYR",
       "legs": 4
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "BWI",
+      "destination": "PVD",
+      "legs": 1
     },
     {
       "fleet": "CRJ200",
@@ -1422,6 +1428,12 @@
       "fleet": "CRJ200",
       "origin": "PNS",
       "destination": "MCI",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "PVD",
+      "destination": "BWI",
       "legs": 1
     },
     {
@@ -4118,7 +4130,7 @@
     "BTR": 2,
     "BTV": 4,
     "BUF": 8,
-    "BWI": 16,
+    "BWI": 17,
     "CAE": 4,
     "CAK": 7,
     "CHA": 3,
@@ -4183,7 +4195,7 @@
     "PIE": 19,
     "PIT": 10,
     "PNS": 5,
-    "PVD": 9,
+    "PVD": 10,
     "PWM": 7,
     "RDU": 11,
     "RFD": 33,

@@ -77,6 +77,10 @@
         {
           "path": "config/optimizations/schedule_7_v1_3_2_round_3.json",
           "sha256": "563e4e0bcedd042aa5a946372889be264fdb2cdf43ffd9929fe880f45698af19"
+        },
+        {
+          "path": "config/optimizations/schedule_7_v1_3_2_round_4.json",
+          "sha256": "0fd6cf8f11ad51ee34938d57da3be933637106378ff4e29ed6e692a88f2e2978"
         }
       ],
       "publication": "Not authorized; app default remains v1.3.1"
@@ -15067,10 +15071,10 @@
       "flight": 1418,
       "origin": "PHF",
       "destination": "BWI",
-      "departure": "09:15",
-      "arrival": "10:03",
-      "departureMinute": 555,
-      "arrivalMinute": 603
+      "departure": "09:17",
+      "arrival": "10:05",
+      "departureMinute": 557,
+      "arrivalMinute": 605
     },
     {
       "id": "BWI-PHF-CRJ700-02-IN",
@@ -18902,7 +18906,7 @@
       "line": "AE",
       "fleet": "CRJ200",
       "day": 4,
-      "sequenceWithinRoute": 4,
+      "sequenceWithinRoute": 6,
       "pairing": 515,
       "flight": 1658,
       "origin": "SYR",
@@ -21366,7 +21370,7 @@
       "line": "AE",
       "fleet": "CRJ200",
       "day": 4,
-      "sequenceWithinRoute": 3,
+      "sequenceWithinRoute": 5,
       "pairing": 491,
       "flight": 1812,
       "origin": "PVD",
@@ -21958,7 +21962,7 @@
       "line": "AE",
       "fleet": "CRJ200",
       "day": 4,
-      "sequenceWithinRoute": 5,
+      "sequenceWithinRoute": 7,
       "pairing": 632,
       "flight": 1849,
       "origin": "DAY",
@@ -21974,7 +21978,7 @@
       "line": "AE",
       "fleet": "CRJ200",
       "day": 4,
-      "sequenceWithinRoute": 6,
+      "sequenceWithinRoute": 8,
       "pairing": 812,
       "flight": 1850,
       "origin": "SDF",
@@ -27142,7 +27146,7 @@
       "line": "AE",
       "fleet": "CRJ200",
       "day": 4,
-      "sequenceWithinRoute": 7,
+      "sequenceWithinRoute": 9,
       "pairing": 471,
       "flight": 2173,
       "origin": "DAY",
@@ -27903,6 +27907,38 @@
       "arrival": "13:53",
       "departureMinute": 743,
       "arrivalMinute": 833
+    },
+    {
+      "id": "R125-REVIEW-PVD-BWI",
+      "route": 125,
+      "line": "AE",
+      "fleet": "CRJ200",
+      "day": 4,
+      "sequenceWithinRoute": 3,
+      "pairing": 907,
+      "flight": 2221,
+      "origin": "PVD",
+      "destination": "BWI",
+      "departure": "08:30",
+      "arrival": "09:43",
+      "departureMinute": 510,
+      "arrivalMinute": 583
+    },
+    {
+      "id": "R125-REVIEW-BWI-PVD",
+      "route": 125,
+      "line": "AE",
+      "fleet": "CRJ200",
+      "day": 4,
+      "sequenceWithinRoute": 4,
+      "pairing": 908,
+      "flight": 2222,
+      "origin": "BWI",
+      "destination": "PVD",
+      "departure": "10:25",
+      "arrival": "11:38",
+      "departureMinute": 625,
+      "arrivalMinute": 698
     }
   ]
 }
