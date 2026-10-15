@@ -26,6 +26,29 @@ assert not any(l['line']in{'AO','AQ'}for l in c['legs'])
 fleet=checks['fleet_capacity']['metrics'];assert {k:fleet[k]for k in c['schedule']['fleetCounts']}=={'MAX9':{'used':24,'capacity':35},'CRJ900':{'used':28,'capacity':45},'CRJ700':{'used':56,'capacity':65},'CRJ200':{'used':76,'capacity':80}}
 stands=[x for city in gates['cities']for x in city['claims']if x['rowType']=='stand']
 report={'status':'draft; not published','flights':1214,'routes':184,'lines':len({l['line']for l in c['legs']}),'retimedFlights':sorted(changed),'newFlights':0,'operating':operating['summary'],'beforeMaintenanceFindings':errors['findings'],'standingGrace':checks['rolling_ron_grace']['findings'],'lineCounts':{line:len({l['day']for l in c['legs']if l['line']==line})for line in sorted({l['line']for l in c['legs']})},'standClaims':len(stands),'standMinutes':sum(x['end']-x['start']for x in stands),'fleetUse':{k:fleet[k]for k in c['schedule']['fleetCounts']}}
+checkpoint=ROOT/'outputs/schedule_7_v1_3_2_maintenance/base_maintenance_canonical.json';checkpoint.parent.mkdir(parents=True,exist_ok=True);checkpoint.write_text(json.dumps(c,indent=2)+'\n')
+if '--maintenance-only' in sys.argv:
+ print('Rebuilt pinned maintenance checkpoint:',checkpoint);sys.exit(0)
+round2_path=ROOT/'config/optimizations/schedule_7_v1_3_2_round_2.json'
+if round2_path.exists():
+ round2=json.loads(round2_path.read_text());assert hashlib.sha256(checkpoint.read_bytes()).hexdigest()==round2['baseSchedule']['sha256']
+ maintenance=c;c=apply_optimization_overlay(c,round2)
+ c['provenance']['workingDraft']['draftOverlays'].append({'path':round2_path.relative_to(ROOT).as_posix(),'sha256':hashlib.sha256(round2_path.read_bytes()).hexdigest()})
+ old={l['id']:l for l in maintenance['legs']};now={l['id']:l for l in c['legs']}
+ assert {old[i]['flight']for i in old.keys()-now.keys()}=={1257,1258}
+ added=[now[i]for i in now.keys()-old.keys()];assert {l['flight']for l in added}=={2217,2218}
+ assert len(now)==1214 and {(l['origin'],l['destination'])for l in added}=={('SFB','RFD'),('RFD','SFB')}
+ for i in old.keys()&now.keys():
+  allowed={'departure','arrival','departureMinute','arrivalMinute'}if old[i]['flight']in{1256,1219}else set()
+  if old[i]['route']==501:allowed.add('sequenceWithinRoute')
+  assert all(now[i][k]==v for k,v in old[i].items()if k not in allowed)
+ assert c['cities']==base['cities'] and c['hubBanks']==base['hubBanks'] and c['operatingPolicy']==base['operatingPolicy'] and c['schedule']==maintenance['schedule']
+ structure=validate_schedule(c);operating=validate_operating_rules(c);overnight=validate_overnight_turns(c);plan=reconstruct_planning_snapshot(c,demand_data_version='bts-db1c-6mo-jul2025-apr2026-v7');planning=validate_planning_snapshot(plan,c);gates=export_gate_schedule(c)
+ assert structure['status']==overnight['status']==planning['status']=='pass' and operating['summary']['effectiveErrorFindings']==0
+ checks={x['id']:x for x in operating['checks']};assert [x['id']for x in checks['rolling_ron_grace']['findings']]==['AM']
+ assert checks['fleet_capacity']['metrics']==fleet
+ stands=[x for city in gates['cities']for x in city['claims']if x['rowType']=='stand'];assert (len(stands),sum(x['end']-x['start']for x in stands))==(15,3061)
+ report.update({'retimedFlights':[1219,1256,1817,1904],'newFlights':2,'removedFlights':[1257,1258],'addedFlights':sorted(added,key=lambda l:l['flight']),'netFlightChange':0,'operating':operating['summary'],'acceptedR501':round2['acceptedR501']})
 out=ROOT/'data/schedules/schedule_7_v1_3_2_draft';out.mkdir(parents=True,exist_ok=True)
 for name,x in {'canonical_schedule.json':c,'validation_report.json':structure,'operating_validation_report.json':operating,'overnight_turn_validation.json':overnight,'planning_snapshot.json':plan,'planning_validation_report.json':planning,'gates.json':gates,'timetable.json':export_timetable(c),'draft_report.json':report}.items():(out/name).write_text(json.dumps(x,indent=2)+'\n')
 print(json.dumps(report))

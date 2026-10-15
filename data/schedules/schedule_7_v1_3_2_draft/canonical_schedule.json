@@ -69,6 +69,10 @@
         {
           "path": "config/optimizations/schedule_7_v1_3_2_round_1.json",
           "sha256": "bc6ad3d00e026dfb34107cc835ef5ba64a6435b757bb67ad77cf344a1e382022"
+        },
+        {
+          "path": "config/optimizations/schedule_7_v1_3_2_round_2.json",
+          "sha256": "7227cfdb48cbf8cfcec71d05567950ebe31541ccf8b073722fd99998b588700a"
         }
       ],
       "publication": "Not authorized; app default remains v1.3.1"
@@ -11907,10 +11911,10 @@
       "flight": 1219,
       "origin": "ABE",
       "destination": "SFB",
-      "departure": "13:30",
-      "arrival": "15:47",
-      "departureMinute": 810,
-      "arrivalMinute": 947
+      "departure": "10:45",
+      "arrival": "13:02",
+      "departureMinute": 645,
+      "arrivalMinute": 782
     },
     {
       "id": "ABE-SFB-CRJ900-01-IN",
@@ -12499,42 +12503,10 @@
       "flight": 1256,
       "origin": "MYR",
       "destination": "ABE",
-      "departure": "11:15",
-      "arrival": "12:48",
-      "departureMinute": 675,
-      "arrivalMinute": 768
-    },
-    {
-      "id": "CHS-SFB-CRJ900-01-OUT",
-      "route": 501,
-      "line": "AB",
-      "fleet": "CRJ900",
-      "day": 1,
-      "sequenceWithinRoute": 5,
-      "pairing": 612,
-      "flight": 1257,
-      "origin": "CHS",
-      "destination": "SFB",
-      "departure": "19:00",
-      "arrival": "20:07",
-      "departureMinute": 1140,
-      "arrivalMinute": 1207
-    },
-    {
-      "id": "CHS-SFB-CRJ900-01-IN",
-      "route": 501,
-      "line": "AB",
-      "fleet": "CRJ900",
-      "day": 1,
-      "sequenceWithinRoute": 4,
-      "pairing": 613,
-      "flight": 1258,
-      "origin": "SFB",
-      "destination": "CHS",
-      "departure": "16:30",
-      "arrival": "17:37",
-      "departureMinute": 990,
-      "arrivalMinute": 1057
+      "departure": "08:30",
+      "arrival": "10:03",
+      "departureMinute": 510,
+      "arrivalMinute": 603
     },
     {
       "id": "JAX-RDU-CRJ900-01-OUT",
@@ -27863,6 +27835,38 @@
       "arrival": "16:25",
       "departureMinute": 935,
       "arrivalMinute": 985
+    },
+    {
+      "id": "R501-REVIEW-SFB-RFD",
+      "route": 501,
+      "line": "AB",
+      "fleet": "CRJ900",
+      "day": 1,
+      "sequenceWithinRoute": 4,
+      "pairing": 599,
+      "flight": 2217,
+      "origin": "SFB",
+      "destination": "RFD",
+      "departure": "14:15",
+      "arrival": "15:49",
+      "departureMinute": 855,
+      "arrivalMinute": 949
+    },
+    {
+      "id": "R501-REVIEW-RFD-SFB",
+      "route": 501,
+      "line": "AB",
+      "fleet": "CRJ900",
+      "day": 1,
+      "sequenceWithinRoute": 5,
+      "pairing": 598,
+      "flight": 2218,
+      "origin": "RFD",
+      "destination": "SFB",
+      "departure": "16:29",
+      "arrival": "20:03",
+      "departureMinute": 989,
+      "arrivalMinute": 1203
     }
   ]
 }

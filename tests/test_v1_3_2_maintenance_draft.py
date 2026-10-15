@@ -19,13 +19,19 @@ class MaintenanceRepairTests(unittest.TestCase):
   grace=next(c for c in self.report['checks']if c['id']=='rolling_ron_grace')
   self.assertEqual([f['id']for f in grace['findings']],['AM'])
   self.assertEqual(grace['findings'][0]['evidence']['longestRunWithoutTargetRon'],11)
- def test_no_flying_inventory_or_policy_is_added(self):
-  old={l['id']:l for l in self.base['legs']};now={l['id']:l for l in self.now['legs']};self.assertEqual(old.keys(),now.keys())
-  for i,l in old.items():self.assertEqual(tuple(l[k]for k in ['flight','fleet','pairing','origin','destination']),tuple(now[i][k]for k in ['flight','fleet','pairing','origin','destination']))
-  changes={l['flight']:now[i]['departureMinute']-l['departureMinute']for i,l in old.items()if now[i]['departureMinute']!=l['departureMinute']}
-  self.assertEqual(changes,{1817:1,1904:43})
+ def test_only_approved_flying_changes_and_no_extra_inventory(self):
+  old={l['id']:l for l in self.base['legs']};now={l['id']:l for l in self.now['legs']};self.assertEqual(len(old),len(now))
+  self.assertEqual({old[i]['flight']for i in old.keys()-now.keys()},{1257,1258})
+  self.assertEqual({now[i]['flight']for i in now.keys()-old.keys()},{2217,2218})
+  for i in old.keys()&now.keys():self.assertEqual(tuple(old[i][k]for k in ['flight','fleet','pairing','origin','destination']),tuple(now[i][k]for k in ['flight','fleet','pairing','origin','destination']))
+  changes={old[i]['flight']:now[i]['departureMinute']-old[i]['departureMinute']for i in old.keys()&now.keys()if now[i]['departureMinute']!=old[i]['departureMinute']}
+  self.assertEqual(changes,{1817:1,1904:43,1256:-165,1219:-165})
   for key in ['cities','hubBanks','operatingPolicy']:self.assertEqual(self.now[key],self.base[key])
   self.assertEqual(self.now['schedule']['fleetCounts'],self.base['schedule']['fleetCounts'])
+ def test_accepted_r501_has_no_long_same_day_hold(self):
+  ls=sorted([l for l in self.now['legs']if l['route']==501],key=lambda l:l['sequenceWithinRoute'])
+  self.assertEqual([(l['origin'],l['destination'])for l in ls],[('ABE','MYR'),('MYR','ABE'),('ABE','SFB'),('SFB','RFD'),('RFD','SFB'),('SFB','SAT')])
+  self.assertEqual(max(b['departureMinute']-a['arrivalMinute']for a,b in zip(ls,ls[1:])),147)
  def test_rotation_size_and_physical_checks(self):
   for line in ['AL','AK']:self.assertEqual(len({l['day']for l in self.now['legs']if l['line']==line}),12)
   self.assertFalse(any(l['line']in{'AO','AQ'}for l in self.now['legs']))

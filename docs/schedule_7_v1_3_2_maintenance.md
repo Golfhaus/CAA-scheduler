@@ -2,6 +2,8 @@
 
 Prepared October 14, 2026 from published v1.3.1 commit `d0b728cab36c0d1f3e04d5140d755c8760b3809b`. The user authorized repairing the maintenance validator and AC/AO/AQ rotations. Publication has not been authorized; main and the app default remain v1.3.1.
 
+**Scope of this document:** the following records the maintenance-only round-one repair. The [cumulative draft](schedule_7_v1_3_2_draft.md) also includes the subsequently accepted R501 replacement, including its explicit CHS nonstop losses. Default reproduction now builds both rounds; `--maintenance-only` recreates this original checkpoint.
+
 ## Validation defect
 
 The old rolling RON check treated a cycle without any eligible overnight as a finite absence equal to its length. A one-day cycle was thus allowed to repeat ELP or TYS forever, while AC's ten-day cycle also passed without a base RON. The corrected check reports an unbounded absence whenever a repeating cycle has zero eligible RONs. Its evidence records cycle length, zero target RON count and an explicit unbounded flag rather than a misleading one-day/ten-day maximum.

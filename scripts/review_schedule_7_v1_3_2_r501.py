@@ -12,7 +12,7 @@ from caa_scheduler.operating_validation import validate_operating_rules,validate
 from caa_scheduler.gate_export import export_gate_schedule
 from caa_scheduler.bank_placement import _block_minutes,_local_arrival
 from caa_scheduler.planning import reconstruct_planning_snapshot,validate_planning_snapshot
-source=ROOT/'data/schedules/schedule_7_v1_3_2_draft/canonical_schedule.json';base=json.loads(source.read_text());out=ROOT/'outputs/schedule_7_v1_3_2_r501';out.mkdir(parents=True,exist_ok=True)
+source=ROOT/'outputs/schedule_7_v1_3_2_maintenance/base_maintenance_canonical.json';base=json.loads(source.read_text());out=ROOT/'outputs/schedule_7_v1_3_2_r501';out.mkdir(parents=True,exist_ok=True)
 assert hashlib.sha256(source.read_bytes()).hexdigest()=='c4d61a0e5ac75354774e7462e360c523ed795de7de61d9e750c28ed960c6817c'
 cities={c['code']:c for c in base['cities']};profile=next(p for p in json.loads((ROOT/'config/policies/planning_rules_v7.json').read_text())['frequencyAllocation']['fleetProfiles']if p['fleet']=='CRJ900');by={l['flight']:l for l in base['legs']}
 def overlay():return {'baseSchedule':{'scheduleId':base['schedule']['id']},'schedule':base['schedule'].copy()}

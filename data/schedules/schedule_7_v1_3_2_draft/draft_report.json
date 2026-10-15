@@ -4,10 +4,12 @@
   "routes": 184,
   "lines": 17,
   "retimedFlights": [
+    1219,
+    1256,
     1817,
     1904
   ],
-  "newFlights": 0,
+  "newFlights": 2,
   "operating": {
     "checks": 25,
     "passed": 19,
@@ -16,7 +18,7 @@
     "notEvaluated": 1,
     "overridden": 2,
     "effectiveErrorFindings": 0,
-    "effectiveWarningFindings": 163
+    "effectiveWarningFindings": 162
   },
   "beforeMaintenanceFindings": [
     {
@@ -109,5 +111,65 @@
       "used": 76,
       "capacity": 80
     }
+  },
+  "removedFlights": [
+    1257,
+    1258
+  ],
+  "addedFlights": [
+    {
+      "id": "R501-REVIEW-SFB-RFD",
+      "route": 501,
+      "line": "AB",
+      "fleet": "CRJ900",
+      "day": 1,
+      "sequenceWithinRoute": 4,
+      "pairing": 599,
+      "flight": 2217,
+      "origin": "SFB",
+      "destination": "RFD",
+      "departure": "14:15",
+      "arrival": "15:49",
+      "departureMinute": 855,
+      "arrivalMinute": 949
+    },
+    {
+      "id": "R501-REVIEW-RFD-SFB",
+      "route": 501,
+      "line": "AB",
+      "fleet": "CRJ900",
+      "day": 1,
+      "sequenceWithinRoute": 5,
+      "pairing": 598,
+      "flight": 2218,
+      "origin": "RFD",
+      "destination": "SFB",
+      "departure": "16:29",
+      "arrival": "20:03",
+      "departureMinute": 989,
+      "arrivalMinute": 1203
+    }
+  ],
+  "netFlightChange": 0,
+  "acceptedR501": {
+    "option": "rfd_later_turn",
+    "removedFlights": [
+      1257,
+      1258
+    ],
+    "addedFlights": [
+      2217,
+      2218
+    ],
+    "retimingMinutes": {
+      "1256": -165,
+      "1219": -165
+    },
+    "newBlockMinutes": 174,
+    "maximumTurnMinutes": 147,
+    "nonstopLosses": [
+      "CHS-SFB",
+      "SFB-CHS"
+    ]
   }
 }

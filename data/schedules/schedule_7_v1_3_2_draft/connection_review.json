@@ -1,7 +1,7 @@
 {
   "accepted": {
     "raw": {
-      "lostPaths": 0,
+      "lostPaths": 2,
       "gained": [
         {
           "market": "BHM-TOL",
@@ -103,6 +103,22 @@
           "demand": 46.7,
           "beforeMinutes": 206,
           "afterMinutes": 207
+        },
+        {
+          "market": "CHS-SFB",
+          "origin": "CHS",
+          "destination": "SFB",
+          "demand": 31.5,
+          "beforeMinutes": 67,
+          "afterMinutes": 170
+        },
+        {
+          "market": "SFB-CHS",
+          "origin": "SFB",
+          "destination": "CHS",
+          "demand": 30.2,
+          "beforeMinutes": 67,
+          "afterMinutes": 220
         },
         {
           "market": "SRQ-MDT",
@@ -611,7 +627,7 @@
       ]
     },
     "geo": {
-      "lostPaths": 0,
+      "lostPaths": 2,
       "gained": [
         {
           "market": "BHM-TOL",
@@ -689,6 +705,22 @@
           "demand": 46.7,
           "beforeMinutes": 206,
           "afterMinutes": 207
+        },
+        {
+          "market": "CHS-SFB",
+          "origin": "CHS",
+          "destination": "SFB",
+          "demand": 31.5,
+          "beforeMinutes": 67,
+          "afterMinutes": 170
+        },
+        {
+          "market": "SFB-CHS",
+          "origin": "SFB",
+          "destination": "CHS",
+          "demand": 30.2,
+          "beforeMinutes": 67,
+          "afterMinutes": 234
         },
         {
           "market": "SRQ-MDT",
@@ -1144,7 +1176,7 @@
     "newChoices": 31,
     "provenance": {
       "baseSha256": "a52e5d14734d80c02f231f8e87155bc4eeba38817f7eba8b5c68fee335e206f2",
-      "draftSha256": "c4d61a0e5ac75354774e7462e360c523ed795de7de61d9e750c28ed960c6817c",
+      "draftSha256": "1f38ce33278f9b330ca8a38d831e7294b626de25924676a5232bb7cc68f81af4",
       "demandSha256": "49c04922ee0cebb3fef8aad923e04bd11874587a263c9511358ddb833b860bc6"
     }
   }

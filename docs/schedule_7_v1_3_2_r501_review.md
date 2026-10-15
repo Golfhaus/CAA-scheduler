@@ -1,6 +1,6 @@
 # R501 investigation — MYR hold and SFB point-to-point flying
 
-Investigated October 14, 2026 against the unpublished maintenance draft at commit `4d2f26623ecc1359df061d03f20cd06f2aeada9c`. This is a review of alternatives, not an accepted schedule overlay. The maintenance draft and published app are unchanged.
+Investigated October 14, 2026 against the unpublished maintenance draft at commit `4d2f26623ecc1359df061d03f20cd06f2aeada9c`. The user accepted `rfd_later_turn` into the v1.3.2 draft later on October 14. Its overlay is `config/optimizations/schedule_7_v1_3_2_round_2.json`; other alternatives below remain unaccepted. Publication is not authorized.
 
 ## Findings
 
@@ -73,8 +73,9 @@ New CRJ900 blocks use the pinned planning profile (0.1364 minutes per nautical m
 Reproduce the native screens and network audit:
 
 ```bash
+python scripts/build_schedule_7_v1_3_2_draft.py --maintenance-only
 python scripts/review_schedule_7_v1_3_2_r501.py
 node scripts/audit_schedule_7_v1_3_2_r501.mjs
 ```
 
-Detailed reviewed evidence is saved in `data/analyses/schedule_7_v1_3_2_r501_review.json`. No R501 change has been applied to the accepted maintenance draft or published app.
+Detailed reviewed evidence is saved in `data/analyses/schedule_7_v1_3_2_r501_review.json`. The selected RFD option is applied to the cumulative v1.3.2 draft. Published v1.3.1 remains unchanged.

@@ -10,8 +10,10 @@ for(const name of Object.keys(native)){
  const targets=[];for(const ne of ['HPN','HVN','ISP','BTV','ORH'])for(const fl of ['PGD','DAB','FLL','PIE','SFB','SRQ'])for(const[a,b]of[[ne,fl],[fl,ne]]){const v=coverageView(after.records.get(a+'-'+b),true);if(v.stops==null||v.stops>1)targets.push(a+'-'+b);}
  reports[name]={raw,geo,priorityCoverageLosses:targets,newChoices:after.paths.size-before.paths.size};
  if(accepted){
-  assert.equal(raw.lostPaths,0);assert.equal(geo.lostPaths,0);assert.deepEqual(raw.lost,[]);assert.deepEqual(geo.lost,[]);assert.deepEqual(targets,[]);
-  assert.ok(geo.slower.every(x=>[1,43].includes(x.afterMinutes-x.beforeMinutes)));
+  assert.equal(raw.lostPaths,2);assert.equal(geo.lostPaths,2);assert.deepEqual(raw.lost,[]);assert.deepEqual(geo.lost,[]);assert.deepEqual(targets,[]);
+  for(const [key,p]of before.paths)if(!after.paths.has(key))assert.ok(['1257','1258'].includes(key));
+  const approvedChs={'CHS-SFB':170,'SFB-CHS':234};
+  assert.ok(geo.slower.every(x=>approvedChs[x.market]===x.afterMinutes||[1,43].includes(x.afterMinutes-x.beforeMinutes)));
   const sha=p=>createHash('sha256').update(fs.readFileSync(p)).digest('hex');
   reports[name].provenance={baseSha256:sha(root+'/data/schedules/schedule_7_v1_3_1/canonical_schedule.json'),draftSha256:sha(root+'/data/schedules/schedule_7_v1_3_2_draft/canonical_schedule.json'),demandSha256:sha(root+'/data/reference/airport_od_matrix_consolidated_v2.csv')};
  }

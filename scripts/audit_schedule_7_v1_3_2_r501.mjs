@@ -4,7 +4,7 @@ import {buildServiceAnalysis,parseAirportDemand,compareServiceAnalyses,coverageV
 import path from 'node:path';import {fileURLToPath}from'node:url';import {createHash}from'node:crypto';
 const project=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');process.chdir(project);
 const root='outputs/schedule_7_v1_3_2_r501',read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
-const base=read('data/schedules/schedule_7_v1_3_2_draft/canonical_schedule.json'),od=parseAirportDemand(fs.readFileSync('data/reference/airport_od_matrix_consolidated_v2.csv','utf8')),before=buildServiceAnalysis(base,od,buildItineraries),native=read(root+'/native.json');
+const base=read('outputs/schedule_7_v1_3_2_maintenance/base_maintenance_canonical.json'),od=parseAirportDemand(fs.readFileSync('data/reference/airport_od_matrix_consolidated_v2.csv','utf8')),before=buildServiceAnalysis(base,od,buildItineraries),native=read(root+'/native.json');
 let results={};
 const picked=process.argv.slice(2);
 for(const[name,n]of Object.entries(native)){
@@ -30,4 +30,4 @@ for(const[name,n]of Object.entries(native)){
 fs.writeFileSync(root+'/network.json',JSON.stringify(results,null,2)+'\n');
 
 const sha=p=>createHash('sha256').update(fs.readFileSync(p)).digest('hex');
-fs.writeFileSync(root+'/provenance.json',JSON.stringify({baseCommit:'4d2f26623ecc1359df061d03f20cd06f2aeada9c',baseSha256:sha('data/schedules/schedule_7_v1_3_2_draft/canonical_schedule.json'),demandSha256:sha('data/reference/airport_od_matrix_consolidated_v2.csv'),method:'Same app enumeration, 30–240 minute connections, 2.25x geographic screen. Competitive opportunity indices split underlying OD over choices within 30 minutes of fastest at the same stop count and exclude connections when a nonstop exists; they are not passenger-load forecasts.'},null,2)+'\n');
+fs.writeFileSync(root+'/provenance.json',JSON.stringify({baseCommit:'4d2f26623ecc1359df061d03f20cd06f2aeada9c',baseSha256:sha('outputs/schedule_7_v1_3_2_maintenance/base_maintenance_canonical.json'),demandSha256:sha('data/reference/airport_od_matrix_consolidated_v2.csv'),method:'Same app enumeration, 30–240 minute connections, 2.25x geographic screen. Competitive opportunity indices split underlying OD over choices within 30 minutes of fastest at the same stop count and exclude connections when a nonstop exists; they are not passenger-load forecasts.'},null,2)+'\n');

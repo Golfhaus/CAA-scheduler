@@ -22,9 +22,9 @@
       "aircraftCount": 45,
       "aircraftDaysUsed": 28,
       "legCount": 164,
-      "blockMinutes": 19526,
+      "blockMinutes": 19700,
       "minimumTurnMinutes": 5440,
-      "requiredAircraftMinutes": 24966
+      "requiredAircraftMinutes": 25140
     },
     "CRJ700": {
       "aircraftCount": 65,
@@ -2992,12 +2992,6 @@
     },
     {
       "fleet": "CRJ900",
-      "origin": "CHS",
-      "destination": "SFB",
-      "legs": 1
-    },
-    {
-      "fleet": "CRJ900",
       "origin": "CLT",
       "destination": "JAX",
       "legs": 3
@@ -3359,6 +3353,12 @@
     {
       "fleet": "CRJ900",
       "origin": "RFD",
+      "destination": "SFB",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ900",
+      "origin": "RFD",
       "destination": "SYR",
       "legs": 2
     },
@@ -3389,7 +3389,7 @@
     {
       "fleet": "CRJ900",
       "origin": "SFB",
-      "destination": "CHS",
+      "destination": "RFD",
       "legs": 1
     },
     {
@@ -4110,7 +4110,7 @@
     "CAE": 4,
     "CAK": 7,
     "CHA": 3,
-    "CHS": 9,
+    "CHS": 8,
     "CID": 3,
     "CLT": 23,
     "CMH": 5,
@@ -4174,7 +4174,7 @@
     "PVD": 9,
     "PWM": 6,
     "RDU": 11,
-    "RFD": 32,
+    "RFD": 33,
     "ROA": 3,
     "ROC": 6,
     "SAT": 7,

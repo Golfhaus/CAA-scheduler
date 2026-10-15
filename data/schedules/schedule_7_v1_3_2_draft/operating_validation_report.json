@@ -10,7 +10,7 @@
     "notEvaluated": 1,
     "overridden": 2,
     "effectiveErrorFindings": 0,
-    "effectiveWarningFindings": 163
+    "effectiveWarningFindings": 162
   },
   "checks": [
     {
@@ -114,10 +114,10 @@
       "severity": "warning",
       "hardStop": false,
       "status": "warning",
-      "message": "82 finding(s)",
+      "message": "81 finding(s)",
       "metrics": {
-        "findingCount": 82,
-        "effectiveFindingCount": 82,
+        "findingCount": 81,
+        "effectiveFindingCount": 81,
         "overriddenFindingCount": 0
       },
       "findings": [
@@ -299,18 +299,6 @@
             "arrivalFlight": 1199,
             "departureFlight": 1208,
             "minutes": 172
-          }
-        },
-        {
-          "id": "AB-1-1255-1256",
-          "message": "Hold at MYR is 312 minutes and needs deliberate-hold review",
-          "evidence": {
-            "line": "AB",
-            "day": 1,
-            "city": "MYR",
-            "arrivalFlight": 1255,
-            "departureFlight": 1256,
-            "minutes": 312
           }
         },
         {
@@ -1248,8 +1236,8 @@
             "departures": [
               270,
               270,
+              645,
               735,
-              810,
               1080,
               1150,
               1250
@@ -1257,13 +1245,13 @@
             "excessiveGaps": [
               {
                 "from": 270,
-                "to": 735,
-                "minutes": 465
+                "to": 645,
+                "minutes": 375
               },
               {
-                "from": 810,
+                "from": 735,
                 "to": 1080,
-                "minutes": 270
+                "minutes": 345
               }
             ],
             "serviceWindowMinutes": {
@@ -2794,15 +2782,15 @@
             "city": "MYR",
             "departures": [
               310,
-              675,
+              510,
               800,
               1060
             ],
             "excessiveGaps": [
               {
-                "from": 310,
-                "to": 675,
-                "minutes": 365
+                "from": 510,
+                "to": 800,
+                "minutes": 290
               },
               {
                 "from": 800,
@@ -3896,7 +3884,7 @@
           "evidence": {
             "city": "RFD",
             "percentile": 99.0,
-            "totalFlights": 64,
+            "totalFlights": 66,
             "hubOrFocusFlights": 32,
             "minimumFlights": 8,
             "connectedHubs": [
