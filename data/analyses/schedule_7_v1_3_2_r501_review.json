@@ -451,7 +451,7 @@
       }
     }
   },
-  "preferredLocalDemandReplacement": "balanced_rfd_replace_chs",
+  "preferredLocalDemandReplacement": "rfd_later_turn",
   "alternatives": [
     "early_return_rdu",
     "jax_plus_rdu"
@@ -6151,6 +6151,444 @@
           "arrivalMinute": 1355
         }
       ]
+    },
+    "rfd_short_holds": {
+      "valid": false,
+      "operating": {
+        "checks": 25,
+        "passed": 17,
+        "failed": 2,
+        "warnings": 3,
+        "notEvaluated": 1,
+        "overridden": 2,
+        "effectiveErrorFindings": 3,
+        "effectiveWarningFindings": 162
+      },
+      "structural": "pass",
+      "overnight": "pass",
+      "planningStatus": "pass",
+      "failedChecks": [
+        {
+          "id": "passenger_touch_on_stand",
+          "title": "Passenger handling on stands",
+          "section": "\u00a71.7 hard-stop addition",
+          "severity": "error",
+          "hardStop": true,
+          "status": "fail",
+          "message": "2 finding(s)",
+          "metrics": {
+            "findingCount": 2,
+            "effectiveFindingCount": 2,
+            "overriddenFindingCount": 0
+          },
+          "findings": [
+            {
+              "id": "SFB-716-995-1040",
+              "message": "SFB claim 716 requires passenger handling on stand 1",
+              "evidence": {
+                "city": "SFB",
+                "label": "716",
+                "kind": "turn",
+                "start": 995,
+                "end": 1040,
+                "stand": 1
+              }
+            },
+            {
+              "id": "SFB-716-1145-1205",
+              "message": "SFB claim 716 requires passenger handling on stand 1",
+              "evidence": {
+                "city": "SFB",
+                "label": "716",
+                "kind": "turn",
+                "start": 1145,
+                "end": 1205,
+                "stand": 1
+              }
+            }
+          ]
+        },
+        {
+          "id": "fixed_physical_inventory",
+          "title": "Authoritative gate and stand inventory",
+          "section": "\u00a71.7 / \u00a72.2",
+          "severity": "error",
+          "hardStop": true,
+          "status": "fail",
+          "message": "1 finding(s)",
+          "metrics": {
+            "findingCount": 1,
+            "effectiveFindingCount": 1,
+            "overriddenFindingCount": 0
+          },
+          "findings": [
+            {
+              "id": "SFB",
+              "message": "SFB cannot fit its claims into the configured physical inventory: 2 passenger touch(es) remain off-gate",
+              "evidence": {
+                "city": "SFB",
+                "requiredGates": 5,
+                "configuredGates": 4,
+                "requiredStands": 2,
+                "configuredStands": 2,
+                "strandedPassengerTouches": 2
+              }
+            }
+          ]
+        }
+      ],
+      "gate": "2 passenger touch(es) remain off-gate",
+      "stands": null,
+      "overlay": {
+        "baseSchedule": {
+          "scheduleId": "schedule_7_v1_3_2_draft"
+        },
+        "schedule": {
+          "id": "schedule_7_v1_3_2_draft",
+          "number": 7,
+          "version": "1.3.2-draft",
+          "label": "Schedule 7, Version 1.3.2 draft",
+          "status": "draft",
+          "fleetCounts": {
+            "MAX9": 35,
+            "CRJ900": 45,
+            "CRJ700": 65,
+            "CRJ200": 80
+          },
+          "connectionWindowMinutes": {
+            "minimum": 30,
+            "maximum": 240
+          }
+        },
+        "retimeLegs": [
+          {
+            "legId": "ABE-MYR-CRJ900-01-IN",
+            "expectedDepartureMinute": 675,
+            "expectedArrivalMinute": 768,
+            "departureMinute": 480,
+            "arrivalMinute": 573
+          },
+          {
+            "legId": "ABE-SFB-CRJ900-01-OUT",
+            "expectedDepartureMinute": 810,
+            "expectedArrivalMinute": 947,
+            "departureMinute": 615,
+            "arrivalMinute": 752
+          }
+        ],
+        "removeLegs": [
+          {
+            "legId": "CHS-SFB-CRJ900-01-OUT",
+            "expectedRoute": 501
+          },
+          {
+            "legId": "CHS-SFB-CRJ900-01-IN",
+            "expectedRoute": 501
+          }
+        ],
+        "insertLegs": [
+          {
+            "id": "R501-REVIEW-SFB-RFD",
+            "route": 501,
+            "origin": "SFB",
+            "destination": "RFD",
+            "departureMinute": 795,
+            "arrivalMinute": 889
+          },
+          {
+            "id": "R501-REVIEW-RFD-SFB",
+            "route": 501,
+            "origin": "RFD",
+            "destination": "SFB",
+            "departureMinute": 929,
+            "arrivalMinute": 1143
+          }
+        ]
+      },
+      "route": [
+        {
+          "id": "ABE-MYR-CRJ900-01-OUT",
+          "route": 501,
+          "line": "AB",
+          "fleet": "CRJ900",
+          "day": 1,
+          "sequenceWithinRoute": 1,
+          "pairing": 724,
+          "flight": 1255,
+          "origin": "ABE",
+          "destination": "MYR",
+          "departure": "04:30",
+          "arrival": "06:03",
+          "departureMinute": 270,
+          "arrivalMinute": 363
+        },
+        {
+          "id": "ABE-MYR-CRJ900-01-IN",
+          "route": 501,
+          "line": "AB",
+          "fleet": "CRJ900",
+          "day": 1,
+          "sequenceWithinRoute": 2,
+          "pairing": 735,
+          "flight": 1256,
+          "origin": "MYR",
+          "destination": "ABE",
+          "departure": "08:00",
+          "arrival": "09:33",
+          "departureMinute": 480,
+          "arrivalMinute": 573
+        },
+        {
+          "id": "ABE-SFB-CRJ900-01-OUT",
+          "route": 501,
+          "line": "AB",
+          "fleet": "CRJ900",
+          "day": 1,
+          "sequenceWithinRoute": 3,
+          "pairing": 719,
+          "flight": 1219,
+          "origin": "ABE",
+          "destination": "SFB",
+          "departure": "10:15",
+          "arrival": "12:32",
+          "departureMinute": 615,
+          "arrivalMinute": 752
+        },
+        {
+          "id": "R501-REVIEW-SFB-RFD",
+          "route": 501,
+          "line": "AB",
+          "fleet": "CRJ900",
+          "day": 1,
+          "sequenceWithinRoute": 4,
+          "pairing": 599,
+          "flight": 2217,
+          "origin": "SFB",
+          "destination": "RFD",
+          "departure": "13:15",
+          "arrival": "14:49",
+          "departureMinute": 795,
+          "arrivalMinute": 889
+        },
+        {
+          "id": "R501-REVIEW-RFD-SFB",
+          "route": 501,
+          "line": "AB",
+          "fleet": "CRJ900",
+          "day": 1,
+          "sequenceWithinRoute": 5,
+          "pairing": 598,
+          "flight": 2218,
+          "origin": "RFD",
+          "destination": "SFB",
+          "departure": "15:29",
+          "arrival": "19:03",
+          "departureMinute": 929,
+          "arrivalMinute": 1143
+        },
+        {
+          "id": "V116-R525-SFB-SAT",
+          "route": 501,
+          "line": "AB",
+          "fleet": "CRJ900",
+          "day": 1,
+          "sequenceWithinRoute": 6,
+          "pairing": 882,
+          "flight": 2074,
+          "origin": "SFB",
+          "destination": "SAT",
+          "departure": "21:00",
+          "arrival": "22:35",
+          "departureMinute": 1260,
+          "arrivalMinute": 1355
+        }
+      ]
+    },
+    "rfd_later_turn": {
+      "valid": true,
+      "operating": {
+        "checks": 25,
+        "passed": 19,
+        "failed": 0,
+        "warnings": 3,
+        "notEvaluated": 1,
+        "overridden": 2,
+        "effectiveErrorFindings": 0,
+        "effectiveWarningFindings": 162
+      },
+      "structural": "pass",
+      "overnight": "pass",
+      "planningStatus": "pass",
+      "failedChecks": [],
+      "gate": "pass",
+      "stands": {
+        "claims": 15,
+        "minutes": 3061
+      },
+      "overlay": {
+        "baseSchedule": {
+          "scheduleId": "schedule_7_v1_3_2_draft"
+        },
+        "schedule": {
+          "id": "schedule_7_v1_3_2_draft",
+          "number": 7,
+          "version": "1.3.2-draft",
+          "label": "Schedule 7, Version 1.3.2 draft",
+          "status": "draft",
+          "fleetCounts": {
+            "MAX9": 35,
+            "CRJ900": 45,
+            "CRJ700": 65,
+            "CRJ200": 80
+          },
+          "connectionWindowMinutes": {
+            "minimum": 30,
+            "maximum": 240
+          }
+        },
+        "retimeLegs": [
+          {
+            "legId": "ABE-MYR-CRJ900-01-IN",
+            "expectedDepartureMinute": 675,
+            "expectedArrivalMinute": 768,
+            "departureMinute": 510,
+            "arrivalMinute": 603
+          },
+          {
+            "legId": "ABE-SFB-CRJ900-01-OUT",
+            "expectedDepartureMinute": 810,
+            "expectedArrivalMinute": 947,
+            "departureMinute": 645,
+            "arrivalMinute": 782
+          }
+        ],
+        "removeLegs": [
+          {
+            "legId": "CHS-SFB-CRJ900-01-OUT",
+            "expectedRoute": 501
+          },
+          {
+            "legId": "CHS-SFB-CRJ900-01-IN",
+            "expectedRoute": 501
+          }
+        ],
+        "insertLegs": [
+          {
+            "id": "R501-REVIEW-SFB-RFD",
+            "route": 501,
+            "origin": "SFB",
+            "destination": "RFD",
+            "departureMinute": 855,
+            "arrivalMinute": 949
+          },
+          {
+            "id": "R501-REVIEW-RFD-SFB",
+            "route": 501,
+            "origin": "RFD",
+            "destination": "SFB",
+            "departureMinute": 989,
+            "arrivalMinute": 1203
+          }
+        ]
+      },
+      "route": [
+        {
+          "id": "ABE-MYR-CRJ900-01-OUT",
+          "route": 501,
+          "line": "AB",
+          "fleet": "CRJ900",
+          "day": 1,
+          "sequenceWithinRoute": 1,
+          "pairing": 724,
+          "flight": 1255,
+          "origin": "ABE",
+          "destination": "MYR",
+          "departure": "04:30",
+          "arrival": "06:03",
+          "departureMinute": 270,
+          "arrivalMinute": 363
+        },
+        {
+          "id": "ABE-MYR-CRJ900-01-IN",
+          "route": 501,
+          "line": "AB",
+          "fleet": "CRJ900",
+          "day": 1,
+          "sequenceWithinRoute": 2,
+          "pairing": 735,
+          "flight": 1256,
+          "origin": "MYR",
+          "destination": "ABE",
+          "departure": "08:30",
+          "arrival": "10:03",
+          "departureMinute": 510,
+          "arrivalMinute": 603
+        },
+        {
+          "id": "ABE-SFB-CRJ900-01-OUT",
+          "route": 501,
+          "line": "AB",
+          "fleet": "CRJ900",
+          "day": 1,
+          "sequenceWithinRoute": 3,
+          "pairing": 719,
+          "flight": 1219,
+          "origin": "ABE",
+          "destination": "SFB",
+          "departure": "10:45",
+          "arrival": "13:02",
+          "departureMinute": 645,
+          "arrivalMinute": 782
+        },
+        {
+          "id": "R501-REVIEW-SFB-RFD",
+          "route": 501,
+          "line": "AB",
+          "fleet": "CRJ900",
+          "day": 1,
+          "sequenceWithinRoute": 4,
+          "pairing": 599,
+          "flight": 2217,
+          "origin": "SFB",
+          "destination": "RFD",
+          "departure": "14:15",
+          "arrival": "15:49",
+          "departureMinute": 855,
+          "arrivalMinute": 949
+        },
+        {
+          "id": "R501-REVIEW-RFD-SFB",
+          "route": 501,
+          "line": "AB",
+          "fleet": "CRJ900",
+          "day": 1,
+          "sequenceWithinRoute": 5,
+          "pairing": 598,
+          "flight": 2218,
+          "origin": "RFD",
+          "destination": "SFB",
+          "departure": "16:29",
+          "arrival": "20:03",
+          "departureMinute": 989,
+          "arrivalMinute": 1203
+        },
+        {
+          "id": "V116-R525-SFB-SAT",
+          "route": 501,
+          "line": "AB",
+          "fleet": "CRJ900",
+          "day": 1,
+          "sequenceWithinRoute": 6,
+          "pairing": 882,
+          "flight": 2074,
+          "origin": "SFB",
+          "destination": "SAT",
+          "departure": "21:00",
+          "arrival": "22:35",
+          "departureMinute": 1260,
+          "arrivalMinute": 1355
+        }
+      ]
     }
   },
   "networkScreens": {
@@ -8420,6 +8858,87 @@
       "flights": 1216
     },
     "balanced_rfd_replace_chs": {
+      "geo": {
+        "lostPaths": 2,
+        "gained": [],
+        "lost": [],
+        "faster": [],
+        "slower": [
+          {
+            "market": "CHS-SFB",
+            "origin": "CHS",
+            "destination": "SFB",
+            "demand": 31.5,
+            "beforeMinutes": 67,
+            "afterMinutes": 170
+          },
+          {
+            "market": "SFB-CHS",
+            "origin": "SFB",
+            "destination": "CHS",
+            "demand": 30.2,
+            "beforeMinutes": 67,
+            "afterMinutes": 234
+          }
+        ]
+      },
+      "downgrades": [
+        {
+          "market": "CHS-SFB",
+          "demand": 31.5,
+          "beforeStops": 0,
+          "afterStops": 1
+        },
+        {
+          "market": "SFB-CHS",
+          "demand": 30.2,
+          "beforeStops": 0,
+          "afterStops": 1
+        }
+      ],
+      "profiles": [
+        {
+          "flight": 2217,
+          "market": "SFB-RFD",
+          "departure": "14:15",
+          "arrival": "15:49",
+          "localOd": 820.3,
+          "competitiveIndex": 410.15,
+          "markets": [
+            {
+              "market": "SFB-RFD",
+              "demand": 820.3,
+              "minutes": 154,
+              "stops": 0,
+              "newOneStop": false,
+              "competitive": true,
+              "choiceShare": 0.5
+            }
+          ]
+        },
+        {
+          "flight": 2218,
+          "market": "RFD-SFB",
+          "departure": "16:29",
+          "arrival": "20:03",
+          "localOd": 820.8,
+          "competitiveIndex": 410.4,
+          "markets": [
+            {
+              "market": "RFD-SFB",
+              "demand": 820.8,
+              "minutes": 154,
+              "stops": 0,
+              "newOneStop": false,
+              "competitive": true,
+              "choiceShare": 0.5
+            }
+          ]
+        }
+      ],
+      "flights": 1214
+    },
+    "rfd_later_turn": {
       "geo": {
         "lostPaths": 2,
         "gained": [],

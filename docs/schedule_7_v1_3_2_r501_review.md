@@ -22,18 +22,18 @@ These are underlying market totals, shared with existing flights and other choic
 
 ## Preferred demand-based replacement: RFD
 
-Retain ABE–MYR, bring its return forward 2h15, bring ABE–SFB forward 2h15, and use the larger afternoon window for a second SFB–RFD round trip in place of CHS. All times below are airport-local; RFD and SAT are Central.
+Retain ABE–MYR, bring its return forward 2h45, bring ABE–SFB forward 2h45, and use the larger afternoon window for a second SFB–RFD round trip in place of CHS. All times below are airport-local; RFD and SAT are Central.
 
 | Flight/market | Current | Reviewed RFD option |
 |---|---|---|
 | F1255 ABE–MYR | 04:30–06:03 ET | Unchanged |
-| F1256 MYR–ABE | 11:15–12:48 ET | **09:00–10:33 ET** |
-| F1219 ABE–SFB | 13:30–15:47 ET | **11:15–13:32 ET** |
+| F1256 MYR–ABE | 11:15–12:48 ET | **08:30–10:03 ET** |
+| F1219 ABE–SFB | 13:30–15:47 ET | **10:45–13:02 ET** |
 | SFB outbound turn | CHS 16:30–17:37 ET | **RFD 14:15 ET–15:49 CT** |
 | SFB return turn | CHS 19:00–20:07 ET | **RFD 16:29 CT–20:03 ET** |
 | F2074 SFB–SAT | 21:00 ET–22:35 CT | Unchanged |
 
-R501 stays at **six flights**, uses no additional aircraft and gains **2h54 of block flying**, reaching 13h06. The MYR hold drops to **2h57**; later turns are 42 minutes at ABE, 43 at SFB, 40 at RFD and 57 at SFB. This deliberately leaves a residual MYR hold rather than force another unsupported or infeasible flight. Both RFD directions gain a second daily nonstop, well separated from the retained morning MAX9 service.
+R501 stays at **six flights**, uses no additional aircraft and gains **2h54 of block flying**, reaching 13h06. The MYR hold drops to **2h27**; later turns are 42 minutes at ABE, 73 at SFB, 40 at RFD and 57 at SFB. No same-day R501 turn exceeds 2h30. Both RFD directions gain a second daily nonstop, well separated from the retained morning MAX9 service.
 
 The explicit cost is loss of the CHS–SFB nonstop pair. Both directions retain one-stop JAX service, but fastest elapsed journeys change:
 
@@ -62,9 +62,9 @@ The combined option retains the same two CHS nonstop losses and elapsed-time pen
 
 ## Other screens and verification
 
-Twenty-three timetable variants were screened; fifteen pass structural, operating, next-day turn and physical inventory checks. The three principal options also pass planning validation. Their fleet allocations, R501 origin/terminus, line AB maintenance cycle, other routes, banks and policy remain unchanged; each has **zero effective operating errors and zero hard stops**, and stand use remains **15 claims / 3,061 minutes**. The inherited AM maintenance grace remains explicitly reported; this study introduces no new grace or waiver. Runway data remains unavailable in the existing native check.
+Twenty-five timetable variants were screened; sixteen pass structural, operating, next-day turn and physical inventory checks. The three principal options also pass planning validation. Their fleet allocations, R501 origin/terminus, line AB maintenance cycle, other routes, banks and policy remain unchanged; each has **zero effective operating errors and zero hard stops**, and stand use remains **15 claims / 3,061 minutes**. The inherited AM maintenance grace remains explicitly reported; this study introduces no new grace or waiver. Runway data remains unavailable in the existing native check.
 
-The first PHF insertion (MYR 07:20→PHF 08:25; PHF 09:05→MYR 10:10) fails PHF's 16-gate inventory. The BWI and PIT midday additions tested while retaining CHS fail spacing/turn and SFB gate checks. A second CLT flight in the original afternoon window passes, but is weaker on O-D than RDU; a midday CLT flight at 11:53 conflicts with the existing 11:45 departure. No exceptions were added to force any of these through.
+The first PHF insertion (MYR 07:20→PHF 08:25; PHF 09:05→MYR 10:10) fails PHF's 16-gate inventory. The BWI and PIT midday additions tested while retaining CHS fail spacing/turn and SFB gate checks. A second CLT flight in the original afternoon window passes, but is weaker on O-D than RDU; a midday CLT flight at 11:53 conflicts with the existing 11:45 departure. An 08:00 MYR return paired with a 13:15 SFB–RFD departure also fails SFB physical inventory; the selected 08:30 MYR return and 14:15 SFB departure pass. No exceptions were added to force any of these through.
 
 MYR–FLL, MYR–BWI, MYR–PIT and MYR–BNA turns fit the existing MYR hold. Their directional local markets are approximately 46, 42, 38 and 22 respectively. FLL cuts its two fastest journeys; BWI opens BWI→MYR to direct/one-stop coverage. These are useful screened alternatives, but their local demand is smaller than the principal SFB opportunities and the connecting opportunity of the JAX insertion. Filling the hold alone is not the selection rule.
 

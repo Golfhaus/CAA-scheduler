@@ -52,6 +52,8 @@ for k in ['insertLegs','removeLegs','bankAssignmentsToAdd']:o.setdefault(k,[]).e
 candidates['phf_plus_rdu']=o
 o=overlay();retime(o,1256,450);retime(o,1219,585);retime(o,1258,1030);turn(o,'SFB','RDU',765);candidates['balanced_rdu_keep_chs']=o
 o=overlay();retime(o,1256,540);retime(o,1219,675);remove(o,[1257,1258]);turn(o,'SFB','RFD',855);candidates['balanced_rfd_replace_chs']=o
+for name,myr,abe,sfb in [('rfd_short_holds',480,615,795),('rfd_later_turn',510,645,855)]:
+ o=overlay();retime(o,1256,myr);retime(o,1219,abe);remove(o,[1257,1258]);turn(o,'SFB','RFD',sfb);candidates[name]=o
 for dest in ['jax','fll','bwi','pit']:
  o=copy.deepcopy(candidates['hold_'+dest]);q=candidates['replace_chs_rdu']
  for k in ['insertLegs','removeLegs','bankAssignmentsToAdd']:o.setdefault(k,[]).extend(q.get(k,[]))
