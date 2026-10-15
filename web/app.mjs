@@ -7,7 +7,7 @@ import {
 } from "./build-config.mjs";
 import { bankBreakdownAirports, bankDisplayLabel, buildHubBankBreakdown } from "./hub-bank-breakdown.mjs?v=20261015-bank-labels";
 import { routingDetailOptions, buildRoutingDetails } from "./routing-details.mjs";
-import { buildOperatingDayGrid } from "./operating-day-timeline.mjs";
+import { buildOperatingDayGrid } from "./operating-day-timeline.mjs?v=20261015-readable-hours";
 import { createOpportunityUI } from "./opportunity-ui.mjs";
 
 let opportunityUI = null;
@@ -1327,7 +1327,7 @@ function renderCheck(check, query, forceOpen) {
 function renderOperatingDayAxis(grid, zone = "") {
   return `<div class="time-axis"><span>${escapeHtml(zone)}</span><div class="axis-track">${grid.ticks.map((tick) => {
     const day = tick.day ? ` (${tick.day > 0 ? "+" : ""}${tick.day} day${Math.abs(tick.day) === 1 ? "" : "s"})` : "";
-    const description = `${tick.label}:00${zone ? ` ${zone}` : ""}${day}`;
+    const description = `${tick.label}:00–${formatMinute24(tick.minute + 60)}${zone ? ` ${zone}` : ""}${day}`;
     return `<span class="axis-label" title="${escapeHtml(description)}" aria-label="${escapeHtml(description)}" style="left:${tick.left}%">${tick.label}</span>`;
   }).join("")}</div></div>`;
 }

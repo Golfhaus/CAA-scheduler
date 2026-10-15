@@ -7,14 +7,14 @@ export function buildOperatingDayGrid(start, end) {
   const duration = end - start;
   const percent = (minute) => (minute - start) / duration * 100;
   const ticks = [];
-  for (let minute = Math.ceil(start / 60) * 60; minute <= end; minute += 60) {
-    const hour = ((Math.floor(minute / 60) % 24) + 24) % 24;
-    ticks.push({minute, left: percent(minute), label: String(hour).padStart(2, "0"),
-      day: Math.floor(minute / 1440)});
-  }
   const bands = [];
   for (let minute = start; minute < end;) {
+    const hourStart = Math.floor(minute / 60) * 60;
+    const hour = ((hourStart / 60 % 24) + 24) % 24;
     const next = Math.min(end, (Math.floor(minute / 60) + 1) * 60);
+    // The label names the visible hour band, including clipped edge hours.
+    ticks.push({minute: hourStart, left: percent((minute + next) / 2),
+      label: String(hour).padStart(2, "0"), day: Math.floor(hourStart / 1440)});
     bands.push({left: percent(minute), width: (next - minute) / duration * 100,
       shaded: Math.abs(Math.floor(minute / 60) % 2) === 0});
     minute = next;

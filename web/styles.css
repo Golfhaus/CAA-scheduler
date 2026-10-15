@@ -636,7 +636,8 @@ tbody tr:hover { background: #f6f9fc; }
 .claim-tooltip-copy .claim-tooltip-warning { margin-top: 0.18rem; color: var(--danger); font-weight: 850; }
 .claim-tooltip-close { flex: 0 0 auto; width: 2.25rem; height: 2.25rem; display: grid; place-items: center; border: 0; border-radius: 50%; background: transparent; color: var(--navy-900); font-size: 1.35rem; line-height: 1; }
 .claim-tooltip-close:hover { background: rgba(9, 42, 83, 0.08); }
-.operating-day-timeline { --timeline-hour-width: 1.5rem; min-width: calc(6.4rem + var(--timeline-hours, 24) * var(--timeline-hour-width)); }
+/* A 40-minute turn needs room for a complete three-digit route label. */
+.operating-day-timeline { --timeline-hour-width: 3rem; min-width: calc(6.4rem + var(--timeline-hours, 24) * var(--timeline-hour-width)); }
 .time-axis, .timeline-row { display: grid; grid-template-columns: 4.8rem minmax(0, 1fr); gap: 0.6rem; }
 .time-axis { margin-bottom: 0.35rem; color: var(--muted); font-size: 0.7rem; }
 .axis-track { position: relative; height: 1.2rem; }
@@ -773,7 +774,6 @@ tbody tr:hover { background: #f6f9fc; }
   .gate-heading .airport-picker { width: 100%; align-items: flex-start; flex-direction: column; }
   .airport-picker select { width: 100%; min-width: 0; }
   .gate-panel { overflow-x: auto; padding: 0.75rem; }
-  .operating-day-timeline { --timeline-hour-width: 1.25rem; }
   .timeline-key { margin-left: 0; }
   .claim-tooltip { margin-left: 0; }
   .itinerary-leg { grid-template-columns: 3.5rem minmax(8rem, 1fr); }
