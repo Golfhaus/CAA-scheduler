@@ -17,6 +17,22 @@ Milestone 0.5 extends the responsive GitHub Pages application with local schedul
 
 The interface uses the airline's navy, blue, and orange palette, remains usable on phone-sized screens, provides visible keyboard focus, honors reduced-motion preferences, and keeps status meaning in text rather than color alone.
 
+## Operating-day chart standard
+
+Every chart showing progression through the operating day uses the shared
+`web/operating-day-timeline.mjs` grid and `.operating-day-timeline` styles.
+Show every hour as a two-digit 24-hour label (`03`, `04`, …), with subtle
+alternating hour shading and thin hourly boundaries behind the activity.
+Keep full times, time zones and day offsets in tooltips and accessible text;
+retain the chart's existing time zone and unwrapped midnight geometry.
+
+Gates and Routing Details use this standard. New time-based charts should reuse
+the same grid and axis/band renderers in `web/app.mjs`, rather than choose a new
+tick interval or independent shading. Chart width responds to the available
+space, with a compact per-hour minimum to keep labels legible. Longer route
+days add only the width needed for the extra hours. Horizontal scrolling stays
+inside the chart panel on narrow screens.
+
 ## Opportunity tools in Sked Stats
 
 **Service Coverage** ranks city pairs by pinned daily O-D demand in missing directions. It distinguishes one-way and two-way gaps, fastest available trips, missing shared hubs and timing gaps. An optional 2.25× great-circle-distance screen separates impractical detours from the current timetable's listed connections. Missing demand remains unavailable rather than becoming zero; schedules whose demand pin differs from the served snapshot retain coverage analysis without demand ranking.

@@ -7,6 +7,7 @@ import {
 } from "./build-config.mjs";
 import { bankBreakdownAirports, bankDisplayLabel, buildHubBankBreakdown } from "./hub-bank-breakdown.mjs?v=20261015-bank-labels";
 import { routingDetailOptions, buildRoutingDetails } from "./routing-details.mjs";
+import { buildOperatingDayGrid } from "./operating-day-timeline.mjs";
 import { createOpportunityUI } from "./opportunity-ui.mjs";
 
 let opportunityUI = null;
@@ -1323,6 +1324,18 @@ function renderCheck(check, query, forceOpen) {
   return `<details class="check-card status-${check.status}" id="check-${escapeHtml(check.id)}" ${forceOpen ? "open" : ""}><summary><span class="check-title"><strong>${escapeHtml(check.title)}</strong><span>${renderInstructionReferences(check.section)} · ${effectiveCount} effective findings</span></span><span class="check-badges">${check.hardStop ? '<span class="hard-stop-badge">Hard stop</span>' : ""}<span class="check-status">${escapeHtml(statusLabel(check.status))}</span></span></summary><div class="check-body"><p class="check-message">${escapeHtml(check.message)}</p>${findings}</div></details>`;
 }
 
+function renderOperatingDayAxis(grid, zone = "") {
+  return `<div class="time-axis"><span>${escapeHtml(zone)}</span><div class="axis-track">${grid.ticks.map((tick) => {
+    const day = tick.day ? ` (${tick.day > 0 ? "+" : ""}${tick.day} day${Math.abs(tick.day) === 1 ? "" : "s"})` : "";
+    const description = `${tick.label}:00${zone ? ` ${zone}` : ""}${day}`;
+    return `<span class="axis-label" title="${escapeHtml(description)}" aria-label="${escapeHtml(description)}" style="left:${tick.left}%">${tick.label}</span>`;
+  }).join("")}</div></div>`;
+}
+
+function renderOperatingDayHourBands(grid) {
+  return grid.bands.map((band) => `<i class="timeline-hour-band${band.shaded ? " is-shaded" : ""}" aria-hidden="true" style="left:${band.left}%;width:${band.width}%"></i>`).join("");
+}
+
 function renderRoutingDetails() {
   const options = routingDetailOptions(state.canonical);
   if (!options.some((option) => option.id === state.routingDetailRoute)) state.routingDetailRoute = options[0]?.id || "";
@@ -1343,12 +1356,11 @@ function renderRoutingDetails() {
   $("#routing-detail-timezone").textContent = `Chart times: ${detail.referenceCity} (${detail.zone}). Tooltips show local airport times. Ground assignments include overnight portions within the displayed day.${detail.unassigned ? " Some ground activity has no assigned gate or stand." : ""}`;
   const duration = detail.end - detail.start;
   const percent = (minute) => ((minute - detail.start) / duration) * 100;
-  const ticks = [detail.start];
-  for (let minute = detail.start + 240; minute < detail.end; minute += 240) ticks.push(minute);
-  ticks.push(detail.end);
-  const guides = ticks.map((minute) => `<i class="routing-time-guide" aria-hidden="true" style="left:${percent(minute)}%"></i>`).join("");
+  const grid = buildOperatingDayGrid(detail.start, detail.end);
+  const guides = renderOperatingDayHourBands(grid);
+  $("#routing-detail-timeline").style.setProperty("--timeline-hours", grid.hours);
   const fleetColor = state.gates?.fleetColors?.[detail.fleet] || "#93b9e0";
-  $("#routing-detail-timeline").innerHTML = `<div class="time-axis"><span>${escapeHtml(detail.zone)}</span><div class="axis-track">${ticks.map((minute) => `<span class="axis-label" style="left:${percent(minute)}%">${formatMinute24(minute)}${minute >= 1440 ? " +1" : ""}</span>`).join("")}</div></div>${[["inflight", "Inflight"], ["gate", "Gate"], ["stand", "Stand"]].map(([kind, label]) => `<div class="timeline-row routing-detail-row"><span class="lane-label">${label}</span><div class="lane-track routing-lane-track">${guides}${detail.blocks.map((block, index) => block.kind !== kind ? "" : `<button type="button" class="claim-bar routing-activity kind-${kind}" data-routing-block="${index}" title="${escapeHtml(`${block.title}\n${block.detail}`)}" aria-label="${escapeHtml(`${block.title}. ${block.detail}`)}" aria-controls="routing-block-details" style="left:${percent(block.start)}%;width:${((block.end - block.start) / duration) * 100}%;--fleet-color:${escapeHtml(fleetColor)}">${escapeHtml(block.label)}</button>`).join("")}</div></div>`).join("")}`;
+  $("#routing-detail-timeline").innerHTML = `${renderOperatingDayAxis(grid, detail.zone)}${[["inflight", "Inflight"], ["gate", "Gate"], ["stand", "Stand"]].map(([kind, label]) => `<div class="timeline-row routing-detail-row"><span class="lane-label">${label}</span><div class="lane-track routing-lane-track">${guides}${detail.blocks.map((block, index) => block.kind !== kind ? "" : `<button type="button" class="claim-bar routing-activity kind-${kind}" data-routing-block="${index}" title="${escapeHtml(`${block.title}\n${block.detail}`)}" aria-label="${escapeHtml(`${block.title}. ${block.detail}`)}" aria-controls="routing-block-details" style="left:${percent(block.start)}%;width:${((block.end - block.start) / duration) * 100}%;--fleet-color:${escapeHtml(fleetColor)}">${escapeHtml(block.label)}</button>`).join("")}</div></div>`).join("")}`;
 }
 
 function showRoutingBlockDetails(button) {
@@ -1393,13 +1405,14 @@ function renderGates() {
     ...Array.from({ length: maximumStandRow }, (_, index) => ({ type: "stand", row: index + 1 })),
     ...Array.from({ length: maximumOverflowRow }, (_, index) => ({ type: "overflow", row: index + 1 })),
   ];
-  const axis = Array.from({ length: 7 }, (_, index) => GATE_WINDOW_START + index * 240);
+  const grid = buildOperatingDayGrid(GATE_WINDOW_START, GATE_WINDOW_START + 1440);
+  $("#gate-timeline").style.setProperty("--timeline-hours", grid.hours);
   const banks = buildGateBankGuide(state.canonical, city);
-  const boundaries = banks.boundaries.map((minute) => `<i class="bank-boundary" aria-hidden="true" style="left:${(minute / 1440) * 100}%"></i>`).join("");
+  const boundaries = renderOperatingDayHourBands(grid) + banks.boundaries.map((minute) => `<i class="bank-boundary" aria-hidden="true" style="left:${(minute / 1440) * 100}%"></i>`).join("");
   const bankDivider = banks.labels.length
     ? `<div class="timeline-row timeline-bank-row"><span class="lane-label">Banks</span><div class="lane-track bank-label-track">${boundaries}${banks.labels.map((bank) => `<span class="bank-label" title="${escapeHtml(bank.id)} · ${escapeHtml(bank.time)}" style="left:${((bank.start + bank.duration / 2) / 1440) * 100}%">${escapeHtml(bank.label)}</span>`).join("")}</div></div>`
     : "";
-  $("#gate-timeline").innerHTML = `<div class="time-axis"><span></span><div class="axis-track">${axis.map((minute) => `<span class="axis-label" style="left:${((minute - GATE_WINDOW_START) / 1440) * 100}%">${formatMinute24(minute)}</span>`).join("")}</div></div>${lanes.filter((lane) => lane.type === "gate").map((lane) => renderLane(city, lane, colors, passengerStandClaims, boundaries)).join("")}${bankDivider}${lanes.filter((lane) => lane.type !== "gate").map((lane) => renderLane(city, lane, colors, passengerStandClaims, boundaries)).join("")}`;
+  $("#gate-timeline").innerHTML = `${renderOperatingDayAxis(grid)}${lanes.filter((lane) => lane.type === "gate").map((lane) => renderLane(city, lane, colors, passengerStandClaims, boundaries)).join("")}${bankDivider}${lanes.filter((lane) => lane.type !== "gate").map((lane) => renderLane(city, lane, colors, passengerStandClaims, boundaries)).join("")}`;
 }
 
 function renderLane(city, lane, colors, passengerStandClaims, boundaries = "") {

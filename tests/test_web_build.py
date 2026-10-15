@@ -26,11 +26,11 @@ class WebBuildTests(unittest.TestCase):
         self.assertIn('id="preview-warning"', html)
         self.assertIn("previewNotice", script)
         self.assertIn(
-            'src="app.mjs?v=console-ui-20261015-bank-labels"',
+            'src="app.mjs?v=console-ui-20261015-hourly-timelines"',
             html,
         )
         self.assertIn(
-            'href="styles.css?v=console-ui-20261010-routing-details"',
+            'href="styles.css?v=console-ui-20261015-hourly-timelines"',
             html,
         )
         self.assertNotIn('`${auditHub} target cities`', script)
