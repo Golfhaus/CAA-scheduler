@@ -26,7 +26,7 @@ class WebBuildTests(unittest.TestCase):
         self.assertIn('id="preview-warning"', html)
         self.assertIn("previewNotice", script)
         self.assertIn(
-            'src="app.mjs?v=console-ui-20261010-routing-details"',
+            'src="app.mjs?v=console-ui-20261015-bank-labels"',
             html,
         )
         self.assertIn(

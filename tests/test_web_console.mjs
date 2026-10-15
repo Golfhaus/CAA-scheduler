@@ -257,6 +257,16 @@ test("bank guides deduplicate shared edges and map overnight banks into the gate
   assert.deepEqual(buildGateBankGuide(canonical, {code: "BHM", isFocusCity: true}), {boundaries: [], labels: []});
 });
 
+test("PHF midnight bank uses a short label while preserving its identity and window", () => {
+  const id = "PHF-SWAP-MID-RETIME-337-345-PRESERVE-N1";
+  const guide = buildGateBankGuide(canonical, {code: "PHF", isHub: true});
+  assert.deepEqual(guide.labels.filter((bank) => bank.id === id), [
+    {id, label: "N1", time: "00:00–01:00", start: 1260, duration: 60},
+  ]);
+  const breakdown = buildHubBankBreakdown(canonical, "PHF");
+  assert.equal(breakdown.banks.find((bank) => bank.id === id).label, "N1");
+});
+
 test("planning market filters preserve fleet and match either market endpoint", () => {
   const row = { fleet: "CRJ700", origin: "BHM", destination: "JAX", legs: 3 };
   assert.equal(marketMatches(row, { fleet: "CRJ700", origin: "BHM" }), true);
