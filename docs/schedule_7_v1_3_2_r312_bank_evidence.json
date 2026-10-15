@@ -1,0 +1,892 @@
+{
+  "approval": "Proposal only; not applied",
+  "baseCommit": "0e9a17f48b9de56d50be89a4cc49defd4d2a3bd6",
+  "baseCanonicalSha256": "ecf5306874c274135e8d6b3bbfbd33bfb5ef6e7ed8b2dc2a1bd731bc435e733f",
+  "native": {
+    "312_bank_arrival_1170": {
+      "valid": true,
+      "operating": {
+        "checks": 25,
+        "passed": 19,
+        "failed": 0,
+        "warnings": 3,
+        "notEvaluated": 1,
+        "overridden": 2,
+        "effectiveErrorFindings": 0,
+        "effectiveWarningFindings": 159
+      },
+      "structural": "pass",
+      "overnight": "pass",
+      "planning": "pass",
+      "failedChecks": [],
+      "gate": "pass",
+      "stands": {
+        "claims": 15,
+        "minutes": 3061
+      },
+      "overlay": {
+        "baseSchedule": {
+          "scheduleId": "schedule_7_v1_3_2_draft",
+          "sha256": "ecf5306874c274135e8d6b3bbfbd33bfb5ef6e7ed8b2dc2a1bd731bc435e733f"
+        },
+        "schedule": {
+          "id": "schedule_7_v1_3_2_draft",
+          "number": 7,
+          "version": "1.3.2-draft",
+          "label": "Schedule 7, Version 1.3.2 draft",
+          "status": "draft",
+          "fleetCounts": {
+            "MAX9": 35,
+            "CRJ900": 45,
+            "CRJ700": 65,
+            "CRJ200": 80
+          },
+          "connectionWindowMinutes": {
+            "minimum": 30,
+            "maximum": 240
+          }
+        },
+        "removeLegs": [
+          {
+            "legId": "BDL-DAB-CRJ700-01-IN",
+            "expectedRoute": 312
+          }
+        ],
+        "insertLegs": [
+          {
+            "id": "REVIEW-R312-DAB-PHF",
+            "route": 312,
+            "origin": "DAB",
+            "destination": "PHF",
+            "departureMinute": 1062,
+            "arrivalMinute": 1170
+          },
+          {
+            "id": "REVIEW-R312-PHF-BDL",
+            "route": 312,
+            "origin": "PHF",
+            "destination": "BDL",
+            "departureMinute": 1220,
+            "arrivalMinute": 1300
+          }
+        ],
+        "bankAssignmentsToAdd": [
+          {
+            "legId": "REVIEW-R312-DAB-PHF",
+            "operation": "arrival",
+            "bankId": "PHF-M6"
+          },
+          {
+            "legId": "REVIEW-R312-PHF-BDL",
+            "operation": "departure",
+            "bankId": "PHF-B7"
+          }
+        ]
+      }
+    },
+    "312_bank_arrival_1180": {
+      "valid": true,
+      "operating": {
+        "checks": 25,
+        "passed": 19,
+        "failed": 0,
+        "warnings": 3,
+        "notEvaluated": 1,
+        "overridden": 2,
+        "effectiveErrorFindings": 0,
+        "effectiveWarningFindings": 159
+      },
+      "structural": "pass",
+      "overnight": "pass",
+      "planning": "pass",
+      "failedChecks": [],
+      "gate": "pass",
+      "stands": {
+        "claims": 15,
+        "minutes": 3061
+      },
+      "overlay": {
+        "baseSchedule": {
+          "scheduleId": "schedule_7_v1_3_2_draft",
+          "sha256": "ecf5306874c274135e8d6b3bbfbd33bfb5ef6e7ed8b2dc2a1bd731bc435e733f"
+        },
+        "schedule": {
+          "id": "schedule_7_v1_3_2_draft",
+          "number": 7,
+          "version": "1.3.2-draft",
+          "label": "Schedule 7, Version 1.3.2 draft",
+          "status": "draft",
+          "fleetCounts": {
+            "MAX9": 35,
+            "CRJ900": 45,
+            "CRJ700": 65,
+            "CRJ200": 80
+          },
+          "connectionWindowMinutes": {
+            "minimum": 30,
+            "maximum": 240
+          }
+        },
+        "removeLegs": [
+          {
+            "legId": "BDL-DAB-CRJ700-01-IN",
+            "expectedRoute": 312
+          }
+        ],
+        "insertLegs": [
+          {
+            "id": "REVIEW-R312-DAB-PHF",
+            "route": 312,
+            "origin": "DAB",
+            "destination": "PHF",
+            "departureMinute": 1072,
+            "arrivalMinute": 1180
+          },
+          {
+            "id": "REVIEW-R312-PHF-BDL",
+            "route": 312,
+            "origin": "PHF",
+            "destination": "BDL",
+            "departureMinute": 1220,
+            "arrivalMinute": 1300
+          }
+        ],
+        "bankAssignmentsToAdd": [
+          {
+            "legId": "REVIEW-R312-DAB-PHF",
+            "operation": "arrival",
+            "bankId": "PHF-M6"
+          },
+          {
+            "legId": "REVIEW-R312-PHF-BDL",
+            "operation": "departure",
+            "bankId": "PHF-B7"
+          }
+        ]
+      }
+    },
+    "312_bank_arrival_1190": {
+      "valid": false,
+      "operating": {
+        "checks": 25,
+        "passed": 17,
+        "failed": 2,
+        "warnings": 3,
+        "notEvaluated": 1,
+        "overridden": 2,
+        "effectiveErrorFindings": 4,
+        "effectiveWarningFindings": 159
+      },
+      "structural": "pass",
+      "overnight": "pass",
+      "planning": "pass",
+      "failedChecks": [
+        {
+          "id": "passenger_touch_on_stand",
+          "title": "Passenger handling on stands",
+          "section": "\u00a71.7 hard-stop addition",
+          "severity": "error",
+          "hardStop": true,
+          "status": "fail",
+          "message": "3 finding(s)",
+          "metrics": {
+            "findingCount": 3,
+            "effectiveFindingCount": 3,
+            "overriddenFindingCount": 0
+          },
+          "findings": [
+            {
+              "id": "PHF-136-936-981",
+              "message": "PHF claim 136 requires passenger handling on stand 1",
+              "evidence": {
+                "city": "PHF",
+                "label": "136",
+                "kind": "turn",
+                "start": 936,
+                "end": 981,
+                "stand": 1
+              }
+            },
+            {
+              "id": "PHF-528-937-982",
+              "message": "PHF claim 528 requires passenger handling on stand 2",
+              "evidence": {
+                "city": "PHF",
+                "label": "528",
+                "kind": "turn",
+                "start": 937,
+                "end": 982,
+                "stand": 2
+              }
+            },
+            {
+              "id": "PHF-103-1195-1255",
+              "message": "PHF claim 103 requires passenger handling on stand 1",
+              "evidence": {
+                "city": "PHF",
+                "label": "103",
+                "kind": "turn",
+                "start": 1195,
+                "end": 1255,
+                "stand": 1
+              }
+            }
+          ]
+        },
+        {
+          "id": "fixed_physical_inventory",
+          "title": "Authoritative gate and stand inventory",
+          "section": "\u00a71.7 / \u00a72.2",
+          "severity": "error",
+          "hardStop": true,
+          "status": "fail",
+          "message": "1 finding(s)",
+          "metrics": {
+            "findingCount": 1,
+            "effectiveFindingCount": 1,
+            "overriddenFindingCount": 0
+          },
+          "findings": [
+            {
+              "id": "PHF",
+              "message": "PHF cannot fit its claims into the configured physical inventory: 3 passenger touch(es) remain off-gate",
+              "evidence": {
+                "city": "PHF",
+                "requiredGates": 17,
+                "configuredGates": 16,
+                "requiredStands": 8,
+                "configuredStands": 8,
+                "strandedPassengerTouches": 3
+              }
+            }
+          ]
+        }
+      ],
+      "gate": "3 passenger touch(es) remain off-gate",
+      "stands": null,
+      "overlay": {
+        "baseSchedule": {
+          "scheduleId": "schedule_7_v1_3_2_draft",
+          "sha256": "ecf5306874c274135e8d6b3bbfbd33bfb5ef6e7ed8b2dc2a1bd731bc435e733f"
+        },
+        "schedule": {
+          "id": "schedule_7_v1_3_2_draft",
+          "number": 7,
+          "version": "1.3.2-draft",
+          "label": "Schedule 7, Version 1.3.2 draft",
+          "status": "draft",
+          "fleetCounts": {
+            "MAX9": 35,
+            "CRJ900": 45,
+            "CRJ700": 65,
+            "CRJ200": 80
+          },
+          "connectionWindowMinutes": {
+            "minimum": 30,
+            "maximum": 240
+          }
+        },
+        "removeLegs": [
+          {
+            "legId": "BDL-DAB-CRJ700-01-IN",
+            "expectedRoute": 312
+          }
+        ],
+        "insertLegs": [
+          {
+            "id": "REVIEW-R312-DAB-PHF",
+            "route": 312,
+            "origin": "DAB",
+            "destination": "PHF",
+            "departureMinute": 1082,
+            "arrivalMinute": 1190
+          },
+          {
+            "id": "REVIEW-R312-PHF-BDL",
+            "route": 312,
+            "origin": "PHF",
+            "destination": "BDL",
+            "departureMinute": 1230,
+            "arrivalMinute": 1310
+          }
+        ],
+        "bankAssignmentsToAdd": [
+          {
+            "legId": "REVIEW-R312-DAB-PHF",
+            "operation": "arrival",
+            "bankId": "PHF-M6"
+          },
+          {
+            "legId": "REVIEW-R312-PHF-BDL",
+            "operation": "departure",
+            "bankId": "PHF-B7"
+          }
+        ]
+      }
+    }
+  },
+  "preferredNetwork": {
+    "geo": {
+      "lostPaths": 1,
+      "gained": [
+        {
+          "market": "DAB-BNA",
+          "origin": "DAB",
+          "destination": "BNA",
+          "demand": 5.4,
+          "beforeMinutes": 347,
+          "afterMinutes": 285
+        },
+        {
+          "market": "DAB-ILM",
+          "origin": "DAB",
+          "destination": "ILM",
+          "demand": 1,
+          "beforeMinutes": null,
+          "afterMinutes": 240
+        },
+        {
+          "market": "DAB-ROA",
+          "origin": "DAB",
+          "destination": "ROA",
+          "demand": 0.9,
+          "beforeMinutes": 494,
+          "afterMinutes": 287
+        },
+        {
+          "market": "DAB-ACY",
+          "origin": "DAB",
+          "destination": "ACY",
+          "demand": 0,
+          "beforeMinutes": 444,
+          "afterMinutes": 237
+        }
+      ],
+      "lost": [],
+      "faster": [
+        {
+          "market": "DAB-PVD",
+          "origin": "DAB",
+          "destination": "PVD",
+          "demand": 14.8,
+          "beforeMinutes": 333,
+          "afterMinutes": 266
+        },
+        {
+          "market": "BHM-BDL",
+          "origin": "BHM",
+          "destination": "BDL",
+          "demand": 7.2,
+          "beforeMinutes": 328,
+          "afterMinutes": 220
+        },
+        {
+          "market": "DAB-BNA",
+          "origin": "DAB",
+          "destination": "BNA",
+          "demand": 5.4,
+          "beforeMinutes": 347,
+          "afterMinutes": 285
+        },
+        {
+          "market": "DAB-DAL",
+          "origin": "DAB",
+          "destination": "DAL",
+          "demand": 4,
+          "beforeMinutes": 401,
+          "afterMinutes": 356
+        },
+        {
+          "market": "DAB-MCI",
+          "origin": "DAB",
+          "destination": "MCI",
+          "demand": 4,
+          "beforeMinutes": 335,
+          "afterMinutes": 330
+        },
+        {
+          "market": "DAB-BWI",
+          "origin": "DAB",
+          "destination": "BWI",
+          "demand": 3.8,
+          "beforeMinutes": 229,
+          "afterMinutes": 206
+        },
+        {
+          "market": "DAB-SAT",
+          "origin": "DAB",
+          "destination": "SAT",
+          "demand": 2.7,
+          "beforeMinutes": 549,
+          "afterMinutes": 479
+        },
+        {
+          "market": "DAB-HOU",
+          "origin": "DAB",
+          "destination": "HOU",
+          "demand": 1.6,
+          "beforeMinutes": 411,
+          "afterMinutes": 366
+        },
+        {
+          "market": "DAB-ROA",
+          "origin": "DAB",
+          "destination": "ROA",
+          "demand": 0.9,
+          "beforeMinutes": 494,
+          "afterMinutes": 287
+        },
+        {
+          "market": "DAB-AVP",
+          "origin": "DAB",
+          "destination": "AVP",
+          "demand": 0.7,
+          "beforeMinutes": 296,
+          "afterMinutes": 251
+        },
+        {
+          "market": "DAB-ACY",
+          "origin": "DAB",
+          "destination": "ACY",
+          "demand": 0,
+          "beforeMinutes": 444,
+          "afterMinutes": 237
+        },
+        {
+          "market": "DAB-TTN",
+          "origin": "DAB",
+          "destination": "TTN",
+          "demand": 0,
+          "beforeMinutes": 288,
+          "afterMinutes": 243
+        }
+      ],
+      "slower": [
+        {
+          "market": "DAB-BDL",
+          "origin": "DAB",
+          "destination": "BDL",
+          "demand": 18.7,
+          "beforeMinutes": 157,
+          "afterMinutes": 228
+        }
+      ]
+    },
+    "raw": {
+      "lostPaths": 1,
+      "gained": [
+        {
+          "market": "DAB-BNA",
+          "origin": "DAB",
+          "destination": "BNA",
+          "demand": 5.4,
+          "beforeMinutes": 347,
+          "afterMinutes": 285
+        },
+        {
+          "market": "DAB-ILM",
+          "origin": "DAB",
+          "destination": "ILM",
+          "demand": 1,
+          "beforeMinutes": 447,
+          "afterMinutes": 240
+        },
+        {
+          "market": "DAB-ROA",
+          "origin": "DAB",
+          "destination": "ROA",
+          "demand": 0.9,
+          "beforeMinutes": 467,
+          "afterMinutes": 287
+        },
+        {
+          "market": "DAB-MYR",
+          "origin": "DAB",
+          "destination": "MYR",
+          "demand": 0.6,
+          "beforeMinutes": 456,
+          "afterMinutes": 249
+        },
+        {
+          "market": "DAB-ACY",
+          "origin": "DAB",
+          "destination": "ACY",
+          "demand": 0,
+          "beforeMinutes": 444,
+          "afterMinutes": 237
+        }
+      ],
+      "lost": [],
+      "faster": [
+        {
+          "market": "DAB-PVD",
+          "origin": "DAB",
+          "destination": "PVD",
+          "demand": 14.8,
+          "beforeMinutes": 333,
+          "afterMinutes": 266
+        },
+        {
+          "market": "BHM-BDL",
+          "origin": "BHM",
+          "destination": "BDL",
+          "demand": 7.2,
+          "beforeMinutes": 328,
+          "afterMinutes": 220
+        },
+        {
+          "market": "DAB-BNA",
+          "origin": "DAB",
+          "destination": "BNA",
+          "demand": 5.4,
+          "beforeMinutes": 347,
+          "afterMinutes": 285
+        },
+        {
+          "market": "DAB-DAL",
+          "origin": "DAB",
+          "destination": "DAL",
+          "demand": 4,
+          "beforeMinutes": 401,
+          "afterMinutes": 356
+        },
+        {
+          "market": "DAB-MCI",
+          "origin": "DAB",
+          "destination": "MCI",
+          "demand": 4,
+          "beforeMinutes": 335,
+          "afterMinutes": 330
+        },
+        {
+          "market": "DAB-BWI",
+          "origin": "DAB",
+          "destination": "BWI",
+          "demand": 3.8,
+          "beforeMinutes": 229,
+          "afterMinutes": 206
+        },
+        {
+          "market": "DAB-SAT",
+          "origin": "DAB",
+          "destination": "SAT",
+          "demand": 2.7,
+          "beforeMinutes": 549,
+          "afterMinutes": 479
+        },
+        {
+          "market": "DAB-HOU",
+          "origin": "DAB",
+          "destination": "HOU",
+          "demand": 1.6,
+          "beforeMinutes": 411,
+          "afterMinutes": 366
+        },
+        {
+          "market": "DAB-ILM",
+          "origin": "DAB",
+          "destination": "ILM",
+          "demand": 1,
+          "beforeMinutes": 447,
+          "afterMinutes": 240
+        },
+        {
+          "market": "DAB-ROA",
+          "origin": "DAB",
+          "destination": "ROA",
+          "demand": 0.9,
+          "beforeMinutes": 467,
+          "afterMinutes": 287
+        },
+        {
+          "market": "DAB-AVP",
+          "origin": "DAB",
+          "destination": "AVP",
+          "demand": 0.7,
+          "beforeMinutes": 296,
+          "afterMinutes": 251
+        },
+        {
+          "market": "DAB-MYR",
+          "origin": "DAB",
+          "destination": "MYR",
+          "demand": 0.6,
+          "beforeMinutes": 456,
+          "afterMinutes": 249
+        },
+        {
+          "market": "DAB-ACY",
+          "origin": "DAB",
+          "destination": "ACY",
+          "demand": 0,
+          "beforeMinutes": 444,
+          "afterMinutes": 237
+        },
+        {
+          "market": "DAB-TTN",
+          "origin": "DAB",
+          "destination": "TTN",
+          "demand": 0,
+          "beforeMinutes": 288,
+          "afterMinutes": 243
+        }
+      ],
+      "slower": [
+        {
+          "market": "DAB-BDL",
+          "origin": "DAB",
+          "destination": "BDL",
+          "demand": 18.7,
+          "beforeMinutes": 157,
+          "afterMinutes": 228
+        }
+      ]
+    },
+    "lostChoices": [
+      {
+        "key": "1360",
+        "market": "DAB-BDL",
+        "stops": 0,
+        "minutes": 157,
+        "reasonable": true
+      }
+    ],
+    "downgrades": [
+      {
+        "market": "DAB-BDL",
+        "demand": 18.7,
+        "beforeStops": 0,
+        "afterStops": 1
+      }
+    ],
+    "flights": 1219
+  },
+  "newFlightProfiles": [
+    {
+      "flight": 2223,
+      "market": "DAB-PHF",
+      "departure": "17:52",
+      "arrival": "19:40",
+      "localOd": 2.2,
+      "competitiveIndex": 39.633333333333326,
+      "markets": [
+        {
+          "market": "DAB-BDL",
+          "demand": 18.7,
+          "minutes": 228,
+          "stops": 1,
+          "newOneStop": false,
+          "competitive": true,
+          "choiceShare": 0.3333333333333333
+        },
+        {
+          "market": "DAB-PVD",
+          "demand": 14.8,
+          "minutes": 266,
+          "stops": 1,
+          "newOneStop": false,
+          "competitive": true,
+          "choiceShare": 1
+        },
+        {
+          "market": "DAB-BNA",
+          "demand": 5.4,
+          "minutes": 285,
+          "stops": 1,
+          "newOneStop": true,
+          "competitive": true,
+          "choiceShare": 1
+        },
+        {
+          "market": "DAB-DAL",
+          "demand": 4,
+          "minutes": 356,
+          "stops": 1,
+          "newOneStop": false,
+          "competitive": true,
+          "choiceShare": 1
+        },
+        {
+          "market": "DAB-MCI",
+          "demand": 4,
+          "minutes": 330,
+          "stops": 1,
+          "newOneStop": false,
+          "competitive": true,
+          "choiceShare": 0.5
+        },
+        {
+          "market": "DAB-BWI",
+          "demand": 3.8,
+          "minutes": 206,
+          "stops": 1,
+          "newOneStop": false,
+          "competitive": true,
+          "choiceShare": 0.5
+        },
+        {
+          "market": "DAB-PHF",
+          "demand": 2.2,
+          "minutes": 108,
+          "stops": 0,
+          "newOneStop": false,
+          "competitive": true,
+          "choiceShare": 0.5
+        },
+        {
+          "market": "DAB-HOU",
+          "demand": 1.6,
+          "minutes": 366,
+          "stops": 1,
+          "newOneStop": false,
+          "competitive": true,
+          "choiceShare": 1
+        },
+        {
+          "market": "DAB-ILM",
+          "demand": 1,
+          "minutes": 240,
+          "stops": 1,
+          "newOneStop": true,
+          "competitive": true,
+          "choiceShare": 1
+        },
+        {
+          "market": "DAB-ROA",
+          "demand": 0.9,
+          "minutes": 287,
+          "stops": 1,
+          "newOneStop": true,
+          "competitive": true,
+          "choiceShare": 1
+        },
+        {
+          "market": "DAB-AVP",
+          "demand": 0.7,
+          "minutes": 251,
+          "stops": 1,
+          "newOneStop": false,
+          "competitive": true,
+          "choiceShare": 1
+        },
+        {
+          "market": "DAB-ACY",
+          "demand": 0,
+          "minutes": 237,
+          "stops": 1,
+          "newOneStop": true,
+          "competitive": true,
+          "choiceShare": 1
+        },
+        {
+          "market": "DAB-TTN",
+          "demand": 0,
+          "minutes": 243,
+          "stops": 1,
+          "newOneStop": false,
+          "competitive": true,
+          "choiceShare": 1
+        }
+      ]
+    },
+    {
+      "flight": 2224,
+      "market": "PHF-BDL",
+      "departure": "20:20",
+      "arrival": "21:40",
+      "localOd": 21.7,
+      "competitiveIndex": 20.666666666666664,
+      "markets": [
+        {
+          "market": "FLL-BDL",
+          "demand": 112.5,
+          "minutes": 350,
+          "stops": 1,
+          "newOneStop": false,
+          "competitive": false,
+          "choiceShare": 0
+        },
+        {
+          "market": "SAV-BDL",
+          "demand": 22.7,
+          "minutes": 310,
+          "stops": 1,
+          "newOneStop": false,
+          "competitive": false,
+          "choiceShare": 0
+        },
+        {
+          "market": "PHF-BDL",
+          "demand": 21.7,
+          "minutes": 80,
+          "stops": 0,
+          "newOneStop": false,
+          "competitive": true,
+          "choiceShare": 0.3333333333333333
+        },
+        {
+          "market": "MSY-BDL",
+          "demand": 20.5,
+          "minutes": 375,
+          "stops": 1,
+          "newOneStop": false,
+          "competitive": false,
+          "choiceShare": 0
+        },
+        {
+          "market": "PIT-BDL",
+          "demand": 19.8,
+          "minutes": 294,
+          "stops": 1,
+          "newOneStop": false,
+          "competitive": false,
+          "choiceShare": 0
+        },
+        {
+          "market": "HOU-BDL",
+          "demand": 19,
+          "minutes": 410,
+          "stops": 1,
+          "newOneStop": false,
+          "competitive": false,
+          "choiceShare": 0
+        },
+        {
+          "market": "DAB-BDL",
+          "demand": 18.7,
+          "minutes": 228,
+          "stops": 1,
+          "newOneStop": false,
+          "competitive": true,
+          "choiceShare": 0.3333333333333333
+        },
+        {
+          "market": "BHM-BDL",
+          "demand": 7.2,
+          "minutes": 220,
+          "stops": 1,
+          "newOneStop": false,
+          "competitive": true,
+          "choiceShare": 1
+        },
+        {
+          "market": "DAY-BDL",
+          "demand": 3.8,
+          "minutes": 320,
+          "stops": 1,
+          "newOneStop": false,
+          "competitive": false,
+          "choiceShare": 0
+        }
+      ]
+    }
+  ],
+  "provenance": {
+    "baseCommit": "0e9a17f48b9de56d50be89a4cc49defd4d2a3bd6",
+    "baseConfiguration": "config/optimizations/schedule_7_v1_3_2_round_4.json",
+    "baseConfigurationSha256": "0fd6cf8f11ad51ee34938d57da3be933637106378ff4e29ed6e692a88f2e2978",
+    "baseSha256": "ecf5306874c274135e8d6b3bbfbd33bfb5ef6e7ed8b2dc2a1bd731bc435e733f",
+    "demandSha256": "49c04922ee0cebb3fef8aad923e04bd11874587a263c9511358ddb833b860bc6",
+    "method": "Same app enumeration, 30\u2013240 minute connections, 2.25x geographic screen. Competitive opportunity indices split underlying OD over choices within 30 minutes of fastest at the same stop count and exclude connections when a nonstop exists; they are not passenger-load forecasts."
+  }
+}
