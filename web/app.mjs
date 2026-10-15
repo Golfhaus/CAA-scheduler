@@ -5,7 +5,7 @@ import {
   serializeBuildConfig,
   validateBuildConfig,
 } from "./build-config.mjs";
-import { bankBreakdownAirports, buildHubBankBreakdown } from "./hub-bank-breakdown.mjs";
+import { bankBreakdownAirports, bankDisplayLabel, buildHubBankBreakdown } from "./hub-bank-breakdown.mjs?v=20261015-bank-labels";
 import { routingDetailOptions, buildRoutingDetails } from "./routing-details.mjs";
 import { createOpportunityUI } from "./opportunity-ui.mjs";
 
@@ -550,7 +550,7 @@ export function buildGateBankGuide(canonical, city) {
       .map((segment) => ({
         ...segment,
         id: bank.id,
-        label: bank.id.replace(`${city.code}-`, ""),
+        label: bankDisplayLabel(bank),
         time: `${formatMinute24(bank.startMinute)}–${formatMinute24(bank.endMinute)}`,
       })));
   const boundaries = [...new Set(labels.flatMap((bank) => [bank.start, bank.start + bank.duration]))]

@@ -1,6 +1,11 @@
 const DAY_MINUTES = 1440;
 const operatingMinute = (minute) => ((Number(minute) - 180) % DAY_MINUTES + DAY_MINUTES) % DAY_MINUTES;
 
+export function bankDisplayLabel(bank) {
+  // Overlay banks can carry provenance in their ID before the bank code.
+  return bank.id.match(/(?:^|-)([BMN]\d+)$/)?.[1] || bank.id.replace(`${bank.hub}-`, "");
+}
+
 function insideWindow(minute, bank) {
   const offset = ((Number(minute) - bank.startMinute) % DAY_MINUTES + DAY_MINUTES) % DAY_MINUTES;
   const width = ((bank.endMinute - bank.startMinute) % DAY_MINUTES + DAY_MINUTES) % DAY_MINUTES;
@@ -23,7 +28,7 @@ export function buildHubBankBreakdown(canonical, hub) {
   const makeBucket = (bank) => ({...bank, inbound: [], outbound: []});
   const banks = (canonical.hubBanks || []).filter((bank) => bank.hub === hub)
     .sort((a, b) => operatingMinute(a.startMinute) - operatingMinute(b.startMinute) || a.id.localeCompare(b.id))
-    .map((bank) => makeBucket({...bank, label: bank.id.replace(`${hub}-`, "")}));
+    .map((bank) => makeBucket({...bank, label: bankDisplayLabel(bank)}));
   const banksById = new Map(banks.map((bank) => [bank.id, bank]));
   const unassigned = makeBucket({id: "unassigned", label: "Unassigned to a bank"});
   const assignments = new Map();
