@@ -23,13 +23,16 @@ Every chart showing progression through the operating day uses the shared
 `web/operating-day-timeline.mjs` grid and `.operating-day-timeline` styles.
 Show every hour as a two-digit 24-hour label (`03`, `04`, …), with subtle
 alternating hour shading and thin hourly boundaries behind the activity.
+Center each hour label over its entire hour band, rather than its start boundary.
 Keep full times, time zones and day offsets in tooltips and accessible text;
 retain the chart's existing time zone and unwrapped midnight geometry.
 
 Gates and Routing Details use this standard. New time-based charts should reuse
 the same grid and axis/band renderers in `web/app.mjs`, rather than choose a new
 tick interval or independent shading. Chart width responds to the available
-space, with a compact per-hour minimum to keep labels legible. Longer route
+space, with a minimum of 3rem per hour so a 40-minute turn has room for a
+complete three-digit route label. Readability takes priority over reducing
+horizontal scrolling, including on phones. Longer route
 days add only the width needed for the extra hours. Horizontal scrolling stays
 inside the chart panel on narrow screens.
 
