@@ -1,15 +1,17 @@
 {
   "status": "draft; not published",
-  "flights": 1214,
+  "flights": 1216,
   "routes": 184,
   "lines": 17,
   "retimedFlights": [
     1219,
     1256,
+    1699,
     1817,
+    1892,
     1904
   ],
-  "newFlights": 2,
+  "newFlights": 4,
   "operating": {
     "checks": 25,
     "passed": 19,
@@ -18,7 +20,7 @@
     "notEvaluated": 1,
     "overridden": 2,
     "effectiveErrorFindings": 0,
-    "effectiveWarningFindings": 162
+    "effectiveWarningFindings": 161
   },
   "beforeMaintenanceFindings": [
     {
@@ -148,9 +150,41 @@
       "arrival": "20:03",
       "departureMinute": 989,
       "arrivalMinute": 1203
+    },
+    {
+      "id": "R175-REVIEW-PWM-BWI",
+      "route": 175,
+      "line": "AN",
+      "fleet": "CRJ200",
+      "day": 8,
+      "sequenceWithinRoute": 3,
+      "pairing": 905,
+      "flight": 2219,
+      "origin": "PWM",
+      "destination": "BWI",
+      "departure": "10:13",
+      "arrival": "11:43",
+      "departureMinute": 613,
+      "arrivalMinute": 703
+    },
+    {
+      "id": "R175-REVIEW-BWI-PWM",
+      "route": 175,
+      "line": "AN",
+      "fleet": "CRJ200",
+      "day": 8,
+      "sequenceWithinRoute": 4,
+      "pairing": 906,
+      "flight": 2220,
+      "origin": "BWI",
+      "destination": "PWM",
+      "departure": "12:23",
+      "arrival": "13:53",
+      "departureMinute": 743,
+      "arrivalMinute": 833
     }
   ],
-  "netFlightChange": 0,
+  "netFlightChange": 2,
   "acceptedR501": {
     "option": "rfd_later_turn",
     "removedFlights": [
@@ -171,5 +205,18 @@
       "CHS-SFB",
       "SFB-CHS"
     ]
+  },
+  "acceptedR175": {
+    "addedFlights": [
+      2219,
+      2220
+    ],
+    "retimingMinutes": {
+      "1892": -8,
+      "1699": -10
+    },
+    "newBlockMinutes": 180,
+    "maximumTurnMinutes": 86,
+    "preservesExistingItineraryChoices": true
   }
 }

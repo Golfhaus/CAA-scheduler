@@ -73,6 +73,10 @@
         {
           "path": "config/optimizations/schedule_7_v1_3_2_round_2.json",
           "sha256": "7227cfdb48cbf8cfcec71d05567950ebe31541ccf8b073722fd99998b588700a"
+        },
+        {
+          "path": "config/optimizations/schedule_7_v1_3_2_round_3.json",
+          "sha256": "563e4e0bcedd042aa5a946372889be264fdb2cdf43ffd9929fe880f45698af19"
         }
       ],
       "publication": "Not authorized; app default remains v1.3.1"
@@ -19559,10 +19563,10 @@
       "flight": 1699,
       "origin": "SYR",
       "destination": "PWM",
-      "departure": "08:35",
-      "arrival": "09:43",
-      "departureMinute": 515,
-      "arrivalMinute": 583
+      "departure": "08:25",
+      "arrival": "09:33",
+      "departureMinute": 505,
+      "arrivalMinute": 573
     },
     {
       "id": "PWM-SYR-CRJ200-03-IN",
@@ -19634,7 +19638,7 @@
       "line": "AN",
       "fleet": "CRJ200",
       "day": 8,
-      "sequenceWithinRoute": 3,
+      "sequenceWithinRoute": 5,
       "pairing": 180,
       "flight": 1704,
       "origin": "PWM",
@@ -20306,7 +20310,7 @@
       "line": "AN",
       "fleet": "CRJ200",
       "day": 8,
-      "sequenceWithinRoute": 6,
+      "sequenceWithinRoute": 8,
       "pairing": 302,
       "flight": 1746,
       "origin": "PHF",
@@ -22226,7 +22230,7 @@
       "line": "AN",
       "fleet": "CRJ200",
       "day": 8,
-      "sequenceWithinRoute": 5,
+      "sequenceWithinRoute": 7,
       "pairing": 744,
       "flight": 1866,
       "origin": "ACY",
@@ -22647,10 +22651,10 @@
       "flight": 1892,
       "origin": "ISP",
       "destination": "SYR",
-      "departure": "06:55",
-      "arrival": "07:53",
-      "departureMinute": 415,
-      "arrivalMinute": 473
+      "departure": "06:47",
+      "arrival": "07:45",
+      "departureMinute": 407,
+      "arrivalMinute": 465
     },
     {
       "id": "ISP-SYR-CRJ200-02-OUT",
@@ -22882,7 +22886,7 @@
       "line": "AN",
       "fleet": "CRJ200",
       "day": 8,
-      "sequenceWithinRoute": 4,
+      "sequenceWithinRoute": 6,
       "pairing": 258,
       "flight": 1907,
       "origin": "SYR",
@@ -27867,6 +27871,38 @@
       "arrival": "20:03",
       "departureMinute": 989,
       "arrivalMinute": 1203
+    },
+    {
+      "id": "R175-REVIEW-PWM-BWI",
+      "route": 175,
+      "line": "AN",
+      "fleet": "CRJ200",
+      "day": 8,
+      "sequenceWithinRoute": 3,
+      "pairing": 905,
+      "flight": 2219,
+      "origin": "PWM",
+      "destination": "BWI",
+      "departure": "10:13",
+      "arrival": "11:43",
+      "departureMinute": 613,
+      "arrivalMinute": 703
+    },
+    {
+      "id": "R175-REVIEW-BWI-PWM",
+      "route": 175,
+      "line": "AN",
+      "fleet": "CRJ200",
+      "day": 8,
+      "sequenceWithinRoute": 4,
+      "pairing": 906,
+      "flight": 2220,
+      "origin": "BWI",
+      "destination": "PWM",
+      "departure": "12:23",
+      "arrival": "13:53",
+      "departureMinute": 743,
+      "arrivalMinute": 833
     }
   ]
 }

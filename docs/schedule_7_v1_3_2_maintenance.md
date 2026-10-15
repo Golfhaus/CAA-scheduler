@@ -2,7 +2,7 @@
 
 Prepared October 14, 2026 from published v1.3.1 commit `d0b728cab36c0d1f3e04d5140d755c8760b3809b`. The user authorized repairing the maintenance validator and AC/AO/AQ rotations. Publication has not been authorized; main and the app default remain v1.3.1.
 
-**Scope of this document:** the following records the maintenance-only round-one repair. The [cumulative draft](schedule_7_v1_3_2_draft.md) also includes the subsequently accepted R501 replacement, including its explicit CHS nonstop losses. Default reproduction now builds both rounds; `--maintenance-only` recreates this original checkpoint.
+**Scope of this document:** the following records the maintenance-only round-one repair. The [cumulative draft](schedule_7_v1_3_2_draft.md) also includes the subsequently accepted R501 replacement, including its explicit CHS nonstop losses. Default reproduction now builds all accepted rounds; `--maintenance-only` recreates this original checkpoint.
 
 ## Validation defect
 

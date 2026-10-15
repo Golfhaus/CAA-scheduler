@@ -13,7 +13,13 @@ for(const name of Object.keys(native)){
   assert.equal(raw.lostPaths,2);assert.equal(geo.lostPaths,2);assert.deepEqual(raw.lost,[]);assert.deepEqual(geo.lost,[]);assert.deepEqual(targets,[]);
   for(const [key,p]of before.paths)if(!after.paths.has(key))assert.ok(['1257','1258'].includes(key));
   const approvedChs={'CHS-SFB':170,'SFB-CHS':234};
-  assert.ok(geo.slower.every(x=>approvedChs[x.market]===x.afterMinutes||[1,43].includes(x.afterMinutes-x.beforeMinutes)));
+  assert.ok(geo.slower.every(x=>approvedChs[x.market]===x.afterMinutes||[1,43].includes(x.afterMinutes-x.beforeMinutes)||x.origin==='ISP'&&x.afterMinutes-x.beforeMinutes===8));
+  const prior=buildServiceAnalysis(read(root+'/outputs/schedule_7_v1_3_2_r175/base_round_2_canonical.json'),od,buildItineraries),r175Raw=compareServiceAnalyses(prior,after),r175Geo=compareServiceAnalyses(prior,after,true);
+  assert.equal(r175Raw.lostPaths,0);assert.equal(r175Geo.lostPaths,0);assert.deepEqual(r175Geo.lost,[]);
+  assert.equal(r175Geo.faster.length,15);assert.equal(r175Geo.slower.length,22);
+  assert.ok(r175Geo.slower.every(x=>x.origin==='ISP'&&x.afterMinutes-x.beforeMinutes===8));
+  for(const market of ['PWM-BWI','BWI-PWM'])assert.equal(coverageView(after.records.get(market),true).stops,0);
+  reports[name].r175Impact={raw:r175Raw,geo:r175Geo};
   const sha=p=>createHash('sha256').update(fs.readFileSync(p)).digest('hex');
   reports[name].provenance={baseSha256:sha(root+'/data/schedules/schedule_7_v1_3_1/canonical_schedule.json'),draftSha256:sha(root+'/data/schedules/schedule_7_v1_3_2_draft/canonical_schedule.json'),demandSha256:sha(root+'/data/reference/airport_od_matrix_consolidated_v2.csv')};
  }

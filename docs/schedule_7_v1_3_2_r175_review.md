@@ -1,6 +1,6 @@
 # R175 holistic review
 
-Reviewed October 14, 2026 against the cumulative v1.3.2 draft, including the accepted R501 RFD replacement. **R175 has not been modified.** The recommended BWI option is a proposal for review; publication remains unauthorized.
+Reviewed October 14, 2026 against the cumulative v1.3.2 draft, including the accepted R501 RFD replacement. **Accepted into the v1.3.2 draft by the user on October 14, 2026.** The authoritative overlay is `config/optimizations/schedule_7_v1_3_2_round_3.json`; publication remains unauthorized.
 
 ## Recommendation
 
@@ -70,4 +70,4 @@ python scripts/review_schedule_7_v1_3_2_r175.py
 node scripts/audit_schedule_7_v1_3_2_r175.mjs
 ```
 
-The standalone proposed overlay is `config/proposals/schedule_7_v1_3_2_r175_bwi.json`; it is not included in the draft build. Detailed evidence is `data/analyses/schedule_7_v1_3_2_r175_review.json`. Native studies write their trial schedules to `outputs/`; the canonical draft remains the accepted maintenance plus R501 package.
+The original proposal is retained as historical evidence in `config/proposals/schedule_7_v1_3_2_r175_bwi.json`. The accepted round-three optimization overlay is included in the draft build. Detailed evidence is `data/analyses/schedule_7_v1_3_2_r175_review.json`. Native studies write their trial schedules to `outputs/`; the review scripts use the pinned pre-R175 checkpoint. The canonical draft now includes maintenance, R501 and R175.

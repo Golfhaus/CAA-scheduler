@@ -31,6 +31,7 @@ preserves all 1,214 flights and aircraft requirements, consolidates AO/AQ into
 compliant rotations, and corrects AC with two flight retimings. It passes the
 corrected checks, with AM's standing one-day grace explicitly reported.
 The cumulative v1.3.2 draft also includes the accepted [R501 RFD replacement](docs/schedule_7_v1_3_2_r501_review.md): retain ABE–MYR, reduce the longest sit to 2h27 and replace the CHS turn with a second RFD round trip. That removes the CHS nonstop pair, with one-stop alternatives retained.
+The accepted [R175 PWM–BWI turn](docs/schedule_7_v1_3_2_r175_review.md) adds three hours of CRJ200 flying with no extra aircraft and reduces its longest hold to 1h26. The cumulative draft contains 1,216 flights.
 The app default remains v1.3.1 until separate release approval.
 
 ## Milestone 0.7 — planning foundation

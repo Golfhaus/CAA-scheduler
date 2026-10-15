@@ -10,7 +10,7 @@
     "notEvaluated": 1,
     "overridden": 2,
     "effectiveErrorFindings": 0,
-    "effectiveWarningFindings": 162
+    "effectiveWarningFindings": 161
   },
   "checks": [
     {
@@ -114,10 +114,10 @@
       "severity": "warning",
       "hardStop": false,
       "status": "warning",
-      "message": "81 finding(s)",
+      "message": "80 finding(s)",
       "metrics": {
-        "findingCount": 81,
-        "effectiveFindingCount": 81,
+        "findingCount": 80,
+        "effectiveFindingCount": 80,
         "overriddenFindingCount": 0
       },
       "findings": [
@@ -938,18 +938,6 @@
           }
         },
         {
-          "id": "AN-8-1699-1704",
-          "message": "Hold at PWM is 317 minutes and needs deliberate-hold review",
-          "evidence": {
-            "line": "AN",
-            "day": 8,
-            "city": "PWM",
-            "arrivalFlight": 1699,
-            "departureFlight": 1704,
-            "minutes": 317
-          }
-        },
-        {
           "id": "AM-4-1825-1829",
           "message": "Hold at BTV is 183 minutes and needs deliberate-hold review",
           "evidence": {
@@ -1175,9 +1163,9 @@
       "status": "pass",
       "message": "Point-to-point flying is within the 10% cap",
       "metrics": {
-        "flights": 97,
-        "totalFlights": 1214,
-        "share": 0.07990115321252059,
+        "flights": 99,
+        "totalFlights": 1216,
+        "share": 0.08141447368421052,
         "findingCount": 0,
         "effectiveFindingCount": 0,
         "overriddenFindingCount": 0
@@ -2392,15 +2380,15 @@
           "evidence": {
             "city": "ISP",
             "departures": [
-              415,
+              407,
               745,
               910
             ],
             "excessiveGaps": [
               {
-                "from": 415,
+                "from": 407,
                 "to": 745,
-                "minutes": 330
+                "minutes": 338
               }
             ],
             "serviceWindowMinutes": {
@@ -2981,6 +2969,7 @@
               270,
               280,
               570,
+              613,
               900,
               986,
               1057
@@ -2992,9 +2981,9 @@
                 "minutes": 290
               },
               {
-                "from": 570,
+                "from": 613,
                 "to": 900,
-                "minutes": 330
+                "minutes": 287
               }
             ],
             "serviceWindowMinutes": {
@@ -3631,7 +3620,7 @@
           "evidence": {
             "city": "BWI",
             "percentile": 94.0,
-            "totalFlights": 30,
+            "totalFlights": 32,
             "hubOrFocusFlights": 28,
             "minimumFlights": 8,
             "connectedHubs": [
