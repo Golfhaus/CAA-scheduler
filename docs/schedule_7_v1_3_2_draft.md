@@ -13,6 +13,10 @@ The draft contains **1,216 flights, 184 routes and 17 lines**. Fleet use remains
 
 Against published v1.3.1, the app audit loses exactly the two approved CHS direct choices and no direct/one-stop market coverage. Geographic fastest-journey effects are 22 faster and 81 slower. R175 contributes 15 faster journeys and 22 ISP-origin journeys that take eight minutes longer due to added connection waiting; it loses no existing choices. The accepted CHS downgrades and one-/43-minute maintenance impacts remain explicit. All accepted northeast/Florida coverage remains intact.
 
+## Under review
+
+[R125 PVD–BWI proposal](schedule_7_v1_3_2_r125_review.md): add 2h26 of flying inside the 5h11 PVD hold, preserving all R125 clocks. A two-minute delay to R346 F1418 resolves BWI gate capacity; every existing choice remains available and three fastest journeys to BWI increase by two minutes. **This is not applied.**
+
 ## Build
 
 `python scripts/build_schedule_7_v1_3_2_draft.py` reproduces all three accepted overlays and the native artifacts. `--maintenance-only` recreates the pinned round-one checkpoint; `--r501-only` recreates the round-two checkpoint. Neither overwrites the cumulative draft. `bash scripts/run_latest_regression.sh` validates the currently published baseline, corrected maintenance behavior, cumulative draft and approved network tradeoffs. Publication requires a separate release step.
