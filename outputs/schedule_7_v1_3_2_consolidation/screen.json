@@ -1,0 +1,864 @@
+{
+  "status": "diagnostic only \u2014 not a validated consolidation",
+  "baseline": "R144 staged, unpublished; six target routes unchanged",
+  "targetRoutes": [
+    {
+      "route": 107,
+      "line": "AC",
+      "day": 7,
+      "fleet": "CRJ200",
+      "flights": 6,
+      "blockMinutes": 347,
+      "criticalMinutesOriginLocal": 347,
+      "starts": "BTV",
+      "ends": "CAK",
+      "legs": [
+        {
+          "flight": 1828,
+          "origin": "BTV",
+          "destination": "SYR",
+          "departureMinute": 420,
+          "arrivalMinute": 472
+        },
+        {
+          "flight": 1889,
+          "origin": "SYR",
+          "destination": "ISP",
+          "departureMinute": 515,
+          "arrivalMinute": 573
+        },
+        {
+          "flight": 1893,
+          "origin": "ISP",
+          "destination": "SYR",
+          "departureMinute": 745,
+          "arrivalMinute": 803
+        },
+        {
+          "flight": 1792,
+          "origin": "SYR",
+          "destination": "BDL",
+          "departureMinute": 845,
+          "arrivalMinute": 899
+        },
+        {
+          "flight": 1791,
+          "origin": "BDL",
+          "destination": "SYR",
+          "departureMinute": 1080,
+          "arrivalMinute": 1134
+        },
+        {
+          "flight": 1674,
+          "origin": "SYR",
+          "destination": "CAK",
+          "departureMinute": 1175,
+          "arrivalMinute": 1246
+        }
+      ]
+    },
+    {
+      "route": 125,
+      "line": "AE",
+      "day": 4,
+      "fleet": "CRJ200",
+      "flights": 9,
+      "blockMinutes": 560,
+      "criticalMinutesOriginLocal": 486,
+      "starts": "HVN",
+      "ends": "IND",
+      "legs": [
+        {
+          "flight": 1878,
+          "origin": "HVN",
+          "destination": "SYR",
+          "departureMinute": 270,
+          "arrivalMinute": 326
+        },
+        {
+          "flight": 1811,
+          "origin": "SYR",
+          "destination": "PVD",
+          "departureMinute": 366,
+          "arrivalMinute": 429
+        },
+        {
+          "flight": 2221,
+          "origin": "PVD",
+          "destination": "BWI",
+          "departureMinute": 510,
+          "arrivalMinute": 583
+        },
+        {
+          "flight": 2222,
+          "origin": "BWI",
+          "destination": "PVD",
+          "departureMinute": 625,
+          "arrivalMinute": 698
+        },
+        {
+          "flight": 1812,
+          "origin": "PVD",
+          "destination": "SYR",
+          "departureMinute": 740,
+          "arrivalMinute": 803
+        },
+        {
+          "flight": 1658,
+          "origin": "SYR",
+          "destination": "DAY",
+          "departureMinute": 845,
+          "arrivalMinute": 938
+        },
+        {
+          "flight": 1849,
+          "origin": "DAY",
+          "destination": "SDF",
+          "departureMinute": 980,
+          "arrivalMinute": 1028
+        },
+        {
+          "flight": 1850,
+          "origin": "SDF",
+          "destination": "DAY",
+          "departureMinute": 1135,
+          "arrivalMinute": 1183
+        },
+        {
+          "flight": 2173,
+          "origin": "DAY",
+          "destination": "IND",
+          "departureMinute": 1295,
+          "arrivalMinute": 1338
+        }
+      ]
+    },
+    {
+      "route": 146,
+      "line": "AI",
+      "day": 3,
+      "fleet": "CRJ200",
+      "flights": 5,
+      "blockMinutes": 327,
+      "criticalMinutesOriginLocal": 317,
+      "starts": "MCI",
+      "ends": "FSD",
+      "legs": [
+        {
+          "flight": 1647,
+          "origin": "MCI",
+          "destination": "ICT",
+          "departureMinute": 350,
+          "arrivalMinute": 403
+        },
+        {
+          "flight": 1651,
+          "origin": "ICT",
+          "destination": "MCI",
+          "departureMinute": 540,
+          "arrivalMinute": 593
+        },
+        {
+          "flight": 1530,
+          "origin": "MCI",
+          "destination": "LIT",
+          "departureMinute": 735,
+          "arrivalMinute": 810
+        },
+        {
+          "flight": 1533,
+          "origin": "LIT",
+          "destination": "MCI",
+          "departureMinute": 920,
+          "arrivalMinute": 995
+        },
+        {
+          "flight": 1677,
+          "origin": "MCI",
+          "destination": "FSD",
+          "departureMinute": 1135,
+          "arrivalMinute": 1206
+        }
+      ]
+    },
+    {
+      "route": 158,
+      "line": "AM",
+      "day": 2,
+      "fleet": "CRJ200",
+      "flights": 7,
+      "blockMinutes": 375,
+      "criticalMinutesOriginLocal": 331,
+      "starts": "GRR",
+      "ends": "ALB",
+      "legs": [
+        {
+          "flight": 1803,
+          "origin": "GRR",
+          "destination": "DAY",
+          "departureMinute": 375,
+          "arrivalMinute": 433
+        },
+        {
+          "flight": 1867,
+          "origin": "DAY",
+          "destination": "LEX",
+          "departureMinute": 475,
+          "arrivalMinute": 521
+        },
+        {
+          "flight": 1868,
+          "origin": "LEX",
+          "destination": "DAY",
+          "departureMinute": 635,
+          "arrivalMinute": 681
+        },
+        {
+          "flight": 1657,
+          "origin": "DAY",
+          "destination": "SYR",
+          "departureMinute": 725,
+          "arrivalMinute": 818
+        },
+        {
+          "flight": 1752,
+          "origin": "SYR",
+          "destination": "ALB",
+          "departureMinute": 1005,
+          "arrivalMinute": 1049
+        },
+        {
+          "flight": 2053,
+          "origin": "ALB",
+          "destination": "SYR",
+          "departureMinute": 1246,
+          "arrivalMinute": 1290
+        },
+        {
+          "flight": 2054,
+          "origin": "SYR",
+          "destination": "ALB",
+          "departureMinute": 1330,
+          "arrivalMinute": 1374
+        }
+      ]
+    },
+    {
+      "route": 160,
+      "line": "AM",
+      "day": 4,
+      "fleet": "CRJ200",
+      "flights": 6,
+      "blockMinutes": 344,
+      "criticalMinutesOriginLocal": 304,
+      "starts": "ACY",
+      "ends": "PWM",
+      "legs": [
+        {
+          "flight": 1865,
+          "origin": "ACY",
+          "destination": "PHF",
+          "departureMinute": 320,
+          "arrivalMinute": 374
+        },
+        {
+          "flight": 1869,
+          "origin": "PHF",
+          "destination": "ACY",
+          "departureMinute": 415,
+          "arrivalMinute": 469
+        },
+        {
+          "flight": 1908,
+          "origin": "ACY",
+          "destination": "SYR",
+          "departureMinute": 575,
+          "arrivalMinute": 639
+        },
+        {
+          "flight": 1825,
+          "origin": "SYR",
+          "destination": "BTV",
+          "departureMinute": 680,
+          "arrivalMinute": 732
+        },
+        {
+          "flight": 1829,
+          "origin": "BTV",
+          "destination": "SYR",
+          "departureMinute": 915,
+          "arrivalMinute": 967
+        },
+        {
+          "flight": 1701,
+          "origin": "SYR",
+          "destination": "PWM",
+          "departureMinute": 1140,
+          "arrivalMinute": 1208
+        }
+      ]
+    },
+    {
+      "route": 176,
+      "line": "AN",
+      "day": 9,
+      "fleet": "CRJ200",
+      "flights": 6,
+      "blockMinutes": 371,
+      "criticalMinutesOriginLocal": 316,
+      "starts": "AVP",
+      "ends": "AGS",
+      "legs": [
+        {
+          "flight": 1747,
+          "origin": "AVP",
+          "destination": "PHF",
+          "departureMinute": 305,
+          "arrivalMinute": 373
+        },
+        {
+          "flight": 1762,
+          "origin": "PHF",
+          "destination": "GSO",
+          "departureMinute": 415,
+          "arrivalMinute": 471
+        },
+        {
+          "flight": 1761,
+          "origin": "GSO",
+          "destination": "PHF",
+          "departureMinute": 600,
+          "arrivalMinute": 656
+        },
+        {
+          "flight": 1615,
+          "origin": "PHF",
+          "destination": "CAE",
+          "departureMinute": 835,
+          "arrivalMinute": 910
+        },
+        {
+          "flight": 1682,
+          "origin": "CAE",
+          "destination": "JAX",
+          "departureMinute": 1000,
+          "arrivalMinute": 1061
+        },
+        {
+          "flight": 1778,
+          "origin": "JAX",
+          "destination": "AGS",
+          "departureMinute": 1165,
+          "arrivalMinute": 1220
+        }
+      ]
+    }
+  ],
+  "physicalLineCountBefore": 17,
+  "targetDistinctLines": [
+    "AC",
+    "AE",
+    "AI",
+    "AM",
+    "AN"
+  ],
+  "lineDayCycles": {
+    "AI": [
+      {
+        "day": 1,
+        "route": 144,
+        "starts": "JAN",
+        "ends": "SHV",
+        "flights": 8
+      },
+      {
+        "day": 2,
+        "route": 145,
+        "starts": "SHV",
+        "ends": "MCI",
+        "flights": 5
+      },
+      {
+        "day": 3,
+        "route": 146,
+        "starts": "MCI",
+        "ends": "FSD",
+        "flights": 5
+      },
+      {
+        "day": 4,
+        "route": 147,
+        "starts": "FSD",
+        "ends": "FAR",
+        "flights": 6
+      },
+      {
+        "day": 5,
+        "route": 148,
+        "starts": "FAR",
+        "ends": "COU",
+        "flights": 6
+      },
+      {
+        "day": 6,
+        "route": 149,
+        "starts": "COU",
+        "ends": "DSM",
+        "flights": 6
+      },
+      {
+        "day": 7,
+        "route": 150,
+        "starts": "DSM",
+        "ends": "XNA",
+        "flights": 6
+      },
+      {
+        "day": 8,
+        "route": 151,
+        "starts": "XNA",
+        "ends": "MCN",
+        "flights": 8
+      },
+      {
+        "day": 9,
+        "route": 152,
+        "starts": "MCN",
+        "ends": "ICT",
+        "flights": 6
+      },
+      {
+        "day": 10,
+        "route": 153,
+        "starts": "ICT",
+        "ends": "DSM",
+        "flights": 8
+      },
+      {
+        "day": 11,
+        "route": 154,
+        "starts": "DSM",
+        "ends": "MCI",
+        "flights": 7
+      },
+      {
+        "day": 12,
+        "route": 155,
+        "starts": "MCI",
+        "ends": "JAN",
+        "flights": 5
+      }
+    ],
+    "AE": [
+      {
+        "day": 1,
+        "route": 122,
+        "starts": "CHA",
+        "ends": "CRW",
+        "flights": 8
+      },
+      {
+        "day": 2,
+        "route": 123,
+        "starts": "CRW",
+        "ends": "MSN",
+        "flights": 6
+      },
+      {
+        "day": 3,
+        "route": 124,
+        "starts": "MSN",
+        "ends": "HVN",
+        "flights": 8
+      },
+      {
+        "day": 4,
+        "route": 125,
+        "starts": "HVN",
+        "ends": "IND",
+        "flights": 9
+      },
+      {
+        "day": 5,
+        "route": 126,
+        "starts": "IND",
+        "ends": "MLB",
+        "flights": 8
+      },
+      {
+        "day": 6,
+        "route": 127,
+        "starts": "MLB",
+        "ends": "CAE",
+        "flights": 7
+      },
+      {
+        "day": 7,
+        "route": 128,
+        "starts": "CAE",
+        "ends": "MYR",
+        "flights": 8
+      },
+      {
+        "day": 8,
+        "route": 129,
+        "starts": "MYR",
+        "ends": "SYR",
+        "flights": 6
+      },
+      {
+        "day": 9,
+        "route": 130,
+        "starts": "SYR",
+        "ends": "PWM",
+        "flights": 9
+      },
+      {
+        "day": 10,
+        "route": 131,
+        "starts": "PWM",
+        "ends": "ORH",
+        "flights": 8
+      },
+      {
+        "day": 11,
+        "route": 132,
+        "starts": "ORH",
+        "ends": "CHA",
+        "flights": 8
+      }
+    ],
+    "AC": [
+      {
+        "day": 1,
+        "route": 101,
+        "starts": "TOL",
+        "ends": "ATW",
+        "flights": 8
+      },
+      {
+        "day": 2,
+        "route": 102,
+        "starts": "ATW",
+        "ends": "AVL",
+        "flights": 6
+      },
+      {
+        "day": 3,
+        "route": 103,
+        "starts": "AVL",
+        "ends": "TTN",
+        "flights": 7
+      },
+      {
+        "day": 4,
+        "route": 104,
+        "starts": "TTN",
+        "ends": "BUF",
+        "flights": 7
+      },
+      {
+        "day": 5,
+        "route": 105,
+        "starts": "BUF",
+        "ends": "BGR",
+        "flights": 6
+      },
+      {
+        "day": 6,
+        "route": 106,
+        "starts": "BGR",
+        "ends": "BTV",
+        "flights": 6
+      },
+      {
+        "day": 7,
+        "route": 107,
+        "starts": "BTV",
+        "ends": "CAK",
+        "flights": 6
+      },
+      {
+        "day": 8,
+        "route": 108,
+        "starts": "CAK",
+        "ends": "SYR",
+        "flights": 7
+      },
+      {
+        "day": 9,
+        "route": 167,
+        "starts": "SYR",
+        "ends": "ERI",
+        "flights": 7
+      },
+      {
+        "day": 10,
+        "route": 156,
+        "starts": "ERI",
+        "ends": "TOL",
+        "flights": 6
+      }
+    ],
+    "AM": [
+      {
+        "day": 1,
+        "route": 157,
+        "starts": "DAY",
+        "ends": "GRR",
+        "flights": 5
+      },
+      {
+        "day": 2,
+        "route": 158,
+        "starts": "GRR",
+        "ends": "ALB",
+        "flights": 7
+      },
+      {
+        "day": 3,
+        "route": 159,
+        "starts": "ALB",
+        "ends": "ACY",
+        "flights": 10
+      },
+      {
+        "day": 4,
+        "route": 160,
+        "starts": "ACY",
+        "ends": "PWM",
+        "flights": 6
+      },
+      {
+        "day": 5,
+        "route": 161,
+        "starts": "PWM",
+        "ends": "SWF",
+        "flights": 8
+      },
+      {
+        "day": 6,
+        "route": 162,
+        "starts": "SWF",
+        "ends": "ILM",
+        "flights": 7
+      },
+      {
+        "day": 7,
+        "route": 163,
+        "starts": "ILM",
+        "ends": "MHT",
+        "flights": 8
+      },
+      {
+        "day": 8,
+        "route": 164,
+        "starts": "MHT",
+        "ends": "SBN",
+        "flights": 8
+      },
+      {
+        "day": 9,
+        "route": 165,
+        "starts": "SBN",
+        "ends": "FWA",
+        "flights": 8
+      },
+      {
+        "day": 10,
+        "route": 166,
+        "starts": "FWA",
+        "ends": "MDT",
+        "flights": 8
+      },
+      {
+        "day": 11,
+        "route": 109,
+        "starts": "MDT",
+        "ends": "ROC",
+        "flights": 7
+      },
+      {
+        "day": 12,
+        "route": 110,
+        "starts": "ROC",
+        "ends": "DAY",
+        "flights": 7
+      }
+    ],
+    "AN": [
+      {
+        "day": 1,
+        "route": 168,
+        "starts": "AGS",
+        "ends": "ROA",
+        "flights": 8
+      },
+      {
+        "day": 2,
+        "route": 169,
+        "starts": "ROA",
+        "ends": "JAX",
+        "flights": 9
+      },
+      {
+        "day": 3,
+        "route": 170,
+        "starts": "JAX",
+        "ends": "XNA",
+        "flights": 9
+      },
+      {
+        "day": 4,
+        "route": 171,
+        "starts": "XNA",
+        "ends": "PIA",
+        "flights": 8
+      },
+      {
+        "day": 5,
+        "route": 172,
+        "starts": "PIA",
+        "ends": "MFE",
+        "flights": 6
+      },
+      {
+        "day": 6,
+        "route": 173,
+        "starts": "MFE",
+        "ends": "DAB",
+        "flights": 8
+      },
+      {
+        "day": 7,
+        "route": 174,
+        "starts": "DAB",
+        "ends": "ISP",
+        "flights": 8
+      },
+      {
+        "day": 8,
+        "route": 175,
+        "starts": "ISP",
+        "ends": "AVP",
+        "flights": 8
+      },
+      {
+        "day": 9,
+        "route": 176,
+        "starts": "AVP",
+        "ends": "AGS",
+        "flights": 6
+      }
+    ]
+  },
+  "sameDayCrossLineHandoffCandidates": [
+    {
+      "station": "PHF",
+      "sourceRoute": 160,
+      "sourceFlight": 1865,
+      "sourceLine": "AM",
+      "targetRoute": 104,
+      "targetFlight": 1513,
+      "targetLine": "AC",
+      "day": 4,
+      "gapMinutes": 41
+    },
+    {
+      "station": "SYR",
+      "sourceRoute": 107,
+      "sourceFlight": 1791,
+      "sourceLine": "AC",
+      "targetRoute": 163,
+      "targetFlight": 1837,
+      "targetLine": "AM",
+      "day": 7,
+      "gapMinutes": 41
+    },
+    {
+      "station": "SYR",
+      "sourceRoute": 107,
+      "sourceFlight": 1791,
+      "sourceLine": "AC",
+      "targetRoute": 174,
+      "targetFlight": 1891,
+      "targetLine": "AN",
+      "day": 7,
+      "gapMinutes": 41
+    },
+    {
+      "station": "DAY",
+      "sourceRoute": 125,
+      "sourceFlight": 1850,
+      "sourceLine": "AE",
+      "targetRoute": 104,
+      "targetFlight": 1772,
+      "targetLine": "AC",
+      "day": 4,
+      "gapMinutes": 42
+    },
+    {
+      "station": "DAY",
+      "sourceRoute": 158,
+      "sourceFlight": 1803,
+      "sourceLine": "AM",
+      "targetRoute": 102,
+      "targetFlight": 1786,
+      "targetLine": "AC",
+      "day": 2,
+      "gapMinutes": 42
+    },
+    {
+      "station": "DAY",
+      "sourceRoute": 158,
+      "sourceFlight": 1803,
+      "sourceLine": "AM",
+      "targetRoute": 123,
+      "targetFlight": 1807,
+      "targetLine": "AE",
+      "day": 2,
+      "gapMinutes": 42
+    },
+    {
+      "station": "DAY",
+      "sourceRoute": 158,
+      "sourceFlight": 1868,
+      "sourceLine": "AM",
+      "targetRoute": 123,
+      "targetFlight": 1567,
+      "targetLine": "AE",
+      "day": 2,
+      "gapMinutes": 44
+    },
+    {
+      "station": "SYR",
+      "sourceRoute": 160,
+      "sourceFlight": 1829,
+      "sourceLine": "AM",
+      "targetRoute": 104,
+      "targetFlight": 1688,
+      "targetLine": "AC",
+      "day": 4,
+      "gapMinutes": 48
+    },
+    {
+      "station": "SYR",
+      "sourceRoute": 107,
+      "sourceFlight": 1893,
+      "sourceLine": "AC",
+      "targetRoute": 163,
+      "targetFlight": 1683,
+      "targetLine": "AM",
+      "day": 7,
+      "gapMinutes": 157
+    }
+  ],
+  "candidateCount": 9,
+  "caveats": [
+    "A handoff does not remove an aircraft: full circular rotation and MX/RON constraints must pass.",
+    "Cross-line handoffs at matching day numbers are only a starting search and do not prove physical co-location across line cycles.",
+    "Critical period uses 06:00\u201322:00 at the flight origin, with timezone-adjusted elapsed duration; final app metric should independently verify clock convention.",
+    "No passenger demand, gate/stand conflicts or one-stop network effects were certified for a consolidated candidate.",
+    "R125 contains its prior PVD-BWI extension and is not the old 7-flight route."
+  ]
+}
