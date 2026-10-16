@@ -89,6 +89,7 @@ for name,fn in cases.items():
   print(name,ok,r.get("gate"),r.get("exception"),[(x["id"],len(x["findings"])) for x in r.get("failedChecks",[])],flush=True)
   if ok:
    (out/(name+"_overlay.json")).write_text(json.dumps(o,indent=2)+"\n")
+   (out/(name+"_canonical.json")).write_text(json.dumps(c,indent=2)+"\n")
  except Exception as e:
   results[name]={"pass":False,"exception":repr(e)}
   print(name,"exception",repr(e),flush=True)
