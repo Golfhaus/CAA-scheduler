@@ -1,0 +1,340 @@
+{
+  "R176_PHF_GSO": {
+    "pass": true,
+    "structural": "pass",
+    "overnight": "pass",
+    "planning": "pass",
+    "gate": "pass",
+    "operating": {
+      "checks": 25,
+      "passed": 19,
+      "failed": 0,
+      "warnings": 3,
+      "notEvaluated": 1,
+      "overridden": 2,
+      "effectiveErrorFindings": 0,
+      "effectiveWarningFindings": 157
+    },
+    "failedChecks": [],
+    "overlay": {
+      "baseSchedule": {
+        "scheduleId": "schedule_7_v1_3_2_draft"
+      },
+      "schedule": {
+        "id": "schedule_7_v1_3_2_draft",
+        "number": 7,
+        "version": "1.3.2-draft",
+        "label": "Schedule 7, Version 1.3.2 draft",
+        "status": "draft",
+        "fleetCounts": {
+          "MAX9": 35,
+          "CRJ900": 45,
+          "CRJ700": 65,
+          "CRJ200": 80
+        },
+        "connectionWindowMinutes": {
+          "minimum": 30,
+          "maximum": 240
+        }
+      },
+      "retimeLegs": [
+        {
+          "legId": "GSO-PHF-CRJ200-01-OUT",
+          "expectedDepartureMinute": 600,
+          "expectedArrivalMinute": 656,
+          "departureMinute": 555,
+          "arrivalMinute": 611
+        },
+        {
+          "legId": "CAE-PHF-CRJ200-02-IN",
+          "expectedDepartureMinute": 835,
+          "expectedArrivalMinute": 910,
+          "departureMinute": 843,
+          "arrivalMinute": 918
+        }
+      ],
+      "bankAssignmentReplacements": [
+        {
+          "legId": "GSO-PHF-CRJ200-01-OUT",
+          "operation": "arrival",
+          "bankId": "PHF-M1"
+        }
+      ],
+      "insertLegs": [
+        {
+          "id": "V132-DAY-176-GSO-PHF-GSO",
+          "route": 176,
+          "origin": "PHF",
+          "destination": "GSO",
+          "departureMinute": 651,
+          "arrivalMinute": 707
+        },
+        {
+          "id": "V132-DAY-176-GSO-GSO-PHF",
+          "route": 176,
+          "origin": "GSO",
+          "destination": "PHF",
+          "departureMinute": 747,
+          "arrivalMinute": 803
+        }
+      ],
+      "bankAssignmentsToAdd": [
+        {
+          "legId": "V132-DAY-176-GSO-PHF-GSO",
+          "operation": "departure",
+          "bankId": "PHF-B3"
+        },
+        {
+          "legId": "V132-DAY-176-GSO-GSO-PHF",
+          "operation": "arrival",
+          "bankId": "PHF-B4"
+        }
+      ]
+    }
+  },
+  "R160_SYR_ROC": {
+    "pass": false,
+    "structural": "pass",
+    "overnight": "pass",
+    "planning": "pass",
+    "gate": "GateCapacityError('3 passenger touch(es) remain off-gate')",
+    "operating": {
+      "checks": 25,
+      "passed": 17,
+      "failed": 2,
+      "warnings": 3,
+      "notEvaluated": 1,
+      "overridden": 2,
+      "effectiveErrorFindings": 4,
+      "effectiveWarningFindings": 157
+    },
+    "failedChecks": [
+      {
+        "id": "passenger_touch_on_stand",
+        "findings": [
+          {
+            "id": "SYR-355-841-886",
+            "message": "SYR claim 355 requires passenger handling on stand 1",
+            "evidence": {
+              "city": "SYR",
+              "label": "355",
+              "kind": "turn",
+              "start": 841,
+              "end": 886,
+              "stand": 1
+            }
+          },
+          {
+            "id": "SYR-355-941-1001",
+            "message": "SYR claim 355 requires passenger handling on stand 1",
+            "evidence": {
+              "city": "SYR",
+              "label": "355",
+              "kind": "turn",
+              "start": 941,
+              "end": 1001,
+              "stand": 1
+            }
+          },
+          {
+            "id": "SYR-518 -> 519-1159-1204",
+            "message": "SYR claim 518 -> 519 requires passenger handling on stand 1",
+            "evidence": {
+              "city": "SYR",
+              "label": "518 -> 519",
+              "kind": "ron",
+              "start": 1159,
+              "end": 1204,
+              "stand": 1
+            }
+          }
+        ]
+      },
+      {
+        "id": "fixed_physical_inventory",
+        "findings": [
+          {
+            "id": "SYR",
+            "message": "SYR cannot fit its claims into the configured physical inventory: 3 passenger touch(es) remain off-gate",
+            "evidence": {
+              "city": "SYR",
+              "requiredGates": 17,
+              "configuredGates": 16,
+              "requiredStands": 5,
+              "configuredStands": 8,
+              "strandedPassengerTouches": 3
+            }
+          }
+        ]
+      }
+    ],
+    "overlay": {
+      "baseSchedule": {
+        "scheduleId": "schedule_7_v1_3_2_draft"
+      },
+      "schedule": {
+        "id": "schedule_7_v1_3_2_draft",
+        "number": 7,
+        "version": "1.3.2-draft",
+        "label": "Schedule 7, Version 1.3.2 draft",
+        "status": "draft",
+        "fleetCounts": {
+          "MAX9": 35,
+          "CRJ900": 45,
+          "CRJ700": 65,
+          "CRJ200": 80
+        },
+        "connectionWindowMinutes": {
+          "minimum": 30,
+          "maximum": 240
+        }
+      },
+      "retimeLegs": [
+        {
+          "legId": "BTV-SYR-CRJ200-02-OUT",
+          "expectedDepartureMinute": 915,
+          "expectedArrivalMinute": 967,
+          "departureMinute": 800,
+          "arrivalMinute": 852
+        },
+        {
+          "legId": "PWM-SYR-CRJ200-01-IN",
+          "expectedDepartureMinute": 1140,
+          "expectedArrivalMinute": 1208,
+          "departureMinute": 1176,
+          "arrivalMinute": 1244
+        }
+      ],
+      "bankAssignmentReplacements": [
+        {
+          "legId": "BTV-SYR-CRJ200-02-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-B4"
+        }
+      ],
+      "insertLegs": [
+        {
+          "id": "V132-DAY-160-ROC-SYR-ROC",
+          "route": 160,
+          "origin": "SYR",
+          "destination": "ROC",
+          "departureMinute": 1018,
+          "arrivalMinute": 1057
+        },
+        {
+          "id": "V132-DAY-160-ROC-ROC-SYR",
+          "route": 160,
+          "origin": "ROC",
+          "destination": "SYR",
+          "departureMinute": 1097,
+          "arrivalMinute": 1136
+        }
+      ],
+      "bankAssignmentsToAdd": [
+        {
+          "legId": "V132-DAY-160-ROC-SYR-ROC",
+          "operation": "departure",
+          "bankId": "SYR-B5"
+        },
+        {
+          "legId": "V132-DAY-160-ROC-ROC-SYR",
+          "operation": "arrival",
+          "bankId": "SYR-B6"
+        }
+      ]
+    }
+  },
+  "R158_SYR_ROC": {
+    "pass": true,
+    "structural": "pass",
+    "overnight": "pass",
+    "planning": "pass",
+    "gate": "pass",
+    "operating": {
+      "checks": 25,
+      "passed": 19,
+      "failed": 0,
+      "warnings": 3,
+      "notEvaluated": 1,
+      "overridden": 2,
+      "effectiveErrorFindings": 0,
+      "effectiveWarningFindings": 157
+    },
+    "failedChecks": [],
+    "overlay": {
+      "baseSchedule": {
+        "scheduleId": "schedule_7_v1_3_2_draft"
+      },
+      "schedule": {
+        "id": "schedule_7_v1_3_2_draft",
+        "number": 7,
+        "version": "1.3.2-draft",
+        "label": "Schedule 7, Version 1.3.2 draft",
+        "status": "draft",
+        "fleetCounts": {
+          "MAX9": 35,
+          "CRJ900": 45,
+          "CRJ700": 65,
+          "CRJ200": 80
+        },
+        "connectionWindowMinutes": {
+          "minimum": 30,
+          "maximum": 240
+        }
+      },
+      "retimeLegs": [
+        {
+          "legId": "DAY-LEX-CRJ200-01-IN",
+          "expectedDepartureMinute": 635,
+          "expectedArrivalMinute": 681,
+          "departureMinute": 629,
+          "arrivalMinute": 675
+        },
+        {
+          "legId": "DAY-SYR-CRJ200-01-OUT",
+          "expectedDepartureMinute": 725,
+          "expectedArrivalMinute": 818,
+          "departureMinute": 715,
+          "arrivalMinute": 808
+        },
+        {
+          "legId": "ALB-SYR-CRJ200-04-IN",
+          "expectedDepartureMinute": 1005,
+          "expectedArrivalMinute": 1049,
+          "departureMinute": 1006,
+          "arrivalMinute": 1050
+        }
+      ],
+      "insertLegs": [
+        {
+          "id": "V132-DAY-158-ROC-SYR-ROC",
+          "route": 158,
+          "origin": "SYR",
+          "destination": "ROC",
+          "departureMinute": 848,
+          "arrivalMinute": 887
+        },
+        {
+          "id": "V132-DAY-158-ROC-ROC-SYR",
+          "route": 158,
+          "origin": "ROC",
+          "destination": "SYR",
+          "departureMinute": 927,
+          "arrivalMinute": 966
+        }
+      ],
+      "bankAssignmentsToAdd": [
+        {
+          "legId": "V132-DAY-158-ROC-SYR-ROC",
+          "operation": "departure",
+          "bankId": "SYR-B4"
+        },
+        {
+          "legId": "V132-DAY-158-ROC-ROC-SYR",
+          "operation": "arrival",
+          "bankId": "SYR-B5"
+        }
+      ]
+    }
+  }
+}
