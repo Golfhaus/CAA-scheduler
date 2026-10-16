@@ -7,6 +7,7 @@ on:
       - '.github/workflows/v132-r144-analysis.yml'
       - 'scripts/stage_schedule_7_v1_3_2_r144.py'
       - 'scripts/analyze_schedule_7_v1_3_2_consolidation.py'
+      - 'scripts/screen_schedule_7_v1_3_2_group_optimization.py'
   workflow_dispatch:
 permissions:
   contents: write
@@ -25,13 +26,15 @@ jobs:
         run: python scripts/stage_schedule_7_v1_3_2_r144.py
       - name: Generate six-route holistic feasibility diagnostics
         run: python scripts/analyze_schedule_7_v1_3_2_consolidation.py
+      - name: Screen coordinated CRJ200 operating-day improvements
+        run: python scripts/screen_schedule_7_v1_3_2_group_optimization.py
       - name: Keep checks green before committing evidence
         run: bash scripts/run_latest_regression.sh
       - name: Commit unpublished validated staging artifacts
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -f outputs/schedule_7_v1_3_2_r144_accepted/ outputs/schedule_7_v1_3_2_consolidation/
+          git add -f outputs/schedule_7_v1_3_2_r144_accepted/ outputs/schedule_7_v1_3_2_consolidation/ outputs/schedule_7_v1_3_2_group_optimization/
           if ! git diff --cached --quiet; then
             git commit -m "Record validated unpublished v1.3.2 R144 and consolidation diagnostics [skip ci]"
             git push
