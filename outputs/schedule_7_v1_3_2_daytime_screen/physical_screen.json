@@ -1,0 +1,1260 @@
+{
+  "R176_PHF_RDU": {
+    "pass": true,
+    "structural": "pass",
+    "overnight": "pass",
+    "planning": "pass",
+    "gate": "pass",
+    "operating": {
+      "checks": 25,
+      "passed": 19,
+      "failed": 0,
+      "warnings": 3,
+      "notEvaluated": 1,
+      "overridden": 2,
+      "effectiveErrorFindings": 0,
+      "effectiveWarningFindings": 157
+    },
+    "failedChecks": [],
+    "overlay": {
+      "baseSchedule": {
+        "scheduleId": "schedule_7_v1_3_2_draft"
+      },
+      "schedule": {
+        "id": "schedule_7_v1_3_2_draft",
+        "number": 7,
+        "version": "1.3.2-draft",
+        "label": "Schedule 7, Version 1.3.2 draft",
+        "status": "draft",
+        "fleetCounts": {
+          "MAX9": 35,
+          "CRJ900": 45,
+          "CRJ700": 65,
+          "CRJ200": 80
+        },
+        "connectionWindowMinutes": {
+          "minimum": 30,
+          "maximum": 240
+        }
+      },
+      "retimeLegs": [
+        {
+          "legId": "GSO-PHF-CRJ200-01-OUT",
+          "expectedDepartureMinute": 600,
+          "expectedArrivalMinute": 656,
+          "departureMinute": 555,
+          "arrivalMinute": 611
+        },
+        {
+          "legId": "CAE-PHF-CRJ200-02-IN",
+          "expectedDepartureMinute": 835,
+          "expectedArrivalMinute": 910,
+          "departureMinute": 835,
+          "arrivalMinute": 910
+        }
+      ],
+      "bankAssignmentReplacements": [
+        {
+          "legId": "GSO-PHF-CRJ200-01-OUT",
+          "operation": "arrival",
+          "bankId": "PHF-M1"
+        }
+      ],
+      "insertLegs": [
+        {
+          "id": "V132-DAY-176-RDU-PHF-RDU",
+          "route": 176,
+          "origin": "PHF",
+          "destination": "RDU",
+          "departureMinute": 651,
+          "arrivalMinute": 700
+        },
+        {
+          "id": "V132-DAY-176-RDU-RDU-PHF",
+          "route": 176,
+          "origin": "RDU",
+          "destination": "PHF",
+          "departureMinute": 740,
+          "arrivalMinute": 789
+        }
+      ],
+      "bankAssignmentsToAdd": [
+        {
+          "legId": "V132-DAY-176-RDU-PHF-RDU",
+          "operation": "departure",
+          "bankId": "PHF-B3"
+        },
+        {
+          "legId": "V132-DAY-176-RDU-RDU-PHF",
+          "operation": "arrival",
+          "bankId": "PHF-B4"
+        }
+      ]
+    }
+  },
+  "R176_PHF_BWI": {
+    "pass": false,
+    "structural": "pass",
+    "overnight": "pass",
+    "planning": "pass",
+    "gate": "GateCapacityError('4 passenger touch(es) remain off-gate')",
+    "operating": {
+      "checks": 25,
+      "passed": 16,
+      "failed": 3,
+      "warnings": 3,
+      "notEvaluated": 1,
+      "overridden": 2,
+      "effectiveErrorFindings": 6,
+      "effectiveWarningFindings": 157
+    },
+    "failedChecks": [
+      {
+        "id": "section_26_pairing_spacing",
+        "findings": [
+          {
+            "id": "BWI-PHF",
+            "message": "BWI\u2013PHF fails same-pairing spacing",
+            "evidence": {
+              "origin": "BWI",
+              "destination": "PHF",
+              "departures": [
+                465,
+                605,
+                738,
+                745,
+                797,
+                1244
+              ],
+              "gaps": [
+                {
+                  "from": 465,
+                  "to": 605,
+                  "minutes": 140
+                },
+                {
+                  "from": 605,
+                  "to": 738,
+                  "minutes": 133
+                },
+                {
+                  "from": 738,
+                  "to": 745,
+                  "minutes": 7
+                },
+                {
+                  "from": 745,
+                  "to": 797,
+                  "minutes": 52
+                },
+                {
+                  "from": 797,
+                  "to": 1244,
+                  "minutes": 447
+                },
+                {
+                  "from": 1244,
+                  "to": 465,
+                  "minutes": 661
+                }
+              ],
+              "targetMinutes": 30.0,
+              "allowedExceptions": 0,
+              "hubBound": true
+            }
+          }
+        ]
+      },
+      {
+        "id": "passenger_touch_on_stand",
+        "findings": [
+          {
+            "id": "BWI-175-703-743",
+            "message": "BWI claim 175 requires passenger handling on stand 1",
+            "evidence": {
+              "city": "BWI",
+              "label": "175",
+              "kind": "turn",
+              "start": 703,
+              "end": 743,
+              "stand": 1
+            }
+          },
+          {
+            "id": "BWI-347 -> 348-1396-1441",
+            "message": "BWI claim 347 -> 348 requires passenger handling on stand 1",
+            "evidence": {
+              "city": "BWI",
+              "label": "347 -> 348",
+              "kind": "ron",
+              "start": 1396,
+              "end": 1441,
+              "stand": 1
+            }
+          },
+          {
+            "id": "BWI-506 -> 507-1441-1486",
+            "message": "BWI claim 506 -> 507 requires passenger handling on stand 2",
+            "evidence": {
+              "city": "BWI",
+              "label": "506 -> 507",
+              "kind": "turn",
+              "start": 1441,
+              "end": 1486,
+              "stand": 2
+            }
+          },
+          {
+            "id": "BWI-506 -> 507-1685-1745",
+            "message": "BWI claim 506 -> 507 requires passenger handling on stand 2",
+            "evidence": {
+              "city": "BWI",
+              "label": "506 -> 507",
+              "kind": "turn",
+              "start": 1685,
+              "end": 1745,
+              "stand": 2
+            }
+          }
+        ]
+      },
+      {
+        "id": "fixed_physical_inventory",
+        "findings": [
+          {
+            "id": "BWI",
+            "message": "BWI cannot fit its claims into the configured physical inventory: 4 passenger touch(es) remain off-gate",
+            "evidence": {
+              "city": "BWI",
+              "requiredGates": 3,
+              "configuredGates": 2,
+              "requiredStands": 2,
+              "configuredStands": 2,
+              "strandedPassengerTouches": 4
+            }
+          }
+        ]
+      }
+    ],
+    "overlay": {
+      "baseSchedule": {
+        "scheduleId": "schedule_7_v1_3_2_draft"
+      },
+      "schedule": {
+        "id": "schedule_7_v1_3_2_draft",
+        "number": 7,
+        "version": "1.3.2-draft",
+        "label": "Schedule 7, Version 1.3.2 draft",
+        "status": "draft",
+        "fleetCounts": {
+          "MAX9": 35,
+          "CRJ900": 45,
+          "CRJ700": 65,
+          "CRJ200": 80
+        },
+        "connectionWindowMinutes": {
+          "minimum": 30,
+          "maximum": 240
+        }
+      },
+      "retimeLegs": [
+        {
+          "legId": "GSO-PHF-CRJ200-01-OUT",
+          "expectedDepartureMinute": 600,
+          "expectedArrivalMinute": 656,
+          "departureMinute": 555,
+          "arrivalMinute": 611
+        },
+        {
+          "legId": "CAE-PHF-CRJ200-02-IN",
+          "expectedDepartureMinute": 835,
+          "expectedArrivalMinute": 910,
+          "departureMinute": 835,
+          "arrivalMinute": 910
+        }
+      ],
+      "bankAssignmentReplacements": [
+        {
+          "legId": "GSO-PHF-CRJ200-01-OUT",
+          "operation": "arrival",
+          "bankId": "PHF-M1"
+        }
+      ],
+      "insertLegs": [
+        {
+          "id": "V132-DAY-176-BWI-PHF-BWI",
+          "route": 176,
+          "origin": "PHF",
+          "destination": "BWI",
+          "departureMinute": 651,
+          "arrivalMinute": 698
+        },
+        {
+          "id": "V132-DAY-176-BWI-BWI-PHF",
+          "route": 176,
+          "origin": "BWI",
+          "destination": "PHF",
+          "departureMinute": 738,
+          "arrivalMinute": 785
+        }
+      ],
+      "bankAssignmentsToAdd": [
+        {
+          "legId": "V132-DAY-176-BWI-PHF-BWI",
+          "operation": "departure",
+          "bankId": "PHF-B3"
+        },
+        {
+          "legId": "V132-DAY-176-BWI-BWI-PHF",
+          "operation": "arrival",
+          "bankId": "PHF-B4"
+        }
+      ]
+    }
+  },
+  "R176_PHF_ROA": {
+    "pass": true,
+    "structural": "pass",
+    "overnight": "pass",
+    "planning": "pass",
+    "gate": "pass",
+    "operating": {
+      "checks": 25,
+      "passed": 19,
+      "failed": 0,
+      "warnings": 3,
+      "notEvaluated": 1,
+      "overridden": 2,
+      "effectiveErrorFindings": 0,
+      "effectiveWarningFindings": 157
+    },
+    "failedChecks": [],
+    "overlay": {
+      "baseSchedule": {
+        "scheduleId": "schedule_7_v1_3_2_draft"
+      },
+      "schedule": {
+        "id": "schedule_7_v1_3_2_draft",
+        "number": 7,
+        "version": "1.3.2-draft",
+        "label": "Schedule 7, Version 1.3.2 draft",
+        "status": "draft",
+        "fleetCounts": {
+          "MAX9": 35,
+          "CRJ900": 45,
+          "CRJ700": 65,
+          "CRJ200": 80
+        },
+        "connectionWindowMinutes": {
+          "minimum": 30,
+          "maximum": 240
+        }
+      },
+      "retimeLegs": [
+        {
+          "legId": "GSO-PHF-CRJ200-01-OUT",
+          "expectedDepartureMinute": 600,
+          "expectedArrivalMinute": 656,
+          "departureMinute": 555,
+          "arrivalMinute": 611
+        },
+        {
+          "legId": "CAE-PHF-CRJ200-02-IN",
+          "expectedDepartureMinute": 835,
+          "expectedArrivalMinute": 910,
+          "departureMinute": 839,
+          "arrivalMinute": 914
+        }
+      ],
+      "bankAssignmentReplacements": [
+        {
+          "legId": "GSO-PHF-CRJ200-01-OUT",
+          "operation": "arrival",
+          "bankId": "PHF-M1"
+        }
+      ],
+      "insertLegs": [
+        {
+          "id": "V132-DAY-176-ROA-PHF-ROA",
+          "route": 176,
+          "origin": "PHF",
+          "destination": "ROA",
+          "departureMinute": 651,
+          "arrivalMinute": 705
+        },
+        {
+          "id": "V132-DAY-176-ROA-ROA-PHF",
+          "route": 176,
+          "origin": "ROA",
+          "destination": "PHF",
+          "departureMinute": 745,
+          "arrivalMinute": 799
+        }
+      ],
+      "bankAssignmentsToAdd": [
+        {
+          "legId": "V132-DAY-176-ROA-PHF-ROA",
+          "operation": "departure",
+          "bankId": "PHF-B3"
+        },
+        {
+          "legId": "V132-DAY-176-ROA-ROA-PHF",
+          "operation": "arrival",
+          "bankId": "PHF-B4"
+        }
+      ]
+    }
+  },
+  "R176_PHF_GSO": {
+    "pass": true,
+    "structural": "pass",
+    "overnight": "pass",
+    "planning": "pass",
+    "gate": "pass",
+    "operating": {
+      "checks": 25,
+      "passed": 19,
+      "failed": 0,
+      "warnings": 3,
+      "notEvaluated": 1,
+      "overridden": 2,
+      "effectiveErrorFindings": 0,
+      "effectiveWarningFindings": 157
+    },
+    "failedChecks": [],
+    "overlay": {
+      "baseSchedule": {
+        "scheduleId": "schedule_7_v1_3_2_draft"
+      },
+      "schedule": {
+        "id": "schedule_7_v1_3_2_draft",
+        "number": 7,
+        "version": "1.3.2-draft",
+        "label": "Schedule 7, Version 1.3.2 draft",
+        "status": "draft",
+        "fleetCounts": {
+          "MAX9": 35,
+          "CRJ900": 45,
+          "CRJ700": 65,
+          "CRJ200": 80
+        },
+        "connectionWindowMinutes": {
+          "minimum": 30,
+          "maximum": 240
+        }
+      },
+      "retimeLegs": [
+        {
+          "legId": "GSO-PHF-CRJ200-01-OUT",
+          "expectedDepartureMinute": 600,
+          "expectedArrivalMinute": 656,
+          "departureMinute": 555,
+          "arrivalMinute": 611
+        },
+        {
+          "legId": "CAE-PHF-CRJ200-02-IN",
+          "expectedDepartureMinute": 835,
+          "expectedArrivalMinute": 910,
+          "departureMinute": 843,
+          "arrivalMinute": 918
+        }
+      ],
+      "bankAssignmentReplacements": [
+        {
+          "legId": "GSO-PHF-CRJ200-01-OUT",
+          "operation": "arrival",
+          "bankId": "PHF-M1"
+        }
+      ],
+      "insertLegs": [
+        {
+          "id": "V132-DAY-176-GSO-PHF-GSO",
+          "route": 176,
+          "origin": "PHF",
+          "destination": "GSO",
+          "departureMinute": 651,
+          "arrivalMinute": 707
+        },
+        {
+          "id": "V132-DAY-176-GSO-GSO-PHF",
+          "route": 176,
+          "origin": "GSO",
+          "destination": "PHF",
+          "departureMinute": 747,
+          "arrivalMinute": 803
+        }
+      ],
+      "bankAssignmentsToAdd": [
+        {
+          "legId": "V132-DAY-176-GSO-PHF-GSO",
+          "operation": "departure",
+          "bankId": "PHF-B3"
+        },
+        {
+          "legId": "V132-DAY-176-GSO-GSO-PHF",
+          "operation": "arrival",
+          "bankId": "PHF-B4"
+        }
+      ]
+    }
+  },
+  "R160_SYR_ROC": {
+    "pass": false,
+    "exception": "ValueError('Inserted V132-DAY-160-ROC-ROC-SYR arrival SYR off bank 1123')",
+    "traceback": "Traceback (most recent call last):\n  File \"/home/runner/work/CAA-scheduler/CAA-scheduler/scripts/screen_schedule_7_v1_3_2_daytime.py\", line 84, in <module>\n    overlay=make();c=apply_optimization_overlay(base,overlay)\n            ^^^^^^\n  File \"/home/runner/work/CAA-scheduler/CAA-scheduler/scripts/screen_schedule_7_v1_3_2_daytime.py\", line 79, in <lambda>\n    **{f\"R160_SYR_{d}\":lambda d=d:r160(d) for d in [\"ROC\",\"BUF\",\"ALB\",\"AVP\"]},\n                                  ^^^^^^^\n  File \"/home/runner/work/CAA-scheduler/CAA-scheduler/scripts/screen_schedule_7_v1_3_2_daytime.py\", line 64, in r160\n    arrival=turn(o,160,\"SYR\",dest,1005,dest) # 16:45 SYR B5, return B6\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/CAA-scheduler/CAA-scheduler/scripts/screen_schedule_7_v1_3_2_daytime.py\", line 52, in turn\n    return insert(o,route,dest,origin,arrival+40,tag)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/CAA-scheduler/CAA-scheduler/scripts/screen_schedule_7_v1_3_2_daytime.py\", line 47, in insert\n    if not target:raise ValueError(f\"Inserted {ident} {op} {city} off bank {t}\")\n                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nValueError: Inserted V132-DAY-160-ROC-ROC-SYR arrival SYR off bank 1123\n"
+  },
+  "R160_SYR_BUF": {
+    "pass": false,
+    "structural": "pass",
+    "overnight": "pass",
+    "planning": "pass",
+    "gate": "GateCapacityError('3 passenger touch(es) remain off-gate')",
+    "operating": {
+      "checks": 25,
+      "passed": 16,
+      "failed": 3,
+      "warnings": 3,
+      "notEvaluated": 1,
+      "overridden": 2,
+      "effectiveErrorFindings": 5,
+      "effectiveWarningFindings": 157
+    },
+    "failedChecks": [
+      {
+        "id": "section_26_pairing_spacing",
+        "findings": [
+          {
+            "id": "SYR-BUF",
+            "message": "SYR\u2013BUF fails same-pairing spacing",
+            "evidence": {
+              "origin": "SYR",
+              "destination": "BUF",
+              "departures": [
+                520,
+                678,
+                1005,
+                1015,
+                1165,
+                1342
+              ],
+              "gaps": [
+                {
+                  "from": 520,
+                  "to": 678,
+                  "minutes": 158
+                },
+                {
+                  "from": 678,
+                  "to": 1005,
+                  "minutes": 327
+                },
+                {
+                  "from": 1005,
+                  "to": 1015,
+                  "minutes": 10
+                },
+                {
+                  "from": 1015,
+                  "to": 1165,
+                  "minutes": 150
+                },
+                {
+                  "from": 1165,
+                  "to": 1342,
+                  "minutes": 177
+                },
+                {
+                  "from": 1342,
+                  "to": 520,
+                  "minutes": 618
+                }
+              ],
+              "targetMinutes": 56.0,
+              "allowedExceptions": 1,
+              "hubBound": false
+            }
+          }
+        ]
+      },
+      {
+        "id": "passenger_touch_on_stand",
+        "findings": [
+          {
+            "id": "SYR-355-841-886",
+            "message": "SYR claim 355 requires passenger handling on stand 1",
+            "evidence": {
+              "city": "SYR",
+              "label": "355",
+              "kind": "turn",
+              "start": 841,
+              "end": 886,
+              "stand": 1
+            }
+          },
+          {
+            "id": "SYR-355-941-1001",
+            "message": "SYR claim 355 requires passenger handling on stand 1",
+            "evidence": {
+              "city": "SYR",
+              "label": "355",
+              "kind": "turn",
+              "start": 941,
+              "end": 1001,
+              "stand": 1
+            }
+          },
+          {
+            "id": "SYR-518 -> 519-1159-1204",
+            "message": "SYR claim 518 -> 519 requires passenger handling on stand 1",
+            "evidence": {
+              "city": "SYR",
+              "label": "518 -> 519",
+              "kind": "ron",
+              "start": 1159,
+              "end": 1204,
+              "stand": 1
+            }
+          }
+        ]
+      },
+      {
+        "id": "fixed_physical_inventory",
+        "findings": [
+          {
+            "id": "SYR",
+            "message": "SYR cannot fit its claims into the configured physical inventory: 3 passenger touch(es) remain off-gate",
+            "evidence": {
+              "city": "SYR",
+              "requiredGates": 17,
+              "configuredGates": 16,
+              "requiredStands": 5,
+              "configuredStands": 8,
+              "strandedPassengerTouches": 3
+            }
+          }
+        ]
+      }
+    ],
+    "overlay": {
+      "baseSchedule": {
+        "scheduleId": "schedule_7_v1_3_2_draft"
+      },
+      "schedule": {
+        "id": "schedule_7_v1_3_2_draft",
+        "number": 7,
+        "version": "1.3.2-draft",
+        "label": "Schedule 7, Version 1.3.2 draft",
+        "status": "draft",
+        "fleetCounts": {
+          "MAX9": 35,
+          "CRJ900": 45,
+          "CRJ700": 65,
+          "CRJ200": 80
+        },
+        "connectionWindowMinutes": {
+          "minimum": 30,
+          "maximum": 240
+        }
+      },
+      "retimeLegs": [
+        {
+          "legId": "BTV-SYR-CRJ200-02-OUT",
+          "expectedDepartureMinute": 915,
+          "expectedArrivalMinute": 967,
+          "departureMinute": 800,
+          "arrivalMinute": 852
+        },
+        {
+          "legId": "PWM-SYR-CRJ200-01-IN",
+          "expectedDepartureMinute": 1140,
+          "expectedArrivalMinute": 1208,
+          "departureMinute": 1177,
+          "arrivalMinute": 1245
+        }
+      ],
+      "bankAssignmentReplacements": [
+        {
+          "legId": "BTV-SYR-CRJ200-02-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-B4"
+        }
+      ],
+      "insertLegs": [
+        {
+          "id": "V132-DAY-160-BUF-SYR-BUF",
+          "route": 160,
+          "origin": "SYR",
+          "destination": "BUF",
+          "departureMinute": 1005,
+          "arrivalMinute": 1051
+        },
+        {
+          "id": "V132-DAY-160-BUF-BUF-SYR",
+          "route": 160,
+          "origin": "BUF",
+          "destination": "SYR",
+          "departureMinute": 1091,
+          "arrivalMinute": 1137
+        }
+      ],
+      "bankAssignmentsToAdd": [
+        {
+          "legId": "V132-DAY-160-BUF-SYR-BUF",
+          "operation": "departure",
+          "bankId": "SYR-B5"
+        },
+        {
+          "legId": "V132-DAY-160-BUF-BUF-SYR",
+          "operation": "arrival",
+          "bankId": "SYR-B6"
+        }
+      ]
+    }
+  },
+  "R160_SYR_ALB": {
+    "pass": false,
+    "structural": "pass",
+    "overnight": "pass",
+    "planning": "pass",
+    "gate": "GateCapacityError('3 passenger touch(es) remain off-gate')",
+    "operating": {
+      "checks": 25,
+      "passed": 16,
+      "failed": 3,
+      "warnings": 3,
+      "notEvaluated": 1,
+      "overridden": 2,
+      "effectiveErrorFindings": 8,
+      "effectiveWarningFindings": 157
+    },
+    "failedChecks": [
+      {
+        "id": "section_26_pairing_spacing",
+        "findings": [
+          {
+            "id": "ALB-SYR",
+            "message": "ALB\u2013SYR fails same-pairing spacing",
+            "evidence": {
+              "origin": "ALB",
+              "destination": "SYR",
+              "departures": [
+                270,
+                595,
+                925,
+                1089,
+                1090,
+                1246
+              ],
+              "gaps": [
+                {
+                  "from": 270,
+                  "to": 595,
+                  "minutes": 325
+                },
+                {
+                  "from": 595,
+                  "to": 925,
+                  "minutes": 330
+                },
+                {
+                  "from": 925,
+                  "to": 1089,
+                  "minutes": 164
+                },
+                {
+                  "from": 1089,
+                  "to": 1090,
+                  "minutes": 1
+                },
+                {
+                  "from": 1090,
+                  "to": 1246,
+                  "minutes": 156
+                },
+                {
+                  "from": 1246,
+                  "to": 270,
+                  "minutes": 464
+                }
+              ],
+              "targetMinutes": 30.0,
+              "allowedExceptions": 0,
+              "hubBound": true
+            }
+          },
+          {
+            "id": "SYR-ALB",
+            "message": "SYR\u2013ALB fails same-pairing spacing",
+            "evidence": {
+              "origin": "SYR",
+              "destination": "ALB",
+              "departures": [
+                350,
+                515,
+                850,
+                1005,
+                1005,
+                1330
+              ],
+              "gaps": [
+                {
+                  "from": 350,
+                  "to": 515,
+                  "minutes": 165
+                },
+                {
+                  "from": 515,
+                  "to": 850,
+                  "minutes": 335
+                },
+                {
+                  "from": 850,
+                  "to": 1005,
+                  "minutes": 155
+                },
+                {
+                  "from": 1005,
+                  "to": 1005,
+                  "minutes": 0
+                },
+                {
+                  "from": 1005,
+                  "to": 1330,
+                  "minutes": 325
+                },
+                {
+                  "from": 1330,
+                  "to": 350,
+                  "minutes": 460
+                }
+              ],
+              "targetMinutes": 56.0,
+              "allowedExceptions": 1,
+              "hubBound": false
+            }
+          }
+        ]
+      },
+      {
+        "id": "passenger_touch_on_stand",
+        "findings": [
+          {
+            "id": "SYR-355-841-886",
+            "message": "SYR claim 355 requires passenger handling on stand 1",
+            "evidence": {
+              "city": "SYR",
+              "label": "355",
+              "kind": "turn",
+              "start": 841,
+              "end": 886,
+              "stand": 1
+            }
+          },
+          {
+            "id": "SYR-355-941-1001",
+            "message": "SYR claim 355 requires passenger handling on stand 1",
+            "evidence": {
+              "city": "SYR",
+              "label": "355",
+              "kind": "turn",
+              "start": 941,
+              "end": 1001,
+              "stand": 1
+            }
+          },
+          {
+            "id": "SYR-518 -> 519-1159-1204",
+            "message": "SYR claim 518 -> 519 requires passenger handling on stand 1",
+            "evidence": {
+              "city": "SYR",
+              "label": "518 -> 519",
+              "kind": "ron",
+              "start": 1159,
+              "end": 1204,
+              "stand": 1
+            }
+          },
+          {
+            "id": "ALB-158-1049-1094",
+            "message": "ALB claim 158 requires passenger handling on stand 1",
+            "evidence": {
+              "city": "ALB",
+              "label": "158",
+              "kind": "turn",
+              "start": 1049,
+              "end": 1094,
+              "stand": 1
+            }
+          }
+        ]
+      },
+      {
+        "id": "fixed_physical_inventory",
+        "findings": [
+          {
+            "id": "SYR",
+            "message": "SYR cannot fit its claims into the configured physical inventory: 3 passenger touch(es) remain off-gate",
+            "evidence": {
+              "city": "SYR",
+              "requiredGates": 17,
+              "configuredGates": 16,
+              "requiredStands": 5,
+              "configuredStands": 8,
+              "strandedPassengerTouches": 3
+            }
+          },
+          {
+            "id": "ALB",
+            "message": "ALB cannot fit its claims into the configured physical inventory: 1 passenger touch(es) remain off-gate",
+            "evidence": {
+              "city": "ALB",
+              "requiredGates": 3,
+              "configuredGates": 2,
+              "requiredStands": 2,
+              "configuredStands": 2,
+              "strandedPassengerTouches": 1
+            }
+          }
+        ]
+      }
+    ],
+    "overlay": {
+      "baseSchedule": {
+        "scheduleId": "schedule_7_v1_3_2_draft"
+      },
+      "schedule": {
+        "id": "schedule_7_v1_3_2_draft",
+        "number": 7,
+        "version": "1.3.2-draft",
+        "label": "Schedule 7, Version 1.3.2 draft",
+        "status": "draft",
+        "fleetCounts": {
+          "MAX9": 35,
+          "CRJ900": 45,
+          "CRJ700": 65,
+          "CRJ200": 80
+        },
+        "connectionWindowMinutes": {
+          "minimum": 30,
+          "maximum": 240
+        }
+      },
+      "retimeLegs": [
+        {
+          "legId": "BTV-SYR-CRJ200-02-OUT",
+          "expectedDepartureMinute": 915,
+          "expectedArrivalMinute": 967,
+          "departureMinute": 800,
+          "arrivalMinute": 852
+        },
+        {
+          "legId": "PWM-SYR-CRJ200-01-IN",
+          "expectedDepartureMinute": 1140,
+          "expectedArrivalMinute": 1208,
+          "departureMinute": 1173,
+          "arrivalMinute": 1241
+        }
+      ],
+      "bankAssignmentReplacements": [
+        {
+          "legId": "BTV-SYR-CRJ200-02-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-B4"
+        }
+      ],
+      "insertLegs": [
+        {
+          "id": "V132-DAY-160-ALB-SYR-ALB",
+          "route": 160,
+          "origin": "SYR",
+          "destination": "ALB",
+          "departureMinute": 1005,
+          "arrivalMinute": 1049
+        },
+        {
+          "id": "V132-DAY-160-ALB-ALB-SYR",
+          "route": 160,
+          "origin": "ALB",
+          "destination": "SYR",
+          "departureMinute": 1089,
+          "arrivalMinute": 1133
+        }
+      ],
+      "bankAssignmentsToAdd": [
+        {
+          "legId": "V132-DAY-160-ALB-SYR-ALB",
+          "operation": "departure",
+          "bankId": "SYR-B5"
+        },
+        {
+          "legId": "V132-DAY-160-ALB-ALB-SYR",
+          "operation": "arrival",
+          "bankId": "SYR-B6"
+        }
+      ]
+    }
+  },
+  "R160_SYR_AVP": {
+    "pass": false,
+    "structural": "pass",
+    "overnight": "pass",
+    "planning": "pass",
+    "gate": "GateCapacityError('3 passenger touch(es) remain off-gate')",
+    "operating": {
+      "checks": 25,
+      "passed": 17,
+      "failed": 3,
+      "warnings": 3,
+      "notEvaluated": 1,
+      "overridden": 1,
+      "effectiveErrorFindings": 5,
+      "effectiveWarningFindings": 157
+    },
+    "failedChecks": [
+      {
+        "id": "passenger_touch_on_stand",
+        "findings": [
+          {
+            "id": "SYR-355-841-886",
+            "message": "SYR claim 355 requires passenger handling on stand 1",
+            "evidence": {
+              "city": "SYR",
+              "label": "355",
+              "kind": "turn",
+              "start": 841,
+              "end": 886,
+              "stand": 1
+            }
+          },
+          {
+            "id": "SYR-355-941-1001",
+            "message": "SYR claim 355 requires passenger handling on stand 1",
+            "evidence": {
+              "city": "SYR",
+              "label": "355",
+              "kind": "turn",
+              "start": 941,
+              "end": 1001,
+              "stand": 1
+            }
+          },
+          {
+            "id": "SYR-518 -> 519-1159-1204",
+            "message": "SYR claim 518 -> 519 requires passenger handling on stand 1",
+            "evidence": {
+              "city": "SYR",
+              "label": "518 -> 519",
+              "kind": "ron",
+              "start": 1159,
+              "end": 1204,
+              "stand": 1
+            }
+          }
+        ]
+      },
+      {
+        "id": "fixed_physical_inventory",
+        "findings": [
+          {
+            "id": "SYR",
+            "message": "SYR cannot fit its claims into the configured physical inventory: 3 passenger touch(es) remain off-gate",
+            "evidence": {
+              "city": "SYR",
+              "requiredGates": 17,
+              "configuredGates": 16,
+              "requiredStands": 5,
+              "configuredStands": 8,
+              "strandedPassengerTouches": 3
+            }
+          }
+        ]
+      },
+      {
+        "id": "tiered_service_minimums",
+        "findings": [
+          {
+            "id": "ATW",
+            "message": "ATW does not satisfy its percentile-tier service envelope",
+            "evidence": {
+              "city": "ATW",
+              "percentile": 31.0,
+              "totalFlights": 14,
+              "hubOrFocusFlights": 14,
+              "minimumFlights": 6,
+              "connectedHubs": [
+                "BHM",
+                "DAY",
+                "MCI"
+              ],
+              "hubCountCap": 2
+            },
+            "override": {
+              "reason": "Schedule 7 v1.1.3 BHM focus-city initiative: ATW-BHM is deliberate focus-city feed for Florida Peninsula connectivity.",
+              "approvedBy": "user",
+              "expiresAfterSchedule": 7
+            }
+          },
+          {
+            "id": "AVP",
+            "message": "AVP does not satisfy its percentile-tier service envelope",
+            "evidence": {
+              "city": "AVP",
+              "percentile": 17.0,
+              "totalFlights": 6,
+              "hubOrFocusFlights": 6,
+              "minimumFlights": 3,
+              "connectedHubs": [
+                "PHF",
+                "SYR"
+              ],
+              "hubCountCap": 1
+            }
+          },
+          {
+            "id": "BHM",
+            "message": "BHM does not satisfy its percentile-tier service envelope",
+            "evidence": {
+              "city": "BHM",
+              "percentile": 64.0,
+              "totalFlights": 98,
+              "hubOrFocusFlights": 98,
+              "minimumFlights": 6,
+              "connectedHubs": [
+                "DAY",
+                "JAX",
+                "MCI",
+                "PHF"
+              ],
+              "hubCountCap": 2
+            },
+            "override": {
+              "reason": "Schedule 7 v1.1.0 PHF north-south initiative: PHF is a geographically reasonable additional hub and the added service passes downstream feasibility checks.",
+              "approvedBy": "user",
+              "expiresAfterSchedule": 7
+            }
+          },
+          {
+            "id": "BWI",
+            "message": "BWI does not satisfy its percentile-tier service envelope",
+            "evidence": {
+              "city": "BWI",
+              "percentile": 94.0,
+              "totalFlights": 34,
+              "hubOrFocusFlights": 28,
+              "minimumFlights": 8,
+              "connectedHubs": [
+                "BHM",
+                "DAY",
+                "JAX",
+                "MCI",
+                "PHF",
+                "SYR"
+              ],
+              "hubCountCap": 4
+            },
+            "override": {
+              "reason": "Schedule 7 v1.1.0 PHF north-south initiative: the BWI-BHM-PHF triangles are geographically reasonable and pass downstream feasibility checks.",
+              "approvedBy": "user",
+              "expiresAfterSchedule": 7
+            }
+          }
+        ]
+      }
+    ],
+    "overlay": {
+      "baseSchedule": {
+        "scheduleId": "schedule_7_v1_3_2_draft"
+      },
+      "schedule": {
+        "id": "schedule_7_v1_3_2_draft",
+        "number": 7,
+        "version": "1.3.2-draft",
+        "label": "Schedule 7, Version 1.3.2 draft",
+        "status": "draft",
+        "fleetCounts": {
+          "MAX9": 35,
+          "CRJ900": 45,
+          "CRJ700": 65,
+          "CRJ200": 80
+        },
+        "connectionWindowMinutes": {
+          "minimum": 30,
+          "maximum": 240
+        }
+      },
+      "retimeLegs": [
+        {
+          "legId": "BTV-SYR-CRJ200-02-OUT",
+          "expectedDepartureMinute": 915,
+          "expectedArrivalMinute": 967,
+          "departureMinute": 800,
+          "arrivalMinute": 852
+        },
+        {
+          "legId": "PWM-SYR-CRJ200-01-IN",
+          "expectedDepartureMinute": 1140,
+          "expectedArrivalMinute": 1208,
+          "departureMinute": 1175,
+          "arrivalMinute": 1243
+        }
+      ],
+      "bankAssignmentReplacements": [
+        {
+          "legId": "BTV-SYR-CRJ200-02-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-B4"
+        }
+      ],
+      "insertLegs": [
+        {
+          "id": "V132-DAY-160-AVP-SYR-AVP",
+          "route": 160,
+          "origin": "SYR",
+          "destination": "AVP",
+          "departureMinute": 1005,
+          "arrivalMinute": 1050
+        },
+        {
+          "id": "V132-DAY-160-AVP-AVP-SYR",
+          "route": 160,
+          "origin": "AVP",
+          "destination": "SYR",
+          "departureMinute": 1090,
+          "arrivalMinute": 1135
+        }
+      ],
+      "bankAssignmentsToAdd": [
+        {
+          "legId": "V132-DAY-160-AVP-SYR-AVP",
+          "operation": "departure",
+          "bankId": "SYR-B5"
+        },
+        {
+          "legId": "V132-DAY-160-AVP-AVP-SYR",
+          "operation": "arrival",
+          "bankId": "SYR-B6"
+        }
+      ]
+    }
+  },
+  "R158_SYR_ROC": {
+    "pass": false,
+    "exception": "ValueError('Retimed flight 1868 arrival DAY off bank at 661')",
+    "traceback": "Traceback (most recent call last):\n  File \"/home/runner/work/CAA-scheduler/CAA-scheduler/scripts/screen_schedule_7_v1_3_2_daytime.py\", line 84, in <module>\n    overlay=make();c=apply_optimization_overlay(base,overlay)\n            ^^^^^^\n  File \"/home/runner/work/CAA-scheduler/CAA-scheduler/scripts/screen_schedule_7_v1_3_2_daytime.py\", line 80, in <lambda>\n    **{f\"R158_SYR_{d}\":lambda d=d:r158(d) for d in [\"ROC\",\"BUF\",\"AVP\",\"ALB\"]}}\n                                  ^^^^^^^\n  File \"/home/runner/work/CAA-scheduler/CAA-scheduler/scripts/screen_schedule_7_v1_3_2_daytime.py\", line 71, in r158\n    retime(o,1868,615)  # LEX 10:15 -> DAY 11:01\n    ^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/CAA-scheduler/CAA-scheduler/scripts/screen_schedule_7_v1_3_2_daytime.py\", line 35, in retime\n    if not target:raise ValueError(f\"Retimed flight {flight} {op} {city} off bank at {t}\")\n                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nValueError: Retimed flight 1868 arrival DAY off bank at 661\n"
+  },
+  "R158_SYR_BUF": {
+    "pass": false,
+    "exception": "ValueError('Retimed flight 1868 arrival DAY off bank at 661')",
+    "traceback": "Traceback (most recent call last):\n  File \"/home/runner/work/CAA-scheduler/CAA-scheduler/scripts/screen_schedule_7_v1_3_2_daytime.py\", line 84, in <module>\n    overlay=make();c=apply_optimization_overlay(base,overlay)\n            ^^^^^^\n  File \"/home/runner/work/CAA-scheduler/CAA-scheduler/scripts/screen_schedule_7_v1_3_2_daytime.py\", line 80, in <lambda>\n    **{f\"R158_SYR_{d}\":lambda d=d:r158(d) for d in [\"ROC\",\"BUF\",\"AVP\",\"ALB\"]}}\n                                  ^^^^^^^\n  File \"/home/runner/work/CAA-scheduler/CAA-scheduler/scripts/screen_schedule_7_v1_3_2_daytime.py\", line 71, in r158\n    retime(o,1868,615)  # LEX 10:15 -> DAY 11:01\n    ^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/CAA-scheduler/CAA-scheduler/scripts/screen_schedule_7_v1_3_2_daytime.py\", line 35, in retime\n    if not target:raise ValueError(f\"Retimed flight {flight} {op} {city} off bank at {t}\")\n                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nValueError: Retimed flight 1868 arrival DAY off bank at 661\n"
+  },
+  "R158_SYR_AVP": {
+    "pass": false,
+    "exception": "ValueError('Retimed flight 1868 arrival DAY off bank at 661')",
+    "traceback": "Traceback (most recent call last):\n  File \"/home/runner/work/CAA-scheduler/CAA-scheduler/scripts/screen_schedule_7_v1_3_2_daytime.py\", line 84, in <module>\n    overlay=make();c=apply_optimization_overlay(base,overlay)\n            ^^^^^^\n  File \"/home/runner/work/CAA-scheduler/CAA-scheduler/scripts/screen_schedule_7_v1_3_2_daytime.py\", line 80, in <lambda>\n    **{f\"R158_SYR_{d}\":lambda d=d:r158(d) for d in [\"ROC\",\"BUF\",\"AVP\",\"ALB\"]}}\n                                  ^^^^^^^\n  File \"/home/runner/work/CAA-scheduler/CAA-scheduler/scripts/screen_schedule_7_v1_3_2_daytime.py\", line 71, in r158\n    retime(o,1868,615)  # LEX 10:15 -> DAY 11:01\n    ^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/CAA-scheduler/CAA-scheduler/scripts/screen_schedule_7_v1_3_2_daytime.py\", line 35, in retime\n    if not target:raise ValueError(f\"Retimed flight {flight} {op} {city} off bank at {t}\")\n                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nValueError: Retimed flight 1868 arrival DAY off bank at 661\n"
+  },
+  "R158_SYR_ALB": {
+    "pass": false,
+    "exception": "ValueError('Retimed flight 1868 arrival DAY off bank at 661')",
+    "traceback": "Traceback (most recent call last):\n  File \"/home/runner/work/CAA-scheduler/CAA-scheduler/scripts/screen_schedule_7_v1_3_2_daytime.py\", line 84, in <module>\n    overlay=make();c=apply_optimization_overlay(base,overlay)\n            ^^^^^^\n  File \"/home/runner/work/CAA-scheduler/CAA-scheduler/scripts/screen_schedule_7_v1_3_2_daytime.py\", line 80, in <lambda>\n    **{f\"R158_SYR_{d}\":lambda d=d:r158(d) for d in [\"ROC\",\"BUF\",\"AVP\",\"ALB\"]}}\n                                  ^^^^^^^\n  File \"/home/runner/work/CAA-scheduler/CAA-scheduler/scripts/screen_schedule_7_v1_3_2_daytime.py\", line 71, in r158\n    retime(o,1868,615)  # LEX 10:15 -> DAY 11:01\n    ^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/CAA-scheduler/CAA-scheduler/scripts/screen_schedule_7_v1_3_2_daytime.py\", line 35, in retime\n    if not target:raise ValueError(f\"Retimed flight {flight} {op} {city} off bank at {t}\")\n                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nValueError: Retimed flight 1868 arrival DAY off bank at 661\n"
+  }
+}

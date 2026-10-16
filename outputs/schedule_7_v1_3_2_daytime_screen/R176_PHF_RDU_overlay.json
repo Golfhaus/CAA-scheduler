@@ -1,0 +1,75 @@
+{
+  "baseSchedule": {
+    "scheduleId": "schedule_7_v1_3_2_draft"
+  },
+  "schedule": {
+    "id": "schedule_7_v1_3_2_draft",
+    "number": 7,
+    "version": "1.3.2-draft",
+    "label": "Schedule 7, Version 1.3.2 draft",
+    "status": "draft",
+    "fleetCounts": {
+      "MAX9": 35,
+      "CRJ900": 45,
+      "CRJ700": 65,
+      "CRJ200": 80
+    },
+    "connectionWindowMinutes": {
+      "minimum": 30,
+      "maximum": 240
+    }
+  },
+  "retimeLegs": [
+    {
+      "legId": "GSO-PHF-CRJ200-01-OUT",
+      "expectedDepartureMinute": 600,
+      "expectedArrivalMinute": 656,
+      "departureMinute": 555,
+      "arrivalMinute": 611
+    },
+    {
+      "legId": "CAE-PHF-CRJ200-02-IN",
+      "expectedDepartureMinute": 835,
+      "expectedArrivalMinute": 910,
+      "departureMinute": 835,
+      "arrivalMinute": 910
+    }
+  ],
+  "bankAssignmentReplacements": [
+    {
+      "legId": "GSO-PHF-CRJ200-01-OUT",
+      "operation": "arrival",
+      "bankId": "PHF-M1"
+    }
+  ],
+  "insertLegs": [
+    {
+      "id": "V132-DAY-176-RDU-PHF-RDU",
+      "route": 176,
+      "origin": "PHF",
+      "destination": "RDU",
+      "departureMinute": 651,
+      "arrivalMinute": 700
+    },
+    {
+      "id": "V132-DAY-176-RDU-RDU-PHF",
+      "route": 176,
+      "origin": "RDU",
+      "destination": "PHF",
+      "departureMinute": 740,
+      "arrivalMinute": 789
+    }
+  ],
+  "bankAssignmentsToAdd": [
+    {
+      "legId": "V132-DAY-176-RDU-PHF-RDU",
+      "operation": "departure",
+      "bankId": "PHF-B3"
+    },
+    {
+      "legId": "V132-DAY-176-RDU-RDU-PHF",
+      "operation": "arrival",
+      "bankId": "PHF-B4"
+    }
+  ]
+}
