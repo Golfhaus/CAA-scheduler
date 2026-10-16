@@ -1,0 +1,143 @@
+{
+  "baseSchedule": {
+    "scheduleId": "schedule_7_v1_3_2_draft",
+    "sha256": "4de8042da82c48f67a991551476e620f01b17cade91d75b5189e9a53ecbb48b0",
+    "canonical": "data/schedules/schedule_7_v1_3_2_draft/canonical_schedule.json",
+    "commit": "4d72b3eaea5d3659e09e7c8b252ca889f2ac21a9"
+  },
+  "schedule": {
+    "id": "schedule_7_v1_3_2_draft",
+    "number": 7,
+    "version": "1.3.2-draft",
+    "label": "Schedule 7, Version 1.3.2 draft",
+    "status": "draft",
+    "fleetCounts": {
+      "MAX9": 35,
+      "CRJ900": 45,
+      "CRJ700": 65,
+      "CRJ200": 80
+    },
+    "connectionWindowMinutes": {
+      "minimum": 30,
+      "maximum": 240
+    }
+  },
+  "insertLegs": [
+    {
+      "id": "REVIEW-R144-JAN-JAX",
+      "route": 144,
+      "origin": "JAN",
+      "destination": "JAX",
+      "departureMinute": 270,
+      "arrivalMinute": 428
+    },
+    {
+      "id": "REVIEW-R144-JAX-JAN",
+      "route": 144,
+      "origin": "JAX",
+      "destination": "JAN",
+      "departureMinute": 468,
+      "arrivalMinute": 506
+    },
+    {
+      "id": "REVIEW-R144-MCI-BNA",
+      "route": 144,
+      "origin": "MCI",
+      "destination": "BNA",
+      "departureMinute": 1036,
+      "arrivalMinute": 1131
+    },
+    {
+      "id": "REVIEW-R144-BNA-MCI",
+      "route": 144,
+      "origin": "BNA",
+      "destination": "MCI",
+      "departureMinute": 1171,
+      "arrivalMinute": 1266
+    }
+  ],
+  "bankAssignmentsToAdd": [
+    {
+      "legId": "REVIEW-R144-JAN-JAX",
+      "operation": "arrival",
+      "bankId": "JAX-B3"
+    },
+    {
+      "legId": "REVIEW-R144-JAX-JAN",
+      "operation": "departure",
+      "bankId": "JAX-B4"
+    },
+    {
+      "legId": "REVIEW-R144-MCI-BNA",
+      "operation": "departure",
+      "bankId": "MCI-B8"
+    },
+    {
+      "legId": "REVIEW-R144-BNA-MCI",
+      "operation": "arrival",
+      "bankId": "MCI-M11"
+    }
+  ],
+  "retimeLegs": [
+    {
+      "legId": "JAN-MCI-CRJ200-02-OUT",
+      "expectedDepartureMinute": 490,
+      "expectedArrivalMinute": 593,
+      "departureMinute": 582,
+      "arrivalMinute": 685
+    },
+    {
+      "legId": "MCI-OKC-CRJ200-01-OUT",
+      "expectedDepartureMinute": 735,
+      "expectedArrivalMinute": 806,
+      "departureMinute": 785,
+      "arrivalMinute": 856
+    },
+    {
+      "legId": "MCI-SHV-CRJ200-01-OUT",
+      "expectedDepartureMinute": 1135,
+      "expectedArrivalMinute": 1228,
+      "departureMinute": 1335,
+      "arrivalMinute": 1428
+    }
+  ],
+  "bankAssignmentReplacements": [
+    {
+      "legId": "JAN-MCI-CRJ200-02-OUT",
+      "operation": "arrival",
+      "bankId": "MCI-B5"
+    },
+    {
+      "legId": "MCI-OKC-CRJ200-01-OUT",
+      "operation": "departure",
+      "bankId": "MCI-B6"
+    },
+    {
+      "legId": "MCI-SHV-CRJ200-01-OUT",
+      "operation": "departure",
+      "bankId": "MCI-M12"
+    }
+  ],
+  "schemaVersion": "1.0.0",
+  "id": "schedule-7-v1.3.2-r144-jax-bna-proposal",
+  "approval": {
+    "status": "Proposal only; not applied",
+    "scope": "Holistic R144 rebuild retaining all four existing sectors",
+    "publication": "Not authorized"
+  },
+  "metrics": {
+    "blockMinutesBefore": 338,
+    "blockMinutesAfter": 724,
+    "maximumHoldBefore": 142,
+    "maximumHoldAfter": 100,
+    "flightCountBefore": 4,
+    "flightCountAfter": 8,
+    "reasonableCoverageGains": 26,
+    "reasonableCoverageLosses": 3,
+    "reasonableFastestFaster": 48,
+    "reasonableFastestSlower": 31,
+    "rawItineraryChoicesLost": 82,
+    "reasonableItineraryChoicesLost": 52,
+    "commercialCaveat": "The added JAN-JAX pair has modest competitive opportunity indices (21.8 / 35.7); these are not load forecasts."
+  }
+}
