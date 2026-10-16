@@ -1,0 +1,67 @@
+{
+  "baseSchedule": {
+    "scheduleId": "schedule_7_v1_3_2_draft"
+  },
+  "schedule": {
+    "id": "schedule_7_v1_3_2_draft",
+    "number": 7,
+    "version": "1.3.2-draft",
+    "label": "Schedule 7, Version 1.3.2 draft",
+    "status": "draft",
+    "fleetCounts": {
+      "MAX9": 35,
+      "CRJ900": 45,
+      "CRJ700": 65,
+      "CRJ200": 80
+    },
+    "connectionWindowMinutes": {
+      "minimum": 30,
+      "maximum": 240
+    }
+  },
+  "retimeLegs": [
+    {
+      "legId": "FSD-MCI-CRJ200-01-IN",
+      "expectedDepartureMinute": 1135,
+      "expectedArrivalMinute": 1206,
+      "departureMinute": 1105,
+      "arrivalMinute": 1176
+    }
+  ],
+  "insertLegs": [
+    {
+      "id": "V132-R146-FSD-MCI-LATE",
+      "route": 146,
+      "origin": "FSD",
+      "destination": "MCI",
+      "departureMinute": 1216,
+      "arrivalMinute": 1287
+    },
+    {
+      "id": "V132-R146-MCI-FSD-LATE",
+      "route": 146,
+      "origin": "MCI",
+      "destination": "FSD",
+      "departureMinute": 1335,
+      "arrivalMinute": 1406
+    }
+  ],
+  "bankAssignmentsToAdd": [
+    {
+      "legId": "V132-R146-FSD-MCI-LATE",
+      "operation": "arrival",
+      "bankId": "MCI-M11"
+    },
+    {
+      "legId": "V132-R146-MCI-FSD-LATE",
+      "operation": "departure",
+      "bankId": "MCI-M12"
+    }
+  ],
+  "approval": {
+    "status": "Selected for unpublished v1.3.2 working draft",
+    "selectedOn": "2026-10-16",
+    "reason": "Holistic CRJ200 group optimization: +2 flights, 10 reasonable coverage gains, one low-demand 0.7/day coverage loss; operating and physical checks passed",
+    "publication": "Not authorized"
+  }
+}
