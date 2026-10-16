@@ -10,6 +10,9 @@ on:
       - 'scripts/screen_schedule_7_v1_3_2_group_optimization.py'
       - 'scripts/audit_schedule_7_v1_3_2_group_optimization.mjs'
   workflow_dispatch:
+concurrency:
+  group: v132-crj200-validation
+  cancel-in-progress: true
 permissions:
   contents: write
 jobs:
@@ -40,5 +43,6 @@ jobs:
           git add -f outputs/schedule_7_v1_3_2_r144_accepted/ outputs/schedule_7_v1_3_2_consolidation/ outputs/schedule_7_v1_3_2_group_optimization/
           if ! git diff --cached --quiet; then
             git commit -m "Record validated unpublished v1.3.2 R144 and consolidation diagnostics [skip ci]"
+            git pull --rebase origin schedule-7-v1.3.2-maintenance-draft
             git push
           fi
