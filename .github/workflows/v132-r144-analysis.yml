@@ -8,6 +8,7 @@ on:
       - 'scripts/stage_schedule_7_v1_3_2_r144.py'
       - 'scripts/analyze_schedule_7_v1_3_2_consolidation.py'
       - 'scripts/screen_schedule_7_v1_3_2_group_optimization.py'
+      - 'scripts/audit_schedule_7_v1_3_2_group_optimization.mjs'
   workflow_dispatch:
 permissions:
   contents: write
@@ -28,6 +29,8 @@ jobs:
         run: python scripts/analyze_schedule_7_v1_3_2_consolidation.py
       - name: Screen coordinated CRJ200 operating-day improvements
         run: python scripts/screen_schedule_7_v1_3_2_group_optimization.py
+      - name: Audit geographical network effects of accepted physical candidates
+        run: node scripts/audit_schedule_7_v1_3_2_group_optimization.mjs
       - name: Keep checks green before committing evidence
         run: bash scripts/run_latest_regression.sh
       - name: Commit unpublished validated staging artifacts
