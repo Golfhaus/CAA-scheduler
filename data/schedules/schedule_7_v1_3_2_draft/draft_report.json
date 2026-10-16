@@ -1,6 +1,6 @@
 {
   "status": "draft; not published",
-  "flights": 1218,
+  "flights": 1221,
   "routes": 184,
   "lines": 17,
   "retimedFlights": [
@@ -10,9 +10,10 @@
     1699,
     1817,
     1892,
-    1904
+    1904,
+    1991
   ],
-  "newFlights": 6,
+  "newFlights": 10,
   "operating": {
     "checks": 25,
     "passed": 19,
@@ -21,7 +22,7 @@
     "notEvaluated": 1,
     "overridden": 2,
     "effectiveErrorFindings": 0,
-    "effectiveWarningFindings": 160
+    "effectiveWarningFindings": 158
   },
   "beforeMaintenanceFindings": [
     {
@@ -117,7 +118,8 @@
   },
   "removedFlights": [
     1257,
-    1258
+    1258,
+    1360
   ],
   "addedFlights": [
     {
@@ -215,9 +217,73 @@
       "arrival": "11:38",
       "departureMinute": 625,
       "arrivalMinute": 698
+    },
+    {
+      "id": "REVIEW-R111-BHM-PIE",
+      "route": 111,
+      "line": "AD",
+      "fleet": "CRJ200",
+      "day": 1,
+      "sequenceWithinRoute": 4,
+      "pairing": 857,
+      "flight": 2223,
+      "origin": "BHM",
+      "destination": "PIE",
+      "departure": "13:28",
+      "arrival": "15:59",
+      "departureMinute": 808,
+      "arrivalMinute": 959
+    },
+    {
+      "id": "REVIEW-R111-PIE-BHM",
+      "route": 111,
+      "line": "AD",
+      "fleet": "CRJ200",
+      "day": 1,
+      "sequenceWithinRoute": 5,
+      "pairing": 858,
+      "flight": 2224,
+      "origin": "PIE",
+      "destination": "BHM",
+      "departure": "16:39",
+      "arrival": "17:10",
+      "departureMinute": 999,
+      "arrivalMinute": 1030
+    },
+    {
+      "id": "REVIEW-R312-DAB-PHF",
+      "route": 312,
+      "line": "AH",
+      "fleet": "CRJ700",
+      "day": 1,
+      "sequenceWithinRoute": 6,
+      "pairing": 819,
+      "flight": 2225,
+      "origin": "DAB",
+      "destination": "PHF",
+      "departure": "17:52",
+      "arrival": "19:40",
+      "departureMinute": 1072,
+      "arrivalMinute": 1180
+    },
+    {
+      "id": "REVIEW-R312-PHF-BDL",
+      "route": 312,
+      "line": "AH",
+      "fleet": "CRJ700",
+      "day": 1,
+      "sequenceWithinRoute": 7,
+      "pairing": 820,
+      "flight": 2226,
+      "origin": "PHF",
+      "destination": "BDL",
+      "departure": "20:20",
+      "arrival": "21:40",
+      "departureMinute": 1220,
+      "arrivalMinute": 1300
     }
   ],
-  "netFlightChange": 4,
+  "netFlightChange": 7,
   "acceptedR501": {
     "option": "rfd_later_turn",
     "removedFlights": [
@@ -263,5 +329,35 @@
     "newBlockMinutes": 146,
     "maximumTurnMinutes": 112,
     "preservesExistingItineraryChoices": true
+  },
+  "acceptedR111": {
+    "addedFlights": [
+      2223,
+      2224
+    ],
+    "retimingMinutes": {
+      "1991": -26
+    },
+    "newBlockMinutes": 182,
+    "maximumTurnMinutes": 56,
+    "lostOneStopMarket": "OMA-PHF",
+    "lostRawChoices": 20,
+    "lostReasonableChoices": 15
+  },
+  "acceptedR312": {
+    "addedFlights": [
+      2225,
+      2226
+    ],
+    "removedFlights": [
+      1360
+    ],
+    "newBlockMinutes": 31,
+    "maximumTurnMinutes": 79,
+    "droppedNonstop": "DAB-BDL",
+    "newEveningJourneyMinutes": 228,
+    "extraMinutesVersusNonstop": 71,
+    "arrivalBank": "PHF-M6",
+    "departureBank": "PHF-B7"
   }
 }

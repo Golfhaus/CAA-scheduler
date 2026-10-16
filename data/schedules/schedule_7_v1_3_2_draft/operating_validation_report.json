@@ -10,7 +10,7 @@
     "notEvaluated": 1,
     "overridden": 2,
     "effectiveErrorFindings": 0,
-    "effectiveWarningFindings": 160
+    "effectiveWarningFindings": 158
   },
   "checks": [
     {
@@ -114,10 +114,10 @@
       "severity": "warning",
       "hardStop": false,
       "status": "warning",
-      "message": "79 finding(s)",
+      "message": "77 finding(s)",
       "metrics": {
-        "findingCount": 79,
-        "effectiveFindingCount": 79,
+        "findingCount": 77,
+        "effectiveFindingCount": 77,
         "overriddenFindingCount": 0
       },
       "findings": [
@@ -470,18 +470,6 @@
           }
         },
         {
-          "id": "AH-1-1922-1360",
-          "message": "Hold at DAB is 267 minutes and needs deliberate-hold review",
-          "evidence": {
-            "line": "AH",
-            "day": 1,
-            "city": "DAB",
-            "arrivalFlight": 1922,
-            "departureFlight": 1360,
-            "minutes": 267
-          }
-        },
-        {
           "id": "AK-8-1447-1424",
           "message": "Hold at MCI is 238 minutes and needs deliberate-hold review",
           "evidence": {
@@ -527,18 +515,6 @@
             "arrivalFlight": 1465,
             "departureFlight": 1459,
             "minutes": 163
-          }
-        },
-        {
-          "id": "AD-1-1991-1992",
-          "message": "Hold at BHM is 276 minutes and needs deliberate-hold review",
-          "evidence": {
-            "line": "AD",
-            "day": 1,
-            "city": "BHM",
-            "arrivalFlight": 1991,
-            "departureFlight": 1992,
-            "minutes": 276
           }
         },
         {
@@ -1151,9 +1127,9 @@
       "status": "pass",
       "message": "Point-to-point flying is within the 10% cap",
       "metrics": {
-        "flights": 101,
-        "totalFlights": 1218,
-        "share": 0.08292282430213464,
+        "flights": 100,
+        "totalFlights": 1221,
+        "share": 0.0819000819000819,
         "findingCount": 0,
         "effectiveFindingCount": 0,
         "overriddenFindingCount": 0
@@ -1741,19 +1717,14 @@
               467,
               545,
               865,
-              1203,
-              1260
+              1072,
+              1203
             ],
             "excessiveGaps": [
               {
                 "from": 545,
                 "to": 865,
                 "minutes": 320
-              },
-              {
-                "from": 865,
-                "to": 1203,
-                "minutes": 338
               }
             ],
             "serviceWindowMinutes": {
@@ -2820,16 +2791,16 @@
               345,
               545,
               595,
-              666,
+              640,
               910,
               1230,
               1238
             ],
             "excessiveGaps": [
               {
-                "from": 666,
+                "from": 640,
                 "to": 910,
-                "minutes": 244
+                "minutes": 270
               },
               {
                 "from": 910,
@@ -3585,8 +3556,8 @@
           "evidence": {
             "city": "BHM",
             "percentile": 64.0,
-            "totalFlights": 96,
-            "hubOrFocusFlights": 96,
+            "totalFlights": 98,
+            "hubOrFocusFlights": 98,
             "minimumFlights": 6,
             "connectedHubs": [
               "DAY",
@@ -3659,7 +3630,7 @@
             "city": "DAB",
             "percentile": 27.0,
             "totalFlights": 14,
-            "hubOrFocusFlights": 12,
+            "hubOrFocusFlights": 13,
             "minimumFlights": 6,
             "connectedHubs": [
               "BHM",
@@ -3792,8 +3763,8 @@
           "evidence": {
             "city": "PIE",
             "percentile": 96.0,
-            "totalFlights": 38,
-            "hubOrFocusFlights": 32,
+            "totalFlights": 40,
+            "hubOrFocusFlights": 34,
             "minimumFlights": 8,
             "connectedHubs": [
               "BHM",

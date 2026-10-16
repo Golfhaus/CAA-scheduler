@@ -81,6 +81,10 @@
         {
           "path": "config/optimizations/schedule_7_v1_3_2_round_4.json",
           "sha256": "0fd6cf8f11ad51ee34938d57da3be933637106378ff4e29ed6e692a88f2e2978"
+        },
+        {
+          "path": "config/optimizations/schedule_7_v1_3_2_round_5.json",
+          "sha256": "39adb9117982414f14c071bcd46ff01bfc0f162ed6a69e4e064697b32f78b3bf"
         }
       ],
       "publication": "Not authorized; app default remains v1.3.1"
@@ -6169,6 +6173,16 @@
       "legId": "V131-DSM-R154-DSM-MCI",
       "operation": "arrival",
       "bankId": "MCI-B8"
+    },
+    {
+      "legId": "REVIEW-R312-DAB-PHF",
+      "operation": "arrival",
+      "bankId": "PHF-M6"
+    },
+    {
+      "legId": "REVIEW-R312-PHF-BDL",
+      "operation": "departure",
+      "bankId": "PHF-B7"
     }
   ],
   "cities": [
@@ -14133,22 +14147,6 @@
       "arrivalMinute": 427
     },
     {
-      "id": "BDL-DAB-CRJ700-01-IN",
-      "route": 312,
-      "line": "AH",
-      "fleet": "CRJ700",
-      "day": 1,
-      "sequenceWithinRoute": 6,
-      "pairing": 728,
-      "flight": 1360,
-      "origin": "DAB",
-      "destination": "BDL",
-      "departure": "21:00",
-      "arrival": "23:37",
-      "departureMinute": 1260,
-      "arrivalMinute": 1417
-    },
-    {
       "id": "CAE-FLL-CRJ700-01-OUT",
       "route": 353,
       "line": "AS",
@@ -17690,7 +17688,7 @@
       "line": "AD",
       "fleet": "CRJ200",
       "day": 1,
-      "sequenceWithinRoute": 6,
+      "sequenceWithinRoute": 8,
       "pairing": 786,
       "flight": 1582,
       "origin": "MCI",
@@ -18618,7 +18616,7 @@
       "line": "AD",
       "fleet": "CRJ200",
       "day": 1,
-      "sequenceWithinRoute": 5,
+      "sequenceWithinRoute": 7,
       "pairing": 120,
       "flight": 1640,
       "origin": "OMA",
@@ -24239,10 +24237,10 @@
       "flight": 1991,
       "origin": "OMA",
       "destination": "BHM",
-      "departure": "11:06",
-      "arrival": "13:14",
-      "departureMinute": 666,
-      "arrivalMinute": 794
+      "departure": "10:40",
+      "arrival": "12:48",
+      "departureMinute": 640,
+      "arrivalMinute": 768
     },
     {
       "id": "V113-R164-BHM-OMA",
@@ -24250,7 +24248,7 @@
       "line": "AD",
       "fleet": "CRJ200",
       "day": 1,
-      "sequenceWithinRoute": 4,
+      "sequenceWithinRoute": 6,
       "pairing": 864,
       "flight": 1992,
       "origin": "BHM",
@@ -27939,6 +27937,70 @@
       "arrival": "11:38",
       "departureMinute": 625,
       "arrivalMinute": 698
+    },
+    {
+      "id": "REVIEW-R111-BHM-PIE",
+      "route": 111,
+      "line": "AD",
+      "fleet": "CRJ200",
+      "day": 1,
+      "sequenceWithinRoute": 4,
+      "pairing": 857,
+      "flight": 2223,
+      "origin": "BHM",
+      "destination": "PIE",
+      "departure": "13:28",
+      "arrival": "15:59",
+      "departureMinute": 808,
+      "arrivalMinute": 959
+    },
+    {
+      "id": "REVIEW-R111-PIE-BHM",
+      "route": 111,
+      "line": "AD",
+      "fleet": "CRJ200",
+      "day": 1,
+      "sequenceWithinRoute": 5,
+      "pairing": 858,
+      "flight": 2224,
+      "origin": "PIE",
+      "destination": "BHM",
+      "departure": "16:39",
+      "arrival": "17:10",
+      "departureMinute": 999,
+      "arrivalMinute": 1030
+    },
+    {
+      "id": "REVIEW-R312-DAB-PHF",
+      "route": 312,
+      "line": "AH",
+      "fleet": "CRJ700",
+      "day": 1,
+      "sequenceWithinRoute": 6,
+      "pairing": 819,
+      "flight": 2225,
+      "origin": "DAB",
+      "destination": "PHF",
+      "departure": "17:52",
+      "arrival": "19:40",
+      "departureMinute": 1072,
+      "arrivalMinute": 1180
+    },
+    {
+      "id": "REVIEW-R312-PHF-BDL",
+      "route": 312,
+      "line": "AH",
+      "fleet": "CRJ700",
+      "day": 1,
+      "sequenceWithinRoute": 7,
+      "pairing": 820,
+      "flight": 2226,
+      "origin": "PHF",
+      "destination": "BDL",
+      "departure": "20:20",
+      "arrival": "21:40",
+      "departureMinute": 1220,
+      "arrivalMinute": 1300
     }
   ]
 }

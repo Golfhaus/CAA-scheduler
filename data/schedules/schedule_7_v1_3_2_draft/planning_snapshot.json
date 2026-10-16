@@ -4,8 +4,8 @@
   "sourceKind": "canonical_reconstruction",
   "demandDataVersion": "bts-db1c-6mo-jul2025-apr2026-v7",
   "summary": {
-    "legCount": 1218,
-    "marketRows": 678,
+    "legCount": 1221,
+    "marketRows": 677,
     "stationCount": 105,
     "fleetTypes": 4
   },
@@ -29,18 +29,18 @@
     "CRJ700": {
       "aircraftCount": 65,
       "aircraftDaysUsed": 56,
-      "legCount": 348,
-      "blockMinutes": 35874,
-      "minimumTurnMinutes": 11680,
-      "requiredAircraftMinutes": 47554
+      "legCount": 349,
+      "blockMinutes": 35905,
+      "minimumTurnMinutes": 11720,
+      "requiredAircraftMinutes": 47625
     },
     "CRJ200": {
       "aircraftCount": 80,
       "aircraftDaysUsed": 76,
-      "legCount": 536,
-      "blockMinutes": 39892,
-      "minimumTurnMinutes": 18400,
-      "requiredAircraftMinutes": 58292
+      "legCount": 538,
+      "blockMinutes": 40074,
+      "minimumTurnMinutes": 18480,
+      "requiredAircraftMinutes": 58554
     }
   },
   "markets": [
@@ -204,7 +204,7 @@
       "fleet": "CRJ200",
       "origin": "BHM",
       "destination": "PIE",
-      "legs": 1
+      "legs": 2
     },
     {
       "fleet": "CRJ200",
@@ -1398,7 +1398,7 @@
       "fleet": "CRJ200",
       "origin": "PIE",
       "destination": "BHM",
-      "legs": 1
+      "legs": 2
     },
     {
       "fleet": "CRJ200",
@@ -2033,12 +2033,6 @@
     {
       "fleet": "CRJ700",
       "origin": "DAB",
-      "destination": "BDL",
-      "legs": 1
-    },
-    {
-      "fleet": "CRJ700",
-      "origin": "DAB",
       "destination": "JAX",
       "legs": 1
     },
@@ -2046,7 +2040,7 @@
       "fleet": "CRJ700",
       "origin": "DAB",
       "destination": "PHF",
-      "legs": 1
+      "legs": 2
     },
     {
       "fleet": "CRJ700",
@@ -2508,7 +2502,7 @@
       "fleet": "CRJ700",
       "origin": "PHF",
       "destination": "BDL",
-      "legs": 2
+      "legs": 3
     },
     {
       "fleet": "CRJ700",
@@ -4124,7 +4118,7 @@
     "AVP": 2,
     "BDL": 11,
     "BGR": 2,
-    "BHM": 48,
+    "BHM": 49,
     "BLV": 7,
     "BNA": 10,
     "BTR": 2,
@@ -4190,9 +4184,9 @@
     "OMA": 7,
     "ORH": 3,
     "PGD": 11,
-    "PHF": 123,
+    "PHF": 124,
     "PIA": 2,
-    "PIE": 19,
+    "PIE": 20,
     "PIT": 10,
     "PNS": 5,
     "PVD": 10,

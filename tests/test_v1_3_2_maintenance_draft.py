@@ -20,12 +20,12 @@ class MaintenanceRepairTests(unittest.TestCase):
   self.assertEqual([f['id']for f in grace['findings']],['AM'])
   self.assertEqual(grace['findings'][0]['evidence']['longestRunWithoutTargetRon'],11)
  def test_only_approved_flying_changes_and_no_extra_inventory(self):
-  old={l['id']:l for l in self.base['legs']};now={l['id']:l for l in self.now['legs']};self.assertEqual(len(old)+4,len(now))
-  self.assertEqual({old[i]['flight']for i in old.keys()-now.keys()},{1257,1258})
-  self.assertEqual({now[i]['flight']for i in now.keys()-old.keys()},{2217,2218,2219,2220,2221,2222})
+  old={l['id']:l for l in self.base['legs']};now={l['id']:l for l in self.now['legs']};self.assertEqual(len(old)+7,len(now))
+  self.assertEqual({old[i]['flight']for i in old.keys()-now.keys()},{1257,1258,1360})
+  self.assertEqual({now[i]['flight']for i in now.keys()-old.keys()},{2217,2218,2219,2220,2221,2222,2223,2224,2225,2226})
   for i in old.keys()&now.keys():self.assertEqual(tuple(old[i][k]for k in ['flight','fleet','pairing','origin','destination']),tuple(now[i][k]for k in ['flight','fleet','pairing','origin','destination']))
   changes={old[i]['flight']:now[i]['departureMinute']-old[i]['departureMinute']for i in old.keys()&now.keys()if now[i]['departureMinute']!=old[i]['departureMinute']}
-  self.assertEqual(changes,{1817:1,1904:43,1256:-165,1219:-165,1892:-8,1699:-10,1418:2})
+  self.assertEqual(changes,{1817:1,1904:43,1256:-165,1219:-165,1892:-8,1699:-10,1418:2,1991:-26})
   for key in ['cities','hubBanks','operatingPolicy']:self.assertEqual(self.now[key],self.base[key])
   self.assertEqual(self.now['schedule']['fleetCounts'],self.base['schedule']['fleetCounts'])
  def test_accepted_r501_has_no_long_same_day_hold(self):
@@ -54,4 +54,23 @@ class MaintenanceRepairTests(unittest.TestCase):
    if l['flight']in old:self.assertEqual((l['departure'],l['arrival']),(old[l['flight']]['departure'],old[l['flight']]['arrival']))
   self.assertEqual(max(b['departureMinute']-a['arrivalMinute']for a,b in zip(ls,ls[1:])),112)
   l=next(l for l in self.now['legs']if l['flight']==1418);self.assertEqual((l['route'],l['departure'],l['arrival']),(346,'09:17','10:05'))
+ def test_accepted_r111_pie_turn_and_existing_tail(self):
+  ls=sorted([l for l in self.now['legs']if l['route']==111],key=lambda l:l['sequenceWithinRoute'])
+  self.assertEqual(len(ls),8)
+  self.assertEqual([(l['flight'],l['origin'],l['destination'],l['departure'],l['arrival'])for l in ls[2:5]],[(1991,'OMA','BHM','10:40','12:48'),(2223,'BHM','PIE','13:28','15:59'),(2224,'PIE','BHM','16:39','17:10')])
+  self.assertEqual(max(b['departureMinute']-a['arrivalMinute']for a,b in zip(ls,ls[1:])),56)
+  old={l['flight']:l for l in self.base['legs']}
+  for l in ls[5:]:self.assertEqual((l['departure'],l['arrival']),(old[l['flight']]['departure'],old[l['flight']]['arrival']))
+ def test_accepted_r312_feeds_evening_bank_and_preserves_first_five(self):
+  ls=sorted([l for l in self.now['legs']if l['route']==312],key=lambda l:l['sequenceWithinRoute'])
+  old=sorted([l for l in self.base['legs']if l['route']==312],key=lambda l:l['sequenceWithinRoute'])
+  self.assertEqual(ls[:5],old[:5])
+  self.assertEqual([(l['flight'],l['origin'],l['destination'],l['departure'],l['arrival'])for l in ls[5:]],[(2225,'DAB','PHF','17:52','19:40'),(2226,'PHF','BDL','20:20','21:40')])
+  self.assertEqual(max(b['departureMinute']-a['arrivalMinute']for a,b in zip(ls,ls[1:])),79)
+  self.assertFalse(any(l['flight']==1360 for l in self.now['legs']))
+  assignments={(a['legId'],a['operation']):a['bankId']for a in self.now['bankAssignments']}
+  self.assertEqual(assignments[(ls[5]['id'],'arrival')],'PHF-M6')
+  self.assertEqual(assignments[(ls[6]['id'],'departure')],'PHF-B7')
+  for destination in ['BDL','BWI','MCI','PVD','BNA','DAL','HOU','ILM','AVP','ROA']:
+   self.assertTrue(any(l['origin']=='PHF'and l['destination']==destination and 30<=l['departureMinute']-ls[5]['arrivalMinute']<=240 for l in self.now['legs']),destination)
 if __name__=='__main__':unittest.main()

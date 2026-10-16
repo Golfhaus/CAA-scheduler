@@ -1,5 +1,8 @@
 # R111 and R312 hold review — proposal only
 
+**Adoption update, October 15, 2026:** The user accepted the original R111 PIE option and the refined R312 17:52 DAB–19:40 PHF / 20:20 PHF–21:40 BDL sequence. See the [combined adoption and validation](schedule_7_v1_3_2_r111_r312_adopted.md). The remainder records the historical investigation before adoption.
+
+
 Reviewed October 15, 2026 against cumulative v1.3.2 draft commit `0e9a17f48b9de56d50be89a4cc49defd4d2a3bd6`, canonical SHA256 `ecf5306874c274135e8d6b3bbfbd33bfb5ef6e7ed8b2dc2a1bd731bc435e733f`.
 
 No schedule changes have been adopted from this review. The accepted draft remains 1,218 flights / 184 routes / 17 lines. Main and the app remain v1.3.1.
@@ -74,3 +77,4 @@ All scenarios were evaluated independently against the pinned accepted draft usi
 The competitive indices allocate each underlying market among geographically reasonable choices within 30 minutes of the fastest journey at the same stop count, exclude connections where a nonstop exists, and include at most one stop. They are screening indices, not capacity-constrained passenger assignments or commercial forecasts.
 
 These are independently tested proposals; combining candidates would require a fresh cumulative validation. Publication and application to the draft have not been authorized by this inquiry.
+

@@ -1,5 +1,8 @@
 # R312: PHF evening-bank follow-up — proposal only
 
+**Adoption update, October 15, 2026:** The user accepted the original R111 PIE option and the refined R312 17:52 DAB–19:40 PHF / 20:20 PHF–21:40 BDL sequence. See the [combined adoption and validation](schedule_7_v1_3_2_r111_r312_adopted.md). The remainder records the historical investigation before adoption.
+
+
 Reviewed October 15, 2026 against accepted draft commit `0e9a17f48b9de56d50be89a4cc49defd4d2a3bd6`, canonical SHA256 `ecf5306874c274135e8d6b3bbfbd33bfb5ef6e7ed8b2dc2a1bd731bc435e733f`.
 
 This refines the [earlier review](schedule_7_v1_3_2_r111_r312_review.md). No candidate is adopted. Accepted canonical/build overlays remain unchanged.
@@ -57,3 +60,4 @@ Recommendation: use 17:52 DAB–19:40 PHF as the preferred timing if the PHF pro
 `python scripts/review_schedule_7_v1_3_2_r111_r312.py 312_bank_arrival_1170 312_bank_arrival_1180 312_bank_arrival_1190` recreates the three additional native screens against the pinned canonical. `node scripts/audit_schedule_7_v1_3_2_r111_r312.mjs` evaluates all locally passing scenarios (or accepts their names). The full script without scenario arguments reproduces the original alternatives too.
 
 [Evidence](schedule_7_v1_3_2_r312_bank_evidence.json) records native findings/overlays, before/after network comparisons, new-flight profiles and source provenance. All candidates remain independent proposals; combining with an R111 candidate requires cumulative validation.
+

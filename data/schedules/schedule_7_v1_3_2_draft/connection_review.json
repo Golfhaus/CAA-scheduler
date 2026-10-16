@@ -1,8 +1,56 @@
 {
   "accepted": {
     "raw": {
-      "lostPaths": 2,
+      "lostPaths": 23,
       "gained": [
+        {
+          "market": "PIE-OKC",
+          "origin": "PIE",
+          "destination": "OKC",
+          "demand": 21.5,
+          "beforeMinutes": 450,
+          "afterMinutes": 276
+        },
+        {
+          "market": "PIE-TUL",
+          "origin": "PIE",
+          "destination": "TUL",
+          "demand": 15.8,
+          "beforeMinutes": 518,
+          "afterMinutes": 399
+        },
+        {
+          "market": "DAB-BNA",
+          "origin": "DAB",
+          "destination": "BNA",
+          "demand": 5.4,
+          "beforeMinutes": 347,
+          "afterMinutes": 285
+        },
+        {
+          "market": "DAB-ILM",
+          "origin": "DAB",
+          "destination": "ILM",
+          "demand": 1,
+          "beforeMinutes": 447,
+          "afterMinutes": 240
+        },
+        {
+          "market": "DAB-ROA",
+          "origin": "DAB",
+          "destination": "ROA",
+          "demand": 0.9,
+          "beforeMinutes": 467,
+          "afterMinutes": 287
+        },
+        {
+          "market": "DAB-MYR",
+          "origin": "DAB",
+          "destination": "MYR",
+          "demand": 0.6,
+          "beforeMinutes": 456,
+          "afterMinutes": 249
+        },
         {
           "market": "BHM-TOL",
           "origin": "BHM",
@@ -10,10 +58,35 @@
           "demand": 0,
           "beforeMinutes": 619,
           "afterMinutes": 178
+        },
+        {
+          "market": "DAB-ACY",
+          "origin": "DAB",
+          "destination": "ACY",
+          "demand": 0,
+          "beforeMinutes": 444,
+          "afterMinutes": 237
         }
       ],
-      "lost": [],
+      "lost": [
+        {
+          "market": "OMA-PHF",
+          "origin": "OMA",
+          "destination": "PHF",
+          "demand": 7.1,
+          "beforeMinutes": 331,
+          "afterMinutes": 331
+        }
+      ],
       "faster": [
+        {
+          "market": "PIE-IND",
+          "origin": "PIE",
+          "destination": "IND",
+          "demand": 106,
+          "beforeMinutes": 343,
+          "afterMinutes": 339
+        },
         {
           "market": "SFB-PWM",
           "origin": "SFB",
@@ -39,6 +112,14 @@
           "afterMinutes": 73
         },
         {
+          "market": "GRR-PIE",
+          "origin": "GRR",
+          "destination": "PIE",
+          "demand": 38.2,
+          "beforeMinutes": 359,
+          "afterMinutes": 334
+        },
+        {
           "market": "BWI-PWM",
           "origin": "BWI",
           "destination": "PWM",
@@ -55,12 +136,28 @@
           "afterMinutes": 90
         },
         {
+          "market": "OMA-PIE",
+          "origin": "OMA",
+          "destination": "PIE",
+          "demand": 27.4,
+          "beforeMinutes": 297,
+          "afterMinutes": 259
+        },
+        {
           "market": "PIE-PWM",
           "origin": "PIE",
           "destination": "PWM",
           "demand": 26,
           "beforeMinutes": 271,
           "afterMinutes": 263
+        },
+        {
+          "market": "PIE-OKC",
+          "origin": "PIE",
+          "destination": "OKC",
+          "demand": 21.5,
+          "beforeMinutes": 450,
+          "afterMinutes": 276
         },
         {
           "market": "PGD-PWM",
@@ -87,12 +184,76 @@
           "afterMinutes": 278
         },
         {
+          "market": "PIE-TUL",
+          "origin": "PIE",
+          "destination": "TUL",
+          "demand": 15.8,
+          "beforeMinutes": 518,
+          "afterMinutes": 399
+        },
+        {
+          "market": "DAB-PVD",
+          "origin": "DAB",
+          "destination": "PVD",
+          "demand": 14.8,
+          "beforeMinutes": 333,
+          "afterMinutes": 266
+        },
+        {
           "market": "FLL-PWM",
           "origin": "FLL",
           "destination": "PWM",
           "demand": 13.6,
           "beforeMinutes": 276,
           "afterMinutes": 273
+        },
+        {
+          "market": "ATW-PIE",
+          "origin": "ATW",
+          "destination": "PIE",
+          "demand": 12.9,
+          "beforeMinutes": 379,
+          "afterMinutes": 295
+        },
+        {
+          "market": "PIE-SGF",
+          "origin": "PIE",
+          "destination": "SGF",
+          "demand": 12.3,
+          "beforeMinutes": 395,
+          "afterMinutes": 246
+        },
+        {
+          "market": "PIE-DAY",
+          "origin": "PIE",
+          "destination": "DAY",
+          "demand": 11.8,
+          "beforeMinutes": 246,
+          "afterMinutes": 226
+        },
+        {
+          "market": "DAY-PIE",
+          "origin": "DAY",
+          "destination": "PIE",
+          "demand": 11.7,
+          "beforeMinutes": 249,
+          "afterMinutes": 237
+        },
+        {
+          "market": "FWA-PIE",
+          "origin": "FWA",
+          "destination": "PIE",
+          "demand": 11.4,
+          "beforeMinutes": 404,
+          "afterMinutes": 314
+        },
+        {
+          "market": "SBN-PIE",
+          "origin": "SBN",
+          "destination": "PIE",
+          "demand": 10.8,
+          "beforeMinutes": 379,
+          "afterMinutes": 324
         },
         {
           "market": "PIT-PWM",
@@ -103,12 +264,52 @@
           "afterMinutes": 303
         },
         {
+          "market": "ERI-PIE",
+          "origin": "ERI",
+          "destination": "PIE",
+          "demand": 8.6,
+          "beforeMinutes": 394,
+          "afterMinutes": 339
+        },
+        {
+          "market": "BHM-BDL",
+          "origin": "BHM",
+          "destination": "BDL",
+          "demand": 7.2,
+          "beforeMinutes": 328,
+          "afterMinutes": 220
+        },
+        {
           "market": "PGD-TOL",
           "origin": "PGD",
           "destination": "TOL",
           "demand": 7.2,
           "beforeMinutes": 509,
           "afterMinutes": 312
+        },
+        {
+          "market": "DAB-BNA",
+          "origin": "DAB",
+          "destination": "BNA",
+          "demand": 5.4,
+          "beforeMinutes": 347,
+          "afterMinutes": 285
+        },
+        {
+          "market": "TOL-PIE",
+          "origin": "TOL",
+          "destination": "PIE",
+          "demand": 5.4,
+          "beforeMinutes": 404,
+          "afterMinutes": 321
+        },
+        {
+          "market": "PIE-TOL",
+          "origin": "PIE",
+          "destination": "TOL",
+          "demand": 5.2,
+          "beforeMinutes": 454,
+          "afterMinutes": 313
         },
         {
           "market": "CAK-PWM",
@@ -119,12 +320,44 @@
           "afterMinutes": 173
         },
         {
+          "market": "DAB-DAL",
+          "origin": "DAB",
+          "destination": "DAL",
+          "demand": 4,
+          "beforeMinutes": 401,
+          "afterMinutes": 356
+        },
+        {
+          "market": "DAB-MCI",
+          "origin": "DAB",
+          "destination": "MCI",
+          "demand": 4,
+          "beforeMinutes": 335,
+          "afterMinutes": 330
+        },
+        {
+          "market": "DAB-BWI",
+          "origin": "DAB",
+          "destination": "BWI",
+          "demand": 3.8,
+          "beforeMinutes": 229,
+          "afterMinutes": 206
+        },
+        {
           "market": "BGR-PWM",
           "origin": "BGR",
           "destination": "PWM",
           "demand": 2.7,
           "beforeMinutes": 188,
           "afterMinutes": 178
+        },
+        {
+          "market": "DAB-SAT",
+          "origin": "DAB",
+          "destination": "SAT",
+          "demand": 2.7,
+          "beforeMinutes": 549,
+          "afterMinutes": 479
         },
         {
           "market": "BUF-PWM",
@@ -143,6 +376,14 @@
           "afterMinutes": 138
         },
         {
+          "market": "DAB-HOU",
+          "origin": "DAB",
+          "destination": "HOU",
+          "demand": 1.6,
+          "beforeMinutes": 411,
+          "afterMinutes": 366
+        },
+        {
           "market": "DAB-PWM",
           "origin": "DAB",
           "destination": "PWM",
@@ -151,12 +392,44 @@
           "afterMinutes": 266
         },
         {
+          "market": "DAB-ILM",
+          "origin": "DAB",
+          "destination": "ILM",
+          "demand": 1,
+          "beforeMinutes": 447,
+          "afterMinutes": 240
+        },
+        {
+          "market": "DAB-ROA",
+          "origin": "DAB",
+          "destination": "ROA",
+          "demand": 0.9,
+          "beforeMinutes": 467,
+          "afterMinutes": 287
+        },
+        {
+          "market": "DAB-AVP",
+          "origin": "DAB",
+          "destination": "AVP",
+          "demand": 0.7,
+          "beforeMinutes": 296,
+          "afterMinutes": 251
+        },
+        {
           "market": "BTV-PWM",
           "origin": "BTV",
           "destination": "PWM",
           "demand": 0.6,
           "beforeMinutes": 163,
           "afterMinutes": 153
+        },
+        {
+          "market": "DAB-MYR",
+          "origin": "DAB",
+          "destination": "MYR",
+          "demand": 0.6,
+          "beforeMinutes": 456,
+          "afterMinutes": 249
         },
         {
           "market": "MHT-PWM",
@@ -205,6 +478,22 @@
           "demand": 0,
           "beforeMinutes": 549,
           "afterMinutes": 327
+        },
+        {
+          "market": "DAB-ACY",
+          "origin": "DAB",
+          "destination": "ACY",
+          "demand": 0,
+          "beforeMinutes": 444,
+          "afterMinutes": 237
+        },
+        {
+          "market": "DAB-TTN",
+          "origin": "DAB",
+          "destination": "TTN",
+          "demand": 0,
+          "beforeMinutes": 288,
+          "afterMinutes": 243
         },
         {
           "market": "FLL-TOL",
@@ -289,12 +578,44 @@
           "afterMinutes": 277
         },
         {
+          "market": "OMA-SRQ",
+          "origin": "OMA",
+          "destination": "SRQ",
+          "demand": 20.1,
+          "beforeMinutes": 367,
+          "afterMinutes": 393
+        },
+        {
+          "market": "DAB-BDL",
+          "origin": "DAB",
+          "destination": "BDL",
+          "demand": 18.7,
+          "beforeMinutes": 157,
+          "afterMinutes": 228
+        },
+        {
           "market": "ISP-SRQ",
           "origin": "ISP",
           "destination": "SRQ",
           "demand": 13.5,
           "beforeMinutes": 276,
           "afterMinutes": 284
+        },
+        {
+          "market": "OMA-JAX",
+          "origin": "OMA",
+          "destination": "JAX",
+          "demand": 12.6,
+          "beforeMinutes": 265,
+          "afterMinutes": 291
+        },
+        {
+          "market": "OMA-BWI",
+          "origin": "OMA",
+          "destination": "BWI",
+          "demand": 12.3,
+          "beforeMinutes": 426,
+          "afterMinutes": 452
         },
         {
           "market": "SAT-MDT",
@@ -305,12 +626,28 @@
           "afterMinutes": 647
         },
         {
-          "market": "PIE-TOL",
-          "origin": "PIE",
-          "destination": "TOL",
-          "demand": 5.2,
-          "beforeMinutes": 454,
-          "afterMinutes": 497
+          "market": "OMA-ECP",
+          "origin": "OMA",
+          "destination": "ECP",
+          "demand": 7.6,
+          "beforeMinutes": 500,
+          "afterMinutes": 526
+        },
+        {
+          "market": "OMA-BDL",
+          "origin": "OMA",
+          "destination": "BDL",
+          "demand": 7.4,
+          "beforeMinutes": 517,
+          "afterMinutes": 543
+        },
+        {
+          "market": "OMA-TYS",
+          "origin": "OMA",
+          "destination": "TYS",
+          "demand": 5.9,
+          "beforeMinutes": 519,
+          "afterMinutes": 545
         },
         {
           "market": "ISP-JAX",
@@ -327,6 +664,14 @@
           "demand": 4.2,
           "beforeMinutes": 576,
           "afterMinutes": 577
+        },
+        {
+          "market": "OMA-GSO",
+          "origin": "OMA",
+          "destination": "GSO",
+          "demand": 3.6,
+          "beforeMinutes": 520,
+          "afterMinutes": 546
         },
         {
           "market": "SFB-TOL",
@@ -361,6 +706,22 @@
           "afterMinutes": 607
         },
         {
+          "market": "OMA-LEX",
+          "origin": "OMA",
+          "destination": "LEX",
+          "demand": 2.6,
+          "beforeMinutes": 474,
+          "afterMinutes": 500
+        },
+        {
+          "market": "OMA-BTR",
+          "origin": "OMA",
+          "destination": "BTR",
+          "demand": 2.5,
+          "beforeMinutes": 544,
+          "afterMinutes": 570
+        },
+        {
           "market": "ICT-MDT",
           "origin": "ICT",
           "destination": "MDT",
@@ -385,12 +746,52 @@
           "afterMinutes": 609
         },
         {
+          "market": "OMA-MOB",
+          "origin": "OMA",
+          "destination": "MOB",
+          "demand": 2.1,
+          "beforeMinutes": 520,
+          "afterMinutes": 546
+        },
+        {
+          "market": "OMA-GPT",
+          "origin": "OMA",
+          "destination": "GPT",
+          "demand": 2,
+          "beforeMinutes": 527,
+          "afterMinutes": 553
+        },
+        {
           "market": "ISP-MCI",
           "origin": "ISP",
           "destination": "MCI",
           "demand": 1.8,
           "beforeMinutes": 262,
           "afterMinutes": 270
+        },
+        {
+          "market": "OMA-ROA",
+          "origin": "OMA",
+          "destination": "ROA",
+          "demand": 1.8,
+          "beforeMinutes": 403,
+          "afterMinutes": 429
+        },
+        {
+          "market": "OMA-AGS",
+          "origin": "OMA",
+          "destination": "AGS",
+          "demand": 1.7,
+          "beforeMinutes": 494,
+          "afterMinutes": 520
+        },
+        {
+          "market": "OMA-TLH",
+          "origin": "OMA",
+          "destination": "TLH",
+          "demand": 1.7,
+          "beforeMinutes": 489,
+          "afterMinutes": 515
         },
         {
           "market": "PWM-MDT",
@@ -417,6 +818,14 @@
           "afterMinutes": 472
         },
         {
+          "market": "OMA-GNV",
+          "origin": "OMA",
+          "destination": "GNV",
+          "demand": 1.6,
+          "beforeMinutes": 476,
+          "afterMinutes": 502
+        },
+        {
           "market": "CAK-MDT",
           "origin": "CAK",
           "destination": "MDT",
@@ -438,6 +847,14 @@
           "destination": "BLV",
           "demand": 1.3,
           "beforeMinutes": 444,
+          "afterMinutes": 452
+        },
+        {
+          "market": "OMA-MLB",
+          "origin": "OMA",
+          "destination": "MLB",
+          "demand": 1.2,
+          "beforeMinutes": 426,
           "afterMinutes": 452
         },
         {
@@ -945,6 +1362,14 @@
           "afterMinutes": 512
         },
         {
+          "market": "OMA-MCN",
+          "origin": "OMA",
+          "destination": "MCN",
+          "demand": 0,
+          "beforeMinutes": 493,
+          "afterMinutes": 519
+        },
+        {
           "market": "PHF-TOL",
           "origin": "PHF",
           "destination": "TOL",
@@ -1035,8 +1460,48 @@
       ]
     },
     "geo": {
-      "lostPaths": 2,
+      "lostPaths": 18,
       "gained": [
+        {
+          "market": "PIE-OKC",
+          "origin": "PIE",
+          "destination": "OKC",
+          "demand": 21.5,
+          "beforeMinutes": 450,
+          "afterMinutes": 276
+        },
+        {
+          "market": "PIE-TUL",
+          "origin": "PIE",
+          "destination": "TUL",
+          "demand": 15.8,
+          "beforeMinutes": 518,
+          "afterMinutes": 399
+        },
+        {
+          "market": "DAB-BNA",
+          "origin": "DAB",
+          "destination": "BNA",
+          "demand": 5.4,
+          "beforeMinutes": 347,
+          "afterMinutes": 285
+        },
+        {
+          "market": "DAB-ILM",
+          "origin": "DAB",
+          "destination": "ILM",
+          "demand": 1,
+          "beforeMinutes": null,
+          "afterMinutes": 240
+        },
+        {
+          "market": "DAB-ROA",
+          "origin": "DAB",
+          "destination": "ROA",
+          "demand": 0.9,
+          "beforeMinutes": 494,
+          "afterMinutes": 287
+        },
         {
           "market": "BHM-TOL",
           "origin": "BHM",
@@ -1044,10 +1509,35 @@
           "demand": 0,
           "beforeMinutes": 619,
           "afterMinutes": 178
+        },
+        {
+          "market": "DAB-ACY",
+          "origin": "DAB",
+          "destination": "ACY",
+          "demand": 0,
+          "beforeMinutes": 444,
+          "afterMinutes": 237
         }
       ],
-      "lost": [],
+      "lost": [
+        {
+          "market": "OMA-PHF",
+          "origin": "OMA",
+          "destination": "PHF",
+          "demand": 7.1,
+          "beforeMinutes": 331,
+          "afterMinutes": 331
+        }
+      ],
       "faster": [
+        {
+          "market": "PIE-IND",
+          "origin": "PIE",
+          "destination": "IND",
+          "demand": 106,
+          "beforeMinutes": 343,
+          "afterMinutes": 339
+        },
         {
           "market": "SFB-PWM",
           "origin": "SFB",
@@ -1073,6 +1563,14 @@
           "afterMinutes": 73
         },
         {
+          "market": "GRR-PIE",
+          "origin": "GRR",
+          "destination": "PIE",
+          "demand": 38.2,
+          "beforeMinutes": 359,
+          "afterMinutes": 334
+        },
+        {
           "market": "BWI-PWM",
           "origin": "BWI",
           "destination": "PWM",
@@ -1089,12 +1587,28 @@
           "afterMinutes": 90
         },
         {
+          "market": "OMA-PIE",
+          "origin": "OMA",
+          "destination": "PIE",
+          "demand": 27.4,
+          "beforeMinutes": 297,
+          "afterMinutes": 259
+        },
+        {
           "market": "PIE-PWM",
           "origin": "PIE",
           "destination": "PWM",
           "demand": 26,
           "beforeMinutes": 271,
           "afterMinutes": 263
+        },
+        {
+          "market": "PIE-OKC",
+          "origin": "PIE",
+          "destination": "OKC",
+          "demand": 21.5,
+          "beforeMinutes": 450,
+          "afterMinutes": 276
         },
         {
           "market": "PGD-PWM",
@@ -1121,12 +1635,76 @@
           "afterMinutes": 278
         },
         {
+          "market": "PIE-TUL",
+          "origin": "PIE",
+          "destination": "TUL",
+          "demand": 15.8,
+          "beforeMinutes": 518,
+          "afterMinutes": 399
+        },
+        {
+          "market": "DAB-PVD",
+          "origin": "DAB",
+          "destination": "PVD",
+          "demand": 14.8,
+          "beforeMinutes": 333,
+          "afterMinutes": 266
+        },
+        {
           "market": "FLL-PWM",
           "origin": "FLL",
           "destination": "PWM",
           "demand": 13.6,
           "beforeMinutes": 276,
           "afterMinutes": 273
+        },
+        {
+          "market": "ATW-PIE",
+          "origin": "ATW",
+          "destination": "PIE",
+          "demand": 12.9,
+          "beforeMinutes": 379,
+          "afterMinutes": 295
+        },
+        {
+          "market": "PIE-SGF",
+          "origin": "PIE",
+          "destination": "SGF",
+          "demand": 12.3,
+          "beforeMinutes": 395,
+          "afterMinutes": 246
+        },
+        {
+          "market": "PIE-DAY",
+          "origin": "PIE",
+          "destination": "DAY",
+          "demand": 11.8,
+          "beforeMinutes": 246,
+          "afterMinutes": 226
+        },
+        {
+          "market": "DAY-PIE",
+          "origin": "DAY",
+          "destination": "PIE",
+          "demand": 11.7,
+          "beforeMinutes": 249,
+          "afterMinutes": 237
+        },
+        {
+          "market": "FWA-PIE",
+          "origin": "FWA",
+          "destination": "PIE",
+          "demand": 11.4,
+          "beforeMinutes": 404,
+          "afterMinutes": 314
+        },
+        {
+          "market": "SBN-PIE",
+          "origin": "SBN",
+          "destination": "PIE",
+          "demand": 10.8,
+          "beforeMinutes": 379,
+          "afterMinutes": 324
         },
         {
           "market": "PIT-PWM",
@@ -1137,6 +1715,22 @@
           "afterMinutes": 303
         },
         {
+          "market": "ERI-PIE",
+          "origin": "ERI",
+          "destination": "PIE",
+          "demand": 8.6,
+          "beforeMinutes": 394,
+          "afterMinutes": 339
+        },
+        {
+          "market": "BHM-BDL",
+          "origin": "BHM",
+          "destination": "BDL",
+          "demand": 7.2,
+          "beforeMinutes": 328,
+          "afterMinutes": 220
+        },
+        {
           "market": "PGD-TOL",
           "origin": "PGD",
           "destination": "TOL",
@@ -1145,12 +1739,68 @@
           "afterMinutes": 312
         },
         {
+          "market": "DAB-BNA",
+          "origin": "DAB",
+          "destination": "BNA",
+          "demand": 5.4,
+          "beforeMinutes": 347,
+          "afterMinutes": 285
+        },
+        {
+          "market": "TOL-PIE",
+          "origin": "TOL",
+          "destination": "PIE",
+          "demand": 5.4,
+          "beforeMinutes": 404,
+          "afterMinutes": 321
+        },
+        {
+          "market": "PIE-TOL",
+          "origin": "PIE",
+          "destination": "TOL",
+          "demand": 5.2,
+          "beforeMinutes": 454,
+          "afterMinutes": 313
+        },
+        {
           "market": "CAK-PWM",
           "origin": "CAK",
           "destination": "PWM",
           "demand": 4,
           "beforeMinutes": 183,
           "afterMinutes": 173
+        },
+        {
+          "market": "DAB-DAL",
+          "origin": "DAB",
+          "destination": "DAL",
+          "demand": 4,
+          "beforeMinutes": 401,
+          "afterMinutes": 356
+        },
+        {
+          "market": "DAB-MCI",
+          "origin": "DAB",
+          "destination": "MCI",
+          "demand": 4,
+          "beforeMinutes": 335,
+          "afterMinutes": 330
+        },
+        {
+          "market": "DAB-BWI",
+          "origin": "DAB",
+          "destination": "BWI",
+          "demand": 3.8,
+          "beforeMinutes": 229,
+          "afterMinutes": 206
+        },
+        {
+          "market": "DAB-SAT",
+          "origin": "DAB",
+          "destination": "SAT",
+          "demand": 2.7,
+          "beforeMinutes": 549,
+          "afterMinutes": 479
         },
         {
           "market": "BUF-PWM",
@@ -1169,12 +1819,36 @@
           "afterMinutes": 138
         },
         {
+          "market": "DAB-HOU",
+          "origin": "DAB",
+          "destination": "HOU",
+          "demand": 1.6,
+          "beforeMinutes": 411,
+          "afterMinutes": 366
+        },
+        {
           "market": "DAB-PWM",
           "origin": "DAB",
           "destination": "PWM",
           "demand": 1.4,
           "beforeMinutes": 276,
           "afterMinutes": 266
+        },
+        {
+          "market": "DAB-ROA",
+          "origin": "DAB",
+          "destination": "ROA",
+          "demand": 0.9,
+          "beforeMinutes": 494,
+          "afterMinutes": 287
+        },
+        {
+          "market": "DAB-AVP",
+          "origin": "DAB",
+          "destination": "AVP",
+          "demand": 0.7,
+          "beforeMinutes": 296,
+          "afterMinutes": 251
         },
         {
           "market": "ABE-PWM",
@@ -1207,6 +1881,22 @@
           "demand": 0,
           "beforeMinutes": 414,
           "afterMinutes": 307
+        },
+        {
+          "market": "DAB-ACY",
+          "origin": "DAB",
+          "destination": "ACY",
+          "demand": 0,
+          "beforeMinutes": 444,
+          "afterMinutes": 237
+        },
+        {
+          "market": "DAB-TTN",
+          "origin": "DAB",
+          "destination": "TTN",
+          "demand": 0,
+          "beforeMinutes": 288,
+          "afterMinutes": 243
         },
         {
           "market": "FLL-TOL",
@@ -1291,6 +1981,22 @@
           "afterMinutes": 277
         },
         {
+          "market": "OMA-SRQ",
+          "origin": "OMA",
+          "destination": "SRQ",
+          "demand": 20.1,
+          "beforeMinutes": 367,
+          "afterMinutes": 393
+        },
+        {
+          "market": "DAB-BDL",
+          "origin": "DAB",
+          "destination": "BDL",
+          "demand": 18.7,
+          "beforeMinutes": 157,
+          "afterMinutes": 228
+        },
+        {
           "market": "ISP-SRQ",
           "origin": "ISP",
           "destination": "SRQ",
@@ -1307,6 +2013,22 @@
           "afterMinutes": 290
         },
         {
+          "market": "OMA-JAX",
+          "origin": "OMA",
+          "destination": "JAX",
+          "demand": 12.6,
+          "beforeMinutes": 265,
+          "afterMinutes": 291
+        },
+        {
+          "market": "OMA-BWI",
+          "origin": "OMA",
+          "destination": "BWI",
+          "demand": 12.3,
+          "beforeMinutes": 426,
+          "afterMinutes": 452
+        },
+        {
           "market": "SAT-MDT",
           "origin": "SAT",
           "destination": "MDT",
@@ -1315,12 +2037,28 @@
           "afterMinutes": 647
         },
         {
-          "market": "PIE-TOL",
-          "origin": "PIE",
-          "destination": "TOL",
-          "demand": 5.2,
-          "beforeMinutes": 454,
-          "afterMinutes": 497
+          "market": "OMA-ECP",
+          "origin": "OMA",
+          "destination": "ECP",
+          "demand": 7.6,
+          "beforeMinutes": 500,
+          "afterMinutes": 526
+        },
+        {
+          "market": "OMA-BDL",
+          "origin": "OMA",
+          "destination": "BDL",
+          "demand": 7.4,
+          "beforeMinutes": 517,
+          "afterMinutes": 543
+        },
+        {
+          "market": "OMA-TYS",
+          "origin": "OMA",
+          "destination": "TYS",
+          "demand": 5.9,
+          "beforeMinutes": 519,
+          "afterMinutes": 545
         },
         {
           "market": "ISP-JAX",
@@ -1337,6 +2075,14 @@
           "demand": 4.2,
           "beforeMinutes": 576,
           "afterMinutes": 577
+        },
+        {
+          "market": "OMA-GSO",
+          "origin": "OMA",
+          "destination": "GSO",
+          "demand": 3.6,
+          "beforeMinutes": 520,
+          "afterMinutes": 546
         },
         {
           "market": "SFB-TOL",
@@ -1371,6 +2117,14 @@
           "afterMinutes": 607
         },
         {
+          "market": "OMA-BTR",
+          "origin": "OMA",
+          "destination": "BTR",
+          "demand": 2.5,
+          "beforeMinutes": 544,
+          "afterMinutes": 570
+        },
+        {
           "market": "ICT-MDT",
           "origin": "ICT",
           "destination": "MDT",
@@ -1395,12 +2149,52 @@
           "afterMinutes": 609
         },
         {
+          "market": "OMA-MOB",
+          "origin": "OMA",
+          "destination": "MOB",
+          "demand": 2.1,
+          "beforeMinutes": 520,
+          "afterMinutes": 546
+        },
+        {
+          "market": "OMA-GPT",
+          "origin": "OMA",
+          "destination": "GPT",
+          "demand": 2,
+          "beforeMinutes": 527,
+          "afterMinutes": 553
+        },
+        {
           "market": "ISP-MCI",
           "origin": "ISP",
           "destination": "MCI",
           "demand": 1.8,
           "beforeMinutes": 262,
           "afterMinutes": 270
+        },
+        {
+          "market": "OMA-ROA",
+          "origin": "OMA",
+          "destination": "ROA",
+          "demand": 1.8,
+          "beforeMinutes": 403,
+          "afterMinutes": 429
+        },
+        {
+          "market": "OMA-AGS",
+          "origin": "OMA",
+          "destination": "AGS",
+          "demand": 1.7,
+          "beforeMinutes": 494,
+          "afterMinutes": 520
+        },
+        {
+          "market": "OMA-TLH",
+          "origin": "OMA",
+          "destination": "TLH",
+          "demand": 1.7,
+          "beforeMinutes": 489,
+          "afterMinutes": 515
         },
         {
           "market": "PWM-MDT",
@@ -1427,6 +2221,14 @@
           "afterMinutes": 472
         },
         {
+          "market": "OMA-GNV",
+          "origin": "OMA",
+          "destination": "GNV",
+          "demand": 1.6,
+          "beforeMinutes": 476,
+          "afterMinutes": 502
+        },
+        {
           "market": "CAK-MDT",
           "origin": "CAK",
           "destination": "MDT",
@@ -1448,6 +2250,14 @@
           "destination": "BLV",
           "demand": 1.3,
           "beforeMinutes": 444,
+          "afterMinutes": 452
+        },
+        {
+          "market": "OMA-MLB",
+          "origin": "OMA",
+          "destination": "MLB",
+          "demand": 1.2,
+          "beforeMinutes": 426,
           "afterMinutes": 452
         },
         {
@@ -1851,6 +2661,14 @@
           "afterMinutes": 512
         },
         {
+          "market": "OMA-MCN",
+          "origin": "OMA",
+          "destination": "MCN",
+          "demand": 0,
+          "beforeMinutes": 493,
+          "afterMinutes": 519
+        },
+        {
           "market": "PHF-TOL",
           "origin": "PHF",
           "destination": "TOL",
@@ -1917,7 +2735,7 @@
       ]
     },
     "priorityCoverageLosses": [],
-    "newChoices": 35,
+    "newChoices": 240,
     "r175Impact": {
       "raw": {
         "lostPaths": 0,
@@ -2702,9 +3520,865 @@
         ]
       }
     },
+    "r111R312Impact": {
+      "raw": {
+        "lostPaths": 21,
+        "gained": [
+          {
+            "market": "PIE-OKC",
+            "origin": "PIE",
+            "destination": "OKC",
+            "demand": 21.5,
+            "beforeMinutes": 450,
+            "afterMinutes": 276
+          },
+          {
+            "market": "PIE-TUL",
+            "origin": "PIE",
+            "destination": "TUL",
+            "demand": 15.8,
+            "beforeMinutes": 518,
+            "afterMinutes": 399
+          },
+          {
+            "market": "DAB-BNA",
+            "origin": "DAB",
+            "destination": "BNA",
+            "demand": 5.4,
+            "beforeMinutes": 347,
+            "afterMinutes": 285
+          },
+          {
+            "market": "DAB-ILM",
+            "origin": "DAB",
+            "destination": "ILM",
+            "demand": 1,
+            "beforeMinutes": 447,
+            "afterMinutes": 240
+          },
+          {
+            "market": "DAB-ROA",
+            "origin": "DAB",
+            "destination": "ROA",
+            "demand": 0.9,
+            "beforeMinutes": 467,
+            "afterMinutes": 287
+          },
+          {
+            "market": "DAB-MYR",
+            "origin": "DAB",
+            "destination": "MYR",
+            "demand": 0.6,
+            "beforeMinutes": 456,
+            "afterMinutes": 249
+          },
+          {
+            "market": "DAB-ACY",
+            "origin": "DAB",
+            "destination": "ACY",
+            "demand": 0,
+            "beforeMinutes": 444,
+            "afterMinutes": 237
+          }
+        ],
+        "lost": [
+          {
+            "market": "OMA-PHF",
+            "origin": "OMA",
+            "destination": "PHF",
+            "demand": 7.1,
+            "beforeMinutes": 331,
+            "afterMinutes": 331
+          }
+        ],
+        "faster": [
+          {
+            "market": "PIE-IND",
+            "origin": "PIE",
+            "destination": "IND",
+            "demand": 106,
+            "beforeMinutes": 343,
+            "afterMinutes": 339
+          },
+          {
+            "market": "GRR-PIE",
+            "origin": "GRR",
+            "destination": "PIE",
+            "demand": 38.2,
+            "beforeMinutes": 359,
+            "afterMinutes": 334
+          },
+          {
+            "market": "OMA-PIE",
+            "origin": "OMA",
+            "destination": "PIE",
+            "demand": 27.4,
+            "beforeMinutes": 297,
+            "afterMinutes": 259
+          },
+          {
+            "market": "PIE-OKC",
+            "origin": "PIE",
+            "destination": "OKC",
+            "demand": 21.5,
+            "beforeMinutes": 450,
+            "afterMinutes": 276
+          },
+          {
+            "market": "PIE-TUL",
+            "origin": "PIE",
+            "destination": "TUL",
+            "demand": 15.8,
+            "beforeMinutes": 518,
+            "afterMinutes": 399
+          },
+          {
+            "market": "DAB-PVD",
+            "origin": "DAB",
+            "destination": "PVD",
+            "demand": 14.8,
+            "beforeMinutes": 333,
+            "afterMinutes": 266
+          },
+          {
+            "market": "ATW-PIE",
+            "origin": "ATW",
+            "destination": "PIE",
+            "demand": 12.9,
+            "beforeMinutes": 379,
+            "afterMinutes": 295
+          },
+          {
+            "market": "PIE-SGF",
+            "origin": "PIE",
+            "destination": "SGF",
+            "demand": 12.3,
+            "beforeMinutes": 395,
+            "afterMinutes": 246
+          },
+          {
+            "market": "PIE-DAY",
+            "origin": "PIE",
+            "destination": "DAY",
+            "demand": 11.8,
+            "beforeMinutes": 246,
+            "afterMinutes": 226
+          },
+          {
+            "market": "DAY-PIE",
+            "origin": "DAY",
+            "destination": "PIE",
+            "demand": 11.7,
+            "beforeMinutes": 249,
+            "afterMinutes": 237
+          },
+          {
+            "market": "FWA-PIE",
+            "origin": "FWA",
+            "destination": "PIE",
+            "demand": 11.4,
+            "beforeMinutes": 404,
+            "afterMinutes": 314
+          },
+          {
+            "market": "SBN-PIE",
+            "origin": "SBN",
+            "destination": "PIE",
+            "demand": 10.8,
+            "beforeMinutes": 379,
+            "afterMinutes": 324
+          },
+          {
+            "market": "ERI-PIE",
+            "origin": "ERI",
+            "destination": "PIE",
+            "demand": 8.6,
+            "beforeMinutes": 394,
+            "afterMinutes": 339
+          },
+          {
+            "market": "BHM-BDL",
+            "origin": "BHM",
+            "destination": "BDL",
+            "demand": 7.2,
+            "beforeMinutes": 328,
+            "afterMinutes": 220
+          },
+          {
+            "market": "DAB-BNA",
+            "origin": "DAB",
+            "destination": "BNA",
+            "demand": 5.4,
+            "beforeMinutes": 347,
+            "afterMinutes": 285
+          },
+          {
+            "market": "TOL-PIE",
+            "origin": "TOL",
+            "destination": "PIE",
+            "demand": 5.4,
+            "beforeMinutes": 404,
+            "afterMinutes": 321
+          },
+          {
+            "market": "PIE-TOL",
+            "origin": "PIE",
+            "destination": "TOL",
+            "demand": 5.2,
+            "beforeMinutes": 497,
+            "afterMinutes": 313
+          },
+          {
+            "market": "DAB-DAL",
+            "origin": "DAB",
+            "destination": "DAL",
+            "demand": 4,
+            "beforeMinutes": 401,
+            "afterMinutes": 356
+          },
+          {
+            "market": "DAB-MCI",
+            "origin": "DAB",
+            "destination": "MCI",
+            "demand": 4,
+            "beforeMinutes": 335,
+            "afterMinutes": 330
+          },
+          {
+            "market": "DAB-BWI",
+            "origin": "DAB",
+            "destination": "BWI",
+            "demand": 3.8,
+            "beforeMinutes": 229,
+            "afterMinutes": 206
+          },
+          {
+            "market": "DAB-SAT",
+            "origin": "DAB",
+            "destination": "SAT",
+            "demand": 2.7,
+            "beforeMinutes": 549,
+            "afterMinutes": 479
+          },
+          {
+            "market": "DAB-HOU",
+            "origin": "DAB",
+            "destination": "HOU",
+            "demand": 1.6,
+            "beforeMinutes": 411,
+            "afterMinutes": 366
+          },
+          {
+            "market": "DAB-ILM",
+            "origin": "DAB",
+            "destination": "ILM",
+            "demand": 1,
+            "beforeMinutes": 447,
+            "afterMinutes": 240
+          },
+          {
+            "market": "DAB-ROA",
+            "origin": "DAB",
+            "destination": "ROA",
+            "demand": 0.9,
+            "beforeMinutes": 467,
+            "afterMinutes": 287
+          },
+          {
+            "market": "DAB-AVP",
+            "origin": "DAB",
+            "destination": "AVP",
+            "demand": 0.7,
+            "beforeMinutes": 296,
+            "afterMinutes": 251
+          },
+          {
+            "market": "DAB-MYR",
+            "origin": "DAB",
+            "destination": "MYR",
+            "demand": 0.6,
+            "beforeMinutes": 456,
+            "afterMinutes": 249
+          },
+          {
+            "market": "DAB-ACY",
+            "origin": "DAB",
+            "destination": "ACY",
+            "demand": 0,
+            "beforeMinutes": 444,
+            "afterMinutes": 237
+          },
+          {
+            "market": "DAB-TTN",
+            "origin": "DAB",
+            "destination": "TTN",
+            "demand": 0,
+            "beforeMinutes": 288,
+            "afterMinutes": 243
+          }
+        ],
+        "slower": [
+          {
+            "market": "OMA-SRQ",
+            "origin": "OMA",
+            "destination": "SRQ",
+            "demand": 20.1,
+            "beforeMinutes": 367,
+            "afterMinutes": 393
+          },
+          {
+            "market": "DAB-BDL",
+            "origin": "DAB",
+            "destination": "BDL",
+            "demand": 18.7,
+            "beforeMinutes": 157,
+            "afterMinutes": 228
+          },
+          {
+            "market": "OMA-JAX",
+            "origin": "OMA",
+            "destination": "JAX",
+            "demand": 12.6,
+            "beforeMinutes": 265,
+            "afterMinutes": 291
+          },
+          {
+            "market": "OMA-BWI",
+            "origin": "OMA",
+            "destination": "BWI",
+            "demand": 12.3,
+            "beforeMinutes": 426,
+            "afterMinutes": 452
+          },
+          {
+            "market": "OMA-ECP",
+            "origin": "OMA",
+            "destination": "ECP",
+            "demand": 7.6,
+            "beforeMinutes": 500,
+            "afterMinutes": 526
+          },
+          {
+            "market": "OMA-BDL",
+            "origin": "OMA",
+            "destination": "BDL",
+            "demand": 7.4,
+            "beforeMinutes": 517,
+            "afterMinutes": 543
+          },
+          {
+            "market": "OMA-TYS",
+            "origin": "OMA",
+            "destination": "TYS",
+            "demand": 5.9,
+            "beforeMinutes": 519,
+            "afterMinutes": 545
+          },
+          {
+            "market": "OMA-GSO",
+            "origin": "OMA",
+            "destination": "GSO",
+            "demand": 3.6,
+            "beforeMinutes": 520,
+            "afterMinutes": 546
+          },
+          {
+            "market": "OMA-LEX",
+            "origin": "OMA",
+            "destination": "LEX",
+            "demand": 2.6,
+            "beforeMinutes": 474,
+            "afterMinutes": 500
+          },
+          {
+            "market": "OMA-BTR",
+            "origin": "OMA",
+            "destination": "BTR",
+            "demand": 2.5,
+            "beforeMinutes": 544,
+            "afterMinutes": 570
+          },
+          {
+            "market": "OMA-MOB",
+            "origin": "OMA",
+            "destination": "MOB",
+            "demand": 2.1,
+            "beforeMinutes": 520,
+            "afterMinutes": 546
+          },
+          {
+            "market": "OMA-GPT",
+            "origin": "OMA",
+            "destination": "GPT",
+            "demand": 2,
+            "beforeMinutes": 527,
+            "afterMinutes": 553
+          },
+          {
+            "market": "OMA-ROA",
+            "origin": "OMA",
+            "destination": "ROA",
+            "demand": 1.8,
+            "beforeMinutes": 403,
+            "afterMinutes": 429
+          },
+          {
+            "market": "OMA-AGS",
+            "origin": "OMA",
+            "destination": "AGS",
+            "demand": 1.7,
+            "beforeMinutes": 494,
+            "afterMinutes": 520
+          },
+          {
+            "market": "OMA-TLH",
+            "origin": "OMA",
+            "destination": "TLH",
+            "demand": 1.7,
+            "beforeMinutes": 489,
+            "afterMinutes": 515
+          },
+          {
+            "market": "OMA-GNV",
+            "origin": "OMA",
+            "destination": "GNV",
+            "demand": 1.6,
+            "beforeMinutes": 476,
+            "afterMinutes": 502
+          },
+          {
+            "market": "OMA-MLB",
+            "origin": "OMA",
+            "destination": "MLB",
+            "demand": 1.2,
+            "beforeMinutes": 426,
+            "afterMinutes": 452
+          },
+          {
+            "market": "OMA-MCN",
+            "origin": "OMA",
+            "destination": "MCN",
+            "demand": 0,
+            "beforeMinutes": 493,
+            "afterMinutes": 519
+          }
+        ]
+      },
+      "geo": {
+        "lostPaths": 16,
+        "gained": [
+          {
+            "market": "PIE-OKC",
+            "origin": "PIE",
+            "destination": "OKC",
+            "demand": 21.5,
+            "beforeMinutes": 450,
+            "afterMinutes": 276
+          },
+          {
+            "market": "PIE-TUL",
+            "origin": "PIE",
+            "destination": "TUL",
+            "demand": 15.8,
+            "beforeMinutes": 518,
+            "afterMinutes": 399
+          },
+          {
+            "market": "DAB-BNA",
+            "origin": "DAB",
+            "destination": "BNA",
+            "demand": 5.4,
+            "beforeMinutes": 347,
+            "afterMinutes": 285
+          },
+          {
+            "market": "DAB-ILM",
+            "origin": "DAB",
+            "destination": "ILM",
+            "demand": 1,
+            "beforeMinutes": null,
+            "afterMinutes": 240
+          },
+          {
+            "market": "DAB-ROA",
+            "origin": "DAB",
+            "destination": "ROA",
+            "demand": 0.9,
+            "beforeMinutes": 494,
+            "afterMinutes": 287
+          },
+          {
+            "market": "DAB-ACY",
+            "origin": "DAB",
+            "destination": "ACY",
+            "demand": 0,
+            "beforeMinutes": 444,
+            "afterMinutes": 237
+          }
+        ],
+        "lost": [
+          {
+            "market": "OMA-PHF",
+            "origin": "OMA",
+            "destination": "PHF",
+            "demand": 7.1,
+            "beforeMinutes": 331,
+            "afterMinutes": 331
+          }
+        ],
+        "faster": [
+          {
+            "market": "PIE-IND",
+            "origin": "PIE",
+            "destination": "IND",
+            "demand": 106,
+            "beforeMinutes": 343,
+            "afterMinutes": 339
+          },
+          {
+            "market": "GRR-PIE",
+            "origin": "GRR",
+            "destination": "PIE",
+            "demand": 38.2,
+            "beforeMinutes": 359,
+            "afterMinutes": 334
+          },
+          {
+            "market": "OMA-PIE",
+            "origin": "OMA",
+            "destination": "PIE",
+            "demand": 27.4,
+            "beforeMinutes": 297,
+            "afterMinutes": 259
+          },
+          {
+            "market": "PIE-OKC",
+            "origin": "PIE",
+            "destination": "OKC",
+            "demand": 21.5,
+            "beforeMinutes": 450,
+            "afterMinutes": 276
+          },
+          {
+            "market": "PIE-TUL",
+            "origin": "PIE",
+            "destination": "TUL",
+            "demand": 15.8,
+            "beforeMinutes": 518,
+            "afterMinutes": 399
+          },
+          {
+            "market": "DAB-PVD",
+            "origin": "DAB",
+            "destination": "PVD",
+            "demand": 14.8,
+            "beforeMinutes": 333,
+            "afterMinutes": 266
+          },
+          {
+            "market": "ATW-PIE",
+            "origin": "ATW",
+            "destination": "PIE",
+            "demand": 12.9,
+            "beforeMinutes": 379,
+            "afterMinutes": 295
+          },
+          {
+            "market": "PIE-SGF",
+            "origin": "PIE",
+            "destination": "SGF",
+            "demand": 12.3,
+            "beforeMinutes": 395,
+            "afterMinutes": 246
+          },
+          {
+            "market": "PIE-DAY",
+            "origin": "PIE",
+            "destination": "DAY",
+            "demand": 11.8,
+            "beforeMinutes": 246,
+            "afterMinutes": 226
+          },
+          {
+            "market": "DAY-PIE",
+            "origin": "DAY",
+            "destination": "PIE",
+            "demand": 11.7,
+            "beforeMinutes": 249,
+            "afterMinutes": 237
+          },
+          {
+            "market": "FWA-PIE",
+            "origin": "FWA",
+            "destination": "PIE",
+            "demand": 11.4,
+            "beforeMinutes": 404,
+            "afterMinutes": 314
+          },
+          {
+            "market": "SBN-PIE",
+            "origin": "SBN",
+            "destination": "PIE",
+            "demand": 10.8,
+            "beforeMinutes": 379,
+            "afterMinutes": 324
+          },
+          {
+            "market": "ERI-PIE",
+            "origin": "ERI",
+            "destination": "PIE",
+            "demand": 8.6,
+            "beforeMinutes": 394,
+            "afterMinutes": 339
+          },
+          {
+            "market": "BHM-BDL",
+            "origin": "BHM",
+            "destination": "BDL",
+            "demand": 7.2,
+            "beforeMinutes": 328,
+            "afterMinutes": 220
+          },
+          {
+            "market": "DAB-BNA",
+            "origin": "DAB",
+            "destination": "BNA",
+            "demand": 5.4,
+            "beforeMinutes": 347,
+            "afterMinutes": 285
+          },
+          {
+            "market": "TOL-PIE",
+            "origin": "TOL",
+            "destination": "PIE",
+            "demand": 5.4,
+            "beforeMinutes": 404,
+            "afterMinutes": 321
+          },
+          {
+            "market": "PIE-TOL",
+            "origin": "PIE",
+            "destination": "TOL",
+            "demand": 5.2,
+            "beforeMinutes": 497,
+            "afterMinutes": 313
+          },
+          {
+            "market": "DAB-DAL",
+            "origin": "DAB",
+            "destination": "DAL",
+            "demand": 4,
+            "beforeMinutes": 401,
+            "afterMinutes": 356
+          },
+          {
+            "market": "DAB-MCI",
+            "origin": "DAB",
+            "destination": "MCI",
+            "demand": 4,
+            "beforeMinutes": 335,
+            "afterMinutes": 330
+          },
+          {
+            "market": "DAB-BWI",
+            "origin": "DAB",
+            "destination": "BWI",
+            "demand": 3.8,
+            "beforeMinutes": 229,
+            "afterMinutes": 206
+          },
+          {
+            "market": "DAB-SAT",
+            "origin": "DAB",
+            "destination": "SAT",
+            "demand": 2.7,
+            "beforeMinutes": 549,
+            "afterMinutes": 479
+          },
+          {
+            "market": "DAB-HOU",
+            "origin": "DAB",
+            "destination": "HOU",
+            "demand": 1.6,
+            "beforeMinutes": 411,
+            "afterMinutes": 366
+          },
+          {
+            "market": "DAB-ROA",
+            "origin": "DAB",
+            "destination": "ROA",
+            "demand": 0.9,
+            "beforeMinutes": 494,
+            "afterMinutes": 287
+          },
+          {
+            "market": "DAB-AVP",
+            "origin": "DAB",
+            "destination": "AVP",
+            "demand": 0.7,
+            "beforeMinutes": 296,
+            "afterMinutes": 251
+          },
+          {
+            "market": "DAB-ACY",
+            "origin": "DAB",
+            "destination": "ACY",
+            "demand": 0,
+            "beforeMinutes": 444,
+            "afterMinutes": 237
+          },
+          {
+            "market": "DAB-TTN",
+            "origin": "DAB",
+            "destination": "TTN",
+            "demand": 0,
+            "beforeMinutes": 288,
+            "afterMinutes": 243
+          }
+        ],
+        "slower": [
+          {
+            "market": "OMA-SRQ",
+            "origin": "OMA",
+            "destination": "SRQ",
+            "demand": 20.1,
+            "beforeMinutes": 367,
+            "afterMinutes": 393
+          },
+          {
+            "market": "DAB-BDL",
+            "origin": "DAB",
+            "destination": "BDL",
+            "demand": 18.7,
+            "beforeMinutes": 157,
+            "afterMinutes": 228
+          },
+          {
+            "market": "OMA-JAX",
+            "origin": "OMA",
+            "destination": "JAX",
+            "demand": 12.6,
+            "beforeMinutes": 265,
+            "afterMinutes": 291
+          },
+          {
+            "market": "OMA-BWI",
+            "origin": "OMA",
+            "destination": "BWI",
+            "demand": 12.3,
+            "beforeMinutes": 426,
+            "afterMinutes": 452
+          },
+          {
+            "market": "OMA-ECP",
+            "origin": "OMA",
+            "destination": "ECP",
+            "demand": 7.6,
+            "beforeMinutes": 500,
+            "afterMinutes": 526
+          },
+          {
+            "market": "OMA-BDL",
+            "origin": "OMA",
+            "destination": "BDL",
+            "demand": 7.4,
+            "beforeMinutes": 517,
+            "afterMinutes": 543
+          },
+          {
+            "market": "OMA-TYS",
+            "origin": "OMA",
+            "destination": "TYS",
+            "demand": 5.9,
+            "beforeMinutes": 519,
+            "afterMinutes": 545
+          },
+          {
+            "market": "OMA-GSO",
+            "origin": "OMA",
+            "destination": "GSO",
+            "demand": 3.6,
+            "beforeMinutes": 520,
+            "afterMinutes": 546
+          },
+          {
+            "market": "OMA-BTR",
+            "origin": "OMA",
+            "destination": "BTR",
+            "demand": 2.5,
+            "beforeMinutes": 544,
+            "afterMinutes": 570
+          },
+          {
+            "market": "OMA-MOB",
+            "origin": "OMA",
+            "destination": "MOB",
+            "demand": 2.1,
+            "beforeMinutes": 520,
+            "afterMinutes": 546
+          },
+          {
+            "market": "OMA-GPT",
+            "origin": "OMA",
+            "destination": "GPT",
+            "demand": 2,
+            "beforeMinutes": 527,
+            "afterMinutes": 553
+          },
+          {
+            "market": "OMA-ROA",
+            "origin": "OMA",
+            "destination": "ROA",
+            "demand": 1.8,
+            "beforeMinutes": 403,
+            "afterMinutes": 429
+          },
+          {
+            "market": "OMA-AGS",
+            "origin": "OMA",
+            "destination": "AGS",
+            "demand": 1.7,
+            "beforeMinutes": 494,
+            "afterMinutes": 520
+          },
+          {
+            "market": "OMA-TLH",
+            "origin": "OMA",
+            "destination": "TLH",
+            "demand": 1.7,
+            "beforeMinutes": 489,
+            "afterMinutes": 515
+          },
+          {
+            "market": "OMA-GNV",
+            "origin": "OMA",
+            "destination": "GNV",
+            "demand": 1.6,
+            "beforeMinutes": 476,
+            "afterMinutes": 502
+          },
+          {
+            "market": "OMA-MLB",
+            "origin": "OMA",
+            "destination": "MLB",
+            "demand": 1.2,
+            "beforeMinutes": 426,
+            "afterMinutes": 452
+          },
+          {
+            "market": "OMA-MCN",
+            "origin": "OMA",
+            "destination": "MCN",
+            "demand": 0,
+            "beforeMinutes": 493,
+            "afterMinutes": 519
+          }
+        ]
+      }
+    },
     "provenance": {
       "baseSha256": "a52e5d14734d80c02f231f8e87155bc4eeba38817f7eba8b5c68fee335e206f2",
-      "draftSha256": "ecf5306874c274135e8d6b3bbfbd33bfb5ef6e7ed8b2dc2a1bd731bc435e733f",
+      "draftSha256": "4de8042da82c48f67a991551476e620f01b17cade91d75b5189e9a53ecbb48b0",
       "demandSha256": "49c04922ee0cebb3fef8aad923e04bd11874587a263c9511358ddb833b860bc6"
     }
   }

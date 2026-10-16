@@ -764,7 +764,7 @@
           "arrivalCity": "ALB",
           "departureCity": "VPS",
           "moveTo": {
-            "row": 1,
+            "row": 2,
             "rowType": "stand"
           }
         },
@@ -779,7 +779,7 @@
           "arrivalCity": "MHT",
           "departureCity": "MLB",
           "moveTo": {
-            "row": 2,
+            "row": 1,
             "rowType": "stand"
           }
         },
@@ -811,7 +811,7 @@
           "label": "328",
           "fleet": "CRJ700",
           "kind": "turn",
-          "row": 1,
+          "row": 2,
           "rowType": "stand",
           "arrivalCity": "ALB",
           "departureCity": "VPS",
@@ -830,7 +830,7 @@
           "label": "327",
           "fleet": "CRJ700",
           "kind": "turn",
-          "row": 2,
+          "row": 1,
           "rowType": "stand",
           "arrivalCity": "MHT",
           "departureCity": "MLB",
@@ -997,7 +997,7 @@
           "arrivalCity": "ALB",
           "departureCity": "VPS",
           "moveFrom": {
-            "row": 1,
+            "row": 2,
             "rowType": "stand"
           }
         },
@@ -1012,7 +1012,7 @@
           "arrivalCity": "MHT",
           "departureCity": "MLB",
           "moveFrom": {
-            "row": 2,
+            "row": 1,
             "rowType": "stand"
           }
         },
@@ -1158,6 +1158,17 @@
           "rowType": "gate",
           "arrivalCity": "JAX",
           "departureCity": "PIT"
+        },
+        {
+          "start": 1180,
+          "end": 1220,
+          "label": "312",
+          "fleet": "CRJ700",
+          "kind": "turn",
+          "row": 3,
+          "rowType": "gate",
+          "arrivalCity": "DAB",
+          "departureCity": "BDL"
         },
         {
           "start": 1190,
@@ -6892,14 +6903,14 @@
           }
         },
         {
-          "start": 1417,
+          "start": 1300,
           "end": 1710,
           "label": "312 -> 313",
           "fleet": "CRJ700",
-          "kind": "turn",
+          "kind": "ron",
           "row": 2,
           "rowType": "gate",
-          "arrivalCity": "DAB",
+          "arrivalCity": "PHF",
           "departureCity": "CLT"
         },
         {
@@ -6972,7 +6983,7 @@
           "arrivalCity": "SAV",
           "departureCity": "SAV",
           "moveTo": {
-            "row": 1,
+            "row": 2,
             "rowType": "stand"
           }
         },
@@ -6987,7 +6998,7 @@
           "arrivalCity": "CLT",
           "departureCity": "CLT",
           "moveTo": {
-            "row": 3,
+            "row": 1,
             "rowType": "stand"
           }
         },
@@ -7002,7 +7013,7 @@
           "arrivalCity": "DAY",
           "departureCity": "DAY",
           "moveTo": {
-            "row": 2,
+            "row": 3,
             "rowType": "stand"
           }
         },
@@ -7012,7 +7023,7 @@
           "label": "339",
           "fleet": "CRJ700",
           "kind": "turn",
-          "row": 1,
+          "row": 2,
           "rowType": "stand",
           "arrivalCity": "SAV",
           "departureCity": "SAV",
@@ -7031,7 +7042,7 @@
           "label": "306",
           "fleet": "CRJ700",
           "kind": "turn",
-          "row": 3,
+          "row": 1,
           "rowType": "stand",
           "arrivalCity": "CLT",
           "departureCity": "CLT",
@@ -7050,7 +7061,7 @@
           "label": "157",
           "fleet": "CRJ200",
           "kind": "turn",
-          "row": 2,
+          "row": 3,
           "rowType": "stand",
           "arrivalCity": "DAY",
           "departureCity": "DAY",
@@ -7129,7 +7140,7 @@
           "arrivalCity": "DAY",
           "departureCity": "DAY",
           "moveFrom": {
-            "row": 2,
+            "row": 3,
             "rowType": "stand"
           }
         },
@@ -7144,7 +7155,7 @@
           "arrivalCity": "CLT",
           "departureCity": "CLT",
           "moveFrom": {
-            "row": 3,
+            "row": 1,
             "rowType": "stand"
           }
         },
@@ -7159,7 +7170,7 @@
           "arrivalCity": "SAV",
           "departureCity": "SAV",
           "moveFrom": {
-            "row": 1,
+            "row": 2,
             "rowType": "stand"
           }
         },
@@ -7213,7 +7224,7 @@
           "label": "102",
           "fleet": "CRJ200",
           "kind": "turn",
-          "row": 2,
+          "row": 1,
           "rowType": "gate",
           "arrivalCity": "ATW",
           "departureCity": "ATW"
@@ -7224,7 +7235,7 @@
           "label": "722",
           "fleet": "MAX9",
           "kind": "turn",
-          "row": 1,
+          "row": 3,
           "rowType": "gate",
           "arrivalCity": "PHF",
           "departureCity": "FLL"
@@ -7235,10 +7246,21 @@
           "label": "139",
           "fleet": "CRJ200",
           "kind": "turn",
-          "row": 3,
+          "row": 4,
           "rowType": "gate",
           "arrivalCity": "DAY",
           "departureCity": "DAY"
+        },
+        {
+          "start": 768,
+          "end": 808,
+          "label": "111",
+          "fleet": "CRJ200",
+          "kind": "turn",
+          "row": 2,
+          "rowType": "gate",
+          "arrivalCity": "OMA",
+          "departureCity": "PIE"
         },
         {
           "start": 794,
@@ -7246,7 +7268,7 @@
           "label": "344",
           "fleet": "CRJ700",
           "kind": "turn",
-          "row": 5,
+          "row": 3,
           "rowType": "gate",
           "arrivalCity": "PGD",
           "departureCity": "JAX"
@@ -7257,7 +7279,7 @@
           "label": "148",
           "fleet": "CRJ200",
           "kind": "turn",
-          "row": 3,
+          "row": 4,
           "rowType": "gate",
           "arrivalCity": "FSD",
           "departureCity": "FSD"
@@ -7268,21 +7290,10 @@
           "label": "171",
           "fleet": "CRJ200",
           "kind": "turn",
-          "row": 4,
+          "row": 5,
           "rowType": "gate",
           "arrivalCity": "MCI",
           "departureCity": "SFB"
-        },
-        {
-          "start": 794,
-          "end": 1070,
-          "label": "111",
-          "fleet": "CRJ200",
-          "kind": "turn",
-          "row": 1,
-          "rowType": "gate",
-          "arrivalCity": "OMA",
-          "departureCity": "OMA"
         },
         {
           "start": 837,
@@ -7290,7 +7301,7 @@
           "label": "509",
           "fleet": "CRJ900",
           "kind": "turn",
-          "row": 3,
+          "row": 2,
           "rowType": "gate",
           "arrivalCity": "MCI",
           "departureCity": "FLL"
@@ -7312,7 +7323,7 @@
           "label": "143",
           "fleet": "CRJ200",
           "kind": "turn",
-          "row": 5,
+          "row": 3,
           "rowType": "gate",
           "arrivalCity": "DAB",
           "departureCity": "HRL"
@@ -7323,7 +7334,7 @@
           "label": "117",
           "fleet": "CRJ200",
           "kind": "turn",
-          "row": 2,
+          "row": 1,
           "rowType": "gate",
           "arrivalCity": "EYW",
           "departureCity": "TUL"
@@ -7334,7 +7345,7 @@
           "label": "347",
           "fleet": "CRJ700",
           "kind": "turn",
-          "row": 5,
+          "row": 3,
           "rowType": "gate",
           "arrivalCity": "PHF",
           "departureCity": "BWI"
@@ -7360,7 +7371,7 @@
           "label": "346",
           "fleet": "CRJ700",
           "kind": "turn",
-          "row": 3,
+          "row": 2,
           "rowType": "gate",
           "arrivalCity": "BWI",
           "departureCity": "PHF"
@@ -7380,7 +7391,7 @@
             "rowType": "gate"
           },
           "moveTo": {
-            "row": 1,
+            "row": 3,
             "rowType": "gate"
           }
         },
@@ -7390,7 +7401,7 @@
           "label": "138",
           "fleet": "CRJ200",
           "kind": "turn",
-          "row": 4,
+          "row": 3,
           "rowType": "gate",
           "arrivalCity": "DAY",
           "departureCity": "DAY"
@@ -7401,7 +7412,7 @@
           "label": "141",
           "fleet": "CRJ200",
           "kind": "turn",
-          "row": 3,
+          "row": 2,
           "rowType": "gate",
           "arrivalCity": "LBB",
           "departureCity": "SGF"
@@ -7412,10 +7423,21 @@
           "label": "722",
           "fleet": "MAX9",
           "kind": "turn",
-          "row": 6,
+          "row": 5,
           "rowType": "gate",
           "arrivalCity": "FLL",
           "departureCity": "PHF"
+        },
+        {
+          "start": 1030,
+          "end": 1070,
+          "label": "111",
+          "fleet": "CRJ200",
+          "kind": "turn",
+          "row": 6,
+          "rowType": "gate",
+          "arrivalCity": "PIE",
+          "departureCity": "OMA"
         },
         {
           "start": 1056,
@@ -7423,7 +7445,7 @@
           "label": "348",
           "fleet": "CRJ700",
           "kind": "turn",
-          "row": 2,
+          "row": 1,
           "rowType": "gate",
           "arrivalCity": "JAX",
           "departureCity": "OKC"
@@ -7434,7 +7456,7 @@
           "label": "171",
           "fleet": "CRJ200",
           "kind": "turn",
-          "row": 5,
+          "row": 4,
           "rowType": "gate",
           "arrivalCity": "SFB",
           "departureCity": "MCI"
@@ -7445,7 +7467,7 @@
           "label": "149",
           "fleet": "CRJ200",
           "kind": "turn",
-          "row": 1,
+          "row": 3,
           "rowType": "gate",
           "arrivalCity": "MCI",
           "departureCity": "MCI",
@@ -9192,14 +9214,14 @@
         },
         {
           "start": 993,
-          "end": 1260,
+          "end": 1072,
           "label": "312",
           "fleet": "CRJ700",
           "kind": "turn",
-          "row": 2,
+          "row": 1,
           "rowType": "gate",
           "arrivalCity": "PHF",
-          "departureCity": "BDL"
+          "departureCity": "PHF"
         },
         {
           "start": 1159,
@@ -12173,7 +12195,7 @@
         },
         {
           "start": 584,
-          "end": 666,
+          "end": 640,
           "label": "111",
           "fleet": "CRJ200",
           "kind": "turn",
@@ -12444,7 +12466,7 @@
       "isFocusCity": false,
       "nGates": 4,
       "nStands": 2,
-      "peakUsed": 3,
+      "peakUsed": 4,
       "claims": [
         {
           "start": 272,
@@ -12577,6 +12599,17 @@
           "rowType": "gate",
           "arrivalCity": "PHF",
           "departureCity": "SYR"
+        },
+        {
+          "start": 959,
+          "end": 999,
+          "label": "111",
+          "fleet": "CRJ200",
+          "kind": "turn",
+          "row": 4,
+          "rowType": "gate",
+          "arrivalCity": "BHM",
+          "departureCity": "BHM"
         },
         {
           "start": 1009,

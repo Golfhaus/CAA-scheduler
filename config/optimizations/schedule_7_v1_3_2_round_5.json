@@ -1,0 +1,123 @@
+{
+  "baseSchedule": {
+    "scheduleId": "schedule_7_v1_3_2_draft",
+    "sha256": "ecf5306874c274135e8d6b3bbfbd33bfb5ef6e7ed8b2dc2a1bd731bc435e733f",
+    "canonical": "outputs/schedule_7_v1_3_2_r111_r312/base_round_4_canonical.json",
+    "commit": "6722c0b4c95f17451483906b4632a38cbae2f833"
+  },
+  "schedule": {
+    "id": "schedule_7_v1_3_2_draft",
+    "number": 7,
+    "version": "1.3.2-draft",
+    "label": "Schedule 7, Version 1.3.2 draft",
+    "status": "draft",
+    "fleetCounts": {
+      "MAX9": 35,
+      "CRJ900": 45,
+      "CRJ700": 65,
+      "CRJ200": 80
+    },
+    "connectionWindowMinutes": {
+      "minimum": 30,
+      "maximum": 240
+    }
+  },
+  "retimeLegs": [
+    {
+      "legId": "V113-R164-OMA-BHM",
+      "expectedDepartureMinute": 666,
+      "expectedArrivalMinute": 794,
+      "departureMinute": 640,
+      "arrivalMinute": 768
+    }
+  ],
+  "removeLegs": [
+    {
+      "legId": "BDL-DAB-CRJ700-01-IN",
+      "expectedRoute": 312
+    }
+  ],
+  "insertLegs": [
+    {
+      "id": "REVIEW-R111-BHM-PIE",
+      "route": 111,
+      "origin": "BHM",
+      "destination": "PIE",
+      "departureMinute": 808,
+      "arrivalMinute": 959
+    },
+    {
+      "id": "REVIEW-R111-PIE-BHM",
+      "route": 111,
+      "origin": "PIE",
+      "destination": "BHM",
+      "departureMinute": 999,
+      "arrivalMinute": 1030
+    },
+    {
+      "id": "REVIEW-R312-DAB-PHF",
+      "route": 312,
+      "origin": "DAB",
+      "destination": "PHF",
+      "departureMinute": 1072,
+      "arrivalMinute": 1180
+    },
+    {
+      "id": "REVIEW-R312-PHF-BDL",
+      "route": 312,
+      "origin": "PHF",
+      "destination": "BDL",
+      "departureMinute": 1220,
+      "arrivalMinute": 1300
+    }
+  ],
+  "bankAssignmentsToAdd": [
+    {
+      "legId": "REVIEW-R312-DAB-PHF",
+      "operation": "arrival",
+      "bankId": "PHF-M6"
+    },
+    {
+      "legId": "REVIEW-R312-PHF-BDL",
+      "operation": "departure",
+      "bankId": "PHF-B7"
+    }
+  ],
+  "schemaVersion": "1.0.0",
+  "id": "schedule-7-v1.3.2-r111-pie-r312-phf",
+  "approval": {
+    "status": "User accepted October 15, 2026",
+    "scope": "Original R111 PIE turn and modified R312 evening PHF-bank return",
+    "publication": "Not authorized"
+  },
+  "acceptedR111": {
+    "addedFlights": [
+      2223,
+      2224
+    ],
+    "retimingMinutes": {
+      "1991": -26
+    },
+    "newBlockMinutes": 182,
+    "maximumTurnMinutes": 56,
+    "lostOneStopMarket": "OMA-PHF",
+    "lostRawChoices": 20,
+    "lostReasonableChoices": 15
+  },
+  "acceptedR312": {
+    "addedFlights": [
+      2225,
+      2226
+    ],
+    "removedFlights": [
+      1360
+    ],
+    "newBlockMinutes": 31,
+    "maximumTurnMinutes": 79,
+    "droppedNonstop": "DAB-BDL",
+    "newEveningJourneyMinutes": 228,
+    "extraMinutesVersusNonstop": 71,
+    "arrivalBank": "PHF-M6",
+    "departureBank": "PHF-B7"
+  }
+}
