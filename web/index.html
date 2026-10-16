@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#092a53">
     <meta name="description" content="Coastal American Airways schedule operations console">
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="styles.css?v=console-ui-20261015-readable-hours">
+    <link rel="stylesheet" href="styles.css?v=console-ui-20261016-critical-utilization">
     <title>CAA Scheduler</title>
   </head>
   <body>
@@ -323,7 +323,7 @@
           <div id="routing-view-details" data-routing-view="details" role="tabpanel" aria-labelledby="routing-tab-details" hidden>
             <div class="routing-detail-toolbar">
               <label class="airport-picker"><span>Route · day / line</span><select id="routing-detail-route"></select></label>
-              <p class="stats-note" id="routing-detail-summary"></p>
+              <div class="routing-detail-summary" id="routing-detail-summary" aria-live="polite"></div>
             </div>
             <section class="panel gate-panel routing-detail-panel" aria-label="Selected route activity">
               <p class="stats-note" id="routing-detail-timezone"></p>
@@ -527,43 +527,64 @@
             </section>
           </div>
           <div id="stats-extension-opps" data-stats-view="extension-opps" role="tabpanel" hidden>
-            <p class="stats-note">Route endpoints surface late originators and early terminators, with red-eyes last. Turns and RODs include holds of at least two hours; RONs are excluded.</p>
-            <section class="panel extension-panel" aria-labelledby="extension-originators-title">
-              <div class="panel-heading">
-                <div><p class="eyebrow">Latest first</p><h2 id="extension-originators-title">Originators</h2></div>
-                <span class="result-count" id="extension-originator-count"></span>
-              </div>
-              <div class="table-shell extension-table-shell">
-                <table>
-                  <thead><tr><th>Route</th><th>Line</th><th>Fleet</th><th>Flight</th><th>Origin</th><th>Departs</th><th>Destination</th><th>Arrives</th></tr></thead>
-                  <tbody id="extension-originator-rows"></tbody>
-                </table>
-              </div>
-            </section>
-            <section class="panel extension-panel" aria-labelledby="extension-terminators-title">
-              <div class="panel-heading">
-                <div><p class="eyebrow">Earliest first · red-eyes last</p><h2 id="extension-terminators-title">Terminators</h2></div>
-                <span class="result-count" id="extension-terminator-count"></span>
-              </div>
-              <div class="table-shell extension-table-shell">
-                <table>
-                  <thead><tr><th>Route</th><th>Line</th><th>Fleet</th><th>Flight</th><th>Origin</th><th>Departs</th><th>Destination</th><th>Arrives</th></tr></thead>
-                  <tbody id="extension-terminator-rows"></tbody>
-                </table>
-              </div>
-            </section>
-            <section class="panel extension-panel" aria-labelledby="extension-holds-title">
-              <div class="panel-heading">
-                <div><p class="eyebrow">Longest first</p><h2 id="extension-holds-title">Turns and RODs of two hours or more</h2></div>
-                <span class="result-count" id="extension-hold-count"></span>
-              </div>
-              <div class="table-shell extension-table-shell">
-                <table>
-                  <thead><tr><th>Route</th><th>Fleet</th><th>Airport</th><th>Type</th><th>Time</th><th>Duration</th><th>Movement</th><th>Position path</th></tr></thead>
-                  <tbody id="extension-hold-rows"></tbody>
-                </table>
-              </div>
-            </section>
+            <div class="stats-tabbar" role="tablist" aria-label="Extension opportunities views">
+              <button class="stats-tab is-active" id="extension-tab-endpoints" type="button" role="tab" data-extension-tab="endpoints-holds" aria-controls="extension-endpoints-holds" aria-selected="true">Endpoints &amp; Holds</button>
+              <button class="stats-tab" id="extension-tab-critical" type="button" role="tab" data-extension-tab="critical-utilization" aria-controls="extension-critical-utilization" aria-selected="false" tabindex="-1">Critical Period Utilization</button>
+            </div>
+            <div id="extension-endpoints-holds" data-extension-view="endpoints-holds" role="tabpanel" aria-labelledby="extension-tab-endpoints">
+              <p class="stats-note">Route endpoints surface late originators and early terminators, with red-eyes last. Turns and RODs include holds of at least two hours; RONs are excluded.</p>
+              <section class="panel extension-panel" aria-labelledby="extension-originators-title">
+                <div class="panel-heading">
+                  <div><p class="eyebrow">Latest first</p><h2 id="extension-originators-title">Originators</h2></div>
+                  <span class="result-count" id="extension-originator-count"></span>
+                </div>
+                <div class="table-shell extension-table-shell">
+                  <table>
+                    <thead><tr><th>Route</th><th>Line</th><th>Fleet</th><th>Flight</th><th>Origin</th><th>Departs</th><th>Destination</th><th>Arrives</th></tr></thead>
+                    <tbody id="extension-originator-rows"></tbody>
+                  </table>
+                </div>
+              </section>
+              <section class="panel extension-panel" aria-labelledby="extension-terminators-title">
+                <div class="panel-heading">
+                  <div><p class="eyebrow">Earliest first · red-eyes last</p><h2 id="extension-terminators-title">Terminators</h2></div>
+                  <span class="result-count" id="extension-terminator-count"></span>
+                </div>
+                <div class="table-shell extension-table-shell">
+                  <table>
+                    <thead><tr><th>Route</th><th>Line</th><th>Fleet</th><th>Flight</th><th>Origin</th><th>Departs</th><th>Destination</th><th>Arrives</th></tr></thead>
+                    <tbody id="extension-terminator-rows"></tbody>
+                  </table>
+                </div>
+              </section>
+              <section class="panel extension-panel" aria-labelledby="extension-holds-title">
+                <div class="panel-heading">
+                  <div><p class="eyebrow">Longest first</p><h2 id="extension-holds-title">Turns and RODs of two hours or more</h2></div>
+                  <span class="result-count" id="extension-hold-count"></span>
+                </div>
+                <div class="table-shell extension-table-shell">
+                  <table>
+                    <thead><tr><th>Route</th><th>Fleet</th><th>Airport</th><th>Type</th><th>Time</th><th>Duration</th><th>Movement</th><th>Position path</th></tr></thead>
+                    <tbody id="extension-hold-rows"></tbody>
+                  </table>
+                </div>
+              </section>
+            </div>
+            <div id="extension-critical-utilization" data-extension-view="critical-utilization" role="tabpanel" aria-labelledby="extension-tab-critical" hidden>
+              <p class="stats-note">Least flying first during 06:00–22:00. Each route uses its originating station's time zone, matching Routing Details. Only minutes inside the period count; on-ground time is the rest of the 16-hour period. Select a route to inspect it.</p>
+              <section class="panel extension-panel critical-utilization-panel" aria-labelledby="critical-utilization-title">
+                <div class="panel-heading">
+                  <div><p class="eyebrow">Least flying first</p><h2 id="critical-utilization-title">Critical Period Utilization</h2></div>
+                  <span class="result-count" id="critical-utilization-count"></span>
+                </div>
+                <div class="table-shell extension-table-shell">
+                  <table>
+                    <thead><tr><th>Rank</th><th>Route</th><th>In-flight</th><th>On-ground</th><th>Utilization</th><th>Fleet</th><th>Line / day</th><th>Time zone</th></tr></thead>
+                    <tbody id="critical-utilization-rows"></tbody>
+                  </table>
+                </div>
+              </section>
+            </div>
           </div>
         </section>
 
@@ -594,7 +615,7 @@
       </div>
     </main>
 
-    <script type="module" src="app.mjs?v=console-ui-20261015-readable-hours"></script>
+    <script type="module" src="app.mjs?v=console-ui-20261016-critical-utilization"></script>
   </body>
 </html>
 
