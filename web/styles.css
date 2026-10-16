@@ -475,6 +475,8 @@ tbody tr:hover { background: #f6f9fc; }
 .extension-table-shell { max-height: 26rem; border: 0; border-radius: 0; box-shadow: none; }
 .extension-table-shell th { z-index: 3; }
 .extension-table-shell td { font-variant-numeric: tabular-nums; }
+.critical-utilization-panel .panel-heading { flex-wrap: wrap; }
+.critical-utilization-panel .panel-heading > div { flex: 1 1 17rem; }
 
 .bank-breakdown-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; margin-bottom: 1rem; }
 .bank-breakdown-toolbar h2 { margin: 0 0 0.4rem; color: var(--navy-900); font-size: 1.15rem; }
@@ -654,9 +656,11 @@ tbody tr:hover { background: #f6f9fc; }
 .bank-label { position: absolute; z-index: 1; top: 50%; transform: translate(-50%, -50%); font-size: 0.65rem; font-weight: 750; white-space: nowrap; color: #385574; }
 .claim-bar { position: absolute; z-index: 1; top: 0.16rem; height: 1.12rem; overflow: hidden; appearance: none; border: 1px solid rgba(6, 26, 51, 0.18); border-radius: 0.23rem; padding: 0.05rem 0.2rem; color: #10223a; font-size: 0.63rem; font-weight: 750; line-height: 1; text-align: left; white-space: nowrap; text-overflow: ellipsis; touch-action: manipulation; }
 .claim-bar.kind-stand { border-style: dashed; }
-.routing-detail-toolbar { display: flex; align-items: end; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem; }
+.routing-detail-toolbar { display: flex; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem; }
 .routing-detail-toolbar .airport-picker { min-width: min(100%, 22rem); }
 .routing-detail-toolbar .stats-note { margin: 0 0 0.45rem; }
+.routing-detail-summary { flex: 1 1 22rem; display: grid; gap: 0.28rem; padding: 0.7rem 0.9rem; border-left: 3px solid var(--blue-700); border-radius: 0.3rem; background: #f5f9fe; color: var(--navy-900); font-size: 0.84rem; line-height: 1.4; font-variant-numeric: tabular-nums; }
+.routing-detail-summary p { margin: 0; }
 .routing-detail-timeline { margin-top: 1.3rem; }
 .routing-detail-row { min-height: 4rem; }
 .routing-detail-row .lane-label { font-size: 0.85rem; }

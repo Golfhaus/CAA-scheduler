@@ -36,6 +36,22 @@ horizontal scrolling, including on phones. Longer route
 days add only the width needed for the extra hours. Horizontal scrolling stays
 inside the chart panel on narrow screens.
 
+## Route flight-time utilization
+
+Routing Details shows fleet, flight count and endpoint stations, followed by
+total time in-flight during 03:00–03:00 and a bold critical time in-flight during
+06:00–22:00. Both use compact `9h15m` durations and the originating airport's
+time zone, matching the chart. Flights crossing a window boundary contribute
+only their overlapping minutes; flight duration comes from the same unwrapped,
+time-zone-adjusted geometry used by the chart.
+
+Under Extension Opps, **Endpoints & Holds** retains the existing lists.
+**Critical Period Utilization** ranks every route by critical in-flight minutes,
+ascending, with route number breaking ties. It also shows remaining on-ground
+time in the 16-hour period, utilization percentage, fleet, line/day and the
+clock used. Route buttons open Routing Details. Both views share the calculation
+in `web/routing-details.mjs`; the summary and ranking must agree.
+
 ## Opportunity tools in Sked Stats
 
 **Service Coverage** ranks city pairs by pinned daily O-D demand in missing directions. It distinguishes one-way and two-way gaps, fastest available trips, missing shared hubs and timing gaps. An optional 2.25× great-circle-distance screen separates impractical detours from the current timetable's listed connections. Missing demand remains unavailable rather than becoming zero; schedules whose demand pin differs from the served snapshot retain coverage analysis without demand ranking.

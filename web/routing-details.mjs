@@ -19,6 +19,33 @@ export function routingDetailOptions(canonical) {
   return [...routes.values()].sort((a, b) => Number(a.route) - Number(b.route));
 }
 
+export function formatFlightTime(minutes) {
+  return `${Math.floor(minutes / 60)}h${String(minutes % 60).padStart(2, "0")}m`;
+}
+
+// Flights use the route origin's clock, as in the activity chart. Only the
+// overlap with each window counts, including flights crossing its boundaries.
+export function routeFlightUtilization(flights) {
+  const inside = (start, end) => flights.reduce((total, flight) =>
+    total + Math.max(0, Math.min(flight.end, end) - Math.max(flight.start, start)), 0);
+  const totalFlightMinutes = inside(180, 1620);
+  const criticalFlightMinutes = inside(360, 1320);
+  return {totalFlightMinutes, criticalFlightMinutes,
+    criticalGroundMinutes: 960 - criticalFlightMinutes,
+    criticalUtilization: criticalFlightMinutes / 960};
+}
+
+export function buildCriticalPeriodUtilization(canonical) {
+  return routingDetailOptions(canonical).map(({id}) => {
+    const detail = buildRoutingDetails(canonical, null, id);
+    const {route, line, day, fleet, referenceCity, zone, totalFlightMinutes,
+      criticalFlightMinutes, criticalGroundMinutes, criticalUtilization} = detail;
+    return {route, line, day, fleet, referenceCity, zone, totalFlightMinutes,
+      criticalFlightMinutes, criticalGroundMinutes, criticalUtilization};
+  }).sort((a, b) => a.criticalFlightMinutes - b.criticalFlightMinutes
+    || Number(a.route) - Number(b.route));
+}
+
 // A single airport's time zone is used for geometry. Flight tooltips retain
 // local endpoint clocks; gate claims are converted from their airport's zone.
 export function buildRoutingDetails(canonical, gates, route) {
@@ -89,5 +116,6 @@ export function buildRoutingDetails(canonical, gates, route) {
   return {route: first.route, line: first.line, day: first.day, fleet: first.fleet,
     referenceCity: first.origin, timezone: reference?.timezone || "local",
     zone: ZONES[reference?.timezone] || "local", start, end, blocks, flights,
-    unassigned, blockMinutes: flights.reduce((sum, flight) => sum + flight.end - flight.start, 0)};
+    unassigned, ...routeFlightUtilization(flights),
+    blockMinutes: flights.reduce((sum, flight) => sum + flight.end - flight.start, 0)};
 }

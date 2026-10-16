@@ -6,7 +6,7 @@ import {
   validateBuildConfig,
 } from "./build-config.mjs";
 import { bankBreakdownAirports, bankDisplayLabel, buildHubBankBreakdown } from "./hub-bank-breakdown.mjs?v=20261015-bank-labels";
-import { routingDetailOptions, buildRoutingDetails } from "./routing-details.mjs";
+import { routingDetailOptions, buildRoutingDetails, buildCriticalPeriodUtilization, formatFlightTime } from "./routing-details.mjs?v=20261016-critical-utilization";
 import { buildOperatingDayGrid } from "./operating-day-timeline.mjs?v=20261015-readable-hours";
 import { createOpportunityUI } from "./opportunity-ui.mjs";
 
@@ -47,6 +47,7 @@ const state = {
   routingDetail: null,
   timetablePage: 1,
   scheduleStatsTab: "deps-hubs",
+  extensionTab: "endpoints-holds",
   bankBreakdown: null,
   bankBreakdownBankId: null,
   bankBreakdownGroup: "",
@@ -683,6 +684,26 @@ function activateRoutingTab(tab) {
   $("#routing-result-count").hidden = state.routingTab !== "all";
 }
 
+function activateExtensionTab(tab) {
+  state.extensionTab = tab === "critical-utilization" ? tab : "endpoints-holds";
+  $$("[data-extension-tab]").forEach((button) => {
+    const active = button.dataset.extensionTab === state.extensionTab;
+    button.classList.toggle("is-active", active);
+    button.setAttribute("aria-selected", String(active));
+    button.tabIndex = active ? 0 : -1;
+  });
+  $$("[data-extension-view]").forEach((view) => {
+    view.hidden = view.dataset.extensionView !== state.extensionTab;
+  });
+}
+
+function openRoutingDetails(route) {
+  state.routingDetailRoute = String(route);
+  renderRoutingDetails();
+  activateRoutingTab("details");
+  activateTab("routings");
+}
+
 async function fetchJson(path) {
   const response = await fetch(path, { cache: "no-store" });
   if (!response.ok) throw new Error(`${path} returned ${response.status}`);
@@ -719,6 +740,7 @@ async function loadSchedule(scheduleId) {
     planningPage: 1,
     timetablePage: 1,
     scheduleStatsTab: "deps-hubs",
+    extensionTab: "endpoints-holds",
     itineraryCache: new Map(),
     buildConfig: null,
     buildPreflight: null,
@@ -1143,6 +1165,12 @@ function renderExtensionOpportunities() {
   $("#extension-hold-rows").innerHTML = opportunities.holds.length
     ? opportunities.holds.map((hold) => `<tr><td class="route-number">${escapeHtml(hold.route)}</td><td><span class="fleet-badge">${escapeHtml(hold.fleet)}</span></td><td><strong>${escapeHtml(hold.airport)}</strong></td><td>${escapeHtml(hold.kind)}</td><td>${formatMinute24(hold.start)}–${formatMinute24(hold.end)}</td><td>${escapeHtml(formatDuration(hold.duration))}</td><td>${escapeHtml(hold.arrivalCity)} -> ${escapeHtml(hold.airport)} -> ${escapeHtml(hold.departureCity)}</td><td>${escapeHtml(hold.path)}</td></tr>`).join("")
     : `<tr class="empty-row"><td colspan="8">No turns or RODs last two hours or more.</td></tr>`;
+  const utilization = buildCriticalPeriodUtilization(state.canonical);
+  $("#critical-utilization-count").textContent = `${utilization.length} routes`;
+  $("#critical-utilization-rows").innerHTML = utilization.length
+    ? utilization.map((route, index) => `<tr data-critical-minutes="${route.criticalFlightMinutes}"><td>${index + 1}</td><td class="route-number"><button type="button" class="finding-link" data-critical-route="${escapeHtml(route.route)}" aria-label="Open Route ${escapeHtml(route.route)} in Routing Details">${escapeHtml(route.route)}</button></td><td><strong>${formatFlightTime(route.criticalFlightMinutes)}</strong></td><td>${formatFlightTime(route.criticalGroundMinutes)}</td><td>${(route.criticalUtilization * 100).toFixed(1)}%</td><td><span class="fleet-badge">${escapeHtml(route.fleet)}</span></td><td>${escapeHtml(route.line)} / ${route.day}</td><td title="${escapeHtml(route.referenceCity)} time">${escapeHtml(route.zone)}</td></tr>`).join("")
+    : `<tr class="empty-row"><td colspan="8">No routes available.</td></tr>`;
+  activateExtensionTab(state.extensionTab);
 }
 
 function populateBankBreakdownAirports() {
@@ -1352,8 +1380,8 @@ function renderRoutingDetails() {
     $("#routing-detail-timeline").innerHTML = "";
     return;
   }
-  $("#routing-detail-summary").textContent = `${detail.fleet} · ${detail.flights.length} flights · ${formatDuration(detail.blockMinutes)} inflight · ${detail.flights[0].leg.origin} → ${detail.flights.at(-1).leg.destination}`;
-  $("#routing-detail-timezone").textContent = `Chart times: ${detail.referenceCity} (${detail.zone}). Tooltips show local airport times. Ground assignments include overnight portions within the displayed day.${detail.unassigned ? " Some ground activity has no assigned gate or stand." : ""}`;
+  $("#routing-detail-summary").innerHTML = `<p>${escapeHtml(detail.fleet)} • ${detail.flights.length} flights • ${escapeHtml(detail.flights[0].leg.origin)} → ${escapeHtml(detail.flights.at(-1).leg.destination)}</p><p>Total time in-flight: <span id="routing-total-flight-time">${formatFlightTime(detail.totalFlightMinutes)}</span></p><p><strong>Critical time in-flight: <span id="routing-critical-flight-time">${formatFlightTime(detail.criticalFlightMinutes)}</span></strong></p>`;
+  $("#routing-detail-timezone").textContent = `Chart and summary times: ${detail.referenceCity} (${detail.zone}). Total flying counts 03:00–03:00; critical flying counts 06:00–22:00. Tooltips show local airport times. Ground assignments include overnight portions within the displayed day.${detail.unassigned ? " Some ground activity has no assigned gate or stand." : ""}`;
   const duration = detail.end - detail.start;
   const percent = (minute) => ((minute - detail.start) / duration) * 100;
   const grid = buildOperatingDayGrid(detail.start, detail.end);
@@ -1709,6 +1737,15 @@ function handleReference(button) {
 }
 
 function bindEvents() {
+  document.querySelector('[aria-label="Extension opportunities views"]').addEventListener("keydown", (event) => {
+    if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key) || !event.target.matches("[data-extension-tab]")) return;
+    event.preventDefault();
+    const buttons = $$("[data-extension-tab]");
+    const at = buttons.indexOf(event.target);
+    const next = event.key === "Home" ? 0 : event.key === "End" ? buttons.length - 1 : (at + (event.key === "ArrowRight" ? 1 : -1) + buttons.length) % buttons.length;
+    activateExtensionTab(buttons[next].dataset.extensionTab);
+    buttons[next].focus();
+  });
   document.querySelector('.stats-tabbar').addEventListener('keydown', (event) => {
     if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key) || !event.target.matches('[data-stats-tab]')) return;
     event.preventDefault();
@@ -1726,12 +1763,7 @@ function bindEvents() {
       $("#timetable-connections").value = "all";
       renderTimetable();
     },
-    openRoute: (route) => {
-      state.routingDetailRoute = String(route);
-      renderRoutingDetails();
-      activateRoutingTab("details");
-      activateTab("routings");
-    },
+    openRoute: openRoutingDetails,
     openGate: (city) => {
       $("#gate-airport").value = city;
       renderGates();
@@ -1783,6 +1815,16 @@ function bindEvents() {
     const statsTab = event.target.closest("[data-stats-tab]");
     if (statsTab) {
       activateScheduleStatsTab(statsTab.dataset.statsTab);
+      return;
+    }
+    const extensionTab = event.target.closest("[data-extension-tab]");
+    if (extensionTab) {
+      activateExtensionTab(extensionTab.dataset.extensionTab);
+      return;
+    }
+    const criticalRoute = event.target.closest("[data-critical-route]");
+    if (criticalRoute) {
+      openRoutingDetails(criticalRoute.dataset.criticalRoute);
       return;
     }
     const routingTab = event.target.closest("[data-routing-tab]");
