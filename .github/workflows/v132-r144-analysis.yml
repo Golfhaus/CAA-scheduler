@@ -14,6 +14,8 @@ on:
       - 'scripts/audit_schedule_7_v1_3_2_daytime.mjs'
       - 'scripts/screen_schedule_7_v1_3_2_daytime_refined.py'
       - 'scripts/audit_schedule_7_v1_3_2_daytime_refined.mjs'
+      - 'scripts/screen_schedule_7_v1_3_2_r158_rebuild.py'
+      - 'scripts/audit_schedule_7_v1_3_2_r158_rebuild.mjs'
   workflow_dispatch:
 concurrency:
   group: v132-crj200-validation
@@ -49,13 +51,17 @@ jobs:
         run: python scripts/screen_schedule_7_v1_3_2_daytime_refined.py
       - name: Compare refined network opportunities
         run: node scripts/audit_schedule_7_v1_3_2_daytime_refined.mjs
+      - name: Test R158 evening market replacement alternatives
+        run: python scripts/screen_schedule_7_v1_3_2_r158_rebuild.py
+      - name: Audit R158 evening alternate network effects
+        run: node scripts/audit_schedule_7_v1_3_2_r158_rebuild.mjs
       - name: Keep checks green before committing evidence
         run: bash scripts/run_latest_regression.sh
       - name: Commit unpublished validated staging artifacts
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -f outputs/schedule_7_v1_3_2_r144_accepted/ outputs/schedule_7_v1_3_2_consolidation/ outputs/schedule_7_v1_3_2_group_optimization/ outputs/schedule_7_v1_3_2_selected/ outputs/schedule_7_v1_3_2_daytime_screen/ outputs/schedule_7_v1_3_2_daytime_refined/
+          git add -f outputs/schedule_7_v1_3_2_r144_accepted/ outputs/schedule_7_v1_3_2_consolidation/ outputs/schedule_7_v1_3_2_group_optimization/ outputs/schedule_7_v1_3_2_selected/ outputs/schedule_7_v1_3_2_daytime_screen/ outputs/schedule_7_v1_3_2_daytime_refined/ outputs/schedule_7_v1_3_2_r158_rebuild/
           if ! git diff --cached --quiet; then
             git commit -m "Record validated unpublished v1.3.2 R144 and consolidation diagnostics [skip ci]"
             git restore --worktree .
