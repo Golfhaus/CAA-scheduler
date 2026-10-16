@@ -1,0 +1,61 @@
+{
+  "baseSchedule": {
+    "scheduleId": "schedule_7_v1_3_2_draft"
+  },
+  "schedule": {
+    "id": "schedule_7_v1_3_2_draft",
+    "number": 7,
+    "version": "1.3.2-draft",
+    "label": "Schedule 7, Version 1.3.2 draft",
+    "status": "draft",
+    "fleetCounts": {
+      "MAX9": 35,
+      "CRJ900": 45,
+      "CRJ700": 65,
+      "CRJ200": 80
+    },
+    "connectionWindowMinutes": {
+      "minimum": 30,
+      "maximum": 240
+    }
+  },
+  "retimeLegs": [
+    {
+      "legId": "CAK-SYR-CRJ200-01-IN",
+      "expectedDepartureMinute": 1175,
+      "expectedArrivalMinute": 1246,
+      "departureMinute": 1125,
+      "arrivalMinute": 1196
+    }
+  ],
+  "insertLegs": [
+    {
+      "id": "V132-R107-CAK-SYR-LATE",
+      "route": 107,
+      "origin": "CAK",
+      "destination": "SYR",
+      "departureMinute": 1236,
+      "arrivalMinute": 1307
+    },
+    {
+      "id": "V132-R107-SYR-CAK-LATE",
+      "route": 107,
+      "origin": "SYR",
+      "destination": "CAK",
+      "departureMinute": 1347,
+      "arrivalMinute": 1418
+    }
+  ],
+  "bankAssignmentsToAdd": [
+    {
+      "legId": "V132-R107-CAK-SYR-LATE",
+      "operation": "arrival",
+      "bankId": "SYR-B7"
+    },
+    {
+      "legId": "V132-R107-SYR-CAK-LATE",
+      "operation": "departure",
+      "bankId": "SYR-B7"
+    }
+  ]
+}
