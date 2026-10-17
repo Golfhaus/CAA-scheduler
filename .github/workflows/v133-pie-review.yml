@@ -5,6 +5,7 @@ on:
     paths:
       - '.github/workflows/v133-pie-review.yml'
       - 'scripts/review_schedule_7_v1_3_3_pie_baseline.mjs'
+      - 'config/proposals/schedule_7_v1_3_3_r514_pie_mci.json'
   workflow_dispatch:
 permissions:
   contents: write
