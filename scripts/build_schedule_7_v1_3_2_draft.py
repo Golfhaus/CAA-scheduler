@@ -113,6 +113,48 @@ if round5_path.exists():
  checks={x['id']:x for x in operating['checks']};assert [x['id']for x in checks['rolling_ron_grace']['findings']]==['AM'] and checks['fleet_capacity']['metrics']==fleet
  stands=[x for city in gates['cities']for x in city['claims']if x['rowType']=='stand'];assert (len(stands),sum(x['end']-x['start']for x in stands))==(15,3061)
  report.update({'flights':1221,'retimedFlights':[1219,1256,1418,1699,1817,1892,1904,1991],'newFlights':10,'removedFlights':[1257,1258,1360],'addedFlights':report['addedFlights']+sorted(added,key=lambda l:l['flight']),'netFlightChange':7,'operating':operating['summary'],'acceptedR111':round5['acceptedR111'],'acceptedR312':round5['acceptedR312']})
+# The original five rounds remain independently reproducible for pinned historical checks.
+# Ordinary execution now produces the cumulative, unpublished 1,229-flight working draft.
+if '--five-round-only' not in sys.argv:
+ baseline={l['id']:l for l in c['legs']}
+ for selected_path in [
+  ROOT/'config/proposals/schedule_7_v1_3_2_r144_jax_bna.json',
+  ROOT/'config/optimizations/schedule_7_v1_3_2_r146_selected.json',
+  ROOT/'config/optimizations/schedule_7_v1_3_2_r176_selected.json',
+  ROOT/'config/optimizations/schedule_7_v1_3_2_r158_selected.json',
+ ]:
+  selected=json.loads(selected_path.read_text())
+  c=apply_optimization_overlay(c,selected)
+  c['provenance']['workingDraft']['draftOverlays'].append({
+   'path':selected_path.relative_to(ROOT).as_posix(),
+   'sha256':hashlib.sha256(selected_path.read_bytes()).hexdigest()
+  })
+ assert len(c['legs'])==1229
+ new={l['id']:l for l in c['legs']}
+ assert {baseline[i]['flight']for i in baseline.keys()-new.keys()}=={2053,2054}
+ assert {(new[i]['origin'],new[i]['destination']) for i in new.keys()-baseline.keys()}=={
+  ('JAN','JAX'),('JAX','JAN'),('MCI','BNA'),('BNA','MCI'),
+  ('FSD','MCI'),('MCI','FSD'),('PHF','GSO'),('GSO','PHF'),
+  ('ALB','RDU'),('RDU','ALB')}
+ assert c['cities']==base['cities'] and c['hubBanks']==base['hubBanks']
+ assert c['schedule']['fleetCounts']==base['schedule']['fleetCounts']
+ structure=validate_schedule(c);operating=validate_operating_rules(c)
+ overnight=validate_overnight_turns(c)
+ plan=reconstruct_planning_snapshot(c,demand_data_version='bts-db1c-6mo-jul2025-apr2026-v7')
+ planning=validate_planning_snapshot(plan,c);gates=export_gate_schedule(c)
+ assert structure['status']==planning['status']==overnight['status']=='pass'
+ assert operating['summary']['effectiveErrorFindings']==0
+ checks={x['id']:x for x in operating['checks']}
+ assert [x['id']for x in checks['rolling_ron_grace']['findings']]==['AM']
+ assert checks['fleet_capacity']['metrics']==fleet
+ stands=[x for city in gates['cities']for x in city['claims']if x['rowType']=='stand']
+ assert (len(stands),sum(x['end']-x['start']for x in stands))==(15,3061)
+ report.update({'flights':1229,'lines':17,'newFlights':20,'netFlightChange':15,
+  'removedFlights':[1257,1258,1360,2053,2054],
+  'selectedGroupRoutes':[144,146,158,176],
+  'publication':'Not authorized; app default remains v1.3.1',
+  'operating':operating['summary'],'standClaims':len(stands),
+  'standMinutes':sum(x['end']-x['start']for x in stands)})
 out=ROOT/'data/schedules/schedule_7_v1_3_2_draft';out.mkdir(parents=True,exist_ok=True)
 for name,x in {'canonical_schedule.json':c,'validation_report.json':structure,'operating_validation_report.json':operating,'overnight_turn_validation.json':overnight,'planning_snapshot.json':plan,'planning_validation_report.json':planning,'gates.json':gates,'timetable.json':export_timetable(c),'draft_report.json':report}.items():(out/name).write_text(json.dumps(x,indent=2)+'\n')
 print(json.dumps(report))
