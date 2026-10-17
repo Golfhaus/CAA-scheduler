@@ -1,0 +1,67 @@
+{
+  "schemaVersion": "1.0.0",
+  "scheduleId": "schedule_7_v1_3_2",
+  "status": "released",
+  "sourceScheduleId": "schedule_7_v1_3_1",
+  "overlayIds": [],
+  "summary": {
+    "legs": 1229,
+    "routes": 184,
+    "lines": 17,
+    "effectiveOperatingErrors": 0,
+    "hardStopFailures": 0,
+    "overnightTurnFailures": 0,
+    "directRoundTripCities": 7,
+    "connectedDirectionalPairs": 20,
+    "standClaims": 15,
+    "standMinutes": 3061,
+    "hubStandClaims": 0,
+    "hubStandMinutes": 0
+  },
+  "validation": {
+    "structural": "pass",
+    "operating": "review",
+    "overnightTurns": "pass",
+    "planningReconstruction": "pass"
+  },
+  "connectionFinding": "7/7 target cities have direct SYR round trips, and 20/20 directional cross-group pairs meet the configured connection window.",
+  "connectionScopeDecision": {
+    "status": "approved",
+    "approvedBy": "user",
+    "date": "2026-10-16",
+    "userInstruction": "Complete any remaining audits, and publish v1.3.2 to main if there are no issues.",
+    "acceptedDraftSha256": "7c80bceceb4a4867bd8b62409c81efa324c937b5182af52e780eb1b8affe79ab",
+    "networkItineraryAuditSummary": {
+      "geographicallyReasonableGains": 60,
+      "geographicallyReasonableLosses": 5,
+      "fasterFastestJourneys": 154,
+      "slowerFastestJourneys": 155,
+      "lostMarkets": [
+        "ATW-FSD",
+        "ATW-OKC",
+        "ATW-SHV",
+        "DSM-SHV",
+        "OMA-PHF"
+      ],
+      "auditedComparedTo": "schedule_7_v1_3_1"
+    },
+    "releaseInterpretation": "Five documented, previously reviewed geographic one-stop coverage tradeoffs; none are new operating validation failures."
+  },
+  "patchScope": {
+    "kind": "maintenance_repair_and_productive_crj200_flying",
+    "timetableChanged": true,
+    "routingChanged": true,
+    "description": "Correct cyclic maintenance/RON validation, preserve approved R501/R175/R125/R111/R312 improvements, and adopt R144/R146/R158/R176 route optimization."
+  },
+  "artifacts": [
+    "canonical_schedule.json",
+    "connection_audit.json",
+    "gates.json",
+    "operating_validation_report.json",
+    "overnight_turn_validation.json",
+    "planning_snapshot.json",
+    "planning_validation_report.json",
+    "timetable.json",
+    "validation_report.json"
+  ]
+}
