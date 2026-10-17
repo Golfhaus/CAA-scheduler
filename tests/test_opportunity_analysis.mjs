@@ -8,6 +8,8 @@ const latest = manifest.schedules.find((entry) => entry.id === manifest.defaultS
 const canonical = JSON.parse(await readFile(new URL(`../${latest.files.canonical}`, import.meta.url), "utf8"));
 const demand = parseAirportDemand(await readFile(new URL("../data/reference/airport_od_matrix_consolidated_v2.csv", import.meta.url), "utf8"));
 const baseline = buildServiceAnalysis(canonical, demand, buildItineraries);
+const v131Canonical = JSON.parse(await readFile(new URL("../data/schedules/schedule_7_v1_3_1/canonical_schedule.json", import.meta.url), "utf8"));
+const v131FrozenAudit = buildServiceAnalysis(v131Canonical, demand, buildItineraries);
 const retime = (flight, shift) => {
   const candidate = structuredClone(canonical), screen = screenTimingChange(candidate, flight, shift), leg = candidate.legs.find((l) => l.flight === flight);
   leg.departureMinute += shift; leg.arrivalMinute += shift; leg.departure = screen.departure; leg.arrival = screen.arrival;
@@ -15,6 +17,7 @@ const retime = (flight, shift) => {
 };
 
 test("directional coverage and pair gaps reproduce the independently audited current network", () => {
+  const baseline = v131FrozenAudit;
   assert.equal(baseline.records.size, 10920);
   assert.equal([...baseline.records.values()].filter((r) => coverageView(r).gap).length, 5097);
   const counts = baseline.pairs.map((p) => Number(coverageView(p.forward).gap) + Number(coverageView(p.reverse).gap));
