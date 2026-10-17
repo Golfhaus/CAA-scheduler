@@ -63,7 +63,7 @@ def newroute(route,line,fleet,hub,north,south,morning_bhm,south_dep,south_back,n
  legs=[]
  for idx,(a,d,dep,arr) in enumerate(sequence,1):
   ld=local(a,dep);la=local(d,arr)
-  if not (270<=ld<= (1410 if a in base["operatingPolicy"]["hubs"] or a in base["operatingPolicy"]["focusCities"] else1260)):
+  if not (270 <= ld <= (1410 if a in (base["operatingPolicy"]["hubs"] + base["operatingPolicy"]["focusCities"]) else 1260)):
    raise ValueError(f"curfew departure {route}/{idx} {a} {ld}")
   legs.append({"id":f"V133-BHM-{route}-{idx}-{a}-{d}","origin":a,"destination":d,
                "departureMinute":ld,"arrivalMinute":la})
