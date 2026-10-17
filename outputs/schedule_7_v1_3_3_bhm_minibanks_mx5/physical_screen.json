@@ -1,7 +1,243 @@
 {
   "day_day": {
-    "pass": false,
-    "error": "ValueError('530: terminal at SYR does not meet a bank')",
-    "trace": "Traceback (most recent call last):\n  File \"/home/runner/work/CAA-scheduler/CAA-scheduler/scripts/screen_schedule_7_v1_3_3_bhm_mx5_rotations.py\", line 112, in <module>\n    overlay=make(label,adjust,swap)\n            ^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/CAA-scheduler/CAA-scheduler/scripts/screen_schedule_7_v1_3_3_bhm_mx5_rotations.py\", line 97, in make\n    route_spec,assign=newroute(route,line,fleet,hub,north,south,morning,sout+adjust,out_south+adjust,dep_n+adjust)\n                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/CAA-scheduler/CAA-scheduler/scripts/screen_schedule_7_v1_3_3_bhm_mx5_rotations.py\", line 53, in newroute\n    if arrival_h is None:raise ValueError(f\"{route}: terminal at {hub} does not meet a bank\")\n                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nValueError: 530: terminal at SYR does not meet a bank\n"
+    "pass": true,
+    "structure": "pass",
+    "overnight": "pass",
+    "planning": "pass",
+    "gate": "pass",
+    "operating": {
+      "checks": 25,
+      "passed": 17,
+      "failed": 0,
+      "warnings": 5,
+      "notEvaluated": 1,
+      "overridden": 2,
+      "effectiveErrorFindings": 0,
+      "effectiveWarningFindings": 161
+    },
+    "failed": [],
+    "fleets": {
+      "MAX9": {
+        "used": 24,
+        "capacity": 35
+      },
+      "CRJ900": {
+        "used": 30,
+        "capacity": 45
+      },
+      "CRJ700": {
+        "used": 58,
+        "capacity": 65
+      },
+      "CRJ200": {
+        "used": 76,
+        "capacity": 80
+      },
+      "findingCount": 0,
+      "effectiveFindingCount": 0,
+      "overriddenFindingCount": 0
+    },
+    "routes": [
+      {
+        "route": 529,
+        "line": "BA",
+        "fleet": "CRJ900",
+        "day": 1,
+        "legs": [
+          {
+            "id": "V133-BHM-529-1-DAY-ALB",
+            "origin": "DAY",
+            "destination": "ALB",
+            "departureMinute": 360,
+            "arrivalMinute": 460
+          },
+          {
+            "id": "V133-BHM-529-2-ALB-BHM",
+            "origin": "ALB",
+            "destination": "BHM",
+            "departureMinute": 520,
+            "arrivalMinute": 604
+          },
+          {
+            "id": "V133-BHM-529-3-BHM-SRQ",
+            "origin": "BHM",
+            "destination": "SRQ",
+            "departureMinute": 651,
+            "arrivalMinute": 801
+          },
+          {
+            "id": "V133-BHM-529-4-SRQ-BHM",
+            "origin": "SRQ",
+            "destination": "BHM",
+            "departureMinute": 848,
+            "arrivalMinute": 878
+          },
+          {
+            "id": "V133-BHM-529-5-BHM-ALB",
+            "origin": "BHM",
+            "destination": "ALB",
+            "departureMinute": 918,
+            "arrivalMinute": 1122
+          },
+          {
+            "id": "V133-BHM-529-6-ALB-DAY",
+            "origin": "ALB",
+            "destination": "DAY",
+            "departureMinute": 1165,
+            "arrivalMinute": 1265
+          }
+        ]
+      },
+      {
+        "route": 530,
+        "line": "BB",
+        "fleet": "CRJ900",
+        "day": 1,
+        "legs": [
+          {
+            "id": "V133-BHM-530-1-SYR-CAK",
+            "origin": "SYR",
+            "destination": "CAK",
+            "departureMinute": 368,
+            "arrivalMinute": 437
+          },
+          {
+            "id": "V133-BHM-530-2-CAK-BHM",
+            "origin": "CAK",
+            "destination": "BHM",
+            "departureMinute": 565,
+            "arrivalMinute": 606
+          },
+          {
+            "id": "V133-BHM-530-3-BHM-MYR",
+            "origin": "BHM",
+            "destination": "MYR",
+            "departureMinute": 653,
+            "arrivalMinute": 798
+          },
+          {
+            "id": "V133-BHM-530-4-MYR-BHM",
+            "origin": "MYR",
+            "destination": "BHM",
+            "departureMinute": 855,
+            "arrivalMinute": 880
+          },
+          {
+            "id": "V133-BHM-530-5-BHM-CAK",
+            "origin": "BHM",
+            "destination": "CAK",
+            "departureMinute": 920,
+            "arrivalMinute": 1081
+          },
+          {
+            "id": "V133-BHM-530-6-CAK-SYR",
+            "origin": "CAK",
+            "destination": "SYR",
+            "departureMinute": 1221,
+            "arrivalMinute": 1290
+          }
+        ]
+      },
+      {
+        "route": 357,
+        "line": "BC",
+        "fleet": "CRJ700",
+        "day": 1,
+        "legs": [
+          {
+            "id": "V133-BHM-357-1-SYR-ISP",
+            "origin": "SYR",
+            "destination": "ISP",
+            "departureMinute": 368,
+            "arrivalMinute": 426
+          },
+          {
+            "id": "V133-BHM-357-2-ISP-BHM",
+            "origin": "ISP",
+            "destination": "BHM",
+            "departureMinute": 525,
+            "arrivalMinute": 610
+          },
+          {
+            "id": "V133-BHM-357-3-BHM-PGD",
+            "origin": "BHM",
+            "destination": "PGD",
+            "departureMinute": 655,
+            "arrivalMinute": 814
+          },
+          {
+            "id": "V133-BHM-357-4-PGD-BHM",
+            "origin": "PGD",
+            "destination": "BHM",
+            "departureMinute": 921,
+            "arrivalMinute": 960
+          },
+          {
+            "id": "V133-BHM-357-5-BHM-ISP",
+            "origin": "BHM",
+            "destination": "ISP",
+            "departureMinute": 1000,
+            "arrivalMinute": 1205
+          },
+          {
+            "id": "V133-BHM-357-6-ISP-SYR",
+            "origin": "ISP",
+            "destination": "SYR",
+            "departureMinute": 1245,
+            "arrivalMinute": 1303
+          }
+        ]
+      },
+      {
+        "route": 358,
+        "line": "BD",
+        "fleet": "CRJ700",
+        "day": 1,
+        "legs": [
+          {
+            "id": "V133-BHM-358-1-DAY-HVN",
+            "origin": "DAY",
+            "destination": "HVN",
+            "departureMinute": 360,
+            "arrivalMinute": 467
+          },
+          {
+            "id": "V133-BHM-358-2-HVN-BHM",
+            "origin": "HVN",
+            "destination": "BHM",
+            "departureMinute": 532,
+            "arrivalMinute": 620
+          },
+          {
+            "id": "V133-BHM-358-3-BHM-CHS",
+            "origin": "BHM",
+            "destination": "CHS",
+            "departureMinute": 665,
+            "arrivalMinute": 805
+          },
+          {
+            "id": "V133-BHM-358-4-CHS-BHM",
+            "origin": "CHS",
+            "destination": "BHM",
+            "departureMinute": 909,
+            "arrivalMinute": 929
+          },
+          {
+            "id": "V133-BHM-358-5-BHM-HVN",
+            "origin": "BHM",
+            "destination": "HVN",
+            "departureMinute": 969,
+            "arrivalMinute": 1177
+          },
+          {
+            "id": "V133-BHM-358-6-HVN-DAY",
+            "origin": "HVN",
+            "destination": "DAY",
+            "departureMinute": 1217,
+            "arrivalMinute": 1324
+          }
+        ]
+      }
+    ]
   }
 }
