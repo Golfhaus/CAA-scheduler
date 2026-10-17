@@ -1,0 +1,36 @@
+name: Screen v1.3.3 BHM four-aircraft mini-banks
+on:
+  push:
+    branches:
+      - schedule-7-v1.3.3-bhm-mini-banks
+    paths:
+      - '.github/workflows/v133-bhm-minibanks.yml'
+      - 'scripts/screen_schedule_7_v1_3_3_bhm_minibanks.py'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: v133-bhm-minibanks
+  cancel-in-progress: true
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -e .
+      - name: Generate and native-screen four-aircraft BHM candidates
+        run: python scripts/screen_schedule_7_v1_3_3_bhm_minibanks.py
+      - name: Archive feasibility reports without publishing
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f outputs/schedule_7_v1_3_3_bhm_minibanks/
+          if ! git diff --cached --quiet; then
+            git commit -m "Record v1.3.3 BHM spare-fleet feasibility evidence [skip ci]"
+            git restore --worktree .
+            git pull --rebase origin schedule-7-v1.3.3-bhm-mini-banks
+            git push
+          fi
