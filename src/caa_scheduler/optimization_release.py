@@ -174,6 +174,8 @@ def build_optimization_release(
 
     canonical["schedule"].update(copy.deepcopy(config["schedule"]))
     canonical["gatePlan"]["label"] = canonical["schedule"]["label"]
+    if config.get("dropWorkingDraftProvenance", False):
+        canonical.setdefault("provenance", {}).pop("workingDraft", None)
     canonical.setdefault("provenance", {})["optimizationRelease"] = {
         "sourceScheduleId": config["sourceScheduleId"],
         "config": {

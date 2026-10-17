@@ -1,0 +1,523 @@
+{
+  "ALB_RDU": {
+    "summary": {
+      "added": 2,
+      "gains": 1,
+      "losses": 0,
+      "faster": 2,
+      "slower": 3,
+      "rawLosses": 0,
+      "rawGains": 1,
+      "lostPaths": 21,
+      "coverageDowngrades": 0
+    },
+    "addedProfiles": [
+      {
+        "flight": 2233,
+        "market": "ALB-RDU",
+        "od": 35.3,
+        "departure": "18:09",
+        "arrival": "19:52"
+      },
+      {
+        "flight": 2234,
+        "market": "RDU-ALB",
+        "od": 34.6,
+        "departure": "20:32",
+        "arrival": "22:15"
+      }
+    ],
+    "coverageLosses": [],
+    "coverageGains": [
+      {
+        "market": "RDU-ALB",
+        "origin": "RDU",
+        "destination": "ALB",
+        "demand": 34.6,
+        "beforeMinutes": 414,
+        "afterMinutes": 103
+      }
+    ],
+    "slowestJourneys": [
+      {
+        "market": "BUF-ALB",
+        "origin": "BUF",
+        "destination": "ALB",
+        "demand": 1.3,
+        "beforeMinutes": 123,
+        "afterMinutes": 124
+      },
+      {
+        "market": "ALB-PWM",
+        "origin": "ALB",
+        "destination": "PWM",
+        "demand": 0.6,
+        "beforeMinutes": 162,
+        "afterMinutes": 283
+      },
+      {
+        "market": "ROC-ALB",
+        "origin": "ROC",
+        "destination": "ALB",
+        "demand": 0.5,
+        "beforeMinutes": 119,
+        "afterMinutes": 124
+      }
+    ],
+    "downgrades": [],
+    "lostChoices": [
+      {
+        "key": "1863-2054",
+        "market": "ABE-ALB",
+        "reasonable": true,
+        "stops": 1,
+        "minutes": 294
+      },
+      {
+        "key": "2053",
+        "market": "ALB-SYR",
+        "reasonable": true,
+        "stops": 0,
+        "minutes": 44
+      },
+      {
+        "key": "2053-2041",
+        "market": "ALB-PIT",
+        "reasonable": true,
+        "stops": 1,
+        "minutes": 165
+      },
+      {
+        "key": "2053-2043",
+        "market": "ALB-ABE",
+        "reasonable": true,
+        "stops": 1,
+        "minutes": 151
+      },
+      {
+        "key": "2053-2045",
+        "market": "ALB-BUF",
+        "reasonable": true,
+        "stops": 1,
+        "minutes": 143
+      },
+      {
+        "key": "2053-2047",
+        "market": "ALB-ORH",
+        "reasonable": false,
+        "stops": 1,
+        "minutes": 158
+      },
+      {
+        "key": "2053-2052",
+        "market": "ALB-PWM",
+        "reasonable": true,
+        "stops": 1,
+        "minutes": 162
+      },
+      {
+        "key": "2053-2056",
+        "market": "ALB-HVN",
+        "reasonable": false,
+        "stops": 1,
+        "minutes": 142
+      },
+      {
+        "key": "1791-2054",
+        "market": "BDL-ALB",
+        "reasonable": false,
+        "stops": 1,
+        "minutes": 294
+      },
+      {
+        "key": "1776-2054",
+        "market": "BGR-ALB",
+        "reasonable": true,
+        "stops": 1,
+        "minutes": 319
+      },
+      {
+        "key": "2038-2054",
+        "market": "BNA-ALB",
+        "reasonable": true,
+        "stops": 1,
+        "minutes": 214
+      },
+      {
+        "key": "1830-2054",
+        "market": "BTV-ALB",
+        "reasonable": false,
+        "stops": 1,
+        "minutes": 294
+      },
+      {
+        "key": "2051-2054",
+        "market": "BUF-ALB",
+        "reasonable": true,
+        "stops": 1,
+        "minutes": 123
+      },
+      {
+        "key": "1684-2054",
+        "market": "BWI-ALB",
+        "reasonable": true,
+        "stops": 1,
+        "minutes": 304
+      },
+      {
+        "key": "1671-2054",
+        "market": "CAK-ALB",
+        "reasonable": true,
+        "stops": 1,
+        "minutes": 309
+      },
+      {
+        "key": "1312-2054",
+        "market": "CLT-ALB",
+        "reasonable": true,
+        "stops": 1,
+        "minutes": 344
+      },
+      {
+        "key": "1131-2054",
+        "market": "FLL-ALB",
+        "reasonable": true,
+        "stops": 1,
+        "minutes": 414
+      },
+      {
+        "key": "1856-2054",
+        "market": "HPN-ALB",
+        "reasonable": false,
+        "stops": 1,
+        "minutes": 294
+      },
+      {
+        "key": "2055-2054",
+        "market": "HVN-ALB",
+        "reasonable": false,
+        "stops": 1,
+        "minutes": 140
+      },
+      {
+        "key": "1231-2054",
+        "market": "PIE-ALB",
+        "reasonable": true,
+        "stops": 1,
+        "minutes": 409
+      },
+      {
+        "key": "1232-2054",
+        "market": "PIE-ALB",
+        "reasonable": true,
+        "stops": 1,
+        "minutes": 379
+      },
+      {
+        "key": "2049-2054",
+        "market": "PWM-ALB",
+        "reasonable": true,
+        "stops": 1,
+        "minutes": 317
+      },
+      {
+        "key": "1154-2054",
+        "market": "RFD-ALB",
+        "reasonable": true,
+        "stops": 1,
+        "minutes": 349
+      },
+      {
+        "key": "2104-2054",
+        "market": "RFD-ALB",
+        "reasonable": true,
+        "stops": 1,
+        "minutes": 190
+      },
+      {
+        "key": "2040-2054",
+        "market": "ROC-ALB",
+        "reasonable": true,
+        "stops": 1,
+        "minutes": 119
+      },
+      {
+        "key": "1304-2054",
+        "market": "SRQ-ALB",
+        "reasonable": true,
+        "stops": 1,
+        "minutes": 419
+      },
+      {
+        "key": "2013-2054",
+        "market": "SWF-ALB",
+        "reasonable": false,
+        "stops": 1,
+        "minutes": 253
+      },
+      {
+        "key": "2054",
+        "market": "SYR-ALB",
+        "reasonable": true,
+        "stops": 0,
+        "minutes": 44
+      }
+    ]
+  },
+  "ALB_PIT": {
+    "summary": {
+      "added": 2,
+      "gains": 0,
+      "losses": 0,
+      "faster": 2,
+      "slower": 3,
+      "rawLosses": 0,
+      "rawGains": 0,
+      "lostPaths": 21,
+      "coverageDowngrades": 0
+    },
+    "addedProfiles": [
+      {
+        "flight": 2233,
+        "market": "ALB-PIT",
+        "od": 6.4,
+        "departure": "18:09",
+        "arrival": "19:27"
+      },
+      {
+        "flight": 2234,
+        "market": "PIT-ALB",
+        "od": 6.7,
+        "departure": "20:07",
+        "arrival": "21:25"
+      }
+    ],
+    "coverageLosses": [],
+    "coverageGains": [],
+    "slowestJourneys": [
+      {
+        "market": "BUF-ALB",
+        "origin": "BUF",
+        "destination": "ALB",
+        "demand": 1.3,
+        "beforeMinutes": 123,
+        "afterMinutes": 124
+      },
+      {
+        "market": "ALB-PWM",
+        "origin": "ALB",
+        "destination": "PWM",
+        "demand": 0.6,
+        "beforeMinutes": 162,
+        "afterMinutes": 283
+      },
+      {
+        "market": "ROC-ALB",
+        "origin": "ROC",
+        "destination": "ALB",
+        "demand": 0.5,
+        "beforeMinutes": 119,
+        "afterMinutes": 124
+      }
+    ],
+    "downgrades": [],
+    "lostChoices": [
+      {
+        "key": "1863-2054",
+        "market": "ABE-ALB",
+        "reasonable": true,
+        "stops": 1,
+        "minutes": 294
+      },
+      {
+        "key": "2053",
+        "market": "ALB-SYR",
+        "reasonable": true,
+        "stops": 0,
+        "minutes": 44
+      },
+      {
+        "key": "2053-2041",
+        "market": "ALB-PIT",
+        "reasonable": true,
+        "stops": 1,
+        "minutes": 165
+      },
+      {
+        "key": "2053-2043",
+        "market": "ALB-ABE",
+        "reasonable": true,
+        "stops": 1,
+        "minutes": 151
+      },
+      {
+        "key": "2053-2045",
+        "market": "ALB-BUF",
+        "reasonable": true,
+        "stops": 1,
+        "minutes": 143
+      },
+      {
+        "key": "2053-2047",
+        "market": "ALB-ORH",
+        "reasonable": false,
+        "stops": 1,
+        "minutes": 158
+      },
+      {
+        "key": "2053-2052",
+        "market": "ALB-PWM",
+        "reasonable": true,
+        "stops": 1,
+        "minutes": 162
+      },
+      {
+        "key": "2053-2056",
+        "market": "ALB-HVN",
+        "reasonable": false,
+        "stops": 1,
+        "minutes": 142
+      },
+      {
+        "key": "1791-2054",
+        "market": "BDL-ALB",
+        "reasonable": false,
+        "stops": 1,
+        "minutes": 294
+      },
+      {
+        "key": "1776-2054",
+        "market": "BGR-ALB",
+        "reasonable": true,
+        "stops": 1,
+        "minutes": 319
+      },
+      {
+        "key": "2038-2054",
+        "market": "BNA-ALB",
+        "reasonable": true,
+        "stops": 1,
+        "minutes": 214
+      },
+      {
+        "key": "1830-2054",
+        "market": "BTV-ALB",
+        "reasonable": false,
+        "stops": 1,
+        "minutes": 294
+      },
+      {
+        "key": "2051-2054",
+        "market": "BUF-ALB",
+        "reasonable": true,
+        "stops": 1,
+        "minutes": 123
+      },
+      {
+        "key": "1684-2054",
+        "market": "BWI-ALB",
+        "reasonable": true,
+        "stops": 1,
+        "minutes": 304
+      },
+      {
+        "key": "1671-2054",
+        "market": "CAK-ALB",
+        "reasonable": true,
+        "stops": 1,
+        "minutes": 309
+      },
+      {
+        "key": "1312-2054",
+        "market": "CLT-ALB",
+        "reasonable": true,
+        "stops": 1,
+        "minutes": 344
+      },
+      {
+        "key": "1131-2054",
+        "market": "FLL-ALB",
+        "reasonable": true,
+        "stops": 1,
+        "minutes": 414
+      },
+      {
+        "key": "1856-2054",
+        "market": "HPN-ALB",
+        "reasonable": false,
+        "stops": 1,
+        "minutes": 294
+      },
+      {
+        "key": "2055-2054",
+        "market": "HVN-ALB",
+        "reasonable": false,
+        "stops": 1,
+        "minutes": 140
+      },
+      {
+        "key": "1231-2054",
+        "market": "PIE-ALB",
+        "reasonable": true,
+        "stops": 1,
+        "minutes": 409
+      },
+      {
+        "key": "1232-2054",
+        "market": "PIE-ALB",
+        "reasonable": true,
+        "stops": 1,
+        "minutes": 379
+      },
+      {
+        "key": "2049-2054",
+        "market": "PWM-ALB",
+        "reasonable": true,
+        "stops": 1,
+        "minutes": 317
+      },
+      {
+        "key": "1154-2054",
+        "market": "RFD-ALB",
+        "reasonable": true,
+        "stops": 1,
+        "minutes": 349
+      },
+      {
+        "key": "2104-2054",
+        "market": "RFD-ALB",
+        "reasonable": true,
+        "stops": 1,
+        "minutes": 190
+      },
+      {
+        "key": "2040-2054",
+        "market": "ROC-ALB",
+        "reasonable": true,
+        "stops": 1,
+        "minutes": 119
+      },
+      {
+        "key": "1304-2054",
+        "market": "SRQ-ALB",
+        "reasonable": true,
+        "stops": 1,
+        "minutes": 419
+      },
+      {
+        "key": "2013-2054",
+        "market": "SWF-ALB",
+        "reasonable": false,
+        "stops": 1,
+        "minutes": 253
+      },
+      {
+        "key": "2054",
+        "market": "SYR-ALB",
+        "reasonable": true,
+        "stops": 0,
+        "minutes": 44
+      }
+    ]
+  }
+}

@@ -1,0 +1,42 @@
+name: Validate v1.3.2 selected R158 and R176 draft
+on:
+  push:
+    branches: [schedule-7-v1.3.2-maintenance-draft]
+    paths:
+      - '.github/workflows/v132-group-finalize.yml'
+      - 'scripts/stage_schedule_7_v1_3_2_group_selected.py'
+      - 'scripts/audit_schedule_7_v1_3_2_group_selected.mjs'
+      - 'config/optimizations/schedule_7_v1_3_2_r158_selected.json'
+      - 'config/optimizations/schedule_7_v1_3_2_r176_selected.json'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: v132-group-finalize
+  cancel-in-progress: true
+jobs:
+  build-and-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -e .
+      - name: Validate selected 1229-flight working draft
+        run: python scripts/stage_schedule_7_v1_3_2_group_selected.py
+      - name: Audit net itinerary impacts and utilization
+        run: node scripts/audit_schedule_7_v1_3_2_group_selected.mjs
+      - name: Latest routine regression
+        run: bash scripts/run_latest_regression.sh
+      - name: Commit validated unpublished artifacts
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f outputs/schedule_7_v1_3_2_group_selected/
+          if ! git diff --cached --quiet; then
+            git commit -m "Save validated v1.3.2 selected group schedule and network audit [skip ci]"
+            git restore --worktree .
+            git pull --rebase origin schedule-7-v1.3.2-maintenance-draft
+            git push
+          fi

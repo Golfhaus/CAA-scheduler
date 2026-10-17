@@ -1,0 +1,53 @@
+{
+  "baseSchedule": {
+    "scheduleId": "schedule_7_v1_3_2_draft"
+  },
+  "schedule": {
+    "id": "schedule_7_v1_3_2_draft",
+    "number": 7,
+    "version": "1.3.2-draft",
+    "label": "Schedule 7, Version 1.3.2 draft",
+    "status": "draft",
+    "fleetCounts": {
+      "MAX9": 35,
+      "CRJ900": 45,
+      "CRJ700": 65,
+      "CRJ200": 80
+    },
+    "connectionWindowMinutes": {
+      "minimum": 30,
+      "maximum": 240
+    }
+  },
+  "removeLegs": [
+    {
+      "legId": "PWM-SYR-CRJ200-01-IN",
+      "expectedRoute": 160
+    }
+  ],
+  "insertLegs": [
+    {
+      "id": "V132-FINAL-160-PIT-SYR-PIT",
+      "route": 160,
+      "origin": "SYR",
+      "destination": "PIT",
+      "departureMinute": 1125,
+      "arrivalMinute": 1191
+    },
+    {
+      "id": "V132-FINAL-160-PIT-PIT-PWM",
+      "route": 160,
+      "origin": "PIT",
+      "destination": "PWM",
+      "departureMinute": 1231,
+      "arrivalMinute": 1335
+    }
+  ],
+  "bankAssignmentsToAdd": [
+    {
+      "legId": "V132-FINAL-160-PIT-SYR-PIT",
+      "operation": "departure",
+      "bankId": "SYR-B6"
+    }
+  ]
+}

@@ -425,7 +425,22 @@ def validate_operating_rules(canonical: dict[str, Any]) -> dict[str, Any]:
         if all(target_flags):
             longest = 0
         elif not any(target_flags):
-            longest = len(target_flags)
+            # The cycle repeats forever. Its length is not a bound on the
+            # absence of a qualifying overnight, even for a one-day line.
+            rolling_errors.append(
+                _finding(
+                    line,
+                    f"Line {line} never reaches a target-city RON in its repeating cycle",
+                    line=line,
+                    cycleDays=len(target_flags),
+                    targetRonCount=0,
+                    longestRunWithoutTargetRon=None,
+                    unbounded=True,
+                    limit=rolling_limit,
+                    grace=grace,
+                )
+            )
+            continue
         else:
             doubled = target_flags + target_flags
             longest = current = 0
@@ -449,7 +464,7 @@ def validate_operating_rules(canonical: dict[str, Any]) -> dict[str, Any]:
             "§2.1 / Lesson 31",
             "error",
             rolling_errors,
-            f"Every line reaches a target RON within {rolling_limit + grace} days",
+            f"Every repeating line includes a target RON and has at most {rolling_limit + grace} consecutive non-target overnights",
         )
     )
     checks.append(

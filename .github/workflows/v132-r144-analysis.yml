@@ -1,0 +1,70 @@
+name: Stage v1.3.2 R144 and consolidation evidence
+on:
+  push:
+    branches:
+      - schedule-7-v1.3.2-maintenance-draft
+    paths:
+      - '.github/workflows/v132-r144-analysis.yml'
+      - 'scripts/stage_schedule_7_v1_3_2_r144.py'
+      - 'scripts/analyze_schedule_7_v1_3_2_consolidation.py'
+      - 'scripts/screen_schedule_7_v1_3_2_group_optimization.py'
+      - 'scripts/audit_schedule_7_v1_3_2_group_optimization.mjs'
+      - 'scripts/stage_schedule_7_v1_3_2_selected.py'
+      - 'scripts/screen_schedule_7_v1_3_2_daytime.py'
+      - 'scripts/audit_schedule_7_v1_3_2_daytime.mjs'
+      - 'scripts/screen_schedule_7_v1_3_2_daytime_refined.py'
+      - 'scripts/audit_schedule_7_v1_3_2_daytime_refined.mjs'
+      - 'scripts/screen_schedule_7_v1_3_2_r158_rebuild.py'
+      - 'scripts/audit_schedule_7_v1_3_2_r158_rebuild.mjs'
+  workflow_dispatch:
+concurrency:
+  group: v132-crj200-validation
+  cancel-in-progress: true
+permissions:
+  contents: write
+jobs:
+  validate-and-stage:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -e .
+      - name: Run pinned R144 integration and native checks
+        run: python scripts/stage_schedule_7_v1_3_2_r144.py
+      - name: Generate six-route holistic feasibility diagnostics
+        run: python scripts/analyze_schedule_7_v1_3_2_consolidation.py
+      - name: Screen coordinated CRJ200 operating-day improvements
+        run: python scripts/screen_schedule_7_v1_3_2_group_optimization.py
+      - name: Audit geographical network effects of accepted physical candidates
+        run: node scripts/audit_schedule_7_v1_3_2_group_optimization.mjs
+      - name: Stage selected draft
+        run: python scripts/stage_schedule_7_v1_3_2_selected.py
+      - name: Screen daytime R160 R176 R158 scenarios
+        run: python scripts/screen_schedule_7_v1_3_2_daytime.py
+      - name: Audit daytime scenario network effects
+        run: node scripts/audit_schedule_7_v1_3_2_daytime.mjs
+      - name: Test refined bank-aligned R160 R158 R176 alternatives
+        run: python scripts/screen_schedule_7_v1_3_2_daytime_refined.py
+      - name: Compare refined network opportunities
+        run: node scripts/audit_schedule_7_v1_3_2_daytime_refined.mjs
+      - name: Test R158 evening market replacement alternatives
+        run: python scripts/screen_schedule_7_v1_3_2_r158_rebuild.py
+      - name: Audit R158 evening alternate network effects
+        run: node scripts/audit_schedule_7_v1_3_2_r158_rebuild.mjs
+      - name: Keep checks green before committing evidence
+        run: bash scripts/run_latest_regression.sh
+      - name: Commit unpublished validated staging artifacts
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f outputs/schedule_7_v1_3_2_r144_accepted/ outputs/schedule_7_v1_3_2_consolidation/ outputs/schedule_7_v1_3_2_group_optimization/ outputs/schedule_7_v1_3_2_selected/ outputs/schedule_7_v1_3_2_daytime_screen/ outputs/schedule_7_v1_3_2_daytime_refined/ outputs/schedule_7_v1_3_2_r158_rebuild/
+          if ! git diff --cached --quiet; then
+            git commit -m "Record validated unpublished v1.3.2 R144 and consolidation diagnostics [skip ci]"
+            git restore --worktree .
+            git pull --rebase origin schedule-7-v1.3.2-maintenance-draft
+            git push
+          fi

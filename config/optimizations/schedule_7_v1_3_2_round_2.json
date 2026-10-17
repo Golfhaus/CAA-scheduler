@@ -1,0 +1,96 @@
+{
+  "baseSchedule": {
+    "scheduleId": "schedule_7_v1_3_2_draft",
+    "canonical": "outputs/schedule_7_v1_3_2_maintenance/base_maintenance_canonical.json",
+    "sha256": "c4d61a0e5ac75354774e7462e360c523ed795de7de61d9e750c28ed960c6817c",
+    "commit": "771b424a6e97a680d575fc3e70fdb5e5376aaaed"
+  },
+  "schedule": {
+    "id": "schedule_7_v1_3_2_draft",
+    "number": 7,
+    "version": "1.3.2-draft",
+    "label": "Schedule 7, Version 1.3.2 draft",
+    "status": "draft",
+    "fleetCounts": {
+      "MAX9": 35,
+      "CRJ900": 45,
+      "CRJ700": 65,
+      "CRJ200": 80
+    },
+    "connectionWindowMinutes": {
+      "minimum": 30,
+      "maximum": 240
+    }
+  },
+  "retimeLegs": [
+    {
+      "legId": "ABE-MYR-CRJ900-01-IN",
+      "expectedDepartureMinute": 675,
+      "expectedArrivalMinute": 768,
+      "departureMinute": 510,
+      "arrivalMinute": 603
+    },
+    {
+      "legId": "ABE-SFB-CRJ900-01-OUT",
+      "expectedDepartureMinute": 810,
+      "expectedArrivalMinute": 947,
+      "departureMinute": 645,
+      "arrivalMinute": 782
+    }
+  ],
+  "removeLegs": [
+    {
+      "legId": "CHS-SFB-CRJ900-01-OUT",
+      "expectedRoute": 501
+    },
+    {
+      "legId": "CHS-SFB-CRJ900-01-IN",
+      "expectedRoute": 501
+    }
+  ],
+  "insertLegs": [
+    {
+      "id": "R501-REVIEW-SFB-RFD",
+      "route": 501,
+      "origin": "SFB",
+      "destination": "RFD",
+      "departureMinute": 855,
+      "arrivalMinute": 949
+    },
+    {
+      "id": "R501-REVIEW-RFD-SFB",
+      "route": 501,
+      "origin": "RFD",
+      "destination": "SFB",
+      "departureMinute": 989,
+      "arrivalMinute": 1203
+    }
+  ],
+  "schemaVersion": "1.0.0",
+  "id": "schedule-7-v1.3.2-r501-rfd",
+  "approval": {
+    "scope": "User-approved R501 RFD replacement, October 14, 2026",
+    "publication": "Not authorized"
+  },
+  "acceptedR501": {
+    "option": "rfd_later_turn",
+    "removedFlights": [
+      1257,
+      1258
+    ],
+    "addedFlights": [
+      2217,
+      2218
+    ],
+    "retimingMinutes": {
+      "1256": -165,
+      "1219": -165
+    },
+    "newBlockMinutes": 174,
+    "maximumTurnMinutes": 147,
+    "nonstopLosses": [
+      "CHS-SFB",
+      "SFB-CHS"
+    ]
+  }
+}

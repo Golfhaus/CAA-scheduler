@@ -67,7 +67,7 @@ test("routing selector identifies every current route by number, day, line and f
   const options = routingDetailOptions(canonical);
   assert.equal(options.length, 184);
   assert.equal(new Set(options.map((option) => option.id)).size, options.length);
-  assert.deepEqual(options.find((option) => option.id === "323"), {id: "323", route: 323, line: "AK", day: 3, fleet: "CRJ700"});
+  assert.deepEqual(options.find((option) => option.id === "323"), {id: "323", route: 323, line: "AK", day: entry.id === "schedule_7_v1_3_2" ? 6 : 3, fleet: "CRJ700"});
   assert.ok(options.every((option, index) => !index || Number(options[index - 1].route) < Number(option.route)));
   assert.equal(buildRoutingDetails(canonical, gates, "missing"), null);
 });

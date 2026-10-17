@@ -22,9 +22,9 @@ class TwoDayGrowthTests(unittest.TestCase):
         cls.candidate = CANONICAL
 
     def test_released_sequence_and_consolidated_lines(self):
-        self.assertEqual(SCHEDULE_ID, "schedule_7_v1_3_1")
+        self.assertIn(SCHEDULE_ID, {"schedule_7_v1_3_1", "schedule_7_v1_3_2"})
         self.assertEqual(self.candidate["schedule"]["status"], "released")
-        self.assertEqual(len(self.candidate["legs"]), 1214)
+        self.assertEqual(len(self.candidate["legs"]), 1229 if SCHEDULE_ID == "schedule_7_v1_3_2" else 1214)
         new = sorted((l for l in self.candidate["legs"] if l["id"].startswith("V120-2MAX-")),
                      key=lambda l: l["flight"])
         self.assertEqual([l["flight"] for l in new], list(range(2083, 2099)))
@@ -63,7 +63,10 @@ class TwoDayGrowthTests(unittest.TestCase):
     def test_operating_planning_and_overnight_checks_and_no_extra_stand_use(self):
         self.assertEqual(validate_schedule(self.candidate)["status"], "pass")
         operating = validate_operating_rules(self.candidate)
-        self.assertEqual(operating["summary"]["effectiveErrorFindings"], 0)
+        expected_maintenance = {"AC", "AO", "AQ"} if SCHEDULE_ID == "schedule_7_v1_3_1" and (ROOT / "config/optimizations/schedule_7_v1_3_2_round_1.json").exists() else set()
+        maintenance = next(c for c in operating["checks"] if c["id"] == "rolling_ron_window")
+        self.assertEqual({f["id"] for f in maintenance["findings"]}, expected_maintenance)
+        self.assertEqual(operating["summary"]["effectiveErrorFindings"], len(expected_maintenance))
         self.assertFalse(any(c["hardStop"] and c["status"] == "fail" for c in operating["checks"]))
         self.assertEqual(validate_overnight_turns(self.candidate)["status"], "pass")
         self.assertEqual(validate_planning_snapshot(reconstruct_planning_snapshot(self.candidate), self.candidate)["status"], "pass")

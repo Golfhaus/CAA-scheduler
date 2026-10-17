@@ -1,0 +1,1205 @@
+{
+  "R160_SYR_PIT_PWM": {
+    "summary": {
+      "added": 2,
+      "gains": 0,
+      "losses": 1,
+      "faster": 2,
+      "slower": 5,
+      "rawLosses": 1,
+      "rawGains": 0,
+      "lostPaths": 49,
+      "coverageDowngrades": 14
+    },
+    "addedProfiles": [
+      {
+        "flight": 2237,
+        "market": "SYR-PIT",
+        "od": 2.5,
+        "departure": "18:45",
+        "arrival": "19:51"
+      },
+      {
+        "flight": 2238,
+        "market": "PIT-PWM",
+        "od": 9.3,
+        "departure": "20:31",
+        "arrival": "22:15"
+      }
+    ],
+    "coverageLosses": [
+      {
+        "market": "MCI-PWM",
+        "origin": "MCI",
+        "destination": "PWM",
+        "demand": 7.2,
+        "beforeMinutes": 363,
+        "afterMinutes": null
+      }
+    ],
+    "coverageGains": [],
+    "slowestJourneys": [
+      {
+        "market": "BLV-PWM",
+        "origin": "BLV",
+        "destination": "PWM",
+        "demand": 7.1,
+        "beforeMinutes": 523,
+        "afterMinutes": 573
+      },
+      {
+        "market": "SAT-PWM",
+        "origin": "SAT",
+        "destination": "PWM",
+        "demand": 6.3,
+        "beforeMinutes": 623,
+        "afterMinutes": 793
+      },
+      {
+        "market": "DAY-PWM",
+        "origin": "DAY",
+        "destination": "PWM",
+        "demand": 1.7,
+        "beforeMinutes": 483,
+        "afterMinutes": 502
+      },
+      {
+        "market": "JAN-PWM",
+        "origin": "JAN",
+        "destination": "PWM",
+        "demand": 0.8,
+        "beforeMinutes": 566,
+        "afterMinutes": 583
+      },
+      {
+        "market": "ALB-PWM",
+        "origin": "ALB",
+        "destination": "PWM",
+        "demand": 0.6,
+        "beforeMinutes": 283,
+        "afterMinutes": 303
+      }
+    ],
+    "downgrades": [
+      {
+        "market": "AUS-PWM",
+        "demand": 10.9,
+        "oldStops": 2,
+        "newStops": null
+      },
+      {
+        "market": "BHM-PWM",
+        "demand": 3.5,
+        "oldStops": 2,
+        "newStops": null
+      },
+      {
+        "market": "CID-PWM",
+        "demand": 1.4,
+        "oldStops": 2,
+        "newStops": null
+      },
+      {
+        "market": "COU-PWM",
+        "demand": 0.2,
+        "oldStops": 2,
+        "newStops": null
+      },
+      {
+        "market": "DLH-PWM",
+        "demand": 0.4,
+        "oldStops": 2,
+        "newStops": null
+      },
+      {
+        "market": "DSM-PWM",
+        "demand": 2.4,
+        "oldStops": 2,
+        "newStops": null
+      },
+      {
+        "market": "FSD-PWM",
+        "demand": 0.9,
+        "oldStops": 2,
+        "newStops": null
+      },
+      {
+        "market": "HRL-PWM",
+        "demand": 0.4,
+        "oldStops": 2,
+        "newStops": null
+      },
+      {
+        "market": "ICT-PWM",
+        "demand": 1.1,
+        "oldStops": 2,
+        "newStops": null
+      },
+      {
+        "market": "LIT-PWM",
+        "demand": 1.9,
+        "oldStops": 2,
+        "newStops": null
+      },
+      {
+        "market": "MCI-PWM",
+        "demand": 7.2,
+        "oldStops": 1,
+        "newStops": null
+      },
+      {
+        "market": "OMA-PWM",
+        "demand": 3.2,
+        "oldStops": 2,
+        "newStops": null
+      },
+      {
+        "market": "SHV-PWM",
+        "demand": 0.4,
+        "oldStops": 2,
+        "newStops": null
+      },
+      {
+        "market": "TUL-PWM",
+        "demand": 2.3,
+        "oldStops": 2,
+        "newStops": null
+      }
+    ],
+    "lostChoices": [
+      {
+        "key": "1821-1952-1701",
+        "market": "ABE-PWM",
+        "reasonable": false,
+        "stops": 2,
+        "minutes": 473
+      },
+      {
+        "key": "1755-1701",
+        "market": "ALB-PWM",
+        "reasonable": true,
+        "stops": 1,
+        "minutes": 283
+      },
+      {
+        "key": "1942-1952-1701",
+        "market": "ALB-PWM",
+        "reasonable": false,
+        "stops": 2,
+        "minutes": 440
+      },
+      {
+        "key": "2185-1952-1701",
+        "market": "ALB-PWM",
+        "reasonable": false,
+        "stops": 2,
+        "minutes": 593
+      },
+      {
+        "key": "1083-1439-1701",
+        "market": "AUS-PWM",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 710
+      },
+      {
+        "key": "1084-1439-1701",
+        "market": "AUS-PWM",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 658
+      },
+      {
+        "key": "1921-1952-1701",
+        "market": "BDL-PWM",
+        "reasonable": false,
+        "stops": 2,
+        "minutes": 443
+      },
+      {
+        "key": "1410-1439-1701",
+        "market": "BHM-PWM",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 558
+      },
+      {
+        "key": "1357-1439-1701",
+        "market": "BLV-PWM",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 523
+      },
+      {
+        "key": "1079-1439-1701",
+        "market": "BNA-PWM",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 648
+      },
+      {
+        "key": "1293-1952-1701",
+        "market": "BNA-PWM",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 513
+      },
+      {
+        "key": "1829-1701",
+        "market": "BTV-PWM",
+        "reasonable": false,
+        "stops": 1,
+        "minutes": 293
+      },
+      {
+        "key": "1417-1952-1701",
+        "market": "BWI-PWM",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 463
+      },
+      {
+        "key": "1930-1952-1701",
+        "market": "BWI-PWM",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 411
+      },
+      {
+        "key": "1670-1701",
+        "market": "CAK-PWM",
+        "reasonable": true,
+        "stops": 1,
+        "minutes": 313
+      },
+      {
+        "key": "1394-1952-1701",
+        "market": "CHS-PWM",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 488
+      },
+      {
+        "key": "1719-1439-1701",
+        "market": "CID-PWM",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 613
+      },
+      {
+        "key": "1311-1701",
+        "market": "CLT-PWM",
+        "reasonable": true,
+        "stops": 1,
+        "minutes": 343
+      },
+      {
+        "key": "1834-1439-1701",
+        "market": "COU-PWM",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 598
+      },
+      {
+        "key": "1045-1439-1701",
+        "market": "DAL-PWM",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 543
+      },
+      {
+        "key": "1206-1952-1701",
+        "market": "DAL-PWM",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 576
+      },
+      {
+        "key": "1567-1952-1701",
+        "market": "DAY-PWM",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 483
+      },
+      {
+        "key": "1692-1439-1701",
+        "market": "DLH-PWM",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 523
+      },
+      {
+        "key": "1735-1439-1701",
+        "market": "DSM-PWM",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 603
+      },
+      {
+        "key": "1736-1439-1701",
+        "market": "DSM-PWM",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 503
+      },
+      {
+        "key": "1113-1952-1701",
+        "market": "FLL-PWM",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 538
+      },
+      {
+        "key": "1130-1701",
+        "market": "FLL-PWM",
+        "reasonable": true,
+        "stops": 1,
+        "minutes": 413
+      },
+      {
+        "key": "1679-1439-1701",
+        "market": "FSD-PWM",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 523
+      },
+      {
+        "key": "2234-1952-1701",
+        "market": "GSO-PWM",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 461
+      },
+      {
+        "key": "1323-1952-1701",
+        "market": "HOU-PWM",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 598
+      },
+      {
+        "key": "1855-1701",
+        "market": "HPN-PWM",
+        "reasonable": true,
+        "stops": 1,
+        "minutes": 293
+      },
+      {
+        "key": "1448-1439-1701",
+        "market": "HRL-PWM",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 749
+      },
+      {
+        "key": "1880-1701",
+        "market": "HVN-PWM",
+        "reasonable": false,
+        "stops": 1,
+        "minutes": 293
+      },
+      {
+        "key": "1651-1439-1701",
+        "market": "ICT-PWM",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 608
+      },
+      {
+        "key": "1894-1701",
+        "market": "ISP-PWM",
+        "reasonable": true,
+        "stops": 1,
+        "minutes": 298
+      },
+      {
+        "key": "1500-1439-1701",
+        "market": "JAN-PWM",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 566
+      },
+      {
+        "key": "1532-1439-1701",
+        "market": "LIT-PWM",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 583
+      },
+      {
+        "key": "1439-1701",
+        "market": "MCI-PWM",
+        "reasonable": true,
+        "stops": 1,
+        "minutes": 363
+      },
+      {
+        "key": "1840-1701",
+        "market": "MHT-PWM",
+        "reasonable": false,
+        "stops": 1,
+        "minutes": 298
+      },
+      {
+        "key": "1936-1952-1701",
+        "market": "MHT-PWM",
+        "reasonable": false,
+        "stops": 2,
+        "minutes": 432
+      },
+      {
+        "key": "1275-1952-1701",
+        "market": "MSY-PWM",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 563
+      },
+      {
+        "key": "1638-1439-1701",
+        "market": "OMA-PWM",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 603
+      },
+      {
+        "key": "1639-1439-1701",
+        "market": "OMA-PWM",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 553
+      },
+      {
+        "key": "1197-1439-1701",
+        "market": "PGD-PWM",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 618
+      },
+      {
+        "key": "2100-1952-1701",
+        "market": "PGD-PWM",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 448
+      },
+      {
+        "key": "1389-1439-1701",
+        "market": "PHF-PWM",
+        "reasonable": false,
+        "stops": 2,
+        "minutes": 563
+      },
+      {
+        "key": "1952-1701",
+        "market": "PHF-PWM",
+        "reasonable": true,
+        "stops": 1,
+        "minutes": 283
+      },
+      {
+        "key": "1179-1952-1701",
+        "market": "PIE-PWM",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 533
+      },
+      {
+        "key": "1230-1701",
+        "market": "PIE-PWM",
+        "reasonable": true,
+        "stops": 1,
+        "minutes": 403
+      },
+      {
+        "key": "1288-1952-1701",
+        "market": "PVD-PWM",
+        "reasonable": false,
+        "stops": 2,
+        "minutes": 498
+      },
+      {
+        "key": "1137-1439-1701",
+        "market": "RDU-PWM",
+        "reasonable": false,
+        "stops": 2,
+        "minutes": 693
+      },
+      {
+        "key": "1118-1952-1701",
+        "market": "RFD-PWM",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 533
+      },
+      {
+        "key": "1948-1952-1701",
+        "market": "ROC-PWM",
+        "reasonable": false,
+        "stops": 2,
+        "minutes": 440
+      },
+      {
+        "key": "1194-1439-1701",
+        "market": "SAT-PWM",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 623
+      },
+      {
+        "key": "1496-1952-1701",
+        "market": "SAV-PWM",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 498
+      },
+      {
+        "key": "1052-1701",
+        "market": "SFB-PWM",
+        "reasonable": true,
+        "stops": 1,
+        "minutes": 383
+      },
+      {
+        "key": "1070-1952-1701",
+        "market": "SFB-PWM",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 518
+      },
+      {
+        "key": "1598-1439-1701",
+        "market": "SHV-PWM",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 648
+      },
+      {
+        "key": "1303-1701",
+        "market": "SRQ-PWM",
+        "reasonable": true,
+        "stops": 1,
+        "minutes": 418
+      },
+      {
+        "key": "1701",
+        "market": "SYR-PWM",
+        "reasonable": true,
+        "stops": 0,
+        "minutes": 68
+      },
+      {
+        "key": "2146-1439-1701",
+        "market": "TUL-PWM",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 463
+      }
+    ]
+  },
+  "R160_SYR_BDL_PWM": {
+    "summary": {
+      "added": 2,
+      "gains": 1,
+      "losses": 1,
+      "faster": 2,
+      "slower": 5,
+      "rawLosses": 1,
+      "rawGains": 0,
+      "lostPaths": 49,
+      "coverageDowngrades": 14
+    },
+    "addedProfiles": [
+      {
+        "flight": 2237,
+        "market": "SYR-BDL",
+        "od": 0.6,
+        "departure": "18:45",
+        "arrival": "19:39"
+      },
+      {
+        "flight": 2238,
+        "market": "BDL-PWM",
+        "od": 0.6,
+        "departure": "20:19",
+        "arrival": "21:10"
+      }
+    ],
+    "coverageLosses": [
+      {
+        "market": "MCI-PWM",
+        "origin": "MCI",
+        "destination": "PWM",
+        "demand": 7.2,
+        "beforeMinutes": 363,
+        "afterMinutes": null
+      }
+    ],
+    "coverageGains": [
+      {
+        "market": "BDL-PWM",
+        "origin": "BDL",
+        "destination": "PWM",
+        "demand": 0.6,
+        "beforeMinutes": null,
+        "afterMinutes": 51
+      }
+    ],
+    "slowestJourneys": [
+      {
+        "market": "BLV-PWM",
+        "origin": "BLV",
+        "destination": "PWM",
+        "demand": 7.1,
+        "beforeMinutes": 523,
+        "afterMinutes": 573
+      },
+      {
+        "market": "SAT-PWM",
+        "origin": "SAT",
+        "destination": "PWM",
+        "demand": 6.3,
+        "beforeMinutes": 623,
+        "afterMinutes": 793
+      },
+      {
+        "market": "DAY-PWM",
+        "origin": "DAY",
+        "destination": "PWM",
+        "demand": 1.7,
+        "beforeMinutes": 483,
+        "afterMinutes": 502
+      },
+      {
+        "market": "JAN-PWM",
+        "origin": "JAN",
+        "destination": "PWM",
+        "demand": 0.8,
+        "beforeMinutes": 566,
+        "afterMinutes": 583
+      },
+      {
+        "market": "ALB-PWM",
+        "origin": "ALB",
+        "destination": "PWM",
+        "demand": 0.6,
+        "beforeMinutes": 283,
+        "afterMinutes": 303
+      }
+    ],
+    "downgrades": [
+      {
+        "market": "AUS-PWM",
+        "demand": 10.9,
+        "oldStops": 2,
+        "newStops": null
+      },
+      {
+        "market": "BHM-PWM",
+        "demand": 3.5,
+        "oldStops": 2,
+        "newStops": null
+      },
+      {
+        "market": "CID-PWM",
+        "demand": 1.4,
+        "oldStops": 2,
+        "newStops": null
+      },
+      {
+        "market": "COU-PWM",
+        "demand": 0.2,
+        "oldStops": 2,
+        "newStops": null
+      },
+      {
+        "market": "DLH-PWM",
+        "demand": 0.4,
+        "oldStops": 2,
+        "newStops": null
+      },
+      {
+        "market": "DSM-PWM",
+        "demand": 2.4,
+        "oldStops": 2,
+        "newStops": null
+      },
+      {
+        "market": "FSD-PWM",
+        "demand": 0.9,
+        "oldStops": 2,
+        "newStops": null
+      },
+      {
+        "market": "HRL-PWM",
+        "demand": 0.4,
+        "oldStops": 2,
+        "newStops": null
+      },
+      {
+        "market": "ICT-PWM",
+        "demand": 1.1,
+        "oldStops": 2,
+        "newStops": null
+      },
+      {
+        "market": "LIT-PWM",
+        "demand": 1.9,
+        "oldStops": 2,
+        "newStops": null
+      },
+      {
+        "market": "MCI-PWM",
+        "demand": 7.2,
+        "oldStops": 1,
+        "newStops": null
+      },
+      {
+        "market": "OMA-PWM",
+        "demand": 3.2,
+        "oldStops": 2,
+        "newStops": null
+      },
+      {
+        "market": "SHV-PWM",
+        "demand": 0.4,
+        "oldStops": 2,
+        "newStops": null
+      },
+      {
+        "market": "TUL-PWM",
+        "demand": 2.3,
+        "oldStops": 2,
+        "newStops": null
+      }
+    ],
+    "lostChoices": [
+      {
+        "key": "1821-1952-1701",
+        "market": "ABE-PWM",
+        "reasonable": false,
+        "stops": 2,
+        "minutes": 473
+      },
+      {
+        "key": "1755-1701",
+        "market": "ALB-PWM",
+        "reasonable": true,
+        "stops": 1,
+        "minutes": 283
+      },
+      {
+        "key": "1942-1952-1701",
+        "market": "ALB-PWM",
+        "reasonable": false,
+        "stops": 2,
+        "minutes": 440
+      },
+      {
+        "key": "2185-1952-1701",
+        "market": "ALB-PWM",
+        "reasonable": false,
+        "stops": 2,
+        "minutes": 593
+      },
+      {
+        "key": "1083-1439-1701",
+        "market": "AUS-PWM",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 710
+      },
+      {
+        "key": "1084-1439-1701",
+        "market": "AUS-PWM",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 658
+      },
+      {
+        "key": "1921-1952-1701",
+        "market": "BDL-PWM",
+        "reasonable": false,
+        "stops": 2,
+        "minutes": 443
+      },
+      {
+        "key": "1410-1439-1701",
+        "market": "BHM-PWM",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 558
+      },
+      {
+        "key": "1357-1439-1701",
+        "market": "BLV-PWM",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 523
+      },
+      {
+        "key": "1079-1439-1701",
+        "market": "BNA-PWM",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 648
+      },
+      {
+        "key": "1293-1952-1701",
+        "market": "BNA-PWM",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 513
+      },
+      {
+        "key": "1829-1701",
+        "market": "BTV-PWM",
+        "reasonable": false,
+        "stops": 1,
+        "minutes": 293
+      },
+      {
+        "key": "1417-1952-1701",
+        "market": "BWI-PWM",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 463
+      },
+      {
+        "key": "1930-1952-1701",
+        "market": "BWI-PWM",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 411
+      },
+      {
+        "key": "1670-1701",
+        "market": "CAK-PWM",
+        "reasonable": true,
+        "stops": 1,
+        "minutes": 313
+      },
+      {
+        "key": "1394-1952-1701",
+        "market": "CHS-PWM",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 488
+      },
+      {
+        "key": "1719-1439-1701",
+        "market": "CID-PWM",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 613
+      },
+      {
+        "key": "1311-1701",
+        "market": "CLT-PWM",
+        "reasonable": true,
+        "stops": 1,
+        "minutes": 343
+      },
+      {
+        "key": "1834-1439-1701",
+        "market": "COU-PWM",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 598
+      },
+      {
+        "key": "1045-1439-1701",
+        "market": "DAL-PWM",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 543
+      },
+      {
+        "key": "1206-1952-1701",
+        "market": "DAL-PWM",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 576
+      },
+      {
+        "key": "1567-1952-1701",
+        "market": "DAY-PWM",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 483
+      },
+      {
+        "key": "1692-1439-1701",
+        "market": "DLH-PWM",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 523
+      },
+      {
+        "key": "1735-1439-1701",
+        "market": "DSM-PWM",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 603
+      },
+      {
+        "key": "1736-1439-1701",
+        "market": "DSM-PWM",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 503
+      },
+      {
+        "key": "1113-1952-1701",
+        "market": "FLL-PWM",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 538
+      },
+      {
+        "key": "1130-1701",
+        "market": "FLL-PWM",
+        "reasonable": true,
+        "stops": 1,
+        "minutes": 413
+      },
+      {
+        "key": "1679-1439-1701",
+        "market": "FSD-PWM",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 523
+      },
+      {
+        "key": "2234-1952-1701",
+        "market": "GSO-PWM",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 461
+      },
+      {
+        "key": "1323-1952-1701",
+        "market": "HOU-PWM",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 598
+      },
+      {
+        "key": "1855-1701",
+        "market": "HPN-PWM",
+        "reasonable": true,
+        "stops": 1,
+        "minutes": 293
+      },
+      {
+        "key": "1448-1439-1701",
+        "market": "HRL-PWM",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 749
+      },
+      {
+        "key": "1880-1701",
+        "market": "HVN-PWM",
+        "reasonable": false,
+        "stops": 1,
+        "minutes": 293
+      },
+      {
+        "key": "1651-1439-1701",
+        "market": "ICT-PWM",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 608
+      },
+      {
+        "key": "1894-1701",
+        "market": "ISP-PWM",
+        "reasonable": true,
+        "stops": 1,
+        "minutes": 298
+      },
+      {
+        "key": "1500-1439-1701",
+        "market": "JAN-PWM",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 566
+      },
+      {
+        "key": "1532-1439-1701",
+        "market": "LIT-PWM",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 583
+      },
+      {
+        "key": "1439-1701",
+        "market": "MCI-PWM",
+        "reasonable": true,
+        "stops": 1,
+        "minutes": 363
+      },
+      {
+        "key": "1840-1701",
+        "market": "MHT-PWM",
+        "reasonable": false,
+        "stops": 1,
+        "minutes": 298
+      },
+      {
+        "key": "1936-1952-1701",
+        "market": "MHT-PWM",
+        "reasonable": false,
+        "stops": 2,
+        "minutes": 432
+      },
+      {
+        "key": "1275-1952-1701",
+        "market": "MSY-PWM",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 563
+      },
+      {
+        "key": "1638-1439-1701",
+        "market": "OMA-PWM",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 603
+      },
+      {
+        "key": "1639-1439-1701",
+        "market": "OMA-PWM",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 553
+      },
+      {
+        "key": "1197-1439-1701",
+        "market": "PGD-PWM",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 618
+      },
+      {
+        "key": "2100-1952-1701",
+        "market": "PGD-PWM",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 448
+      },
+      {
+        "key": "1389-1439-1701",
+        "market": "PHF-PWM",
+        "reasonable": false,
+        "stops": 2,
+        "minutes": 563
+      },
+      {
+        "key": "1952-1701",
+        "market": "PHF-PWM",
+        "reasonable": true,
+        "stops": 1,
+        "minutes": 283
+      },
+      {
+        "key": "1179-1952-1701",
+        "market": "PIE-PWM",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 533
+      },
+      {
+        "key": "1230-1701",
+        "market": "PIE-PWM",
+        "reasonable": true,
+        "stops": 1,
+        "minutes": 403
+      },
+      {
+        "key": "1288-1952-1701",
+        "market": "PVD-PWM",
+        "reasonable": false,
+        "stops": 2,
+        "minutes": 498
+      },
+      {
+        "key": "1137-1439-1701",
+        "market": "RDU-PWM",
+        "reasonable": false,
+        "stops": 2,
+        "minutes": 693
+      },
+      {
+        "key": "1118-1952-1701",
+        "market": "RFD-PWM",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 533
+      },
+      {
+        "key": "1948-1952-1701",
+        "market": "ROC-PWM",
+        "reasonable": false,
+        "stops": 2,
+        "minutes": 440
+      },
+      {
+        "key": "1194-1439-1701",
+        "market": "SAT-PWM",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 623
+      },
+      {
+        "key": "1496-1952-1701",
+        "market": "SAV-PWM",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 498
+      },
+      {
+        "key": "1052-1701",
+        "market": "SFB-PWM",
+        "reasonable": true,
+        "stops": 1,
+        "minutes": 383
+      },
+      {
+        "key": "1070-1952-1701",
+        "market": "SFB-PWM",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 518
+      },
+      {
+        "key": "1598-1439-1701",
+        "market": "SHV-PWM",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 648
+      },
+      {
+        "key": "1303-1701",
+        "market": "SRQ-PWM",
+        "reasonable": true,
+        "stops": 1,
+        "minutes": 418
+      },
+      {
+        "key": "1701",
+        "market": "SYR-PWM",
+        "reasonable": true,
+        "stops": 0,
+        "minutes": 68
+      },
+      {
+        "key": "2146-1439-1701",
+        "market": "TUL-PWM",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 463
+      }
+    ]
+  }
+}

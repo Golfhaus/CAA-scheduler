@@ -1,0 +1,7301 @@
+{
+  "approval": "Investigation only; no schedule changes adopted",
+  "baseCommit": "4d72b3eaea5d3659e09e7c8b252ca889f2ac21a9",
+  "provenance": {
+    "baseCommit": "4d72b3eaea5d3659e09e7c8b252ca889f2ac21a9",
+    "baseConfiguration": "config/optimizations/schedule_7_v1_3_2_round_5.json",
+    "baseConfigurationSha256": "39adb9117982414f14c071bcd46ff01bfc0f162ed6a69e4e064697b32f78b3bf",
+    "baseSha256": "4de8042da82c48f67a991551476e620f01b17cade91d75b5189e9a53ecbb48b0",
+    "demandSha256": "49c04922ee0cebb3fef8aad923e04bd11874587a263c9511358ddb833b860bc6",
+    "method": "Same app enumeration, 30\u2013240 minute connections, 2.25x geographic screen. Competitive opportunity indices split underlying OD over choices within 30 minutes of fastest at the same stop count and exclude connections when a nonstop exists; they are not passenger-load forecasts."
+  },
+  "preferredNative": {
+    "valid": true,
+    "operating": {
+      "checks": 25,
+      "passed": 19,
+      "failed": 0,
+      "warnings": 3,
+      "notEvaluated": 1,
+      "overridden": 2,
+      "effectiveErrorFindings": 0,
+      "effectiveWarningFindings": 158
+    },
+    "structural": "pass",
+    "overnight": "pass",
+    "planning": "pass",
+    "failedChecks": [],
+    "gate": "pass",
+    "stands": {
+      "claims": 15,
+      "minutes": 3061
+    },
+    "overlay": {
+      "baseSchedule": {
+        "scheduleId": "schedule_7_v1_3_2_draft",
+        "sha256": "4de8042da82c48f67a991551476e620f01b17cade91d75b5189e9a53ecbb48b0",
+        "canonical": "data/schedules/schedule_7_v1_3_2_draft/canonical_schedule.json",
+        "commit": "4d72b3eaea5d3659e09e7c8b252ca889f2ac21a9"
+      },
+      "schedule": {
+        "id": "schedule_7_v1_3_2_draft",
+        "number": 7,
+        "version": "1.3.2-draft",
+        "label": "Schedule 7, Version 1.3.2 draft",
+        "status": "draft",
+        "fleetCounts": {
+          "MAX9": 35,
+          "CRJ900": 45,
+          "CRJ700": 65,
+          "CRJ200": 80
+        },
+        "connectionWindowMinutes": {
+          "minimum": 30,
+          "maximum": 240
+        }
+      },
+      "insertLegs": [
+        {
+          "id": "REVIEW-R144-JAN-JAX",
+          "route": 144,
+          "origin": "JAN",
+          "destination": "JAX",
+          "departureMinute": 270,
+          "arrivalMinute": 428
+        },
+        {
+          "id": "REVIEW-R144-JAX-JAN",
+          "route": 144,
+          "origin": "JAX",
+          "destination": "JAN",
+          "departureMinute": 468,
+          "arrivalMinute": 506
+        },
+        {
+          "id": "REVIEW-R144-MCI-BNA",
+          "route": 144,
+          "origin": "MCI",
+          "destination": "BNA",
+          "departureMinute": 1036,
+          "arrivalMinute": 1131
+        },
+        {
+          "id": "REVIEW-R144-BNA-MCI",
+          "route": 144,
+          "origin": "BNA",
+          "destination": "MCI",
+          "departureMinute": 1171,
+          "arrivalMinute": 1266
+        }
+      ],
+      "bankAssignmentsToAdd": [
+        {
+          "legId": "REVIEW-R144-JAN-JAX",
+          "operation": "arrival",
+          "bankId": "JAX-B3"
+        },
+        {
+          "legId": "REVIEW-R144-JAX-JAN",
+          "operation": "departure",
+          "bankId": "JAX-B4"
+        },
+        {
+          "legId": "REVIEW-R144-MCI-BNA",
+          "operation": "departure",
+          "bankId": "MCI-B8"
+        },
+        {
+          "legId": "REVIEW-R144-BNA-MCI",
+          "operation": "arrival",
+          "bankId": "MCI-M11"
+        }
+      ],
+      "retimeLegs": [
+        {
+          "legId": "JAN-MCI-CRJ200-02-OUT",
+          "expectedDepartureMinute": 490,
+          "expectedArrivalMinute": 593,
+          "departureMinute": 582,
+          "arrivalMinute": 685
+        },
+        {
+          "legId": "MCI-OKC-CRJ200-01-OUT",
+          "expectedDepartureMinute": 735,
+          "expectedArrivalMinute": 806,
+          "departureMinute": 785,
+          "arrivalMinute": 856
+        },
+        {
+          "legId": "MCI-SHV-CRJ200-01-OUT",
+          "expectedDepartureMinute": 1135,
+          "expectedArrivalMinute": 1228,
+          "departureMinute": 1335,
+          "arrivalMinute": 1428
+        }
+      ],
+      "bankAssignmentReplacements": [
+        {
+          "legId": "JAN-MCI-CRJ200-02-OUT",
+          "operation": "arrival",
+          "bankId": "MCI-B5"
+        },
+        {
+          "legId": "MCI-OKC-CRJ200-01-OUT",
+          "operation": "departure",
+          "bankId": "MCI-B6"
+        },
+        {
+          "legId": "MCI-SHV-CRJ200-01-OUT",
+          "operation": "departure",
+          "bankId": "MCI-M12"
+        }
+      ],
+      "schemaVersion": "1.0.0",
+      "id": "schedule-7-v1.3.2-r144-jax-bna-proposal",
+      "approval": {
+        "status": "Proposal only; not applied",
+        "scope": "Holistic R144 rebuild retaining all four existing sectors",
+        "publication": "Not authorized"
+      },
+      "metrics": {
+        "blockMinutesBefore": 338,
+        "blockMinutesAfter": 724,
+        "maximumHoldBefore": 142,
+        "maximumHoldAfter": 100,
+        "flightCountBefore": 4,
+        "flightCountAfter": 8,
+        "reasonableCoverageGains": 26,
+        "reasonableCoverageLosses": 3,
+        "reasonableFastestFaster": 48,
+        "reasonableFastestSlower": 31,
+        "rawItineraryChoicesLost": 82,
+        "reasonableItineraryChoicesLost": 52,
+        "commercialCaveat": "The added JAN-JAX pair has modest competitive opportunity indices (21.8 / 35.7); these are not load forecasts."
+      }
+    }
+  },
+  "preferredRoute": [
+    {
+      "id": "REVIEW-R144-JAN-JAX",
+      "route": 144,
+      "line": "AI",
+      "fleet": "CRJ200",
+      "day": 1,
+      "sequenceWithinRoute": 1,
+      "pairing": 280,
+      "flight": 2227,
+      "origin": "JAN",
+      "destination": "JAX",
+      "departure": "04:30",
+      "arrival": "07:08",
+      "departureMinute": 270,
+      "arrivalMinute": 428
+    },
+    {
+      "id": "REVIEW-R144-JAX-JAN",
+      "route": 144,
+      "line": "AI",
+      "fleet": "CRJ200",
+      "day": 1,
+      "sequenceWithinRoute": 2,
+      "pairing": 279,
+      "flight": 2228,
+      "origin": "JAX",
+      "destination": "JAN",
+      "departure": "07:48",
+      "arrival": "08:26",
+      "departureMinute": 468,
+      "arrivalMinute": 506
+    },
+    {
+      "id": "JAN-MCI-CRJ200-02-OUT",
+      "route": 144,
+      "line": "AI",
+      "fleet": "CRJ200",
+      "day": 1,
+      "sequenceWithinRoute": 3,
+      "pairing": 777,
+      "flight": 1500,
+      "origin": "JAN",
+      "destination": "MCI",
+      "departure": "09:42",
+      "arrival": "11:25",
+      "departureMinute": 582,
+      "arrivalMinute": 685
+    },
+    {
+      "id": "MCI-OKC-CRJ200-01-OUT",
+      "route": 144,
+      "line": "AI",
+      "fleet": "CRJ200",
+      "day": 1,
+      "sequenceWithinRoute": 4,
+      "pairing": 410,
+      "flight": 1553,
+      "origin": "MCI",
+      "destination": "OKC",
+      "departure": "13:05",
+      "arrival": "14:16",
+      "departureMinute": 785,
+      "arrivalMinute": 856
+    },
+    {
+      "id": "MCI-OKC-CRJ200-01-IN",
+      "route": 144,
+      "line": "AI",
+      "fleet": "CRJ200",
+      "day": 1,
+      "sequenceWithinRoute": 5,
+      "pairing": 411,
+      "flight": 1554,
+      "origin": "OKC",
+      "destination": "MCI",
+      "departure": "15:25",
+      "arrival": "16:36",
+      "departureMinute": 925,
+      "arrivalMinute": 996
+    },
+    {
+      "id": "REVIEW-R144-MCI-BNA",
+      "route": 144,
+      "line": "AI",
+      "fleet": "CRJ200",
+      "day": 1,
+      "sequenceWithinRoute": 6,
+      "pairing": 566,
+      "flight": 2229,
+      "origin": "MCI",
+      "destination": "BNA",
+      "departure": "17:16",
+      "arrival": "18:51",
+      "departureMinute": 1036,
+      "arrivalMinute": 1131
+    },
+    {
+      "id": "REVIEW-R144-BNA-MCI",
+      "route": 144,
+      "line": "AI",
+      "fleet": "CRJ200",
+      "day": 1,
+      "sequenceWithinRoute": 7,
+      "pairing": 567,
+      "flight": 2230,
+      "origin": "BNA",
+      "destination": "MCI",
+      "departure": "19:31",
+      "arrival": "21:06",
+      "departureMinute": 1171,
+      "arrivalMinute": 1266
+    },
+    {
+      "id": "MCI-SHV-CRJ200-01-OUT",
+      "route": 144,
+      "line": "AI",
+      "fleet": "CRJ200",
+      "day": 1,
+      "sequenceWithinRoute": 8,
+      "pairing": 153,
+      "flight": 1596,
+      "origin": "MCI",
+      "destination": "SHV",
+      "departure": "22:15",
+      "arrival": "23:48",
+      "departureMinute": 1335,
+      "arrivalMinute": 1428
+    }
+  ],
+  "preferredNetwork": {
+    "geo": {
+      "lostPaths": 52,
+      "gained": [
+        {
+          "market": "ELP-BNA",
+          "origin": "ELP",
+          "destination": "BNA",
+          "demand": 19,
+          "beforeMinutes": 592,
+          "afterMinutes": 341
+        },
+        {
+          "market": "SFB-SHV",
+          "origin": "SFB",
+          "destination": "SHV",
+          "demand": 9.8,
+          "beforeMinutes": null,
+          "afterMinutes": 343
+        },
+        {
+          "market": "BNA-SHV",
+          "origin": "BNA",
+          "destination": "SHV",
+          "demand": 8.1,
+          "beforeMinutes": null,
+          "afterMinutes": 257
+        },
+        {
+          "market": "CRP-BNA",
+          "origin": "CRP",
+          "destination": "BNA",
+          "demand": 6.1,
+          "beforeMinutes": null,
+          "afterMinutes": 376
+        },
+        {
+          "market": "JAN-FLL",
+          "origin": "JAN",
+          "destination": "FLL",
+          "demand": 5.7,
+          "beforeMinutes": null,
+          "afterMinutes": 386
+        },
+        {
+          "market": "PIT-JAN",
+          "origin": "PIT",
+          "destination": "JAN",
+          "demand": 4.4,
+          "beforeMinutes": 340,
+          "afterMinutes": 271
+        },
+        {
+          "market": "CMH-SHV",
+          "origin": "CMH",
+          "destination": "SHV",
+          "demand": 3.2,
+          "beforeMinutes": 599,
+          "afterMinutes": 354
+        },
+        {
+          "market": "OMA-SHV",
+          "origin": "OMA",
+          "destination": "SHV",
+          "demand": 2.2,
+          "beforeMinutes": null,
+          "afterMinutes": 190
+        },
+        {
+          "market": "JAN-GSP",
+          "origin": "JAN",
+          "destination": "GSP",
+          "demand": 2.1,
+          "beforeMinutes": null,
+          "afterMinutes": 384
+        },
+        {
+          "market": "CAK-SHV",
+          "origin": "CAK",
+          "destination": "SHV",
+          "demand": 2,
+          "beforeMinutes": 646,
+          "afterMinutes": 308
+        },
+        {
+          "market": "TYS-JAN",
+          "origin": "TYS",
+          "destination": "JAN",
+          "demand": 1.9,
+          "beforeMinutes": null,
+          "afterMinutes": 296
+        },
+        {
+          "market": "JAN-AVL",
+          "origin": "JAN",
+          "destination": "AVL",
+          "demand": 1.7,
+          "beforeMinutes": null,
+          "afterMinutes": 325
+        },
+        {
+          "market": "JAN-PVD",
+          "origin": "JAN",
+          "destination": "PVD",
+          "demand": 1.6,
+          "beforeMinutes": null,
+          "afterMinutes": 403
+        },
+        {
+          "market": "LEX-JAN",
+          "origin": "LEX",
+          "destination": "JAN",
+          "demand": 1.5,
+          "beforeMinutes": null,
+          "afterMinutes": 261
+        },
+        {
+          "market": "PGD-SHV",
+          "origin": "PGD",
+          "destination": "SHV",
+          "demand": 1.3,
+          "beforeMinutes": null,
+          "afterMinutes": 388
+        },
+        {
+          "market": "JAN-ILM",
+          "origin": "JAN",
+          "destination": "ILM",
+          "demand": 1.2,
+          "beforeMinutes": null,
+          "afterMinutes": 390
+        },
+        {
+          "market": "JAN-MYR",
+          "origin": "JAN",
+          "destination": "MYR",
+          "demand": 1.1,
+          "beforeMinutes": null,
+          "afterMinutes": 380
+        },
+        {
+          "market": "DAB-JAN",
+          "origin": "DAB",
+          "destination": "JAN",
+          "demand": 1,
+          "beforeMinutes": null,
+          "afterMinutes": 261
+        },
+        {
+          "market": "AGS-JAN",
+          "origin": "AGS",
+          "destination": "JAN",
+          "demand": 0.9,
+          "beforeMinutes": null,
+          "afterMinutes": 211
+        },
+        {
+          "market": "GNV-JAN",
+          "origin": "GNV",
+          "destination": "JAN",
+          "demand": 0.9,
+          "beforeMinutes": null,
+          "afterMinutes": 219
+        },
+        {
+          "market": "MSN-SHV",
+          "origin": "MSN",
+          "destination": "SHV",
+          "demand": 0.7,
+          "beforeMinutes": 678,
+          "afterMinutes": 374
+        },
+        {
+          "market": "DLH-OKC",
+          "origin": "DLH",
+          "destination": "OKC",
+          "demand": 0.6,
+          "beforeMinutes": 590,
+          "afterMinutes": 231
+        },
+        {
+          "market": "ICT-SHV",
+          "origin": "ICT",
+          "destination": "SHV",
+          "demand": 0.6,
+          "beforeMinutes": null,
+          "afterMinutes": 288
+        },
+        {
+          "market": "TLH-JAN",
+          "origin": "TLH",
+          "destination": "JAN",
+          "demand": 0.6,
+          "beforeMinutes": null,
+          "afterMinutes": 271
+        },
+        {
+          "market": "LBB-SHV",
+          "origin": "LBB",
+          "destination": "SHV",
+          "demand": 0.5,
+          "beforeMinutes": null,
+          "afterMinutes": 338
+        },
+        {
+          "market": "MCN-JAN",
+          "origin": "MCN",
+          "destination": "JAN",
+          "demand": 0,
+          "beforeMinutes": null,
+          "afterMinutes": 211
+        }
+      ],
+      "lost": [
+        {
+          "market": "ATW-OKC",
+          "origin": "ATW",
+          "destination": "OKC",
+          "demand": 1.7,
+          "beforeMinutes": 354,
+          "afterMinutes": 387
+        },
+        {
+          "market": "DSM-SHV",
+          "origin": "DSM",
+          "destination": "SHV",
+          "demand": 0.8,
+          "beforeMinutes": 293,
+          "afterMinutes": null
+        },
+        {
+          "market": "ATW-SHV",
+          "origin": "ATW",
+          "destination": "SHV",
+          "demand": 0.2,
+          "beforeMinutes": 230,
+          "afterMinutes": 633
+        }
+      ],
+      "faster": [
+        {
+          "market": "BNA-SAT",
+          "origin": "BNA",
+          "destination": "SAT",
+          "demand": 68.4,
+          "beforeMinutes": 386,
+          "afterMinutes": 320
+        },
+        {
+          "market": "MKE-BNA",
+          "origin": "MKE",
+          "destination": "BNA",
+          "demand": 52.7,
+          "beforeMinutes": 268,
+          "afterMinutes": 221
+        },
+        {
+          "market": "OKC-BNA",
+          "origin": "OKC",
+          "destination": "BNA",
+          "demand": 36.2,
+          "beforeMinutes": 399,
+          "afterMinutes": 206
+        },
+        {
+          "market": "DSM-BNA",
+          "origin": "DSM",
+          "destination": "BNA",
+          "demand": 31.9,
+          "beforeMinutes": 339,
+          "afterMinutes": 196
+        },
+        {
+          "market": "BNA-DSM",
+          "origin": "BNA",
+          "destination": "DSM",
+          "demand": 31.4,
+          "beforeMinutes": 241,
+          "afterMinutes": 175
+        },
+        {
+          "market": "CLT-OKC",
+          "origin": "CLT",
+          "destination": "OKC",
+          "demand": 21.1,
+          "beforeMinutes": 555,
+          "afterMinutes": 407
+        },
+        {
+          "market": "BNA-ELP",
+          "origin": "BNA",
+          "destination": "ELP",
+          "demand": 19.2,
+          "beforeMinutes": 384,
+          "afterMinutes": 318
+        },
+        {
+          "market": "ELP-BNA",
+          "origin": "ELP",
+          "destination": "BNA",
+          "demand": 19,
+          "beforeMinutes": 592,
+          "afterMinutes": 341
+        },
+        {
+          "market": "XNA-BNA",
+          "origin": "XNA",
+          "destination": "BNA",
+          "demand": 18.1,
+          "beforeMinutes": 386,
+          "afterMinutes": 193
+        },
+        {
+          "market": "CLT-SHV",
+          "origin": "CLT",
+          "destination": "SHV",
+          "demand": 8.2,
+          "beforeMinutes": 458,
+          "afterMinutes": 258
+        },
+        {
+          "market": "CHS-OKC",
+          "origin": "CHS",
+          "destination": "OKC",
+          "demand": 7.6,
+          "beforeMinutes": 555,
+          "afterMinutes": 476
+        },
+        {
+          "market": "RDU-JAN",
+          "origin": "RDU",
+          "destination": "JAN",
+          "demand": 7.5,
+          "beforeMinutes": 383,
+          "afterMinutes": 296
+        },
+        {
+          "market": "PHF-OKC",
+          "origin": "PHF",
+          "destination": "OKC",
+          "demand": 7.2,
+          "beforeMinutes": 390,
+          "afterMinutes": 271
+        },
+        {
+          "market": "PVD-OKC",
+          "origin": "PVD",
+          "destination": "OKC",
+          "demand": 5.1,
+          "beforeMinutes": 500,
+          "afterMinutes": 486
+        },
+        {
+          "market": "JAN-PIT",
+          "origin": "JAN",
+          "destination": "PIT",
+          "demand": 4.4,
+          "beforeMinutes": 319,
+          "afterMinutes": 299
+        },
+        {
+          "market": "PIT-JAN",
+          "origin": "PIT",
+          "destination": "JAN",
+          "demand": 4.4,
+          "beforeMinutes": 340,
+          "afterMinutes": 271
+        },
+        {
+          "market": "BNA-SGF",
+          "origin": "BNA",
+          "destination": "SGF",
+          "demand": 4,
+          "beforeMinutes": 335,
+          "afterMinutes": 269
+        },
+        {
+          "market": "JAN-BLV",
+          "origin": "JAN",
+          "destination": "BLV",
+          "demand": 3.5,
+          "beforeMinutes": 309,
+          "afterMinutes": 217
+        },
+        {
+          "market": "CMH-SHV",
+          "origin": "CMH",
+          "destination": "SHV",
+          "demand": 3.2,
+          "beforeMinutes": 599,
+          "afterMinutes": 354
+        },
+        {
+          "market": "JAN-OKC",
+          "origin": "JAN",
+          "destination": "OKC",
+          "demand": 3.2,
+          "beforeMinutes": 316,
+          "afterMinutes": 274
+        },
+        {
+          "market": "JAN-MKE",
+          "origin": "JAN",
+          "destination": "MKE",
+          "demand": 3.1,
+          "beforeMinutes": 329,
+          "afterMinutes": 237
+        },
+        {
+          "market": "PHF-JAN",
+          "origin": "PHF",
+          "destination": "JAN",
+          "demand": 3.1,
+          "beforeMinutes": 423,
+          "afterMinutes": 296
+        },
+        {
+          "market": "CAK-SHV",
+          "origin": "CAK",
+          "destination": "SHV",
+          "demand": 2,
+          "beforeMinutes": 646,
+          "afterMinutes": 308
+        },
+        {
+          "market": "JAN-PGD",
+          "origin": "JAN",
+          "destination": "PGD",
+          "demand": 1.8,
+          "beforeMinutes": 387,
+          "afterMinutes": 212
+        },
+        {
+          "market": "ELP-SHV",
+          "origin": "ELP",
+          "destination": "SHV",
+          "demand": 1.7,
+          "beforeMinutes": 438,
+          "afterMinutes": 261
+        },
+        {
+          "market": "MKE-SHV",
+          "origin": "MKE",
+          "destination": "SHV",
+          "demand": 1.7,
+          "beforeMinutes": 318,
+          "afterMinutes": 218
+        },
+        {
+          "market": "PGD-JAN",
+          "origin": "PGD",
+          "destination": "JAN",
+          "demand": 1.7,
+          "beforeMinutes": 263,
+          "afterMinutes": 211
+        },
+        {
+          "market": "JAN-BUF",
+          "origin": "JAN",
+          "destination": "BUF",
+          "demand": 1.5,
+          "beforeMinutes": 661,
+          "afterMinutes": 394
+        },
+        {
+          "market": "DAY-SHV",
+          "origin": "DAY",
+          "destination": "SHV",
+          "demand": 1.2,
+          "beforeMinutes": 438,
+          "afterMinutes": 393
+        },
+        {
+          "market": "JAN-DAY",
+          "origin": "JAN",
+          "destination": "DAY",
+          "demand": 1.2,
+          "beforeMinutes": 255,
+          "afterMinutes": 237
+        },
+        {
+          "market": "JAN-MDT",
+          "origin": "JAN",
+          "destination": "MDT",
+          "demand": 1.1,
+          "beforeMinutes": 682,
+          "afterMinutes": 590
+        },
+        {
+          "market": "JAN-AGS",
+          "origin": "JAN",
+          "destination": "AGS",
+          "demand": 0.9,
+          "beforeMinutes": 260,
+          "afterMinutes": 240
+        },
+        {
+          "market": "JAN-PWM",
+          "origin": "JAN",
+          "destination": "PWM",
+          "demand": 0.8,
+          "beforeMinutes": 658,
+          "afterMinutes": 566
+        },
+        {
+          "market": "JAN-ROC",
+          "origin": "JAN",
+          "destination": "ROC",
+          "demand": 0.8,
+          "beforeMinutes": 665,
+          "afterMinutes": 389
+        },
+        {
+          "market": "JAN-SYR",
+          "origin": "JAN",
+          "destination": "SYR",
+          "demand": 0.8,
+          "beforeMinutes": 452,
+          "afterMinutes": 308
+        },
+        {
+          "market": "FWA-SHV",
+          "origin": "FWA",
+          "destination": "SHV",
+          "demand": 0.7,
+          "beforeMinutes": 643,
+          "afterMinutes": 478
+        },
+        {
+          "market": "JAN-LBB",
+          "origin": "JAN",
+          "destination": "LBB",
+          "demand": 0.7,
+          "beforeMinutes": 349,
+          "afterMinutes": 257
+        },
+        {
+          "market": "MSN-SHV",
+          "origin": "MSN",
+          "destination": "SHV",
+          "demand": 0.7,
+          "beforeMinutes": 678,
+          "afterMinutes": 374
+        },
+        {
+          "market": "DLH-OKC",
+          "origin": "DLH",
+          "destination": "OKC",
+          "demand": 0.6,
+          "beforeMinutes": 590,
+          "afterMinutes": 231
+        },
+        {
+          "market": "JAN-FWA",
+          "origin": "JAN",
+          "destination": "FWA",
+          "demand": 0.6,
+          "beforeMinutes": 395,
+          "afterMinutes": 310
+        },
+        {
+          "market": "JAN-BTV",
+          "origin": "JAN",
+          "destination": "BTV",
+          "demand": 0.5,
+          "beforeMinutes": 677,
+          "afterMinutes": 402
+        },
+        {
+          "market": "JAN-MHT",
+          "origin": "JAN",
+          "destination": "MHT",
+          "demand": 0.5,
+          "beforeMinutes": 685,
+          "afterMinutes": 415
+        },
+        {
+          "market": "JAN-BGR",
+          "origin": "JAN",
+          "destination": "BGR",
+          "demand": 0.3,
+          "beforeMinutes": 705,
+          "afterMinutes": 595
+        },
+        {
+          "market": "JAN-ISP",
+          "origin": "JAN",
+          "destination": "ISP",
+          "demand": 0.1,
+          "beforeMinutes": 683,
+          "afterMinutes": 413
+        },
+        {
+          "market": "JAN-MCN",
+          "origin": "JAN",
+          "destination": "MCN",
+          "demand": 0,
+          "beforeMinutes": 259,
+          "afterMinutes": 239
+        },
+        {
+          "market": "JAN-ORH",
+          "origin": "JAN",
+          "destination": "ORH",
+          "demand": 0,
+          "beforeMinutes": 683,
+          "afterMinutes": 591
+        },
+        {
+          "market": "JAN-SWF",
+          "origin": "JAN",
+          "destination": "SWF",
+          "demand": 0,
+          "beforeMinutes": 477,
+          "afterMinutes": 389
+        },
+        {
+          "market": "SWF-OKC",
+          "origin": "SWF",
+          "destination": "OKC",
+          "demand": 0,
+          "beforeMinutes": 516,
+          "afterMinutes": 436
+        }
+      ],
+      "slower": [
+        {
+          "market": "BNA-OKC",
+          "origin": "BNA",
+          "destination": "OKC",
+          "demand": 36.4,
+          "beforeMinutes": 306,
+          "afterMinutes": 356
+        },
+        {
+          "market": "BLV-OKC",
+          "origin": "BLV",
+          "destination": "OKC",
+          "demand": 17.7,
+          "beforeMinutes": 181,
+          "afterMinutes": 231
+        },
+        {
+          "market": "RDU-OKC",
+          "origin": "RDU",
+          "destination": "OKC",
+          "demand": 16.9,
+          "beforeMinutes": 351,
+          "afterMinutes": 401
+        },
+        {
+          "market": "CAK-OKC",
+          "origin": "CAK",
+          "destination": "OKC",
+          "demand": 8.6,
+          "beforeMinutes": 466,
+          "afterMinutes": 516
+        },
+        {
+          "market": "JAN-RDU",
+          "origin": "JAN",
+          "destination": "RDU",
+          "demand": 7.6,
+          "beforeMinutes": 382,
+          "afterMinutes": 482
+        },
+        {
+          "market": "PGD-OKC",
+          "origin": "PGD",
+          "destination": "OKC",
+          "demand": 7.1,
+          "beforeMinutes": 276,
+          "afterMinutes": 326
+        },
+        {
+          "market": "RFD-SHV",
+          "origin": "RFD",
+          "destination": "SHV",
+          "demand": 5.9,
+          "beforeMinutes": 203,
+          "afterMinutes": 262
+        },
+        {
+          "market": "BUF-OKC",
+          "origin": "BUF",
+          "destination": "OKC",
+          "demand": 4.9,
+          "beforeMinutes": 441,
+          "afterMinutes": 491
+        },
+        {
+          "market": "PIE-SHV",
+          "origin": "PIE",
+          "destination": "SHV",
+          "demand": 4.3,
+          "beforeMinutes": 293,
+          "afterMinutes": 383
+        },
+        {
+          "market": "JAN-MAF",
+          "origin": "JAN",
+          "destination": "MAF",
+          "demand": 4.1,
+          "beforeMinutes": 263,
+          "afterMinutes": 308
+        },
+        {
+          "market": "OMA-OKC",
+          "origin": "OMA",
+          "destination": "OKC",
+          "demand": 3.9,
+          "beforeMinutes": 211,
+          "afterMinutes": 261
+        },
+        {
+          "market": "SYR-OKC",
+          "origin": "SYR",
+          "destination": "OKC",
+          "demand": 3.9,
+          "beforeMinutes": 346,
+          "afterMinutes": 396
+        },
+        {
+          "market": "DSM-OKC",
+          "origin": "DSM",
+          "destination": "OKC",
+          "demand": 3.6,
+          "beforeMinutes": 161,
+          "afterMinutes": 211
+        },
+        {
+          "market": "HRL-OKC",
+          "origin": "HRL",
+          "destination": "OKC",
+          "demand": 3.5,
+          "beforeMinutes": 407,
+          "afterMinutes": 457
+        },
+        {
+          "market": "JAN-PHF",
+          "origin": "JAN",
+          "destination": "PHF",
+          "demand": 3.4,
+          "beforeMinutes": 386,
+          "afterMinutes": 486
+        },
+        {
+          "market": "PWM-OKC",
+          "origin": "PWM",
+          "destination": "OKC",
+          "demand": 3,
+          "beforeMinutes": 596,
+          "afterMinutes": 646
+        },
+        {
+          "market": "ROC-OKC",
+          "origin": "ROC",
+          "destination": "OKC",
+          "demand": 2.8,
+          "beforeMinutes": 431,
+          "afterMinutes": 481
+        },
+        {
+          "market": "MHT-OKC",
+          "origin": "MHT",
+          "destination": "OKC",
+          "demand": 2.5,
+          "beforeMinutes": 451,
+          "afterMinutes": 501
+        },
+        {
+          "market": "CID-OKC",
+          "origin": "CID",
+          "destination": "OKC",
+          "demand": 2.2,
+          "beforeMinutes": 271,
+          "afterMinutes": 321
+        },
+        {
+          "market": "FSD-OKC",
+          "origin": "FSD",
+          "destination": "OKC",
+          "demand": 1.8,
+          "beforeMinutes": 181,
+          "afterMinutes": 231
+        },
+        {
+          "market": "LIT-OKC",
+          "origin": "LIT",
+          "destination": "OKC",
+          "demand": 1.8,
+          "beforeMinutes": 241,
+          "afterMinutes": 291
+        },
+        {
+          "market": "ATW-OKC",
+          "origin": "ATW",
+          "destination": "OKC",
+          "demand": 1.7,
+          "beforeMinutes": 354,
+          "afterMinutes": 387
+        },
+        {
+          "market": "BLV-SHV",
+          "origin": "BLV",
+          "destination": "SHV",
+          "demand": 1.6,
+          "beforeMinutes": 198,
+          "afterMinutes": 398
+        },
+        {
+          "market": "BTV-OKC",
+          "origin": "BTV",
+          "destination": "OKC",
+          "demand": 1.6,
+          "beforeMinutes": 446,
+          "afterMinutes": 496
+        },
+        {
+          "market": "BGR-OKC",
+          "origin": "BGR",
+          "destination": "OKC",
+          "demand": 0.9,
+          "beforeMinutes": 471,
+          "afterMinutes": 521
+        },
+        {
+          "market": "COU-OKC",
+          "origin": "COU",
+          "destination": "OKC",
+          "demand": 0.5,
+          "beforeMinutes": 256,
+          "afterMinutes": 306
+        },
+        {
+          "market": "FSD-SHV",
+          "origin": "FSD",
+          "destination": "SHV",
+          "demand": 0.4,
+          "beforeMinutes": 203,
+          "afterMinutes": 403
+        },
+        {
+          "market": "ATW-SHV",
+          "origin": "ATW",
+          "destination": "SHV",
+          "demand": 0.2,
+          "beforeMinutes": 230,
+          "afterMinutes": 633
+        },
+        {
+          "market": "ISP-OKC",
+          "origin": "ISP",
+          "destination": "OKC",
+          "demand": 0.2,
+          "beforeMinutes": 459,
+          "afterMinutes": 509
+        },
+        {
+          "market": "ORH-OKC",
+          "origin": "ORH",
+          "destination": "OKC",
+          "demand": 0.1,
+          "beforeMinutes": 451,
+          "afterMinutes": 501
+        },
+        {
+          "market": "HVN-OKC",
+          "origin": "HVN",
+          "destination": "OKC",
+          "demand": 0,
+          "beforeMinutes": 596,
+          "afterMinutes": 646
+        }
+      ]
+    },
+    "raw": {
+      "lostPaths": 82,
+      "gained": [
+        {
+          "market": "ELP-BNA",
+          "origin": "ELP",
+          "destination": "BNA",
+          "demand": 19,
+          "beforeMinutes": 592,
+          "afterMinutes": 341
+        },
+        {
+          "market": "JAN-BNA",
+          "origin": "JAN",
+          "destination": "BNA",
+          "demand": 11.3,
+          "beforeMinutes": null,
+          "afterMinutes": 402
+        },
+        {
+          "market": "SFB-SHV",
+          "origin": "SFB",
+          "destination": "SHV",
+          "demand": 9.8,
+          "beforeMinutes": null,
+          "afterMinutes": 343
+        },
+        {
+          "market": "BNA-SHV",
+          "origin": "BNA",
+          "destination": "SHV",
+          "demand": 8.1,
+          "beforeMinutes": null,
+          "afterMinutes": 257
+        },
+        {
+          "market": "CRP-BNA",
+          "origin": "CRP",
+          "destination": "BNA",
+          "demand": 6.1,
+          "beforeMinutes": null,
+          "afterMinutes": 376
+        },
+        {
+          "market": "JAN-FLL",
+          "origin": "JAN",
+          "destination": "FLL",
+          "demand": 5.7,
+          "beforeMinutes": 579,
+          "afterMinutes": 386
+        },
+        {
+          "market": "HOU-SHV",
+          "origin": "HOU",
+          "destination": "SHV",
+          "demand": 5.3,
+          "beforeMinutes": 638,
+          "afterMinutes": 343
+        },
+        {
+          "market": "PIT-JAN",
+          "origin": "PIT",
+          "destination": "JAN",
+          "demand": 4.4,
+          "beforeMinutes": 340,
+          "afterMinutes": 271
+        },
+        {
+          "market": "TUL-OKC",
+          "origin": "TUL",
+          "destination": "OKC",
+          "demand": 3.5,
+          "beforeMinutes": 530,
+          "afterMinutes": 171
+        },
+        {
+          "market": "CMH-SHV",
+          "origin": "CMH",
+          "destination": "SHV",
+          "demand": 3.2,
+          "beforeMinutes": 599,
+          "afterMinutes": 354
+        },
+        {
+          "market": "SBN-BNA",
+          "origin": "SBN",
+          "destination": "BNA",
+          "demand": 3.2,
+          "beforeMinutes": 469,
+          "afterMinutes": 313
+        },
+        {
+          "market": "DAL-SHV",
+          "origin": "DAL",
+          "destination": "SHV",
+          "demand": 2.8,
+          "beforeMinutes": 743,
+          "afterMinutes": 318
+        },
+        {
+          "market": "OMA-SHV",
+          "origin": "OMA",
+          "destination": "SHV",
+          "demand": 2.2,
+          "beforeMinutes": null,
+          "afterMinutes": 190
+        },
+        {
+          "market": "JAN-GSP",
+          "origin": "JAN",
+          "destination": "GSP",
+          "demand": 2.1,
+          "beforeMinutes": null,
+          "afterMinutes": 384
+        },
+        {
+          "market": "CAK-SHV",
+          "origin": "CAK",
+          "destination": "SHV",
+          "demand": 2,
+          "beforeMinutes": 646,
+          "afterMinutes": 308
+        },
+        {
+          "market": "TYS-JAN",
+          "origin": "TYS",
+          "destination": "JAN",
+          "demand": 1.9,
+          "beforeMinutes": 398,
+          "afterMinutes": 296
+        },
+        {
+          "market": "AUS-SHV",
+          "origin": "AUS",
+          "destination": "SHV",
+          "demand": 1.8,
+          "beforeMinutes": 638,
+          "afterMinutes": 338
+        },
+        {
+          "market": "JAN-AVL",
+          "origin": "JAN",
+          "destination": "AVL",
+          "demand": 1.7,
+          "beforeMinutes": null,
+          "afterMinutes": 325
+        },
+        {
+          "market": "JAN-PVD",
+          "origin": "JAN",
+          "destination": "PVD",
+          "demand": 1.6,
+          "beforeMinutes": null,
+          "afterMinutes": 403
+        },
+        {
+          "market": "LEX-JAN",
+          "origin": "LEX",
+          "destination": "JAN",
+          "demand": 1.5,
+          "beforeMinutes": 463,
+          "afterMinutes": 261
+        },
+        {
+          "market": "PGD-SHV",
+          "origin": "PGD",
+          "destination": "SHV",
+          "demand": 1.3,
+          "beforeMinutes": null,
+          "afterMinutes": 388
+        },
+        {
+          "market": "BHM-SHV",
+          "origin": "BHM",
+          "destination": "SHV",
+          "demand": 1.2,
+          "beforeMinutes": null,
+          "afterMinutes": 281
+        },
+        {
+          "market": "JAN-ILM",
+          "origin": "JAN",
+          "destination": "ILM",
+          "demand": 1.2,
+          "beforeMinutes": null,
+          "afterMinutes": 390
+        },
+        {
+          "market": "JAN-MYR",
+          "origin": "JAN",
+          "destination": "MYR",
+          "demand": 1.1,
+          "beforeMinutes": null,
+          "afterMinutes": 380
+        },
+        {
+          "market": "DAB-JAN",
+          "origin": "DAB",
+          "destination": "JAN",
+          "demand": 1,
+          "beforeMinutes": 586,
+          "afterMinutes": 261
+        },
+        {
+          "market": "AGS-JAN",
+          "origin": "AGS",
+          "destination": "JAN",
+          "demand": 0.9,
+          "beforeMinutes": 483,
+          "afterMinutes": 211
+        },
+        {
+          "market": "GNV-JAN",
+          "origin": "GNV",
+          "destination": "JAN",
+          "demand": 0.9,
+          "beforeMinutes": 593,
+          "afterMinutes": 219
+        },
+        {
+          "market": "MSN-SHV",
+          "origin": "MSN",
+          "destination": "SHV",
+          "demand": 0.7,
+          "beforeMinutes": 678,
+          "afterMinutes": 374
+        },
+        {
+          "market": "TUL-SHV",
+          "origin": "TUL",
+          "destination": "SHV",
+          "demand": 0.7,
+          "beforeMinutes": null,
+          "afterMinutes": 293
+        },
+        {
+          "market": "DLH-OKC",
+          "origin": "DLH",
+          "destination": "OKC",
+          "demand": 0.6,
+          "beforeMinutes": 590,
+          "afterMinutes": 231
+        },
+        {
+          "market": "ICT-SHV",
+          "origin": "ICT",
+          "destination": "SHV",
+          "demand": 0.6,
+          "beforeMinutes": null,
+          "afterMinutes": 288
+        },
+        {
+          "market": "TLH-JAN",
+          "origin": "TLH",
+          "destination": "JAN",
+          "demand": 0.6,
+          "beforeMinutes": 543,
+          "afterMinutes": 271
+        },
+        {
+          "market": "JAN-CHA",
+          "origin": "JAN",
+          "destination": "CHA",
+          "demand": 0.5,
+          "beforeMinutes": null,
+          "afterMinutes": 394
+        },
+        {
+          "market": "LBB-SHV",
+          "origin": "LBB",
+          "destination": "SHV",
+          "demand": 0.5,
+          "beforeMinutes": null,
+          "afterMinutes": 338
+        },
+        {
+          "market": "JAN-HSV",
+          "origin": "JAN",
+          "destination": "HSV",
+          "demand": 0.4,
+          "beforeMinutes": null,
+          "afterMinutes": 267
+        },
+        {
+          "market": "ECP-JAN",
+          "origin": "ECP",
+          "destination": "JAN",
+          "demand": 0.3,
+          "beforeMinutes": 488,
+          "afterMinutes": 216
+        },
+        {
+          "market": "JAN-SHV",
+          "origin": "JAN",
+          "destination": "SHV",
+          "demand": 0.2,
+          "beforeMinutes": null,
+          "afterMinutes": 283
+        },
+        {
+          "market": "MOB-JAN",
+          "origin": "MOB",
+          "destination": "JAN",
+          "demand": 0.1,
+          "beforeMinutes": 508,
+          "afterMinutes": 236
+        },
+        {
+          "market": "MCN-JAN",
+          "origin": "MCN",
+          "destination": "JAN",
+          "demand": 0,
+          "beforeMinutes": 483,
+          "afterMinutes": 211
+        }
+      ],
+      "lost": [
+        {
+          "market": "MAF-SHV",
+          "origin": "MAF",
+          "destination": "SHV",
+          "demand": 2.5,
+          "beforeMinutes": 253,
+          "afterMinutes": null
+        },
+        {
+          "market": "ATW-OKC",
+          "origin": "ATW",
+          "destination": "OKC",
+          "demand": 1.7,
+          "beforeMinutes": 354,
+          "afterMinutes": 387
+        },
+        {
+          "market": "OKC-SHV",
+          "origin": "OKC",
+          "destination": "SHV",
+          "demand": 1.3,
+          "beforeMinutes": 303,
+          "afterMinutes": null
+        },
+        {
+          "market": "DSM-SHV",
+          "origin": "DSM",
+          "destination": "SHV",
+          "demand": 0.8,
+          "beforeMinutes": 293,
+          "afterMinutes": null
+        },
+        {
+          "market": "XNA-SHV",
+          "origin": "XNA",
+          "destination": "SHV",
+          "demand": 0.5,
+          "beforeMinutes": 290,
+          "afterMinutes": null
+        },
+        {
+          "market": "HRL-SHV",
+          "origin": "HRL",
+          "destination": "SHV",
+          "demand": 0.3,
+          "beforeMinutes": 356,
+          "afterMinutes": null
+        },
+        {
+          "market": "ATW-SHV",
+          "origin": "ATW",
+          "destination": "SHV",
+          "demand": 0.2,
+          "beforeMinutes": 230,
+          "afterMinutes": 633
+        }
+      ],
+      "faster": [
+        {
+          "market": "BNA-SAT",
+          "origin": "BNA",
+          "destination": "SAT",
+          "demand": 68.4,
+          "beforeMinutes": 386,
+          "afterMinutes": 320
+        },
+        {
+          "market": "MKE-BNA",
+          "origin": "MKE",
+          "destination": "BNA",
+          "demand": 52.7,
+          "beforeMinutes": 268,
+          "afterMinutes": 221
+        },
+        {
+          "market": "OKC-BNA",
+          "origin": "OKC",
+          "destination": "BNA",
+          "demand": 36.2,
+          "beforeMinutes": 399,
+          "afterMinutes": 206
+        },
+        {
+          "market": "DSM-BNA",
+          "origin": "DSM",
+          "destination": "BNA",
+          "demand": 31.9,
+          "beforeMinutes": 339,
+          "afterMinutes": 196
+        },
+        {
+          "market": "BNA-DSM",
+          "origin": "BNA",
+          "destination": "DSM",
+          "demand": 31.4,
+          "beforeMinutes": 241,
+          "afterMinutes": 175
+        },
+        {
+          "market": "CLT-OKC",
+          "origin": "CLT",
+          "destination": "OKC",
+          "demand": 21.1,
+          "beforeMinutes": 555,
+          "afterMinutes": 407
+        },
+        {
+          "market": "BNA-ELP",
+          "origin": "BNA",
+          "destination": "ELP",
+          "demand": 19.2,
+          "beforeMinutes": 384,
+          "afterMinutes": 318
+        },
+        {
+          "market": "ELP-BNA",
+          "origin": "ELP",
+          "destination": "BNA",
+          "demand": 19,
+          "beforeMinutes": 592,
+          "afterMinutes": 341
+        },
+        {
+          "market": "XNA-BNA",
+          "origin": "XNA",
+          "destination": "BNA",
+          "demand": 18.1,
+          "beforeMinutes": 386,
+          "afterMinutes": 193
+        },
+        {
+          "market": "JAN-DAL",
+          "origin": "JAN",
+          "destination": "DAL",
+          "demand": 16.4,
+          "beforeMinutes": 421,
+          "afterMinutes": 329
+        },
+        {
+          "market": "JAN-CLT",
+          "origin": "JAN",
+          "destination": "CLT",
+          "demand": 11.6,
+          "beforeMinutes": 353,
+          "afterMinutes": 268
+        },
+        {
+          "market": "CLT-SHV",
+          "origin": "CLT",
+          "destination": "SHV",
+          "demand": 8.2,
+          "beforeMinutes": 458,
+          "afterMinutes": 258
+        },
+        {
+          "market": "CHS-OKC",
+          "origin": "CHS",
+          "destination": "OKC",
+          "demand": 7.6,
+          "beforeMinutes": 555,
+          "afterMinutes": 476
+        },
+        {
+          "market": "RDU-JAN",
+          "origin": "RDU",
+          "destination": "JAN",
+          "demand": 7.5,
+          "beforeMinutes": 383,
+          "afterMinutes": 296
+        },
+        {
+          "market": "JAN-AUS",
+          "origin": "JAN",
+          "destination": "AUS",
+          "demand": 7.2,
+          "beforeMinutes": 352,
+          "afterMinutes": 260
+        },
+        {
+          "market": "PHF-OKC",
+          "origin": "PHF",
+          "destination": "OKC",
+          "demand": 7.2,
+          "beforeMinutes": 390,
+          "afterMinutes": 271
+        },
+        {
+          "market": "MEM-BNA",
+          "origin": "MEM",
+          "destination": "BNA",
+          "demand": 7,
+          "beforeMinutes": 269,
+          "afterMinutes": 216
+        },
+        {
+          "market": "JAN-PIE",
+          "origin": "JAN",
+          "destination": "PIE",
+          "demand": 6.1,
+          "beforeMinutes": 402,
+          "afterMinutes": 310
+        },
+        {
+          "market": "JAN-FLL",
+          "origin": "JAN",
+          "destination": "FLL",
+          "demand": 5.7,
+          "beforeMinutes": 579,
+          "afterMinutes": 386
+        },
+        {
+          "market": "HOU-SHV",
+          "origin": "HOU",
+          "destination": "SHV",
+          "demand": 5.3,
+          "beforeMinutes": 638,
+          "afterMinutes": 343
+        },
+        {
+          "market": "PVD-OKC",
+          "origin": "PVD",
+          "destination": "OKC",
+          "demand": 5.1,
+          "beforeMinutes": 500,
+          "afterMinutes": 486
+        },
+        {
+          "market": "JAN-PIT",
+          "origin": "JAN",
+          "destination": "PIT",
+          "demand": 4.4,
+          "beforeMinutes": 319,
+          "afterMinutes": 299
+        },
+        {
+          "market": "PIT-JAN",
+          "origin": "PIT",
+          "destination": "JAN",
+          "demand": 4.4,
+          "beforeMinutes": 340,
+          "afterMinutes": 271
+        },
+        {
+          "market": "BNA-SGF",
+          "origin": "BNA",
+          "destination": "SGF",
+          "demand": 4,
+          "beforeMinutes": 335,
+          "afterMinutes": 269
+        },
+        {
+          "market": "JAN-BLV",
+          "origin": "JAN",
+          "destination": "BLV",
+          "demand": 3.5,
+          "beforeMinutes": 309,
+          "afterMinutes": 217
+        },
+        {
+          "market": "TUL-OKC",
+          "origin": "TUL",
+          "destination": "OKC",
+          "demand": 3.5,
+          "beforeMinutes": 530,
+          "afterMinutes": 171
+        },
+        {
+          "market": "CMH-SHV",
+          "origin": "CMH",
+          "destination": "SHV",
+          "demand": 3.2,
+          "beforeMinutes": 599,
+          "afterMinutes": 354
+        },
+        {
+          "market": "JAN-OKC",
+          "origin": "JAN",
+          "destination": "OKC",
+          "demand": 3.2,
+          "beforeMinutes": 316,
+          "afterMinutes": 274
+        },
+        {
+          "market": "SBN-BNA",
+          "origin": "SBN",
+          "destination": "BNA",
+          "demand": 3.2,
+          "beforeMinutes": 469,
+          "afterMinutes": 313
+        },
+        {
+          "market": "JAN-MKE",
+          "origin": "JAN",
+          "destination": "MKE",
+          "demand": 3.1,
+          "beforeMinutes": 329,
+          "afterMinutes": 237
+        },
+        {
+          "market": "PHF-JAN",
+          "origin": "PHF",
+          "destination": "JAN",
+          "demand": 3.1,
+          "beforeMinutes": 423,
+          "afterMinutes": 296
+        },
+        {
+          "market": "DAL-SHV",
+          "origin": "DAL",
+          "destination": "SHV",
+          "demand": 2.8,
+          "beforeMinutes": 743,
+          "afterMinutes": 318
+        },
+        {
+          "market": "SDF-JAN",
+          "origin": "SDF",
+          "destination": "JAN",
+          "demand": 2.8,
+          "beforeMinutes": 293,
+          "afterMinutes": 261
+        },
+        {
+          "market": "CAK-SHV",
+          "origin": "CAK",
+          "destination": "SHV",
+          "demand": 2,
+          "beforeMinutes": 646,
+          "afterMinutes": 308
+        },
+        {
+          "market": "TYS-JAN",
+          "origin": "TYS",
+          "destination": "JAN",
+          "demand": 1.9,
+          "beforeMinutes": 398,
+          "afterMinutes": 296
+        },
+        {
+          "market": "AUS-SHV",
+          "origin": "AUS",
+          "destination": "SHV",
+          "demand": 1.8,
+          "beforeMinutes": 638,
+          "afterMinutes": 338
+        },
+        {
+          "market": "JAN-PGD",
+          "origin": "JAN",
+          "destination": "PGD",
+          "demand": 1.8,
+          "beforeMinutes": 387,
+          "afterMinutes": 212
+        },
+        {
+          "market": "ELP-SHV",
+          "origin": "ELP",
+          "destination": "SHV",
+          "demand": 1.7,
+          "beforeMinutes": 438,
+          "afterMinutes": 261
+        },
+        {
+          "market": "MKE-SHV",
+          "origin": "MKE",
+          "destination": "SHV",
+          "demand": 1.7,
+          "beforeMinutes": 318,
+          "afterMinutes": 218
+        },
+        {
+          "market": "PGD-JAN",
+          "origin": "PGD",
+          "destination": "JAN",
+          "demand": 1.7,
+          "beforeMinutes": 263,
+          "afterMinutes": 211
+        },
+        {
+          "market": "JAN-BUF",
+          "origin": "JAN",
+          "destination": "BUF",
+          "demand": 1.5,
+          "beforeMinutes": 661,
+          "afterMinutes": 394
+        },
+        {
+          "market": "LEX-JAN",
+          "origin": "LEX",
+          "destination": "JAN",
+          "demand": 1.5,
+          "beforeMinutes": 463,
+          "afterMinutes": 261
+        },
+        {
+          "market": "JAN-SRQ",
+          "origin": "JAN",
+          "destination": "SRQ",
+          "demand": 1.4,
+          "beforeMinutes": 751,
+          "afterMinutes": 526
+        },
+        {
+          "market": "DAY-SHV",
+          "origin": "DAY",
+          "destination": "SHV",
+          "demand": 1.2,
+          "beforeMinutes": 438,
+          "afterMinutes": 393
+        },
+        {
+          "market": "JAN-DAY",
+          "origin": "JAN",
+          "destination": "DAY",
+          "demand": 1.2,
+          "beforeMinutes": 255,
+          "afterMinutes": 237
+        },
+        {
+          "market": "JAN-MDT",
+          "origin": "JAN",
+          "destination": "MDT",
+          "demand": 1.1,
+          "beforeMinutes": 682,
+          "afterMinutes": 590
+        },
+        {
+          "market": "DAB-JAN",
+          "origin": "DAB",
+          "destination": "JAN",
+          "demand": 1,
+          "beforeMinutes": 586,
+          "afterMinutes": 261
+        },
+        {
+          "market": "AGS-JAN",
+          "origin": "AGS",
+          "destination": "JAN",
+          "demand": 0.9,
+          "beforeMinutes": 483,
+          "afterMinutes": 211
+        },
+        {
+          "market": "GNV-JAN",
+          "origin": "GNV",
+          "destination": "JAN",
+          "demand": 0.9,
+          "beforeMinutes": 593,
+          "afterMinutes": 219
+        },
+        {
+          "market": "JAN-AGS",
+          "origin": "JAN",
+          "destination": "AGS",
+          "demand": 0.9,
+          "beforeMinutes": 260,
+          "afterMinutes": 240
+        },
+        {
+          "market": "JAN-PWM",
+          "origin": "JAN",
+          "destination": "PWM",
+          "demand": 0.8,
+          "beforeMinutes": 658,
+          "afterMinutes": 566
+        },
+        {
+          "market": "JAN-ROC",
+          "origin": "JAN",
+          "destination": "ROC",
+          "demand": 0.8,
+          "beforeMinutes": 665,
+          "afterMinutes": 389
+        },
+        {
+          "market": "JAN-SYR",
+          "origin": "JAN",
+          "destination": "SYR",
+          "demand": 0.8,
+          "beforeMinutes": 452,
+          "afterMinutes": 308
+        },
+        {
+          "market": "FWA-SHV",
+          "origin": "FWA",
+          "destination": "SHV",
+          "demand": 0.7,
+          "beforeMinutes": 643,
+          "afterMinutes": 478
+        },
+        {
+          "market": "JAN-LBB",
+          "origin": "JAN",
+          "destination": "LBB",
+          "demand": 0.7,
+          "beforeMinutes": 349,
+          "afterMinutes": 257
+        },
+        {
+          "market": "MSN-SHV",
+          "origin": "MSN",
+          "destination": "SHV",
+          "demand": 0.7,
+          "beforeMinutes": 678,
+          "afterMinutes": 374
+        },
+        {
+          "market": "DLH-OKC",
+          "origin": "DLH",
+          "destination": "OKC",
+          "demand": 0.6,
+          "beforeMinutes": 590,
+          "afterMinutes": 231
+        },
+        {
+          "market": "JAN-BHM",
+          "origin": "JAN",
+          "destination": "BHM",
+          "demand": 0.6,
+          "beforeMinutes": 304,
+          "afterMinutes": 255
+        },
+        {
+          "market": "JAN-FWA",
+          "origin": "JAN",
+          "destination": "FWA",
+          "demand": 0.6,
+          "beforeMinutes": 395,
+          "afterMinutes": 310
+        },
+        {
+          "market": "TLH-JAN",
+          "origin": "TLH",
+          "destination": "JAN",
+          "demand": 0.6,
+          "beforeMinutes": 543,
+          "afterMinutes": 271
+        },
+        {
+          "market": "JAN-BTV",
+          "origin": "JAN",
+          "destination": "BTV",
+          "demand": 0.5,
+          "beforeMinutes": 677,
+          "afterMinutes": 402
+        },
+        {
+          "market": "JAN-LIT",
+          "origin": "JAN",
+          "destination": "LIT",
+          "demand": 0.5,
+          "beforeMinutes": 320,
+          "afterMinutes": 228
+        },
+        {
+          "market": "JAN-MHT",
+          "origin": "JAN",
+          "destination": "MHT",
+          "demand": 0.5,
+          "beforeMinutes": 685,
+          "afterMinutes": 415
+        },
+        {
+          "market": "JAN-GPT",
+          "origin": "JAN",
+          "destination": "GPT",
+          "demand": 0.4,
+          "beforeMinutes": 293,
+          "afterMinutes": 273
+        },
+        {
+          "market": "ECP-JAN",
+          "origin": "ECP",
+          "destination": "JAN",
+          "demand": 0.3,
+          "beforeMinutes": 488,
+          "afterMinutes": 216
+        },
+        {
+          "market": "JAN-BGR",
+          "origin": "JAN",
+          "destination": "BGR",
+          "demand": 0.3,
+          "beforeMinutes": 705,
+          "afterMinutes": 595
+        },
+        {
+          "market": "JAN-VPS",
+          "origin": "JAN",
+          "destination": "VPS",
+          "demand": 0.3,
+          "beforeMinutes": 272,
+          "afterMinutes": 252
+        },
+        {
+          "market": "JAN-ISP",
+          "origin": "JAN",
+          "destination": "ISP",
+          "demand": 0.1,
+          "beforeMinutes": 683,
+          "afterMinutes": 413
+        },
+        {
+          "market": "MOB-JAN",
+          "origin": "MOB",
+          "destination": "JAN",
+          "demand": 0.1,
+          "beforeMinutes": 508,
+          "afterMinutes": 236
+        },
+        {
+          "market": "JAN-MCN",
+          "origin": "JAN",
+          "destination": "MCN",
+          "demand": 0,
+          "beforeMinutes": 259,
+          "afterMinutes": 239
+        },
+        {
+          "market": "JAN-ORH",
+          "origin": "JAN",
+          "destination": "ORH",
+          "demand": 0,
+          "beforeMinutes": 683,
+          "afterMinutes": 591
+        },
+        {
+          "market": "JAN-SWF",
+          "origin": "JAN",
+          "destination": "SWF",
+          "demand": 0,
+          "beforeMinutes": 477,
+          "afterMinutes": 389
+        },
+        {
+          "market": "MCN-JAN",
+          "origin": "MCN",
+          "destination": "JAN",
+          "demand": 0,
+          "beforeMinutes": 483,
+          "afterMinutes": 211
+        },
+        {
+          "market": "SWF-OKC",
+          "origin": "SWF",
+          "destination": "OKC",
+          "demand": 0,
+          "beforeMinutes": 516,
+          "afterMinutes": 436
+        }
+      ],
+      "slower": [
+        {
+          "market": "BNA-OKC",
+          "origin": "BNA",
+          "destination": "OKC",
+          "demand": 36.4,
+          "beforeMinutes": 306,
+          "afterMinutes": 356
+        },
+        {
+          "market": "AUS-OKC",
+          "origin": "AUS",
+          "destination": "OKC",
+          "demand": 23.4,
+          "beforeMinutes": 316,
+          "afterMinutes": 366
+        },
+        {
+          "market": "BLV-OKC",
+          "origin": "BLV",
+          "destination": "OKC",
+          "demand": 17.7,
+          "beforeMinutes": 181,
+          "afterMinutes": 231
+        },
+        {
+          "market": "RDU-OKC",
+          "origin": "RDU",
+          "destination": "OKC",
+          "demand": 16.9,
+          "beforeMinutes": 351,
+          "afterMinutes": 401
+        },
+        {
+          "market": "CAK-OKC",
+          "origin": "CAK",
+          "destination": "OKC",
+          "demand": 8.6,
+          "beforeMinutes": 466,
+          "afterMinutes": 516
+        },
+        {
+          "market": "JAN-RDU",
+          "origin": "JAN",
+          "destination": "RDU",
+          "demand": 7.6,
+          "beforeMinutes": 382,
+          "afterMinutes": 477
+        },
+        {
+          "market": "PGD-OKC",
+          "origin": "PGD",
+          "destination": "OKC",
+          "demand": 7.1,
+          "beforeMinutes": 276,
+          "afterMinutes": 326
+        },
+        {
+          "market": "RFD-SHV",
+          "origin": "RFD",
+          "destination": "SHV",
+          "demand": 5.9,
+          "beforeMinutes": 203,
+          "afterMinutes": 262
+        },
+        {
+          "market": "BUF-OKC",
+          "origin": "BUF",
+          "destination": "OKC",
+          "demand": 4.9,
+          "beforeMinutes": 441,
+          "afterMinutes": 491
+        },
+        {
+          "market": "PIE-SHV",
+          "origin": "PIE",
+          "destination": "SHV",
+          "demand": 4.3,
+          "beforeMinutes": 293,
+          "afterMinutes": 383
+        },
+        {
+          "market": "JAN-MAF",
+          "origin": "JAN",
+          "destination": "MAF",
+          "demand": 4.1,
+          "beforeMinutes": 263,
+          "afterMinutes": 308
+        },
+        {
+          "market": "OMA-OKC",
+          "origin": "OMA",
+          "destination": "OKC",
+          "demand": 3.9,
+          "beforeMinutes": 211,
+          "afterMinutes": 261
+        },
+        {
+          "market": "SYR-OKC",
+          "origin": "SYR",
+          "destination": "OKC",
+          "demand": 3.9,
+          "beforeMinutes": 346,
+          "afterMinutes": 396
+        },
+        {
+          "market": "JAN-CHS",
+          "origin": "JAN",
+          "destination": "CHS",
+          "demand": 3.8,
+          "beforeMinutes": 402,
+          "afterMinutes": 502
+        },
+        {
+          "market": "DSM-OKC",
+          "origin": "DSM",
+          "destination": "OKC",
+          "demand": 3.6,
+          "beforeMinutes": 161,
+          "afterMinutes": 211
+        },
+        {
+          "market": "HRL-OKC",
+          "origin": "HRL",
+          "destination": "OKC",
+          "demand": 3.5,
+          "beforeMinutes": 407,
+          "afterMinutes": 457
+        },
+        {
+          "market": "JAN-PHF",
+          "origin": "JAN",
+          "destination": "PHF",
+          "demand": 3.4,
+          "beforeMinutes": 386,
+          "afterMinutes": 486
+        },
+        {
+          "market": "PWM-OKC",
+          "origin": "PWM",
+          "destination": "OKC",
+          "demand": 3,
+          "beforeMinutes": 596,
+          "afterMinutes": 646
+        },
+        {
+          "market": "ROC-OKC",
+          "origin": "ROC",
+          "destination": "OKC",
+          "demand": 2.8,
+          "beforeMinutes": 431,
+          "afterMinutes": 481
+        },
+        {
+          "market": "MHT-OKC",
+          "origin": "MHT",
+          "destination": "OKC",
+          "demand": 2.5,
+          "beforeMinutes": 451,
+          "afterMinutes": 501
+        },
+        {
+          "market": "CID-OKC",
+          "origin": "CID",
+          "destination": "OKC",
+          "demand": 2.2,
+          "beforeMinutes": 271,
+          "afterMinutes": 321
+        },
+        {
+          "market": "MSY-SHV",
+          "origin": "MSY",
+          "destination": "SHV",
+          "demand": 2.1,
+          "beforeMinutes": 238,
+          "afterMinutes": 353
+        },
+        {
+          "market": "FSD-OKC",
+          "origin": "FSD",
+          "destination": "OKC",
+          "demand": 1.8,
+          "beforeMinutes": 181,
+          "afterMinutes": 231
+        },
+        {
+          "market": "LIT-OKC",
+          "origin": "LIT",
+          "destination": "OKC",
+          "demand": 1.8,
+          "beforeMinutes": 241,
+          "afterMinutes": 291
+        },
+        {
+          "market": "ATW-OKC",
+          "origin": "ATW",
+          "destination": "OKC",
+          "demand": 1.7,
+          "beforeMinutes": 354,
+          "afterMinutes": 387
+        },
+        {
+          "market": "BLV-SHV",
+          "origin": "BLV",
+          "destination": "SHV",
+          "demand": 1.6,
+          "beforeMinutes": 198,
+          "afterMinutes": 398
+        },
+        {
+          "market": "BTV-OKC",
+          "origin": "BTV",
+          "destination": "OKC",
+          "demand": 1.6,
+          "beforeMinutes": 446,
+          "afterMinutes": 496
+        },
+        {
+          "market": "SHV-OKC",
+          "origin": "SHV",
+          "destination": "OKC",
+          "demand": 1.4,
+          "beforeMinutes": 306,
+          "afterMinutes": 356
+        },
+        {
+          "market": "PNS-SHV",
+          "origin": "PNS",
+          "destination": "SHV",
+          "demand": 1.3,
+          "beforeMinutes": 258,
+          "afterMinutes": 323
+        },
+        {
+          "market": "JAN-MSY",
+          "origin": "JAN",
+          "destination": "MSY",
+          "demand": 1,
+          "beforeMinutes": 259,
+          "afterMinutes": 359
+        },
+        {
+          "market": "BGR-OKC",
+          "origin": "BGR",
+          "destination": "OKC",
+          "demand": 0.9,
+          "beforeMinutes": 471,
+          "afterMinutes": 521
+        },
+        {
+          "market": "MEM-SHV",
+          "origin": "MEM",
+          "destination": "SHV",
+          "demand": 0.9,
+          "beforeMinutes": 213,
+          "afterMinutes": 413
+        },
+        {
+          "market": "ICT-OKC",
+          "origin": "ICT",
+          "destination": "OKC",
+          "demand": 0.7,
+          "beforeMinutes": 266,
+          "afterMinutes": 316
+        },
+        {
+          "market": "JAN-HRL",
+          "origin": "JAN",
+          "destination": "HRL",
+          "demand": 0.6,
+          "beforeMinutes": 342,
+          "afterMinutes": 400
+        },
+        {
+          "market": "COU-OKC",
+          "origin": "COU",
+          "destination": "OKC",
+          "demand": 0.5,
+          "beforeMinutes": 256,
+          "afterMinutes": 306
+        },
+        {
+          "market": "MFE-SHV",
+          "origin": "MFE",
+          "destination": "SHV",
+          "demand": 0.5,
+          "beforeMinutes": 288,
+          "afterMinutes": 488
+        },
+        {
+          "market": "FSD-SHV",
+          "origin": "FSD",
+          "destination": "SHV",
+          "demand": 0.4,
+          "beforeMinutes": 203,
+          "afterMinutes": 403
+        },
+        {
+          "market": "JAN-PNS",
+          "origin": "JAN",
+          "destination": "PNS",
+          "demand": 0.4,
+          "beforeMinutes": 270,
+          "afterMinutes": 370
+        },
+        {
+          "market": "SGF-OKC",
+          "origin": "SGF",
+          "destination": "OKC",
+          "demand": 0.4,
+          "beforeMinutes": 536,
+          "afterMinutes": 586
+        },
+        {
+          "market": "ATW-SHV",
+          "origin": "ATW",
+          "destination": "SHV",
+          "demand": 0.2,
+          "beforeMinutes": 230,
+          "afterMinutes": 633
+        },
+        {
+          "market": "ISP-OKC",
+          "origin": "ISP",
+          "destination": "OKC",
+          "demand": 0.2,
+          "beforeMinutes": 459,
+          "afterMinutes": 509
+        },
+        {
+          "market": "ORH-OKC",
+          "origin": "ORH",
+          "destination": "OKC",
+          "demand": 0.1,
+          "beforeMinutes": 451,
+          "afterMinutes": 501
+        },
+        {
+          "market": "HVN-OKC",
+          "origin": "HVN",
+          "destination": "OKC",
+          "demand": 0,
+          "beforeMinutes": 596,
+          "afterMinutes": 646
+        }
+      ]
+    },
+    "lostChoices": [
+      {
+        "key": "1970-1596",
+        "market": "ATW-SHV",
+        "stops": 1,
+        "minutes": 230,
+        "reasonable": true
+      },
+      {
+        "key": "2057-1553",
+        "market": "ATW-OKC",
+        "stops": 1,
+        "minutes": 354,
+        "reasonable": true
+      },
+      {
+        "key": "1476-1538-1596",
+        "market": "AUS-SHV",
+        "stops": 2,
+        "minutes": 638,
+        "reasonable": false
+      },
+      {
+        "key": "1409-1553",
+        "market": "BHM-OKC",
+        "stops": 1,
+        "minutes": 416,
+        "reasonable": true
+      },
+      {
+        "key": "1358-1596",
+        "market": "BLV-SHV",
+        "stops": 1,
+        "minutes": 298,
+        "reasonable": true
+      },
+      {
+        "key": "1769-1538-1596",
+        "market": "BUF-SHV",
+        "stops": 2,
+        "minutes": 678,
+        "reasonable": true
+      },
+      {
+        "key": "2086-1538-1596",
+        "market": "CAK-SHV",
+        "stops": 2,
+        "minutes": 646,
+        "reasonable": true
+      },
+      {
+        "key": "1577-1538-1596",
+        "market": "CHS-SHV",
+        "stops": 2,
+        "minutes": 708,
+        "reasonable": true
+      },
+      {
+        "key": "1718-1553",
+        "market": "CID-OKC",
+        "stops": 1,
+        "minutes": 371,
+        "reasonable": true
+      },
+      {
+        "key": "1096-1596",
+        "market": "CLT-SHV",
+        "stops": 1,
+        "minutes": 458,
+        "reasonable": true
+      },
+      {
+        "key": "2065-1409-1553",
+        "market": "CLT-OKC",
+        "stops": 2,
+        "minutes": 596,
+        "reasonable": true
+      },
+      {
+        "key": "2094-1538-1596",
+        "market": "CMH-SHV",
+        "stops": 2,
+        "minutes": 599,
+        "reasonable": true
+      },
+      {
+        "key": "1367-1538-1596",
+        "market": "DAL-SHV",
+        "stops": 2,
+        "minutes": 743,
+        "reasonable": false
+      },
+      {
+        "key": "1538-1596",
+        "market": "DAY-SHV",
+        "stops": 1,
+        "minutes": 438,
+        "reasonable": true
+      },
+      {
+        "key": "2069-1409-1553",
+        "market": "DAY-OKC",
+        "stops": 2,
+        "minutes": 596,
+        "reasonable": true
+      },
+      {
+        "key": "1734-1553",
+        "market": "DSM-OKC",
+        "stops": 1,
+        "minutes": 361,
+        "reasonable": true
+      },
+      {
+        "key": "2216-1596",
+        "market": "DSM-SHV",
+        "stops": 1,
+        "minutes": 293,
+        "reasonable": true
+      },
+      {
+        "key": "1955-1596",
+        "market": "ELP-SHV",
+        "stops": 1,
+        "minutes": 438,
+        "reasonable": true
+      },
+      {
+        "key": "1902-1538-1596",
+        "market": "ERI-SHV",
+        "stops": 2,
+        "minutes": 668,
+        "reasonable": true
+      },
+      {
+        "key": "1872-1538-1596",
+        "market": "FWA-SHV",
+        "stops": 2,
+        "minutes": 643,
+        "reasonable": true
+      },
+      {
+        "key": "1804-1538-1596",
+        "market": "GRR-SHV",
+        "stops": 2,
+        "minutes": 663,
+        "reasonable": true
+      },
+      {
+        "key": "1507-1538-1596",
+        "market": "HOU-SHV",
+        "stops": 2,
+        "minutes": 638,
+        "reasonable": false
+      },
+      {
+        "key": "1447-1553",
+        "market": "HRL-OKC",
+        "stops": 1,
+        "minutes": 456,
+        "reasonable": true
+      },
+      {
+        "key": "1954-1596",
+        "market": "HRL-SHV",
+        "stops": 1,
+        "minutes": 356,
+        "reasonable": false
+      },
+      {
+        "key": "1500-1036",
+        "market": "JAN-SFB",
+        "stops": 1,
+        "minutes": 297,
+        "reasonable": false
+      },
+      {
+        "key": "1500-1187",
+        "market": "JAN-MSY",
+        "stops": 1,
+        "minutes": 259,
+        "reasonable": false
+      },
+      {
+        "key": "1500-1343",
+        "market": "JAN-PNS",
+        "stops": 1,
+        "minutes": 270,
+        "reasonable": false
+      },
+      {
+        "key": "1500-1537",
+        "market": "JAN-DAY",
+        "stops": 1,
+        "minutes": 255,
+        "reasonable": true
+      },
+      {
+        "key": "1500-1537-1363",
+        "market": "JAN-DAL",
+        "stops": 2,
+        "minutes": 439,
+        "reasonable": false
+      },
+      {
+        "key": "1500-1537-1364",
+        "market": "JAN-DAL",
+        "stops": 2,
+        "minutes": 564,
+        "reasonable": false
+      },
+      {
+        "key": "1500-1537-1460",
+        "market": "JAN-RDU",
+        "stops": 2,
+        "minutes": 382,
+        "reasonable": true
+      },
+      {
+        "key": "1500-1537-1461",
+        "market": "JAN-RDU",
+        "stops": 2,
+        "minutes": 512,
+        "reasonable": true
+      },
+      {
+        "key": "1500-1537-1568",
+        "market": "JAN-PHF",
+        "stops": 2,
+        "minutes": 386,
+        "reasonable": true
+      },
+      {
+        "key": "1500-1537-1569",
+        "market": "JAN-PHF",
+        "stops": 2,
+        "minutes": 521,
+        "reasonable": true
+      },
+      {
+        "key": "1500-1537-1578",
+        "market": "JAN-CHS",
+        "stops": 2,
+        "minutes": 402,
+        "reasonable": false
+      },
+      {
+        "key": "1500-1537-1667",
+        "market": "JAN-CMH",
+        "stops": 2,
+        "minutes": 463,
+        "reasonable": true
+      },
+      {
+        "key": "1500-1537-1694",
+        "market": "JAN-MSN",
+        "stops": 2,
+        "minutes": 500,
+        "reasonable": true
+      },
+      {
+        "key": "1500-1537-1809",
+        "market": "JAN-GRR",
+        "stops": 2,
+        "minutes": 483,
+        "reasonable": true
+      },
+      {
+        "key": "1500-1537-1814",
+        "market": "JAN-CAK",
+        "stops": 2,
+        "minutes": 475,
+        "reasonable": true
+      },
+      {
+        "key": "1500-1537-1819",
+        "market": "JAN-IND",
+        "stops": 2,
+        "minutes": 468,
+        "reasonable": true
+      },
+      {
+        "key": "1500-1537-1849",
+        "market": "JAN-SDF",
+        "stops": 2,
+        "minutes": 478,
+        "reasonable": false
+      },
+      {
+        "key": "1500-1537-1861",
+        "market": "JAN-SBN",
+        "stops": 2,
+        "minutes": 485,
+        "reasonable": true
+      },
+      {
+        "key": "1500-1537-1981",
+        "market": "JAN-BHM",
+        "stops": 2,
+        "minutes": 514,
+        "reasonable": false
+      },
+      {
+        "key": "1500-1537-2012",
+        "market": "JAN-SWF",
+        "stops": 2,
+        "minutes": 477,
+        "reasonable": true
+      },
+      {
+        "key": "1500-1537-2097",
+        "market": "JAN-JAX",
+        "stops": 2,
+        "minutes": 535,
+        "reasonable": false
+      },
+      {
+        "key": "1500-1537-2194",
+        "market": "JAN-PIT",
+        "stops": 2,
+        "minutes": 367,
+        "reasonable": true
+      },
+      {
+        "key": "1500-1581",
+        "market": "JAN-MAF",
+        "stops": 1,
+        "minutes": 263,
+        "reasonable": true
+      },
+      {
+        "key": "1500-1953",
+        "market": "JAN-HRL",
+        "stops": 1,
+        "minutes": 342,
+        "reasonable": false
+      },
+      {
+        "key": "1500-1963",
+        "market": "JAN-SBN",
+        "stops": 1,
+        "minutes": 288,
+        "reasonable": true
+      },
+      {
+        "key": "1500-1965",
+        "market": "JAN-SDF",
+        "stops": 1,
+        "minutes": 310,
+        "reasonable": true
+      },
+      {
+        "key": "1500-1971",
+        "market": "JAN-BHM",
+        "stops": 1,
+        "minutes": 304,
+        "reasonable": false
+      },
+      {
+        "key": "1500-1971-1421",
+        "market": "JAN-JAX",
+        "stops": 2,
+        "minutes": 441,
+        "reasonable": false
+      },
+      {
+        "key": "1500-1971-1521",
+        "market": "JAN-TUL",
+        "stops": 2,
+        "minutes": 643,
+        "reasonable": false
+      },
+      {
+        "key": "1500-1971-1664",
+        "market": "JAN-HRL",
+        "stops": 2,
+        "minutes": 586,
+        "reasonable": false
+      },
+      {
+        "key": "1500-1971-1928",
+        "market": "JAN-PHF",
+        "stops": 2,
+        "minutes": 640,
+        "reasonable": true
+      },
+      {
+        "key": "1500-1971-1932",
+        "market": "JAN-BWI",
+        "stops": 2,
+        "minutes": 602,
+        "reasonable": true
+      },
+      {
+        "key": "1500-1971-1972",
+        "market": "JAN-SFB",
+        "stops": 2,
+        "minutes": 436,
+        "reasonable": false
+      },
+      {
+        "key": "1500-1971-1988",
+        "market": "JAN-FLL",
+        "stops": 2,
+        "minutes": 579,
+        "reasonable": false
+      },
+      {
+        "key": "1500-1971-1994",
+        "market": "JAN-ATW",
+        "stops": 2,
+        "minutes": 515,
+        "reasonable": false
+      },
+      {
+        "key": "1500-1971-1996",
+        "market": "JAN-ICT",
+        "stops": 2,
+        "minutes": 567,
+        "reasonable": false
+      },
+      {
+        "key": "1500-1971-1998",
+        "market": "JAN-FSD",
+        "stops": 2,
+        "minutes": 492,
+        "reasonable": false
+      },
+      {
+        "key": "1500-2059",
+        "market": "JAN-RFD",
+        "stops": 1,
+        "minutes": 272,
+        "reasonable": true
+      },
+      {
+        "key": "1868-1538-1596",
+        "market": "LEX-SHV",
+        "stops": 2,
+        "minutes": 653,
+        "reasonable": true
+      },
+      {
+        "key": "1533-1596",
+        "market": "LIT-SHV",
+        "stops": 1,
+        "minutes": 308,
+        "reasonable": false
+      },
+      {
+        "key": "1580-1596",
+        "market": "MAF-SHV",
+        "stops": 1,
+        "minutes": 253,
+        "reasonable": false
+      },
+      {
+        "key": "1429-1596",
+        "market": "MEM-SHV",
+        "stops": 1,
+        "minutes": 313,
+        "reasonable": false
+      },
+      {
+        "key": "1266-1596",
+        "market": "MKE-SHV",
+        "stops": 1,
+        "minutes": 318,
+        "reasonable": true
+      },
+      {
+        "key": "1697-1538-1596",
+        "market": "MSN-SHV",
+        "stops": 2,
+        "minutes": 678,
+        "reasonable": true
+      },
+      {
+        "key": "1554-1596",
+        "market": "OKC-SHV",
+        "stops": 1,
+        "minutes": 303,
+        "reasonable": false
+      },
+      {
+        "key": "1073-1596",
+        "market": "PIE-SHV",
+        "stops": 1,
+        "minutes": 293,
+        "reasonable": true
+      },
+      {
+        "key": "2193-1538-1596",
+        "market": "PIT-SHV",
+        "stops": 2,
+        "minutes": 530,
+        "reasonable": true
+      },
+      {
+        "key": "1338-1538-1596",
+        "market": "RFD-SHV",
+        "stops": 2,
+        "minutes": 548,
+        "reasonable": true
+      },
+      {
+        "key": "2064-1596",
+        "market": "RFD-SHV",
+        "stops": 1,
+        "minutes": 268,
+        "reasonable": true
+      },
+      {
+        "key": "1730-1538-1596",
+        "market": "ROC-SHV",
+        "stops": 2,
+        "minutes": 688,
+        "reasonable": true
+      },
+      {
+        "key": "1193-1553",
+        "market": "SAT-OKC",
+        "stops": 1,
+        "minutes": 426,
+        "reasonable": false
+      },
+      {
+        "key": "2067-1409-1553",
+        "market": "SAV-OKC",
+        "stops": 2,
+        "minutes": 596,
+        "reasonable": true
+      },
+      {
+        "key": "1858-1538-1596",
+        "market": "SBN-SHV",
+        "stops": 2,
+        "minutes": 653,
+        "reasonable": true
+      },
+      {
+        "key": "1964-1596",
+        "market": "SBN-SHV",
+        "stops": 1,
+        "minutes": 410,
+        "reasonable": true
+      },
+      {
+        "key": "1966-1596",
+        "market": "SDF-SHV",
+        "stops": 1,
+        "minutes": 388,
+        "reasonable": true
+      },
+      {
+        "key": "1641-1409-1553",
+        "market": "SGF-OKC",
+        "stops": 2,
+        "minutes": 536,
+        "reasonable": false
+      },
+      {
+        "key": "1906-1538-1596",
+        "market": "TOL-SHV",
+        "stops": 2,
+        "minutes": 650,
+        "reasonable": true
+      },
+      {
+        "key": "2110-1596",
+        "market": "XNA-SHV",
+        "stops": 1,
+        "minutes": 290,
+        "reasonable": false
+      }
+    ],
+    "downgrades": [
+      {
+        "market": "ATW-OKC",
+        "demand": 1.7,
+        "beforeStops": 1,
+        "afterStops": 2
+      },
+      {
+        "market": "ATW-SHV",
+        "demand": 0.2,
+        "beforeStops": 1,
+        "afterStops": 2
+      }
+    ],
+    "profiles": [
+      {
+        "flight": 1500,
+        "market": "JAN-MCI",
+        "departure": "09:42",
+        "arrival": "11:25",
+        "localOd": 5.3,
+        "competitiveIndex": 12.266666666666666,
+        "markets": [
+          {
+            "market": "JAN-RFD",
+            "demand": 15.4,
+            "minutes": 279,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": false,
+            "choiceShare": 0
+          },
+          {
+            "market": "JAN-MCI",
+            "demand": 5.3,
+            "minutes": 103,
+            "stops": 0,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 0.3333333333333333
+          },
+          {
+            "market": "JAN-CMH",
+            "demand": 3.7,
+            "minutes": 452,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": false,
+            "choiceShare": 0
+          },
+          {
+            "market": "JAN-BLV",
+            "demand": 3.5,
+            "minutes": 217,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "JAN-OKC",
+            "demand": 3.2,
+            "minutes": 274,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "JAN-MKE",
+            "demand": 3.1,
+            "minutes": 237,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "JAN-MSN",
+            "demand": 2,
+            "minutes": 384,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": false,
+            "choiceShare": 0
+          },
+          {
+            "market": "JAN-XNA",
+            "demand": 1.5,
+            "minutes": 300,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": false,
+            "choiceShare": 0
+          },
+          {
+            "market": "JAN-DSM",
+            "demand": 1.4,
+            "minutes": 308,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": false,
+            "choiceShare": 0
+          },
+          {
+            "market": "JAN-DAY",
+            "demand": 1.2,
+            "minutes": 413,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": false,
+            "choiceShare": 0
+          },
+          {
+            "market": "JAN-SYR",
+            "demand": 0.8,
+            "minutes": 360,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": false,
+            "choiceShare": 0
+          },
+          {
+            "market": "JAN-LBB",
+            "demand": 0.7,
+            "minutes": 257,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "JAN-ATW",
+            "demand": 0.7,
+            "minutes": 349,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": false,
+            "choiceShare": 0
+          }
+        ]
+      },
+      {
+        "flight": 1553,
+        "market": "MCI-OKC",
+        "departure": "13:05",
+        "arrival": "14:16",
+        "localOd": 4.3,
+        "competitiveIndex": 114.6,
+        "markets": [
+          {
+            "market": "BNA-OKC",
+            "demand": 36.4,
+            "minutes": 356,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "BLV-OKC",
+            "demand": 17.7,
+            "minutes": 231,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "RDU-OKC",
+            "demand": 16.9,
+            "minutes": 401,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "PHF-OKC",
+            "demand": 7.2,
+            "minutes": 271,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "PGD-OKC",
+            "demand": 7.1,
+            "minutes": 326,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "MCI-OKC",
+            "demand": 4.3,
+            "minutes": 71,
+            "stops": 0,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "OMA-OKC",
+            "demand": 3.9,
+            "minutes": 261,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "SYR-OKC",
+            "demand": 3.9,
+            "minutes": 396,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "DSM-OKC",
+            "demand": 3.6,
+            "minutes": 211,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "HRL-OKC",
+            "demand": 3.5,
+            "minutes": 457,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "JAN-OKC",
+            "demand": 3.2,
+            "minutes": 274,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "CID-OKC",
+            "demand": 2.2,
+            "minutes": 321,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "FSD-OKC",
+            "demand": 1.8,
+            "minutes": 231,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "LIT-OKC",
+            "demand": 1.8,
+            "minutes": 291,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "DLH-OKC",
+            "demand": 0.6,
+            "minutes": 231,
+            "stops": 1,
+            "newOneStop": true,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "COU-OKC",
+            "demand": 0.5,
+            "minutes": 306,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          }
+        ]
+      },
+      {
+        "flight": 1554,
+        "market": "OKC-MCI",
+        "departure": "15:25",
+        "arrival": "16:36",
+        "localOd": 4.2,
+        "competitiveIndex": 181.40000000000006,
+        "markets": [
+          {
+            "market": "OKC-RFD",
+            "demand": 57.5,
+            "minutes": 289,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "OKC-BNA",
+            "demand": 36.2,
+            "minutes": 206,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "OKC-FLL",
+            "demand": 17.9,
+            "minutes": 484,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": false,
+            "choiceShare": 0
+          },
+          {
+            "market": "OKC-RDU",
+            "demand": 16.5,
+            "minutes": 349,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "OKC-BWI",
+            "demand": 15.6,
+            "minutes": 456,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "OKC-PNS",
+            "demand": 7.6,
+            "minutes": 390,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "OKC-PHF",
+            "demand": 7,
+            "minutes": 272,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "OKC-MKE",
+            "demand": 6.9,
+            "minutes": 245,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "OKC-MEM",
+            "demand": 4.7,
+            "minutes": 290,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "OKC-MCI",
+            "demand": 4.2,
+            "minutes": 71,
+            "stops": 0,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "OKC-OMA",
+            "demand": 3.9,
+            "minutes": 259,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "OKC-CRP",
+            "demand": 3.4,
+            "minutes": 449,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "OKC-DSM",
+            "demand": 3.4,
+            "minutes": 320,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "OKC-HRL",
+            "demand": 3.3,
+            "minutes": 257,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "OKC-MFE",
+            "demand": 2.3,
+            "minutes": 365,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "OKC-CID",
+            "demand": 2.3,
+            "minutes": 331,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "OKC-FAR",
+            "demand": 1.9,
+            "minutes": 412,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "OKC-ATW",
+            "demand": 1.8,
+            "minutes": 352,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "OKC-FSD",
+            "demand": 1.7,
+            "minutes": 281,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "OKC-DLH",
+            "demand": 0.5,
+            "minutes": 412,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "OKC-COU",
+            "demand": 0.4,
+            "minutes": 327,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "OKC-SGF",
+            "demand": 0.3,
+            "minutes": 159,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          }
+        ]
+      },
+      {
+        "flight": 1596,
+        "market": "MCI-SHV",
+        "departure": "22:15",
+        "arrival": "23:48",
+        "localOd": 3.1,
+        "competitiveIndex": 54.94999999999999,
+        "markets": [
+          {
+            "market": "SFB-SHV",
+            "demand": 9.8,
+            "minutes": 343,
+            "stops": 1,
+            "newOneStop": true,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "CLT-SHV",
+            "demand": 8.2,
+            "minutes": 258,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "BNA-SHV",
+            "demand": 8.1,
+            "minutes": 257,
+            "stops": 1,
+            "newOneStop": true,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "RFD-SHV",
+            "demand": 5.9,
+            "minutes": 262,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "PIE-SHV",
+            "demand": 4.3,
+            "minutes": 383,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "CMH-SHV",
+            "demand": 3.2,
+            "minutes": 354,
+            "stops": 1,
+            "newOneStop": true,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "MCI-SHV",
+            "demand": 3.1,
+            "minutes": 93,
+            "stops": 0,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 0.5
+          },
+          {
+            "market": "IND-SHV",
+            "demand": 2.7,
+            "minutes": 313,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": false,
+            "choiceShare": 0
+          },
+          {
+            "market": "OMA-SHV",
+            "demand": 2.2,
+            "minutes": 190,
+            "stops": 1,
+            "newOneStop": true,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "CAK-SHV",
+            "demand": 2,
+            "minutes": 308,
+            "stops": 1,
+            "newOneStop": true,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "ELP-SHV",
+            "demand": 1.7,
+            "minutes": 261,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "MKE-SHV",
+            "demand": 1.7,
+            "minutes": 218,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "BLV-SHV",
+            "demand": 1.6,
+            "minutes": 398,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "PGD-SHV",
+            "demand": 1.3,
+            "minutes": 388,
+            "stops": 1,
+            "newOneStop": true,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "DAY-SHV",
+            "demand": 1.2,
+            "minutes": 393,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "MSN-SHV",
+            "demand": 0.7,
+            "minutes": 374,
+            "stops": 1,
+            "newOneStop": true,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "ICT-SHV",
+            "demand": 0.6,
+            "minutes": 288,
+            "stops": 1,
+            "newOneStop": true,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "LBB-SHV",
+            "demand": 0.5,
+            "minutes": 338,
+            "stops": 1,
+            "newOneStop": true,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "SGF-SHV",
+            "demand": 0.5,
+            "minutes": 238,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": false,
+            "choiceShare": 0
+          },
+          {
+            "market": "FSD-SHV",
+            "demand": 0.4,
+            "minutes": 403,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          }
+        ]
+      },
+      {
+        "flight": 2227,
+        "market": "JAN-JAX",
+        "departure": "04:30",
+        "arrival": "07:08",
+        "localOd": 5,
+        "competitiveIndex": 21.750000000000004,
+        "markets": [
+          {
+            "market": "JAN-RFD",
+            "demand": 15.4,
+            "minutes": 386,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": false,
+            "choiceShare": 0
+          },
+          {
+            "market": "JAN-FLL",
+            "demand": 5.7,
+            "minutes": 386,
+            "stops": 1,
+            "newOneStop": true,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "JAN-JAX",
+            "demand": 5,
+            "minutes": 98,
+            "stops": 0,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 0.5
+          },
+          {
+            "market": "JAN-PIT",
+            "demand": 4.4,
+            "minutes": 299,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 0.5
+          },
+          {
+            "market": "JAN-BDL",
+            "demand": 2.2,
+            "minutes": 393,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": false,
+            "choiceShare": 0
+          },
+          {
+            "market": "JAN-GSP",
+            "demand": 2.1,
+            "minutes": 384,
+            "stops": 1,
+            "newOneStop": true,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "JAN-PGD",
+            "demand": 1.8,
+            "minutes": 212,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "JAN-AVL",
+            "demand": 1.7,
+            "minutes": 325,
+            "stops": 1,
+            "newOneStop": true,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "JAN-PVD",
+            "demand": 1.6,
+            "minutes": 403,
+            "stops": 1,
+            "newOneStop": true,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "JAN-ILM",
+            "demand": 1.2,
+            "minutes": 390,
+            "stops": 1,
+            "newOneStop": true,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "JAN-DAY",
+            "demand": 1.2,
+            "minutes": 237,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 0.5
+          },
+          {
+            "market": "JAN-MYR",
+            "demand": 1.1,
+            "minutes": 380,
+            "stops": 1,
+            "newOneStop": true,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "JAN-AGS",
+            "demand": 0.9,
+            "minutes": 240,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 0.5
+          },
+          {
+            "market": "JAN-SYR",
+            "demand": 0.8,
+            "minutes": 308,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "JAN-MCN",
+            "demand": 0,
+            "minutes": 239,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 0.5
+          }
+        ]
+      },
+      {
+        "flight": 2228,
+        "market": "JAX-JAN",
+        "departure": "07:48",
+        "arrival": "08:26",
+        "localOd": 4.9,
+        "competitiveIndex": 35.650000000000006,
+        "markets": [
+          {
+            "market": "BWI-JAN",
+            "demand": 19.4,
+            "minutes": 291,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": false,
+            "choiceShare": 0
+          },
+          {
+            "market": "SFB-JAN",
+            "demand": 16.9,
+            "minutes": 296,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": false,
+            "choiceShare": 0
+          },
+          {
+            "market": "CLT-JAN",
+            "demand": 11.5,
+            "minutes": 296,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 0.5
+          },
+          {
+            "market": "RDU-JAN",
+            "demand": 7.5,
+            "minutes": 296,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "JAX-JAN",
+            "demand": 4.9,
+            "minutes": 98,
+            "stops": 0,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 0.5
+          },
+          {
+            "market": "PIT-JAN",
+            "demand": 4.4,
+            "minutes": 271,
+            "stops": 1,
+            "newOneStop": true,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "CMH-JAN",
+            "demand": 3.8,
+            "minutes": 266,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 0.5
+          },
+          {
+            "market": "PHF-JAN",
+            "demand": 3.1,
+            "minutes": 296,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "TYS-JAN",
+            "demand": 1.9,
+            "minutes": 296,
+            "stops": 1,
+            "newOneStop": true,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "ELP-JAN",
+            "demand": 1.8,
+            "minutes": 506,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": false,
+            "choiceShare": 0
+          },
+          {
+            "market": "PGD-JAN",
+            "demand": 1.7,
+            "minutes": 211,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "LEX-JAN",
+            "demand": 1.5,
+            "minutes": 261,
+            "stops": 1,
+            "newOneStop": true,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "EYW-JAN",
+            "demand": 1.4,
+            "minutes": 241,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 0.5
+          },
+          {
+            "market": "DAY-JAN",
+            "demand": 1.1,
+            "minutes": 257,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 0.5
+          },
+          {
+            "market": "DAB-JAN",
+            "demand": 1,
+            "minutes": 261,
+            "stops": 1,
+            "newOneStop": true,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "AGS-JAN",
+            "demand": 0.9,
+            "minutes": 211,
+            "stops": 1,
+            "newOneStop": true,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "GNV-JAN",
+            "demand": 0.9,
+            "minutes": 219,
+            "stops": 1,
+            "newOneStop": true,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "ROA-JAN",
+            "demand": 0.9,
+            "minutes": 251,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 0.5
+          },
+          {
+            "market": "MLB-JAN",
+            "demand": 0.7,
+            "minutes": 271,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 0.5
+          },
+          {
+            "market": "TLH-JAN",
+            "demand": 0.6,
+            "minutes": 271,
+            "stops": 1,
+            "newOneStop": true,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "MCN-JAN",
+            "demand": 0,
+            "minutes": 211,
+            "stops": 1,
+            "newOneStop": true,
+            "competitive": true,
+            "choiceShare": 1
+          }
+        ]
+      },
+      {
+        "flight": 2229,
+        "market": "MCI-BNA",
+        "departure": "17:16",
+        "arrival": "18:51",
+        "localOd": 77.9,
+        "competitiveIndex": 193.01666666666668,
+        "markets": [
+          {
+            "market": "FLL-BNA",
+            "demand": 222.7,
+            "minutes": 476,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": false,
+            "choiceShare": 0
+          },
+          {
+            "market": "MCI-BNA",
+            "demand": 77.9,
+            "minutes": 95,
+            "stops": 0,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 0.3333333333333333
+          },
+          {
+            "market": "MKE-BNA",
+            "demand": 52.7,
+            "minutes": 221,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "OKC-BNA",
+            "demand": 36.2,
+            "minutes": 206,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "DSM-BNA",
+            "demand": 31.9,
+            "minutes": 196,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "ELP-BNA",
+            "demand": 19,
+            "minutes": 341,
+            "stops": 1,
+            "newOneStop": true,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "XNA-BNA",
+            "demand": 18.1,
+            "minutes": 193,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "FAR-BNA",
+            "demand": 17.6,
+            "minutes": 436,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": false,
+            "choiceShare": 0
+          },
+          {
+            "market": "ATW-BNA",
+            "demand": 15.1,
+            "minutes": 379,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": false,
+            "choiceShare": 0
+          },
+          {
+            "market": "CID-BNA",
+            "demand": 9.3,
+            "minutes": 396,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": false,
+            "choiceShare": 0
+          },
+          {
+            "market": "LBB-BNA",
+            "demand": 7.9,
+            "minutes": 396,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": false,
+            "choiceShare": 0
+          },
+          {
+            "market": "PIA-BNA",
+            "demand": 7.4,
+            "minutes": 401,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": false,
+            "choiceShare": 0
+          },
+          {
+            "market": "CRP-BNA",
+            "demand": 6.1,
+            "minutes": 376,
+            "stops": 1,
+            "newOneStop": true,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "MFE-BNA",
+            "demand": 6.1,
+            "minutes": 395,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 0.5
+          }
+        ]
+      },
+      {
+        "flight": 2230,
+        "market": "BNA-MCI",
+        "departure": "19:31",
+        "arrival": "21:06",
+        "localOd": 78.2,
+        "competitiveIndex": 161.46666666666667,
+        "markets": [
+          {
+            "market": "BNA-MCI",
+            "demand": 78.2,
+            "minutes": 95,
+            "stops": 0,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 0.3333333333333333
+          },
+          {
+            "market": "BNA-SAT",
+            "demand": 68.4,
+            "minutes": 320,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "BNA-DSM",
+            "demand": 31.4,
+            "minutes": 175,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "BNA-ELP",
+            "demand": 19.2,
+            "minutes": 318,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "BNA-MAF",
+            "demand": 8.6,
+            "minutes": 282,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 0.5
+          },
+          {
+            "market": "BNA-SHV",
+            "demand": 8.1,
+            "minutes": 257,
+            "stops": 1,
+            "newOneStop": true,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "BNA-SGF",
+            "demand": 4,
+            "minutes": 269,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          }
+        ]
+      }
+    ],
+    "baselineProfiles": [
+      {
+        "flight": 1500,
+        "market": "JAN-MCI",
+        "departure": "08:10",
+        "arrival": "09:53",
+        "localOd": 5.3,
+        "competitiveIndex": 17.766666666666666,
+        "markets": [
+          {
+            "market": "JAN-RFD",
+            "demand": 15.4,
+            "minutes": 272,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": false,
+            "choiceShare": 0
+          },
+          {
+            "market": "JAN-MCI",
+            "demand": 5.3,
+            "minutes": 103,
+            "stops": 0,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 0.3333333333333333
+          },
+          {
+            "market": "JAN-MAF",
+            "demand": 4.1,
+            "minutes": 263,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "JAN-BLV",
+            "demand": 3.5,
+            "minutes": 309,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "JAN-OKC",
+            "demand": 3.2,
+            "minutes": 316,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "JAN-MKE",
+            "demand": 3.1,
+            "minutes": 329,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "JAN-SDF",
+            "demand": 2.8,
+            "minutes": 310,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": false,
+            "choiceShare": 0
+          },
+          {
+            "market": "JAN-XNA",
+            "demand": 1.5,
+            "minutes": 392,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": false,
+            "choiceShare": 0
+          },
+          {
+            "market": "JAN-DAY",
+            "demand": 1.2,
+            "minutes": 255,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 0.5
+          },
+          {
+            "market": "JAN-SBN",
+            "demand": 0.9,
+            "minutes": 288,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": false,
+            "choiceShare": 0
+          },
+          {
+            "market": "JAN-SYR",
+            "demand": 0.8,
+            "minutes": 452,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "JAN-LBB",
+            "demand": 0.7,
+            "minutes": 349,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          }
+        ]
+      },
+      {
+        "flight": 1553,
+        "market": "MCI-OKC",
+        "departure": "12:15",
+        "arrival": "13:26",
+        "localOd": 4.3,
+        "competitiveIndex": 108.5,
+        "markets": [
+          {
+            "market": "BNA-OKC",
+            "demand": 36.4,
+            "minutes": 306,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "BLV-OKC",
+            "demand": 17.7,
+            "minutes": 181,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "RDU-OKC",
+            "demand": 16.9,
+            "minutes": 351,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "PGD-OKC",
+            "demand": 7.1,
+            "minutes": 276,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "MCI-OKC",
+            "demand": 4.3,
+            "minutes": 71,
+            "stops": 0,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "OMA-OKC",
+            "demand": 3.9,
+            "minutes": 211,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "SYR-OKC",
+            "demand": 3.9,
+            "minutes": 346,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "DSM-OKC",
+            "demand": 3.6,
+            "minutes": 161,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "HRL-OKC",
+            "demand": 3.5,
+            "minutes": 407,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "JAN-OKC",
+            "demand": 3.2,
+            "minutes": 316,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "CID-OKC",
+            "demand": 2.2,
+            "minutes": 271,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "FSD-OKC",
+            "demand": 1.8,
+            "minutes": 181,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "LIT-OKC",
+            "demand": 1.8,
+            "minutes": 241,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "ATW-OKC",
+            "demand": 1.7,
+            "minutes": 354,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "COU-OKC",
+            "demand": 0.5,
+            "minutes": 256,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          }
+        ]
+      },
+      {
+        "flight": 1554,
+        "market": "OKC-MCI",
+        "departure": "15:25",
+        "arrival": "16:36",
+        "localOd": 4.2,
+        "competitiveIndex": 181.40000000000006,
+        "markets": [
+          {
+            "market": "OKC-RFD",
+            "demand": 57.5,
+            "minutes": 289,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "OKC-BNA",
+            "demand": 36.2,
+            "minutes": 399,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "OKC-FLL",
+            "demand": 17.9,
+            "minutes": 484,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": false,
+            "choiceShare": 0
+          },
+          {
+            "market": "OKC-RDU",
+            "demand": 16.5,
+            "minutes": 349,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "OKC-BWI",
+            "demand": 15.6,
+            "minutes": 456,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "OKC-PNS",
+            "demand": 7.6,
+            "minutes": 390,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "OKC-PHF",
+            "demand": 7,
+            "minutes": 272,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "OKC-MKE",
+            "demand": 6.9,
+            "minutes": 245,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "OKC-MEM",
+            "demand": 4.7,
+            "minutes": 290,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "OKC-MCI",
+            "demand": 4.2,
+            "minutes": 71,
+            "stops": 0,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "OKC-OMA",
+            "demand": 3.9,
+            "minutes": 259,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "OKC-CRP",
+            "demand": 3.4,
+            "minutes": 449,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "OKC-DSM",
+            "demand": 3.4,
+            "minutes": 320,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "OKC-HRL",
+            "demand": 3.3,
+            "minutes": 257,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "OKC-MFE",
+            "demand": 2.3,
+            "minutes": 365,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "OKC-CID",
+            "demand": 2.3,
+            "minutes": 331,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "OKC-FAR",
+            "demand": 1.9,
+            "minutes": 412,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "OKC-ATW",
+            "demand": 1.8,
+            "minutes": 352,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "OKC-FSD",
+            "demand": 1.7,
+            "minutes": 281,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "OKC-DLH",
+            "demand": 0.5,
+            "minutes": 412,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "OKC-COU",
+            "demand": 0.4,
+            "minutes": 327,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "OKC-SGF",
+            "demand": 0.3,
+            "minutes": 159,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          }
+        ]
+      },
+      {
+        "flight": 1596,
+        "market": "MCI-SHV",
+        "departure": "18:55",
+        "arrival": "20:28",
+        "localOd": 3.1,
+        "competitiveIndex": 27.550000000000004,
+        "markets": [
+          {
+            "market": "CLT-SHV",
+            "demand": 8.2,
+            "minutes": 458,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "RFD-SHV",
+            "demand": 5.9,
+            "minutes": 203,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "PIE-SHV",
+            "demand": 4.3,
+            "minutes": 293,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "MCI-SHV",
+            "demand": 3.1,
+            "minutes": 93,
+            "stops": 0,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 0.5
+          },
+          {
+            "market": "ELP-SHV",
+            "demand": 1.7,
+            "minutes": 438,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "MKE-SHV",
+            "demand": 1.7,
+            "minutes": 318,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "BLV-SHV",
+            "demand": 1.6,
+            "minutes": 198,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "SDF-SHV",
+            "demand": 1.6,
+            "minutes": 388,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": false,
+            "choiceShare": 0
+          },
+          {
+            "market": "DAY-SHV",
+            "demand": 1.2,
+            "minutes": 438,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "DSM-SHV",
+            "demand": 0.8,
+            "minutes": 293,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "SBN-SHV",
+            "demand": 0.5,
+            "minutes": 410,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": false,
+            "choiceShare": 0
+          },
+          {
+            "market": "FSD-SHV",
+            "demand": 0.4,
+            "minutes": 203,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          },
+          {
+            "market": "ATW-SHV",
+            "demand": 0.2,
+            "minutes": 230,
+            "stops": 1,
+            "newOneStop": false,
+            "competitive": true,
+            "choiceShare": 1
+          }
+        ]
+      }
+    ],
+    "flights": 1225
+  },
+  "candidateScreens": {
+    "retain_hou_dal": {
+      "valid": false,
+      "exception": null,
+      "failedChecks": [
+        {
+          "id": "passenger_touch_on_stand",
+          "effectiveFindings": 1
+        },
+        {
+          "id": "fixed_physical_inventory",
+          "effectiveFindings": 1
+        }
+      ],
+      "gate": "1 passenger touch(es) remain off-gate",
+      "stands": null
+    },
+    "retain_hou_rfd": {
+      "valid": false,
+      "exception": null,
+      "failedChecks": [
+        {
+          "id": "passenger_touch_on_stand",
+          "effectiveFindings": 1
+        },
+        {
+          "id": "fixed_physical_inventory",
+          "effectiveFindings": 1
+        }
+      ],
+      "gate": "1 passenger touch(es) remain off-gate",
+      "stands": null
+    },
+    "retain_hou_aus": {
+      "valid": false,
+      "exception": null,
+      "failedChecks": [
+        {
+          "id": "passenger_touch_on_stand",
+          "effectiveFindings": 1
+        },
+        {
+          "id": "fixed_physical_inventory",
+          "effectiveFindings": 1
+        }
+      ],
+      "gate": "1 passenger touch(es) remain off-gate",
+      "stands": null
+    },
+    "retain_hou_sat": {
+      "valid": false,
+      "exception": null,
+      "failedChecks": [
+        {
+          "id": "section_26_pairing_spacing",
+          "effectiveFindings": 2
+        },
+        {
+          "id": "passenger_touch_on_stand",
+          "effectiveFindings": 1
+        },
+        {
+          "id": "fixed_physical_inventory",
+          "effectiveFindings": 1
+        }
+      ],
+      "gate": "1 passenger touch(es) remain off-gate",
+      "stands": null
+    },
+    "jax_rebuild": {
+      "valid": false,
+      "exception": null,
+      "failedChecks": [
+        {
+          "id": "section_26_pairing_spacing",
+          "effectiveFindings": 2
+        },
+        {
+          "id": "passenger_touch_on_stand",
+          "effectiveFindings": 1
+        },
+        {
+          "id": "fixed_physical_inventory",
+          "effectiveFindings": 1
+        }
+      ],
+      "gate": "1 passenger touch(es) remain off-gate",
+      "stands": null
+    },
+    "retain_bna_hou": {
+      "valid": false,
+      "exception": null,
+      "failedChecks": [
+        {
+          "id": "section_26_pairing_spacing",
+          "effectiveFindings": 1
+        },
+        {
+          "id": "passenger_touch_on_stand",
+          "effectiveFindings": 1
+        },
+        {
+          "id": "fixed_physical_inventory",
+          "effectiveFindings": 1
+        }
+      ],
+      "gate": "1 passenger touch(es) remain off-gate",
+      "stands": null
+    },
+    "six_bna_morning": {
+      "valid": false,
+      "exception": null,
+      "failedChecks": [
+        {
+          "id": "passenger_touch_on_stand",
+          "effectiveFindings": 1
+        },
+        {
+          "id": "fixed_physical_inventory",
+          "effectiveFindings": 1
+        }
+      ],
+      "gate": "1 passenger touch(es) remain off-gate",
+      "stands": null
+    },
+    "early_hou_dal_282": {
+      "valid": false,
+      "exception": null,
+      "failedChecks": [
+        {
+          "id": "passenger_touch_on_stand",
+          "effectiveFindings": 1
+        },
+        {
+          "id": "fixed_physical_inventory",
+          "effectiveFindings": 1
+        }
+      ],
+      "gate": "1 passenger touch(es) remain off-gate",
+      "stands": null
+    },
+    "early_hou_dal_288": {
+      "valid": false,
+      "exception": null,
+      "failedChecks": [
+        {
+          "id": "passenger_touch_on_stand",
+          "effectiveFindings": 1
+        },
+        {
+          "id": "fixed_physical_inventory",
+          "effectiveFindings": 1
+        }
+      ],
+      "gate": "1 passenger touch(es) remain off-gate",
+      "stands": null
+    },
+    "early_hou_dal_294": {
+      "valid": false,
+      "exception": null,
+      "failedChecks": [
+        {
+          "id": "passenger_touch_on_stand",
+          "effectiveFindings": 1
+        },
+        {
+          "id": "fixed_physical_inventory",
+          "effectiveFindings": 1
+        }
+      ],
+      "gate": "1 passenger touch(es) remain off-gate",
+      "stands": null
+    },
+    "jax_hou_rebuild": {
+      "valid": false,
+      "exception": null,
+      "failedChecks": [
+        {
+          "id": "passenger_touch_on_stand",
+          "effectiveFindings": 1
+        },
+        {
+          "id": "fixed_physical_inventory",
+          "effectiveFindings": 1
+        }
+      ],
+      "gate": "1 passenger touch(es) remain off-gate",
+      "stands": null
+    },
+    "bna_rfd_late": {
+      "valid": false,
+      "exception": null,
+      "failedChecks": [
+        {
+          "id": "section_26_pairing_spacing",
+          "effectiveFindings": 1
+        }
+      ],
+      "gate": "pass",
+      "stands": {
+        "claims": 15,
+        "minutes": 3061
+      }
+    },
+    "hou_dsm_late": {
+      "valid": false,
+      "exception": null,
+      "failedChecks": [
+        {
+          "id": "section_26_pairing_spacing",
+          "effectiveFindings": 1
+        }
+      ],
+      "gate": "pass",
+      "stands": {
+        "claims": 15,
+        "minutes": 3061
+      }
+    },
+    "edge_hou_rfd": {
+      "valid": true,
+      "exception": null,
+      "failedChecks": [],
+      "gate": "pass",
+      "stands": {
+        "claims": 15,
+        "minutes": 3061
+      }
+    },
+    "edge_bna_dal": {
+      "valid": true,
+      "exception": null,
+      "failedChecks": [],
+      "gate": "pass",
+      "stands": {
+        "claims": 15,
+        "minutes": 3061
+      }
+    },
+    "edge_hou_dsm": {
+      "valid": true,
+      "exception": null,
+      "failedChecks": [],
+      "gate": "pass",
+      "stands": {
+        "claims": 15,
+        "minutes": 3061
+      }
+    },
+    "edge_hou_oma": {
+      "valid": false,
+      "exception": null,
+      "failedChecks": [
+        {
+          "id": "passenger_touch_on_stand",
+          "effectiveFindings": 1
+        },
+        {
+          "id": "fixed_physical_inventory",
+          "effectiveFindings": 1
+        }
+      ],
+      "gate": "1 passenger touch(es) remain off-gate",
+      "stands": null
+    },
+    "edge_hou_bna": {
+      "valid": true,
+      "exception": null,
+      "failedChecks": [],
+      "gate": "pass",
+      "stands": {
+        "claims": 15,
+        "minutes": 3061
+      }
+    },
+    "edge_hou_lit": {
+      "valid": true,
+      "exception": null,
+      "failedChecks": [],
+      "gate": "pass",
+      "stands": {
+        "claims": 15,
+        "minutes": 3061
+      }
+    },
+    "jax_hou_late_bank": {
+      "valid": false,
+      "exception": null,
+      "failedChecks": [
+        {
+          "id": "passenger_touch_on_stand",
+          "effectiveFindings": 1
+        },
+        {
+          "id": "fixed_physical_inventory",
+          "effectiveFindings": 1
+        }
+      ],
+      "gate": "1 passenger touch(es) remain off-gate",
+      "stands": null
+    },
+    "jan_jax_bna_preserve_okc_return": {
+      "valid": true,
+      "exception": null,
+      "failedChecks": [],
+      "gate": "pass",
+      "stands": {
+        "claims": 15,
+        "minutes": 3061
+      }
+    },
+    "jan_jax_bna_290": {
+      "valid": true,
+      "exception": null,
+      "failedChecks": [],
+      "gate": "pass",
+      "stands": {
+        "claims": 15,
+        "minutes": 3061
+      }
+    },
+    "jan_jax_bna_300": {
+      "valid": true,
+      "exception": null,
+      "failedChecks": [],
+      "gate": "pass",
+      "stands": {
+        "claims": 15,
+        "minutes": 3061
+      }
+    },
+    "day_hou_rebuild": {
+      "valid": false,
+      "exception": null,
+      "failedChecks": [
+        {
+          "id": "tiered_service_minimums",
+          "effectiveFindings": 1
+        }
+      ],
+      "gate": "pass",
+      "stands": {
+        "claims": 15,
+        "minutes": 3061
+      }
+    },
+    "six_hou_rebuild": {
+      "valid": true,
+      "exception": null,
+      "failedChecks": [],
+      "gate": "pass",
+      "stands": {
+        "claims": 15,
+        "minutes": 3061
+      }
+    },
+    "six_bwi_1145": {
+      "valid": true,
+      "exception": null,
+      "failedChecks": [],
+      "gate": "pass",
+      "stands": {
+        "claims": 15,
+        "minutes": 3061
+      }
+    },
+    "six_bwi_1155": {
+      "valid": true,
+      "exception": null,
+      "failedChecks": [],
+      "gate": "pass",
+      "stands": {
+        "claims": 15,
+        "minutes": 3061
+      }
+    },
+    "six_bwi_1164": {
+      "valid": true,
+      "exception": null,
+      "failedChecks": [],
+      "gate": "pass",
+      "stands": {
+        "claims": 15,
+        "minutes": 3061
+      }
+    }
+  },
+  "comparisonMetrics": {
+    "edge_hou_rfd": {
+      "geo": {
+        "lostPaths": 62,
+        "gained": 20,
+        "lost": 11,
+        "faster": 57,
+        "slower": 31
+      },
+      "raw": {
+        "lostPaths": 106,
+        "gained": 34,
+        "lost": 21,
+        "faster": 77,
+        "slower": 50
+      },
+      "lostMarkets": [
+        {
+          "market": "HRL-OKC",
+          "origin": "HRL",
+          "destination": "OKC",
+          "demand": 3.5,
+          "beforeMinutes": 407,
+          "afterMinutes": null
+        },
+        {
+          "market": "JAN-BLV",
+          "origin": "JAN",
+          "destination": "BLV",
+          "demand": 3.5,
+          "beforeMinutes": 309,
+          "afterMinutes": null
+        },
+        {
+          "market": "OKC-HRL",
+          "origin": "OKC",
+          "destination": "HRL",
+          "demand": 3.3,
+          "beforeMinutes": 257,
+          "afterMinutes": null
+        },
+        {
+          "market": "JAN-OKC",
+          "origin": "JAN",
+          "destination": "OKC",
+          "demand": 3.2,
+          "beforeMinutes": 316,
+          "afterMinutes": null
+        },
+        {
+          "market": "JAN-MKE",
+          "origin": "JAN",
+          "destination": "MKE",
+          "demand": 3.1,
+          "beforeMinutes": 329,
+          "afterMinutes": null
+        },
+        {
+          "market": "ATW-OKC",
+          "origin": "ATW",
+          "destination": "OKC",
+          "demand": 1.7,
+          "beforeMinutes": 354,
+          "afterMinutes": 387
+        },
+        {
+          "market": "DSM-SHV",
+          "origin": "DSM",
+          "destination": "SHV",
+          "demand": 0.8,
+          "beforeMinutes": 293,
+          "afterMinutes": null
+        },
+        {
+          "market": "JAN-SYR",
+          "origin": "JAN",
+          "destination": "SYR",
+          "demand": 0.8,
+          "beforeMinutes": 452,
+          "afterMinutes": null
+        },
+        {
+          "market": "JAN-LBB",
+          "origin": "JAN",
+          "destination": "LBB",
+          "demand": 0.7,
+          "beforeMinutes": 349,
+          "afterMinutes": null
+        },
+        {
+          "market": "OKC-SGF",
+          "origin": "OKC",
+          "destination": "SGF",
+          "demand": 0.3,
+          "beforeMinutes": 159,
+          "afterMinutes": null
+        },
+        {
+          "market": "ATW-SHV",
+          "origin": "ATW",
+          "destination": "SHV",
+          "demand": 0.2,
+          "beforeMinutes": 230,
+          "afterMinutes": 633
+        }
+      ],
+      "profiles": [
+        {
+          "flight": 1500,
+          "market": "JAN-MCI",
+          "departure": "05:41",
+          "arrival": "07:24",
+          "localOd": 5.3,
+          "competitiveIndex": 1.7666666666666666
+        },
+        {
+          "flight": 1553,
+          "market": "MCI-OKC",
+          "departure": "13:45",
+          "arrival": "14:56",
+          "localOd": 4.3,
+          "competitiveIndex": 151.54999999999998
+        },
+        {
+          "flight": 1554,
+          "market": "OKC-MCI",
+          "departure": "15:36",
+          "arrival": "16:47",
+          "localOd": 4.2,
+          "competitiveIndex": 178.70000000000005
+        },
+        {
+          "flight": 1596,
+          "market": "MCI-SHV",
+          "departure": "22:15",
+          "arrival": "23:48",
+          "localOd": 3.1,
+          "competitiveIndex": 54.94999999999999
+        },
+        {
+          "flight": 2227,
+          "market": "MCI-HOU",
+          "departure": "08:07",
+          "arrival": "10:07",
+          "localOd": 61.2,
+          "competitiveIndex": 158.25
+        },
+        {
+          "flight": 2228,
+          "market": "HOU-MCI",
+          "departure": "11:05",
+          "arrival": "13:05",
+          "localOd": 62.2,
+          "competitiveIndex": 180.66666666666666
+        },
+        {
+          "flight": 2229,
+          "market": "MCI-RFD",
+          "departure": "18:05",
+          "arrival": "19:22",
+          "localOd": 199.6,
+          "competitiveIndex": 215.26999999999998
+        },
+        {
+          "flight": 2230,
+          "market": "RFD-MCI",
+          "departure": "20:02",
+          "arrival": "21:19",
+          "localOd": 200.4,
+          "competitiveIndex": 237.98000000000002
+        }
+      ]
+    },
+    "edge_bna_dal": {
+      "geo": {
+        "lostPaths": 64,
+        "gained": 14,
+        "lost": 13,
+        "faster": 29,
+        "slower": 52
+      },
+      "raw": {
+        "lostPaths": 104,
+        "gained": 24,
+        "lost": 20,
+        "faster": 50,
+        "slower": 73
+      },
+      "lostMarkets": [
+        {
+          "market": "OKC-BNA",
+          "origin": "OKC",
+          "destination": "BNA",
+          "demand": 36.2,
+          "beforeMinutes": 399,
+          "afterMinutes": null
+        },
+        {
+          "market": "OKC-BWI",
+          "origin": "OKC",
+          "destination": "BWI",
+          "demand": 15.6,
+          "beforeMinutes": 456,
+          "afterMinutes": null
+        },
+        {
+          "market": "JAN-BLV",
+          "origin": "JAN",
+          "destination": "BLV",
+          "demand": 3.5,
+          "beforeMinutes": 309,
+          "afterMinutes": null
+        },
+        {
+          "market": "OKC-CRP",
+          "origin": "OKC",
+          "destination": "CRP",
+          "demand": 3.4,
+          "beforeMinutes": 449,
+          "afterMinutes": null
+        },
+        {
+          "market": "JAN-OKC",
+          "origin": "JAN",
+          "destination": "OKC",
+          "demand": 3.2,
+          "beforeMinutes": 316,
+          "afterMinutes": null
+        },
+        {
+          "market": "JAN-MKE",
+          "origin": "JAN",
+          "destination": "MKE",
+          "demand": 3.1,
+          "beforeMinutes": 329,
+          "afterMinutes": null
+        },
+        {
+          "market": "OKC-FAR",
+          "origin": "OKC",
+          "destination": "FAR",
+          "demand": 1.9,
+          "beforeMinutes": 412,
+          "afterMinutes": null
+        },
+        {
+          "market": "ATW-OKC",
+          "origin": "ATW",
+          "destination": "OKC",
+          "demand": 1.7,
+          "beforeMinutes": 354,
+          "afterMinutes": 387
+        },
+        {
+          "market": "ELP-SHV",
+          "origin": "ELP",
+          "destination": "SHV",
+          "demand": 1.7,
+          "beforeMinutes": 438,
+          "afterMinutes": null
+        },
+        {
+          "market": "DSM-SHV",
+          "origin": "DSM",
+          "destination": "SHV",
+          "demand": 0.8,
+          "beforeMinutes": 293,
+          "afterMinutes": null
+        },
+        {
+          "market": "JAN-SYR",
+          "origin": "JAN",
+          "destination": "SYR",
+          "demand": 0.8,
+          "beforeMinutes": 452,
+          "afterMinutes": null
+        },
+        {
+          "market": "JAN-LBB",
+          "origin": "JAN",
+          "destination": "LBB",
+          "demand": 0.7,
+          "beforeMinutes": 349,
+          "afterMinutes": null
+        },
+        {
+          "market": "OKC-DLH",
+          "origin": "OKC",
+          "destination": "DLH",
+          "demand": 0.5,
+          "beforeMinutes": 412,
+          "afterMinutes": null
+        }
+      ],
+      "profiles": [
+        {
+          "flight": 1500,
+          "market": "JAN-MCI",
+          "departure": "05:41",
+          "arrival": "07:24",
+          "localOd": 5.3,
+          "competitiveIndex": 1.7666666666666666
+        },
+        {
+          "flight": 1553,
+          "market": "MCI-OKC",
+          "departure": "13:05",
+          "arrival": "14:16",
+          "localOd": 4.3,
+          "competitiveIndex": 111.4
+        },
+        {
+          "flight": 1554,
+          "market": "OKC-MCI",
+          "departure": "15:14",
+          "arrival": "16:25",
+          "localOd": 4.2,
+          "competitiveIndex": 123.80000000000001
+        },
+        {
+          "flight": 1596,
+          "market": "MCI-SHV",
+          "departure": "21:27",
+          "arrival": "23:00",
+          "localOd": 3.1,
+          "competitiveIndex": 51.5
+        },
+        {
+          "flight": 2227,
+          "market": "MCI-BNA",
+          "departure": "08:07",
+          "arrival": "09:42",
+          "localOd": 77.9,
+          "competitiveIndex": 180.23333333333332
+        },
+        {
+          "flight": 2228,
+          "market": "BNA-MCI",
+          "departure": "10:43",
+          "arrival": "12:18",
+          "localOd": 78.2,
+          "competitiveIndex": 335.0666666666666
+        },
+        {
+          "flight": 2229,
+          "market": "MCI-DAL",
+          "departure": "17:05",
+          "arrival": "18:36",
+          "localOd": 102.1,
+          "competitiveIndex": 201.325
+        },
+        {
+          "flight": 2230,
+          "market": "DAL-MCI",
+          "departure": "19:16",
+          "arrival": "20:47",
+          "localOd": 102.6,
+          "competitiveIndex": 96.29999999999998
+        }
+      ]
+    },
+    "edge_hou_dsm": {
+      "geo": {
+        "lostPaths": 59,
+        "gained": 18,
+        "lost": 10,
+        "faster": 59,
+        "slower": 31
+      },
+      "raw": {
+        "lostPaths": 102,
+        "gained": 31,
+        "lost": 19,
+        "faster": 79,
+        "slower": 50
+      },
+      "lostMarkets": [
+        {
+          "market": "HRL-OKC",
+          "origin": "HRL",
+          "destination": "OKC",
+          "demand": 3.5,
+          "beforeMinutes": 407,
+          "afterMinutes": null
+        },
+        {
+          "market": "JAN-BLV",
+          "origin": "JAN",
+          "destination": "BLV",
+          "demand": 3.5,
+          "beforeMinutes": 309,
+          "afterMinutes": null
+        },
+        {
+          "market": "OKC-HRL",
+          "origin": "OKC",
+          "destination": "HRL",
+          "demand": 3.3,
+          "beforeMinutes": 257,
+          "afterMinutes": null
+        },
+        {
+          "market": "JAN-OKC",
+          "origin": "JAN",
+          "destination": "OKC",
+          "demand": 3.2,
+          "beforeMinutes": 316,
+          "afterMinutes": null
+        },
+        {
+          "market": "JAN-MKE",
+          "origin": "JAN",
+          "destination": "MKE",
+          "demand": 3.1,
+          "beforeMinutes": 329,
+          "afterMinutes": null
+        },
+        {
+          "market": "ATW-OKC",
+          "origin": "ATW",
+          "destination": "OKC",
+          "demand": 1.7,
+          "beforeMinutes": 354,
+          "afterMinutes": 387
+        },
+        {
+          "market": "ELP-SHV",
+          "origin": "ELP",
+          "destination": "SHV",
+          "demand": 1.7,
+          "beforeMinutes": 438,
+          "afterMinutes": null
+        },
+        {
+          "market": "JAN-SYR",
+          "origin": "JAN",
+          "destination": "SYR",
+          "demand": 0.8,
+          "beforeMinutes": 452,
+          "afterMinutes": null
+        },
+        {
+          "market": "JAN-LBB",
+          "origin": "JAN",
+          "destination": "LBB",
+          "demand": 0.7,
+          "beforeMinutes": 349,
+          "afterMinutes": null
+        },
+        {
+          "market": "OKC-SGF",
+          "origin": "OKC",
+          "destination": "SGF",
+          "demand": 0.3,
+          "beforeMinutes": 159,
+          "afterMinutes": null
+        }
+      ],
+      "profiles": [
+        {
+          "flight": 1500,
+          "market": "JAN-MCI",
+          "departure": "05:41",
+          "arrival": "07:24",
+          "localOd": 5.3,
+          "competitiveIndex": 1.7666666666666666
+        },
+        {
+          "flight": 1553,
+          "market": "MCI-OKC",
+          "departure": "13:45",
+          "arrival": "14:56",
+          "localOd": 4.3,
+          "competitiveIndex": 151.54999999999998
+        },
+        {
+          "flight": 1554,
+          "market": "OKC-MCI",
+          "departure": "15:36",
+          "arrival": "16:47",
+          "localOd": 4.2,
+          "competitiveIndex": 178.70000000000005
+        },
+        {
+          "flight": 1596,
+          "market": "MCI-SHV",
+          "departure": "21:05",
+          "arrival": "22:38",
+          "localOd": 3.1,
+          "competitiveIndex": 41.6
+        },
+        {
+          "flight": 2227,
+          "market": "MCI-HOU",
+          "departure": "08:07",
+          "arrival": "10:07",
+          "localOd": 61.2,
+          "competitiveIndex": 158.25
+        },
+        {
+          "flight": 2228,
+          "market": "HOU-MCI",
+          "departure": "11:05",
+          "arrival": "13:05",
+          "localOd": 62.2,
+          "competitiveIndex": 180.66666666666666
+        },
+        {
+          "flight": 2229,
+          "market": "MCI-DSM",
+          "departure": "18:05",
+          "arrival": "18:55",
+          "localOd": 0.8,
+          "competitiveIndex": 15.56
+        },
+        {
+          "flight": 2230,
+          "market": "DSM-MCI",
+          "departure": "19:35",
+          "arrival": "20:25",
+          "localOd": 0.9,
+          "competitiveIndex": 8.129999999999999
+        }
+      ]
+    },
+    "edge_hou_bna": {
+      "geo": {
+        "lostPaths": 65,
+        "gained": 23,
+        "lost": 13,
+        "faster": 58,
+        "slower": 29
+      },
+      "raw": {
+        "lostPaths": 113,
+        "gained": 39,
+        "lost": 25,
+        "faster": 80,
+        "slower": 47
+      },
+      "lostMarkets": [
+        {
+          "market": "HRL-OKC",
+          "origin": "HRL",
+          "destination": "OKC",
+          "demand": 3.5,
+          "beforeMinutes": 407,
+          "afterMinutes": null
+        },
+        {
+          "market": "JAN-BLV",
+          "origin": "JAN",
+          "destination": "BLV",
+          "demand": 3.5,
+          "beforeMinutes": 309,
+          "afterMinutes": null
+        },
+        {
+          "market": "OKC-HRL",
+          "origin": "OKC",
+          "destination": "HRL",
+          "demand": 3.3,
+          "beforeMinutes": 257,
+          "afterMinutes": null
+        },
+        {
+          "market": "JAN-OKC",
+          "origin": "JAN",
+          "destination": "OKC",
+          "demand": 3.2,
+          "beforeMinutes": 316,
+          "afterMinutes": null
+        },
+        {
+          "market": "JAN-MKE",
+          "origin": "JAN",
+          "destination": "MKE",
+          "demand": 3.1,
+          "beforeMinutes": 329,
+          "afterMinutes": null
+        },
+        {
+          "market": "ATW-OKC",
+          "origin": "ATW",
+          "destination": "OKC",
+          "demand": 1.7,
+          "beforeMinutes": 354,
+          "afterMinutes": 387
+        },
+        {
+          "market": "BLV-SHV",
+          "origin": "BLV",
+          "destination": "SHV",
+          "demand": 1.6,
+          "beforeMinutes": 198,
+          "afterMinutes": null
+        },
+        {
+          "market": "DSM-SHV",
+          "origin": "DSM",
+          "destination": "SHV",
+          "demand": 0.8,
+          "beforeMinutes": 293,
+          "afterMinutes": null
+        },
+        {
+          "market": "JAN-SYR",
+          "origin": "JAN",
+          "destination": "SYR",
+          "demand": 0.8,
+          "beforeMinutes": 452,
+          "afterMinutes": null
+        },
+        {
+          "market": "JAN-LBB",
+          "origin": "JAN",
+          "destination": "LBB",
+          "demand": 0.7,
+          "beforeMinutes": 349,
+          "afterMinutes": null
+        },
+        {
+          "market": "FSD-SHV",
+          "origin": "FSD",
+          "destination": "SHV",
+          "demand": 0.4,
+          "beforeMinutes": 203,
+          "afterMinutes": null
+        },
+        {
+          "market": "OKC-SGF",
+          "origin": "OKC",
+          "destination": "SGF",
+          "demand": 0.3,
+          "beforeMinutes": 159,
+          "afterMinutes": null
+        },
+        {
+          "market": "ATW-SHV",
+          "origin": "ATW",
+          "destination": "SHV",
+          "demand": 0.2,
+          "beforeMinutes": 230,
+          "afterMinutes": 673
+        }
+      ],
+      "profiles": [
+        {
+          "flight": 1500,
+          "market": "JAN-MCI",
+          "departure": "05:41",
+          "arrival": "07:24",
+          "localOd": 5.3,
+          "competitiveIndex": 1.7666666666666666
+        },
+        {
+          "flight": 1553,
+          "market": "MCI-OKC",
+          "departure": "13:45",
+          "arrival": "14:56",
+          "localOd": 4.3,
+          "competitiveIndex": 151.54999999999998
+        },
+        {
+          "flight": 1554,
+          "market": "OKC-MCI",
+          "departure": "15:36",
+          "arrival": "16:47",
+          "localOd": 4.2,
+          "competitiveIndex": 178.70000000000005
+        },
+        {
+          "flight": 1596,
+          "market": "MCI-SHV",
+          "departure": "22:55",
+          "arrival": "00:28",
+          "localOd": 3.1,
+          "competitiveIndex": 55.849999999999994
+        },
+        {
+          "flight": 2227,
+          "market": "MCI-HOU",
+          "departure": "08:07",
+          "arrival": "10:07",
+          "localOd": 61.2,
+          "competitiveIndex": 158.25
+        },
+        {
+          "flight": 2228,
+          "market": "HOU-MCI",
+          "departure": "11:05",
+          "arrival": "13:05",
+          "localOd": 62.2,
+          "competitiveIndex": 180.66666666666666
+        },
+        {
+          "flight": 2229,
+          "market": "MCI-BNA",
+          "departure": "18:05",
+          "arrival": "19:40",
+          "localOd": 77.9,
+          "competitiveIndex": 161.33333333333334
+        },
+        {
+          "flight": 2230,
+          "market": "BNA-MCI",
+          "departure": "20:40",
+          "arrival": "22:15",
+          "localOd": 78.2,
+          "competitiveIndex": 106.56666666666666
+        }
+      ]
+    },
+    "edge_hou_lit": {
+      "geo": {
+        "lostPaths": 62,
+        "gained": 21,
+        "lost": 11,
+        "faster": 54,
+        "slower": 31
+      },
+      "raw": {
+        "lostPaths": 106,
+        "gained": 35,
+        "lost": 21,
+        "faster": 75,
+        "slower": 50
+      },
+      "lostMarkets": [
+        {
+          "market": "HRL-OKC",
+          "origin": "HRL",
+          "destination": "OKC",
+          "demand": 3.5,
+          "beforeMinutes": 407,
+          "afterMinutes": null
+        },
+        {
+          "market": "JAN-BLV",
+          "origin": "JAN",
+          "destination": "BLV",
+          "demand": 3.5,
+          "beforeMinutes": 309,
+          "afterMinutes": null
+        },
+        {
+          "market": "OKC-HRL",
+          "origin": "OKC",
+          "destination": "HRL",
+          "demand": 3.3,
+          "beforeMinutes": 257,
+          "afterMinutes": null
+        },
+        {
+          "market": "JAN-OKC",
+          "origin": "JAN",
+          "destination": "OKC",
+          "demand": 3.2,
+          "beforeMinutes": 316,
+          "afterMinutes": null
+        },
+        {
+          "market": "JAN-MKE",
+          "origin": "JAN",
+          "destination": "MKE",
+          "demand": 3.1,
+          "beforeMinutes": 329,
+          "afterMinutes": null
+        },
+        {
+          "market": "ATW-OKC",
+          "origin": "ATW",
+          "destination": "OKC",
+          "demand": 1.7,
+          "beforeMinutes": 354,
+          "afterMinutes": 387
+        },
+        {
+          "market": "DSM-SHV",
+          "origin": "DSM",
+          "destination": "SHV",
+          "demand": 0.8,
+          "beforeMinutes": 293,
+          "afterMinutes": null
+        },
+        {
+          "market": "JAN-SYR",
+          "origin": "JAN",
+          "destination": "SYR",
+          "demand": 0.8,
+          "beforeMinutes": 452,
+          "afterMinutes": null
+        },
+        {
+          "market": "JAN-LBB",
+          "origin": "JAN",
+          "destination": "LBB",
+          "demand": 0.7,
+          "beforeMinutes": 349,
+          "afterMinutes": null
+        },
+        {
+          "market": "OKC-SGF",
+          "origin": "OKC",
+          "destination": "SGF",
+          "demand": 0.3,
+          "beforeMinutes": 159,
+          "afterMinutes": null
+        },
+        {
+          "market": "ATW-SHV",
+          "origin": "ATW",
+          "destination": "SHV",
+          "demand": 0.2,
+          "beforeMinutes": 230,
+          "afterMinutes": 633
+        }
+      ],
+      "profiles": [
+        {
+          "flight": 1500,
+          "market": "JAN-MCI",
+          "departure": "05:41",
+          "arrival": "07:24",
+          "localOd": 5.3,
+          "competitiveIndex": 1.7666666666666666
+        },
+        {
+          "flight": 1553,
+          "market": "MCI-OKC",
+          "departure": "13:45",
+          "arrival": "14:56",
+          "localOd": 4.3,
+          "competitiveIndex": 151.54999999999998
+        },
+        {
+          "flight": 1554,
+          "market": "OKC-MCI",
+          "departure": "15:36",
+          "arrival": "16:47",
+          "localOd": 4.2,
+          "competitiveIndex": 180.50000000000006
+        },
+        {
+          "flight": 1596,
+          "market": "MCI-SHV",
+          "departure": "22:15",
+          "arrival": "23:48",
+          "localOd": 3.1,
+          "competitiveIndex": 54.94999999999999
+        },
+        {
+          "flight": 2227,
+          "market": "MCI-HOU",
+          "departure": "08:07",
+          "arrival": "10:07",
+          "localOd": 61.2,
+          "competitiveIndex": 158.25
+        },
+        {
+          "flight": 2228,
+          "market": "HOU-MCI",
+          "departure": "11:05",
+          "arrival": "13:05",
+          "localOd": 62.2,
+          "competitiveIndex": 180.66666666666666
+        },
+        {
+          "flight": 2229,
+          "market": "MCI-LIT",
+          "departure": "18:05",
+          "arrival": "19:20",
+          "localOd": 4.8,
+          "competitiveIndex": 24.45
+        },
+        {
+          "flight": 2230,
+          "market": "LIT-MCI",
+          "departure": "20:00",
+          "arrival": "21:15",
+          "localOd": 4.6,
+          "competitiveIndex": 7.55
+        }
+      ]
+    },
+    "jan_jax_bna_290": {
+      "geo": {
+        "lostPaths": 52,
+        "gained": 26,
+        "lost": 3,
+        "faster": 46,
+        "slower": 32
+      },
+      "raw": {
+        "lostPaths": 82,
+        "gained": 39,
+        "lost": 7,
+        "faster": 72,
+        "slower": 44
+      },
+      "lostMarkets": [
+        {
+          "market": "ATW-OKC",
+          "origin": "ATW",
+          "destination": "OKC",
+          "demand": 1.7,
+          "beforeMinutes": 354,
+          "afterMinutes": 387
+        },
+        {
+          "market": "DSM-SHV",
+          "origin": "DSM",
+          "destination": "SHV",
+          "demand": 0.8,
+          "beforeMinutes": 293,
+          "afterMinutes": null
+        },
+        {
+          "market": "ATW-SHV",
+          "origin": "ATW",
+          "destination": "SHV",
+          "demand": 0.2,
+          "beforeMinutes": 230,
+          "afterMinutes": 633
+        }
+      ],
+      "profiles": [
+        {
+          "flight": 1500,
+          "market": "JAN-MCI",
+          "departure": "09:42",
+          "arrival": "11:25",
+          "localOd": 5.3,
+          "competitiveIndex": 12.266666666666666
+        },
+        {
+          "flight": 1553,
+          "market": "MCI-OKC",
+          "departure": "13:05",
+          "arrival": "14:16",
+          "localOd": 4.3,
+          "competitiveIndex": 114.6
+        },
+        {
+          "flight": 1554,
+          "market": "OKC-MCI",
+          "departure": "15:25",
+          "arrival": "16:36",
+          "localOd": 4.2,
+          "competitiveIndex": 181.40000000000006
+        },
+        {
+          "flight": 1596,
+          "market": "MCI-SHV",
+          "departure": "22:15",
+          "arrival": "23:48",
+          "localOd": 3.1,
+          "competitiveIndex": 54.94999999999999
+        },
+        {
+          "flight": 2227,
+          "market": "JAN-JAX",
+          "departure": "04:50",
+          "arrival": "07:28",
+          "localOd": 5,
+          "competitiveIndex": 23.8
+        },
+        {
+          "flight": 2228,
+          "market": "JAX-JAN",
+          "departure": "08:08",
+          "arrival": "08:46",
+          "localOd": 4.9,
+          "competitiveIndex": 26.5
+        },
+        {
+          "flight": 2229,
+          "market": "MCI-BNA",
+          "departure": "17:16",
+          "arrival": "18:51",
+          "localOd": 77.9,
+          "competitiveIndex": 193.01666666666668
+        },
+        {
+          "flight": 2230,
+          "market": "BNA-MCI",
+          "departure": "19:31",
+          "arrival": "21:06",
+          "localOd": 78.2,
+          "competitiveIndex": 161.46666666666667
+        }
+      ]
+    },
+    "jan_jax_bna_300": {
+      "geo": {
+        "lostPaths": 52,
+        "gained": 26,
+        "lost": 3,
+        "faster": 45,
+        "slower": 32
+      },
+      "raw": {
+        "lostPaths": 82,
+        "gained": 39,
+        "lost": 7,
+        "faster": 71,
+        "slower": 44
+      },
+      "lostMarkets": [
+        {
+          "market": "ATW-OKC",
+          "origin": "ATW",
+          "destination": "OKC",
+          "demand": 1.7,
+          "beforeMinutes": 354,
+          "afterMinutes": 387
+        },
+        {
+          "market": "DSM-SHV",
+          "origin": "DSM",
+          "destination": "SHV",
+          "demand": 0.8,
+          "beforeMinutes": 293,
+          "afterMinutes": null
+        },
+        {
+          "market": "ATW-SHV",
+          "origin": "ATW",
+          "destination": "SHV",
+          "demand": 0.2,
+          "beforeMinutes": 230,
+          "afterMinutes": 633
+        }
+      ],
+      "profiles": [
+        {
+          "flight": 1500,
+          "market": "JAN-MCI",
+          "departure": "09:42",
+          "arrival": "11:25",
+          "localOd": 5.3,
+          "competitiveIndex": 12.266666666666666
+        },
+        {
+          "flight": 1553,
+          "market": "MCI-OKC",
+          "departure": "13:05",
+          "arrival": "14:16",
+          "localOd": 4.3,
+          "competitiveIndex": 114.6
+        },
+        {
+          "flight": 1554,
+          "market": "OKC-MCI",
+          "departure": "15:25",
+          "arrival": "16:36",
+          "localOd": 4.2,
+          "competitiveIndex": 181.40000000000006
+        },
+        {
+          "flight": 1596,
+          "market": "MCI-SHV",
+          "departure": "22:15",
+          "arrival": "23:48",
+          "localOd": 3.1,
+          "competitiveIndex": 54.94999999999999
+        },
+        {
+          "flight": 2227,
+          "market": "JAN-JAX",
+          "departure": "05:00",
+          "arrival": "07:38",
+          "localOd": 5,
+          "competitiveIndex": 22
+        },
+        {
+          "flight": 2228,
+          "market": "JAX-JAN",
+          "departure": "08:18",
+          "arrival": "08:56",
+          "localOd": 4.9,
+          "competitiveIndex": 25.1
+        },
+        {
+          "flight": 2229,
+          "market": "MCI-BNA",
+          "departure": "17:16",
+          "arrival": "18:51",
+          "localOd": 77.9,
+          "competitiveIndex": 193.01666666666668
+        },
+        {
+          "flight": 2230,
+          "market": "BNA-MCI",
+          "departure": "19:31",
+          "arrival": "21:06",
+          "localOd": 78.2,
+          "competitiveIndex": 161.46666666666667
+        }
+      ]
+    },
+    "six_hou_rebuild": {
+      "geo": {
+        "lostPaths": 92,
+        "gained": 21,
+        "lost": 17,
+        "faster": 38,
+        "slower": 23
+      },
+      "raw": {
+        "lostPaths": 123,
+        "gained": 32,
+        "lost": 23,
+        "faster": 62,
+        "slower": 53
+      },
+      "lostMarkets": [
+        {
+          "market": "BNA-OKC",
+          "origin": "BNA",
+          "destination": "OKC",
+          "demand": 36.4,
+          "beforeMinutes": 306,
+          "afterMinutes": null
+        },
+        {
+          "market": "OKC-RDU",
+          "origin": "OKC",
+          "destination": "RDU",
+          "demand": 16.5,
+          "beforeMinutes": 349,
+          "afterMinutes": 477
+        },
+        {
+          "market": "CLT-SHV",
+          "origin": "CLT",
+          "destination": "SHV",
+          "demand": 8.2,
+          "beforeMinutes": 458,
+          "afterMinutes": null
+        },
+        {
+          "market": "OKC-MEM",
+          "origin": "OKC",
+          "destination": "MEM",
+          "demand": 4.7,
+          "beforeMinutes": 290,
+          "afterMinutes": null
+        },
+        {
+          "market": "OKC-OMA",
+          "origin": "OKC",
+          "destination": "OMA",
+          "demand": 3.9,
+          "beforeMinutes": 259,
+          "afterMinutes": null
+        },
+        {
+          "market": "OMA-OKC",
+          "origin": "OMA",
+          "destination": "OKC",
+          "demand": 3.9,
+          "beforeMinutes": 211,
+          "afterMinutes": null
+        },
+        {
+          "market": "SYR-OKC",
+          "origin": "SYR",
+          "destination": "OKC",
+          "demand": 3.9,
+          "beforeMinutes": 346,
+          "afterMinutes": 425
+        },
+        {
+          "market": "HRL-OKC",
+          "origin": "HRL",
+          "destination": "OKC",
+          "demand": 3.5,
+          "beforeMinutes": 407,
+          "afterMinutes": null
+        },
+        {
+          "market": "OKC-HRL",
+          "origin": "OKC",
+          "destination": "HRL",
+          "demand": 3.3,
+          "beforeMinutes": 257,
+          "afterMinutes": null
+        },
+        {
+          "market": "JAN-OKC",
+          "origin": "JAN",
+          "destination": "OKC",
+          "demand": 3.2,
+          "beforeMinutes": 316,
+          "afterMinutes": null
+        },
+        {
+          "market": "OKC-MFE",
+          "origin": "OKC",
+          "destination": "MFE",
+          "demand": 2.3,
+          "beforeMinutes": 365,
+          "afterMinutes": null
+        },
+        {
+          "market": "LIT-OKC",
+          "origin": "LIT",
+          "destination": "OKC",
+          "demand": 1.8,
+          "beforeMinutes": 241,
+          "afterMinutes": null
+        },
+        {
+          "market": "ELP-SHV",
+          "origin": "ELP",
+          "destination": "SHV",
+          "demand": 1.7,
+          "beforeMinutes": 438,
+          "afterMinutes": null
+        },
+        {
+          "market": "OKC-FSD",
+          "origin": "OKC",
+          "destination": "FSD",
+          "demand": 1.7,
+          "beforeMinutes": 281,
+          "afterMinutes": null
+        },
+        {
+          "market": "JAN-SYR",
+          "origin": "JAN",
+          "destination": "SYR",
+          "demand": 0.8,
+          "beforeMinutes": 452,
+          "afterMinutes": null
+        },
+        {
+          "market": "COU-OKC",
+          "origin": "COU",
+          "destination": "OKC",
+          "demand": 0.5,
+          "beforeMinutes": 256,
+          "afterMinutes": null
+        },
+        {
+          "market": "OKC-SGF",
+          "origin": "OKC",
+          "destination": "SGF",
+          "demand": 0.3,
+          "beforeMinutes": 159,
+          "afterMinutes": null
+        }
+      ],
+      "profiles": [
+        {
+          "flight": 1500,
+          "market": "JAN-MCI",
+          "departure": "07:05",
+          "arrival": "08:48",
+          "localOd": 5.3,
+          "competitiveIndex": 16.616666666666667
+        },
+        {
+          "flight": 1553,
+          "market": "MCI-OKC",
+          "departure": "15:24",
+          "arrival": "16:35",
+          "localOd": 4.3,
+          "competitiveIndex": 176.6
+        },
+        {
+          "flight": 1554,
+          "market": "OKC-MCI",
+          "departure": "17:15",
+          "arrival": "18:26",
+          "localOd": 4.2,
+          "competitiveIndex": 177.55000000000004
+        },
+        {
+          "flight": 1596,
+          "market": "MCI-SHV",
+          "departure": "19:44",
+          "arrival": "21:17",
+          "localOd": 3.1,
+          "competitiveIndex": 18.35
+        },
+        {
+          "flight": 2227,
+          "market": "MCI-HOU",
+          "departure": "09:45",
+          "arrival": "11:45",
+          "localOd": 61.2,
+          "competitiveIndex": 89.75
+        },
+        {
+          "flight": 2228,
+          "market": "HOU-MCI",
+          "departure": "12:44",
+          "arrival": "14:44",
+          "localOd": 62.2,
+          "competitiveIndex": 158.85000000000002
+        }
+      ]
+    },
+    "six_bwi_1145": {
+      "geo": {
+        "lostPaths": 94,
+        "gained": 31,
+        "lost": 20,
+        "faster": 40,
+        "slower": 27
+      },
+      "raw": {
+        "lostPaths": 127,
+        "gained": 38,
+        "lost": 25,
+        "faster": 56,
+        "slower": 50
+      },
+      "lostMarkets": [
+        {
+          "market": "OKC-RFD",
+          "origin": "OKC",
+          "destination": "RFD",
+          "demand": 57.5,
+          "beforeMinutes": 289,
+          "afterMinutes": 487
+        },
+        {
+          "market": "BLV-OKC",
+          "origin": "BLV",
+          "destination": "OKC",
+          "demand": 17.7,
+          "beforeMinutes": 181,
+          "afterMinutes": null
+        },
+        {
+          "market": "OKC-RDU",
+          "origin": "OKC",
+          "destination": "RDU",
+          "demand": 16.5,
+          "beforeMinutes": 349,
+          "afterMinutes": 381
+        },
+        {
+          "market": "PGD-OKC",
+          "origin": "PGD",
+          "destination": "OKC",
+          "demand": 7.1,
+          "beforeMinutes": 276,
+          "afterMinutes": 685
+        },
+        {
+          "market": "OKC-MEM",
+          "origin": "OKC",
+          "destination": "MEM",
+          "demand": 4.7,
+          "beforeMinutes": 290,
+          "afterMinutes": null
+        },
+        {
+          "market": "OKC-OMA",
+          "origin": "OKC",
+          "destination": "OMA",
+          "demand": 3.9,
+          "beforeMinutes": 259,
+          "afterMinutes": null
+        },
+        {
+          "market": "SYR-OKC",
+          "origin": "SYR",
+          "destination": "OKC",
+          "demand": 3.9,
+          "beforeMinutes": 346,
+          "afterMinutes": 425
+        },
+        {
+          "market": "OKC-CRP",
+          "origin": "OKC",
+          "destination": "CRP",
+          "demand": 3.4,
+          "beforeMinutes": 449,
+          "afterMinutes": null
+        },
+        {
+          "market": "OKC-DSM",
+          "origin": "OKC",
+          "destination": "DSM",
+          "demand": 3.4,
+          "beforeMinutes": 320,
+          "afterMinutes": null
+        },
+        {
+          "market": "OKC-CID",
+          "origin": "OKC",
+          "destination": "CID",
+          "demand": 2.3,
+          "beforeMinutes": 331,
+          "afterMinutes": null
+        },
+        {
+          "market": "OKC-MFE",
+          "origin": "OKC",
+          "destination": "MFE",
+          "demand": 2.3,
+          "beforeMinutes": 365,
+          "afterMinutes": null
+        },
+        {
+          "market": "OKC-FAR",
+          "origin": "OKC",
+          "destination": "FAR",
+          "demand": 1.9,
+          "beforeMinutes": 412,
+          "afterMinutes": null
+        },
+        {
+          "market": "LIT-OKC",
+          "origin": "LIT",
+          "destination": "OKC",
+          "demand": 1.8,
+          "beforeMinutes": 241,
+          "afterMinutes": null
+        },
+        {
+          "market": "OKC-ATW",
+          "origin": "OKC",
+          "destination": "ATW",
+          "demand": 1.8,
+          "beforeMinutes": 352,
+          "afterMinutes": 661
+        },
+        {
+          "market": "ELP-SHV",
+          "origin": "ELP",
+          "destination": "SHV",
+          "demand": 1.7,
+          "beforeMinutes": 438,
+          "afterMinutes": null
+        },
+        {
+          "market": "OKC-FSD",
+          "origin": "OKC",
+          "destination": "FSD",
+          "demand": 1.7,
+          "beforeMinutes": 281,
+          "afterMinutes": null
+        },
+        {
+          "market": "DSM-SHV",
+          "origin": "DSM",
+          "destination": "SHV",
+          "demand": 0.8,
+          "beforeMinutes": 293,
+          "afterMinutes": null
+        },
+        {
+          "market": "JAN-SYR",
+          "origin": "JAN",
+          "destination": "SYR",
+          "demand": 0.8,
+          "beforeMinutes": 452,
+          "afterMinutes": null
+        },
+        {
+          "market": "OKC-DLH",
+          "origin": "OKC",
+          "destination": "DLH",
+          "demand": 0.5,
+          "beforeMinutes": 412,
+          "afterMinutes": null
+        },
+        {
+          "market": "OKC-COU",
+          "origin": "OKC",
+          "destination": "COU",
+          "demand": 0.4,
+          "beforeMinutes": 327,
+          "afterMinutes": null
+        }
+      ],
+      "profiles": [
+        {
+          "flight": 1500,
+          "market": "JAN-MCI",
+          "departure": "07:05",
+          "arrival": "08:48",
+          "localOd": 5.3,
+          "competitiveIndex": 19.816666666666663
+        },
+        {
+          "flight": 1553,
+          "market": "MCI-OKC",
+          "departure": "10:35",
+          "arrival": "11:46",
+          "localOd": 4.3,
+          "competitiveIndex": 97.20000000000002
+        },
+        {
+          "flight": 1554,
+          "market": "OKC-MCI",
+          "departure": "12:26",
+          "arrival": "13:37",
+          "localOd": 4.2,
+          "competitiveIndex": 172.7
+        },
+        {
+          "flight": 1596,
+          "market": "MCI-SHV",
+          "departure": "21:25",
+          "arrival": "22:58",
+          "localOd": 3.1,
+          "competitiveIndex": 56.95
+        },
+        {
+          "flight": 2227,
+          "market": "MCI-BWI",
+          "departure": "14:44",
+          "arrival": "18:24",
+          "localOd": 45.4,
+          "competitiveIndex": 115.55
+        },
+        {
+          "flight": 2228,
+          "market": "BWI-MCI",
+          "departure": "19:05",
+          "arrival": "20:45",
+          "localOd": 45.6,
+          "competitiveIndex": 103.7
+        }
+      ]
+    },
+    "six_bwi_1155": {
+      "geo": {
+        "lostPaths": 94,
+        "gained": 31,
+        "lost": 20,
+        "faster": 40,
+        "slower": 27
+      },
+      "raw": {
+        "lostPaths": 127,
+        "gained": 38,
+        "lost": 25,
+        "faster": 56,
+        "slower": 50
+      },
+      "lostMarkets": [
+        {
+          "market": "OKC-RFD",
+          "origin": "OKC",
+          "destination": "RFD",
+          "demand": 57.5,
+          "beforeMinutes": 289,
+          "afterMinutes": 487
+        },
+        {
+          "market": "BLV-OKC",
+          "origin": "BLV",
+          "destination": "OKC",
+          "demand": 17.7,
+          "beforeMinutes": 181,
+          "afterMinutes": null
+        },
+        {
+          "market": "OKC-RDU",
+          "origin": "OKC",
+          "destination": "RDU",
+          "demand": 16.5,
+          "beforeMinutes": 349,
+          "afterMinutes": 381
+        },
+        {
+          "market": "PGD-OKC",
+          "origin": "PGD",
+          "destination": "OKC",
+          "demand": 7.1,
+          "beforeMinutes": 276,
+          "afterMinutes": 685
+        },
+        {
+          "market": "OKC-MEM",
+          "origin": "OKC",
+          "destination": "MEM",
+          "demand": 4.7,
+          "beforeMinutes": 290,
+          "afterMinutes": null
+        },
+        {
+          "market": "OKC-OMA",
+          "origin": "OKC",
+          "destination": "OMA",
+          "demand": 3.9,
+          "beforeMinutes": 259,
+          "afterMinutes": null
+        },
+        {
+          "market": "SYR-OKC",
+          "origin": "SYR",
+          "destination": "OKC",
+          "demand": 3.9,
+          "beforeMinutes": 346,
+          "afterMinutes": 425
+        },
+        {
+          "market": "OKC-CRP",
+          "origin": "OKC",
+          "destination": "CRP",
+          "demand": 3.4,
+          "beforeMinutes": 449,
+          "afterMinutes": null
+        },
+        {
+          "market": "OKC-DSM",
+          "origin": "OKC",
+          "destination": "DSM",
+          "demand": 3.4,
+          "beforeMinutes": 320,
+          "afterMinutes": null
+        },
+        {
+          "market": "OKC-CID",
+          "origin": "OKC",
+          "destination": "CID",
+          "demand": 2.3,
+          "beforeMinutes": 331,
+          "afterMinutes": null
+        },
+        {
+          "market": "OKC-MFE",
+          "origin": "OKC",
+          "destination": "MFE",
+          "demand": 2.3,
+          "beforeMinutes": 365,
+          "afterMinutes": null
+        },
+        {
+          "market": "OKC-FAR",
+          "origin": "OKC",
+          "destination": "FAR",
+          "demand": 1.9,
+          "beforeMinutes": 412,
+          "afterMinutes": null
+        },
+        {
+          "market": "LIT-OKC",
+          "origin": "LIT",
+          "destination": "OKC",
+          "demand": 1.8,
+          "beforeMinutes": 241,
+          "afterMinutes": null
+        },
+        {
+          "market": "OKC-ATW",
+          "origin": "OKC",
+          "destination": "ATW",
+          "demand": 1.8,
+          "beforeMinutes": 352,
+          "afterMinutes": 661
+        },
+        {
+          "market": "ELP-SHV",
+          "origin": "ELP",
+          "destination": "SHV",
+          "demand": 1.7,
+          "beforeMinutes": 438,
+          "afterMinutes": null
+        },
+        {
+          "market": "OKC-FSD",
+          "origin": "OKC",
+          "destination": "FSD",
+          "demand": 1.7,
+          "beforeMinutes": 281,
+          "afterMinutes": null
+        },
+        {
+          "market": "DSM-SHV",
+          "origin": "DSM",
+          "destination": "SHV",
+          "demand": 0.8,
+          "beforeMinutes": 293,
+          "afterMinutes": null
+        },
+        {
+          "market": "JAN-SYR",
+          "origin": "JAN",
+          "destination": "SYR",
+          "demand": 0.8,
+          "beforeMinutes": 452,
+          "afterMinutes": null
+        },
+        {
+          "market": "OKC-DLH",
+          "origin": "OKC",
+          "destination": "DLH",
+          "demand": 0.5,
+          "beforeMinutes": 412,
+          "afterMinutes": null
+        },
+        {
+          "market": "OKC-COU",
+          "origin": "OKC",
+          "destination": "COU",
+          "demand": 0.4,
+          "beforeMinutes": 327,
+          "afterMinutes": null
+        }
+      ],
+      "profiles": [
+        {
+          "flight": 1500,
+          "market": "JAN-MCI",
+          "departure": "07:05",
+          "arrival": "08:48",
+          "localOd": 5.3,
+          "competitiveIndex": 19.816666666666663
+        },
+        {
+          "flight": 1553,
+          "market": "MCI-OKC",
+          "departure": "10:35",
+          "arrival": "11:46",
+          "localOd": 4.3,
+          "competitiveIndex": 97.20000000000002
+        },
+        {
+          "flight": 1554,
+          "market": "OKC-MCI",
+          "departure": "12:26",
+          "arrival": "13:37",
+          "localOd": 4.2,
+          "competitiveIndex": 172.7
+        },
+        {
+          "flight": 1596,
+          "market": "MCI-SHV",
+          "departure": "21:35",
+          "arrival": "23:08",
+          "localOd": 3.1,
+          "competitiveIndex": 55.599999999999994
+        },
+        {
+          "flight": 2227,
+          "market": "MCI-BWI",
+          "departure": "14:44",
+          "arrival": "18:24",
+          "localOd": 45.4,
+          "competitiveIndex": 115.55
+        },
+        {
+          "flight": 2228,
+          "market": "BWI-MCI",
+          "departure": "19:15",
+          "arrival": "20:55",
+          "localOd": 45.6,
+          "competitiveIndex": 107.6
+        }
+      ]
+    },
+    "six_bwi_1164": {
+      "geo": {
+        "lostPaths": 94,
+        "gained": 30,
+        "lost": 20,
+        "faster": 39,
+        "slower": 27
+      },
+      "raw": {
+        "lostPaths": 127,
+        "gained": 37,
+        "lost": 25,
+        "faster": 55,
+        "slower": 50
+      },
+      "lostMarkets": [
+        {
+          "market": "OKC-RFD",
+          "origin": "OKC",
+          "destination": "RFD",
+          "demand": 57.5,
+          "beforeMinutes": 289,
+          "afterMinutes": 487
+        },
+        {
+          "market": "BLV-OKC",
+          "origin": "BLV",
+          "destination": "OKC",
+          "demand": 17.7,
+          "beforeMinutes": 181,
+          "afterMinutes": null
+        },
+        {
+          "market": "OKC-RDU",
+          "origin": "OKC",
+          "destination": "RDU",
+          "demand": 16.5,
+          "beforeMinutes": 349,
+          "afterMinutes": 381
+        },
+        {
+          "market": "PGD-OKC",
+          "origin": "PGD",
+          "destination": "OKC",
+          "demand": 7.1,
+          "beforeMinutes": 276,
+          "afterMinutes": 685
+        },
+        {
+          "market": "OKC-MEM",
+          "origin": "OKC",
+          "destination": "MEM",
+          "demand": 4.7,
+          "beforeMinutes": 290,
+          "afterMinutes": null
+        },
+        {
+          "market": "OKC-OMA",
+          "origin": "OKC",
+          "destination": "OMA",
+          "demand": 3.9,
+          "beforeMinutes": 259,
+          "afterMinutes": null
+        },
+        {
+          "market": "SYR-OKC",
+          "origin": "SYR",
+          "destination": "OKC",
+          "demand": 3.9,
+          "beforeMinutes": 346,
+          "afterMinutes": 425
+        },
+        {
+          "market": "OKC-CRP",
+          "origin": "OKC",
+          "destination": "CRP",
+          "demand": 3.4,
+          "beforeMinutes": 449,
+          "afterMinutes": null
+        },
+        {
+          "market": "OKC-DSM",
+          "origin": "OKC",
+          "destination": "DSM",
+          "demand": 3.4,
+          "beforeMinutes": 320,
+          "afterMinutes": null
+        },
+        {
+          "market": "OKC-CID",
+          "origin": "OKC",
+          "destination": "CID",
+          "demand": 2.3,
+          "beforeMinutes": 331,
+          "afterMinutes": null
+        },
+        {
+          "market": "OKC-MFE",
+          "origin": "OKC",
+          "destination": "MFE",
+          "demand": 2.3,
+          "beforeMinutes": 365,
+          "afterMinutes": null
+        },
+        {
+          "market": "OKC-FAR",
+          "origin": "OKC",
+          "destination": "FAR",
+          "demand": 1.9,
+          "beforeMinutes": 412,
+          "afterMinutes": null
+        },
+        {
+          "market": "LIT-OKC",
+          "origin": "LIT",
+          "destination": "OKC",
+          "demand": 1.8,
+          "beforeMinutes": 241,
+          "afterMinutes": null
+        },
+        {
+          "market": "OKC-ATW",
+          "origin": "OKC",
+          "destination": "ATW",
+          "demand": 1.8,
+          "beforeMinutes": 352,
+          "afterMinutes": 661
+        },
+        {
+          "market": "ELP-SHV",
+          "origin": "ELP",
+          "destination": "SHV",
+          "demand": 1.7,
+          "beforeMinutes": 438,
+          "afterMinutes": null
+        },
+        {
+          "market": "OKC-FSD",
+          "origin": "OKC",
+          "destination": "FSD",
+          "demand": 1.7,
+          "beforeMinutes": 281,
+          "afterMinutes": null
+        },
+        {
+          "market": "DSM-SHV",
+          "origin": "DSM",
+          "destination": "SHV",
+          "demand": 0.8,
+          "beforeMinutes": 293,
+          "afterMinutes": null
+        },
+        {
+          "market": "JAN-SYR",
+          "origin": "JAN",
+          "destination": "SYR",
+          "demand": 0.8,
+          "beforeMinutes": 452,
+          "afterMinutes": null
+        },
+        {
+          "market": "OKC-DLH",
+          "origin": "OKC",
+          "destination": "DLH",
+          "demand": 0.5,
+          "beforeMinutes": 412,
+          "afterMinutes": null
+        },
+        {
+          "market": "OKC-COU",
+          "origin": "OKC",
+          "destination": "COU",
+          "demand": 0.4,
+          "beforeMinutes": 327,
+          "afterMinutes": null
+        }
+      ],
+      "profiles": [
+        {
+          "flight": 1500,
+          "market": "JAN-MCI",
+          "departure": "07:05",
+          "arrival": "08:48",
+          "localOd": 5.3,
+          "competitiveIndex": 19.816666666666663
+        },
+        {
+          "flight": 1553,
+          "market": "MCI-OKC",
+          "departure": "10:35",
+          "arrival": "11:46",
+          "localOd": 4.3,
+          "competitiveIndex": 97.20000000000002
+        },
+        {
+          "flight": 1554,
+          "market": "OKC-MCI",
+          "departure": "12:26",
+          "arrival": "13:37",
+          "localOd": 4.2,
+          "competitiveIndex": 172.7
+        },
+        {
+          "flight": 1596,
+          "market": "MCI-SHV",
+          "departure": "21:44",
+          "arrival": "23:17",
+          "localOd": 3.1,
+          "competitiveIndex": 55.349999999999994
+        },
+        {
+          "flight": 2227,
+          "market": "MCI-BWI",
+          "departure": "14:44",
+          "arrival": "18:24",
+          "localOd": 45.4,
+          "competitiveIndex": 115.55
+        },
+        {
+          "flight": 2228,
+          "market": "BWI-MCI",
+          "departure": "19:24",
+          "arrival": "21:04",
+          "localOd": 45.6,
+          "competitiveIndex": 106.05
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,372 @@
+{
+  "status": "draft; not published",
+  "flights": 1229,
+  "routes": 184,
+  "lines": 17,
+  "retimedFlights": [
+    1219,
+    1256,
+    1418,
+    1699,
+    1817,
+    1892,
+    1904,
+    1991
+  ],
+  "newFlights": 20,
+  "operating": {
+    "checks": 25,
+    "passed": 19,
+    "failed": 0,
+    "warnings": 3,
+    "notEvaluated": 1,
+    "overridden": 2,
+    "effectiveErrorFindings": 0,
+    "effectiveWarningFindings": 156
+  },
+  "beforeMaintenanceFindings": [
+    {
+      "id": "AC",
+      "message": "Line AC never reaches a target-city RON in its repeating cycle",
+      "evidence": {
+        "line": "AC",
+        "cycleDays": 10,
+        "targetRonCount": 0,
+        "longestRunWithoutTargetRon": null,
+        "unbounded": true,
+        "limit": 10,
+        "grace": 1
+      }
+    },
+    {
+      "id": "AO",
+      "message": "Line AO never reaches a target-city RON in its repeating cycle",
+      "evidence": {
+        "line": "AO",
+        "cycleDays": 1,
+        "targetRonCount": 0,
+        "longestRunWithoutTargetRon": null,
+        "unbounded": true,
+        "limit": 10,
+        "grace": 1
+      }
+    },
+    {
+      "id": "AQ",
+      "message": "Line AQ never reaches a target-city RON in its repeating cycle",
+      "evidence": {
+        "line": "AQ",
+        "cycleDays": 1,
+        "targetRonCount": 0,
+        "longestRunWithoutTargetRon": null,
+        "unbounded": true,
+        "limit": 10,
+        "grace": 1
+      }
+    }
+  ],
+  "standingGrace": [
+    {
+      "id": "AM",
+      "message": "Line AM uses the one-day rolling RON grace",
+      "evidence": {
+        "line": "AM",
+        "longestRunWithoutTargetRon": 11,
+        "limit": 10,
+        "grace": 1
+      }
+    }
+  ],
+  "lineCounts": {
+    "A": 12,
+    "AA": 11,
+    "AB": 10,
+    "AC": 10,
+    "AD": 11,
+    "AE": 11,
+    "AF": 11,
+    "AG": 9,
+    "AH": 9,
+    "AI": 12,
+    "AJ": 9,
+    "AK": 12,
+    "AL": 12,
+    "AM": 12,
+    "AN": 9,
+    "AS": 12,
+    "B": 12
+  },
+  "standClaims": 15,
+  "standMinutes": 3061,
+  "fleetUse": {
+    "MAX9": {
+      "used": 24,
+      "capacity": 35
+    },
+    "CRJ900": {
+      "used": 28,
+      "capacity": 45
+    },
+    "CRJ700": {
+      "used": 56,
+      "capacity": 65
+    },
+    "CRJ200": {
+      "used": 76,
+      "capacity": 80
+    }
+  },
+  "removedFlights": [
+    1257,
+    1258,
+    1360,
+    2053,
+    2054
+  ],
+  "addedFlights": [
+    {
+      "id": "R501-REVIEW-SFB-RFD",
+      "route": 501,
+      "line": "AB",
+      "fleet": "CRJ900",
+      "day": 1,
+      "sequenceWithinRoute": 4,
+      "pairing": 599,
+      "flight": 2217,
+      "origin": "SFB",
+      "destination": "RFD",
+      "departure": "14:15",
+      "arrival": "15:49",
+      "departureMinute": 855,
+      "arrivalMinute": 949
+    },
+    {
+      "id": "R501-REVIEW-RFD-SFB",
+      "route": 501,
+      "line": "AB",
+      "fleet": "CRJ900",
+      "day": 1,
+      "sequenceWithinRoute": 5,
+      "pairing": 598,
+      "flight": 2218,
+      "origin": "RFD",
+      "destination": "SFB",
+      "departure": "16:29",
+      "arrival": "20:03",
+      "departureMinute": 989,
+      "arrivalMinute": 1203
+    },
+    {
+      "id": "R175-REVIEW-PWM-BWI",
+      "route": 175,
+      "line": "AN",
+      "fleet": "CRJ200",
+      "day": 8,
+      "sequenceWithinRoute": 3,
+      "pairing": 905,
+      "flight": 2219,
+      "origin": "PWM",
+      "destination": "BWI",
+      "departure": "10:13",
+      "arrival": "11:43",
+      "departureMinute": 613,
+      "arrivalMinute": 703
+    },
+    {
+      "id": "R175-REVIEW-BWI-PWM",
+      "route": 175,
+      "line": "AN",
+      "fleet": "CRJ200",
+      "day": 8,
+      "sequenceWithinRoute": 4,
+      "pairing": 906,
+      "flight": 2220,
+      "origin": "BWI",
+      "destination": "PWM",
+      "departure": "12:23",
+      "arrival": "13:53",
+      "departureMinute": 743,
+      "arrivalMinute": 833
+    },
+    {
+      "id": "R125-REVIEW-PVD-BWI",
+      "route": 125,
+      "line": "AE",
+      "fleet": "CRJ200",
+      "day": 4,
+      "sequenceWithinRoute": 3,
+      "pairing": 907,
+      "flight": 2221,
+      "origin": "PVD",
+      "destination": "BWI",
+      "departure": "08:30",
+      "arrival": "09:43",
+      "departureMinute": 510,
+      "arrivalMinute": 583
+    },
+    {
+      "id": "R125-REVIEW-BWI-PVD",
+      "route": 125,
+      "line": "AE",
+      "fleet": "CRJ200",
+      "day": 4,
+      "sequenceWithinRoute": 4,
+      "pairing": 908,
+      "flight": 2222,
+      "origin": "BWI",
+      "destination": "PVD",
+      "departure": "10:25",
+      "arrival": "11:38",
+      "departureMinute": 625,
+      "arrivalMinute": 698
+    },
+    {
+      "id": "REVIEW-R111-BHM-PIE",
+      "route": 111,
+      "line": "AD",
+      "fleet": "CRJ200",
+      "day": 1,
+      "sequenceWithinRoute": 4,
+      "pairing": 857,
+      "flight": 2223,
+      "origin": "BHM",
+      "destination": "PIE",
+      "departure": "13:28",
+      "arrival": "15:59",
+      "departureMinute": 808,
+      "arrivalMinute": 959
+    },
+    {
+      "id": "REVIEW-R111-PIE-BHM",
+      "route": 111,
+      "line": "AD",
+      "fleet": "CRJ200",
+      "day": 1,
+      "sequenceWithinRoute": 5,
+      "pairing": 858,
+      "flight": 2224,
+      "origin": "PIE",
+      "destination": "BHM",
+      "departure": "16:39",
+      "arrival": "17:10",
+      "departureMinute": 999,
+      "arrivalMinute": 1030
+    },
+    {
+      "id": "REVIEW-R312-DAB-PHF",
+      "route": 312,
+      "line": "AH",
+      "fleet": "CRJ700",
+      "day": 1,
+      "sequenceWithinRoute": 6,
+      "pairing": 819,
+      "flight": 2225,
+      "origin": "DAB",
+      "destination": "PHF",
+      "departure": "17:52",
+      "arrival": "19:40",
+      "departureMinute": 1072,
+      "arrivalMinute": 1180
+    },
+    {
+      "id": "REVIEW-R312-PHF-BDL",
+      "route": 312,
+      "line": "AH",
+      "fleet": "CRJ700",
+      "day": 1,
+      "sequenceWithinRoute": 7,
+      "pairing": 820,
+      "flight": 2226,
+      "origin": "PHF",
+      "destination": "BDL",
+      "departure": "20:20",
+      "arrival": "21:40",
+      "departureMinute": 1220,
+      "arrivalMinute": 1300
+    }
+  ],
+  "netFlightChange": 15,
+  "acceptedR501": {
+    "option": "rfd_later_turn",
+    "removedFlights": [
+      1257,
+      1258
+    ],
+    "addedFlights": [
+      2217,
+      2218
+    ],
+    "retimingMinutes": {
+      "1256": -165,
+      "1219": -165
+    },
+    "newBlockMinutes": 174,
+    "maximumTurnMinutes": 147,
+    "nonstopLosses": [
+      "CHS-SFB",
+      "SFB-CHS"
+    ]
+  },
+  "acceptedR175": {
+    "addedFlights": [
+      2219,
+      2220
+    ],
+    "retimingMinutes": {
+      "1892": -8,
+      "1699": -10
+    },
+    "newBlockMinutes": 180,
+    "maximumTurnMinutes": 86,
+    "preservesExistingItineraryChoices": true
+  },
+  "acceptedR125": {
+    "addedFlights": [
+      2221,
+      2222
+    ],
+    "retimingMinutes": {
+      "1418": 2
+    },
+    "newBlockMinutes": 146,
+    "maximumTurnMinutes": 112,
+    "preservesExistingItineraryChoices": true
+  },
+  "acceptedR111": {
+    "addedFlights": [
+      2223,
+      2224
+    ],
+    "retimingMinutes": {
+      "1991": -26
+    },
+    "newBlockMinutes": 182,
+    "maximumTurnMinutes": 56,
+    "lostOneStopMarket": "OMA-PHF",
+    "lostRawChoices": 20,
+    "lostReasonableChoices": 15
+  },
+  "acceptedR312": {
+    "addedFlights": [
+      2225,
+      2226
+    ],
+    "removedFlights": [
+      1360
+    ],
+    "newBlockMinutes": 31,
+    "maximumTurnMinutes": 79,
+    "droppedNonstop": "DAB-BDL",
+    "newEveningJourneyMinutes": 228,
+    "extraMinutesVersusNonstop": 71,
+    "arrivalBank": "PHF-M6",
+    "departureBank": "PHF-B7"
+  },
+  "selectedGroupRoutes": [
+    144,
+    146,
+    158,
+    176
+  ],
+  "publication": "Not authorized; app default remains v1.3.1"
+}

@@ -1,0 +1,1294 @@
+{
+  "R176_PHF_GSO": {
+    "summary": {
+      "added": 2,
+      "gains": 16,
+      "losses": 0,
+      "faster": 33,
+      "slower": 15,
+      "rawLosses": 0,
+      "rawGains": 13,
+      "lostPaths": 9,
+      "coverageDowngrades": 0
+    },
+    "addedProfiles": [
+      {
+        "flight": 2233,
+        "market": "PHF-GSO",
+        "od": 0.7,
+        "departure": "10:51",
+        "arrival": "11:47"
+      },
+      {
+        "flight": 2234,
+        "market": "GSO-PHF",
+        "od": 0.8,
+        "departure": "12:27",
+        "arrival": "13:23"
+      }
+    ],
+    "coverageLosses": [],
+    "coverageGains": [
+      {
+        "market": "DAL-GSO",
+        "origin": "DAL",
+        "destination": "GSO",
+        "demand": 25.6,
+        "beforeMinutes": 614,
+        "afterMinutes": 367
+      },
+      {
+        "market": "PIE-GSO",
+        "origin": "PIE",
+        "destination": "GSO",
+        "demand": 13.4,
+        "beforeMinutes": 642,
+        "afterMinutes": 312
+      },
+      {
+        "market": "MSY-GSO",
+        "origin": "MSY",
+        "destination": "GSO",
+        "demand": 9.5,
+        "beforeMinutes": null,
+        "afterMinutes": 342
+      },
+      {
+        "market": "HOU-GSO",
+        "origin": "HOU",
+        "destination": "GSO",
+        "demand": 9.4,
+        "beforeMinutes": 471,
+        "afterMinutes": 377
+      },
+      {
+        "market": "GSO-BUF",
+        "origin": "GSO",
+        "destination": "BUF",
+        "demand": 4,
+        "beforeMinutes": null,
+        "afterMinutes": 321
+      },
+      {
+        "market": "SRQ-GSO",
+        "origin": "SRQ",
+        "destination": "GSO",
+        "demand": 4,
+        "beforeMinutes": null,
+        "afterMinutes": 259
+      },
+      {
+        "market": "GSO-SYR",
+        "origin": "GSO",
+        "destination": "SYR",
+        "demand": 3.6,
+        "beforeMinutes": null,
+        "afterMinutes": 263
+      },
+      {
+        "market": "SYR-GSO",
+        "origin": "SYR",
+        "destination": "GSO",
+        "demand": 3.6,
+        "beforeMinutes": null,
+        "afterMinutes": 285
+      },
+      {
+        "market": "GSO-ROC",
+        "origin": "GSO",
+        "destination": "ROC",
+        "demand": 2.5,
+        "beforeMinutes": null,
+        "afterMinutes": 173
+      },
+      {
+        "market": "GSO-MDT",
+        "origin": "GSO",
+        "destination": "MDT",
+        "demand": 1.7,
+        "beforeMinutes": null,
+        "afterMinutes": 285
+      },
+      {
+        "market": "BWI-GSO",
+        "origin": "BWI",
+        "destination": "GSO",
+        "demand": 1.6,
+        "beforeMinutes": null,
+        "afterMinutes": 242
+      },
+      {
+        "market": "DAY-GSO",
+        "origin": "DAY",
+        "destination": "GSO",
+        "demand": 1.6,
+        "beforeMinutes": null,
+        "afterMinutes": 296
+      },
+      {
+        "market": "GSO-MHT",
+        "origin": "GSO",
+        "destination": "MHT",
+        "demand": 1.5,
+        "beforeMinutes": null,
+        "afterMinutes": 181
+      },
+      {
+        "market": "GSO-VPS",
+        "origin": "GSO",
+        "destination": "VPS",
+        "demand": 1.5,
+        "beforeMinutes": 632,
+        "afterMinutes": 412
+      },
+      {
+        "market": "GSO-ABE",
+        "origin": "GSO",
+        "destination": "ABE",
+        "demand": 1,
+        "beforeMinutes": null,
+        "afterMinutes": 290
+      },
+      {
+        "market": "SWF-GSO",
+        "origin": "SWF",
+        "destination": "GSO",
+        "demand": 0,
+        "beforeMinutes": null,
+        "afterMinutes": 227
+      }
+    ],
+    "slowestJourneys": [
+      {
+        "market": "RFD-CAE",
+        "origin": "RFD",
+        "destination": "CAE",
+        "demand": 28.3,
+        "beforeMinutes": 235,
+        "afterMinutes": 243
+      },
+      {
+        "market": "GSO-DAL",
+        "origin": "GSO",
+        "destination": "DAL",
+        "demand": 25.3,
+        "beforeMinutes": 268,
+        "afterMinutes": 313
+      },
+      {
+        "market": "DAL-CAE",
+        "origin": "DAL",
+        "destination": "CAE",
+        "demand": 15.5,
+        "beforeMinutes": 278,
+        "afterMinutes": 286
+      },
+      {
+        "market": "GSO-HOU",
+        "origin": "GSO",
+        "destination": "HOU",
+        "demand": 9.3,
+        "beforeMinutes": 278,
+        "afterMinutes": 323
+      },
+      {
+        "market": "BWI-CAE",
+        "origin": "BWI",
+        "destination": "CAE",
+        "demand": 5.9,
+        "beforeMinutes": 165,
+        "afterMinutes": 173
+      },
+      {
+        "market": "GSO-PGD",
+        "origin": "GSO",
+        "destination": "PGD",
+        "demand": 4.6,
+        "beforeMinutes": 302,
+        "afterMinutes": 312
+      },
+      {
+        "market": "GSO-BHM",
+        "origin": "GSO",
+        "destination": "BHM",
+        "demand": 4.2,
+        "beforeMinutes": 196,
+        "afterMinutes": 241
+      },
+      {
+        "market": "ALB-CAE",
+        "origin": "ALB",
+        "destination": "CAE",
+        "demand": 2.9,
+        "beforeMinutes": 295,
+        "afterMinutes": 303
+      },
+      {
+        "market": "GSO-ICT",
+        "origin": "GSO",
+        "destination": "ICT",
+        "demand": 2.7,
+        "beforeMinutes": 517,
+        "afterMinutes": 562
+      },
+      {
+        "market": "GSO-ATW",
+        "origin": "GSO",
+        "destination": "ATW",
+        "demand": 1.4,
+        "beforeMinutes": 465,
+        "afterMinutes": 510
+      },
+      {
+        "market": "GSO-FSD",
+        "origin": "GSO",
+        "destination": "FSD",
+        "demand": 1.3,
+        "beforeMinutes": 442,
+        "afterMinutes": 487
+      },
+      {
+        "market": "GSO-MLB",
+        "origin": "GSO",
+        "destination": "MLB",
+        "demand": 1,
+        "beforeMinutes": 357,
+        "afterMinutes": 367
+      },
+      {
+        "market": "ABE-CAE",
+        "origin": "ABE",
+        "destination": "CAE",
+        "demand": 0.9,
+        "beforeMinutes": 175,
+        "afterMinutes": 180
+      },
+      {
+        "market": "GSO-AVP",
+        "origin": "GSO",
+        "destination": "AVP",
+        "demand": 0.4,
+        "beforeMinutes": 163,
+        "afterMinutes": 208
+      },
+      {
+        "market": "GSO-TTN",
+        "origin": "GSO",
+        "destination": "TTN",
+        "demand": 0,
+        "beforeMinutes": 155,
+        "afterMinutes": 200
+      }
+    ],
+    "downgrades": [],
+    "lostChoices": [
+      {
+        "key": "1761-1922",
+        "market": "GSO-DAB",
+        "reasonable": true,
+        "stops": 1,
+        "minutes": 393
+      },
+      {
+        "key": "1761-1931",
+        "market": "GSO-BHM",
+        "reasonable": true,
+        "stops": 1,
+        "minutes": 395
+      },
+      {
+        "key": "1761-1931-1433",
+        "market": "GSO-OKC",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 675
+      },
+      {
+        "key": "1761-1931-1521",
+        "market": "GSO-TUL",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 593
+      },
+      {
+        "key": "1761-1931-1643",
+        "market": "GSO-SGF",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 645
+      },
+      {
+        "key": "1761-1931-1932",
+        "market": "GSO-BWI",
+        "reasonable": false,
+        "stops": 2,
+        "minutes": 552
+      },
+      {
+        "key": "1761-1931-1974",
+        "market": "GSO-MCI",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 667
+      },
+      {
+        "key": "1761-1931-1980",
+        "market": "GSO-MCI",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 716
+      },
+      {
+        "key": "1761-1931-1982",
+        "market": "GSO-DAY",
+        "reasonable": false,
+        "stops": 2,
+        "minutes": 625
+      },
+      {
+        "key": "1761-1931-1992",
+        "market": "GSO-OMA",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 658
+      },
+      {
+        "key": "1761-2029",
+        "market": "GSO-RFD",
+        "reasonable": true,
+        "stops": 1,
+        "minutes": 417
+      }
+    ]
+  },
+  "R158_SYR_ROC": {
+    "summary": {
+      "added": 2,
+      "gains": 5,
+      "losses": 1,
+      "faster": 48,
+      "slower": 49,
+      "rawLosses": 1,
+      "rawGains": 3,
+      "lostPaths": 29,
+      "coverageDowngrades": 4
+    },
+    "addedProfiles": [
+      {
+        "flight": 2233,
+        "market": "SYR-ROC",
+        "od": 1.2,
+        "departure": "14:08",
+        "arrival": "14:47"
+      },
+      {
+        "flight": 2234,
+        "market": "ROC-SYR",
+        "od": 1.1,
+        "departure": "15:27",
+        "arrival": "16:06"
+      }
+    ],
+    "coverageLosses": [
+      {
+        "market": "SBN-SYR",
+        "origin": "SBN",
+        "destination": "SYR",
+        "demand": 1.1,
+        "beforeMinutes": 183,
+        "afterMinutes": 375
+      }
+    ],
+    "coverageGains": [
+      {
+        "market": "DAY-PWM",
+        "origin": "DAY",
+        "destination": "PWM",
+        "demand": 1.7,
+        "beforeMinutes": 483,
+        "afterMinutes": 198
+      },
+      {
+        "market": "PVD-ROC",
+        "origin": "PVD",
+        "destination": "ROC",
+        "demand": 1.3,
+        "beforeMinutes": null,
+        "afterMinutes": 147
+      },
+      {
+        "market": "DAY-BTV",
+        "origin": "DAY",
+        "destination": "BTV",
+        "demand": 0.9,
+        "beforeMinutes": 321,
+        "afterMinutes": 182
+      },
+      {
+        "market": "DAY-BGR",
+        "origin": "DAY",
+        "destination": "BGR",
+        "demand": 0.7,
+        "beforeMinutes": 514,
+        "afterMinutes": 210
+      },
+      {
+        "market": "ROC-MDT",
+        "origin": "ROC",
+        "destination": "MDT",
+        "demand": 0.3,
+        "beforeMinutes": null,
+        "afterMinutes": 305
+      }
+    ],
+    "slowestJourneys": [
+      {
+        "market": "SFB-ALB",
+        "origin": "SFB",
+        "destination": "ALB",
+        "demand": 135.6,
+        "beforeMinutes": 224,
+        "afterMinutes": 225
+      },
+      {
+        "market": "FLL-ALB",
+        "origin": "FLL",
+        "destination": "ALB",
+        "demand": 98.5,
+        "beforeMinutes": 254,
+        "afterMinutes": 255
+      },
+      {
+        "market": "PIE-ALB",
+        "origin": "PIE",
+        "destination": "ALB",
+        "demand": 43.3,
+        "beforeMinutes": 244,
+        "afterMinutes": 245
+      },
+      {
+        "market": "CLT-ALB",
+        "origin": "CLT",
+        "destination": "ALB",
+        "demand": 35,
+        "beforeMinutes": 184,
+        "afterMinutes": 185
+      },
+      {
+        "market": "LEX-FLL",
+        "origin": "LEX",
+        "destination": "FLL",
+        "demand": 30.5,
+        "beforeMinutes": 325,
+        "afterMinutes": 331
+      },
+      {
+        "market": "SRQ-ALB",
+        "origin": "SRQ",
+        "destination": "ALB",
+        "demand": 29.8,
+        "beforeMinutes": 259,
+        "afterMinutes": 260
+      },
+      {
+        "market": "LEX-SFB",
+        "origin": "LEX",
+        "destination": "SFB",
+        "demand": 18.9,
+        "beforeMinutes": 351,
+        "afterMinutes": 357
+      },
+      {
+        "market": "LEX-SRQ",
+        "origin": "LEX",
+        "destination": "SRQ",
+        "demand": 16.4,
+        "beforeMinutes": 458,
+        "afterMinutes": 464
+      },
+      {
+        "market": "LEX-DAL",
+        "origin": "LEX",
+        "destination": "DAL",
+        "demand": 14.4,
+        "beforeMinutes": 354,
+        "afterMinutes": 360
+      },
+      {
+        "market": "LEX-AUS",
+        "origin": "LEX",
+        "destination": "AUS",
+        "demand": 8.8,
+        "beforeMinutes": 249,
+        "afterMinutes": 255
+      },
+      {
+        "market": "MCI-ALB",
+        "origin": "MCI",
+        "destination": "ALB",
+        "demand": 8.7,
+        "beforeMinutes": 654,
+        "afterMinutes": 655
+      },
+      {
+        "market": "LEX-RDU",
+        "origin": "LEX",
+        "destination": "RDU",
+        "demand": 7.6,
+        "beforeMinutes": 172,
+        "afterMinutes": 178
+      },
+      {
+        "market": "LEX-HOU",
+        "origin": "LEX",
+        "destination": "HOU",
+        "demand": 7.3,
+        "beforeMinutes": 248,
+        "afterMinutes": 254
+      },
+      {
+        "market": "PIT-ALB",
+        "origin": "PIT",
+        "destination": "ALB",
+        "demand": 6.7,
+        "beforeMinutes": 265,
+        "afterMinutes": 266
+      },
+      {
+        "market": "LEX-MCI",
+        "origin": "LEX",
+        "destination": "MCI",
+        "demand": 5.7,
+        "beforeMinutes": 320,
+        "afterMinutes": 326
+      },
+      {
+        "market": "LEX-BWI",
+        "origin": "LEX",
+        "destination": "BWI",
+        "demand": 4.5,
+        "beforeMinutes": 390,
+        "afterMinutes": 396
+      },
+      {
+        "market": "CAK-ALB",
+        "origin": "CAK",
+        "destination": "ALB",
+        "demand": 3.4,
+        "beforeMinutes": 154,
+        "afterMinutes": 155
+      },
+      {
+        "market": "LEX-ALB",
+        "origin": "LEX",
+        "destination": "ALB",
+        "demand": 2.9,
+        "beforeMinutes": 259,
+        "afterMinutes": 265
+      },
+      {
+        "market": "VPS-ALB",
+        "origin": "VPS",
+        "destination": "ALB",
+        "demand": 2.9,
+        "beforeMinutes": 631,
+        "afterMinutes": 632
+      },
+      {
+        "market": "LEX-PHF",
+        "origin": "LEX",
+        "destination": "PHF",
+        "demand": 2.8,
+        "beforeMinutes": 181,
+        "afterMinutes": 187
+      },
+      {
+        "market": "LEX-OMA",
+        "origin": "LEX",
+        "destination": "OMA",
+        "demand": 2.5,
+        "beforeMinutes": 609,
+        "afterMinutes": 615
+      },
+      {
+        "market": "LEX-PIT",
+        "origin": "LEX",
+        "destination": "PIT",
+        "demand": 2.3,
+        "beforeMinutes": 282,
+        "afterMinutes": 288
+      },
+      {
+        "market": "LEX-MKE",
+        "origin": "LEX",
+        "destination": "MKE",
+        "demand": 2.2,
+        "beforeMinutes": 162,
+        "afterMinutes": 168
+      },
+      {
+        "market": "LEX-XNA",
+        "origin": "LEX",
+        "destination": "XNA",
+        "demand": 2.2,
+        "beforeMinutes": 617,
+        "afterMinutes": 623
+      },
+      {
+        "market": "LEX-BHM",
+        "origin": "LEX",
+        "destination": "BHM",
+        "demand": 2.1,
+        "beforeMinutes": 178,
+        "afterMinutes": 184
+      },
+      {
+        "market": "LEX-ELP",
+        "origin": "LEX",
+        "destination": "ELP",
+        "demand": 2.1,
+        "beforeMinutes": 546,
+        "afterMinutes": 552
+      },
+      {
+        "market": "LEX-LIT",
+        "origin": "LEX",
+        "destination": "LIT",
+        "demand": 2.1,
+        "beforeMinutes": 435,
+        "afterMinutes": 441
+      },
+      {
+        "market": "LEX-TUL",
+        "origin": "LEX",
+        "destination": "TUL",
+        "demand": 2.1,
+        "beforeMinutes": 519,
+        "afterMinutes": 525
+      },
+      {
+        "market": "DAY-ALB",
+        "origin": "DAY",
+        "destination": "ALB",
+        "demand": 1.6,
+        "beforeMinutes": 169,
+        "afterMinutes": 179
+      },
+      {
+        "market": "LEX-MDT",
+        "origin": "LEX",
+        "destination": "MDT",
+        "demand": 1.6,
+        "beforeMinutes": 397,
+        "afterMinutes": 403
+      },
+      {
+        "market": "LEX-BUF",
+        "origin": "LEX",
+        "destination": "BUF",
+        "demand": 1.5,
+        "beforeMinutes": 426,
+        "afterMinutes": 432
+      },
+      {
+        "market": "LEX-GRR",
+        "origin": "LEX",
+        "destination": "GRR",
+        "demand": 1.5,
+        "beforeMinutes": 148,
+        "afterMinutes": 154
+      },
+      {
+        "market": "GNV-ALB",
+        "origin": "GNV",
+        "destination": "ALB",
+        "demand": 1.4,
+        "beforeMinutes": 544,
+        "afterMinutes": 545
+      },
+      {
+        "market": "LEX-MLB",
+        "origin": "LEX",
+        "destination": "MLB",
+        "demand": 1.4,
+        "beforeMinutes": 322,
+        "afterMinutes": 328
+      },
+      {
+        "market": "LEX-ICT",
+        "origin": "LEX",
+        "destination": "ICT",
+        "demand": 1.3,
+        "beforeMinutes": 482,
+        "afterMinutes": 488
+      },
+      {
+        "market": "GPT-ALB",
+        "origin": "GPT",
+        "destination": "ALB",
+        "demand": 1.1,
+        "beforeMinutes": 664,
+        "afterMinutes": 665
+      },
+      {
+        "market": "LEX-FSD",
+        "origin": "LEX",
+        "destination": "FSD",
+        "demand": 1.1,
+        "beforeMinutes": 407,
+        "afterMinutes": 413
+      },
+      {
+        "market": "SBN-SYR",
+        "origin": "SBN",
+        "destination": "SYR",
+        "demand": 1.1,
+        "beforeMinutes": 183,
+        "afterMinutes": 375
+      },
+      {
+        "market": "BTR-ALB",
+        "origin": "BTR",
+        "destination": "ALB",
+        "demand": 1,
+        "beforeMinutes": 679,
+        "afterMinutes": 680
+      },
+      {
+        "market": "LEX-SGF",
+        "origin": "LEX",
+        "destination": "SGF",
+        "demand": 0.8,
+        "beforeMinutes": 509,
+        "afterMinutes": 515
+      },
+      {
+        "market": "LEX-ABE",
+        "origin": "LEX",
+        "destination": "ABE",
+        "demand": 0.6,
+        "beforeMinutes": 402,
+        "afterMinutes": 408
+      },
+      {
+        "market": "LEX-LBB",
+        "origin": "LEX",
+        "destination": "LBB",
+        "demand": 0.5,
+        "beforeMinutes": 464,
+        "afterMinutes": 470
+      },
+      {
+        "market": "MFE-ALB",
+        "origin": "MFE",
+        "destination": "ALB",
+        "demand": 0.4,
+        "beforeMinutes": 679,
+        "afterMinutes": 680
+      },
+      {
+        "market": "PWM-ALB",
+        "origin": "PWM",
+        "destination": "ALB",
+        "demand": 0.4,
+        "beforeMinutes": 149,
+        "afterMinutes": 150
+      },
+      {
+        "market": "LEX-IND",
+        "origin": "LEX",
+        "destination": "IND",
+        "demand": 0.3,
+        "beforeMinutes": 214,
+        "afterMinutes": 220
+      },
+      {
+        "market": "LEX-CRW",
+        "origin": "LEX",
+        "destination": "CRW",
+        "demand": 0.1,
+        "beforeMinutes": 142,
+        "afterMinutes": 148
+      },
+      {
+        "market": "DAY-HVN",
+        "origin": "DAY",
+        "destination": "HVN",
+        "demand": 0,
+        "beforeMinutes": 341,
+        "afterMinutes": 351
+      },
+      {
+        "market": "LEX-ACY",
+        "origin": "LEX",
+        "destination": "ACY",
+        "demand": 0,
+        "beforeMinutes": 439,
+        "afterMinutes": 445
+      },
+      {
+        "market": "LEX-HVN",
+        "origin": "LEX",
+        "destination": "HVN",
+        "demand": 0,
+        "beforeMinutes": 431,
+        "afterMinutes": 437
+      }
+    ],
+    "downgrades": [
+      {
+        "market": "SBN-ACY",
+        "demand": 0,
+        "oldStops": 2,
+        "newStops": null
+      },
+      {
+        "market": "SBN-ALB",
+        "demand": 1.1,
+        "oldStops": 2,
+        "newStops": null
+      },
+      {
+        "market": "SBN-HVN",
+        "demand": 0,
+        "oldStops": 2,
+        "newStops": null
+      },
+      {
+        "market": "SBN-SYR",
+        "demand": 1.1,
+        "oldStops": 1,
+        "newStops": 2
+      }
+    ],
+    "lostChoices": [
+      {
+        "key": "1769-1657",
+        "market": "BUF-SYR",
+        "reasonable": false,
+        "stops": 1,
+        "minutes": 208
+      },
+      {
+        "key": "1769-1657-1056",
+        "market": "BUF-SFB",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 555
+      },
+      {
+        "key": "1769-1657-1135",
+        "market": "BUF-FLL",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 574
+      },
+      {
+        "key": "1769-1657-1227",
+        "market": "BUF-PIE",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 564
+      },
+      {
+        "key": "1769-1657-1307",
+        "market": "BUF-CLT",
+        "reasonable": false,
+        "stops": 2,
+        "minutes": 507
+      },
+      {
+        "key": "1769-1657-1407",
+        "market": "BUF-JAX",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 388
+      },
+      {
+        "key": "1769-1657-1511",
+        "market": "BUF-PHF",
+        "reasonable": false,
+        "stops": 2,
+        "minutes": 325
+      },
+      {
+        "key": "1769-1657-1512",
+        "market": "BUF-PHF",
+        "reasonable": false,
+        "stops": 2,
+        "minutes": 485
+      },
+      {
+        "key": "1769-1657-1608",
+        "market": "BUF-PIT",
+        "reasonable": false,
+        "stops": 2,
+        "minutes": 466
+      },
+      {
+        "key": "1769-1657-1673",
+        "market": "BUF-CAK",
+        "reasonable": false,
+        "stops": 2,
+        "minutes": 471
+      },
+      {
+        "key": "1769-1657-1683",
+        "market": "BUF-BWI",
+        "reasonable": false,
+        "stops": 2,
+        "minutes": 415
+      },
+      {
+        "key": "1769-1657-1751",
+        "market": "BUF-ALB",
+        "reasonable": false,
+        "stops": 2,
+        "minutes": 284
+      },
+      {
+        "key": "1769-1657-1752",
+        "market": "BUF-ALB",
+        "reasonable": false,
+        "stops": 2,
+        "minutes": 439
+      },
+      {
+        "key": "1769-1657-1864",
+        "market": "BUF-ABE",
+        "reasonable": false,
+        "stops": 2,
+        "minutes": 452
+      },
+      {
+        "key": "1769-1657-1877",
+        "market": "BUF-HVN",
+        "reasonable": false,
+        "stops": 2,
+        "minutes": 456
+      },
+      {
+        "key": "1769-1657-1907",
+        "market": "BUF-ACY",
+        "reasonable": false,
+        "stops": 2,
+        "minutes": 464
+      },
+      {
+        "key": "1769-1657-2008",
+        "market": "BUF-FWA",
+        "reasonable": false,
+        "stops": 2,
+        "minutes": 360
+      },
+      {
+        "key": "1769-1657-2037",
+        "market": "BUF-BNA",
+        "reasonable": false,
+        "stops": 2,
+        "minutes": 494
+      },
+      {
+        "key": "1769-1657-2103",
+        "market": "BUF-RFD",
+        "reasonable": false,
+        "stops": 2,
+        "minutes": 514
+      },
+      {
+        "key": "1769-1657-2204",
+        "market": "BUF-DAB",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 549
+      },
+      {
+        "key": "2086-1657",
+        "market": "CAK-SYR",
+        "reasonable": true,
+        "stops": 1,
+        "minutes": 176
+      },
+      {
+        "key": "2086-1657-1056",
+        "market": "CAK-SFB",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 523
+      },
+      {
+        "key": "2086-1657-1135",
+        "market": "CAK-FLL",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 542
+      },
+      {
+        "key": "2086-1657-1227",
+        "market": "CAK-PIE",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 532
+      },
+      {
+        "key": "2086-1657-1307",
+        "market": "CAK-CLT",
+        "reasonable": false,
+        "stops": 2,
+        "minutes": 475
+      },
+      {
+        "key": "2086-1657-1407",
+        "market": "CAK-JAX",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 356
+      },
+      {
+        "key": "2086-1657-1511",
+        "market": "CAK-PHF",
+        "reasonable": false,
+        "stops": 2,
+        "minutes": 293
+      },
+      {
+        "key": "2086-1657-1512",
+        "market": "CAK-PHF",
+        "reasonable": false,
+        "stops": 2,
+        "minutes": 453
+      },
+      {
+        "key": "2086-1657-1608",
+        "market": "CAK-PIT",
+        "reasonable": false,
+        "stops": 2,
+        "minutes": 434
+      },
+      {
+        "key": "2086-1657-1683",
+        "market": "CAK-BWI",
+        "reasonable": false,
+        "stops": 2,
+        "minutes": 383
+      },
+      {
+        "key": "2086-1657-1688",
+        "market": "CAK-BUF",
+        "reasonable": false,
+        "stops": 2,
+        "minutes": 419
+      },
+      {
+        "key": "2086-1657-1751",
+        "market": "CAK-ALB",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 252
+      },
+      {
+        "key": "2086-1657-1752",
+        "market": "CAK-ALB",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 407
+      },
+      {
+        "key": "2086-1657-1864",
+        "market": "CAK-ABE",
+        "reasonable": false,
+        "stops": 2,
+        "minutes": 420
+      },
+      {
+        "key": "2086-1657-1877",
+        "market": "CAK-HVN",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 424
+      },
+      {
+        "key": "2086-1657-1907",
+        "market": "CAK-ACY",
+        "reasonable": false,
+        "stops": 2,
+        "minutes": 432
+      },
+      {
+        "key": "2086-1657-2008",
+        "market": "CAK-FWA",
+        "reasonable": false,
+        "stops": 2,
+        "minutes": 328
+      },
+      {
+        "key": "2086-1657-2037",
+        "market": "CAK-BNA",
+        "reasonable": false,
+        "stops": 2,
+        "minutes": 462
+      },
+      {
+        "key": "2086-1657-2103",
+        "market": "CAK-RFD",
+        "reasonable": false,
+        "stops": 2,
+        "minutes": 482
+      },
+      {
+        "key": "2086-1657-2204",
+        "market": "CAK-DAB",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 517
+      },
+      {
+        "key": "1858-1657",
+        "market": "SBN-SYR",
+        "reasonable": true,
+        "stops": 1,
+        "minutes": 183
+      },
+      {
+        "key": "1858-1657-1056",
+        "market": "SBN-SFB",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 530
+      },
+      {
+        "key": "1858-1657-1135",
+        "market": "SBN-FLL",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 549
+      },
+      {
+        "key": "1858-1657-1227",
+        "market": "SBN-PIE",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 539
+      },
+      {
+        "key": "1858-1657-1307",
+        "market": "SBN-CLT",
+        "reasonable": false,
+        "stops": 2,
+        "minutes": 482
+      },
+      {
+        "key": "1858-1657-1407",
+        "market": "SBN-JAX",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 363
+      },
+      {
+        "key": "1858-1657-1511",
+        "market": "SBN-PHF",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 300
+      },
+      {
+        "key": "1858-1657-1512",
+        "market": "SBN-PHF",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 460
+      },
+      {
+        "key": "1858-1657-1608",
+        "market": "SBN-PIT",
+        "reasonable": false,
+        "stops": 2,
+        "minutes": 441
+      },
+      {
+        "key": "1858-1657-1673",
+        "market": "SBN-CAK",
+        "reasonable": false,
+        "stops": 2,
+        "minutes": 446
+      },
+      {
+        "key": "1858-1657-1683",
+        "market": "SBN-BWI",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 390
+      },
+      {
+        "key": "1858-1657-1688",
+        "market": "SBN-BUF",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 426
+      },
+      {
+        "key": "1858-1657-1751",
+        "market": "SBN-ALB",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 259
+      },
+      {
+        "key": "1858-1657-1752",
+        "market": "SBN-ALB",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 414
+      },
+      {
+        "key": "1858-1657-1864",
+        "market": "SBN-ABE",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 427
+      },
+      {
+        "key": "1858-1657-1877",
+        "market": "SBN-HVN",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 431
+      },
+      {
+        "key": "1858-1657-1907",
+        "market": "SBN-ACY",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 439
+      },
+      {
+        "key": "1858-1657-2008",
+        "market": "SBN-FWA",
+        "reasonable": false,
+        "stops": 2,
+        "minutes": 335
+      },
+      {
+        "key": "1858-1657-2037",
+        "market": "SBN-BNA",
+        "reasonable": false,
+        "stops": 2,
+        "minutes": 469
+      },
+      {
+        "key": "1858-1657-2103",
+        "market": "SBN-RFD",
+        "reasonable": false,
+        "stops": 2,
+        "minutes": 489
+      },
+      {
+        "key": "1858-1657-2204",
+        "market": "SBN-DAB",
+        "reasonable": true,
+        "stops": 2,
+        "minutes": 524
+      }
+    ]
+  }
+}

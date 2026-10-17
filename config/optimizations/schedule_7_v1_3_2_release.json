@@ -1,0 +1,74 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "schedule-7-v1.3.2-release",
+  "sourceScheduleId": "schedule_7_v1_3_1",
+  "baseCanonical": "data/schedules/schedule_7_v1_3_2_draft/canonical_schedule.json",
+  "baseCanonicalSha256": "7c80bceceb4a4867bd8b62409c81efa324c937b5182af52e780eb1b8affe79ab",
+  "overlays": [],
+  "overlaySha256": {},
+  "outputDirectory": "data/schedules/schedule_7_v1_3_2",
+  "rejoinAvoidableTows": true,
+  "dropWorkingDraftProvenance": true,
+  "demandDataVersion": "bts-db1c-6mo-jul2025-apr2026-v7",
+  "schedule": {
+    "id": "schedule_7_v1_3_2",
+    "number": 7,
+    "version": "1.3.2",
+    "label": "Schedule 7, Version 1.3.2",
+    "status": "released"
+  },
+  "patchScope": {
+    "kind": "maintenance_repair_and_productive_crj200_flying",
+    "timetableChanged": true,
+    "routingChanged": true,
+    "description": "Correct cyclic maintenance/RON validation, preserve approved R501/R175/R125/R111/R312 improvements, and adopt R144/R146/R158/R176 route optimization."
+  },
+  "connectionAudit": {
+    "hub": "SYR",
+    "groups": {
+      "northeast": [
+        "HPN",
+        "HVN",
+        "ISP",
+        "BTV",
+        "ORH"
+      ],
+      "priorityFlorida": [
+        "PGD",
+        "DAB"
+      ]
+    }
+  },
+  "connectionScopeDecision": {
+    "status": "approved",
+    "approvedBy": "user",
+    "date": "2026-10-16",
+    "userInstruction": "Complete any remaining audits, and publish v1.3.2 to main if there are no issues.",
+    "acceptedDraftSha256": "7c80bceceb4a4867bd8b62409c81efa324c937b5182af52e780eb1b8affe79ab",
+    "networkItineraryAuditSummary": {
+      "geographicallyReasonableGains": 60,
+      "geographicallyReasonableLosses": 5,
+      "fasterFastestJourneys": 154,
+      "slowerFastestJourneys": 155,
+      "lostMarkets": [
+        "ATW-FSD",
+        "ATW-OKC",
+        "ATW-SHV",
+        "DSM-SHV",
+        "OMA-PHF"
+      ],
+      "auditedComparedTo": "schedule_7_v1_3_1"
+    },
+    "releaseInterpretation": "Five documented, previously reviewed geographic one-stop coverage tradeoffs; none are new operating validation failures."
+  },
+  "expectedRelease": {
+    "legs": 1229,
+    "routes": 184,
+    "lines": 17,
+    "effectiveOperatingErrors": 0,
+    "hardStopFailures": 0,
+    "overnightTurnFailures": 0,
+    "standClaims": 15,
+    "standMinutes": 3061
+  }
+}

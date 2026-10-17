@@ -6,6 +6,7 @@ ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT/'src'))
 from latest_schedule import CANONICAL,SCHEDULE_ID,RELEASE_CONFIG
 from caa_scheduler.optimization_release import audit_hub_connections
 from caa_scheduler.optimization_overlay import apply_optimization_overlay
+@unittest.skipIf(SCHEDULE_ID != "schedule_7_v1_3_1", "v1.3.1 historical patch-specific assertions; superseded by v1.3.2 pinned checks")
 class LatestApprovedFlyingTests(unittest.TestCase):
  @classmethod
  def setUpClass(cls):

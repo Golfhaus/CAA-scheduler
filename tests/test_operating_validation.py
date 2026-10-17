@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import sys
+import copy
 import unittest
 from pathlib import Path
 
@@ -10,6 +11,9 @@ sys.path.insert(0, str(REPO_ROOT / "src"))
 
 from caa_scheduler.io import read_json
 from latest_schedule import CANONICAL
+
+# Historical v1.3.1 regression fixture must remain intentionally defective: v1.3.2 repairs these lines.
+V131_CANONICAL = read_json(REPO_ROOT / "data/schedules/schedule_7_v1_3_1/canonical_schedule.json")
 from caa_scheduler.operating_validation import (
     _service_window_gaps,
     validate_operating_rules,
@@ -17,6 +21,23 @@ from caa_scheduler.operating_validation import (
 
 
 class OperatingValidationTests(unittest.TestCase):
+    def test_repeating_cycles_without_an_eligible_overnight_always_fail(self) -> None:
+        for line, length in [("AO", 1), ("AQ", 1), ("AC", 10)]:
+            with self.subTest(line=line):
+                report = validate_operating_rules(V131_CANONICAL)
+                check = next(c for c in report["checks"] if c["id"] == "rolling_ron_window")
+                finding = next(f for f in check["findings"] if f["id"] == line)
+                self.assertEqual(check["status"], "fail")
+                self.assertTrue(finding["evidence"]["unbounded"])
+                self.assertEqual(finding["evidence"]["cycleDays"], length)
+                self.assertIsNone(finding["evidence"]["longestRunWithoutTargetRon"])
+
+    def test_one_day_cycle_with_an_eligible_overnight_passes(self) -> None:
+        candidate = copy.deepcopy(V131_CANONICAL)
+        candidate["operatingPolicy"]["ronTargetCities"].append("ELP")
+        check = next(c for c in validate_operating_rules(candidate)["checks"] if c["id"] == "rolling_ron_window")
+        self.assertNotIn("AO", [f["id"] for f in check["findings"]])
+
     def test_city_departure_gaps_only_compare_flights_in_the_service_day(self) -> None:
         self.assertEqual(
             _service_window_gaps([60, 510, 900, 1400], 270, 1260),

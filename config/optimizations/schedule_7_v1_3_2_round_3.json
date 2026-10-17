@@ -1,0 +1,91 @@
+{
+  "baseSchedule": {
+    "scheduleId": "schedule_7_v1_3_2_draft",
+    "sha256": "1f38ce33278f9b330ca8a38d831e7294b626de25924676a5232bb7cc68f81af4",
+    "canonical": "outputs/schedule_7_v1_3_2_r175/base_round_2_canonical.json",
+    "commit": "1584e501dc3b98d6eb13dc9bb643ee76b34d0d71"
+  },
+  "schedule": {
+    "id": "schedule_7_v1_3_2_draft",
+    "number": 7,
+    "version": "1.3.2-draft",
+    "label": "Schedule 7, Version 1.3.2 draft",
+    "status": "draft",
+    "fleetCounts": {
+      "MAX9": 35,
+      "CRJ900": 45,
+      "CRJ700": 65,
+      "CRJ200": 80
+    },
+    "connectionWindowMinutes": {
+      "minimum": 30,
+      "maximum": 240
+    }
+  },
+  "retimeLegs": [
+    {
+      "legId": "ISP-SYR-CRJ200-01-OUT",
+      "expectedDepartureMinute": 415,
+      "expectedArrivalMinute": 473,
+      "departureMinute": 407,
+      "arrivalMinute": 465
+    },
+    {
+      "legId": "PWM-SYR-CRJ200-02-IN",
+      "expectedDepartureMinute": 515,
+      "expectedArrivalMinute": 583,
+      "departureMinute": 505,
+      "arrivalMinute": 573
+    }
+  ],
+  "bankAssignmentReplacements": [
+    {
+      "legId": "ISP-SYR-CRJ200-01-OUT",
+      "operation": "arrival",
+      "bankId": "SYR-B2"
+    },
+    {
+      "legId": "PWM-SYR-CRJ200-02-IN",
+      "operation": "departure",
+      "bankId": "SYR-B2"
+    }
+  ],
+  "insertLegs": [
+    {
+      "id": "R175-REVIEW-PWM-BWI",
+      "route": 175,
+      "origin": "PWM",
+      "destination": "BWI",
+      "departureMinute": 613,
+      "arrivalMinute": 703
+    },
+    {
+      "id": "R175-REVIEW-BWI-PWM",
+      "route": 175,
+      "origin": "BWI",
+      "destination": "PWM",
+      "departureMinute": 743,
+      "arrivalMinute": 833
+    }
+  ],
+  "schemaVersion": "1.0.0",
+  "id": "schedule-7-v1.3.2-r175-bwi",
+  "approval": {
+    "status": "User accepted October 14, 2026",
+    "scope": "R175 PWM\u2013BWI turn with eight-/ten-minute advances",
+    "publication": "Not authorized"
+  },
+  "acceptedR175": {
+    "addedFlights": [
+      2219,
+      2220
+    ],
+    "retimingMinutes": {
+      "1892": -8,
+      "1699": -10
+    },
+    "newBlockMinutes": 180,
+    "maximumTurnMinutes": 86,
+    "preservesExistingItineraryChoices": true
+  }
+}

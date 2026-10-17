@@ -1,0 +1,56 @@
+{
+  "baseSchedule": {
+    "scheduleId": "schedule_7_v1_3_2_draft"
+  },
+  "schedule": {
+    "id": "schedule_7_v1_3_2_draft",
+    "number": 7,
+    "version": "1.3.2-draft",
+    "label": "Schedule 7, Version 1.3.2 draft",
+    "status": "draft",
+    "fleetCounts": {
+      "MAX9": 35,
+      "CRJ900": 45,
+      "CRJ700": 65,
+      "CRJ200": 80
+    },
+    "connectionWindowMinutes": {
+      "minimum": 30,
+      "maximum": 240
+    }
+  },
+  "removeLegs": [
+    {
+      "legId": "V115-R150-ALB-SYR",
+      "expectedRoute": 158
+    },
+    {
+      "legId": "V115-R150-SYR-ALB",
+      "expectedRoute": 158
+    }
+  ],
+  "insertLegs": [
+    {
+      "id": "V132-R158-RDU-ALB-RDU",
+      "route": 158,
+      "origin": "ALB",
+      "destination": "RDU",
+      "departureMinute": 1089,
+      "arrivalMinute": 1192
+    },
+    {
+      "id": "V132-R158-RDU-RDU-ALB",
+      "route": 158,
+      "origin": "RDU",
+      "destination": "ALB",
+      "departureMinute": 1232,
+      "arrivalMinute": 1335
+    }
+  ],
+  "approval": {
+    "status": "Selected for v1.3.2 unpublished group working draft",
+    "publication": "Not authorized",
+    "selectionDate": "2026-10-16",
+    "reason": "Replace low-demand ALB-SYR-ALB with ALB-RDU-ALB; RDU-ALB gains new direct coverage, about 35 local O-D/day each direction, zero geographic coverage loss"
+  }
+}

@@ -1,5 +1,14 @@
 # CAA Scheduler
 
+## Latest published release
+
+The app defaults to **Schedule 7 v1.3.2**, released October 16, 2026, with **1,229 flights, 184 routes and 17 routing lines**. The release fixes the cyclic maintenance/RON validation problem and incorporates the reviewed R501, R175, R125, R111, R312, R144, R146, R158 and R176 improvements. Physical inventory and fleet use are unchanged, with zero effective operating errors.
+
+The full network comparison against v1.3.1 finds 60 geographically reasonable direct/one-stop coverage gains and five reviewed losses, plus 154 improved and 155 slower fastest journeys. See [v1.3.2 release notes](docs/schedule_7_v1_3_2_release.md) for commercial tradeoffs, validations, and reproduction; see [released canonical](data/schedules/schedule_7_v1_3_2/canonical_schedule.json).
+
+## Historical v1.3.1 release and v1.3.2 development notes
+
+
 CAA Scheduler is the migration target for Coastal American Airways schedule construction. It moves the durable schedule state and deterministic processing out of an LLM conversation and into version-controlled code and data.
 
 ## Latest published release
@@ -20,6 +29,19 @@ is the starting point for future work, and the
 [release configuration](config/optimizations/schedule_7_v1_3_1_release.json)
 reproduces the published package. Earlier releases and planning snapshots remain
 historical references; routine regression targets only v1.3.1.
+
+## Maintenance correction in development
+
+The v1.3.1 stored zero-error report predates a discovered repeating-line RON
+validation defect. The corrected validator identifies **AC, AO and AQ** as
+never reaching an eligible MX-base overnight; their short cycle lengths do not
+make the absence finite. The [unpublished v1.3.2 repair](docs/schedule_7_v1_3_2_maintenance.md)
+preserves all 1,214 flights and aircraft requirements, consolidates AO/AQ into
+compliant rotations, and corrects AC with two flight retimings. It passes the
+corrected checks, with AM's standing one-day grace explicitly reported.
+The cumulative v1.3.2 draft also includes the accepted [R501 RFD replacement](docs/schedule_7_v1_3_2_r501_review.md): retain ABE–MYR, reduce the longest sit to 2h27 and replace the CHS turn with a second RFD round trip. That removes the CHS nonstop pair, with one-stop alternatives retained.
+The accepted [R175 PWM–BWI turn](docs/schedule_7_v1_3_2_r175_review.md) adds three hours of CRJ200 flying with no extra aircraft and reduces its longest hold to 1h26. The accepted [R125 PVD–BWI turn](docs/schedule_7_v1_3_2_r125_review.md) adds 2h26 of flying with unchanged R125 clocks; a two-minute R346 adjustment fits BWI gates. The cumulative draft contains 1,218 flights.
+The app default remains v1.3.1 until separate release approval.
 
 ## Milestone 0.7 — planning foundation
 

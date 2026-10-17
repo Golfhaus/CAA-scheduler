@@ -1,0 +1,518 @@
+{
+  "schemaVersion": "1.0.0",
+  "scheduleId": "schedule_7_v1_3_2",
+  "hub": "SYR",
+  "connectionWindowMinutes": {
+    "minimum": 30,
+    "maximum": 240
+  },
+  "groups": {
+    "northeast": [
+      "HPN",
+      "HVN",
+      "ISP",
+      "BTV",
+      "ORH"
+    ],
+    "priorityFlorida": [
+      "PGD",
+      "DAB"
+    ]
+  },
+  "summary": {
+    "targetCities": 7,
+    "directRoundTripCities": 7,
+    "directionalPairs": 20,
+    "connectedDirectionalPairs": 20,
+    "missingDirectionalPairs": 0,
+    "connectionCoverage": 1.0,
+    "bySourceGroup": {
+      "northeast": {
+        "directionalPairs": 10,
+        "connectedDirectionalPairs": 10,
+        "missingDirectionalPairs": 0
+      },
+      "priorityFlorida": {
+        "directionalPairs": 10,
+        "connectedDirectionalPairs": 10,
+        "missingDirectionalPairs": 0
+      }
+    }
+  },
+  "directCoverage": [
+    {
+      "city": "HPN",
+      "group": "northeast",
+      "toHubLegs": 4,
+      "fromHubLegs": 4,
+      "roundTripCovered": true
+    },
+    {
+      "city": "HVN",
+      "group": "northeast",
+      "toHubLegs": 4,
+      "fromHubLegs": 4,
+      "roundTripCovered": true
+    },
+    {
+      "city": "ISP",
+      "group": "northeast",
+      "toHubLegs": 3,
+      "fromHubLegs": 3,
+      "roundTripCovered": true
+    },
+    {
+      "city": "BTV",
+      "group": "northeast",
+      "toHubLegs": 4,
+      "fromHubLegs": 4,
+      "roundTripCovered": true
+    },
+    {
+      "city": "ORH",
+      "group": "northeast",
+      "toHubLegs": 3,
+      "fromHubLegs": 3,
+      "roundTripCovered": true
+    },
+    {
+      "city": "PGD",
+      "group": "priorityFlorida",
+      "toHubLegs": 1,
+      "fromHubLegs": 1,
+      "roundTripCovered": true
+    },
+    {
+      "city": "DAB",
+      "group": "priorityFlorida",
+      "toHubLegs": 1,
+      "fromHubLegs": 1,
+      "roundTripCovered": true
+    }
+  ],
+  "directionalPairs": [
+    {
+      "source": "HPN",
+      "sourceGroup": "northeast",
+      "destination": "PGD",
+      "destinationGroup": "priorityFlorida",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "HPN-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1854,
+          "hubArrival": "13:15",
+          "outboundLegId": "V131-NE-R356-4-SYR-PGD",
+          "outboundFlight": 2210,
+          "hubDeparture": "13:55",
+          "waitMinutes": 40
+        },
+        {
+          "inboundLegId": "V125-HOLDS-R161-2-HPN-SYR",
+          "inboundFlight": 2192,
+          "hubArrival": "10:30",
+          "outboundLegId": "V131-NE-R356-4-SYR-PGD",
+          "outboundFlight": 2210,
+          "hubDeparture": "13:55",
+          "waitMinutes": 205
+        }
+      ]
+    },
+    {
+      "source": "HPN",
+      "sourceGroup": "northeast",
+      "destination": "DAB",
+      "destinationGroup": "priorityFlorida",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "HPN-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1855,
+          "hubArrival": "16:09",
+          "outboundLegId": "V131-NE-R355-4-SYR-DAB",
+          "outboundFlight": 2204,
+          "hubDeparture": "16:41",
+          "waitMinutes": 32
+        },
+        {
+          "inboundLegId": "HPN-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1854,
+          "hubArrival": "13:15",
+          "outboundLegId": "V131-NE-R355-4-SYR-DAB",
+          "outboundFlight": 2204,
+          "hubDeparture": "16:41",
+          "waitMinutes": 206
+        }
+      ]
+    },
+    {
+      "source": "HVN",
+      "sourceGroup": "northeast",
+      "destination": "PGD",
+      "destinationGroup": "priorityFlorida",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "HVN-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1879,
+          "hubArrival": "10:41",
+          "outboundLegId": "V131-NE-R356-4-SYR-PGD",
+          "outboundFlight": 2210,
+          "hubDeparture": "13:55",
+          "waitMinutes": 194
+        }
+      ]
+    },
+    {
+      "source": "HVN",
+      "sourceGroup": "northeast",
+      "destination": "DAB",
+      "destinationGroup": "priorityFlorida",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "HVN-SYR-CRJ200-03-OUT",
+          "inboundFlight": 1880,
+          "hubArrival": "16:11",
+          "outboundLegId": "V131-NE-R355-4-SYR-DAB",
+          "outboundFlight": 2204,
+          "hubDeparture": "16:41",
+          "waitMinutes": 30
+        }
+      ]
+    },
+    {
+      "source": "ISP",
+      "sourceGroup": "northeast",
+      "destination": "PGD",
+      "destinationGroup": "priorityFlorida",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "ISP-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1893,
+          "hubArrival": "13:23",
+          "outboundLegId": "V131-NE-R356-4-SYR-PGD",
+          "outboundFlight": 2210,
+          "hubDeparture": "13:55",
+          "waitMinutes": 32
+        }
+      ]
+    },
+    {
+      "source": "ISP",
+      "sourceGroup": "northeast",
+      "destination": "DAB",
+      "destinationGroup": "priorityFlorida",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "ISP-SYR-CRJ200-03-OUT",
+          "inboundFlight": 1894,
+          "hubArrival": "16:08",
+          "outboundLegId": "V131-NE-R355-4-SYR-DAB",
+          "outboundFlight": 2204,
+          "hubDeparture": "16:41",
+          "waitMinutes": 33
+        },
+        {
+          "inboundLegId": "ISP-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1893,
+          "hubArrival": "13:23",
+          "outboundLegId": "V131-NE-R355-4-SYR-DAB",
+          "outboundFlight": 2204,
+          "hubDeparture": "16:41",
+          "waitMinutes": 198
+        }
+      ]
+    },
+    {
+      "source": "BTV",
+      "sourceGroup": "northeast",
+      "destination": "PGD",
+      "destinationGroup": "priorityFlorida",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V125-HOLDS-R318-2-BTV-SYR",
+          "inboundFlight": 2190,
+          "hubArrival": "10:40",
+          "outboundLegId": "V131-NE-R356-4-SYR-PGD",
+          "outboundFlight": 2210,
+          "hubDeparture": "13:55",
+          "waitMinutes": 195
+        }
+      ]
+    },
+    {
+      "source": "BTV",
+      "sourceGroup": "northeast",
+      "destination": "DAB",
+      "destinationGroup": "priorityFlorida",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "BTV-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1829,
+          "hubArrival": "16:07",
+          "outboundLegId": "V131-NE-R355-4-SYR-DAB",
+          "outboundFlight": 2204,
+          "hubDeparture": "16:41",
+          "waitMinutes": 34
+        }
+      ]
+    },
+    {
+      "source": "ORH",
+      "sourceGroup": "northeast",
+      "destination": "PGD",
+      "destinationGroup": "priorityFlorida",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "ORH-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1884,
+          "hubArrival": "13:23",
+          "outboundLegId": "V131-NE-R356-4-SYR-PGD",
+          "outboundFlight": 2210,
+          "hubDeparture": "13:55",
+          "waitMinutes": 32
+        }
+      ]
+    },
+    {
+      "source": "ORH",
+      "sourceGroup": "northeast",
+      "destination": "DAB",
+      "destinationGroup": "priorityFlorida",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "ORH-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1884,
+          "hubArrival": "13:23",
+          "outboundLegId": "V131-NE-R355-4-SYR-DAB",
+          "outboundFlight": 2204,
+          "hubDeparture": "16:41",
+          "waitMinutes": 198
+        }
+      ]
+    },
+    {
+      "source": "PGD",
+      "sourceGroup": "priorityFlorida",
+      "destination": "HPN",
+      "destinationGroup": "northeast",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V131-NE-R355-1-PGD-SYR",
+          "inboundFlight": 2201,
+          "hubArrival": "07:45",
+          "outboundLegId": "HPN-SYR-CRJ200-01-IN",
+          "outboundFlight": 1851,
+          "hubDeparture": "08:35",
+          "waitMinutes": 50
+        },
+        {
+          "inboundLegId": "V131-NE-R355-1-PGD-SYR",
+          "inboundFlight": 2201,
+          "hubArrival": "07:45",
+          "outboundLegId": "HPN-SYR-CRJ200-02-IN",
+          "outboundFlight": 1852,
+          "hubDeparture": "11:20",
+          "waitMinutes": 215
+        }
+      ]
+    },
+    {
+      "source": "PGD",
+      "sourceGroup": "priorityFlorida",
+      "destination": "HVN",
+      "destinationGroup": "northeast",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V131-NE-R355-1-PGD-SYR",
+          "inboundFlight": 2201,
+          "hubArrival": "07:45",
+          "outboundLegId": "HVN-SYR-CRJ200-02-IN",
+          "outboundFlight": 1876,
+          "hubDeparture": "10:30",
+          "waitMinutes": 165
+        }
+      ]
+    },
+    {
+      "source": "PGD",
+      "sourceGroup": "priorityFlorida",
+      "destination": "ISP",
+      "destinationGroup": "northeast",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V131-NE-R355-1-PGD-SYR",
+          "inboundFlight": 2201,
+          "hubArrival": "07:45",
+          "outboundLegId": "ISP-SYR-CRJ200-02-IN",
+          "outboundFlight": 1889,
+          "hubDeparture": "08:35",
+          "waitMinutes": 50
+        },
+        {
+          "inboundLegId": "V131-NE-R355-1-PGD-SYR",
+          "inboundFlight": 2201,
+          "hubArrival": "07:45",
+          "outboundLegId": "ISP-SYR-CRJ200-03-IN",
+          "outboundFlight": 1890,
+          "hubDeparture": "11:25",
+          "waitMinutes": 220
+        }
+      ]
+    },
+    {
+      "source": "PGD",
+      "sourceGroup": "priorityFlorida",
+      "destination": "BTV",
+      "destinationGroup": "northeast",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V131-NE-R355-1-PGD-SYR",
+          "inboundFlight": 2201,
+          "hubArrival": "07:45",
+          "outboundLegId": "BTV-SYR-CRJ200-02-IN",
+          "outboundFlight": 1825,
+          "hubDeparture": "11:20",
+          "waitMinutes": 215
+        }
+      ]
+    },
+    {
+      "source": "PGD",
+      "sourceGroup": "priorityFlorida",
+      "destination": "ORH",
+      "destinationGroup": "northeast",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V131-NE-R355-1-PGD-SYR",
+          "inboundFlight": 2201,
+          "hubArrival": "07:45",
+          "outboundLegId": "ORH-SYR-CRJ200-02-IN",
+          "outboundFlight": 1881,
+          "hubDeparture": "08:35",
+          "waitMinutes": 50
+        }
+      ]
+    },
+    {
+      "source": "DAB",
+      "sourceGroup": "priorityFlorida",
+      "destination": "HPN",
+      "destinationGroup": "northeast",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V131-NE-R356-1-DAB-SYR",
+          "inboundFlight": 2207,
+          "hubArrival": "07:45",
+          "outboundLegId": "HPN-SYR-CRJ200-01-IN",
+          "outboundFlight": 1851,
+          "hubDeparture": "08:35",
+          "waitMinutes": 50
+        },
+        {
+          "inboundLegId": "V131-NE-R356-1-DAB-SYR",
+          "inboundFlight": 2207,
+          "hubArrival": "07:45",
+          "outboundLegId": "HPN-SYR-CRJ200-02-IN",
+          "outboundFlight": 1852,
+          "hubDeparture": "11:20",
+          "waitMinutes": 215
+        }
+      ]
+    },
+    {
+      "source": "DAB",
+      "sourceGroup": "priorityFlorida",
+      "destination": "HVN",
+      "destinationGroup": "northeast",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V131-NE-R356-1-DAB-SYR",
+          "inboundFlight": 2207,
+          "hubArrival": "07:45",
+          "outboundLegId": "HVN-SYR-CRJ200-02-IN",
+          "outboundFlight": 1876,
+          "hubDeparture": "10:30",
+          "waitMinutes": 165
+        }
+      ]
+    },
+    {
+      "source": "DAB",
+      "sourceGroup": "priorityFlorida",
+      "destination": "ISP",
+      "destinationGroup": "northeast",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V131-NE-R356-1-DAB-SYR",
+          "inboundFlight": 2207,
+          "hubArrival": "07:45",
+          "outboundLegId": "ISP-SYR-CRJ200-02-IN",
+          "outboundFlight": 1889,
+          "hubDeparture": "08:35",
+          "waitMinutes": 50
+        },
+        {
+          "inboundLegId": "V131-NE-R356-1-DAB-SYR",
+          "inboundFlight": 2207,
+          "hubArrival": "07:45",
+          "outboundLegId": "ISP-SYR-CRJ200-03-IN",
+          "outboundFlight": 1890,
+          "hubDeparture": "11:25",
+          "waitMinutes": 220
+        }
+      ]
+    },
+    {
+      "source": "DAB",
+      "sourceGroup": "priorityFlorida",
+      "destination": "BTV",
+      "destinationGroup": "northeast",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V131-NE-R356-1-DAB-SYR",
+          "inboundFlight": 2207,
+          "hubArrival": "07:45",
+          "outboundLegId": "BTV-SYR-CRJ200-02-IN",
+          "outboundFlight": 1825,
+          "hubDeparture": "11:20",
+          "waitMinutes": 215
+        }
+      ]
+    },
+    {
+      "source": "DAB",
+      "sourceGroup": "priorityFlorida",
+      "destination": "ORH",
+      "destinationGroup": "northeast",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V131-NE-R356-1-DAB-SYR",
+          "inboundFlight": 2207,
+          "hubArrival": "07:45",
+          "outboundLegId": "ORH-SYR-CRJ200-02-IN",
+          "outboundFlight": 1881,
+          "hubDeparture": "08:35",
+          "waitMinutes": 50
+        }
+      ]
+    }
+  ]
+}

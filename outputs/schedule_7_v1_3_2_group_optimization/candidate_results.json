@@ -1,0 +1,2149 @@
+{
+  "R146_MCI_FSD_late": {
+    "pass": true,
+    "structure": "pass",
+    "overnight": "pass",
+    "planning": "pass",
+    "operating": {
+      "checks": 25,
+      "passed": 19,
+      "failed": 0,
+      "warnings": 3,
+      "notEvaluated": 1,
+      "overridden": 2,
+      "effectiveErrorFindings": 0,
+      "effectiveWarningFindings": 158
+    },
+    "gate": "pass",
+    "failedChecks": [],
+    "metrics": {
+      "flights": 1227,
+      "targetRoutes": {
+        "107": [
+          {
+            "flight": 1828,
+            "origin": "BTV",
+            "destination": "SYR",
+            "departure": "07:00",
+            "arrival": "07:52"
+          },
+          {
+            "flight": 1889,
+            "origin": "SYR",
+            "destination": "ISP",
+            "departure": "08:35",
+            "arrival": "09:33"
+          },
+          {
+            "flight": 1893,
+            "origin": "ISP",
+            "destination": "SYR",
+            "departure": "12:25",
+            "arrival": "13:23"
+          },
+          {
+            "flight": 1792,
+            "origin": "SYR",
+            "destination": "BDL",
+            "departure": "14:05",
+            "arrival": "14:59"
+          },
+          {
+            "flight": 1791,
+            "origin": "BDL",
+            "destination": "SYR",
+            "departure": "18:00",
+            "arrival": "18:54"
+          },
+          {
+            "flight": 1674,
+            "origin": "SYR",
+            "destination": "CAK",
+            "departure": "19:35",
+            "arrival": "20:46"
+          }
+        ],
+        "125": [
+          {
+            "flight": 1878,
+            "origin": "HVN",
+            "destination": "SYR",
+            "departure": "04:30",
+            "arrival": "05:26"
+          },
+          {
+            "flight": 1811,
+            "origin": "SYR",
+            "destination": "PVD",
+            "departure": "06:06",
+            "arrival": "07:09"
+          },
+          {
+            "flight": 2221,
+            "origin": "PVD",
+            "destination": "BWI",
+            "departure": "08:30",
+            "arrival": "09:43"
+          },
+          {
+            "flight": 2222,
+            "origin": "BWI",
+            "destination": "PVD",
+            "departure": "10:25",
+            "arrival": "11:38"
+          },
+          {
+            "flight": 1812,
+            "origin": "PVD",
+            "destination": "SYR",
+            "departure": "12:20",
+            "arrival": "13:23"
+          },
+          {
+            "flight": 1658,
+            "origin": "SYR",
+            "destination": "DAY",
+            "departure": "14:05",
+            "arrival": "15:38"
+          },
+          {
+            "flight": 1849,
+            "origin": "DAY",
+            "destination": "SDF",
+            "departure": "16:20",
+            "arrival": "17:08"
+          },
+          {
+            "flight": 1850,
+            "origin": "SDF",
+            "destination": "DAY",
+            "departure": "18:55",
+            "arrival": "19:43"
+          },
+          {
+            "flight": 2173,
+            "origin": "DAY",
+            "destination": "IND",
+            "departure": "21:35",
+            "arrival": "22:18"
+          }
+        ],
+        "146": [
+          {
+            "flight": 1647,
+            "origin": "MCI",
+            "destination": "ICT",
+            "departure": "05:50",
+            "arrival": "06:43"
+          },
+          {
+            "flight": 1651,
+            "origin": "ICT",
+            "destination": "MCI",
+            "departure": "09:00",
+            "arrival": "09:53"
+          },
+          {
+            "flight": 1530,
+            "origin": "MCI",
+            "destination": "LIT",
+            "departure": "12:15",
+            "arrival": "13:30"
+          },
+          {
+            "flight": 1533,
+            "origin": "LIT",
+            "destination": "MCI",
+            "departure": "15:20",
+            "arrival": "16:35"
+          },
+          {
+            "flight": 1677,
+            "origin": "MCI",
+            "destination": "FSD",
+            "departure": "18:25",
+            "arrival": "19:36"
+          },
+          {
+            "flight": 2231,
+            "origin": "FSD",
+            "destination": "MCI",
+            "departure": "20:16",
+            "arrival": "21:27"
+          },
+          {
+            "flight": 2232,
+            "origin": "MCI",
+            "destination": "FSD",
+            "departure": "22:15",
+            "arrival": "23:26"
+          }
+        ],
+        "158": [
+          {
+            "flight": 1803,
+            "origin": "GRR",
+            "destination": "DAY",
+            "departure": "06:15",
+            "arrival": "07:13"
+          },
+          {
+            "flight": 1867,
+            "origin": "DAY",
+            "destination": "LEX",
+            "departure": "07:55",
+            "arrival": "08:41"
+          },
+          {
+            "flight": 1868,
+            "origin": "LEX",
+            "destination": "DAY",
+            "departure": "10:35",
+            "arrival": "11:21"
+          },
+          {
+            "flight": 1657,
+            "origin": "DAY",
+            "destination": "SYR",
+            "departure": "12:05",
+            "arrival": "13:38"
+          },
+          {
+            "flight": 1752,
+            "origin": "SYR",
+            "destination": "ALB",
+            "departure": "16:45",
+            "arrival": "17:29"
+          },
+          {
+            "flight": 2053,
+            "origin": "ALB",
+            "destination": "SYR",
+            "departure": "20:46",
+            "arrival": "21:30"
+          },
+          {
+            "flight": 2054,
+            "origin": "SYR",
+            "destination": "ALB",
+            "departure": "22:10",
+            "arrival": "22:54"
+          }
+        ],
+        "160": [
+          {
+            "flight": 1865,
+            "origin": "ACY",
+            "destination": "PHF",
+            "departure": "05:20",
+            "arrival": "06:14"
+          },
+          {
+            "flight": 1869,
+            "origin": "PHF",
+            "destination": "ACY",
+            "departure": "06:55",
+            "arrival": "07:49"
+          },
+          {
+            "flight": 1908,
+            "origin": "ACY",
+            "destination": "SYR",
+            "departure": "09:35",
+            "arrival": "10:39"
+          },
+          {
+            "flight": 1825,
+            "origin": "SYR",
+            "destination": "BTV",
+            "departure": "11:20",
+            "arrival": "12:12"
+          },
+          {
+            "flight": 1829,
+            "origin": "BTV",
+            "destination": "SYR",
+            "departure": "15:15",
+            "arrival": "16:07"
+          },
+          {
+            "flight": 1701,
+            "origin": "SYR",
+            "destination": "PWM",
+            "departure": "19:00",
+            "arrival": "20:08"
+          }
+        ],
+        "176": [
+          {
+            "flight": 1747,
+            "origin": "AVP",
+            "destination": "PHF",
+            "departure": "05:05",
+            "arrival": "06:13"
+          },
+          {
+            "flight": 1762,
+            "origin": "PHF",
+            "destination": "GSO",
+            "departure": "06:55",
+            "arrival": "07:51"
+          },
+          {
+            "flight": 1761,
+            "origin": "GSO",
+            "destination": "PHF",
+            "departure": "10:00",
+            "arrival": "10:56"
+          },
+          {
+            "flight": 1615,
+            "origin": "PHF",
+            "destination": "CAE",
+            "departure": "13:55",
+            "arrival": "15:10"
+          },
+          {
+            "flight": 1682,
+            "origin": "CAE",
+            "destination": "JAX",
+            "departure": "16:40",
+            "arrival": "17:41"
+          },
+          {
+            "flight": 1778,
+            "origin": "JAX",
+            "destination": "AGS",
+            "departure": "19:25",
+            "arrival": "20:20"
+          }
+        ]
+      }
+    },
+    "overlay": {
+      "baseSchedule": {
+        "scheduleId": "schedule_7_v1_3_2_draft"
+      },
+      "schedule": {
+        "id": "schedule_7_v1_3_2_draft",
+        "number": 7,
+        "version": "1.3.2-draft",
+        "label": "Schedule 7, Version 1.3.2 draft",
+        "status": "draft",
+        "fleetCounts": {
+          "MAX9": 35,
+          "CRJ900": 45,
+          "CRJ700": 65,
+          "CRJ200": 80
+        },
+        "connectionWindowMinutes": {
+          "minimum": 30,
+          "maximum": 240
+        }
+      },
+      "retimeLegs": [
+        {
+          "legId": "FSD-MCI-CRJ200-01-IN",
+          "expectedDepartureMinute": 1135,
+          "expectedArrivalMinute": 1206,
+          "departureMinute": 1105,
+          "arrivalMinute": 1176
+        }
+      ],
+      "insertLegs": [
+        {
+          "id": "V132-R146-FSD-MCI-LATE",
+          "route": 146,
+          "origin": "FSD",
+          "destination": "MCI",
+          "departureMinute": 1216,
+          "arrivalMinute": 1287
+        },
+        {
+          "id": "V132-R146-MCI-FSD-LATE",
+          "route": 146,
+          "origin": "MCI",
+          "destination": "FSD",
+          "departureMinute": 1335,
+          "arrivalMinute": 1406
+        }
+      ],
+      "bankAssignmentsToAdd": [
+        {
+          "legId": "V132-R146-FSD-MCI-LATE",
+          "operation": "arrival",
+          "bankId": "MCI-M11"
+        },
+        {
+          "legId": "V132-R146-MCI-FSD-LATE",
+          "operation": "departure",
+          "bankId": "MCI-M12"
+        }
+      ]
+    }
+  },
+  "R107_SYR_CAK_late": {
+    "pass": true,
+    "structure": "pass",
+    "overnight": "pass",
+    "planning": "pass",
+    "operating": {
+      "checks": 25,
+      "passed": 19,
+      "failed": 0,
+      "warnings": 3,
+      "notEvaluated": 1,
+      "overridden": 2,
+      "effectiveErrorFindings": 0,
+      "effectiveWarningFindings": 159
+    },
+    "gate": "pass",
+    "failedChecks": [],
+    "metrics": {
+      "flights": 1227,
+      "targetRoutes": {
+        "107": [
+          {
+            "flight": 1828,
+            "origin": "BTV",
+            "destination": "SYR",
+            "departure": "07:00",
+            "arrival": "07:52"
+          },
+          {
+            "flight": 1889,
+            "origin": "SYR",
+            "destination": "ISP",
+            "departure": "08:35",
+            "arrival": "09:33"
+          },
+          {
+            "flight": 1893,
+            "origin": "ISP",
+            "destination": "SYR",
+            "departure": "12:25",
+            "arrival": "13:23"
+          },
+          {
+            "flight": 1792,
+            "origin": "SYR",
+            "destination": "BDL",
+            "departure": "14:05",
+            "arrival": "14:59"
+          },
+          {
+            "flight": 1791,
+            "origin": "BDL",
+            "destination": "SYR",
+            "departure": "18:00",
+            "arrival": "18:54"
+          },
+          {
+            "flight": 1674,
+            "origin": "SYR",
+            "destination": "CAK",
+            "departure": "18:45",
+            "arrival": "19:56"
+          },
+          {
+            "flight": 2231,
+            "origin": "CAK",
+            "destination": "SYR",
+            "departure": "20:36",
+            "arrival": "21:47"
+          },
+          {
+            "flight": 2232,
+            "origin": "SYR",
+            "destination": "CAK",
+            "departure": "22:27",
+            "arrival": "23:38"
+          }
+        ],
+        "125": [
+          {
+            "flight": 1878,
+            "origin": "HVN",
+            "destination": "SYR",
+            "departure": "04:30",
+            "arrival": "05:26"
+          },
+          {
+            "flight": 1811,
+            "origin": "SYR",
+            "destination": "PVD",
+            "departure": "06:06",
+            "arrival": "07:09"
+          },
+          {
+            "flight": 2221,
+            "origin": "PVD",
+            "destination": "BWI",
+            "departure": "08:30",
+            "arrival": "09:43"
+          },
+          {
+            "flight": 2222,
+            "origin": "BWI",
+            "destination": "PVD",
+            "departure": "10:25",
+            "arrival": "11:38"
+          },
+          {
+            "flight": 1812,
+            "origin": "PVD",
+            "destination": "SYR",
+            "departure": "12:20",
+            "arrival": "13:23"
+          },
+          {
+            "flight": 1658,
+            "origin": "SYR",
+            "destination": "DAY",
+            "departure": "14:05",
+            "arrival": "15:38"
+          },
+          {
+            "flight": 1849,
+            "origin": "DAY",
+            "destination": "SDF",
+            "departure": "16:20",
+            "arrival": "17:08"
+          },
+          {
+            "flight": 1850,
+            "origin": "SDF",
+            "destination": "DAY",
+            "departure": "18:55",
+            "arrival": "19:43"
+          },
+          {
+            "flight": 2173,
+            "origin": "DAY",
+            "destination": "IND",
+            "departure": "21:35",
+            "arrival": "22:18"
+          }
+        ],
+        "146": [
+          {
+            "flight": 1647,
+            "origin": "MCI",
+            "destination": "ICT",
+            "departure": "05:50",
+            "arrival": "06:43"
+          },
+          {
+            "flight": 1651,
+            "origin": "ICT",
+            "destination": "MCI",
+            "departure": "09:00",
+            "arrival": "09:53"
+          },
+          {
+            "flight": 1530,
+            "origin": "MCI",
+            "destination": "LIT",
+            "departure": "12:15",
+            "arrival": "13:30"
+          },
+          {
+            "flight": 1533,
+            "origin": "LIT",
+            "destination": "MCI",
+            "departure": "15:20",
+            "arrival": "16:35"
+          },
+          {
+            "flight": 1677,
+            "origin": "MCI",
+            "destination": "FSD",
+            "departure": "18:55",
+            "arrival": "20:06"
+          }
+        ],
+        "158": [
+          {
+            "flight": 1803,
+            "origin": "GRR",
+            "destination": "DAY",
+            "departure": "06:15",
+            "arrival": "07:13"
+          },
+          {
+            "flight": 1867,
+            "origin": "DAY",
+            "destination": "LEX",
+            "departure": "07:55",
+            "arrival": "08:41"
+          },
+          {
+            "flight": 1868,
+            "origin": "LEX",
+            "destination": "DAY",
+            "departure": "10:35",
+            "arrival": "11:21"
+          },
+          {
+            "flight": 1657,
+            "origin": "DAY",
+            "destination": "SYR",
+            "departure": "12:05",
+            "arrival": "13:38"
+          },
+          {
+            "flight": 1752,
+            "origin": "SYR",
+            "destination": "ALB",
+            "departure": "16:45",
+            "arrival": "17:29"
+          },
+          {
+            "flight": 2053,
+            "origin": "ALB",
+            "destination": "SYR",
+            "departure": "20:46",
+            "arrival": "21:30"
+          },
+          {
+            "flight": 2054,
+            "origin": "SYR",
+            "destination": "ALB",
+            "departure": "22:10",
+            "arrival": "22:54"
+          }
+        ],
+        "160": [
+          {
+            "flight": 1865,
+            "origin": "ACY",
+            "destination": "PHF",
+            "departure": "05:20",
+            "arrival": "06:14"
+          },
+          {
+            "flight": 1869,
+            "origin": "PHF",
+            "destination": "ACY",
+            "departure": "06:55",
+            "arrival": "07:49"
+          },
+          {
+            "flight": 1908,
+            "origin": "ACY",
+            "destination": "SYR",
+            "departure": "09:35",
+            "arrival": "10:39"
+          },
+          {
+            "flight": 1825,
+            "origin": "SYR",
+            "destination": "BTV",
+            "departure": "11:20",
+            "arrival": "12:12"
+          },
+          {
+            "flight": 1829,
+            "origin": "BTV",
+            "destination": "SYR",
+            "departure": "15:15",
+            "arrival": "16:07"
+          },
+          {
+            "flight": 1701,
+            "origin": "SYR",
+            "destination": "PWM",
+            "departure": "19:00",
+            "arrival": "20:08"
+          }
+        ],
+        "176": [
+          {
+            "flight": 1747,
+            "origin": "AVP",
+            "destination": "PHF",
+            "departure": "05:05",
+            "arrival": "06:13"
+          },
+          {
+            "flight": 1762,
+            "origin": "PHF",
+            "destination": "GSO",
+            "departure": "06:55",
+            "arrival": "07:51"
+          },
+          {
+            "flight": 1761,
+            "origin": "GSO",
+            "destination": "PHF",
+            "departure": "10:00",
+            "arrival": "10:56"
+          },
+          {
+            "flight": 1615,
+            "origin": "PHF",
+            "destination": "CAE",
+            "departure": "13:55",
+            "arrival": "15:10"
+          },
+          {
+            "flight": 1682,
+            "origin": "CAE",
+            "destination": "JAX",
+            "departure": "16:40",
+            "arrival": "17:41"
+          },
+          {
+            "flight": 1778,
+            "origin": "JAX",
+            "destination": "AGS",
+            "departure": "19:25",
+            "arrival": "20:20"
+          }
+        ]
+      }
+    },
+    "overlay": {
+      "baseSchedule": {
+        "scheduleId": "schedule_7_v1_3_2_draft"
+      },
+      "schedule": {
+        "id": "schedule_7_v1_3_2_draft",
+        "number": 7,
+        "version": "1.3.2-draft",
+        "label": "Schedule 7, Version 1.3.2 draft",
+        "status": "draft",
+        "fleetCounts": {
+          "MAX9": 35,
+          "CRJ900": 45,
+          "CRJ700": 65,
+          "CRJ200": 80
+        },
+        "connectionWindowMinutes": {
+          "minimum": 30,
+          "maximum": 240
+        }
+      },
+      "retimeLegs": [
+        {
+          "legId": "CAK-SYR-CRJ200-01-IN",
+          "expectedDepartureMinute": 1175,
+          "expectedArrivalMinute": 1246,
+          "departureMinute": 1125,
+          "arrivalMinute": 1196
+        }
+      ],
+      "insertLegs": [
+        {
+          "id": "V132-R107-CAK-SYR-LATE",
+          "route": 107,
+          "origin": "CAK",
+          "destination": "SYR",
+          "departureMinute": 1236,
+          "arrivalMinute": 1307
+        },
+        {
+          "id": "V132-R107-SYR-CAK-LATE",
+          "route": 107,
+          "origin": "SYR",
+          "destination": "CAK",
+          "departureMinute": 1347,
+          "arrivalMinute": 1418
+        }
+      ],
+      "bankAssignmentsToAdd": [
+        {
+          "legId": "V132-R107-CAK-SYR-LATE",
+          "operation": "arrival",
+          "bankId": "SYR-B7"
+        },
+        {
+          "legId": "V132-R107-SYR-CAK-LATE",
+          "operation": "departure",
+          "bankId": "SYR-B7"
+        }
+      ]
+    }
+  },
+  "R160_SYR_PWM_late": {
+    "pass": false,
+    "structure": "pass",
+    "overnight": "pass",
+    "planning": "pass",
+    "operating": {
+      "checks": 25,
+      "passed": 18,
+      "failed": 1,
+      "warnings": 3,
+      "notEvaluated": 1,
+      "overridden": 2,
+      "effectiveErrorFindings": 1,
+      "effectiveWarningFindings": 158
+    },
+    "gate": "pass",
+    "failedChecks": [
+      {
+        "id": "section_26_pairing_spacing",
+        "findings": [
+          {
+            "id": "SYR-PWM",
+            "message": "SYR\u2013PWM fails same-pairing spacing",
+            "evidence": {
+              "origin": "SYR",
+              "destination": "PWM",
+              "departures": [
+                505,
+                845,
+                1125,
+                1340,
+                1341
+              ],
+              "gaps": [
+                {
+                  "from": 505,
+                  "to": 845,
+                  "minutes": 340
+                },
+                {
+                  "from": 845,
+                  "to": 1125,
+                  "minutes": 280
+                },
+                {
+                  "from": 1125,
+                  "to": 1340,
+                  "minutes": 215
+                },
+                {
+                  "from": 1340,
+                  "to": 1341,
+                  "minutes": 1
+                },
+                {
+                  "from": 1341,
+                  "to": 505,
+                  "minutes": 604
+                }
+              ],
+              "targetMinutes": 67.19999999999999,
+              "allowedExceptions": 1,
+              "hubBound": false
+            }
+          }
+        ]
+      }
+    ],
+    "metrics": {
+      "flights": 1227,
+      "targetRoutes": {
+        "107": [
+          {
+            "flight": 1828,
+            "origin": "BTV",
+            "destination": "SYR",
+            "departure": "07:00",
+            "arrival": "07:52"
+          },
+          {
+            "flight": 1889,
+            "origin": "SYR",
+            "destination": "ISP",
+            "departure": "08:35",
+            "arrival": "09:33"
+          },
+          {
+            "flight": 1893,
+            "origin": "ISP",
+            "destination": "SYR",
+            "departure": "12:25",
+            "arrival": "13:23"
+          },
+          {
+            "flight": 1792,
+            "origin": "SYR",
+            "destination": "BDL",
+            "departure": "14:05",
+            "arrival": "14:59"
+          },
+          {
+            "flight": 1791,
+            "origin": "BDL",
+            "destination": "SYR",
+            "departure": "18:00",
+            "arrival": "18:54"
+          },
+          {
+            "flight": 1674,
+            "origin": "SYR",
+            "destination": "CAK",
+            "departure": "19:35",
+            "arrival": "20:46"
+          }
+        ],
+        "125": [
+          {
+            "flight": 1878,
+            "origin": "HVN",
+            "destination": "SYR",
+            "departure": "04:30",
+            "arrival": "05:26"
+          },
+          {
+            "flight": 1811,
+            "origin": "SYR",
+            "destination": "PVD",
+            "departure": "06:06",
+            "arrival": "07:09"
+          },
+          {
+            "flight": 2221,
+            "origin": "PVD",
+            "destination": "BWI",
+            "departure": "08:30",
+            "arrival": "09:43"
+          },
+          {
+            "flight": 2222,
+            "origin": "BWI",
+            "destination": "PVD",
+            "departure": "10:25",
+            "arrival": "11:38"
+          },
+          {
+            "flight": 1812,
+            "origin": "PVD",
+            "destination": "SYR",
+            "departure": "12:20",
+            "arrival": "13:23"
+          },
+          {
+            "flight": 1658,
+            "origin": "SYR",
+            "destination": "DAY",
+            "departure": "14:05",
+            "arrival": "15:38"
+          },
+          {
+            "flight": 1849,
+            "origin": "DAY",
+            "destination": "SDF",
+            "departure": "16:20",
+            "arrival": "17:08"
+          },
+          {
+            "flight": 1850,
+            "origin": "SDF",
+            "destination": "DAY",
+            "departure": "18:55",
+            "arrival": "19:43"
+          },
+          {
+            "flight": 2173,
+            "origin": "DAY",
+            "destination": "IND",
+            "departure": "21:35",
+            "arrival": "22:18"
+          }
+        ],
+        "146": [
+          {
+            "flight": 1647,
+            "origin": "MCI",
+            "destination": "ICT",
+            "departure": "05:50",
+            "arrival": "06:43"
+          },
+          {
+            "flight": 1651,
+            "origin": "ICT",
+            "destination": "MCI",
+            "departure": "09:00",
+            "arrival": "09:53"
+          },
+          {
+            "flight": 1530,
+            "origin": "MCI",
+            "destination": "LIT",
+            "departure": "12:15",
+            "arrival": "13:30"
+          },
+          {
+            "flight": 1533,
+            "origin": "LIT",
+            "destination": "MCI",
+            "departure": "15:20",
+            "arrival": "16:35"
+          },
+          {
+            "flight": 1677,
+            "origin": "MCI",
+            "destination": "FSD",
+            "departure": "18:55",
+            "arrival": "20:06"
+          }
+        ],
+        "158": [
+          {
+            "flight": 1803,
+            "origin": "GRR",
+            "destination": "DAY",
+            "departure": "06:15",
+            "arrival": "07:13"
+          },
+          {
+            "flight": 1867,
+            "origin": "DAY",
+            "destination": "LEX",
+            "departure": "07:55",
+            "arrival": "08:41"
+          },
+          {
+            "flight": 1868,
+            "origin": "LEX",
+            "destination": "DAY",
+            "departure": "10:35",
+            "arrival": "11:21"
+          },
+          {
+            "flight": 1657,
+            "origin": "DAY",
+            "destination": "SYR",
+            "departure": "12:05",
+            "arrival": "13:38"
+          },
+          {
+            "flight": 1752,
+            "origin": "SYR",
+            "destination": "ALB",
+            "departure": "16:45",
+            "arrival": "17:29"
+          },
+          {
+            "flight": 2053,
+            "origin": "ALB",
+            "destination": "SYR",
+            "departure": "20:46",
+            "arrival": "21:30"
+          },
+          {
+            "flight": 2054,
+            "origin": "SYR",
+            "destination": "ALB",
+            "departure": "22:10",
+            "arrival": "22:54"
+          }
+        ],
+        "160": [
+          {
+            "flight": 1865,
+            "origin": "ACY",
+            "destination": "PHF",
+            "departure": "05:20",
+            "arrival": "06:14"
+          },
+          {
+            "flight": 1869,
+            "origin": "PHF",
+            "destination": "ACY",
+            "departure": "06:55",
+            "arrival": "07:49"
+          },
+          {
+            "flight": 1908,
+            "origin": "ACY",
+            "destination": "SYR",
+            "departure": "09:35",
+            "arrival": "10:39"
+          },
+          {
+            "flight": 1825,
+            "origin": "SYR",
+            "destination": "BTV",
+            "departure": "11:20",
+            "arrival": "12:12"
+          },
+          {
+            "flight": 1829,
+            "origin": "BTV",
+            "destination": "SYR",
+            "departure": "15:15",
+            "arrival": "16:07"
+          },
+          {
+            "flight": 1701,
+            "origin": "SYR",
+            "destination": "PWM",
+            "departure": "18:45",
+            "arrival": "19:53"
+          },
+          {
+            "flight": 2231,
+            "origin": "PWM",
+            "destination": "SYR",
+            "departure": "20:33",
+            "arrival": "21:41"
+          },
+          {
+            "flight": 2232,
+            "origin": "SYR",
+            "destination": "PWM",
+            "departure": "22:21",
+            "arrival": "23:29"
+          }
+        ],
+        "176": [
+          {
+            "flight": 1747,
+            "origin": "AVP",
+            "destination": "PHF",
+            "departure": "05:05",
+            "arrival": "06:13"
+          },
+          {
+            "flight": 1762,
+            "origin": "PHF",
+            "destination": "GSO",
+            "departure": "06:55",
+            "arrival": "07:51"
+          },
+          {
+            "flight": 1761,
+            "origin": "GSO",
+            "destination": "PHF",
+            "departure": "10:00",
+            "arrival": "10:56"
+          },
+          {
+            "flight": 1615,
+            "origin": "PHF",
+            "destination": "CAE",
+            "departure": "13:55",
+            "arrival": "15:10"
+          },
+          {
+            "flight": 1682,
+            "origin": "CAE",
+            "destination": "JAX",
+            "departure": "16:40",
+            "arrival": "17:41"
+          },
+          {
+            "flight": 1778,
+            "origin": "JAX",
+            "destination": "AGS",
+            "departure": "19:25",
+            "arrival": "20:20"
+          }
+        ]
+      }
+    },
+    "overlay": {
+      "baseSchedule": {
+        "scheduleId": "schedule_7_v1_3_2_draft"
+      },
+      "schedule": {
+        "id": "schedule_7_v1_3_2_draft",
+        "number": 7,
+        "version": "1.3.2-draft",
+        "label": "Schedule 7, Version 1.3.2 draft",
+        "status": "draft",
+        "fleetCounts": {
+          "MAX9": 35,
+          "CRJ900": 45,
+          "CRJ700": 65,
+          "CRJ200": 80
+        },
+        "connectionWindowMinutes": {
+          "minimum": 30,
+          "maximum": 240
+        }
+      },
+      "retimeLegs": [
+        {
+          "legId": "PWM-SYR-CRJ200-01-IN",
+          "expectedDepartureMinute": 1140,
+          "expectedArrivalMinute": 1208,
+          "departureMinute": 1125,
+          "arrivalMinute": 1193
+        }
+      ],
+      "insertLegs": [
+        {
+          "id": "V132-R160-PWM-SYR-LATE",
+          "route": 160,
+          "origin": "PWM",
+          "destination": "SYR",
+          "departureMinute": 1233,
+          "arrivalMinute": 1301
+        },
+        {
+          "id": "V132-R160-SYR-PWM-LATE",
+          "route": 160,
+          "origin": "SYR",
+          "destination": "PWM",
+          "departureMinute": 1341,
+          "arrivalMinute": 1409
+        }
+      ],
+      "bankAssignmentsToAdd": [
+        {
+          "legId": "V132-R160-PWM-SYR-LATE",
+          "operation": "arrival",
+          "bankId": "SYR-B7"
+        },
+        {
+          "legId": "V132-R160-SYR-PWM-LATE",
+          "operation": "departure",
+          "bankId": "SYR-B7"
+        }
+      ]
+    }
+  },
+  "R158_ALB_SYR_hold": {
+    "pass": false,
+    "structure": "pass",
+    "overnight": "pass",
+    "planning": "pass",
+    "operating": {
+      "checks": 25,
+      "passed": 16,
+      "failed": 3,
+      "warnings": 3,
+      "notEvaluated": 1,
+      "overridden": 2,
+      "effectiveErrorFindings": 5,
+      "effectiveWarningFindings": 157
+    },
+    "gate": "GateCapacityError: 3 passenger touch(es) remain off-gate",
+    "failedChecks": [
+      {
+        "id": "section_26_pairing_spacing",
+        "findings": [
+          {
+            "id": "ALB-SYR",
+            "message": "ALB\u2013SYR fails same-pairing spacing",
+            "evidence": {
+              "origin": "ALB",
+              "destination": "SYR",
+              "departures": [
+                270,
+                595,
+                925,
+                1081,
+                1090,
+                1249
+              ],
+              "gaps": [
+                {
+                  "from": 270,
+                  "to": 595,
+                  "minutes": 325
+                },
+                {
+                  "from": 595,
+                  "to": 925,
+                  "minutes": 330
+                },
+                {
+                  "from": 925,
+                  "to": 1081,
+                  "minutes": 156
+                },
+                {
+                  "from": 1081,
+                  "to": 1090,
+                  "minutes": 9
+                },
+                {
+                  "from": 1090,
+                  "to": 1249,
+                  "minutes": 159
+                },
+                {
+                  "from": 1249,
+                  "to": 270,
+                  "minutes": 461
+                }
+              ],
+              "targetMinutes": 30.0,
+              "allowedExceptions": 0,
+              "hubBound": true
+            }
+          }
+        ]
+      },
+      {
+        "id": "passenger_touch_on_stand",
+        "findings": [
+          {
+            "id": "SYR-355-841-886",
+            "message": "SYR claim 355 requires passenger handling on stand 1",
+            "evidence": {
+              "city": "SYR",
+              "label": "355",
+              "kind": "turn",
+              "start": 841,
+              "end": 886,
+              "stand": 1
+            }
+          },
+          {
+            "id": "SYR-355-941-1001",
+            "message": "SYR claim 355 requires passenger handling on stand 1",
+            "evidence": {
+              "city": "SYR",
+              "label": "355",
+              "kind": "turn",
+              "start": 941,
+              "end": 1001,
+              "stand": 1
+            }
+          },
+          {
+            "id": "SYR-306-1137-1182",
+            "message": "SYR claim 306 requires passenger handling on stand 1",
+            "evidence": {
+              "city": "SYR",
+              "label": "306",
+              "kind": "turn",
+              "start": 1137,
+              "end": 1182,
+              "stand": 1
+            }
+          }
+        ]
+      },
+      {
+        "id": "fixed_physical_inventory",
+        "findings": [
+          {
+            "id": "SYR",
+            "message": "SYR cannot fit its claims into the configured physical inventory: 3 passenger touch(es) remain off-gate",
+            "evidence": {
+              "city": "SYR",
+              "requiredGates": 17,
+              "configuredGates": 16,
+              "requiredStands": 4,
+              "configuredStands": 8,
+              "strandedPassengerTouches": 3
+            }
+          }
+        ]
+      }
+    ],
+    "metrics": {
+      "flights": 1227,
+      "targetRoutes": {
+        "107": [
+          {
+            "flight": 1828,
+            "origin": "BTV",
+            "destination": "SYR",
+            "departure": "07:00",
+            "arrival": "07:52"
+          },
+          {
+            "flight": 1889,
+            "origin": "SYR",
+            "destination": "ISP",
+            "departure": "08:35",
+            "arrival": "09:33"
+          },
+          {
+            "flight": 1893,
+            "origin": "ISP",
+            "destination": "SYR",
+            "departure": "12:25",
+            "arrival": "13:23"
+          },
+          {
+            "flight": 1792,
+            "origin": "SYR",
+            "destination": "BDL",
+            "departure": "14:05",
+            "arrival": "14:59"
+          },
+          {
+            "flight": 1791,
+            "origin": "BDL",
+            "destination": "SYR",
+            "departure": "18:00",
+            "arrival": "18:54"
+          },
+          {
+            "flight": 1674,
+            "origin": "SYR",
+            "destination": "CAK",
+            "departure": "19:35",
+            "arrival": "20:46"
+          }
+        ],
+        "125": [
+          {
+            "flight": 1878,
+            "origin": "HVN",
+            "destination": "SYR",
+            "departure": "04:30",
+            "arrival": "05:26"
+          },
+          {
+            "flight": 1811,
+            "origin": "SYR",
+            "destination": "PVD",
+            "departure": "06:06",
+            "arrival": "07:09"
+          },
+          {
+            "flight": 2221,
+            "origin": "PVD",
+            "destination": "BWI",
+            "departure": "08:30",
+            "arrival": "09:43"
+          },
+          {
+            "flight": 2222,
+            "origin": "BWI",
+            "destination": "PVD",
+            "departure": "10:25",
+            "arrival": "11:38"
+          },
+          {
+            "flight": 1812,
+            "origin": "PVD",
+            "destination": "SYR",
+            "departure": "12:20",
+            "arrival": "13:23"
+          },
+          {
+            "flight": 1658,
+            "origin": "SYR",
+            "destination": "DAY",
+            "departure": "14:05",
+            "arrival": "15:38"
+          },
+          {
+            "flight": 1849,
+            "origin": "DAY",
+            "destination": "SDF",
+            "departure": "16:20",
+            "arrival": "17:08"
+          },
+          {
+            "flight": 1850,
+            "origin": "SDF",
+            "destination": "DAY",
+            "departure": "18:55",
+            "arrival": "19:43"
+          },
+          {
+            "flight": 2173,
+            "origin": "DAY",
+            "destination": "IND",
+            "departure": "21:35",
+            "arrival": "22:18"
+          }
+        ],
+        "146": [
+          {
+            "flight": 1647,
+            "origin": "MCI",
+            "destination": "ICT",
+            "departure": "05:50",
+            "arrival": "06:43"
+          },
+          {
+            "flight": 1651,
+            "origin": "ICT",
+            "destination": "MCI",
+            "departure": "09:00",
+            "arrival": "09:53"
+          },
+          {
+            "flight": 1530,
+            "origin": "MCI",
+            "destination": "LIT",
+            "departure": "12:15",
+            "arrival": "13:30"
+          },
+          {
+            "flight": 1533,
+            "origin": "LIT",
+            "destination": "MCI",
+            "departure": "15:20",
+            "arrival": "16:35"
+          },
+          {
+            "flight": 1677,
+            "origin": "MCI",
+            "destination": "FSD",
+            "departure": "18:55",
+            "arrival": "20:06"
+          }
+        ],
+        "158": [
+          {
+            "flight": 1803,
+            "origin": "GRR",
+            "destination": "DAY",
+            "departure": "06:15",
+            "arrival": "07:13"
+          },
+          {
+            "flight": 1867,
+            "origin": "DAY",
+            "destination": "LEX",
+            "departure": "07:55",
+            "arrival": "08:41"
+          },
+          {
+            "flight": 1868,
+            "origin": "LEX",
+            "destination": "DAY",
+            "departure": "10:35",
+            "arrival": "11:21"
+          },
+          {
+            "flight": 1657,
+            "origin": "DAY",
+            "destination": "SYR",
+            "departure": "12:05",
+            "arrival": "13:38"
+          },
+          {
+            "flight": 1752,
+            "origin": "SYR",
+            "destination": "ALB",
+            "departure": "16:30",
+            "arrival": "17:14"
+          },
+          {
+            "flight": 2231,
+            "origin": "ALB",
+            "destination": "SYR",
+            "departure": "18:01",
+            "arrival": "18:45"
+          },
+          {
+            "flight": 2232,
+            "origin": "SYR",
+            "destination": "ALB",
+            "departure": "19:25",
+            "arrival": "20:09"
+          },
+          {
+            "flight": 2053,
+            "origin": "ALB",
+            "destination": "SYR",
+            "departure": "20:49",
+            "arrival": "21:33"
+          },
+          {
+            "flight": 2054,
+            "origin": "SYR",
+            "destination": "ALB",
+            "departure": "22:13",
+            "arrival": "22:57"
+          }
+        ],
+        "160": [
+          {
+            "flight": 1865,
+            "origin": "ACY",
+            "destination": "PHF",
+            "departure": "05:20",
+            "arrival": "06:14"
+          },
+          {
+            "flight": 1869,
+            "origin": "PHF",
+            "destination": "ACY",
+            "departure": "06:55",
+            "arrival": "07:49"
+          },
+          {
+            "flight": 1908,
+            "origin": "ACY",
+            "destination": "SYR",
+            "departure": "09:35",
+            "arrival": "10:39"
+          },
+          {
+            "flight": 1825,
+            "origin": "SYR",
+            "destination": "BTV",
+            "departure": "11:20",
+            "arrival": "12:12"
+          },
+          {
+            "flight": 1829,
+            "origin": "BTV",
+            "destination": "SYR",
+            "departure": "15:15",
+            "arrival": "16:07"
+          },
+          {
+            "flight": 1701,
+            "origin": "SYR",
+            "destination": "PWM",
+            "departure": "19:00",
+            "arrival": "20:08"
+          }
+        ],
+        "176": [
+          {
+            "flight": 1747,
+            "origin": "AVP",
+            "destination": "PHF",
+            "departure": "05:05",
+            "arrival": "06:13"
+          },
+          {
+            "flight": 1762,
+            "origin": "PHF",
+            "destination": "GSO",
+            "departure": "06:55",
+            "arrival": "07:51"
+          },
+          {
+            "flight": 1761,
+            "origin": "GSO",
+            "destination": "PHF",
+            "departure": "10:00",
+            "arrival": "10:56"
+          },
+          {
+            "flight": 1615,
+            "origin": "PHF",
+            "destination": "CAE",
+            "departure": "13:55",
+            "arrival": "15:10"
+          },
+          {
+            "flight": 1682,
+            "origin": "CAE",
+            "destination": "JAX",
+            "departure": "16:40",
+            "arrival": "17:41"
+          },
+          {
+            "flight": 1778,
+            "origin": "JAX",
+            "destination": "AGS",
+            "departure": "19:25",
+            "arrival": "20:20"
+          }
+        ]
+      }
+    },
+    "overlay": {
+      "baseSchedule": {
+        "scheduleId": "schedule_7_v1_3_2_draft"
+      },
+      "schedule": {
+        "id": "schedule_7_v1_3_2_draft",
+        "number": 7,
+        "version": "1.3.2-draft",
+        "label": "Schedule 7, Version 1.3.2 draft",
+        "status": "draft",
+        "fleetCounts": {
+          "MAX9": 35,
+          "CRJ900": 45,
+          "CRJ700": 65,
+          "CRJ200": 80
+        },
+        "connectionWindowMinutes": {
+          "minimum": 30,
+          "maximum": 240
+        }
+      },
+      "retimeLegs": [
+        {
+          "legId": "ALB-SYR-CRJ200-04-IN",
+          "expectedDepartureMinute": 1005,
+          "expectedArrivalMinute": 1049,
+          "departureMinute": 990,
+          "arrivalMinute": 1034
+        },
+        {
+          "legId": "V115-R150-ALB-SYR",
+          "expectedDepartureMinute": 1246,
+          "expectedArrivalMinute": 1290,
+          "departureMinute": 1249,
+          "arrivalMinute": 1293
+        },
+        {
+          "legId": "V115-R150-SYR-ALB",
+          "expectedDepartureMinute": 1330,
+          "expectedArrivalMinute": 1374,
+          "departureMinute": 1333,
+          "arrivalMinute": 1377
+        }
+      ],
+      "insertLegs": [
+        {
+          "id": "V132-R158-ALB-SYR-EVENING",
+          "route": 158,
+          "origin": "ALB",
+          "destination": "SYR",
+          "departureMinute": 1081,
+          "arrivalMinute": 1125
+        },
+        {
+          "id": "V132-R158-SYR-ALB-EVENING",
+          "route": 158,
+          "origin": "SYR",
+          "destination": "ALB",
+          "departureMinute": 1165,
+          "arrivalMinute": 1209
+        }
+      ],
+      "bankAssignmentsToAdd": [
+        {
+          "legId": "V132-R158-ALB-SYR-EVENING",
+          "operation": "arrival",
+          "bankId": "SYR-B6"
+        },
+        {
+          "legId": "V132-R158-SYR-ALB-EVENING",
+          "operation": "departure",
+          "bankId": "SYR-B6"
+        }
+      ]
+    }
+  },
+  "combined": {
+    "pass": true,
+    "structure": "pass",
+    "overnight": "pass",
+    "planning": "pass",
+    "operating": {
+      "checks": 25,
+      "passed": 19,
+      "failed": 0,
+      "warnings": 3,
+      "notEvaluated": 1,
+      "overridden": 2,
+      "effectiveErrorFindings": 0,
+      "effectiveWarningFindings": 159
+    },
+    "gate": "pass",
+    "failedChecks": [],
+    "metrics": {
+      "flights": 1229,
+      "targetRoutes": {
+        "107": [
+          {
+            "flight": 1828,
+            "origin": "BTV",
+            "destination": "SYR",
+            "departure": "07:00",
+            "arrival": "07:52"
+          },
+          {
+            "flight": 1889,
+            "origin": "SYR",
+            "destination": "ISP",
+            "departure": "08:35",
+            "arrival": "09:33"
+          },
+          {
+            "flight": 1893,
+            "origin": "ISP",
+            "destination": "SYR",
+            "departure": "12:25",
+            "arrival": "13:23"
+          },
+          {
+            "flight": 1792,
+            "origin": "SYR",
+            "destination": "BDL",
+            "departure": "14:05",
+            "arrival": "14:59"
+          },
+          {
+            "flight": 1791,
+            "origin": "BDL",
+            "destination": "SYR",
+            "departure": "18:00",
+            "arrival": "18:54"
+          },
+          {
+            "flight": 1674,
+            "origin": "SYR",
+            "destination": "CAK",
+            "departure": "18:45",
+            "arrival": "19:56"
+          },
+          {
+            "flight": 2233,
+            "origin": "CAK",
+            "destination": "SYR",
+            "departure": "20:36",
+            "arrival": "21:47"
+          },
+          {
+            "flight": 2234,
+            "origin": "SYR",
+            "destination": "CAK",
+            "departure": "22:27",
+            "arrival": "23:38"
+          }
+        ],
+        "125": [
+          {
+            "flight": 1878,
+            "origin": "HVN",
+            "destination": "SYR",
+            "departure": "04:30",
+            "arrival": "05:26"
+          },
+          {
+            "flight": 1811,
+            "origin": "SYR",
+            "destination": "PVD",
+            "departure": "06:06",
+            "arrival": "07:09"
+          },
+          {
+            "flight": 2221,
+            "origin": "PVD",
+            "destination": "BWI",
+            "departure": "08:30",
+            "arrival": "09:43"
+          },
+          {
+            "flight": 2222,
+            "origin": "BWI",
+            "destination": "PVD",
+            "departure": "10:25",
+            "arrival": "11:38"
+          },
+          {
+            "flight": 1812,
+            "origin": "PVD",
+            "destination": "SYR",
+            "departure": "12:20",
+            "arrival": "13:23"
+          },
+          {
+            "flight": 1658,
+            "origin": "SYR",
+            "destination": "DAY",
+            "departure": "14:05",
+            "arrival": "15:38"
+          },
+          {
+            "flight": 1849,
+            "origin": "DAY",
+            "destination": "SDF",
+            "departure": "16:20",
+            "arrival": "17:08"
+          },
+          {
+            "flight": 1850,
+            "origin": "SDF",
+            "destination": "DAY",
+            "departure": "18:55",
+            "arrival": "19:43"
+          },
+          {
+            "flight": 2173,
+            "origin": "DAY",
+            "destination": "IND",
+            "departure": "21:35",
+            "arrival": "22:18"
+          }
+        ],
+        "146": [
+          {
+            "flight": 1647,
+            "origin": "MCI",
+            "destination": "ICT",
+            "departure": "05:50",
+            "arrival": "06:43"
+          },
+          {
+            "flight": 1651,
+            "origin": "ICT",
+            "destination": "MCI",
+            "departure": "09:00",
+            "arrival": "09:53"
+          },
+          {
+            "flight": 1530,
+            "origin": "MCI",
+            "destination": "LIT",
+            "departure": "12:15",
+            "arrival": "13:30"
+          },
+          {
+            "flight": 1533,
+            "origin": "LIT",
+            "destination": "MCI",
+            "departure": "15:20",
+            "arrival": "16:35"
+          },
+          {
+            "flight": 1677,
+            "origin": "MCI",
+            "destination": "FSD",
+            "departure": "18:25",
+            "arrival": "19:36"
+          },
+          {
+            "flight": 2231,
+            "origin": "FSD",
+            "destination": "MCI",
+            "departure": "20:16",
+            "arrival": "21:27"
+          },
+          {
+            "flight": 2232,
+            "origin": "MCI",
+            "destination": "FSD",
+            "departure": "22:15",
+            "arrival": "23:26"
+          }
+        ],
+        "158": [
+          {
+            "flight": 1803,
+            "origin": "GRR",
+            "destination": "DAY",
+            "departure": "06:15",
+            "arrival": "07:13"
+          },
+          {
+            "flight": 1867,
+            "origin": "DAY",
+            "destination": "LEX",
+            "departure": "07:55",
+            "arrival": "08:41"
+          },
+          {
+            "flight": 1868,
+            "origin": "LEX",
+            "destination": "DAY",
+            "departure": "10:35",
+            "arrival": "11:21"
+          },
+          {
+            "flight": 1657,
+            "origin": "DAY",
+            "destination": "SYR",
+            "departure": "12:05",
+            "arrival": "13:38"
+          },
+          {
+            "flight": 1752,
+            "origin": "SYR",
+            "destination": "ALB",
+            "departure": "16:45",
+            "arrival": "17:29"
+          },
+          {
+            "flight": 2053,
+            "origin": "ALB",
+            "destination": "SYR",
+            "departure": "20:46",
+            "arrival": "21:30"
+          },
+          {
+            "flight": 2054,
+            "origin": "SYR",
+            "destination": "ALB",
+            "departure": "22:10",
+            "arrival": "22:54"
+          }
+        ],
+        "160": [
+          {
+            "flight": 1865,
+            "origin": "ACY",
+            "destination": "PHF",
+            "departure": "05:20",
+            "arrival": "06:14"
+          },
+          {
+            "flight": 1869,
+            "origin": "PHF",
+            "destination": "ACY",
+            "departure": "06:55",
+            "arrival": "07:49"
+          },
+          {
+            "flight": 1908,
+            "origin": "ACY",
+            "destination": "SYR",
+            "departure": "09:35",
+            "arrival": "10:39"
+          },
+          {
+            "flight": 1825,
+            "origin": "SYR",
+            "destination": "BTV",
+            "departure": "11:20",
+            "arrival": "12:12"
+          },
+          {
+            "flight": 1829,
+            "origin": "BTV",
+            "destination": "SYR",
+            "departure": "15:15",
+            "arrival": "16:07"
+          },
+          {
+            "flight": 1701,
+            "origin": "SYR",
+            "destination": "PWM",
+            "departure": "19:00",
+            "arrival": "20:08"
+          }
+        ],
+        "176": [
+          {
+            "flight": 1747,
+            "origin": "AVP",
+            "destination": "PHF",
+            "departure": "05:05",
+            "arrival": "06:13"
+          },
+          {
+            "flight": 1762,
+            "origin": "PHF",
+            "destination": "GSO",
+            "departure": "06:55",
+            "arrival": "07:51"
+          },
+          {
+            "flight": 1761,
+            "origin": "GSO",
+            "destination": "PHF",
+            "departure": "10:00",
+            "arrival": "10:56"
+          },
+          {
+            "flight": 1615,
+            "origin": "PHF",
+            "destination": "CAE",
+            "departure": "13:55",
+            "arrival": "15:10"
+          },
+          {
+            "flight": 1682,
+            "origin": "CAE",
+            "destination": "JAX",
+            "departure": "16:40",
+            "arrival": "17:41"
+          },
+          {
+            "flight": 1778,
+            "origin": "JAX",
+            "destination": "AGS",
+            "departure": "19:25",
+            "arrival": "20:20"
+          }
+        ]
+      }
+    },
+    "included": [
+      "R146_MCI_FSD_late",
+      "R107_SYR_CAK_late"
+    ],
+    "overlay": {
+      "baseSchedule": {
+        "scheduleId": "schedule_7_v1_3_2_draft"
+      },
+      "schedule": {
+        "id": "schedule_7_v1_3_2_draft",
+        "number": 7,
+        "version": "1.3.2-draft",
+        "label": "Schedule 7, Version 1.3.2 draft",
+        "status": "draft",
+        "fleetCounts": {
+          "MAX9": 35,
+          "CRJ900": 45,
+          "CRJ700": 65,
+          "CRJ200": 80
+        },
+        "connectionWindowMinutes": {
+          "minimum": 30,
+          "maximum": 240
+        }
+      },
+      "retimeLegs": [
+        {
+          "legId": "FSD-MCI-CRJ200-01-IN",
+          "expectedDepartureMinute": 1135,
+          "expectedArrivalMinute": 1206,
+          "departureMinute": 1105,
+          "arrivalMinute": 1176
+        },
+        {
+          "legId": "CAK-SYR-CRJ200-01-IN",
+          "expectedDepartureMinute": 1175,
+          "expectedArrivalMinute": 1246,
+          "departureMinute": 1125,
+          "arrivalMinute": 1196
+        }
+      ],
+      "insertLegs": [
+        {
+          "id": "V132-R146-FSD-MCI-LATE",
+          "route": 146,
+          "origin": "FSD",
+          "destination": "MCI",
+          "departureMinute": 1216,
+          "arrivalMinute": 1287
+        },
+        {
+          "id": "V132-R146-MCI-FSD-LATE",
+          "route": 146,
+          "origin": "MCI",
+          "destination": "FSD",
+          "departureMinute": 1335,
+          "arrivalMinute": 1406
+        },
+        {
+          "id": "V132-R107-CAK-SYR-LATE",
+          "route": 107,
+          "origin": "CAK",
+          "destination": "SYR",
+          "departureMinute": 1236,
+          "arrivalMinute": 1307
+        },
+        {
+          "id": "V132-R107-SYR-CAK-LATE",
+          "route": 107,
+          "origin": "SYR",
+          "destination": "CAK",
+          "departureMinute": 1347,
+          "arrivalMinute": 1418
+        }
+      ],
+      "bankAssignmentReplacements": [],
+      "bankAssignmentsToAdd": [
+        {
+          "legId": "V132-R146-FSD-MCI-LATE",
+          "operation": "arrival",
+          "bankId": "MCI-M11"
+        },
+        {
+          "legId": "V132-R146-MCI-FSD-LATE",
+          "operation": "departure",
+          "bankId": "MCI-M12"
+        },
+        {
+          "legId": "V132-R107-CAK-SYR-LATE",
+          "operation": "arrival",
+          "bankId": "SYR-B7"
+        },
+        {
+          "legId": "V132-R107-SYR-CAK-LATE",
+          "operation": "departure",
+          "bankId": "SYR-B7"
+        }
+      ]
+    }
+  }
+}

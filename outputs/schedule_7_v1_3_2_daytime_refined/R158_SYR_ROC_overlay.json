@@ -1,0 +1,75 @@
+{
+  "baseSchedule": {
+    "scheduleId": "schedule_7_v1_3_2_draft"
+  },
+  "schedule": {
+    "id": "schedule_7_v1_3_2_draft",
+    "number": 7,
+    "version": "1.3.2-draft",
+    "label": "Schedule 7, Version 1.3.2 draft",
+    "status": "draft",
+    "fleetCounts": {
+      "MAX9": 35,
+      "CRJ900": 45,
+      "CRJ700": 65,
+      "CRJ200": 80
+    },
+    "connectionWindowMinutes": {
+      "minimum": 30,
+      "maximum": 240
+    }
+  },
+  "retimeLegs": [
+    {
+      "legId": "DAY-LEX-CRJ200-01-IN",
+      "expectedDepartureMinute": 635,
+      "expectedArrivalMinute": 681,
+      "departureMinute": 629,
+      "arrivalMinute": 675
+    },
+    {
+      "legId": "DAY-SYR-CRJ200-01-OUT",
+      "expectedDepartureMinute": 725,
+      "expectedArrivalMinute": 818,
+      "departureMinute": 715,
+      "arrivalMinute": 808
+    },
+    {
+      "legId": "ALB-SYR-CRJ200-04-IN",
+      "expectedDepartureMinute": 1005,
+      "expectedArrivalMinute": 1049,
+      "departureMinute": 1006,
+      "arrivalMinute": 1050
+    }
+  ],
+  "insertLegs": [
+    {
+      "id": "V132-DAY-158-ROC-SYR-ROC",
+      "route": 158,
+      "origin": "SYR",
+      "destination": "ROC",
+      "departureMinute": 848,
+      "arrivalMinute": 887
+    },
+    {
+      "id": "V132-DAY-158-ROC-ROC-SYR",
+      "route": 158,
+      "origin": "ROC",
+      "destination": "SYR",
+      "departureMinute": 927,
+      "arrivalMinute": 966
+    }
+  ],
+  "bankAssignmentsToAdd": [
+    {
+      "legId": "V132-DAY-158-ROC-SYR-ROC",
+      "operation": "departure",
+      "bankId": "SYR-B4"
+    },
+    {
+      "legId": "V132-DAY-158-ROC-ROC-SYR",
+      "operation": "arrival",
+      "bankId": "SYR-B5"
+    }
+  ]
+}
