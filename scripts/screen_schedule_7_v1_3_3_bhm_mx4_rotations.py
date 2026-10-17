@@ -117,7 +117,7 @@ for label,adjust,swap in cases:
   except Exception as e:gate=repr(e);g=None
   passed=s["status"]==n["status"]==p["status"]=="pass" and v["summary"]["effectiveErrorFindings"]==0 and gate=="pass"
   results[label]={"pass":passed,"structure":s["status"],"overnight":n["status"],"planning":p["status"],"gate":gate,
-   "operating":v["summary"],"failed":[{"id":x["id"],"count":len(x["findings"]),"examples":x["findings"][:4]}for x in v["checks"] if x["status"]=="fail"],
+   "operating":v["summary"],"failed":[{"id":x["id"],"count":len(x["findings"]),"examples":x["findings"][:70]}for x in v["checks"] if x["status"]=="fail"],
    "fleets":next(x for x in v["checks"] if x["id"]=="fleet_capacity")["metrics"],
    "routes":overlay["addRoutes"]}
   if passed:
