@@ -72,7 +72,8 @@ def newroute(route,line,fleet,hub,north,south,morning_bhm,south_dep,south_back,n
   for code,op,t in [(leg["origin"],"departure",leg["departureMinute"]),(leg["destination"],"arrival",leg["arrivalMinute"])]:
    if code not in hub_banks:continue
    bid=bank(code,t)
-   if not bid and op=="arrival" and idx==len(legs)-1:continue # late MX RON arrival\n   if not bid:raise ValueError(f"{route} {code} {op} {t} off bank")
+   if not bid and op=="arrival" and idx==len(legs)-1:continue # late MX RON arrival
+   if not bid:raise ValueError(f"{route} {code} {op} {t} off bank")
    assignments.append({"legId":leg["id"],"operation":op,"bankId":bid})
  return {"route":route,"line":line,"fleet":fleet,"day":1,"legs":legs},assignments
 def make(label,adjust=0,swap=False):
@@ -96,7 +97,14 @@ def make(label,adjust=0,swap=False):
   route_spec,assign=newroute(route,line,fleet,hub,north,south,morning,sout+adjust,out_south+adjust,dep_n+adjust)
   overlay["addRoutes"].append(route_spec)
   overlay["bankAssignmentsToAdd"].extend(assign)
- # The user explicitly requested useful additional BHM connectivity for these\n # four northern stations. Only service-tier hub-count exceptions are allowed;\n # physical capacity, banks, curfews and frequency spacing remain hard.\n existing={(x["checkId"],x["findingId"]) for x in base["operatingPolicy"].get("overrides",[])}\n for station in ("ISP","HVN","ALB","CAK"):\n  if ("tiered_service_minimums",station) not in existing:\n   overlay.setdefault("operatingOverrides",[]).append({"checkId":"tiered_service_minimums","findingId":station,"reason":"User-authorized v1.3.3 BHM north-south mini-bank: geographically suitable additional focus-city connectivity without changing physical, frequency, bank or curfew rules.","approvedBy":"user","expiresAfterSchedule":7})\n return overlay
+ # The user explicitly requested useful additional BHM connectivity for these
+ # four northern stations. Only service-tier hub-count exceptions are allowed;
+ # physical capacity, banks, curfews and frequency spacing remain hard.
+ existing={(x["checkId"],x["findingId"]) for x in base["operatingPolicy"].get("overrides",[])}
+ for station in ("ISP","HVN","ALB","CAK"):
+  if ("tiered_service_minimums",station) not in existing:
+   overlay.setdefault("operatingOverrides",[]).append({"checkId":"tiered_service_minimums","findingId":station,"reason":"User-authorized v1.3.3 BHM north-south mini-bank: geographically suitable additional focus-city connectivity without changing physical, frequency, bank or curfew rules.","approvedBy":"user","expiresAfterSchedule":7})
+ return overlay
 cases=[("day_day",0,False),("day_day_late",6,False)]
 results={}
 for label,adjust,swap in cases:
