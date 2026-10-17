@@ -35,6 +35,8 @@ class LatestScheduleReleaseTests(unittest.TestCase):
 
     def test_release_rejects_a_changed_overlay_pin(self) -> None:
         config = read_json(LATEST_RELEASE_CONFIG)
+        if not config['overlays']:
+            self.skipTest('Release uses a pinned cumulative canonical; base checksum test covers its integrity')
         config['overlaySha256'][config['overlays'][0]] = '0' * 64
         with tempfile.TemporaryDirectory(dir=REPO_ROOT) as directory:
             config_path = Path(directory) / 'stale.json'
