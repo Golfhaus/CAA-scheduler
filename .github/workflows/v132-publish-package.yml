@@ -10,6 +10,9 @@ on:
       - 'tests/test_latest_schedule_release.py'
       - 'tests/test_latest_service_gains.py'
       - 'tests/test_operating_validation.py'
+      - 'tests/test_opportunity_analysis.mjs'
+      - 'tests/test_routing_details.mjs'
+      - 'tests/test_web_console.mjs'
   workflow_dispatch:
 permissions:
   contents: write
