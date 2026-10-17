@@ -10,7 +10,7 @@
     "notEvaluated": 1,
     "overridden": 2,
     "effectiveErrorFindings": 0,
-    "effectiveWarningFindings": 158
+    "effectiveWarningFindings": 156
   },
   "checks": [
     {
@@ -114,10 +114,10 @@
       "severity": "warning",
       "hardStop": false,
       "status": "warning",
-      "message": "77 finding(s)",
+      "message": "75 finding(s)",
       "metrics": {
-        "findingCount": 77,
-        "effectiveFindingCount": 77,
+        "findingCount": 75,
+        "effectiveFindingCount": 75,
         "overriddenFindingCount": 0
       },
       "findings": [
@@ -794,18 +794,6 @@
           }
         },
         {
-          "id": "AN-9-1761-1615",
-          "message": "Hold at PHF is 179 minutes and needs deliberate-hold review",
-          "evidence": {
-            "line": "AN",
-            "day": 9,
-            "city": "PHF",
-            "arrivalFlight": 1761,
-            "departureFlight": 1615,
-            "minutes": 179
-          }
-        },
-        {
           "id": "AM-2-1657-1752",
           "message": "Hold at SYR is 187 minutes and needs deliberate-hold review",
           "evidence": {
@@ -815,18 +803,6 @@
             "arrivalFlight": 1657,
             "departureFlight": 1752,
             "minutes": 187
-          }
-        },
-        {
-          "id": "AM-2-1752-2053",
-          "message": "Hold at ALB is 197 minutes and needs deliberate-hold review",
-          "evidence": {
-            "line": "AM",
-            "day": 2,
-            "city": "ALB",
-            "arrivalFlight": 1752,
-            "departureFlight": 2053,
-            "minutes": 197
           }
         },
         {
@@ -1127,9 +1103,9 @@
       "status": "pass",
       "message": "Point-to-point flying is within the 10% cap",
       "metrics": {
-        "flights": 100,
-        "totalFlights": 1221,
-        "share": 0.0819000819000819,
+        "flights": 102,
+        "totalFlights": 1229,
+        "share": 0.08299430431244914,
         "findingCount": 0,
         "effectiveFindingCount": 0,
         "overriddenFindingCount": 0
@@ -1277,8 +1253,8 @@
               615,
               768,
               925,
-              1090,
-              1246
+              1089,
+              1090
             ],
             "excessiveGaps": [
               {
@@ -1443,6 +1419,7 @@
               1043,
               1100,
               1105,
+              1171,
               1180,
               1245
             ],
@@ -1967,7 +1944,8 @@
               325,
               625,
               646,
-              1025
+              1025,
+              1216
             ],
             "excessiveGaps": [
               {
@@ -2363,16 +2341,17 @@
           "evidence": {
             "city": "JAN",
             "departures": [
+              270,
               390,
-              490,
+              582,
               900,
               1145
             ],
             "excessiveGaps": [
               {
-                "from": 490,
+                "from": 582,
                 "to": 900,
-                "minutes": 410
+                "minutes": 318
               },
               {
                 "from": 900,

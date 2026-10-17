@@ -85,6 +85,22 @@
         {
           "path": "config/optimizations/schedule_7_v1_3_2_round_5.json",
           "sha256": "39adb9117982414f14c071bcd46ff01bfc0f162ed6a69e4e064697b32f78b3bf"
+        },
+        {
+          "path": "config/proposals/schedule_7_v1_3_2_r144_jax_bna.json",
+          "sha256": "ea7f47f553c31bb0c805f35a2cadca34df91a2aacc05dbaa1af924dcfe068ff3"
+        },
+        {
+          "path": "config/optimizations/schedule_7_v1_3_2_r146_selected.json",
+          "sha256": "527d36a8eb18848fa78fd5d576b84e179190cf80b69ededf5b6e92b1e953e512"
+        },
+        {
+          "path": "config/optimizations/schedule_7_v1_3_2_r176_selected.json",
+          "sha256": "2157fbf67debba76aecf79fdfe1e08e4b15f17bfa06a45d3281b3e25ee60912c"
+        },
+        {
+          "path": "config/optimizations/schedule_7_v1_3_2_r158_selected.json",
+          "sha256": "8a0a34ed7d55b50bcd9facdef986b22cf31f5a0bfb6815971c3a198f68231036"
         }
       ],
       "publication": "Not authorized; app default remains v1.3.1"
@@ -2772,7 +2788,7 @@
     {
       "legId": "GSO-PHF-CRJ200-01-OUT",
       "operation": "arrival",
-      "bankId": "PHF-B3"
+      "bankId": "PHF-M1"
     },
     {
       "legId": "GSP-JAX-CRJ700-01-IN",
@@ -3122,7 +3138,7 @@
     {
       "legId": "JAN-MCI-CRJ200-02-OUT",
       "operation": "arrival",
-      "bankId": "MCI-B4"
+      "bankId": "MCI-B5"
     },
     {
       "legId": "JAX-LEX-CRJ700-01-IN",
@@ -3762,7 +3778,7 @@
     {
       "legId": "MCI-OKC-CRJ200-01-OUT",
       "operation": "departure",
-      "bankId": "MCI-B5"
+      "bankId": "MCI-B6"
     },
     {
       "legId": "MCI-OMA-CRJ200-01-IN",
@@ -3992,7 +4008,7 @@
     {
       "legId": "MCI-SHV-CRJ200-01-OUT",
       "operation": "departure",
-      "bankId": "MCI-B9"
+      "bankId": "MCI-M12"
     },
     {
       "legId": "MCI-SHV-CRJ200-02-IN",
@@ -5335,16 +5351,6 @@
       "bankId": "SYR-B7"
     },
     {
-      "legId": "V115-R150-ALB-SYR",
-      "operation": "arrival",
-      "bankId": "SYR-B7"
-    },
-    {
-      "legId": "V115-R150-SYR-ALB",
-      "operation": "departure",
-      "bankId": "SYR-B7"
-    },
-    {
       "legId": "V115-R124-HVN-SYR",
       "operation": "arrival",
       "bankId": "SYR-B7"
@@ -6183,6 +6189,46 @@
       "legId": "REVIEW-R312-PHF-BDL",
       "operation": "departure",
       "bankId": "PHF-B7"
+    },
+    {
+      "legId": "REVIEW-R144-JAN-JAX",
+      "operation": "arrival",
+      "bankId": "JAX-B3"
+    },
+    {
+      "legId": "REVIEW-R144-JAX-JAN",
+      "operation": "departure",
+      "bankId": "JAX-B4"
+    },
+    {
+      "legId": "REVIEW-R144-MCI-BNA",
+      "operation": "departure",
+      "bankId": "MCI-B8"
+    },
+    {
+      "legId": "REVIEW-R144-BNA-MCI",
+      "operation": "arrival",
+      "bankId": "MCI-M11"
+    },
+    {
+      "legId": "V132-R146-FSD-MCI-LATE",
+      "operation": "arrival",
+      "bankId": "MCI-M11"
+    },
+    {
+      "legId": "V132-R146-MCI-FSD-LATE",
+      "operation": "departure",
+      "bankId": "MCI-M12"
+    },
+    {
+      "legId": "V132-DAY-176-GSO-PHF-GSO",
+      "operation": "departure",
+      "bankId": "PHF-B3"
+    },
+    {
+      "legId": "V132-DAY-176-GSO-GSO-PHF",
+      "operation": "arrival",
+      "bankId": "PHF-B4"
     }
   ],
   "cities": [
@@ -16376,15 +16422,15 @@
       "line": "AI",
       "fleet": "CRJ200",
       "day": 1,
-      "sequenceWithinRoute": 1,
+      "sequenceWithinRoute": 3,
       "pairing": 777,
       "flight": 1500,
       "origin": "JAN",
       "destination": "MCI",
-      "departure": "08:10",
-      "arrival": "09:53",
-      "departureMinute": 490,
-      "arrivalMinute": 593
+      "departure": "09:42",
+      "arrival": "11:25",
+      "departureMinute": 582,
+      "arrivalMinute": 685
     },
     {
       "id": "JAN-MCI-CRJ200-01-IN",
@@ -17224,15 +17270,15 @@
       "line": "AI",
       "fleet": "CRJ200",
       "day": 1,
-      "sequenceWithinRoute": 2,
+      "sequenceWithinRoute": 4,
       "pairing": 410,
       "flight": 1553,
       "origin": "MCI",
       "destination": "OKC",
-      "departure": "12:15",
-      "arrival": "13:26",
-      "departureMinute": 735,
-      "arrivalMinute": 806
+      "departure": "13:05",
+      "arrival": "14:16",
+      "departureMinute": 785,
+      "arrivalMinute": 856
     },
     {
       "id": "MCI-OKC-CRJ200-01-IN",
@@ -17240,7 +17286,7 @@
       "line": "AI",
       "fleet": "CRJ200",
       "day": 1,
-      "sequenceWithinRoute": 3,
+      "sequenceWithinRoute": 5,
       "pairing": 411,
       "flight": 1554,
       "origin": "OKC",
@@ -17912,15 +17958,15 @@
       "line": "AI",
       "fleet": "CRJ200",
       "day": 1,
-      "sequenceWithinRoute": 4,
+      "sequenceWithinRoute": 8,
       "pairing": 153,
       "flight": 1596,
       "origin": "MCI",
       "destination": "SHV",
-      "departure": "18:55",
-      "arrival": "20:28",
-      "departureMinute": 1135,
-      "arrivalMinute": 1228
+      "departure": "22:15",
+      "arrival": "23:48",
+      "departureMinute": 1335,
+      "arrivalMinute": 1428
     },
     {
       "id": "MCI-SHV-CRJ200-01-IN",
@@ -18216,15 +18262,15 @@
       "line": "AN",
       "fleet": "CRJ200",
       "day": 9,
-      "sequenceWithinRoute": 4,
+      "sequenceWithinRoute": 6,
       "pairing": 398,
       "flight": 1615,
       "origin": "PHF",
       "destination": "CAE",
-      "departure": "13:55",
-      "arrival": "15:10",
-      "departureMinute": 835,
-      "arrivalMinute": 910
+      "departure": "14:03",
+      "arrival": "15:18",
+      "departureMinute": 843,
+      "arrivalMinute": 918
     },
     {
       "id": "CAE-PHF-CRJ200-01-IN",
@@ -19213,10 +19259,10 @@
       "flight": 1677,
       "origin": "MCI",
       "destination": "FSD",
-      "departure": "18:55",
-      "arrival": "20:06",
-      "departureMinute": 1135,
-      "arrivalMinute": 1206
+      "departure": "18:25",
+      "arrival": "19:36",
+      "departureMinute": 1105,
+      "arrivalMinute": 1176
     },
     {
       "id": "FSD-MCI-CRJ200-01-OUT",
@@ -19288,7 +19334,7 @@
       "line": "AN",
       "fleet": "CRJ200",
       "day": 9,
-      "sequenceWithinRoute": 5,
+      "sequenceWithinRoute": 7,
       "pairing": 237,
       "flight": 1682,
       "origin": "CAE",
@@ -20557,10 +20603,10 @@
       "flight": 1761,
       "origin": "GSO",
       "destination": "PHF",
-      "departure": "10:00",
-      "arrival": "10:56",
-      "departureMinute": 600,
-      "arrivalMinute": 656
+      "departure": "09:15",
+      "arrival": "10:11",
+      "departureMinute": 555,
+      "arrivalMinute": 611
     },
     {
       "id": "GSO-PHF-CRJ200-01-IN",
@@ -20824,7 +20870,7 @@
       "line": "AN",
       "fleet": "CRJ200",
       "day": 9,
-      "sequenceWithinRoute": 6,
+      "sequenceWithinRoute": 8,
       "pairing": 330,
       "flight": 1778,
       "origin": "JAX",
@@ -25219,38 +25265,6 @@
       "arrivalMinute": 1408
     },
     {
-      "id": "V115-R150-ALB-SYR",
-      "route": 158,
-      "line": "AM",
-      "fleet": "CRJ200",
-      "day": 2,
-      "sequenceWithinRoute": 6,
-      "pairing": 174,
-      "flight": 2053,
-      "origin": "ALB",
-      "destination": "SYR",
-      "departure": "20:46",
-      "arrival": "21:30",
-      "departureMinute": 1246,
-      "arrivalMinute": 1290
-    },
-    {
-      "id": "V115-R150-SYR-ALB",
-      "route": 158,
-      "line": "AM",
-      "fleet": "CRJ200",
-      "day": 2,
-      "sequenceWithinRoute": 7,
-      "pairing": 173,
-      "flight": 2054,
-      "origin": "SYR",
-      "destination": "ALB",
-      "departure": "22:10",
-      "arrival": "22:54",
-      "departureMinute": 1330,
-      "arrivalMinute": 1374
-    },
-    {
       "id": "V115-R124-HVN-SYR",
       "route": 124,
       "line": "AE",
@@ -28001,6 +28015,166 @@
       "arrival": "21:40",
       "departureMinute": 1220,
       "arrivalMinute": 1300
+    },
+    {
+      "id": "REVIEW-R144-JAN-JAX",
+      "route": 144,
+      "line": "AI",
+      "fleet": "CRJ200",
+      "day": 1,
+      "sequenceWithinRoute": 1,
+      "pairing": 280,
+      "flight": 2227,
+      "origin": "JAN",
+      "destination": "JAX",
+      "departure": "04:30",
+      "arrival": "07:08",
+      "departureMinute": 270,
+      "arrivalMinute": 428
+    },
+    {
+      "id": "REVIEW-R144-JAX-JAN",
+      "route": 144,
+      "line": "AI",
+      "fleet": "CRJ200",
+      "day": 1,
+      "sequenceWithinRoute": 2,
+      "pairing": 279,
+      "flight": 2228,
+      "origin": "JAX",
+      "destination": "JAN",
+      "departure": "07:48",
+      "arrival": "08:26",
+      "departureMinute": 468,
+      "arrivalMinute": 506
+    },
+    {
+      "id": "REVIEW-R144-MCI-BNA",
+      "route": 144,
+      "line": "AI",
+      "fleet": "CRJ200",
+      "day": 1,
+      "sequenceWithinRoute": 6,
+      "pairing": 566,
+      "flight": 2229,
+      "origin": "MCI",
+      "destination": "BNA",
+      "departure": "17:16",
+      "arrival": "18:51",
+      "departureMinute": 1036,
+      "arrivalMinute": 1131
+    },
+    {
+      "id": "REVIEW-R144-BNA-MCI",
+      "route": 144,
+      "line": "AI",
+      "fleet": "CRJ200",
+      "day": 1,
+      "sequenceWithinRoute": 7,
+      "pairing": 567,
+      "flight": 2230,
+      "origin": "BNA",
+      "destination": "MCI",
+      "departure": "19:31",
+      "arrival": "21:06",
+      "departureMinute": 1171,
+      "arrivalMinute": 1266
+    },
+    {
+      "id": "V132-R146-FSD-MCI-LATE",
+      "route": 146,
+      "line": "AI",
+      "fleet": "CRJ200",
+      "day": 3,
+      "sequenceWithinRoute": 6,
+      "pairing": 146,
+      "flight": 2231,
+      "origin": "FSD",
+      "destination": "MCI",
+      "departure": "20:16",
+      "arrival": "21:27",
+      "departureMinute": 1216,
+      "arrivalMinute": 1287
+    },
+    {
+      "id": "V132-R146-MCI-FSD-LATE",
+      "route": 146,
+      "line": "AI",
+      "fleet": "CRJ200",
+      "day": 3,
+      "sequenceWithinRoute": 7,
+      "pairing": 145,
+      "flight": 2232,
+      "origin": "MCI",
+      "destination": "FSD",
+      "departure": "22:15",
+      "arrival": "23:26",
+      "departureMinute": 1335,
+      "arrivalMinute": 1406
+    },
+    {
+      "id": "V132-DAY-176-GSO-PHF-GSO",
+      "route": 176,
+      "line": "AN",
+      "fleet": "CRJ200",
+      "day": 9,
+      "sequenceWithinRoute": 4,
+      "pairing": 798,
+      "flight": 2233,
+      "origin": "PHF",
+      "destination": "GSO",
+      "departure": "10:51",
+      "arrival": "11:47",
+      "departureMinute": 651,
+      "arrivalMinute": 707
+    },
+    {
+      "id": "V132-DAY-176-GSO-GSO-PHF",
+      "route": 176,
+      "line": "AN",
+      "fleet": "CRJ200",
+      "day": 9,
+      "sequenceWithinRoute": 5,
+      "pairing": 770,
+      "flight": 2234,
+      "origin": "GSO",
+      "destination": "PHF",
+      "departure": "12:27",
+      "arrival": "13:23",
+      "departureMinute": 747,
+      "arrivalMinute": 803
+    },
+    {
+      "id": "V132-R158-RDU-ALB-RDU",
+      "route": 158,
+      "line": "AM",
+      "fleet": "CRJ200",
+      "day": 2,
+      "sequenceWithinRoute": 6,
+      "pairing": 909,
+      "flight": 2235,
+      "origin": "ALB",
+      "destination": "RDU",
+      "departure": "18:09",
+      "arrival": "19:52",
+      "departureMinute": 1089,
+      "arrivalMinute": 1192
+    },
+    {
+      "id": "V132-R158-RDU-RDU-ALB",
+      "route": 158,
+      "line": "AM",
+      "fleet": "CRJ200",
+      "day": 2,
+      "sequenceWithinRoute": 7,
+      "pairing": 910,
+      "flight": 2236,
+      "origin": "RDU",
+      "destination": "ALB",
+      "departure": "20:32",
+      "arrival": "22:15",
+      "departureMinute": 1232,
+      "arrivalMinute": 1335
     }
   ]
 }
