@@ -1,0 +1,864 @@
+{
+  "day_day": {
+    "pass": false,
+    "structure": "pass",
+    "overnight": "pass",
+    "planning": "pass",
+    "gate": "pass",
+    "operating": {
+      "checks": 25,
+      "passed": 17,
+      "failed": 2,
+      "warnings": 5,
+      "notEvaluated": 1,
+      "overridden": 0,
+      "effectiveErrorFindings": 3,
+      "effectiveWarningFindings": 161
+    },
+    "failed": [
+      {
+        "id": "tiered_service_minimums",
+        "count": 26,
+        "examples": [
+          {
+            "id": "ALB",
+            "message": "ALB does not satisfy its percentile-tier service envelope",
+            "evidence": {
+              "city": "ALB",
+              "percentile": 73.0,
+              "totalFlights": 20,
+              "hubOrFocusFlights": 16,
+              "minimumFlights": 8,
+              "connectedHubs": [
+                "BHM",
+                "DAY",
+                "PHF",
+                "SYR"
+              ],
+              "hubCountCap": 3
+            },
+            "override": {
+              "reason": "User-authorized v1.3.3 BHM north-south mini-bank: geographically suitable additional focus-city connectivity without changing physical, frequency, bank or curfew rules.",
+              "approvedBy": "user",
+              "expiresAfterSchedule": 7
+            }
+          },
+          {
+            "id": "ATW",
+            "message": "ATW does not satisfy its percentile-tier service envelope",
+            "evidence": {
+              "city": "ATW",
+              "percentile": 31.0,
+              "totalFlights": 14,
+              "hubOrFocusFlights": 14,
+              "minimumFlights": 6,
+              "connectedHubs": [
+                "BHM",
+                "DAY",
+                "MCI"
+              ],
+              "hubCountCap": 2
+            },
+            "override": {
+              "reason": "Schedule 7 v1.1.3 BHM focus-city initiative: ATW-BHM is deliberate focus-city feed for Florida Peninsula connectivity.",
+              "approvedBy": "user",
+              "expiresAfterSchedule": 7
+            }
+          },
+          {
+            "id": "BHM",
+            "message": "BHM does not satisfy its percentile-tier service envelope",
+            "evidence": {
+              "city": "BHM",
+              "percentile": 64.0,
+              "totalFlights": 114,
+              "hubOrFocusFlights": 114,
+              "minimumFlights": 6,
+              "connectedHubs": [
+                "DAY",
+                "JAX",
+                "MCI",
+                "PHF"
+              ],
+              "hubCountCap": 2
+            },
+            "override": {
+              "reason": "Schedule 7 v1.1.0 PHF north-south initiative: PHF is a geographically reasonable additional hub and the added service passes downstream feasibility checks.",
+              "approvedBy": "user",
+              "expiresAfterSchedule": 7
+            }
+          },
+          {
+            "id": "BWI",
+            "message": "BWI does not satisfy its percentile-tier service envelope",
+            "evidence": {
+              "city": "BWI",
+              "percentile": 94.0,
+              "totalFlights": 34,
+              "hubOrFocusFlights": 28,
+              "minimumFlights": 8,
+              "connectedHubs": [
+                "BHM",
+                "DAY",
+                "JAX",
+                "MCI",
+                "PHF",
+                "SYR"
+              ],
+              "hubCountCap": 4
+            },
+            "override": {
+              "reason": "Schedule 7 v1.1.0 PHF north-south initiative: the BWI-BHM-PHF triangles are geographically reasonable and pass downstream feasibility checks.",
+              "approvedBy": "user",
+              "expiresAfterSchedule": 7
+            }
+          }
+        ]
+      },
+      {
+        "id": "hub_bank_alignment",
+        "count": 8,
+        "examples": [
+          {
+            "id": "V114-R169-SYR-FWA-departure",
+            "message": "Departure for V114-R169-SYR-FWA falls outside bank SYR-B4",
+            "evidence": {
+              "assignment": {
+                "legId": "V114-R169-SYR-FWA",
+                "operation": "departure",
+                "bankId": "SYR-B4"
+              },
+              "minute": 875,
+              "bankWindow": [
+                795,
+                855
+              ]
+            },
+            "override": {
+              "reason": "Schedule 7 v1.1.4 tactical initiative: the 14:35 SYR-FWA return departs 20 minutes after Bank 4 to remain within SYR's fixed 16-gate inventory without weakening existing bank connections.",
+              "approvedBy": "user",
+              "expiresAfterSchedule": 7
+            }
+          },
+          {
+            "id": "V114-R122-SYR-SWF-departure",
+            "message": "Departure for V114-R122-SYR-SWF falls outside bank SYR-B6",
+            "evidence": {
+              "assignment": {
+                "legId": "V114-R122-SYR-SWF",
+                "operation": "departure",
+                "bankId": "SYR-B6"
+              },
+              "minute": 1210,
+              "bankWindow": [
+                1125,
+                1185
+              ]
+            },
+            "override": {
+              "reason": "Schedule 7 v1.1.4 tactical initiative: the 20:10 SYR-SWF return departs 25 minutes after Bank 6 to remain within SYR's fixed 16-gate inventory without weakening existing bank connections.",
+              "approvedBy": "user",
+              "expiresAfterSchedule": 7
+            }
+          },
+          {
+            "id": "V116-R149-DAY-BHM-departure",
+            "message": "Departure for V116-R149-DAY-BHM falls outside bank DAY-B1",
+            "evidence": {
+              "assignment": {
+                "legId": "V116-R149-DAY-BHM",
+                "operation": "departure",
+                "bankId": "DAY-B1"
+              },
+              "minute": 270,
+              "bankWindow": [
+                301,
+                361
+              ]
+            },
+            "override": {
+              "reason": "Schedule 7 v1.1.6 BHM morning initiative: the 04:30 DAY departure is 30 minutes before DAY Bank 1 so the aircraft can feed BHM's morning wave while remaining within fixed gate capacity at both cities.",
+              "approvedBy": "user",
+              "expiresAfterSchedule": 7
+            }
+          },
+          {
+            "id": "V116-R330-DAY-PHF-departure",
+            "message": "Departure for V116-R330-DAY-PHF falls outside bank DAY-B2",
+            "evidence": {
+              "assignment": {
+                "legId": "V116-R330-DAY-PHF",
+                "operation": "departure",
+                "bankId": "DAY-B2"
+              },
+              "minute": 411,
+              "bankWindow": [
+                425,
+                485
+              ]
+            },
+            "override": {
+              "reason": "Schedule 7 v1.1.6 PHF early-hub initiative: the user-selected 06:51 DAY departure splits the difference between a minimum turn and DAY Bank 2, producing an 08:20 PHF return with a 55-minute turn into the existing originator.",
+              "approvedBy": "user",
+              "expiresAfterSchedule": 7
+            }
+          }
+        ]
+      }
+    ],
+    "fleets": {
+      "MAX9": {
+        "used": 24,
+        "capacity": 35
+      },
+      "CRJ900": {
+        "used": 30,
+        "capacity": 45
+      },
+      "CRJ700": {
+        "used": 58,
+        "capacity": 65
+      },
+      "CRJ200": {
+        "used": 76,
+        "capacity": 80
+      },
+      "findingCount": 0,
+      "effectiveFindingCount": 0,
+      "overriddenFindingCount": 0
+    },
+    "routes": [
+      {
+        "route": 529,
+        "line": "BA",
+        "fleet": "CRJ900",
+        "day": 1,
+        "legs": [
+          {
+            "id": "V133-BHM-529-1-DAY-ALB",
+            "origin": "DAY",
+            "destination": "ALB",
+            "departureMinute": 360,
+            "arrivalMinute": 460
+          },
+          {
+            "id": "V133-BHM-529-2-ALB-BHM",
+            "origin": "ALB",
+            "destination": "BHM",
+            "departureMinute": 520,
+            "arrivalMinute": 604
+          },
+          {
+            "id": "V133-BHM-529-3-BHM-SRQ",
+            "origin": "BHM",
+            "destination": "SRQ",
+            "departureMinute": 651,
+            "arrivalMinute": 801
+          },
+          {
+            "id": "V133-BHM-529-4-SRQ-BHM",
+            "origin": "SRQ",
+            "destination": "BHM",
+            "departureMinute": 873,
+            "arrivalMinute": 903
+          },
+          {
+            "id": "V133-BHM-529-5-BHM-ALB",
+            "origin": "BHM",
+            "destination": "ALB",
+            "departureMinute": 943,
+            "arrivalMinute": 1147
+          },
+          {
+            "id": "V133-BHM-529-6-ALB-DAY",
+            "origin": "ALB",
+            "destination": "DAY",
+            "departureMinute": 1187,
+            "arrivalMinute": 1287
+          }
+        ]
+      },
+      {
+        "route": 530,
+        "line": "BB",
+        "fleet": "CRJ900",
+        "day": 1,
+        "legs": [
+          {
+            "id": "V133-BHM-530-1-SYR-CAK",
+            "origin": "SYR",
+            "destination": "CAK",
+            "departureMinute": 368,
+            "arrivalMinute": 437
+          },
+          {
+            "id": "V133-BHM-530-2-CAK-BHM",
+            "origin": "CAK",
+            "destination": "BHM",
+            "departureMinute": 565,
+            "arrivalMinute": 606
+          },
+          {
+            "id": "V133-BHM-530-3-BHM-MYR",
+            "origin": "BHM",
+            "destination": "MYR",
+            "departureMinute": 653,
+            "arrivalMinute": 798
+          },
+          {
+            "id": "V133-BHM-530-4-MYR-BHM",
+            "origin": "MYR",
+            "destination": "BHM",
+            "departureMinute": 881,
+            "arrivalMinute": 906
+          },
+          {
+            "id": "V133-BHM-530-5-BHM-CAK",
+            "origin": "BHM",
+            "destination": "CAK",
+            "departureMinute": 946,
+            "arrivalMinute": 1107
+          },
+          {
+            "id": "V133-BHM-530-6-CAK-SYR",
+            "origin": "CAK",
+            "destination": "SYR",
+            "departureMinute": 1221,
+            "arrivalMinute": 1290
+          }
+        ]
+      },
+      {
+        "route": 357,
+        "line": "BC",
+        "fleet": "CRJ700",
+        "day": 1,
+        "legs": [
+          {
+            "id": "V133-BHM-357-1-SYR-ISP",
+            "origin": "SYR",
+            "destination": "ISP",
+            "departureMinute": 368,
+            "arrivalMinute": 426
+          },
+          {
+            "id": "V133-BHM-357-2-ISP-BHM",
+            "origin": "ISP",
+            "destination": "BHM",
+            "departureMinute": 525,
+            "arrivalMinute": 610
+          },
+          {
+            "id": "V133-BHM-357-3-BHM-PGD",
+            "origin": "BHM",
+            "destination": "PGD",
+            "departureMinute": 655,
+            "arrivalMinute": 814
+          },
+          {
+            "id": "V133-BHM-357-4-PGD-BHM",
+            "origin": "PGD",
+            "destination": "BHM",
+            "departureMinute": 921,
+            "arrivalMinute": 960
+          },
+          {
+            "id": "V133-BHM-357-5-BHM-ISP",
+            "origin": "BHM",
+            "destination": "ISP",
+            "departureMinute": 1000,
+            "arrivalMinute": 1205
+          },
+          {
+            "id": "V133-BHM-357-6-ISP-SYR",
+            "origin": "ISP",
+            "destination": "SYR",
+            "departureMinute": 1245,
+            "arrivalMinute": 1303
+          }
+        ]
+      },
+      {
+        "route": 358,
+        "line": "BD",
+        "fleet": "CRJ700",
+        "day": 1,
+        "legs": [
+          {
+            "id": "V133-BHM-358-1-DAY-HVN",
+            "origin": "DAY",
+            "destination": "HVN",
+            "departureMinute": 360,
+            "arrivalMinute": 467
+          },
+          {
+            "id": "V133-BHM-358-2-HVN-BHM",
+            "origin": "HVN",
+            "destination": "BHM",
+            "departureMinute": 532,
+            "arrivalMinute": 620
+          },
+          {
+            "id": "V133-BHM-358-3-BHM-CHS",
+            "origin": "BHM",
+            "destination": "CHS",
+            "departureMinute": 665,
+            "arrivalMinute": 805
+          },
+          {
+            "id": "V133-BHM-358-4-CHS-BHM",
+            "origin": "CHS",
+            "destination": "BHM",
+            "departureMinute": 934,
+            "arrivalMinute": 954
+          },
+          {
+            "id": "V133-BHM-358-5-BHM-HVN",
+            "origin": "BHM",
+            "destination": "HVN",
+            "departureMinute": 994,
+            "arrivalMinute": 1202
+          },
+          {
+            "id": "V133-BHM-358-6-HVN-DAY",
+            "origin": "HVN",
+            "destination": "DAY",
+            "departureMinute": 1242,
+            "arrivalMinute": 1349
+          }
+        ]
+      }
+    ]
+  },
+  "day_day_late": {
+    "pass": false,
+    "structure": "pass",
+    "overnight": "pass",
+    "planning": "pass",
+    "gate": "pass",
+    "operating": {
+      "checks": 25,
+      "passed": 17,
+      "failed": 2,
+      "warnings": 5,
+      "notEvaluated": 1,
+      "overridden": 0,
+      "effectiveErrorFindings": 3,
+      "effectiveWarningFindings": 161
+    },
+    "failed": [
+      {
+        "id": "tiered_service_minimums",
+        "count": 26,
+        "examples": [
+          {
+            "id": "ALB",
+            "message": "ALB does not satisfy its percentile-tier service envelope",
+            "evidence": {
+              "city": "ALB",
+              "percentile": 73.0,
+              "totalFlights": 20,
+              "hubOrFocusFlights": 16,
+              "minimumFlights": 8,
+              "connectedHubs": [
+                "BHM",
+                "DAY",
+                "PHF",
+                "SYR"
+              ],
+              "hubCountCap": 3
+            },
+            "override": {
+              "reason": "User-authorized v1.3.3 BHM north-south mini-bank: geographically suitable additional focus-city connectivity without changing physical, frequency, bank or curfew rules.",
+              "approvedBy": "user",
+              "expiresAfterSchedule": 7
+            }
+          },
+          {
+            "id": "ATW",
+            "message": "ATW does not satisfy its percentile-tier service envelope",
+            "evidence": {
+              "city": "ATW",
+              "percentile": 31.0,
+              "totalFlights": 14,
+              "hubOrFocusFlights": 14,
+              "minimumFlights": 6,
+              "connectedHubs": [
+                "BHM",
+                "DAY",
+                "MCI"
+              ],
+              "hubCountCap": 2
+            },
+            "override": {
+              "reason": "Schedule 7 v1.1.3 BHM focus-city initiative: ATW-BHM is deliberate focus-city feed for Florida Peninsula connectivity.",
+              "approvedBy": "user",
+              "expiresAfterSchedule": 7
+            }
+          },
+          {
+            "id": "BHM",
+            "message": "BHM does not satisfy its percentile-tier service envelope",
+            "evidence": {
+              "city": "BHM",
+              "percentile": 64.0,
+              "totalFlights": 114,
+              "hubOrFocusFlights": 114,
+              "minimumFlights": 6,
+              "connectedHubs": [
+                "DAY",
+                "JAX",
+                "MCI",
+                "PHF"
+              ],
+              "hubCountCap": 2
+            },
+            "override": {
+              "reason": "Schedule 7 v1.1.0 PHF north-south initiative: PHF is a geographically reasonable additional hub and the added service passes downstream feasibility checks.",
+              "approvedBy": "user",
+              "expiresAfterSchedule": 7
+            }
+          },
+          {
+            "id": "BWI",
+            "message": "BWI does not satisfy its percentile-tier service envelope",
+            "evidence": {
+              "city": "BWI",
+              "percentile": 94.0,
+              "totalFlights": 34,
+              "hubOrFocusFlights": 28,
+              "minimumFlights": 8,
+              "connectedHubs": [
+                "BHM",
+                "DAY",
+                "JAX",
+                "MCI",
+                "PHF",
+                "SYR"
+              ],
+              "hubCountCap": 4
+            },
+            "override": {
+              "reason": "Schedule 7 v1.1.0 PHF north-south initiative: the BWI-BHM-PHF triangles are geographically reasonable and pass downstream feasibility checks.",
+              "approvedBy": "user",
+              "expiresAfterSchedule": 7
+            }
+          }
+        ]
+      },
+      {
+        "id": "hub_bank_alignment",
+        "count": 8,
+        "examples": [
+          {
+            "id": "V114-R169-SYR-FWA-departure",
+            "message": "Departure for V114-R169-SYR-FWA falls outside bank SYR-B4",
+            "evidence": {
+              "assignment": {
+                "legId": "V114-R169-SYR-FWA",
+                "operation": "departure",
+                "bankId": "SYR-B4"
+              },
+              "minute": 875,
+              "bankWindow": [
+                795,
+                855
+              ]
+            },
+            "override": {
+              "reason": "Schedule 7 v1.1.4 tactical initiative: the 14:35 SYR-FWA return departs 20 minutes after Bank 4 to remain within SYR's fixed 16-gate inventory without weakening existing bank connections.",
+              "approvedBy": "user",
+              "expiresAfterSchedule": 7
+            }
+          },
+          {
+            "id": "V114-R122-SYR-SWF-departure",
+            "message": "Departure for V114-R122-SYR-SWF falls outside bank SYR-B6",
+            "evidence": {
+              "assignment": {
+                "legId": "V114-R122-SYR-SWF",
+                "operation": "departure",
+                "bankId": "SYR-B6"
+              },
+              "minute": 1210,
+              "bankWindow": [
+                1125,
+                1185
+              ]
+            },
+            "override": {
+              "reason": "Schedule 7 v1.1.4 tactical initiative: the 20:10 SYR-SWF return departs 25 minutes after Bank 6 to remain within SYR's fixed 16-gate inventory without weakening existing bank connections.",
+              "approvedBy": "user",
+              "expiresAfterSchedule": 7
+            }
+          },
+          {
+            "id": "V116-R149-DAY-BHM-departure",
+            "message": "Departure for V116-R149-DAY-BHM falls outside bank DAY-B1",
+            "evidence": {
+              "assignment": {
+                "legId": "V116-R149-DAY-BHM",
+                "operation": "departure",
+                "bankId": "DAY-B1"
+              },
+              "minute": 270,
+              "bankWindow": [
+                301,
+                361
+              ]
+            },
+            "override": {
+              "reason": "Schedule 7 v1.1.6 BHM morning initiative: the 04:30 DAY departure is 30 minutes before DAY Bank 1 so the aircraft can feed BHM's morning wave while remaining within fixed gate capacity at both cities.",
+              "approvedBy": "user",
+              "expiresAfterSchedule": 7
+            }
+          },
+          {
+            "id": "V116-R330-DAY-PHF-departure",
+            "message": "Departure for V116-R330-DAY-PHF falls outside bank DAY-B2",
+            "evidence": {
+              "assignment": {
+                "legId": "V116-R330-DAY-PHF",
+                "operation": "departure",
+                "bankId": "DAY-B2"
+              },
+              "minute": 411,
+              "bankWindow": [
+                425,
+                485
+              ]
+            },
+            "override": {
+              "reason": "Schedule 7 v1.1.6 PHF early-hub initiative: the user-selected 06:51 DAY departure splits the difference between a minimum turn and DAY Bank 2, producing an 08:20 PHF return with a 55-minute turn into the existing originator.",
+              "approvedBy": "user",
+              "expiresAfterSchedule": 7
+            }
+          }
+        ]
+      }
+    ],
+    "fleets": {
+      "MAX9": {
+        "used": 24,
+        "capacity": 35
+      },
+      "CRJ900": {
+        "used": 30,
+        "capacity": 45
+      },
+      "CRJ700": {
+        "used": 58,
+        "capacity": 65
+      },
+      "CRJ200": {
+        "used": 76,
+        "capacity": 80
+      },
+      "findingCount": 0,
+      "effectiveFindingCount": 0,
+      "overriddenFindingCount": 0
+    },
+    "routes": [
+      {
+        "route": 529,
+        "line": "BA",
+        "fleet": "CRJ900",
+        "day": 1,
+        "legs": [
+          {
+            "id": "V133-BHM-529-1-DAY-ALB",
+            "origin": "DAY",
+            "destination": "ALB",
+            "departureMinute": 360,
+            "arrivalMinute": 460
+          },
+          {
+            "id": "V133-BHM-529-2-ALB-BHM",
+            "origin": "ALB",
+            "destination": "BHM",
+            "departureMinute": 520,
+            "arrivalMinute": 604
+          },
+          {
+            "id": "V133-BHM-529-3-BHM-SRQ",
+            "origin": "BHM",
+            "destination": "SRQ",
+            "departureMinute": 657,
+            "arrivalMinute": 807
+          },
+          {
+            "id": "V133-BHM-529-4-SRQ-BHM",
+            "origin": "SRQ",
+            "destination": "BHM",
+            "departureMinute": 879,
+            "arrivalMinute": 909
+          },
+          {
+            "id": "V133-BHM-529-5-BHM-ALB",
+            "origin": "BHM",
+            "destination": "ALB",
+            "departureMinute": 949,
+            "arrivalMinute": 1153
+          },
+          {
+            "id": "V133-BHM-529-6-ALB-DAY",
+            "origin": "ALB",
+            "destination": "DAY",
+            "departureMinute": 1193,
+            "arrivalMinute": 1293
+          }
+        ]
+      },
+      {
+        "route": 530,
+        "line": "BB",
+        "fleet": "CRJ900",
+        "day": 1,
+        "legs": [
+          {
+            "id": "V133-BHM-530-1-SYR-CAK",
+            "origin": "SYR",
+            "destination": "CAK",
+            "departureMinute": 368,
+            "arrivalMinute": 437
+          },
+          {
+            "id": "V133-BHM-530-2-CAK-BHM",
+            "origin": "CAK",
+            "destination": "BHM",
+            "departureMinute": 565,
+            "arrivalMinute": 606
+          },
+          {
+            "id": "V133-BHM-530-3-BHM-MYR",
+            "origin": "BHM",
+            "destination": "MYR",
+            "departureMinute": 659,
+            "arrivalMinute": 804
+          },
+          {
+            "id": "V133-BHM-530-4-MYR-BHM",
+            "origin": "MYR",
+            "destination": "BHM",
+            "departureMinute": 887,
+            "arrivalMinute": 912
+          },
+          {
+            "id": "V133-BHM-530-5-BHM-CAK",
+            "origin": "BHM",
+            "destination": "CAK",
+            "departureMinute": 952,
+            "arrivalMinute": 1113
+          },
+          {
+            "id": "V133-BHM-530-6-CAK-SYR",
+            "origin": "CAK",
+            "destination": "SYR",
+            "departureMinute": 1221,
+            "arrivalMinute": 1290
+          }
+        ]
+      },
+      {
+        "route": 357,
+        "line": "BC",
+        "fleet": "CRJ700",
+        "day": 1,
+        "legs": [
+          {
+            "id": "V133-BHM-357-1-SYR-ISP",
+            "origin": "SYR",
+            "destination": "ISP",
+            "departureMinute": 368,
+            "arrivalMinute": 426
+          },
+          {
+            "id": "V133-BHM-357-2-ISP-BHM",
+            "origin": "ISP",
+            "destination": "BHM",
+            "departureMinute": 525,
+            "arrivalMinute": 610
+          },
+          {
+            "id": "V133-BHM-357-3-BHM-PGD",
+            "origin": "BHM",
+            "destination": "PGD",
+            "departureMinute": 661,
+            "arrivalMinute": 820
+          },
+          {
+            "id": "V133-BHM-357-4-PGD-BHM",
+            "origin": "PGD",
+            "destination": "BHM",
+            "departureMinute": 927,
+            "arrivalMinute": 966
+          },
+          {
+            "id": "V133-BHM-357-5-BHM-ISP",
+            "origin": "BHM",
+            "destination": "ISP",
+            "departureMinute": 1006,
+            "arrivalMinute": 1211
+          },
+          {
+            "id": "V133-BHM-357-6-ISP-SYR",
+            "origin": "ISP",
+            "destination": "SYR",
+            "departureMinute": 1251,
+            "arrivalMinute": 1309
+          }
+        ]
+      },
+      {
+        "route": 358,
+        "line": "BD",
+        "fleet": "CRJ700",
+        "day": 1,
+        "legs": [
+          {
+            "id": "V133-BHM-358-1-DAY-HVN",
+            "origin": "DAY",
+            "destination": "HVN",
+            "departureMinute": 360,
+            "arrivalMinute": 467
+          },
+          {
+            "id": "V133-BHM-358-2-HVN-BHM",
+            "origin": "HVN",
+            "destination": "BHM",
+            "departureMinute": 532,
+            "arrivalMinute": 620
+          },
+          {
+            "id": "V133-BHM-358-3-BHM-CHS",
+            "origin": "BHM",
+            "destination": "CHS",
+            "departureMinute": 671,
+            "arrivalMinute": 811
+          },
+          {
+            "id": "V133-BHM-358-4-CHS-BHM",
+            "origin": "CHS",
+            "destination": "BHM",
+            "departureMinute": 940,
+            "arrivalMinute": 960
+          },
+          {
+            "id": "V133-BHM-358-5-BHM-HVN",
+            "origin": "BHM",
+            "destination": "HVN",
+            "departureMinute": 1000,
+            "arrivalMinute": 1208
+          },
+          {
+            "id": "V133-BHM-358-6-HVN-DAY",
+            "origin": "HVN",
+            "destination": "DAY",
+            "departureMinute": 1248,
+            "arrivalMinute": 1355
+          }
+        ]
+      }
+    ]
+  }
+}
