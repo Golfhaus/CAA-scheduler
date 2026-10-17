@@ -24,6 +24,7 @@ jobs:
         run: node scripts/review_schedule_7_v1_3_3_pie_baseline.mjs
       - run: python scripts/review_schedule_7_v1_3_3_r514.py
       - run: node scripts/review_schedule_7_v1_3_3_r514_network.mjs
+      - run: python scripts/build_schedule_7_v1_3_3_draft.py
       - name: Commit diagnostic only (not a schedule change)
         run: |
           git config user.name "github-actions[bot]"
