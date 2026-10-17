@@ -23,6 +23,7 @@ jobs:
       - name: Reconstruct exact PIE itinerary availability
         run: node scripts/review_schedule_7_v1_3_3_pie_baseline.mjs
       - run: python scripts/review_schedule_7_v1_3_3_r514.py
+      - run: node scripts/review_schedule_7_v1_3_3_r514_network.mjs
       - name: Commit diagnostic only (not a schedule change)
         run: |
           git config user.name "github-actions[bot]"
