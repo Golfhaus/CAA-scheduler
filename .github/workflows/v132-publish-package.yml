@@ -7,6 +7,8 @@ on:
       - 'scripts/prepare_schedule_7_v1_3_2_release.py'
       - 'docs/schedule_7_v1_3_2_release.md'
       - 'src/caa_scheduler/optimization_release.py'
+      - 'tests/test_latest_schedule_release.py'
+      - 'tests/test_latest_service_gains.py'
   workflow_dispatch:
 permissions:
   contents: write
