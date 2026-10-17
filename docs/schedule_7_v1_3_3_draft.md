@@ -23,11 +23,11 @@ Replace the existing afternoon **PIE–SYR–PIE** pair (flights 1230 and 1227) 
 | --- | --- | --- | --- |
 | PIE–PHF | 06:35 ET | 08:34 ET | unchanged |
 | PHF–PIE | 09:15 ET | 11:14 ET | unchanged |
-| PIE–MCI | **12:10 ET** | **13:42 CT** | new, replaces PIE–SYR |
-| MCI–PIE | **14:44 CT** | **18:16 ET** | new, replaces SYR–PIE |
+| PIE–MCI | **12:10 ET** | **13:46 CT** | new, replaces PIE–SYR |
+| MCI–PIE | **14:44 CT** | **18:20 ET** | new, replaces SYR–PIE |
 | PIE–JAX | 20:14 ET | 21:08 ET | unchanged |
 
-The MCI arrival fits B6 (13:05–14:05 CT) and the departure fits B7 (14:44–15:44 CT). PIE morning turn 56 minutes; MCI turn 62 minutes; PIE final turn 118 minutes. No added aircraft day or route; the candidate remains 1,229 flights / 184 routes / 17 lines.
+The MCI arrival fits B6 (13:05–14:05 CT) and the departure fits B7 (14:44–15:44 CT). PIE morning turn 56 minutes; MCI turn 58 minutes; PIE final turn 114 minutes. No added aircraft day or route; the candidate remains 1,229 flights / 184 routes / 17 lines.
 
 All **nine** independent PIE departure × MCI return timing combinations screened passed the native structural, operating, maintenance/overnight, planning and physical gate checks. Preferred 12:10/14:44 option selected on the strength of a later but still bank-compliant PIE departure, three new geographically reasonable one-stop markets and competitive overall elapsed time.
 
