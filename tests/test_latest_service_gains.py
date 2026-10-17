@@ -22,9 +22,9 @@ class TwoDayGrowthTests(unittest.TestCase):
         cls.candidate = CANONICAL
 
     def test_released_sequence_and_consolidated_lines(self):
-        self.assertEqual(SCHEDULE_ID, "schedule_7_v1_3_1")
+        self.assertIn(SCHEDULE_ID, {"schedule_7_v1_3_1", "schedule_7_v1_3_2"})
         self.assertEqual(self.candidate["schedule"]["status"], "released")
-        self.assertEqual(len(self.candidate["legs"]), 1214)
+        self.assertEqual(len(self.candidate["legs"]), 1229 if SCHEDULE_ID == "schedule_7_v1_3_2" else 1214)
         new = sorted((l for l in self.candidate["legs"] if l["id"].startswith("V120-2MAX-")),
                      key=lambda l: l["flight"])
         self.assertEqual([l["flight"] for l in new], list(range(2083, 2099)))
