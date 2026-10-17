@@ -1,0 +1,413 @@
+{
+  "day_mci": {
+    "pass": false,
+    "error": "ValueError('358 short north morning')",
+    "trace": "Traceback (most recent call last):\n  File \"/home/runner/work/CAA-scheduler/CAA-scheduler/scripts/screen_schedule_7_v1_3_3_bhm_mx3_rotations.py\", line 104, in <module>\n    overlay=make(label,adjust,swap)\n            ^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/CAA-scheduler/CAA-scheduler/scripts/screen_schedule_7_v1_3_3_bhm_mx3_rotations.py\", line 96, in make\n    route_spec,assign=newroute(route,line,fleet,hub,north,south,morning,sout+adjust,out_south+adjust,dep_n+adjust)\n                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/CAA-scheduler/CAA-scheduler/scripts/screen_schedule_7_v1_3_3_bhm_mx3_rotations.py\", line 42, in newroute\n    if n_depart_ct-first_n_arr_ct<40:raise ValueError(f\"{route} short north morning\")\n                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nValueError: 358 short north morning\n"
+  },
+  "day_day": {
+    "pass": false,
+    "error": "ValueError('358 no DAY terminal bank near 1289')",
+    "trace": "Traceback (most recent call last):\n  File \"/home/runner/work/CAA-scheduler/CAA-scheduler/scripts/screen_schedule_7_v1_3_3_bhm_mx3_rotations.py\", line 104, in <module>\n    overlay=make(label,adjust,swap)\n            ^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/CAA-scheduler/CAA-scheduler/scripts/screen_schedule_7_v1_3_3_bhm_mx3_rotations.py\", line 96, in make\n    route_spec,assign=newroute(route,line,fleet,hub,north,south,morning,sout+adjust,out_south+adjust,dep_n+adjust)\n                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/CAA-scheduler/CAA-scheduler/scripts/screen_schedule_7_v1_3_3_bhm_mx3_rotations.py\", line 53, in newroute\n    if arrival_h is None:raise ValueError(f\"{route} no {hub} terminal bank near {last_h_first_ct}\")\n                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nValueError: 358 no DAY terminal bank near 1289\n"
+  },
+  "day_phf": {
+    "pass": false,
+    "structure": "pass",
+    "overnight": "pass",
+    "planning": "pass",
+    "gate": "GateCapacityError('3 passenger touch(es) remain off-gate')",
+    "operating": {
+      "checks": 25,
+      "passed": 16,
+      "failed": 3,
+      "warnings": 4,
+      "notEvaluated": 1,
+      "overridden": 1,
+      "effectiveErrorFindings": 9,
+      "effectiveWarningFindings": 160
+    },
+    "failed": [
+      {
+        "id": "passenger_touch_on_stand",
+        "count": 3,
+        "examples": [
+          {
+            "id": "PHF-528-937-982",
+            "message": "PHF claim 528 requires passenger handling on stand 2",
+            "evidence": {
+              "city": "PHF",
+              "label": "528",
+              "kind": "turn",
+              "start": 937,
+              "end": 982,
+              "stand": 2
+            }
+          },
+          {
+            "id": "PHF-722 -> 723-1235-1280",
+            "message": "PHF claim 722 -> 723 requires passenger handling on stand 1",
+            "evidence": {
+              "city": "PHF",
+              "label": "722 -> 723",
+              "kind": "ron",
+              "start": 1235,
+              "end": 1280,
+              "stand": 1
+            }
+          },
+          {
+            "id": "PHF-358 -> 358-1798-1858",
+            "message": "PHF claim 358 -> 358 requires passenger handling on stand 1",
+            "evidence": {
+              "city": "PHF",
+              "label": "358 -> 358",
+              "kind": "ron",
+              "start": 1798,
+              "end": 1858,
+              "stand": 1
+            }
+          }
+        ]
+      },
+      {
+        "id": "fixed_physical_inventory",
+        "count": 1,
+        "examples": [
+          {
+            "id": "PHF",
+            "message": "PHF cannot fit its claims into the configured physical inventory: 3 passenger touch(es) remain off-gate",
+            "evidence": {
+              "city": "PHF",
+              "requiredGates": 17,
+              "configuredGates": 16,
+              "requiredStands": 8,
+              "configuredStands": 8,
+              "strandedPassengerTouches": 3
+            }
+          }
+        ]
+      },
+      {
+        "id": "tiered_service_minimums",
+        "count": 26,
+        "examples": [
+          {
+            "id": "ALB",
+            "message": "ALB does not satisfy its percentile-tier service envelope",
+            "evidence": {
+              "city": "ALB",
+              "percentile": 73.0,
+              "totalFlights": 20,
+              "hubOrFocusFlights": 16,
+              "minimumFlights": 8,
+              "connectedHubs": [
+                "BHM",
+                "DAY",
+                "PHF",
+                "SYR"
+              ],
+              "hubCountCap": 3
+            }
+          },
+          {
+            "id": "ATW",
+            "message": "ATW does not satisfy its percentile-tier service envelope",
+            "evidence": {
+              "city": "ATW",
+              "percentile": 31.0,
+              "totalFlights": 14,
+              "hubOrFocusFlights": 14,
+              "minimumFlights": 6,
+              "connectedHubs": [
+                "BHM",
+                "DAY",
+                "MCI"
+              ],
+              "hubCountCap": 2
+            },
+            "override": {
+              "reason": "Schedule 7 v1.1.3 BHM focus-city initiative: ATW-BHM is deliberate focus-city feed for Florida Peninsula connectivity.",
+              "approvedBy": "user",
+              "expiresAfterSchedule": 7
+            }
+          },
+          {
+            "id": "BHM",
+            "message": "BHM does not satisfy its percentile-tier service envelope",
+            "evidence": {
+              "city": "BHM",
+              "percentile": 64.0,
+              "totalFlights": 114,
+              "hubOrFocusFlights": 114,
+              "minimumFlights": 6,
+              "connectedHubs": [
+                "DAY",
+                "JAX",
+                "MCI",
+                "PHF"
+              ],
+              "hubCountCap": 2
+            },
+            "override": {
+              "reason": "Schedule 7 v1.1.0 PHF north-south initiative: PHF is a geographically reasonable additional hub and the added service passes downstream feasibility checks.",
+              "approvedBy": "user",
+              "expiresAfterSchedule": 7
+            }
+          },
+          {
+            "id": "BWI",
+            "message": "BWI does not satisfy its percentile-tier service envelope",
+            "evidence": {
+              "city": "BWI",
+              "percentile": 94.0,
+              "totalFlights": 34,
+              "hubOrFocusFlights": 28,
+              "minimumFlights": 8,
+              "connectedHubs": [
+                "BHM",
+                "DAY",
+                "JAX",
+                "MCI",
+                "PHF",
+                "SYR"
+              ],
+              "hubCountCap": 4
+            },
+            "override": {
+              "reason": "Schedule 7 v1.1.0 PHF north-south initiative: the BWI-BHM-PHF triangles are geographically reasonable and pass downstream feasibility checks.",
+              "approvedBy": "user",
+              "expiresAfterSchedule": 7
+            }
+          }
+        ]
+      }
+    ],
+    "fleets": {
+      "MAX9": {
+        "used": 24,
+        "capacity": 35
+      },
+      "CRJ900": {
+        "used": 30,
+        "capacity": 45
+      },
+      "CRJ700": {
+        "used": 58,
+        "capacity": 65
+      },
+      "CRJ200": {
+        "used": 76,
+        "capacity": 80
+      },
+      "findingCount": 0,
+      "effectiveFindingCount": 0,
+      "overriddenFindingCount": 0
+    },
+    "routes": [
+      {
+        "route": 529,
+        "line": "BA",
+        "fleet": "CRJ900",
+        "day": 1,
+        "legs": [
+          {
+            "id": "V133-BHM-529-1-DAY-ALB",
+            "origin": "DAY",
+            "destination": "ALB",
+            "departureMinute": 360,
+            "arrivalMinute": 460
+          },
+          {
+            "id": "V133-BHM-529-2-ALB-BHM",
+            "origin": "ALB",
+            "destination": "BHM",
+            "departureMinute": 520,
+            "arrivalMinute": 604
+          },
+          {
+            "id": "V133-BHM-529-3-BHM-SRQ",
+            "origin": "BHM",
+            "destination": "SRQ",
+            "departureMinute": 651,
+            "arrivalMinute": 801
+          },
+          {
+            "id": "V133-BHM-529-4-SRQ-BHM",
+            "origin": "SRQ",
+            "destination": "BHM",
+            "departureMinute": 873,
+            "arrivalMinute": 903
+          },
+          {
+            "id": "V133-BHM-529-5-BHM-ALB",
+            "origin": "BHM",
+            "destination": "ALB",
+            "departureMinute": 943,
+            "arrivalMinute": 1147
+          },
+          {
+            "id": "V133-BHM-529-6-ALB-DAY",
+            "origin": "ALB",
+            "destination": "DAY",
+            "departureMinute": 1187,
+            "arrivalMinute": 1287
+          }
+        ]
+      },
+      {
+        "route": 530,
+        "line": "BB",
+        "fleet": "CRJ900",
+        "day": 1,
+        "legs": [
+          {
+            "id": "V133-BHM-530-1-SYR-CAK",
+            "origin": "SYR",
+            "destination": "CAK",
+            "departureMinute": 368,
+            "arrivalMinute": 437
+          },
+          {
+            "id": "V133-BHM-530-2-CAK-BHM",
+            "origin": "CAK",
+            "destination": "BHM",
+            "departureMinute": 565,
+            "arrivalMinute": 606
+          },
+          {
+            "id": "V133-BHM-530-3-BHM-MYR",
+            "origin": "BHM",
+            "destination": "MYR",
+            "departureMinute": 653,
+            "arrivalMinute": 798
+          },
+          {
+            "id": "V133-BHM-530-4-MYR-BHM",
+            "origin": "MYR",
+            "destination": "BHM",
+            "departureMinute": 881,
+            "arrivalMinute": 906
+          },
+          {
+            "id": "V133-BHM-530-5-BHM-CAK",
+            "origin": "BHM",
+            "destination": "CAK",
+            "departureMinute": 946,
+            "arrivalMinute": 1107
+          },
+          {
+            "id": "V133-BHM-530-6-CAK-SYR",
+            "origin": "CAK",
+            "destination": "SYR",
+            "departureMinute": 1221,
+            "arrivalMinute": 1290
+          }
+        ]
+      },
+      {
+        "route": 357,
+        "line": "BC",
+        "fleet": "CRJ700",
+        "day": 1,
+        "legs": [
+          {
+            "id": "V133-BHM-357-1-SYR-ISP",
+            "origin": "SYR",
+            "destination": "ISP",
+            "departureMinute": 368,
+            "arrivalMinute": 426
+          },
+          {
+            "id": "V133-BHM-357-2-ISP-BHM",
+            "origin": "ISP",
+            "destination": "BHM",
+            "departureMinute": 525,
+            "arrivalMinute": 610
+          },
+          {
+            "id": "V133-BHM-357-3-BHM-PGD",
+            "origin": "BHM",
+            "destination": "PGD",
+            "departureMinute": 655,
+            "arrivalMinute": 814
+          },
+          {
+            "id": "V133-BHM-357-4-PGD-BHM",
+            "origin": "PGD",
+            "destination": "BHM",
+            "departureMinute": 921,
+            "arrivalMinute": 960
+          },
+          {
+            "id": "V133-BHM-357-5-BHM-ISP",
+            "origin": "BHM",
+            "destination": "ISP",
+            "departureMinute": 1000,
+            "arrivalMinute": 1205
+          },
+          {
+            "id": "V133-BHM-357-6-ISP-SYR",
+            "origin": "ISP",
+            "destination": "SYR",
+            "departureMinute": 1245,
+            "arrivalMinute": 1303
+          }
+        ]
+      },
+      {
+        "route": 358,
+        "line": "BD",
+        "fleet": "CRJ700",
+        "day": 1,
+        "legs": [
+          {
+            "id": "V133-BHM-358-1-PHF-HVN",
+            "origin": "PHF",
+            "destination": "HVN",
+            "departureMinute": 418,
+            "arrivalMinute": 492
+          },
+          {
+            "id": "V133-BHM-358-2-HVN-BHM",
+            "origin": "HVN",
+            "destination": "BHM",
+            "departureMinute": 532,
+            "arrivalMinute": 620
+          },
+          {
+            "id": "V133-BHM-358-3-BHM-CHS",
+            "origin": "BHM",
+            "destination": "CHS",
+            "departureMinute": 665,
+            "arrivalMinute": 805
+          },
+          {
+            "id": "V133-BHM-358-4-CHS-BHM",
+            "origin": "CHS",
+            "destination": "BHM",
+            "departureMinute": 934,
+            "arrivalMinute": 954
+          },
+          {
+            "id": "V133-BHM-358-5-BHM-HVN",
+            "origin": "BHM",
+            "destination": "HVN",
+            "departureMinute": 994,
+            "arrivalMinute": 1202
+          },
+          {
+            "id": "V133-BHM-358-6-HVN-PHF",
+            "origin": "HVN",
+            "destination": "PHF",
+            "departureMinute": 1242,
+            "arrivalMinute": 1316
+          }
+        ]
+      }
+    ]
+  },
+  "phf_mci": {
+    "pass": false,
+    "error": "ValueError('358 short north morning')",
+    "trace": "Traceback (most recent call last):\n  File \"/home/runner/work/CAA-scheduler/CAA-scheduler/scripts/screen_schedule_7_v1_3_3_bhm_mx3_rotations.py\", line 104, in <module>\n    overlay=make(label,adjust,swap)\n            ^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/CAA-scheduler/CAA-scheduler/scripts/screen_schedule_7_v1_3_3_bhm_mx3_rotations.py\", line 96, in make\n    route_spec,assign=newroute(route,line,fleet,hub,north,south,morning,sout+adjust,out_south+adjust,dep_n+adjust)\n                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/CAA-scheduler/CAA-scheduler/scripts/screen_schedule_7_v1_3_3_bhm_mx3_rotations.py\", line 42, in newroute\n    if n_depart_ct-first_n_arr_ct<40:raise ValueError(f\"{route} short north morning\")\n                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nValueError: 358 short north morning\n"
+  }
+}

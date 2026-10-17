@@ -1,0 +1,40 @@
+name: Review Schedule 7 v1.3.3 PIE connection gaps
+on:
+  push:
+    branches: [schedule-7-v1.3.3-pie-connectivity-draft]
+    paths:
+      - '.github/workflows/v133-pie-review.yml'
+      - 'scripts/review_schedule_7_v1_3_3_pie_baseline.mjs'
+      - 'config/proposals/schedule_7_v1_3_3_r514_pie_mci.json'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: v133-pie-review
+  cancel-in-progress: true
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -e .
+      - name: Reconstruct exact PIE itinerary availability
+        run: node scripts/review_schedule_7_v1_3_3_pie_baseline.mjs
+      - run: python scripts/review_schedule_7_v1_3_3_r514.py
+      - run: node scripts/review_schedule_7_v1_3_3_r514_network.mjs
+      - run: python scripts/build_schedule_7_v1_3_3_draft.py
+      - name: Commit diagnostic only (not a schedule change)
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f outputs/schedule_7_v1_3_3_pie_review/ data/schedules/schedule_7_v1_3_3_draft/
+          if ! git diff --cached --quiet; then
+            git commit -m "Document baseline PIE and return-direction itinerary asymmetry [skip ci]"
+            git restore --worktree .
+            git pull --rebase origin schedule-7-v1.3.3-pie-connectivity-draft
+            git push
+          fi
+# R514 study pending\n

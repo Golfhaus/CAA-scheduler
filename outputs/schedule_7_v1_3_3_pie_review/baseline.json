@@ -1,0 +1,4025 @@
+{
+  "release": "schedule_7_v1_3_2",
+  "pairs": {
+    "PIE-IND": {
+      "demand": 106,
+      "coverage": {
+        "stops": 2,
+        "gap": true,
+        "counts": [
+          0,
+          0,
+          10
+        ],
+        "best": [
+          null,
+          null,
+          {
+            "legs": [
+              {
+                "origin": "PIE",
+                "dest": "BHM",
+                "dep": "16:39",
+                "arr": "17:10",
+                "flight": 2224,
+                "fleet": "CRJ200"
+              },
+              {
+                "origin": "BHM",
+                "dest": "DAY",
+                "dep": "17:54",
+                "arr": "20:25",
+                "flight": 1982,
+                "fleet": "CRJ200"
+              },
+              {
+                "origin": "DAY",
+                "dest": "IND",
+                "dep": "21:35",
+                "arr": "22:18",
+                "flight": 2173,
+                "fleet": "CRJ200"
+              }
+            ],
+            "waits": [
+              44,
+              70
+            ],
+            "stops": 2,
+            "dest": "IND",
+            "departureMinute": 999,
+            "totalMinutes": 339,
+            "circuity": 1.2237710169490508
+          }
+        ],
+        "fastest": {
+          "legs": [
+            {
+              "origin": "PIE",
+              "dest": "BHM",
+              "dep": "16:39",
+              "arr": "17:10",
+              "flight": 2224,
+              "fleet": "CRJ200"
+            },
+            {
+              "origin": "BHM",
+              "dest": "DAY",
+              "dep": "17:54",
+              "arr": "20:25",
+              "flight": 1982,
+              "fleet": "CRJ200"
+            },
+            {
+              "origin": "DAY",
+              "dest": "IND",
+              "dep": "21:35",
+              "arr": "22:18",
+              "flight": 2173,
+              "fleet": "CRJ200"
+            }
+          ],
+          "waits": [
+            44,
+            70
+          ],
+          "stops": 2,
+          "dest": "IND",
+          "departureMinute": 999,
+          "totalMinutes": 339,
+          "circuity": 1.2237710169490508
+        }
+      },
+      "rawCoverage": {
+        "stops": 2,
+        "gap": true,
+        "counts": [
+          0,
+          0,
+          13
+        ],
+        "best": [
+          null,
+          null,
+          {
+            "legs": [
+              {
+                "origin": "PIE",
+                "dest": "BHM",
+                "dep": "16:39",
+                "arr": "17:10",
+                "flight": 2224,
+                "fleet": "CRJ200"
+              },
+              {
+                "origin": "BHM",
+                "dest": "DAY",
+                "dep": "17:54",
+                "arr": "20:25",
+                "flight": 1982,
+                "fleet": "CRJ200"
+              },
+              {
+                "origin": "DAY",
+                "dest": "IND",
+                "dep": "21:35",
+                "arr": "22:18",
+                "flight": 2173,
+                "fleet": "CRJ200"
+              }
+            ],
+            "waits": [
+              44,
+              70
+            ],
+            "stops": 2,
+            "dest": "IND",
+            "departureMinute": 999,
+            "totalMinutes": 339,
+            "circuity": 1.2237710169490508
+          }
+        ],
+        "fastest": {
+          "legs": [
+            {
+              "origin": "PIE",
+              "dest": "BHM",
+              "dep": "16:39",
+              "arr": "17:10",
+              "flight": 2224,
+              "fleet": "CRJ200"
+            },
+            {
+              "origin": "BHM",
+              "dest": "DAY",
+              "dep": "17:54",
+              "arr": "20:25",
+              "flight": 1982,
+              "fleet": "CRJ200"
+            },
+            {
+              "origin": "DAY",
+              "dest": "IND",
+              "dep": "21:35",
+              "arr": "22:18",
+              "flight": 2173,
+              "fleet": "CRJ200"
+            }
+          ],
+          "waits": [
+            44,
+            70
+          ],
+          "stops": 2,
+          "dest": "IND",
+          "departureMinute": 999,
+          "totalMinutes": 339,
+          "circuity": 1.2237710169490508
+        }
+      },
+      "shortestStop": 2,
+      "options": [
+        {
+          "flights": [
+            2224,
+            1982,
+            2173
+          ],
+          "route": "PIE→BHM→DAY→IND",
+          "dep": "16:39",
+          "arr": "22:18",
+          "waits": [
+            44,
+            70
+          ],
+          "minutes": 339,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1179,
+            1570,
+            1819
+          ],
+          "route": "PIE→PHF→DAY→IND",
+          "dep": "11:15",
+          "arr": "16:58",
+          "waits": [
+            46,
+            44
+          ],
+          "minutes": 343,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1976,
+            1978,
+            1819
+          ],
+          "route": "PIE→BHM→DAY→IND",
+          "dep": "10:04",
+          "arr": "16:58",
+          "waits": [
+            158,
+            31
+          ],
+          "minutes": 414,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1178,
+            1570,
+            1819
+          ],
+          "route": "PIE→PHF→DAY→IND",
+          "dep": "08:55",
+          "arr": "16:58",
+          "waits": [
+            186,
+            44
+          ],
+          "minutes": 483,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1180,
+            1571,
+            2173
+          ],
+          "route": "PIE→PHF→DAY→IND",
+          "dep": "13:35",
+          "arr": "22:18",
+          "waits": [
+            36,
+            234
+          ],
+          "minutes": 523,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1180,
+            1572,
+            2173
+          ],
+          "route": "PIE→PHF→DAY→IND",
+          "dep": "13:35",
+          "arr": "22:18",
+          "waits": [
+            161,
+            109
+          ],
+          "minutes": 523,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1536,
+            1451,
+            2173
+          ],
+          "route": "PIE→JAX→DAY→IND",
+          "dep": "13:30",
+          "arr": "22:18",
+          "waits": [
+            81,
+            235
+          ],
+          "minutes": 528,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1229,
+            1658,
+            1819
+          ],
+          "route": "PIE→SYR→DAY→IND",
+          "dep": "08:04",
+          "arr": "16:58",
+          "waits": [
+            197,
+            37
+          ],
+          "minutes": 534,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1179,
+            2025,
+            1186
+          ],
+          "route": "PIE→PHF→JAX→IND",
+          "dep": "11:15",
+          "arr": "21:24",
+          "waits": [
+            42,
+            238
+          ],
+          "minutes": 609,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1179,
+            1571,
+            2173
+          ],
+          "route": "PIE→PHF→DAY→IND",
+          "dep": "11:15",
+          "arr": "22:18",
+          "waits": [
+            176,
+            234
+          ],
+          "minutes": 663,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1976,
+            1421,
+            1186
+          ],
+          "route": "PIE→BHM→JAX→IND",
+          "dep": "10:04",
+          "arr": "21:24",
+          "waits": [
+            220,
+            179
+          ],
+          "minutes": 680,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1178,
+            2025,
+            1186
+          ],
+          "route": "PIE→PHF→JAX→IND",
+          "dep": "08:55",
+          "arr": "21:24",
+          "waits": [
+            182,
+            238
+          ],
+          "minutes": 749,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1229,
+            1407,
+            1186
+          ],
+          "route": "PIE→SYR→JAX→IND",
+          "dep": "08:04",
+          "arr": "21:24",
+          "waits": [
+            202,
+            172
+          ],
+          "minutes": 800,
+          "stops": 2
+        }
+      ],
+      "reasonable": [
+        {
+          "flights": [
+            2224,
+            1982,
+            2173
+          ],
+          "route": "PIE→BHM→DAY→IND",
+          "dep": "16:39",
+          "arr": "22:18",
+          "waits": [
+            44,
+            70
+          ],
+          "minutes": 339,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1179,
+            1570,
+            1819
+          ],
+          "route": "PIE→PHF→DAY→IND",
+          "dep": "11:15",
+          "arr": "16:58",
+          "waits": [
+            46,
+            44
+          ],
+          "minutes": 343,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1976,
+            1978,
+            1819
+          ],
+          "route": "PIE→BHM→DAY→IND",
+          "dep": "10:04",
+          "arr": "16:58",
+          "waits": [
+            158,
+            31
+          ],
+          "minutes": 414,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1178,
+            1570,
+            1819
+          ],
+          "route": "PIE→PHF→DAY→IND",
+          "dep": "08:55",
+          "arr": "16:58",
+          "waits": [
+            186,
+            44
+          ],
+          "minutes": 483,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1180,
+            1571,
+            2173
+          ],
+          "route": "PIE→PHF→DAY→IND",
+          "dep": "13:35",
+          "arr": "22:18",
+          "waits": [
+            36,
+            234
+          ],
+          "minutes": 523,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1180,
+            1572,
+            2173
+          ],
+          "route": "PIE→PHF→DAY→IND",
+          "dep": "13:35",
+          "arr": "22:18",
+          "waits": [
+            161,
+            109
+          ],
+          "minutes": 523,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1536,
+            1451,
+            2173
+          ],
+          "route": "PIE→JAX→DAY→IND",
+          "dep": "13:30",
+          "arr": "22:18",
+          "waits": [
+            81,
+            235
+          ],
+          "minutes": 528,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1229,
+            1658,
+            1819
+          ],
+          "route": "PIE→SYR→DAY→IND",
+          "dep": "08:04",
+          "arr": "16:58",
+          "waits": [
+            197,
+            37
+          ],
+          "minutes": 534,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1179,
+            1571,
+            2173
+          ],
+          "route": "PIE→PHF→DAY→IND",
+          "dep": "11:15",
+          "arr": "22:18",
+          "waits": [
+            176,
+            234
+          ],
+          "minutes": 663,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1976,
+            1421,
+            1186
+          ],
+          "route": "PIE→BHM→JAX→IND",
+          "dep": "10:04",
+          "arr": "21:24",
+          "waits": [
+            220,
+            179
+          ],
+          "minutes": 680,
+          "stops": 2
+        }
+      ]
+    },
+    "IND-PIE": {
+      "demand": 105.7,
+      "coverage": {
+        "stops": 1,
+        "gap": false,
+        "counts": [
+          0,
+          1,
+          6
+        ],
+        "best": [
+          null,
+          {
+            "legs": [
+              {
+                "origin": "IND",
+                "dest": "MCI",
+                "dep": "19:35",
+                "arr": "20:05",
+                "flight": 2022,
+                "fleet": "CRJ200"
+              },
+              {
+                "origin": "MCI",
+                "dest": "PIE",
+                "dep": "20:40",
+                "arr": "00:12",
+                "flight": 1072,
+                "fleet": "MAX9"
+              }
+            ],
+            "waits": [
+              35
+            ],
+            "stops": 1,
+            "dest": "PIE",
+            "departureMinute": 1175,
+            "totalMinutes": 277,
+            "circuity": 1.7771144305192441
+          },
+          {
+            "legs": [
+              {
+                "origin": "IND",
+                "dest": "DAY",
+                "dep": "14:49",
+                "arr": "15:36",
+                "flight": 2096,
+                "fleet": "MAX9"
+              },
+              {
+                "origin": "DAY",
+                "dest": "PHF",
+                "dep": "16:20",
+                "arr": "17:51",
+                "flight": 1569,
+                "fleet": "CRJ200"
+              },
+              {
+                "origin": "PHF",
+                "dest": "PIE",
+                "dep": "18:35",
+                "arr": "20:34",
+                "flight": 1175,
+                "fleet": "CRJ900"
+              }
+            ],
+            "waits": [
+              44,
+              44
+            ],
+            "stops": 2,
+            "dest": "PIE",
+            "departureMinute": 889,
+            "totalMinutes": 345,
+            "circuity": 1.5471137024583541
+          }
+        ],
+        "fastest": {
+          "legs": [
+            {
+              "origin": "IND",
+              "dest": "MCI",
+              "dep": "19:35",
+              "arr": "20:05",
+              "flight": 2022,
+              "fleet": "CRJ200"
+            },
+            {
+              "origin": "MCI",
+              "dest": "PIE",
+              "dep": "20:40",
+              "arr": "00:12",
+              "flight": 1072,
+              "fleet": "MAX9"
+            }
+          ],
+          "waits": [
+            35
+          ],
+          "stops": 1,
+          "dest": "PIE",
+          "departureMinute": 1175,
+          "totalMinutes": 277,
+          "circuity": 1.7771144305192441
+        }
+      },
+      "rawCoverage": {
+        "stops": 1,
+        "gap": false,
+        "counts": [
+          0,
+          1,
+          15
+        ],
+        "best": [
+          null,
+          {
+            "legs": [
+              {
+                "origin": "IND",
+                "dest": "MCI",
+                "dep": "19:35",
+                "arr": "20:05",
+                "flight": 2022,
+                "fleet": "CRJ200"
+              },
+              {
+                "origin": "MCI",
+                "dest": "PIE",
+                "dep": "20:40",
+                "arr": "00:12",
+                "flight": 1072,
+                "fleet": "MAX9"
+              }
+            ],
+            "waits": [
+              35
+            ],
+            "stops": 1,
+            "dest": "PIE",
+            "departureMinute": 1175,
+            "totalMinutes": 277,
+            "circuity": 1.7771144305192441
+          },
+          {
+            "legs": [
+              {
+                "origin": "IND",
+                "dest": "DAY",
+                "dep": "14:49",
+                "arr": "15:36",
+                "flight": 2096,
+                "fleet": "MAX9"
+              },
+              {
+                "origin": "DAY",
+                "dest": "PHF",
+                "dep": "16:20",
+                "arr": "17:51",
+                "flight": 1569,
+                "fleet": "CRJ200"
+              },
+              {
+                "origin": "PHF",
+                "dest": "PIE",
+                "dep": "18:35",
+                "arr": "20:34",
+                "flight": 1175,
+                "fleet": "CRJ900"
+              }
+            ],
+            "waits": [
+              44,
+              44
+            ],
+            "stops": 2,
+            "dest": "PIE",
+            "departureMinute": 889,
+            "totalMinutes": 345,
+            "circuity": 1.5471137024583541
+          }
+        ],
+        "fastest": {
+          "legs": [
+            {
+              "origin": "IND",
+              "dest": "MCI",
+              "dep": "19:35",
+              "arr": "20:05",
+              "flight": 2022,
+              "fleet": "CRJ200"
+            },
+            {
+              "origin": "MCI",
+              "dest": "PIE",
+              "dep": "20:40",
+              "arr": "00:12",
+              "flight": 1072,
+              "fleet": "MAX9"
+            }
+          ],
+          "waits": [
+            35
+          ],
+          "stops": 1,
+          "dest": "PIE",
+          "departureMinute": 1175,
+          "totalMinutes": 277,
+          "circuity": 1.7771144305192441
+        }
+      },
+      "shortestStop": 1,
+      "options": [
+        {
+          "flights": [
+            2022,
+            1072
+          ],
+          "route": "IND→MCI→PIE",
+          "dep": "19:35",
+          "arr": "00:12",
+          "waits": [
+            35
+          ],
+          "minutes": 277,
+          "stops": 1
+        },
+        {
+          "flights": [
+            2096,
+            1569,
+            1175
+          ],
+          "route": "IND→DAY→PHF→PIE",
+          "dep": "14:49",
+          "arr": "20:34",
+          "waits": [
+            44,
+            44
+          ],
+          "minutes": 345,
+          "stops": 2
+        },
+        {
+          "flights": [
+            2174,
+            2078,
+            1172
+          ],
+          "route": "IND→DAY→PHF→PIE",
+          "dep": "04:30",
+          "arr": "11:14",
+          "waits": [
+            98,
+            55
+          ],
+          "minutes": 404,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1184,
+            1159,
+            1174
+          ],
+          "route": "IND→JAX→PHF→PIE",
+          "dep": "11:25",
+          "arr": "18:14",
+          "waits": [
+            41,
+            38
+          ],
+          "minutes": 409,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1183,
+            1159,
+            1174
+          ],
+          "route": "IND→JAX→PHF→PIE",
+          "dep": "10:20",
+          "arr": "18:14",
+          "waits": [
+            106,
+            38
+          ],
+          "minutes": 474,
+          "stops": 2
+        },
+        {
+          "flights": [
+            2096,
+            1569,
+            1176
+          ],
+          "route": "IND→DAY→PHF→PIE",
+          "dep": "14:49",
+          "arr": "22:54",
+          "waits": [
+            44,
+            184
+          ],
+          "minutes": 485,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1222,
+            1254,
+            1535
+          ],
+          "route": "IND→MCI→JAX→PIE",
+          "dep": "04:30",
+          "arr": "12:44",
+          "waits": [
+            40,
+            170
+          ],
+          "minutes": 494,
+          "stops": 2
+        },
+        {
+          "flights": [
+            2174,
+            1452,
+            1535
+          ],
+          "route": "IND→DAY→JAX→PIE",
+          "dep": "04:30",
+          "arr": "12:44",
+          "waits": [
+            167,
+            115
+          ],
+          "minutes": 494,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1184,
+            1159,
+            1175
+          ],
+          "route": "IND→JAX→PHF→PIE",
+          "dep": "11:25",
+          "arr": "20:34",
+          "waits": [
+            41,
+            178
+          ],
+          "minutes": 549,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1184,
+            1160,
+            1175
+          ],
+          "route": "IND→JAX→PHF→PIE",
+          "dep": "11:25",
+          "arr": "20:34",
+          "waits": [
+            171,
+            48
+          ],
+          "minutes": 549,
+          "stops": 2
+        },
+        {
+          "flights": [
+            2096,
+            2106,
+            1072
+          ],
+          "route": "IND→DAY→MCI→PIE",
+          "dep": "14:49",
+          "arr": "00:12",
+          "waits": [
+            159,
+            100
+          ],
+          "minutes": 563,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1183,
+            1159,
+            1175
+          ],
+          "route": "IND→JAX→PHF→PIE",
+          "dep": "10:20",
+          "arr": "20:34",
+          "waits": [
+            106,
+            178
+          ],
+          "minutes": 614,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1183,
+            1160,
+            1175
+          ],
+          "route": "IND→JAX→PHF→PIE",
+          "dep": "10:20",
+          "arr": "20:34",
+          "waits": [
+            236,
+            48
+          ],
+          "minutes": 614,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1184,
+            1160,
+            1176
+          ],
+          "route": "IND→JAX→PHF→PIE",
+          "dep": "11:25",
+          "arr": "22:54",
+          "waits": [
+            171,
+            188
+          ],
+          "minutes": 689,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1184,
+            2026,
+            1176
+          ],
+          "route": "IND→JAX→PHF→PIE",
+          "dep": "11:25",
+          "arr": "22:54",
+          "waits": [
+            211,
+            149
+          ],
+          "minutes": 689,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1183,
+            1160,
+            1176
+          ],
+          "route": "IND→JAX→PHF→PIE",
+          "dep": "10:20",
+          "arr": "22:54",
+          "waits": [
+            236,
+            188
+          ],
+          "minutes": 754,
+          "stops": 2
+        }
+      ],
+      "reasonable": [
+        {
+          "flights": [
+            2022,
+            1072
+          ],
+          "route": "IND→MCI→PIE",
+          "dep": "19:35",
+          "arr": "00:12",
+          "waits": [
+            35
+          ],
+          "minutes": 277,
+          "stops": 1
+        },
+        {
+          "flights": [
+            2096,
+            1569,
+            1175
+          ],
+          "route": "IND→DAY→PHF→PIE",
+          "dep": "14:49",
+          "arr": "20:34",
+          "waits": [
+            44,
+            44
+          ],
+          "minutes": 345,
+          "stops": 2
+        },
+        {
+          "flights": [
+            2174,
+            2078,
+            1172
+          ],
+          "route": "IND→DAY→PHF→PIE",
+          "dep": "04:30",
+          "arr": "11:14",
+          "waits": [
+            98,
+            55
+          ],
+          "minutes": 404,
+          "stops": 2
+        },
+        {
+          "flights": [
+            2096,
+            1569,
+            1176
+          ],
+          "route": "IND→DAY→PHF→PIE",
+          "dep": "14:49",
+          "arr": "22:54",
+          "waits": [
+            44,
+            184
+          ],
+          "minutes": 485,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1222,
+            1254,
+            1535
+          ],
+          "route": "IND→MCI→JAX→PIE",
+          "dep": "04:30",
+          "arr": "12:44",
+          "waits": [
+            40,
+            170
+          ],
+          "minutes": 494,
+          "stops": 2
+        },
+        {
+          "flights": [
+            2174,
+            1452,
+            1535
+          ],
+          "route": "IND→DAY→JAX→PIE",
+          "dep": "04:30",
+          "arr": "12:44",
+          "waits": [
+            167,
+            115
+          ],
+          "minutes": 494,
+          "stops": 2
+        },
+        {
+          "flights": [
+            2096,
+            2106,
+            1072
+          ],
+          "route": "IND→DAY→MCI→PIE",
+          "dep": "14:49",
+          "arr": "00:12",
+          "waits": [
+            159,
+            100
+          ],
+          "minutes": 563,
+          "stops": 2
+        }
+      ]
+    },
+    "PIE-AUS": {
+      "demand": 96.8,
+      "coverage": {
+        "stops": 2,
+        "gap": true,
+        "counts": [
+          0,
+          0,
+          3
+        ],
+        "best": [
+          null,
+          null,
+          {
+            "legs": [
+              {
+                "origin": "PIE",
+                "dest": "JAX",
+                "dep": "13:30",
+                "arr": "14:24",
+                "flight": 1536,
+                "fleet": "CRJ200"
+              },
+              {
+                "origin": "JAX",
+                "dest": "DAY",
+                "dep": "15:45",
+                "arr": "17:40",
+                "flight": 1451,
+                "fleet": "CRJ700"
+              },
+              {
+                "origin": "DAY",
+                "dest": "AUS",
+                "dep": "18:20",
+                "arr": "19:59",
+                "flight": 1483,
+                "fleet": "CRJ700"
+              }
+            ],
+            "waits": [
+              81,
+              40
+            ],
+            "stops": 2,
+            "dest": "AUS",
+            "departureMinute": 810,
+            "totalMinutes": 449,
+            "circuity": 2.032920931747932
+          }
+        ],
+        "fastest": {
+          "legs": [
+            {
+              "origin": "PIE",
+              "dest": "JAX",
+              "dep": "13:30",
+              "arr": "14:24",
+              "flight": 1536,
+              "fleet": "CRJ200"
+            },
+            {
+              "origin": "JAX",
+              "dest": "DAY",
+              "dep": "15:45",
+              "arr": "17:40",
+              "flight": 1451,
+              "fleet": "CRJ700"
+            },
+            {
+              "origin": "DAY",
+              "dest": "AUS",
+              "dep": "18:20",
+              "arr": "19:59",
+              "flight": 1483,
+              "fleet": "CRJ700"
+            }
+          ],
+          "waits": [
+            81,
+            40
+          ],
+          "stops": 2,
+          "dest": "AUS",
+          "departureMinute": 810,
+          "totalMinutes": 449,
+          "circuity": 2.032920931747932
+        }
+      },
+      "rawCoverage": {
+        "stops": 2,
+        "gap": true,
+        "counts": [
+          0,
+          0,
+          15
+        ],
+        "best": [
+          null,
+          null,
+          {
+            "legs": [
+              {
+                "origin": "PIE",
+                "dest": "PHF",
+                "dep": "13:35",
+                "arr": "15:34",
+                "flight": 1180,
+                "fleet": "CRJ900"
+              },
+              {
+                "origin": "PHF",
+                "dest": "DAY",
+                "dep": "16:10",
+                "arr": "17:41",
+                "flight": 1571,
+                "fleet": "CRJ200"
+              },
+              {
+                "origin": "DAY",
+                "dest": "AUS",
+                "dep": "18:20",
+                "arr": "19:59",
+                "flight": 1483,
+                "fleet": "CRJ700"
+              }
+            ],
+            "waits": [
+              36,
+              39
+            ],
+            "stops": 2,
+            "dest": "AUS",
+            "departureMinute": 815,
+            "totalMinutes": 444,
+            "circuity": 2.4001662424785053
+          }
+        ],
+        "fastest": {
+          "legs": [
+            {
+              "origin": "PIE",
+              "dest": "PHF",
+              "dep": "13:35",
+              "arr": "15:34",
+              "flight": 1180,
+              "fleet": "CRJ900"
+            },
+            {
+              "origin": "PHF",
+              "dest": "DAY",
+              "dep": "16:10",
+              "arr": "17:41",
+              "flight": 1571,
+              "fleet": "CRJ200"
+            },
+            {
+              "origin": "DAY",
+              "dest": "AUS",
+              "dep": "18:20",
+              "arr": "19:59",
+              "flight": 1483,
+              "fleet": "CRJ700"
+            }
+          ],
+          "waits": [
+            36,
+            39
+          ],
+          "stops": 2,
+          "dest": "AUS",
+          "departureMinute": 815,
+          "totalMinutes": 444,
+          "circuity": 2.4001662424785053
+        }
+      },
+      "shortestStop": 2,
+      "options": [
+        {
+          "flights": [
+            1180,
+            1571,
+            1483
+          ],
+          "route": "PIE→PHF→DAY→AUS",
+          "dep": "13:35",
+          "arr": "19:59",
+          "waits": [
+            36,
+            39
+          ],
+          "minutes": 444,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1536,
+            1451,
+            1483
+          ],
+          "route": "PIE→JAX→DAY→AUS",
+          "dep": "13:30",
+          "arr": "19:59",
+          "waits": [
+            81,
+            40
+          ],
+          "minutes": 449,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1177,
+            1161,
+            1148
+          ],
+          "route": "PIE→PHF→JAX→AUS",
+          "dep": "06:35",
+          "arr": "14:20",
+          "waits": [
+            41,
+            123
+          ],
+          "minutes": 525,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1180,
+            1571,
+            1484
+          ],
+          "route": "PIE→PHF→DAY→AUS",
+          "dep": "13:35",
+          "arr": "22:04",
+          "waits": [
+            36,
+            164
+          ],
+          "minutes": 569,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1180,
+            1572,
+            1484
+          ],
+          "route": "PIE→PHF→DAY→AUS",
+          "dep": "13:35",
+          "arr": "22:04",
+          "waits": [
+            161,
+            39
+          ],
+          "minutes": 569,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1536,
+            1451,
+            1484
+          ],
+          "route": "PIE→JAX→DAY→AUS",
+          "dep": "13:30",
+          "arr": "22:04",
+          "waits": [
+            81,
+            165
+          ],
+          "minutes": 574,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1179,
+            1570,
+            1483
+          ],
+          "route": "PIE→PHF→DAY→AUS",
+          "dep": "11:15",
+          "arr": "19:59",
+          "waits": [
+            46,
+            169
+          ],
+          "minutes": 584,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1179,
+            1571,
+            1483
+          ],
+          "route": "PIE→PHF→DAY→AUS",
+          "dep": "11:15",
+          "arr": "19:59",
+          "waits": [
+            176,
+            39
+          ],
+          "minutes": 584,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1228,
+            1440,
+            1081
+          ],
+          "route": "PIE→SYR→MCI→AUS",
+          "dep": "05:10",
+          "arr": "14:02",
+          "waits": [
+            46,
+            118
+          ],
+          "minutes": 592,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1228,
+            2202,
+            1148
+          ],
+          "route": "PIE→SYR→JAX→AUS",
+          "dep": "05:10",
+          "arr": "14:20",
+          "waits": [
+            31,
+            122
+          ],
+          "minutes": 610,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1976,
+            1978,
+            1483
+          ],
+          "route": "PIE→BHM→DAY→AUS",
+          "dep": "10:04",
+          "arr": "19:59",
+          "waits": [
+            158,
+            156
+          ],
+          "minutes": 655,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1179,
+            1571,
+            1484
+          ],
+          "route": "PIE→PHF→DAY→AUS",
+          "dep": "11:15",
+          "arr": "22:04",
+          "waits": [
+            176,
+            164
+          ],
+          "minutes": 709,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1177,
+            1389,
+            1082
+          ],
+          "route": "PIE→PHF→MCI→AUS",
+          "dep": "06:35",
+          "arr": "17:27",
+          "waits": [
+            131,
+            198
+          ],
+          "minutes": 712,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1178,
+            1570,
+            1483
+          ],
+          "route": "PIE→PHF→DAY→AUS",
+          "dep": "08:55",
+          "arr": "19:59",
+          "waits": [
+            186,
+            169
+          ],
+          "minutes": 724,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1229,
+            1658,
+            1483
+          ],
+          "route": "PIE→SYR→DAY→AUS",
+          "dep": "08:04",
+          "arr": "19:59",
+          "waits": [
+            197,
+            162
+          ],
+          "minutes": 775,
+          "stops": 2
+        }
+      ],
+      "reasonable": [
+        {
+          "flights": [
+            1536,
+            1451,
+            1483
+          ],
+          "route": "PIE→JAX→DAY→AUS",
+          "dep": "13:30",
+          "arr": "19:59",
+          "waits": [
+            81,
+            40
+          ],
+          "minutes": 449,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1536,
+            1451,
+            1484
+          ],
+          "route": "PIE→JAX→DAY→AUS",
+          "dep": "13:30",
+          "arr": "22:04",
+          "waits": [
+            81,
+            165
+          ],
+          "minutes": 574,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1976,
+            1978,
+            1483
+          ],
+          "route": "PIE→BHM→DAY→AUS",
+          "dep": "10:04",
+          "arr": "19:59",
+          "waits": [
+            158,
+            156
+          ],
+          "minutes": 655,
+          "stops": 2
+        }
+      ]
+    },
+    "AUS-PIE": {
+      "demand": 99.2,
+      "coverage": {
+        "stops": 1,
+        "gap": false,
+        "counts": [
+          0,
+          3,
+          1
+        ],
+        "best": [
+          null,
+          {
+            "legs": [
+              {
+                "origin": "AUS",
+                "dest": "MCI",
+                "dep": "18:10",
+                "arr": "19:57",
+                "flight": 2001,
+                "fleet": "MAX9"
+              },
+              {
+                "origin": "MCI",
+                "dest": "PIE",
+                "dep": "20:40",
+                "arr": "00:12",
+                "flight": 1072,
+                "fleet": "MAX9"
+              }
+            ],
+            "waits": [
+              43
+            ],
+            "stops": 1,
+            "dest": "PIE",
+            "departureMinute": 1090,
+            "totalMinutes": 302,
+            "circuity": 1.8484727942866224
+          },
+          {
+            "legs": [
+              {
+                "origin": "AUS",
+                "dest": "DAY",
+                "dep": "05:40",
+                "arr": "09:19",
+                "flight": 1475,
+                "fleet": "CRJ700"
+              },
+              {
+                "origin": "DAY",
+                "dest": "BHM",
+                "dep": "12:02",
+                "arr": "12:33",
+                "flight": 1977,
+                "fleet": "CRJ200"
+              },
+              {
+                "origin": "BHM",
+                "dest": "PIE",
+                "dep": "13:28",
+                "arr": "15:59",
+                "flight": 2223,
+                "fleet": "CRJ200"
+              }
+            ],
+            "waits": [
+              163,
+              55
+            ],
+            "stops": 2,
+            "dest": "PIE",
+            "departureMinute": 340,
+            "totalMinutes": 559,
+            "circuity": 2.1037326677379236
+          }
+        ],
+        "fastest": {
+          "legs": [
+            {
+              "origin": "AUS",
+              "dest": "MCI",
+              "dep": "18:10",
+              "arr": "19:57",
+              "flight": 2001,
+              "fleet": "MAX9"
+            },
+            {
+              "origin": "MCI",
+              "dest": "PIE",
+              "dep": "20:40",
+              "arr": "00:12",
+              "flight": 1072,
+              "fleet": "MAX9"
+            }
+          ],
+          "waits": [
+            43
+          ],
+          "stops": 1,
+          "dest": "PIE",
+          "departureMinute": 1090,
+          "totalMinutes": 302,
+          "circuity": 1.8484727942866224
+        }
+      },
+      "rawCoverage": {
+        "stops": 1,
+        "gap": false,
+        "counts": [
+          0,
+          3,
+          14
+        ],
+        "best": [
+          null,
+          {
+            "legs": [
+              {
+                "origin": "AUS",
+                "dest": "MCI",
+                "dep": "18:10",
+                "arr": "19:57",
+                "flight": 2001,
+                "fleet": "MAX9"
+              },
+              {
+                "origin": "MCI",
+                "dest": "PIE",
+                "dep": "20:40",
+                "arr": "00:12",
+                "flight": 1072,
+                "fleet": "MAX9"
+              }
+            ],
+            "waits": [
+              43
+            ],
+            "stops": 1,
+            "dest": "PIE",
+            "departureMinute": 1090,
+            "totalMinutes": 302,
+            "circuity": 1.8484727942866224
+          },
+          {
+            "legs": [
+              {
+                "origin": "AUS",
+                "dest": "DAY",
+                "dep": "09:50",
+                "arr": "13:29",
+                "flight": 1476,
+                "fleet": "CRJ700"
+              },
+              {
+                "origin": "DAY",
+                "dest": "PHF",
+                "dep": "14:05",
+                "arr": "15:36",
+                "flight": 1568,
+                "fleet": "CRJ200"
+              },
+              {
+                "origin": "PHF",
+                "dest": "PIE",
+                "dep": "16:15",
+                "arr": "18:14",
+                "flight": 1174,
+                "fleet": "CRJ900"
+              }
+            ],
+            "waits": [
+              36,
+              39
+            ],
+            "stops": 2,
+            "dest": "PIE",
+            "departureMinute": 590,
+            "totalMinutes": 444,
+            "circuity": 2.4001662424785053
+          }
+        ],
+        "fastest": {
+          "legs": [
+            {
+              "origin": "AUS",
+              "dest": "MCI",
+              "dep": "18:10",
+              "arr": "19:57",
+              "flight": 2001,
+              "fleet": "MAX9"
+            },
+            {
+              "origin": "MCI",
+              "dest": "PIE",
+              "dep": "20:40",
+              "arr": "00:12",
+              "flight": 1072,
+              "fleet": "MAX9"
+            }
+          ],
+          "waits": [
+            43
+          ],
+          "stops": 1,
+          "dest": "PIE",
+          "departureMinute": 1090,
+          "totalMinutes": 302,
+          "circuity": 1.8484727942866224
+        }
+      },
+      "shortestStop": 1,
+      "options": [
+        {
+          "flights": [
+            2001,
+            1072
+          ],
+          "route": "AUS→MCI→PIE",
+          "dep": "18:10",
+          "arr": "00:12",
+          "waits": [
+            43
+          ],
+          "minutes": 302,
+          "stops": 1
+        },
+        {
+          "flights": [
+            1084,
+            1071
+          ],
+          "route": "AUS→MCI→PIE",
+          "dep": "08:10",
+          "arr": "15:52",
+          "waits": [
+            143
+          ],
+          "minutes": 402,
+          "stops": 1
+        },
+        {
+          "flights": [
+            1083,
+            1071
+          ],
+          "route": "AUS→MCI→PIE",
+          "dep": "07:18",
+          "arr": "15:52",
+          "waits": [
+            195
+          ],
+          "minutes": 454,
+          "stops": 1
+        },
+        {
+          "flights": [
+            1476,
+            1568,
+            1174
+          ],
+          "route": "AUS→DAY→PHF→PIE",
+          "dep": "09:50",
+          "arr": "18:14",
+          "waits": [
+            36,
+            39
+          ],
+          "minutes": 444,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1477,
+            1569,
+            1175
+          ],
+          "route": "AUS→DAY→PHF→PIE",
+          "dep": "11:55",
+          "arr": "20:34",
+          "waits": [
+            46,
+            44
+          ],
+          "minutes": 459,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1149,
+            1160,
+            1175
+          ],
+          "route": "AUS→JAX→PHF→PIE",
+          "dep": "11:00",
+          "arr": "20:34",
+          "waits": [
+            105,
+            48
+          ],
+          "minutes": 514,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1478,
+            2106,
+            1072
+          ],
+          "route": "AUS→DAY→MCI→PIE",
+          "dep": "14:00",
+          "arr": "00:12",
+          "waits": [
+            36,
+            100
+          ],
+          "minutes": 552,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1475,
+            1977,
+            2223
+          ],
+          "route": "AUS→DAY→BHM→PIE",
+          "dep": "05:40",
+          "arr": "15:59",
+          "waits": [
+            163,
+            55
+          ],
+          "minutes": 559,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1476,
+            1568,
+            1175
+          ],
+          "route": "AUS→DAY→PHF→PIE",
+          "dep": "09:50",
+          "arr": "20:34",
+          "waits": [
+            36,
+            179
+          ],
+          "minutes": 584,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1476,
+            1569,
+            1175
+          ],
+          "route": "AUS→DAY→PHF→PIE",
+          "dep": "09:50",
+          "arr": "20:34",
+          "waits": [
+            171,
+            44
+          ],
+          "minutes": 584,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1477,
+            1569,
+            1176
+          ],
+          "route": "AUS→DAY→PHF→PIE",
+          "dep": "11:55",
+          "arr": "22:54",
+          "waits": [
+            46,
+            184
+          ],
+          "minutes": 599,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1149,
+            1160,
+            1176
+          ],
+          "route": "AUS→JAX→PHF→PIE",
+          "dep": "11:00",
+          "arr": "22:54",
+          "waits": [
+            105,
+            188
+          ],
+          "minutes": 654,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1149,
+            2026,
+            1176
+          ],
+          "route": "AUS→JAX→PHF→PIE",
+          "dep": "11:00",
+          "arr": "22:54",
+          "waits": [
+            145,
+            149
+          ],
+          "minutes": 654,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1477,
+            2106,
+            1072
+          ],
+          "route": "AUS→DAY→MCI→PIE",
+          "dep": "11:55",
+          "arr": "00:12",
+          "waits": [
+            161,
+            100
+          ],
+          "minutes": 677,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1475,
+            1567,
+            1174
+          ],
+          "route": "AUS→DAY→PHF→PIE",
+          "dep": "05:40",
+          "arr": "18:14",
+          "waits": [
+            166,
+            159
+          ],
+          "minutes": 694,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1476,
+            1569,
+            1176
+          ],
+          "route": "AUS→DAY→PHF→PIE",
+          "dep": "09:50",
+          "arr": "22:54",
+          "waits": [
+            171,
+            184
+          ],
+          "minutes": 724,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1475,
+            1657,
+            1227
+          ],
+          "route": "AUS→DAY→SYR→PIE",
+          "dep": "05:40",
+          "arr": "19:34",
+          "waits": [
+            166,
+            192
+          ],
+          "minutes": 774,
+          "stops": 2
+        }
+      ],
+      "reasonable": [
+        {
+          "flights": [
+            2001,
+            1072
+          ],
+          "route": "AUS→MCI→PIE",
+          "dep": "18:10",
+          "arr": "00:12",
+          "waits": [
+            43
+          ],
+          "minutes": 302,
+          "stops": 1
+        },
+        {
+          "flights": [
+            1084,
+            1071
+          ],
+          "route": "AUS→MCI→PIE",
+          "dep": "08:10",
+          "arr": "15:52",
+          "waits": [
+            143
+          ],
+          "minutes": 402,
+          "stops": 1
+        },
+        {
+          "flights": [
+            1083,
+            1071
+          ],
+          "route": "AUS→MCI→PIE",
+          "dep": "07:18",
+          "arr": "15:52",
+          "waits": [
+            195
+          ],
+          "minutes": 454,
+          "stops": 1
+        },
+        {
+          "flights": [
+            1475,
+            1977,
+            2223
+          ],
+          "route": "AUS→DAY→BHM→PIE",
+          "dep": "05:40",
+          "arr": "15:59",
+          "waits": [
+            163,
+            55
+          ],
+          "minutes": 559,
+          "stops": 2
+        }
+      ]
+    },
+    "PIE-BLV": {
+      "demand": 77.8,
+      "coverage": {
+        "stops": null,
+        "gap": true,
+        "counts": [
+          0,
+          0,
+          0
+        ],
+        "best": [
+          null,
+          null,
+          null
+        ],
+        "fastest": null
+      },
+      "rawCoverage": {
+        "stops": 2,
+        "gap": true,
+        "counts": [
+          0,
+          0,
+          6
+        ],
+        "best": [
+          null,
+          null,
+          {
+            "legs": [
+              {
+                "origin": "PIE",
+                "dest": "PHF",
+                "dep": "08:55",
+                "arr": "10:54",
+                "flight": 1178,
+                "fleet": "CRJ900"
+              },
+              {
+                "origin": "PHF",
+                "dest": "JAX",
+                "dep": "11:35",
+                "arr": "13:12",
+                "flight": 1162,
+                "fleet": "CRJ900"
+              },
+              {
+                "origin": "JAX",
+                "dest": "BLV",
+                "dep": "14:00",
+                "arr": "14:58",
+                "flight": 1216,
+                "fleet": "CRJ900"
+              }
+            ],
+            "waits": [
+              41,
+              48
+            ],
+            "stops": 2,
+            "dest": "BLV",
+            "departureMinute": 535,
+            "totalMinutes": 423,
+            "circuity": 2.3769391928701857
+          }
+        ],
+        "fastest": {
+          "legs": [
+            {
+              "origin": "PIE",
+              "dest": "PHF",
+              "dep": "08:55",
+              "arr": "10:54",
+              "flight": 1178,
+              "fleet": "CRJ900"
+            },
+            {
+              "origin": "PHF",
+              "dest": "JAX",
+              "dep": "11:35",
+              "arr": "13:12",
+              "flight": 1162,
+              "fleet": "CRJ900"
+            },
+            {
+              "origin": "JAX",
+              "dest": "BLV",
+              "dep": "14:00",
+              "arr": "14:58",
+              "flight": 1216,
+              "fleet": "CRJ900"
+            }
+          ],
+          "waits": [
+            41,
+            48
+          ],
+          "stops": 2,
+          "dest": "BLV",
+          "departureMinute": 535,
+          "totalMinutes": 423,
+          "circuity": 2.3769391928701857
+        }
+      },
+      "shortestStop": 2,
+      "options": [
+        {
+          "flights": [
+            1178,
+            1162,
+            1216
+          ],
+          "route": "PIE→PHF→JAX→BLV",
+          "dep": "08:55",
+          "arr": "14:58",
+          "waits": [
+            41,
+            48
+          ],
+          "minutes": 423,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1228,
+            1440,
+            1356
+          ],
+          "route": "PIE→SYR→MCI→BLV",
+          "dep": "05:10",
+          "arr": "13:19",
+          "waits": [
+            46,
+            118
+          ],
+          "minutes": 549,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1177,
+            1161,
+            1216
+          ],
+          "route": "PIE→PHF→JAX→BLV",
+          "dep": "06:35",
+          "arr": "14:58",
+          "waits": [
+            41,
+            188
+          ],
+          "minutes": 563,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1177,
+            1162,
+            1216
+          ],
+          "route": "PIE→PHF→JAX→BLV",
+          "dep": "06:35",
+          "arr": "14:58",
+          "waits": [
+            181,
+            48
+          ],
+          "minutes": 563,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1228,
+            2202,
+            1216
+          ],
+          "route": "PIE→SYR→JAX→BLV",
+          "dep": "05:10",
+          "arr": "14:58",
+          "waits": [
+            31,
+            187
+          ],
+          "minutes": 648,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1177,
+            1389,
+            2107
+          ],
+          "route": "PIE→PHF→MCI→BLV",
+          "dep": "06:35",
+          "arr": "16:30",
+          "waits": [
+            131,
+            183
+          ],
+          "minutes": 655,
+          "stops": 2
+        }
+      ],
+      "reasonable": []
+    },
+    "BLV-PIE": {
+      "demand": 77.6,
+      "coverage": {
+        "stops": 1,
+        "gap": false,
+        "counts": [
+          0,
+          2,
+          0
+        ],
+        "best": [
+          null,
+          {
+            "legs": [
+              {
+                "origin": "BLV",
+                "dest": "MCI",
+                "dep": "10:25",
+                "arr": "11:29",
+                "flight": 1357,
+                "fleet": "CRJ700"
+              },
+              {
+                "origin": "MCI",
+                "dest": "PIE",
+                "dep": "12:20",
+                "arr": "15:52",
+                "flight": 1071,
+                "fleet": "MAX9"
+              }
+            ],
+            "waits": [
+              51
+            ],
+            "stops": 1,
+            "dest": "PIE",
+            "departureMinute": 625,
+            "totalMinutes": 267,
+            "circuity": 1.5590065415183827
+          },
+          null
+        ],
+        "fastest": {
+          "legs": [
+            {
+              "origin": "BLV",
+              "dest": "MCI",
+              "dep": "10:25",
+              "arr": "11:29",
+              "flight": 1357,
+              "fleet": "CRJ700"
+            },
+            {
+              "origin": "MCI",
+              "dest": "PIE",
+              "dep": "12:20",
+              "arr": "15:52",
+              "flight": 1071,
+              "fleet": "MAX9"
+            }
+          ],
+          "waits": [
+            51
+          ],
+          "stops": 1,
+          "dest": "PIE",
+          "departureMinute": 625,
+          "totalMinutes": 267,
+          "circuity": 1.5590065415183827
+        }
+      },
+      "rawCoverage": {
+        "stops": 1,
+        "gap": false,
+        "counts": [
+          0,
+          2,
+          7
+        ],
+        "best": [
+          null,
+          {
+            "legs": [
+              {
+                "origin": "BLV",
+                "dest": "MCI",
+                "dep": "10:25",
+                "arr": "11:29",
+                "flight": 1357,
+                "fleet": "CRJ700"
+              },
+              {
+                "origin": "MCI",
+                "dest": "PIE",
+                "dep": "12:20",
+                "arr": "15:52",
+                "flight": 1071,
+                "fleet": "MAX9"
+              }
+            ],
+            "waits": [
+              51
+            ],
+            "stops": 1,
+            "dest": "PIE",
+            "departureMinute": 625,
+            "totalMinutes": 267,
+            "circuity": 1.5590065415183827
+          },
+          {
+            "legs": [
+              {
+                "origin": "BLV",
+                "dest": "JAX",
+                "dep": "09:15",
+                "arr": "12:13",
+                "flight": 1218,
+                "fleet": "CRJ900"
+              },
+              {
+                "origin": "JAX",
+                "dest": "PHF",
+                "dep": "14:00",
+                "arr": "15:37",
+                "flight": 1159,
+                "fleet": "CRJ900"
+              },
+              {
+                "origin": "PHF",
+                "dest": "PIE",
+                "dep": "16:15",
+                "arr": "18:14",
+                "flight": 1174,
+                "fleet": "CRJ900"
+              }
+            ],
+            "waits": [
+              107,
+              38
+            ],
+            "stops": 2,
+            "dest": "PIE",
+            "departureMinute": 555,
+            "totalMinutes": 479,
+            "circuity": 2.3769391928701853
+          }
+        ],
+        "fastest": {
+          "legs": [
+            {
+              "origin": "BLV",
+              "dest": "MCI",
+              "dep": "10:25",
+              "arr": "11:29",
+              "flight": 1357,
+              "fleet": "CRJ700"
+            },
+            {
+              "origin": "MCI",
+              "dest": "PIE",
+              "dep": "12:20",
+              "arr": "15:52",
+              "flight": 1071,
+              "fleet": "MAX9"
+            }
+          ],
+          "waits": [
+            51
+          ],
+          "stops": 1,
+          "dest": "PIE",
+          "departureMinute": 625,
+          "totalMinutes": 267,
+          "circuity": 1.5590065415183827
+        }
+      },
+      "shortestStop": 1,
+      "options": [
+        {
+          "flights": [
+            1357,
+            1071
+          ],
+          "route": "BLV→MCI→PIE",
+          "dep": "10:25",
+          "arr": "15:52",
+          "waits": [
+            51
+          ],
+          "minutes": 267,
+          "stops": 1
+        },
+        {
+          "flights": [
+            2108,
+            1072
+          ],
+          "route": "BLV→MCI→PIE",
+          "dep": "17:10",
+          "arr": "00:12",
+          "waits": [
+            145
+          ],
+          "minutes": 362,
+          "stops": 1
+        },
+        {
+          "flights": [
+            1218,
+            1159,
+            1174
+          ],
+          "route": "BLV→JAX→PHF→PIE",
+          "dep": "09:15",
+          "arr": "18:14",
+          "waits": [
+            107,
+            38
+          ],
+          "minutes": 479,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1217,
+            1408,
+            1225
+          ],
+          "route": "BLV→JAX→SYR→PIE",
+          "dep": "04:40",
+          "arr": "14:13",
+          "waits": [
+            32,
+            51
+          ],
+          "minutes": 513,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1218,
+            1159,
+            1175
+          ],
+          "route": "BLV→JAX→PHF→PIE",
+          "dep": "09:15",
+          "arr": "20:34",
+          "waits": [
+            107,
+            178
+          ],
+          "minutes": 619,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1218,
+            1160,
+            1175
+          ],
+          "route": "BLV→JAX→PHF→PIE",
+          "dep": "09:15",
+          "arr": "20:34",
+          "waits": [
+            237,
+            48
+          ],
+          "minutes": 619,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1217,
+            1408,
+            1226
+          ],
+          "route": "BLV→JAX→SYR→PIE",
+          "dep": "04:40",
+          "arr": "16:49",
+          "waits": [
+            32,
+            207
+          ],
+          "minutes": 669,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1218,
+            1160,
+            1176
+          ],
+          "route": "BLV→JAX→PHF→PIE",
+          "dep": "09:15",
+          "arr": "22:54",
+          "waits": [
+            237,
+            188
+          ],
+          "minutes": 759,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1217,
+            2203,
+            1227
+          ],
+          "route": "BLV→JAX→SYR→PIE",
+          "dep": "04:40",
+          "arr": "19:34",
+          "waits": [
+            235,
+            169
+          ],
+          "minutes": 834,
+          "stops": 2
+        }
+      ],
+      "reasonable": [
+        {
+          "flights": [
+            1357,
+            1071
+          ],
+          "route": "BLV→MCI→PIE",
+          "dep": "10:25",
+          "arr": "15:52",
+          "waits": [
+            51
+          ],
+          "minutes": 267,
+          "stops": 1
+        },
+        {
+          "flights": [
+            2108,
+            1072
+          ],
+          "route": "BLV→MCI→PIE",
+          "dep": "17:10",
+          "arr": "00:12",
+          "waits": [
+            145
+          ],
+          "minutes": 362,
+          "stops": 1
+        }
+      ]
+    },
+    "PIE-GRR": {
+      "demand": 39.1,
+      "coverage": {
+        "stops": 1,
+        "gap": false,
+        "counts": [
+          0,
+          2,
+          9
+        ],
+        "best": [
+          null,
+          {
+            "legs": [
+              {
+                "origin": "PIE",
+                "dest": "MCI",
+                "dep": "18:25",
+                "arr": "19:57",
+                "flight": 1074,
+                "fleet": "MAX9"
+              },
+              {
+                "origin": "MCI",
+                "dest": "GRR",
+                "dep": "21:23",
+                "arr": "23:58",
+                "flight": 2181,
+                "fleet": "MAX9"
+              }
+            ],
+            "waits": [
+              86
+            ],
+            "stops": 1,
+            "dest": "GRR",
+            "departureMinute": 1105,
+            "totalMinutes": 333,
+            "circuity": 1.5139185178675214
+          },
+          {
+            "legs": [
+              {
+                "origin": "PIE",
+                "dest": "PHF",
+                "dep": "11:15",
+                "arr": "13:14",
+                "flight": 1179,
+                "fleet": "CRJ900"
+              },
+              {
+                "origin": "PHF",
+                "dest": "DAY",
+                "dep": "14:00",
+                "arr": "15:31",
+                "flight": 1570,
+                "fleet": "CRJ200"
+              },
+              {
+                "origin": "DAY",
+                "dest": "GRR",
+                "dep": "16:15",
+                "arr": "17:13",
+                "flight": 1809,
+                "fleet": "CRJ200"
+              }
+            ],
+            "waits": [
+              46,
+              44
+            ],
+            "stops": 2,
+            "dest": "GRR",
+            "departureMinute": 675,
+            "totalMinutes": 358,
+            "circuity": 1.3450815157910458
+          }
+        ],
+        "fastest": {
+          "legs": [
+            {
+              "origin": "PIE",
+              "dest": "MCI",
+              "dep": "18:25",
+              "arr": "19:57",
+              "flight": 1074,
+              "fleet": "MAX9"
+            },
+            {
+              "origin": "MCI",
+              "dest": "GRR",
+              "dep": "21:23",
+              "arr": "23:58",
+              "flight": 2181,
+              "fleet": "MAX9"
+            }
+          ],
+          "waits": [
+            86
+          ],
+          "stops": 1,
+          "dest": "GRR",
+          "departureMinute": 1105,
+          "totalMinutes": 333,
+          "circuity": 1.5139185178675214
+        }
+      },
+      "rawCoverage": {
+        "stops": 1,
+        "gap": false,
+        "counts": [
+          0,
+          2,
+          9
+        ],
+        "best": [
+          null,
+          {
+            "legs": [
+              {
+                "origin": "PIE",
+                "dest": "MCI",
+                "dep": "18:25",
+                "arr": "19:57",
+                "flight": 1074,
+                "fleet": "MAX9"
+              },
+              {
+                "origin": "MCI",
+                "dest": "GRR",
+                "dep": "21:23",
+                "arr": "23:58",
+                "flight": 2181,
+                "fleet": "MAX9"
+              }
+            ],
+            "waits": [
+              86
+            ],
+            "stops": 1,
+            "dest": "GRR",
+            "departureMinute": 1105,
+            "totalMinutes": 333,
+            "circuity": 1.5139185178675214
+          },
+          {
+            "legs": [
+              {
+                "origin": "PIE",
+                "dest": "PHF",
+                "dep": "11:15",
+                "arr": "13:14",
+                "flight": 1179,
+                "fleet": "CRJ900"
+              },
+              {
+                "origin": "PHF",
+                "dest": "DAY",
+                "dep": "14:00",
+                "arr": "15:31",
+                "flight": 1570,
+                "fleet": "CRJ200"
+              },
+              {
+                "origin": "DAY",
+                "dest": "GRR",
+                "dep": "16:15",
+                "arr": "17:13",
+                "flight": 1809,
+                "fleet": "CRJ200"
+              }
+            ],
+            "waits": [
+              46,
+              44
+            ],
+            "stops": 2,
+            "dest": "GRR",
+            "departureMinute": 675,
+            "totalMinutes": 358,
+            "circuity": 1.3450815157910458
+          }
+        ],
+        "fastest": {
+          "legs": [
+            {
+              "origin": "PIE",
+              "dest": "MCI",
+              "dep": "18:25",
+              "arr": "19:57",
+              "flight": 1074,
+              "fleet": "MAX9"
+            },
+            {
+              "origin": "MCI",
+              "dest": "GRR",
+              "dep": "21:23",
+              "arr": "23:58",
+              "flight": 2181,
+              "fleet": "MAX9"
+            }
+          ],
+          "waits": [
+            86
+          ],
+          "stops": 1,
+          "dest": "GRR",
+          "departureMinute": 1105,
+          "totalMinutes": 333,
+          "circuity": 1.5139185178675214
+        }
+      },
+      "shortestStop": 1,
+      "options": [
+        {
+          "flights": [
+            1074,
+            2181
+          ],
+          "route": "PIE→MCI→GRR",
+          "dep": "18:25",
+          "arr": "23:58",
+          "waits": [
+            86
+          ],
+          "minutes": 333,
+          "stops": 1
+        },
+        {
+          "flights": [
+            1073,
+            2181
+          ],
+          "route": "PIE→MCI→GRR",
+          "dep": "16:35",
+          "arr": "23:58",
+          "waits": [
+            196
+          ],
+          "minutes": 443,
+          "stops": 1
+        },
+        {
+          "flights": [
+            1179,
+            1570,
+            1809
+          ],
+          "route": "PIE→PHF→DAY→GRR",
+          "dep": "11:15",
+          "arr": "17:13",
+          "waits": [
+            46,
+            44
+          ],
+          "minutes": 358,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1180,
+            1571,
+            1810
+          ],
+          "route": "PIE→PHF→DAY→GRR",
+          "dep": "13:35",
+          "arr": "20:38",
+          "waits": [
+            36,
+            119
+          ],
+          "minutes": 423,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1536,
+            1451,
+            1810
+          ],
+          "route": "PIE→JAX→DAY→GRR",
+          "dep": "13:30",
+          "arr": "20:38",
+          "waits": [
+            81,
+            120
+          ],
+          "minutes": 428,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1976,
+            1978,
+            1809
+          ],
+          "route": "PIE→BHM→DAY→GRR",
+          "dep": "10:04",
+          "arr": "17:13",
+          "waits": [
+            158,
+            31
+          ],
+          "minutes": 429,
+          "stops": 2
+        },
+        {
+          "flights": [
+            2224,
+            1974,
+            2181
+          ],
+          "route": "PIE→BHM→MCI→GRR",
+          "dep": "16:39",
+          "arr": "23:58",
+          "waits": [
+            68,
+            76
+          ],
+          "minutes": 439,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1178,
+            1570,
+            1809
+          ],
+          "route": "PIE→PHF→DAY→GRR",
+          "dep": "08:55",
+          "arr": "17:13",
+          "waits": [
+            186,
+            44
+          ],
+          "minutes": 498,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1229,
+            1658,
+            1809
+          ],
+          "route": "PIE→SYR→DAY→GRR",
+          "dep": "08:04",
+          "arr": "17:13",
+          "waits": [
+            197,
+            37
+          ],
+          "minutes": 549,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1179,
+            1571,
+            1810
+          ],
+          "route": "PIE→PHF→DAY→GRR",
+          "dep": "11:15",
+          "arr": "20:38",
+          "waits": [
+            176,
+            119
+          ],
+          "minutes": 563,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1976,
+            1978,
+            1810
+          ],
+          "route": "PIE→BHM→DAY→GRR",
+          "dep": "10:04",
+          "arr": "20:38",
+          "waits": [
+            158,
+            236
+          ],
+          "minutes": 634,
+          "stops": 2
+        }
+      ],
+      "reasonable": [
+        {
+          "flights": [
+            1074,
+            2181
+          ],
+          "route": "PIE→MCI→GRR",
+          "dep": "18:25",
+          "arr": "23:58",
+          "waits": [
+            86
+          ],
+          "minutes": 333,
+          "stops": 1
+        },
+        {
+          "flights": [
+            1073,
+            2181
+          ],
+          "route": "PIE→MCI→GRR",
+          "dep": "16:35",
+          "arr": "23:58",
+          "waits": [
+            196
+          ],
+          "minutes": 443,
+          "stops": 1
+        },
+        {
+          "flights": [
+            1179,
+            1570,
+            1809
+          ],
+          "route": "PIE→PHF→DAY→GRR",
+          "dep": "11:15",
+          "arr": "17:13",
+          "waits": [
+            46,
+            44
+          ],
+          "minutes": 358,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1180,
+            1571,
+            1810
+          ],
+          "route": "PIE→PHF→DAY→GRR",
+          "dep": "13:35",
+          "arr": "20:38",
+          "waits": [
+            36,
+            119
+          ],
+          "minutes": 423,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1536,
+            1451,
+            1810
+          ],
+          "route": "PIE→JAX→DAY→GRR",
+          "dep": "13:30",
+          "arr": "20:38",
+          "waits": [
+            81,
+            120
+          ],
+          "minutes": 428,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1976,
+            1978,
+            1809
+          ],
+          "route": "PIE→BHM→DAY→GRR",
+          "dep": "10:04",
+          "arr": "17:13",
+          "waits": [
+            158,
+            31
+          ],
+          "minutes": 429,
+          "stops": 2
+        },
+        {
+          "flights": [
+            2224,
+            1974,
+            2181
+          ],
+          "route": "PIE→BHM→MCI→GRR",
+          "dep": "16:39",
+          "arr": "23:58",
+          "waits": [
+            68,
+            76
+          ],
+          "minutes": 439,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1178,
+            1570,
+            1809
+          ],
+          "route": "PIE→PHF→DAY→GRR",
+          "dep": "08:55",
+          "arr": "17:13",
+          "waits": [
+            186,
+            44
+          ],
+          "minutes": 498,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1229,
+            1658,
+            1809
+          ],
+          "route": "PIE→SYR→DAY→GRR",
+          "dep": "08:04",
+          "arr": "17:13",
+          "waits": [
+            197,
+            37
+          ],
+          "minutes": 549,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1179,
+            1571,
+            1810
+          ],
+          "route": "PIE→PHF→DAY→GRR",
+          "dep": "11:15",
+          "arr": "20:38",
+          "waits": [
+            176,
+            119
+          ],
+          "minutes": 563,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1976,
+            1978,
+            1810
+          ],
+          "route": "PIE→BHM→DAY→GRR",
+          "dep": "10:04",
+          "arr": "20:38",
+          "waits": [
+            158,
+            236
+          ],
+          "minutes": 634,
+          "stops": 2
+        }
+      ]
+    },
+    "GRR-PIE": {
+      "demand": 38.2,
+      "coverage": {
+        "stops": 2,
+        "gap": true,
+        "counts": [
+          0,
+          0,
+          10
+        ],
+        "best": [
+          null,
+          null,
+          {
+            "legs": [
+              {
+                "origin": "GRR",
+                "dest": "DAY",
+                "dep": "10:25",
+                "arr": "11:23",
+                "flight": 1804,
+                "fleet": "CRJ200"
+              },
+              {
+                "origin": "DAY",
+                "dest": "BHM",
+                "dep": "12:02",
+                "arr": "12:33",
+                "flight": 1977,
+                "fleet": "CRJ200"
+              },
+              {
+                "origin": "BHM",
+                "dest": "PIE",
+                "dep": "13:28",
+                "arr": "15:59",
+                "flight": 2223,
+                "fleet": "CRJ200"
+              }
+            ],
+            "waits": [
+              39,
+              55
+            ],
+            "stops": 2,
+            "dest": "PIE",
+            "departureMinute": 625,
+            "totalMinutes": 334,
+            "circuity": 1.0850737865266322
+          }
+        ],
+        "fastest": {
+          "legs": [
+            {
+              "origin": "GRR",
+              "dest": "DAY",
+              "dep": "10:25",
+              "arr": "11:23",
+              "flight": 1804,
+              "fleet": "CRJ200"
+            },
+            {
+              "origin": "DAY",
+              "dest": "BHM",
+              "dep": "12:02",
+              "arr": "12:33",
+              "flight": 1977,
+              "fleet": "CRJ200"
+            },
+            {
+              "origin": "BHM",
+              "dest": "PIE",
+              "dep": "13:28",
+              "arr": "15:59",
+              "flight": 2223,
+              "fleet": "CRJ200"
+            }
+          ],
+          "waits": [
+            39,
+            55
+          ],
+          "stops": 2,
+          "dest": "PIE",
+          "departureMinute": 625,
+          "totalMinutes": 334,
+          "circuity": 1.0850737865266322
+        }
+      },
+      "rawCoverage": {
+        "stops": 2,
+        "gap": true,
+        "counts": [
+          0,
+          0,
+          10
+        ],
+        "best": [
+          null,
+          null,
+          {
+            "legs": [
+              {
+                "origin": "GRR",
+                "dest": "DAY",
+                "dep": "10:25",
+                "arr": "11:23",
+                "flight": 1804,
+                "fleet": "CRJ200"
+              },
+              {
+                "origin": "DAY",
+                "dest": "BHM",
+                "dep": "12:02",
+                "arr": "12:33",
+                "flight": 1977,
+                "fleet": "CRJ200"
+              },
+              {
+                "origin": "BHM",
+                "dest": "PIE",
+                "dep": "13:28",
+                "arr": "15:59",
+                "flight": 2223,
+                "fleet": "CRJ200"
+              }
+            ],
+            "waits": [
+              39,
+              55
+            ],
+            "stops": 2,
+            "dest": "PIE",
+            "departureMinute": 625,
+            "totalMinutes": 334,
+            "circuity": 1.0850737865266322
+          }
+        ],
+        "fastest": {
+          "legs": [
+            {
+              "origin": "GRR",
+              "dest": "DAY",
+              "dep": "10:25",
+              "arr": "11:23",
+              "flight": 1804,
+              "fleet": "CRJ200"
+            },
+            {
+              "origin": "DAY",
+              "dest": "BHM",
+              "dep": "12:02",
+              "arr": "12:33",
+              "flight": 1977,
+              "fleet": "CRJ200"
+            },
+            {
+              "origin": "BHM",
+              "dest": "PIE",
+              "dep": "13:28",
+              "arr": "15:59",
+              "flight": 2223,
+              "fleet": "CRJ200"
+            }
+          ],
+          "waits": [
+            39,
+            55
+          ],
+          "stops": 2,
+          "dest": "PIE",
+          "departureMinute": 625,
+          "totalMinutes": 334,
+          "circuity": 1.0850737865266322
+        }
+      },
+      "shortestStop": 2,
+      "options": [
+        {
+          "flights": [
+            1804,
+            1977,
+            2223
+          ],
+          "route": "GRR→DAY→BHM→PIE",
+          "dep": "10:25",
+          "arr": "15:59",
+          "waits": [
+            39,
+            55
+          ],
+          "minutes": 334,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1805,
+            1569,
+            1175
+          ],
+          "route": "GRR→DAY→PHF→PIE",
+          "dep": "14:35",
+          "arr": "20:34",
+          "waits": [
+            47,
+            44
+          ],
+          "minutes": 359,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1803,
+            1452,
+            1535
+          ],
+          "route": "GRR→DAY→JAX→PIE",
+          "dep": "06:15",
+          "arr": "12:44",
+          "waits": [
+            47,
+            115
+          ],
+          "minutes": 389,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1804,
+            1567,
+            1174
+          ],
+          "route": "GRR→DAY→PHF→PIE",
+          "dep": "10:25",
+          "arr": "18:14",
+          "waits": [
+            42,
+            159
+          ],
+          "minutes": 469,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1804,
+            1568,
+            1174
+          ],
+          "route": "GRR→DAY→PHF→PIE",
+          "dep": "10:25",
+          "arr": "18:14",
+          "waits": [
+            162,
+            39
+          ],
+          "minutes": 469,
+          "stops": 2
+        },
+        {
+          "flights": [
+            2182,
+            1254,
+            1535
+          ],
+          "route": "GRR→MCI→JAX→PIE",
+          "dep": "04:30",
+          "arr": "12:44",
+          "waits": [
+            30,
+            170
+          ],
+          "minutes": 494,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1805,
+            1569,
+            1176
+          ],
+          "route": "GRR→DAY→PHF→PIE",
+          "dep": "14:35",
+          "arr": "22:54",
+          "waits": [
+            47,
+            184
+          ],
+          "minutes": 499,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1804,
+            1657,
+            1227
+          ],
+          "route": "GRR→DAY→SYR→PIE",
+          "dep": "10:25",
+          "arr": "19:34",
+          "waits": [
+            42,
+            192
+          ],
+          "minutes": 549,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1805,
+            2106,
+            1072
+          ],
+          "route": "GRR→DAY→MCI→PIE",
+          "dep": "14:35",
+          "arr": "00:12",
+          "waits": [
+            162,
+            100
+          ],
+          "minutes": 577,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1804,
+            1568,
+            1175
+          ],
+          "route": "GRR→DAY→PHF→PIE",
+          "dep": "10:25",
+          "arr": "20:34",
+          "waits": [
+            162,
+            179
+          ],
+          "minutes": 609,
+          "stops": 2
+        }
+      ],
+      "reasonable": [
+        {
+          "flights": [
+            1804,
+            1977,
+            2223
+          ],
+          "route": "GRR→DAY→BHM→PIE",
+          "dep": "10:25",
+          "arr": "15:59",
+          "waits": [
+            39,
+            55
+          ],
+          "minutes": 334,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1805,
+            1569,
+            1175
+          ],
+          "route": "GRR→DAY→PHF→PIE",
+          "dep": "14:35",
+          "arr": "20:34",
+          "waits": [
+            47,
+            44
+          ],
+          "minutes": 359,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1803,
+            1452,
+            1535
+          ],
+          "route": "GRR→DAY→JAX→PIE",
+          "dep": "06:15",
+          "arr": "12:44",
+          "waits": [
+            47,
+            115
+          ],
+          "minutes": 389,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1804,
+            1567,
+            1174
+          ],
+          "route": "GRR→DAY→PHF→PIE",
+          "dep": "10:25",
+          "arr": "18:14",
+          "waits": [
+            42,
+            159
+          ],
+          "minutes": 469,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1804,
+            1568,
+            1174
+          ],
+          "route": "GRR→DAY→PHF→PIE",
+          "dep": "10:25",
+          "arr": "18:14",
+          "waits": [
+            162,
+            39
+          ],
+          "minutes": 469,
+          "stops": 2
+        },
+        {
+          "flights": [
+            2182,
+            1254,
+            1535
+          ],
+          "route": "GRR→MCI→JAX→PIE",
+          "dep": "04:30",
+          "arr": "12:44",
+          "waits": [
+            30,
+            170
+          ],
+          "minutes": 494,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1805,
+            1569,
+            1176
+          ],
+          "route": "GRR→DAY→PHF→PIE",
+          "dep": "14:35",
+          "arr": "22:54",
+          "waits": [
+            47,
+            184
+          ],
+          "minutes": 499,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1804,
+            1657,
+            1227
+          ],
+          "route": "GRR→DAY→SYR→PIE",
+          "dep": "10:25",
+          "arr": "19:34",
+          "waits": [
+            42,
+            192
+          ],
+          "minutes": 549,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1805,
+            2106,
+            1072
+          ],
+          "route": "GRR→DAY→MCI→PIE",
+          "dep": "14:35",
+          "arr": "00:12",
+          "waits": [
+            162,
+            100
+          ],
+          "minutes": 577,
+          "stops": 2
+        },
+        {
+          "flights": [
+            1804,
+            1568,
+            1175
+          ],
+          "route": "GRR→DAY→PHF→PIE",
+          "dep": "10:25",
+          "arr": "20:34",
+          "waits": [
+            162,
+            179
+          ],
+          "minutes": 609,
+          "stops": 2
+        }
+      ]
+    }
+  },
+  "nearMisses": [
+    {
+      "market": "PIE-IND",
+      "demand": 106,
+      "hub": "JAX",
+      "first": {
+        "flight": 1536,
+        "arrival": "14:24"
+      },
+      "second": {
+        "flight": 1186,
+        "departure": "19:30"
+      },
+      "transfer": 306,
+      "delta": -66,
+      "preferred": {
+        "flight": 1186,
+        "shift": -66,
+        "screen": {
+          "leg": {
+            "id": "IND-JAX-CRJ900-01-IN",
+            "route": 503,
+            "line": "AB",
+            "fleet": "CRJ900",
+            "day": 3,
+            "sequenceWithinRoute": 6,
+            "pairing": 477,
+            "flight": 1186,
+            "origin": "JAX",
+            "destination": "IND",
+            "departure": "19:30",
+            "arrival": "21:24",
+            "departureMinute": 1170,
+            "arrivalMinute": 1284
+          },
+          "shift": -66,
+          "departure": "18:24",
+          "arrival": "20:18",
+          "turns": [
+            {
+              "side": "Before flight",
+              "minutes": -21
+            },
+            {
+              "side": "Next overnight",
+              "minutes": 492
+            }
+          ],
+          "issues": [
+            "Before flight: -21 min, below 40 min",
+            "departure outside assigned JAX-B14"
+          ]
+        }
+      }
+    },
+    {
+      "market": "PIE-AUS",
+      "demand": 96.8,
+      "hub": "JAX",
+      "first": {
+        "flight": 1536,
+        "arrival": "14:24"
+      },
+      "second": {
+        "flight": 1148,
+        "departure": "12:55"
+      },
+      "transfer": 1351,
+      "delta": 119,
+      "preferred": {
+        "flight": 1148,
+        "shift": 119,
+        "screen": {
+          "leg": {
+            "id": "AUS-JAX-CRJ900-02-IN",
+            "route": 511,
+            "line": "AG",
+            "fleet": "CRJ900",
+            "day": 1,
+            "sequenceWithinRoute": 4,
+            "pairing": 425,
+            "flight": 1148,
+            "origin": "JAX",
+            "destination": "AUS",
+            "departure": "12:55",
+            "arrival": "14:20",
+            "departureMinute": 775,
+            "arrivalMinute": 860
+          },
+          "shift": 119,
+          "departure": "14:54",
+          "arrival": "16:19",
+          "turns": [
+            {
+              "side": "Before flight",
+              "minutes": 161
+            },
+            {
+              "side": "After flight",
+              "minutes": -59
+            }
+          ],
+          "issues": [
+            "After flight: -59 min, below 40 min",
+            "departure outside assigned JAX-B8"
+          ]
+        }
+      }
+    },
+    {
+      "market": "PIE-BLV",
+      "demand": 77.8,
+      "hub": "JAX",
+      "first": {
+        "flight": 1536,
+        "arrival": "14:24"
+      },
+      "second": {
+        "flight": 1216,
+        "departure": "14:00"
+      },
+      "transfer": 1416,
+      "delta": 54,
+      "preferred": {
+        "flight": 1216,
+        "shift": 54,
+        "screen": {
+          "leg": {
+            "id": "BLV-JAX-CRJ900-02-IN",
+            "route": 512,
+            "line": "AG",
+            "fleet": "CRJ900",
+            "day": 2,
+            "sequenceWithinRoute": 4,
+            "pairing": 628,
+            "flight": 1216,
+            "origin": "JAX",
+            "destination": "BLV",
+            "departure": "14:00",
+            "arrival": "14:58",
+            "departureMinute": 840,
+            "arrivalMinute": 898
+          },
+          "shift": 54,
+          "departure": "14:54",
+          "arrival": "15:52",
+          "turns": [
+            {
+              "side": "Before flight",
+              "minutes": 160
+            },
+            {
+              "side": "After flight",
+              "minutes": 128
+            }
+          ],
+          "issues": [
+            "departure outside assigned JAX-B9"
+          ]
+        }
+      }
+    }
+  ],
+  "mciOut": [
+    {
+      "flight": 1081,
+      "route": 710,
+      "dest": "AUS",
+      "dep": "12:15"
+    },
+    {
+      "flight": 1082,
+      "route": 712,
+      "dest": "AUS",
+      "dep": "15:40"
+    },
+    {
+      "flight": 1221,
+      "route": 503,
+      "dest": "IND",
+      "dep": "07:20"
+    },
+    {
+      "flight": 1355,
+      "route": 304,
+      "dest": "BLV",
+      "dep": "07:15"
+    },
+    {
+      "flight": 1356,
+      "route": 304,
+      "dest": "BLV",
+      "dep": "12:15"
+    },
+    {
+      "flight": 2002,
+      "route": 713,
+      "dest": "AUS",
+      "dep": "04:51"
+    },
+    {
+      "flight": 2021,
+      "route": 113,
+      "dest": "IND",
+      "dep": "16:25"
+    },
+    {
+      "flight": 2107,
+      "route": 172,
+      "dest": "BLV",
+      "dep": "15:25"
+    },
+    {
+      "flight": 2181,
+      "route": 715,
+      "dest": "GRR",
+      "dep": "21:23"
+    }
+  ],
+  "jaxOut": [
+    {
+      "flight": 1147,
+      "route": 513,
+      "dest": "AUS",
+      "dep": "08:35"
+    },
+    {
+      "flight": 1148,
+      "route": 511,
+      "dest": "AUS",
+      "dep": "12:55"
+    },
+    {
+      "flight": 1185,
+      "route": 512,
+      "dest": "IND",
+      "dep": "07:30"
+    },
+    {
+      "flight": 1186,
+      "route": 503,
+      "dest": "IND",
+      "dep": "19:30"
+    },
+    {
+      "flight": 1215,
+      "route": 511,
+      "dest": "BLV",
+      "dep": "07:30"
+    },
+    {
+      "flight": 1216,
+      "route": 512,
+      "dest": "BLV",
+      "dep": "14:00"
+    }
+  ]
+}
