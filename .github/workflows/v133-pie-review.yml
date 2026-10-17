@@ -1,0 +1,31 @@
+name: Review Schedule 7 v1.3.3 PIE connection gaps
+on:
+  push:
+    branches: [schedule-7-v1.3.3-pie-connectivity-draft]
+    paths:
+      - '.github/workflows/v133-pie-review.yml'
+      - 'scripts/review_schedule_7_v1_3_3_pie_baseline.mjs'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: v133-pie-review
+  cancel-in-progress: true
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Reconstruct exact PIE itinerary availability
+        run: node scripts/review_schedule_7_v1_3_3_pie_baseline.mjs
+      - name: Commit diagnostic only (not a schedule change)
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f outputs/schedule_7_v1_3_3_pie_review/baseline.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Document baseline PIE and return-direction itinerary asymmetry [skip ci]"
+            git restore --worktree .
+            git pull --rebase origin schedule-7-v1.3.3-pie-connectivity-draft
+            git push
+          fi
