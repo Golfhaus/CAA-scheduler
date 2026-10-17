@@ -1,0 +1,2373 @@
+{
+  "base": "released v1.3.2",
+  "publication": "not authorized",
+  "results": {
+    "r514_715_884": {
+      "markets": {
+        "PIE-IND": {
+          "demand": 106,
+          "oldStops": 2,
+          "newStops": 1,
+          "oldFastest": 339,
+          "newFastest": 339,
+          "oldReasonableCounts": [
+            0,
+            0,
+            10
+          ],
+          "newReasonableCounts": [
+            0,
+            1,
+            11
+          ],
+          "bestRoute": [
+            {
+              "flights": [
+                2237,
+                2021
+              ],
+              "route": "PIE→MCI→IND",
+              "waits": [
+                174
+              ],
+              "minutes": 420
+            },
+            {
+              "flights": [
+                2224,
+                1982,
+                2173
+              ],
+              "route": "PIE→BHM→DAY→IND",
+              "waits": [
+                44,
+                70
+              ],
+              "minutes": 339
+            }
+          ]
+        },
+        "PIE-AUS": {
+          "demand": 96.8,
+          "oldStops": 2,
+          "newStops": 1,
+          "oldFastest": 449,
+          "newFastest": 392,
+          "oldReasonableCounts": [
+            0,
+            0,
+            3
+          ],
+          "newReasonableCounts": [
+            0,
+            1,
+            3
+          ],
+          "bestRoute": [
+            {
+              "flights": [
+                2237,
+                1082
+              ],
+              "route": "PIE→MCI→AUS",
+              "waits": [
+                129
+              ],
+              "minutes": 392
+            },
+            {
+              "flights": [
+                1536,
+                1451,
+                1483
+              ],
+              "route": "PIE→JAX→DAY→AUS",
+              "waits": [
+                81,
+                40
+              ],
+              "minutes": 449
+            }
+          ]
+        },
+        "PIE-BLV": {
+          "demand": 77.8,
+          "oldStops": null,
+          "newStops": 1,
+          "oldFastest": null,
+          "newFastest": 335,
+          "oldReasonableCounts": [
+            0,
+            0,
+            0
+          ],
+          "newReasonableCounts": [
+            0,
+            1,
+            0
+          ],
+          "bestRoute": [
+            {
+              "flights": [
+                2237,
+                2107
+              ],
+              "route": "PIE→MCI→BLV",
+              "waits": [
+                114
+              ],
+              "minutes": 335
+            }
+          ]
+        },
+        "PIE-GRR": {
+          "demand": 39.1,
+          "oldStops": 1,
+          "newStops": 1,
+          "oldFastest": 333,
+          "newFastest": 333,
+          "oldReasonableCounts": [
+            0,
+            2,
+            9
+          ],
+          "newReasonableCounts": [
+            0,
+            2,
+            10
+          ],
+          "bestRoute": [
+            {
+              "flights": [
+                1074,
+                2181
+              ],
+              "route": "PIE→MCI→GRR",
+              "waits": [
+                86
+              ],
+              "minutes": 333
+            },
+            {
+              "flights": [
+                1179,
+                1570,
+                1809
+              ],
+              "route": "PIE→PHF→DAY→GRR",
+              "waits": [
+                46,
+                44
+              ],
+              "minutes": 358
+            }
+          ]
+        },
+        "GRR-PIE": {
+          "demand": 38.2,
+          "oldStops": 2,
+          "newStops": 2,
+          "oldFastest": 334,
+          "newFastest": 334,
+          "oldReasonableCounts": [
+            0,
+            0,
+            10
+          ],
+          "newReasonableCounts": [
+            0,
+            0,
+            9
+          ],
+          "bestRoute": [
+            {
+              "flights": [
+                1804,
+                1977,
+                2223
+              ],
+              "route": "GRR→DAY→BHM→PIE",
+              "waits": [
+                39,
+                55
+              ],
+              "minutes": 334
+            }
+          ]
+        }
+      },
+      "geo": {
+        "gains": 12,
+        "losses": [
+          {
+            "market": "FWA-PIE",
+            "demand": 11.4,
+            "previous": 314,
+            "after": 314
+          }
+        ],
+        "faster": 10,
+        "slower": 5,
+        "lostPaths": 60,
+        "highDemandLost": [
+          "FWA-PIE"
+        ],
+        "largestSlower": [
+          {
+            "market": "PIE-ALB",
+            "origin": "PIE",
+            "destination": "ALB",
+            "demand": 43.3,
+            "beforeMinutes": 244,
+            "afterMinutes": 249
+          },
+          {
+            "market": "ALB-PIE",
+            "origin": "ALB",
+            "destination": "PIE",
+            "demand": 43.2,
+            "beforeMinutes": 249,
+            "afterMinutes": 258
+          },
+          {
+            "market": "HPN-PIE",
+            "origin": "HPN",
+            "destination": "PIE",
+            "demand": 37.2,
+            "beforeMinutes": 259,
+            "afterMinutes": 268
+          },
+          {
+            "market": "HVN-PIE",
+            "origin": "HVN",
+            "destination": "PIE",
+            "demand": 33.6,
+            "beforeMinutes": 259,
+            "afterMinutes": 268
+          },
+          {
+            "market": "PIE-HVN",
+            "origin": "PIE",
+            "destination": "HVN",
+            "demand": 32.4,
+            "beforeMinutes": 261,
+            "afterMinutes": 376
+          }
+        ]
+      },
+      "raw": {
+        "gains": 11,
+        "losses": 1
+      },
+      "removed": [
+        1230,
+        1227
+      ],
+      "flights": 1229
+    },
+    "r514_715_895": {
+      "markets": {
+        "PIE-IND": {
+          "demand": 106,
+          "oldStops": 2,
+          "newStops": 1,
+          "oldFastest": 339,
+          "newFastest": 339,
+          "oldReasonableCounts": [
+            0,
+            0,
+            10
+          ],
+          "newReasonableCounts": [
+            0,
+            1,
+            11
+          ],
+          "bestRoute": [
+            {
+              "flights": [
+                2237,
+                2021
+              ],
+              "route": "PIE→MCI→IND",
+              "waits": [
+                174
+              ],
+              "minutes": 420
+            },
+            {
+              "flights": [
+                2224,
+                1982,
+                2173
+              ],
+              "route": "PIE→BHM→DAY→IND",
+              "waits": [
+                44,
+                70
+              ],
+              "minutes": 339
+            }
+          ]
+        },
+        "PIE-AUS": {
+          "demand": 96.8,
+          "oldStops": 2,
+          "newStops": 1,
+          "oldFastest": 449,
+          "newFastest": 392,
+          "oldReasonableCounts": [
+            0,
+            0,
+            3
+          ],
+          "newReasonableCounts": [
+            0,
+            1,
+            3
+          ],
+          "bestRoute": [
+            {
+              "flights": [
+                2237,
+                1082
+              ],
+              "route": "PIE→MCI→AUS",
+              "waits": [
+                129
+              ],
+              "minutes": 392
+            },
+            {
+              "flights": [
+                1536,
+                1451,
+                1483
+              ],
+              "route": "PIE→JAX→DAY→AUS",
+              "waits": [
+                81,
+                40
+              ],
+              "minutes": 449
+            }
+          ]
+        },
+        "PIE-BLV": {
+          "demand": 77.8,
+          "oldStops": null,
+          "newStops": 1,
+          "oldFastest": null,
+          "newFastest": 335,
+          "oldReasonableCounts": [
+            0,
+            0,
+            0
+          ],
+          "newReasonableCounts": [
+            0,
+            1,
+            0
+          ],
+          "bestRoute": [
+            {
+              "flights": [
+                2237,
+                2107
+              ],
+              "route": "PIE→MCI→BLV",
+              "waits": [
+                114
+              ],
+              "minutes": 335
+            }
+          ]
+        },
+        "PIE-GRR": {
+          "demand": 39.1,
+          "oldStops": 1,
+          "newStops": 1,
+          "oldFastest": 333,
+          "newFastest": 333,
+          "oldReasonableCounts": [
+            0,
+            2,
+            9
+          ],
+          "newReasonableCounts": [
+            0,
+            2,
+            10
+          ],
+          "bestRoute": [
+            {
+              "flights": [
+                1074,
+                2181
+              ],
+              "route": "PIE→MCI→GRR",
+              "waits": [
+                86
+              ],
+              "minutes": 333
+            },
+            {
+              "flights": [
+                1179,
+                1570,
+                1809
+              ],
+              "route": "PIE→PHF→DAY→GRR",
+              "waits": [
+                46,
+                44
+              ],
+              "minutes": 358
+            }
+          ]
+        },
+        "GRR-PIE": {
+          "demand": 38.2,
+          "oldStops": 2,
+          "newStops": 2,
+          "oldFastest": 334,
+          "newFastest": 334,
+          "oldReasonableCounts": [
+            0,
+            0,
+            10
+          ],
+          "newReasonableCounts": [
+            0,
+            0,
+            9
+          ],
+          "bestRoute": [
+            {
+              "flights": [
+                1804,
+                1977,
+                2223
+              ],
+              "route": "GRR→DAY→BHM→PIE",
+              "waits": [
+                39,
+                55
+              ],
+              "minutes": 334
+            }
+          ]
+        }
+      },
+      "geo": {
+        "gains": 12,
+        "losses": [
+          {
+            "market": "FWA-PIE",
+            "demand": 11.4,
+            "previous": 314,
+            "after": 314
+          }
+        ],
+        "faster": 7,
+        "slower": 5,
+        "lostPaths": 60,
+        "highDemandLost": [
+          "FWA-PIE"
+        ],
+        "largestSlower": [
+          {
+            "market": "PIE-ALB",
+            "origin": "PIE",
+            "destination": "ALB",
+            "demand": 43.3,
+            "beforeMinutes": 244,
+            "afterMinutes": 249
+          },
+          {
+            "market": "ALB-PIE",
+            "origin": "ALB",
+            "destination": "PIE",
+            "demand": 43.2,
+            "beforeMinutes": 249,
+            "afterMinutes": 258
+          },
+          {
+            "market": "HPN-PIE",
+            "origin": "HPN",
+            "destination": "PIE",
+            "demand": 37.2,
+            "beforeMinutes": 259,
+            "afterMinutes": 268
+          },
+          {
+            "market": "HVN-PIE",
+            "origin": "HVN",
+            "destination": "PIE",
+            "demand": 33.6,
+            "beforeMinutes": 259,
+            "afterMinutes": 268
+          },
+          {
+            "market": "PIE-HVN",
+            "origin": "PIE",
+            "destination": "HVN",
+            "demand": 32.4,
+            "beforeMinutes": 261,
+            "afterMinutes": 376
+          }
+        ]
+      },
+      "raw": {
+        "gains": 11,
+        "losses": 1
+      },
+      "removed": [
+        1230,
+        1227
+      ],
+      "flights": 1229
+    },
+    "r514_715_905": {
+      "markets": {
+        "PIE-IND": {
+          "demand": 106,
+          "oldStops": 2,
+          "newStops": 1,
+          "oldFastest": 339,
+          "newFastest": 339,
+          "oldReasonableCounts": [
+            0,
+            0,
+            10
+          ],
+          "newReasonableCounts": [
+            0,
+            1,
+            11
+          ],
+          "bestRoute": [
+            {
+              "flights": [
+                2237,
+                2021
+              ],
+              "route": "PIE→MCI→IND",
+              "waits": [
+                174
+              ],
+              "minutes": 420
+            },
+            {
+              "flights": [
+                2224,
+                1982,
+                2173
+              ],
+              "route": "PIE→BHM→DAY→IND",
+              "waits": [
+                44,
+                70
+              ],
+              "minutes": 339
+            }
+          ]
+        },
+        "PIE-AUS": {
+          "demand": 96.8,
+          "oldStops": 2,
+          "newStops": 1,
+          "oldFastest": 449,
+          "newFastest": 392,
+          "oldReasonableCounts": [
+            0,
+            0,
+            3
+          ],
+          "newReasonableCounts": [
+            0,
+            1,
+            3
+          ],
+          "bestRoute": [
+            {
+              "flights": [
+                2237,
+                1082
+              ],
+              "route": "PIE→MCI→AUS",
+              "waits": [
+                129
+              ],
+              "minutes": 392
+            },
+            {
+              "flights": [
+                1536,
+                1451,
+                1483
+              ],
+              "route": "PIE→JAX→DAY→AUS",
+              "waits": [
+                81,
+                40
+              ],
+              "minutes": 449
+            }
+          ]
+        },
+        "PIE-BLV": {
+          "demand": 77.8,
+          "oldStops": null,
+          "newStops": 1,
+          "oldFastest": null,
+          "newFastest": 335,
+          "oldReasonableCounts": [
+            0,
+            0,
+            0
+          ],
+          "newReasonableCounts": [
+            0,
+            1,
+            0
+          ],
+          "bestRoute": [
+            {
+              "flights": [
+                2237,
+                2107
+              ],
+              "route": "PIE→MCI→BLV",
+              "waits": [
+                114
+              ],
+              "minutes": 335
+            }
+          ]
+        },
+        "PIE-GRR": {
+          "demand": 39.1,
+          "oldStops": 1,
+          "newStops": 1,
+          "oldFastest": 333,
+          "newFastest": 333,
+          "oldReasonableCounts": [
+            0,
+            2,
+            9
+          ],
+          "newReasonableCounts": [
+            0,
+            2,
+            10
+          ],
+          "bestRoute": [
+            {
+              "flights": [
+                1074,
+                2181
+              ],
+              "route": "PIE→MCI→GRR",
+              "waits": [
+                86
+              ],
+              "minutes": 333
+            },
+            {
+              "flights": [
+                1179,
+                1570,
+                1809
+              ],
+              "route": "PIE→PHF→DAY→GRR",
+              "waits": [
+                46,
+                44
+              ],
+              "minutes": 358
+            }
+          ]
+        },
+        "GRR-PIE": {
+          "demand": 38.2,
+          "oldStops": 2,
+          "newStops": 2,
+          "oldFastest": 334,
+          "newFastest": 334,
+          "oldReasonableCounts": [
+            0,
+            0,
+            10
+          ],
+          "newReasonableCounts": [
+            0,
+            0,
+            9
+          ],
+          "bestRoute": [
+            {
+              "flights": [
+                1804,
+                1977,
+                2223
+              ],
+              "route": "GRR→DAY→BHM→PIE",
+              "waits": [
+                39,
+                55
+              ],
+              "minutes": 334
+            }
+          ]
+        }
+      },
+      "geo": {
+        "gains": 12,
+        "losses": [
+          {
+            "market": "FWA-PIE",
+            "demand": 11.4,
+            "previous": 314,
+            "after": 314
+          }
+        ],
+        "faster": 7,
+        "slower": 5,
+        "lostPaths": 60,
+        "highDemandLost": [
+          "FWA-PIE"
+        ],
+        "largestSlower": [
+          {
+            "market": "PIE-ALB",
+            "origin": "PIE",
+            "destination": "ALB",
+            "demand": 43.3,
+            "beforeMinutes": 244,
+            "afterMinutes": 249
+          },
+          {
+            "market": "ALB-PIE",
+            "origin": "ALB",
+            "destination": "PIE",
+            "demand": 43.2,
+            "beforeMinutes": 249,
+            "afterMinutes": 258
+          },
+          {
+            "market": "HPN-PIE",
+            "origin": "HPN",
+            "destination": "PIE",
+            "demand": 37.2,
+            "beforeMinutes": 259,
+            "afterMinutes": 268
+          },
+          {
+            "market": "HVN-PIE",
+            "origin": "HVN",
+            "destination": "PIE",
+            "demand": 33.6,
+            "beforeMinutes": 259,
+            "afterMinutes": 268
+          },
+          {
+            "market": "PIE-HVN",
+            "origin": "PIE",
+            "destination": "HVN",
+            "demand": 32.4,
+            "beforeMinutes": 261,
+            "afterMinutes": 376
+          }
+        ]
+      },
+      "raw": {
+        "gains": 11,
+        "losses": 1
+      },
+      "removed": [
+        1230,
+        1227
+      ],
+      "flights": 1229
+    },
+    "r514_720_884": {
+      "markets": {
+        "PIE-IND": {
+          "demand": 106,
+          "oldStops": 2,
+          "newStops": 1,
+          "oldFastest": 339,
+          "newFastest": 339,
+          "oldReasonableCounts": [
+            0,
+            0,
+            10
+          ],
+          "newReasonableCounts": [
+            0,
+            1,
+            11
+          ],
+          "bestRoute": [
+            {
+              "flights": [
+                2237,
+                2021
+              ],
+              "route": "PIE→MCI→IND",
+              "waits": [
+                169
+              ],
+              "minutes": 415
+            },
+            {
+              "flights": [
+                2224,
+                1982,
+                2173
+              ],
+              "route": "PIE→BHM→DAY→IND",
+              "waits": [
+                44,
+                70
+              ],
+              "minutes": 339
+            }
+          ]
+        },
+        "PIE-AUS": {
+          "demand": 96.8,
+          "oldStops": 2,
+          "newStops": 1,
+          "oldFastest": 449,
+          "newFastest": 387,
+          "oldReasonableCounts": [
+            0,
+            0,
+            3
+          ],
+          "newReasonableCounts": [
+            0,
+            1,
+            3
+          ],
+          "bestRoute": [
+            {
+              "flights": [
+                2237,
+                1082
+              ],
+              "route": "PIE→MCI→AUS",
+              "waits": [
+                124
+              ],
+              "minutes": 387
+            },
+            {
+              "flights": [
+                1536,
+                1451,
+                1483
+              ],
+              "route": "PIE→JAX→DAY→AUS",
+              "waits": [
+                81,
+                40
+              ],
+              "minutes": 449
+            }
+          ]
+        },
+        "PIE-BLV": {
+          "demand": 77.8,
+          "oldStops": null,
+          "newStops": 1,
+          "oldFastest": null,
+          "newFastest": 330,
+          "oldReasonableCounts": [
+            0,
+            0,
+            0
+          ],
+          "newReasonableCounts": [
+            0,
+            1,
+            0
+          ],
+          "bestRoute": [
+            {
+              "flights": [
+                2237,
+                2107
+              ],
+              "route": "PIE→MCI→BLV",
+              "waits": [
+                109
+              ],
+              "minutes": 330
+            }
+          ]
+        },
+        "PIE-GRR": {
+          "demand": 39.1,
+          "oldStops": 1,
+          "newStops": 1,
+          "oldFastest": 333,
+          "newFastest": 333,
+          "oldReasonableCounts": [
+            0,
+            2,
+            9
+          ],
+          "newReasonableCounts": [
+            0,
+            2,
+            10
+          ],
+          "bestRoute": [
+            {
+              "flights": [
+                1074,
+                2181
+              ],
+              "route": "PIE→MCI→GRR",
+              "waits": [
+                86
+              ],
+              "minutes": 333
+            },
+            {
+              "flights": [
+                1179,
+                1570,
+                1809
+              ],
+              "route": "PIE→PHF→DAY→GRR",
+              "waits": [
+                46,
+                44
+              ],
+              "minutes": 358
+            }
+          ]
+        },
+        "GRR-PIE": {
+          "demand": 38.2,
+          "oldStops": 2,
+          "newStops": 2,
+          "oldFastest": 334,
+          "newFastest": 334,
+          "oldReasonableCounts": [
+            0,
+            0,
+            10
+          ],
+          "newReasonableCounts": [
+            0,
+            0,
+            9
+          ],
+          "bestRoute": [
+            {
+              "flights": [
+                1804,
+                1977,
+                2223
+              ],
+              "route": "GRR→DAY→BHM→PIE",
+              "waits": [
+                39,
+                55
+              ],
+              "minutes": 334
+            }
+          ]
+        }
+      },
+      "geo": {
+        "gains": 12,
+        "losses": [
+          {
+            "market": "FWA-PIE",
+            "demand": 11.4,
+            "previous": 314,
+            "after": 314
+          }
+        ],
+        "faster": 9,
+        "slower": 5,
+        "lostPaths": 60,
+        "highDemandLost": [
+          "FWA-PIE"
+        ],
+        "largestSlower": [
+          {
+            "market": "PIE-ALB",
+            "origin": "PIE",
+            "destination": "ALB",
+            "demand": 43.3,
+            "beforeMinutes": 244,
+            "afterMinutes": 249
+          },
+          {
+            "market": "ALB-PIE",
+            "origin": "ALB",
+            "destination": "PIE",
+            "demand": 43.2,
+            "beforeMinutes": 249,
+            "afterMinutes": 258
+          },
+          {
+            "market": "HPN-PIE",
+            "origin": "HPN",
+            "destination": "PIE",
+            "demand": 37.2,
+            "beforeMinutes": 259,
+            "afterMinutes": 268
+          },
+          {
+            "market": "HVN-PIE",
+            "origin": "HVN",
+            "destination": "PIE",
+            "demand": 33.6,
+            "beforeMinutes": 259,
+            "afterMinutes": 268
+          },
+          {
+            "market": "PIE-HVN",
+            "origin": "PIE",
+            "destination": "HVN",
+            "demand": 32.4,
+            "beforeMinutes": 261,
+            "afterMinutes": 376
+          }
+        ]
+      },
+      "raw": {
+        "gains": 11,
+        "losses": 1
+      },
+      "removed": [
+        1230,
+        1227
+      ],
+      "flights": 1229
+    },
+    "r514_720_895": {
+      "markets": {
+        "PIE-IND": {
+          "demand": 106,
+          "oldStops": 2,
+          "newStops": 1,
+          "oldFastest": 339,
+          "newFastest": 339,
+          "oldReasonableCounts": [
+            0,
+            0,
+            10
+          ],
+          "newReasonableCounts": [
+            0,
+            1,
+            11
+          ],
+          "bestRoute": [
+            {
+              "flights": [
+                2237,
+                2021
+              ],
+              "route": "PIE→MCI→IND",
+              "waits": [
+                169
+              ],
+              "minutes": 415
+            },
+            {
+              "flights": [
+                2224,
+                1982,
+                2173
+              ],
+              "route": "PIE→BHM→DAY→IND",
+              "waits": [
+                44,
+                70
+              ],
+              "minutes": 339
+            }
+          ]
+        },
+        "PIE-AUS": {
+          "demand": 96.8,
+          "oldStops": 2,
+          "newStops": 1,
+          "oldFastest": 449,
+          "newFastest": 387,
+          "oldReasonableCounts": [
+            0,
+            0,
+            3
+          ],
+          "newReasonableCounts": [
+            0,
+            1,
+            3
+          ],
+          "bestRoute": [
+            {
+              "flights": [
+                2237,
+                1082
+              ],
+              "route": "PIE→MCI→AUS",
+              "waits": [
+                124
+              ],
+              "minutes": 387
+            },
+            {
+              "flights": [
+                1536,
+                1451,
+                1483
+              ],
+              "route": "PIE→JAX→DAY→AUS",
+              "waits": [
+                81,
+                40
+              ],
+              "minutes": 449
+            }
+          ]
+        },
+        "PIE-BLV": {
+          "demand": 77.8,
+          "oldStops": null,
+          "newStops": 1,
+          "oldFastest": null,
+          "newFastest": 330,
+          "oldReasonableCounts": [
+            0,
+            0,
+            0
+          ],
+          "newReasonableCounts": [
+            0,
+            1,
+            0
+          ],
+          "bestRoute": [
+            {
+              "flights": [
+                2237,
+                2107
+              ],
+              "route": "PIE→MCI→BLV",
+              "waits": [
+                109
+              ],
+              "minutes": 330
+            }
+          ]
+        },
+        "PIE-GRR": {
+          "demand": 39.1,
+          "oldStops": 1,
+          "newStops": 1,
+          "oldFastest": 333,
+          "newFastest": 333,
+          "oldReasonableCounts": [
+            0,
+            2,
+            9
+          ],
+          "newReasonableCounts": [
+            0,
+            2,
+            10
+          ],
+          "bestRoute": [
+            {
+              "flights": [
+                1074,
+                2181
+              ],
+              "route": "PIE→MCI→GRR",
+              "waits": [
+                86
+              ],
+              "minutes": 333
+            },
+            {
+              "flights": [
+                1179,
+                1570,
+                1809
+              ],
+              "route": "PIE→PHF→DAY→GRR",
+              "waits": [
+                46,
+                44
+              ],
+              "minutes": 358
+            }
+          ]
+        },
+        "GRR-PIE": {
+          "demand": 38.2,
+          "oldStops": 2,
+          "newStops": 2,
+          "oldFastest": 334,
+          "newFastest": 334,
+          "oldReasonableCounts": [
+            0,
+            0,
+            10
+          ],
+          "newReasonableCounts": [
+            0,
+            0,
+            9
+          ],
+          "bestRoute": [
+            {
+              "flights": [
+                1804,
+                1977,
+                2223
+              ],
+              "route": "GRR→DAY→BHM→PIE",
+              "waits": [
+                39,
+                55
+              ],
+              "minutes": 334
+            }
+          ]
+        }
+      },
+      "geo": {
+        "gains": 12,
+        "losses": [
+          {
+            "market": "FWA-PIE",
+            "demand": 11.4,
+            "previous": 314,
+            "after": 314
+          }
+        ],
+        "faster": 6,
+        "slower": 5,
+        "lostPaths": 60,
+        "highDemandLost": [
+          "FWA-PIE"
+        ],
+        "largestSlower": [
+          {
+            "market": "PIE-ALB",
+            "origin": "PIE",
+            "destination": "ALB",
+            "demand": 43.3,
+            "beforeMinutes": 244,
+            "afterMinutes": 249
+          },
+          {
+            "market": "ALB-PIE",
+            "origin": "ALB",
+            "destination": "PIE",
+            "demand": 43.2,
+            "beforeMinutes": 249,
+            "afterMinutes": 258
+          },
+          {
+            "market": "HPN-PIE",
+            "origin": "HPN",
+            "destination": "PIE",
+            "demand": 37.2,
+            "beforeMinutes": 259,
+            "afterMinutes": 268
+          },
+          {
+            "market": "HVN-PIE",
+            "origin": "HVN",
+            "destination": "PIE",
+            "demand": 33.6,
+            "beforeMinutes": 259,
+            "afterMinutes": 268
+          },
+          {
+            "market": "PIE-HVN",
+            "origin": "PIE",
+            "destination": "HVN",
+            "demand": 32.4,
+            "beforeMinutes": 261,
+            "afterMinutes": 376
+          }
+        ]
+      },
+      "raw": {
+        "gains": 11,
+        "losses": 1
+      },
+      "removed": [
+        1230,
+        1227
+      ],
+      "flights": 1229
+    },
+    "r514_720_905": {
+      "markets": {
+        "PIE-IND": {
+          "demand": 106,
+          "oldStops": 2,
+          "newStops": 1,
+          "oldFastest": 339,
+          "newFastest": 339,
+          "oldReasonableCounts": [
+            0,
+            0,
+            10
+          ],
+          "newReasonableCounts": [
+            0,
+            1,
+            11
+          ],
+          "bestRoute": [
+            {
+              "flights": [
+                2237,
+                2021
+              ],
+              "route": "PIE→MCI→IND",
+              "waits": [
+                169
+              ],
+              "minutes": 415
+            },
+            {
+              "flights": [
+                2224,
+                1982,
+                2173
+              ],
+              "route": "PIE→BHM→DAY→IND",
+              "waits": [
+                44,
+                70
+              ],
+              "minutes": 339
+            }
+          ]
+        },
+        "PIE-AUS": {
+          "demand": 96.8,
+          "oldStops": 2,
+          "newStops": 1,
+          "oldFastest": 449,
+          "newFastest": 387,
+          "oldReasonableCounts": [
+            0,
+            0,
+            3
+          ],
+          "newReasonableCounts": [
+            0,
+            1,
+            3
+          ],
+          "bestRoute": [
+            {
+              "flights": [
+                2237,
+                1082
+              ],
+              "route": "PIE→MCI→AUS",
+              "waits": [
+                124
+              ],
+              "minutes": 387
+            },
+            {
+              "flights": [
+                1536,
+                1451,
+                1483
+              ],
+              "route": "PIE→JAX→DAY→AUS",
+              "waits": [
+                81,
+                40
+              ],
+              "minutes": 449
+            }
+          ]
+        },
+        "PIE-BLV": {
+          "demand": 77.8,
+          "oldStops": null,
+          "newStops": 1,
+          "oldFastest": null,
+          "newFastest": 330,
+          "oldReasonableCounts": [
+            0,
+            0,
+            0
+          ],
+          "newReasonableCounts": [
+            0,
+            1,
+            0
+          ],
+          "bestRoute": [
+            {
+              "flights": [
+                2237,
+                2107
+              ],
+              "route": "PIE→MCI→BLV",
+              "waits": [
+                109
+              ],
+              "minutes": 330
+            }
+          ]
+        },
+        "PIE-GRR": {
+          "demand": 39.1,
+          "oldStops": 1,
+          "newStops": 1,
+          "oldFastest": 333,
+          "newFastest": 333,
+          "oldReasonableCounts": [
+            0,
+            2,
+            9
+          ],
+          "newReasonableCounts": [
+            0,
+            2,
+            10
+          ],
+          "bestRoute": [
+            {
+              "flights": [
+                1074,
+                2181
+              ],
+              "route": "PIE→MCI→GRR",
+              "waits": [
+                86
+              ],
+              "minutes": 333
+            },
+            {
+              "flights": [
+                1179,
+                1570,
+                1809
+              ],
+              "route": "PIE→PHF→DAY→GRR",
+              "waits": [
+                46,
+                44
+              ],
+              "minutes": 358
+            }
+          ]
+        },
+        "GRR-PIE": {
+          "demand": 38.2,
+          "oldStops": 2,
+          "newStops": 2,
+          "oldFastest": 334,
+          "newFastest": 334,
+          "oldReasonableCounts": [
+            0,
+            0,
+            10
+          ],
+          "newReasonableCounts": [
+            0,
+            0,
+            9
+          ],
+          "bestRoute": [
+            {
+              "flights": [
+                1804,
+                1977,
+                2223
+              ],
+              "route": "GRR→DAY→BHM→PIE",
+              "waits": [
+                39,
+                55
+              ],
+              "minutes": 334
+            }
+          ]
+        }
+      },
+      "geo": {
+        "gains": 12,
+        "losses": [
+          {
+            "market": "FWA-PIE",
+            "demand": 11.4,
+            "previous": 314,
+            "after": 314
+          }
+        ],
+        "faster": 6,
+        "slower": 5,
+        "lostPaths": 60,
+        "highDemandLost": [
+          "FWA-PIE"
+        ],
+        "largestSlower": [
+          {
+            "market": "PIE-ALB",
+            "origin": "PIE",
+            "destination": "ALB",
+            "demand": 43.3,
+            "beforeMinutes": 244,
+            "afterMinutes": 249
+          },
+          {
+            "market": "ALB-PIE",
+            "origin": "ALB",
+            "destination": "PIE",
+            "demand": 43.2,
+            "beforeMinutes": 249,
+            "afterMinutes": 258
+          },
+          {
+            "market": "HPN-PIE",
+            "origin": "HPN",
+            "destination": "PIE",
+            "demand": 37.2,
+            "beforeMinutes": 259,
+            "afterMinutes": 268
+          },
+          {
+            "market": "HVN-PIE",
+            "origin": "HVN",
+            "destination": "PIE",
+            "demand": 33.6,
+            "beforeMinutes": 259,
+            "afterMinutes": 268
+          },
+          {
+            "market": "PIE-HVN",
+            "origin": "PIE",
+            "destination": "HVN",
+            "demand": 32.4,
+            "beforeMinutes": 261,
+            "afterMinutes": 376
+          }
+        ]
+      },
+      "raw": {
+        "gains": 11,
+        "losses": 1
+      },
+      "removed": [
+        1230,
+        1227
+      ],
+      "flights": 1229
+    },
+    "r514_730_884": {
+      "markets": {
+        "PIE-IND": {
+          "demand": 106,
+          "oldStops": 2,
+          "newStops": 1,
+          "oldFastest": 339,
+          "newFastest": 339,
+          "oldReasonableCounts": [
+            0,
+            0,
+            10
+          ],
+          "newReasonableCounts": [
+            0,
+            1,
+            11
+          ],
+          "bestRoute": [
+            {
+              "flights": [
+                2237,
+                2021
+              ],
+              "route": "PIE→MCI→IND",
+              "waits": [
+                159
+              ],
+              "minutes": 405
+            },
+            {
+              "flights": [
+                2224,
+                1982,
+                2173
+              ],
+              "route": "PIE→BHM→DAY→IND",
+              "waits": [
+                44,
+                70
+              ],
+              "minutes": 339
+            }
+          ]
+        },
+        "PIE-AUS": {
+          "demand": 96.8,
+          "oldStops": 2,
+          "newStops": 1,
+          "oldFastest": 449,
+          "newFastest": 377,
+          "oldReasonableCounts": [
+            0,
+            0,
+            3
+          ],
+          "newReasonableCounts": [
+            0,
+            1,
+            3
+          ],
+          "bestRoute": [
+            {
+              "flights": [
+                2237,
+                1082
+              ],
+              "route": "PIE→MCI→AUS",
+              "waits": [
+                114
+              ],
+              "minutes": 377
+            },
+            {
+              "flights": [
+                1536,
+                1451,
+                1483
+              ],
+              "route": "PIE→JAX→DAY→AUS",
+              "waits": [
+                81,
+                40
+              ],
+              "minutes": 449
+            }
+          ]
+        },
+        "PIE-BLV": {
+          "demand": 77.8,
+          "oldStops": null,
+          "newStops": 1,
+          "oldFastest": null,
+          "newFastest": 320,
+          "oldReasonableCounts": [
+            0,
+            0,
+            0
+          ],
+          "newReasonableCounts": [
+            0,
+            1,
+            0
+          ],
+          "bestRoute": [
+            {
+              "flights": [
+                2237,
+                2107
+              ],
+              "route": "PIE→MCI→BLV",
+              "waits": [
+                99
+              ],
+              "minutes": 320
+            }
+          ]
+        },
+        "PIE-GRR": {
+          "demand": 39.1,
+          "oldStops": 1,
+          "newStops": 1,
+          "oldFastest": 333,
+          "newFastest": 333,
+          "oldReasonableCounts": [
+            0,
+            2,
+            9
+          ],
+          "newReasonableCounts": [
+            0,
+            2,
+            10
+          ],
+          "bestRoute": [
+            {
+              "flights": [
+                1074,
+                2181
+              ],
+              "route": "PIE→MCI→GRR",
+              "waits": [
+                86
+              ],
+              "minutes": 333
+            },
+            {
+              "flights": [
+                1179,
+                1570,
+                1809
+              ],
+              "route": "PIE→PHF→DAY→GRR",
+              "waits": [
+                46,
+                44
+              ],
+              "minutes": 358
+            }
+          ]
+        },
+        "GRR-PIE": {
+          "demand": 38.2,
+          "oldStops": 2,
+          "newStops": 2,
+          "oldFastest": 334,
+          "newFastest": 334,
+          "oldReasonableCounts": [
+            0,
+            0,
+            10
+          ],
+          "newReasonableCounts": [
+            0,
+            0,
+            9
+          ],
+          "bestRoute": [
+            {
+              "flights": [
+                1804,
+                1977,
+                2223
+              ],
+              "route": "GRR→DAY→BHM→PIE",
+              "waits": [
+                39,
+                55
+              ],
+              "minutes": 334
+            }
+          ]
+        }
+      },
+      "geo": {
+        "gains": 12,
+        "losses": [
+          {
+            "market": "FWA-PIE",
+            "demand": 11.4,
+            "previous": 314,
+            "after": 314
+          }
+        ],
+        "faster": 9,
+        "slower": 5,
+        "lostPaths": 60,
+        "highDemandLost": [
+          "FWA-PIE"
+        ],
+        "largestSlower": [
+          {
+            "market": "PIE-ALB",
+            "origin": "PIE",
+            "destination": "ALB",
+            "demand": 43.3,
+            "beforeMinutes": 244,
+            "afterMinutes": 249
+          },
+          {
+            "market": "ALB-PIE",
+            "origin": "ALB",
+            "destination": "PIE",
+            "demand": 43.2,
+            "beforeMinutes": 249,
+            "afterMinutes": 258
+          },
+          {
+            "market": "HPN-PIE",
+            "origin": "HPN",
+            "destination": "PIE",
+            "demand": 37.2,
+            "beforeMinutes": 259,
+            "afterMinutes": 268
+          },
+          {
+            "market": "HVN-PIE",
+            "origin": "HVN",
+            "destination": "PIE",
+            "demand": 33.6,
+            "beforeMinutes": 259,
+            "afterMinutes": 268
+          },
+          {
+            "market": "PIE-HVN",
+            "origin": "PIE",
+            "destination": "HVN",
+            "demand": 32.4,
+            "beforeMinutes": 261,
+            "afterMinutes": 376
+          }
+        ]
+      },
+      "raw": {
+        "gains": 11,
+        "losses": 1
+      },
+      "removed": [
+        1230,
+        1227
+      ],
+      "flights": 1229
+    },
+    "r514_730_895": {
+      "markets": {
+        "PIE-IND": {
+          "demand": 106,
+          "oldStops": 2,
+          "newStops": 1,
+          "oldFastest": 339,
+          "newFastest": 339,
+          "oldReasonableCounts": [
+            0,
+            0,
+            10
+          ],
+          "newReasonableCounts": [
+            0,
+            1,
+            11
+          ],
+          "bestRoute": [
+            {
+              "flights": [
+                2237,
+                2021
+              ],
+              "route": "PIE→MCI→IND",
+              "waits": [
+                159
+              ],
+              "minutes": 405
+            },
+            {
+              "flights": [
+                2224,
+                1982,
+                2173
+              ],
+              "route": "PIE→BHM→DAY→IND",
+              "waits": [
+                44,
+                70
+              ],
+              "minutes": 339
+            }
+          ]
+        },
+        "PIE-AUS": {
+          "demand": 96.8,
+          "oldStops": 2,
+          "newStops": 1,
+          "oldFastest": 449,
+          "newFastest": 377,
+          "oldReasonableCounts": [
+            0,
+            0,
+            3
+          ],
+          "newReasonableCounts": [
+            0,
+            1,
+            3
+          ],
+          "bestRoute": [
+            {
+              "flights": [
+                2237,
+                1082
+              ],
+              "route": "PIE→MCI→AUS",
+              "waits": [
+                114
+              ],
+              "minutes": 377
+            },
+            {
+              "flights": [
+                1536,
+                1451,
+                1483
+              ],
+              "route": "PIE→JAX→DAY→AUS",
+              "waits": [
+                81,
+                40
+              ],
+              "minutes": 449
+            }
+          ]
+        },
+        "PIE-BLV": {
+          "demand": 77.8,
+          "oldStops": null,
+          "newStops": 1,
+          "oldFastest": null,
+          "newFastest": 320,
+          "oldReasonableCounts": [
+            0,
+            0,
+            0
+          ],
+          "newReasonableCounts": [
+            0,
+            1,
+            0
+          ],
+          "bestRoute": [
+            {
+              "flights": [
+                2237,
+                2107
+              ],
+              "route": "PIE→MCI→BLV",
+              "waits": [
+                99
+              ],
+              "minutes": 320
+            }
+          ]
+        },
+        "PIE-GRR": {
+          "demand": 39.1,
+          "oldStops": 1,
+          "newStops": 1,
+          "oldFastest": 333,
+          "newFastest": 333,
+          "oldReasonableCounts": [
+            0,
+            2,
+            9
+          ],
+          "newReasonableCounts": [
+            0,
+            2,
+            10
+          ],
+          "bestRoute": [
+            {
+              "flights": [
+                1074,
+                2181
+              ],
+              "route": "PIE→MCI→GRR",
+              "waits": [
+                86
+              ],
+              "minutes": 333
+            },
+            {
+              "flights": [
+                1179,
+                1570,
+                1809
+              ],
+              "route": "PIE→PHF→DAY→GRR",
+              "waits": [
+                46,
+                44
+              ],
+              "minutes": 358
+            }
+          ]
+        },
+        "GRR-PIE": {
+          "demand": 38.2,
+          "oldStops": 2,
+          "newStops": 2,
+          "oldFastest": 334,
+          "newFastest": 334,
+          "oldReasonableCounts": [
+            0,
+            0,
+            10
+          ],
+          "newReasonableCounts": [
+            0,
+            0,
+            9
+          ],
+          "bestRoute": [
+            {
+              "flights": [
+                1804,
+                1977,
+                2223
+              ],
+              "route": "GRR→DAY→BHM→PIE",
+              "waits": [
+                39,
+                55
+              ],
+              "minutes": 334
+            }
+          ]
+        }
+      },
+      "geo": {
+        "gains": 12,
+        "losses": [
+          {
+            "market": "FWA-PIE",
+            "demand": 11.4,
+            "previous": 314,
+            "after": 314
+          }
+        ],
+        "faster": 6,
+        "slower": 5,
+        "lostPaths": 60,
+        "highDemandLost": [
+          "FWA-PIE"
+        ],
+        "largestSlower": [
+          {
+            "market": "PIE-ALB",
+            "origin": "PIE",
+            "destination": "ALB",
+            "demand": 43.3,
+            "beforeMinutes": 244,
+            "afterMinutes": 249
+          },
+          {
+            "market": "ALB-PIE",
+            "origin": "ALB",
+            "destination": "PIE",
+            "demand": 43.2,
+            "beforeMinutes": 249,
+            "afterMinutes": 258
+          },
+          {
+            "market": "HPN-PIE",
+            "origin": "HPN",
+            "destination": "PIE",
+            "demand": 37.2,
+            "beforeMinutes": 259,
+            "afterMinutes": 268
+          },
+          {
+            "market": "HVN-PIE",
+            "origin": "HVN",
+            "destination": "PIE",
+            "demand": 33.6,
+            "beforeMinutes": 259,
+            "afterMinutes": 268
+          },
+          {
+            "market": "PIE-HVN",
+            "origin": "PIE",
+            "destination": "HVN",
+            "demand": 32.4,
+            "beforeMinutes": 261,
+            "afterMinutes": 376
+          }
+        ]
+      },
+      "raw": {
+        "gains": 11,
+        "losses": 1
+      },
+      "removed": [
+        1230,
+        1227
+      ],
+      "flights": 1229
+    },
+    "r514_730_905": {
+      "markets": {
+        "PIE-IND": {
+          "demand": 106,
+          "oldStops": 2,
+          "newStops": 1,
+          "oldFastest": 339,
+          "newFastest": 339,
+          "oldReasonableCounts": [
+            0,
+            0,
+            10
+          ],
+          "newReasonableCounts": [
+            0,
+            1,
+            11
+          ],
+          "bestRoute": [
+            {
+              "flights": [
+                2237,
+                2021
+              ],
+              "route": "PIE→MCI→IND",
+              "waits": [
+                159
+              ],
+              "minutes": 405
+            },
+            {
+              "flights": [
+                2224,
+                1982,
+                2173
+              ],
+              "route": "PIE→BHM→DAY→IND",
+              "waits": [
+                44,
+                70
+              ],
+              "minutes": 339
+            }
+          ]
+        },
+        "PIE-AUS": {
+          "demand": 96.8,
+          "oldStops": 2,
+          "newStops": 1,
+          "oldFastest": 449,
+          "newFastest": 377,
+          "oldReasonableCounts": [
+            0,
+            0,
+            3
+          ],
+          "newReasonableCounts": [
+            0,
+            1,
+            3
+          ],
+          "bestRoute": [
+            {
+              "flights": [
+                2237,
+                1082
+              ],
+              "route": "PIE→MCI→AUS",
+              "waits": [
+                114
+              ],
+              "minutes": 377
+            },
+            {
+              "flights": [
+                1536,
+                1451,
+                1483
+              ],
+              "route": "PIE→JAX→DAY→AUS",
+              "waits": [
+                81,
+                40
+              ],
+              "minutes": 449
+            }
+          ]
+        },
+        "PIE-BLV": {
+          "demand": 77.8,
+          "oldStops": null,
+          "newStops": 1,
+          "oldFastest": null,
+          "newFastest": 320,
+          "oldReasonableCounts": [
+            0,
+            0,
+            0
+          ],
+          "newReasonableCounts": [
+            0,
+            1,
+            0
+          ],
+          "bestRoute": [
+            {
+              "flights": [
+                2237,
+                2107
+              ],
+              "route": "PIE→MCI→BLV",
+              "waits": [
+                99
+              ],
+              "minutes": 320
+            }
+          ]
+        },
+        "PIE-GRR": {
+          "demand": 39.1,
+          "oldStops": 1,
+          "newStops": 1,
+          "oldFastest": 333,
+          "newFastest": 333,
+          "oldReasonableCounts": [
+            0,
+            2,
+            9
+          ],
+          "newReasonableCounts": [
+            0,
+            2,
+            10
+          ],
+          "bestRoute": [
+            {
+              "flights": [
+                1074,
+                2181
+              ],
+              "route": "PIE→MCI→GRR",
+              "waits": [
+                86
+              ],
+              "minutes": 333
+            },
+            {
+              "flights": [
+                1179,
+                1570,
+                1809
+              ],
+              "route": "PIE→PHF→DAY→GRR",
+              "waits": [
+                46,
+                44
+              ],
+              "minutes": 358
+            }
+          ]
+        },
+        "GRR-PIE": {
+          "demand": 38.2,
+          "oldStops": 2,
+          "newStops": 2,
+          "oldFastest": 334,
+          "newFastest": 334,
+          "oldReasonableCounts": [
+            0,
+            0,
+            10
+          ],
+          "newReasonableCounts": [
+            0,
+            0,
+            9
+          ],
+          "bestRoute": [
+            {
+              "flights": [
+                1804,
+                1977,
+                2223
+              ],
+              "route": "GRR→DAY→BHM→PIE",
+              "waits": [
+                39,
+                55
+              ],
+              "minutes": 334
+            }
+          ]
+        }
+      },
+      "geo": {
+        "gains": 12,
+        "losses": [
+          {
+            "market": "FWA-PIE",
+            "demand": 11.4,
+            "previous": 314,
+            "after": 314
+          }
+        ],
+        "faster": 6,
+        "slower": 5,
+        "lostPaths": 60,
+        "highDemandLost": [
+          "FWA-PIE"
+        ],
+        "largestSlower": [
+          {
+            "market": "PIE-ALB",
+            "origin": "PIE",
+            "destination": "ALB",
+            "demand": 43.3,
+            "beforeMinutes": 244,
+            "afterMinutes": 249
+          },
+          {
+            "market": "ALB-PIE",
+            "origin": "ALB",
+            "destination": "PIE",
+            "demand": 43.2,
+            "beforeMinutes": 249,
+            "afterMinutes": 258
+          },
+          {
+            "market": "HPN-PIE",
+            "origin": "HPN",
+            "destination": "PIE",
+            "demand": 37.2,
+            "beforeMinutes": 259,
+            "afterMinutes": 268
+          },
+          {
+            "market": "HVN-PIE",
+            "origin": "HVN",
+            "destination": "PIE",
+            "demand": 33.6,
+            "beforeMinutes": 259,
+            "afterMinutes": 268
+          },
+          {
+            "market": "PIE-HVN",
+            "origin": "PIE",
+            "destination": "HVN",
+            "demand": 32.4,
+            "beforeMinutes": 261,
+            "afterMinutes": 376
+          }
+        ]
+      },
+      "raw": {
+        "gains": 11,
+        "losses": 1
+      },
+      "removed": [
+        1230,
+        1227
+      ],
+      "flights": 1229
+    }
+  }
+}
