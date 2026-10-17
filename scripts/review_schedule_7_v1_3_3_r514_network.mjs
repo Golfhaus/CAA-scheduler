@@ -26,6 +26,6 @@ for(const [scenario,check] of Object.entries(native)){
  const highLoss=geo.lost.filter(x=>x.demand>=5).map(x=>x.market);
  report.results[scenario]={markets:marketChanges,geo:{gains:geo.gained.length,losses:lost,faster:geo.faster.length,slower:geo.slower.length,lostPaths:geo.lostPaths,
  highDemandLost:highLoss,largestSlower:geo.slower.slice().sort((a,b)=>b.demand-a.demand).slice(0,15)},raw:{gains:raw.gained.length,losses:raw.lost.length},removed:[1230,1227],flights:current.legs.length};
- console.log(scenario,JSON.stringify({targets:Object.fromEntries(Object.entries(marketChanges).map(([k,v])=>[k,[v.oldStops,v.newStops,v.oldFastest,v.newFastest]])),gains:geo.gained.length,losses:lost,faster:geo.faster.length,slower:geo.slower.length,highLoss}),flush=true);
+ console.log(scenario,JSON.stringify({targets:Object.fromEntries(Object.entries(marketChanges).map(([k,v])=>[k,[v.oldStops,v.newStops,v.oldFastest,v.newFastest]])),gains:geo.gained.length,losses:lost,faster:geo.faster.length,slower:geo.slower.length,highLoss}));
 }
 fs.writeFileSync(root+'/r514_network_screen.json',JSON.stringify(report,null,2)+'\n');
