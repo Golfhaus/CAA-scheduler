@@ -8,7 +8,7 @@ import {
 import { bankBreakdownAirports, bankDisplayLabel, buildHubBankBreakdown } from "./hub-bank-breakdown.mjs?v=20261015-bank-labels";
 import { routingDetailOptions, buildRoutingDetails, buildCriticalPeriodUtilization, formatFlightTime } from "./routing-details.mjs?v=20261016-critical-utilization";
 import { buildOperatingDayGrid } from "./operating-day-timeline.mjs?v=20261015-readable-hours";
-import { createOpportunityUI } from "./opportunity-ui.mjs";
+import { createOpportunityUI } from "./opportunity-ui.mjs?v=20261017-shared-hubs";
 
 let opportunityUI = null;
 

@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import {readFile} from "node:fs/promises";
 import test from "node:test";
 import {buildItineraries} from "../web/app.mjs";
-import {parseAirportDemand, buildServiceAnalysis, coverageView, screenTimingChange, compareServiceAnalyses, buildBankEffectiveness} from "../web/opportunity-analysis.mjs";
+import {parseAirportDemand, buildServiceAnalysis, coverageView, screenTimingChange, compareServiceAnalyses, buildBankEffectiveness, sharedHubsMatch} from "../web/opportunity-analysis.mjs";
 const manifest = JSON.parse(await readFile(new URL("../web/schedules.json", import.meta.url), "utf8"));
 const latest = manifest.schedules.find((entry) => entry.id === manifest.defaultScheduleId);
 const canonical = JSON.parse(await readFile(new URL(`../${latest.files.canonical}`, import.meta.url), "utf8"));
@@ -10,6 +10,21 @@ const demand = parseAirportDemand(await readFile(new URL("../data/reference/airp
 const baseline = buildServiceAnalysis(canonical, demand, buildItineraries);
 const v131Canonical = JSON.parse(await readFile(new URL("../data/schedules/schedule_7_v1_3_1/canonical_schedule.json", import.meta.url), "utf8"));
 const v131FrozenAudit = buildServiceAnalysis(v131Canonical, demand, buildItineraries);
+test("shared hub filtering matches any checked hub and treats None as no shared hubs", () => {
+  assert.equal(sharedHubsMatch(["JAX", "PHF"], new Set(["JAX"])), true);
+  assert.equal(sharedHubsMatch(["MCI"], new Set(["JAX", "MCI"])), true);
+  assert.equal(sharedHubsMatch(["SYR"], new Set(["JAX", "MCI"])), false);
+  assert.equal(sharedHubsMatch([], new Set(["none"])), true);
+  assert.equal(sharedHubsMatch(["PHF"], new Set(["none"])), false);
+  assert.equal(sharedHubsMatch([], new Set(["JAX"])), false);
+  assert.equal(sharedHubsMatch([], new Set(["none", "JAX"])), true);
+  assert.equal(sharedHubsMatch(["JAX"], new Set(["none", "JAX"])), true);
+  assert.equal(sharedHubsMatch([], new Set()), false);
+  assert.equal(sharedHubsMatch(["JAX"], new Set()), false);
+  const all = new Set([...baseline.hubs, "none"]);
+  assert.ok(baseline.pairs.every((p) => sharedHubsMatch(p.forward.sharedHubs, all)));
+});
+
 const retime = (flight, shift) => {
   const candidate = structuredClone(canonical), screen = screenTimingChange(candidate, flight, shift), leg = candidate.legs.find((l) => l.flight === flight);
   leg.departureMinute += shift; leg.arrivalMinute += shift; leg.departure = screen.departure; leg.arrival = screen.arrival;

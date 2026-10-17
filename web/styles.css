@@ -814,6 +814,13 @@ tbody tr:hover { background: #f6f9fc; }
 .analysis-filters label, .analysis-change-picker { display: grid; gap: 6px; font-size: .85rem; font-weight: 600; }
 .analysis-filters input, .analysis-filters select, .analysis-change-picker select { min-height: 42px; border: 1px solid #ccd6df; background: #fff; border-radius: 8px; padding: 8px 12px; color: #16354c; font: inherit; max-width: 100%; }
 .analysis-filters input[type=number] { width: 125px; }
+.coverage-hub-filter { flex: 1 1 100%; min-width: 0; margin: 0; padding: 0.65rem 0.8rem 0.8rem; border: 1px solid #ccd6df; border-radius: 8px; }
+.coverage-hub-filter legend { padding-inline: 0.3rem; color: #16354c; font-size: 0.85rem; font-weight: 700; }
+.coverage-hub-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem; margin-bottom: 0.4rem; font-size: 0.8rem; color: var(--muted); }
+.coverage-hub-options { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.analysis-filters .coverage-hub-option { display: inline-flex; flex: 0 0 auto; align-items: center; gap: 0.4rem; min-height: 42px; padding: 0.45rem 0.65rem; border: 1px solid #ccd6df; border-radius: 6px; background: white; cursor: pointer; }
+.coverage-hub-options input[type="checkbox"] { width: 1rem; height: 1rem; min-height: 0; margin: 0; padding: 0; accent-color: var(--blue-700); }
+.coverage-hub-option:has(:checked) { background: #edf3f9; border-color: #9fb5ce; }
 .analysis-summary { font-weight: 600; color: #204762; line-height: 1.6; }
 .analysis-table-shell { margin-top: 18px; }
 .analysis-table-shell table { min-width: 930px; }
