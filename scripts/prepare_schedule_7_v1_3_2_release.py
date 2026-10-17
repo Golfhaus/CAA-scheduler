@@ -88,6 +88,23 @@ assert manifest["defaultScheduleId"]=="schedule_7_v1_3_1"
 manifest["schedules"].append(entry)
 manifest["defaultScheduleId"]=new_id
 manifest_file.write_text(json.dumps(manifest,indent=2,ensure_ascii=False)+"\n")
+readme=ROOT/"README.md"
+original=readme.read_text()
+intro=("# CAA Scheduler\n\n## Latest published release\n\n"
+ "The app defaults to **Schedule 7 v1.3.2**, released October 16, 2026, with "
+ "**1,229 flights, 184 routes and 17 routing lines**. The release fixes the cyclic "
+ "maintenance/RON validation problem and incorporates the reviewed R501, R175, "
+ "R125, R111, R312, R144, R146, R158 and R176 improvements. Physical inventory "
+ "and fleet use are unchanged, with zero effective operating errors.\n\n"
+ "The full network comparison against v1.3.1 finds 60 geographically reasonable "
+ "direct/one-stop coverage gains and five reviewed losses, plus 154 improved and "
+ "155 slower fastest journeys. See [v1.3.2 release notes]"
+ "(docs/schedule_7_v1_3_2_release.md) for commercial tradeoffs, validations, "
+ "and reproduction; see [released canonical]"
+ "(data/schedules/schedule_7_v1_3_2/canonical_schedule.json).\n\n"
+ "## Historical v1.3.1 release and v1.3.2 development notes\n\n")
+assert original.startswith("# CAA Scheduler\n")
+readme.write_text(intro+original[len("# CAA Scheduler\n"):])
 print(json.dumps({"status":"release assets prepared for PR validation, not merged",
 "flightCount":len(released["legs"]),"routes":184,"lines":17,
 "newDefault":manifest["defaultScheduleId"],"draftSha256":sha,
