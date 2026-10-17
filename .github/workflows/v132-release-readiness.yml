@@ -1,0 +1,39 @@
+name: v1.3.2 release-readiness audit (unpublished)
+on:
+  push:
+    branches: [schedule-7-v1.3.2-maintenance-draft]
+    paths:
+      - '.github/workflows/v132-release-readiness.yml'
+      - 'scripts/audit_schedule_7_v1_3_2_vs_v1_3_1.mjs'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: v132-release-readiness
+  cancel-in-progress: true
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -e .
+      - name: Reproduce cumulative draft
+        run: python scripts/build_schedule_7_v1_3_2_draft.py
+      - name: Check latest regressions
+        run: bash scripts/run_latest_regression.sh
+      - name: Compare complete network to v1.3.1
+        run: node scripts/audit_schedule_7_v1_3_2_vs_v1_3_1.mjs
+      - name: Preserve unpublished audit results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f outputs/schedule_7_v1_3_2_release_readiness/
+          if ! git diff --cached --quiet; then
+            git commit -m "Record unpublished v1.3.2 network readiness audit [skip ci]"
+            git restore --worktree .
+            git pull --rebase origin schedule-7-v1.3.2-maintenance-draft
+            git push
+          fi
