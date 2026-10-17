@@ -9,6 +9,7 @@ on:
       - 'src/caa_scheduler/optimization_release.py'
       - 'tests/test_latest_schedule_release.py'
       - 'tests/test_latest_service_gains.py'
+      - 'tests/test_operating_validation.py'
   workflow_dispatch:
 permissions:
   contents: write
