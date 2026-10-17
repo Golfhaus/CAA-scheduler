@@ -49,7 +49,7 @@ def newroute(route,line,fleet,hub,north,south,morning_bhm,south_dep,south_back,n
  last_h_first_ct=north_final_ct+bh
  # Hub terminator bank is desirable but not necessary if the turn is outside
  # the formal bank; however, only retain banked arrival candidates.
- arrival_h=first_legal_arrive(hub,local(hub,last_h_first_ct),local(hub,last_h_first_ct)+90)
+ arrival_h=first_legal_arrive(hub,local(hub,last_h_first_ct),local(hub,last_h_first_ct)+180)
  if arrival_h is None:raise ValueError(f"{route}: terminal at {hub} does not meet a bank")
  north_final_ct += arrival_h-local(hub,last_h_first_ct)
  if local(north,north_final_ct)>1260:raise ValueError(f"{route} northern final dep after 21:00 local")
