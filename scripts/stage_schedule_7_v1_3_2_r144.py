@@ -14,7 +14,7 @@ from caa_scheduler.planning import reconstruct_planning_snapshot, validate_plann
 from caa_scheduler.gate_export import export_gate_schedule
 from caa_scheduler.timetable import export_timetable
 
-subprocess.run([sys.executable,str(ROOT/"scripts/build_schedule_7_v1_3_2_draft.py")],check=True)
+subprocess.run([sys.executable,str(ROOT/"scripts/build_schedule_7_v1_3_2_draft.py"),"--five-round-only"],check=True)
 source=ROOT/"data/schedules/schedule_7_v1_3_2_draft/canonical_schedule.json"
 proposal=ROOT/"config/proposals/schedule_7_v1_3_2_r144_jax_bna.json"
 overlay=json.loads(proposal.read_text())
