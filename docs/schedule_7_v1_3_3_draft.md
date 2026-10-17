@@ -45,6 +45,10 @@ All **nine** independent PIE departure × MCI return timing combinations screene
 
 Evidence: `outputs/schedule_7_v1_3_3_pie_review/baseline.json`, `r514_physical_screen.json`, `r514_network_screen.json`. Preferred saved candidate at `r514_730_884_canonical.json`, reproducible from `config/proposals/schedule_7_v1_3_3_r514_pie_mci.json`. Draft build script: `scripts/build_schedule_7_v1_3_3_draft.py`.
 
-## Publication and next decisions
+## User decision and remaining v1.3.3 priorities
 
-**Do not publish.** The first v1.3.3 draft is a reviewable candidate. Before adoption, consider restoring FWA→PIE one-stop or PIE→HVN useful timing by minor changes elsewhere, and assess a separate, potentially simpler GRR→PIE one-stop initiative. Any additional option must be measured against the complete released v1.3.2 network, with fixed gate, bank, maintenance, curfew, line and stand rules enforced.
+**R514 PIE–MCI–PIE is accepted for retention in the unpublished v1.3.3 working draft.** The user explicitly directed that this change remain in the draft despite the reviewed connectivity tradeoffs. Do not revert it when evaluating subsequent revisions.
+
+**Future optimization priorities:** (1) improve **PIE→HVN**, whose directional O-D demand is 32.4/day and fastest journey deteriorates from 4h21m to 6h16m under R514; (2) add a geographically reasonable **GRR→PIE one-stop** journey, while retaining the existing PIE→GRR one-stop. These are future adjustments, *not* prerequisites for keeping R514 in the draft. FWA→PIE remains a documented loss of its only one-stop but retains the 5h14m fastest two-stop journey.
+
+**Do not publish v1.3.3 to main until separately authorized.** Assess future alterations against the full current v1.3.3 working draft and released v1.3.2 baseline, enforcing unchanged gate, bank, maintenance, curfew, line and stand limits.
