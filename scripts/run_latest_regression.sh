@@ -11,7 +11,9 @@ node --test tests/*.mjs
 # v1.3.1 remains published while its discovered maintenance defect is repaired.
 # Revalidate the pinned replacement draft as well; never accept new errors in it.
 if [[ -f config/optimizations/schedule_7_v1_3_2_round_1.json ]]; then
-  python scripts/build_schedule_7_v1_3_2_draft.py
+  python scripts/build_schedule_7_v1_3_2_draft.py --five-round-only
   python tests/test_v1_3_2_maintenance_draft.py
   node scripts/audit_schedule_7_v1_3_2_maintenance.mjs --accepted
+  python scripts/build_schedule_7_v1_3_2_draft.py
+  python tests/test_v1_3_2_cumulative_selected.py
 fi
