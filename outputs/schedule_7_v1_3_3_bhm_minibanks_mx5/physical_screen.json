@@ -1,0 +1,7 @@
+{
+  "day_day": {
+    "pass": false,
+    "error": "ValueError('530: terminal at SYR does not meet a bank')",
+    "trace": "Traceback (most recent call last):\n  File \"/home/runner/work/CAA-scheduler/CAA-scheduler/scripts/screen_schedule_7_v1_3_3_bhm_mx5_rotations.py\", line 112, in <module>\n    overlay=make(label,adjust,swap)\n            ^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/CAA-scheduler/CAA-scheduler/scripts/screen_schedule_7_v1_3_3_bhm_mx5_rotations.py\", line 97, in make\n    route_spec,assign=newroute(route,line,fleet,hub,north,south,morning,sout+adjust,out_south+adjust,dep_n+adjust)\n                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/CAA-scheduler/CAA-scheduler/scripts/screen_schedule_7_v1_3_3_bhm_mx5_rotations.py\", line 53, in newroute\n    if arrival_h is None:raise ValueError(f\"{route}: terminal at {hub} does not meet a bank\")\n                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nValueError: 530: terminal at SYR does not meet a bank\n"
+  }
+}
