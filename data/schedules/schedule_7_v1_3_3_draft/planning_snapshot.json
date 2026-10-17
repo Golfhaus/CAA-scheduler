@@ -4,8 +4,8 @@
   "sourceKind": "canonical_reconstruction",
   "demandDataVersion": "bts-db1c-6mo-jul2025-apr2026-v7",
   "summary": {
-    "legCount": 1229,
-    "marketRows": 683,
+    "legCount": 1253,
+    "marketRows": 705,
     "stationCount": 105,
     "fleetTypes": 4
   },
@@ -20,19 +20,19 @@
     },
     "CRJ900": {
       "aircraftCount": 45,
-      "aircraftDaysUsed": 28,
-      "legCount": 164,
-      "blockMinutes": 19684,
-      "minimumTurnMinutes": 5440,
-      "requiredAircraftMinutes": 25124
+      "aircraftDaysUsed": 30,
+      "legCount": 176,
+      "blockMinutes": 20862,
+      "minimumTurnMinutes": 5840,
+      "requiredAircraftMinutes": 26702
     },
     "CRJ700": {
       "aircraftCount": 65,
-      "aircraftDaysUsed": 56,
-      "legCount": 349,
-      "blockMinutes": 35905,
-      "minimumTurnMinutes": 11720,
-      "requiredAircraftMinutes": 47625
+      "aircraftDaysUsed": 58,
+      "legCount": 361,
+      "blockMinutes": 37179,
+      "minimumTurnMinutes": 12120,
+      "requiredAircraftMinutes": 49299
     },
     "CRJ200": {
       "aircraftCount": 80,
@@ -1895,7 +1895,25 @@
     {
       "fleet": "CRJ700",
       "origin": "BHM",
+      "destination": "CHS",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ700",
+      "origin": "BHM",
       "destination": "CLT",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ700",
+      "origin": "BHM",
+      "destination": "HVN",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ700",
+      "origin": "BHM",
+      "destination": "ISP",
       "legs": 1
     },
     {
@@ -1920,7 +1938,7 @@
       "fleet": "CRJ700",
       "origin": "BHM",
       "destination": "PGD",
-      "legs": 1
+      "legs": 2
     },
     {
       "fleet": "CRJ700",
@@ -2004,6 +2022,12 @@
       "fleet": "CRJ700",
       "origin": "CAE",
       "destination": "FLL",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ700",
+      "origin": "CHS",
+      "destination": "BHM",
       "legs": 1
     },
     {
@@ -2113,6 +2137,12 @@
       "origin": "DAY",
       "destination": "DAL",
       "legs": 3
+    },
+    {
+      "fleet": "CRJ700",
+      "origin": "DAY",
+      "destination": "HVN",
+      "legs": 1
     },
     {
       "fleet": "CRJ700",
@@ -2233,6 +2263,30 @@
       "origin": "HSV",
       "destination": "JAX",
       "legs": 2
+    },
+    {
+      "fleet": "CRJ700",
+      "origin": "HVN",
+      "destination": "BHM",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ700",
+      "origin": "HVN",
+      "destination": "DAY",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ700",
+      "origin": "ISP",
+      "destination": "BHM",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ700",
+      "origin": "ISP",
+      "destination": "SYR",
+      "legs": 1
     },
     {
       "fleet": "CRJ700",
@@ -2490,7 +2544,7 @@
       "fleet": "CRJ700",
       "origin": "PGD",
       "destination": "BHM",
-      "legs": 1
+      "legs": 2
     },
     {
       "fleet": "CRJ700",
@@ -2897,6 +2951,12 @@
     {
       "fleet": "CRJ700",
       "origin": "SYR",
+      "destination": "ISP",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ700",
+      "origin": "SYR",
       "destination": "JAX",
       "legs": 2
     },
@@ -2968,6 +3028,18 @@
     },
     {
       "fleet": "CRJ900",
+      "origin": "ALB",
+      "destination": "BHM",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ900",
+      "origin": "ALB",
+      "destination": "DAY",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ900",
       "origin": "ATW",
       "destination": "MCI",
       "legs": 1
@@ -2983,6 +3055,18 @@
       "origin": "BDL",
       "destination": "JAX",
       "legs": 3
+    },
+    {
+      "fleet": "CRJ900",
+      "origin": "BHM",
+      "destination": "ALB",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ900",
+      "origin": "BHM",
+      "destination": "CAK",
+      "legs": 1
     },
     {
       "fleet": "CRJ900",
@@ -3010,6 +3094,18 @@
     },
     {
       "fleet": "CRJ900",
+      "origin": "BHM",
+      "destination": "MYR",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ900",
+      "origin": "BHM",
+      "destination": "SRQ",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ900",
       "origin": "BLV",
       "destination": "BNA",
       "legs": 1
@@ -3030,6 +3126,18 @@
       "fleet": "CRJ900",
       "origin": "BWI",
       "destination": "MCI",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ900",
+      "origin": "CAK",
+      "destination": "BHM",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ900",
+      "origin": "CAK",
+      "destination": "SYR",
       "legs": 1
     },
     {
@@ -3072,6 +3180,12 @@
       "fleet": "CRJ900",
       "origin": "DAL",
       "destination": "SAT",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ900",
+      "origin": "DAY",
+      "destination": "ALB",
       "legs": 1
     },
     {
@@ -3316,6 +3430,12 @@
     },
     {
       "fleet": "CRJ900",
+      "origin": "MYR",
+      "destination": "BHM",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ900",
       "origin": "ORH",
       "destination": "SYR",
       "legs": 1
@@ -3456,6 +3576,18 @@
       "fleet": "CRJ900",
       "origin": "SFB",
       "destination": "TUL",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ900",
+      "origin": "SRQ",
+      "destination": "BHM",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ900",
+      "origin": "SYR",
+      "destination": "CAK",
       "legs": 1
     },
     {
@@ -4147,14 +4279,14 @@
     "ABE": 7,
     "ACY": 3,
     "AGS": 2,
-    "ALB": 8,
+    "ALB": 10,
     "ATW": 7,
     "AUS": 14,
     "AVL": 3,
     "AVP": 2,
     "BDL": 11,
     "BGR": 2,
-    "BHM": 49,
+    "BHM": 57,
     "BLV": 7,
     "BNA": 11,
     "BTR": 2,
@@ -4162,9 +4294,9 @@
     "BUF": 8,
     "BWI": 17,
     "CAE": 4,
-    "CAK": 7,
+    "CAK": 9,
     "CHA": 3,
-    "CHS": 8,
+    "CHS": 9,
     "CID": 3,
     "CLT": 23,
     "CMH": 5,
@@ -4173,7 +4305,7 @@
     "CRW": 2,
     "DAB": 7,
     "DAL": 22,
-    "DAY": 86,
+    "DAY": 88,
     "DLH": 2,
     "DSM": 5,
     "ECP": 3,
@@ -4193,11 +4325,11 @@
     "HPN": 5,
     "HRL": 5,
     "HSV": 3,
-    "HVN": 4,
+    "HVN": 6,
     "ICT": 4,
     "ILM": 3,
     "IND": 7,
-    "ISP": 3,
+    "ISP": 5,
     "JAN": 5,
     "JAX": 110,
     "LBB": 4,
@@ -4215,11 +4347,11 @@
     "MOB": 2,
     "MSN": 5,
     "MSY": 11,
-    "MYR": 4,
+    "MYR": 5,
     "OKC": 4,
     "OMA": 7,
     "ORH": 3,
-    "PGD": 11,
+    "PGD": 12,
     "PHF": 125,
     "PIA": 2,
     "PIE": 20,
@@ -4238,9 +4370,9 @@
     "SFB": 29,
     "SGF": 4,
     "SHV": 2,
-    "SRQ": 8,
+    "SRQ": 9,
     "SWF": 5,
-    "SYR": 97,
+    "SYR": 99,
     "TLH": 2,
     "TOL": 2,
     "TRI": 2,
