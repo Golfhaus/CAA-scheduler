@@ -16,6 +16,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -e .
       - name: Reconstruct exact PIE itinerary availability
         run: node scripts/review_schedule_7_v1_3_3_pie_baseline.mjs
       - name: Commit diagnostic only (not a schedule change)
