@@ -56,6 +56,13 @@ in `web/routing-details.mjs`; the summary and ranking must agree.
 
 **Service Coverage** ranks city pairs by pinned daily O-D demand in missing directions. It distinguishes one-way and two-way gaps, fastest available trips, missing shared hubs and timing gaps. An optional 2.25× great-circle-distance screen separates impractical detours from the current timetable's listed connections. Missing demand remains unavailable rather than becoming zero; schedules whose demand pin differs from the served snapshot retain coverage analysis without demand ranking.
 
+The **Shared Hubs** checkbox group filters the **Existing shared hubs** column.
+A pair matches any checked hub; **None** matches pairs with no shared hub.
+All options start checked. **All** restores them and **Clear** unchecks them;
+no checked options means no matching pairs. These selections combine with the
+other coverage filters, reset pagination, and reset to all when a new schedule's
+analysis is loaded. Options come from the selected schedule's hubs/focus cities.
+
 **Connection Near-Misses** identifies the closest missed transfer for each missing direction, with 5/10/15/30-minute filters and larger options. Arrival and departure repair choices expose basic aircraft-turn, overnight, assigned-bank, departure-window and spacing-floor constraints. A read-only preview recomputes all direct/one/two-stop service and reports coverage gains/losses, lost itinerary choices and faster/slower journeys. It explicitly distinguishes a new one-stop trip from a faster trip. Previews are timing screens, not complete gate, spacing or maintenance validation; they never mutate the selected schedule.
 
 **Bank Effectiveness** counts actual timed, geographically reasonable transfers. Per-flight onward/feed counts include other banks inside the connection window. Unique directional market O-D is counted once, not once per flight combination, and is not a passenger forecast. The bank arrival/departure matrix explains valid and missed transfers. BHM's unassigned flying remains inspectable without inventing bank assignments. Large whole-day matrices ask for a bank selection while retaining full-day feed counts.

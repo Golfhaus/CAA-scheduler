@@ -97,6 +97,10 @@ export function buildServiceAnalysis(canonical, demand, enumerate) {
   return {canonical, cities, hubs, minimum, maximum, records, paths, pairs, nearMisses, distance};
 }
 
+export function sharedHubsMatch(sharedHubs, selected) {
+  return sharedHubs.length ? sharedHubs.some((hub) => selected.has(hub)) : selected.has("none");
+}
+
 export function coverageView(record, geographic = false) {
   const counts = geographic ? record.reasonableCounts : record.counts;
   const best = geographic ? record.reasonableBest : record.best;

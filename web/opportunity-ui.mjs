@@ -1,4 +1,4 @@
-import {buildServiceAnalysis, coverageView, parseAirportDemand, compareServiceAnalyses, buildBankEffectiveness} from "./opportunity-analysis.mjs";
+import {buildServiceAnalysis, coverageView, parseAirportDemand, compareServiceAnalyses, buildBankEffectiveness, sharedHubsMatch} from "./opportunity-analysis.mjs?v=20261017-shared-hubs";
 
 const escape = (s) => String(s ?? "").replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;").replaceAll("'", "&#039;");
 const number = (n) => n == null ? "Unavailable" : Number(n).toLocaleString(undefined, {maximumFractionDigits: 1});
@@ -49,20 +49,29 @@ export function createOpportunityUI({getCanonical, getManifest, enumerate, openM
       if (token !== generation || canonical !== getCanonical()) return null;
       analysis = result;
       for (const id of ["coverage-demand-note", "near-demand-note", "effectiveness-demand-note"]) $(id).textContent = note;
-      populateBanks(); return analysis;
+      populateBanks(); populateCoverageHubs(); return analysis;
     })().catch((error) => { if (token === generation) { pending = null; $("analysis-status").textContent = `Analysis unavailable: ${error.message}`; } return null; });
     return pending;
+  }
+  function populateCoverageHubs() {
+    $("coverage-hub-options").innerHTML = [...analysis.hubs].sort().concat("none")
+      .map((hub) => `<label class="coverage-hub-option"><input type="checkbox" value="${escape(hub)}" checked><span>${hub === "none" ? "None" : escape(hub)}</span></label>`).join("");
+    $("coverage-shared-hubs").disabled = false;
+  }
+  function updateCoverageHubs() {
+    if (analysis) { coveragePage = 1; renderCoverage(); }
   }
   function renderCoverage() {
     const geo = $("coverage-geography").value === "reasonable", query = $("coverage-search").value.trim().toLowerCase(), filter = $("coverage-gap").value, threshold = Math.max(0, Number($("coverage-demand").value) || 0);
     let both = 0, single = 0;
+    const selectedHubs = new Set([...$("coverage-hub-options").querySelectorAll("input:checked")].map((input) => input.value));
     const pairs = analysis.pairs.map((p) => {
       const a = coverageView(p.forward, geo), b = coverageView(p.reverse, geo), count = Number(a.gap) + Number(b.gap);
       if (count === 2) both++; if (count === 1) single++;
       const demands = [p.forward.demand, p.reverse.demand];
       const demand = demands.every((n) => n != null) ? demands.reduce((s, n, i) => s + ((filter === "all" || [a, b][i].gap) ? n : 0), 0) : null;
       return {...p, aView: a, bView: b, count, demand};
-    }).filter((p) => matching(p, query) && (filter === "all" || filter === "both" && p.count === 2 || filter === "one" && p.count === 1 || filter === "any" && p.count > 0) && (p.demand == null || p.demand >= threshold));
+    }).filter((p) => matching(p, query) && sharedHubsMatch(p.forward.sharedHubs, selectedHubs) && (filter === "all" || filter === "both" && p.count === 2 || filter === "one" && p.count === 1 || filter === "any" && p.count > 0) && (p.demand == null || p.demand >= threshold));
     pairs.sort((a, b) => (b.demand ?? -1) - (a.demand ?? -1) || a.key.localeCompare(b.key));
     coveragePage = Math.min(coveragePage, Math.max(1, Math.ceil(pairs.length / 50)));
     $("coverage-summary").textContent = `${both.toLocaleString()} pairs missing both ways · ${single.toLocaleString()} missing one way across the full schedule. Ranking counts demand only in missing directions; All pairs counts both directions.`;
@@ -113,7 +122,7 @@ export function createOpportunityUI({getCanonical, getManifest, enumerate, openM
   }
   function populateBankSelector() {
     const hub = $("effectiveness-hub").value, old = $("effectiveness-bank").value;
-    const banks = analysis.canonical.hubBanks.filter((b) => b.hub === hub);
+    const banks = (analysis.canonical.hubBanks || []).filter((b) => b.hub === hub);
     $("effectiveness-bank").innerHTML = '<option value="all">Whole day</option>' + banks.map((b) => `<option value="${escape(b.id)}">${escape(b.id)} · ${String(Math.floor(b.startMinute / 60)).padStart(2, "0")}:${String(b.startMinute % 60).padStart(2, "0")}</option>`).join("") + '<option value="unassigned">Unassigned flights</option>';
     $("effectiveness-bank").value = banks.some((b) => b.id === old) || ["all", "unassigned"].includes(old) ? old : "all";
   }
@@ -142,6 +151,13 @@ export function createOpportunityUI({getCanonical, getManifest, enumerate, openM
     const gate = event.target.closest("[data-analysis-gate]"); if (gate) openGate(gate.dataset.analysisGate);
   });
   for (const id of ["coverage-search", "coverage-gap", "coverage-geography", "coverage-demand"]) $(id).addEventListener(id.includes("search") || id.includes("demand") ? "input" : "change", () => { if (analysis) { coveragePage = 1; renderCoverage(); } });
+  $("coverage-hub-options").addEventListener("change", updateCoverageHubs);
+  for (const [id, checked] of [["coverage-hubs-all", true], ["coverage-hubs-clear", false]]) {
+    $(id).addEventListener("click", () => {
+      $("coverage-hub-options").querySelectorAll("input").forEach((input) => { input.checked = checked; });
+      updateCoverageHubs();
+    });
+  }
   for (const id of ["near-search", "near-hub", "near-limit", "near-geography", "near-demand", "near-sort"]) $(id).addEventListener(id.includes("search") || id.includes("demand") ? "input" : "change", () => { if (analysis) { nearPage = 1; renderNear(); $("near-preview").hidden = true; selectedMiss = null; impactGeneration++; } });
   $("near-change").addEventListener("change", () => { void renderImpact(); });
   $("effectiveness-hub").addEventListener("change", () => { if (analysis) { populateBankSelector(); renderEffectiveness(); $("effectiveness-detail").hidden = true; } });
@@ -149,6 +165,8 @@ export function createOpportunityUI({getCanonical, getManifest, enumerate, openM
   return {
     reset() {
       generation++; impactGeneration++; analysis = null; pending = null; coveragePage = nearPage = 1; selectedMiss = null; nearRows = []; matrixCells = [];
+      $("coverage-shared-hubs").disabled = true;
+      $("coverage-hub-options").textContent = "";
       for (const id of ["coverage-rows", "near-rows", "effectiveness-inbound", "effectiveness-outbound", "effectiveness-matrix", "coverage-summary", "near-summary", "effectiveness-summary"]) $(id).textContent = "";
       $("near-preview").hidden = true; $("effectiveness-detail").hidden = true;
     },

@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#092a53">
     <meta name="description" content="Coastal American Airways schedule operations console">
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="styles.css?v=console-ui-20261016-critical-utilization">
+    <link rel="stylesheet" href="styles.css?v=console-ui-20261017-shared-hubs">
     <title>CAA Scheduler</title>
   </head>
   <body>
@@ -452,6 +452,11 @@
               <label><span>Coverage</span><select id="coverage-gap"><option value="any">Missing in either direction</option><option value="both">Missing in both directions</option><option value="one">Missing in one direction</option><option value="all">All city pairs</option></select></label>
               <label><span>Connections</span><select id="coverage-geography"><option value="current">Current timetable</option><option value="reasonable">Reasonable detours (≤2.25× distance)</option></select></label>
               <label><span>Minimum O-D/day</span><input id="coverage-demand" type="number" value="0.1" min="0" step="0.1"></label>
+              <fieldset class="coverage-hub-filter" id="coverage-shared-hubs" disabled>
+                <legend>Shared Hubs</legend>
+                <div class="coverage-hub-controls"><span>Match any checked option.</span><button type="button" class="analysis-link" id="coverage-hubs-all" aria-label="Select all shared hub options">All</button><button type="button" class="analysis-link" id="coverage-hubs-clear" aria-label="Clear all shared hub options">Clear</button></div>
+                <div class="coverage-hub-options" id="coverage-hub-options"></div>
+              </fieldset>
             </div>
             <p id="coverage-summary" class="analysis-summary" aria-live="polite"></p>
             <p id="coverage-demand-note" class="stats-note"></p>
@@ -615,7 +620,7 @@
       </div>
     </main>
 
-    <script type="module" src="app.mjs?v=console-ui-20261016-critical-utilization"></script>
+    <script type="module" src="app.mjs?v=console-ui-20261017-shared-hubs"></script>
   </body>
 </html>
 
