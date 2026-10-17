@@ -52,3 +52,11 @@ Evidence: `outputs/schedule_7_v1_3_3_pie_review/baseline.json`, `r514_physical_s
 **Future optimization priorities:** (1) improve **PIE→HVN**, whose directional O-D demand is 32.4/day and fastest journey deteriorates from 4h21m to 6h16m under R514; (2) add a geographically reasonable **GRR→PIE one-stop** journey, while retaining the existing PIE→GRR one-stop. These are future adjustments, *not* prerequisites for keeping R514 in the draft. FWA→PIE remains a documented loss of its only one-stop but retains the 5h14m fastest two-stop journey.
 
 **Do not publish v1.3.3 to main until separately authorized.** Assess future alterations against the full current v1.3.3 working draft and released v1.3.2 baseline, enforcing unchanged gate, bank, maintenance, curfew, line and stand limits.
+
+## Subsequent approved draft development — BHM mini-banks
+
+The user authorized reserving two spare CRJ900 and two spare CRJ700 aircraft-days to build north–south connection banks through BHM. This is **staged in the unpublished cumulative v1.3.3 draft**, adding 24 flights on four closed maintenance-base rotations (routes 529/530/357/358) without replacing or removing the earlier accepted R514 PIE–MCI–PIE turn.
+
+See [the complete BHM mini-bank review](schedule_7_v1_3_3_bhm_minibanks.md) for exact times, inventory limits, all 32 directional north–south markets, scoped service-tier exceptions, and the immutable pre-BHM revert checkpoint. The cumulative schedule now contains **1,253 flights across 188 routes and 21 lines**, with zero effective operating errors and the unchanged 15 system stand claims. The network comparison against the **pre-BHM v1.3.3 draft** shows 60 geographically reasonable market gains, no losses, 117 faster journeys and no slower journeys. Four new one-day lines have the standing 9–12-day line-length *guideline warnings*, not operating errors.
+
+**Publication remains unauthorized.** PIE→HVN and GRR→PIE remain future initiatives; neither was altered as part of this BHM work.
