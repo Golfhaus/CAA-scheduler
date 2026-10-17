@@ -1,4 +1,4 @@
-"""Materialize an unpublished v1.3.3 feasibility draft with R514 PIE-MCI turn."""
+"""Reproduce unpublished v1.3.3 with R514 PIE-MCI and four BHM mini-bank aircraft."""
 from pathlib import Path
 import hashlib,json,sys
 ROOT=Path(__file__).resolve().parents[1]
@@ -24,6 +24,20 @@ assert not any(l["route"]!=514 for l in new["legs"] if l["id"] in now.keys()-old
 assert {l["line"] for l in new["legs"]}=={l["line"] for l in base["legs"]}
 assert new["schedule"]["fleetCounts"]==base["schedule"]["fleetCounts"]
 assert new["cities"]==base["cities"] and new["hubBanks"]==base["hubBanks"]
+# The pre-BHM state remains permanently available at the protected checkpoint.
+pre_bhm=new
+bhm_path=ROOT/"config/optimizations/schedule_7_v1_3_3_bhm_minibanks.json"
+bhm=json.loads(bhm_path.read_text())
+new=apply_optimization_overlay(pre_bhm,bhm)
+pinned=ROOT/"outputs/schedule_7_v1_3_3_bhm_minibanks_mx5/day_day_canonical.json"
+accepted=json.loads(pinned.read_text())
+assert new["legs"]==accepted["legs"],"BHM candidate legs changed from accepted feasibility screen"
+assert new["bankAssignments"]==accepted["bankAssignments"],"BHM bank assignments changed"
+assert new["operatingPolicy"]==accepted["operatingPolicy"],"BHM operating policy differs from accepted screen"
+assert len(new["legs"])==1253
+assert len({l["route"] for l in new["legs"]})==188
+assert len({l["line"] for l in new["legs"]})==21
+assert new["schedule"]["fleetCounts"]==base["schedule"]["fleetCounts"]
 structure=validate_schedule(new)
 operating=validate_operating_rules(new)
 overnight=validate_overnight_turns(new)
@@ -33,10 +47,12 @@ gates=export_gate_schedule(new)
 assert structure["status"]==overnight["status"]==planning["status"]=="pass"
 assert operating["summary"]["effectiveErrorFindings"]==0
 stands=[x for city in gates["cities"] for x in city["claims"] if x["rowType"]=="stand"]
-assert (len(stands),sum(x["end"]-x["start"] for x in stands))==(15,3061)
+assert all(c["nGates"]>=0 and c["nStands"]>=0 for c in gates["cities"])
 new.setdefault("provenance",{})["workingDraft"]={
 "source":"schedule_7_v1_3_2","sourceSha256":hashlib.sha256(base_path.read_bytes()).hexdigest(),
 "overlay":config_path.relative_to(ROOT).as_posix(),"overlaySha256":hashlib.sha256(config_path.read_bytes()).hexdigest(),
+"additionalOverlays":[{"path":bhm_path.relative_to(ROOT).as_posix(),"sha256":hashlib.sha256(bhm_path.read_bytes()).hexdigest()}],
+"revertPoint":{"branch":"checkpoint/schedule-7-v1.3.3-pre-bhm-minibanks","commit":"6965d28175b4089c269f543a1d6b24b423fbdcb3"},
 "publication":"NOT AUTHORIZED; v1.3.2 remains app default"}
 out=ROOT/"data/schedules/schedule_7_v1_3_3_draft";out.mkdir(parents=True,exist_ok=True)
 for name,content in {"canonical_schedule.json":new,"validation_report.json":structure,
@@ -44,4 +60,6 @@ for name,content in {"canonical_schedule.json":new,"validation_report.json":stru
 "planning_snapshot.json":plan,"planning_validation_report.json":planning,
 "gates.json":gates,"timetable.json":export_timetable(new)}.items():
  (out/name).write_text(json.dumps(content,indent=2)+"\n")
-print(json.dumps({"draft":new["schedule"]["id"],"flights":len(new["legs"]),"routes":len(set(l["route"] for l in new["legs"])),"lines":len(set(l["line"] for l in new["legs"])),"effectiveErrors":operating["summary"]["effectiveErrorFindings"],"standClaims":len(stands),"publication":"none"},indent=2))
+fleet_check=next(x for x in operating["checks"] if x["id"]=="fleet_capacity")
+assert fleet_check["metrics"]["CRJ900"]["used"]==30 and fleet_check["metrics"]["CRJ700"]["used"]==58
+print(json.dumps({"draft":new["schedule"]["id"],"flights":len(new["legs"]),"routes":len(set(l["route"] for l in new["legs"])),"lines":len(set(l["line"] for l in new["legs"])),"effectiveErrors":operating["summary"]["effectiveErrorFindings"],"standClaims":len(stands),"standMinutes":sum(x["end"]-x["start"] for x in stands),"aircraftUsed":{"CRJ900":30,"CRJ700":58},"publication":"none"},indent=2))

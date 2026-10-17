@@ -1,0 +1,327 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "schedule-7-v1.3.3-bhm-mx-day_day",
+  "baseSchedule": {
+    "scheduleId": "schedule_7_v1_3_3_draft"
+  },
+  "schedule": {
+    "id": "schedule_7_v1_3_3_draft",
+    "number": 7,
+    "version": "1.3.3-draft",
+    "label": "Schedule 7, Version 1.3.3 draft",
+    "status": "draft",
+    "fleetCounts": {
+      "MAX9": 35,
+      "CRJ900": 45,
+      "CRJ700": 65,
+      "CRJ200": 80
+    },
+    "connectionWindowMinutes": {
+      "minimum": 30,
+      "maximum": 240
+    }
+  },
+  "addRoutes": [
+    {
+      "route": 529,
+      "line": "BA",
+      "fleet": "CRJ900",
+      "day": 1,
+      "legs": [
+        {
+          "id": "V133-BHM-529-1-DAY-ALB",
+          "origin": "DAY",
+          "destination": "ALB",
+          "departureMinute": 360,
+          "arrivalMinute": 460
+        },
+        {
+          "id": "V133-BHM-529-2-ALB-BHM",
+          "origin": "ALB",
+          "destination": "BHM",
+          "departureMinute": 520,
+          "arrivalMinute": 604
+        },
+        {
+          "id": "V133-BHM-529-3-BHM-SRQ",
+          "origin": "BHM",
+          "destination": "SRQ",
+          "departureMinute": 651,
+          "arrivalMinute": 801
+        },
+        {
+          "id": "V133-BHM-529-4-SRQ-BHM",
+          "origin": "SRQ",
+          "destination": "BHM",
+          "departureMinute": 848,
+          "arrivalMinute": 878
+        },
+        {
+          "id": "V133-BHM-529-5-BHM-ALB",
+          "origin": "BHM",
+          "destination": "ALB",
+          "departureMinute": 918,
+          "arrivalMinute": 1122
+        },
+        {
+          "id": "V133-BHM-529-6-ALB-DAY",
+          "origin": "ALB",
+          "destination": "DAY",
+          "departureMinute": 1165,
+          "arrivalMinute": 1265
+        }
+      ]
+    },
+    {
+      "route": 530,
+      "line": "BB",
+      "fleet": "CRJ900",
+      "day": 1,
+      "legs": [
+        {
+          "id": "V133-BHM-530-1-SYR-CAK",
+          "origin": "SYR",
+          "destination": "CAK",
+          "departureMinute": 368,
+          "arrivalMinute": 437
+        },
+        {
+          "id": "V133-BHM-530-2-CAK-BHM",
+          "origin": "CAK",
+          "destination": "BHM",
+          "departureMinute": 565,
+          "arrivalMinute": 606
+        },
+        {
+          "id": "V133-BHM-530-3-BHM-MYR",
+          "origin": "BHM",
+          "destination": "MYR",
+          "departureMinute": 653,
+          "arrivalMinute": 798
+        },
+        {
+          "id": "V133-BHM-530-4-MYR-BHM",
+          "origin": "MYR",
+          "destination": "BHM",
+          "departureMinute": 855,
+          "arrivalMinute": 880
+        },
+        {
+          "id": "V133-BHM-530-5-BHM-CAK",
+          "origin": "BHM",
+          "destination": "CAK",
+          "departureMinute": 920,
+          "arrivalMinute": 1081
+        },
+        {
+          "id": "V133-BHM-530-6-CAK-SYR",
+          "origin": "CAK",
+          "destination": "SYR",
+          "departureMinute": 1221,
+          "arrivalMinute": 1290
+        }
+      ]
+    },
+    {
+      "route": 357,
+      "line": "BC",
+      "fleet": "CRJ700",
+      "day": 1,
+      "legs": [
+        {
+          "id": "V133-BHM-357-1-SYR-ISP",
+          "origin": "SYR",
+          "destination": "ISP",
+          "departureMinute": 368,
+          "arrivalMinute": 426
+        },
+        {
+          "id": "V133-BHM-357-2-ISP-BHM",
+          "origin": "ISP",
+          "destination": "BHM",
+          "departureMinute": 525,
+          "arrivalMinute": 610
+        },
+        {
+          "id": "V133-BHM-357-3-BHM-PGD",
+          "origin": "BHM",
+          "destination": "PGD",
+          "departureMinute": 655,
+          "arrivalMinute": 814
+        },
+        {
+          "id": "V133-BHM-357-4-PGD-BHM",
+          "origin": "PGD",
+          "destination": "BHM",
+          "departureMinute": 921,
+          "arrivalMinute": 960
+        },
+        {
+          "id": "V133-BHM-357-5-BHM-ISP",
+          "origin": "BHM",
+          "destination": "ISP",
+          "departureMinute": 1000,
+          "arrivalMinute": 1205
+        },
+        {
+          "id": "V133-BHM-357-6-ISP-SYR",
+          "origin": "ISP",
+          "destination": "SYR",
+          "departureMinute": 1245,
+          "arrivalMinute": 1303
+        }
+      ]
+    },
+    {
+      "route": 358,
+      "line": "BD",
+      "fleet": "CRJ700",
+      "day": 1,
+      "legs": [
+        {
+          "id": "V133-BHM-358-1-DAY-HVN",
+          "origin": "DAY",
+          "destination": "HVN",
+          "departureMinute": 360,
+          "arrivalMinute": 467
+        },
+        {
+          "id": "V133-BHM-358-2-HVN-BHM",
+          "origin": "HVN",
+          "destination": "BHM",
+          "departureMinute": 532,
+          "arrivalMinute": 620
+        },
+        {
+          "id": "V133-BHM-358-3-BHM-CHS",
+          "origin": "BHM",
+          "destination": "CHS",
+          "departureMinute": 665,
+          "arrivalMinute": 805
+        },
+        {
+          "id": "V133-BHM-358-4-CHS-BHM",
+          "origin": "CHS",
+          "destination": "BHM",
+          "departureMinute": 909,
+          "arrivalMinute": 929
+        },
+        {
+          "id": "V133-BHM-358-5-BHM-HVN",
+          "origin": "BHM",
+          "destination": "HVN",
+          "departureMinute": 969,
+          "arrivalMinute": 1177
+        },
+        {
+          "id": "V133-BHM-358-6-HVN-DAY",
+          "origin": "HVN",
+          "destination": "DAY",
+          "departureMinute": 1217,
+          "arrivalMinute": 1324
+        }
+      ]
+    }
+  ],
+  "bankAssignmentsToAdd": [
+    {
+      "legId": "V133-BHM-529-1-DAY-ALB",
+      "operation": "departure",
+      "bankId": "DAY-B1"
+    },
+    {
+      "legId": "V133-BHM-529-6-ALB-DAY",
+      "operation": "arrival",
+      "bankId": "DAY-B9"
+    },
+    {
+      "legId": "V133-BHM-530-1-SYR-CAK",
+      "operation": "departure",
+      "bankId": "SYR-B1"
+    },
+    {
+      "legId": "V133-BHM-530-6-CAK-SYR",
+      "operation": "arrival",
+      "bankId": "SYR-B7"
+    },
+    {
+      "legId": "V133-BHM-357-1-SYR-ISP",
+      "operation": "departure",
+      "bankId": "SYR-B1"
+    },
+    {
+      "legId": "V133-BHM-357-6-ISP-SYR",
+      "operation": "arrival",
+      "bankId": "SYR-B7"
+    },
+    {
+      "legId": "V133-BHM-358-1-DAY-HVN",
+      "operation": "departure",
+      "bankId": "DAY-B1"
+    },
+    {
+      "legId": "V133-BHM-358-6-HVN-DAY",
+      "operation": "arrival",
+      "bankId": "DAY-B9"
+    }
+  ],
+  "operatingOverrides": [
+    {
+      "checkId": "tiered_service_minimums",
+      "findingId": "ISP",
+      "reason": "User-authorized v1.3.3 BHM north-south mini-bank: geographically suitable additional focus-city connectivity without changing physical, frequency, bank or curfew rules.",
+      "approvedBy": "user",
+      "expiresAfterSchedule": 7
+    },
+    {
+      "checkId": "tiered_service_minimums",
+      "findingId": "HVN",
+      "reason": "User-authorized v1.3.3 BHM north-south mini-bank: geographically suitable additional focus-city connectivity without changing physical, frequency, bank or curfew rules.",
+      "approvedBy": "user",
+      "expiresAfterSchedule": 7
+    },
+    {
+      "checkId": "tiered_service_minimums",
+      "findingId": "ALB",
+      "reason": "User-authorized v1.3.3 BHM north-south mini-bank: geographically suitable additional focus-city connectivity without changing physical, frequency, bank or curfew rules.",
+      "approvedBy": "user",
+      "expiresAfterSchedule": 7
+    },
+    {
+      "checkId": "tiered_service_minimums",
+      "findingId": "CAK",
+      "reason": "User-authorized v1.3.3 BHM north-south mini-bank: geographically suitable additional focus-city connectivity without changing physical, frequency, bank or curfew rules.",
+      "approvedBy": "user",
+      "expiresAfterSchedule": 7
+    },
+    {
+      "checkId": "tiered_service_minimums",
+      "findingId": "CHS",
+      "reason": "User-authorized v1.3.3 BHM north-south mini-bank: geographically suitable additional focus-city connectivity without changing physical, frequency, bank or curfew rules.",
+      "approvedBy": "user",
+      "expiresAfterSchedule": 7
+    },
+    {
+      "checkId": "tiered_service_minimums",
+      "findingId": "MYR",
+      "reason": "User-authorized v1.3.3 BHM north-south mini-bank: geographically suitable additional focus-city connectivity without changing physical, frequency, bank or curfew rules.",
+      "approvedBy": "user",
+      "expiresAfterSchedule": 7
+    }
+  ],
+  "review": {
+    "status": "Selected for unpublished v1.3.3 working draft",
+    "purpose": "2 CRJ900 + 2 CRJ700 aircraft-days north–south BHM mini-banks",
+    "notPublished": true,
+    "checkpoint": "checkpoint/schedule-7-v1.3.3-pre-bhm-minibanks",
+    "allowedPolicyExceptions": "Scope-limited service-tier hub-count exceptions only for ISP HVN ALB CAK CHS MYR; no gate, curfew, minimum turn, maintenance, or frequency exceptions",
+    "networkSummary": {
+      "reasonableCoverageGains": 60,
+      "reasonableCoverageLosses": 0,
+      "faster": 117,
+      "slower": 0,
+      "northToSouthBHM": 15,
+      "southToNorthBHM": 13
+    }
+  }
+}

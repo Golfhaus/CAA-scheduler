@@ -4,13 +4,13 @@
   "status": "review",
   "summary": {
     "checks": 25,
-    "passed": 19,
+    "passed": 17,
     "failed": 0,
-    "warnings": 3,
+    "warnings": 5,
     "notEvaluated": 1,
     "overridden": 2,
     "effectiveErrorFindings": 0,
-    "effectiveWarningFindings": 156
+    "effectiveWarningFindings": 161
   },
   "checks": [
     {
@@ -44,11 +44,11 @@
           "capacity": 35
         },
         "CRJ900": {
-          "used": 28,
+          "used": 30,
           "capacity": 45
         },
         "CRJ700": {
-          "used": 56,
+          "used": 58,
           "capacity": 65
         },
         "CRJ200": {
@@ -1029,14 +1029,63 @@
       "section": "\u00a72.8",
       "severity": "warning",
       "hardStop": false,
-      "status": "pass",
-      "message": "Every line contains 9\u201312 routes",
+      "status": "warning",
+      "message": "4 finding(s)",
       "metrics": {
-        "findingCount": 0,
-        "effectiveFindingCount": 0,
+        "findingCount": 4,
+        "effectiveFindingCount": 4,
         "overriddenFindingCount": 0
       },
-      "findings": []
+      "findings": [
+        {
+          "id": "BA",
+          "message": "Line BA contains 1 routes; the standing guideline is 9\u201312",
+          "evidence": {
+            "line": "BA",
+            "routes": 1,
+            "guideline": [
+              9,
+              12
+            ]
+          }
+        },
+        {
+          "id": "BB",
+          "message": "Line BB contains 1 routes; the standing guideline is 9\u201312",
+          "evidence": {
+            "line": "BB",
+            "routes": 1,
+            "guideline": [
+              9,
+              12
+            ]
+          }
+        },
+        {
+          "id": "BC",
+          "message": "Line BC contains 1 routes; the standing guideline is 9\u201312",
+          "evidence": {
+            "line": "BC",
+            "routes": 1,
+            "guideline": [
+              9,
+              12
+            ]
+          }
+        },
+        {
+          "id": "BD",
+          "message": "Line BD contains 1 routes; the standing guideline is 9\u201312",
+          "evidence": {
+            "line": "BD",
+            "routes": 1,
+            "guideline": [
+              9,
+              12
+            ]
+          }
+        }
+      ]
     },
     {
       "id": "rolling_ron_window",
@@ -1104,8 +1153,8 @@
       "message": "Point-to-point flying is within the 10% cap",
       "metrics": {
         "flights": 102,
-        "totalFlights": 1229,
-        "share": 0.08299430431244914,
+        "totalFlights": 1253,
+        "share": 0.08140462889066241,
         "findingCount": 0,
         "effectiveFindingCount": 0,
         "overriddenFindingCount": 0
@@ -1249,18 +1298,20 @@
             "departures": [
               270,
               270,
+              520,
               595,
               615,
               768,
               925,
               1089,
-              1090
+              1090,
+              1165
             ],
             "excessiveGaps": [
               {
                 "from": 270,
-                "to": 595,
-                "minutes": 325
+                "to": 520,
+                "minutes": 250
               }
             ],
             "serviceWindowMinutes": {
@@ -1552,18 +1603,15 @@
             "departures": [
               270,
               400,
+              565,
               642,
               895,
               1065,
               1135,
-              1180
+              1180,
+              1221
             ],
             "excessiveGaps": [
-              {
-                "from": 400,
-                "to": 642,
-                "minutes": 242
-              },
               {
                 "from": 642,
                 "to": 895,
@@ -2196,15 +2244,17 @@
             "city": "HVN",
             "departures": [
               270,
+              532,
               585,
               915,
+              1217,
               1234
             ],
             "excessiveGaps": [
               {
                 "from": 270,
-                "to": 585,
-                "minutes": 315
+                "to": 532,
+                "minutes": 262
               },
               {
                 "from": 585,
@@ -2213,8 +2263,8 @@
               },
               {
                 "from": 915,
-                "to": 1234,
-                "minutes": 319
+                "to": 1217,
+                "minutes": 302
               }
             ],
             "serviceWindowMinutes": {
@@ -2318,14 +2368,16 @@
             "city": "ISP",
             "departures": [
               407,
+              525,
               745,
-              910
+              910,
+              1245
             ],
             "excessiveGaps": [
               {
-                "from": 407,
-                "to": 745,
-                "minutes": 338
+                "from": 910,
+                "to": 1245,
+                "minutes": 335
               }
             ],
             "serviceWindowMinutes": {
@@ -2710,6 +2762,7 @@
               310,
               510,
               800,
+              855,
               1060
             ],
             "excessiveGaps": [
@@ -2717,11 +2770,6 @@
                 "from": 510,
                 "to": 800,
                 "minutes": 290
-              },
-              {
-                "from": 800,
-                "to": 1060,
-                "minutes": 260
               }
             ],
             "serviceWindowMinutes": {
@@ -3500,13 +3548,36 @@
       "severity": "error",
       "hardStop": false,
       "status": "overridden",
-      "message": "All 21 finding(s) have explicit overrides",
+      "message": "All 26 finding(s) have explicit overrides",
       "metrics": {
-        "findingCount": 21,
+        "findingCount": 26,
         "effectiveFindingCount": 0,
-        "overriddenFindingCount": 21
+        "overriddenFindingCount": 26
       },
       "findings": [
+        {
+          "id": "ALB",
+          "message": "ALB does not satisfy its percentile-tier service envelope",
+          "evidence": {
+            "city": "ALB",
+            "percentile": 73.0,
+            "totalFlights": 20,
+            "hubOrFocusFlights": 16,
+            "minimumFlights": 8,
+            "connectedHubs": [
+              "BHM",
+              "DAY",
+              "PHF",
+              "SYR"
+            ],
+            "hubCountCap": 3
+          },
+          "override": {
+            "reason": "User-authorized v1.3.3 BHM north-south mini-bank: geographically suitable additional focus-city connectivity without changing physical, frequency, bank or curfew rules.",
+            "approvedBy": "user",
+            "expiresAfterSchedule": 7
+          }
+        },
         {
           "id": "ATW",
           "message": "ATW does not satisfy its percentile-tier service envelope",
@@ -3535,8 +3606,8 @@
           "evidence": {
             "city": "BHM",
             "percentile": 64.0,
-            "totalFlights": 98,
-            "hubOrFocusFlights": 98,
+            "totalFlights": 114,
+            "hubOrFocusFlights": 114,
             "minimumFlights": 6,
             "connectedHubs": [
               "DAY",
@@ -3573,6 +3644,52 @@
           },
           "override": {
             "reason": "Schedule 7 v1.1.0 PHF north-south initiative: the BWI-BHM-PHF triangles are geographically reasonable and pass downstream feasibility checks.",
+            "approvedBy": "user",
+            "expiresAfterSchedule": 7
+          }
+        },
+        {
+          "id": "CAK",
+          "message": "CAK does not satisfy its percentile-tier service envelope",
+          "evidence": {
+            "city": "CAK",
+            "percentile": 81.0,
+            "totalFlights": 18,
+            "hubOrFocusFlights": 18,
+            "minimumFlights": 8,
+            "connectedHubs": [
+              "BHM",
+              "DAY",
+              "MCI",
+              "SYR"
+            ],
+            "hubCountCap": 3
+          },
+          "override": {
+            "reason": "User-authorized v1.3.3 BHM north-south mini-bank: geographically suitable additional focus-city connectivity without changing physical, frequency, bank or curfew rules.",
+            "approvedBy": "user",
+            "expiresAfterSchedule": 7
+          }
+        },
+        {
+          "id": "CHS",
+          "message": "CHS does not satisfy its percentile-tier service envelope",
+          "evidence": {
+            "city": "CHS",
+            "percentile": 79.0,
+            "totalFlights": 18,
+            "hubOrFocusFlights": 18,
+            "minimumFlights": 8,
+            "connectedHubs": [
+              "BHM",
+              "DAY",
+              "JAX",
+              "PHF"
+            ],
+            "hubCountCap": 3
+          },
+          "override": {
+            "reason": "User-authorized v1.3.3 BHM north-south mini-bank: geographically suitable additional focus-city connectivity without changing physical, frequency, bank or curfew rules.",
             "approvedBy": "user",
             "expiresAfterSchedule": 7
           }
@@ -3692,6 +3809,28 @@
           }
         },
         {
+          "id": "HVN",
+          "message": "HVN does not satisfy its percentile-tier service envelope",
+          "evidence": {
+            "city": "HVN",
+            "percentile": 57.0,
+            "totalFlights": 12,
+            "hubOrFocusFlights": 12,
+            "minimumFlights": 6,
+            "connectedHubs": [
+              "BHM",
+              "DAY",
+              "SYR"
+            ],
+            "hubCountCap": 2
+          },
+          "override": {
+            "reason": "User-authorized v1.3.3 BHM north-south mini-bank: geographically suitable additional focus-city connectivity without changing physical, frequency, bank or curfew rules.",
+            "approvedBy": "user",
+            "expiresAfterSchedule": 7
+          }
+        },
+        {
           "id": "MLB",
           "message": "MLB does not satisfy its percentile-tier service envelope",
           "evidence": {
@@ -3713,13 +3852,35 @@
           }
         },
         {
+          "id": "MYR",
+          "message": "MYR does not satisfy its percentile-tier service envelope",
+          "evidence": {
+            "city": "MYR",
+            "percentile": 70.0,
+            "totalFlights": 10,
+            "hubOrFocusFlights": 8,
+            "minimumFlights": 6,
+            "connectedHubs": [
+              "BHM",
+              "JAX",
+              "PHF"
+            ],
+            "hubCountCap": 2
+          },
+          "override": {
+            "reason": "User-authorized v1.3.3 BHM north-south mini-bank: geographically suitable additional focus-city connectivity without changing physical, frequency, bank or curfew rules.",
+            "approvedBy": "user",
+            "expiresAfterSchedule": 7
+          }
+        },
+        {
           "id": "PGD",
           "message": "PGD does not satisfy its percentile-tier service envelope",
           "evidence": {
             "city": "PGD",
             "percentile": 89.0,
-            "totalFlights": 22,
-            "hubOrFocusFlights": 18,
+            "totalFlights": 24,
+            "hubOrFocusFlights": 20,
             "minimumFlights": 8,
             "connectedHubs": [
               "BHM",
@@ -3924,8 +4085,8 @@
           "evidence": {
             "city": "SRQ",
             "percentile": 80.0,
-            "totalFlights": 16,
-            "hubOrFocusFlights": 16,
+            "totalFlights": 18,
+            "hubOrFocusFlights": 18,
             "minimumFlights": 8,
             "connectedHubs": [
               "BHM",
@@ -4156,10 +4317,24 @@
       "section": "\u00a71.11",
       "severity": "warning",
       "hardStop": false,
-      "status": "pass",
-      "message": "Every configured override matches a current finding",
+      "status": "warning",
+      "message": "1 finding(s)",
       "metrics": {},
-      "findings": []
+      "findings": [
+        {
+          "id": "tiered_service_minimums:ISP",
+          "message": "Configured override did not match a current finding or has expired",
+          "evidence": {
+            "override": {
+              "checkId": "tiered_service_minimums",
+              "findingId": "ISP",
+              "reason": "User-authorized v1.3.3 BHM north-south mini-bank: geographically suitable additional focus-city connectivity without changing physical, frequency, bank or curfew rules.",
+              "approvedBy": "user",
+              "expiresAfterSchedule": 7
+            }
+          }
+        }
+      ]
     }
   ]
 }
