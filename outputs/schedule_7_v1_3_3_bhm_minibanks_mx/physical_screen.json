@@ -1,0 +1,1465 @@
+{
+  "base": {
+    "pass": false,
+    "structure": "pass",
+    "overnight": "pass",
+    "planning": "pass",
+    "gate": "GateCapacityError('4 passenger touch(es) remain off-gate')",
+    "operating": {
+      "checks": 25,
+      "passed": 15,
+      "failed": 4,
+      "warnings": 4,
+      "notEvaluated": 1,
+      "overridden": 1,
+      "effectiveErrorFindings": 12,
+      "effectiveWarningFindings": 160
+    },
+    "failed": [
+      {
+        "id": "section_26_pairing_spacing",
+        "count": 2,
+        "examples": [
+          {
+            "id": "PGD-BHM",
+            "message": "PGD\u2013BHM fails same-pairing spacing",
+            "evidence": {
+              "origin": "PGD",
+              "destination": "BHM",
+              "departures": [
+                755,
+                870
+              ],
+              "gaps": [
+                {
+                  "from": 755,
+                  "to": 870,
+                  "minutes": 115
+                },
+                {
+                  "from": 870,
+                  "to": 755,
+                  "minutes": 1325
+                }
+              ],
+              "targetMinutes": 168.0,
+              "allowedExceptions": 0,
+              "hubBound": false
+            }
+          },
+          {
+            "id": "SYR-ALB",
+            "message": "SYR\u2013ALB fails same-pairing spacing",
+            "evidence": {
+              "origin": "SYR",
+              "destination": "ALB",
+              "departures": [
+                350,
+                368,
+                515,
+                850,
+                1005
+              ],
+              "gaps": [
+                {
+                  "from": 350,
+                  "to": 368,
+                  "minutes": 18
+                },
+                {
+                  "from": 368,
+                  "to": 515,
+                  "minutes": 147
+                },
+                {
+                  "from": 515,
+                  "to": 850,
+                  "minutes": 335
+                },
+                {
+                  "from": 850,
+                  "to": 1005,
+                  "minutes": 155
+                },
+                {
+                  "from": 1005,
+                  "to": 350,
+                  "minutes": 785
+                }
+              ],
+              "targetMinutes": 67.19999999999999,
+              "allowedExceptions": 1,
+              "hubBound": false
+            }
+          }
+        ]
+      },
+      {
+        "id": "passenger_touch_on_stand",
+        "count": 4,
+        "examples": [
+          {
+            "id": "PHF-528-937-982",
+            "message": "PHF claim 528 requires passenger handling on stand 2",
+            "evidence": {
+              "city": "PHF",
+              "label": "528",
+              "kind": "turn",
+              "start": 937,
+              "end": 982,
+              "stand": 2
+            }
+          },
+          {
+            "id": "PHF-722 -> 723-1235-1280",
+            "message": "PHF claim 722 -> 723 requires passenger handling on stand 1",
+            "evidence": {
+              "city": "PHF",
+              "label": "722 -> 723",
+              "kind": "ron",
+              "start": 1235,
+              "end": 1280,
+              "stand": 1
+            }
+          },
+          {
+            "id": "PHF-357 -> 357-1795-1855",
+            "message": "PHF claim 357 -> 357 requires passenger handling on stand 1",
+            "evidence": {
+              "city": "PHF",
+              "label": "357 -> 357",
+              "kind": "ron",
+              "start": 1795,
+              "end": 1855,
+              "stand": 1
+            }
+          },
+          {
+            "id": "PHF-358 -> 358-1790-1850",
+            "message": "PHF claim 358 -> 358 requires passenger handling on stand 3",
+            "evidence": {
+              "city": "PHF",
+              "label": "358 -> 358",
+              "kind": "ron",
+              "start": 1790,
+              "end": 1850,
+              "stand": 3
+            }
+          }
+        ]
+      },
+      {
+        "id": "fixed_physical_inventory",
+        "count": 1,
+        "examples": [
+          {
+            "id": "PHF",
+            "message": "PHF cannot fit its claims into the configured physical inventory: 4 passenger touch(es) remain off-gate",
+            "evidence": {
+              "city": "PHF",
+              "requiredGates": 17,
+              "configuredGates": 16,
+              "requiredStands": 8,
+              "configuredStands": 8,
+              "strandedPassengerTouches": 4
+            }
+          }
+        ]
+      },
+      {
+        "id": "tiered_service_minimums",
+        "count": 26,
+        "examples": [
+          {
+            "id": "ATW",
+            "message": "ATW does not satisfy its percentile-tier service envelope",
+            "evidence": {
+              "city": "ATW",
+              "percentile": 31.0,
+              "totalFlights": 14,
+              "hubOrFocusFlights": 14,
+              "minimumFlights": 6,
+              "connectedHubs": [
+                "BHM",
+                "DAY",
+                "MCI"
+              ],
+              "hubCountCap": 2
+            },
+            "override": {
+              "reason": "Schedule 7 v1.1.3 BHM focus-city initiative: ATW-BHM is deliberate focus-city feed for Florida Peninsula connectivity.",
+              "approvedBy": "user",
+              "expiresAfterSchedule": 7
+            }
+          },
+          {
+            "id": "BHM",
+            "message": "BHM does not satisfy its percentile-tier service envelope",
+            "evidence": {
+              "city": "BHM",
+              "percentile": 64.0,
+              "totalFlights": 114,
+              "hubOrFocusFlights": 114,
+              "minimumFlights": 6,
+              "connectedHubs": [
+                "DAY",
+                "JAX",
+                "MCI",
+                "PHF"
+              ],
+              "hubCountCap": 2
+            },
+            "override": {
+              "reason": "Schedule 7 v1.1.0 PHF north-south initiative: PHF is a geographically reasonable additional hub and the added service passes downstream feasibility checks.",
+              "approvedBy": "user",
+              "expiresAfterSchedule": 7
+            }
+          },
+          {
+            "id": "BWI",
+            "message": "BWI does not satisfy its percentile-tier service envelope",
+            "evidence": {
+              "city": "BWI",
+              "percentile": 94.0,
+              "totalFlights": 34,
+              "hubOrFocusFlights": 28,
+              "minimumFlights": 8,
+              "connectedHubs": [
+                "BHM",
+                "DAY",
+                "JAX",
+                "MCI",
+                "PHF",
+                "SYR"
+              ],
+              "hubCountCap": 4
+            },
+            "override": {
+              "reason": "Schedule 7 v1.1.0 PHF north-south initiative: the BWI-BHM-PHF triangles are geographically reasonable and pass downstream feasibility checks.",
+              "approvedBy": "user",
+              "expiresAfterSchedule": 7
+            }
+          },
+          {
+            "id": "CAK",
+            "message": "CAK does not satisfy its percentile-tier service envelope",
+            "evidence": {
+              "city": "CAK",
+              "percentile": 81.0,
+              "totalFlights": 18,
+              "hubOrFocusFlights": 18,
+              "minimumFlights": 8,
+              "connectedHubs": [
+                "BHM",
+                "DAY",
+                "MCI",
+                "SYR"
+              ],
+              "hubCountCap": 3
+            }
+          }
+        ]
+      }
+    ],
+    "fleets": {
+      "MAX9": {
+        "used": 24,
+        "capacity": 35
+      },
+      "CRJ900": {
+        "used": 30,
+        "capacity": 45
+      },
+      "CRJ700": {
+        "used": 58,
+        "capacity": 65
+      },
+      "CRJ200": {
+        "used": 76,
+        "capacity": 80
+      },
+      "findingCount": 0,
+      "effectiveFindingCount": 0,
+      "overriddenFindingCount": 0
+    },
+    "routes": [
+      {
+        "route": 529,
+        "line": "BA",
+        "fleet": "CRJ900",
+        "day": 1,
+        "legs": [
+          {
+            "id": "V133-BHM-529-1-SYR-ALB",
+            "origin": "SYR",
+            "destination": "ALB",
+            "departureMinute": 368,
+            "arrivalMinute": 414
+          },
+          {
+            "id": "V133-BHM-529-2-ALB-BHM",
+            "origin": "ALB",
+            "destination": "BHM",
+            "departureMinute": 520,
+            "arrivalMinute": 604
+          },
+          {
+            "id": "V133-BHM-529-3-BHM-SRQ",
+            "origin": "BHM",
+            "destination": "SRQ",
+            "departureMinute": 651,
+            "arrivalMinute": 801
+          },
+          {
+            "id": "V133-BHM-529-4-SRQ-BHM",
+            "origin": "SRQ",
+            "destination": "BHM",
+            "departureMinute": 873,
+            "arrivalMinute": 903
+          },
+          {
+            "id": "V133-BHM-529-5-BHM-ALB",
+            "origin": "BHM",
+            "destination": "ALB",
+            "departureMinute": 943,
+            "arrivalMinute": 1147
+          },
+          {
+            "id": "V133-BHM-529-6-ALB-SYR",
+            "origin": "ALB",
+            "destination": "SYR",
+            "departureMinute": 1244,
+            "arrivalMinute": 1290
+          }
+        ]
+      },
+      {
+        "route": 530,
+        "line": "BB",
+        "fleet": "CRJ900",
+        "day": 1,
+        "legs": [
+          {
+            "id": "V133-BHM-530-1-SYR-CAK",
+            "origin": "SYR",
+            "destination": "CAK",
+            "departureMinute": 368,
+            "arrivalMinute": 437
+          },
+          {
+            "id": "V133-BHM-530-2-CAK-BHM",
+            "origin": "CAK",
+            "destination": "BHM",
+            "departureMinute": 565,
+            "arrivalMinute": 606
+          },
+          {
+            "id": "V133-BHM-530-3-BHM-PGD",
+            "origin": "BHM",
+            "destination": "PGD",
+            "departureMinute": 653,
+            "arrivalMinute": 809
+          },
+          {
+            "id": "V133-BHM-530-4-PGD-BHM",
+            "origin": "PGD",
+            "destination": "BHM",
+            "departureMinute": 870,
+            "arrivalMinute": 906
+          },
+          {
+            "id": "V133-BHM-530-5-BHM-CAK",
+            "origin": "BHM",
+            "destination": "CAK",
+            "departureMinute": 946,
+            "arrivalMinute": 1107
+          },
+          {
+            "id": "V133-BHM-530-6-CAK-SYR",
+            "origin": "CAK",
+            "destination": "SYR",
+            "departureMinute": 1221,
+            "arrivalMinute": 1290
+          }
+        ]
+      },
+      {
+        "route": 357,
+        "line": "BC",
+        "fleet": "CRJ700",
+        "day": 1,
+        "legs": [
+          {
+            "id": "V133-BHM-357-1-PHF-ISP",
+            "origin": "PHF",
+            "destination": "ISP",
+            "departureMinute": 415,
+            "arrivalMinute": 485
+          },
+          {
+            "id": "V133-BHM-357-2-ISP-BHM",
+            "origin": "ISP",
+            "destination": "BHM",
+            "departureMinute": 525,
+            "arrivalMinute": 610
+          },
+          {
+            "id": "V133-BHM-357-3-BHM-MYR",
+            "origin": "BHM",
+            "destination": "MYR",
+            "departureMinute": 655,
+            "arrivalMinute": 802
+          },
+          {
+            "id": "V133-BHM-357-4-MYR-BHM",
+            "origin": "MYR",
+            "destination": "BHM",
+            "departureMinute": 925,
+            "arrivalMinute": 952
+          },
+          {
+            "id": "V133-BHM-357-5-BHM-ISP",
+            "origin": "BHM",
+            "destination": "ISP",
+            "departureMinute": 992,
+            "arrivalMinute": 1197
+          },
+          {
+            "id": "V133-BHM-357-6-ISP-PHF",
+            "origin": "ISP",
+            "destination": "PHF",
+            "departureMinute": 1237,
+            "arrivalMinute": 1307
+          }
+        ]
+      },
+      {
+        "route": 358,
+        "line": "BD",
+        "fleet": "CRJ700",
+        "day": 1,
+        "legs": [
+          {
+            "id": "V133-BHM-358-1-PHF-HVN",
+            "origin": "PHF",
+            "destination": "HVN",
+            "departureMinute": 410,
+            "arrivalMinute": 484
+          },
+          {
+            "id": "V133-BHM-358-2-HVN-BHM",
+            "origin": "HVN",
+            "destination": "BHM",
+            "departureMinute": 524,
+            "arrivalMinute": 612
+          },
+          {
+            "id": "V133-BHM-358-3-BHM-CHS",
+            "origin": "BHM",
+            "destination": "CHS",
+            "departureMinute": 657,
+            "arrivalMinute": 797
+          },
+          {
+            "id": "V133-BHM-358-4-CHS-BHM",
+            "origin": "CHS",
+            "destination": "BHM",
+            "departureMinute": 934,
+            "arrivalMinute": 954
+          },
+          {
+            "id": "V133-BHM-358-5-BHM-HVN",
+            "origin": "BHM",
+            "destination": "HVN",
+            "departureMinute": 994,
+            "arrivalMinute": 1202
+          },
+          {
+            "id": "V133-BHM-358-6-HVN-PHF",
+            "origin": "HVN",
+            "destination": "PHF",
+            "departureMinute": 1242,
+            "arrivalMinute": 1316
+          }
+        ]
+      }
+    ]
+  },
+  "early": {
+    "pass": false,
+    "error": "ValueError('529 short BHM/south turn: (604, 643, 895, 935, 90)')",
+    "trace": "Traceback (most recent call last):\n  File \"/home/runner/work/CAA-scheduler/CAA-scheduler/scripts/screen_schedule_7_v1_3_3_bhm_mx_rotations.py\", line 100, in <module>\n    overlay=make(label,adjust,swap)\n            ^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/CAA-scheduler/CAA-scheduler/scripts/screen_schedule_7_v1_3_3_bhm_mx_rotations.py\", line 92, in make\n    route_spec,assign=newroute(route,line,fleet,hub,north,south,morning,sout+adjust,out_south+adjust,dep_n+adjust)\n                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/CAA-scheduler/CAA-scheduler/scripts/screen_schedule_7_v1_3_3_bhm_mx_rotations.py\", line 46, in newroute\n    raise ValueError(f\"{route} short BHM/south turn: {morning_bhm,south_dep,south_back,north_dep,bs}\")\nValueError: 529 short BHM/south turn: (604, 643, 895, 935, 90)\n"
+  },
+  "late": {
+    "pass": false,
+    "structure": "pass",
+    "overnight": "pass",
+    "planning": "pass",
+    "gate": "GateCapacityError('4 passenger touch(es) remain off-gate')",
+    "operating": {
+      "checks": 25,
+      "passed": 15,
+      "failed": 4,
+      "warnings": 4,
+      "notEvaluated": 1,
+      "overridden": 1,
+      "effectiveErrorFindings": 12,
+      "effectiveWarningFindings": 160
+    },
+    "failed": [
+      {
+        "id": "section_26_pairing_spacing",
+        "count": 2,
+        "examples": [
+          {
+            "id": "PGD-BHM",
+            "message": "PGD\u2013BHM fails same-pairing spacing",
+            "evidence": {
+              "origin": "PGD",
+              "destination": "BHM",
+              "departures": [
+                755,
+                878
+              ],
+              "gaps": [
+                {
+                  "from": 755,
+                  "to": 878,
+                  "minutes": 123
+                },
+                {
+                  "from": 878,
+                  "to": 755,
+                  "minutes": 1317
+                }
+              ],
+              "targetMinutes": 168.0,
+              "allowedExceptions": 0,
+              "hubBound": false
+            }
+          },
+          {
+            "id": "SYR-ALB",
+            "message": "SYR\u2013ALB fails same-pairing spacing",
+            "evidence": {
+              "origin": "SYR",
+              "destination": "ALB",
+              "departures": [
+                350,
+                368,
+                515,
+                850,
+                1005
+              ],
+              "gaps": [
+                {
+                  "from": 350,
+                  "to": 368,
+                  "minutes": 18
+                },
+                {
+                  "from": 368,
+                  "to": 515,
+                  "minutes": 147
+                },
+                {
+                  "from": 515,
+                  "to": 850,
+                  "minutes": 335
+                },
+                {
+                  "from": 850,
+                  "to": 1005,
+                  "minutes": 155
+                },
+                {
+                  "from": 1005,
+                  "to": 350,
+                  "minutes": 785
+                }
+              ],
+              "targetMinutes": 67.19999999999999,
+              "allowedExceptions": 1,
+              "hubBound": false
+            }
+          }
+        ]
+      },
+      {
+        "id": "passenger_touch_on_stand",
+        "count": 4,
+        "examples": [
+          {
+            "id": "PHF-528-937-982",
+            "message": "PHF claim 528 requires passenger handling on stand 2",
+            "evidence": {
+              "city": "PHF",
+              "label": "528",
+              "kind": "turn",
+              "start": 937,
+              "end": 982,
+              "stand": 2
+            }
+          },
+          {
+            "id": "PHF-722 -> 723-1235-1280",
+            "message": "PHF claim 722 -> 723 requires passenger handling on stand 1",
+            "evidence": {
+              "city": "PHF",
+              "label": "722 -> 723",
+              "kind": "ron",
+              "start": 1235,
+              "end": 1280,
+              "stand": 1
+            }
+          },
+          {
+            "id": "PHF-357 -> 357-1795-1855",
+            "message": "PHF claim 357 -> 357 requires passenger handling on stand 1",
+            "evidence": {
+              "city": "PHF",
+              "label": "357 -> 357",
+              "kind": "ron",
+              "start": 1795,
+              "end": 1855,
+              "stand": 1
+            }
+          },
+          {
+            "id": "PHF-358 -> 358-1790-1850",
+            "message": "PHF claim 358 -> 358 requires passenger handling on stand 3",
+            "evidence": {
+              "city": "PHF",
+              "label": "358 -> 358",
+              "kind": "ron",
+              "start": 1790,
+              "end": 1850,
+              "stand": 3
+            }
+          }
+        ]
+      },
+      {
+        "id": "fixed_physical_inventory",
+        "count": 1,
+        "examples": [
+          {
+            "id": "PHF",
+            "message": "PHF cannot fit its claims into the configured physical inventory: 4 passenger touch(es) remain off-gate",
+            "evidence": {
+              "city": "PHF",
+              "requiredGates": 17,
+              "configuredGates": 16,
+              "requiredStands": 8,
+              "configuredStands": 8,
+              "strandedPassengerTouches": 4
+            }
+          }
+        ]
+      },
+      {
+        "id": "tiered_service_minimums",
+        "count": 26,
+        "examples": [
+          {
+            "id": "ATW",
+            "message": "ATW does not satisfy its percentile-tier service envelope",
+            "evidence": {
+              "city": "ATW",
+              "percentile": 31.0,
+              "totalFlights": 14,
+              "hubOrFocusFlights": 14,
+              "minimumFlights": 6,
+              "connectedHubs": [
+                "BHM",
+                "DAY",
+                "MCI"
+              ],
+              "hubCountCap": 2
+            },
+            "override": {
+              "reason": "Schedule 7 v1.1.3 BHM focus-city initiative: ATW-BHM is deliberate focus-city feed for Florida Peninsula connectivity.",
+              "approvedBy": "user",
+              "expiresAfterSchedule": 7
+            }
+          },
+          {
+            "id": "BHM",
+            "message": "BHM does not satisfy its percentile-tier service envelope",
+            "evidence": {
+              "city": "BHM",
+              "percentile": 64.0,
+              "totalFlights": 114,
+              "hubOrFocusFlights": 114,
+              "minimumFlights": 6,
+              "connectedHubs": [
+                "DAY",
+                "JAX",
+                "MCI",
+                "PHF"
+              ],
+              "hubCountCap": 2
+            },
+            "override": {
+              "reason": "Schedule 7 v1.1.0 PHF north-south initiative: PHF is a geographically reasonable additional hub and the added service passes downstream feasibility checks.",
+              "approvedBy": "user",
+              "expiresAfterSchedule": 7
+            }
+          },
+          {
+            "id": "BWI",
+            "message": "BWI does not satisfy its percentile-tier service envelope",
+            "evidence": {
+              "city": "BWI",
+              "percentile": 94.0,
+              "totalFlights": 34,
+              "hubOrFocusFlights": 28,
+              "minimumFlights": 8,
+              "connectedHubs": [
+                "BHM",
+                "DAY",
+                "JAX",
+                "MCI",
+                "PHF",
+                "SYR"
+              ],
+              "hubCountCap": 4
+            },
+            "override": {
+              "reason": "Schedule 7 v1.1.0 PHF north-south initiative: the BWI-BHM-PHF triangles are geographically reasonable and pass downstream feasibility checks.",
+              "approvedBy": "user",
+              "expiresAfterSchedule": 7
+            }
+          },
+          {
+            "id": "CAK",
+            "message": "CAK does not satisfy its percentile-tier service envelope",
+            "evidence": {
+              "city": "CAK",
+              "percentile": 81.0,
+              "totalFlights": 18,
+              "hubOrFocusFlights": 18,
+              "minimumFlights": 8,
+              "connectedHubs": [
+                "BHM",
+                "DAY",
+                "MCI",
+                "SYR"
+              ],
+              "hubCountCap": 3
+            }
+          }
+        ]
+      }
+    ],
+    "fleets": {
+      "MAX9": {
+        "used": 24,
+        "capacity": 35
+      },
+      "CRJ900": {
+        "used": 30,
+        "capacity": 45
+      },
+      "CRJ700": {
+        "used": 58,
+        "capacity": 65
+      },
+      "CRJ200": {
+        "used": 76,
+        "capacity": 80
+      },
+      "findingCount": 0,
+      "effectiveFindingCount": 0,
+      "overriddenFindingCount": 0
+    },
+    "routes": [
+      {
+        "route": 529,
+        "line": "BA",
+        "fleet": "CRJ900",
+        "day": 1,
+        "legs": [
+          {
+            "id": "V133-BHM-529-1-SYR-ALB",
+            "origin": "SYR",
+            "destination": "ALB",
+            "departureMinute": 368,
+            "arrivalMinute": 414
+          },
+          {
+            "id": "V133-BHM-529-2-ALB-BHM",
+            "origin": "ALB",
+            "destination": "BHM",
+            "departureMinute": 520,
+            "arrivalMinute": 604
+          },
+          {
+            "id": "V133-BHM-529-3-BHM-SRQ",
+            "origin": "BHM",
+            "destination": "SRQ",
+            "departureMinute": 659,
+            "arrivalMinute": 809
+          },
+          {
+            "id": "V133-BHM-529-4-SRQ-BHM",
+            "origin": "SRQ",
+            "destination": "BHM",
+            "departureMinute": 881,
+            "arrivalMinute": 911
+          },
+          {
+            "id": "V133-BHM-529-5-BHM-ALB",
+            "origin": "BHM",
+            "destination": "ALB",
+            "departureMinute": 951,
+            "arrivalMinute": 1155
+          },
+          {
+            "id": "V133-BHM-529-6-ALB-SYR",
+            "origin": "ALB",
+            "destination": "SYR",
+            "departureMinute": 1244,
+            "arrivalMinute": 1290
+          }
+        ]
+      },
+      {
+        "route": 530,
+        "line": "BB",
+        "fleet": "CRJ900",
+        "day": 1,
+        "legs": [
+          {
+            "id": "V133-BHM-530-1-SYR-CAK",
+            "origin": "SYR",
+            "destination": "CAK",
+            "departureMinute": 368,
+            "arrivalMinute": 437
+          },
+          {
+            "id": "V133-BHM-530-2-CAK-BHM",
+            "origin": "CAK",
+            "destination": "BHM",
+            "departureMinute": 565,
+            "arrivalMinute": 606
+          },
+          {
+            "id": "V133-BHM-530-3-BHM-PGD",
+            "origin": "BHM",
+            "destination": "PGD",
+            "departureMinute": 661,
+            "arrivalMinute": 817
+          },
+          {
+            "id": "V133-BHM-530-4-PGD-BHM",
+            "origin": "PGD",
+            "destination": "BHM",
+            "departureMinute": 878,
+            "arrivalMinute": 914
+          },
+          {
+            "id": "V133-BHM-530-5-BHM-CAK",
+            "origin": "BHM",
+            "destination": "CAK",
+            "departureMinute": 954,
+            "arrivalMinute": 1115
+          },
+          {
+            "id": "V133-BHM-530-6-CAK-SYR",
+            "origin": "CAK",
+            "destination": "SYR",
+            "departureMinute": 1221,
+            "arrivalMinute": 1290
+          }
+        ]
+      },
+      {
+        "route": 357,
+        "line": "BC",
+        "fleet": "CRJ700",
+        "day": 1,
+        "legs": [
+          {
+            "id": "V133-BHM-357-1-PHF-ISP",
+            "origin": "PHF",
+            "destination": "ISP",
+            "departureMinute": 415,
+            "arrivalMinute": 485
+          },
+          {
+            "id": "V133-BHM-357-2-ISP-BHM",
+            "origin": "ISP",
+            "destination": "BHM",
+            "departureMinute": 525,
+            "arrivalMinute": 610
+          },
+          {
+            "id": "V133-BHM-357-3-BHM-MYR",
+            "origin": "BHM",
+            "destination": "MYR",
+            "departureMinute": 663,
+            "arrivalMinute": 810
+          },
+          {
+            "id": "V133-BHM-357-4-MYR-BHM",
+            "origin": "MYR",
+            "destination": "BHM",
+            "departureMinute": 933,
+            "arrivalMinute": 960
+          },
+          {
+            "id": "V133-BHM-357-5-BHM-ISP",
+            "origin": "BHM",
+            "destination": "ISP",
+            "departureMinute": 1000,
+            "arrivalMinute": 1205
+          },
+          {
+            "id": "V133-BHM-357-6-ISP-PHF",
+            "origin": "ISP",
+            "destination": "PHF",
+            "departureMinute": 1245,
+            "arrivalMinute": 1315
+          }
+        ]
+      },
+      {
+        "route": 358,
+        "line": "BD",
+        "fleet": "CRJ700",
+        "day": 1,
+        "legs": [
+          {
+            "id": "V133-BHM-358-1-PHF-HVN",
+            "origin": "PHF",
+            "destination": "HVN",
+            "departureMinute": 410,
+            "arrivalMinute": 484
+          },
+          {
+            "id": "V133-BHM-358-2-HVN-BHM",
+            "origin": "HVN",
+            "destination": "BHM",
+            "departureMinute": 524,
+            "arrivalMinute": 612
+          },
+          {
+            "id": "V133-BHM-358-3-BHM-CHS",
+            "origin": "BHM",
+            "destination": "CHS",
+            "departureMinute": 665,
+            "arrivalMinute": 805
+          },
+          {
+            "id": "V133-BHM-358-4-CHS-BHM",
+            "origin": "CHS",
+            "destination": "BHM",
+            "departureMinute": 942,
+            "arrivalMinute": 962
+          },
+          {
+            "id": "V133-BHM-358-5-BHM-HVN",
+            "origin": "BHM",
+            "destination": "HVN",
+            "departureMinute": 1002,
+            "arrivalMinute": 1210
+          },
+          {
+            "id": "V133-BHM-358-6-HVN-PHF",
+            "origin": "HVN",
+            "destination": "PHF",
+            "departureMinute": 1250,
+            "arrivalMinute": 1324
+          }
+        ]
+      }
+    ]
+  },
+  "swap": {
+    "pass": false,
+    "structure": "pass",
+    "overnight": "pass",
+    "planning": "pass",
+    "gate": "GateCapacityError('4 passenger touch(es) remain off-gate')",
+    "operating": {
+      "checks": 25,
+      "passed": 15,
+      "failed": 4,
+      "warnings": 4,
+      "notEvaluated": 1,
+      "overridden": 1,
+      "effectiveErrorFindings": 12,
+      "effectiveWarningFindings": 160
+    },
+    "failed": [
+      {
+        "id": "section_26_pairing_spacing",
+        "count": 2,
+        "examples": [
+          {
+            "id": "PGD-BHM",
+            "message": "PGD\u2013BHM fails same-pairing spacing",
+            "evidence": {
+              "origin": "PGD",
+              "destination": "BHM",
+              "departures": [
+                755,
+                867
+              ],
+              "gaps": [
+                {
+                  "from": 755,
+                  "to": 867,
+                  "minutes": 112
+                },
+                {
+                  "from": 867,
+                  "to": 755,
+                  "minutes": 1328
+                }
+              ],
+              "targetMinutes": 168.0,
+              "allowedExceptions": 0,
+              "hubBound": false
+            }
+          },
+          {
+            "id": "SYR-ALB",
+            "message": "SYR\u2013ALB fails same-pairing spacing",
+            "evidence": {
+              "origin": "SYR",
+              "destination": "ALB",
+              "departures": [
+                350,
+                368,
+                515,
+                850,
+                1005
+              ],
+              "gaps": [
+                {
+                  "from": 350,
+                  "to": 368,
+                  "minutes": 18
+                },
+                {
+                  "from": 368,
+                  "to": 515,
+                  "minutes": 147
+                },
+                {
+                  "from": 515,
+                  "to": 850,
+                  "minutes": 335
+                },
+                {
+                  "from": 850,
+                  "to": 1005,
+                  "minutes": 155
+                },
+                {
+                  "from": 1005,
+                  "to": 350,
+                  "minutes": 785
+                }
+              ],
+              "targetMinutes": 67.19999999999999,
+              "allowedExceptions": 1,
+              "hubBound": false
+            }
+          }
+        ]
+      },
+      {
+        "id": "passenger_touch_on_stand",
+        "count": 4,
+        "examples": [
+          {
+            "id": "PHF-528-937-982",
+            "message": "PHF claim 528 requires passenger handling on stand 2",
+            "evidence": {
+              "city": "PHF",
+              "label": "528",
+              "kind": "turn",
+              "start": 937,
+              "end": 982,
+              "stand": 2
+            }
+          },
+          {
+            "id": "PHF-722 -> 723-1235-1280",
+            "message": "PHF claim 722 -> 723 requires passenger handling on stand 1",
+            "evidence": {
+              "city": "PHF",
+              "label": "722 -> 723",
+              "kind": "ron",
+              "start": 1235,
+              "end": 1280,
+              "stand": 1
+            }
+          },
+          {
+            "id": "PHF-357 -> 357-1795-1855",
+            "message": "PHF claim 357 -> 357 requires passenger handling on stand 1",
+            "evidence": {
+              "city": "PHF",
+              "label": "357 -> 357",
+              "kind": "ron",
+              "start": 1795,
+              "end": 1855,
+              "stand": 1
+            }
+          },
+          {
+            "id": "PHF-358 -> 358-1790-1850",
+            "message": "PHF claim 358 -> 358 requires passenger handling on stand 3",
+            "evidence": {
+              "city": "PHF",
+              "label": "358 -> 358",
+              "kind": "ron",
+              "start": 1790,
+              "end": 1850,
+              "stand": 3
+            }
+          }
+        ]
+      },
+      {
+        "id": "fixed_physical_inventory",
+        "count": 1,
+        "examples": [
+          {
+            "id": "PHF",
+            "message": "PHF cannot fit its claims into the configured physical inventory: 4 passenger touch(es) remain off-gate",
+            "evidence": {
+              "city": "PHF",
+              "requiredGates": 17,
+              "configuredGates": 16,
+              "requiredStands": 8,
+              "configuredStands": 8,
+              "strandedPassengerTouches": 4
+            }
+          }
+        ]
+      },
+      {
+        "id": "tiered_service_minimums",
+        "count": 26,
+        "examples": [
+          {
+            "id": "ATW",
+            "message": "ATW does not satisfy its percentile-tier service envelope",
+            "evidence": {
+              "city": "ATW",
+              "percentile": 31.0,
+              "totalFlights": 14,
+              "hubOrFocusFlights": 14,
+              "minimumFlights": 6,
+              "connectedHubs": [
+                "BHM",
+                "DAY",
+                "MCI"
+              ],
+              "hubCountCap": 2
+            },
+            "override": {
+              "reason": "Schedule 7 v1.1.3 BHM focus-city initiative: ATW-BHM is deliberate focus-city feed for Florida Peninsula connectivity.",
+              "approvedBy": "user",
+              "expiresAfterSchedule": 7
+            }
+          },
+          {
+            "id": "BHM",
+            "message": "BHM does not satisfy its percentile-tier service envelope",
+            "evidence": {
+              "city": "BHM",
+              "percentile": 64.0,
+              "totalFlights": 114,
+              "hubOrFocusFlights": 114,
+              "minimumFlights": 6,
+              "connectedHubs": [
+                "DAY",
+                "JAX",
+                "MCI",
+                "PHF"
+              ],
+              "hubCountCap": 2
+            },
+            "override": {
+              "reason": "Schedule 7 v1.1.0 PHF north-south initiative: PHF is a geographically reasonable additional hub and the added service passes downstream feasibility checks.",
+              "approvedBy": "user",
+              "expiresAfterSchedule": 7
+            }
+          },
+          {
+            "id": "BWI",
+            "message": "BWI does not satisfy its percentile-tier service envelope",
+            "evidence": {
+              "city": "BWI",
+              "percentile": 94.0,
+              "totalFlights": 34,
+              "hubOrFocusFlights": 28,
+              "minimumFlights": 8,
+              "connectedHubs": [
+                "BHM",
+                "DAY",
+                "JAX",
+                "MCI",
+                "PHF",
+                "SYR"
+              ],
+              "hubCountCap": 4
+            },
+            "override": {
+              "reason": "Schedule 7 v1.1.0 PHF north-south initiative: the BWI-BHM-PHF triangles are geographically reasonable and pass downstream feasibility checks.",
+              "approvedBy": "user",
+              "expiresAfterSchedule": 7
+            }
+          },
+          {
+            "id": "CAK",
+            "message": "CAK does not satisfy its percentile-tier service envelope",
+            "evidence": {
+              "city": "CAK",
+              "percentile": 81.0,
+              "totalFlights": 18,
+              "hubOrFocusFlights": 18,
+              "minimumFlights": 8,
+              "connectedHubs": [
+                "BHM",
+                "DAY",
+                "MCI",
+                "SYR"
+              ],
+              "hubCountCap": 3
+            }
+          }
+        ]
+      }
+    ],
+    "fleets": {
+      "MAX9": {
+        "used": 24,
+        "capacity": 35
+      },
+      "CRJ900": {
+        "used": 30,
+        "capacity": 45
+      },
+      "CRJ700": {
+        "used": 58,
+        "capacity": 65
+      },
+      "CRJ200": {
+        "used": 76,
+        "capacity": 80
+      },
+      "findingCount": 0,
+      "effectiveFindingCount": 0,
+      "overriddenFindingCount": 0
+    },
+    "routes": [
+      {
+        "route": 529,
+        "line": "BA",
+        "fleet": "CRJ900",
+        "day": 1,
+        "legs": [
+          {
+            "id": "V133-BHM-529-1-SYR-ALB",
+            "origin": "SYR",
+            "destination": "ALB",
+            "departureMinute": 368,
+            "arrivalMinute": 414
+          },
+          {
+            "id": "V133-BHM-529-2-ALB-BHM",
+            "origin": "ALB",
+            "destination": "BHM",
+            "departureMinute": 520,
+            "arrivalMinute": 604
+          },
+          {
+            "id": "V133-BHM-529-3-BHM-PGD",
+            "origin": "BHM",
+            "destination": "PGD",
+            "departureMinute": 651,
+            "arrivalMinute": 807
+          },
+          {
+            "id": "V133-BHM-529-4-PGD-BHM",
+            "origin": "PGD",
+            "destination": "BHM",
+            "departureMinute": 867,
+            "arrivalMinute": 903
+          },
+          {
+            "id": "V133-BHM-529-5-BHM-ALB",
+            "origin": "BHM",
+            "destination": "ALB",
+            "departureMinute": 943,
+            "arrivalMinute": 1147
+          },
+          {
+            "id": "V133-BHM-529-6-ALB-SYR",
+            "origin": "ALB",
+            "destination": "SYR",
+            "departureMinute": 1244,
+            "arrivalMinute": 1290
+          }
+        ]
+      },
+      {
+        "route": 530,
+        "line": "BB",
+        "fleet": "CRJ900",
+        "day": 1,
+        "legs": [
+          {
+            "id": "V133-BHM-530-1-SYR-CAK",
+            "origin": "SYR",
+            "destination": "CAK",
+            "departureMinute": 368,
+            "arrivalMinute": 437
+          },
+          {
+            "id": "V133-BHM-530-2-CAK-BHM",
+            "origin": "CAK",
+            "destination": "BHM",
+            "departureMinute": 565,
+            "arrivalMinute": 606
+          },
+          {
+            "id": "V133-BHM-530-3-BHM-SRQ",
+            "origin": "BHM",
+            "destination": "SRQ",
+            "departureMinute": 653,
+            "arrivalMinute": 803
+          },
+          {
+            "id": "V133-BHM-530-4-SRQ-BHM",
+            "origin": "SRQ",
+            "destination": "BHM",
+            "departureMinute": 876,
+            "arrivalMinute": 906
+          },
+          {
+            "id": "V133-BHM-530-5-BHM-CAK",
+            "origin": "BHM",
+            "destination": "CAK",
+            "departureMinute": 946,
+            "arrivalMinute": 1107
+          },
+          {
+            "id": "V133-BHM-530-6-CAK-SYR",
+            "origin": "CAK",
+            "destination": "SYR",
+            "departureMinute": 1221,
+            "arrivalMinute": 1290
+          }
+        ]
+      },
+      {
+        "route": 357,
+        "line": "BC",
+        "fleet": "CRJ700",
+        "day": 1,
+        "legs": [
+          {
+            "id": "V133-BHM-357-1-PHF-ISP",
+            "origin": "PHF",
+            "destination": "ISP",
+            "departureMinute": 415,
+            "arrivalMinute": 485
+          },
+          {
+            "id": "V133-BHM-357-2-ISP-BHM",
+            "origin": "ISP",
+            "destination": "BHM",
+            "departureMinute": 525,
+            "arrivalMinute": 610
+          },
+          {
+            "id": "V133-BHM-357-3-BHM-CHS",
+            "origin": "BHM",
+            "destination": "CHS",
+            "departureMinute": 655,
+            "arrivalMinute": 795
+          },
+          {
+            "id": "V133-BHM-357-4-CHS-BHM",
+            "origin": "CHS",
+            "destination": "BHM",
+            "departureMinute": 932,
+            "arrivalMinute": 952
+          },
+          {
+            "id": "V133-BHM-357-5-BHM-ISP",
+            "origin": "BHM",
+            "destination": "ISP",
+            "departureMinute": 992,
+            "arrivalMinute": 1197
+          },
+          {
+            "id": "V133-BHM-357-6-ISP-PHF",
+            "origin": "ISP",
+            "destination": "PHF",
+            "departureMinute": 1237,
+            "arrivalMinute": 1307
+          }
+        ]
+      },
+      {
+        "route": 358,
+        "line": "BD",
+        "fleet": "CRJ700",
+        "day": 1,
+        "legs": [
+          {
+            "id": "V133-BHM-358-1-PHF-HVN",
+            "origin": "PHF",
+            "destination": "HVN",
+            "departureMinute": 410,
+            "arrivalMinute": 484
+          },
+          {
+            "id": "V133-BHM-358-2-HVN-BHM",
+            "origin": "HVN",
+            "destination": "BHM",
+            "departureMinute": 524,
+            "arrivalMinute": 612
+          },
+          {
+            "id": "V133-BHM-358-3-BHM-MYR",
+            "origin": "BHM",
+            "destination": "MYR",
+            "departureMinute": 657,
+            "arrivalMinute": 804
+          },
+          {
+            "id": "V133-BHM-358-4-MYR-BHM",
+            "origin": "MYR",
+            "destination": "BHM",
+            "departureMinute": 927,
+            "arrivalMinute": 954
+          },
+          {
+            "id": "V133-BHM-358-5-BHM-HVN",
+            "origin": "BHM",
+            "destination": "HVN",
+            "departureMinute": 994,
+            "arrivalMinute": 1202
+          },
+          {
+            "id": "V133-BHM-358-6-HVN-PHF",
+            "origin": "HVN",
+            "destination": "PHF",
+            "departureMinute": 1242,
+            "arrivalMinute": 1316
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,53 @@
+name: Stage complete v1.3.3 BHM mini-bank draft
+on:
+  push:
+    branches: [schedule-7-v1.3.3-bhm-mini-banks]
+    paths:
+      - '.github/workflows/v133-bhm-stage.yml'
+      - 'scripts/build_schedule_7_v1_3_3_draft.py'
+      - 'config/optimizations/schedule_7_v1_3_3_bhm_minibanks.json'
+      - 'tests/test_v1_3_3_bhm_minibanks.py'
+      - 'scripts/screen_schedule_7_v1_3_3_bhm_line_insertion.py'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: v133-bhm-stage
+  cancel-in-progress: true
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -e .
+      - name: Build cumulative v1.3.3 working draft
+        run: python scripts/build_schedule_7_v1_3_3_draft.py
+      - name: Validate BHM fleet, gate, maintenance, itinerary facts
+        run: python tests/test_v1_3_3_bhm_minibanks.py
+      - name: Test R530 insertion into AG without changing selected draft
+        run: python scripts/screen_schedule_7_v1_3_3_bhm_line_insertion.py
+      - name: Keep currently published release suite green
+        run: bash scripts/run_latest_regression.sh
+      - name: Confirm web default still released v1.3.2
+        run: |
+          python -m caa_scheduler build-web --output dist
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          data=json.loads(Path("dist/schedules.json").read_text())
+          assert data["defaultScheduleId"]=="schedule_7_v1_3_2"
+          PY
+      - name: Commit validated unpublished draft artifacts
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f data/schedules/schedule_7_v1_3_3_draft/ outputs/schedule_7_v1_3_3_bhm_line_insertion/
+          if ! git diff --cached --quiet; then
+            git commit -m "Stage validated unpublished 1,253-flight v1.3.3 BHM draft [skip ci]"
+            git restore --worktree .
+            git pull --rebase origin schedule-7-v1.3.3-bhm-mini-banks
+            git push
+          fi

@@ -1,0 +1,64 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "schedule-7-v1.3.3-r514-pie-mci-720-905",
+  "baseSchedule": {
+    "scheduleId": "schedule_7_v1_3_2"
+  },
+  "schedule": {
+    "id": "schedule_7_v1_3_3_draft",
+    "number": 7,
+    "version": "1.3.3-draft",
+    "label": "Schedule 7, Version 1.3.3 draft",
+    "status": "draft",
+    "fleetCounts": {
+      "MAX9": 35,
+      "CRJ900": 45,
+      "CRJ700": 65,
+      "CRJ200": 80
+    },
+    "connectionWindowMinutes": {
+      "minimum": 30,
+      "maximum": 240
+    }
+  },
+  "removeLegs": [
+    {
+      "legId": "PIE-SYR-CRJ900-03-OUT",
+      "expectedRoute": 514
+    },
+    {
+      "legId": "PIE-SYR-CRJ900-05-IN",
+      "expectedRoute": 514
+    }
+  ],
+  "insertLegs": [
+    {
+      "id": "V133-R514-PIE-MCI",
+      "route": 514,
+      "origin": "PIE",
+      "destination": "MCI",
+      "departureMinute": 720,
+      "arrivalMinute": 816
+    },
+    {
+      "id": "V133-R514-MCI-PIE",
+      "route": 514,
+      "origin": "MCI",
+      "destination": "PIE",
+      "departureMinute": 905,
+      "arrivalMinute": 1121
+    }
+  ],
+  "bankAssignmentsToAdd": [
+    {
+      "legId": "V133-R514-PIE-MCI",
+      "operation": "arrival",
+      "bankId": "MCI-B6"
+    },
+    {
+      "legId": "V133-R514-MCI-PIE",
+      "operation": "departure",
+      "bankId": "MCI-B7"
+    }
+  ]
+}

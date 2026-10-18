@@ -1,0 +1,63 @@
+{
+  "strategy": "Place SYR-to-SYR route R530 between AG R518 and R519",
+  "changes": [
+    {
+      "sourceRoute": 519,
+      "expectedLine": "AG",
+      "expectedDay": 9,
+      "expectedFleet": "CRJ900",
+      "line": "AG",
+      "day": 10
+    },
+    {
+      "sourceRoute": 530,
+      "expectedLine": "BB",
+      "expectedDay": 1,
+      "expectedFleet": "CRJ900",
+      "line": "AG",
+      "day": 9
+    }
+  ],
+  "baseFlights": 1253,
+  "structure": "pass",
+  "overnight": "pass",
+  "planning": "pass",
+  "operating": {
+    "checks": 25,
+    "passed": 17,
+    "failed": 0,
+    "warnings": 5,
+    "notEvaluated": 1,
+    "overridden": 2,
+    "effectiveErrorFindings": 0,
+    "effectiveWarningFindings": 160
+  },
+  "gate": "pass",
+  "failed": [],
+  "counts": {
+    "legs": 1253,
+    "lines": 20,
+    "fleetUse": {
+      "MAX9": {
+        "used": 24,
+        "capacity": 35
+      },
+      "CRJ900": {
+        "used": 30,
+        "capacity": 45
+      },
+      "CRJ700": {
+        "used": 58,
+        "capacity": 65
+      },
+      "CRJ200": {
+        "used": 76,
+        "capacity": 80
+      },
+      "findingCount": 0,
+      "effectiveFindingCount": 0,
+      "overriddenFindingCount": 0
+    }
+  },
+  "pass": true
+}

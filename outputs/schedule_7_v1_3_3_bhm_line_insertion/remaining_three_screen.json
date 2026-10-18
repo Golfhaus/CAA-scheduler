@@ -1,0 +1,471 @@
+[
+  {
+    "route": 529,
+    "host": "AG",
+    "day": 11,
+    "endpoint": "CMH",
+    "reason": "CMH~ALB endpoints, after AG R519",
+    "changedLegs": [
+      {
+        "from": "V133-BHM-529-1-DAY-ALB",
+        "to": "V133-BHM-529-1-CMH-ALB",
+        "flight": 2239
+      },
+      {
+        "from": "V133-BHM-529-6-ALB-DAY",
+        "to": "V133-BHM-529-6-ALB-CMH",
+        "flight": 2244
+      }
+    ],
+    "lineRoutes": [
+      [
+        1,
+        511
+      ],
+      [
+        2,
+        512
+      ],
+      [
+        3,
+        513
+      ],
+      [
+        4,
+        514
+      ],
+      [
+        5,
+        515
+      ],
+      [
+        6,
+        516
+      ],
+      [
+        7,
+        517
+      ],
+      [
+        8,
+        518
+      ],
+      [
+        9,
+        530
+      ],
+      [
+        10,
+        519
+      ],
+      [
+        11,
+        529
+      ]
+    ],
+    "lineDays": 11,
+    "structure": "pass",
+    "overnight": "pass",
+    "planning": "pass",
+    "gate": "pass",
+    "operating": {
+      "checks": 25,
+      "passed": 17,
+      "failed": 0,
+      "warnings": 5,
+      "notEvaluated": 1,
+      "overridden": 2,
+      "effectiveErrorFindings": 0,
+      "effectiveWarningFindings": 160
+    },
+    "failed": [],
+    "pass": true
+  },
+  {
+    "route": 357,
+    "host": "AH",
+    "day": 10,
+    "endpoint": "BDL",
+    "reason": "BDL~ISP endpoints, after AH R320",
+    "changedLegs": [
+      {
+        "from": "V133-BHM-357-1-SYR-ISP",
+        "to": "V133-BHM-357-1-BDL-ISP",
+        "flight": 2251
+      },
+      {
+        "from": "V133-BHM-357-6-ISP-SYR",
+        "to": "V133-BHM-357-6-ISP-BDL",
+        "flight": 2256
+      }
+    ],
+    "lineRoutes": [
+      [
+        1,
+        312
+      ],
+      [
+        2,
+        313
+      ],
+      [
+        3,
+        314
+      ],
+      [
+        4,
+        315
+      ],
+      [
+        5,
+        316
+      ],
+      [
+        6,
+        317
+      ],
+      [
+        7,
+        318
+      ],
+      [
+        8,
+        319
+      ],
+      [
+        9,
+        320
+      ],
+      [
+        10,
+        357
+      ]
+    ],
+    "lineDays": 10,
+    "structure": "pass",
+    "overnight": "pass",
+    "planning": "pass",
+    "gate": "4 passenger touch(es) remain off-gate",
+    "operating": {
+      "checks": 25,
+      "passed": 15,
+      "failed": 2,
+      "warnings": 5,
+      "notEvaluated": 1,
+      "overridden": 2,
+      "effectiveErrorFindings": 5,
+      "effectiveWarningFindings": 158
+    },
+    "failed": [
+      {
+        "id": "passenger_touch_on_stand",
+        "findings": [
+          {
+            "id": "BDL-357 -> 312-1286-1331",
+            "message": "BDL claim 357 -> 312 requires passenger handling on stand 1",
+            "evidence": {
+              "city": "BDL",
+              "label": "357 -> 312",
+              "kind": "ron",
+              "start": 1286,
+              "end": 1331,
+              "stand": 1
+            }
+          },
+          {
+            "id": "BDL-357 -> 312-1650-1710",
+            "message": "BDL claim 357 -> 312 requires passenger handling on stand 1",
+            "evidence": {
+              "city": "BDL",
+              "label": "357 -> 312",
+              "kind": "ron",
+              "start": 1650,
+              "end": 1710,
+              "stand": 1
+            }
+          },
+          {
+            "id": "BDL-312 -> 313-1300-1345",
+            "message": "BDL claim 312 -> 313 requires passenger handling on stand 2",
+            "evidence": {
+              "city": "BDL",
+              "label": "312 -> 313",
+              "kind": "ron",
+              "start": 1300,
+              "end": 1345,
+              "stand": 2
+            }
+          },
+          {
+            "id": "BDL-312 -> 313-1650-1710",
+            "message": "BDL claim 312 -> 313 requires passenger handling on stand 2",
+            "evidence": {
+              "city": "BDL",
+              "label": "312 -> 313",
+              "kind": "ron",
+              "start": 1650,
+              "end": 1710,
+              "stand": 2
+            }
+          }
+        ]
+      },
+      {
+        "id": "fixed_physical_inventory",
+        "findings": [
+          {
+            "id": "BDL",
+            "message": "BDL cannot fit its claims into the configured physical inventory: 4 passenger touch(es) remain off-gate",
+            "evidence": {
+              "city": "BDL",
+              "requiredGates": 3,
+              "configuredGates": 2,
+              "requiredStands": 2,
+              "configuredStands": 2,
+              "strandedPassengerTouches": 4
+            }
+          }
+        ]
+      }
+    ],
+    "pass": false
+  },
+  {
+    "route": 358,
+    "host": "AL",
+    "day": 12,
+    "endpoint": "PHF",
+    "reason": "PHF~HVN endpoints between AL R327 and R321",
+    "changedLegs": [
+      {
+        "from": "V133-BHM-358-1-DAY-HVN",
+        "to": "V133-BHM-358-1-PHF-HVN",
+        "flight": 2257
+      },
+      {
+        "from": "V133-BHM-358-6-HVN-DAY",
+        "to": "V133-BHM-358-6-HVN-PHF",
+        "flight": 2262
+      }
+    ],
+    "lineRoutes": [
+      [
+        1,
+        330
+      ],
+      [
+        2,
+        331
+      ],
+      [
+        3,
+        351
+      ],
+      [
+        4,
+        332
+      ],
+      [
+        5,
+        333
+      ],
+      [
+        6,
+        334
+      ],
+      [
+        7,
+        335
+      ],
+      [
+        8,
+        336
+      ],
+      [
+        9,
+        350
+      ],
+      [
+        10,
+        337
+      ],
+      [
+        11,
+        327
+      ],
+      [
+        12,
+        358
+      ],
+      [
+        13,
+        321
+      ]
+    ],
+    "lineDays": 13,
+    "structure": "pass",
+    "overnight": "pass",
+    "planning": "pass",
+    "gate": "3 passenger touch(es) remain off-gate",
+    "operating": {
+      "checks": 25,
+      "passed": 15,
+      "failed": 3,
+      "warnings": 5,
+      "notEvaluated": 1,
+      "overridden": 1,
+      "effectiveErrorFindings": 6,
+      "effectiveWarningFindings": 160
+    },
+    "failed": [
+      {
+        "id": "passenger_touch_on_stand",
+        "findings": [
+          {
+            "id": "PHF-528-937-982",
+            "message": "PHF claim 528 requires passenger handling on stand 2",
+            "evidence": {
+              "city": "PHF",
+              "label": "528",
+              "kind": "turn",
+              "start": 937,
+              "end": 982,
+              "stand": 2
+            }
+          },
+          {
+            "id": "PHF-722 -> 723-1235-1280",
+            "message": "PHF claim 722 -> 723 requires passenger handling on stand 1",
+            "evidence": {
+              "city": "PHF",
+              "label": "722 -> 723",
+              "kind": "ron",
+              "start": 1235,
+              "end": 1280,
+              "stand": 1
+            }
+          },
+          {
+            "id": "PHF-327 -> 358-1772-1832",
+            "message": "PHF claim 327 -> 358 requires passenger handling on stand 1",
+            "evidence": {
+              "city": "PHF",
+              "label": "327 -> 358",
+              "kind": "ron",
+              "start": 1772,
+              "end": 1832,
+              "stand": 1
+            }
+          }
+        ]
+      },
+      {
+        "id": "fixed_physical_inventory",
+        "findings": [
+          {
+            "id": "PHF",
+            "message": "PHF cannot fit its claims into the configured physical inventory: 3 passenger touch(es) remain off-gate",
+            "evidence": {
+              "city": "PHF",
+              "requiredGates": 17,
+              "configuredGates": 16,
+              "requiredStands": 8,
+              "configuredStands": 8,
+              "strandedPassengerTouches": 3
+            }
+          }
+        ]
+      },
+      {
+        "id": "hub_bank_alignment",
+        "findings": [
+          {
+            "id": "V114-R169-SYR-FWA-departure",
+            "message": "Departure for V114-R169-SYR-FWA falls outside bank SYR-B4",
+            "evidence": {
+              "assignment": {
+                "legId": "V114-R169-SYR-FWA",
+                "operation": "departure",
+                "bankId": "SYR-B4"
+              },
+              "minute": 875,
+              "bankWindow": [
+                795,
+                855
+              ]
+            },
+            "override": {
+              "reason": "Schedule 7 v1.1.4 tactical initiative: the 14:35 SYR-FWA return departs 20 minutes after Bank 4 to remain within SYR's fixed 16-gate inventory without weakening existing bank connections.",
+              "approvedBy": "user",
+              "expiresAfterSchedule": 7
+            }
+          },
+          {
+            "id": "V114-R122-SYR-SWF-departure",
+            "message": "Departure for V114-R122-SYR-SWF falls outside bank SYR-B6",
+            "evidence": {
+              "assignment": {
+                "legId": "V114-R122-SYR-SWF",
+                "operation": "departure",
+                "bankId": "SYR-B6"
+              },
+              "minute": 1210,
+              "bankWindow": [
+                1125,
+                1185
+              ]
+            },
+            "override": {
+              "reason": "Schedule 7 v1.1.4 tactical initiative: the 20:10 SYR-SWF return departs 25 minutes after Bank 6 to remain within SYR's fixed 16-gate inventory without weakening existing bank connections.",
+              "approvedBy": "user",
+              "expiresAfterSchedule": 7
+            }
+          },
+          {
+            "id": "V116-R149-DAY-BHM-departure",
+            "message": "Departure for V116-R149-DAY-BHM falls outside bank DAY-B1",
+            "evidence": {
+              "assignment": {
+                "legId": "V116-R149-DAY-BHM",
+                "operation": "departure",
+                "bankId": "DAY-B1"
+              },
+              "minute": 270,
+              "bankWindow": [
+                301,
+                361
+              ]
+            },
+            "override": {
+              "reason": "Schedule 7 v1.1.6 BHM morning initiative: the 04:30 DAY departure is 30 minutes before DAY Bank 1 so the aircraft can feed BHM's morning wave while remaining within fixed gate capacity at both cities.",
+              "approvedBy": "user",
+              "expiresAfterSchedule": 7
+            }
+          },
+          {
+            "id": "V116-R330-DAY-PHF-departure",
+            "message": "Departure for V116-R330-DAY-PHF falls outside bank DAY-B2",
+            "evidence": {
+              "assignment": {
+                "legId": "V116-R330-DAY-PHF",
+                "operation": "departure",
+                "bankId": "DAY-B2"
+              },
+              "minute": 411,
+              "bankWindow": [
+                425,
+                485
+              ]
+            },
+            "override": {
+              "reason": "Schedule 7 v1.1.6 PHF early-hub initiative: the user-selected 06:51 DAY departure splits the difference between a minimum turn and DAY Bank 2, producing an 08:20 PHF return with a 55-minute turn into the existing originator.",
+              "approvedBy": "user",
+              "expiresAfterSchedule": 7
+            }
+          }
+        ]
+      }
+    ],
+    "pass": false
+  }
+]

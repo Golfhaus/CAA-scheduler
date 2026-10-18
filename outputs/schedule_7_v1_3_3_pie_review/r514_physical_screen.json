@@ -1,0 +1,1073 @@
+{
+  "r514_715_884": {
+    "pass": true,
+    "structure": "pass",
+    "overnight": "pass",
+    "planning": "pass",
+    "operating": {
+      "checks": 25,
+      "passed": 19,
+      "failed": 0,
+      "warnings": 3,
+      "notEvaluated": 1,
+      "overridden": 2,
+      "effectiveErrorFindings": 0,
+      "effectiveWarningFindings": 156
+    },
+    "gate": "pass",
+    "failed": [],
+    "overlay": {
+      "schemaVersion": "1.0.0",
+      "id": "schedule-7-v1.3.3-r514-pie-mci-715-884",
+      "baseSchedule": {
+        "scheduleId": "schedule_7_v1_3_2"
+      },
+      "schedule": {
+        "id": "schedule_7_v1_3_3_draft",
+        "number": 7,
+        "version": "1.3.3-draft",
+        "label": "Schedule 7, Version 1.3.3 draft",
+        "status": "draft",
+        "fleetCounts": {
+          "MAX9": 35,
+          "CRJ900": 45,
+          "CRJ700": 65,
+          "CRJ200": 80
+        },
+        "connectionWindowMinutes": {
+          "minimum": 30,
+          "maximum": 240
+        }
+      },
+      "removeLegs": [
+        {
+          "legId": "PIE-SYR-CRJ900-03-OUT",
+          "expectedRoute": 514
+        },
+        {
+          "legId": "PIE-SYR-CRJ900-05-IN",
+          "expectedRoute": 514
+        }
+      ],
+      "insertLegs": [
+        {
+          "id": "V133-R514-PIE-MCI",
+          "route": 514,
+          "origin": "PIE",
+          "destination": "MCI",
+          "departureMinute": 715,
+          "arrivalMinute": 811
+        },
+        {
+          "id": "V133-R514-MCI-PIE",
+          "route": 514,
+          "origin": "MCI",
+          "destination": "PIE",
+          "departureMinute": 884,
+          "arrivalMinute": 1100
+        }
+      ],
+      "bankAssignmentsToAdd": [
+        {
+          "legId": "V133-R514-PIE-MCI",
+          "operation": "arrival",
+          "bankId": "MCI-B6"
+        },
+        {
+          "legId": "V133-R514-MCI-PIE",
+          "operation": "departure",
+          "bankId": "MCI-B7"
+        }
+      ]
+    },
+    "flights": [
+      {
+        "flight": 1177,
+        "from": "PIE",
+        "to": "PHF",
+        "dep": "06:35",
+        "arr": "08:34"
+      },
+      {
+        "flight": 1172,
+        "from": "PHF",
+        "to": "PIE",
+        "dep": "09:15",
+        "arr": "11:14"
+      },
+      {
+        "flight": 2237,
+        "from": "PIE",
+        "to": "MCI",
+        "dep": "11:55",
+        "arr": "13:31"
+      },
+      {
+        "flight": 2238,
+        "from": "MCI",
+        "to": "PIE",
+        "dep": "14:44",
+        "arr": "18:20"
+      },
+      {
+        "flight": 2129,
+        "from": "PIE",
+        "to": "JAX",
+        "dep": "20:14",
+        "arr": "21:08"
+      }
+    ]
+  },
+  "r514_715_895": {
+    "pass": true,
+    "structure": "pass",
+    "overnight": "pass",
+    "planning": "pass",
+    "operating": {
+      "checks": 25,
+      "passed": 19,
+      "failed": 0,
+      "warnings": 3,
+      "notEvaluated": 1,
+      "overridden": 2,
+      "effectiveErrorFindings": 0,
+      "effectiveWarningFindings": 156
+    },
+    "gate": "pass",
+    "failed": [],
+    "overlay": {
+      "schemaVersion": "1.0.0",
+      "id": "schedule-7-v1.3.3-r514-pie-mci-715-895",
+      "baseSchedule": {
+        "scheduleId": "schedule_7_v1_3_2"
+      },
+      "schedule": {
+        "id": "schedule_7_v1_3_3_draft",
+        "number": 7,
+        "version": "1.3.3-draft",
+        "label": "Schedule 7, Version 1.3.3 draft",
+        "status": "draft",
+        "fleetCounts": {
+          "MAX9": 35,
+          "CRJ900": 45,
+          "CRJ700": 65,
+          "CRJ200": 80
+        },
+        "connectionWindowMinutes": {
+          "minimum": 30,
+          "maximum": 240
+        }
+      },
+      "removeLegs": [
+        {
+          "legId": "PIE-SYR-CRJ900-03-OUT",
+          "expectedRoute": 514
+        },
+        {
+          "legId": "PIE-SYR-CRJ900-05-IN",
+          "expectedRoute": 514
+        }
+      ],
+      "insertLegs": [
+        {
+          "id": "V133-R514-PIE-MCI",
+          "route": 514,
+          "origin": "PIE",
+          "destination": "MCI",
+          "departureMinute": 715,
+          "arrivalMinute": 811
+        },
+        {
+          "id": "V133-R514-MCI-PIE",
+          "route": 514,
+          "origin": "MCI",
+          "destination": "PIE",
+          "departureMinute": 895,
+          "arrivalMinute": 1111
+        }
+      ],
+      "bankAssignmentsToAdd": [
+        {
+          "legId": "V133-R514-PIE-MCI",
+          "operation": "arrival",
+          "bankId": "MCI-B6"
+        },
+        {
+          "legId": "V133-R514-MCI-PIE",
+          "operation": "departure",
+          "bankId": "MCI-B7"
+        }
+      ]
+    },
+    "flights": [
+      {
+        "flight": 1177,
+        "from": "PIE",
+        "to": "PHF",
+        "dep": "06:35",
+        "arr": "08:34"
+      },
+      {
+        "flight": 1172,
+        "from": "PHF",
+        "to": "PIE",
+        "dep": "09:15",
+        "arr": "11:14"
+      },
+      {
+        "flight": 2237,
+        "from": "PIE",
+        "to": "MCI",
+        "dep": "11:55",
+        "arr": "13:31"
+      },
+      {
+        "flight": 2238,
+        "from": "MCI",
+        "to": "PIE",
+        "dep": "14:55",
+        "arr": "18:31"
+      },
+      {
+        "flight": 2129,
+        "from": "PIE",
+        "to": "JAX",
+        "dep": "20:14",
+        "arr": "21:08"
+      }
+    ]
+  },
+  "r514_715_905": {
+    "pass": true,
+    "structure": "pass",
+    "overnight": "pass",
+    "planning": "pass",
+    "operating": {
+      "checks": 25,
+      "passed": 19,
+      "failed": 0,
+      "warnings": 3,
+      "notEvaluated": 1,
+      "overridden": 2,
+      "effectiveErrorFindings": 0,
+      "effectiveWarningFindings": 156
+    },
+    "gate": "pass",
+    "failed": [],
+    "overlay": {
+      "schemaVersion": "1.0.0",
+      "id": "schedule-7-v1.3.3-r514-pie-mci-715-905",
+      "baseSchedule": {
+        "scheduleId": "schedule_7_v1_3_2"
+      },
+      "schedule": {
+        "id": "schedule_7_v1_3_3_draft",
+        "number": 7,
+        "version": "1.3.3-draft",
+        "label": "Schedule 7, Version 1.3.3 draft",
+        "status": "draft",
+        "fleetCounts": {
+          "MAX9": 35,
+          "CRJ900": 45,
+          "CRJ700": 65,
+          "CRJ200": 80
+        },
+        "connectionWindowMinutes": {
+          "minimum": 30,
+          "maximum": 240
+        }
+      },
+      "removeLegs": [
+        {
+          "legId": "PIE-SYR-CRJ900-03-OUT",
+          "expectedRoute": 514
+        },
+        {
+          "legId": "PIE-SYR-CRJ900-05-IN",
+          "expectedRoute": 514
+        }
+      ],
+      "insertLegs": [
+        {
+          "id": "V133-R514-PIE-MCI",
+          "route": 514,
+          "origin": "PIE",
+          "destination": "MCI",
+          "departureMinute": 715,
+          "arrivalMinute": 811
+        },
+        {
+          "id": "V133-R514-MCI-PIE",
+          "route": 514,
+          "origin": "MCI",
+          "destination": "PIE",
+          "departureMinute": 905,
+          "arrivalMinute": 1121
+        }
+      ],
+      "bankAssignmentsToAdd": [
+        {
+          "legId": "V133-R514-PIE-MCI",
+          "operation": "arrival",
+          "bankId": "MCI-B6"
+        },
+        {
+          "legId": "V133-R514-MCI-PIE",
+          "operation": "departure",
+          "bankId": "MCI-B7"
+        }
+      ]
+    },
+    "flights": [
+      {
+        "flight": 1177,
+        "from": "PIE",
+        "to": "PHF",
+        "dep": "06:35",
+        "arr": "08:34"
+      },
+      {
+        "flight": 1172,
+        "from": "PHF",
+        "to": "PIE",
+        "dep": "09:15",
+        "arr": "11:14"
+      },
+      {
+        "flight": 2237,
+        "from": "PIE",
+        "to": "MCI",
+        "dep": "11:55",
+        "arr": "13:31"
+      },
+      {
+        "flight": 2238,
+        "from": "MCI",
+        "to": "PIE",
+        "dep": "15:05",
+        "arr": "18:41"
+      },
+      {
+        "flight": 2129,
+        "from": "PIE",
+        "to": "JAX",
+        "dep": "20:14",
+        "arr": "21:08"
+      }
+    ]
+  },
+  "r514_720_884": {
+    "pass": true,
+    "structure": "pass",
+    "overnight": "pass",
+    "planning": "pass",
+    "operating": {
+      "checks": 25,
+      "passed": 19,
+      "failed": 0,
+      "warnings": 3,
+      "notEvaluated": 1,
+      "overridden": 2,
+      "effectiveErrorFindings": 0,
+      "effectiveWarningFindings": 156
+    },
+    "gate": "pass",
+    "failed": [],
+    "overlay": {
+      "schemaVersion": "1.0.0",
+      "id": "schedule-7-v1.3.3-r514-pie-mci-720-884",
+      "baseSchedule": {
+        "scheduleId": "schedule_7_v1_3_2"
+      },
+      "schedule": {
+        "id": "schedule_7_v1_3_3_draft",
+        "number": 7,
+        "version": "1.3.3-draft",
+        "label": "Schedule 7, Version 1.3.3 draft",
+        "status": "draft",
+        "fleetCounts": {
+          "MAX9": 35,
+          "CRJ900": 45,
+          "CRJ700": 65,
+          "CRJ200": 80
+        },
+        "connectionWindowMinutes": {
+          "minimum": 30,
+          "maximum": 240
+        }
+      },
+      "removeLegs": [
+        {
+          "legId": "PIE-SYR-CRJ900-03-OUT",
+          "expectedRoute": 514
+        },
+        {
+          "legId": "PIE-SYR-CRJ900-05-IN",
+          "expectedRoute": 514
+        }
+      ],
+      "insertLegs": [
+        {
+          "id": "V133-R514-PIE-MCI",
+          "route": 514,
+          "origin": "PIE",
+          "destination": "MCI",
+          "departureMinute": 720,
+          "arrivalMinute": 816
+        },
+        {
+          "id": "V133-R514-MCI-PIE",
+          "route": 514,
+          "origin": "MCI",
+          "destination": "PIE",
+          "departureMinute": 884,
+          "arrivalMinute": 1100
+        }
+      ],
+      "bankAssignmentsToAdd": [
+        {
+          "legId": "V133-R514-PIE-MCI",
+          "operation": "arrival",
+          "bankId": "MCI-B6"
+        },
+        {
+          "legId": "V133-R514-MCI-PIE",
+          "operation": "departure",
+          "bankId": "MCI-B7"
+        }
+      ]
+    },
+    "flights": [
+      {
+        "flight": 1177,
+        "from": "PIE",
+        "to": "PHF",
+        "dep": "06:35",
+        "arr": "08:34"
+      },
+      {
+        "flight": 1172,
+        "from": "PHF",
+        "to": "PIE",
+        "dep": "09:15",
+        "arr": "11:14"
+      },
+      {
+        "flight": 2237,
+        "from": "PIE",
+        "to": "MCI",
+        "dep": "12:00",
+        "arr": "13:36"
+      },
+      {
+        "flight": 2238,
+        "from": "MCI",
+        "to": "PIE",
+        "dep": "14:44",
+        "arr": "18:20"
+      },
+      {
+        "flight": 2129,
+        "from": "PIE",
+        "to": "JAX",
+        "dep": "20:14",
+        "arr": "21:08"
+      }
+    ]
+  },
+  "r514_720_895": {
+    "pass": true,
+    "structure": "pass",
+    "overnight": "pass",
+    "planning": "pass",
+    "operating": {
+      "checks": 25,
+      "passed": 19,
+      "failed": 0,
+      "warnings": 3,
+      "notEvaluated": 1,
+      "overridden": 2,
+      "effectiveErrorFindings": 0,
+      "effectiveWarningFindings": 156
+    },
+    "gate": "pass",
+    "failed": [],
+    "overlay": {
+      "schemaVersion": "1.0.0",
+      "id": "schedule-7-v1.3.3-r514-pie-mci-720-895",
+      "baseSchedule": {
+        "scheduleId": "schedule_7_v1_3_2"
+      },
+      "schedule": {
+        "id": "schedule_7_v1_3_3_draft",
+        "number": 7,
+        "version": "1.3.3-draft",
+        "label": "Schedule 7, Version 1.3.3 draft",
+        "status": "draft",
+        "fleetCounts": {
+          "MAX9": 35,
+          "CRJ900": 45,
+          "CRJ700": 65,
+          "CRJ200": 80
+        },
+        "connectionWindowMinutes": {
+          "minimum": 30,
+          "maximum": 240
+        }
+      },
+      "removeLegs": [
+        {
+          "legId": "PIE-SYR-CRJ900-03-OUT",
+          "expectedRoute": 514
+        },
+        {
+          "legId": "PIE-SYR-CRJ900-05-IN",
+          "expectedRoute": 514
+        }
+      ],
+      "insertLegs": [
+        {
+          "id": "V133-R514-PIE-MCI",
+          "route": 514,
+          "origin": "PIE",
+          "destination": "MCI",
+          "departureMinute": 720,
+          "arrivalMinute": 816
+        },
+        {
+          "id": "V133-R514-MCI-PIE",
+          "route": 514,
+          "origin": "MCI",
+          "destination": "PIE",
+          "departureMinute": 895,
+          "arrivalMinute": 1111
+        }
+      ],
+      "bankAssignmentsToAdd": [
+        {
+          "legId": "V133-R514-PIE-MCI",
+          "operation": "arrival",
+          "bankId": "MCI-B6"
+        },
+        {
+          "legId": "V133-R514-MCI-PIE",
+          "operation": "departure",
+          "bankId": "MCI-B7"
+        }
+      ]
+    },
+    "flights": [
+      {
+        "flight": 1177,
+        "from": "PIE",
+        "to": "PHF",
+        "dep": "06:35",
+        "arr": "08:34"
+      },
+      {
+        "flight": 1172,
+        "from": "PHF",
+        "to": "PIE",
+        "dep": "09:15",
+        "arr": "11:14"
+      },
+      {
+        "flight": 2237,
+        "from": "PIE",
+        "to": "MCI",
+        "dep": "12:00",
+        "arr": "13:36"
+      },
+      {
+        "flight": 2238,
+        "from": "MCI",
+        "to": "PIE",
+        "dep": "14:55",
+        "arr": "18:31"
+      },
+      {
+        "flight": 2129,
+        "from": "PIE",
+        "to": "JAX",
+        "dep": "20:14",
+        "arr": "21:08"
+      }
+    ]
+  },
+  "r514_720_905": {
+    "pass": true,
+    "structure": "pass",
+    "overnight": "pass",
+    "planning": "pass",
+    "operating": {
+      "checks": 25,
+      "passed": 19,
+      "failed": 0,
+      "warnings": 3,
+      "notEvaluated": 1,
+      "overridden": 2,
+      "effectiveErrorFindings": 0,
+      "effectiveWarningFindings": 156
+    },
+    "gate": "pass",
+    "failed": [],
+    "overlay": {
+      "schemaVersion": "1.0.0",
+      "id": "schedule-7-v1.3.3-r514-pie-mci-720-905",
+      "baseSchedule": {
+        "scheduleId": "schedule_7_v1_3_2"
+      },
+      "schedule": {
+        "id": "schedule_7_v1_3_3_draft",
+        "number": 7,
+        "version": "1.3.3-draft",
+        "label": "Schedule 7, Version 1.3.3 draft",
+        "status": "draft",
+        "fleetCounts": {
+          "MAX9": 35,
+          "CRJ900": 45,
+          "CRJ700": 65,
+          "CRJ200": 80
+        },
+        "connectionWindowMinutes": {
+          "minimum": 30,
+          "maximum": 240
+        }
+      },
+      "removeLegs": [
+        {
+          "legId": "PIE-SYR-CRJ900-03-OUT",
+          "expectedRoute": 514
+        },
+        {
+          "legId": "PIE-SYR-CRJ900-05-IN",
+          "expectedRoute": 514
+        }
+      ],
+      "insertLegs": [
+        {
+          "id": "V133-R514-PIE-MCI",
+          "route": 514,
+          "origin": "PIE",
+          "destination": "MCI",
+          "departureMinute": 720,
+          "arrivalMinute": 816
+        },
+        {
+          "id": "V133-R514-MCI-PIE",
+          "route": 514,
+          "origin": "MCI",
+          "destination": "PIE",
+          "departureMinute": 905,
+          "arrivalMinute": 1121
+        }
+      ],
+      "bankAssignmentsToAdd": [
+        {
+          "legId": "V133-R514-PIE-MCI",
+          "operation": "arrival",
+          "bankId": "MCI-B6"
+        },
+        {
+          "legId": "V133-R514-MCI-PIE",
+          "operation": "departure",
+          "bankId": "MCI-B7"
+        }
+      ]
+    },
+    "flights": [
+      {
+        "flight": 1177,
+        "from": "PIE",
+        "to": "PHF",
+        "dep": "06:35",
+        "arr": "08:34"
+      },
+      {
+        "flight": 1172,
+        "from": "PHF",
+        "to": "PIE",
+        "dep": "09:15",
+        "arr": "11:14"
+      },
+      {
+        "flight": 2237,
+        "from": "PIE",
+        "to": "MCI",
+        "dep": "12:00",
+        "arr": "13:36"
+      },
+      {
+        "flight": 2238,
+        "from": "MCI",
+        "to": "PIE",
+        "dep": "15:05",
+        "arr": "18:41"
+      },
+      {
+        "flight": 2129,
+        "from": "PIE",
+        "to": "JAX",
+        "dep": "20:14",
+        "arr": "21:08"
+      }
+    ]
+  },
+  "r514_730_884": {
+    "pass": true,
+    "structure": "pass",
+    "overnight": "pass",
+    "planning": "pass",
+    "operating": {
+      "checks": 25,
+      "passed": 19,
+      "failed": 0,
+      "warnings": 3,
+      "notEvaluated": 1,
+      "overridden": 2,
+      "effectiveErrorFindings": 0,
+      "effectiveWarningFindings": 156
+    },
+    "gate": "pass",
+    "failed": [],
+    "overlay": {
+      "schemaVersion": "1.0.0",
+      "id": "schedule-7-v1.3.3-r514-pie-mci-730-884",
+      "baseSchedule": {
+        "scheduleId": "schedule_7_v1_3_2"
+      },
+      "schedule": {
+        "id": "schedule_7_v1_3_3_draft",
+        "number": 7,
+        "version": "1.3.3-draft",
+        "label": "Schedule 7, Version 1.3.3 draft",
+        "status": "draft",
+        "fleetCounts": {
+          "MAX9": 35,
+          "CRJ900": 45,
+          "CRJ700": 65,
+          "CRJ200": 80
+        },
+        "connectionWindowMinutes": {
+          "minimum": 30,
+          "maximum": 240
+        }
+      },
+      "removeLegs": [
+        {
+          "legId": "PIE-SYR-CRJ900-03-OUT",
+          "expectedRoute": 514
+        },
+        {
+          "legId": "PIE-SYR-CRJ900-05-IN",
+          "expectedRoute": 514
+        }
+      ],
+      "insertLegs": [
+        {
+          "id": "V133-R514-PIE-MCI",
+          "route": 514,
+          "origin": "PIE",
+          "destination": "MCI",
+          "departureMinute": 730,
+          "arrivalMinute": 826
+        },
+        {
+          "id": "V133-R514-MCI-PIE",
+          "route": 514,
+          "origin": "MCI",
+          "destination": "PIE",
+          "departureMinute": 884,
+          "arrivalMinute": 1100
+        }
+      ],
+      "bankAssignmentsToAdd": [
+        {
+          "legId": "V133-R514-PIE-MCI",
+          "operation": "arrival",
+          "bankId": "MCI-B6"
+        },
+        {
+          "legId": "V133-R514-MCI-PIE",
+          "operation": "departure",
+          "bankId": "MCI-B7"
+        }
+      ]
+    },
+    "flights": [
+      {
+        "flight": 1177,
+        "from": "PIE",
+        "to": "PHF",
+        "dep": "06:35",
+        "arr": "08:34"
+      },
+      {
+        "flight": 1172,
+        "from": "PHF",
+        "to": "PIE",
+        "dep": "09:15",
+        "arr": "11:14"
+      },
+      {
+        "flight": 2237,
+        "from": "PIE",
+        "to": "MCI",
+        "dep": "12:10",
+        "arr": "13:46"
+      },
+      {
+        "flight": 2238,
+        "from": "MCI",
+        "to": "PIE",
+        "dep": "14:44",
+        "arr": "18:20"
+      },
+      {
+        "flight": 2129,
+        "from": "PIE",
+        "to": "JAX",
+        "dep": "20:14",
+        "arr": "21:08"
+      }
+    ]
+  },
+  "r514_730_895": {
+    "pass": true,
+    "structure": "pass",
+    "overnight": "pass",
+    "planning": "pass",
+    "operating": {
+      "checks": 25,
+      "passed": 19,
+      "failed": 0,
+      "warnings": 3,
+      "notEvaluated": 1,
+      "overridden": 2,
+      "effectiveErrorFindings": 0,
+      "effectiveWarningFindings": 156
+    },
+    "gate": "pass",
+    "failed": [],
+    "overlay": {
+      "schemaVersion": "1.0.0",
+      "id": "schedule-7-v1.3.3-r514-pie-mci-730-895",
+      "baseSchedule": {
+        "scheduleId": "schedule_7_v1_3_2"
+      },
+      "schedule": {
+        "id": "schedule_7_v1_3_3_draft",
+        "number": 7,
+        "version": "1.3.3-draft",
+        "label": "Schedule 7, Version 1.3.3 draft",
+        "status": "draft",
+        "fleetCounts": {
+          "MAX9": 35,
+          "CRJ900": 45,
+          "CRJ700": 65,
+          "CRJ200": 80
+        },
+        "connectionWindowMinutes": {
+          "minimum": 30,
+          "maximum": 240
+        }
+      },
+      "removeLegs": [
+        {
+          "legId": "PIE-SYR-CRJ900-03-OUT",
+          "expectedRoute": 514
+        },
+        {
+          "legId": "PIE-SYR-CRJ900-05-IN",
+          "expectedRoute": 514
+        }
+      ],
+      "insertLegs": [
+        {
+          "id": "V133-R514-PIE-MCI",
+          "route": 514,
+          "origin": "PIE",
+          "destination": "MCI",
+          "departureMinute": 730,
+          "arrivalMinute": 826
+        },
+        {
+          "id": "V133-R514-MCI-PIE",
+          "route": 514,
+          "origin": "MCI",
+          "destination": "PIE",
+          "departureMinute": 895,
+          "arrivalMinute": 1111
+        }
+      ],
+      "bankAssignmentsToAdd": [
+        {
+          "legId": "V133-R514-PIE-MCI",
+          "operation": "arrival",
+          "bankId": "MCI-B6"
+        },
+        {
+          "legId": "V133-R514-MCI-PIE",
+          "operation": "departure",
+          "bankId": "MCI-B7"
+        }
+      ]
+    },
+    "flights": [
+      {
+        "flight": 1177,
+        "from": "PIE",
+        "to": "PHF",
+        "dep": "06:35",
+        "arr": "08:34"
+      },
+      {
+        "flight": 1172,
+        "from": "PHF",
+        "to": "PIE",
+        "dep": "09:15",
+        "arr": "11:14"
+      },
+      {
+        "flight": 2237,
+        "from": "PIE",
+        "to": "MCI",
+        "dep": "12:10",
+        "arr": "13:46"
+      },
+      {
+        "flight": 2238,
+        "from": "MCI",
+        "to": "PIE",
+        "dep": "14:55",
+        "arr": "18:31"
+      },
+      {
+        "flight": 2129,
+        "from": "PIE",
+        "to": "JAX",
+        "dep": "20:14",
+        "arr": "21:08"
+      }
+    ]
+  },
+  "r514_730_905": {
+    "pass": true,
+    "structure": "pass",
+    "overnight": "pass",
+    "planning": "pass",
+    "operating": {
+      "checks": 25,
+      "passed": 19,
+      "failed": 0,
+      "warnings": 3,
+      "notEvaluated": 1,
+      "overridden": 2,
+      "effectiveErrorFindings": 0,
+      "effectiveWarningFindings": 156
+    },
+    "gate": "pass",
+    "failed": [],
+    "overlay": {
+      "schemaVersion": "1.0.0",
+      "id": "schedule-7-v1.3.3-r514-pie-mci-730-905",
+      "baseSchedule": {
+        "scheduleId": "schedule_7_v1_3_2"
+      },
+      "schedule": {
+        "id": "schedule_7_v1_3_3_draft",
+        "number": 7,
+        "version": "1.3.3-draft",
+        "label": "Schedule 7, Version 1.3.3 draft",
+        "status": "draft",
+        "fleetCounts": {
+          "MAX9": 35,
+          "CRJ900": 45,
+          "CRJ700": 65,
+          "CRJ200": 80
+        },
+        "connectionWindowMinutes": {
+          "minimum": 30,
+          "maximum": 240
+        }
+      },
+      "removeLegs": [
+        {
+          "legId": "PIE-SYR-CRJ900-03-OUT",
+          "expectedRoute": 514
+        },
+        {
+          "legId": "PIE-SYR-CRJ900-05-IN",
+          "expectedRoute": 514
+        }
+      ],
+      "insertLegs": [
+        {
+          "id": "V133-R514-PIE-MCI",
+          "route": 514,
+          "origin": "PIE",
+          "destination": "MCI",
+          "departureMinute": 730,
+          "arrivalMinute": 826
+        },
+        {
+          "id": "V133-R514-MCI-PIE",
+          "route": 514,
+          "origin": "MCI",
+          "destination": "PIE",
+          "departureMinute": 905,
+          "arrivalMinute": 1121
+        }
+      ],
+      "bankAssignmentsToAdd": [
+        {
+          "legId": "V133-R514-PIE-MCI",
+          "operation": "arrival",
+          "bankId": "MCI-B6"
+        },
+        {
+          "legId": "V133-R514-MCI-PIE",
+          "operation": "departure",
+          "bankId": "MCI-B7"
+        }
+      ]
+    },
+    "flights": [
+      {
+        "flight": 1177,
+        "from": "PIE",
+        "to": "PHF",
+        "dep": "06:35",
+        "arr": "08:34"
+      },
+      {
+        "flight": 1172,
+        "from": "PHF",
+        "to": "PIE",
+        "dep": "09:15",
+        "arr": "11:14"
+      },
+      {
+        "flight": 2237,
+        "from": "PIE",
+        "to": "MCI",
+        "dep": "12:10",
+        "arr": "13:46"
+      },
+      {
+        "flight": 2238,
+        "from": "MCI",
+        "to": "PIE",
+        "dep": "15:05",
+        "arr": "18:41"
+      },
+      {
+        "flight": 2129,
+        "from": "PIE",
+        "to": "JAX",
+        "dep": "20:14",
+        "arr": "21:08"
+      }
+    ]
+  }
+}

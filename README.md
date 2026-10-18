@@ -2,6 +2,13 @@
 
 ## Latest published release
 
+**Schedule 7 v1.3.3** (October 18, 2026) is the application default: **1,253 flights, 188 routes, 17 routing lines**, with zero effective operating errors. Adds approved R514 PIE–MCI and the BHM north–south mini-banks on R529, R530, R357 and R358. The four mini-bank routes are integrated into longer aircraft lines (maximum 13 days). See [v1.3.3 release notes](docs/schedule_7_v1_3_3_release.md) and [canonical schedule](data/schedules/schedule_7_v1_3_3/canonical_schedule.json).
+
+## Historical v1.3.2 and older releases
+
+
+## Latest published release
+
 The app defaults to **Schedule 7 v1.3.2**, released October 16, 2026, with **1,229 flights, 184 routes and 17 routing lines**. The release fixes the cyclic maintenance/RON validation problem and incorporates the reviewed R501, R175, R125, R111, R312, R144, R146, R158 and R176 improvements. Physical inventory and fleet use are unchanged, with zero effective operating errors.
 
 The full network comparison against v1.3.1 finds 60 geographically reasonable direct/one-stop coverage gains and five reviewed losses, plus 154 improved and 155 slower fastest journeys. See [v1.3.2 release notes](docs/schedule_7_v1_3_2_release.md) for commercial tradeoffs, validations, and reproduction; see [released canonical](data/schedules/schedule_7_v1_3_2/canonical_schedule.json).

@@ -1,0 +1,35 @@
+name: Validate v1.3.3 BHM line integrations and remaining alternatives
+on:
+  push:
+    branches: [schedule-7-v1.3.3-bhm-mini-banks]
+    paths:
+      - '.github/workflows/v133-bhm-line-splice.yml'
+      - 'scripts/build_schedule_7_v1_3_3_draft.py'
+      - 'scripts/screen_v133_bhm_alternatives.py'
+      - 'data/schedules/schedule_7_v1_3_3_draft/canonical_schedule.json'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -e .
+      - name: Rebuild and validate committed R529/R530 draft
+        run: python scripts/build_schedule_7_v1_3_3_draft.py
+      - name: Evaluate remaining CRJ700 integrations
+        run: python scripts/screen_v133_bhm_alternatives.py
+      - name: Preserve native validation evidence on development branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f data/schedules/schedule_7_v1_3_3_draft/ outputs/schedule_7_v1_3_3_bhm_line_insertion/remaining_two_alternatives.json outputs/schedule_7_v1_3_3_bhm_line_insertion/remaining_two_combined.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Record R529/R530 rebuild and remaining-route feasibility [skip ci]"
+            git pull --rebase origin schedule-7-v1.3.3-bhm-mini-banks
+            git push
+          fi
