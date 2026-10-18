@@ -75,7 +75,14 @@
         "branch": "checkpoint/schedule-7-v1.3.3-pre-bhm-minibanks",
         "commit": "6965d28175b4089c269f543a1d6b24b423fbdcb3"
       },
-      "publication": "NOT AUTHORIZED; v1.3.2 remains app default"
+      "publication": "NOT AUTHORIZED; v1.3.2 remains app default",
+      "r529Integration": {
+        "route": 529,
+        "line": "AG",
+        "day": 11,
+        "positioning": "CMH-ALB-CMH",
+        "screen": "outputs/schedule_7_v1_3_3_bhm_line_insertion/remaining_three_screen.json"
+      }
     }
   },
   "gatePlan": {
@@ -6243,16 +6250,6 @@
       "legId": "V133-R514-MCI-PIE",
       "operation": "departure",
       "bankId": "MCI-B7"
-    },
-    {
-      "legId": "V133-BHM-529-1-DAY-ALB",
-      "operation": "departure",
-      "bankId": "DAY-B1"
-    },
-    {
-      "legId": "V133-BHM-529-6-ALB-DAY",
-      "operation": "arrival",
-      "bankId": "DAY-B9"
     },
     {
       "legId": "V133-BHM-530-1-SYR-CAK",
@@ -28231,15 +28228,15 @@
       "arrivalMinute": 1100
     },
     {
-      "id": "V133-BHM-529-1-DAY-ALB",
+      "id": "V133-BHM-529-1-CMH-ALB",
       "route": 529,
-      "line": "BA",
+      "line": "AG",
       "fleet": "CRJ900",
-      "day": 1,
+      "day": 11,
       "sequenceWithinRoute": 1,
-      "pairing": 911,
+      "pairing": 927,
       "flight": 2239,
-      "origin": "DAY",
+      "origin": "CMH",
       "destination": "ALB",
       "departure": "06:00",
       "arrival": "07:40",
@@ -28249,9 +28246,9 @@
     {
       "id": "V133-BHM-529-2-ALB-BHM",
       "route": 529,
-      "line": "BA",
+      "line": "AG",
       "fleet": "CRJ900",
-      "day": 1,
+      "day": 11,
       "sequenceWithinRoute": 2,
       "pairing": 912,
       "flight": 2240,
@@ -28265,9 +28262,9 @@
     {
       "id": "V133-BHM-529-3-BHM-SRQ",
       "route": 529,
-      "line": "BA",
+      "line": "AG",
       "fleet": "CRJ900",
-      "day": 1,
+      "day": 11,
       "sequenceWithinRoute": 3,
       "pairing": 511,
       "flight": 2241,
@@ -28281,9 +28278,9 @@
     {
       "id": "V133-BHM-529-4-SRQ-BHM",
       "route": 529,
-      "line": "BA",
+      "line": "AG",
       "fleet": "CRJ900",
-      "day": 1,
+      "day": 11,
       "sequenceWithinRoute": 4,
       "pairing": 554,
       "flight": 2242,
@@ -28297,9 +28294,9 @@
     {
       "id": "V133-BHM-529-5-BHM-ALB",
       "route": 529,
-      "line": "BA",
+      "line": "AG",
       "fleet": "CRJ900",
-      "day": 1,
+      "day": 11,
       "sequenceWithinRoute": 5,
       "pairing": 913,
       "flight": 2243,
@@ -28311,16 +28308,16 @@
       "arrivalMinute": 1122
     },
     {
-      "id": "V133-BHM-529-6-ALB-DAY",
+      "id": "V133-BHM-529-6-ALB-CMH",
       "route": 529,
-      "line": "BA",
+      "line": "AG",
       "fleet": "CRJ900",
-      "day": 1,
+      "day": 11,
       "sequenceWithinRoute": 6,
-      "pairing": 914,
+      "pairing": 928,
       "flight": 2244,
       "origin": "ALB",
-      "destination": "DAY",
+      "destination": "CMH",
       "departure": "19:25",
       "arrival": "21:05",
       "departureMinute": 1165,
