@@ -1,4 +1,4 @@
-"""Reproduce unpublished v1.3.3 with R514 PIE-MCI and four BHM mini-bank aircraft."""
+"""Reproduce v1.3.3 approved draft with four BHM mini-bank routes integrated into long lines."""
 from pathlib import Path
 import hashlib,json,sys
 ROOT=Path(__file__).resolve().parents[1]
@@ -67,6 +67,43 @@ for leg in r529:
 new["bankAssignments"]=[a for a in new["bankAssignments"] if a["legId"] not in old_ids]
 assert len({l["line"] for l in new["legs"]})==19
 assert len({l["route"] for l in new["legs"]})==188
+# Approved combined CRJ700 line integrations, matching the native-validated screen.
+def splice_crj700(route, old_line, host, insert_day, endpoint, first_times, last_times):
+    target=[l for l in new["legs"] if l["route"]==route]
+    target.sort(key=lambda l:l["sequenceWithinRoute"])
+    assert len(target)==6 and {(l["line"],l["day"]) for l in target}=={(old_line,1)}
+    for leg in new["legs"]:
+        if leg["line"]==host and leg["day"]>=insert_day:
+            leg["day"]+=1
+    first,last=target[0],target[-1]
+    old_ids={first["id"],last["id"]}
+    first["origin"]=endpoint;last["destination"]=endpoint
+    first["departureMinute"],first["arrivalMinute"]=first_times
+    last["departureMinute"],last["arrivalMinute"]=last_times
+    for leg in (first,last):
+        leg["departure"]=f'{leg["departureMinute"]//60%24:02}:{leg["departureMinute"]%60:02}'
+        leg["arrival"]=f'{leg["arrivalMinute"]//60%24:02}:{leg["arrivalMinute"]%60:02}'
+    first["id"]=f'V133-BHM-{route}-1-{first["origin"]}-{first["destination"]}'
+    last["id"]=f'V133-BHM-{route}-6-{last["origin"]}-{last["destination"]}'
+    markets={(l["origin"],l["destination"]):l["pairing"] for l in new["legs"] if l["route"]!=route}
+    next_pairing=max(l["pairing"] for l in new["legs"])+1
+    for leg in (first,last):
+        market=(leg["origin"],leg["destination"])
+        if market not in markets:
+            markets[market]=next_pairing
+            next_pairing+=1
+        leg["pairing"]=markets[market]
+    for leg in target:
+        leg["line"]=host;leg["day"]=insert_day
+    new["bankAssignments"]=[a for a in new["bankAssignments"] if a["legId"] not in old_ids]
+
+splice_crj700(357,"BC","AK",10,"RDU",(336,426),(1245,1335))
+splice_crj700(358,"BD","AA",8,"CHS",(365,467),(1217,1319))
+assert len(new["legs"])==1253
+assert len({l["route"] for l in new["legs"]})==188
+assert len({l["line"] for l in new["legs"]})==17
+assert max(l["day"] for l in new["legs"] if l["line"]=="AK")==13
+assert max(l["day"] for l in new["legs"] if l["line"]=="AA")==12
 assert new["schedule"]["fleetCounts"]==base["schedule"]["fleetCounts"]
 structure=validate_schedule(new)
 operating=validate_operating_rules(new)
@@ -82,9 +119,10 @@ new.setdefault("provenance",{})["workingDraft"]={
 "source":"schedule_7_v1_3_2","sourceSha256":hashlib.sha256(base_path.read_bytes()).hexdigest(),
 "overlay":config_path.relative_to(ROOT).as_posix(),"overlaySha256":hashlib.sha256(config_path.read_bytes()).hexdigest(),
 "additionalOverlays":[{"path":bhm_path.relative_to(ROOT).as_posix(),"sha256":hashlib.sha256(bhm_path.read_bytes()).hexdigest()},{"path":splice_path.relative_to(ROOT).as_posix(),"sha256":hashlib.sha256(splice_path.read_bytes()).hexdigest()}],
+"r357r358Integration":{"r357":{"line":"AK","day":10,"endpoint":"RDU"},"r358":{"line":"AA","day":8,"endpoint":"CHS"},"screen":"outputs/schedule_7_v1_3_3_bhm_line_insertion/remaining_two_combined.json"},
 "r529Integration":{"route":529,"line":"AG","day":11,"positioning":"CMH-ALB-CMH","screen":"outputs/schedule_7_v1_3_3_bhm_line_insertion/remaining_three_screen.json"},
 "revertPoint":{"branch":"checkpoint/schedule-7-v1.3.3-pre-bhm-minibanks","commit":"6965d28175b4089c269f543a1d6b24b423fbdcb3"},
-"publication":"NOT AUTHORIZED; v1.3.2 remains app default"}
+"publication":"Approved for v1.3.3 release on 2026-10-18; draft itself remains unpublished until release package passes checks"}
 out=ROOT/"data/schedules/schedule_7_v1_3_3_draft";out.mkdir(parents=True,exist_ok=True)
 for name,content in {"canonical_schedule.json":new,"validation_report.json":structure,
 "operating_validation_report.json":operating,"overnight_turn_validation.json":overnight,
