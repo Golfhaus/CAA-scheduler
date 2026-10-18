@@ -68,21 +68,21 @@
         },
         {
           "path": "config/optimizations/schedule_7_v1_3_3_r530_ag_insertion.json",
-          "note": "validated R530 to AG splice; canonical rebuilt using scripts/build_schedule_7_v1_3_3_draft.py"
+          "sha256": "cad9d9148661b7c168c0b41f16112c40f6b7e64579440b4299a2e4d1dde77e5f"
         }
       ],
-      "revertPoint": {
-        "branch": "checkpoint/schedule-7-v1.3.3-pre-bhm-minibanks",
-        "commit": "6965d28175b4089c269f543a1d6b24b423fbdcb3"
-      },
-      "publication": "NOT AUTHORIZED; v1.3.2 remains app default",
       "r529Integration": {
         "route": 529,
         "line": "AG",
         "day": 11,
         "positioning": "CMH-ALB-CMH",
         "screen": "outputs/schedule_7_v1_3_3_bhm_line_insertion/remaining_three_screen.json"
-      }
+      },
+      "revertPoint": {
+        "branch": "checkpoint/schedule-7-v1.3.3-pre-bhm-minibanks",
+        "commit": "6965d28175b4089c269f543a1d6b24b423fbdcb3"
+      },
+      "publication": "NOT AUTHORIZED; v1.3.2 remains app default"
     }
   },
   "gatePlan": {
@@ -344,12 +344,12 @@
       {
         "checkId": "tiered_service_minimums",
         "findingId": "GNV",
-        "reason": "User explicitly requested PHF–GNV overnight/originator service as the replacement GNV RON. Useful second-hub coverage is authorized; all physical, maintenance and timing rules remain enforced."
+        "reason": "User explicitly requested PHF\u2013GNV overnight/originator service as the replacement GNV RON. Useful second-hub coverage is authorized; all physical, maintenance and timing rules remain enforced."
       },
       {
         "checkId": "tiered_service_minimums",
         "findingId": "RFD",
-        "reason": "User-requested v1.3.1 JAX–RFD MAX9 service creates useful two-way connections for MYR, EYW, ECP, ILM, ROA and TLH. Standing useful additional hub-count exception applies. Roster unchanged; all service minimums, fleet, curfews, bank windows and physical inventory remain enforced.",
+        "reason": "User-requested v1.3.1 JAX\u2013RFD MAX9 service creates useful two-way connections for MYR, EYW, ECP, ILM, ROA and TLH. Standing useful additional hub-count exception applies. Roster unchanged; all service minimums, fleet, curfews, bank windows and physical inventory remain enforced.",
         "approvedBy": "user"
       },
       {
@@ -6303,7 +6303,7 @@
       "longitude": -75.4404,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 39
+      "demandPercentile": 39.0
     },
     {
       "code": "ACY",
@@ -6325,7 +6325,7 @@
       "longitude": -74.5772,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 35
+      "demandPercentile": 35.0
     },
     {
       "code": "AGS",
@@ -6346,7 +6346,7 @@
       "longitude": -81.9645,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 13
+      "demandPercentile": 13.0
     },
     {
       "code": "ALB",
@@ -6367,7 +6367,7 @@
       "longitude": -73.802,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 73
+      "demandPercentile": 73.0
     },
     {
       "code": "ATW",
@@ -6388,7 +6388,7 @@
       "longitude": -88.5191,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 31
+      "demandPercentile": 31.0
     },
     {
       "code": "AUS",
@@ -6412,7 +6412,7 @@
       "longitude": -97.6699,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 91
+      "demandPercentile": 91.0
     },
     {
       "code": "AVL",
@@ -6434,7 +6434,7 @@
       "longitude": -82.542,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 49
+      "demandPercentile": 49.0
     },
     {
       "code": "AVP",
@@ -6455,7 +6455,7 @@
       "longitude": -75.7234,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 17
+      "demandPercentile": 17.0
     },
     {
       "code": "BDL",
@@ -6477,7 +6477,7 @@
       "longitude": -72.6843,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 82
+      "demandPercentile": 82.0
     },
     {
       "code": "BGR",
@@ -6498,7 +6498,7 @@
       "longitude": -68.8281,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 21
+      "demandPercentile": 21.0
     },
     {
       "code": "BHM",
@@ -6520,7 +6520,7 @@
       "longitude": -86.7523,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 64
+      "demandPercentile": 64.0
     },
     {
       "code": "BLV",
@@ -6542,7 +6542,7 @@
       "longitude": -89.8352,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 85
+      "demandPercentile": 85.0
     },
     {
       "code": "BNA",
@@ -6566,7 +6566,7 @@
       "longitude": -86.6782,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 95
+      "demandPercentile": 95.0
     },
     {
       "code": "BTR",
@@ -6587,7 +6587,7 @@
       "longitude": -91.1499,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 23
+      "demandPercentile": 23.0
     },
     {
       "code": "BTV",
@@ -6608,7 +6608,7 @@
       "longitude": -73.1533,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 40
+      "demandPercentile": 40.0
     },
     {
       "code": "BUF",
@@ -6630,7 +6630,7 @@
       "longitude": -78.7306,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 76
+      "demandPercentile": 76.0
     },
     {
       "code": "BWI",
@@ -6654,7 +6654,7 @@
       "longitude": -76.669,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 94
+      "demandPercentile": 94.0
     },
     {
       "code": "CAE",
@@ -6676,7 +6676,7 @@
       "longitude": -81.1195,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 38
+      "demandPercentile": 38.0
     },
     {
       "code": "CAK",
@@ -6698,7 +6698,7 @@
       "longitude": -81.4436,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 81
+      "demandPercentile": 81.0
     },
     {
       "code": "CHA",
@@ -6720,7 +6720,7 @@
       "longitude": -85.2036,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 36
+      "demandPercentile": 36.0
     },
     {
       "code": "CHS",
@@ -6743,7 +6743,7 @@
       "longitude": -80.0405,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 79
+      "demandPercentile": 79.0
     },
     {
       "code": "CID",
@@ -6764,7 +6764,7 @@
       "longitude": -91.7108,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 37
+      "demandPercentile": 37.0
     },
     {
       "code": "CLT",
@@ -6788,7 +6788,7 @@
       "longitude": -80.9514,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 93
+      "demandPercentile": 93.0
     },
     {
       "code": "CMH",
@@ -6811,7 +6811,7 @@
       "longitude": -82.8922,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 83
+      "demandPercentile": 83.0
     },
     {
       "code": "COU",
@@ -6832,7 +6832,7 @@
       "longitude": -92.2178,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 5
+      "demandPercentile": 5.0
     },
     {
       "code": "CRP",
@@ -6853,7 +6853,7 @@
       "longitude": -97.5024,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 20
+      "demandPercentile": 20.0
     },
     {
       "code": "CRW",
@@ -6874,7 +6874,7 @@
       "longitude": -81.5929,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 8
+      "demandPercentile": 8.0
     },
     {
       "code": "DAB",
@@ -6896,7 +6896,7 @@
       "longitude": -81.058,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 27
+      "demandPercentile": 27.0
     },
     {
       "code": "DAL",
@@ -6920,7 +6920,7 @@
       "longitude": -96.8509,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 97
+      "demandPercentile": 97.0
     },
     {
       "code": "DAY",
@@ -6959,7 +6959,7 @@
       "longitude": -92.1932,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 4
+      "demandPercentile": 4.0
     },
     {
       "code": "DSM",
@@ -6980,7 +6980,7 @@
       "longitude": -93.6631,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 59
+      "demandPercentile": 59.0
     },
     {
       "code": "ECP",
@@ -7002,7 +7002,7 @@
       "longitude": -85.7956,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 51
+      "demandPercentile": 51.0
     },
     {
       "code": "ELP",
@@ -7024,7 +7024,7 @@
       "longitude": -106.3764,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 67
+      "demandPercentile": 67.0
     },
     {
       "code": "ERI",
@@ -7045,7 +7045,7 @@
       "longitude": -80.1739,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 3
+      "demandPercentile": 3.0
     },
     {
       "code": "EYW",
@@ -7067,7 +7067,7 @@
       "longitude": -81.76,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 53
+      "demandPercentile": 53.0
     },
     {
       "code": "FAR",
@@ -7088,7 +7088,7 @@
       "longitude": -96.8157,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 24
+      "demandPercentile": 24.0
     },
     {
       "code": "FLL",
@@ -7112,7 +7112,7 @@
       "longitude": -80.1497,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 98
+      "demandPercentile": 98.0
     },
     {
       "code": "FSD",
@@ -7133,7 +7133,7 @@
       "longitude": -96.7419,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 32
+      "demandPercentile": 32.0
     },
     {
       "code": "FWA",
@@ -7154,7 +7154,7 @@
       "longitude": -85.1952,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 25
+      "demandPercentile": 25.0
     },
     {
       "code": "GNV",
@@ -7175,7 +7175,7 @@
       "longitude": -82.2718,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 11
+      "demandPercentile": 11.0
     },
     {
       "code": "GPT",
@@ -7196,7 +7196,7 @@
       "longitude": -89.0701,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 18
+      "demandPercentile": 18.0
     },
     {
       "code": "GRR",
@@ -7217,7 +7217,7 @@
       "longitude": -85.5228,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 71
+      "demandPercentile": 71.0
     },
     {
       "code": "GSO",
@@ -7239,7 +7239,7 @@
       "longitude": -79.9411,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 45
+      "demandPercentile": 45.0
     },
     {
       "code": "GSP",
@@ -7261,7 +7261,7 @@
       "longitude": -82.2189,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 63
+      "demandPercentile": 63.0
     },
     {
       "code": "HOU",
@@ -7285,7 +7285,7 @@
       "longitude": -95.2772,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 92
+      "demandPercentile": 92.0
     },
     {
       "code": "HPN",
@@ -7306,7 +7306,7 @@
       "longitude": -73.7076,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 61
+      "demandPercentile": 61.0
     },
     {
       "code": "HRL",
@@ -7328,7 +7328,7 @@
       "longitude": -97.6553,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 28
+      "demandPercentile": 28.0
     },
     {
       "code": "HSV",
@@ -7350,7 +7350,7 @@
       "longitude": -86.7751,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 44
+      "demandPercentile": 44.0
     },
     {
       "code": "HVN",
@@ -7371,7 +7371,7 @@
       "longitude": -72.8877,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 57
+      "demandPercentile": 57.0
     },
     {
       "code": "ICT",
@@ -7392,7 +7392,7 @@
       "longitude": -97.433,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 42
+      "demandPercentile": 42.0
     },
     {
       "code": "ILM",
@@ -7414,7 +7414,7 @@
       "longitude": -77.9029,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 47
+      "demandPercentile": 47.0
     },
     {
       "code": "IND",
@@ -7437,7 +7437,7 @@
       "longitude": -86.2946,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 86
+      "demandPercentile": 86.0
     },
     {
       "code": "ISP",
@@ -7458,7 +7458,7 @@
       "longitude": -73.1007,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 55
+      "demandPercentile": 55.0
     },
     {
       "code": "JAN",
@@ -7480,7 +7480,7 @@
       "longitude": -90.0759,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 34
+      "demandPercentile": 34.0
     },
     {
       "code": "JAX",
@@ -7520,7 +7520,7 @@
       "longitude": -101.8206,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 30
+      "demandPercentile": 30.0
     },
     {
       "code": "LEX",
@@ -7542,7 +7542,7 @@
       "longitude": -84.6086,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 43
+      "demandPercentile": 43.0
     },
     {
       "code": "LIT",
@@ -7563,7 +7563,7 @@
       "longitude": -92.2248,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 46
+      "demandPercentile": 46.0
     },
     {
       "code": "MAF",
@@ -7585,7 +7585,7 @@
       "longitude": -102.2019,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 41
+      "demandPercentile": 41.0
     },
     {
       "code": "MCI",
@@ -7624,7 +7624,7 @@
       "longitude": -83.6492,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 1
+      "demandPercentile": 1.0
     },
     {
       "code": "MDT",
@@ -7646,7 +7646,7 @@
       "longitude": -76.7626,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 50
+      "demandPercentile": 50.0
     },
     {
       "code": "MEM",
@@ -7667,7 +7667,7 @@
       "longitude": -89.9767,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 75
+      "demandPercentile": 75.0
     },
     {
       "code": "MFE",
@@ -7689,7 +7689,7 @@
       "longitude": -98.2386,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 26
+      "demandPercentile": 26.0
     },
     {
       "code": "MHT",
@@ -7710,7 +7710,7 @@
       "longitude": -71.4357,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 48
+      "demandPercentile": 48.0
     },
     {
       "code": "MKE",
@@ -7732,7 +7732,7 @@
       "longitude": -87.8971,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 77
+      "demandPercentile": 77.0
     },
     {
       "code": "MLB",
@@ -7753,7 +7753,7 @@
       "longitude": -80.6453,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 14
+      "demandPercentile": 14.0
     },
     {
       "code": "MOB",
@@ -7774,7 +7774,7 @@
       "longitude": -88.2428,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 12
+      "demandPercentile": 12.0
     },
     {
       "code": "MSN",
@@ -7795,7 +7795,7 @@
       "longitude": -89.3375,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 52
+      "demandPercentile": 52.0
     },
     {
       "code": "MSY",
@@ -7818,7 +7818,7 @@
       "longitude": -90.259,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 88
+      "demandPercentile": 88.0
     },
     {
       "code": "MYR",
@@ -7840,7 +7840,7 @@
       "longitude": -78.9283,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 70
+      "demandPercentile": 70.0
     },
     {
       "code": "OKC",
@@ -7862,7 +7862,7 @@
       "longitude": -97.6008,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 68
+      "demandPercentile": 68.0
     },
     {
       "code": "OMA",
@@ -7883,7 +7883,7 @@
       "longitude": -95.8941,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 72
+      "demandPercentile": 72.0
     },
     {
       "code": "ORH",
@@ -7904,7 +7904,7 @@
       "longitude": -71.8756,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 7
+      "demandPercentile": 7.0
     },
     {
       "code": "PGD",
@@ -7927,7 +7927,7 @@
       "longitude": -81.9909,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 89
+      "demandPercentile": 89.0
     },
     {
       "code": "PHF",
@@ -7966,7 +7966,7 @@
       "longitude": -89.6933,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 16
+      "demandPercentile": 16.0
     },
     {
       "code": "PIE",
@@ -7990,7 +7990,7 @@
       "longitude": -82.6865,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 96
+      "demandPercentile": 96.0
     },
     {
       "code": "PIT",
@@ -8013,7 +8013,7 @@
       "longitude": -80.2327,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 87
+      "demandPercentile": 87.0
     },
     {
       "code": "PNS",
@@ -8035,7 +8035,7 @@
       "longitude": -87.1866,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 65
+      "demandPercentile": 65.0
     },
     {
       "code": "PVD",
@@ -8058,7 +8058,7 @@
       "longitude": -71.4277,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 78
+      "demandPercentile": 78.0
     },
     {
       "code": "PWM",
@@ -8079,7 +8079,7 @@
       "longitude": -70.3086,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 58
+      "demandPercentile": 58.0
     },
     {
       "code": "RDU",
@@ -8103,7 +8103,7 @@
       "longitude": -78.7875,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 90
+      "demandPercentile": 90.0
     },
     {
       "code": "RFD",
@@ -8127,7 +8127,7 @@
       "longitude": -89.0972,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 99
+      "demandPercentile": 99.0
     },
     {
       "code": "ROA",
@@ -8148,7 +8148,7 @@
       "longitude": -79.9754,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 22
+      "demandPercentile": 22.0
     },
     {
       "code": "ROC",
@@ -8170,7 +8170,7 @@
       "longitude": -77.6719,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 62
+      "demandPercentile": 62.0
     },
     {
       "code": "SAT",
@@ -8193,7 +8193,7 @@
       "longitude": -98.4691,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 84
+      "demandPercentile": 84.0
     },
     {
       "code": "SAV",
@@ -8215,7 +8215,7 @@
       "longitude": -81.2021,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 69
+      "demandPercentile": 69.0
     },
     {
       "code": "SBN",
@@ -8236,7 +8236,7 @@
       "longitude": -86.3173,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 29
+      "demandPercentile": 29.0
     },
     {
       "code": "SDF",
@@ -8258,7 +8258,7 @@
       "longitude": -85.7365,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 74
+      "demandPercentile": 74.0
     },
     {
       "code": "SFB",
@@ -8282,7 +8282,7 @@
       "longitude": -81.2349,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 100
+      "demandPercentile": 100.0
     },
     {
       "code": "SGF",
@@ -8304,7 +8304,7 @@
       "longitude": -93.3886,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 33
+      "demandPercentile": 33.0
     },
     {
       "code": "SHV",
@@ -8325,7 +8325,7 @@
       "longitude": -93.826,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 15
+      "demandPercentile": 15.0
     },
     {
       "code": "SRQ",
@@ -8348,7 +8348,7 @@
       "longitude": -82.5544,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 80
+      "demandPercentile": 80.0
     },
     {
       "code": "SWF",
@@ -8369,7 +8369,7 @@
       "longitude": -74.1048,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 6
+      "demandPercentile": 6.0
     },
     {
       "code": "SYR",
@@ -8408,7 +8408,7 @@
       "longitude": -84.3509,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 19
+      "demandPercentile": 19.0
     },
     {
       "code": "TOL",
@@ -8429,7 +8429,7 @@
       "longitude": -83.8078,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 2
+      "demandPercentile": 2.0
     },
     {
       "code": "TRI",
@@ -8450,7 +8450,7 @@
       "longitude": -82.4074,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 9
+      "demandPercentile": 9.0
     },
     {
       "code": "TTN",
@@ -8471,7 +8471,7 @@
       "longitude": -74.8135,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 10
+      "demandPercentile": 10.0
     },
     {
       "code": "TUL",
@@ -8493,7 +8493,7 @@
       "longitude": -95.8881,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 60
+      "demandPercentile": 60.0
     },
     {
       "code": "TYS",
@@ -8515,7 +8515,7 @@
       "longitude": -83.9941,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 66
+      "demandPercentile": 66.0
     },
     {
       "code": "VPS",
@@ -8537,7 +8537,7 @@
       "longitude": -86.526,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 56
+      "demandPercentile": 56.0
     },
     {
       "code": "XNA",
@@ -8559,7 +8559,7 @@
       "longitude": -94.3078,
       "runwayLengthFeet": null,
       "elevationFeet": null,
-      "demandPercentile": 54
+      "demandPercentile": 54.0
     }
   ],
   "legs": [
