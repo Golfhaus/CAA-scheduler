@@ -1,0 +1,31 @@
+name: Screen v1.3.3 BHM aircraft line insertion
+on:
+  push:
+    branches: [schedule-7-v1.3.3-bhm-mini-banks]
+    paths:
+      - '.github/workflows/v133-bhm-line-splice.yml'
+      - 'scripts/screen_v133_bhm_line_insertion.py'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -e .
+      - run: python scripts/screen_v133_bhm_line_insertion.py
+      - name: Archive dry-run results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f outputs/schedule_7_v1_3_3_bhm_line_insertion/
+          if ! git diff --cached --quiet; then
+            git commit -m "Record BHM R530 line-insertion feasibility screen [skip ci]"
+            git restore --worktree .
+            git pull --rebase origin schedule-7-v1.3.3-bhm-mini-banks
+            git push
+          fi
