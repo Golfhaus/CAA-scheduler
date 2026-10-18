@@ -1,0 +1,41 @@
+{
+  "baseSchedule": {
+    "scheduleId": "schedule_7_v1_3_3_draft"
+  },
+  "schedule": {
+    "id": "schedule_7_v1_3_3_draft",
+    "number": 7,
+    "version": "1.3.3-draft",
+    "label": "Schedule 7, Version 1.3.3 draft",
+    "status": "draft",
+    "fleetCounts": {
+      "MAX9": 35,
+      "CRJ900": 45,
+      "CRJ700": 65,
+      "CRJ200": 80
+    },
+    "connectionWindowMinutes": {
+      "minimum": 30,
+      "maximum": 240
+    }
+  },
+  "routeReassignments": [
+    {
+      "sourceRoute": 519,
+      "expectedLine": "AG",
+      "expectedDay": 9,
+      "expectedFleet": "CRJ900",
+      "line": "AG",
+      "day": 10
+    },
+    {
+      "sourceRoute": 530,
+      "expectedLine": "BB",
+      "expectedDay": 1,
+      "expectedFleet": "CRJ900",
+      "line": "AG",
+      "day": 9
+    }
+  ],
+  "id": "schedule-7-v1.3.3-r530-ag-insertion"
+}
