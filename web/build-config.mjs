@@ -1,4 +1,5 @@
 export const BUILD_CONFIG_SCHEMA_VERSION = "1.0.0";
+export const AIRPORT_ROLES = ["hub", "focus_city", "large_destination", "destination"];
 
 function clone(value) {
   return JSON.parse(JSON.stringify(value));
@@ -54,6 +55,12 @@ export function createBuildConfig(canonical, manifest) {
         version: cleanString(manifest?.buildSetup?.demandData?.version),
       },
     },
+    airportFacilities: (canonical.cities || []).filter((city) => city.active).map((city) => ({
+      airport: String(city.code).toUpperCase(),
+      role: AIRPORT_ROLES.includes(city.role) ? city.role : "destination",
+      gates: Number.isInteger(city.gateAllocationOverride) ? city.gateAllocationOverride : null,
+    })),
+    airportOptions: "",
     networkChanges: [],
     notes: "",
   };
@@ -105,6 +112,14 @@ export function normalizeBuildConfig(value) {
         version: cleanString(value.inputs?.demandData?.version),
       },
     },
+    airportFacilities: Array.isArray(value.airportFacilities)
+      ? value.airportFacilities.map((entry) => ({
+          airport: cleanString(entry?.airport).toUpperCase(),
+          role: cleanString(entry?.role),
+          gates: entry?.gates === "" || entry?.gates == null ? null : Number(entry.gates),
+        }))
+      : [],
+    airportOptions: cleanString(value.airportOptions),
     networkChanges: Array.isArray(value.networkChanges)
       ? value.networkChanges.map((change) => ({
           airport: cleanString(change?.airport).toUpperCase(),
@@ -245,6 +260,22 @@ export function validateBuildConfig(value, canonical) {
           ? `${config.networkChanges.length} proposed airport change${config.networkChanges.length === 1 ? "" : "s"} passed structural preflight.`
           : "No airport additions, removals, or status changes are proposed."),
   ));
+
+  const activeFacilities = new Set((canonical?.cities || []).filter((city) => city.active).map((city) => String(city.code).toUpperCase()));
+  const facilityCodes = new Set();
+  const facilityErrors = [];
+  let missingGateCounts = 0;
+  for (const entry of config.airportFacilities) {
+    if (!/^[A-Z0-9]{3,4}$/.test(entry.airport) || facilityCodes.has(entry.airport)) facilityErrors.push(`Invalid or duplicate airport: ${entry.airport || "(blank)"}`);
+    facilityCodes.add(entry.airport);
+    if (!AIRPORT_ROLES.includes(entry.role)) facilityErrors.push(`${entry.airport}: invalid airport role`);
+    if (entry.gates === null) missingGateCounts += 1;
+    else if (!Number.isInteger(entry.gates) || entry.gates < 0) facilityErrors.push(`${entry.airport}: gate count must be a nonnegative whole number`);
+  }
+  const missingAirports = [...activeFacilities].filter((code) => !facilityCodes.has(code) && !config.networkChanges.some((change) => change.airport === code && change.action === "remove"));
+  if (missingAirports.length) facilityErrors.push(`Missing baseline airports: ${missingAirports.join(", ")}`);
+  checks.push(check("airport_facilities", "Airport roles and gate inventory", facilityErrors.length ? "fail" : missingGateCounts ? "warning" : "pass",
+    facilityErrors.length ? facilityErrors.join("; ") : missingGateCounts ? `${missingGateCounts} airports still need explicit gate counts before construction; classification and known gate counts are saved.` : `${config.airportFacilities.length} airport classifications and gate counts are recorded.`));
 
   const additions = config.networkChanges.filter((change) => change.action === "add").length;
   checks.push(check(
