@@ -849,3 +849,11 @@ tbody tr:hover { background: #f6f9fc; }
   .analysis-filters input, .analysis-filters select { width: 100%; }
   .analysis-preview { padding: 16px; }
 }
+
+/* Schedule-level airport classifications and gate inventory */
+.setup-airport-list { max-height: 28rem; overflow-y: auto; }
+.airport-setup-row { grid-template-columns: minmax(9rem, 1.4fr) minmax(9rem, 1fr) minmax(5rem, .45fr); }
+.setup-airport-label { display: flex; flex-direction: column; gap: .2rem; align-self: center; }
+.setup-airport-label span { font-size: .76rem; color: var(--muted); }
+.setup-airport-options { display: block; padding: 1rem 1.2rem; }
+@media (max-width: 650px) { .airport-setup-row { grid-template-columns: 1fr 1fr; } .setup-airport-label { grid-column: 1 / -1; } }
