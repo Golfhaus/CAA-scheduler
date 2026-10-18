@@ -7,6 +7,7 @@
 - **Exact revert commit:** `6965d28175b4089c269f543a1d6b24b423fbdcb3`.
 - **Preserved branch:** `checkpoint/schedule-7-v1.3.3-pre-bhm-minibanks`.
 - **Development branch:** `schedule-7-v1.3.3-bhm-mini-banks`.
+- **Checkpoint warning:** `checkpoint/v1.3.3-before-bhm-four-aircraft-20261017` is misleadingly named: it currently contains the post-BHM 1,253-flight schedule and **must not** be used to revert the BHM additions. Use only `checkpoint/schedule-7-v1.3.3-pre-bhm-minibanks` at the pinned SHA above.
 - The checkpoint retains the 1,229-flight v1.3.3 working draft including the previously accepted R514 PIE–MCI round trip. To discard the BHM additions, restart from the checkpoint rather than rewriting released `main`. Do not move the checkpoint branch forward.
 
 ## Approved aircraft allocation and airports
