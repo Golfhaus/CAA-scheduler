@@ -135,6 +135,18 @@
               <p class="setup-help">Every type and aircraft count is written into this build configuration. Values are copied only as editable starting suggestions.</p>
             </section>
 
+            <section class="panel setup-panel" aria-labelledby="setup-airports-title">
+              <div class="panel-heading">
+                <div><p class="eyebrow">Variable by schedule, fixed across versions</p><h2 id="setup-airports-title">Airport roles and gates</h2></div>
+              </div>
+              <p class="setup-help">Review each airport’s classification and available gate count. Unspecified gate counts remain blank rather than assuming a value. Preserve these settings when creating later versions of the same schedule.</p>
+              <div class="setup-fields">
+                <label class="wide-field"><span>Find airport</span><input id="setup-airport-filter" type="search" placeholder="Filter by code or name"></label>
+              </div>
+              <div class="setup-list setup-airport-list" id="setup-airport-rows"></div>
+              <label class="setup-textarea setup-airport-options"><span>Other airport options or exceptions</span><textarea id="setup-airport-options" rows="3" placeholder="Describe other classifications, gate arrangements, or airport-specific considerations"></textarea></label>
+            </section>
+
             <section class="panel setup-panel" aria-labelledby="setup-inputs-title">
               <div class="panel-heading">
                 <div><p class="eyebrow">Reproducible inputs</p><h2 id="setup-inputs-title">Policy and data pins</h2></div>
