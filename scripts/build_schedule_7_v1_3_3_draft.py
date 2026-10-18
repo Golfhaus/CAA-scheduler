@@ -37,6 +37,12 @@ assert new["operatingPolicy"]==accepted["operatingPolicy"],"BHM operating policy
 assert len(new["legs"])==1253
 assert len({l["route"] for l in new["legs"]})==188
 assert len({l["line"] for l in new["legs"]})==21
+# Approved line splice: R530 occupies AG day 9; former R519 becomes AG day 10.
+splice_path=ROOT/"config/optimizations/schedule_7_v1_3_3_r530_ag_insertion.json"
+splice=json.loads(splice_path.read_text())
+new=apply_optimization_overlay(new,splice)
+assert len({l["line"] for l in new["legs"]})==20
+assert len(new["legs"])==1253
 assert new["schedule"]["fleetCounts"]==base["schedule"]["fleetCounts"]
 structure=validate_schedule(new)
 operating=validate_operating_rules(new)
@@ -51,7 +57,7 @@ assert all(c["nGates"]>=0 and c["nStands"]>=0 for c in gates["cities"])
 new.setdefault("provenance",{})["workingDraft"]={
 "source":"schedule_7_v1_3_2","sourceSha256":hashlib.sha256(base_path.read_bytes()).hexdigest(),
 "overlay":config_path.relative_to(ROOT).as_posix(),"overlaySha256":hashlib.sha256(config_path.read_bytes()).hexdigest(),
-"additionalOverlays":[{"path":bhm_path.relative_to(ROOT).as_posix(),"sha256":hashlib.sha256(bhm_path.read_bytes()).hexdigest()}],
+"additionalOverlays":[{"path":bhm_path.relative_to(ROOT).as_posix(),"sha256":hashlib.sha256(bhm_path.read_bytes()).hexdigest()},{"path":splice_path.relative_to(ROOT).as_posix(),"sha256":hashlib.sha256(splice_path.read_bytes()).hexdigest()}],
 "revertPoint":{"branch":"checkpoint/schedule-7-v1.3.3-pre-bhm-minibanks","commit":"6965d28175b4089c269f543a1d6b24b423fbdcb3"},
 "publication":"NOT AUTHORIZED; v1.3.2 remains app default"}
 out=ROOT/"data/schedules/schedule_7_v1_3_3_draft";out.mkdir(parents=True,exist_ok=True)
