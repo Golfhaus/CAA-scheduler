@@ -43,6 +43,30 @@ splice=json.loads(splice_path.read_text())
 new=apply_optimization_overlay(new,splice)
 assert len({l["line"] for l in new["legs"]})==20
 assert len(new["legs"])==1253
+# Approved R529 splice: close at CMH, join AG after R519 on day 11.
+# Preserve all six flight numbers; replace only the DAY positioning markets.
+r529=[l for l in new["legs"] if l["route"]==529]
+assert len(r529)==6 and {(l["line"],l["day"]) for l in r529}=={("BA",1)}
+r529.sort(key=lambda l:l["sequenceWithinRoute"])
+first,last=r529[0],r529[-1]
+assert (first["id"],first["origin"],first["destination"],first["departureMinute"],first["arrivalMinute"])==("V133-BHM-529-1-DAY-ALB","DAY","ALB",360,460)
+assert (last["id"],last["origin"],last["destination"],last["departureMinute"],last["arrivalMinute"])==("V133-BHM-529-6-ALB-DAY","ALB","DAY",1165,1265)
+old_ids={first["id"],last["id"]}
+first["id"]="V133-BHM-529-1-CMH-ALB";first["origin"]="CMH"
+last["id"]="V133-BHM-529-6-ALB-CMH";last["destination"]="CMH"
+pairings={(l["origin"],l["destination"]):l["pairing"] for l in new["legs"] if l["route"]!=529}
+next_pairing=max(l["pairing"] for l in new["legs"])+1
+for leg in (first,last):
+    market=(leg["origin"],leg["destination"])
+    if market not in pairings:
+        pairings[market]=next_pairing
+        next_pairing+=1
+    leg["pairing"]=pairings[market]
+for leg in r529:
+    leg["line"]="AG";leg["day"]=11
+new["bankAssignments"]=[a for a in new["bankAssignments"] if a["legId"] not in old_ids]
+assert len({l["line"] for l in new["legs"]})==19
+assert len({l["route"] for l in new["legs"]})==188
 assert new["schedule"]["fleetCounts"]==base["schedule"]["fleetCounts"]
 structure=validate_schedule(new)
 operating=validate_operating_rules(new)
@@ -58,6 +82,7 @@ new.setdefault("provenance",{})["workingDraft"]={
 "source":"schedule_7_v1_3_2","sourceSha256":hashlib.sha256(base_path.read_bytes()).hexdigest(),
 "overlay":config_path.relative_to(ROOT).as_posix(),"overlaySha256":hashlib.sha256(config_path.read_bytes()).hexdigest(),
 "additionalOverlays":[{"path":bhm_path.relative_to(ROOT).as_posix(),"sha256":hashlib.sha256(bhm_path.read_bytes()).hexdigest()},{"path":splice_path.relative_to(ROOT).as_posix(),"sha256":hashlib.sha256(splice_path.read_bytes()).hexdigest()}],
+"r529Integration":{"route":529,"line":"AG","day":11,"positioning":"CMH-ALB-CMH","screen":"outputs/schedule_7_v1_3_3_bhm_line_insertion/remaining_three_screen.json"},
 "revertPoint":{"branch":"checkpoint/schedule-7-v1.3.3-pre-bhm-minibanks","commit":"6965d28175b4089c269f543a1d6b24b423fbdcb3"},
 "publication":"NOT AUTHORIZED; v1.3.2 remains app default"}
 out=ROOT/"data/schedules/schedule_7_v1_3_3_draft";out.mkdir(parents=True,exist_ok=True)
