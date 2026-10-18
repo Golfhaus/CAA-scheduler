@@ -74,3 +74,25 @@ test("export and import normalize to the same portable JSON", () => {
   assert.equal(serializeBuildConfig(imported), serialized);
   assert.equal(buildConfigFilename(imported), "schedule_8_v0_1_0_build_config.json");
 });
+
+test("airport facility settings survive export, import, and version changes", () => {
+  const config = createBuildConfig(canonical, manifest);
+  const day = config.airportFacilities.find((entry) => entry.airport === "DAY");
+  assert.equal(day.role, "hub");
+  day.gates = 14;
+  config.airportOptions = "Skunkworks Bravo: review remote stands at DAY";
+  config.schedule.version = "0.2.0";
+  const imported = normalizeBuildConfig(JSON.parse(serializeBuildConfig(config)));
+  assert.equal(imported.airportFacilities.find((entry) => entry.airport === "DAY").gates, 14);
+  assert.match(imported.airportOptions, /Skunkworks Bravo/);
+  assert.equal(validateBuildConfig(imported, canonical).status, "pass");
+});
+
+test("airport facility preflight flags invalid classifications and gate counts", () => {
+  const config = createBuildConfig(canonical, manifest);
+  const airport = config.airportFacilities[0];
+  airport.role = "unknown";
+  airport.gates = -1;
+  const report = validateBuildConfig(config, canonical);
+  assert.equal(report.checks.find((item) => item.id === "airport_facilities").status, "fail");
+});
