@@ -1,0 +1,128 @@
+{
+  "scope": "DRY RUN only; no draft or release edited",
+  "changes": {
+    "schemaVersion": "1.0.0",
+    "id": "v133-r530-ag-splice-dry-run",
+    "baseSchedule": {
+      "scheduleId": "schedule_7_v1_3_3_draft"
+    },
+    "schedule": {
+      "id": "schedule_7_v1_3_3_draft",
+      "number": 7,
+      "version": "1.3.3-draft",
+      "label": "Schedule 7, Version 1.3.3 draft",
+      "status": "draft",
+      "fleetCounts": {
+        "MAX9": 35,
+        "CRJ900": 45,
+        "CRJ700": 65,
+        "CRJ200": 80
+      },
+      "connectionWindowMinutes": {
+        "minimum": 30,
+        "maximum": 240
+      }
+    },
+    "routeReassignments": [
+      {
+        "sourceRoute": 530,
+        "expectedLine": "BB",
+        "expectedDay": 1,
+        "expectedFleet": "CRJ900",
+        "line": "AG",
+        "day": 9
+      },
+      {
+        "sourceRoute": 519,
+        "expectedLine": "AG",
+        "expectedDay": 9,
+        "expectedFleet": "CRJ900",
+        "line": "AG",
+        "day": 10
+      }
+    ]
+  },
+  "pass": true,
+  "structural": "pass",
+  "overnight": "pass",
+  "planning": "pass",
+  "gate": "pass",
+  "operating": {
+    "checks": 25,
+    "passed": 17,
+    "failed": 0,
+    "warnings": 5,
+    "notEvaluated": 1,
+    "overridden": 2,
+    "effectiveErrorFindings": 0,
+    "effectiveWarningFindings": 160
+  },
+  "failed": [],
+  "flightCount": 1253,
+  "routeCount": 188,
+  "lineCount": 20,
+  "fleetUse": {
+    "MAX9": {
+      "used": 24,
+      "capacity": 35
+    },
+    "CRJ900": {
+      "used": 30,
+      "capacity": 45
+    },
+    "CRJ700": {
+      "used": 58,
+      "capacity": 65
+    },
+    "CRJ200": {
+      "used": 76,
+      "capacity": 80
+    },
+    "findingCount": 0,
+    "effectiveFindingCount": 0,
+    "overriddenFindingCount": 0
+  },
+  "agRouteDays": [
+    {
+      "day": 1,
+      "route": 511
+    },
+    {
+      "day": 2,
+      "route": 512
+    },
+    {
+      "day": 3,
+      "route": 513
+    },
+    {
+      "day": 4,
+      "route": 514
+    },
+    {
+      "day": 5,
+      "route": 515
+    },
+    {
+      "day": 6,
+      "route": 516
+    },
+    {
+      "day": 7,
+      "route": 517
+    },
+    {
+      "day": 8,
+      "route": 518
+    },
+    {
+      "day": 9,
+      "route": 530
+    },
+    {
+      "day": 10,
+      "route": 519
+    }
+  ],
+  "firstFlightOnR530": 2245
+}
