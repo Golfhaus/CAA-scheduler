@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "schedule-7-v1.3.3-release",
+  "sourceScheduleId": "schedule_7_v1_3_2",
+  "baseCanonical": "data/schedules/schedule_7_v1_3_3_draft/canonical_schedule.json",
+  "baseCanonicalSha256": "c439d3668f5ec367ce58adb1dc53b2be8f3a400f37a0c9aab045b4b40460fcf3",
+  "overlays": [],
+  "overlaySha256": {},
+  "outputDirectory": "data/schedules/schedule_7_v1_3_3",
+  "rejoinAvoidableTows": true,
+  "dropWorkingDraftProvenance": true,
+  "demandDataVersion": "bts-db1c-6mo-jul2025-apr2026-v7",
+  "schedule": {
+    "id": "schedule_7_v1_3_3",
+    "number": 7,
+    "version": "1.3.3",
+    "label": "Schedule 7, Version 1.3.3",
+    "status": "released"
+  },
+  "patchScope": {
+    "kind": "r514_pie_mci_and_bhm_north_south_mini_banks",
+    "timetableChanged": true,
+    "routingChanged": true,
+    "description": "Approved R514 PIE\u2013MCI turn plus 24 BHM mini-bank flights on R529/R530/R357/R358, spliced into AG, AK and AA lines."
+  },
+  "connectionAudit": {
+    "hub": "BHM",
+    "groups": {
+      "north": [
+        "ISP",
+        "HVN",
+        "ALB",
+        "CAK"
+      ],
+      "south": [
+        "MYR",
+        "SRQ",
+        "CHS",
+        "PGD"
+      ]
+    }
+  },
+  "connectionScopeDecision": {
+    "status": "approved",
+    "approvedBy": "user",
+    "date": "2026-10-18",
+    "userInstruction": "Commit these to the draft, and push 1.3.3 to main.",
+    "acceptedDraftSha256": "c439d3668f5ec367ce58adb1dc53b2be8f3a400f37a0c9aab045b4b40460fcf3",
+    "review": "Prior network audit documented 60 geographically reasonable coverage gains and no losses compared with the R514-only draft; positioning-leg replacements require separate review."
+  },
+  "expectedRelease": {
+    "legs": 1253,
+    "routes": 188,
+    "lines": 17,
+    "effectiveOperatingErrors": 0,
+    "hardStopFailures": 0,
+    "overnightTurnFailures": 0
+  }
+}

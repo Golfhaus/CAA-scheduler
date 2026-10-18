@@ -30,9 +30,9 @@
       "aircraftCount": 65,
       "aircraftDaysUsed": 58,
       "legCount": 361,
-      "blockMinutes": 37179,
+      "blockMinutes": 37233,
       "minimumTurnMinutes": 12120,
-      "requiredAircraftMinutes": 49299
+      "requiredAircraftMinutes": 49353
     },
     "CRJ200": {
       "aircraftCount": 80,
@@ -2033,6 +2033,12 @@
     {
       "fleet": "CRJ700",
       "origin": "CHS",
+      "destination": "HVN",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ700",
+      "origin": "CHS",
       "destination": "PHF",
       "legs": 6
     },
@@ -2137,12 +2143,6 @@
       "origin": "DAY",
       "destination": "DAL",
       "legs": 3
-    },
-    {
-      "fleet": "CRJ700",
-      "origin": "DAY",
-      "destination": "HVN",
-      "legs": 1
     },
     {
       "fleet": "CRJ700",
@@ -2273,7 +2273,7 @@
     {
       "fleet": "CRJ700",
       "origin": "HVN",
-      "destination": "DAY",
+      "destination": "CHS",
       "legs": 1
     },
     {
@@ -2285,7 +2285,7 @@
     {
       "fleet": "CRJ700",
       "origin": "ISP",
-      "destination": "SYR",
+      "destination": "RDU",
       "legs": 1
     },
     {
@@ -2801,6 +2801,12 @@
     {
       "fleet": "CRJ700",
       "origin": "RDU",
+      "destination": "ISP",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ700",
+      "origin": "RDU",
       "destination": "PHF",
       "legs": 1
     },
@@ -2946,12 +2952,6 @@
       "fleet": "CRJ700",
       "origin": "SYR",
       "destination": "DAB",
-      "legs": 1
-    },
-    {
-      "fleet": "CRJ700",
-      "origin": "SYR",
-      "destination": "ISP",
       "legs": 1
     },
     {
@@ -4296,7 +4296,7 @@
     "CAE": 4,
     "CAK": 9,
     "CHA": 3,
-    "CHS": 9,
+    "CHS": 10,
     "CID": 3,
     "CLT": 23,
     "CMH": 6,
@@ -4305,7 +4305,7 @@
     "CRW": 2,
     "DAB": 7,
     "DAL": 22,
-    "DAY": 87,
+    "DAY": 86,
     "DLH": 2,
     "DSM": 5,
     "ECP": 3,
@@ -4359,7 +4359,7 @@
     "PNS": 5,
     "PVD": 10,
     "PWM": 7,
-    "RDU": 12,
+    "RDU": 13,
     "RFD": 33,
     "ROA": 3,
     "ROC": 6,
@@ -4372,7 +4372,7 @@
     "SHV": 2,
     "SRQ": 9,
     "SWF": 5,
-    "SYR": 99,
+    "SYR": 98,
     "TLH": 2,
     "TOL": 2,
     "TRI": 2,
