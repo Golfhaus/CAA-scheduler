@@ -1539,6 +1539,7 @@ function renderSetup() {
     "#setup-policy-sha": config.inputs.operatingPolicy.sha256,
     "#setup-demand-version": config.inputs.demandData.version,
     "#setup-notes": config.notes,
+    "#setup-airport-options": config.airportOptions,
   };
   Object.entries(values).forEach(([selector, value]) => { $(selector).value = value ?? ""; });
 
@@ -1555,6 +1556,8 @@ function renderSetup() {
       <button class="row-remove" type="button" data-remove-fleet="${index}" aria-label="Remove ${escapeHtml(fleet)}">Remove</button>
     </div>`)
     .join("");
+
+  renderSetupAirportRows();
 
   $("#setup-network-rows").innerHTML = config.networkChanges.length
     ? config.networkChanges.map((change, index) => `<div class="setup-row network-setup-row" data-setup-network-row>
@@ -1579,11 +1582,36 @@ function renderSetup() {
   renderSetupPreflight();
 }
 
+function renderSetupAirportRows() {
+  const term = ($("#setup-airport-filter").value || "").trim().toUpperCase();
+  const names = new Map((state.canonical.cities || []).map((city) => [String(city.code).toUpperCase(), city.displayName || city.name || ""]));
+  $("#setup-airport-rows").innerHTML = state.buildConfig.airportFacilities
+    .map((entry, index) => ({ ...entry, index, name: names.get(entry.airport) || "" }))
+    .filter((entry) => !term || `${entry.airport} ${entry.name}`.toUpperCase().includes(term))
+    .map((entry) => `<div class="setup-row airport-setup-row" data-setup-airport-row="${entry.index}">
+      <div class="setup-airport-label"><strong>${escapeHtml(entry.airport)}</strong><span>${escapeHtml(entry.name)}</span></div>
+      <label><span>Airport type</span><select data-setup-airport-role>
+        <option value="hub" ${entry.role === "hub" ? "selected" : ""}>Hub</option>
+        <option value="focus_city" ${entry.role === "focus_city" ? "selected" : ""}>Focus City</option>
+        <option value="large_destination" ${entry.role === "large_destination" ? "selected" : ""}>Large Destination</option>
+        <option value="destination" ${entry.role === "destination" ? "selected" : ""}>Destination</option>
+      </select></label>
+      <label><span>Gates</span><input data-setup-airport-gates type="number" min="0" step="1" placeholder="Unset" value="${entry.gates ?? ""}" aria-label="${escapeHtml(entry.airport)} gate count"></label>
+    </div>`).join("") || '<p class="setup-empty">No airports match this filter.</p>';
+}
+
 function readSetupForm() {
   const fleetCounts = {};
   $("[data-setup-fleet-row]").forEach((row) => {
     const fleet = row.querySelector("[data-setup-fleet-name]").value.trim().toUpperCase();
     if (fleet) fleetCounts[fleet] = Number(row.querySelector("[data-setup-fleet-count]").value);
+  });
+  const airportFacilities = state.buildConfig.airportFacilities.map((entry) => ({ ...entry }));
+  $("[data-setup-airport-row]").forEach((row) => {
+    const entry = airportFacilities[Number(row.dataset.setupAirportRow)];
+    entry.role = row.querySelector("[data-setup-airport-role]").value;
+    const gates = row.querySelector("[data-setup-airport-gates]").value.trim();
+    entry.gates = gates === "" ? null : Number(gates);
   });
   const kind = $("#setup-start-kind").value;
   const value = {
@@ -1600,6 +1628,8 @@ function readSetupForm() {
       scheduleId: kind === "blank" ? null : $("#setup-baseline").value,
     },
     fleetCounts,
+    airportFacilities,
+    airportOptions: $("#setup-airport-options").value,
     connectionWindowMinutes: {
       minimum: Number($("#setup-connect-min").value),
       maximum: Number($("#setup-connect-max").value),
@@ -1889,6 +1919,7 @@ function bindEvents() {
   $("#setup-form").addEventListener("input", () => updateSetupDraft());
   $("#setup-form").addEventListener("change", () => updateSetupDraft());
   $("#setup-add-fleet").addEventListener("click", addFleetType);
+  $("#setup-airport-filter").addEventListener("input", renderSetupAirportRows);
   $("#setup-add-network").addEventListener("click", addNetworkChange);
   $("#setup-save").addEventListener("click", () => updateSetupDraft("Saved in this browser"));
   $("#setup-export").addEventListener("click", exportSetupConfig);
