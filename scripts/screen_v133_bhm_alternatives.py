@@ -78,3 +78,26 @@ out=ROOT/"outputs/schedule_7_v1_3_3_bhm_line_insertion"
 out.mkdir(parents=True,exist_ok=True)
 (out/"remaining_two_alternatives.json").write_text(json.dumps(results,indent=2)+"\n")
 print(json.dumps([{"label":r["label"],"pass":r.get("pass",False),"errors":r.get("effectiveErrors"),"gate":r.get("gate"),"checks":[f["id"] for f in r.get("operatingFailedChecks",[])]} for r in results],indent=2))
+
+# Combined test: both individually passing CRJ700 insertions on the same schedule.
+combined={"name":"R357 RDU/AK day10 + R358 CHS/AA day8","unpublished":True}
+try:
+    c=candidate_for(cases[1],base)
+    c=candidate_for(cases[3],c)
+    structure=validate_schedule(c)
+    overnight=validate_overnight_turns(c)
+    operating=validate_operating_rules(c)
+    planning=validate_planning_snapshot(reconstruct_planning_snapshot(c),c)
+    try:export_gate_schedule(c);gate="pass"
+    except Exception as e:gate=f"{type(e).__name__}: {str(e)[:500]}"
+    combined.update(structure=structure["status"],overnight=overnight["status"],
+      planning=planning["status"],gate=gate,operating=operating["summary"],
+      failed=[{"id":x["id"],"findings":x.get("findings",[])[:5]} for x in operating["checks"] if x["status"]=="fail"],
+      flights=len(c["legs"]),routes=len({l["route"] for l in c["legs"]}),
+      lines=len({l["line"] for l in c["legs"]}),
+      lineDays={line:max(l["day"] for l in c["legs"] if l["line"]==line) for line in ("AK","AA")})
+    combined["pass"]=structure["status"]==overnight["status"]==planning["status"]=="pass" and operating["summary"]["effectiveErrorFindings"]==0 and gate=="pass"
+except Exception as e:
+    combined.update(pass_=False,error=repr(e),trace=traceback.format_exc()[-800:])
+(out/"remaining_two_combined.json").write_text(json.dumps(combined,indent=2)+"\n")
+print(json.dumps(combined,indent=2))
