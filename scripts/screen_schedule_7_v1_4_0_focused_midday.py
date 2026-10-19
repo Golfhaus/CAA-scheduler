@@ -37,7 +37,9 @@ for index,item in enumerate(cases):
    ov["insertLegs"].append({"id":f"V140-R{item['route']}-FOCUSED-{index}-{i}","route":item["route"],"origin":a,"destination":d,"departureMinute":dep,"arrivalMinute":arr})
   for seq,operation,bank in item["banks"]:
    ov["bankAssignmentsToAdd"].append({"legId":ov["insertLegs"][seq-1]["id"],"operation":operation,"bankId":bank})
-  if item.get("newBank"):ov["hubBanksToAdd"]=[item["newBank"]]
+  if item.get("newBank"):
+   ov["hubBanksToAdd"]=[item["newBank"]]
+   ov["hubBankCountOverrides"]={"DAY":10}
   c=apply_optimization_overlay(b,ov)
   s=validate_schedule(c);n=validate_overnight_turns(c);o=validate_operating_rules(c)
   p=validate_planning_snapshot(reconstruct_planning_snapshot(c),c)
