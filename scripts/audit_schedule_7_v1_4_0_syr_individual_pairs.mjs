@@ -13,7 +13,7 @@ for(const meta of manifest){
  const analysis=buildServiceAnalysis(candidate,demand,buildItineraries);
  const geo=compareServiceAnalyses(original,analysis,true);
  output.push({...meta,gains:geo.gained.length,losses:geo.lost.length,faster:geo.faster.length,
- slower:geo.slower.length,marketsGained:geo.gained,marketsLost:geo.lost});
+ slower:geo.slower.length,marketsGained:geo.gained,marketsLost:geo.lost,\n weightedFaster:geo.faster.reduce((v,x)=>v+x.demand*(x.beforeMinutes-x.afterMinutes),0),\n weightedSlower:geo.slower.reduce((v,x)=>v+x.demand*(x.afterMinutes-x.beforeMinutes),0),\n topSlower:geo.slower.map(x=>({market:x.market,demand:x.demand,delta:x.afterMinutes-x.beforeMinutes,weighted:x.demand*(x.afterMinutes-x.beforeMinutes)})).sort((a,b)=>b.weighted-a.weighted).slice(0,8)});
 }
 fs.writeFileSync(root+'/syr_single_paired_network.json',JSON.stringify(output,null,2)+'\n');
 console.log(JSON.stringify(output.map(x=>({name:x.name,route:x.route,bank:x.bank,
