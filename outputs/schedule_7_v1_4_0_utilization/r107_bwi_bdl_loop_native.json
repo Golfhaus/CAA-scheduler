@@ -1,0 +1,54 @@
+{
+  "scope": "READ-ONLY, NOT in draft",
+  "description": "Keep BDL-SYR direct return; use SYR-BWI-BDL A-B outbound routing",
+  "flights": 1258,
+  "gate": "pass",
+  "structural": "pass",
+  "overnight": "pass",
+  "planning": "pass",
+  "operating": {
+    "checks": 25,
+    "passed": 16,
+    "failed": 1,
+    "warnings": 5,
+    "notEvaluated": 1,
+    "overridden": 2,
+    "effectiveErrorFindings": 1,
+    "effectiveWarningFindings": 159
+  },
+  "failed": [
+    {
+      "check": "section_26_pairing_spacing",
+      "findings": [
+        {
+          "id": "SYR-BDL",
+          "message": "SYR\u2013BDL fails same-pairing spacing",
+          "evidence": {
+            "origin": "SYR",
+            "destination": "BDL",
+            "departures": [
+              359,
+              505
+            ],
+            "gaps": [
+              {
+                "from": 359,
+                "to": 505,
+                "minutes": 146
+              },
+              {
+                "from": 505,
+                "to": 359,
+                "minutes": 1294
+              }
+            ],
+            "targetMinutes": 168.0,
+            "allowedExceptions": 0,
+            "hubBound": false
+          }
+        }
+      ]
+    }
+  ],
+  "pass": false
+}
