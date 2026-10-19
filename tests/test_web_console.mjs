@@ -69,7 +69,7 @@ test("overview metrics reflect the frozen schedule", () => {
     cities: 105,
     routes: latest.id === "schedule_7_v1_4_0" || latest.id === "schedule_7_v1_3_3" ? 188 : 184,
     lines: latest.id === "schedule_7_v1_4_0" || latest.id === "schedule_7_v1_3_3" || latest.id === "schedule_7_v1_3_2" ? 17 : 19,
-    markets: latest.id === "schedule_7_v1_4_0" ? 594 : latest.id === "schedule_7_v1_3_3" ? 593 : latest.id === "schedule_7_v1_3_2" ? 575 : 572,
+    markets: latest.id === "schedule_7_v1_4_0" ? 593 : latest.id === "schedule_7_v1_3_3" ? 593 : latest.id === "schedule_7_v1_3_2" ? 575 : 572,
   });
   assert.deepEqual(fleetUsage(canonical), {
     CRJ200: 76,
