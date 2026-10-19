@@ -34,7 +34,7 @@ for name,selected in scenarios:
    members.sort(key=lambda x:(0 if x["route"] in (107,160) else 1,x["route"],x["returnFlight"]))
    bank=bankByCode[code]
    for i,x in enumerate(members):
-    target=bank["center"]+i*5
+    target=590 if code=="M09" and x["route"]==129 else bank["center"]+i*5
     before=x["scheduledDepartureMinute"];after=target-x["durationMinutes"]
     minimum=x["outstationArrivalMinute"]+40
     maximum=(x["nextDepartureMinute"]-40) if x["nextDepartureMinute"] is not None else x["scheduledArrivalMinute"]
