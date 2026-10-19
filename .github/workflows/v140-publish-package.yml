@@ -1,0 +1,52 @@
+name: Prepare and verify Schedule 7 v1.4.0 release
+on:
+  push:
+    branches: [schedule-7-v1.4.0-utilization-analysis]
+    paths:
+      - '.github/workflows/v140-publish-package.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: v140-publish-package
+  cancel-in-progress: true
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -e .
+      - name: Rebuild the complete accepted 1259-flight v1.4.0 draft
+        run: python scripts/build_schedule_7_v1_4_0_draft.py
+      - name: Package guarded v1.4.0 release and update web default
+        run: python scripts/prepare_schedule_7_v1_4_0_release.py
+      - name: Full latest-only regression suite
+        run: bash scripts/run_latest_regression.sh
+      - name: Build and verify web console default
+        run: |
+          python -m caa_scheduler build-web --output dist
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path("dist")
+          manifest=json.loads((p/"schedules.json").read_text())
+          assert manifest["defaultScheduleId"]=="schedule_7_v1_4_0"
+          schedule=json.loads((p/"data/schedules/schedule_7_v1_4_0/canonical_schedule.json").read_text())
+          assert schedule["schedule"]["status"]=="released"
+          assert len(schedule["legs"])==1259
+          assert len({x["route"] for x in schedule["legs"]})==188
+          assert len({x["line"] for x in schedule["legs"]})==17
+          PY
+      - name: Commit tested release assets to development branch only
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f config/optimizations/schedule_7_v1_4_0_release.json data/schedules/schedule_7_v1_4_0/ data/schedules/schedule_7_v1_4_0_draft/ web/schedules.json README.md
+          if ! git diff --cached --quiet; then
+            git commit -m "Package tested Schedule 7 v1.4.0 and web default [skip ci]"
+            git pull --rebase origin schedule-7-v1.4.0-utilization-analysis
+            git push origin HEAD:schedule-7-v1.4.0-utilization-analysis
+          fi
