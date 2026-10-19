@@ -135,16 +135,27 @@
               <p class="setup-help">Every type and aircraft count is written into this build configuration. Values are copied only as editable starting suggestions.</p>
             </section>
 
-            <section class="panel setup-panel" aria-labelledby="setup-airports-title">
+            <section class="panel setup-panel setup-airport-panel" aria-labelledby="setup-airports-title">
               <div class="panel-heading">
-                <div><p class="eyebrow">Variable by schedule, fixed across versions</p><h2 id="setup-airports-title">Airport roles and gates</h2></div>
+                <div><p class="eyebrow">Schedule-level inventory</p><h2 id="setup-airports-title">Airport types, gates and stands</h2></div>
               </div>
-              <p class="setup-help">Review each airport’s classification and available gate count. Unspecified gate counts remain blank rather than assuming a value. Preserve these settings when creating later versions of the same schedule.</p>
-              <div class="setup-fields">
-                <label class="wide-field"><span>Find airport</span><input id="setup-airport-filter" type="search" placeholder="Filter by code or name"></label>
+              <p class="setup-help">Set the default capacity for each airport type. Adjusted airports are identified below; open the drill-down to edit individual stations or reset their overrides. These values belong to a schedule, not its individual versions.</p>
+              <div class="setup-list" id="setup-airport-types"></div>
+              <div class="setup-airport-drill-toolbar">
+                <button class="secondary-button" type="button" id="setup-airport-toggle" aria-expanded="false" aria-controls="setup-airport-details">Manage airport adjustments</button>
+                <span id="setup-airport-override-summary" class="panel-meta"></span>
               </div>
-              <div class="setup-list setup-airport-list" id="setup-airport-rows"></div>
-              <label class="setup-textarea setup-airport-options"><span>Other airport options or exceptions</span><textarea id="setup-airport-options" rows="3" placeholder="Describe other classifications, gate arrangements, or airport-specific considerations"></textarea></label>
+              <div id="setup-airport-details" hidden>
+                <div class="setup-airport-filters">
+                  <label><span>Find airport</span><input id="setup-airport-filter" type="search" placeholder="Code or name"></label>
+                  <label><span>Show</span><select id="setup-airport-show">
+                    <option value="overrides">Adjusted airports</option>
+                    <option value="all">All airports</option>
+                  </select></label>
+                </div>
+                <div class="setup-list setup-airport-list" id="setup-airport-rows"></div>
+              </div>
+              <label class="setup-textarea setup-airport-options"><span>Other airport options or exceptions</span><textarea id="setup-airport-options" rows="3" placeholder="Additional classifications, special gate or stand arrangements, and exceptions"></textarea></label>
             </section>
 
             <section class="panel setup-panel" aria-labelledby="setup-inputs-title">
