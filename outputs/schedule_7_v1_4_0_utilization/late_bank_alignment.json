@@ -9,34 +9,16 @@
     "gate": "pass",
     "operating": {
       "checks": 25,
-      "passed": 16,
-      "failed": 1,
+      "passed": 17,
+      "failed": 0,
       "warnings": 5,
       "notEvaluated": 1,
       "overridden": 2,
-      "effectiveErrorFindings": 1,
+      "effectiveErrorFindings": 0,
       "effectiveWarningFindings": 160
     },
-    "failed": [
-      {
-        "check": "minimum_turn_time",
-        "findings": [
-          {
-            "id": "AC-6-1856-1827",
-            "message": "Turn at SYR is 31 minutes",
-            "evidence": {
-              "line": "AC",
-              "day": 6,
-              "city": "SYR",
-              "arrivalFlight": 1856,
-              "departureFlight": 1827,
-              "minutes": 31
-            }
-          }
-        ]
-      }
-    ],
-    "pass": false,
+    "failed": [],
+    "pass": true,
     "overlay": {
       "id": "v140-banked-106-0",
       "baseSchedule": {
@@ -60,6 +42,13 @@
         }
       },
       "retimeLegs": [
+        {
+          "legId": "HPN-SYR-CRJ200-03-OUT",
+          "expectedDepartureMinute": 1080,
+          "expectedArrivalMinute": 1134,
+          "departureMinute": 1071,
+          "arrivalMinute": 1125
+        },
         {
           "legId": "BTV-SYR-CRJ200-01-IN",
           "expectedDepartureMinute": 1175,
@@ -400,51 +389,18 @@
     "gate": "pass",
     "operating": {
       "checks": 25,
-      "passed": 16,
-      "failed": 2,
+      "passed": 17,
+      "failed": 1,
       "warnings": 5,
       "notEvaluated": 1,
       "overridden": 1,
-      "effectiveErrorFindings": 3,
+      "effectiveErrorFindings": 1,
       "effectiveWarningFindings": 160
     },
     "failed": [
       {
-        "check": "minimum_turn_time",
-        "findings": [
-          {
-            "id": "AM-12-1608-1794",
-            "message": "Turn at PIT is 39 minutes",
-            "evidence": {
-              "line": "AM",
-              "day": 12,
-              "city": "PIT",
-              "arrivalFlight": 1608,
-              "departureFlight": 1794,
-              "minutes": 39
-            }
-          }
-        ]
-      },
-      {
         "check": "hub_bank_alignment",
         "findings": [
-          {
-            "id": "DAY-PIT-CRJ200-01-IN-arrival",
-            "message": "Arrival for DAY-PIT-CRJ200-01-IN falls outside bank DAY-B8",
-            "evidence": {
-              "assignment": {
-                "legId": "DAY-PIT-CRJ200-01-IN",
-                "operation": "arrival",
-                "bankId": "DAY-B8"
-              },
-              "minute": 1172,
-              "bankWindow": [
-                1175,
-                1235
-              ]
-            }
-          },
           {
             "id": "V114-R169-SYR-FWA-departure",
             "message": "Departure for V114-R169-SYR-FWA falls outside bank SYR-B4",
@@ -591,6 +547,15 @@
               "approvedBy": "user",
               "expiresAfterSchedule": 7
             }
+          },
+          {
+            "id": "V140-R110-LATE-2-2-arrival-assignment-count",
+            "message": "V140-R110-LATE-2-2 arrival has 0 bank assignments; exactly one is required",
+            "evidence": {
+              "legId": "V140-R110-LATE-2-2",
+              "operation": "arrival",
+              "assignments": 0
+            }
           }
         ]
       }
@@ -623,8 +588,8 @@
           "legId": "DAY-PIT-CRJ200-01-IN",
           "expectedDepartureMinute": 1125,
           "expectedArrivalMinute": 1182,
-          "departureMinute": 1115,
-          "arrivalMinute": 1172
+          "departureMinute": 1119,
+          "arrivalMinute": 1176
         }
       ],
       "insertLegs": [
@@ -633,16 +598,16 @@
           "route": 110,
           "origin": "DAY",
           "destination": "SYR",
-          "departureMinute": 1212,
-          "arrivalMinute": 1305
+          "departureMinute": 1216,
+          "arrivalMinute": 1309
         },
         {
           "id": "V140-R110-LATE-2-2",
           "route": 110,
           "origin": "SYR",
           "destination": "DAY",
-          "departureMinute": 1345,
-          "arrivalMinute": 1438
+          "departureMinute": 1349,
+          "arrivalMinute": 1442
         }
       ],
       "bankAssignmentsToAdd": [
