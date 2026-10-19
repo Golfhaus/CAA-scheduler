@@ -67,6 +67,10 @@
         {
           "path": "config/optimizations/schedule_7_v1_4_0_r110.json",
           "sha256": "80ab52bb30f49fc15a1c3c71d5bdd98c4e605b4a511f36a632f27ba1236bbc72"
+        },
+        {
+          "path": "config/optimizations/schedule_7_v1_4_0_syr_m15_m17_r160.json",
+          "sha256": "32d210fd0cd70d8cd04d6b52298519cd5068d2f292893626794cab8259da5c97"
         }
       ],
       "publication": "UNPUBLISHED v1.4.0 working draft; released default stays v1.3.3"
@@ -144,7 +148,7 @@
       "JAX": 15,
       "MCI": 12,
       "PHF": 14,
-      "SYR": 7
+      "SYR": 9
     },
     "hubBankWindowMinutes": 60,
     "overrides": [
@@ -731,6 +735,18 @@
       "hub": "DAY",
       "startMinute": 0,
       "endMinute": 45
+    },
+    {
+      "id": "SYR-M15",
+      "hub": "SYR",
+      "startMinute": 885,
+      "endMinute": 945
+    },
+    {
+      "id": "SYR-M17",
+      "hub": "SYR",
+      "startMinute": 1035,
+      "endMinute": 1095
     }
   ],
   "bankAssignments": [
@@ -852,7 +868,7 @@
     {
       "legId": "ALB-SYR-CRJ200-04-OUT",
       "operation": "arrival",
-      "bankId": "SYR-B6"
+      "bankId": "SYR-M17"
     },
     {
       "legId": "ATW-DAY-CRJ200-01-IN",
@@ -1227,7 +1243,7 @@
     {
       "legId": "BTV-SYR-CRJ200-01-IN",
       "operation": "departure",
-      "bankId": "SYR-B6"
+      "bankId": "SYR-M17"
     },
     {
       "legId": "BTV-SYR-CRJ200-01-OUT",
@@ -1242,7 +1258,7 @@
     {
       "legId": "BTV-SYR-CRJ200-02-OUT",
       "operation": "arrival",
-      "bankId": "SYR-B5"
+      "bankId": "SYR-M15"
     },
     {
       "legId": "BTV-SYR-CRJ200-03-IN",
@@ -2932,7 +2948,7 @@
     {
       "legId": "HPN-SYR-CRJ200-03-OUT",
       "operation": "arrival",
-      "bankId": "SYR-B6"
+      "bankId": "SYR-M17"
     },
     {
       "legId": "HRL-MCI-CRJ700-01-IN",
@@ -4132,7 +4148,7 @@
     {
       "legId": "MHT-SYR-CRJ200-03-OUT",
       "operation": "arrival",
-      "bankId": "SYR-B5"
+      "bankId": "SYR-M15"
     },
     {
       "legId": "MSY-PHF-CRJ700-01-IN",
@@ -4207,7 +4223,7 @@
     {
       "legId": "ORH-SYR-CRJ200-01-IN",
       "operation": "departure",
-      "bankId": "SYR-B6"
+      "bankId": "SYR-M17"
     },
     {
       "legId": "ORH-SYR-CRJ200-01-OUT",
@@ -4567,7 +4583,7 @@
     {
       "legId": "PIT-SYR-CRJ200-01-IN",
       "operation": "departure",
-      "bankId": "SYR-B5"
+      "bankId": "SYR-M15"
     },
     {
       "legId": "PIT-SYR-CRJ200-01-OUT",
@@ -4587,7 +4603,7 @@
     {
       "legId": "PWM-SYR-CRJ200-01-IN",
       "operation": "departure",
-      "bankId": "SYR-B6"
+      "bankId": "SYR-M15"
     },
     {
       "legId": "PWM-SYR-CRJ200-01-OUT",
@@ -5337,12 +5353,12 @@
     {
       "legId": "V115-R144-PWM-SYR",
       "operation": "arrival",
-      "bankId": "SYR-B6"
+      "bankId": "SYR-M17"
     },
     {
       "legId": "V115-R144-SYR-BUF",
       "operation": "departure",
-      "bankId": "SYR-B6"
+      "bankId": "SYR-M17"
     },
     {
       "legId": "V115-R144-BUF-SYR",
@@ -6283,6 +6299,16 @@
       "legId": "V140-R110-FOCUSED-2-2",
       "operation": "arrival",
       "bankId": "DAY-M0"
+    },
+    {
+      "legId": "V140-R160-BANK-TURN-1",
+      "operation": "arrival",
+      "bankId": "PHF-M6"
+    },
+    {
+      "legId": "V140-R160-BANK-TURN-2",
+      "operation": "departure",
+      "bankId": "PHF-M6"
     }
   ],
   "cities": [
@@ -18177,10 +18203,10 @@
       "flight": 1608,
       "origin": "SYR",
       "destination": "PIT",
-      "departure": "16:50",
-      "arrival": "17:56",
-      "departureMinute": 1010,
-      "arrivalMinute": 1076
+      "departure": "15:40",
+      "arrival": "16:46",
+      "departureMinute": 940,
+      "arrivalMinute": 1006
     },
     {
       "id": "GPT-JAX-CRJ200-02-IN",
@@ -19665,10 +19691,10 @@
       "flight": 1701,
       "origin": "SYR",
       "destination": "PWM",
-      "departure": "19:00",
-      "arrival": "20:08",
-      "departureMinute": 1140,
-      "arrivalMinute": 1208
+      "departure": "15:40",
+      "arrival": "16:48",
+      "departureMinute": 940,
+      "arrivalMinute": 1008
     },
     {
       "id": "PWM-SYR-CRJ200-01-OUT",
@@ -20545,10 +20571,10 @@
       "flight": 1756,
       "origin": "ALB",
       "destination": "SYR",
-      "departure": "18:10",
-      "arrival": "18:54",
-      "departureMinute": 1090,
-      "arrivalMinute": 1134
+      "departure": "16:46",
+      "arrival": "17:30",
+      "departureMinute": 1006,
+      "arrivalMinute": 1050
     },
     {
       "id": "JAX-TLH-CRJ200-02-OUT",
@@ -21681,10 +21707,10 @@
       "flight": 1827,
       "origin": "SYR",
       "destination": "BTV",
-      "departure": "19:25",
-      "arrival": "20:17",
-      "departureMinute": 1165,
-      "arrivalMinute": 1217
+      "departure": "18:10",
+      "arrival": "19:02",
+      "departureMinute": 1090,
+      "arrivalMinute": 1142
     },
     {
       "id": "BTV-SYR-CRJ200-01-OUT",
@@ -21713,10 +21739,10 @@
       "flight": 1829,
       "origin": "BTV",
       "destination": "SYR",
-      "departure": "15:15",
-      "arrival": "16:07",
-      "departureMinute": 915,
-      "arrivalMinute": 967
+      "departure": "14:08",
+      "arrival": "15:00",
+      "departureMinute": 848,
+      "arrivalMinute": 900
     },
     {
       "id": "BTV-SYR-CRJ200-03-OUT",
@@ -21889,10 +21915,10 @@
       "flight": 1840,
       "origin": "MHT",
       "destination": "SYR",
-      "departure": "15:10",
-      "arrival": "16:10",
-      "departureMinute": 910,
-      "arrivalMinute": 970
+      "departure": "14:00",
+      "arrival": "15:00",
+      "departureMinute": 840,
+      "arrivalMinute": 900
     },
     {
       "id": "DAY-TRI-CRJ200-02-OUT",
@@ -22145,10 +22171,10 @@
       "flight": 1856,
       "origin": "HPN",
       "destination": "SYR",
-      "departure": "17:51",
-      "arrival": "18:45",
-      "departureMinute": 1071,
-      "arrivalMinute": 1125
+      "departure": "16:36",
+      "arrival": "17:30",
+      "departureMinute": 996,
+      "arrivalMinute": 1050
     },
     {
       "id": "DAY-SBN-CRJ200-01-IN",
@@ -22561,10 +22587,10 @@
       "flight": 1882,
       "origin": "SYR",
       "destination": "ORH",
-      "departure": "19:35",
-      "arrival": "20:33",
-      "departureMinute": 1175,
-      "arrivalMinute": 1233
+      "departure": "18:10",
+      "arrival": "19:08",
+      "departureMinute": 1090,
+      "arrivalMinute": 1148
     },
     {
       "id": "ORH-SYR-CRJ200-01-OUT",
@@ -25233,10 +25259,10 @@
       "flight": 2049,
       "origin": "PWM",
       "destination": "SYR",
-      "departure": "17:37",
-      "arrival": "18:45",
-      "departureMinute": 1057,
-      "arrivalMinute": 1125
+      "departure": "16:22",
+      "arrival": "17:30",
+      "departureMinute": 982,
+      "arrivalMinute": 1050
     },
     {
       "id": "V115-R144-SYR-BUF",
@@ -25249,10 +25275,10 @@
       "flight": 2050,
       "origin": "SYR",
       "destination": "BUF",
-      "departure": "19:25",
-      "arrival": "20:11",
-      "departureMinute": 1165,
-      "arrivalMinute": 1211
+      "departure": "18:10",
+      "arrival": "18:56",
+      "departureMinute": 1090,
+      "arrivalMinute": 1136
     },
     {
       "id": "V115-R144-BUF-SYR",
@@ -28677,6 +28703,38 @@
       "arrival": "00:02",
       "departureMinute": 1349,
       "arrivalMinute": 1442
+    },
+    {
+      "id": "V140-R160-BANK-TURN-1",
+      "route": 160,
+      "line": "AM",
+      "fleet": "CRJ200",
+      "day": 4,
+      "sequenceWithinRoute": 7,
+      "pairing": 824,
+      "flight": 2267,
+      "origin": "PWM",
+      "destination": "PHF",
+      "departure": "17:28",
+      "arrival": "19:09",
+      "departureMinute": 1048,
+      "arrivalMinute": 1149
+    },
+    {
+      "id": "V140-R160-BANK-TURN-2",
+      "route": 160,
+      "line": "AM",
+      "fleet": "CRJ200",
+      "day": 4,
+      "sequenceWithinRoute": 8,
+      "pairing": 823,
+      "flight": 2268,
+      "origin": "PHF",
+      "destination": "PWM",
+      "departure": "19:49",
+      "arrival": "21:30",
+      "departureMinute": 1189,
+      "arrivalMinute": 1290
     }
   ]
 }

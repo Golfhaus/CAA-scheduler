@@ -10,7 +10,7 @@
     "notEvaluated": 1,
     "overridden": 2,
     "effectiveErrorFindings": 0,
-    "effectiveWarningFindings": 160
+    "effectiveWarningFindings": 155
   },
   "checks": [
     {
@@ -114,10 +114,10 @@
       "severity": "warning",
       "hardStop": false,
       "status": "warning",
-      "message": "75 finding(s)",
+      "message": "70 finding(s)",
       "metrics": {
-        "findingCount": 75,
-        "effectiveFindingCount": 75,
+        "findingCount": 70,
+        "effectiveFindingCount": 70,
         "overriddenFindingCount": 0
       },
       "findings": [
@@ -782,18 +782,6 @@
           }
         },
         {
-          "id": "AM-12-1836-1840",
-          "message": "Hold at MHT is 165 minutes and needs deliberate-hold review",
-          "evidence": {
-            "line": "AM",
-            "day": 12,
-            "city": "MHT",
-            "arrivalFlight": 1836,
-            "departureFlight": 1840,
-            "minutes": 165
-          }
-        },
-        {
           "id": "AM-2-1657-1752",
           "message": "Hold at SYR is 187 minutes and needs deliberate-hold review",
           "evidence": {
@@ -878,42 +866,6 @@
           }
         },
         {
-          "id": "AM-4-1825-1829",
-          "message": "Hold at BTV is 183 minutes and needs deliberate-hold review",
-          "evidence": {
-            "line": "AM",
-            "day": 4,
-            "city": "BTV",
-            "arrivalFlight": 1825,
-            "departureFlight": 1829,
-            "minutes": 183
-          }
-        },
-        {
-          "id": "AM-4-1829-1701",
-          "message": "Hold at SYR is 173 minutes and needs deliberate-hold review",
-          "evidence": {
-            "line": "AM",
-            "day": 4,
-            "city": "SYR",
-            "arrivalFlight": 1829,
-            "departureFlight": 1701,
-            "minutes": 173
-          }
-        },
-        {
-          "id": "AE-10-1751-1756",
-          "message": "Hold at ALB is 196 minutes and needs deliberate-hold review",
-          "evidence": {
-            "line": "AE",
-            "day": 10,
-            "city": "ALB",
-            "arrivalFlight": 1751,
-            "departureFlight": 1756,
-            "minutes": 196
-          }
-        },
-        {
           "id": "AI-6-1979-1980",
           "message": "Hold at BHM is 202 minutes and needs deliberate-hold review",
           "evidence": {
@@ -935,18 +887,6 @@
             "arrivalFlight": 1851,
             "departureFlight": 1854,
             "minutes": 172
-          }
-        },
-        {
-          "id": "AC-6-1853-1856",
-          "message": "Hold at HPN is 182 minutes and needs deliberate-hold review",
-          "evidence": {
-            "line": "AC",
-            "day": 6,
-            "city": "HPN",
-            "arrivalFlight": 1853,
-            "departureFlight": 1856,
-            "minutes": 182
           }
         },
         {
@@ -1117,8 +1057,8 @@
       "message": "Point-to-point flying is within the 10% cap",
       "metrics": {
         "flights": 108,
-        "totalFlights": 1257,
-        "share": 0.08591885441527446,
+        "totalFlights": 1259,
+        "share": 0.0857823669579031,
         "findingCount": 0,
         "effectiveFindingCount": 0,
         "overriddenFindingCount": 0
@@ -1267,8 +1207,8 @@
               615,
               768,
               925,
+              1006,
               1089,
-              1090,
               1165
             ],
             "excessiveGaps": [
@@ -1483,15 +1423,15 @@
             "departures": [
               420,
               588,
-              915,
+              848,
               1080,
               1257
             ],
             "excessiveGaps": [
               {
                 "from": 588,
-                "to": 915,
-                "minutes": 327
+                "to": 848,
+                "minutes": 260
               }
             ],
             "serviceWindowMinutes": {
@@ -2137,7 +2077,7 @@
               576,
               741,
               915,
-              1071
+              996
             ],
             "excessiveGaps": [
               {
@@ -2597,7 +2537,7 @@
               415,
               745,
               776,
-              910
+              840
             ],
             "excessiveGaps": [
               {
@@ -2923,8 +2863,9 @@
               570,
               613,
               900,
+              982,
               986,
-              1057
+              1048
             ],
             "excessiveGaps": [
               {

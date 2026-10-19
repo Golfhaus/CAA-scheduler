@@ -4,7 +4,7 @@
   "sourceKind": "canonical_reconstruction",
   "demandDataVersion": "bts-db1c-6mo-jul2025-apr2026-v7",
   "summary": {
-    "legCount": 1257,
+    "legCount": 1259,
     "marketRows": 705,
     "stationCount": 105,
     "fleetTypes": 4
@@ -37,10 +37,10 @@
     "CRJ200": {
       "aircraftCount": 80,
       "aircraftDaysUsed": 76,
-      "legCount": 550,
-      "blockMinutes": 41122,
-      "minimumTurnMinutes": 18960,
-      "requiredAircraftMinutes": 60082
+      "legCount": 552,
+      "blockMinutes": 41324,
+      "minimumTurnMinutes": 19040,
+      "requiredAircraftMinutes": 60364
     }
   },
   "markets": [
@@ -1374,7 +1374,7 @@
       "fleet": "CRJ200",
       "origin": "PHF",
       "destination": "PWM",
-      "legs": 1
+      "legs": 2
     },
     {
       "fleet": "CRJ200",
@@ -1470,7 +1470,7 @@
       "fleet": "CRJ200",
       "origin": "PWM",
       "destination": "PHF",
-      "legs": 1
+      "legs": 2
     },
     {
       "fleet": "CRJ200",
@@ -4352,13 +4352,13 @@
     "OMA": 7,
     "ORH": 3,
     "PGD": 12,
-    "PHF": 125,
+    "PHF": 126,
     "PIA": 2,
     "PIE": 20,
     "PIT": 10,
     "PNS": 5,
     "PVD": 10,
-    "PWM": 7,
+    "PWM": 8,
     "RDU": 13,
     "RFD": 33,
     "ROA": 3,
@@ -5077,7 +5077,7 @@
     "JAX": 15,
     "MCI": 12,
     "PHF": 14,
-    "SYR": 7
+    "SYR": 9
   },
   "limitations": [
     "Final scheduled frequencies are reconstructed from canonical legs; they are not yet a newly allocated output from the pinned demand data.",
