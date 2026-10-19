@@ -1582,22 +1582,53 @@ function renderSetup() {
   renderSetupPreflight();
 }
 
+const AIRPORT_TYPE_LABELS = {
+  hub: "Hubs",
+  focus_city: "Focus Cities",
+  large_destination: "Large Destinations",
+  destination: "Destinations",
+};
+const AIRPORT_TYPE_ORDER = Object.keys(AIRPORT_TYPE_LABELS);
+
 function renderSetupAirportRows() {
-  const term = ($("#setup-airport-filter").value || "").trim().toUpperCase();
+  const config = state.buildConfig;
   const names = new Map((state.canonical.cities || []).map((city) => [String(city.code).toUpperCase(), city.displayName || city.name || ""]));
-  $("#setup-airport-rows").innerHTML = state.buildConfig.airportFacilities
+  const overridesFor = (role) => config.airportFacilities.filter((entry) => entry.role === role && (entry.gates !== null || entry.stands !== null));
+  const summary = AIRPORT_TYPE_ORDER.map((role) => {
+    const defaults = config.airportTypeDefaults[role];
+    const adjusted = overridesFor(role);
+    const namesText = adjusted.map((entry) => entry.airport).join(", ");
+    const count = config.airportFacilities.filter((entry) => entry.role === role).length;
+    return `<div class="setup-type-row" data-setup-type-row="${role}">
+      <div class="setup-type-label"><strong>${AIRPORT_TYPE_LABELS[role]}</strong><span>${count} airports · ${adjusted.length} with adjustments</span></div>
+      <label><span>Default gates</span><input type="number" min="0" step="1" data-setup-default-gates value="${defaults.gates ?? ""}"></label>
+      <label><span>Default stands</span><input type="number" min="0" step="1" data-setup-default-stands value="${defaults.stands ?? ""}"></label>
+      <div class="setup-adjusted-codes" title="${escapeHtml(namesText)}">${adjusted.length ? `Adjusted: ${escapeHtml(namesText)}` : "No airport adjustments"}</div>
+      <button class="text-button setup-type-drill" type="button" data-drill-role="${role}">View airports</button>
+    </div>`;
+  }).join("");
+  $("#setup-airport-types").innerHTML = summary;
+  const allOverrides = config.airportFacilities.filter((entry) => entry.gates !== null || entry.stands !== null);
+  $("#setup-airport-override-summary").textContent = `${allOverrides.length} airports with adjustments`;
+
+  const term = ($("#setup-airport-filter").value || "").trim().toUpperCase();
+  const show = $("#setup-airport-show").value;
+  $("#setup-airport-rows").innerHTML = config.airportFacilities
     .map((entry, index) => ({ ...entry, index, name: names.get(entry.airport) || "" }))
-    .filter((entry) => !term || `${entry.airport} ${entry.name}`.toUpperCase().includes(term))
-    .map((entry) => `<div class="setup-row airport-setup-row" data-setup-airport-row="${entry.index}">
-      <div class="setup-airport-label"><strong>${escapeHtml(entry.airport)}</strong><span>${escapeHtml(entry.name)}</span></div>
-      <label><span>Airport type</span><select data-setup-airport-role>
-        <option value="hub" ${entry.role === "hub" ? "selected" : ""}>Hub</option>
-        <option value="focus_city" ${entry.role === "focus_city" ? "selected" : ""}>Focus City</option>
-        <option value="large_destination" ${entry.role === "large_destination" ? "selected" : ""}>Large Destination</option>
-        <option value="destination" ${entry.role === "destination" ? "selected" : ""}>Destination</option>
-      </select></label>
-      <label><span>Gates</span><input data-setup-airport-gates type="number" min="0" step="1" placeholder="Unset" value="${entry.gates ?? ""}" aria-label="${escapeHtml(entry.airport)} gate count"></label>
-    </div>`).join("") || '<p class="setup-empty">No airports match this filter.</p>';
+    .filter((entry) => (!term || `${entry.airport} ${entry.name}`.toUpperCase().includes(term))
+      && (show === "all" || entry.gates !== null || entry.stands !== null))
+    .map((entry) => {
+      const defaults = config.airportTypeDefaults[entry.role] || {};
+      return `<div class="setup-row airport-setup-row" data-setup-airport-row="${entry.index}">
+        <div class="setup-airport-label"><strong>${escapeHtml(entry.airport)}</strong><span>${escapeHtml(entry.name)}</span></div>
+        <label><span>Airport type</span><select data-setup-airport-role>
+          ${AIRPORT_TYPE_ORDER.map((role) => `<option value="${role}" ${entry.role === role ? "selected" : ""}>${AIRPORT_TYPE_LABELS[role]}</option>`).join("")}
+        </select></label>
+        <label><span>Gate override</span><input data-setup-airport-gates type="number" min="0" step="1" placeholder="${defaults.gates ?? ""} default" value="${entry.gates ?? ""}" aria-label="${escapeHtml(entry.airport)} gate override"></label>
+        <label><span>Stand override</span><input data-setup-airport-stands type="number" min="0" step="1" placeholder="${defaults.stands ?? ""} default" value="${entry.stands ?? ""}" aria-label="${escapeHtml(entry.airport)} stand override"></label>
+        <button class="row-remove" type="button" data-reset-airport="${entry.index}" ${entry.gates === null && entry.stands === null ? "disabled" : ""}>Reset</button>
+      </div>`;
+    }).join("") || '<p class="setup-empty">No matching airports. Choose “All airports” to add adjustments.</p>';
 }
 
 function readSetupForm() {
@@ -1606,12 +1637,21 @@ function readSetupForm() {
     const fleet = row.querySelector("[data-setup-fleet-name]").value.trim().toUpperCase();
     if (fleet) fleetCounts[fleet] = Number(row.querySelector("[data-setup-fleet-count]").value);
   });
+  const airportTypeDefaults = Object.fromEntries(AIRPORT_TYPE_ORDER.map((role) => {
+    const row = document.querySelector(`[data-setup-type-row="${role}"]`);
+    return [role, {
+      gates: row.querySelector("[data-setup-default-gates]").value.trim(),
+      stands: row.querySelector("[data-setup-default-stands]").value.trim(),
+    }];
+  }));
   const airportFacilities = state.buildConfig.airportFacilities.map((entry) => ({ ...entry }));
   $("[data-setup-airport-row]").forEach((row) => {
     const entry = airportFacilities[Number(row.dataset.setupAirportRow)];
     entry.role = row.querySelector("[data-setup-airport-role]").value;
     const gates = row.querySelector("[data-setup-airport-gates]").value.trim();
     entry.gates = gates === "" ? null : Number(gates);
+    const stands = row.querySelector("[data-setup-airport-stands]").value.trim();
+    entry.stands = stands === "" ? null : Number(stands);
   });
   const kind = $("#setup-start-kind").value;
   const value = {
@@ -1628,6 +1668,7 @@ function readSetupForm() {
       scheduleId: kind === "blank" ? null : $("#setup-baseline").value,
     },
     fleetCounts,
+    airportTypeDefaults,
     airportFacilities,
     airportOptions: $("#setup-airport-options").value,
     connectionWindowMinutes: {
@@ -1667,6 +1708,7 @@ function updateSetupDraft(message = "Draft saved") {
   readSetupForm();
   $("#setup-baseline").disabled = state.buildConfig.startingPoint.kind === "blank";
   saveSetupDraft(message);
+  renderSetupAirportRows();
   renderSetupPreflight();
 }
 
@@ -1801,6 +1843,30 @@ function bindEvents() {
     },
   });
   document.addEventListener("click", (event) => {
+    const drill = event.target.closest("[data-drill-role]");
+    if (drill) {
+      const role = drill.dataset.drillRole;
+      $("#setup-airport-details").hidden = false;
+      $("#setup-airport-toggle").setAttribute("aria-expanded", "true");
+      $("#setup-airport-show").value = "all";
+      $("#setup-airport-filter").value = "";
+      renderSetupAirportRows();
+      const index = state.buildConfig.airportFacilities.findIndex((entry) => entry.role === role);
+      if (index >= 0) document.querySelector(`[data-setup-airport-row="${index}"]`)?.scrollIntoView({ block: "nearest", behavior: "smooth" });
+      return;
+    }
+    const resetAirport = event.target.closest("[data-reset-airport]");
+    if (resetAirport) {
+      readSetupForm();
+      const entry = state.buildConfig.airportFacilities[Number(resetAirport.dataset.resetAirport)];
+      entry.gates = null;
+      entry.stands = null;
+      state.buildPreflight = validateBuildConfig(state.buildConfig, state.canonical);
+      saveSetupDraft("Airport adjustments reset");
+      renderSetupAirportRows();
+      renderSetupPreflight();
+      return;
+    }
     const removeFleet = event.target.closest("[data-remove-fleet]");
     if (removeFleet) {
       readSetupForm();
@@ -1920,6 +1986,12 @@ function bindEvents() {
   $("#setup-form").addEventListener("change", () => updateSetupDraft());
   $("#setup-add-fleet").addEventListener("click", addFleetType);
   $("#setup-airport-filter").addEventListener("input", renderSetupAirportRows);
+  $("#setup-airport-show").addEventListener("change", renderSetupAirportRows);
+  $("#setup-airport-toggle").addEventListener("click", () => {
+    const details = $("#setup-airport-details");
+    details.hidden = !details.hidden;
+    $("#setup-airport-toggle").setAttribute("aria-expanded", String(!details.hidden));
+  });
   $("#setup-add-network").addEventListener("click", addNetworkChange);
   $("#setup-save").addEventListener("click", () => updateSetupDraft("Saved in this browser"));
   $("#setup-export").addEventListener("click", exportSetupConfig);
