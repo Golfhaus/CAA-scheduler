@@ -1633,6 +1633,28 @@ function renderSetupAirportRows() {
     }).join("") || '<p class="setup-empty">No matching airports. Choose “All airports” to add adjustments.</p>';
 }
 
+function refreshSetupAirportSummary() {
+  const config = state.buildConfig;
+  let adjustedTotal = 0;
+  for (const role of AIRPORT_TYPE_ORDER) {
+    const row = document.querySelector(`[data-setup-type-row="${role}"]`);
+    if (!row) continue;
+    const members = config.airportFacilities.filter((entry) => entry.role === role);
+    const adjusted = members.filter((entry) => entry.gates !== null || entry.stands !== null);
+    adjustedTotal += adjusted.length;
+    row.querySelector(".setup-type-label span").textContent = `${members.length} airports · ${adjusted.length} with adjustments`;
+    row.querySelector(".setup-adjusted-codes").textContent = adjusted.length
+      ? `Adjusted: ${adjusted.map((entry) => entry.airport).join(", ")}`
+      : "No airport adjustments";
+  }
+  $("#setup-airport-override-summary").textContent = `${adjustedTotal} airports with adjustments`;
+  document.querySelectorAll("[data-setup-airport-row]").forEach((row) => {
+    const airport = config.airportFacilities[Number(row.dataset.setupAirportRow)];
+    const reset = row.querySelector("[data-reset-airport]");
+    if (reset && airport) reset.disabled = airport.gates === null && airport.stands === null;
+  });
+}
+
 function readSetupForm() {
   const fleetCounts = {};
   $("[data-setup-fleet-row]").forEach((row) => {
@@ -1710,6 +1732,7 @@ function updateSetupDraft(message = "Draft saved") {
   readSetupForm();
   $("#setup-baseline").disabled = state.buildConfig.startingPoint.kind === "blank";
   saveSetupDraft(message);
+  refreshSetupAirportSummary();
   renderSetupPreflight();
 }
 
