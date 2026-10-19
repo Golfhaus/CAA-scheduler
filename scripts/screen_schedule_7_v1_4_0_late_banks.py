@@ -11,14 +11,14 @@ from caa_scheduler.gate_export import export_gate_schedule
 b=json.loads((ROOT/"data/schedules/schedule_7_v1_3_3/canonical_schedule.json").read_text())
 byflight={l["flight"]:l for l in b["legs"]}
 cases=[
- {"name":"106 BTV-SYR-BTV late, earlier terminator","route":106,"retime":[(1827,1165,1217)],
+ {"name":"106 BTV-SYR-BTV late, earlier terminator","route":106,"retime":[(1856,1071,1125),(1827,1165,1217)],
   "extra":[("BTV","SYR",1257,1309),("SYR","BTV",1349,1401)],
   "banks":[(1,"arrival","SYR-B7"),(2,"departure","SYR-B7")]},
  {"name":"110 DAY-BHM-DAY late focus turn","route":110,"retime":[],
   "extra":[("DAY","BHM",1222,1253),("BHM","DAY",1293,1444)],
   "banks":[(1,"departure","DAY-B8")]},
- {"name":"110 DAY-SYR-DAY late hub turn","route":110,"retime":[(1794,1115,1172)],
-  "extra":[("DAY","SYR",1212,1305),("SYR","DAY",1345,1438)],
+ {"name":"110 DAY-SYR-DAY late hub turn","route":110,"retime":[(1794,1119,1176)],
+  "extra":[("DAY","SYR",1216,1309),("SYR","DAY",1349,1442)],
   "banks":[(1,"departure","DAY-B8"),(1,"arrival","SYR-B7"),(2,"departure","SYR-B7")]},
 ]
 results=[]
