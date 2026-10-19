@@ -16,16 +16,20 @@ banks=[
  {"id":"SYR-M15","hub":"SYR","startMinute":885,"endMinute":945},
  {"id":"SYR-M17","hub":"SYR","startMinute":1035,"endMinute":1095}]
 plans=[
- ("selective_six",False,False),
- ("selective_seven_HVN",True,False),
- ("selective_six_plus_R160_extension",False,True)
+ ("selective_six",False,False,[]),
+ ("selective_seven_HVN",True,False,[]),
+ ("selective_six_plus_R160_extension",False,True,[]),
+ ("positive_four",False,False,[(124,"M15"),(167,"M15")]),
+ ("positive_four_plus_R160",False,True,[(124,"M15"),(167,"M15")]),
+ ("positive_five_plus_CAK",False,False,[(124,"M15")]),
+ ("positive_five_CAK_plus_R160",False,True,[(124,"M15")])
 ]
 results=[]
-for name,addHVN,addR160 in plans:
+for name,addHVN,addR160,omissions in plans:
  record={"name":name,"scope":"READ-ONLY selective Syracuse proposal"}
  try:
-  selected=[x for x in pairs if x.get("pass") and ((x["route"],x["bank"]) in core or (addHVN and x["route"]==104 and x["bank"]=="M15"))]
-  assert len(selected)==6+int(addHVN)
+  selected=[x for x in pairs if x.get("pass") and (((x["route"],x["bank"]) in core and (x["route"],x["bank"]) not in omissions) or (addHVN and x["route"]==104 and x["bank"]=="M15"))]
+  assert len(selected)==6-len(omissions)+int(addHVN)
   ov={"schemaVersion":"1.0.0","id":"v140-syr-"+name,
   "baseSchedule":{"scheduleId":base["schedule"]["id"]},"schedule":base["schedule"],
   "hubBanksToAdd":banks,"hubBankCountOverrides":{"SYR":9},
