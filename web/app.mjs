@@ -326,6 +326,25 @@ export function scheduleMetrics(canonical) {
   };
 }
 
+export function lineDurationMetricCard(canonical) {
+  const lineLengths = new Map();
+  canonical.legs.forEach(({ line, day }) => {
+    lineLengths.set(line, Math.max(lineLengths.get(line) || 0, Number(day)));
+  });
+  const counts = new Map();
+  lineLengths.forEach((days) => counts.set(days, (counts.get(days) || 0) + 1));
+  const breakdown = [...counts.entries()]
+    .sort(([a], [b]) => b - a)
+    .map(([days, count]) => {
+      const label = `${count} ${days}-day`;
+      return days < 9 || days > 12
+        ? `<span class="line-duration-outside-range">${label}</span>`
+        : label;
+    })
+    .join(", ");
+  return `<article class="metric-card"><span>Lines</span><strong>${lineLengths.size}</strong><small>${breakdown}</small></article>`;
+}
+
 export function buildDepartureHubMatrix(timetable) {
   const cities = [...timetable.cities].sort((a, b) => a.code.localeCompare(b.code));
   const destinations = cities
@@ -821,7 +840,7 @@ function renderOverview() {
     metricCard("Flights", metrics.flights.toLocaleString(), "Published daily legs"),
     metricCard("Cities", metrics.cities, "Active network stations"),
     metricCard("Routes", metrics.routes, "Canonical aircraft routes"),
-    metricCard("Lines", metrics.lines, "Ten-day aircraft lines"),
+    lineDurationMetricCard(canonical),
     metricCard(
       "Structural checks",
       `${structural.summary.passed}/${structural.summary.checks}`,
