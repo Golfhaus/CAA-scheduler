@@ -207,7 +207,8 @@
         "required": [
           "airport",
           "role",
-          "gates"
+          "gates",
+          "stands"
         ],
         "properties": {
           "airport": {
@@ -228,12 +229,103 @@
               "null"
             ],
             "minimum": 0
+          },
+          "stands": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "minimum": 0
           }
         }
       }
     },
     "airportOptions": {
       "type": "string"
+    },
+    "airportTypeDefaults": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "hub",
+        "focus_city",
+        "large_destination",
+        "destination"
+      ],
+      "properties": {
+        "hub": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "gates",
+            "stands"
+          ],
+          "properties": {
+            "gates": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "stands": {
+              "type": "integer",
+              "minimum": 0
+            }
+          }
+        },
+        "focus_city": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "gates",
+            "stands"
+          ],
+          "properties": {
+            "gates": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "stands": {
+              "type": "integer",
+              "minimum": 0
+            }
+          }
+        },
+        "large_destination": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "gates",
+            "stands"
+          ],
+          "properties": {
+            "gates": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "stands": {
+              "type": "integer",
+              "minimum": 0
+            }
+          }
+        },
+        "destination": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "gates",
+            "stands"
+          ],
+          "properties": {
+            "gates": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "stands": {
+              "type": "integer",
+              "minimum": 0
+            }
+          }
+        }
+      }
     }
   },
   "$defs": {
