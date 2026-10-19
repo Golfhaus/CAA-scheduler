@@ -1,0 +1,1774 @@
+[
+  {
+    "route": 103,
+    "station": "ISP",
+    "flight": 1894,
+    "bank": "SYR-M15",
+    "targetArrivalMinute": 905,
+    "newDepartureMinute": 847,
+    "holdReducedMinutes": 63,
+    "nextFlight": 1512,
+    "nextDestination": "PHF",
+    "scope": "single flight, read only",
+    "structure": "pass",
+    "overnight": "pass",
+    "planning": "pass",
+    "gate": "pass",
+    "operating": {
+      "checks": 25,
+      "passed": 17,
+      "failed": 0,
+      "warnings": 5,
+      "notEvaluated": 1,
+      "overridden": 2,
+      "effectiveErrorFindings": 0,
+      "effectiveWarningFindings": 159
+    },
+    "failed": [],
+    "pass": true,
+    "overlay": {
+      "schemaVersion": "1.0.0",
+      "id": "v140-syr-hold-103-1894-M15",
+      "baseSchedule": {
+        "scheduleId": "schedule_7_v1_4_0_draft"
+      },
+      "schedule": {
+        "id": "schedule_7_v1_4_0_draft",
+        "number": 7,
+        "version": "1.4.0-draft",
+        "label": "Schedule 7, Version 1.4.0 draft",
+        "status": "draft",
+        "fleetCounts": {
+          "MAX9": 35,
+          "CRJ900": 45,
+          "CRJ700": 65,
+          "CRJ200": 80
+        },
+        "connectionWindowMinutes": {
+          "minimum": 30,
+          "maximum": 240
+        }
+      },
+      "hubBanksToAdd": [
+        {
+          "id": "SYR-M15",
+          "hub": "SYR",
+          "startMinute": 885,
+          "endMinute": 945
+        }
+      ],
+      "hubBankCountOverrides": {
+        "SYR": 8
+      },
+      "retimeLegs": [
+        {
+          "legId": "ISP-SYR-CRJ200-03-OUT",
+          "expectedDepartureMinute": 910,
+          "expectedArrivalMinute": 968,
+          "departureMinute": 847,
+          "arrivalMinute": 905
+        }
+      ],
+      "bankAssignmentReplacements": [
+        {
+          "legId": "ISP-SYR-CRJ200-03-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-M15"
+        }
+      ]
+    }
+  },
+  {
+    "route": 104,
+    "station": "HVN",
+    "flight": 1880,
+    "bank": "SYR-M15",
+    "targetArrivalMinute": 905,
+    "newDepartureMinute": 849,
+    "holdReducedMinutes": 66,
+    "nextFlight": 1688,
+    "nextDestination": "BUF",
+    "scope": "single flight, read only",
+    "structure": "pass",
+    "overnight": "pass",
+    "planning": "pass",
+    "gate": "pass",
+    "operating": {
+      "checks": 25,
+      "passed": 17,
+      "failed": 0,
+      "warnings": 5,
+      "notEvaluated": 1,
+      "overridden": 2,
+      "effectiveErrorFindings": 0,
+      "effectiveWarningFindings": 160
+    },
+    "failed": [],
+    "pass": true,
+    "overlay": {
+      "schemaVersion": "1.0.0",
+      "id": "v140-syr-hold-104-1880-M15",
+      "baseSchedule": {
+        "scheduleId": "schedule_7_v1_4_0_draft"
+      },
+      "schedule": {
+        "id": "schedule_7_v1_4_0_draft",
+        "number": 7,
+        "version": "1.4.0-draft",
+        "label": "Schedule 7, Version 1.4.0 draft",
+        "status": "draft",
+        "fleetCounts": {
+          "MAX9": 35,
+          "CRJ900": 45,
+          "CRJ700": 65,
+          "CRJ200": 80
+        },
+        "connectionWindowMinutes": {
+          "minimum": 30,
+          "maximum": 240
+        }
+      },
+      "hubBanksToAdd": [
+        {
+          "id": "SYR-M15",
+          "hub": "SYR",
+          "startMinute": 885,
+          "endMinute": 945
+        }
+      ],
+      "hubBankCountOverrides": {
+        "SYR": 8
+      },
+      "retimeLegs": [
+        {
+          "legId": "HVN-SYR-CRJ200-03-OUT",
+          "expectedDepartureMinute": 915,
+          "expectedArrivalMinute": 971,
+          "departureMinute": 849,
+          "arrivalMinute": 905
+        }
+      ],
+      "bankAssignmentReplacements": [
+        {
+          "legId": "HVN-SYR-CRJ200-03-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-M15"
+        }
+      ]
+    }
+  },
+  {
+    "route": 105,
+    "station": "MHT",
+    "flight": 1839,
+    "bank": "SYR-M12",
+    "targetArrivalMinute": 725,
+    "newDepartureMinute": 665,
+    "holdReducedMinutes": 80,
+    "nextFlight": 1773,
+    "nextDestination": "BGR",
+    "scope": "single flight, read only",
+    "structure": "pass",
+    "overnight": "pass",
+    "planning": "pass",
+    "gate": "pass",
+    "operating": {
+      "checks": 25,
+      "passed": 17,
+      "failed": 0,
+      "warnings": 5,
+      "notEvaluated": 1,
+      "overridden": 2,
+      "effectiveErrorFindings": 0,
+      "effectiveWarningFindings": 159
+    },
+    "failed": [],
+    "pass": true,
+    "overlay": {
+      "schemaVersion": "1.0.0",
+      "id": "v140-syr-hold-105-1839-M12",
+      "baseSchedule": {
+        "scheduleId": "schedule_7_v1_4_0_draft"
+      },
+      "schedule": {
+        "id": "schedule_7_v1_4_0_draft",
+        "number": 7,
+        "version": "1.4.0-draft",
+        "label": "Schedule 7, Version 1.4.0 draft",
+        "status": "draft",
+        "fleetCounts": {
+          "MAX9": 35,
+          "CRJ900": 45,
+          "CRJ700": 65,
+          "CRJ200": 80
+        },
+        "connectionWindowMinutes": {
+          "minimum": 30,
+          "maximum": 240
+        }
+      },
+      "hubBanksToAdd": [
+        {
+          "id": "SYR-M12",
+          "hub": "SYR",
+          "startMinute": 715,
+          "endMinute": 775
+        }
+      ],
+      "hubBankCountOverrides": {
+        "SYR": 8
+      },
+      "retimeLegs": [
+        {
+          "legId": "MHT-SYR-CRJ200-02-OUT",
+          "expectedDepartureMinute": 745,
+          "expectedArrivalMinute": 805,
+          "departureMinute": 665,
+          "arrivalMinute": 725
+        }
+      ],
+      "bankAssignmentReplacements": [
+        {
+          "legId": "MHT-SYR-CRJ200-02-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-M12"
+        }
+      ]
+    }
+  },
+  {
+    "route": 105,
+    "station": "BGR",
+    "flight": 1776,
+    "bank": "SYR-M17",
+    "targetArrivalMinute": 1055,
+    "newDepartureMinute": 975,
+    "holdReducedMinutes": 80,
+    "nextFlight": 1774,
+    "nextDestination": "BGR",
+    "scope": "single flight, read only",
+    "structure": "pass",
+    "overnight": "pass",
+    "planning": "pass",
+    "gate": "pass",
+    "operating": {
+      "checks": 25,
+      "passed": 17,
+      "failed": 0,
+      "warnings": 5,
+      "notEvaluated": 1,
+      "overridden": 2,
+      "effectiveErrorFindings": 0,
+      "effectiveWarningFindings": 160
+    },
+    "failed": [],
+    "pass": true,
+    "overlay": {
+      "schemaVersion": "1.0.0",
+      "id": "v140-syr-hold-105-1776-M17",
+      "baseSchedule": {
+        "scheduleId": "schedule_7_v1_4_0_draft"
+      },
+      "schedule": {
+        "id": "schedule_7_v1_4_0_draft",
+        "number": 7,
+        "version": "1.4.0-draft",
+        "label": "Schedule 7, Version 1.4.0 draft",
+        "status": "draft",
+        "fleetCounts": {
+          "MAX9": 35,
+          "CRJ900": 45,
+          "CRJ700": 65,
+          "CRJ200": 80
+        },
+        "connectionWindowMinutes": {
+          "minimum": 30,
+          "maximum": 240
+        }
+      },
+      "hubBanksToAdd": [
+        {
+          "id": "SYR-M17",
+          "hub": "SYR",
+          "startMinute": 1035,
+          "endMinute": 1095
+        }
+      ],
+      "hubBankCountOverrides": {
+        "SYR": 8
+      },
+      "retimeLegs": [
+        {
+          "legId": "BGR-SYR-CRJ200-02-OUT",
+          "expectedDepartureMinute": 1055,
+          "expectedArrivalMinute": 1135,
+          "departureMinute": 975,
+          "arrivalMinute": 1055
+        }
+      ],
+      "bankAssignmentReplacements": [
+        {
+          "legId": "BGR-SYR-CRJ200-02-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-M17"
+        }
+      ]
+    }
+  },
+  {
+    "route": 106,
+    "station": "HPN",
+    "flight": 1854,
+    "bank": "SYR-M12",
+    "targetArrivalMinute": 725,
+    "newDepartureMinute": 671,
+    "holdReducedMinutes": 70,
+    "nextFlight": 1853,
+    "nextDestination": "HPN",
+    "scope": "single flight, read only",
+    "structure": "pass",
+    "overnight": "pass",
+    "planning": "pass",
+    "gate": "pass",
+    "operating": {
+      "checks": 25,
+      "passed": 17,
+      "failed": 0,
+      "warnings": 5,
+      "notEvaluated": 1,
+      "overridden": 2,
+      "effectiveErrorFindings": 0,
+      "effectiveWarningFindings": 159
+    },
+    "failed": [],
+    "pass": true,
+    "overlay": {
+      "schemaVersion": "1.0.0",
+      "id": "v140-syr-hold-106-1854-M12",
+      "baseSchedule": {
+        "scheduleId": "schedule_7_v1_4_0_draft"
+      },
+      "schedule": {
+        "id": "schedule_7_v1_4_0_draft",
+        "number": 7,
+        "version": "1.4.0-draft",
+        "label": "Schedule 7, Version 1.4.0 draft",
+        "status": "draft",
+        "fleetCounts": {
+          "MAX9": 35,
+          "CRJ900": 45,
+          "CRJ700": 65,
+          "CRJ200": 80
+        },
+        "connectionWindowMinutes": {
+          "minimum": 30,
+          "maximum": 240
+        }
+      },
+      "hubBanksToAdd": [
+        {
+          "id": "SYR-M12",
+          "hub": "SYR",
+          "startMinute": 715,
+          "endMinute": 775
+        }
+      ],
+      "hubBankCountOverrides": {
+        "SYR": 8
+      },
+      "retimeLegs": [
+        {
+          "legId": "HPN-SYR-CRJ200-01-OUT",
+          "expectedDepartureMinute": 741,
+          "expectedArrivalMinute": 795,
+          "departureMinute": 671,
+          "arrivalMinute": 725
+        }
+      ],
+      "bankAssignmentReplacements": [
+        {
+          "legId": "HPN-SYR-CRJ200-01-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-M12"
+        }
+      ]
+    }
+  },
+  {
+    "route": 106,
+    "station": "HPN",
+    "flight": 1856,
+    "bank": "SYR-M17",
+    "targetArrivalMinute": 1055,
+    "newDepartureMinute": 1001,
+    "holdReducedMinutes": 70,
+    "nextFlight": 1827,
+    "nextDestination": "BTV",
+    "scope": "single flight, read only",
+    "structure": "pass",
+    "overnight": "pass",
+    "planning": "pass",
+    "gate": "pass",
+    "operating": {
+      "checks": 25,
+      "passed": 17,
+      "failed": 0,
+      "warnings": 5,
+      "notEvaluated": 1,
+      "overridden": 2,
+      "effectiveErrorFindings": 0,
+      "effectiveWarningFindings": 159
+    },
+    "failed": [],
+    "pass": true,
+    "overlay": {
+      "schemaVersion": "1.0.0",
+      "id": "v140-syr-hold-106-1856-M17",
+      "baseSchedule": {
+        "scheduleId": "schedule_7_v1_4_0_draft"
+      },
+      "schedule": {
+        "id": "schedule_7_v1_4_0_draft",
+        "number": 7,
+        "version": "1.4.0-draft",
+        "label": "Schedule 7, Version 1.4.0 draft",
+        "status": "draft",
+        "fleetCounts": {
+          "MAX9": 35,
+          "CRJ900": 45,
+          "CRJ700": 65,
+          "CRJ200": 80
+        },
+        "connectionWindowMinutes": {
+          "minimum": 30,
+          "maximum": 240
+        }
+      },
+      "hubBanksToAdd": [
+        {
+          "id": "SYR-M17",
+          "hub": "SYR",
+          "startMinute": 1035,
+          "endMinute": 1095
+        }
+      ],
+      "hubBankCountOverrides": {
+        "SYR": 8
+      },
+      "retimeLegs": [
+        {
+          "legId": "HPN-SYR-CRJ200-03-OUT",
+          "expectedDepartureMinute": 1071,
+          "expectedArrivalMinute": 1125,
+          "departureMinute": 1001,
+          "arrivalMinute": 1055
+        }
+      ],
+      "bankAssignmentReplacements": [
+        {
+          "legId": "HPN-SYR-CRJ200-03-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-M17"
+        }
+      ]
+    }
+  },
+  {
+    "route": 107,
+    "station": "ISP",
+    "flight": 1893,
+    "bank": "SYR-M12",
+    "targetArrivalMinute": 725,
+    "newDepartureMinute": 667,
+    "holdReducedMinutes": 78,
+    "nextFlight": 1792,
+    "nextDestination": "BDL",
+    "scope": "single flight, read only",
+    "structure": "pass",
+    "overnight": "pass",
+    "planning": "pass",
+    "gate": "pass",
+    "operating": {
+      "checks": 25,
+      "passed": 17,
+      "failed": 0,
+      "warnings": 5,
+      "notEvaluated": 1,
+      "overridden": 2,
+      "effectiveErrorFindings": 0,
+      "effectiveWarningFindings": 159
+    },
+    "failed": [],
+    "pass": true,
+    "overlay": {
+      "schemaVersion": "1.0.0",
+      "id": "v140-syr-hold-107-1893-M12",
+      "baseSchedule": {
+        "scheduleId": "schedule_7_v1_4_0_draft"
+      },
+      "schedule": {
+        "id": "schedule_7_v1_4_0_draft",
+        "number": 7,
+        "version": "1.4.0-draft",
+        "label": "Schedule 7, Version 1.4.0 draft",
+        "status": "draft",
+        "fleetCounts": {
+          "MAX9": 35,
+          "CRJ900": 45,
+          "CRJ700": 65,
+          "CRJ200": 80
+        },
+        "connectionWindowMinutes": {
+          "minimum": 30,
+          "maximum": 240
+        }
+      },
+      "hubBanksToAdd": [
+        {
+          "id": "SYR-M12",
+          "hub": "SYR",
+          "startMinute": 715,
+          "endMinute": 775
+        }
+      ],
+      "hubBankCountOverrides": {
+        "SYR": 8
+      },
+      "retimeLegs": [
+        {
+          "legId": "ISP-SYR-CRJ200-02-OUT",
+          "expectedDepartureMinute": 745,
+          "expectedArrivalMinute": 803,
+          "departureMinute": 667,
+          "arrivalMinute": 725
+        }
+      ],
+      "bankAssignmentReplacements": [
+        {
+          "legId": "ISP-SYR-CRJ200-02-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-M12"
+        }
+      ]
+    }
+  },
+  {
+    "route": 107,
+    "station": "BDL",
+    "flight": 1791,
+    "bank": "SYR-M17",
+    "targetArrivalMinute": 1055,
+    "newDepartureMinute": 1001,
+    "holdReducedMinutes": 79,
+    "nextFlight": 1674,
+    "nextDestination": "CAK",
+    "scope": "single flight, read only",
+    "structure": "pass",
+    "overnight": "pass",
+    "planning": "pass",
+    "gate": "pass",
+    "operating": {
+      "checks": 25,
+      "passed": 17,
+      "failed": 0,
+      "warnings": 5,
+      "notEvaluated": 1,
+      "overridden": 2,
+      "effectiveErrorFindings": 0,
+      "effectiveWarningFindings": 159
+    },
+    "failed": [],
+    "pass": true,
+    "overlay": {
+      "schemaVersion": "1.0.0",
+      "id": "v140-syr-hold-107-1791-M17",
+      "baseSchedule": {
+        "scheduleId": "schedule_7_v1_4_0_draft"
+      },
+      "schedule": {
+        "id": "schedule_7_v1_4_0_draft",
+        "number": 7,
+        "version": "1.4.0-draft",
+        "label": "Schedule 7, Version 1.4.0 draft",
+        "status": "draft",
+        "fleetCounts": {
+          "MAX9": 35,
+          "CRJ900": 45,
+          "CRJ700": 65,
+          "CRJ200": 80
+        },
+        "connectionWindowMinutes": {
+          "minimum": 30,
+          "maximum": 240
+        }
+      },
+      "hubBanksToAdd": [
+        {
+          "id": "SYR-M17",
+          "hub": "SYR",
+          "startMinute": 1035,
+          "endMinute": 1095
+        }
+      ],
+      "hubBankCountOverrides": {
+        "SYR": 8
+      },
+      "retimeLegs": [
+        {
+          "legId": "BDL-SYR-CRJ200-01-OUT",
+          "expectedDepartureMinute": 1080,
+          "expectedArrivalMinute": 1134,
+          "departureMinute": 1001,
+          "arrivalMinute": 1055
+        }
+      ],
+      "bankAssignmentReplacements": [
+        {
+          "legId": "BDL-SYR-CRJ200-01-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-M17"
+        }
+      ]
+    }
+  },
+  {
+    "route": 108,
+    "station": "ORH",
+    "flight": 1884,
+    "bank": "SYR-M12",
+    "targetArrivalMinute": 725,
+    "newDepartureMinute": 667,
+    "holdReducedMinutes": 78,
+    "nextFlight": 1826,
+    "nextDestination": "BTV",
+    "scope": "single flight, read only",
+    "structure": "pass",
+    "overnight": "pass",
+    "planning": "pass",
+    "gate": "pass",
+    "operating": {
+      "checks": 25,
+      "passed": 17,
+      "failed": 0,
+      "warnings": 5,
+      "notEvaluated": 1,
+      "overridden": 2,
+      "effectiveErrorFindings": 0,
+      "effectiveWarningFindings": 159
+    },
+    "failed": [],
+    "pass": true,
+    "overlay": {
+      "schemaVersion": "1.0.0",
+      "id": "v140-syr-hold-108-1884-M12",
+      "baseSchedule": {
+        "scheduleId": "schedule_7_v1_4_0_draft"
+      },
+      "schedule": {
+        "id": "schedule_7_v1_4_0_draft",
+        "number": 7,
+        "version": "1.4.0-draft",
+        "label": "Schedule 7, Version 1.4.0 draft",
+        "status": "draft",
+        "fleetCounts": {
+          "MAX9": 35,
+          "CRJ900": 45,
+          "CRJ700": 65,
+          "CRJ200": 80
+        },
+        "connectionWindowMinutes": {
+          "minimum": 30,
+          "maximum": 240
+        }
+      },
+      "hubBanksToAdd": [
+        {
+          "id": "SYR-M12",
+          "hub": "SYR",
+          "startMinute": 715,
+          "endMinute": 775
+        }
+      ],
+      "hubBankCountOverrides": {
+        "SYR": 8
+      },
+      "retimeLegs": [
+        {
+          "legId": "ORH-SYR-CRJ200-02-OUT",
+          "expectedDepartureMinute": 745,
+          "expectedArrivalMinute": 803,
+          "departureMinute": 667,
+          "arrivalMinute": 725
+        }
+      ],
+      "bankAssignmentReplacements": [
+        {
+          "legId": "ORH-SYR-CRJ200-02-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-M12"
+        }
+      ]
+    }
+  },
+  {
+    "route": 108,
+    "station": "BTV",
+    "flight": 1830,
+    "bank": "SYR-M17",
+    "targetArrivalMinute": 1055,
+    "newDepartureMinute": 1003,
+    "holdReducedMinutes": 77,
+    "nextFlight": 2039,
+    "nextDestination": "ROC",
+    "scope": "single flight, read only",
+    "structure": "pass",
+    "overnight": "pass",
+    "planning": "pass",
+    "gate": "pass",
+    "operating": {
+      "checks": 25,
+      "passed": 17,
+      "failed": 0,
+      "warnings": 5,
+      "notEvaluated": 1,
+      "overridden": 2,
+      "effectiveErrorFindings": 0,
+      "effectiveWarningFindings": 159
+    },
+    "failed": [],
+    "pass": true,
+    "overlay": {
+      "schemaVersion": "1.0.0",
+      "id": "v140-syr-hold-108-1830-M17",
+      "baseSchedule": {
+        "scheduleId": "schedule_7_v1_4_0_draft"
+      },
+      "schedule": {
+        "id": "schedule_7_v1_4_0_draft",
+        "number": 7,
+        "version": "1.4.0-draft",
+        "label": "Schedule 7, Version 1.4.0 draft",
+        "status": "draft",
+        "fleetCounts": {
+          "MAX9": 35,
+          "CRJ900": 45,
+          "CRJ700": 65,
+          "CRJ200": 80
+        },
+        "connectionWindowMinutes": {
+          "minimum": 30,
+          "maximum": 240
+        }
+      },
+      "hubBanksToAdd": [
+        {
+          "id": "SYR-M17",
+          "hub": "SYR",
+          "startMinute": 1035,
+          "endMinute": 1095
+        }
+      ],
+      "hubBankCountOverrides": {
+        "SYR": 8
+      },
+      "retimeLegs": [
+        {
+          "legId": "BTV-SYR-CRJ200-03-OUT",
+          "expectedDepartureMinute": 1080,
+          "expectedArrivalMinute": 1132,
+          "departureMinute": 1003,
+          "arrivalMinute": 1055
+        }
+      ],
+      "bankAssignmentReplacements": [
+        {
+          "legId": "BTV-SYR-CRJ200-03-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-M17"
+        }
+      ]
+    }
+  },
+  {
+    "route": 110,
+    "station": "HVN",
+    "flight": 1879,
+    "bank": "SYR-M09",
+    "targetArrivalMinute": 555,
+    "newDepartureMinute": 499,
+    "holdReducedMinutes": 86,
+    "nextFlight": 1836,
+    "nextDestination": "MHT",
+    "scope": "single flight, read only",
+    "structure": "pass",
+    "overnight": "pass",
+    "planning": "pass",
+    "gate": "pass",
+    "operating": {
+      "checks": 25,
+      "passed": 17,
+      "failed": 0,
+      "warnings": 5,
+      "notEvaluated": 1,
+      "overridden": 2,
+      "effectiveErrorFindings": 0,
+      "effectiveWarningFindings": 159
+    },
+    "failed": [],
+    "pass": true,
+    "overlay": {
+      "schemaVersion": "1.0.0",
+      "id": "v140-syr-hold-110-1879-M09",
+      "baseSchedule": {
+        "scheduleId": "schedule_7_v1_4_0_draft"
+      },
+      "schedule": {
+        "id": "schedule_7_v1_4_0_draft",
+        "number": 7,
+        "version": "1.4.0-draft",
+        "label": "Schedule 7, Version 1.4.0 draft",
+        "status": "draft",
+        "fleetCounts": {
+          "MAX9": 35,
+          "CRJ900": 45,
+          "CRJ700": 65,
+          "CRJ200": 80
+        },
+        "connectionWindowMinutes": {
+          "minimum": 30,
+          "maximum": 240
+        }
+      },
+      "hubBanksToAdd": [
+        {
+          "id": "SYR-M09",
+          "hub": "SYR",
+          "startMinute": 535,
+          "endMinute": 595
+        }
+      ],
+      "hubBankCountOverrides": {
+        "SYR": 8
+      },
+      "retimeLegs": [
+        {
+          "legId": "HVN-SYR-CRJ200-02-OUT",
+          "expectedDepartureMinute": 585,
+          "expectedArrivalMinute": 641,
+          "departureMinute": 499,
+          "arrivalMinute": 555
+        }
+      ],
+      "bankAssignmentReplacements": [
+        {
+          "legId": "HVN-SYR-CRJ200-02-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-M09"
+        }
+      ]
+    }
+  },
+  {
+    "route": 110,
+    "station": "MHT",
+    "flight": 1840,
+    "bank": "SYR-M15",
+    "targetArrivalMinute": 905,
+    "newDepartureMinute": 845,
+    "holdReducedMinutes": 65,
+    "nextFlight": 1608,
+    "nextDestination": "PIT",
+    "scope": "single flight, read only",
+    "structure": "pass",
+    "overnight": "pass",
+    "planning": "pass",
+    "gate": "pass",
+    "operating": {
+      "checks": 25,
+      "passed": 17,
+      "failed": 0,
+      "warnings": 5,
+      "notEvaluated": 1,
+      "overridden": 2,
+      "effectiveErrorFindings": 0,
+      "effectiveWarningFindings": 159
+    },
+    "failed": [],
+    "pass": true,
+    "overlay": {
+      "schemaVersion": "1.0.0",
+      "id": "v140-syr-hold-110-1840-M15",
+      "baseSchedule": {
+        "scheduleId": "schedule_7_v1_4_0_draft"
+      },
+      "schedule": {
+        "id": "schedule_7_v1_4_0_draft",
+        "number": 7,
+        "version": "1.4.0-draft",
+        "label": "Schedule 7, Version 1.4.0 draft",
+        "status": "draft",
+        "fleetCounts": {
+          "MAX9": 35,
+          "CRJ900": 45,
+          "CRJ700": 65,
+          "CRJ200": 80
+        },
+        "connectionWindowMinutes": {
+          "minimum": 30,
+          "maximum": 240
+        }
+      },
+      "hubBanksToAdd": [
+        {
+          "id": "SYR-M15",
+          "hub": "SYR",
+          "startMinute": 885,
+          "endMinute": 945
+        }
+      ],
+      "hubBankCountOverrides": {
+        "SYR": 8
+      },
+      "retimeLegs": [
+        {
+          "legId": "MHT-SYR-CRJ200-03-OUT",
+          "expectedDepartureMinute": 910,
+          "expectedArrivalMinute": 970,
+          "departureMinute": 845,
+          "arrivalMinute": 905
+        }
+      ],
+      "bankAssignmentReplacements": [
+        {
+          "legId": "MHT-SYR-CRJ200-03-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-M15"
+        }
+      ]
+    }
+  },
+  {
+    "route": 124,
+    "station": "HPN",
+    "flight": 1855,
+    "bank": "SYR-M15",
+    "targetArrivalMinute": 905,
+    "newDepartureMinute": 851,
+    "holdReducedMinutes": 64,
+    "nextFlight": 1877,
+    "nextDestination": "HVN",
+    "scope": "single flight, read only",
+    "structure": "pass",
+    "overnight": "pass",
+    "planning": "pass",
+    "gate": "pass",
+    "operating": {
+      "checks": 25,
+      "passed": 17,
+      "failed": 0,
+      "warnings": 5,
+      "notEvaluated": 1,
+      "overridden": 2,
+      "effectiveErrorFindings": 0,
+      "effectiveWarningFindings": 159
+    },
+    "failed": [],
+    "pass": true,
+    "overlay": {
+      "schemaVersion": "1.0.0",
+      "id": "v140-syr-hold-124-1855-M15",
+      "baseSchedule": {
+        "scheduleId": "schedule_7_v1_4_0_draft"
+      },
+      "schedule": {
+        "id": "schedule_7_v1_4_0_draft",
+        "number": 7,
+        "version": "1.4.0-draft",
+        "label": "Schedule 7, Version 1.4.0 draft",
+        "status": "draft",
+        "fleetCounts": {
+          "MAX9": 35,
+          "CRJ900": 45,
+          "CRJ700": 65,
+          "CRJ200": 80
+        },
+        "connectionWindowMinutes": {
+          "minimum": 30,
+          "maximum": 240
+        }
+      },
+      "hubBanksToAdd": [
+        {
+          "id": "SYR-M15",
+          "hub": "SYR",
+          "startMinute": 885,
+          "endMinute": 945
+        }
+      ],
+      "hubBankCountOverrides": {
+        "SYR": 8
+      },
+      "retimeLegs": [
+        {
+          "legId": "HPN-SYR-CRJ200-02-OUT",
+          "expectedDepartureMinute": 915,
+          "expectedArrivalMinute": 969,
+          "departureMinute": 851,
+          "arrivalMinute": 905
+        }
+      ],
+      "bankAssignmentReplacements": [
+        {
+          "legId": "HPN-SYR-CRJ200-02-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-M15"
+        }
+      ]
+    }
+  },
+  {
+    "route": 124,
+    "station": "HVN",
+    "flight": 2055,
+    "bank": "SYR-M20",
+    "targetArrivalMinute": 1235,
+    "newDepartureMinute": 1179,
+    "holdReducedMinutes": 55,
+    "nextFlight": 2056,
+    "nextDestination": "HVN",
+    "scope": "single flight, read only",
+    "structure": "pass",
+    "overnight": "pass",
+    "planning": "pass",
+    "gate": "pass",
+    "operating": {
+      "checks": 25,
+      "passed": 17,
+      "failed": 0,
+      "warnings": 5,
+      "notEvaluated": 1,
+      "overridden": 2,
+      "effectiveErrorFindings": 0,
+      "effectiveWarningFindings": 159
+    },
+    "failed": [],
+    "pass": true,
+    "overlay": {
+      "schemaVersion": "1.0.0",
+      "id": "v140-syr-hold-124-2055-M20",
+      "baseSchedule": {
+        "scheduleId": "schedule_7_v1_4_0_draft"
+      },
+      "schedule": {
+        "id": "schedule_7_v1_4_0_draft",
+        "number": 7,
+        "version": "1.4.0-draft",
+        "label": "Schedule 7, Version 1.4.0 draft",
+        "status": "draft",
+        "fleetCounts": {
+          "MAX9": 35,
+          "CRJ900": 45,
+          "CRJ700": 65,
+          "CRJ200": 80
+        },
+        "connectionWindowMinutes": {
+          "minimum": 30,
+          "maximum": 240
+        }
+      },
+      "hubBanksToAdd": [
+        {
+          "id": "SYR-M20",
+          "hub": "SYR",
+          "startMinute": 1215,
+          "endMinute": 1275
+        }
+      ],
+      "hubBankCountOverrides": {
+        "SYR": 8
+      },
+      "retimeLegs": [
+        {
+          "legId": "V115-R124-HVN-SYR",
+          "expectedDepartureMinute": 1234,
+          "expectedArrivalMinute": 1290,
+          "departureMinute": 1179,
+          "arrivalMinute": 1235
+        }
+      ],
+      "bankAssignmentReplacements": [
+        {
+          "legId": "V115-R124-HVN-SYR",
+          "operation": "arrival",
+          "bankId": "SYR-M20"
+        }
+      ]
+    }
+  },
+  {
+    "route": 129,
+    "station": "PHF",
+    "flight": 1514,
+    "bank": "SYR-M09",
+    "targetArrivalMinute": 555,
+    "newDepartureMinute": 470,
+    "holdReducedMinutes": 85,
+    "nextFlight": 1708,
+    "nextDestination": "ROC",
+    "scope": "single flight, read only",
+    "structure": "pass",
+    "overnight": "pass",
+    "planning": "pass",
+    "gate": "pass",
+    "operating": {
+      "checks": 25,
+      "passed": 17,
+      "failed": 1,
+      "warnings": 5,
+      "notEvaluated": 1,
+      "overridden": 1,
+      "effectiveErrorFindings": 1,
+      "effectiveWarningFindings": 159
+    },
+    "failed": [
+      {
+        "check": "hub_bank_alignment",
+        "findings": [
+          {
+            "id": "PHF-SYR-CRJ200-02-OUT-departure",
+            "message": "Departure for PHF-SYR-CRJ200-02-OUT falls outside bank PHF-B2",
+            "evidence": {
+              "assignment": {
+                "legId": "PHF-SYR-CRJ200-02-OUT",
+                "operation": "departure",
+                "bankId": "PHF-B2"
+              },
+              "minute": 470,
+              "bankWindow": [
+                505,
+                565
+              ]
+            }
+          },
+          {
+            "id": "V114-R169-SYR-FWA-departure",
+            "message": "Departure for V114-R169-SYR-FWA falls outside bank SYR-B4",
+            "evidence": {
+              "assignment": {
+                "legId": "V114-R169-SYR-FWA",
+                "operation": "departure",
+                "bankId": "SYR-B4"
+              },
+              "minute": 875,
+              "bankWindow": [
+                795,
+                855
+              ]
+            },
+            "override": {
+              "reason": "Schedule 7 v1.1.4 tactical initiative: the 14:35 SYR-FWA return departs 20 minutes after Bank 4 to remain within SYR's fixed 16-gate inventory without weakening existing bank connections.",
+              "approvedBy": "user",
+              "expiresAfterSchedule": 7
+            }
+          },
+          {
+            "id": "V114-R122-SYR-SWF-departure",
+            "message": "Departure for V114-R122-SYR-SWF falls outside bank SYR-B6",
+            "evidence": {
+              "assignment": {
+                "legId": "V114-R122-SYR-SWF",
+                "operation": "departure",
+                "bankId": "SYR-B6"
+              },
+              "minute": 1210,
+              "bankWindow": [
+                1125,
+                1185
+              ]
+            },
+            "override": {
+              "reason": "Schedule 7 v1.1.4 tactical initiative: the 20:10 SYR-SWF return departs 25 minutes after Bank 6 to remain within SYR's fixed 16-gate inventory without weakening existing bank connections.",
+              "approvedBy": "user",
+              "expiresAfterSchedule": 7
+            }
+          },
+          {
+            "id": "V116-R149-DAY-BHM-departure",
+            "message": "Departure for V116-R149-DAY-BHM falls outside bank DAY-B1",
+            "evidence": {
+              "assignment": {
+                "legId": "V116-R149-DAY-BHM",
+                "operation": "departure",
+                "bankId": "DAY-B1"
+              },
+              "minute": 270,
+              "bankWindow": [
+                301,
+                361
+              ]
+            },
+            "override": {
+              "reason": "Schedule 7 v1.1.6 BHM morning initiative: the 04:30 DAY departure is 30 minutes before DAY Bank 1 so the aircraft can feed BHM's morning wave while remaining within fixed gate capacity at both cities.",
+              "approvedBy": "user",
+              "expiresAfterSchedule": 7
+            }
+          }
+        ]
+      }
+    ],
+    "pass": false
+  },
+  {
+    "route": 130,
+    "station": "PWM",
+    "flight": 2049,
+    "bank": "SYR-M17",
+    "targetArrivalMinute": 1055,
+    "newDepartureMinute": 987,
+    "holdReducedMinutes": 70,
+    "nextFlight": 2050,
+    "nextDestination": "BUF",
+    "scope": "single flight, read only",
+    "structure": "pass",
+    "overnight": "pass",
+    "planning": "pass",
+    "gate": "pass",
+    "operating": {
+      "checks": 25,
+      "passed": 17,
+      "failed": 0,
+      "warnings": 5,
+      "notEvaluated": 1,
+      "overridden": 2,
+      "effectiveErrorFindings": 0,
+      "effectiveWarningFindings": 160
+    },
+    "failed": [],
+    "pass": true,
+    "overlay": {
+      "schemaVersion": "1.0.0",
+      "id": "v140-syr-hold-130-2049-M17",
+      "baseSchedule": {
+        "scheduleId": "schedule_7_v1_4_0_draft"
+      },
+      "schedule": {
+        "id": "schedule_7_v1_4_0_draft",
+        "number": 7,
+        "version": "1.4.0-draft",
+        "label": "Schedule 7, Version 1.4.0 draft",
+        "status": "draft",
+        "fleetCounts": {
+          "MAX9": 35,
+          "CRJ900": 45,
+          "CRJ700": 65,
+          "CRJ200": 80
+        },
+        "connectionWindowMinutes": {
+          "minimum": 30,
+          "maximum": 240
+        }
+      },
+      "hubBanksToAdd": [
+        {
+          "id": "SYR-M17",
+          "hub": "SYR",
+          "startMinute": 1035,
+          "endMinute": 1095
+        }
+      ],
+      "hubBankCountOverrides": {
+        "SYR": 8
+      },
+      "retimeLegs": [
+        {
+          "legId": "V115-R144-PWM-SYR",
+          "expectedDepartureMinute": 1057,
+          "expectedArrivalMinute": 1125,
+          "departureMinute": 987,
+          "arrivalMinute": 1055
+        }
+      ],
+      "bankAssignmentReplacements": [
+        {
+          "legId": "V115-R144-PWM-SYR",
+          "operation": "arrival",
+          "bankId": "SYR-M17"
+        }
+      ]
+    }
+  },
+  {
+    "route": 131,
+    "station": "ALB",
+    "flight": 1756,
+    "bank": "SYR-M17",
+    "targetArrivalMinute": 1055,
+    "newDepartureMinute": 1011,
+    "holdReducedMinutes": 79,
+    "nextFlight": 1882,
+    "nextDestination": "ORH",
+    "scope": "single flight, read only",
+    "structure": "pass",
+    "overnight": "pass",
+    "planning": "pass",
+    "gate": "pass",
+    "operating": {
+      "checks": 25,
+      "passed": 17,
+      "failed": 0,
+      "warnings": 5,
+      "notEvaluated": 1,
+      "overridden": 2,
+      "effectiveErrorFindings": 0,
+      "effectiveWarningFindings": 159
+    },
+    "failed": [],
+    "pass": true,
+    "overlay": {
+      "schemaVersion": "1.0.0",
+      "id": "v140-syr-hold-131-1756-M17",
+      "baseSchedule": {
+        "scheduleId": "schedule_7_v1_4_0_draft"
+      },
+      "schedule": {
+        "id": "schedule_7_v1_4_0_draft",
+        "number": 7,
+        "version": "1.4.0-draft",
+        "label": "Schedule 7, Version 1.4.0 draft",
+        "status": "draft",
+        "fleetCounts": {
+          "MAX9": 35,
+          "CRJ900": 45,
+          "CRJ700": 65,
+          "CRJ200": 80
+        },
+        "connectionWindowMinutes": {
+          "minimum": 30,
+          "maximum": 240
+        }
+      },
+      "hubBanksToAdd": [
+        {
+          "id": "SYR-M17",
+          "hub": "SYR",
+          "startMinute": 1035,
+          "endMinute": 1095
+        }
+      ],
+      "hubBankCountOverrides": {
+        "SYR": 8
+      },
+      "retimeLegs": [
+        {
+          "legId": "ALB-SYR-CRJ200-04-OUT",
+          "expectedDepartureMinute": 1090,
+          "expectedArrivalMinute": 1134,
+          "departureMinute": 1011,
+          "arrivalMinute": 1055
+        }
+      ],
+      "bankAssignmentReplacements": [
+        {
+          "legId": "ALB-SYR-CRJ200-04-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-M17"
+        }
+      ]
+    }
+  },
+  {
+    "route": 160,
+    "station": "BTV",
+    "flight": 1829,
+    "bank": "SYR-M15",
+    "targetArrivalMinute": 905,
+    "newDepartureMinute": 853,
+    "holdReducedMinutes": 62,
+    "nextFlight": 1701,
+    "nextDestination": "PWM",
+    "scope": "single flight, read only",
+    "structure": "pass",
+    "overnight": "pass",
+    "planning": "pass",
+    "gate": "pass",
+    "operating": {
+      "checks": 25,
+      "passed": 17,
+      "failed": 0,
+      "warnings": 5,
+      "notEvaluated": 1,
+      "overridden": 2,
+      "effectiveErrorFindings": 0,
+      "effectiveWarningFindings": 159
+    },
+    "failed": [],
+    "pass": true,
+    "overlay": {
+      "schemaVersion": "1.0.0",
+      "id": "v140-syr-hold-160-1829-M15",
+      "baseSchedule": {
+        "scheduleId": "schedule_7_v1_4_0_draft"
+      },
+      "schedule": {
+        "id": "schedule_7_v1_4_0_draft",
+        "number": 7,
+        "version": "1.4.0-draft",
+        "label": "Schedule 7, Version 1.4.0 draft",
+        "status": "draft",
+        "fleetCounts": {
+          "MAX9": 35,
+          "CRJ900": 45,
+          "CRJ700": 65,
+          "CRJ200": 80
+        },
+        "connectionWindowMinutes": {
+          "minimum": 30,
+          "maximum": 240
+        }
+      },
+      "hubBanksToAdd": [
+        {
+          "id": "SYR-M15",
+          "hub": "SYR",
+          "startMinute": 885,
+          "endMinute": 945
+        }
+      ],
+      "hubBankCountOverrides": {
+        "SYR": 8
+      },
+      "retimeLegs": [
+        {
+          "legId": "BTV-SYR-CRJ200-02-OUT",
+          "expectedDepartureMinute": 915,
+          "expectedArrivalMinute": 967,
+          "departureMinute": 853,
+          "arrivalMinute": 905
+        }
+      ],
+      "bankAssignmentReplacements": [
+        {
+          "legId": "BTV-SYR-CRJ200-02-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-M15"
+        }
+      ]
+    }
+  },
+  {
+    "route": 162,
+    "station": "BDL",
+    "flight": 2102,
+    "bank": "SYR-M09",
+    "targetArrivalMinute": 555,
+    "newDepartureMinute": 501,
+    "holdReducedMinutes": 104,
+    "nextFlight": 1511,
+    "nextDestination": "PHF",
+    "scope": "single flight, read only",
+    "structure": "pass",
+    "overnight": "pass",
+    "planning": "pass",
+    "gate": "pass",
+    "operating": {
+      "checks": 25,
+      "passed": 17,
+      "failed": 0,
+      "warnings": 5,
+      "notEvaluated": 1,
+      "overridden": 2,
+      "effectiveErrorFindings": 0,
+      "effectiveWarningFindings": 158
+    },
+    "failed": [],
+    "pass": true,
+    "overlay": {
+      "schemaVersion": "1.0.0",
+      "id": "v140-syr-hold-162-2102-M09",
+      "baseSchedule": {
+        "scheduleId": "schedule_7_v1_4_0_draft"
+      },
+      "schedule": {
+        "id": "schedule_7_v1_4_0_draft",
+        "number": 7,
+        "version": "1.4.0-draft",
+        "label": "Schedule 7, Version 1.4.0 draft",
+        "status": "draft",
+        "fleetCounts": {
+          "MAX9": 35,
+          "CRJ900": 45,
+          "CRJ700": 65,
+          "CRJ200": 80
+        },
+        "connectionWindowMinutes": {
+          "minimum": 30,
+          "maximum": 240
+        }
+      },
+      "hubBanksToAdd": [
+        {
+          "id": "SYR-M09",
+          "hub": "SYR",
+          "startMinute": 535,
+          "endMinute": 595
+        }
+      ],
+      "hubBankCountOverrides": {
+        "SYR": 8
+      },
+      "retimeLegs": [
+        {
+          "legId": "V121-R123-2-BDL-SYR",
+          "expectedDepartureMinute": 605,
+          "expectedArrivalMinute": 659,
+          "departureMinute": 501,
+          "arrivalMinute": 555
+        }
+      ],
+      "bankAssignmentReplacements": [
+        {
+          "legId": "V121-R123-2-BDL-SYR",
+          "operation": "arrival",
+          "bankId": "SYR-M09"
+        }
+      ]
+    }
+  },
+  {
+    "route": 167,
+    "station": "ALB",
+    "flight": 1754,
+    "bank": "SYR-M09",
+    "targetArrivalMinute": 555,
+    "newDepartureMinute": 511,
+    "holdReducedMinutes": 84,
+    "nextFlight": 1672,
+    "nextDestination": "CAK",
+    "scope": "single flight, read only",
+    "structure": "pass",
+    "overnight": "pass",
+    "planning": "pass",
+    "gate": "pass",
+    "operating": {
+      "checks": 25,
+      "passed": 17,
+      "failed": 0,
+      "warnings": 5,
+      "notEvaluated": 1,
+      "overridden": 2,
+      "effectiveErrorFindings": 0,
+      "effectiveWarningFindings": 159
+    },
+    "failed": [],
+    "pass": true,
+    "overlay": {
+      "schemaVersion": "1.0.0",
+      "id": "v140-syr-hold-167-1754-M09",
+      "baseSchedule": {
+        "scheduleId": "schedule_7_v1_4_0_draft"
+      },
+      "schedule": {
+        "id": "schedule_7_v1_4_0_draft",
+        "number": 7,
+        "version": "1.4.0-draft",
+        "label": "Schedule 7, Version 1.4.0 draft",
+        "status": "draft",
+        "fleetCounts": {
+          "MAX9": 35,
+          "CRJ900": 45,
+          "CRJ700": 65,
+          "CRJ200": 80
+        },
+        "connectionWindowMinutes": {
+          "minimum": 30,
+          "maximum": 240
+        }
+      },
+      "hubBanksToAdd": [
+        {
+          "id": "SYR-M09",
+          "hub": "SYR",
+          "startMinute": 535,
+          "endMinute": 595
+        }
+      ],
+      "hubBankCountOverrides": {
+        "SYR": 8
+      },
+      "retimeLegs": [
+        {
+          "legId": "ALB-SYR-CRJ200-02-OUT",
+          "expectedDepartureMinute": 595,
+          "expectedArrivalMinute": 639,
+          "departureMinute": 511,
+          "arrivalMinute": 555
+        }
+      ],
+      "bankAssignmentReplacements": [
+        {
+          "legId": "ALB-SYR-CRJ200-02-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-M09"
+        }
+      ]
+    }
+  },
+  {
+    "route": 167,
+    "station": "CAK",
+    "flight": 1670,
+    "bank": "SYR-M15",
+    "targetArrivalMinute": 905,
+    "newDepartureMinute": 834,
+    "holdReducedMinutes": 61,
+    "nextFlight": 1673,
+    "nextDestination": "CAK",
+    "scope": "single flight, read only",
+    "structure": "pass",
+    "overnight": "pass",
+    "planning": "pass",
+    "gate": "pass",
+    "operating": {
+      "checks": 25,
+      "passed": 17,
+      "failed": 0,
+      "warnings": 5,
+      "notEvaluated": 1,
+      "overridden": 2,
+      "effectiveErrorFindings": 0,
+      "effectiveWarningFindings": 159
+    },
+    "failed": [],
+    "pass": true,
+    "overlay": {
+      "schemaVersion": "1.0.0",
+      "id": "v140-syr-hold-167-1670-M15",
+      "baseSchedule": {
+        "scheduleId": "schedule_7_v1_4_0_draft"
+      },
+      "schedule": {
+        "id": "schedule_7_v1_4_0_draft",
+        "number": 7,
+        "version": "1.4.0-draft",
+        "label": "Schedule 7, Version 1.4.0 draft",
+        "status": "draft",
+        "fleetCounts": {
+          "MAX9": 35,
+          "CRJ900": 45,
+          "CRJ700": 65,
+          "CRJ200": 80
+        },
+        "connectionWindowMinutes": {
+          "minimum": 30,
+          "maximum": 240
+        }
+      },
+      "hubBanksToAdd": [
+        {
+          "id": "SYR-M15",
+          "hub": "SYR",
+          "startMinute": 885,
+          "endMinute": 945
+        }
+      ],
+      "hubBankCountOverrides": {
+        "SYR": 8
+      },
+      "retimeLegs": [
+        {
+          "legId": "CAK-SYR-CRJ200-02-OUT",
+          "expectedDepartureMinute": 895,
+          "expectedArrivalMinute": 966,
+          "departureMinute": 834,
+          "arrivalMinute": 905
+        }
+      ],
+      "bankAssignmentReplacements": [
+        {
+          "legId": "CAK-SYR-CRJ200-02-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-M15"
+        }
+      ]
+    }
+  },
+  {
+    "route": 530,
+    "station": "CAK",
+    "flight": 2250,
+    "bank": "SYR-M20",
+    "targetArrivalMinute": 1235,
+    "newDepartureMinute": 1166,
+    "holdReducedMinutes": 55,
+    "nextFlight": null,
+    "nextDestination": null,
+    "scope": "single flight, read only",
+    "structure": "pass",
+    "overnight": "pass",
+    "planning": "pass",
+    "gate": "pass",
+    "operating": {
+      "checks": 25,
+      "passed": 17,
+      "failed": 0,
+      "warnings": 5,
+      "notEvaluated": 1,
+      "overridden": 2,
+      "effectiveErrorFindings": 0,
+      "effectiveWarningFindings": 160
+    },
+    "failed": [],
+    "pass": true,
+    "overlay": {
+      "schemaVersion": "1.0.0",
+      "id": "v140-syr-hold-530-2250-M20",
+      "baseSchedule": {
+        "scheduleId": "schedule_7_v1_4_0_draft"
+      },
+      "schedule": {
+        "id": "schedule_7_v1_4_0_draft",
+        "number": 7,
+        "version": "1.4.0-draft",
+        "label": "Schedule 7, Version 1.4.0 draft",
+        "status": "draft",
+        "fleetCounts": {
+          "MAX9": 35,
+          "CRJ900": 45,
+          "CRJ700": 65,
+          "CRJ200": 80
+        },
+        "connectionWindowMinutes": {
+          "minimum": 30,
+          "maximum": 240
+        }
+      },
+      "hubBanksToAdd": [
+        {
+          "id": "SYR-M20",
+          "hub": "SYR",
+          "startMinute": 1215,
+          "endMinute": 1275
+        }
+      ],
+      "hubBankCountOverrides": {
+        "SYR": 8
+      },
+      "retimeLegs": [
+        {
+          "legId": "V133-BHM-530-6-CAK-SYR",
+          "expectedDepartureMinute": 1221,
+          "expectedArrivalMinute": 1290,
+          "departureMinute": 1166,
+          "arrivalMinute": 1235
+        }
+      ],
+      "bankAssignmentReplacements": [
+        {
+          "legId": "V133-BHM-530-6-CAK-SYR",
+          "operation": "arrival",
+          "bankId": "SYR-M20"
+        }
+      ]
+    }
+  }
+]

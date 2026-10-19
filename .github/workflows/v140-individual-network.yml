@@ -1,0 +1,32 @@
+name: Audit individual v1.4 A-B commercial tradeoffs
+on:
+  push:
+    branches: [schedule-7-v1.4.0-utilization-analysis]
+    paths:
+      - '.github/workflows/v140-individual-network.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: v140-individual-network
+  cancel-in-progress: true
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -e .
+      - run: python scripts/build_schedule_7_v1_4_0_individual_network.py
+      - run: node scripts/audit_schedule_7_v1_4_0_individual_network.mjs
+      - name: Archive commercial comparisons only
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f outputs/schedule_7_v1_4_0_utilization/individual_network_comparisons.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Archive v1.4 independent P2P passenger-network tradeoffs [skip ci]"
+            git push origin HEAD:schedule-7-v1.4.0-utilization-analysis
+          fi

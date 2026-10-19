@@ -1,0 +1,21 @@
+{
+  "scope": "READ-ONLY, NOT in draft",
+  "description": "Keep BDL-SYR direct return; use SYR-BWI-BDL A-B outbound routing; retime other morning SYR-BDL six minutes for section 2.6 spacing",
+  "flights": 1258,
+  "gate": "pass",
+  "structural": "pass",
+  "overnight": "pass",
+  "planning": "pass",
+  "operating": {
+    "checks": 25,
+    "passed": 17,
+    "failed": 0,
+    "warnings": 5,
+    "notEvaluated": 1,
+    "overridden": 2,
+    "effectiveErrorFindings": 0,
+    "effectiveWarningFindings": 159
+  },
+  "failed": [],
+  "pass": true
+}

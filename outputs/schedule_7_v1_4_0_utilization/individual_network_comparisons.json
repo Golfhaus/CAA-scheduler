@@ -1,0 +1,1243 @@
+[
+  {
+    "name": "R160_BTV_PHF",
+    "flights": 1258,
+    "coverageGains": 7,
+    "coverageLosses": 4,
+    "faster": 39,
+    "slower": 36,
+    "gains": [
+      {
+        "market": "BTV-RDU",
+        "origin": "BTV",
+        "destination": "RDU",
+        "demand": 18,
+        "beforeMinutes": 436,
+        "afterMinutes": 262
+      },
+      {
+        "market": "BTV-CHS",
+        "origin": "BTV",
+        "destination": "CHS",
+        "demand": 8,
+        "beforeMinutes": 415,
+        "afterMinutes": 288
+      },
+      {
+        "market": "BTV-DAL",
+        "origin": "BTV",
+        "destination": "DAL",
+        "demand": 7.8,
+        "beforeMinutes": 510,
+        "afterMinutes": 336
+      },
+      {
+        "market": "BTV-MSY",
+        "origin": "BTV",
+        "destination": "MSY",
+        "demand": 5.3,
+        "beforeMinutes": 536,
+        "afterMinutes": 362
+      },
+      {
+        "market": "BTV-SAV",
+        "origin": "BTV",
+        "destination": "SAV",
+        "demand": 3.8,
+        "beforeMinutes": 334,
+        "afterMinutes": 299
+      },
+      {
+        "market": "BTV-VPS",
+        "origin": "BTV",
+        "destination": "VPS",
+        "demand": 0.9,
+        "beforeMinutes": 571,
+        "afterMinutes": 397
+      },
+      {
+        "market": "BTV-MLB",
+        "origin": "BTV",
+        "destination": "MLB",
+        "demand": 0.5,
+        "beforeMinutes": 562,
+        "afterMinutes": 388
+      }
+    ],
+    "losses": [
+      {
+        "market": "BTV-DAB",
+        "origin": "BTV",
+        "destination": "DAB",
+        "demand": 0.9,
+        "beforeMinutes": 244,
+        "afterMinutes": null
+      },
+      {
+        "market": "BTV-BWI",
+        "origin": "BTV",
+        "destination": "BWI",
+        "demand": 0.6,
+        "beforeMinutes": 265,
+        "afterMinutes": 592
+      },
+      {
+        "market": "ACY-FWA",
+        "origin": "ACY",
+        "destination": "FWA",
+        "demand": 0,
+        "beforeMinutes": 395,
+        "afterMinutes": 564
+      },
+      {
+        "market": "BTV-ACY",
+        "origin": "BTV",
+        "destination": "ACY",
+        "demand": 0,
+        "beforeMinutes": 159,
+        "afterMinutes": null
+      }
+    ],
+    "improved": [
+      {
+        "market": "BTV-RDU",
+        "origin": "BTV",
+        "destination": "RDU",
+        "demand": 18,
+        "beforeMinutes": 436,
+        "afterMinutes": 262
+      },
+      {
+        "market": "PGD-BTV",
+        "origin": "PGD",
+        "destination": "BTV",
+        "demand": 11.4,
+        "beforeMinutes": 377,
+        "afterMinutes": 367
+      },
+      {
+        "market": "BTV-CHS",
+        "origin": "BTV",
+        "destination": "CHS",
+        "demand": 8,
+        "beforeMinutes": 415,
+        "afterMinutes": 288
+      },
+      {
+        "market": "CHS-BTV",
+        "origin": "CHS",
+        "destination": "BTV",
+        "demand": 7.9,
+        "beforeMinutes": 292,
+        "afterMinutes": 282
+      },
+      {
+        "market": "BTV-DAL",
+        "origin": "BTV",
+        "destination": "DAL",
+        "demand": 7.8,
+        "beforeMinutes": 510,
+        "afterMinutes": 336
+      },
+      {
+        "market": "SAV-SYR",
+        "origin": "SAV",
+        "destination": "SYR",
+        "demand": 7.7,
+        "beforeMinutes": 300,
+        "afterMinutes": 277
+      },
+      {
+        "market": "JAX-BTV",
+        "origin": "JAX",
+        "destination": "BTV",
+        "demand": 7.3,
+        "beforeMinutes": 242,
+        "afterMinutes": 232
+      },
+      {
+        "market": "MSY-BTV",
+        "origin": "MSY",
+        "destination": "BTV",
+        "demand": 5.4,
+        "beforeMinutes": 367,
+        "afterMinutes": 357
+      },
+      {
+        "market": "BTV-MSY",
+        "origin": "BTV",
+        "destination": "MSY",
+        "demand": 5.3,
+        "beforeMinutes": 536,
+        "afterMinutes": 362
+      },
+      {
+        "market": "PIT-BTV",
+        "origin": "PIT",
+        "destination": "BTV",
+        "demand": 5.2,
+        "beforeMinutes": 160,
+        "afterMinutes": 150
+      },
+      {
+        "market": "SAV-BTV",
+        "origin": "SAV",
+        "destination": "BTV",
+        "demand": 4.1,
+        "beforeMinutes": 432,
+        "afterMinutes": 422
+      },
+      {
+        "market": "BTV-SAV",
+        "origin": "BTV",
+        "destination": "SAV",
+        "demand": 3.8,
+        "beforeMinutes": 334,
+        "afterMinutes": 299
+      },
+      {
+        "market": "BLV-BTV",
+        "origin": "BLV",
+        "destination": "BTV",
+        "demand": 3.6,
+        "beforeMinutes": 392,
+        "afterMinutes": 382
+      },
+      {
+        "market": "GSO-SYR",
+        "origin": "GSO",
+        "destination": "SYR",
+        "demand": 3.6,
+        "beforeMinutes": 263,
+        "afterMinutes": 240
+      },
+      {
+        "market": "SAT-BTV",
+        "origin": "SAT",
+        "destination": "BTV",
+        "demand": 3.5,
+        "beforeMinutes": 612,
+        "afterMinutes": 602
+      },
+      {
+        "market": "MYR-BTV",
+        "origin": "MYR",
+        "destination": "BTV",
+        "demand": 3.4,
+        "beforeMinutes": 422,
+        "afterMinutes": 412
+      },
+      {
+        "market": "ILM-BTV",
+        "origin": "ILM",
+        "destination": "BTV",
+        "demand": 3,
+        "beforeMinutes": 417,
+        "afterMinutes": 407
+      },
+      {
+        "market": "BTV-PHF",
+        "origin": "BTV",
+        "destination": "PHF",
+        "demand": 2.8,
+        "beforeMinutes": 180,
+        "afterMinutes": 100
+      },
+      {
+        "market": "PHF-BTV",
+        "origin": "PHF",
+        "destination": "BTV",
+        "demand": 2.8,
+        "beforeMinutes": 177,
+        "afterMinutes": 167
+      },
+      {
+        "market": "TYS-BTV",
+        "origin": "TYS",
+        "destination": "BTV",
+        "demand": 2.7,
+        "beforeMinutes": 462,
+        "afterMinutes": 452
+      },
+      {
+        "market": "PHF-BGR",
+        "origin": "PHF",
+        "destination": "BGR",
+        "demand": 2.2,
+        "beforeMinutes": 330,
+        "afterMinutes": 322
+      },
+      {
+        "market": "CAE-BTV",
+        "origin": "CAE",
+        "destination": "BTV",
+        "demand": 1.7,
+        "beforeMinutes": 432,
+        "afterMinutes": 422
+      },
+      {
+        "market": "EYW-BTV",
+        "origin": "EYW",
+        "destination": "BTV",
+        "demand": 1.6,
+        "beforeMinutes": 407,
+        "afterMinutes": 397
+      },
+      {
+        "market": "LEX-BTV",
+        "origin": "LEX",
+        "destination": "BTV",
+        "demand": 1.1,
+        "beforeMinutes": 427,
+        "afterMinutes": 417
+      },
+      {
+        "market": "ECP-BTV",
+        "origin": "ECP",
+        "destination": "BTV",
+        "demand": 1,
+        "beforeMinutes": 382,
+        "afterMinutes": 372
+      },
+      {
+        "market": "BTV-VPS",
+        "origin": "BTV",
+        "destination": "VPS",
+        "demand": 0.9,
+        "beforeMinutes": 571,
+        "afterMinutes": 397
+      },
+      {
+        "market": "DAB-BTV",
+        "origin": "DAB",
+        "destination": "BTV",
+        "demand": 0.9,
+        "beforeMinutes": 425,
+        "afterMinutes": 415
+      },
+      {
+        "market": "ELP-BTV",
+        "origin": "ELP",
+        "destination": "BTV",
+        "demand": 0.9,
+        "beforeMinutes": 672,
+        "afterMinutes": 662
+      },
+      {
+        "market": "MDT-BTV",
+        "origin": "MDT",
+        "destination": "BTV",
+        "demand": 0.8,
+        "beforeMinutes": 152,
+        "afterMinutes": 142
+      },
+      {
+        "market": "GNV-BTV",
+        "origin": "GNV",
+        "destination": "BTV",
+        "demand": 0.6,
+        "beforeMinutes": 385,
+        "afterMinutes": 375
+      },
+      {
+        "market": "MLB-BTV",
+        "origin": "MLB",
+        "destination": "BTV",
+        "demand": 0.6,
+        "beforeMinutes": 437,
+        "afterMinutes": 427
+      },
+      {
+        "market": "TLH-BTV",
+        "origin": "TLH",
+        "destination": "BTV",
+        "demand": 0.6,
+        "beforeMinutes": 437,
+        "afterMinutes": 427
+      },
+      {
+        "market": "BTV-MLB",
+        "origin": "BTV",
+        "destination": "MLB",
+        "demand": 0.5,
+        "beforeMinutes": 562,
+        "afterMinutes": 388
+      },
+      {
+        "market": "JAN-BTV",
+        "origin": "JAN",
+        "destination": "BTV",
+        "demand": 0.5,
+        "beforeMinutes": 402,
+        "afterMinutes": 392
+      },
+      {
+        "market": "AGS-BTV",
+        "origin": "AGS",
+        "destination": "BTV",
+        "demand": 0.4,
+        "beforeMinutes": 377,
+        "afterMinutes": 367
+      },
+      {
+        "market": "MOB-BTV",
+        "origin": "MOB",
+        "destination": "BTV",
+        "demand": 0.3,
+        "beforeMinutes": 402,
+        "afterMinutes": 392
+      },
+      {
+        "market": "PHF-ORH",
+        "origin": "PHF",
+        "destination": "ORH",
+        "demand": 0.3,
+        "beforeMinutes": 303,
+        "afterMinutes": 300
+      },
+      {
+        "market": "ACY-BTV",
+        "origin": "ACY",
+        "destination": "BTV",
+        "demand": 0,
+        "beforeMinutes": 157,
+        "afterMinutes": 156
+      },
+      {
+        "market": "MCN-BTV",
+        "origin": "MCN",
+        "destination": "BTV",
+        "demand": 0,
+        "beforeMinutes": 377,
+        "afterMinutes": 367
+      }
+    ],
+    "regressed": [
+      {
+        "market": "ACY-SFB",
+        "origin": "ACY",
+        "destination": "SFB",
+        "demand": 80.1,
+        "beforeMinutes": 245,
+        "afterMinutes": 254
+      },
+      {
+        "market": "ACY-FLL",
+        "origin": "ACY",
+        "destination": "FLL",
+        "demand": 78.6,
+        "beforeMinutes": 279,
+        "afterMinutes": 288
+      },
+      {
+        "market": "PIE-BTV",
+        "origin": "PIE",
+        "destination": "BTV",
+        "demand": 20.8,
+        "beforeMinutes": 248,
+        "afterMinutes": 252
+      },
+      {
+        "market": "BTV-HOU",
+        "origin": "BTV",
+        "destination": "HOU",
+        "demand": 5,
+        "beforeMinutes": 523,
+        "afterMinutes": 710
+      },
+      {
+        "market": "BTV-GSP",
+        "origin": "BTV",
+        "destination": "GSP",
+        "demand": 3.6,
+        "beforeMinutes": 296,
+        "afterMinutes": 623
+      },
+      {
+        "market": "ACY-RFD",
+        "origin": "ACY",
+        "destination": "RFD",
+        "demand": 0.9,
+        "beforeMinutes": 380,
+        "afterMinutes": 389
+      },
+      {
+        "market": "BTV-BWI",
+        "origin": "BTV",
+        "destination": "BWI",
+        "demand": 0.6,
+        "beforeMinutes": 265,
+        "afterMinutes": 592
+      },
+      {
+        "market": "BTV-GNV",
+        "origin": "BTV",
+        "destination": "GNV",
+        "demand": 0.6,
+        "beforeMinutes": 495,
+        "afterMinutes": 614
+      },
+      {
+        "market": "ACY-CMH",
+        "origin": "ACY",
+        "destination": "CMH",
+        "demand": 0.4,
+        "beforeMinutes": 438,
+        "afterMinutes": 447
+      },
+      {
+        "market": "ACY-IND",
+        "origin": "ACY",
+        "destination": "IND",
+        "demand": 0.3,
+        "beforeMinutes": 443,
+        "afterMinutes": 452
+      },
+      {
+        "market": "ACY-BUF",
+        "origin": "ACY",
+        "destination": "BUF",
+        "demand": 0.2,
+        "beforeMinutes": 149,
+        "afterMinutes": 158
+      },
+      {
+        "market": "ACY-CAK",
+        "origin": "ACY",
+        "destination": "CAK",
+        "demand": 0.2,
+        "beforeMinutes": 176,
+        "afterMinutes": 185
+      },
+      {
+        "market": "ACY-PIT",
+        "origin": "ACY",
+        "destination": "PIT",
+        "demand": 0.2,
+        "beforeMinutes": 169,
+        "afterMinutes": 178
+      },
+      {
+        "market": "ACY-BGR",
+        "origin": "ACY",
+        "destination": "BGR",
+        "demand": 0.1,
+        "beforeMinutes": 350,
+        "afterMinutes": 359
+      },
+      {
+        "market": "ACY-DAY",
+        "origin": "ACY",
+        "destination": "DAY",
+        "demand": 0.1,
+        "beforeMinutes": 363,
+        "afterMinutes": 372
+      },
+      {
+        "market": "ACY-ELP",
+        "origin": "ACY",
+        "destination": "ELP",
+        "demand": 0.1,
+        "beforeMinutes": 806,
+        "afterMinutes": 815
+      },
+      {
+        "market": "ACY-GRR",
+        "origin": "ACY",
+        "destination": "GRR",
+        "demand": 0.1,
+        "beforeMinutes": 458,
+        "afterMinutes": 467
+      },
+      {
+        "market": "ACY-MHT",
+        "origin": "ACY",
+        "destination": "MHT",
+        "demand": 0.1,
+        "beforeMinutes": 170,
+        "afterMinutes": 179
+      },
+      {
+        "market": "ACY-ROC",
+        "origin": "ACY",
+        "destination": "ROC",
+        "demand": 0.1,
+        "beforeMinutes": 144,
+        "afterMinutes": 153
+      },
+      {
+        "market": "ACY-SDF",
+        "origin": "ACY",
+        "destination": "SDF",
+        "demand": 0.1,
+        "beforeMinutes": 453,
+        "afterMinutes": 462
+      },
+      {
+        "market": "ACY-SRQ",
+        "origin": "ACY",
+        "destination": "SRQ",
+        "demand": 0.1,
+        "beforeMinutes": 281,
+        "afterMinutes": 290
+      },
+      {
+        "market": "ACY-ALB",
+        "origin": "ACY",
+        "destination": "ALB",
+        "demand": 0,
+        "beforeMinutes": 319,
+        "afterMinutes": 328
+      },
+      {
+        "market": "ACY-BTR",
+        "origin": "ACY",
+        "destination": "BTR",
+        "demand": 0,
+        "beforeMinutes": 695,
+        "afterMinutes": 704
+      },
+      {
+        "market": "ACY-ECP",
+        "origin": "ACY",
+        "destination": "ECP",
+        "demand": 0,
+        "beforeMinutes": 651,
+        "afterMinutes": 660
+      },
+      {
+        "market": "ACY-FWA",
+        "origin": "ACY",
+        "destination": "FWA",
+        "demand": 0,
+        "beforeMinutes": 395,
+        "afterMinutes": 564
+      },
+      {
+        "market": "ACY-GPT",
+        "origin": "ACY",
+        "destination": "GPT",
+        "demand": 0,
+        "beforeMinutes": 678,
+        "afterMinutes": 687
+      },
+      {
+        "market": "ACY-JAN",
+        "origin": "ACY",
+        "destination": "JAN",
+        "demand": 0,
+        "beforeMinutes": 688,
+        "afterMinutes": 697
+      },
+      {
+        "market": "ACY-MCN",
+        "origin": "ACY",
+        "destination": "MCN",
+        "demand": 0,
+        "beforeMinutes": 644,
+        "afterMinutes": 653
+      },
+      {
+        "market": "ACY-MLB",
+        "origin": "ACY",
+        "destination": "MLB",
+        "demand": 0,
+        "beforeMinutes": 575,
+        "afterMinutes": 584
+      },
+      {
+        "market": "ACY-MOB",
+        "origin": "ACY",
+        "destination": "MOB",
+        "demand": 0,
+        "beforeMinutes": 671,
+        "afterMinutes": 680
+      },
+      {
+        "market": "ACY-MSN",
+        "origin": "ACY",
+        "destination": "MSN",
+        "demand": 0,
+        "beforeMinutes": 475,
+        "afterMinutes": 484
+      },
+      {
+        "market": "ACY-SBN",
+        "origin": "ACY",
+        "destination": "SBN",
+        "demand": 0,
+        "beforeMinutes": 460,
+        "afterMinutes": 469
+      },
+      {
+        "market": "ACY-TLH",
+        "origin": "ACY",
+        "destination": "TLH",
+        "demand": 0,
+        "beforeMinutes": 640,
+        "afterMinutes": 649
+      },
+      {
+        "market": "ACY-VPS",
+        "origin": "ACY",
+        "destination": "VPS",
+        "demand": 0,
+        "beforeMinutes": 584,
+        "afterMinutes": 593
+      },
+      {
+        "market": "BTV-HVN",
+        "origin": "BTV",
+        "destination": "HVN",
+        "demand": 0,
+        "beforeMinutes": 151,
+        "afterMinutes": 266
+      },
+      {
+        "market": "HVN-BTV",
+        "origin": "HVN",
+        "destination": "BTV",
+        "demand": 0,
+        "beforeMinutes": 147,
+        "afterMinutes": 167
+      }
+    ],
+    "rawGains": 8,
+    "rawLosses": 4
+  },
+  {
+    "name": "R160_BTV_PWM",
+    "flights": 1258,
+    "coverageGains": 1,
+    "coverageLosses": 3,
+    "faster": 0,
+    "slower": 7,
+    "gains": [
+      {
+        "market": "BTV-PWM",
+        "origin": "BTV",
+        "destination": "PWM",
+        "demand": 0.6,
+        "beforeMinutes": null,
+        "afterMinutes": 55
+      }
+    ],
+    "losses": [
+      {
+        "market": "BTV-DAB",
+        "origin": "BTV",
+        "destination": "DAB",
+        "demand": 0.9,
+        "beforeMinutes": 244,
+        "afterMinutes": null
+      },
+      {
+        "market": "BTV-BWI",
+        "origin": "BTV",
+        "destination": "BWI",
+        "demand": 0.6,
+        "beforeMinutes": 265,
+        "afterMinutes": 592
+      },
+      {
+        "market": "BTV-ACY",
+        "origin": "BTV",
+        "destination": "ACY",
+        "demand": 0,
+        "beforeMinutes": 159,
+        "afterMinutes": null
+      }
+    ],
+    "improved": [],
+    "regressed": [
+      {
+        "market": "BTV-CHS",
+        "origin": "BTV",
+        "destination": "CHS",
+        "demand": 8,
+        "beforeMinutes": 415,
+        "afterMinutes": 462
+      },
+      {
+        "market": "BTV-HOU",
+        "origin": "BTV",
+        "destination": "HOU",
+        "demand": 5,
+        "beforeMinutes": 523,
+        "afterMinutes": 710
+      },
+      {
+        "market": "BTV-GSP",
+        "origin": "BTV",
+        "destination": "GSP",
+        "demand": 3.6,
+        "beforeMinutes": 296,
+        "afterMinutes": 623
+      },
+      {
+        "market": "BTV-PHF",
+        "origin": "BTV",
+        "destination": "PHF",
+        "demand": 2.8,
+        "beforeMinutes": 180,
+        "afterMinutes": 292
+      },
+      {
+        "market": "BTV-BWI",
+        "origin": "BTV",
+        "destination": "BWI",
+        "demand": 0.6,
+        "beforeMinutes": 265,
+        "afterMinutes": 592
+      },
+      {
+        "market": "BTV-GNV",
+        "origin": "BTV",
+        "destination": "GNV",
+        "demand": 0.6,
+        "beforeMinutes": 495,
+        "afterMinutes": 614
+      },
+      {
+        "market": "BTV-HVN",
+        "origin": "BTV",
+        "destination": "HVN",
+        "demand": 0,
+        "beforeMinutes": 151,
+        "afterMinutes": 266
+      }
+    ],
+    "rawGains": 0,
+    "rawLosses": 3
+  },
+  {
+    "name": "R107_BDL_BUF",
+    "flights": 1258,
+    "coverageGains": 1,
+    "coverageLosses": 5,
+    "faster": 1,
+    "slower": 6,
+    "gains": [
+      {
+        "market": "BUF-MDT",
+        "origin": "BUF",
+        "destination": "MDT",
+        "demand": 0.6,
+        "beforeMinutes": null,
+        "afterMinutes": 153
+      }
+    ],
+    "losses": [
+      {
+        "market": "BDL-PIT",
+        "origin": "BDL",
+        "destination": "PIT",
+        "demand": 20.2,
+        "beforeMinutes": 331,
+        "afterMinutes": null
+      },
+      {
+        "market": "BDL-CAK",
+        "origin": "BDL",
+        "destination": "CAK",
+        "demand": 9.6,
+        "beforeMinutes": 166,
+        "afterMinutes": 390
+      },
+      {
+        "market": "BDL-ROC",
+        "origin": "BDL",
+        "destination": "ROC",
+        "demand": 1.6,
+        "beforeMinutes": 135,
+        "afterMinutes": null
+      },
+      {
+        "market": "BDL-MDT",
+        "origin": "BDL",
+        "destination": "MDT",
+        "demand": 0.7,
+        "beforeMinutes": 152,
+        "afterMinutes": null
+      },
+      {
+        "market": "BDL-ABE",
+        "origin": "BDL",
+        "destination": "ABE",
+        "demand": 0.2,
+        "beforeMinutes": 317,
+        "afterMinutes": null
+      }
+    ],
+    "improved": [
+      {
+        "market": "BDL-BUF",
+        "origin": "BDL",
+        "destination": "BUF",
+        "demand": 3.6,
+        "beforeMinutes": 131,
+        "afterMinutes": 80
+      }
+    ],
+    "regressed": [
+      {
+        "market": "BDL-FLL",
+        "origin": "BDL",
+        "destination": "FLL",
+        "demand": 110.9,
+        "beforeMinutes": 269,
+        "afterMinutes": 283
+      },
+      {
+        "market": "BDL-RFD",
+        "origin": "BDL",
+        "destination": "RFD",
+        "demand": 104.2,
+        "beforeMinutes": 200,
+        "afterMinutes": 252
+      },
+      {
+        "market": "BDL-SRQ",
+        "origin": "BDL",
+        "destination": "SRQ",
+        "demand": 34.7,
+        "beforeMinutes": 271,
+        "afterMinutes": 303
+      },
+      {
+        "market": "BDL-CAK",
+        "origin": "BDL",
+        "destination": "CAK",
+        "demand": 9.6,
+        "beforeMinutes": 166,
+        "afterMinutes": 390
+      },
+      {
+        "market": "BDL-BTV",
+        "origin": "BDL",
+        "destination": "BTV",
+        "demand": 0.4,
+        "beforeMinutes": 137,
+        "afterMinutes": 262
+      },
+      {
+        "market": "BDL-BGR",
+        "origin": "BDL",
+        "destination": "BGR",
+        "demand": 0.3,
+        "beforeMinutes": 175,
+        "afterMinutes": 290
+      }
+    ],
+    "rawGains": 1,
+    "rawLosses": 7
+  },
+  {
+    "name": "R107_BDL_ROC",
+    "flights": 1258,
+    "coverageGains": 1,
+    "coverageLosses": 5,
+    "faster": 3,
+    "slower": 6,
+    "gains": [
+      {
+        "market": "ROC-MDT",
+        "origin": "ROC",
+        "destination": "MDT",
+        "demand": 0.3,
+        "beforeMinutes": null,
+        "afterMinutes": 146
+      }
+    ],
+    "losses": [
+      {
+        "market": "BDL-PIT",
+        "origin": "BDL",
+        "destination": "PIT",
+        "demand": 20.2,
+        "beforeMinutes": 331,
+        "afterMinutes": null
+      },
+      {
+        "market": "BDL-CAK",
+        "origin": "BDL",
+        "destination": "CAK",
+        "demand": 9.6,
+        "beforeMinutes": 166,
+        "afterMinutes": 390
+      },
+      {
+        "market": "BDL-BUF",
+        "origin": "BDL",
+        "destination": "BUF",
+        "demand": 3.6,
+        "beforeMinutes": 131,
+        "afterMinutes": null
+      },
+      {
+        "market": "BDL-MDT",
+        "origin": "BDL",
+        "destination": "MDT",
+        "demand": 0.7,
+        "beforeMinutes": 152,
+        "afterMinutes": null
+      },
+      {
+        "market": "BDL-ABE",
+        "origin": "BDL",
+        "destination": "ABE",
+        "demand": 0.2,
+        "beforeMinutes": 317,
+        "afterMinutes": null
+      }
+    ],
+    "improved": [
+      {
+        "market": "BDL-ROC",
+        "origin": "BDL",
+        "destination": "ROC",
+        "demand": 1.6,
+        "beforeMinutes": 135,
+        "afterMinutes": 75
+      },
+      {
+        "market": "ROC-CAK",
+        "origin": "ROC",
+        "destination": "CAK",
+        "demand": 0.9,
+        "beforeMinutes": 167,
+        "afterMinutes": 160
+      },
+      {
+        "market": "ROC-BTV",
+        "origin": "ROC",
+        "destination": "BTV",
+        "demand": 0.5,
+        "beforeMinutes": 132,
+        "afterMinutes": 131
+      }
+    ],
+    "regressed": [
+      {
+        "market": "BDL-FLL",
+        "origin": "BDL",
+        "destination": "FLL",
+        "demand": 110.9,
+        "beforeMinutes": 269,
+        "afterMinutes": 283
+      },
+      {
+        "market": "BDL-RFD",
+        "origin": "BDL",
+        "destination": "RFD",
+        "demand": 104.2,
+        "beforeMinutes": 200,
+        "afterMinutes": 252
+      },
+      {
+        "market": "BDL-SRQ",
+        "origin": "BDL",
+        "destination": "SRQ",
+        "demand": 34.7,
+        "beforeMinutes": 271,
+        "afterMinutes": 303
+      },
+      {
+        "market": "BDL-CAK",
+        "origin": "BDL",
+        "destination": "CAK",
+        "demand": 9.6,
+        "beforeMinutes": 166,
+        "afterMinutes": 390
+      },
+      {
+        "market": "BDL-BTV",
+        "origin": "BDL",
+        "destination": "BTV",
+        "demand": 0.4,
+        "beforeMinutes": 137,
+        "afterMinutes": 262
+      },
+      {
+        "market": "BDL-BGR",
+        "origin": "BDL",
+        "destination": "BGR",
+        "demand": 0.3,
+        "beforeMinutes": 175,
+        "afterMinutes": 290
+      }
+    ],
+    "rawGains": 0,
+    "rawLosses": 6
+  },
+  {
+    "name": "R107_BDL_PVD",
+    "flights": 1258,
+    "coverageGains": 2,
+    "coverageLosses": 6,
+    "faster": 5,
+    "slower": 6,
+    "gains": [
+      {
+        "market": "BDL-PVD",
+        "origin": "BDL",
+        "destination": "PVD",
+        "demand": 1.4,
+        "beforeMinutes": null,
+        "afterMinutes": 35
+      },
+      {
+        "market": "PVD-ROC",
+        "origin": "PVD",
+        "destination": "ROC",
+        "demand": 1.3,
+        "beforeMinutes": null,
+        "afterMinutes": 153
+      }
+    ],
+    "losses": [
+      {
+        "market": "BDL-PIT",
+        "origin": "BDL",
+        "destination": "PIT",
+        "demand": 20.2,
+        "beforeMinutes": 331,
+        "afterMinutes": null
+      },
+      {
+        "market": "BDL-CAK",
+        "origin": "BDL",
+        "destination": "CAK",
+        "demand": 9.6,
+        "beforeMinutes": 166,
+        "afterMinutes": 390
+      },
+      {
+        "market": "BDL-BUF",
+        "origin": "BDL",
+        "destination": "BUF",
+        "demand": 3.6,
+        "beforeMinutes": 131,
+        "afterMinutes": null
+      },
+      {
+        "market": "BDL-ROC",
+        "origin": "BDL",
+        "destination": "ROC",
+        "demand": 1.6,
+        "beforeMinutes": 135,
+        "afterMinutes": null
+      },
+      {
+        "market": "BDL-MDT",
+        "origin": "BDL",
+        "destination": "MDT",
+        "demand": 0.7,
+        "beforeMinutes": 152,
+        "afterMinutes": null
+      },
+      {
+        "market": "BDL-ABE",
+        "origin": "BDL",
+        "destination": "ABE",
+        "demand": 0.2,
+        "beforeMinutes": 317,
+        "afterMinutes": null
+      }
+    ],
+    "improved": [
+      {
+        "market": "PVD-SRQ",
+        "origin": "PVD",
+        "destination": "SRQ",
+        "demand": 33.8,
+        "beforeMinutes": 318,
+        "afterMinutes": 289
+      },
+      {
+        "market": "PVD-CAK",
+        "origin": "PVD",
+        "destination": "CAK",
+        "demand": 5.5,
+        "beforeMinutes": 285,
+        "afterMinutes": 184
+      },
+      {
+        "market": "PVD-BUF",
+        "origin": "PVD",
+        "destination": "BUF",
+        "demand": 2.5,
+        "beforeMinutes": 321,
+        "afterMinutes": 149
+      },
+      {
+        "market": "PVD-MDT",
+        "origin": "PVD",
+        "destination": "MDT",
+        "demand": 1.3,
+        "beforeMinutes": 182,
+        "afterMinutes": 170
+      },
+      {
+        "market": "PVD-BTV",
+        "origin": "PVD",
+        "destination": "BTV",
+        "demand": 0.3,
+        "beforeMinutes": 157,
+        "afterMinutes": 155
+      }
+    ],
+    "regressed": [
+      {
+        "market": "BDL-FLL",
+        "origin": "BDL",
+        "destination": "FLL",
+        "demand": 110.9,
+        "beforeMinutes": 269,
+        "afterMinutes": 283
+      },
+      {
+        "market": "BDL-RFD",
+        "origin": "BDL",
+        "destination": "RFD",
+        "demand": 104.2,
+        "beforeMinutes": 200,
+        "afterMinutes": 252
+      },
+      {
+        "market": "BDL-SRQ",
+        "origin": "BDL",
+        "destination": "SRQ",
+        "demand": 34.7,
+        "beforeMinutes": 271,
+        "afterMinutes": 303
+      },
+      {
+        "market": "BDL-CAK",
+        "origin": "BDL",
+        "destination": "CAK",
+        "demand": 9.6,
+        "beforeMinutes": 166,
+        "afterMinutes": 390
+      },
+      {
+        "market": "BDL-BTV",
+        "origin": "BDL",
+        "destination": "BTV",
+        "demand": 0.4,
+        "beforeMinutes": 137,
+        "afterMinutes": 262
+      },
+      {
+        "market": "BDL-BGR",
+        "origin": "BDL",
+        "destination": "BGR",
+        "demand": 0.3,
+        "beforeMinutes": 175,
+        "afterMinutes": 290
+      }
+    ],
+    "rawGains": 2,
+    "rawLosses": 7
+  }
+]

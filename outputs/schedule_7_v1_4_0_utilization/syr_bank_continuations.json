@@ -1,0 +1,365 @@
+[
+  {
+    "name": "R107-ISP-BDL-CAK-DAY-CAK",
+    "description": "Retimed ISP and BDL returns create SYR M12 and M17 turns; CAK-DAY-CAK adds 100 block minutes, ends at CAK",
+    "scope": "READ ONLY, NOT IN ACCEPTED DRAFT",
+    "structure": "pass",
+    "overnight": "pass",
+    "planning": "pass",
+    "gate": "GateCapacityError: 3 passenger touch(es) remain off-gate",
+    "operating": {
+      "checks": 25,
+      "passed": 14,
+      "failed": 3,
+      "warnings": 5,
+      "notEvaluated": 1,
+      "overridden": 2,
+      "effectiveErrorFindings": 5,
+      "effectiveWarningFindings": 159
+    },
+    "addedFlights": 2,
+    "failures": [
+      {
+        "check": "section_26_pairing_spacing",
+        "findings": [
+          {
+            "id": "DAY-CAK",
+            "message": "DAY\u2013CAK fails same-pairing spacing",
+            "evidence": {
+              "origin": "DAY",
+              "destination": "CAK",
+              "departures": [
+                550,
+                975,
+                1295,
+                1305
+              ],
+              "gaps": [
+                {
+                  "from": 550,
+                  "to": 975,
+                  "minutes": 425
+                },
+                {
+                  "from": 975,
+                  "to": 1295,
+                  "minutes": 320
+                },
+                {
+                  "from": 1295,
+                  "to": 1305,
+                  "minutes": 10
+                },
+                {
+                  "from": 1305,
+                  "to": 550,
+                  "minutes": 685
+                }
+              ],
+              "targetMinutes": 84.0,
+              "allowedExceptions": 1,
+              "hubBound": false
+            }
+          }
+        ]
+      },
+      {
+        "check": "passenger_touch_on_stand",
+        "findings": [
+          {
+            "id": "BDL-107-819-864",
+            "message": "BDL claim 107 requires passenger handling on stand 1",
+            "evidence": {
+              "city": "BDL",
+              "label": "107",
+              "kind": "turn",
+              "start": 819,
+              "end": 864,
+              "stand": 1
+            }
+          },
+          {
+            "id": "BDL-312 -> 313-1300-1345",
+            "message": "BDL claim 312 -> 313 requires passenger handling on stand 1",
+            "evidence": {
+              "city": "BDL",
+              "label": "312 -> 313",
+              "kind": "ron",
+              "start": 1300,
+              "end": 1345,
+              "stand": 1
+            }
+          },
+          {
+            "id": "BDL-312 -> 313-1650-1710",
+            "message": "BDL claim 312 -> 313 requires passenger handling on stand 1",
+            "evidence": {
+              "city": "BDL",
+              "label": "312 -> 313",
+              "kind": "ron",
+              "start": 1650,
+              "end": 1710,
+              "stand": 1
+            }
+          }
+        ]
+      },
+      {
+        "check": "fixed_physical_inventory",
+        "findings": [
+          {
+            "id": "BDL",
+            "message": "BDL cannot fit its claims into the configured physical inventory: 3 passenger touch(es) remain off-gate",
+            "evidence": {
+              "city": "BDL",
+              "requiredGates": 3,
+              "configuredGates": 2,
+              "requiredStands": 2,
+              "configuredStands": 2,
+              "strandedPassengerTouches": 3
+            }
+          }
+        ]
+      }
+    ],
+    "pass": false,
+    "overlay": {
+      "schemaVersion": "1.0.0",
+      "id": "v140-syr-bank-continue-R107-ISP-BDL-CAK-DAY-CAK",
+      "baseSchedule": {
+        "scheduleId": "schedule_7_v1_4_0_draft"
+      },
+      "schedule": {
+        "id": "schedule_7_v1_4_0_draft",
+        "number": 7,
+        "version": "1.4.0-draft",
+        "label": "Schedule 7, Version 1.4.0 draft",
+        "status": "draft",
+        "fleetCounts": {
+          "MAX9": 35,
+          "CRJ900": 45,
+          "CRJ700": 65,
+          "CRJ200": 80
+        },
+        "connectionWindowMinutes": {
+          "minimum": 30,
+          "maximum": 240
+        }
+      },
+      "hubBanksToAdd": [
+        {
+          "id": "SYR-M12",
+          "hub": "SYR",
+          "startMinute": 715,
+          "endMinute": 775
+        },
+        {
+          "id": "SYR-M17",
+          "hub": "SYR",
+          "startMinute": 1035,
+          "endMinute": 1095
+        }
+      ],
+      "hubBankCountOverrides": {
+        "SYR": 9
+      },
+      "retimeLegs": [
+        {
+          "legId": "ISP-SYR-CRJ200-02-OUT",
+          "expectedDepartureMinute": 745,
+          "expectedArrivalMinute": 803,
+          "departureMinute": 667,
+          "arrivalMinute": 725
+        },
+        {
+          "legId": "BDL-SYR-CRJ200-01-IN",
+          "expectedDepartureMinute": 845,
+          "expectedArrivalMinute": 899,
+          "departureMinute": 765,
+          "arrivalMinute": 819
+        },
+        {
+          "legId": "BDL-SYR-CRJ200-01-OUT",
+          "expectedDepartureMinute": 1080,
+          "expectedArrivalMinute": 1134,
+          "departureMinute": 996,
+          "arrivalMinute": 1050
+        },
+        {
+          "legId": "CAK-SYR-CRJ200-01-IN",
+          "expectedDepartureMinute": 1175,
+          "expectedArrivalMinute": 1246,
+          "departureMinute": 1090,
+          "arrivalMinute": 1161
+        }
+      ],
+      "bankAssignmentReplacements": [
+        {
+          "legId": "ISP-SYR-CRJ200-02-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-M12"
+        },
+        {
+          "legId": "BDL-SYR-CRJ200-01-IN",
+          "operation": "departure",
+          "bankId": "SYR-M12"
+        },
+        {
+          "legId": "BDL-SYR-CRJ200-01-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-M17"
+        },
+        {
+          "legId": "CAK-SYR-CRJ200-01-IN",
+          "operation": "departure",
+          "bankId": "SYR-M17"
+        }
+      ],
+      "insertLegs": [
+        {
+          "id": "V140-R107-BANK-TURN-1",
+          "route": 107,
+          "origin": "CAK",
+          "destination": "DAY",
+          "departureMinute": 1215,
+          "arrivalMinute": 1265
+        },
+        {
+          "id": "V140-R107-BANK-TURN-2",
+          "route": 107,
+          "origin": "DAY",
+          "destination": "CAK",
+          "departureMinute": 1305,
+          "arrivalMinute": 1355
+        }
+      ],
+      "bankAssignmentsToAdd": [
+        {
+          "legId": "V140-R107-BANK-TURN-1",
+          "operation": "arrival",
+          "bankId": "DAY-B9"
+        },
+        {
+          "legId": "V140-R107-BANK-TURN-2",
+          "operation": "departure",
+          "bankId": "DAY-B9"
+        }
+      ]
+    }
+  },
+  {
+    "name": "R160-BTV-SYR-PWM-PHF-PWM",
+    "description": "Shift BTV-SYR and SYR-PWM into M15; add PWM-PHF-PWM to reach original PWM terminator later",
+    "scope": "READ ONLY, NOT IN ACCEPTED DRAFT",
+    "structure": "pass",
+    "overnight": "pass",
+    "planning": "pass",
+    "gate": "pass",
+    "operating": {
+      "checks": 25,
+      "passed": 17,
+      "failed": 0,
+      "warnings": 5,
+      "notEvaluated": 1,
+      "overridden": 2,
+      "effectiveErrorFindings": 0,
+      "effectiveWarningFindings": 158
+    },
+    "addedFlights": 2,
+    "failures": [],
+    "pass": true,
+    "overlay": {
+      "schemaVersion": "1.0.0",
+      "id": "v140-syr-bank-continue-R160-BTV-SYR-PWM-PHF-PWM",
+      "baseSchedule": {
+        "scheduleId": "schedule_7_v1_4_0_draft"
+      },
+      "schedule": {
+        "id": "schedule_7_v1_4_0_draft",
+        "number": 7,
+        "version": "1.4.0-draft",
+        "label": "Schedule 7, Version 1.4.0 draft",
+        "status": "draft",
+        "fleetCounts": {
+          "MAX9": 35,
+          "CRJ900": 45,
+          "CRJ700": 65,
+          "CRJ200": 80
+        },
+        "connectionWindowMinutes": {
+          "minimum": 30,
+          "maximum": 240
+        }
+      },
+      "hubBanksToAdd": [
+        {
+          "id": "SYR-M15",
+          "hub": "SYR",
+          "startMinute": 885,
+          "endMinute": 945
+        }
+      ],
+      "hubBankCountOverrides": {
+        "SYR": 8
+      },
+      "retimeLegs": [
+        {
+          "legId": "BTV-SYR-CRJ200-02-OUT",
+          "expectedDepartureMinute": 915,
+          "expectedArrivalMinute": 967,
+          "departureMinute": 848,
+          "arrivalMinute": 900
+        },
+        {
+          "legId": "PWM-SYR-CRJ200-01-IN",
+          "expectedDepartureMinute": 1140,
+          "expectedArrivalMinute": 1208,
+          "departureMinute": 940,
+          "arrivalMinute": 1008
+        }
+      ],
+      "bankAssignmentReplacements": [
+        {
+          "legId": "BTV-SYR-CRJ200-02-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-M15"
+        },
+        {
+          "legId": "PWM-SYR-CRJ200-01-IN",
+          "operation": "departure",
+          "bankId": "SYR-M15"
+        }
+      ],
+      "insertLegs": [
+        {
+          "id": "V140-R160-BANK-TURN-1",
+          "route": 160,
+          "origin": "PWM",
+          "destination": "PHF",
+          "departureMinute": 1048,
+          "arrivalMinute": 1149
+        },
+        {
+          "id": "V140-R160-BANK-TURN-2",
+          "route": 160,
+          "origin": "PHF",
+          "destination": "PWM",
+          "departureMinute": 1189,
+          "arrivalMinute": 1290
+        }
+      ],
+      "bankAssignmentsToAdd": [
+        {
+          "legId": "V140-R160-BANK-TURN-1",
+          "operation": "arrival",
+          "bankId": "PHF-M6"
+        },
+        {
+          "legId": "V140-R160-BANK-TURN-2",
+          "operation": "departure",
+          "bankId": "PHF-M6"
+        }
+      ]
+    }
+  }
+]

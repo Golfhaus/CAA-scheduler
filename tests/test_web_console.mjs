@@ -65,16 +65,16 @@ function towPieces(label, start, end) {
 
 test("overview metrics reflect the frozen schedule", () => {
   assert.deepEqual(scheduleMetrics(canonical), {
-    flights: latest.id === "schedule_7_v1_3_3" ? 1253 : latest.id === "schedule_7_v1_3_2" ? 1229 : 1214,
+    flights: latest.id === "schedule_7_v1_4_0" ? 1259 : latest.id === "schedule_7_v1_3_3" ? 1253 : latest.id === "schedule_7_v1_3_2" ? 1229 : 1214,
     cities: 105,
-    routes: latest.id === "schedule_7_v1_3_3" ? 188 : 184,
-    lines: latest.id === "schedule_7_v1_3_3" || latest.id === "schedule_7_v1_3_2" ? 17 : 19,
-    markets: latest.id === "schedule_7_v1_3_3" ? 593 : latest.id === "schedule_7_v1_3_2" ? 575 : 572,
+    routes: latest.id === "schedule_7_v1_4_0" || latest.id === "schedule_7_v1_3_3" ? 188 : 184,
+    lines: latest.id === "schedule_7_v1_4_0" || latest.id === "schedule_7_v1_3_3" || latest.id === "schedule_7_v1_3_2" ? 17 : 19,
+    markets: latest.id === "schedule_7_v1_4_0" ? 593 : latest.id === "schedule_7_v1_3_3" ? 593 : latest.id === "schedule_7_v1_3_2" ? 575 : 572,
   });
   assert.deepEqual(fleetUsage(canonical), {
     CRJ200: 76,
-    CRJ700: latest.id === "schedule_7_v1_3_3" ? 58 : 56,
-    CRJ900: latest.id === "schedule_7_v1_3_3" ? 30 : 28,
+    CRJ700: latest.id === "schedule_7_v1_4_0" || latest.id === "schedule_7_v1_3_3" ? 58 : 56,
+    CRJ900: latest.id === "schedule_7_v1_4_0" || latest.id === "schedule_7_v1_3_3" ? 30 : 28,
     MAX9: 24,
   });
 });

@@ -1,0 +1,2142 @@
+[
+  {
+    "name": "paired_M12",
+    "banks": [
+      "M12"
+    ],
+    "scope": "READ ONLY: unaccepted draft alternative",
+    "structure": "pass",
+    "overnight": "pass",
+    "planning": "pass",
+    "gate": "pass",
+    "operating": {
+      "checks": 25,
+      "passed": 17,
+      "failed": 0,
+      "warnings": 5,
+      "notEvaluated": 1,
+      "overridden": 2,
+      "effectiveErrorFindings": 0,
+      "effectiveWarningFindings": 158
+    },
+    "paired": 3,
+    "extraInbound": 0,
+    "pairsByBank": {
+      "M12": [
+        105,
+        106,
+        108
+      ]
+    },
+    "failures": [],
+    "pass": true,
+    "overlay": {
+      "schemaVersion": "1.0.0",
+      "id": "v140-syr-grouped-outbound-paired_M12",
+      "baseSchedule": {
+        "scheduleId": "schedule_7_v1_4_0_draft"
+      },
+      "schedule": {
+        "id": "schedule_7_v1_4_0_draft",
+        "number": 7,
+        "version": "1.4.0-draft",
+        "label": "Schedule 7, Version 1.4.0 draft",
+        "status": "draft",
+        "fleetCounts": {
+          "MAX9": 35,
+          "CRJ900": 45,
+          "CRJ700": 65,
+          "CRJ200": 80
+        },
+        "connectionWindowMinutes": {
+          "minimum": 30,
+          "maximum": 240
+        }
+      },
+      "hubBanksToAdd": [
+        {
+          "id": "SYR-M12",
+          "hub": "SYR",
+          "startMinute": 715,
+          "endMinute": 775
+        }
+      ],
+      "hubBankCountOverrides": {
+        "SYR": 8
+      },
+      "retimeLegs": [
+        {
+          "legId": "MHT-SYR-CRJ200-02-OUT",
+          "expectedDepartureMinute": 745,
+          "expectedArrivalMinute": 805,
+          "departureMinute": 665,
+          "arrivalMinute": 725
+        },
+        {
+          "legId": "BGR-SYR-CRJ200-02-IN",
+          "expectedDepartureMinute": 845,
+          "expectedArrivalMinute": 925,
+          "departureMinute": 765,
+          "arrivalMinute": 845
+        },
+        {
+          "legId": "HPN-SYR-CRJ200-01-OUT",
+          "expectedDepartureMinute": 741,
+          "expectedArrivalMinute": 795,
+          "departureMinute": 671,
+          "arrivalMinute": 725
+        },
+        {
+          "legId": "HPN-SYR-CRJ200-03-IN",
+          "expectedDepartureMinute": 835,
+          "expectedArrivalMinute": 889,
+          "departureMinute": 765,
+          "arrivalMinute": 819
+        },
+        {
+          "legId": "ORH-SYR-CRJ200-02-OUT",
+          "expectedDepartureMinute": 745,
+          "expectedArrivalMinute": 803,
+          "departureMinute": 667,
+          "arrivalMinute": 725
+        },
+        {
+          "legId": "BTV-SYR-CRJ200-03-IN",
+          "expectedDepartureMinute": 845,
+          "expectedArrivalMinute": 897,
+          "departureMinute": 765,
+          "arrivalMinute": 817
+        }
+      ],
+      "bankAssignmentReplacements": [
+        {
+          "legId": "MHT-SYR-CRJ200-02-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-M12"
+        },
+        {
+          "legId": "BGR-SYR-CRJ200-02-IN",
+          "operation": "departure",
+          "bankId": "SYR-M12"
+        },
+        {
+          "legId": "HPN-SYR-CRJ200-01-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-M12"
+        },
+        {
+          "legId": "HPN-SYR-CRJ200-03-IN",
+          "operation": "departure",
+          "bankId": "SYR-M12"
+        },
+        {
+          "legId": "ORH-SYR-CRJ200-02-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-M12"
+        },
+        {
+          "legId": "BTV-SYR-CRJ200-03-IN",
+          "operation": "departure",
+          "bankId": "SYR-M12"
+        }
+      ]
+    }
+  },
+  {
+    "name": "paired_M15",
+    "banks": [
+      "M15"
+    ],
+    "scope": "READ ONLY: unaccepted draft alternative",
+    "structure": "pass",
+    "overnight": "pass",
+    "planning": "pass",
+    "gate": "pass",
+    "operating": {
+      "checks": 25,
+      "passed": 17,
+      "failed": 0,
+      "warnings": 5,
+      "notEvaluated": 1,
+      "overridden": 2,
+      "effectiveErrorFindings": 0,
+      "effectiveWarningFindings": 154
+    },
+    "paired": 6,
+    "extraInbound": 0,
+    "pairsByBank": {
+      "M15": [
+        103,
+        104,
+        110,
+        124,
+        160,
+        167
+      ]
+    },
+    "failures": [],
+    "pass": true,
+    "overlay": {
+      "schemaVersion": "1.0.0",
+      "id": "v140-syr-grouped-outbound-paired_M15",
+      "baseSchedule": {
+        "scheduleId": "schedule_7_v1_4_0_draft"
+      },
+      "schedule": {
+        "id": "schedule_7_v1_4_0_draft",
+        "number": 7,
+        "version": "1.4.0-draft",
+        "label": "Schedule 7, Version 1.4.0 draft",
+        "status": "draft",
+        "fleetCounts": {
+          "MAX9": 35,
+          "CRJ900": 45,
+          "CRJ700": 65,
+          "CRJ200": 80
+        },
+        "connectionWindowMinutes": {
+          "minimum": 30,
+          "maximum": 240
+        }
+      },
+      "hubBanksToAdd": [
+        {
+          "id": "SYR-M15",
+          "hub": "SYR",
+          "startMinute": 885,
+          "endMinute": 945
+        }
+      ],
+      "hubBankCountOverrides": {
+        "SYR": 8
+      },
+      "retimeLegs": [
+        {
+          "legId": "ISP-SYR-CRJ200-03-OUT",
+          "expectedDepartureMinute": 910,
+          "expectedArrivalMinute": 968,
+          "departureMinute": 842,
+          "arrivalMinute": 900
+        },
+        {
+          "legId": "PHF-SYR-CRJ200-02-IN",
+          "expectedDepartureMinute": 1010,
+          "expectedArrivalMinute": 1095,
+          "departureMinute": 940,
+          "arrivalMinute": 1025
+        },
+        {
+          "legId": "HVN-SYR-CRJ200-03-OUT",
+          "expectedDepartureMinute": 915,
+          "expectedArrivalMinute": 971,
+          "departureMinute": 844,
+          "arrivalMinute": 900
+        },
+        {
+          "legId": "BUF-SYR-CRJ200-02-IN",
+          "expectedDepartureMinute": 1015,
+          "expectedArrivalMinute": 1061,
+          "departureMinute": 940,
+          "arrivalMinute": 986
+        },
+        {
+          "legId": "MHT-SYR-CRJ200-03-OUT",
+          "expectedDepartureMinute": 910,
+          "expectedArrivalMinute": 970,
+          "departureMinute": 840,
+          "arrivalMinute": 900
+        },
+        {
+          "legId": "PIT-SYR-CRJ200-01-IN",
+          "expectedDepartureMinute": 1010,
+          "expectedArrivalMinute": 1076,
+          "departureMinute": 940,
+          "arrivalMinute": 1006
+        },
+        {
+          "legId": "HPN-SYR-CRJ200-02-OUT",
+          "expectedDepartureMinute": 915,
+          "expectedArrivalMinute": 969,
+          "departureMinute": 846,
+          "arrivalMinute": 900
+        },
+        {
+          "legId": "HVN-SYR-CRJ200-03-IN",
+          "expectedDepartureMinute": 1010,
+          "expectedArrivalMinute": 1066,
+          "departureMinute": 940,
+          "arrivalMinute": 996
+        },
+        {
+          "legId": "BTV-SYR-CRJ200-02-OUT",
+          "expectedDepartureMinute": 915,
+          "expectedArrivalMinute": 967,
+          "departureMinute": 848,
+          "arrivalMinute": 900
+        },
+        {
+          "legId": "PWM-SYR-CRJ200-01-IN",
+          "expectedDepartureMinute": 1140,
+          "expectedArrivalMinute": 1208,
+          "departureMinute": 940,
+          "arrivalMinute": 1008
+        },
+        {
+          "legId": "CAK-SYR-CRJ200-02-OUT",
+          "expectedDepartureMinute": 895,
+          "expectedArrivalMinute": 966,
+          "departureMinute": 829,
+          "arrivalMinute": 900
+        },
+        {
+          "legId": "CAK-SYR-CRJ200-03-IN",
+          "expectedDepartureMinute": 1010,
+          "expectedArrivalMinute": 1081,
+          "departureMinute": 940,
+          "arrivalMinute": 1011
+        }
+      ],
+      "bankAssignmentReplacements": [
+        {
+          "legId": "ISP-SYR-CRJ200-03-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-M15"
+        },
+        {
+          "legId": "PHF-SYR-CRJ200-02-IN",
+          "operation": "departure",
+          "bankId": "SYR-M15"
+        },
+        {
+          "legId": "PHF-SYR-CRJ200-02-IN",
+          "operation": "arrival",
+          "bankId": "PHF-M5"
+        },
+        {
+          "legId": "HVN-SYR-CRJ200-03-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-M15"
+        },
+        {
+          "legId": "BUF-SYR-CRJ200-02-IN",
+          "operation": "departure",
+          "bankId": "SYR-M15"
+        },
+        {
+          "legId": "MHT-SYR-CRJ200-03-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-M15"
+        },
+        {
+          "legId": "PIT-SYR-CRJ200-01-IN",
+          "operation": "departure",
+          "bankId": "SYR-M15"
+        },
+        {
+          "legId": "HPN-SYR-CRJ200-02-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-M15"
+        },
+        {
+          "legId": "HVN-SYR-CRJ200-03-IN",
+          "operation": "departure",
+          "bankId": "SYR-M15"
+        },
+        {
+          "legId": "BTV-SYR-CRJ200-02-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-M15"
+        },
+        {
+          "legId": "PWM-SYR-CRJ200-01-IN",
+          "operation": "departure",
+          "bankId": "SYR-M15"
+        },
+        {
+          "legId": "CAK-SYR-CRJ200-02-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-M15"
+        },
+        {
+          "legId": "CAK-SYR-CRJ200-03-IN",
+          "operation": "departure",
+          "bankId": "SYR-M15"
+        }
+      ]
+    }
+  },
+  {
+    "name": "paired_M17",
+    "banks": [
+      "M17"
+    ],
+    "scope": "READ ONLY: unaccepted draft alternative",
+    "structure": "pass",
+    "overnight": "pass",
+    "planning": "pass",
+    "gate": "pass",
+    "operating": {
+      "checks": 25,
+      "passed": 17,
+      "failed": 0,
+      "warnings": 5,
+      "notEvaluated": 1,
+      "overridden": 2,
+      "effectiveErrorFindings": 0,
+      "effectiveWarningFindings": 156
+    },
+    "paired": 6,
+    "extraInbound": 0,
+    "pairsByBank": {
+      "M17": [
+        105,
+        106,
+        107,
+        108,
+        130,
+        131
+      ]
+    },
+    "failures": [],
+    "pass": true,
+    "overlay": {
+      "schemaVersion": "1.0.0",
+      "id": "v140-syr-grouped-outbound-paired_M17",
+      "baseSchedule": {
+        "scheduleId": "schedule_7_v1_4_0_draft"
+      },
+      "schedule": {
+        "id": "schedule_7_v1_4_0_draft",
+        "number": 7,
+        "version": "1.4.0-draft",
+        "label": "Schedule 7, Version 1.4.0 draft",
+        "status": "draft",
+        "fleetCounts": {
+          "MAX9": 35,
+          "CRJ900": 45,
+          "CRJ700": 65,
+          "CRJ200": 80
+        },
+        "connectionWindowMinutes": {
+          "minimum": 30,
+          "maximum": 240
+        }
+      },
+      "hubBanksToAdd": [
+        {
+          "id": "SYR-M17",
+          "hub": "SYR",
+          "startMinute": 1035,
+          "endMinute": 1095
+        }
+      ],
+      "hubBankCountOverrides": {
+        "SYR": 8
+      },
+      "retimeLegs": [
+        {
+          "legId": "BGR-SYR-CRJ200-02-OUT",
+          "expectedDepartureMinute": 1055,
+          "expectedArrivalMinute": 1135,
+          "departureMinute": 970,
+          "arrivalMinute": 1050
+        },
+        {
+          "legId": "BGR-SYR-CRJ200-01-IN",
+          "expectedDepartureMinute": 1175,
+          "expectedArrivalMinute": 1255,
+          "departureMinute": 1090,
+          "arrivalMinute": 1170
+        },
+        {
+          "legId": "HPN-SYR-CRJ200-03-OUT",
+          "expectedDepartureMinute": 1071,
+          "expectedArrivalMinute": 1125,
+          "departureMinute": 996,
+          "arrivalMinute": 1050
+        },
+        {
+          "legId": "BTV-SYR-CRJ200-01-IN",
+          "expectedDepartureMinute": 1165,
+          "expectedArrivalMinute": 1217,
+          "departureMinute": 1090,
+          "arrivalMinute": 1142
+        },
+        {
+          "legId": "BDL-SYR-CRJ200-01-OUT",
+          "expectedDepartureMinute": 1080,
+          "expectedArrivalMinute": 1134,
+          "departureMinute": 996,
+          "arrivalMinute": 1050
+        },
+        {
+          "legId": "CAK-SYR-CRJ200-01-IN",
+          "expectedDepartureMinute": 1175,
+          "expectedArrivalMinute": 1246,
+          "departureMinute": 1090,
+          "arrivalMinute": 1161
+        },
+        {
+          "legId": "BTV-SYR-CRJ200-03-OUT",
+          "expectedDepartureMinute": 1080,
+          "expectedArrivalMinute": 1132,
+          "departureMinute": 998,
+          "arrivalMinute": 1050
+        },
+        {
+          "legId": "V115-R165-SYR-ROC",
+          "expectedDepartureMinute": 1176,
+          "expectedArrivalMinute": 1215,
+          "departureMinute": 1090,
+          "arrivalMinute": 1129
+        },
+        {
+          "legId": "V115-R144-PWM-SYR",
+          "expectedDepartureMinute": 1057,
+          "expectedArrivalMinute": 1125,
+          "departureMinute": 982,
+          "arrivalMinute": 1050
+        },
+        {
+          "legId": "V115-R144-SYR-BUF",
+          "expectedDepartureMinute": 1165,
+          "expectedArrivalMinute": 1211,
+          "departureMinute": 1090,
+          "arrivalMinute": 1136
+        },
+        {
+          "legId": "ALB-SYR-CRJ200-04-OUT",
+          "expectedDepartureMinute": 1090,
+          "expectedArrivalMinute": 1134,
+          "departureMinute": 1006,
+          "arrivalMinute": 1050
+        },
+        {
+          "legId": "ORH-SYR-CRJ200-01-IN",
+          "expectedDepartureMinute": 1175,
+          "expectedArrivalMinute": 1233,
+          "departureMinute": 1090,
+          "arrivalMinute": 1148
+        }
+      ],
+      "bankAssignmentReplacements": [
+        {
+          "legId": "BGR-SYR-CRJ200-02-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-M17"
+        },
+        {
+          "legId": "BGR-SYR-CRJ200-01-IN",
+          "operation": "departure",
+          "bankId": "SYR-M17"
+        },
+        {
+          "legId": "HPN-SYR-CRJ200-03-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-M17"
+        },
+        {
+          "legId": "BTV-SYR-CRJ200-01-IN",
+          "operation": "departure",
+          "bankId": "SYR-M17"
+        },
+        {
+          "legId": "BDL-SYR-CRJ200-01-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-M17"
+        },
+        {
+          "legId": "CAK-SYR-CRJ200-01-IN",
+          "operation": "departure",
+          "bankId": "SYR-M17"
+        },
+        {
+          "legId": "BTV-SYR-CRJ200-03-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-M17"
+        },
+        {
+          "legId": "V115-R165-SYR-ROC",
+          "operation": "departure",
+          "bankId": "SYR-M17"
+        },
+        {
+          "legId": "V115-R144-PWM-SYR",
+          "operation": "arrival",
+          "bankId": "SYR-M17"
+        },
+        {
+          "legId": "V115-R144-SYR-BUF",
+          "operation": "departure",
+          "bankId": "SYR-M17"
+        },
+        {
+          "legId": "ALB-SYR-CRJ200-04-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-M17"
+        },
+        {
+          "legId": "ORH-SYR-CRJ200-01-IN",
+          "operation": "departure",
+          "bankId": "SYR-M17"
+        }
+      ]
+    }
+  },
+  {
+    "name": "paired_core",
+    "banks": [
+      "M12",
+      "M15",
+      "M17"
+    ],
+    "scope": "READ ONLY: unaccepted draft alternative",
+    "structure": "pass",
+    "overnight": "pass",
+    "planning": "pass",
+    "gate": "pass",
+    "operating": {
+      "checks": 25,
+      "passed": 17,
+      "failed": 0,
+      "warnings": 5,
+      "notEvaluated": 1,
+      "overridden": 2,
+      "effectiveErrorFindings": 0,
+      "effectiveWarningFindings": 149
+    },
+    "paired": 15,
+    "extraInbound": 0,
+    "pairsByBank": {
+      "M12": [
+        105,
+        106,
+        108
+      ],
+      "M15": [
+        103,
+        104,
+        110,
+        124,
+        160,
+        167
+      ],
+      "M17": [
+        105,
+        106,
+        107,
+        108,
+        130,
+        131
+      ]
+    },
+    "failures": [],
+    "pass": true,
+    "overlay": {
+      "schemaVersion": "1.0.0",
+      "id": "v140-syr-grouped-outbound-paired_core",
+      "baseSchedule": {
+        "scheduleId": "schedule_7_v1_4_0_draft"
+      },
+      "schedule": {
+        "id": "schedule_7_v1_4_0_draft",
+        "number": 7,
+        "version": "1.4.0-draft",
+        "label": "Schedule 7, Version 1.4.0 draft",
+        "status": "draft",
+        "fleetCounts": {
+          "MAX9": 35,
+          "CRJ900": 45,
+          "CRJ700": 65,
+          "CRJ200": 80
+        },
+        "connectionWindowMinutes": {
+          "minimum": 30,
+          "maximum": 240
+        }
+      },
+      "hubBanksToAdd": [
+        {
+          "id": "SYR-M12",
+          "hub": "SYR",
+          "startMinute": 715,
+          "endMinute": 775
+        },
+        {
+          "id": "SYR-M15",
+          "hub": "SYR",
+          "startMinute": 885,
+          "endMinute": 945
+        },
+        {
+          "id": "SYR-M17",
+          "hub": "SYR",
+          "startMinute": 1035,
+          "endMinute": 1095
+        }
+      ],
+      "hubBankCountOverrides": {
+        "SYR": 10
+      },
+      "retimeLegs": [
+        {
+          "legId": "ISP-SYR-CRJ200-03-OUT",
+          "expectedDepartureMinute": 910,
+          "expectedArrivalMinute": 968,
+          "departureMinute": 842,
+          "arrivalMinute": 900
+        },
+        {
+          "legId": "PHF-SYR-CRJ200-02-IN",
+          "expectedDepartureMinute": 1010,
+          "expectedArrivalMinute": 1095,
+          "departureMinute": 940,
+          "arrivalMinute": 1025
+        },
+        {
+          "legId": "HVN-SYR-CRJ200-03-OUT",
+          "expectedDepartureMinute": 915,
+          "expectedArrivalMinute": 971,
+          "departureMinute": 844,
+          "arrivalMinute": 900
+        },
+        {
+          "legId": "BUF-SYR-CRJ200-02-IN",
+          "expectedDepartureMinute": 1015,
+          "expectedArrivalMinute": 1061,
+          "departureMinute": 940,
+          "arrivalMinute": 986
+        },
+        {
+          "legId": "MHT-SYR-CRJ200-02-OUT",
+          "expectedDepartureMinute": 745,
+          "expectedArrivalMinute": 805,
+          "departureMinute": 665,
+          "arrivalMinute": 725
+        },
+        {
+          "legId": "BGR-SYR-CRJ200-02-IN",
+          "expectedDepartureMinute": 845,
+          "expectedArrivalMinute": 925,
+          "departureMinute": 765,
+          "arrivalMinute": 845
+        },
+        {
+          "legId": "BGR-SYR-CRJ200-02-OUT",
+          "expectedDepartureMinute": 1055,
+          "expectedArrivalMinute": 1135,
+          "departureMinute": 970,
+          "arrivalMinute": 1050
+        },
+        {
+          "legId": "BGR-SYR-CRJ200-01-IN",
+          "expectedDepartureMinute": 1175,
+          "expectedArrivalMinute": 1255,
+          "departureMinute": 1090,
+          "arrivalMinute": 1170
+        },
+        {
+          "legId": "HPN-SYR-CRJ200-01-OUT",
+          "expectedDepartureMinute": 741,
+          "expectedArrivalMinute": 795,
+          "departureMinute": 671,
+          "arrivalMinute": 725
+        },
+        {
+          "legId": "HPN-SYR-CRJ200-03-IN",
+          "expectedDepartureMinute": 835,
+          "expectedArrivalMinute": 889,
+          "departureMinute": 765,
+          "arrivalMinute": 819
+        },
+        {
+          "legId": "HPN-SYR-CRJ200-03-OUT",
+          "expectedDepartureMinute": 1071,
+          "expectedArrivalMinute": 1125,
+          "departureMinute": 996,
+          "arrivalMinute": 1050
+        },
+        {
+          "legId": "BTV-SYR-CRJ200-01-IN",
+          "expectedDepartureMinute": 1165,
+          "expectedArrivalMinute": 1217,
+          "departureMinute": 1090,
+          "arrivalMinute": 1142
+        },
+        {
+          "legId": "BDL-SYR-CRJ200-01-OUT",
+          "expectedDepartureMinute": 1080,
+          "expectedArrivalMinute": 1134,
+          "departureMinute": 996,
+          "arrivalMinute": 1050
+        },
+        {
+          "legId": "CAK-SYR-CRJ200-01-IN",
+          "expectedDepartureMinute": 1175,
+          "expectedArrivalMinute": 1246,
+          "departureMinute": 1090,
+          "arrivalMinute": 1161
+        },
+        {
+          "legId": "ORH-SYR-CRJ200-02-OUT",
+          "expectedDepartureMinute": 745,
+          "expectedArrivalMinute": 803,
+          "departureMinute": 667,
+          "arrivalMinute": 725
+        },
+        {
+          "legId": "BTV-SYR-CRJ200-03-IN",
+          "expectedDepartureMinute": 845,
+          "expectedArrivalMinute": 897,
+          "departureMinute": 765,
+          "arrivalMinute": 817
+        },
+        {
+          "legId": "BTV-SYR-CRJ200-03-OUT",
+          "expectedDepartureMinute": 1080,
+          "expectedArrivalMinute": 1132,
+          "departureMinute": 998,
+          "arrivalMinute": 1050
+        },
+        {
+          "legId": "V115-R165-SYR-ROC",
+          "expectedDepartureMinute": 1176,
+          "expectedArrivalMinute": 1215,
+          "departureMinute": 1090,
+          "arrivalMinute": 1129
+        },
+        {
+          "legId": "MHT-SYR-CRJ200-03-OUT",
+          "expectedDepartureMinute": 910,
+          "expectedArrivalMinute": 970,
+          "departureMinute": 840,
+          "arrivalMinute": 900
+        },
+        {
+          "legId": "PIT-SYR-CRJ200-01-IN",
+          "expectedDepartureMinute": 1010,
+          "expectedArrivalMinute": 1076,
+          "departureMinute": 940,
+          "arrivalMinute": 1006
+        },
+        {
+          "legId": "HPN-SYR-CRJ200-02-OUT",
+          "expectedDepartureMinute": 915,
+          "expectedArrivalMinute": 969,
+          "departureMinute": 846,
+          "arrivalMinute": 900
+        },
+        {
+          "legId": "HVN-SYR-CRJ200-03-IN",
+          "expectedDepartureMinute": 1010,
+          "expectedArrivalMinute": 1066,
+          "departureMinute": 940,
+          "arrivalMinute": 996
+        },
+        {
+          "legId": "V115-R144-PWM-SYR",
+          "expectedDepartureMinute": 1057,
+          "expectedArrivalMinute": 1125,
+          "departureMinute": 982,
+          "arrivalMinute": 1050
+        },
+        {
+          "legId": "V115-R144-SYR-BUF",
+          "expectedDepartureMinute": 1165,
+          "expectedArrivalMinute": 1211,
+          "departureMinute": 1090,
+          "arrivalMinute": 1136
+        },
+        {
+          "legId": "ALB-SYR-CRJ200-04-OUT",
+          "expectedDepartureMinute": 1090,
+          "expectedArrivalMinute": 1134,
+          "departureMinute": 1006,
+          "arrivalMinute": 1050
+        },
+        {
+          "legId": "ORH-SYR-CRJ200-01-IN",
+          "expectedDepartureMinute": 1175,
+          "expectedArrivalMinute": 1233,
+          "departureMinute": 1090,
+          "arrivalMinute": 1148
+        },
+        {
+          "legId": "BTV-SYR-CRJ200-02-OUT",
+          "expectedDepartureMinute": 915,
+          "expectedArrivalMinute": 967,
+          "departureMinute": 848,
+          "arrivalMinute": 900
+        },
+        {
+          "legId": "PWM-SYR-CRJ200-01-IN",
+          "expectedDepartureMinute": 1140,
+          "expectedArrivalMinute": 1208,
+          "departureMinute": 940,
+          "arrivalMinute": 1008
+        },
+        {
+          "legId": "CAK-SYR-CRJ200-02-OUT",
+          "expectedDepartureMinute": 895,
+          "expectedArrivalMinute": 966,
+          "departureMinute": 829,
+          "arrivalMinute": 900
+        },
+        {
+          "legId": "CAK-SYR-CRJ200-03-IN",
+          "expectedDepartureMinute": 1010,
+          "expectedArrivalMinute": 1081,
+          "departureMinute": 940,
+          "arrivalMinute": 1011
+        }
+      ],
+      "bankAssignmentReplacements": [
+        {
+          "legId": "ISP-SYR-CRJ200-03-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-M15"
+        },
+        {
+          "legId": "PHF-SYR-CRJ200-02-IN",
+          "operation": "departure",
+          "bankId": "SYR-M15"
+        },
+        {
+          "legId": "PHF-SYR-CRJ200-02-IN",
+          "operation": "arrival",
+          "bankId": "PHF-M5"
+        },
+        {
+          "legId": "HVN-SYR-CRJ200-03-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-M15"
+        },
+        {
+          "legId": "BUF-SYR-CRJ200-02-IN",
+          "operation": "departure",
+          "bankId": "SYR-M15"
+        },
+        {
+          "legId": "MHT-SYR-CRJ200-02-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-M12"
+        },
+        {
+          "legId": "BGR-SYR-CRJ200-02-IN",
+          "operation": "departure",
+          "bankId": "SYR-M12"
+        },
+        {
+          "legId": "BGR-SYR-CRJ200-02-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-M17"
+        },
+        {
+          "legId": "BGR-SYR-CRJ200-01-IN",
+          "operation": "departure",
+          "bankId": "SYR-M17"
+        },
+        {
+          "legId": "HPN-SYR-CRJ200-01-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-M12"
+        },
+        {
+          "legId": "HPN-SYR-CRJ200-03-IN",
+          "operation": "departure",
+          "bankId": "SYR-M12"
+        },
+        {
+          "legId": "HPN-SYR-CRJ200-03-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-M17"
+        },
+        {
+          "legId": "BTV-SYR-CRJ200-01-IN",
+          "operation": "departure",
+          "bankId": "SYR-M17"
+        },
+        {
+          "legId": "BDL-SYR-CRJ200-01-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-M17"
+        },
+        {
+          "legId": "CAK-SYR-CRJ200-01-IN",
+          "operation": "departure",
+          "bankId": "SYR-M17"
+        },
+        {
+          "legId": "ORH-SYR-CRJ200-02-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-M12"
+        },
+        {
+          "legId": "BTV-SYR-CRJ200-03-IN",
+          "operation": "departure",
+          "bankId": "SYR-M12"
+        },
+        {
+          "legId": "BTV-SYR-CRJ200-03-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-M17"
+        },
+        {
+          "legId": "V115-R165-SYR-ROC",
+          "operation": "departure",
+          "bankId": "SYR-M17"
+        },
+        {
+          "legId": "MHT-SYR-CRJ200-03-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-M15"
+        },
+        {
+          "legId": "PIT-SYR-CRJ200-01-IN",
+          "operation": "departure",
+          "bankId": "SYR-M15"
+        },
+        {
+          "legId": "HPN-SYR-CRJ200-02-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-M15"
+        },
+        {
+          "legId": "HVN-SYR-CRJ200-03-IN",
+          "operation": "departure",
+          "bankId": "SYR-M15"
+        },
+        {
+          "legId": "V115-R144-PWM-SYR",
+          "operation": "arrival",
+          "bankId": "SYR-M17"
+        },
+        {
+          "legId": "V115-R144-SYR-BUF",
+          "operation": "departure",
+          "bankId": "SYR-M17"
+        },
+        {
+          "legId": "ALB-SYR-CRJ200-04-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-M17"
+        },
+        {
+          "legId": "ORH-SYR-CRJ200-01-IN",
+          "operation": "departure",
+          "bankId": "SYR-M17"
+        },
+        {
+          "legId": "BTV-SYR-CRJ200-02-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-M15"
+        },
+        {
+          "legId": "PWM-SYR-CRJ200-01-IN",
+          "operation": "departure",
+          "bankId": "SYR-M15"
+        },
+        {
+          "legId": "CAK-SYR-CRJ200-02-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-M15"
+        },
+        {
+          "legId": "CAK-SYR-CRJ200-03-IN",
+          "operation": "departure",
+          "bankId": "SYR-M15"
+        }
+      ]
+    }
+  },
+  {
+    "name": "paired_core_plus_R107_M12",
+    "banks": [
+      "M12",
+      "M15",
+      "M17"
+    ],
+    "scope": "READ ONLY: unaccepted draft alternative",
+    "structure": "pass",
+    "overnight": "pass",
+    "planning": "pass",
+    "gate": "pass",
+    "operating": {
+      "checks": 25,
+      "passed": 17,
+      "failed": 0,
+      "warnings": 5,
+      "notEvaluated": 1,
+      "overridden": 2,
+      "effectiveErrorFindings": 0,
+      "effectiveWarningFindings": 148
+    },
+    "paired": 15,
+    "extraInbound": 1,
+    "pairsByBank": {
+      "M12": [
+        105,
+        106,
+        108
+      ],
+      "M15": [
+        103,
+        104,
+        110,
+        124,
+        160,
+        167
+      ],
+      "M17": [
+        105,
+        106,
+        107,
+        108,
+        130,
+        131
+      ]
+    },
+    "failures": [],
+    "pass": true,
+    "overlay": {
+      "schemaVersion": "1.0.0",
+      "id": "v140-syr-grouped-outbound-paired_core_plus_R107_M12",
+      "baseSchedule": {
+        "scheduleId": "schedule_7_v1_4_0_draft"
+      },
+      "schedule": {
+        "id": "schedule_7_v1_4_0_draft",
+        "number": 7,
+        "version": "1.4.0-draft",
+        "label": "Schedule 7, Version 1.4.0 draft",
+        "status": "draft",
+        "fleetCounts": {
+          "MAX9": 35,
+          "CRJ900": 45,
+          "CRJ700": 65,
+          "CRJ200": 80
+        },
+        "connectionWindowMinutes": {
+          "minimum": 30,
+          "maximum": 240
+        }
+      },
+      "hubBanksToAdd": [
+        {
+          "id": "SYR-M12",
+          "hub": "SYR",
+          "startMinute": 715,
+          "endMinute": 775
+        },
+        {
+          "id": "SYR-M15",
+          "hub": "SYR",
+          "startMinute": 885,
+          "endMinute": 945
+        },
+        {
+          "id": "SYR-M17",
+          "hub": "SYR",
+          "startMinute": 1035,
+          "endMinute": 1095
+        }
+      ],
+      "hubBankCountOverrides": {
+        "SYR": 10
+      },
+      "retimeLegs": [
+        {
+          "legId": "ISP-SYR-CRJ200-03-OUT",
+          "expectedDepartureMinute": 910,
+          "expectedArrivalMinute": 968,
+          "departureMinute": 842,
+          "arrivalMinute": 900
+        },
+        {
+          "legId": "PHF-SYR-CRJ200-02-IN",
+          "expectedDepartureMinute": 1010,
+          "expectedArrivalMinute": 1095,
+          "departureMinute": 940,
+          "arrivalMinute": 1025
+        },
+        {
+          "legId": "HVN-SYR-CRJ200-03-OUT",
+          "expectedDepartureMinute": 915,
+          "expectedArrivalMinute": 971,
+          "departureMinute": 844,
+          "arrivalMinute": 900
+        },
+        {
+          "legId": "BUF-SYR-CRJ200-02-IN",
+          "expectedDepartureMinute": 1015,
+          "expectedArrivalMinute": 1061,
+          "departureMinute": 940,
+          "arrivalMinute": 986
+        },
+        {
+          "legId": "MHT-SYR-CRJ200-02-OUT",
+          "expectedDepartureMinute": 745,
+          "expectedArrivalMinute": 805,
+          "departureMinute": 665,
+          "arrivalMinute": 725
+        },
+        {
+          "legId": "BGR-SYR-CRJ200-02-IN",
+          "expectedDepartureMinute": 845,
+          "expectedArrivalMinute": 925,
+          "departureMinute": 765,
+          "arrivalMinute": 845
+        },
+        {
+          "legId": "BGR-SYR-CRJ200-02-OUT",
+          "expectedDepartureMinute": 1055,
+          "expectedArrivalMinute": 1135,
+          "departureMinute": 970,
+          "arrivalMinute": 1050
+        },
+        {
+          "legId": "BGR-SYR-CRJ200-01-IN",
+          "expectedDepartureMinute": 1175,
+          "expectedArrivalMinute": 1255,
+          "departureMinute": 1090,
+          "arrivalMinute": 1170
+        },
+        {
+          "legId": "HPN-SYR-CRJ200-01-OUT",
+          "expectedDepartureMinute": 741,
+          "expectedArrivalMinute": 795,
+          "departureMinute": 671,
+          "arrivalMinute": 725
+        },
+        {
+          "legId": "HPN-SYR-CRJ200-03-IN",
+          "expectedDepartureMinute": 835,
+          "expectedArrivalMinute": 889,
+          "departureMinute": 765,
+          "arrivalMinute": 819
+        },
+        {
+          "legId": "HPN-SYR-CRJ200-03-OUT",
+          "expectedDepartureMinute": 1071,
+          "expectedArrivalMinute": 1125,
+          "departureMinute": 996,
+          "arrivalMinute": 1050
+        },
+        {
+          "legId": "BTV-SYR-CRJ200-01-IN",
+          "expectedDepartureMinute": 1165,
+          "expectedArrivalMinute": 1217,
+          "departureMinute": 1090,
+          "arrivalMinute": 1142
+        },
+        {
+          "legId": "BDL-SYR-CRJ200-01-OUT",
+          "expectedDepartureMinute": 1080,
+          "expectedArrivalMinute": 1134,
+          "departureMinute": 996,
+          "arrivalMinute": 1050
+        },
+        {
+          "legId": "CAK-SYR-CRJ200-01-IN",
+          "expectedDepartureMinute": 1175,
+          "expectedArrivalMinute": 1246,
+          "departureMinute": 1090,
+          "arrivalMinute": 1161
+        },
+        {
+          "legId": "ORH-SYR-CRJ200-02-OUT",
+          "expectedDepartureMinute": 745,
+          "expectedArrivalMinute": 803,
+          "departureMinute": 667,
+          "arrivalMinute": 725
+        },
+        {
+          "legId": "BTV-SYR-CRJ200-03-IN",
+          "expectedDepartureMinute": 845,
+          "expectedArrivalMinute": 897,
+          "departureMinute": 765,
+          "arrivalMinute": 817
+        },
+        {
+          "legId": "BTV-SYR-CRJ200-03-OUT",
+          "expectedDepartureMinute": 1080,
+          "expectedArrivalMinute": 1132,
+          "departureMinute": 998,
+          "arrivalMinute": 1050
+        },
+        {
+          "legId": "V115-R165-SYR-ROC",
+          "expectedDepartureMinute": 1176,
+          "expectedArrivalMinute": 1215,
+          "departureMinute": 1090,
+          "arrivalMinute": 1129
+        },
+        {
+          "legId": "MHT-SYR-CRJ200-03-OUT",
+          "expectedDepartureMinute": 910,
+          "expectedArrivalMinute": 970,
+          "departureMinute": 840,
+          "arrivalMinute": 900
+        },
+        {
+          "legId": "PIT-SYR-CRJ200-01-IN",
+          "expectedDepartureMinute": 1010,
+          "expectedArrivalMinute": 1076,
+          "departureMinute": 940,
+          "arrivalMinute": 1006
+        },
+        {
+          "legId": "HPN-SYR-CRJ200-02-OUT",
+          "expectedDepartureMinute": 915,
+          "expectedArrivalMinute": 969,
+          "departureMinute": 846,
+          "arrivalMinute": 900
+        },
+        {
+          "legId": "HVN-SYR-CRJ200-03-IN",
+          "expectedDepartureMinute": 1010,
+          "expectedArrivalMinute": 1066,
+          "departureMinute": 940,
+          "arrivalMinute": 996
+        },
+        {
+          "legId": "V115-R144-PWM-SYR",
+          "expectedDepartureMinute": 1057,
+          "expectedArrivalMinute": 1125,
+          "departureMinute": 982,
+          "arrivalMinute": 1050
+        },
+        {
+          "legId": "V115-R144-SYR-BUF",
+          "expectedDepartureMinute": 1165,
+          "expectedArrivalMinute": 1211,
+          "departureMinute": 1090,
+          "arrivalMinute": 1136
+        },
+        {
+          "legId": "ALB-SYR-CRJ200-04-OUT",
+          "expectedDepartureMinute": 1090,
+          "expectedArrivalMinute": 1134,
+          "departureMinute": 1006,
+          "arrivalMinute": 1050
+        },
+        {
+          "legId": "ORH-SYR-CRJ200-01-IN",
+          "expectedDepartureMinute": 1175,
+          "expectedArrivalMinute": 1233,
+          "departureMinute": 1090,
+          "arrivalMinute": 1148
+        },
+        {
+          "legId": "BTV-SYR-CRJ200-02-OUT",
+          "expectedDepartureMinute": 915,
+          "expectedArrivalMinute": 967,
+          "departureMinute": 848,
+          "arrivalMinute": 900
+        },
+        {
+          "legId": "PWM-SYR-CRJ200-01-IN",
+          "expectedDepartureMinute": 1140,
+          "expectedArrivalMinute": 1208,
+          "departureMinute": 940,
+          "arrivalMinute": 1008
+        },
+        {
+          "legId": "CAK-SYR-CRJ200-02-OUT",
+          "expectedDepartureMinute": 895,
+          "expectedArrivalMinute": 966,
+          "departureMinute": 829,
+          "arrivalMinute": 900
+        },
+        {
+          "legId": "CAK-SYR-CRJ200-03-IN",
+          "expectedDepartureMinute": 1010,
+          "expectedArrivalMinute": 1081,
+          "departureMinute": 940,
+          "arrivalMinute": 1011
+        },
+        {
+          "legId": "ISP-SYR-CRJ200-02-OUT",
+          "expectedDepartureMinute": 745,
+          "expectedArrivalMinute": 803,
+          "departureMinute": 667,
+          "arrivalMinute": 725
+        }
+      ],
+      "bankAssignmentReplacements": [
+        {
+          "legId": "ISP-SYR-CRJ200-03-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-M15"
+        },
+        {
+          "legId": "PHF-SYR-CRJ200-02-IN",
+          "operation": "departure",
+          "bankId": "SYR-M15"
+        },
+        {
+          "legId": "PHF-SYR-CRJ200-02-IN",
+          "operation": "arrival",
+          "bankId": "PHF-M5"
+        },
+        {
+          "legId": "HVN-SYR-CRJ200-03-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-M15"
+        },
+        {
+          "legId": "BUF-SYR-CRJ200-02-IN",
+          "operation": "departure",
+          "bankId": "SYR-M15"
+        },
+        {
+          "legId": "MHT-SYR-CRJ200-02-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-M12"
+        },
+        {
+          "legId": "BGR-SYR-CRJ200-02-IN",
+          "operation": "departure",
+          "bankId": "SYR-M12"
+        },
+        {
+          "legId": "BGR-SYR-CRJ200-02-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-M17"
+        },
+        {
+          "legId": "BGR-SYR-CRJ200-01-IN",
+          "operation": "departure",
+          "bankId": "SYR-M17"
+        },
+        {
+          "legId": "HPN-SYR-CRJ200-01-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-M12"
+        },
+        {
+          "legId": "HPN-SYR-CRJ200-03-IN",
+          "operation": "departure",
+          "bankId": "SYR-M12"
+        },
+        {
+          "legId": "HPN-SYR-CRJ200-03-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-M17"
+        },
+        {
+          "legId": "BTV-SYR-CRJ200-01-IN",
+          "operation": "departure",
+          "bankId": "SYR-M17"
+        },
+        {
+          "legId": "BDL-SYR-CRJ200-01-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-M17"
+        },
+        {
+          "legId": "CAK-SYR-CRJ200-01-IN",
+          "operation": "departure",
+          "bankId": "SYR-M17"
+        },
+        {
+          "legId": "ORH-SYR-CRJ200-02-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-M12"
+        },
+        {
+          "legId": "BTV-SYR-CRJ200-03-IN",
+          "operation": "departure",
+          "bankId": "SYR-M12"
+        },
+        {
+          "legId": "BTV-SYR-CRJ200-03-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-M17"
+        },
+        {
+          "legId": "V115-R165-SYR-ROC",
+          "operation": "departure",
+          "bankId": "SYR-M17"
+        },
+        {
+          "legId": "MHT-SYR-CRJ200-03-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-M15"
+        },
+        {
+          "legId": "PIT-SYR-CRJ200-01-IN",
+          "operation": "departure",
+          "bankId": "SYR-M15"
+        },
+        {
+          "legId": "HPN-SYR-CRJ200-02-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-M15"
+        },
+        {
+          "legId": "HVN-SYR-CRJ200-03-IN",
+          "operation": "departure",
+          "bankId": "SYR-M15"
+        },
+        {
+          "legId": "V115-R144-PWM-SYR",
+          "operation": "arrival",
+          "bankId": "SYR-M17"
+        },
+        {
+          "legId": "V115-R144-SYR-BUF",
+          "operation": "departure",
+          "bankId": "SYR-M17"
+        },
+        {
+          "legId": "ALB-SYR-CRJ200-04-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-M17"
+        },
+        {
+          "legId": "ORH-SYR-CRJ200-01-IN",
+          "operation": "departure",
+          "bankId": "SYR-M17"
+        },
+        {
+          "legId": "BTV-SYR-CRJ200-02-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-M15"
+        },
+        {
+          "legId": "PWM-SYR-CRJ200-01-IN",
+          "operation": "departure",
+          "bankId": "SYR-M15"
+        },
+        {
+          "legId": "CAK-SYR-CRJ200-02-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-M15"
+        },
+        {
+          "legId": "CAK-SYR-CRJ200-03-IN",
+          "operation": "departure",
+          "bankId": "SYR-M15"
+        },
+        {
+          "legId": "ISP-SYR-CRJ200-02-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-M12"
+        }
+      ]
+    }
+  },
+  {
+    "name": "paired_all_five",
+    "banks": [
+      "M09",
+      "M12",
+      "M15",
+      "M17",
+      "M20"
+    ],
+    "scope": "READ ONLY: unaccepted draft alternative",
+    "structure": "pass",
+    "overnight": "pass",
+    "planning": "pass",
+    "gate": "pass",
+    "operating": {
+      "checks": 25,
+      "passed": 17,
+      "failed": 0,
+      "warnings": 5,
+      "notEvaluated": 1,
+      "overridden": 2,
+      "effectiveErrorFindings": 0,
+      "effectiveWarningFindings": 143
+    },
+    "paired": 18,
+    "extraInbound": 4,
+    "pairsByBank": {
+      "M09": [
+        162,
+        167
+      ],
+      "M12": [
+        105,
+        106,
+        108
+      ],
+      "M15": [
+        103,
+        104,
+        110,
+        124,
+        160,
+        167
+      ],
+      "M17": [
+        105,
+        106,
+        107,
+        108,
+        130,
+        131
+      ],
+      "M20": [
+        124
+      ]
+    },
+    "failures": [],
+    "pass": true,
+    "overlay": {
+      "schemaVersion": "1.0.0",
+      "id": "v140-syr-grouped-outbound-paired_all_five",
+      "baseSchedule": {
+        "scheduleId": "schedule_7_v1_4_0_draft"
+      },
+      "schedule": {
+        "id": "schedule_7_v1_4_0_draft",
+        "number": 7,
+        "version": "1.4.0-draft",
+        "label": "Schedule 7, Version 1.4.0 draft",
+        "status": "draft",
+        "fleetCounts": {
+          "MAX9": 35,
+          "CRJ900": 45,
+          "CRJ700": 65,
+          "CRJ200": 80
+        },
+        "connectionWindowMinutes": {
+          "minimum": 30,
+          "maximum": 240
+        }
+      },
+      "hubBanksToAdd": [
+        {
+          "id": "SYR-M09",
+          "hub": "SYR",
+          "startMinute": 535,
+          "endMinute": 595
+        },
+        {
+          "id": "SYR-M12",
+          "hub": "SYR",
+          "startMinute": 715,
+          "endMinute": 775
+        },
+        {
+          "id": "SYR-M15",
+          "hub": "SYR",
+          "startMinute": 885,
+          "endMinute": 945
+        },
+        {
+          "id": "SYR-M17",
+          "hub": "SYR",
+          "startMinute": 1035,
+          "endMinute": 1095
+        },
+        {
+          "id": "SYR-M20",
+          "hub": "SYR",
+          "startMinute": 1215,
+          "endMinute": 1275
+        }
+      ],
+      "hubBankCountOverrides": {
+        "SYR": 12
+      },
+      "retimeLegs": [
+        {
+          "legId": "ISP-SYR-CRJ200-03-OUT",
+          "expectedDepartureMinute": 910,
+          "expectedArrivalMinute": 968,
+          "departureMinute": 842,
+          "arrivalMinute": 900
+        },
+        {
+          "legId": "PHF-SYR-CRJ200-02-IN",
+          "expectedDepartureMinute": 1010,
+          "expectedArrivalMinute": 1095,
+          "departureMinute": 940,
+          "arrivalMinute": 1025
+        },
+        {
+          "legId": "HVN-SYR-CRJ200-03-OUT",
+          "expectedDepartureMinute": 915,
+          "expectedArrivalMinute": 971,
+          "departureMinute": 844,
+          "arrivalMinute": 900
+        },
+        {
+          "legId": "BUF-SYR-CRJ200-02-IN",
+          "expectedDepartureMinute": 1015,
+          "expectedArrivalMinute": 1061,
+          "departureMinute": 940,
+          "arrivalMinute": 986
+        },
+        {
+          "legId": "MHT-SYR-CRJ200-02-OUT",
+          "expectedDepartureMinute": 745,
+          "expectedArrivalMinute": 805,
+          "departureMinute": 665,
+          "arrivalMinute": 725
+        },
+        {
+          "legId": "BGR-SYR-CRJ200-02-IN",
+          "expectedDepartureMinute": 845,
+          "expectedArrivalMinute": 925,
+          "departureMinute": 765,
+          "arrivalMinute": 845
+        },
+        {
+          "legId": "BGR-SYR-CRJ200-02-OUT",
+          "expectedDepartureMinute": 1055,
+          "expectedArrivalMinute": 1135,
+          "departureMinute": 970,
+          "arrivalMinute": 1050
+        },
+        {
+          "legId": "BGR-SYR-CRJ200-01-IN",
+          "expectedDepartureMinute": 1175,
+          "expectedArrivalMinute": 1255,
+          "departureMinute": 1090,
+          "arrivalMinute": 1170
+        },
+        {
+          "legId": "HPN-SYR-CRJ200-01-OUT",
+          "expectedDepartureMinute": 741,
+          "expectedArrivalMinute": 795,
+          "departureMinute": 671,
+          "arrivalMinute": 725
+        },
+        {
+          "legId": "HPN-SYR-CRJ200-03-IN",
+          "expectedDepartureMinute": 835,
+          "expectedArrivalMinute": 889,
+          "departureMinute": 765,
+          "arrivalMinute": 819
+        },
+        {
+          "legId": "HPN-SYR-CRJ200-03-OUT",
+          "expectedDepartureMinute": 1071,
+          "expectedArrivalMinute": 1125,
+          "departureMinute": 996,
+          "arrivalMinute": 1050
+        },
+        {
+          "legId": "BTV-SYR-CRJ200-01-IN",
+          "expectedDepartureMinute": 1165,
+          "expectedArrivalMinute": 1217,
+          "departureMinute": 1090,
+          "arrivalMinute": 1142
+        },
+        {
+          "legId": "BDL-SYR-CRJ200-01-OUT",
+          "expectedDepartureMinute": 1080,
+          "expectedArrivalMinute": 1134,
+          "departureMinute": 996,
+          "arrivalMinute": 1050
+        },
+        {
+          "legId": "CAK-SYR-CRJ200-01-IN",
+          "expectedDepartureMinute": 1175,
+          "expectedArrivalMinute": 1246,
+          "departureMinute": 1090,
+          "arrivalMinute": 1161
+        },
+        {
+          "legId": "ORH-SYR-CRJ200-02-OUT",
+          "expectedDepartureMinute": 745,
+          "expectedArrivalMinute": 803,
+          "departureMinute": 667,
+          "arrivalMinute": 725
+        },
+        {
+          "legId": "BTV-SYR-CRJ200-03-IN",
+          "expectedDepartureMinute": 845,
+          "expectedArrivalMinute": 897,
+          "departureMinute": 765,
+          "arrivalMinute": 817
+        },
+        {
+          "legId": "BTV-SYR-CRJ200-03-OUT",
+          "expectedDepartureMinute": 1080,
+          "expectedArrivalMinute": 1132,
+          "departureMinute": 998,
+          "arrivalMinute": 1050
+        },
+        {
+          "legId": "V115-R165-SYR-ROC",
+          "expectedDepartureMinute": 1176,
+          "expectedArrivalMinute": 1215,
+          "departureMinute": 1090,
+          "arrivalMinute": 1129
+        },
+        {
+          "legId": "MHT-SYR-CRJ200-03-OUT",
+          "expectedDepartureMinute": 910,
+          "expectedArrivalMinute": 970,
+          "departureMinute": 840,
+          "arrivalMinute": 900
+        },
+        {
+          "legId": "PIT-SYR-CRJ200-01-IN",
+          "expectedDepartureMinute": 1010,
+          "expectedArrivalMinute": 1076,
+          "departureMinute": 940,
+          "arrivalMinute": 1006
+        },
+        {
+          "legId": "HPN-SYR-CRJ200-02-OUT",
+          "expectedDepartureMinute": 915,
+          "expectedArrivalMinute": 969,
+          "departureMinute": 846,
+          "arrivalMinute": 900
+        },
+        {
+          "legId": "HVN-SYR-CRJ200-03-IN",
+          "expectedDepartureMinute": 1010,
+          "expectedArrivalMinute": 1066,
+          "departureMinute": 940,
+          "arrivalMinute": 996
+        },
+        {
+          "legId": "V115-R124-HVN-SYR",
+          "expectedDepartureMinute": 1234,
+          "expectedArrivalMinute": 1290,
+          "departureMinute": 1174,
+          "arrivalMinute": 1230
+        },
+        {
+          "legId": "V115-R124-SYR-HVN",
+          "expectedDepartureMinute": 1332,
+          "expectedArrivalMinute": 1388,
+          "departureMinute": 1270,
+          "arrivalMinute": 1326
+        },
+        {
+          "legId": "V115-R144-PWM-SYR",
+          "expectedDepartureMinute": 1057,
+          "expectedArrivalMinute": 1125,
+          "departureMinute": 982,
+          "arrivalMinute": 1050
+        },
+        {
+          "legId": "V115-R144-SYR-BUF",
+          "expectedDepartureMinute": 1165,
+          "expectedArrivalMinute": 1211,
+          "departureMinute": 1090,
+          "arrivalMinute": 1136
+        },
+        {
+          "legId": "ALB-SYR-CRJ200-04-OUT",
+          "expectedDepartureMinute": 1090,
+          "expectedArrivalMinute": 1134,
+          "departureMinute": 1006,
+          "arrivalMinute": 1050
+        },
+        {
+          "legId": "ORH-SYR-CRJ200-01-IN",
+          "expectedDepartureMinute": 1175,
+          "expectedArrivalMinute": 1233,
+          "departureMinute": 1090,
+          "arrivalMinute": 1148
+        },
+        {
+          "legId": "BTV-SYR-CRJ200-02-OUT",
+          "expectedDepartureMinute": 915,
+          "expectedArrivalMinute": 967,
+          "departureMinute": 848,
+          "arrivalMinute": 900
+        },
+        {
+          "legId": "PWM-SYR-CRJ200-01-IN",
+          "expectedDepartureMinute": 1140,
+          "expectedArrivalMinute": 1208,
+          "departureMinute": 940,
+          "arrivalMinute": 1008
+        },
+        {
+          "legId": "V121-R123-2-BDL-SYR",
+          "expectedDepartureMinute": 605,
+          "expectedArrivalMinute": 659,
+          "departureMinute": 496,
+          "arrivalMinute": 550
+        },
+        {
+          "legId": "PHF-SYR-CRJ200-01-IN",
+          "expectedDepartureMinute": 850,
+          "expectedArrivalMinute": 935,
+          "departureMinute": 590,
+          "arrivalMinute": 675
+        },
+        {
+          "legId": "ALB-SYR-CRJ200-02-OUT",
+          "expectedDepartureMinute": 595,
+          "expectedArrivalMinute": 639,
+          "departureMinute": 506,
+          "arrivalMinute": 550
+        },
+        {
+          "legId": "CAK-SYR-CRJ200-02-IN",
+          "expectedDepartureMinute": 680,
+          "expectedArrivalMinute": 751,
+          "departureMinute": 590,
+          "arrivalMinute": 661
+        },
+        {
+          "legId": "CAK-SYR-CRJ200-02-OUT",
+          "expectedDepartureMinute": 895,
+          "expectedArrivalMinute": 966,
+          "departureMinute": 829,
+          "arrivalMinute": 900
+        },
+        {
+          "legId": "CAK-SYR-CRJ200-03-IN",
+          "expectedDepartureMinute": 1010,
+          "expectedArrivalMinute": 1081,
+          "departureMinute": 940,
+          "arrivalMinute": 1011
+        },
+        {
+          "legId": "HVN-SYR-CRJ200-02-OUT",
+          "expectedDepartureMinute": 585,
+          "expectedArrivalMinute": 641,
+          "departureMinute": 499,
+          "arrivalMinute": 555
+        },
+        {
+          "legId": "PHF-SYR-CRJ200-02-OUT",
+          "expectedDepartureMinute": 555,
+          "expectedArrivalMinute": 640,
+          "departureMinute": 505,
+          "arrivalMinute": 590
+        },
+        {
+          "legId": "ISP-SYR-CRJ200-02-OUT",
+          "expectedDepartureMinute": 745,
+          "expectedArrivalMinute": 803,
+          "departureMinute": 667,
+          "arrivalMinute": 725
+        },
+        {
+          "legId": "V133-BHM-530-6-CAK-SYR",
+          "expectedDepartureMinute": 1221,
+          "expectedArrivalMinute": 1290,
+          "departureMinute": 1171,
+          "arrivalMinute": 1240
+        }
+      ],
+      "bankAssignmentReplacements": [
+        {
+          "legId": "ISP-SYR-CRJ200-03-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-M15"
+        },
+        {
+          "legId": "PHF-SYR-CRJ200-02-IN",
+          "operation": "departure",
+          "bankId": "SYR-M15"
+        },
+        {
+          "legId": "PHF-SYR-CRJ200-02-IN",
+          "operation": "arrival",
+          "bankId": "PHF-M5"
+        },
+        {
+          "legId": "HVN-SYR-CRJ200-03-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-M15"
+        },
+        {
+          "legId": "BUF-SYR-CRJ200-02-IN",
+          "operation": "departure",
+          "bankId": "SYR-M15"
+        },
+        {
+          "legId": "MHT-SYR-CRJ200-02-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-M12"
+        },
+        {
+          "legId": "BGR-SYR-CRJ200-02-IN",
+          "operation": "departure",
+          "bankId": "SYR-M12"
+        },
+        {
+          "legId": "BGR-SYR-CRJ200-02-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-M17"
+        },
+        {
+          "legId": "BGR-SYR-CRJ200-01-IN",
+          "operation": "departure",
+          "bankId": "SYR-M17"
+        },
+        {
+          "legId": "HPN-SYR-CRJ200-01-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-M12"
+        },
+        {
+          "legId": "HPN-SYR-CRJ200-03-IN",
+          "operation": "departure",
+          "bankId": "SYR-M12"
+        },
+        {
+          "legId": "HPN-SYR-CRJ200-03-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-M17"
+        },
+        {
+          "legId": "BTV-SYR-CRJ200-01-IN",
+          "operation": "departure",
+          "bankId": "SYR-M17"
+        },
+        {
+          "legId": "BDL-SYR-CRJ200-01-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-M17"
+        },
+        {
+          "legId": "CAK-SYR-CRJ200-01-IN",
+          "operation": "departure",
+          "bankId": "SYR-M17"
+        },
+        {
+          "legId": "ORH-SYR-CRJ200-02-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-M12"
+        },
+        {
+          "legId": "BTV-SYR-CRJ200-03-IN",
+          "operation": "departure",
+          "bankId": "SYR-M12"
+        },
+        {
+          "legId": "BTV-SYR-CRJ200-03-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-M17"
+        },
+        {
+          "legId": "V115-R165-SYR-ROC",
+          "operation": "departure",
+          "bankId": "SYR-M17"
+        },
+        {
+          "legId": "MHT-SYR-CRJ200-03-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-M15"
+        },
+        {
+          "legId": "PIT-SYR-CRJ200-01-IN",
+          "operation": "departure",
+          "bankId": "SYR-M15"
+        },
+        {
+          "legId": "HPN-SYR-CRJ200-02-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-M15"
+        },
+        {
+          "legId": "HVN-SYR-CRJ200-03-IN",
+          "operation": "departure",
+          "bankId": "SYR-M15"
+        },
+        {
+          "legId": "V115-R124-HVN-SYR",
+          "operation": "arrival",
+          "bankId": "SYR-M20"
+        },
+        {
+          "legId": "V115-R124-SYR-HVN",
+          "operation": "departure",
+          "bankId": "SYR-M20"
+        },
+        {
+          "legId": "V115-R144-PWM-SYR",
+          "operation": "arrival",
+          "bankId": "SYR-M17"
+        },
+        {
+          "legId": "V115-R144-SYR-BUF",
+          "operation": "departure",
+          "bankId": "SYR-M17"
+        },
+        {
+          "legId": "ALB-SYR-CRJ200-04-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-M17"
+        },
+        {
+          "legId": "ORH-SYR-CRJ200-01-IN",
+          "operation": "departure",
+          "bankId": "SYR-M17"
+        },
+        {
+          "legId": "BTV-SYR-CRJ200-02-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-M15"
+        },
+        {
+          "legId": "PWM-SYR-CRJ200-01-IN",
+          "operation": "departure",
+          "bankId": "SYR-M15"
+        },
+        {
+          "legId": "V121-R123-2-BDL-SYR",
+          "operation": "arrival",
+          "bankId": "SYR-M09"
+        },
+        {
+          "legId": "PHF-SYR-CRJ200-01-IN",
+          "operation": "departure",
+          "bankId": "SYR-M09"
+        },
+        {
+          "legId": "PHF-SYR-CRJ200-01-IN",
+          "operation": "arrival",
+          "bankId": "PHF-B3"
+        },
+        {
+          "legId": "ALB-SYR-CRJ200-02-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-M09"
+        },
+        {
+          "legId": "CAK-SYR-CRJ200-02-IN",
+          "operation": "departure",
+          "bankId": "SYR-M09"
+        },
+        {
+          "legId": "CAK-SYR-CRJ200-02-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-M15"
+        },
+        {
+          "legId": "CAK-SYR-CRJ200-03-IN",
+          "operation": "departure",
+          "bankId": "SYR-M15"
+        },
+        {
+          "legId": "HVN-SYR-CRJ200-02-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-M09"
+        },
+        {
+          "legId": "PHF-SYR-CRJ200-02-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-M09"
+        },
+        {
+          "legId": "ISP-SYR-CRJ200-02-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-M12"
+        },
+        {
+          "legId": "V133-BHM-530-6-CAK-SYR",
+          "operation": "arrival",
+          "bankId": "SYR-M20"
+        }
+      ]
+    }
+  }
+]

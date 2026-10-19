@@ -1,0 +1,32 @@
+name: Screen v1.4.0 tactical P2P / A-B-C routings
+on:
+  push:
+    branches: [schedule-7-v1.4.0-utilization-analysis]
+    paths:
+      - '.github/workflows/v140-p2p-screen.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: v140-p2p-screen
+  cancel-in-progress: true
+jobs:
+  screen:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -e .
+      - name: Validate P2P / A-B-C triangles using accepted 1.4.0 draft
+        run: python scripts/screen_schedule_7_v1_4_0_tactical_p2p.py
+      - name: Archive evidence
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f outputs/schedule_7_v1_4_0_utilization/tactical_p2p_screen.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Record v1.4 P2P/A-B-C feasibility results [skip ci]"
+            git push origin HEAD:schedule-7-v1.4.0-utilization-analysis
+          fi

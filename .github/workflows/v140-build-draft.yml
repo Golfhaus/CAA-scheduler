@@ -1,0 +1,31 @@
+name: Build v1.4.0 SYR M15-M17 plus R160 extension draft
+on:
+  push:
+    branches: [schedule-7-v1.4.0-utilization-analysis]
+    paths:
+      - '.github/workflows/v140-build-draft.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: v140-build-draft
+  cancel-in-progress: true
+jobs:
+  draft:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -e .
+      - run: python scripts/build_schedule_7_v1_4_0_draft.py
+      - name: Commit validated unpublished draft artifacts
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f data/schedules/schedule_7_v1_4_0_draft/
+          if ! git diff --cached --quiet; then
+            git commit -m "Record validated combined R106/R110 v1.4.0 draft [skip ci]"
+            git push origin HEAD:schedule-7-v1.4.0-utilization-analysis
+          fi

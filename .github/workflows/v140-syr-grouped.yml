@@ -1,0 +1,33 @@
+name: Validate grouped SYR gap-bank proposals including PHF repair
+on:
+  push:
+    branches: [schedule-7-v1.4.0-utilization-analysis]
+    paths:
+      - '.github/workflows/v140-syr-grouped.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: v140-syr-grouped
+  cancel-in-progress: true
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -e .
+      - name: Native-validate nine grouped mini-bank variants with 22 qualifying holds
+        run: python scripts/screen_schedule_7_v1_4_0_syr_grouped.py
+      - name: Archive read-only group feasibility and passing candidate structures
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f outputs/schedule_7_v1_4_0_utilization/syr_group_feasibility.json
+          git add -f outputs/schedule_7_v1_4_0_utilization/syr_group_*_canonical.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Archive read-only SYR bank-group feasibility scenarios [skip ci]"
+            git push origin HEAD:schedule-7-v1.4.0-utilization-analysis
+          fi

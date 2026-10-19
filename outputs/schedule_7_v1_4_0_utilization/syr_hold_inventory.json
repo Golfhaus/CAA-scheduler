@@ -1,0 +1,813 @@
+{
+  "baseline": "schedule_7_v1_4_0_draft",
+  "minimumHoldMinutes": 120,
+  "rows": [
+    {
+      "route": 103,
+      "line": "AC",
+      "day": 3,
+      "fleet": "CRJ200",
+      "station": "ISP",
+      "holdMinutes": 167,
+      "beforeFlight": 1890,
+      "outstationArrivalMinute": 743,
+      "returnFlight": 1894,
+      "returnLegId": "ISP-SYR-CRJ200-03-OUT",
+      "scheduledDepartureMinute": 910,
+      "scheduledArrivalMinute": 968,
+      "durationMinutes": 58,
+      "nextFlight": 1512,
+      "nextLegId": "PHF-SYR-CRJ200-02-IN",
+      "nextDepartureMinute": 1010,
+      "nextDestination": "PHF",
+      "arrivalAssignment": [
+        {
+          "legId": "ISP-SYR-CRJ200-03-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-B5"
+        }
+      ],
+      "candidates": [
+        {
+          "code": "M15",
+          "targetArrival": 905,
+          "targetDeparture": 847,
+          "savedOutstationHold": 63,
+          "SYRGroundBeforeNext": 105
+        }
+      ]
+    },
+    {
+      "route": 104,
+      "line": "AC",
+      "day": 4,
+      "fleet": "CRJ200",
+      "station": "HVN",
+      "holdMinutes": 229,
+      "beforeFlight": 1876,
+      "outstationArrivalMinute": 686,
+      "returnFlight": 1880,
+      "returnLegId": "HVN-SYR-CRJ200-03-OUT",
+      "scheduledDepartureMinute": 915,
+      "scheduledArrivalMinute": 971,
+      "durationMinutes": 56,
+      "nextFlight": 1688,
+      "nextLegId": "BUF-SYR-CRJ200-02-IN",
+      "nextDepartureMinute": 1015,
+      "nextDestination": "BUF",
+      "arrivalAssignment": [
+        {
+          "legId": "HVN-SYR-CRJ200-03-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-B5"
+        }
+      ],
+      "candidates": [
+        {
+          "code": "M15",
+          "targetArrival": 905,
+          "targetDeparture": 849,
+          "savedOutstationHold": 66,
+          "SYRGroundBeforeNext": 110
+        }
+      ]
+    },
+    {
+      "route": 105,
+      "line": "AC",
+      "day": 5,
+      "fleet": "CRJ200",
+      "station": "MHT",
+      "holdMinutes": 170,
+      "beforeFlight": 1835,
+      "outstationArrivalMinute": 575,
+      "returnFlight": 1839,
+      "returnLegId": "MHT-SYR-CRJ200-02-OUT",
+      "scheduledDepartureMinute": 745,
+      "scheduledArrivalMinute": 805,
+      "durationMinutes": 60,
+      "nextFlight": 1773,
+      "nextLegId": "BGR-SYR-CRJ200-02-IN",
+      "nextDepartureMinute": 845,
+      "nextDestination": "BGR",
+      "arrivalAssignment": [
+        {
+          "legId": "MHT-SYR-CRJ200-02-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-B4"
+        }
+      ],
+      "candidates": [
+        {
+          "code": "M12",
+          "targetArrival": 725,
+          "targetDeparture": 665,
+          "savedOutstationHold": 80,
+          "SYRGroundBeforeNext": 120
+        }
+      ]
+    },
+    {
+      "route": 105,
+      "line": "AC",
+      "day": 5,
+      "fleet": "CRJ200",
+      "station": "BGR",
+      "holdMinutes": 130,
+      "beforeFlight": 1773,
+      "outstationArrivalMinute": 925,
+      "returnFlight": 1776,
+      "returnLegId": "BGR-SYR-CRJ200-02-OUT",
+      "scheduledDepartureMinute": 1055,
+      "scheduledArrivalMinute": 1135,
+      "durationMinutes": 80,
+      "nextFlight": 1774,
+      "nextLegId": "BGR-SYR-CRJ200-01-IN",
+      "nextDepartureMinute": 1175,
+      "nextDestination": "BGR",
+      "arrivalAssignment": [
+        {
+          "legId": "BGR-SYR-CRJ200-02-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-B6"
+        }
+      ],
+      "candidates": [
+        {
+          "code": "M17",
+          "targetArrival": 1055,
+          "targetDeparture": 975,
+          "savedOutstationHold": 80,
+          "SYRGroundBeforeNext": 120
+        }
+      ]
+    },
+    {
+      "route": 106,
+      "line": "AC",
+      "day": 6,
+      "fleet": "CRJ200",
+      "station": "HPN",
+      "holdMinutes": 172,
+      "beforeFlight": 1851,
+      "outstationArrivalMinute": 569,
+      "returnFlight": 1854,
+      "returnLegId": "HPN-SYR-CRJ200-01-OUT",
+      "scheduledDepartureMinute": 741,
+      "scheduledArrivalMinute": 795,
+      "durationMinutes": 54,
+      "nextFlight": 1853,
+      "nextLegId": "HPN-SYR-CRJ200-03-IN",
+      "nextDepartureMinute": 835,
+      "nextDestination": "HPN",
+      "arrivalAssignment": [
+        {
+          "legId": "HPN-SYR-CRJ200-01-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-B4"
+        }
+      ],
+      "candidates": [
+        {
+          "code": "M12",
+          "targetArrival": 725,
+          "targetDeparture": 671,
+          "savedOutstationHold": 70,
+          "SYRGroundBeforeNext": 110
+        }
+      ]
+    },
+    {
+      "route": 106,
+      "line": "AC",
+      "day": 6,
+      "fleet": "CRJ200",
+      "station": "HPN",
+      "holdMinutes": 182,
+      "beforeFlight": 1853,
+      "outstationArrivalMinute": 889,
+      "returnFlight": 1856,
+      "returnLegId": "HPN-SYR-CRJ200-03-OUT",
+      "scheduledDepartureMinute": 1071,
+      "scheduledArrivalMinute": 1125,
+      "durationMinutes": 54,
+      "nextFlight": 1827,
+      "nextLegId": "BTV-SYR-CRJ200-01-IN",
+      "nextDepartureMinute": 1165,
+      "nextDestination": "BTV",
+      "arrivalAssignment": [
+        {
+          "legId": "HPN-SYR-CRJ200-03-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-B6"
+        }
+      ],
+      "candidates": [
+        {
+          "code": "M17",
+          "targetArrival": 1055,
+          "targetDeparture": 1001,
+          "savedOutstationHold": 70,
+          "SYRGroundBeforeNext": 110
+        }
+      ]
+    },
+    {
+      "route": 107,
+      "line": "AC",
+      "day": 7,
+      "fleet": "CRJ200",
+      "station": "ISP",
+      "holdMinutes": 172,
+      "beforeFlight": 1889,
+      "outstationArrivalMinute": 573,
+      "returnFlight": 1893,
+      "returnLegId": "ISP-SYR-CRJ200-02-OUT",
+      "scheduledDepartureMinute": 745,
+      "scheduledArrivalMinute": 803,
+      "durationMinutes": 58,
+      "nextFlight": 1792,
+      "nextLegId": "BDL-SYR-CRJ200-01-IN",
+      "nextDepartureMinute": 845,
+      "nextDestination": "BDL",
+      "arrivalAssignment": [
+        {
+          "legId": "ISP-SYR-CRJ200-02-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-B4"
+        }
+      ],
+      "candidates": [
+        {
+          "code": "M12",
+          "targetArrival": 725,
+          "targetDeparture": 667,
+          "savedOutstationHold": 78,
+          "SYRGroundBeforeNext": 120
+        }
+      ]
+    },
+    {
+      "route": 107,
+      "line": "AC",
+      "day": 7,
+      "fleet": "CRJ200",
+      "station": "BDL",
+      "holdMinutes": 181,
+      "beforeFlight": 1792,
+      "outstationArrivalMinute": 899,
+      "returnFlight": 1791,
+      "returnLegId": "BDL-SYR-CRJ200-01-OUT",
+      "scheduledDepartureMinute": 1080,
+      "scheduledArrivalMinute": 1134,
+      "durationMinutes": 54,
+      "nextFlight": 1674,
+      "nextLegId": "CAK-SYR-CRJ200-01-IN",
+      "nextDepartureMinute": 1175,
+      "nextDestination": "CAK",
+      "arrivalAssignment": [
+        {
+          "legId": "BDL-SYR-CRJ200-01-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-B6"
+        }
+      ],
+      "candidates": [
+        {
+          "code": "M17",
+          "targetArrival": 1055,
+          "targetDeparture": 1001,
+          "savedOutstationHold": 79,
+          "SYRGroundBeforeNext": 120
+        }
+      ]
+    },
+    {
+      "route": 108,
+      "line": "AC",
+      "day": 8,
+      "fleet": "CRJ200",
+      "station": "ORH",
+      "holdMinutes": 172,
+      "beforeFlight": 1881,
+      "outstationArrivalMinute": 573,
+      "returnFlight": 1884,
+      "returnLegId": "ORH-SYR-CRJ200-02-OUT",
+      "scheduledDepartureMinute": 745,
+      "scheduledArrivalMinute": 803,
+      "durationMinutes": 58,
+      "nextFlight": 1826,
+      "nextLegId": "BTV-SYR-CRJ200-03-IN",
+      "nextDepartureMinute": 845,
+      "nextDestination": "BTV",
+      "arrivalAssignment": [
+        {
+          "legId": "ORH-SYR-CRJ200-02-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-B4"
+        }
+      ],
+      "candidates": [
+        {
+          "code": "M12",
+          "targetArrival": 725,
+          "targetDeparture": 667,
+          "savedOutstationHold": 78,
+          "SYRGroundBeforeNext": 120
+        }
+      ]
+    },
+    {
+      "route": 108,
+      "line": "AC",
+      "day": 8,
+      "fleet": "CRJ200",
+      "station": "BTV",
+      "holdMinutes": 183,
+      "beforeFlight": 1826,
+      "outstationArrivalMinute": 897,
+      "returnFlight": 1830,
+      "returnLegId": "BTV-SYR-CRJ200-03-OUT",
+      "scheduledDepartureMinute": 1080,
+      "scheduledArrivalMinute": 1132,
+      "durationMinutes": 52,
+      "nextFlight": 2039,
+      "nextLegId": "V115-R165-SYR-ROC",
+      "nextDepartureMinute": 1176,
+      "nextDestination": "ROC",
+      "arrivalAssignment": [
+        {
+          "legId": "BTV-SYR-CRJ200-03-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-B6"
+        }
+      ],
+      "candidates": [
+        {
+          "code": "M17",
+          "targetArrival": 1055,
+          "targetDeparture": 1003,
+          "savedOutstationHold": 77,
+          "SYRGroundBeforeNext": 121
+        }
+      ]
+    },
+    {
+      "route": 110,
+      "line": "AM",
+      "day": 12,
+      "fleet": "CRJ200",
+      "station": "HVN",
+      "holdMinutes": 179,
+      "beforeFlight": 1875,
+      "outstationArrivalMinute": 406,
+      "returnFlight": 1879,
+      "returnLegId": "HVN-SYR-CRJ200-02-OUT",
+      "scheduledDepartureMinute": 585,
+      "scheduledArrivalMinute": 641,
+      "durationMinutes": 56,
+      "nextFlight": 1836,
+      "nextLegId": "MHT-SYR-CRJ200-03-IN",
+      "nextDepartureMinute": 685,
+      "nextDestination": "MHT",
+      "arrivalAssignment": [
+        {
+          "legId": "HVN-SYR-CRJ200-02-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-B3"
+        }
+      ],
+      "candidates": [
+        {
+          "code": "M09",
+          "targetArrival": 555,
+          "targetDeparture": 499,
+          "savedOutstationHold": 86,
+          "SYRGroundBeforeNext": 130
+        }
+      ]
+    },
+    {
+      "route": 110,
+      "line": "AM",
+      "day": 12,
+      "fleet": "CRJ200",
+      "station": "MHT",
+      "holdMinutes": 165,
+      "beforeFlight": 1836,
+      "outstationArrivalMinute": 745,
+      "returnFlight": 1840,
+      "returnLegId": "MHT-SYR-CRJ200-03-OUT",
+      "scheduledDepartureMinute": 910,
+      "scheduledArrivalMinute": 970,
+      "durationMinutes": 60,
+      "nextFlight": 1608,
+      "nextLegId": "PIT-SYR-CRJ200-01-IN",
+      "nextDepartureMinute": 1010,
+      "nextDestination": "PIT",
+      "arrivalAssignment": [
+        {
+          "legId": "MHT-SYR-CRJ200-03-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-B5"
+        }
+      ],
+      "candidates": [
+        {
+          "code": "M15",
+          "targetArrival": 905,
+          "targetDeparture": 845,
+          "savedOutstationHold": 65,
+          "SYRGroundBeforeNext": 105
+        }
+      ]
+    },
+    {
+      "route": 124,
+      "line": "AE",
+      "day": 3,
+      "fleet": "CRJ200",
+      "station": "HPN",
+      "holdMinutes": 181,
+      "beforeFlight": 1852,
+      "outstationArrivalMinute": 734,
+      "returnFlight": 1855,
+      "returnLegId": "HPN-SYR-CRJ200-02-OUT",
+      "scheduledDepartureMinute": 915,
+      "scheduledArrivalMinute": 969,
+      "durationMinutes": 54,
+      "nextFlight": 1877,
+      "nextLegId": "HVN-SYR-CRJ200-03-IN",
+      "nextDepartureMinute": 1010,
+      "nextDestination": "HVN",
+      "arrivalAssignment": [
+        {
+          "legId": "HPN-SYR-CRJ200-02-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-B5"
+        }
+      ],
+      "candidates": [
+        {
+          "code": "M15",
+          "targetArrival": 905,
+          "targetDeparture": 851,
+          "savedOutstationHold": 64,
+          "SYRGroundBeforeNext": 105
+        }
+      ]
+    },
+    {
+      "route": 124,
+      "line": "AE",
+      "day": 3,
+      "fleet": "CRJ200",
+      "station": "HVN",
+      "holdMinutes": 168,
+      "beforeFlight": 1877,
+      "outstationArrivalMinute": 1066,
+      "returnFlight": 2055,
+      "returnLegId": "V115-R124-HVN-SYR",
+      "scheduledDepartureMinute": 1234,
+      "scheduledArrivalMinute": 1290,
+      "durationMinutes": 56,
+      "nextFlight": 2056,
+      "nextLegId": "V115-R124-SYR-HVN",
+      "nextDepartureMinute": 1332,
+      "nextDestination": "HVN",
+      "arrivalAssignment": [
+        {
+          "legId": "V115-R124-HVN-SYR",
+          "operation": "arrival",
+          "bankId": "SYR-B7"
+        }
+      ],
+      "candidates": [
+        {
+          "code": "M20",
+          "targetArrival": 1235,
+          "targetDeparture": 1179,
+          "savedOutstationHold": 55,
+          "SYRGroundBeforeNext": 97
+        }
+      ]
+    },
+    {
+      "route": 129,
+      "line": "AE",
+      "day": 8,
+      "fleet": "CRJ200",
+      "station": "PHF",
+      "holdMinutes": 179,
+      "beforeFlight": 1713,
+      "outstationArrivalMinute": 376,
+      "returnFlight": 1514,
+      "returnLegId": "PHF-SYR-CRJ200-02-OUT",
+      "scheduledDepartureMinute": 555,
+      "scheduledArrivalMinute": 640,
+      "durationMinutes": 85,
+      "nextFlight": 1708,
+      "nextLegId": "ROC-SYR-CRJ200-02-IN",
+      "nextDepartureMinute": 680,
+      "nextDestination": "ROC",
+      "arrivalAssignment": [
+        {
+          "legId": "PHF-SYR-CRJ200-02-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-B3"
+        }
+      ],
+      "candidates": [
+        {
+          "code": "M09",
+          "targetArrival": 555,
+          "targetDeparture": 470,
+          "savedOutstationHold": 85,
+          "SYRGroundBeforeNext": 125
+        }
+      ]
+    },
+    {
+      "route": 130,
+      "line": "AE",
+      "day": 9,
+      "fleet": "CRJ200",
+      "station": "PWM",
+      "holdMinutes": 144,
+      "beforeFlight": 1700,
+      "outstationArrivalMinute": 913,
+      "returnFlight": 2049,
+      "returnLegId": "V115-R144-PWM-SYR",
+      "scheduledDepartureMinute": 1057,
+      "scheduledArrivalMinute": 1125,
+      "durationMinutes": 68,
+      "nextFlight": 2050,
+      "nextLegId": "V115-R144-SYR-BUF",
+      "nextDepartureMinute": 1165,
+      "nextDestination": "BUF",
+      "arrivalAssignment": [
+        {
+          "legId": "V115-R144-PWM-SYR",
+          "operation": "arrival",
+          "bankId": "SYR-B6"
+        }
+      ],
+      "candidates": [
+        {
+          "code": "M17",
+          "targetArrival": 1055,
+          "targetDeparture": 987,
+          "savedOutstationHold": 70,
+          "SYRGroundBeforeNext": 110
+        }
+      ]
+    },
+    {
+      "route": 131,
+      "line": "AE",
+      "day": 10,
+      "fleet": "CRJ200",
+      "station": "ALB",
+      "holdMinutes": 196,
+      "beforeFlight": 1751,
+      "outstationArrivalMinute": 894,
+      "returnFlight": 1756,
+      "returnLegId": "ALB-SYR-CRJ200-04-OUT",
+      "scheduledDepartureMinute": 1090,
+      "scheduledArrivalMinute": 1134,
+      "durationMinutes": 44,
+      "nextFlight": 1882,
+      "nextLegId": "ORH-SYR-CRJ200-01-IN",
+      "nextDepartureMinute": 1175,
+      "nextDestination": "ORH",
+      "arrivalAssignment": [
+        {
+          "legId": "ALB-SYR-CRJ200-04-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-B6"
+        }
+      ],
+      "candidates": [
+        {
+          "code": "M17",
+          "targetArrival": 1055,
+          "targetDeparture": 1011,
+          "savedOutstationHold": 79,
+          "SYRGroundBeforeNext": 120
+        }
+      ]
+    },
+    {
+      "route": 160,
+      "line": "AM",
+      "day": 4,
+      "fleet": "CRJ200",
+      "station": "BTV",
+      "holdMinutes": 183,
+      "beforeFlight": 1825,
+      "outstationArrivalMinute": 732,
+      "returnFlight": 1829,
+      "returnLegId": "BTV-SYR-CRJ200-02-OUT",
+      "scheduledDepartureMinute": 915,
+      "scheduledArrivalMinute": 967,
+      "durationMinutes": 52,
+      "nextFlight": 1701,
+      "nextLegId": "PWM-SYR-CRJ200-01-IN",
+      "nextDepartureMinute": 1140,
+      "nextDestination": "PWM",
+      "arrivalAssignment": [
+        {
+          "legId": "BTV-SYR-CRJ200-02-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-B5"
+        }
+      ],
+      "candidates": [
+        {
+          "code": "M15",
+          "targetArrival": 905,
+          "targetDeparture": 853,
+          "savedOutstationHold": 62,
+          "SYRGroundBeforeNext": 235
+        }
+      ]
+    },
+    {
+      "route": 162,
+      "line": "AM",
+      "day": 6,
+      "fleet": "CRJ200",
+      "station": "BDL",
+      "holdMinutes": 192,
+      "beforeFlight": 2101,
+      "outstationArrivalMinute": 413,
+      "returnFlight": 2102,
+      "returnLegId": "V121-R123-2-BDL-SYR",
+      "scheduledDepartureMinute": 605,
+      "scheduledArrivalMinute": 659,
+      "durationMinutes": 54,
+      "nextFlight": 1511,
+      "nextLegId": "PHF-SYR-CRJ200-01-IN",
+      "nextDepartureMinute": 850,
+      "nextDestination": "PHF",
+      "arrivalAssignment": [
+        {
+          "legId": "V121-R123-2-BDL-SYR",
+          "operation": "arrival",
+          "bankId": "SYR-B3"
+        }
+      ],
+      "candidates": [
+        {
+          "code": "M09",
+          "targetArrival": 555,
+          "targetDeparture": 501,
+          "savedOutstationHold": 104,
+          "SYRGroundBeforeNext": 295
+        }
+      ]
+    },
+    {
+      "route": 167,
+      "line": "AC",
+      "day": 9,
+      "fleet": "CRJ200",
+      "station": "ALB",
+      "holdMinutes": 201,
+      "beforeFlight": 1749,
+      "outstationArrivalMinute": 394,
+      "returnFlight": 1754,
+      "returnLegId": "ALB-SYR-CRJ200-02-OUT",
+      "scheduledDepartureMinute": 595,
+      "scheduledArrivalMinute": 639,
+      "durationMinutes": 44,
+      "nextFlight": 1672,
+      "nextLegId": "CAK-SYR-CRJ200-02-IN",
+      "nextDepartureMinute": 680,
+      "nextDestination": "CAK",
+      "arrivalAssignment": [
+        {
+          "legId": "ALB-SYR-CRJ200-02-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-B3"
+        }
+      ],
+      "candidates": [
+        {
+          "code": "M09",
+          "targetArrival": 555,
+          "targetDeparture": 511,
+          "savedOutstationHold": 84,
+          "SYRGroundBeforeNext": 125
+        }
+      ]
+    },
+    {
+      "route": 167,
+      "line": "AC",
+      "day": 9,
+      "fleet": "CRJ200",
+      "station": "CAK",
+      "holdMinutes": 144,
+      "beforeFlight": 1672,
+      "outstationArrivalMinute": 751,
+      "returnFlight": 1670,
+      "returnLegId": "CAK-SYR-CRJ200-02-OUT",
+      "scheduledDepartureMinute": 895,
+      "scheduledArrivalMinute": 966,
+      "durationMinutes": 71,
+      "nextFlight": 1673,
+      "nextLegId": "CAK-SYR-CRJ200-03-IN",
+      "nextDepartureMinute": 1010,
+      "nextDestination": "CAK",
+      "arrivalAssignment": [
+        {
+          "legId": "CAK-SYR-CRJ200-02-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-B5"
+        }
+      ],
+      "candidates": [
+        {
+          "code": "M15",
+          "targetArrival": 905,
+          "targetDeparture": 834,
+          "savedOutstationHold": 61,
+          "SYRGroundBeforeNext": 105
+        }
+      ]
+    },
+    {
+      "route": 530,
+      "line": "AG",
+      "day": 9,
+      "fleet": "CRJ900",
+      "station": "CAK",
+      "holdMinutes": 140,
+      "beforeFlight": 2249,
+      "outstationArrivalMinute": 1081,
+      "returnFlight": 2250,
+      "returnLegId": "V133-BHM-530-6-CAK-SYR",
+      "scheduledDepartureMinute": 1221,
+      "scheduledArrivalMinute": 1290,
+      "durationMinutes": 69,
+      "nextFlight": null,
+      "nextLegId": null,
+      "nextDepartureMinute": null,
+      "nextDestination": null,
+      "arrivalAssignment": [
+        {
+          "legId": "V133-BHM-530-6-CAK-SYR",
+          "operation": "arrival",
+          "bankId": "SYR-B7"
+        }
+      ],
+      "candidates": [
+        {
+          "code": "M20",
+          "targetArrival": 1235,
+          "targetDeparture": 1166,
+          "savedOutstationHold": 55,
+          "SYRGroundBeforeNext": null
+        }
+      ]
+    }
+  ],
+  "gapBanks": [
+    {
+      "code": "M09",
+      "id": "SYR-M09",
+      "startMinute": 535,
+      "endMinute": 595,
+      "center": 555
+    },
+    {
+      "code": "M12",
+      "id": "SYR-M12",
+      "startMinute": 715,
+      "endMinute": 775,
+      "center": 725
+    },
+    {
+      "code": "M15",
+      "id": "SYR-M15",
+      "startMinute": 885,
+      "endMinute": 945,
+      "center": 905
+    },
+    {
+      "code": "M17",
+      "id": "SYR-M17",
+      "startMinute": 1035,
+      "endMinute": 1095,
+      "center": 1055
+    },
+    {
+      "code": "M20",
+      "id": "SYR-M20",
+      "startMinute": 1215,
+      "endMinute": 1275,
+      "center": 1235
+    }
+  ]
+}
