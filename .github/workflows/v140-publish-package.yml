@@ -1,4 +1,4 @@
-name: Prepare and verify Schedule 7 v1.4.0 release (verified market count)
+name: Prepare and verify Schedule 7 v1.4.0 release
 on:
   push:
     branches: [schedule-7-v1.4.0-utilization-analysis]
@@ -47,6 +47,7 @@ jobs:
           git add -f config/optimizations/schedule_7_v1_4_0_release.json data/schedules/schedule_7_v1_4_0/ data/schedules/schedule_7_v1_4_0_draft/ web/schedules.json README.md
           if ! git diff --cached --quiet; then
             git commit -m "Package tested Schedule 7 v1.4.0 and web default [skip ci]"
+            git restore --worktree .
             git pull --rebase origin schedule-7-v1.4.0-utilization-analysis
             git push origin HEAD:schedule-7-v1.4.0-utilization-analysis
           fi
