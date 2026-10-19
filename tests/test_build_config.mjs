@@ -96,3 +96,30 @@ test("airport facility preflight flags invalid classifications and gate counts",
   const report = validateBuildConfig(config, canonical);
   assert.equal(report.checks.find((item) => item.id === "airport_facilities").status, "fail");
 });
+
+test("airport role defaults and individual gates and stands round-trip", () => {
+  const config = createBuildConfig(canonical, manifest);
+  assert.deepEqual(config.airportTypeDefaults.hub, { gates: 16, stands: 8 });
+  assert.deepEqual(config.airportTypeDefaults.focus_city, { gates: 6, stands: 4 });
+  assert.deepEqual(config.airportTypeDefaults.destination, { gates: 2, stands: 2 });
+  const city = config.airportFacilities.find((item) => item.airport === "DAY");
+  city.gates = 18;
+  city.stands = 10;
+  config.airportTypeDefaults.large_destination = { gates: 5, stands: 3 };
+  const imported = normalizeBuildConfig(JSON.parse(serializeBuildConfig(config)));
+  assert.deepEqual(imported.airportTypeDefaults.large_destination, { gates: 5, stands: 3 });
+  assert.equal(imported.airportFacilities.find((item) => item.airport === "DAY").stands, 10);
+  const preflight = validateBuildConfig(imported, canonical);
+  assert.equal(preflight.checks.find((item) => item.id === "airport_facilities").status, "pass");
+  city.gates = null;
+  city.stands = null;
+  assert.equal(city.gates, null);
+  assert.equal(city.stands, null);
+});
+
+test("airport inventory preflight rejects invalid stands and type defaults", () => {
+  const config = createBuildConfig(canonical, manifest);
+  config.airportTypeDefaults.hub.stands = -2;
+  config.airportFacilities[0].stands = -1;
+  assert.equal(validateBuildConfig(config, canonical).checks.find((item) => item.id === "airport_facilities").status, "fail");
+});
