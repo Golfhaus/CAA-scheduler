@@ -281,6 +281,7 @@ main {
 .metric-card strong { display: block; margin-top: 0.35rem; font-size: 1.75rem; line-height: 1; }
 .metric-card span { color: var(--muted); font-size: 0.82rem; font-weight: 700; }
 .metric-card small { display: block; margin-top: 0.65rem; color: var(--muted); font-size: 0.76rem; }
+.metric-card small .line-duration-outside-range { color: var(--danger); font: inherit; }
 .metric-card.is-danger { border-color: #efb5af; border-top-color: var(--danger); background: var(--danger-soft); }
 .metric-card.is-warning { border-top-color: #e09a17; }
 .metric-card.is-success { border-top-color: var(--success); }
