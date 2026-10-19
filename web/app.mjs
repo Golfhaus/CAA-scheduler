@@ -1613,9 +1613,11 @@ function renderSetupAirportRows() {
 
   const term = ($("#setup-airport-filter").value || "").trim().toUpperCase();
   const show = $("#setup-airport-show").value;
+  const selectedRole = $("#setup-airport-role-filter").value;
   $("#setup-airport-rows").innerHTML = config.airportFacilities
     .map((entry, index) => ({ ...entry, index, name: names.get(entry.airport) || "" }))
     .filter((entry) => (!term || `${entry.airport} ${entry.name}`.toUpperCase().includes(term))
+      && (selectedRole === "all" || entry.role === selectedRole)
       && (show === "all" || entry.gates !== null || entry.stands !== null))
     .map((entry) => {
       const defaults = config.airportTypeDefaults[entry.role] || {};
@@ -1708,7 +1710,6 @@ function updateSetupDraft(message = "Draft saved") {
   readSetupForm();
   $("#setup-baseline").disabled = state.buildConfig.startingPoint.kind === "blank";
   saveSetupDraft(message);
-  renderSetupAirportRows();
   renderSetupPreflight();
 }
 
@@ -1849,6 +1850,7 @@ function bindEvents() {
       $("#setup-airport-details").hidden = false;
       $("#setup-airport-toggle").setAttribute("aria-expanded", "true");
       $("#setup-airport-show").value = "all";
+      $("#setup-airport-role-filter").value = role;
       $("#setup-airport-filter").value = "";
       renderSetupAirportRows();
       const index = state.buildConfig.airportFacilities.findIndex((entry) => entry.role === role);
@@ -1987,9 +1989,11 @@ function bindEvents() {
   $("#setup-add-fleet").addEventListener("click", addFleetType);
   $("#setup-airport-filter").addEventListener("input", renderSetupAirportRows);
   $("#setup-airport-show").addEventListener("change", renderSetupAirportRows);
+  $("#setup-airport-role-filter").addEventListener("change", renderSetupAirportRows);
   $("#setup-airport-toggle").addEventListener("click", () => {
     const details = $("#setup-airport-details");
     details.hidden = !details.hidden;
+    if (!details.hidden) renderSetupAirportRows();
     $("#setup-airport-toggle").setAttribute("aria-expanded", String(!details.hidden));
   });
   $("#setup-add-network").addEventListener("click", addNetworkChange);
