@@ -1,0 +1,327 @@
+{
+  "name": "SYR M15 R160 PWM-PHF-PWM extension, no other changed routes",
+  "flightsBefore": 1257,
+  "flightsAfter": 1259,
+  "gains": [
+    {
+      "market": "FWA-PWM",
+      "origin": "FWA",
+      "destination": "PWM",
+      "demand": 0.6,
+      "beforeMinutes": 398,
+      "afterMinutes": 268
+    }
+  ],
+  "losses": [
+    {
+      "market": "MCI-PWM",
+      "origin": "MCI",
+      "destination": "PWM",
+      "demand": 7.2,
+      "beforeMinutes": 363,
+      "afterMinutes": 458
+    }
+  ],
+  "faster": [
+    {
+      "market": "PWM-BNA",
+      "origin": "PWM",
+      "destination": "BNA",
+      "demand": 18.2,
+      "beforeMinutes": 349,
+      "afterMinutes": 309
+    },
+    {
+      "market": "PWM-DAL",
+      "origin": "PWM",
+      "destination": "DAL",
+      "demand": 13.2,
+      "beforeMinutes": 386,
+      "afterMinutes": 380
+    },
+    {
+      "market": "JAX-PWM",
+      "origin": "JAX",
+      "destination": "PWM",
+      "demand": 9.3,
+      "beforeMinutes": 423,
+      "afterMinutes": 280
+    },
+    {
+      "market": "PIT-PWM",
+      "origin": "PIT",
+      "destination": "PWM",
+      "demand": 9.3,
+      "beforeMinutes": 289,
+      "afterMinutes": 224
+    },
+    {
+      "market": "BTV-BNA",
+      "origin": "BTV",
+      "destination": "BNA",
+      "demand": 7.7,
+      "beforeMinutes": 331,
+      "afterMinutes": 256
+    },
+    {
+      "market": "PWM-MCI",
+      "origin": "PWM",
+      "destination": "MCI",
+      "demand": 7.4,
+      "beforeMinutes": 407,
+      "afterMinutes": 354
+    },
+    {
+      "market": "PWM-SAT",
+      "origin": "PWM",
+      "destination": "SAT",
+      "demand": 6.4,
+      "beforeMinutes": 565,
+      "afterMinutes": 503
+    },
+    {
+      "market": "PWM-SAV",
+      "origin": "PWM",
+      "destination": "SAV",
+      "demand": 5.9,
+      "beforeMinutes": 355,
+      "afterMinutes": 293
+    },
+    {
+      "market": "TYS-PWM",
+      "origin": "TYS",
+      "destination": "PWM",
+      "demand": 4.2,
+      "beforeMinutes": 643,
+      "afterMinutes": 425
+    },
+    {
+      "market": "PWM-MYR",
+      "origin": "PWM",
+      "destination": "MYR",
+      "demand": 3.8,
+      "beforeMinutes": 335,
+      "afterMinutes": 273
+    },
+    {
+      "market": "BHM-PWM",
+      "origin": "BHM",
+      "destination": "PWM",
+      "demand": 3.5,
+      "beforeMinutes": 558,
+      "afterMinutes": 437
+    },
+    {
+      "market": "PWM-ILM",
+      "origin": "PWM",
+      "destination": "ILM",
+      "demand": 3.3,
+      "beforeMinutes": 326,
+      "afterMinutes": 264
+    },
+    {
+      "market": "PWM-CAE",
+      "origin": "PWM",
+      "destination": "CAE",
+      "demand": 2.2,
+      "beforeMinutes": 344,
+      "afterMinutes": 282
+    },
+    {
+      "market": "LEX-PWM",
+      "origin": "LEX",
+      "destination": "PWM",
+      "demand": 2.1,
+      "beforeMinutes": 608,
+      "afterMinutes": 373
+    },
+    {
+      "market": "PWM-ROA",
+      "origin": "PWM",
+      "destination": "ROA",
+      "demand": 1.6,
+      "beforeMinutes": 373,
+      "afterMinutes": 311
+    },
+    {
+      "market": "TLH-PWM",
+      "origin": "TLH",
+      "destination": "PWM",
+      "demand": 1.4,
+      "beforeMinutes": 618,
+      "afterMinutes": 453
+    },
+    {
+      "market": "PWM-SGF",
+      "origin": "PWM",
+      "destination": "SGF",
+      "demand": 1,
+      "beforeMinutes": 514,
+      "afterMinutes": 452
+    },
+    {
+      "market": "PWM-GNV",
+      "origin": "PWM",
+      "destination": "GNV",
+      "demand": 0.8,
+      "beforeMinutes": 424,
+      "afterMinutes": 362
+    },
+    {
+      "market": "BTV-BWI",
+      "origin": "BTV",
+      "destination": "BWI",
+      "demand": 0.6,
+      "beforeMinutes": 265,
+      "afterMinutes": 177
+    },
+    {
+      "market": "FWA-PWM",
+      "origin": "FWA",
+      "destination": "PWM",
+      "demand": 0.6,
+      "beforeMinutes": 398,
+      "afterMinutes": 268
+    }
+  ],
+  "slower": [
+    {
+      "market": "BTV-CHS",
+      "origin": "BTV",
+      "destination": "CHS",
+      "demand": 8,
+      "beforeMinutes": 415,
+      "afterMinutes": 462
+    },
+    {
+      "market": "MCI-PWM",
+      "origin": "MCI",
+      "destination": "PWM",
+      "demand": 7.2,
+      "beforeMinutes": 363,
+      "afterMinutes": 458
+    },
+    {
+      "market": "BLV-PWM",
+      "origin": "BLV",
+      "destination": "PWM",
+      "demand": 7.1,
+      "beforeMinutes": 523,
+      "afterMinutes": 573
+    },
+    {
+      "market": "SAT-PWM",
+      "origin": "SAT",
+      "destination": "PWM",
+      "demand": 6.3,
+      "beforeMinutes": 623,
+      "afterMinutes": 793
+    },
+    {
+      "market": "BTV-HOU",
+      "origin": "BTV",
+      "destination": "HOU",
+      "demand": 5,
+      "beforeMinutes": 523,
+      "afterMinutes": 590
+    },
+    {
+      "market": "BTV-GSP",
+      "origin": "BTV",
+      "destination": "GSP",
+      "demand": 3.6,
+      "beforeMinutes": 296,
+      "afterMinutes": 363
+    },
+    {
+      "market": "BTV-MYR",
+      "origin": "BTV",
+      "destination": "MYR",
+      "demand": 3.3,
+      "beforeMinutes": 406,
+      "afterMinutes": 473
+    },
+    {
+      "market": "BTV-ILM",
+      "origin": "BTV",
+      "destination": "ILM",
+      "demand": 3.1,
+      "beforeMinutes": 397,
+      "afterMinutes": 464
+    },
+    {
+      "market": "BTV-PHF",
+      "origin": "BTV",
+      "destination": "PHF",
+      "demand": 2.8,
+      "beforeMinutes": 180,
+      "afterMinutes": 247
+    },
+    {
+      "market": "BTV-CAE",
+      "origin": "BTV",
+      "destination": "CAE",
+      "demand": 1.7,
+      "beforeMinutes": 415,
+      "afterMinutes": 482
+    },
+    {
+      "market": "BTV-DAB",
+      "origin": "BTV",
+      "destination": "DAB",
+      "demand": 0.9,
+      "beforeMinutes": 244,
+      "afterMinutes": 311
+    },
+    {
+      "market": "BTV-ROA",
+      "origin": "BTV",
+      "destination": "ROA",
+      "demand": 0.9,
+      "beforeMinutes": 444,
+      "afterMinutes": 511
+    },
+    {
+      "market": "JAN-PWM",
+      "origin": "JAN",
+      "destination": "PWM",
+      "demand": 0.8,
+      "beforeMinutes": 566,
+      "afterMinutes": 583
+    },
+    {
+      "market": "ALB-PWM",
+      "origin": "ALB",
+      "destination": "PWM",
+      "demand": 0.6,
+      "beforeMinutes": 283,
+      "afterMinutes": 303
+    },
+    {
+      "market": "BTV-GNV",
+      "origin": "BTV",
+      "destination": "GNV",
+      "demand": 0.6,
+      "beforeMinutes": 495,
+      "afterMinutes": 562
+    },
+    {
+      "market": "BTV-ACY",
+      "origin": "BTV",
+      "destination": "ACY",
+      "demand": 0,
+      "beforeMinutes": 159,
+      "afterMinutes": 226
+    },
+    {
+      "market": "BTV-HVN",
+      "origin": "BTV",
+      "destination": "HVN",
+      "demand": 0,
+      "beforeMinutes": 151,
+      "afterMinutes": 218
+    }
+  ],
+  "rawGains": 1,
+  "rawLosses": 1
+}
