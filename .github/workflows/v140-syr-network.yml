@@ -1,0 +1,25 @@
+name: Audit Syracuse mini-bank passenger network tradeoffs
+on:
+  push:
+    branches: [schedule-7-v1.4.0-utilization-analysis]
+    paths:
+      - '.github/workflows/v140-syr-network.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compare six physical-pass Syracuse bank scenarios
+        run: node scripts/audit_schedule_7_v1_4_0_syr_banks_network.mjs
+      - name: Archive directional network evidence
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+users.noreply.github.com"
+          git add -f outputs/schedule_7_v1_4_0_utilization/syr_group_network_audit.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Archive Syracuse bank connectivity review [skip ci]"
+            git push origin HEAD:schedule-7-v1.4.0-utilization-analysis
+          fi
