@@ -1,0 +1,466 @@
+[
+  {
+    "name": "R103_ISP_M15",
+    "route": 103,
+    "bank": "M15",
+    "station": "ISP",
+    "next": "PHF",
+    "gains": 0,
+    "losses": 2,
+    "faster": 5,
+    "slower": 38,
+    "marketsGained": [],
+    "marketsLost": [
+      {
+        "market": "SYR-ROA",
+        "origin": "SYR",
+        "destination": "ROA",
+        "demand": 1.3,
+        "beforeMinutes": 349,
+        "afterMinutes": null
+      },
+      {
+        "market": "ISP-MDT",
+        "origin": "ISP",
+        "destination": "MDT",
+        "demand": 0,
+        "beforeMinutes": 322,
+        "afterMinutes": null
+      }
+    ]
+  },
+  {
+    "name": "R104_HVN_M15",
+    "route": 104,
+    "bank": "M15",
+    "station": "HVN",
+    "next": "BUF",
+    "gains": 0,
+    "losses": 1,
+    "faster": 8,
+    "slower": 13,
+    "marketsGained": [],
+    "marketsLost": [
+      {
+        "market": "HVN-MDT",
+        "origin": "HVN",
+        "destination": "MDT",
+        "demand": 0,
+        "beforeMinutes": 317,
+        "afterMinutes": null
+      }
+    ]
+  },
+  {
+    "name": "R105_MHT_M12",
+    "route": 105,
+    "bank": "M12",
+    "station": "MHT",
+    "next": "BGR",
+    "gains": 0,
+    "losses": 2,
+    "faster": 32,
+    "slower": 25,
+    "marketsGained": [],
+    "marketsLost": [
+      {
+        "market": "ROC-BGR",
+        "origin": "ROC",
+        "destination": "BGR",
+        "demand": 0.7,
+        "beforeMinutes": 160,
+        "afterMinutes": null
+      },
+      {
+        "market": "SWF-BGR",
+        "origin": "SWF",
+        "destination": "BGR",
+        "demand": 0,
+        "beforeMinutes": 170,
+        "afterMinutes": null
+      }
+    ]
+  },
+  {
+    "name": "R105_BGR_M17",
+    "route": 105,
+    "bank": "M17",
+    "station": "BGR",
+    "next": "BGR",
+    "gains": 1,
+    "losses": 4,
+    "faster": 28,
+    "slower": 11,
+    "marketsGained": [
+      {
+        "market": "BGR-BWI",
+        "origin": "BGR",
+        "destination": "BWI",
+        "demand": 0.3,
+        "beforeMinutes": null,
+        "afterMinutes": 230
+      }
+    ],
+    "marketsLost": [
+      {
+        "market": "BGR-DAY",
+        "origin": "BGR",
+        "destination": "DAY",
+        "demand": 0.7,
+        "beforeMinutes": 387,
+        "afterMinutes": null
+      },
+      {
+        "market": "ABE-BGR",
+        "origin": "ABE",
+        "destination": "BGR",
+        "demand": 0.3,
+        "beforeMinutes": 175,
+        "afterMinutes": null
+      },
+      {
+        "market": "BGR-ABE",
+        "origin": "BGR",
+        "destination": "ABE",
+        "demand": 0.3,
+        "beforeMinutes": 342,
+        "afterMinutes": null
+      },
+      {
+        "market": "BWI-BGR",
+        "origin": "BWI",
+        "destination": "BGR",
+        "demand": 0.3,
+        "beforeMinutes": 185,
+        "afterMinutes": 373
+      }
+    ]
+  },
+  {
+    "name": "R106_HPN_M12",
+    "route": 106,
+    "bank": "M12",
+    "station": "HPN",
+    "next": "HPN",
+    "gains": 0,
+    "losses": 1,
+    "faster": 2,
+    "slower": 35,
+    "marketsGained": [],
+    "marketsLost": [
+      {
+        "market": "RFD-HPN",
+        "origin": "RFD",
+        "destination": "HPN",
+        "demand": 36.1,
+        "beforeMinutes": 194,
+        "afterMinutes": null
+      }
+    ]
+  },
+  {
+    "name": "R106_HPN_M17",
+    "route": 106,
+    "bank": "M17",
+    "station": "HPN",
+    "next": "BTV",
+    "gains": 0,
+    "losses": 0,
+    "faster": 15,
+    "slower": 7,
+    "marketsGained": [],
+    "marketsLost": []
+  },
+  {
+    "name": "R107_BDL_M17",
+    "route": 107,
+    "bank": "M17",
+    "station": "BDL",
+    "next": "CAK",
+    "gains": 1,
+    "losses": 2,
+    "faster": 1,
+    "slower": 11,
+    "marketsGained": [
+      {
+        "market": "BDL-BWI",
+        "origin": "BDL",
+        "destination": "BWI",
+        "demand": 32.9,
+        "beforeMinutes": null,
+        "afterMinutes": 204
+      }
+    ],
+    "marketsLost": [
+      {
+        "market": "BDL-PIT",
+        "origin": "BDL",
+        "destination": "PIT",
+        "demand": 20.2,
+        "beforeMinutes": 331,
+        "afterMinutes": null
+      },
+      {
+        "market": "BDL-ABE",
+        "origin": "BDL",
+        "destination": "ABE",
+        "demand": 0.2,
+        "beforeMinutes": 317,
+        "afterMinutes": null
+      }
+    ]
+  },
+  {
+    "name": "R108_ORH_M12",
+    "route": 108,
+    "bank": "M12",
+    "station": "ORH",
+    "next": "BTV",
+    "gains": 0,
+    "losses": 4,
+    "faster": 1,
+    "slower": 38,
+    "marketsGained": [],
+    "marketsLost": [
+      {
+        "market": "PVD-BTV",
+        "origin": "PVD",
+        "destination": "BTV",
+        "demand": 0.3,
+        "beforeMinutes": 157,
+        "afterMinutes": null
+      },
+      {
+        "market": "ORH-ABE",
+        "origin": "ORH",
+        "destination": "ABE",
+        "demand": 0,
+        "beforeMinutes": 317,
+        "afterMinutes": null
+      },
+      {
+        "market": "ORH-ACY",
+        "origin": "ORH",
+        "destination": "ACY",
+        "demand": 0,
+        "beforeMinutes": 329,
+        "afterMinutes": null
+      },
+      {
+        "market": "ORH-DAB",
+        "origin": "ORH",
+        "destination": "DAB",
+        "demand": 0,
+        "beforeMinutes": 414,
+        "afterMinutes": null
+      }
+    ]
+  },
+  {
+    "name": "R108_BTV_M17",
+    "route": 108,
+    "bank": "M17",
+    "station": "BTV",
+    "next": "ROC",
+    "gains": 0,
+    "losses": 2,
+    "faster": 15,
+    "slower": 7,
+    "marketsGained": [],
+    "marketsLost": [
+      {
+        "market": "RFD-ROC",
+        "origin": "RFD",
+        "destination": "ROC",
+        "demand": 42.3,
+        "beforeMinutes": 190,
+        "afterMinutes": 454
+      },
+      {
+        "market": "BDL-ROC",
+        "origin": "BDL",
+        "destination": "ROC",
+        "demand": 1.6,
+        "beforeMinutes": 135,
+        "afterMinutes": null
+      }
+    ]
+  },
+  {
+    "name": "R110_MHT_M15",
+    "route": 110,
+    "bank": "M15",
+    "station": "MHT",
+    "next": "PIT",
+    "gains": 0,
+    "losses": 0,
+    "faster": 4,
+    "slower": 13,
+    "marketsGained": [],
+    "marketsLost": []
+  },
+  {
+    "name": "R124_HPN_M15",
+    "route": 124,
+    "bank": "M15",
+    "station": "HPN",
+    "next": "HVN",
+    "gains": 0,
+    "losses": 0,
+    "faster": 18,
+    "slower": 17,
+    "marketsGained": [],
+    "marketsLost": []
+  },
+  {
+    "name": "R124_HVN_M20",
+    "route": 124,
+    "bank": "M20",
+    "station": "HVN",
+    "next": "HVN",
+    "gains": 0,
+    "losses": 0,
+    "faster": 3,
+    "slower": 5,
+    "marketsGained": [],
+    "marketsLost": []
+  },
+  {
+    "name": "R130_PWM_M17",
+    "route": 130,
+    "bank": "M17",
+    "station": "PWM",
+    "next": "BUF",
+    "gains": 0,
+    "losses": 0,
+    "faster": 13,
+    "slower": 11,
+    "marketsGained": [],
+    "marketsLost": []
+  },
+  {
+    "name": "R131_ALB_M17",
+    "route": 131,
+    "bank": "M17",
+    "station": "ALB",
+    "next": "ORH",
+    "gains": 0,
+    "losses": 0,
+    "faster": 23,
+    "slower": 8,
+    "marketsGained": [],
+    "marketsLost": []
+  },
+  {
+    "name": "R160_BTV_M15",
+    "route": 160,
+    "bank": "M15",
+    "station": "BTV",
+    "next": "PWM",
+    "gains": 1,
+    "losses": 1,
+    "faster": 9,
+    "slower": 17,
+    "marketsGained": [
+      {
+        "market": "FWA-PWM",
+        "origin": "FWA",
+        "destination": "PWM",
+        "demand": 0.6,
+        "beforeMinutes": 398,
+        "afterMinutes": 268
+      }
+    ],
+    "marketsLost": [
+      {
+        "market": "MCI-PWM",
+        "origin": "MCI",
+        "destination": "PWM",
+        "demand": 7.2,
+        "beforeMinutes": 363,
+        "afterMinutes": 458
+      }
+    ]
+  },
+  {
+    "name": "R162_BDL_M09",
+    "route": 162,
+    "bank": "M09",
+    "station": "BDL",
+    "next": "PHF",
+    "gains": 1,
+    "losses": 0,
+    "faster": 4,
+    "slower": 33,
+    "marketsGained": [
+      {
+        "market": "BGR-PHF",
+        "origin": "BGR",
+        "destination": "PHF",
+        "demand": 2.1,
+        "beforeMinutes": null,
+        "afterMinutes": 280
+      }
+    ],
+    "marketsLost": []
+  },
+  {
+    "name": "R167_ALB_M09",
+    "route": 167,
+    "bank": "M09",
+    "station": "ALB",
+    "next": "CAK",
+    "gains": 0,
+    "losses": 4,
+    "faster": 4,
+    "slower": 9,
+    "marketsGained": [],
+    "marketsLost": [
+      {
+        "market": "ALB-BNA",
+        "origin": "ALB",
+        "destination": "BNA",
+        "demand": 30.8,
+        "beforeMinutes": 324,
+        "afterMinutes": 382
+      },
+      {
+        "market": "MDT-CAK",
+        "origin": "MDT",
+        "destination": "CAK",
+        "demand": 1.4,
+        "beforeMinutes": 171,
+        "afterMinutes": null
+      },
+      {
+        "market": "ALB-FWA",
+        "origin": "ALB",
+        "destination": "FWA",
+        "demand": 0.7,
+        "beforeMinutes": 375,
+        "afterMinutes": 515
+      },
+      {
+        "market": "ACY-CAK",
+        "origin": "ACY",
+        "destination": "CAK",
+        "demand": 0.2,
+        "beforeMinutes": 176,
+        "afterMinutes": null
+      }
+    ]
+  },
+  {
+    "name": "R167_CAK_M15",
+    "route": 167,
+    "bank": "M15",
+    "station": "CAK",
+    "next": "CAK",
+    "gains": 0,
+    "losses": 0,
+    "faster": 5,
+    "slower": 10,
+    "marketsGained": [],
+    "marketsLost": []
+  }
+]
