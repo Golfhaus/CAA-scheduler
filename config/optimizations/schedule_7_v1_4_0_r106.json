@@ -1,0 +1,69 @@
+{
+  "id": "schedule-7-v1.4.0-r106-accepted",
+  "baseSchedule": {
+    "scheduleId": "schedule_7_v1_3_3"
+  },
+  "schedule": {
+    "id": "schedule_7_v1_4_0_draft",
+    "number": 7,
+    "version": "1.4.0-draft",
+    "label": "Schedule 7, Version 1.4.0 draft",
+    "status": "draft",
+    "fleetCounts": {
+      "MAX9": 35,
+      "CRJ900": 45,
+      "CRJ700": 65,
+      "CRJ200": 80
+    },
+    "connectionWindowMinutes": {
+      "minimum": 30,
+      "maximum": 240
+    }
+  },
+  "retimeLegs": [
+    {
+      "legId": "HPN-SYR-CRJ200-03-OUT",
+      "expectedDepartureMinute": 1080,
+      "expectedArrivalMinute": 1134,
+      "departureMinute": 1071,
+      "arrivalMinute": 1125
+    },
+    {
+      "legId": "BTV-SYR-CRJ200-01-IN",
+      "expectedDepartureMinute": 1175,
+      "expectedArrivalMinute": 1227,
+      "departureMinute": 1165,
+      "arrivalMinute": 1217
+    }
+  ],
+  "insertLegs": [
+    {
+      "id": "V140-R106-LATE-0-1",
+      "route": 106,
+      "origin": "BTV",
+      "destination": "SYR",
+      "departureMinute": 1257,
+      "arrivalMinute": 1309
+    },
+    {
+      "id": "V140-R106-LATE-0-2",
+      "route": 106,
+      "origin": "SYR",
+      "destination": "BTV",
+      "departureMinute": 1349,
+      "arrivalMinute": 1401
+    }
+  ],
+  "bankAssignmentsToAdd": [
+    {
+      "legId": "V140-R106-LATE-0-1",
+      "operation": "arrival",
+      "bankId": "SYR-B7"
+    },
+    {
+      "legId": "V140-R106-LATE-0-2",
+      "operation": "departure",
+      "bankId": "SYR-B7"
+    }
+  ]
+}
