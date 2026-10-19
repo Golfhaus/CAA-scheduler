@@ -1,0 +1,65 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "schedule-7-v1.4.0-release",
+  "sourceScheduleId": "schedule_7_v1_3_3",
+  "baseCanonical": "data/schedules/schedule_7_v1_4_0_draft/canonical_schedule.json",
+  "baseCanonicalSha256": "cf85b9b116185abb44c90ed845b5441f9fd588cfa257757ddb3bf02300a5a6b0",
+  "overlays": [],
+  "overlaySha256": {},
+  "outputDirectory": "data/schedules/schedule_7_v1_4_0",
+  "rejoinAvoidableTows": true,
+  "dropWorkingDraftProvenance": true,
+  "demandDataVersion": "bts-db1c-6mo-jul2025-apr2026-v7",
+  "schedule": {
+    "id": "schedule_7_v1_4_0",
+    "number": 7,
+    "version": "1.4.0",
+    "label": "Schedule 7, Version 1.4.0",
+    "status": "released"
+  },
+  "patchScope": {
+    "kind": "crj200_utilization_and_selective_syr_mini_banks",
+    "timetableChanged": true,
+    "routingChanged": true,
+    "description": "R106 BTV-SYR-BTV and R110 DAY-SYR-DAY extensions; Syracuse M15/M17 paired mini-banks on R106/R110/R130/R131; R160 PWM-PHF-PWM productive extension; logical DAY midnight bank."
+  },
+  "connectionAudit": {
+    "hub": "SYR",
+    "groups": {
+      "northeast": [
+        "BTV",
+        "HPN",
+        "MHT",
+        "PWM",
+        "ALB",
+        "ISP",
+        "BDL"
+      ],
+      "other": [
+        "PIT",
+        "CAK",
+        "BUF",
+        "ORH",
+        "PHF",
+        "BGR",
+        "ROC"
+      ]
+    }
+  },
+  "connectionScopeDecision": {
+    "status": "approved",
+    "approvedBy": "user",
+    "date": "2026-10-19",
+    "userInstruction": "Very good. Publish 1.4.0 to main.",
+    "acceptedDraftSha256": "cf85b9b116185abb44c90ed845b5441f9fd588cfa257757ddb3bf02300a5a6b0",
+    "review": "Accepted the selective four-route SYR M15/M17 mini-bank proposal and R160 PWM-PHF-PWM extension. Previous directional itinerary audit records one geographic gain FWA-PWM and one loss MCI-PWM, plus 74 faster and 53 slower fastest itineraries vs the 1,257-flight interim draft. This tradeoff is documented and remains open; published by explicit user approval."
+  },
+  "expectedRelease": {
+    "legs": 1259,
+    "routes": 188,
+    "lines": 17,
+    "effectiveOperatingErrors": 0,
+    "hardStopFailures": 0,
+    "overnightTurnFailures": 0
+  }
+}

@@ -2,6 +2,13 @@
 
 ## Latest published release
 
+**Schedule 7 v1.4.0**, published October 19, 2026, is the application default: **1,259 flights, 188 routes and 17 routing lines**, with zero effective operating errors. New CRJ200 utilization includes R106, R110 and R160 extensions and two selective SYR mini-banks (M15/M17). Logical DAY-M0 supports the approved R110 evening turn. See [v1.4.0 release notes](docs/schedule_7_v1_4_0_release.md) and [canonical schedule](data/schedules/schedule_7_v1_4_0/canonical_schedule.json).
+
+## Historical v1.3.3 and earlier releases
+
+
+## Latest published release
+
 **Schedule 7 v1.3.3** (October 18, 2026) is the application default: **1,253 flights, 188 routes, 17 routing lines**, with zero effective operating errors. Adds approved R514 PIE–MCI and the BHM north–south mini-banks on R529, R530, R357 and R358. The four mini-bank routes are integrated into longer aircraft lines (maximum 13 days). See [v1.3.3 release notes](docs/schedule_7_v1_3_3_release.md) and [canonical schedule](data/schedules/schedule_7_v1_3_3/canonical_schedule.json).
 
 ## Historical v1.3.2 and older releases

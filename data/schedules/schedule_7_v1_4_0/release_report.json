@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "1.0.0",
+  "scheduleId": "schedule_7_v1_4_0",
+  "status": "released",
+  "sourceScheduleId": "schedule_7_v1_3_3",
+  "overlayIds": [],
+  "summary": {
+    "legs": 1259,
+    "routes": 188,
+    "lines": 17,
+    "effectiveOperatingErrors": 0,
+    "hardStopFailures": 0,
+    "overnightTurnFailures": 0,
+    "directRoundTripCities": 14,
+    "connectedDirectionalPairs": 98,
+    "standClaims": 15,
+    "standMinutes": 3061,
+    "hubStandClaims": 0,
+    "hubStandMinutes": 0
+  },
+  "validation": {
+    "structural": "pass",
+    "operating": "review",
+    "overnightTurns": "pass",
+    "planningReconstruction": "pass"
+  },
+  "connectionFinding": "14/14 target cities have direct SYR round trips, and 98/98 directional cross-group pairs meet the configured connection window.",
+  "connectionScopeDecision": {
+    "status": "approved",
+    "approvedBy": "user",
+    "date": "2026-10-19",
+    "userInstruction": "Very good. Publish 1.4.0 to main.",
+    "acceptedDraftSha256": "cf85b9b116185abb44c90ed845b5441f9fd588cfa257757ddb3bf02300a5a6b0",
+    "review": "Accepted the selective four-route SYR M15/M17 mini-bank proposal and R160 PWM-PHF-PWM extension. Previous directional itinerary audit records one geographic gain FWA-PWM and one loss MCI-PWM, plus 74 faster and 53 slower fastest itineraries vs the 1,257-flight interim draft. This tradeoff is documented and remains open; published by explicit user approval."
+  },
+  "patchScope": {
+    "kind": "crj200_utilization_and_selective_syr_mini_banks",
+    "timetableChanged": true,
+    "routingChanged": true,
+    "description": "R106 BTV-SYR-BTV and R110 DAY-SYR-DAY extensions; Syracuse M15/M17 paired mini-banks on R106/R110/R130/R131; R160 PWM-PHF-PWM productive extension; logical DAY midnight bank."
+  },
+  "artifacts": [
+    "canonical_schedule.json",
+    "connection_audit.json",
+    "gates.json",
+    "operating_validation_report.json",
+    "overnight_turn_validation.json",
+    "planning_snapshot.json",
+    "planning_validation_report.json",
+    "timetable.json",
+    "validation_report.json"
+  ]
+}
