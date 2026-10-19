@@ -1,5 +1,12 @@
 export const BUILD_CONFIG_SCHEMA_VERSION = "1.0.0";
 export const AIRPORT_ROLES = ["hub", "focus_city", "large_destination", "destination"];
+// Inherited gate exporter defaults. Large destination is a new, editable starting suggestion.
+export const DEFAULT_AIRPORT_TYPE_CAPACITIES = {
+  hub: { gates: 16, stands: 8 },
+  focus_city: { gates: 6, stands: 4 },
+  large_destination: { gates: 4, stands: 2 },
+  destination: { gates: 2, stands: 2 },
+};
 
 function clone(value) {
   return JSON.parse(JSON.stringify(value));
@@ -55,10 +62,12 @@ export function createBuildConfig(canonical, manifest) {
         version: cleanString(manifest?.buildSetup?.demandData?.version),
       },
     },
+    airportTypeDefaults: clone(DEFAULT_AIRPORT_TYPE_CAPACITIES),
     airportFacilities: (canonical.cities || []).filter((city) => city.active).map((city) => ({
       airport: String(city.code).toUpperCase(),
       role: AIRPORT_ROLES.includes(city.role) ? city.role : "destination",
       gates: Number.isInteger(city.gateAllocationOverride) ? city.gateAllocationOverride : null,
+      stands: Number.isInteger(city.standAllocationOverride) ? city.standAllocationOverride : null,
     })),
     airportOptions: "",
     networkChanges: [],
@@ -112,11 +121,19 @@ export function normalizeBuildConfig(value) {
         version: cleanString(value.inputs?.demandData?.version),
       },
     },
+    airportTypeDefaults: Object.fromEntries(AIRPORT_ROLES.map((role) => {
+      const values = value.airportTypeDefaults?.[role] || DEFAULT_AIRPORT_TYPE_CAPACITIES[role];
+      return [role, {
+        gates: values?.gates === "" || values?.gates == null ? null : Number(values.gates),
+        stands: values?.stands === "" || values?.stands == null ? null : Number(values.stands),
+      }];
+    })),
     airportFacilities: Array.isArray(value.airportFacilities)
       ? value.airportFacilities.map((entry) => ({
           airport: cleanString(entry?.airport).toUpperCase(),
           role: cleanString(entry?.role),
           gates: entry?.gates === "" || entry?.gates == null ? null : Number(entry.gates),
+          stands: entry?.stands === "" || entry?.stands == null ? null : Number(entry.stands),
         }))
       : [],
     airportOptions: cleanString(value.airportOptions),
@@ -261,21 +278,29 @@ export function validateBuildConfig(value, canonical) {
           : "No airport additions, removals, or status changes are proposed."),
   ));
 
+  const facilityErrors = [];
+  for (const role of AIRPORT_ROLES) {
+    for (const kind of ["gates", "stands"]) {
+      const count = config.airportTypeDefaults[role]?.[kind];
+      if (!Number.isInteger(count) || count < 0) facilityErrors.push(`${role}: default ${kind} must be a nonnegative whole number`);
+    }
+  }
   const activeFacilities = new Set((canonical?.cities || []).filter((city) => city.active).map((city) => String(city.code).toUpperCase()));
   const facilityCodes = new Set();
-  const facilityErrors = [];
-  let missingGateCounts = 0;
+  let overrides = 0;
   for (const entry of config.airportFacilities) {
     if (!/^[A-Z0-9]{3,4}$/.test(entry.airport) || facilityCodes.has(entry.airport)) facilityErrors.push(`Invalid or duplicate airport: ${entry.airport || "(blank)"}`);
     facilityCodes.add(entry.airport);
     if (!AIRPORT_ROLES.includes(entry.role)) facilityErrors.push(`${entry.airport}: invalid airport role`);
-    if (entry.gates === null) missingGateCounts += 1;
-    else if (!Number.isInteger(entry.gates) || entry.gates < 0) facilityErrors.push(`${entry.airport}: gate count must be a nonnegative whole number`);
+    for (const kind of ["gates", "stands"]) {
+      if (entry[kind] !== null && (!Number.isInteger(entry[kind]) || entry[kind] < 0)) facilityErrors.push(`${entry.airport}: ${kind} override must be a nonnegative whole number`);
+      if (entry[kind] !== null) overrides += 1;
+    }
   }
   const missingAirports = [...activeFacilities].filter((code) => !facilityCodes.has(code) && !config.networkChanges.some((change) => change.airport === code && change.action === "remove"));
   if (missingAirports.length) facilityErrors.push(`Missing baseline airports: ${missingAirports.join(", ")}`);
-  checks.push(check("airport_facilities", "Airport roles and gate inventory", facilityErrors.length ? "fail" : missingGateCounts ? "warning" : "pass",
-    facilityErrors.length ? facilityErrors.join("; ") : missingGateCounts ? `${missingGateCounts} airports still need explicit gate counts before construction; classification and known gate counts are saved.` : `${config.airportFacilities.length} airport classifications and gate counts are recorded.`));
+  checks.push(check("airport_facilities", "Airport gates, stands and classifications", facilityErrors.length ? "fail" : "pass",
+    facilityErrors.length ? facilityErrors.join("; ") : `Four airport-type defaults and ${config.airportFacilities.length} classifications are saved; ${overrides} gate/stand overrides are recorded.`));
 
   const additions = config.networkChanges.filter((change) => change.action === "add").length;
   checks.push(check(
