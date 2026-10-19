@@ -1,4 +1,4 @@
-name: Test earlier onward SYR departures from mini-banks
+name: Test earlier onward SYR departures from mini-banks (archive)
 on:
   push:
     branches: [schedule-7-v1.4.0-utilization-analysis]
@@ -27,5 +27,6 @@ jobs:
           git add -f outputs/schedule_7_v1_4_0_utilization/syr_outbound_continuations.json
           if ! git diff --cached --quiet; then
             git commit -m "Archive SYR onward mini-bank route continuation feasibility [skip ci]"
+            git pull --rebase origin schedule-7-v1.4.0-utilization-analysis
             git push origin HEAD:schedule-7-v1.4.0-utilization-analysis
           fi
