@@ -1,0 +1,28 @@
+name: Screen v1.4.0 R107 BWI-BDL A-B loop
+on:
+  push:
+    branches: [schedule-7-v1.4.0-utilization-analysis]
+    paths:
+      - '.github/workflows/v140-r107-bwi-loop.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  screen:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -e .
+      - run: python scripts/screen_schedule_7_v1_4_0_r107_bwi_loop.py
+      - name: Commit feasibility output
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f outputs/schedule_7_v1_4_0_utilization/r107_bwi_bdl_loop_*.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Record R107 BWI-BDL A-B loop feasibility [skip ci]"
+            git push origin HEAD:schedule-7-v1.4.0-utilization-analysis
+          fi
