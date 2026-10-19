@@ -1,4 +1,4 @@
-"""Build unpublished Schedule 7 v1.4.0 draft from published v1.3.3 plus accepted R106/R110.
+"""Build unpublished Schedule 7 v1.4.0 draft from published v1.3.3 and accepted R106/R110/SYR M15-M17/R160.
 Never update main or published manifest.
 """
 from pathlib import Path
@@ -16,19 +16,24 @@ base=json.loads(basepath.read_text())
 assert base["schedule"]["id"]=="schedule_7_v1_3_3"
 assert len(base["legs"])==1253
 configs=[ROOT/f"config/optimizations/schedule_7_v1_4_0_r{route}.json" for route in (106,110)]
+configs.append(ROOT/"config/optimizations/schedule_7_v1_4_0_syr_m15_m17_r160.json")
 new=base
 for path in configs:
     overlay=json.loads(path.read_text())
     new=apply_optimization_overlay(new,overlay)
-assert (len(new["legs"]),len({x["route"] for x in new["legs"]}),len({x["line"] for x in new["legs"]}))==(1257,188,17)
+assert (len(new["legs"]),len({x["route"] for x in new["legs"]}),len({x["line"] for x in new["legs"]}))==(1259,188,17)
 assert new["schedule"]["id"]=="schedule_7_v1_4_0_draft"
 assert new["schedule"]["status"]=="draft"
 assert new["schedule"]["fleetCounts"]==base["schedule"]["fleetCounts"]
 assert new["cities"]==base["cities"]
-assert len(new["hubBanks"])==len(base["hubBanks"])+1
+assert len(new["hubBanks"])==len(base["hubBanks"])+3
+assert new["operatingPolicy"]["hubBankCounts"]["SYR"]==9
+assert {b["id"] for b in new["hubBanks"] if b["hub"]=="SYR"} >= {"SYR-M15","SYR-M17"}
 assert new["operatingPolicy"]["hubBankCounts"]["DAY"]==10
 assert {l["flight"] for l in base["legs"]}.issubset({l["flight"] for l in new["legs"]})
-assert all(len([l for l in new["legs"] if l["route"]==route])==count for route,count in [(106,8),(110,9)])
+assert all(len([l for l in new["legs"] if l["route"]==route])==count for route,count in [(106,8),(110,9),(160,8),(107,6)])
+assert [(l["origin"],l["destination"]) for l in sorted([l for l in new["legs"] if l["route"]==160],key=lambda l:l["sequenceWithinRoute"])[-2:]] == [("PWM","PHF"),("PHF","PWM")]
+assert {(l["route"],l["origin"],l["destination"]) for l in new["legs"] if l["id"].startswith("V140-R160-BANK-TURN")} == {(160,"PWM","PHF"),(160,"PHF","PWM")}
 s=validate_schedule(new)
 o=validate_operating_rules(new)
 n=validate_overnight_turns(new)
