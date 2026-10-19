@@ -1,0 +1,452 @@
+[
+  {
+    "name": "M12_only",
+    "flightCount": 1257,
+    "coverageGains": 0,
+    "coverageLosses": 3,
+    "faster": 4,
+    "slower": 114,
+    "coverageLost": [
+      {
+        "market": "ORH-ABE",
+        "origin": "ORH",
+        "destination": "ABE",
+        "demand": 0,
+        "beforeMinutes": 317,
+        "afterMinutes": null
+      },
+      {
+        "market": "ORH-ACY",
+        "origin": "ORH",
+        "destination": "ACY",
+        "demand": 0,
+        "beforeMinutes": 329,
+        "afterMinutes": null
+      },
+      {
+        "market": "ORH-DAB",
+        "origin": "ORH",
+        "destination": "DAB",
+        "demand": 0,
+        "beforeMinutes": 414,
+        "afterMinutes": null
+      }
+    ],
+    "coverageGained": [],
+    "rawGains": 0,
+    "rawLosses": 3
+  },
+  {
+    "name": "M15_only",
+    "flightCount": 1257,
+    "coverageGains": 0,
+    "coverageLosses": 2,
+    "faster": 9,
+    "slower": 65,
+    "coverageLost": [
+      {
+        "market": "HVN-MDT",
+        "origin": "HVN",
+        "destination": "MDT",
+        "demand": 0,
+        "beforeMinutes": 317,
+        "afterMinutes": null
+      },
+      {
+        "market": "ISP-MDT",
+        "origin": "ISP",
+        "destination": "MDT",
+        "demand": 0,
+        "beforeMinutes": 322,
+        "afterMinutes": null
+      }
+    ],
+    "coverageGained": [],
+    "rawGains": 0,
+    "rawLosses": 3
+  },
+  {
+    "name": "M17_only",
+    "flightCount": 1257,
+    "coverageGains": 2,
+    "coverageLosses": 4,
+    "faster": 3,
+    "slower": 25,
+    "coverageLost": [
+      {
+        "market": "BDL-PIT",
+        "origin": "BDL",
+        "destination": "PIT",
+        "demand": 20.2,
+        "beforeMinutes": 331,
+        "afterMinutes": null
+      },
+      {
+        "market": "BGR-DAY",
+        "origin": "BGR",
+        "destination": "DAY",
+        "demand": 0.7,
+        "beforeMinutes": 387,
+        "afterMinutes": null
+      },
+      {
+        "market": "BGR-ABE",
+        "origin": "BGR",
+        "destination": "ABE",
+        "demand": 0.3,
+        "beforeMinutes": 342,
+        "afterMinutes": null
+      },
+      {
+        "market": "BDL-ABE",
+        "origin": "BDL",
+        "destination": "ABE",
+        "demand": 0.2,
+        "beforeMinutes": 317,
+        "afterMinutes": null
+      }
+    ],
+    "coverageGained": [
+      {
+        "market": "BDL-BWI",
+        "origin": "BDL",
+        "destination": "BWI",
+        "demand": 32.9,
+        "beforeMinutes": null,
+        "afterMinutes": 199
+      },
+      {
+        "market": "BGR-BWI",
+        "origin": "BGR",
+        "destination": "BWI",
+        "demand": 0.3,
+        "beforeMinutes": null,
+        "afterMinutes": 220
+      }
+    ],
+    "rawGains": 1,
+    "rawLosses": 3
+  },
+  {
+    "name": "core_M12_M15_M17",
+    "flightCount": 1257,
+    "coverageGains": 2,
+    "coverageLosses": 9,
+    "faster": 12,
+    "slower": 206,
+    "coverageLost": [
+      {
+        "market": "BDL-PIT",
+        "origin": "BDL",
+        "destination": "PIT",
+        "demand": 20.2,
+        "beforeMinutes": 331,
+        "afterMinutes": null
+      },
+      {
+        "market": "BGR-DAY",
+        "origin": "BGR",
+        "destination": "DAY",
+        "demand": 0.7,
+        "beforeMinutes": 387,
+        "afterMinutes": null
+      },
+      {
+        "market": "BGR-ABE",
+        "origin": "BGR",
+        "destination": "ABE",
+        "demand": 0.3,
+        "beforeMinutes": 342,
+        "afterMinutes": null
+      },
+      {
+        "market": "BDL-ABE",
+        "origin": "BDL",
+        "destination": "ABE",
+        "demand": 0.2,
+        "beforeMinutes": 317,
+        "afterMinutes": null
+      },
+      {
+        "market": "HVN-MDT",
+        "origin": "HVN",
+        "destination": "MDT",
+        "demand": 0,
+        "beforeMinutes": 317,
+        "afterMinutes": null
+      },
+      {
+        "market": "ISP-MDT",
+        "origin": "ISP",
+        "destination": "MDT",
+        "demand": 0,
+        "beforeMinutes": 322,
+        "afterMinutes": null
+      },
+      {
+        "market": "ORH-ABE",
+        "origin": "ORH",
+        "destination": "ABE",
+        "demand": 0,
+        "beforeMinutes": 317,
+        "afterMinutes": null
+      },
+      {
+        "market": "ORH-ACY",
+        "origin": "ORH",
+        "destination": "ACY",
+        "demand": 0,
+        "beforeMinutes": 329,
+        "afterMinutes": null
+      },
+      {
+        "market": "ORH-DAB",
+        "origin": "ORH",
+        "destination": "DAB",
+        "demand": 0,
+        "beforeMinutes": 414,
+        "afterMinutes": null
+      }
+    ],
+    "coverageGained": [
+      {
+        "market": "BDL-BWI",
+        "origin": "BDL",
+        "destination": "BWI",
+        "demand": 32.9,
+        "beforeMinutes": null,
+        "afterMinutes": 199
+      },
+      {
+        "market": "BGR-BWI",
+        "origin": "BGR",
+        "destination": "BWI",
+        "demand": 0.3,
+        "beforeMinutes": null,
+        "afterMinutes": 220
+      }
+    ],
+    "rawGains": 1,
+    "rawLosses": 9
+  },
+  {
+    "name": "all_except_M09",
+    "flightCount": 1257,
+    "coverageGains": 2,
+    "coverageLosses": 9,
+    "faster": 12,
+    "slower": 209,
+    "coverageLost": [
+      {
+        "market": "BDL-PIT",
+        "origin": "BDL",
+        "destination": "PIT",
+        "demand": 20.2,
+        "beforeMinutes": 331,
+        "afterMinutes": null
+      },
+      {
+        "market": "BGR-DAY",
+        "origin": "BGR",
+        "destination": "DAY",
+        "demand": 0.7,
+        "beforeMinutes": 387,
+        "afterMinutes": null
+      },
+      {
+        "market": "BGR-ABE",
+        "origin": "BGR",
+        "destination": "ABE",
+        "demand": 0.3,
+        "beforeMinutes": 342,
+        "afterMinutes": null
+      },
+      {
+        "market": "BDL-ABE",
+        "origin": "BDL",
+        "destination": "ABE",
+        "demand": 0.2,
+        "beforeMinutes": 317,
+        "afterMinutes": null
+      },
+      {
+        "market": "HVN-MDT",
+        "origin": "HVN",
+        "destination": "MDT",
+        "demand": 0,
+        "beforeMinutes": 317,
+        "afterMinutes": null
+      },
+      {
+        "market": "ISP-MDT",
+        "origin": "ISP",
+        "destination": "MDT",
+        "demand": 0,
+        "beforeMinutes": 322,
+        "afterMinutes": null
+      },
+      {
+        "market": "ORH-ABE",
+        "origin": "ORH",
+        "destination": "ABE",
+        "demand": 0,
+        "beforeMinutes": 317,
+        "afterMinutes": null
+      },
+      {
+        "market": "ORH-ACY",
+        "origin": "ORH",
+        "destination": "ACY",
+        "demand": 0,
+        "beforeMinutes": 329,
+        "afterMinutes": null
+      },
+      {
+        "market": "ORH-DAB",
+        "origin": "ORH",
+        "destination": "DAB",
+        "demand": 0,
+        "beforeMinutes": 414,
+        "afterMinutes": null
+      }
+    ],
+    "coverageGained": [
+      {
+        "market": "BDL-BWI",
+        "origin": "BDL",
+        "destination": "BWI",
+        "demand": 32.9,
+        "beforeMinutes": null,
+        "afterMinutes": 199
+      },
+      {
+        "market": "BGR-BWI",
+        "origin": "BGR",
+        "destination": "BWI",
+        "demand": 0.3,
+        "beforeMinutes": null,
+        "afterMinutes": 220
+      }
+    ],
+    "rawGains": 1,
+    "rawLosses": 9
+  },
+  {
+    "name": "all_five",
+    "flightCount": 1257,
+    "coverageGains": 2,
+    "coverageLosses": 11,
+    "faster": 15,
+    "slower": 258,
+    "coverageLost": [
+      {
+        "market": "ALB-FWA",
+        "origin": "ALB",
+        "destination": "FWA",
+        "demand": 0.7,
+        "beforeMinutes": 375,
+        "afterMinutes": 515
+      },
+      {
+        "market": "BGR-DAY",
+        "origin": "BGR",
+        "destination": "DAY",
+        "demand": 0.7,
+        "beforeMinutes": 387,
+        "afterMinutes": null
+      },
+      {
+        "market": "BGR-ABE",
+        "origin": "BGR",
+        "destination": "ABE",
+        "demand": 0.3,
+        "beforeMinutes": 342,
+        "afterMinutes": null
+      },
+      {
+        "market": "BDL-ABE",
+        "origin": "BDL",
+        "destination": "ABE",
+        "demand": 0.2,
+        "beforeMinutes": 317,
+        "afterMinutes": null
+      },
+      {
+        "market": "HVN-BGR",
+        "origin": "HVN",
+        "destination": "BGR",
+        "demand": 0,
+        "beforeMinutes": 340,
+        "afterMinutes": null
+      },
+      {
+        "market": "HVN-FWA",
+        "origin": "HVN",
+        "destination": "FWA",
+        "demand": 0,
+        "beforeMinutes": 385,
+        "afterMinutes": null
+      },
+      {
+        "market": "HVN-MDT",
+        "origin": "HVN",
+        "destination": "MDT",
+        "demand": 0,
+        "beforeMinutes": 317,
+        "afterMinutes": null
+      },
+      {
+        "market": "ISP-MDT",
+        "origin": "ISP",
+        "destination": "MDT",
+        "demand": 0,
+        "beforeMinutes": 322,
+        "afterMinutes": null
+      },
+      {
+        "market": "ORH-ABE",
+        "origin": "ORH",
+        "destination": "ABE",
+        "demand": 0,
+        "beforeMinutes": 317,
+        "afterMinutes": null
+      },
+      {
+        "market": "ORH-ACY",
+        "origin": "ORH",
+        "destination": "ACY",
+        "demand": 0,
+        "beforeMinutes": 329,
+        "afterMinutes": null
+      },
+      {
+        "market": "ORH-DAB",
+        "origin": "ORH",
+        "destination": "DAB",
+        "demand": 0,
+        "beforeMinutes": 414,
+        "afterMinutes": null
+      }
+    ],
+    "coverageGained": [
+      {
+        "market": "BDL-BWI",
+        "origin": "BDL",
+        "destination": "BWI",
+        "demand": 32.9,
+        "beforeMinutes": null,
+        "afterMinutes": 199
+      },
+      {
+        "market": "BGR-BWI",
+        "origin": "BGR",
+        "destination": "BWI",
+        "demand": 0.3,
+        "beforeMinutes": null,
+        "afterMinutes": 220
+      }
+    ],
+    "rawGains": 1,
+    "rawLosses": 10
+  }
+]
