@@ -857,3 +857,16 @@ tbody tr:hover { background: #f6f9fc; }
 .setup-airport-label span { font-size: .76rem; color: var(--muted); }
 .setup-airport-options { display: block; padding: 1rem 1.2rem; }
 @media (max-width: 650px) { .airport-setup-row { grid-template-columns: 1fr 1fr; } .setup-airport-label { grid-column: 1 / -1; } }
+
+/* Airport-type summary with drill-down inventory */
+.setup-airport-panel { grid-column: 1 / -1; }
+.setup-type-row { display: grid; grid-template-columns: minmax(11rem, 1.2fr) minmax(7rem,.55fr) minmax(7rem,.55fr) minmax(10rem,1.6fr) auto; gap: .8rem; align-items: end; border-bottom: 1px solid var(--line); padding: .55rem 0 .8rem; }
+.setup-type-label { align-self: center; display: flex; flex-direction: column; gap: .2rem; }
+.setup-type-label span, .setup-adjusted-codes { color: var(--muted); font-size: .78rem; line-height: 1.4; overflow-wrap: anywhere; }
+.setup-type-row label > span, .setup-airport-filters label > span { display: block; margin-bottom: .35rem; font-size: .73rem; color: var(--muted); font-weight: 750; }
+.setup-type-row input, .setup-airport-filters input, .setup-airport-filters select { width: 100%; box-sizing: border-box; border: 1px solid var(--line); border-radius: .45rem; padding: .6rem; background: var(--surface, white); color: var(--ink); }
+.setup-airport-drill-toolbar { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .75rem; align-items: center; padding: .75rem 1.2rem; }
+.setup-airport-filters { display: grid; grid-template-columns: 1fr minmax(11rem, .35fr); gap: 1rem; padding: .8rem 1.2rem 0; }
+.airport-setup-row { grid-template-columns: minmax(9rem, 1fr) minmax(9rem,1fr) minmax(6rem,.6fr) minmax(6rem,.6fr) auto; }
+@media (max-width: 900px) { .setup-type-row { grid-template-columns: repeat(2,minmax(0,1fr)); } .setup-type-label,.setup-adjusted-codes { grid-column: 1 / -1; } .airport-setup-row { grid-template-columns: repeat(2,minmax(0,1fr)); } .setup-airport-label { grid-column: 1 / -1; } }
+@media (max-width: 650px) { .setup-airport-filters { grid-template-columns: 1fr; } }
