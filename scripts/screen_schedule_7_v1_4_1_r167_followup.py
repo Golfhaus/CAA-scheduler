@@ -12,11 +12,11 @@ assert len(base["legs"])==1266
 byf={x["flight"]:x for x in base["legs"]}
 cases=[
  {"name":"R167 ALB-BWI-ALB and SYR M12 CAK retime",
-  "retime":[(1749,309,353),(1754,583,627),(1672,747,818)],
+  "retime":[(1749,309,353),(1754,623,667),(1672,755,826)],
   "add":[("ALB","BWI",393,468),("BWI","ALB",508,583)],
   "bank":[(1672,"departure","SYR-M12")]},
  {"name":"R167 ALB-PIT-ALB and SYR M12 CAK retime",
-  "retime":[(1749,309,353),(1754,577,621),(1672,741,812)],
+  "retime":[(1749,309,353),(1754,605,649),(1672,755,826)],
   "add":[("ALB","PIT",393,459),("PIT","ALB",499,565)],
   "bank":[(1672,"departure","SYR-M12")]},
  {"name":"R167 ALB-PIT-SYR triangular return into B3",
