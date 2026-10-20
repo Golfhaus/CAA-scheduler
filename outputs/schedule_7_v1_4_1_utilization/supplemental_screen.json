@@ -338,117 +338,16 @@
     "operating": {
       "checks": 25,
       "passed": 17,
-      "failed": 1,
+      "failed": 0,
       "warnings": 5,
       "notEvaluated": 1,
-      "overridden": 1,
-      "effectiveErrorFindings": 2,
+      "overridden": 2,
+      "effectiveErrorFindings": 0,
       "effectiveWarningFindings": 154
     },
     "extraFlights": 2,
-    "failed": [
-      {
-        "check": "hub_bank_alignment",
-        "findings": [
-          {
-            "id": "BGR-SYR-CRJ200-01-IN-departure",
-            "message": "Departure for BGR-SYR-CRJ200-01-IN falls outside bank SYR-B6",
-            "evidence": {
-              "assignment": {
-                "legId": "BGR-SYR-CRJ200-01-IN",
-                "operation": "departure",
-                "bankId": "SYR-B6"
-              },
-              "minute": 1045,
-              "bankWindow": [
-                1125,
-                1185
-              ]
-            }
-          },
-          {
-            "id": "BGR-SYR-CRJ200-02-OUT-arrival",
-            "message": "Arrival for BGR-SYR-CRJ200-02-OUT falls outside bank SYR-B6",
-            "evidence": {
-              "assignment": {
-                "legId": "BGR-SYR-CRJ200-02-OUT",
-                "operation": "arrival",
-                "bankId": "SYR-B6"
-              },
-              "minute": 1005,
-              "bankWindow": [
-                1125,
-                1185
-              ]
-            }
-          },
-          {
-            "id": "V114-R169-SYR-FWA-departure",
-            "message": "Departure for V114-R169-SYR-FWA falls outside bank SYR-B4",
-            "evidence": {
-              "assignment": {
-                "legId": "V114-R169-SYR-FWA",
-                "operation": "departure",
-                "bankId": "SYR-B4"
-              },
-              "minute": 875,
-              "bankWindow": [
-                795,
-                855
-              ]
-            },
-            "override": {
-              "reason": "Schedule 7 v1.1.4 tactical initiative: the 14:35 SYR-FWA return departs 20 minutes after Bank 4 to remain within SYR's fixed 16-gate inventory without weakening existing bank connections.",
-              "approvedBy": "user",
-              "expiresAfterSchedule": 7
-            }
-          },
-          {
-            "id": "V114-R122-SYR-SWF-departure",
-            "message": "Departure for V114-R122-SYR-SWF falls outside bank SYR-B6",
-            "evidence": {
-              "assignment": {
-                "legId": "V114-R122-SYR-SWF",
-                "operation": "departure",
-                "bankId": "SYR-B6"
-              },
-              "minute": 1210,
-              "bankWindow": [
-                1125,
-                1185
-              ]
-            },
-            "override": {
-              "reason": "Schedule 7 v1.1.4 tactical initiative: the 20:10 SYR-SWF return departs 25 minutes after Bank 6 to remain within SYR's fixed 16-gate inventory without weakening existing bank connections.",
-              "approvedBy": "user",
-              "expiresAfterSchedule": 7
-            }
-          },
-          {
-            "id": "V116-R149-DAY-BHM-departure",
-            "message": "Departure for V116-R149-DAY-BHM falls outside bank DAY-B1",
-            "evidence": {
-              "assignment": {
-                "legId": "V116-R149-DAY-BHM",
-                "operation": "departure",
-                "bankId": "DAY-B1"
-              },
-              "minute": 270,
-              "bankWindow": [
-                301,
-                361
-              ]
-            },
-            "override": {
-              "reason": "Schedule 7 v1.1.6 BHM morning initiative: the 04:30 DAY departure is 30 minutes before DAY Bank 1 so the aircraft can feed BHM's morning wave while remaining within fixed gate capacity at both cities.",
-              "approvedBy": "user",
-              "expiresAfterSchedule": 7
-            }
-          }
-        ]
-      }
-    ],
-    "pass": false,
+    "failed": [],
+    "pass": true,
     "overlay": {
       "schemaVersion": "1.0.0",
       "id": "v141-extra-2",
@@ -543,6 +442,16 @@
           "legId": "BGR-SYR-CRJ200-02-IN",
           "operation": "departure",
           "bankId": "SYR-B4"
+        },
+        {
+          "legId": "BGR-SYR-CRJ200-02-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-B5"
+        },
+        {
+          "legId": "BGR-SYR-CRJ200-01-IN",
+          "operation": "departure",
+          "bankId": "SYR-M17"
         }
       ],
       "hubBanksToAdd": [
