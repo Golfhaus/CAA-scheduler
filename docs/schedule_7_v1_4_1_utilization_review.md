@@ -100,3 +100,20 @@ Commercial itinerary comparisons against the 1,266-flight provisional draft:
 Both lose DAB→CAK as a reasonable path (4.0 underlying daily directional O-D) and delay high-demand ALB/SFB and PIE/CAK markets. The ALB–BWI market itself has 21.5/22.5 underlying directional O-D, but it does not offset the observed systemwide travel-time penalties at the tested banks. **Neither R167 option is approved or integrated.** Evidence: `outputs/schedule_7_v1_4_1_utilization/r167_followup_native.json` and `r167_followup_network.json`.
 
 Next: preserve the accepted-to-provisional R108 morning SYR–PIT turn and BTV–RFD network coverage; concentrate further R167 testing on preserving existing ALB and CAK bank connections instead of simply extending flying. R107's residual ISP→BNA loss and R108's ORH→PGD delay remain commercial review items, not hard operating errors.
+
+
+## October 20 resumed continuation — BTV/RFD threshold and holistic R167 options
+
+The pinned O-D matrix reports **BTV→RFD 30.1** and **RFD→BTV 30.3** average daily directional passengers. These are *two separate directions*, not 30.1 combined. Both exceed the user's 15-passenger threshold; keep BTV/RFD connectivity protected. R108's current provisional BTV→SYR 18:00–18:52 return remains in place.
+
+The latest recovered provisional draft is **1,266 flights, 188 routes, 17 lines**. R105, R162, R107 (ISP–PHF–SYR), supporting R356 BDL timing, and R108 (SYR–PIT–SYR) were already in this draft; they were not created again during this continuation.
+
+The read-only R167 ALB hold screen tested four additional possibilities on that *actual* cumulative draft:
+- **ALB–PHF–SYR:** fails PHF physical gate inventory, PHF–SYR same-pairing spacing and the 40-minute SYR turn. Do not adopt.
+- **ALB–PIT–SYR:** no physical gate conflict, but fails native bank alignment and needs further coordinated bank retiming before acceptance.
+- **ALB–BTV–SYR:** passes native structural, overnight, planning, operating and physical gate checks, adds one net leg, and preserves the existing 11:20 SYR–CAK departure. Passenger-network audit required before any incorporation.
+- **ALB–BTV–ALB:** passes native checks and adds two flights but has only 0.6/day underlying ALB–BTV directional O-D. Not recommended solely for utilization.
+
+Evidence: `outputs/schedule_7_v1_4_1_utilization/r167_holistic_native.json` and `scripts/screen_schedule_7_v1_4_1_r167_holistic.py`. The comparative passenger-network audit is `scripts/audit_schedule_7_v1_4_1_r167_holistic_network.mjs` and its output `r167_holistic_network.json`.
+
+**Governance:** No additional route changes have been incorporated in the provisional 1,266-flight draft; published `main` remains v1.4.0.
