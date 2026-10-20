@@ -1,0 +1,480 @@
+[
+  {
+    "name": "R167 ALB-BWI-ALB and SYR M12 CAK retime",
+    "route": 167,
+    "scope": "read-only",
+    "structural": "pass",
+    "overnight": "pass",
+    "planning": "pass",
+    "gate": "pass",
+    "operating": {
+      "checks": 25,
+      "passed": 16,
+      "failed": 2,
+      "warnings": 5,
+      "notEvaluated": 1,
+      "overridden": 1,
+      "effectiveErrorFindings": 2,
+      "effectiveWarningFindings": 145
+    },
+    "addedFlights": 2,
+    "failed": [
+      {
+        "check": "minimum_turn_time",
+        "findings": [
+          {
+            "id": "AC-9-2278-1754",
+            "message": "Turn at ALB is 0 minutes",
+            "evidence": {
+              "line": "AC",
+              "day": 9,
+              "city": "ALB",
+              "arrivalFlight": 2278,
+              "departureFlight": 1754,
+              "minutes": 0
+            }
+          }
+        ]
+      },
+      {
+        "check": "hub_bank_alignment",
+        "findings": [
+          {
+            "id": "ALB-SYR-CRJ200-02-OUT-arrival",
+            "message": "Arrival for ALB-SYR-CRJ200-02-OUT falls outside bank SYR-B3",
+            "evidence": {
+              "assignment": {
+                "legId": "ALB-SYR-CRJ200-02-OUT",
+                "operation": "arrival",
+                "bankId": "SYR-B3"
+              },
+              "minute": 627,
+              "bankWindow": [
+                630,
+                690
+              ]
+            }
+          },
+          {
+            "id": "V114-R169-SYR-FWA-departure",
+            "message": "Departure for V114-R169-SYR-FWA falls outside bank SYR-B4",
+            "evidence": {
+              "assignment": {
+                "legId": "V114-R169-SYR-FWA",
+                "operation": "departure",
+                "bankId": "SYR-B4"
+              },
+              "minute": 875,
+              "bankWindow": [
+                795,
+                855
+              ]
+            },
+            "override": {
+              "reason": "Schedule 7 v1.1.4 tactical initiative: the 14:35 SYR-FWA return departs 20 minutes after Bank 4 to remain within SYR's fixed 16-gate inventory without weakening existing bank connections.",
+              "approvedBy": "user",
+              "expiresAfterSchedule": 7
+            }
+          },
+          {
+            "id": "V114-R122-SYR-SWF-departure",
+            "message": "Departure for V114-R122-SYR-SWF falls outside bank SYR-B6",
+            "evidence": {
+              "assignment": {
+                "legId": "V114-R122-SYR-SWF",
+                "operation": "departure",
+                "bankId": "SYR-B6"
+              },
+              "minute": 1210,
+              "bankWindow": [
+                1125,
+                1185
+              ]
+            },
+            "override": {
+              "reason": "Schedule 7 v1.1.4 tactical initiative: the 20:10 SYR-SWF return departs 25 minutes after Bank 6 to remain within SYR's fixed 16-gate inventory without weakening existing bank connections.",
+              "approvedBy": "user",
+              "expiresAfterSchedule": 7
+            }
+          },
+          {
+            "id": "V116-R149-DAY-BHM-departure",
+            "message": "Departure for V116-R149-DAY-BHM falls outside bank DAY-B1",
+            "evidence": {
+              "assignment": {
+                "legId": "V116-R149-DAY-BHM",
+                "operation": "departure",
+                "bankId": "DAY-B1"
+              },
+              "minute": 270,
+              "bankWindow": [
+                301,
+                361
+              ]
+            },
+            "override": {
+              "reason": "Schedule 7 v1.1.6 BHM morning initiative: the 04:30 DAY departure is 30 minutes before DAY Bank 1 so the aircraft can feed BHM's morning wave while remaining within fixed gate capacity at both cities.",
+              "approvedBy": "user",
+              "expiresAfterSchedule": 7
+            }
+          },
+          {
+            "id": "V116-R330-DAY-PHF-departure",
+            "message": "Departure for V116-R330-DAY-PHF falls outside bank DAY-B2",
+            "evidence": {
+              "assignment": {
+                "legId": "V116-R330-DAY-PHF",
+                "operation": "departure",
+                "bankId": "DAY-B2"
+              },
+              "minute": 411,
+              "bankWindow": [
+                425,
+                485
+              ]
+            },
+            "override": {
+              "reason": "Schedule 7 v1.1.6 PHF early-hub initiative: the user-selected 06:51 DAY departure splits the difference between a minimum turn and DAY Bank 2, producing an 08:20 PHF return with a 55-minute turn into the existing originator.",
+              "approvedBy": "user",
+              "expiresAfterSchedule": 7
+            }
+          },
+          {
+            "id": "V116-R330-DAY-PHF-arrival",
+            "message": "Arrival for V116-R330-DAY-PHF falls outside bank PHF-B2",
+            "evidence": {
+              "assignment": {
+                "legId": "V116-R330-DAY-PHF",
+                "operation": "arrival",
+                "bankId": "PHF-B2"
+              },
+              "minute": 500,
+              "bankWindow": [
+                505,
+                565
+              ]
+            },
+            "override": {
+              "reason": "Schedule 7 v1.1.6 PHF early-hub initiative: the user-selected 08:20 return arrives five minutes before PHF Bank 2 and preserves a 55-minute turn into Route 330's existing originator.",
+              "approvedBy": "user",
+              "expiresAfterSchedule": 7
+            }
+          }
+        ]
+      }
+    ],
+    "pass": false
+  },
+  {
+    "name": "R167 ALB-PIT-ALB and SYR M12 CAK retime",
+    "route": 167,
+    "scope": "read-only",
+    "structural": "pass",
+    "overnight": "pass",
+    "planning": "pass",
+    "gate": "pass",
+    "operating": {
+      "checks": 25,
+      "passed": 16,
+      "failed": 2,
+      "warnings": 5,
+      "notEvaluated": 1,
+      "overridden": 1,
+      "effectiveErrorFindings": 2,
+      "effectiveWarningFindings": 144
+    },
+    "addedFlights": 2,
+    "failed": [
+      {
+        "check": "minimum_turn_time",
+        "findings": [
+          {
+            "id": "AC-9-2278-1754",
+            "message": "Turn at ALB is 12 minutes",
+            "evidence": {
+              "line": "AC",
+              "day": 9,
+              "city": "ALB",
+              "arrivalFlight": 2278,
+              "departureFlight": 1754,
+              "minutes": 12
+            }
+          }
+        ]
+      },
+      {
+        "check": "hub_bank_alignment",
+        "findings": [
+          {
+            "id": "ALB-SYR-CRJ200-02-OUT-arrival",
+            "message": "Arrival for ALB-SYR-CRJ200-02-OUT falls outside bank SYR-B3",
+            "evidence": {
+              "assignment": {
+                "legId": "ALB-SYR-CRJ200-02-OUT",
+                "operation": "arrival",
+                "bankId": "SYR-B3"
+              },
+              "minute": 621,
+              "bankWindow": [
+                630,
+                690
+              ]
+            }
+          },
+          {
+            "id": "V114-R169-SYR-FWA-departure",
+            "message": "Departure for V114-R169-SYR-FWA falls outside bank SYR-B4",
+            "evidence": {
+              "assignment": {
+                "legId": "V114-R169-SYR-FWA",
+                "operation": "departure",
+                "bankId": "SYR-B4"
+              },
+              "minute": 875,
+              "bankWindow": [
+                795,
+                855
+              ]
+            },
+            "override": {
+              "reason": "Schedule 7 v1.1.4 tactical initiative: the 14:35 SYR-FWA return departs 20 minutes after Bank 4 to remain within SYR's fixed 16-gate inventory without weakening existing bank connections.",
+              "approvedBy": "user",
+              "expiresAfterSchedule": 7
+            }
+          },
+          {
+            "id": "V114-R122-SYR-SWF-departure",
+            "message": "Departure for V114-R122-SYR-SWF falls outside bank SYR-B6",
+            "evidence": {
+              "assignment": {
+                "legId": "V114-R122-SYR-SWF",
+                "operation": "departure",
+                "bankId": "SYR-B6"
+              },
+              "minute": 1210,
+              "bankWindow": [
+                1125,
+                1185
+              ]
+            },
+            "override": {
+              "reason": "Schedule 7 v1.1.4 tactical initiative: the 20:10 SYR-SWF return departs 25 minutes after Bank 6 to remain within SYR's fixed 16-gate inventory without weakening existing bank connections.",
+              "approvedBy": "user",
+              "expiresAfterSchedule": 7
+            }
+          },
+          {
+            "id": "V116-R149-DAY-BHM-departure",
+            "message": "Departure for V116-R149-DAY-BHM falls outside bank DAY-B1",
+            "evidence": {
+              "assignment": {
+                "legId": "V116-R149-DAY-BHM",
+                "operation": "departure",
+                "bankId": "DAY-B1"
+              },
+              "minute": 270,
+              "bankWindow": [
+                301,
+                361
+              ]
+            },
+            "override": {
+              "reason": "Schedule 7 v1.1.6 BHM morning initiative: the 04:30 DAY departure is 30 minutes before DAY Bank 1 so the aircraft can feed BHM's morning wave while remaining within fixed gate capacity at both cities.",
+              "approvedBy": "user",
+              "expiresAfterSchedule": 7
+            }
+          },
+          {
+            "id": "V116-R330-DAY-PHF-departure",
+            "message": "Departure for V116-R330-DAY-PHF falls outside bank DAY-B2",
+            "evidence": {
+              "assignment": {
+                "legId": "V116-R330-DAY-PHF",
+                "operation": "departure",
+                "bankId": "DAY-B2"
+              },
+              "minute": 411,
+              "bankWindow": [
+                425,
+                485
+              ]
+            },
+            "override": {
+              "reason": "Schedule 7 v1.1.6 PHF early-hub initiative: the user-selected 06:51 DAY departure splits the difference between a minimum turn and DAY Bank 2, producing an 08:20 PHF return with a 55-minute turn into the existing originator.",
+              "approvedBy": "user",
+              "expiresAfterSchedule": 7
+            }
+          },
+          {
+            "id": "V116-R330-DAY-PHF-arrival",
+            "message": "Arrival for V116-R330-DAY-PHF falls outside bank PHF-B2",
+            "evidence": {
+              "assignment": {
+                "legId": "V116-R330-DAY-PHF",
+                "operation": "arrival",
+                "bankId": "PHF-B2"
+              },
+              "minute": 500,
+              "bankWindow": [
+                505,
+                565
+              ]
+            },
+            "override": {
+              "reason": "Schedule 7 v1.1.6 PHF early-hub initiative: the user-selected 08:20 return arrives five minutes before PHF Bank 2 and preserves a 55-minute turn into Route 330's existing originator.",
+              "approvedBy": "user",
+              "expiresAfterSchedule": 7
+            }
+          }
+        ]
+      }
+    ],
+    "pass": false
+  },
+  {
+    "name": "R167 ALB-PIT-SYR triangular return into B3",
+    "route": 167,
+    "scope": "read-only",
+    "structural": "pass",
+    "overnight": "pass",
+    "planning": "pass",
+    "gate": "pass",
+    "operating": {
+      "checks": 25,
+      "passed": 16,
+      "failed": 1,
+      "warnings": 5,
+      "notEvaluated": 1,
+      "overridden": 2,
+      "effectiveErrorFindings": 1,
+      "effectiveWarningFindings": 145
+    },
+    "addedFlights": 1,
+    "failed": [
+      {
+        "check": "section_26_pairing_spacing",
+        "findings": [
+          {
+            "id": "PIT-SYR",
+            "message": "PIT\u2013SYR fails same-pairing spacing",
+            "evidence": {
+              "origin": "PIT",
+              "destination": "SYR",
+              "departures": [
+                270,
+                572,
+                573,
+                784,
+                821
+              ],
+              "gaps": [
+                {
+                  "from": 270,
+                  "to": 572,
+                  "minutes": 302
+                },
+                {
+                  "from": 572,
+                  "to": 573,
+                  "minutes": 1
+                },
+                {
+                  "from": 573,
+                  "to": 784,
+                  "minutes": 211
+                },
+                {
+                  "from": 784,
+                  "to": 821,
+                  "minutes": 37
+                },
+                {
+                  "from": 821,
+                  "to": 270,
+                  "minutes": 889
+                }
+              ],
+              "targetMinutes": 30.0,
+              "allowedExceptions": 0,
+              "hubBound": true
+            }
+          }
+        ]
+      }
+    ],
+    "pass": false
+  },
+  {
+    "name": "R167 ALB-PWM-SYR triangular return into B3",
+    "route": 167,
+    "scope": "read-only",
+    "structural": "pass",
+    "overnight": "pass",
+    "planning": "pass",
+    "gate": "pass",
+    "operating": {
+      "checks": 25,
+      "passed": 16,
+      "failed": 1,
+      "warnings": 5,
+      "notEvaluated": 1,
+      "overridden": 2,
+      "effectiveErrorFindings": 1,
+      "effectiveWarningFindings": 145
+    },
+    "addedFlights": 1,
+    "failed": [
+      {
+        "check": "section_26_pairing_spacing",
+        "findings": [
+          {
+            "id": "PWM-SYR",
+            "message": "PWM\u2013SYR fails same-pairing spacing",
+            "evidence": {
+              "origin": "PWM",
+              "destination": "SYR",
+              "departures": [
+                270,
+                570,
+                571,
+                900,
+                982
+              ],
+              "gaps": [
+                {
+                  "from": 270,
+                  "to": 570,
+                  "minutes": 300
+                },
+                {
+                  "from": 570,
+                  "to": 571,
+                  "minutes": 1
+                },
+                {
+                  "from": 571,
+                  "to": 900,
+                  "minutes": 329
+                },
+                {
+                  "from": 900,
+                  "to": 982,
+                  "minutes": 82
+                },
+                {
+                  "from": 982,
+                  "to": 270,
+                  "minutes": 728
+                }
+              ],
+              "targetMinutes": 30.0,
+              "allowedExceptions": 0,
+              "hubBound": true
+            }
+          }
+        ]
+      }
+    ],
+    "pass": false
+  }
+]
