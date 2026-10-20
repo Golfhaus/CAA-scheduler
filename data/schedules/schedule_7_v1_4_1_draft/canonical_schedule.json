@@ -63,6 +63,10 @@
         {
           "path": "config/optimizations/schedule_7_v1_4_1_r105_r162_provisional.json",
           "sha256": "977a326e0c3f8fce393c0aeca3846038210ec9d21201d5a1203b620c6d5e4d70"
+        },
+        {
+          "path": "config/optimizations/schedule_7_v1_4_1_r107_isp_phf_provisional.json",
+          "sha256": "10218b77350bd1893756109bc0af3f712f07c5733c6ecf3021eccb85bc6a589d"
         }
       ],
       "status": "PROVISIONAL, UNPUBLISHED; released web default stays v1.4.0"
@@ -139,7 +143,7 @@
       "DAY": 10,
       "JAX": 15,
       "MCI": 12,
-      "PHF": 14,
+      "PHF": 15,
       "SYR": 11
     },
     "hubBankWindowMinutes": 60,
@@ -749,6 +753,12 @@
     {
       "id": "SYR-M12",
       "hub": "SYR",
+      "startMinute": 715,
+      "endMinute": 775
+    },
+    {
+      "id": "PHF-M12-V141",
+      "hub": "PHF",
       "startMinute": 715,
       "endMinute": 775
     }
@@ -3128,11 +3138,6 @@
       "legId": "ISP-SYR-CRJ200-02-IN",
       "operation": "departure",
       "bankId": "SYR-B2"
-    },
-    {
-      "legId": "ISP-SYR-CRJ200-02-OUT",
-      "operation": "arrival",
-      "bankId": "SYR-B4"
     },
     {
       "legId": "ISP-SYR-CRJ200-03-IN",
@@ -6333,6 +6338,21 @@
       "legId": "V141-R105-EXTRA-2-2",
       "operation": "departure",
       "bankId": "SYR-B7"
+    },
+    {
+      "legId": "V141-R107-ISP-PHF-1",
+      "operation": "arrival",
+      "bankId": "PHF-B3"
+    },
+    {
+      "legId": "V141-R107-PHF-SYR-1",
+      "operation": "departure",
+      "bankId": "PHF-M12-V141"
+    },
+    {
+      "legId": "V141-R107-PHF-SYR-1",
+      "operation": "arrival",
+      "bankId": "SYR-B4"
     }
   ],
   "cities": [
@@ -19278,7 +19298,7 @@
       "line": "AC",
       "fleet": "CRJ200",
       "day": 7,
-      "sequenceWithinRoute": 6,
+      "sequenceWithinRoute": 7,
       "pairing": 813,
       "flight": 1674,
       "origin": "SYR",
@@ -21150,7 +21170,7 @@
       "line": "AC",
       "fleet": "CRJ200",
       "day": 7,
-      "sequenceWithinRoute": 5,
+      "sequenceWithinRoute": 6,
       "pairing": 487,
       "flight": 1791,
       "origin": "BDL",
@@ -21166,15 +21186,15 @@
       "line": "AC",
       "fleet": "CRJ200",
       "day": 7,
-      "sequenceWithinRoute": 4,
+      "sequenceWithinRoute": 5,
       "pairing": 489,
       "flight": 1792,
       "origin": "SYR",
       "destination": "BDL",
-      "departure": "14:05",
-      "arrival": "14:59",
-      "departureMinute": 845,
-      "arrivalMinute": 899
+      "departure": "14:13",
+      "arrival": "15:07",
+      "departureMinute": 853,
+      "arrivalMinute": 907
     },
     {
       "id": "DAY-PIT-CRJ200-01-OUT",
@@ -22775,22 +22795,6 @@
       "arrival": "07:45",
       "departureMinute": 407,
       "arrivalMinute": 465
-    },
-    {
-      "id": "ISP-SYR-CRJ200-02-OUT",
-      "route": 107,
-      "line": "AC",
-      "fleet": "CRJ200",
-      "day": 7,
-      "sequenceWithinRoute": 3,
-      "pairing": 194,
-      "flight": 1893,
-      "origin": "ISP",
-      "destination": "SYR",
-      "departure": "12:25",
-      "arrival": "13:23",
-      "departureMinute": 745,
-      "arrivalMinute": 803
     },
     {
       "id": "ISP-SYR-CRJ200-03-OUT",
@@ -28823,6 +28827,38 @@
       "arrival": "23:30",
       "departureMinute": 1330,
       "arrivalMinute": 1410
+    },
+    {
+      "id": "V141-R107-ISP-PHF-1",
+      "route": 107,
+      "line": "AC",
+      "fleet": "CRJ200",
+      "day": 7,
+      "sequenceWithinRoute": 3,
+      "pairing": 933,
+      "flight": 2273,
+      "origin": "ISP",
+      "destination": "PHF",
+      "departure": "10:13",
+      "arrival": "11:29",
+      "departureMinute": 613,
+      "arrivalMinute": 689
+    },
+    {
+      "id": "V141-R107-PHF-SYR-1",
+      "route": 107,
+      "line": "AC",
+      "fleet": "CRJ200",
+      "day": 7,
+      "sequenceWithinRoute": 4,
+      "pairing": 625,
+      "flight": 2274,
+      "origin": "PHF",
+      "destination": "SYR",
+      "departure": "12:09",
+      "arrival": "13:33",
+      "departureMinute": 729,
+      "arrivalMinute": 813
     }
   ]
 }

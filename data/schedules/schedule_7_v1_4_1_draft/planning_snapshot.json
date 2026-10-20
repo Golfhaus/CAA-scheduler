@@ -4,8 +4,8 @@
   "sourceKind": "canonical_reconstruction",
   "demandDataVersion": "bts-db1c-6mo-jul2025-apr2026-v7",
   "summary": {
-    "legCount": 1263,
-    "marketRows": 705,
+    "legCount": 1264,
+    "marketRows": 706,
     "stationCount": 105,
     "fleetTypes": 4
   },
@@ -37,10 +37,10 @@
     "CRJ200": {
       "aircraftCount": 80,
       "aircraftDaysUsed": 76,
-      "legCount": 556,
-      "blockMinutes": 41644,
-      "minimumTurnMinutes": 19200,
-      "requiredAircraftMinutes": 60844
+      "legCount": 557,
+      "blockMinutes": 41746,
+      "minimumTurnMinutes": 19240,
+      "requiredAircraftMinutes": 60986
     }
   },
   "markets": [
@@ -773,8 +773,14 @@
     {
       "fleet": "CRJ200",
       "origin": "ISP",
+      "destination": "PHF",
+      "legs": 1
+    },
+    {
+      "fleet": "CRJ200",
+      "origin": "ISP",
       "destination": "SYR",
-      "legs": 3
+      "legs": 2
     },
     {
       "fleet": "CRJ200",
@@ -1398,7 +1404,7 @@
       "fleet": "CRJ200",
       "origin": "PHF",
       "destination": "SYR",
-      "legs": 2
+      "legs": 3
     },
     {
       "fleet": "CRJ200",
@@ -4352,7 +4358,7 @@
     "OMA": 7,
     "ORH": 3,
     "PGD": 12,
-    "PHF": 126,
+    "PHF": 127,
     "PIA": 2,
     "PIE": 20,
     "PIT": 10,
@@ -5076,7 +5082,7 @@
     "DAY": 10,
     "JAX": 15,
     "MCI": 12,
-    "PHF": 14,
+    "PHF": 15,
     "SYR": 11
   },
   "limitations": [

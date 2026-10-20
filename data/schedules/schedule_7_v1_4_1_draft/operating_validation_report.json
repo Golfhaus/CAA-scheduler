@@ -10,7 +10,7 @@
     "notEvaluated": 1,
     "overridden": 2,
     "effectiveErrorFindings": 0,
-    "effectiveWarningFindings": 151
+    "effectiveWarningFindings": 149
   },
   "checks": [
     {
@@ -114,10 +114,10 @@
       "severity": "warning",
       "hardStop": false,
       "status": "warning",
-      "message": "67 finding(s)",
+      "message": "66 finding(s)",
       "metrics": {
-        "findingCount": 67,
-        "effectiveFindingCount": 67,
+        "findingCount": 66,
+        "effectiveFindingCount": 66,
         "overriddenFindingCount": 0
       },
       "findings": [
@@ -806,27 +806,15 @@
           }
         },
         {
-          "id": "AC-7-1889-1893",
-          "message": "Hold at ISP is 172 minutes and needs deliberate-hold review",
-          "evidence": {
-            "line": "AC",
-            "day": 7,
-            "city": "ISP",
-            "arrivalFlight": 1889,
-            "departureFlight": 1893,
-            "minutes": 172
-          }
-        },
-        {
           "id": "AC-7-1792-1791",
-          "message": "Hold at BDL is 181 minutes and needs deliberate-hold review",
+          "message": "Hold at BDL is 173 minutes and needs deliberate-hold review",
           "evidence": {
             "line": "AC",
             "day": 7,
             "city": "BDL",
             "arrivalFlight": 1792,
             "departureFlight": 1791,
-            "minutes": 181
+            "minutes": 173
           }
         },
         {
@@ -1021,8 +1009,8 @@
       "message": "Point-to-point flying is within the 10% cap",
       "metrics": {
         "flights": 108,
-        "totalFlights": 1263,
-        "share": 0.0855106888361045,
+        "totalFlights": 1264,
+        "share": 0.08544303797468354,
         "findingCount": 0,
         "effectiveFindingCount": 0,
         "overriddenFindingCount": 0
@@ -2214,11 +2202,16 @@
             "departures": [
               407,
               525,
-              745,
+              613,
               910,
               1245
             ],
             "excessiveGaps": [
+              {
+                "from": 613,
+                "to": 910,
+                "minutes": 297
+              },
               {
                 "from": 910,
                 "to": 1245,
@@ -3394,11 +3387,11 @@
       "severity": "error",
       "hardStop": false,
       "status": "overridden",
-      "message": "All 24 finding(s) have explicit overrides",
+      "message": "All 25 finding(s) have explicit overrides",
       "metrics": {
-        "findingCount": 24,
+        "findingCount": 25,
         "effectiveFindingCount": 0,
-        "overriddenFindingCount": 24
+        "overriddenFindingCount": 25
       },
       "findings": [
         {
@@ -3629,6 +3622,28 @@
             "reason": "User explicitly requested PHF\u2013GNV overnight/originator service as the replacement GNV RON. Useful second-hub coverage is authorized; all physical, maintenance and timing rules remain enforced.",
             "approvedBy": null,
             "expiresAfterSchedule": null
+          }
+        },
+        {
+          "id": "ISP",
+          "message": "ISP does not satisfy its percentile-tier service envelope",
+          "evidence": {
+            "city": "ISP",
+            "percentile": 55.0,
+            "totalFlights": 10,
+            "hubOrFocusFlights": 8,
+            "minimumFlights": 6,
+            "connectedHubs": [
+              "BHM",
+              "PHF",
+              "SYR"
+            ],
+            "hubCountCap": 2
+          },
+          "override": {
+            "reason": "User-authorized v1.3.3 BHM north-south mini-bank: geographically suitable additional focus-city connectivity without changing physical, frequency, bank or curfew rules.",
+            "approvedBy": "user",
+            "expiresAfterSchedule": 7
           }
         },
         {
@@ -4119,22 +4134,9 @@
       "severity": "warning",
       "hardStop": false,
       "status": "warning",
-      "message": "3 finding(s)",
+      "message": "2 finding(s)",
       "metrics": {},
       "findings": [
-        {
-          "id": "tiered_service_minimums:ISP",
-          "message": "Configured override did not match a current finding or has expired",
-          "evidence": {
-            "override": {
-              "checkId": "tiered_service_minimums",
-              "findingId": "ISP",
-              "reason": "User-authorized v1.3.3 BHM north-south mini-bank: geographically suitable additional focus-city connectivity without changing physical, frequency, bank or curfew rules.",
-              "approvedBy": "user",
-              "expiresAfterSchedule": 7
-            }
-          }
-        },
         {
           "id": "tiered_service_minimums:HVN",
           "message": "Configured override did not match a current finding or has expired",
