@@ -71,6 +71,10 @@
         {
           "path": "config/optimizations/schedule_7_v1_4_1_r356_compensation.json",
           "sha256": "1d96d9a451a90d16845f52d3e404246e733bef30f04fc03fb08f23c5690f3839"
+        },
+        {
+          "path": "config/optimizations/schedule_7_v1_4_1_r108_pit_provisional.json",
+          "sha256": "e6c0d9dc560e125b93e7a9bfa8d251d43e6440612c9d5962647bdbc4be02932c"
         }
       ],
       "status": "PROVISIONAL, UNPUBLISHED; released web default stays v1.4.0"
@@ -1281,7 +1285,7 @@
     {
       "legId": "BTV-SYR-CRJ200-03-IN",
       "operation": "departure",
-      "bankId": "SYR-B4"
+      "bankId": "SYR-M15"
     },
     {
       "legId": "BTV-SYR-CRJ200-03-OUT",
@@ -4251,7 +4255,7 @@
     {
       "legId": "ORH-SYR-CRJ200-02-OUT",
       "operation": "arrival",
-      "bankId": "SYR-B4"
+      "bankId": "SYR-B3"
     },
     {
       "legId": "PHF-PIE-CRJ900-01-IN",
@@ -6357,6 +6361,16 @@
       "legId": "V141-R107-PHF-SYR-1",
       "operation": "arrival",
       "bankId": "SYR-B4"
+    },
+    {
+      "legId": "V141-R108-BANK-1-1",
+      "operation": "departure",
+      "bankId": "SYR-M12"
+    },
+    {
+      "legId": "V141-R108-BANK-1-2",
+      "operation": "arrival",
+      "bankId": "SYR-M15"
     }
   ],
   "cities": [
@@ -21734,15 +21748,15 @@
       "line": "AC",
       "fleet": "CRJ200",
       "day": 8,
-      "sequenceWithinRoute": 4,
+      "sequenceWithinRoute": 6,
       "pairing": 185,
       "flight": 1826,
       "origin": "SYR",
       "destination": "BTV",
-      "departure": "14:05",
-      "arrival": "14:57",
-      "departureMinute": 845,
-      "arrivalMinute": 897
+      "departure": "15:27",
+      "arrival": "16:19",
+      "departureMinute": 927,
+      "arrivalMinute": 979
     },
     {
       "id": "BTV-SYR-CRJ200-01-IN",
@@ -21798,7 +21812,7 @@
       "line": "AC",
       "fleet": "CRJ200",
       "day": 8,
-      "sequenceWithinRoute": 5,
+      "sequenceWithinRoute": 7,
       "pairing": 186,
       "flight": 1830,
       "origin": "BTV",
@@ -22667,10 +22681,10 @@
       "flight": 1884,
       "origin": "ORH",
       "destination": "SYR",
-      "departure": "12:25",
-      "arrival": "13:23",
-      "departureMinute": 745,
-      "arrivalMinute": 803
+      "departure": "10:13",
+      "arrival": "11:11",
+      "departureMinute": 613,
+      "arrivalMinute": 671
     },
     {
       "id": "SWF-SYR-CRJ200-01-IN",
@@ -25126,7 +25140,7 @@
       "line": "AC",
       "fleet": "CRJ200",
       "day": 8,
-      "sequenceWithinRoute": 6,
+      "sequenceWithinRoute": 8,
       "pairing": 815,
       "flight": 2039,
       "origin": "SYR",
@@ -25142,7 +25156,7 @@
       "line": "AC",
       "fleet": "CRJ200",
       "day": 8,
-      "sequenceWithinRoute": 7,
+      "sequenceWithinRoute": 9,
       "pairing": 810,
       "flight": 2040,
       "origin": "ROC",
@@ -28863,6 +28877,38 @@
       "arrival": "13:33",
       "departureMinute": 729,
       "arrivalMinute": 813
+    },
+    {
+      "id": "V141-R108-BANK-1-1",
+      "route": 108,
+      "line": "AC",
+      "fleet": "CRJ200",
+      "day": 8,
+      "sequenceWithinRoute": 4,
+      "pairing": 814,
+      "flight": 2275,
+      "origin": "SYR",
+      "destination": "PIT",
+      "departure": "11:55",
+      "arrival": "13:01",
+      "departureMinute": 715,
+      "arrivalMinute": 781
+    },
+    {
+      "id": "V141-R108-BANK-1-2",
+      "route": 108,
+      "line": "AC",
+      "fleet": "CRJ200",
+      "day": 8,
+      "sequenceWithinRoute": 5,
+      "pairing": 805,
+      "flight": 2276,
+      "origin": "PIT",
+      "destination": "SYR",
+      "departure": "13:41",
+      "arrival": "14:47",
+      "departureMinute": 821,
+      "arrivalMinute": 887
     }
   ]
 }

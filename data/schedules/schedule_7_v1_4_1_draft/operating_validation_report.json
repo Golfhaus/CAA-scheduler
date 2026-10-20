@@ -10,7 +10,7 @@
     "notEvaluated": 1,
     "overridden": 2,
     "effectiveErrorFindings": 0,
-    "effectiveWarningFindings": 150
+    "effectiveWarningFindings": 147
   },
   "checks": [
     {
@@ -114,10 +114,10 @@
       "severity": "warning",
       "hardStop": false,
       "status": "warning",
-      "message": "67 finding(s)",
+      "message": "65 finding(s)",
       "metrics": {
-        "findingCount": 67,
-        "effectiveFindingCount": 67,
+        "findingCount": 65,
+        "effectiveFindingCount": 65,
         "overriddenFindingCount": 0
       },
       "findings": [
@@ -770,30 +770,6 @@
           }
         },
         {
-          "id": "AC-8-1881-1884",
-          "message": "Hold at ORH is 172 minutes and needs deliberate-hold review",
-          "evidence": {
-            "line": "AC",
-            "day": 8,
-            "city": "ORH",
-            "arrivalFlight": 1881,
-            "departureFlight": 1884,
-            "minutes": 172
-          }
-        },
-        {
-          "id": "AC-8-1826-1830",
-          "message": "Hold at BTV is 183 minutes and needs deliberate-hold review",
-          "evidence": {
-            "line": "AC",
-            "day": 8,
-            "city": "BTV",
-            "arrivalFlight": 1826,
-            "departureFlight": 1830,
-            "minutes": 183
-          }
-        },
-        {
           "id": "AC-9-1749-1754",
           "message": "Hold at ALB is 201 minutes and needs deliberate-hold review",
           "evidence": {
@@ -1021,8 +997,8 @@
       "message": "Point-to-point flying is within the 10% cap",
       "metrics": {
         "flights": 108,
-        "totalFlights": 1264,
-        "share": 0.08544303797468354,
+        "totalFlights": 1266,
+        "share": 0.08530805687203792,
         "findingCount": 0,
         "effectiveFindingCount": 0,
         "overriddenFindingCount": 0
@@ -1066,10 +1042,10 @@
       "severity": "warning",
       "hardStop": false,
       "status": "warning",
-      "message": "79 finding(s)",
+      "message": "78 finding(s)",
       "metrics": {
-        "findingCount": 79,
-        "effectiveFindingCount": 79,
+        "findingCount": 78,
+        "effectiveFindingCount": 78,
         "overriddenFindingCount": 0
       },
       "findings": [
@@ -2693,30 +2669,6 @@
           }
         },
         {
-          "id": "ORH",
-          "message": "ORH has no departure for more than 240 minutes",
-          "evidence": {
-            "city": "ORH",
-            "departures": [
-              270,
-              415,
-              745
-            ],
-            "excessiveGaps": [
-              {
-                "from": 415,
-                "to": 745,
-                "minutes": 330
-              }
-            ],
-            "serviceWindowMinutes": {
-              "start": 270,
-              "end": 1260
-            },
-            "includesOvernightWrap": false
-          }
-        },
-        {
           "id": "PIA",
           "message": "PIA has no departure for more than 240 minutes",
           "evidence": {
@@ -2752,6 +2704,7 @@
               685,
               758,
               784,
+              821,
               1006,
               1119,
               1255
@@ -3755,8 +3708,8 @@
           "evidence": {
             "city": "PIT",
             "percentile": 87.0,
-            "totalFlights": 20,
-            "hubOrFocusFlights": 20,
+            "totalFlights": 22,
+            "hubOrFocusFlights": 22,
             "minimumFlights": 8,
             "connectedHubs": [
               "DAY",
