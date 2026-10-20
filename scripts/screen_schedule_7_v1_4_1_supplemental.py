@@ -24,7 +24,7 @@ cases=[
   "retime":[(1839,705,765),(1773,805,885),(1776,925,1005),(1774,1045,1125)],
   "insert":[("BGR","SYR",1210,1290),("SYR","BGR",1330,1410)],
   "bankassign":[(1,"arrival","SYR-B7"),(2,"departure","SYR-B7")],
-  "replace":[(1839,"arrival","SYR-M12"),(1773,"departure","SYR-B4")],
+  "replace":[(1839,"arrival","SYR-M12"),(1773,"departure","SYR-B4"),(1776,"arrival","SYR-B5"),(1774,"departure","SYR-M17")],
   "banks":["M12"]},
 ]
 bankSpecs={"M12":{"id":"SYR-M12","hub":"SYR","startMinute":715,"endMinute":775}}
