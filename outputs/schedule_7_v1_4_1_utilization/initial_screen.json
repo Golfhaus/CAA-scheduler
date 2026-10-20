@@ -1,0 +1,1127 @@
+[
+  {
+    "name": "R105 MHT-BGR-SYR triangular return",
+    "route": 105,
+    "scope": "read-only screening",
+    "structural": "pass",
+    "overnight": "pass",
+    "planning": "pass",
+    "gate": "pass",
+    "operating": {
+      "checks": 25,
+      "passed": 17,
+      "failed": 0,
+      "warnings": 5,
+      "notEvaluated": 1,
+      "overridden": 2,
+      "effectiveErrorFindings": 0,
+      "effectiveWarningFindings": 153
+    },
+    "changedFlights": 1,
+    "failed": [],
+    "pass": true,
+    "overlay": {
+      "schemaVersion": "1.0.0",
+      "id": "v141-screen-0",
+      "baseSchedule": {
+        "scheduleId": "schedule_7_v1_4_0"
+      },
+      "schedule": {
+        "id": "schedule_7_v1_4_1_draft",
+        "number": 7,
+        "version": "1.4.1-draft",
+        "label": "Schedule 7, Version 1.4.1 draft",
+        "status": "draft",
+        "fleetCounts": {
+          "MAX9": 35,
+          "CRJ900": 45,
+          "CRJ700": 65,
+          "CRJ200": 80
+        },
+        "connectionWindowMinutes": {
+          "minimum": 30,
+          "maximum": 240
+        }
+      },
+      "removeLegs": [
+        {
+          "legId": "MHT-SYR-CRJ200-02-OUT",
+          "expectedRoute": 105
+        }
+      ],
+      "retimeLegs": [],
+      "insertLegs": [
+        {
+          "id": "V141-R105-SCREEN-0-1",
+          "route": 105,
+          "origin": "MHT",
+          "destination": "BGR",
+          "departureMinute": 615,
+          "arrivalMinute": 675
+        },
+        {
+          "id": "V141-R105-SCREEN-0-2",
+          "route": 105,
+          "origin": "BGR",
+          "destination": "SYR",
+          "departureMinute": 715,
+          "arrivalMinute": 795
+        }
+      ],
+      "bankAssignmentsToAdd": [
+        {
+          "legId": "V141-R105-SCREEN-0-2",
+          "operation": "arrival",
+          "bankId": "SYR-B4"
+        }
+      ],
+      "bankAssignmentReplacements": []
+    }
+  },
+  {
+    "name": "R107 ISP-ROC-SYR triangular return",
+    "route": 107,
+    "scope": "read-only screening",
+    "structural": "pass",
+    "overnight": "pass",
+    "planning": "pass",
+    "gate": "pass",
+    "operating": {
+      "checks": 25,
+      "passed": 17,
+      "failed": 0,
+      "warnings": 5,
+      "notEvaluated": 1,
+      "overridden": 2,
+      "effectiveErrorFindings": 0,
+      "effectiveWarningFindings": 154
+    },
+    "changedFlights": 1,
+    "failed": [],
+    "pass": true,
+    "overlay": {
+      "schemaVersion": "1.0.0",
+      "id": "v141-screen-1",
+      "baseSchedule": {
+        "scheduleId": "schedule_7_v1_4_0"
+      },
+      "schedule": {
+        "id": "schedule_7_v1_4_1_draft",
+        "number": 7,
+        "version": "1.4.1-draft",
+        "label": "Schedule 7, Version 1.4.1 draft",
+        "status": "draft",
+        "fleetCounts": {
+          "MAX9": 35,
+          "CRJ900": 45,
+          "CRJ700": 65,
+          "CRJ200": 80
+        },
+        "connectionWindowMinutes": {
+          "minimum": 30,
+          "maximum": 240
+        }
+      },
+      "removeLegs": [
+        {
+          "legId": "ISP-SYR-CRJ200-02-OUT",
+          "expectedRoute": 107
+        }
+      ],
+      "retimeLegs": [],
+      "insertLegs": [
+        {
+          "id": "V141-R107-SCREEN-1-1",
+          "route": 107,
+          "origin": "ISP",
+          "destination": "ROC",
+          "departureMinute": 613,
+          "arrivalMinute": 678
+        },
+        {
+          "id": "V141-R107-SCREEN-1-2",
+          "route": 107,
+          "origin": "ROC",
+          "destination": "SYR",
+          "departureMinute": 718,
+          "arrivalMinute": 757
+        }
+      ],
+      "bankAssignmentsToAdd": [
+        {
+          "legId": "V141-R107-SCREEN-1-2",
+          "operation": "arrival",
+          "bankId": "SYR-M12"
+        }
+      ],
+      "bankAssignmentReplacements": [],
+      "hubBanksToAdd": [
+        {
+          "id": "SYR-M12",
+          "hub": "SYR",
+          "startMinute": 715,
+          "endMinute": 775
+        }
+      ],
+      "hubBankCountOverrides": {
+        "SYR": 10
+      }
+    }
+  },
+  {
+    "name": "R107 ISP-PIT-SYR triangular return",
+    "route": 107,
+    "scope": "read-only screening",
+    "structural": "pass",
+    "overnight": "pass",
+    "planning": "pass",
+    "gate": "pass",
+    "operating": {
+      "checks": 25,
+      "passed": 17,
+      "failed": 0,
+      "warnings": 5,
+      "notEvaluated": 1,
+      "overridden": 2,
+      "effectiveErrorFindings": 0,
+      "effectiveWarningFindings": 154
+    },
+    "changedFlights": 1,
+    "failed": [],
+    "pass": true,
+    "overlay": {
+      "schemaVersion": "1.0.0",
+      "id": "v141-screen-2",
+      "baseSchedule": {
+        "scheduleId": "schedule_7_v1_4_0"
+      },
+      "schedule": {
+        "id": "schedule_7_v1_4_1_draft",
+        "number": 7,
+        "version": "1.4.1-draft",
+        "label": "Schedule 7, Version 1.4.1 draft",
+        "status": "draft",
+        "fleetCounts": {
+          "MAX9": 35,
+          "CRJ900": 45,
+          "CRJ700": 65,
+          "CRJ200": 80
+        },
+        "connectionWindowMinutes": {
+          "minimum": 30,
+          "maximum": 240
+        }
+      },
+      "removeLegs": [
+        {
+          "legId": "ISP-SYR-CRJ200-02-OUT",
+          "expectedRoute": 107
+        }
+      ],
+      "retimeLegs": [],
+      "insertLegs": [
+        {
+          "id": "V141-R107-SCREEN-2-1",
+          "route": 107,
+          "origin": "ISP",
+          "destination": "PIT",
+          "departureMinute": 613,
+          "arrivalMinute": 698
+        },
+        {
+          "id": "V141-R107-SCREEN-2-2",
+          "route": 107,
+          "origin": "PIT",
+          "destination": "SYR",
+          "departureMinute": 738,
+          "arrivalMinute": 804
+        }
+      ],
+      "bankAssignmentsToAdd": [
+        {
+          "legId": "V141-R107-SCREEN-2-2",
+          "operation": "arrival",
+          "bankId": "SYR-B4"
+        }
+      ],
+      "bankAssignmentReplacements": []
+    }
+  },
+  {
+    "name": "R108 ORH-BTV-SYR triangular return",
+    "route": 108,
+    "scope": "read-only screening",
+    "structural": "pass",
+    "overnight": "pass",
+    "planning": "pass",
+    "gate": "pass",
+    "operating": {
+      "checks": 25,
+      "passed": 17,
+      "failed": 0,
+      "warnings": 5,
+      "notEvaluated": 1,
+      "overridden": 2,
+      "effectiveErrorFindings": 0,
+      "effectiveWarningFindings": 152
+    },
+    "changedFlights": 1,
+    "failed": [],
+    "pass": true,
+    "overlay": {
+      "schemaVersion": "1.0.0",
+      "id": "v141-screen-3",
+      "baseSchedule": {
+        "scheduleId": "schedule_7_v1_4_0"
+      },
+      "schedule": {
+        "id": "schedule_7_v1_4_1_draft",
+        "number": 7,
+        "version": "1.4.1-draft",
+        "label": "Schedule 7, Version 1.4.1 draft",
+        "status": "draft",
+        "fleetCounts": {
+          "MAX9": 35,
+          "CRJ900": 45,
+          "CRJ700": 65,
+          "CRJ200": 80
+        },
+        "connectionWindowMinutes": {
+          "minimum": 30,
+          "maximum": 240
+        }
+      },
+      "removeLegs": [
+        {
+          "legId": "ORH-SYR-CRJ200-02-OUT",
+          "expectedRoute": 108
+        }
+      ],
+      "retimeLegs": [],
+      "insertLegs": [
+        {
+          "id": "V141-R108-SCREEN-3-1",
+          "route": 108,
+          "origin": "ORH",
+          "destination": "BTV",
+          "departureMinute": 613,
+          "arrivalMinute": 658
+        },
+        {
+          "id": "V141-R108-SCREEN-3-2",
+          "route": 108,
+          "origin": "BTV",
+          "destination": "SYR",
+          "departureMinute": 698,
+          "arrivalMinute": 750
+        }
+      ],
+      "bankAssignmentsToAdd": [
+        {
+          "legId": "V141-R108-SCREEN-3-2",
+          "operation": "arrival",
+          "bankId": "SYR-M12"
+        }
+      ],
+      "bankAssignmentReplacements": [],
+      "hubBanksToAdd": [
+        {
+          "id": "SYR-M12",
+          "hub": "SYR",
+          "startMinute": 715,
+          "endMinute": 775
+        }
+      ],
+      "hubBankCountOverrides": {
+        "SYR": 10
+      }
+    }
+  },
+  {
+    "name": "R167 ALB-BTV-SYR morning triangle",
+    "route": 167,
+    "scope": "read-only screening",
+    "structural": "pass",
+    "overnight": "pass",
+    "planning": "pass",
+    "gate": "pass",
+    "operating": {
+      "checks": 25,
+      "passed": 17,
+      "failed": 0,
+      "warnings": 5,
+      "notEvaluated": 1,
+      "overridden": 2,
+      "effectiveErrorFindings": 0,
+      "effectiveWarningFindings": 153
+    },
+    "changedFlights": 1,
+    "failed": [],
+    "pass": true,
+    "overlay": {
+      "schemaVersion": "1.0.0",
+      "id": "v141-screen-4",
+      "baseSchedule": {
+        "scheduleId": "schedule_7_v1_4_0"
+      },
+      "schedule": {
+        "id": "schedule_7_v1_4_1_draft",
+        "number": 7,
+        "version": "1.4.1-draft",
+        "label": "Schedule 7, Version 1.4.1 draft",
+        "status": "draft",
+        "fleetCounts": {
+          "MAX9": 35,
+          "CRJ900": 45,
+          "CRJ700": 65,
+          "CRJ200": 80
+        },
+        "connectionWindowMinutes": {
+          "minimum": 30,
+          "maximum": 240
+        }
+      },
+      "removeLegs": [
+        {
+          "legId": "ALB-SYR-CRJ200-02-OUT",
+          "expectedRoute": 167
+        }
+      ],
+      "retimeLegs": [],
+      "insertLegs": [
+        {
+          "id": "V141-R167-SCREEN-4-1",
+          "route": 167,
+          "origin": "ALB",
+          "destination": "BTV",
+          "departureMinute": 434,
+          "arrivalMinute": 474
+        },
+        {
+          "id": "V141-R167-SCREEN-4-2",
+          "route": 167,
+          "origin": "BTV",
+          "destination": "SYR",
+          "departureMinute": 514,
+          "arrivalMinute": 566
+        }
+      ],
+      "bankAssignmentsToAdd": [
+        {
+          "legId": "V141-R167-SCREEN-4-2",
+          "operation": "arrival",
+          "bankId": "SYR-M09"
+        }
+      ],
+      "bankAssignmentReplacements": [],
+      "hubBanksToAdd": [
+        {
+          "id": "SYR-M09",
+          "hub": "SYR",
+          "startMinute": 535,
+          "endMinute": 595
+        }
+      ],
+      "hubBankCountOverrides": {
+        "SYR": 10
+      }
+    }
+  },
+  {
+    "name": "R162 early BDL, SYR-ROC-SYR productive turn",
+    "route": 162,
+    "scope": "read-only screening",
+    "structural": "pass",
+    "overnight": "pass",
+    "planning": "pass",
+    "gate": "pass",
+    "operating": {
+      "checks": 25,
+      "passed": 17,
+      "failed": 1,
+      "warnings": 5,
+      "notEvaluated": 1,
+      "overridden": 1,
+      "effectiveErrorFindings": 1,
+      "effectiveWarningFindings": 152
+    },
+    "changedFlights": 2,
+    "failed": [
+      {
+        "check": "hub_bank_alignment",
+        "findings": [
+          {
+            "id": "V114-R169-SYR-FWA-departure",
+            "message": "Departure for V114-R169-SYR-FWA falls outside bank SYR-B4",
+            "evidence": {
+              "assignment": {
+                "legId": "V114-R169-SYR-FWA",
+                "operation": "departure",
+                "bankId": "SYR-B4"
+              },
+              "minute": 875,
+              "bankWindow": [
+                795,
+                855
+              ]
+            },
+            "override": {
+              "reason": "Schedule 7 v1.1.4 tactical initiative: the 14:35 SYR-FWA return departs 20 minutes after Bank 4 to remain within SYR's fixed 16-gate inventory without weakening existing bank connections.",
+              "approvedBy": "user",
+              "expiresAfterSchedule": 7
+            }
+          },
+          {
+            "id": "V114-R122-SYR-SWF-departure",
+            "message": "Departure for V114-R122-SYR-SWF falls outside bank SYR-B6",
+            "evidence": {
+              "assignment": {
+                "legId": "V114-R122-SYR-SWF",
+                "operation": "departure",
+                "bankId": "SYR-B6"
+              },
+              "minute": 1210,
+              "bankWindow": [
+                1125,
+                1185
+              ]
+            },
+            "override": {
+              "reason": "Schedule 7 v1.1.4 tactical initiative: the 20:10 SYR-SWF return departs 25 minutes after Bank 6 to remain within SYR's fixed 16-gate inventory without weakening existing bank connections.",
+              "approvedBy": "user",
+              "expiresAfterSchedule": 7
+            }
+          },
+          {
+            "id": "V116-R149-DAY-BHM-departure",
+            "message": "Departure for V116-R149-DAY-BHM falls outside bank DAY-B1",
+            "evidence": {
+              "assignment": {
+                "legId": "V116-R149-DAY-BHM",
+                "operation": "departure",
+                "bankId": "DAY-B1"
+              },
+              "minute": 270,
+              "bankWindow": [
+                301,
+                361
+              ]
+            },
+            "override": {
+              "reason": "Schedule 7 v1.1.6 BHM morning initiative: the 04:30 DAY departure is 30 minutes before DAY Bank 1 so the aircraft can feed BHM's morning wave while remaining within fixed gate capacity at both cities.",
+              "approvedBy": "user",
+              "expiresAfterSchedule": 7
+            }
+          },
+          {
+            "id": "V116-R330-DAY-PHF-departure",
+            "message": "Departure for V116-R330-DAY-PHF falls outside bank DAY-B2",
+            "evidence": {
+              "assignment": {
+                "legId": "V116-R330-DAY-PHF",
+                "operation": "departure",
+                "bankId": "DAY-B2"
+              },
+              "minute": 411,
+              "bankWindow": [
+                425,
+                485
+              ]
+            },
+            "override": {
+              "reason": "Schedule 7 v1.1.6 PHF early-hub initiative: the user-selected 06:51 DAY departure splits the difference between a minimum turn and DAY Bank 2, producing an 08:20 PHF return with a 55-minute turn into the existing originator.",
+              "approvedBy": "user",
+              "expiresAfterSchedule": 7
+            }
+          },
+          {
+            "id": "V116-R330-DAY-PHF-arrival",
+            "message": "Arrival for V116-R330-DAY-PHF falls outside bank PHF-B2",
+            "evidence": {
+              "assignment": {
+                "legId": "V116-R330-DAY-PHF",
+                "operation": "arrival",
+                "bankId": "PHF-B2"
+              },
+              "minute": 500,
+              "bankWindow": [
+                505,
+                565
+              ]
+            },
+            "override": {
+              "reason": "Schedule 7 v1.1.6 PHF early-hub initiative: the user-selected 08:20 return arrives five minutes before PHF Bank 2 and preserves a 55-minute turn into Route 330's existing originator.",
+              "approvedBy": "user",
+              "expiresAfterSchedule": 7
+            }
+          }
+        ]
+      }
+    ],
+    "pass": false,
+    "overlay": {
+      "schemaVersion": "1.0.0",
+      "id": "v141-screen-5",
+      "baseSchedule": {
+        "scheduleId": "schedule_7_v1_4_0"
+      },
+      "schedule": {
+        "id": "schedule_7_v1_4_1_draft",
+        "number": 7,
+        "version": "1.4.1-draft",
+        "label": "Schedule 7, Version 1.4.1 draft",
+        "status": "draft",
+        "fleetCounts": {
+          "MAX9": 35,
+          "CRJ900": 45,
+          "CRJ700": 65,
+          "CRJ200": 80
+        },
+        "connectionWindowMinutes": {
+          "minimum": 30,
+          "maximum": 240
+        }
+      },
+      "removeLegs": [],
+      "retimeLegs": [
+        {
+          "legId": "V121-R123-2-BDL-SYR",
+          "expectedDepartureMinute": 605,
+          "expectedArrivalMinute": 659,
+          "departureMinute": 501,
+          "arrivalMinute": 555
+        }
+      ],
+      "insertLegs": [
+        {
+          "id": "V141-R162-SCREEN-5-1",
+          "route": 162,
+          "origin": "SYR",
+          "destination": "ROC",
+          "departureMinute": 600,
+          "arrivalMinute": 639
+        },
+        {
+          "id": "V141-R162-SCREEN-5-2",
+          "route": 162,
+          "origin": "ROC",
+          "destination": "SYR",
+          "departureMinute": 679,
+          "arrivalMinute": 718
+        }
+      ],
+      "bankAssignmentsToAdd": [
+        {
+          "legId": "V141-R162-SCREEN-5-2",
+          "operation": "arrival",
+          "bankId": "SYR-M12"
+        }
+      ],
+      "bankAssignmentReplacements": [
+        {
+          "legId": "V121-R123-2-BDL-SYR",
+          "operation": "arrival",
+          "bankId": "SYR-M09"
+        }
+      ],
+      "hubBanksToAdd": [
+        {
+          "id": "SYR-M09",
+          "hub": "SYR",
+          "startMinute": 535,
+          "endMinute": 595
+        },
+        {
+          "id": "SYR-M12",
+          "hub": "SYR",
+          "startMinute": 715,
+          "endMinute": 775
+        }
+      ],
+      "hubBankCountOverrides": {
+        "SYR": 11
+      }
+    }
+  },
+  {
+    "name": "R162 early BDL, SYR-BGR-SYR productive turn",
+    "route": 162,
+    "scope": "read-only screening",
+    "structural": "pass",
+    "overnight": "pass",
+    "planning": "pass",
+    "gate": "pass",
+    "operating": {
+      "checks": 25,
+      "passed": 17,
+      "failed": 1,
+      "warnings": 5,
+      "notEvaluated": 1,
+      "overridden": 1,
+      "effectiveErrorFindings": 1,
+      "effectiveWarningFindings": 152
+    },
+    "changedFlights": 2,
+    "failed": [
+      {
+        "check": "hub_bank_alignment",
+        "findings": [
+          {
+            "id": "V114-R169-SYR-FWA-departure",
+            "message": "Departure for V114-R169-SYR-FWA falls outside bank SYR-B4",
+            "evidence": {
+              "assignment": {
+                "legId": "V114-R169-SYR-FWA",
+                "operation": "departure",
+                "bankId": "SYR-B4"
+              },
+              "minute": 875,
+              "bankWindow": [
+                795,
+                855
+              ]
+            },
+            "override": {
+              "reason": "Schedule 7 v1.1.4 tactical initiative: the 14:35 SYR-FWA return departs 20 minutes after Bank 4 to remain within SYR's fixed 16-gate inventory without weakening existing bank connections.",
+              "approvedBy": "user",
+              "expiresAfterSchedule": 7
+            }
+          },
+          {
+            "id": "V114-R122-SYR-SWF-departure",
+            "message": "Departure for V114-R122-SYR-SWF falls outside bank SYR-B6",
+            "evidence": {
+              "assignment": {
+                "legId": "V114-R122-SYR-SWF",
+                "operation": "departure",
+                "bankId": "SYR-B6"
+              },
+              "minute": 1210,
+              "bankWindow": [
+                1125,
+                1185
+              ]
+            },
+            "override": {
+              "reason": "Schedule 7 v1.1.4 tactical initiative: the 20:10 SYR-SWF return departs 25 minutes after Bank 6 to remain within SYR's fixed 16-gate inventory without weakening existing bank connections.",
+              "approvedBy": "user",
+              "expiresAfterSchedule": 7
+            }
+          },
+          {
+            "id": "V116-R149-DAY-BHM-departure",
+            "message": "Departure for V116-R149-DAY-BHM falls outside bank DAY-B1",
+            "evidence": {
+              "assignment": {
+                "legId": "V116-R149-DAY-BHM",
+                "operation": "departure",
+                "bankId": "DAY-B1"
+              },
+              "minute": 270,
+              "bankWindow": [
+                301,
+                361
+              ]
+            },
+            "override": {
+              "reason": "Schedule 7 v1.1.6 BHM morning initiative: the 04:30 DAY departure is 30 minutes before DAY Bank 1 so the aircraft can feed BHM's morning wave while remaining within fixed gate capacity at both cities.",
+              "approvedBy": "user",
+              "expiresAfterSchedule": 7
+            }
+          },
+          {
+            "id": "V116-R330-DAY-PHF-departure",
+            "message": "Departure for V116-R330-DAY-PHF falls outside bank DAY-B2",
+            "evidence": {
+              "assignment": {
+                "legId": "V116-R330-DAY-PHF",
+                "operation": "departure",
+                "bankId": "DAY-B2"
+              },
+              "minute": 411,
+              "bankWindow": [
+                425,
+                485
+              ]
+            },
+            "override": {
+              "reason": "Schedule 7 v1.1.6 PHF early-hub initiative: the user-selected 06:51 DAY departure splits the difference between a minimum turn and DAY Bank 2, producing an 08:20 PHF return with a 55-minute turn into the existing originator.",
+              "approvedBy": "user",
+              "expiresAfterSchedule": 7
+            }
+          },
+          {
+            "id": "V116-R330-DAY-PHF-arrival",
+            "message": "Arrival for V116-R330-DAY-PHF falls outside bank PHF-B2",
+            "evidence": {
+              "assignment": {
+                "legId": "V116-R330-DAY-PHF",
+                "operation": "arrival",
+                "bankId": "PHF-B2"
+              },
+              "minute": 500,
+              "bankWindow": [
+                505,
+                565
+              ]
+            },
+            "override": {
+              "reason": "Schedule 7 v1.1.6 PHF early-hub initiative: the user-selected 08:20 return arrives five minutes before PHF Bank 2 and preserves a 55-minute turn into Route 330's existing originator.",
+              "approvedBy": "user",
+              "expiresAfterSchedule": 7
+            }
+          }
+        ]
+      }
+    ],
+    "pass": false,
+    "overlay": {
+      "schemaVersion": "1.0.0",
+      "id": "v141-screen-6",
+      "baseSchedule": {
+        "scheduleId": "schedule_7_v1_4_0"
+      },
+      "schedule": {
+        "id": "schedule_7_v1_4_1_draft",
+        "number": 7,
+        "version": "1.4.1-draft",
+        "label": "Schedule 7, Version 1.4.1 draft",
+        "status": "draft",
+        "fleetCounts": {
+          "MAX9": 35,
+          "CRJ900": 45,
+          "CRJ700": 65,
+          "CRJ200": 80
+        },
+        "connectionWindowMinutes": {
+          "minimum": 30,
+          "maximum": 240
+        }
+      },
+      "removeLegs": [],
+      "retimeLegs": [
+        {
+          "legId": "V121-R123-2-BDL-SYR",
+          "expectedDepartureMinute": 605,
+          "expectedArrivalMinute": 659,
+          "departureMinute": 501,
+          "arrivalMinute": 555
+        }
+      ],
+      "insertLegs": [
+        {
+          "id": "V141-R162-SCREEN-6-1",
+          "route": 162,
+          "origin": "SYR",
+          "destination": "BGR",
+          "departureMinute": 600,
+          "arrivalMinute": 680
+        },
+        {
+          "id": "V141-R162-SCREEN-6-2",
+          "route": 162,
+          "origin": "BGR",
+          "destination": "SYR",
+          "departureMinute": 720,
+          "arrivalMinute": 800
+        }
+      ],
+      "bankAssignmentsToAdd": [
+        {
+          "legId": "V141-R162-SCREEN-6-2",
+          "operation": "arrival",
+          "bankId": "SYR-B4"
+        }
+      ],
+      "bankAssignmentReplacements": [
+        {
+          "legId": "V121-R123-2-BDL-SYR",
+          "operation": "arrival",
+          "bankId": "SYR-M09"
+        }
+      ],
+      "hubBanksToAdd": [
+        {
+          "id": "SYR-M09",
+          "hub": "SYR",
+          "startMinute": 535,
+          "endMinute": 595
+        }
+      ],
+      "hubBankCountOverrides": {
+        "SYR": 10
+      }
+    }
+  },
+  {
+    "name": "R106 HPN-BWI-SYR morning triangle",
+    "route": 106,
+    "scope": "read-only screening",
+    "structural": "pass",
+    "overnight": "pass",
+    "planning": "pass",
+    "gate": "GateCapacityError: 4 passenger touch(es) remain off-gate",
+    "operating": {
+      "checks": 25,
+      "passed": 15,
+      "failed": 3,
+      "warnings": 5,
+      "notEvaluated": 1,
+      "overridden": 1,
+      "effectiveErrorFindings": 6,
+      "effectiveWarningFindings": 154
+    },
+    "changedFlights": 1,
+    "failed": [
+      {
+        "check": "passenger_touch_on_stand",
+        "findings": [
+          {
+            "id": "BWI-175-703-743",
+            "message": "BWI claim 175 requires passenger handling on stand 1",
+            "evidence": {
+              "city": "BWI",
+              "label": "175",
+              "kind": "turn",
+              "start": 703,
+              "end": 743,
+              "stand": 1
+            }
+          },
+          {
+            "id": "BWI-347 -> 348-1396-1441",
+            "message": "BWI claim 347 -> 348 requires passenger handling on stand 1",
+            "evidence": {
+              "city": "BWI",
+              "label": "347 -> 348",
+              "kind": "ron",
+              "start": 1396,
+              "end": 1441,
+              "stand": 1
+            }
+          },
+          {
+            "id": "BWI-506 -> 507-1441-1486",
+            "message": "BWI claim 506 -> 507 requires passenger handling on stand 2",
+            "evidence": {
+              "city": "BWI",
+              "label": "506 -> 507",
+              "kind": "turn",
+              "start": 1441,
+              "end": 1486,
+              "stand": 2
+            }
+          },
+          {
+            "id": "BWI-506 -> 507-1685-1745",
+            "message": "BWI claim 506 -> 507 requires passenger handling on stand 2",
+            "evidence": {
+              "city": "BWI",
+              "label": "506 -> 507",
+              "kind": "turn",
+              "start": 1685,
+              "end": 1745,
+              "stand": 2
+            }
+          }
+        ]
+      },
+      {
+        "check": "fixed_physical_inventory",
+        "findings": [
+          {
+            "id": "BWI",
+            "message": "BWI cannot fit its claims into the configured physical inventory: 4 passenger touch(es) remain off-gate",
+            "evidence": {
+              "city": "BWI",
+              "requiredGates": 3,
+              "configuredGates": 2,
+              "requiredStands": 2,
+              "configuredStands": 2,
+              "strandedPassengerTouches": 4
+            }
+          }
+        ]
+      },
+      {
+        "check": "hub_bank_alignment",
+        "findings": [
+          {
+            "id": "V114-R169-SYR-FWA-departure",
+            "message": "Departure for V114-R169-SYR-FWA falls outside bank SYR-B4",
+            "evidence": {
+              "assignment": {
+                "legId": "V114-R169-SYR-FWA",
+                "operation": "departure",
+                "bankId": "SYR-B4"
+              },
+              "minute": 875,
+              "bankWindow": [
+                795,
+                855
+              ]
+            },
+            "override": {
+              "reason": "Schedule 7 v1.1.4 tactical initiative: the 14:35 SYR-FWA return departs 20 minutes after Bank 4 to remain within SYR's fixed 16-gate inventory without weakening existing bank connections.",
+              "approvedBy": "user",
+              "expiresAfterSchedule": 7
+            }
+          },
+          {
+            "id": "V114-R122-SYR-SWF-departure",
+            "message": "Departure for V114-R122-SYR-SWF falls outside bank SYR-B6",
+            "evidence": {
+              "assignment": {
+                "legId": "V114-R122-SYR-SWF",
+                "operation": "departure",
+                "bankId": "SYR-B6"
+              },
+              "minute": 1210,
+              "bankWindow": [
+                1125,
+                1185
+              ]
+            },
+            "override": {
+              "reason": "Schedule 7 v1.1.4 tactical initiative: the 20:10 SYR-SWF return departs 25 minutes after Bank 6 to remain within SYR's fixed 16-gate inventory without weakening existing bank connections.",
+              "approvedBy": "user",
+              "expiresAfterSchedule": 7
+            }
+          },
+          {
+            "id": "V116-R149-DAY-BHM-departure",
+            "message": "Departure for V116-R149-DAY-BHM falls outside bank DAY-B1",
+            "evidence": {
+              "assignment": {
+                "legId": "V116-R149-DAY-BHM",
+                "operation": "departure",
+                "bankId": "DAY-B1"
+              },
+              "minute": 270,
+              "bankWindow": [
+                301,
+                361
+              ]
+            },
+            "override": {
+              "reason": "Schedule 7 v1.1.6 BHM morning initiative: the 04:30 DAY departure is 30 minutes before DAY Bank 1 so the aircraft can feed BHM's morning wave while remaining within fixed gate capacity at both cities.",
+              "approvedBy": "user",
+              "expiresAfterSchedule": 7
+            }
+          },
+          {
+            "id": "V116-R330-DAY-PHF-departure",
+            "message": "Departure for V116-R330-DAY-PHF falls outside bank DAY-B2",
+            "evidence": {
+              "assignment": {
+                "legId": "V116-R330-DAY-PHF",
+                "operation": "departure",
+                "bankId": "DAY-B2"
+              },
+              "minute": 411,
+              "bankWindow": [
+                425,
+                485
+              ]
+            },
+            "override": {
+              "reason": "Schedule 7 v1.1.6 PHF early-hub initiative: the user-selected 06:51 DAY departure splits the difference between a minimum turn and DAY Bank 2, producing an 08:20 PHF return with a 55-minute turn into the existing originator.",
+              "approvedBy": "user",
+              "expiresAfterSchedule": 7
+            }
+          },
+          {
+            "id": "V116-R330-DAY-PHF-arrival",
+            "message": "Arrival for V116-R330-DAY-PHF falls outside bank PHF-B2",
+            "evidence": {
+              "assignment": {
+                "legId": "V116-R330-DAY-PHF",
+                "operation": "arrival",
+                "bankId": "PHF-B2"
+              },
+              "minute": 500,
+              "bankWindow": [
+                505,
+                565
+              ]
+            },
+            "override": {
+              "reason": "Schedule 7 v1.1.6 PHF early-hub initiative: the user-selected 08:20 return arrives five minutes before PHF Bank 2 and preserves a 55-minute turn into Route 330's existing originator.",
+              "approvedBy": "user",
+              "expiresAfterSchedule": 7
+            }
+          }
+        ]
+      }
+    ],
+    "pass": false,
+    "overlay": {
+      "schemaVersion": "1.0.0",
+      "id": "v141-screen-7",
+      "baseSchedule": {
+        "scheduleId": "schedule_7_v1_4_0"
+      },
+      "schedule": {
+        "id": "schedule_7_v1_4_1_draft",
+        "number": 7,
+        "version": "1.4.1-draft",
+        "label": "Schedule 7, Version 1.4.1 draft",
+        "status": "draft",
+        "fleetCounts": {
+          "MAX9": 35,
+          "CRJ900": 45,
+          "CRJ700": 65,
+          "CRJ200": 80
+        },
+        "connectionWindowMinutes": {
+          "minimum": 30,
+          "maximum": 240
+        }
+      },
+      "removeLegs": [
+        {
+          "legId": "HPN-SYR-CRJ200-01-OUT",
+          "expectedRoute": 106
+        }
+      ],
+      "retimeLegs": [],
+      "insertLegs": [
+        {
+          "id": "V141-R106-SCREEN-7-1",
+          "route": 106,
+          "origin": "HPN",
+          "destination": "BWI",
+          "departureMinute": 609,
+          "arrivalMinute": 679
+        },
+        {
+          "id": "V141-R106-SCREEN-7-2",
+          "route": 106,
+          "origin": "BWI",
+          "destination": "SYR",
+          "departureMinute": 719,
+          "arrivalMinute": 784
+        }
+      ],
+      "bankAssignmentsToAdd": [
+        {
+          "legId": "V141-R106-SCREEN-7-2",
+          "operation": "arrival",
+          "bankId": "SYR-M12"
+        }
+      ],
+      "bankAssignmentReplacements": [],
+      "hubBanksToAdd": [
+        {
+          "id": "SYR-M12",
+          "hub": "SYR",
+          "startMinute": 715,
+          "endMinute": 775
+        }
+      ],
+      "hubBankCountOverrides": {
+        "SYR": 10
+      }
+    }
+  }
+]
