@@ -10,7 +10,7 @@
     "notEvaluated": 1,
     "overridden": 2,
     "effectiveErrorFindings": 0,
-    "effectiveWarningFindings": 149
+    "effectiveWarningFindings": 150
   },
   "checks": [
     {
@@ -114,10 +114,10 @@
       "severity": "warning",
       "hardStop": false,
       "status": "warning",
-      "message": "66 finding(s)",
+      "message": "67 finding(s)",
       "metrics": {
-        "findingCount": 66,
-        "effectiveFindingCount": 66,
+        "findingCount": 67,
+        "effectiveFindingCount": 67,
         "overriddenFindingCount": 0
       },
       "findings": [
@@ -899,6 +899,18 @@
             "arrivalFlight": 2203,
             "departureFlight": 2204,
             "minutes": 160
+          }
+        },
+        {
+          "id": "AS-4-2209-2210",
+          "message": "Hold at SYR is 176 minutes and needs deliberate-hold review",
+          "evidence": {
+            "line": "AS",
+            "day": 4,
+            "city": "SYR",
+            "arrivalFlight": 2209,
+            "departureFlight": 2210,
+            "minutes": 176
           }
         },
         {
