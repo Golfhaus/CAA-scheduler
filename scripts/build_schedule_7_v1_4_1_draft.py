@@ -1,4 +1,4 @@
-"""Build provisional Schedule 7 v1.4.1 from released v1.4.0 with R105/R162/R107.
+"""Build provisional Schedule 7 v1.4.1 from released v1.4.0 with R105/R162/R107/R108.
 
 Scope is R105 and R162 morning/evening BGR productive flying.
 No web manifest or main branch changes. Approval remains pending.
@@ -26,13 +26,19 @@ new=apply_optimization_overlay(new,r107)
 r356_file=ROOT/"config/optimizations/schedule_7_v1_4_1_r356_compensation.json"
 r356=json.loads(r356_file.read_text())
 new=apply_optimization_overlay(new,r356)
+r108_file=ROOT/"config/optimizations/schedule_7_v1_4_1_r108_pit_provisional.json"
+r108=json.loads(r108_file.read_text())
+new=apply_optimization_overlay(new,r108)
 assert next(l for l in new["legs"] if l["flight"]==2209)["departureMinute"]==605
 assert new["schedule"]["id"]=="schedule_7_v1_4_1_draft"
 assert new["schedule"]["status"]=="draft"
-assert (len(new["legs"]),len({x["route"] for x in new["legs"]}),len({x["line"] for x in new["legs"]}))==(1264,188,17)
+assert (len(new["legs"]),len({x["route"] for x in new["legs"]}),len({x["line"] for x in new["legs"]}))==(1266,188,17)
 assert len([x for x in new["legs"] if x["route"]==105])==8
 assert len([x for x in new["legs"] if x["route"]==162])==9
 assert len([x for x in new["legs"] if x["route"]==107])==7
+assert len([x for x in new["legs"] if x["route"]==108])==9
+assert next(x for x in new["legs"] if x["flight"]==1830)["departureMinute"]==1080
+assert next(x for x in new["legs"] if x["flight"]==1830)["arrivalMinute"]==1132
 assert any(x["origin"]=="ISP" and x["destination"]=="PHF" and x["route"]==107 for x in new["legs"])
 assert new["schedule"]["fleetCounts"]==base["schedule"]["fleetCounts"]
 assert new["cities"]==base["cities"]
@@ -55,7 +61,9 @@ new.setdefault("provenance",{})["workingDraft"]={
  {"path":str(r107_file.relative_to(ROOT)),
  "sha256":hashlib.sha256(r107_file.read_bytes()).hexdigest()},
  {"path":str(r356_file.relative_to(ROOT)),
- "sha256":hashlib.sha256(r356_file.read_bytes()).hexdigest()}],
+ "sha256":hashlib.sha256(r356_file.read_bytes()).hexdigest()},
+ {"path":str(r108_file.relative_to(ROOT)),
+ "sha256":hashlib.sha256(r108_file.read_bytes()).hexdigest()}],
  "status":"PROVISIONAL, UNPUBLISHED; released web default stays v1.4.0"}
 out=ROOT/"data/schedules/schedule_7_v1_4_1_draft"
 out.mkdir(parents=True,exist_ok=True)
