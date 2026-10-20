@@ -1,17 +1,17 @@
 # Schedule 7 v1.4.1 — CRJ200 utilization review and provisional draft
 
-**Status:** Unpublished, pending user review. Published app default on `main` is Schedule 7 v1.4.0. The v1.4.1 development branch contains a reproducible provisional **1,264-flight** schedule; none of its optimizations are on `main`.
+**Status:** Unpublished, pending user review. Published app default on `main` is Schedule 7 v1.4.0. The v1.4.1 development branch contains a reproducible provisional **1,266-flight** schedule; none of its optimizations are on `main`.
 
 ## Objective and current disposition
 
-Improve the lowest-usage SYR-heavy CRJ200 routes 105, 106, 107, 108, 162 and 167 without reducing high-demand connectivity simply to add aircraft time. Published v1.4.0 baseline: 1,259 flights, 188 routes, 17 aircraft routing lines. The provisional v1.4.1 draft has 1,264 flights, 188 routes, 17 lines and no additional physical gate or stand inventory.
+Improve the lowest-usage SYR-heavy CRJ200 routes 105, 106, 107, 108, 162 and 167 without reducing high-demand connectivity simply to add aircraft time. Published v1.4.0 baseline: 1,259 flights, 188 routes, 17 aircraft routing lines. The provisional v1.4.1 draft has 1,266 flights, 188 routes, 17 lines and no additional physical gate or stand inventory.
 
 | Route | Published total flying | Current provisional total | Disposition |
 | --- | ---: | ---: | --- |
 | R105 | 6h46m | **9h26m** | Late BGR–SYR–BGR productive turn |
 | R106 | 7h32m | 7h32m | Retained intact; avoid forcing another rebuild |
 | R107 | 5h47m | **7h29m** | ISP–PHF–SYR noon triangle with only 8-minute BDL delay |
-| R108 | 6h09m | 6h09m | Kept intact to preserve BTV–RFD connectivity |
+| R108 | 6h09m | **8h21m** | Provisional SYR–PIT–SYR turn; BTV–RFD connection retained |
 | R162 | 6h53m | **9h33m** | Morning SYR–BGR–SYR turn |
 | R167 | 6h54m | 6h54m | No acceptable market-preserving growth selected |
 
@@ -19,11 +19,12 @@ The draft also includes one supporting CRJ700 timing change to **R356**, ensurin
 
 ## Provisional schedule changes
 
-All edits are reconstructible by `python scripts/build_schedule_7_v1_4_1_draft.py` from the published `schedule_7_v1_4_0` canonical and exactly three overlays:
+All edits are reconstructible by `python scripts/build_schedule_7_v1_4_1_draft.py` from the published `schedule_7_v1_4_0` canonical and four overlays:
 
 1. `config/optimizations/schedule_7_v1_4_1_r105_r162_provisional.json`
 2. `config/optimizations/schedule_7_v1_4_1_r107_isp_phf_provisional.json`
 3. `config/optimizations/schedule_7_v1_4_1_r356_compensation.json`
+4. `config/optimizations/schedule_7_v1_4_1_r108_pit_provisional.json`
 
 The built canonical and native reports are stored under `data/schedules/schedule_7_v1_4_1_draft/`.
 
@@ -70,3 +71,15 @@ Commercial audit: `outputs/schedule_7_v1_4_1_utilization/provisional_network.jso
 Review residual two-market ISP coverage losses and slower BDL/PIE/BGR connections before releasing. Consider tactical adjustment to protect ISP→BNA without undoing R107's modest BDL delay. Additional morning P2P/mini-bank experiments should not be added unless they pass both native physical/operating validation and independent passenger-itinerary audits.
 
 **Governance:** This is a provisional v1.4.1 draft. No PR to `main`, web manifest/default change, or release package has been authorized.
+
+## Additional October 20 holistic review — R108
+
+A new R108 restructuring has been provisionally incorporated in the unpublished draft. It moves ORH→SYR from 12:25–13:23 to **10:13–11:11**, then adds flight **2275 SYR→PIT 11:55–13:01** and **2276 PIT→SYR 13:41–14:47**. It moves SYR→BTV from 14:05–14:57 to **15:27–16:19**, retaining the BTV→SYR **18:00–18:52** flight and therefore its evening onward RFD connection. R108's terminator remains SYR and the following day's originator remains unchanged.
+
+- R108 flying rises from 6h09m to **8h21m**, gaining 132 minutes and two flights.
+- Native structural, overnight, planning, operating and fixed physical gate/stand checks all pass with zero effective operating errors on the cumulative **1,266-flight draft**.
+- Against the preceding 1,264-flight provisional version: one new geographically reasonable directional market (FWA→BTV, 0.3 underlying daily directional O-D); four lost markets with **zero recorded O-D** (ORH→ABE/ACY/BWI/DAB); 15 faster and 43 slower fastest reasonable itineraries; estimated O-D-weighted relative score **+860 modeled passenger-minutes**. Important caveats include ORH→PGD slowing 132 minutes (10.6 O-D/day) and RFD→BTV slowing 15 minutes (30.3 O-D/day). The **BTV→RFD 30.1/day directional market is preserved**, and RFD→BTV also remains served.
+- Screen evidence: `outputs/schedule_7_v1_4_1_utilization/r108_bank_rebuild_screen.json` and `r108_bank_rebuild_network.json`.
+- The newly screened R167 ALB→BWI→SYR alternative passed native checks but lost ALB→BNA (30.8/day), ALB→PIT (6.4/day), and ALB→FWA (0.7/day), with a strongly unfavorable weighted itinerary effect. It is **not integrated**. Another R108 ORH→SYR→PHF→SYR option failed physical PHF gate inventory; ROC failed ROC inventory and market spacing.
+
+The R108 change is **provisional, not a publication authorization**. The accepted web default remains v1.4.0. Future effort should focus on preserving/mitigating the slower R108 ORH→PGD journey and finding commercially stronger R167 morning options rather than adding low-demand flying solely for utilization.
