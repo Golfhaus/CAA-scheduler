@@ -1,77 +1,72 @@
-# Schedule 7 v1.4.1 — CRJ200 critical utilization review
+# Schedule 7 v1.4.1 — CRJ200 utilization review and provisional draft
 
-**Status:** provisional working draft, NOT approved for publication. Published main/default is Schedule 7 v1.4.0.
+**Status:** Unpublished, pending user review. Published app default on `main` is Schedule 7 v1.4.0. The v1.4.1 development branch contains a reproducible provisional **1,264-flight** schedule; none of its optimizations are on `main`.
 
-## Objective and starting point
+## Objective and current disposition
 
-Review routes **105, 106, 107, 108, 167 and 162** jointly for productive flying, emphasizing the SYR M15, M17, B5 and B6 waves and additional morning mini-bank opportunities. Maintain fixed airport inventories, curfews, repeating maintenance, overnight routing continuity, and passenger-network value. R106 was improved in v1.4.0; do not force a low-value change.
+Improve the lowest-usage SYR-heavy CRJ200 routes 105, 106, 107, 108, 162 and 167 without reducing high-demand connectivity simply to add aircraft time. Published v1.4.0 baseline: 1,259 flights, 188 routes, 17 aircraft routing lines. The provisional v1.4.1 draft has 1,264 flights, 188 routes, 17 lines and no additional physical gate or stand inventory.
 
-Initial published 1.4.0 fleet: 1,259 flights, 188 routes, 17 lines.
-
-| Route | Baseline total flying | Provisional draft | Status |
+| Route | Published total flying | Current provisional total | Disposition |
 | --- | ---: | ---: | --- |
-| R105, AC day 5 | 6h46m | **9h26m** | Provisional BGR service addition |
-| R106, AC day 6 | 7h32m | 7h32m | Retain previous v1.4.0 improvements |
-| R107, AC day 7 | 5h47m | 5h47m | Pending holistic connection-preserving rebuild |
-| R108, AC day 8 | 6h09m | 6h09m | Candidate triangles rejected commercially |
-| R167, AC day 9 | 6h54m | 6h54m | No compelling demand-backed growth yet |
-| R162, AM day 6 | 6h53m | **9h33m** | Provisional SYR M09/BGR morning turn |
+| R105 | 6h46m | **9h26m** | Late BGR–SYR–BGR productive turn |
+| R106 | 7h32m | 7h32m | Retained intact; avoid forcing another rebuild |
+| R107 | 5h47m | **7h29m** | ISP–PHF–SYR noon triangle with only 8-minute BDL delay |
+| R108 | 6h09m | 6h09m | Kept intact to preserve BTV–RFD connectivity |
+| R162 | 6h53m | **9h33m** | Morning SYR–BGR–SYR turn |
+| R167 | 6h54m | 6h54m | No acceptable market-preserving growth selected |
 
-## Provisional draft changes
+The draft also includes one supporting CRJ700 timing change to **R356**, ensuring that BDL–PIE connections remain competitive.
 
-Deterministic overlay: `config/optimizations/schedule_7_v1_4_1_r105_r162_provisional.json`.
-Rebuild: `python scripts/build_schedule_7_v1_4_1_draft.py`.
-Provisional canonical and native reports: `data/schedules/schedule_7_v1_4_1_draft/`.
+## Provisional schedule changes
 
-### R162 — productive morning BGR turn
+All edits are reconstructible by `python scripts/build_schedule_7_v1_4_1_draft.py` from the published `schedule_7_v1_4_0` canonical and exactly three overlays:
 
-- Retimes BDL–SYR flight 2102 from 10:05–10:59 to **08:16–09:10**, reducing the long BDL sit after arriving 06:53.
-- Adds logical SYR mini-bank M09 **08:55–09:55** and SYR–BGR flight **2269 09:50–11:10**.
-- Adds BGR–SYR flight **2270 11:55–13:15**, reaching SYR B4.
-- Preserves all original flights, PHF–MDT service and the ILM terminator, with sufficient turns and existing physical gates.
-- Adds 160 inflight minutes to R162, moving total from 6h53m to 9h33m. Critical-period flying increases by 160 minutes.
+1. `config/optimizations/schedule_7_v1_4_1_r105_r162_provisional.json`
+2. `config/optimizations/schedule_7_v1_4_1_r107_isp_phf_provisional.json`
+3. `config/optimizations/schedule_7_v1_4_1_r356_compensation.json`
 
-### R105 — evening BGR–SYR–BGR extension
+The built canonical and native reports are stored under `data/schedules/schedule_7_v1_4_1_draft/`.
 
-- Retimes MHT–SYR to **11:45–12:45**, arriving SYR M12 **11:55–12:55**.
-- Advances SYR–BGR to 13:25–14:45, BGR–SYR to 15:25–16:45 (SYR B5), and SYR–BGR to 17:25–18:45 (SYR M17).
-- Adds BGR–SYR flight **2271 20:10–21:30**, then SYR–BGR flight **2272 22:10–23:30**, aligned to SYR B7. Retains the BGR terminator and next-day BGR originator.
-- Adds 160 total inflight minutes to R105, moving total from 6h46m to 9h26m; 80 of those minutes fall within the 06:00–22:00 critical period.
+**R105:** Retimes MHT–SYR to 11:45–12:45, reaches SYR M12, and advances the SYR/BGR afternoon pair into B5/M17. Adds flights 2271 BGR–SYR 20:10–21:30 and 2272 SYR–BGR 22:10–23:30. Retains BGR terminator and next-day originator; gains 160 flight minutes, 80 within the critical 06:00–22:00 window.
 
-SYR now has 11 logical banks, including new M09 and M12; **no extra physical gates or stands** are allocated.
+**R162:** BDL–SYR flight 2102 departs 08:16 and arrives 09:10, making the new SYR M09 bank. Adds flight 2269 SYR–BGR 09:50–11:10 and 2270 BGR–SYR 11:55–13:15. The original PHF–MDT flying and ILM terminator remain intact. Gains 160 flight minutes, all within the critical window.
 
-## Combined validation and commercial screen
+**R107:** Replaces flight 1893 ISP–SYR 12:25–13:23 with flight 2273 ISP–PHF **10:13–11:29**, reaching PHF B3, and flight 2274 PHF–SYR **12:09–13:33** via new logical PHF M12. Moves existing SYR–BDL flight 1792 from 14:05 to **14:13**, preserving its SYR B4 assignment, BDL–SYR return at 18:00 and CAK terminator. Adds one net flight and 102 flight minutes. The smaller eight-minute BDL delay replaces an earlier tested 80-minute-delay proposal with severe BDL passenger penalties.
 
-R105 and R162 were native-screened individually and combined before building the provisional draft. Combined result:
+**R356 supporting retiming:** Moves CRJ700 flight 2209 BDL–SYR from **10:35–11:29 to 10:05–10:59**. This restores the BDL–PIE fastest reasonable journey formerly served by R162's 10:05 BDL return. It passes gate, turn, bank, overnight and operating rules and adds no flights or fleet usage. Seven other BDL directional itineraries become about 30 minutes slower; the individual O-D-weighted benefit is positive by roughly 4,041 modeled passenger-minutes.
 
-- **1,263 flights, 188 routes, 17 routing lines**, +4 flights from v1.4.0.
-- Structural, planning, overnight and physical gate/stand validation all pass; **zero effective operating errors**.
-- Commercial comparison against published v1.4.0: **12 new geographically reasonable directional markets, zero lost, 70 faster and 39 slower fastest reasonable itineraries**, with a modest +454 O-D-weighted passenger-minute planning score. This is not forecast passenger boardings.
-- Potentially material tradeoffs remain: BDL→PIE (underlying O-D 105/day) experiences an 81-minute slower fastest itinerary in the screened comparison. PIE→BGR also becomes slower under R105's late shuttle. These require review before release.
-- Sources: `outputs/schedule_7_v1_4_1_utilization/combined_screen.json` and the run evidence for `scripts/audit_schedule_7_v1_4_1_combined_network.mjs`.
+### Mini-bank inventory
 
-**This is a provisional, reproducible draft—not a final release decision.**
+The accepted v1.4.0 SYR M15/M17 and DAY-M0 banks remain. v1.4.1 provisionally adds **SYR-M09 08:55–09:55**, **SYR-M12 11:55–12:55**, and **PHF-M12-V141 11:55–12:55**. These are logical schedules only: no changes to the airport's fixed gate or stand inventories.
 
-## Remaining four routes and next moves
+## Native validation and itinerary effects
 
-### R107
+The cumulative 1,264-flight draft passes structural, planning, overnight, passenger-touch gate and operating validation with **zero effective operating errors**, no added aircraft and 17 unchanged routing lines.
 
-A native-validated **ISP–PHF–SYR** midday A–B–C path would raise flying from 5h47m to 7h44m and use existing PHF banks plus SYR M15. It creates eight geographically reasonable market gains but loses three, notably ISP→BNA. More importantly, the fastest RFD→BDL journey becomes 80 minutes slower; RFD→BDL's underlying daily directional O-D is about 105.4. Do not adopt until this and other BDL connections are protected. Other ISP–ROC–SYR and ISP–PIT–SYR triangles are operationally feasible but lose ISP connections and rank lower.
+Compared with published 1,259-flight v1.4.0:
 
-Prioritize a holistic R107 rebuild preserving the 14:05 SYR→BDL bank-dependent connectivity, or add a compensating appropriately timed BDL frequency from another CRJ200 route rather than stretching its late CAK terminator. Existing M17 and B6 have usable opportunities, but preserving strong hub flows matters more than filling unused minutes.
+| Passenger-network measure | Cumulative draft |
+| --- | ---: |
+| Geographically reasonable directional market gains | **19** |
+| Geographically reasonable directional market losses | **2** |
+| Faster fastest reasonable itineraries | **93** |
+| Slower fastest reasonable itineraries | **74** |
+| Relative O-D-weighted fastest-journey score | **+18,313 modeled passenger-minutes** |
 
-### R108
+Gains include ISP→BWI, BGR↔PGD, BGR↔BNA, GSP→SYR, PNS→SYR, and several other BGR/ISP links. The two geographic losses are **ISP→BNA** (3.7 underlying directional O-D per day) and **ISP→FWA** (no recorded O-D in the pinned matrix). Other slower itineraries remain: BDL→PGD/BNA/CMH are about 30 minutes slower after R356's earlier return; PIE→BGR is about 70 minutes slower in the R105 pattern; RFD→BDL is eight minutes slower due to R107. These are tradeoffs requiring final review, not hard operating errors.
 
-BTV–ROC–SYR, BTV–BUF–SYR and BTV–PWM–SYR triangles all pass native checks and each add one leg, but all make **BTV→RFD** (about 30.1 directional O-D/day) 76 minutes slower and lose BTV→MDT geographic coverage. They are not recommended in their screened forms. Consider a SYR bank-bound afternoon rebuild that preserves BTV→RFD, rather than merely diverting the current BTV→SYR return.
+Commercial audit: `outputs/schedule_7_v1_4_1_utilization/provisional_network.json`. Individual compensation audit: `outputs/schedule_7_v1_4_1_utilization/r356_connection_protection_network.json`. Market O-D estimates are source-market directional demand, not forecast boarded passengers.
 
-### R167
+## Alternatives evaluated but not incorporated
 
-A compact **ALB–BTV–ALB** pair can fit between the existing SYR→ALB and ALB→SYR flights. It passes native constraints, adds 80 minutes and two flights, with no detected itinerary losses, but underlying ALB–BTV O-D is only around 0.6 passengers/day **per direction** and no other journey-time gains were detected. Do not use an aircraft for such low-demand flying solely to improve utilization. Study stronger outstation-demand opportunities or modest timing changes.
+**R108:** BTV–ROC–SYR, BTV–BUF–SYR and BTV–PWM–SYR each passed operating checks and add one segment, but make BTV→RFD 76 minutes slower (roughly 30 daily directional O-D) and remove BTV→MDT reasonable service. A more radical BTV–PHF–SYR triangle failed fixed PHF gate inventory. The existing route is better retained.
 
-### R106
+**R167:** ALB–BTV–ALB fits physically but the market has about 0.6 underlying directional O-D each way. A higher-demand ALB–BWI–ALB morning turn also passes native validation, but its tested timing loses ALB→PIT and DAB→CAK coverage and delays other existing journeys. ALB–PHF–ALB failed PHF gate/spacing checks. No R167 changes have been added.
 
-Existing v1.4.0 R106 already flies 7h32m. A screened HPN–BWI–SYR morning triangle violates BWI physical gate inventory and would disrupt the morning. Retain the route for now; do not force it back below its previous useful connection performance.
+**R106:** Already 7h32m after v1.4.0 and strongly connected. The HPN–BWI–SYR morning triangle fails BWI's fixed gate inventory. Preserve R106 as-is.
 
-## Governance
+## Next optimization priorities
 
-No v1.4.1 release package, app manifest/default change, pull request to main, or publication is authorized. The provisional R105/R162 draft should remain available for further review and modifications. User review is needed before considering it accepted for release.
+Review residual two-market ISP coverage losses and slower BDL/PIE/BGR connections before releasing. Consider tactical adjustment to protect ISP→BNA without undoing R107's modest BDL delay. Additional morning P2P/mini-bank experiments should not be added unless they pass both native physical/operating validation and independent passenger-itinerary audits.
+
+**Governance:** This is a provisional v1.4.1 draft. No PR to `main`, web manifest/default change, or release package has been authorized.
