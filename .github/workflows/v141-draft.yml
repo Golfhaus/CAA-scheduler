@@ -1,0 +1,34 @@
+name: Build validated provisional Schedule 7 v1.4.1
+on:
+  push:
+    branches: [schedule-7-v1.4.1-utilization-analysis]
+    paths:
+      - '.github/workflows/v141-draft.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: v141-provisional-draft
+  cancel-in-progress: true
+jobs:
+  draft:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -e .
+      - run: python scripts/build_schedule_7_v1_4_1_draft.py
+      - name: Archive reproducible provisional draft artifacts
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f data/schedules/schedule_7_v1_4_1_draft/
+          if ! git diff --cached --quiet; then
+            git commit -m "Build provisional Schedule 7 v1.4.1 R105/R162 draft [skip ci]"
+            git restore --worktree .
+            git clean -fd outputs/schedule_7_v1_4_1_utilization/
+            git pull --rebase origin schedule-7-v1.4.1-utilization-analysis
+            git push origin HEAD:schedule-7-v1.4.1-utilization-analysis
+          fi
