@@ -1,0 +1,212 @@
+[
+  {
+    "label": "ISP-PHF-SYR with 09min BDL adjustment",
+    "scope": "read-only candidate",
+    "structural": "pass",
+    "overnight": "pass",
+    "planning": "pass",
+    "gate": "pass",
+    "operating": {
+      "checks": 25,
+      "passed": 17,
+      "failed": 0,
+      "warnings": 5,
+      "notEvaluated": 1,
+      "overridden": 2,
+      "effectiveErrorFindings": 0,
+      "effectiveWarningFindings": 149
+    },
+    "failed": [],
+    "pass": true,
+    "overlay": {
+      "schemaVersion": "1.0.0",
+      "id": "v141-r107-phf-noon-0",
+      "baseSchedule": {
+        "scheduleId": "schedule_7_v1_4_1_draft"
+      },
+      "schedule": {
+        "id": "schedule_7_v1_4_1_draft",
+        "number": 7,
+        "version": "1.4.1-draft",
+        "label": "Schedule 7 v1.4.1 draft",
+        "status": "draft",
+        "fleetCounts": {
+          "MAX9": 35,
+          "CRJ900": 45,
+          "CRJ700": 65,
+          "CRJ200": 80
+        },
+        "connectionWindowMinutes": {
+          "minimum": 30,
+          "maximum": 240
+        }
+      },
+      "removeLegs": [
+        {
+          "legId": "ISP-SYR-CRJ200-02-OUT",
+          "expectedRoute": 107
+        }
+      ],
+      "retimeLegs": [
+        {
+          "legId": "BDL-SYR-CRJ200-01-IN",
+          "expectedDepartureMinute": 845,
+          "expectedArrivalMinute": 899,
+          "departureMinute": 854,
+          "arrivalMinute": 908
+        }
+      ],
+      "insertLegs": [
+        {
+          "id": "V141-R107-ISP-PHF-0",
+          "route": 107,
+          "origin": "ISP",
+          "destination": "PHF",
+          "departureMinute": 613,
+          "arrivalMinute": 690
+        },
+        {
+          "id": "V141-R107-PHF-SYR-0",
+          "route": 107,
+          "origin": "PHF",
+          "destination": "SYR",
+          "departureMinute": 730,
+          "arrivalMinute": 814
+        }
+      ],
+      "bankAssignmentsToAdd": [
+        {
+          "legId": "V141-R107-ISP-PHF-0",
+          "operation": "arrival",
+          "bankId": "PHF-B3"
+        },
+        {
+          "legId": "V141-R107-PHF-SYR-0",
+          "operation": "departure",
+          "bankId": "PHF-M12-V141"
+        },
+        {
+          "legId": "V141-R107-PHF-SYR-0",
+          "operation": "arrival",
+          "bankId": "SYR-B4"
+        }
+      ],
+      "hubBanksToAdd": [
+        {
+          "id": "PHF-M12-V141",
+          "hub": "PHF",
+          "startMinute": 715,
+          "endMinute": 775
+        }
+      ],
+      "hubBankCountOverrides": {
+        "PHF": 15
+      }
+    }
+  },
+  {
+    "label": "ISP-PHF-SYR with 08min BDL adjustment",
+    "scope": "read-only candidate",
+    "structural": "pass",
+    "overnight": "pass",
+    "planning": "pass",
+    "gate": "pass",
+    "operating": {
+      "checks": 25,
+      "passed": 17,
+      "failed": 0,
+      "warnings": 5,
+      "notEvaluated": 1,
+      "overridden": 2,
+      "effectiveErrorFindings": 0,
+      "effectiveWarningFindings": 149
+    },
+    "failed": [],
+    "pass": true,
+    "overlay": {
+      "schemaVersion": "1.0.0",
+      "id": "v141-r107-phf-noon-1",
+      "baseSchedule": {
+        "scheduleId": "schedule_7_v1_4_1_draft"
+      },
+      "schedule": {
+        "id": "schedule_7_v1_4_1_draft",
+        "number": 7,
+        "version": "1.4.1-draft",
+        "label": "Schedule 7 v1.4.1 draft",
+        "status": "draft",
+        "fleetCounts": {
+          "MAX9": 35,
+          "CRJ900": 45,
+          "CRJ700": 65,
+          "CRJ200": 80
+        },
+        "connectionWindowMinutes": {
+          "minimum": 30,
+          "maximum": 240
+        }
+      },
+      "removeLegs": [
+        {
+          "legId": "ISP-SYR-CRJ200-02-OUT",
+          "expectedRoute": 107
+        }
+      ],
+      "retimeLegs": [
+        {
+          "legId": "BDL-SYR-CRJ200-01-IN",
+          "expectedDepartureMinute": 845,
+          "expectedArrivalMinute": 899,
+          "departureMinute": 853,
+          "arrivalMinute": 907
+        }
+      ],
+      "insertLegs": [
+        {
+          "id": "V141-R107-ISP-PHF-1",
+          "route": 107,
+          "origin": "ISP",
+          "destination": "PHF",
+          "departureMinute": 613,
+          "arrivalMinute": 689
+        },
+        {
+          "id": "V141-R107-PHF-SYR-1",
+          "route": 107,
+          "origin": "PHF",
+          "destination": "SYR",
+          "departureMinute": 729,
+          "arrivalMinute": 813
+        }
+      ],
+      "bankAssignmentsToAdd": [
+        {
+          "legId": "V141-R107-ISP-PHF-1",
+          "operation": "arrival",
+          "bankId": "PHF-B3"
+        },
+        {
+          "legId": "V141-R107-PHF-SYR-1",
+          "operation": "departure",
+          "bankId": "PHF-M12-V141"
+        },
+        {
+          "legId": "V141-R107-PHF-SYR-1",
+          "operation": "arrival",
+          "bankId": "SYR-B4"
+        }
+      ],
+      "hubBanksToAdd": [
+        {
+          "id": "PHF-M12-V141",
+          "hub": "PHF",
+          "startMinute": 715,
+          "endMinute": 775
+        }
+      ],
+      "hubBankCountOverrides": {
+        "PHF": 15
+      }
+    }
+  }
+]
