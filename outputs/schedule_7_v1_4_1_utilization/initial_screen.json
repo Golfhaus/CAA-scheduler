@@ -438,127 +438,16 @@
     "operating": {
       "checks": 25,
       "passed": 17,
-      "failed": 1,
+      "failed": 0,
       "warnings": 5,
       "notEvaluated": 1,
-      "overridden": 1,
-      "effectiveErrorFindings": 1,
+      "overridden": 2,
+      "effectiveErrorFindings": 0,
       "effectiveWarningFindings": 152
     },
     "changedFlights": 2,
-    "failed": [
-      {
-        "check": "hub_bank_alignment",
-        "findings": [
-          {
-            "id": "V114-R169-SYR-FWA-departure",
-            "message": "Departure for V114-R169-SYR-FWA falls outside bank SYR-B4",
-            "evidence": {
-              "assignment": {
-                "legId": "V114-R169-SYR-FWA",
-                "operation": "departure",
-                "bankId": "SYR-B4"
-              },
-              "minute": 875,
-              "bankWindow": [
-                795,
-                855
-              ]
-            },
-            "override": {
-              "reason": "Schedule 7 v1.1.4 tactical initiative: the 14:35 SYR-FWA return departs 20 minutes after Bank 4 to remain within SYR's fixed 16-gate inventory without weakening existing bank connections.",
-              "approvedBy": "user",
-              "expiresAfterSchedule": 7
-            }
-          },
-          {
-            "id": "V114-R122-SYR-SWF-departure",
-            "message": "Departure for V114-R122-SYR-SWF falls outside bank SYR-B6",
-            "evidence": {
-              "assignment": {
-                "legId": "V114-R122-SYR-SWF",
-                "operation": "departure",
-                "bankId": "SYR-B6"
-              },
-              "minute": 1210,
-              "bankWindow": [
-                1125,
-                1185
-              ]
-            },
-            "override": {
-              "reason": "Schedule 7 v1.1.4 tactical initiative: the 20:10 SYR-SWF return departs 25 minutes after Bank 6 to remain within SYR's fixed 16-gate inventory without weakening existing bank connections.",
-              "approvedBy": "user",
-              "expiresAfterSchedule": 7
-            }
-          },
-          {
-            "id": "V116-R149-DAY-BHM-departure",
-            "message": "Departure for V116-R149-DAY-BHM falls outside bank DAY-B1",
-            "evidence": {
-              "assignment": {
-                "legId": "V116-R149-DAY-BHM",
-                "operation": "departure",
-                "bankId": "DAY-B1"
-              },
-              "minute": 270,
-              "bankWindow": [
-                301,
-                361
-              ]
-            },
-            "override": {
-              "reason": "Schedule 7 v1.1.6 BHM morning initiative: the 04:30 DAY departure is 30 minutes before DAY Bank 1 so the aircraft can feed BHM's morning wave while remaining within fixed gate capacity at both cities.",
-              "approvedBy": "user",
-              "expiresAfterSchedule": 7
-            }
-          },
-          {
-            "id": "V116-R330-DAY-PHF-departure",
-            "message": "Departure for V116-R330-DAY-PHF falls outside bank DAY-B2",
-            "evidence": {
-              "assignment": {
-                "legId": "V116-R330-DAY-PHF",
-                "operation": "departure",
-                "bankId": "DAY-B2"
-              },
-              "minute": 411,
-              "bankWindow": [
-                425,
-                485
-              ]
-            },
-            "override": {
-              "reason": "Schedule 7 v1.1.6 PHF early-hub initiative: the user-selected 06:51 DAY departure splits the difference between a minimum turn and DAY Bank 2, producing an 08:20 PHF return with a 55-minute turn into the existing originator.",
-              "approvedBy": "user",
-              "expiresAfterSchedule": 7
-            }
-          },
-          {
-            "id": "V116-R330-DAY-PHF-arrival",
-            "message": "Arrival for V116-R330-DAY-PHF falls outside bank PHF-B2",
-            "evidence": {
-              "assignment": {
-                "legId": "V116-R330-DAY-PHF",
-                "operation": "arrival",
-                "bankId": "PHF-B2"
-              },
-              "minute": 500,
-              "bankWindow": [
-                505,
-                565
-              ]
-            },
-            "override": {
-              "reason": "Schedule 7 v1.1.6 PHF early-hub initiative: the user-selected 08:20 return arrives five minutes before PHF Bank 2 and preserves a 55-minute turn into Route 330's existing originator.",
-              "approvedBy": "user",
-              "expiresAfterSchedule": 7
-            }
-          }
-        ]
-      }
-    ],
-    "pass": false,
+    "failed": [],
+    "pass": true,
     "overlay": {
       "schemaVersion": "1.0.0",
       "id": "v141-screen-5",
@@ -588,8 +477,8 @@
           "legId": "V121-R123-2-BDL-SYR",
           "expectedDepartureMinute": 605,
           "expectedArrivalMinute": 659,
-          "departureMinute": 501,
-          "arrivalMinute": 555
+          "departureMinute": 496,
+          "arrivalMinute": 550
         }
       ],
       "insertLegs": [
@@ -598,8 +487,8 @@
           "route": 162,
           "origin": "SYR",
           "destination": "ROC",
-          "departureMinute": 600,
-          "arrivalMinute": 639
+          "departureMinute": 590,
+          "arrivalMinute": 629
         },
         {
           "id": "V141-R162-SCREEN-5-2",
@@ -611,6 +500,11 @@
         }
       ],
       "bankAssignmentsToAdd": [
+        {
+          "legId": "V141-R162-SCREEN-5-1",
+          "operation": "departure",
+          "bankId": "SYR-M09"
+        },
         {
           "legId": "V141-R162-SCREEN-5-2",
           "operation": "arrival",
@@ -654,127 +548,16 @@
     "operating": {
       "checks": 25,
       "passed": 17,
-      "failed": 1,
+      "failed": 0,
       "warnings": 5,
       "notEvaluated": 1,
-      "overridden": 1,
-      "effectiveErrorFindings": 1,
+      "overridden": 2,
+      "effectiveErrorFindings": 0,
       "effectiveWarningFindings": 152
     },
     "changedFlights": 2,
-    "failed": [
-      {
-        "check": "hub_bank_alignment",
-        "findings": [
-          {
-            "id": "V114-R169-SYR-FWA-departure",
-            "message": "Departure for V114-R169-SYR-FWA falls outside bank SYR-B4",
-            "evidence": {
-              "assignment": {
-                "legId": "V114-R169-SYR-FWA",
-                "operation": "departure",
-                "bankId": "SYR-B4"
-              },
-              "minute": 875,
-              "bankWindow": [
-                795,
-                855
-              ]
-            },
-            "override": {
-              "reason": "Schedule 7 v1.1.4 tactical initiative: the 14:35 SYR-FWA return departs 20 minutes after Bank 4 to remain within SYR's fixed 16-gate inventory without weakening existing bank connections.",
-              "approvedBy": "user",
-              "expiresAfterSchedule": 7
-            }
-          },
-          {
-            "id": "V114-R122-SYR-SWF-departure",
-            "message": "Departure for V114-R122-SYR-SWF falls outside bank SYR-B6",
-            "evidence": {
-              "assignment": {
-                "legId": "V114-R122-SYR-SWF",
-                "operation": "departure",
-                "bankId": "SYR-B6"
-              },
-              "minute": 1210,
-              "bankWindow": [
-                1125,
-                1185
-              ]
-            },
-            "override": {
-              "reason": "Schedule 7 v1.1.4 tactical initiative: the 20:10 SYR-SWF return departs 25 minutes after Bank 6 to remain within SYR's fixed 16-gate inventory without weakening existing bank connections.",
-              "approvedBy": "user",
-              "expiresAfterSchedule": 7
-            }
-          },
-          {
-            "id": "V116-R149-DAY-BHM-departure",
-            "message": "Departure for V116-R149-DAY-BHM falls outside bank DAY-B1",
-            "evidence": {
-              "assignment": {
-                "legId": "V116-R149-DAY-BHM",
-                "operation": "departure",
-                "bankId": "DAY-B1"
-              },
-              "minute": 270,
-              "bankWindow": [
-                301,
-                361
-              ]
-            },
-            "override": {
-              "reason": "Schedule 7 v1.1.6 BHM morning initiative: the 04:30 DAY departure is 30 minutes before DAY Bank 1 so the aircraft can feed BHM's morning wave while remaining within fixed gate capacity at both cities.",
-              "approvedBy": "user",
-              "expiresAfterSchedule": 7
-            }
-          },
-          {
-            "id": "V116-R330-DAY-PHF-departure",
-            "message": "Departure for V116-R330-DAY-PHF falls outside bank DAY-B2",
-            "evidence": {
-              "assignment": {
-                "legId": "V116-R330-DAY-PHF",
-                "operation": "departure",
-                "bankId": "DAY-B2"
-              },
-              "minute": 411,
-              "bankWindow": [
-                425,
-                485
-              ]
-            },
-            "override": {
-              "reason": "Schedule 7 v1.1.6 PHF early-hub initiative: the user-selected 06:51 DAY departure splits the difference between a minimum turn and DAY Bank 2, producing an 08:20 PHF return with a 55-minute turn into the existing originator.",
-              "approvedBy": "user",
-              "expiresAfterSchedule": 7
-            }
-          },
-          {
-            "id": "V116-R330-DAY-PHF-arrival",
-            "message": "Arrival for V116-R330-DAY-PHF falls outside bank PHF-B2",
-            "evidence": {
-              "assignment": {
-                "legId": "V116-R330-DAY-PHF",
-                "operation": "arrival",
-                "bankId": "PHF-B2"
-              },
-              "minute": 500,
-              "bankWindow": [
-                505,
-                565
-              ]
-            },
-            "override": {
-              "reason": "Schedule 7 v1.1.6 PHF early-hub initiative: the user-selected 08:20 return arrives five minutes before PHF Bank 2 and preserves a 55-minute turn into Route 330's existing originator.",
-              "approvedBy": "user",
-              "expiresAfterSchedule": 7
-            }
-          }
-        ]
-      }
-    ],
-    "pass": false,
+    "failed": [],
+    "pass": true,
     "overlay": {
       "schemaVersion": "1.0.0",
       "id": "v141-screen-6",
@@ -804,8 +587,8 @@
           "legId": "V121-R123-2-BDL-SYR",
           "expectedDepartureMinute": 605,
           "expectedArrivalMinute": 659,
-          "departureMinute": 501,
-          "arrivalMinute": 555
+          "departureMinute": 496,
+          "arrivalMinute": 550
         }
       ],
       "insertLegs": [
@@ -814,19 +597,24 @@
           "route": 162,
           "origin": "SYR",
           "destination": "BGR",
-          "departureMinute": 600,
-          "arrivalMinute": 680
+          "departureMinute": 590,
+          "arrivalMinute": 670
         },
         {
           "id": "V141-R162-SCREEN-6-2",
           "route": 162,
           "origin": "BGR",
           "destination": "SYR",
-          "departureMinute": 720,
-          "arrivalMinute": 800
+          "departureMinute": 715,
+          "arrivalMinute": 795
         }
       ],
       "bankAssignmentsToAdd": [
+        {
+          "legId": "V141-R162-SCREEN-6-1",
+          "operation": "departure",
+          "bankId": "SYR-M09"
+        },
         {
           "legId": "V141-R162-SCREEN-6-2",
           "operation": "arrival",
