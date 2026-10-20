@@ -4,6 +4,124 @@
     "pass": false
   },
   {
+    "name": "R108 ORH-SYR then SYR-PIT-SYR before BTV",
+    "pass": true,
+    "flights": 1266,
+    "gains": [
+      {
+        "market": "FWA-BTV",
+        "origin": "FWA",
+        "destination": "BTV",
+        "demand": 0.3,
+        "beforeMinutes": 391,
+        "afterMinutes": 239
+      }
+    ],
+    "losses": [
+      {
+        "market": "ORH-ABE",
+        "origin": "ORH",
+        "destination": "ABE",
+        "demand": 0,
+        "beforeMinutes": 317,
+        "afterMinutes": null
+      },
+      {
+        "market": "ORH-ACY",
+        "origin": "ORH",
+        "destination": "ACY",
+        "demand": 0,
+        "beforeMinutes": 329,
+        "afterMinutes": null
+      },
+      {
+        "market": "ORH-BWI",
+        "origin": "ORH",
+        "destination": "BWI",
+        "demand": 0,
+        "beforeMinutes": 280,
+        "afterMinutes": null
+      },
+      {
+        "market": "ORH-DAB",
+        "origin": "ORH",
+        "destination": "DAB",
+        "demand": 0,
+        "beforeMinutes": 414,
+        "afterMinutes": null
+      }
+    ],
+    "faster": 15,
+    "slower": 43,
+    "weightedNet": 860.3000000000015,
+    "topSlower": [
+      {
+        "market": "ORH-PGD",
+        "demand": 10.6,
+        "delay": 132,
+        "weight": 1399.2
+      },
+      {
+        "market": "CLT-BTV",
+        "demand": 10.5,
+        "delay": 80,
+        "weight": 840
+      },
+      {
+        "market": "RFD-BTV",
+        "demand": 30.3,
+        "delay": 15,
+        "weight": 454.5
+      },
+      {
+        "market": "GSP-BTV",
+        "demand": 3.6,
+        "delay": 82,
+        "weight": 295.2
+      },
+      {
+        "market": "SFB-BTV",
+        "demand": 25.6,
+        "delay": 10,
+        "weight": 256
+      },
+      {
+        "market": "PNS-BTV",
+        "demand": 1.9,
+        "delay": 82,
+        "weight": 155.79999999999998
+      },
+      {
+        "market": "CAE-BTV",
+        "demand": 1.7,
+        "delay": 82,
+        "weight": 139.4
+      },
+      {
+        "market": "GSO-BTV",
+        "demand": 2.6,
+        "delay": 53,
+        "weight": 137.8
+      },
+      {
+        "market": "ORH-RFD",
+        "demand": 0.5,
+        "delay": 132,
+        "weight": 66
+      },
+      {
+        "market": "ORH-RDU",
+        "demand": 0.4,
+        "delay": 132,
+        "weight": 52.800000000000004
+      }
+    ]
+  },
+  {
+    "name": "R108 ORH-SYR then SYR-PVD-SYR before BTV",
+    "pass": false
+  },
+  {
     "name": "R108 ORH-SYR then SYR-PHF-SYR before BTV",
     "pass": false
   }
