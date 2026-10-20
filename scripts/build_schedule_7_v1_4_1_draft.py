@@ -23,6 +23,10 @@ new=apply_optimization_overlay(base,overlay)
 r107_file=ROOT/"config/optimizations/schedule_7_v1_4_1_r107_isp_phf_provisional.json"
 r107=json.loads(r107_file.read_text())
 new=apply_optimization_overlay(new,r107)
+r356_file=ROOT/"config/optimizations/schedule_7_v1_4_1_r356_compensation.json"
+r356=json.loads(r356_file.read_text())
+new=apply_optimization_overlay(new,r356)
+assert next(l for l in new["legs"] if l["flight"]==2209)["departureMinute"]==605
 assert new["schedule"]["id"]=="schedule_7_v1_4_1_draft"
 assert new["schedule"]["status"]=="draft"
 assert (len(new["legs"]),len({x["route"] for x in new["legs"]}),len({x["line"] for x in new["legs"]}))==(1264,188,17)
@@ -49,7 +53,9 @@ new.setdefault("provenance",{})["workingDraft"]={
  "overlays":[{"path":str(overlay_file.relative_to(ROOT)),
  "sha256":hashlib.sha256(overlay_file.read_bytes()).hexdigest()},
  {"path":str(r107_file.relative_to(ROOT)),
- "sha256":hashlib.sha256(r107_file.read_bytes()).hexdigest()}],
+ "sha256":hashlib.sha256(r107_file.read_bytes()).hexdigest()},
+ {"path":str(r356_file.relative_to(ROOT)),
+ "sha256":hashlib.sha256(r356_file.read_bytes()).hexdigest()}],
  "status":"PROVISIONAL, UNPUBLISHED; released web default stays v1.4.0"}
 out=ROOT/"data/schedules/schedule_7_v1_4_1_draft"
 out.mkdir(parents=True,exist_ok=True)
