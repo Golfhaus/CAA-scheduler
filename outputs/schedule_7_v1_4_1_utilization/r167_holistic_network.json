@@ -1,0 +1,126 @@
+[
+  {
+    "name": "ALB-PHF-SYR preserves 11:20 CAK",
+    "pass": false
+  },
+  {
+    "name": "ALB-PIT-SYR preserves 11:20 CAK",
+    "pass": false
+  },
+  {
+    "name": "ALB-BTV-SYR preserves 11:20 CAK",
+    "pass": true,
+    "addedFlights": 1,
+    "gains": [
+      {
+        "market": "ALB-BTV",
+        "origin": "ALB",
+        "destination": "BTV",
+        "demand": 0.6,
+        "beforeMinutes": null,
+        "afterMinutes": 40
+      }
+    ],
+    "losses": [
+      {
+        "market": "ALB-BNA",
+        "origin": "ALB",
+        "destination": "BNA",
+        "demand": 30.8,
+        "beforeMinutes": 324,
+        "afterMinutes": 382
+      },
+      {
+        "market": "ALB-PIT",
+        "origin": "ALB",
+        "destination": "PIT",
+        "demand": 6.4,
+        "beforeMinutes": 149,
+        "afterMinutes": null
+      },
+      {
+        "market": "ALB-FWA",
+        "origin": "ALB",
+        "destination": "FWA",
+        "demand": 0.7,
+        "beforeMinutes": 375,
+        "afterMinutes": 515
+      }
+    ],
+    "faster": 1,
+    "slower": 7,
+    "weightedNet": -7079.9,
+    "topSlow": [
+      {
+        "market": "ALB-PIE",
+        "demand": 43.2,
+        "extra": 68,
+        "weight": 2937.6000000000004
+      },
+      {
+        "market": "ALB-SFB",
+        "demand": 137,
+        "extra": 15,
+        "weight": 2055
+      },
+      {
+        "market": "ALB-BNA",
+        "demand": 30.8,
+        "extra": 58,
+        "weight": 1786.4
+      },
+      {
+        "market": "ALB-SRQ",
+        "demand": 28.8,
+        "extra": 7,
+        "weight": 201.6
+      },
+      {
+        "market": "ALB-FWA",
+        "demand": 0.7,
+        "extra": 140,
+        "weight": 98
+      },
+      {
+        "market": "ALB-BUF",
+        "demand": 0.9,
+        "extra": 1,
+        "weight": 0.9
+      },
+      {
+        "market": "ALB-ROC",
+        "demand": 0.4,
+        "extra": 1,
+        "weight": 0.4
+      }
+    ]
+  },
+  {
+    "name": "ALB-BTV-ALB hold filler (low O-D)",
+    "pass": true,
+    "addedFlights": 2,
+    "gains": [
+      {
+        "market": "ALB-BTV",
+        "origin": "ALB",
+        "destination": "BTV",
+        "demand": 0.6,
+        "beforeMinutes": null,
+        "afterMinutes": 40
+      },
+      {
+        "market": "BTV-ALB",
+        "origin": "BTV",
+        "destination": "ALB",
+        "demand": 0.6,
+        "beforeMinutes": null,
+        "afterMinutes": 40
+      }
+    ],
+    "losses": [],
+    "faster": 0,
+    "slower": 0,
+    "weightedNet": 0,
+    "topSlow": []
+  }
+]
