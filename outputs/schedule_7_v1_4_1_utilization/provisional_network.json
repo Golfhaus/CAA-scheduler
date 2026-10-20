@@ -1,0 +1,1472 @@
+{
+  "scope": "unpublished v1.4.1 provisional vs published v1.4.0",
+  "beforeFlights": 1259,
+  "afterFlights": 1264,
+  "gains": [
+    {
+      "market": "ISP-BWI",
+      "origin": "ISP",
+      "destination": "BWI",
+      "demand": 18.1,
+      "beforeMinutes": null,
+      "afterMinutes": 270
+    },
+    {
+      "market": "BGR-PGD",
+      "origin": "BGR",
+      "destination": "PGD",
+      "demand": 5.8,
+      "beforeMinutes": 507,
+      "afterMinutes": 299
+    },
+    {
+      "market": "GSP-SYR",
+      "origin": "GSP",
+      "destination": "SYR",
+      "demand": 5.8,
+      "beforeMinutes": 514,
+      "afterMinutes": 238
+    },
+    {
+      "market": "PGD-BGR",
+      "origin": "PGD",
+      "destination": "BGR",
+      "demand": 5.4,
+      "beforeMinutes": 495,
+      "afterMinutes": 365
+    },
+    {
+      "market": "PNS-SYR",
+      "origin": "PNS",
+      "destination": "SYR",
+      "demand": 4.9,
+      "beforeMinutes": null,
+      "afterMinutes": 366
+    },
+    {
+      "market": "BGR-BNA",
+      "origin": "BGR",
+      "destination": "BNA",
+      "demand": 4.7,
+      "beforeMinutes": null,
+      "afterMinutes": 389
+    },
+    {
+      "market": "BNA-BGR",
+      "origin": "BNA",
+      "destination": "BGR",
+      "demand": 4.6,
+      "beforeMinutes": 560,
+      "afterMinutes": 250
+    },
+    {
+      "market": "ISP-MSY",
+      "origin": "ISP",
+      "destination": "MSY",
+      "demand": 2.8,
+      "beforeMinutes": 379,
+      "afterMinutes": 371
+    },
+    {
+      "market": "ISP-SAV",
+      "origin": "ISP",
+      "destination": "SAV",
+      "demand": 2.2,
+      "beforeMinutes": 316,
+      "afterMinutes": 308
+    },
+    {
+      "market": "BGR-PHF",
+      "origin": "BGR",
+      "destination": "PHF",
+      "demand": 2.1,
+      "beforeMinutes": null,
+      "afterMinutes": 220
+    },
+    {
+      "market": "ISP-DAL",
+      "origin": "ISP",
+      "destination": "DAL",
+      "demand": 1.2,
+      "beforeMinutes": 369,
+      "afterMinutes": 485
+    },
+    {
+      "market": "DAY-BGR",
+      "origin": "DAY",
+      "destination": "BGR",
+      "demand": 0.7,
+      "beforeMinutes": 514,
+      "afterMinutes": 400
+    },
+    {
+      "market": "BGR-BWI",
+      "origin": "BGR",
+      "destination": "BWI",
+      "demand": 0.3,
+      "beforeMinutes": null,
+      "afterMinutes": 275
+    },
+    {
+      "market": "BGR-FWA",
+      "origin": "BGR",
+      "destination": "FWA",
+      "demand": 0.2,
+      "beforeMinutes": null,
+      "afterMinutes": 255
+    },
+    {
+      "market": "FWA-BGR",
+      "origin": "FWA",
+      "destination": "BGR",
+      "demand": 0.2,
+      "beforeMinutes": null,
+      "afterMinutes": 385
+    },
+    {
+      "market": "BGR-ACY",
+      "origin": "BGR",
+      "destination": "ACY",
+      "demand": 0.1,
+      "beforeMinutes": null,
+      "afterMinutes": 359
+    },
+    {
+      "market": "BGR-DAB",
+      "origin": "BGR",
+      "destination": "DAB",
+      "demand": 0.1,
+      "beforeMinutes": null,
+      "afterMinutes": 444
+    },
+    {
+      "market": "DAB-BGR",
+      "origin": "DAB",
+      "destination": "BGR",
+      "demand": 0.1,
+      "beforeMinutes": 620,
+      "afterMinutes": 363
+    },
+    {
+      "market": "ISP-CAE",
+      "origin": "ISP",
+      "destination": "CAE",
+      "demand": 0,
+      "beforeMinutes": 420,
+      "afterMinutes": 305
+    }
+  ],
+  "losses": [
+    {
+      "market": "ISP-BNA",
+      "origin": "ISP",
+      "destination": "BNA",
+      "demand": 3.7,
+      "beforeMinutes": 359,
+      "afterMinutes": 447
+    },
+    {
+      "market": "ISP-FWA",
+      "origin": "ISP",
+      "destination": "FWA",
+      "demand": 0,
+      "beforeMinutes": 225,
+      "afterMinutes": 357
+    }
+  ],
+  "faster": [
+    {
+      "market": "RDU-BDL",
+      "origin": "RDU",
+      "destination": "BDL",
+      "demand": 49,
+      "beforeMinutes": 629,
+      "afterMinutes": 427
+    },
+    {
+      "market": "BDL-PIT",
+      "origin": "BDL",
+      "destination": "PIT",
+      "demand": 20.2,
+      "beforeMinutes": 331,
+      "afterMinutes": 248
+    },
+    {
+      "market": "GSP-BDL",
+      "origin": "GSP",
+      "destination": "BDL",
+      "demand": 16.3,
+      "beforeMinutes": 401,
+      "afterMinutes": 332
+    },
+    {
+      "market": "RFD-BGR",
+      "origin": "RFD",
+      "destination": "BGR",
+      "demand": 8.4,
+      "beforeMinutes": 230,
+      "afterMinutes": 226
+    },
+    {
+      "market": "MSN-BDL",
+      "origin": "MSN",
+      "destination": "BDL",
+      "demand": 7.7,
+      "beforeMinutes": 586,
+      "afterMinutes": 297
+    },
+    {
+      "market": "GRR-BDL",
+      "origin": "GRR",
+      "destination": "BDL",
+      "demand": 7.1,
+      "beforeMinutes": 321,
+      "afterMinutes": 282
+    },
+    {
+      "market": "ISP-PHF",
+      "origin": "ISP",
+      "destination": "PHF",
+      "demand": 6.3,
+      "beforeMinutes": 185,
+      "afterMinutes": 76
+    },
+    {
+      "market": "BGR-PGD",
+      "origin": "BGR",
+      "destination": "PGD",
+      "demand": 5.8,
+      "beforeMinutes": 507,
+      "afterMinutes": 299
+    },
+    {
+      "market": "GSP-SYR",
+      "origin": "GSP",
+      "destination": "SYR",
+      "demand": 5.8,
+      "beforeMinutes": 514,
+      "afterMinutes": 238
+    },
+    {
+      "market": "MHT-BNA",
+      "origin": "MHT",
+      "destination": "BNA",
+      "demand": 5.8,
+      "beforeMinutes": 264,
+      "afterMinutes": 214
+    },
+    {
+      "market": "PGD-BGR",
+      "origin": "PGD",
+      "destination": "BGR",
+      "demand": 5.4,
+      "beforeMinutes": 495,
+      "afterMinutes": 365
+    },
+    {
+      "market": "BGR-DAL",
+      "origin": "BGR",
+      "destination": "DAL",
+      "demand": 4.8,
+      "beforeMinutes": 576,
+      "afterMinutes": 399
+    },
+    {
+      "market": "DAL-BGR",
+      "origin": "DAL",
+      "destination": "BGR",
+      "demand": 4.8,
+      "beforeMinutes": 585,
+      "afterMinutes": 460
+    },
+    {
+      "market": "RDU-BGR",
+      "origin": "RDU",
+      "destination": "BGR",
+      "demand": 4.7,
+      "beforeMinutes": 655,
+      "afterMinutes": 400
+    },
+    {
+      "market": "BNA-BGR",
+      "origin": "BNA",
+      "destination": "BGR",
+      "demand": 4.6,
+      "beforeMinutes": 560,
+      "afterMinutes": 250
+    },
+    {
+      "market": "GSP-PWM",
+      "origin": "GSP",
+      "destination": "PWM",
+      "demand": 4.4,
+      "beforeMinutes": 371,
+      "afterMinutes": 338
+    },
+    {
+      "market": "LEX-BDL",
+      "origin": "LEX",
+      "destination": "BDL",
+      "demand": 4.3,
+      "beforeMinutes": 283,
+      "afterMinutes": 272
+    },
+    {
+      "market": "DAY-BDL",
+      "origin": "DAY",
+      "destination": "BDL",
+      "demand": 3.8,
+      "beforeMinutes": 216,
+      "afterMinutes": 182
+    },
+    {
+      "market": "BDL-BUF",
+      "origin": "BDL",
+      "destination": "BUF",
+      "demand": 3.6,
+      "beforeMinutes": 309,
+      "afterMinutes": 228
+    },
+    {
+      "market": "GSO-SYR",
+      "origin": "GSO",
+      "destination": "SYR",
+      "demand": 3.6,
+      "beforeMinutes": 263,
+      "afterMinutes": 258
+    },
+    {
+      "market": "AUS-BGR",
+      "origin": "AUS",
+      "destination": "BGR",
+      "demand": 3.1,
+      "beforeMinutes": 705,
+      "afterMinutes": 575
+    },
+    {
+      "market": "BGR-MSY",
+      "origin": "BGR",
+      "destination": "MSY",
+      "demand": 3.1,
+      "beforeMinutes": 614,
+      "afterMinutes": 409
+    },
+    {
+      "market": "BGR-PIT",
+      "origin": "BGR",
+      "destination": "PIT",
+      "demand": 3,
+      "beforeMinutes": 349,
+      "afterMinutes": 201
+    },
+    {
+      "market": "JAX-BGR",
+      "origin": "JAX",
+      "destination": "BGR",
+      "demand": 3,
+      "beforeMinutes": 435,
+      "afterMinutes": 395
+    },
+    {
+      "market": "MSY-BGR",
+      "origin": "MSY",
+      "destination": "BGR",
+      "demand": 3,
+      "beforeMinutes": 560,
+      "afterMinutes": 480
+    },
+    {
+      "market": "PIT-BGR",
+      "origin": "PIT",
+      "destination": "BGR",
+      "demand": 3,
+      "beforeMinutes": 353,
+      "afterMinutes": 313
+    },
+    {
+      "market": "BLV-BGR",
+      "origin": "BLV",
+      "destination": "BGR",
+      "demand": 2.8,
+      "beforeMinutes": 570,
+      "afterMinutes": 440
+    },
+    {
+      "market": "HOU-BGR",
+      "origin": "HOU",
+      "destination": "BGR",
+      "demand": 2.8,
+      "beforeMinutes": 595,
+      "afterMinutes": 515
+    },
+    {
+      "market": "ISP-MSY",
+      "origin": "ISP",
+      "destination": "MSY",
+      "demand": 2.8,
+      "beforeMinutes": 379,
+      "afterMinutes": 371
+    },
+    {
+      "market": "PHF-BTV",
+      "origin": "PHF",
+      "destination": "BTV",
+      "demand": 2.8,
+      "beforeMinutes": 177,
+      "afterMinutes": 168
+    },
+    {
+      "market": "SBN-BDL",
+      "origin": "SBN",
+      "destination": "BDL",
+      "demand": 2.8,
+      "beforeMinutes": 561,
+      "afterMinutes": 272
+    },
+    {
+      "market": "MCI-BGR",
+      "origin": "MCI",
+      "destination": "BGR",
+      "demand": 2.7,
+      "beforeMinutes": 410,
+      "afterMinutes": 280
+    },
+    {
+      "market": "GSO-BTV",
+      "origin": "GSO",
+      "destination": "BTV",
+      "demand": 2.6,
+      "beforeMinutes": 395,
+      "afterMinutes": 342
+    },
+    {
+      "market": "CHS-BGR",
+      "origin": "CHS",
+      "destination": "BGR",
+      "demand": 2.4,
+      "beforeMinutes": 485,
+      "afterMinutes": 370
+    },
+    {
+      "market": "ISP-SAT",
+      "origin": "ISP",
+      "destination": "SAT",
+      "demand": 2.2,
+      "beforeMinutes": 609,
+      "afterMinutes": 515
+    },
+    {
+      "market": "ISP-SAV",
+      "origin": "ISP",
+      "destination": "SAV",
+      "demand": 2.2,
+      "beforeMinutes": 316,
+      "afterMinutes": 308
+    },
+    {
+      "market": "PHF-BGR",
+      "origin": "PHF",
+      "destination": "BGR",
+      "demand": 2.2,
+      "beforeMinutes": 330,
+      "afterMinutes": 200
+    },
+    {
+      "market": "FWA-BDL",
+      "origin": "FWA",
+      "destination": "BDL",
+      "demand": 2.1,
+      "beforeMinutes": 425,
+      "afterMinutes": 262
+    },
+    {
+      "market": "SAT-BGR",
+      "origin": "SAT",
+      "destination": "BGR",
+      "demand": 2.1,
+      "beforeMinutes": 670,
+      "afterMinutes": 540
+    },
+    {
+      "market": "BGR-SAV",
+      "origin": "BGR",
+      "destination": "SAV",
+      "demand": 2,
+      "beforeMinutes": 359,
+      "afterMinutes": 346
+    },
+    {
+      "market": "SAV-BGR",
+      "origin": "SAV",
+      "destination": "BGR",
+      "demand": 2,
+      "beforeMinutes": 545,
+      "afterMinutes": 415
+    },
+    {
+      "market": "TYS-BGR",
+      "origin": "TYS",
+      "destination": "BGR",
+      "demand": 2,
+      "beforeMinutes": 655,
+      "afterMinutes": 615
+    },
+    {
+      "market": "CAE-BTV",
+      "origin": "CAE",
+      "destination": "BTV",
+      "demand": 1.7,
+      "beforeMinutes": 432,
+      "afterMinutes": 317
+    },
+    {
+      "market": "CAK-BGR",
+      "origin": "CAK",
+      "destination": "BGR",
+      "demand": 1.7,
+      "beforeMinutes": 190,
+      "afterMinutes": 189
+    },
+    {
+      "market": "BGR-BHM",
+      "origin": "BGR",
+      "destination": "BHM",
+      "demand": 1.6,
+      "beforeMinutes": 459,
+      "afterMinutes": 349
+    },
+    {
+      "market": "PHF-FWA",
+      "origin": "PHF",
+      "destination": "FWA",
+      "demand": 1.6,
+      "beforeMinutes": 260,
+      "afterMinutes": 241
+    },
+    {
+      "market": "SDF-BGR",
+      "origin": "SDF",
+      "destination": "BGR",
+      "demand": 1.6,
+      "beforeMinutes": 620,
+      "afterMinutes": 580
+    },
+    {
+      "market": "BHM-BGR",
+      "origin": "BHM",
+      "destination": "BGR",
+      "demand": 1.5,
+      "beforeMinutes": 605,
+      "afterMinutes": 475
+    },
+    {
+      "market": "GSO-BGR",
+      "origin": "GSO",
+      "destination": "BGR",
+      "demand": 1.5,
+      "beforeMinutes": 508,
+      "afterMinutes": 378
+    },
+    {
+      "market": "MYR-BGR",
+      "origin": "MYR",
+      "destination": "BGR",
+      "demand": 1.5,
+      "beforeMinutes": 615,
+      "afterMinutes": 360
+    },
+    {
+      "market": "BGR-SDF",
+      "origin": "BGR",
+      "destination": "SDF",
+      "demand": 1.4,
+      "beforeMinutes": 465,
+      "afterMinutes": 313
+    },
+    {
+      "market": "ILM-BGR",
+      "origin": "ILM",
+      "destination": "BGR",
+      "demand": 1.4,
+      "beforeMinutes": 610,
+      "afterMinutes": 355
+    },
+    {
+      "market": "EYW-BGR",
+      "origin": "EYW",
+      "destination": "BGR",
+      "demand": 1.2,
+      "beforeMinutes": 600,
+      "afterMinutes": 560
+    },
+    {
+      "market": "OMA-BGR",
+      "origin": "OMA",
+      "destination": "BGR",
+      "demand": 1.1,
+      "beforeMinutes": 600,
+      "afterMinutes": 470
+    },
+    {
+      "market": "BUF-BGR",
+      "origin": "BUF",
+      "destination": "BGR",
+      "demand": 0.9,
+      "beforeMinutes": 161,
+      "afterMinutes": 159
+    },
+    {
+      "market": "CAE-BGR",
+      "origin": "CAE",
+      "destination": "BGR",
+      "demand": 0.8,
+      "beforeMinutes": 625,
+      "afterMinutes": 370
+    },
+    {
+      "market": "LIT-BGR",
+      "origin": "LIT",
+      "destination": "BGR",
+      "demand": 0.8,
+      "beforeMinutes": 630,
+      "afterMinutes": 500
+    },
+    {
+      "market": "BGR-DAY",
+      "origin": "BGR",
+      "destination": "DAY",
+      "demand": 0.7,
+      "beforeMinutes": 387,
+      "afterMinutes": 223
+    },
+    {
+      "market": "DAY-BGR",
+      "origin": "DAY",
+      "destination": "BGR",
+      "demand": 0.7,
+      "beforeMinutes": 514,
+      "afterMinutes": 400
+    },
+    {
+      "market": "DSM-BGR",
+      "origin": "DSM",
+      "destination": "BGR",
+      "demand": 0.7,
+      "beforeMinutes": 550,
+      "afterMinutes": 420
+    },
+    {
+      "market": "ROC-BGR",
+      "origin": "ROC",
+      "destination": "BGR",
+      "demand": 0.7,
+      "beforeMinutes": 160,
+      "afterMinutes": 155
+    },
+    {
+      "market": "TUL-BGR",
+      "origin": "TUL",
+      "destination": "BGR",
+      "demand": 0.7,
+      "beforeMinutes": 510,
+      "afterMinutes": 380
+    },
+    {
+      "market": "MDT-BGR",
+      "origin": "MDT",
+      "destination": "BGR",
+      "demand": 0.6,
+      "beforeMinutes": 345,
+      "afterMinutes": 305
+    },
+    {
+      "market": "LEX-BGR",
+      "origin": "LEX",
+      "destination": "BGR",
+      "demand": 0.5,
+      "beforeMinutes": 620,
+      "afterMinutes": 490
+    },
+    {
+      "market": "ALB-BGR",
+      "origin": "ALB",
+      "destination": "BGR",
+      "demand": 0.4,
+      "beforeMinutes": 249,
+      "afterMinutes": 200
+    },
+    {
+      "market": "BDL-BTV",
+      "origin": "BDL",
+      "destination": "BTV",
+      "demand": 0.4,
+      "beforeMinutes": 262,
+      "afterMinutes": 236
+    },
+    {
+      "market": "CID-BGR",
+      "origin": "CID",
+      "destination": "BGR",
+      "demand": 0.4,
+      "beforeMinutes": 660,
+      "afterMinutes": 530
+    },
+    {
+      "market": "ECP-BGR",
+      "origin": "ECP",
+      "destination": "BGR",
+      "demand": 0.4,
+      "beforeMinutes": 575,
+      "afterMinutes": 535
+    },
+    {
+      "market": "ELP-BGR",
+      "origin": "ELP",
+      "destination": "BGR",
+      "demand": 0.4,
+      "beforeMinutes": 865,
+      "afterMinutes": 825
+    },
+    {
+      "market": "TLH-BGR",
+      "origin": "TLH",
+      "destination": "BGR",
+      "demand": 0.4,
+      "beforeMinutes": 630,
+      "afterMinutes": 570
+    },
+    {
+      "market": "BDL-BGR",
+      "origin": "BDL",
+      "destination": "BGR",
+      "demand": 0.3,
+      "beforeMinutes": 175,
+      "afterMinutes": 174
+    },
+    {
+      "market": "BGR-ABE",
+      "origin": "BGR",
+      "destination": "ABE",
+      "demand": 0.3,
+      "beforeMinutes": 342,
+      "afterMinutes": 187
+    },
+    {
+      "market": "FSD-BGR",
+      "origin": "FSD",
+      "destination": "BGR",
+      "demand": 0.3,
+      "beforeMinutes": 570,
+      "afterMinutes": 440
+    },
+    {
+      "market": "GSP-ACY",
+      "origin": "GSP",
+      "destination": "ACY",
+      "demand": 0.3,
+      "beforeMinutes": 514,
+      "afterMinutes": 499
+    },
+    {
+      "market": "ICT-BGR",
+      "origin": "ICT",
+      "destination": "BGR",
+      "demand": 0.3,
+      "beforeMinutes": 655,
+      "afterMinutes": 525
+    },
+    {
+      "market": "JAN-BGR",
+      "origin": "JAN",
+      "destination": "BGR",
+      "demand": 0.3,
+      "beforeMinutes": 595,
+      "afterMinutes": 483
+    },
+    {
+      "market": "AGS-BGR",
+      "origin": "AGS",
+      "destination": "BGR",
+      "demand": 0.2,
+      "beforeMinutes": 570,
+      "afterMinutes": 530
+    },
+    {
+      "market": "BGR-SBN",
+      "origin": "BGR",
+      "destination": "SBN",
+      "demand": 0.2,
+      "beforeMinutes": 443,
+      "afterMinutes": 320
+    },
+    {
+      "market": "MOB-BGR",
+      "origin": "MOB",
+      "destination": "BGR",
+      "demand": 0.2,
+      "beforeMinutes": 595,
+      "afterMinutes": 555
+    },
+    {
+      "market": "SHV-BGR",
+      "origin": "SHV",
+      "destination": "BGR",
+      "demand": 0.2,
+      "beforeMinutes": 695,
+      "afterMinutes": 565
+    },
+    {
+      "market": "ACY-BGR",
+      "origin": "ACY",
+      "destination": "BGR",
+      "demand": 0.1,
+      "beforeMinutes": 350,
+      "afterMinutes": 310
+    },
+    {
+      "market": "COU-BGR",
+      "origin": "COU",
+      "destination": "BGR",
+      "demand": 0.1,
+      "beforeMinutes": 645,
+      "afterMinutes": 515
+    },
+    {
+      "market": "DAB-BGR",
+      "origin": "DAB",
+      "destination": "BGR",
+      "demand": 0.1,
+      "beforeMinutes": 620,
+      "afterMinutes": 363
+    },
+    {
+      "market": "DLH-BGR",
+      "origin": "DLH",
+      "destination": "BGR",
+      "demand": 0.1,
+      "beforeMinutes": 570,
+      "afterMinutes": 440
+    },
+    {
+      "market": "GNV-BGR",
+      "origin": "GNV",
+      "destination": "BGR",
+      "demand": 0.1,
+      "beforeMinutes": 578,
+      "afterMinutes": 400
+    },
+    {
+      "market": "HRL-BGR",
+      "origin": "HRL",
+      "destination": "BGR",
+      "demand": 0.1,
+      "beforeMinutes": 796,
+      "afterMinutes": 666
+    },
+    {
+      "market": "MLB-BGR",
+      "origin": "MLB",
+      "destination": "BGR",
+      "demand": 0.1,
+      "beforeMinutes": 630,
+      "afterMinutes": 590
+    },
+    {
+      "market": "BGR-HVN",
+      "origin": "BGR",
+      "destination": "HVN",
+      "demand": 0,
+      "beforeMinutes": 291,
+      "afterMinutes": 178
+    },
+    {
+      "market": "HVN-BGR",
+      "origin": "HVN",
+      "destination": "BGR",
+      "demand": 0,
+      "beforeMinutes": 340,
+      "afterMinutes": 176
+    },
+    {
+      "market": "ISP-CAE",
+      "origin": "ISP",
+      "destination": "CAE",
+      "demand": 0,
+      "beforeMinutes": 420,
+      "afterMinutes": 305
+    },
+    {
+      "market": "MCN-BGR",
+      "origin": "MCN",
+      "destination": "BGR",
+      "demand": 0,
+      "beforeMinutes": 570,
+      "afterMinutes": 530
+    },
+    {
+      "market": "PNS-HVN",
+      "origin": "PNS",
+      "destination": "HVN",
+      "demand": 0,
+      "beforeMinutes": 730,
+      "afterMinutes": 619
+    },
+    {
+      "market": "TOL-BDL",
+      "origin": "TOL",
+      "destination": "BDL",
+      "demand": 0,
+      "beforeMinutes": 425,
+      "afterMinutes": 269
+    }
+  ],
+  "slower": [
+    {
+      "market": "ISP-SFB",
+      "origin": "ISP",
+      "destination": "SFB",
+      "demand": 166.7,
+      "beforeMinutes": 250,
+      "afterMinutes": 255
+    },
+    {
+      "market": "RFD-BDL",
+      "origin": "RFD",
+      "destination": "BDL",
+      "demand": 105.4,
+      "beforeMinutes": 204,
+      "afterMinutes": 212
+    },
+    {
+      "market": "BDL-PIE",
+      "origin": "BDL",
+      "destination": "PIE",
+      "demand": 105,
+      "beforeMinutes": 248,
+      "afterMinutes": 329
+    },
+    {
+      "market": "ISP-PIE",
+      "origin": "ISP",
+      "destination": "PIE",
+      "demand": 65.3,
+      "beforeMinutes": 264,
+      "afterMinutes": 272
+    },
+    {
+      "market": "ISP-PGD",
+      "origin": "ISP",
+      "destination": "PGD",
+      "demand": 35.8,
+      "beforeMinutes": 269,
+      "afterMinutes": 289
+    },
+    {
+      "market": "MHT-PGD",
+      "origin": "MHT",
+      "destination": "PGD",
+      "demand": 28.9,
+      "beforeMinutes": 269,
+      "afterMinutes": 309
+    },
+    {
+      "market": "SFB-BGR",
+      "origin": "SFB",
+      "destination": "BGR",
+      "demand": 22.7,
+      "beforeMinutes": 270,
+      "afterMinutes": 300
+    },
+    {
+      "market": "PIE-BGR",
+      "origin": "PIE",
+      "destination": "BGR",
+      "demand": 18.8,
+      "beforeMinutes": 290,
+      "afterMinutes": 360
+    },
+    {
+      "market": "MHT-RFD",
+      "origin": "MHT",
+      "destination": "RFD",
+      "demand": 13.3,
+      "beforeMinutes": 210,
+      "afterMinutes": 250
+    },
+    {
+      "market": "FLL-BGR",
+      "origin": "FLL",
+      "destination": "BGR",
+      "demand": 10.2,
+      "beforeMinutes": 295,
+      "afterMinutes": 330
+    },
+    {
+      "market": "BGR-RFD",
+      "origin": "BGR",
+      "destination": "RFD",
+      "demand": 8.5,
+      "beforeMinutes": 225,
+      "afterMinutes": 240
+    },
+    {
+      "market": "BGR-CLT",
+      "origin": "BGR",
+      "destination": "CLT",
+      "demand": 5.5,
+      "beforeMinutes": 227,
+      "afterMinutes": 326
+    },
+    {
+      "market": "CLT-BGR",
+      "origin": "CLT",
+      "destination": "BGR",
+      "demand": 5.3,
+      "beforeMinutes": 225,
+      "afterMinutes": 260
+    },
+    {
+      "market": "MHT-IND",
+      "origin": "MHT",
+      "destination": "IND",
+      "demand": 4.2,
+      "beforeMinutes": 273,
+      "afterMinutes": 313
+    },
+    {
+      "market": "ISP-BNA",
+      "origin": "ISP",
+      "destination": "BNA",
+      "demand": 3.7,
+      "beforeMinutes": 359,
+      "afterMinutes": 447
+    },
+    {
+      "market": "MHT-CMH",
+      "origin": "MHT",
+      "destination": "CMH",
+      "demand": 3.6,
+      "beforeMinutes": 268,
+      "afterMinutes": 308
+    },
+    {
+      "market": "MHT-BHM",
+      "origin": "MHT",
+      "destination": "BHM",
+      "demand": 2.8,
+      "beforeMinutes": 319,
+      "afterMinutes": 359
+    },
+    {
+      "market": "MHT-SDF",
+      "origin": "MHT",
+      "destination": "SDF",
+      "demand": 2.8,
+      "beforeMinutes": 283,
+      "afterMinutes": 323
+    },
+    {
+      "market": "MHT-HOU",
+      "origin": "MHT",
+      "destination": "HOU",
+      "demand": 2.4,
+      "beforeMinutes": 553,
+      "afterMinutes": 593
+    },
+    {
+      "market": "MHT-GRR",
+      "origin": "MHT",
+      "destination": "GRR",
+      "demand": 2.3,
+      "beforeMinutes": 288,
+      "afterMinutes": 328
+    },
+    {
+      "market": "MHT-TYS",
+      "origin": "MHT",
+      "destination": "TYS",
+      "demand": 2.1,
+      "beforeMinutes": 500,
+      "afterMinutes": 540
+    },
+    {
+      "market": "ISP-RFD",
+      "origin": "ISP",
+      "destination": "RFD",
+      "demand": 1.9,
+      "beforeMinutes": 210,
+      "afterMinutes": 214
+    },
+    {
+      "market": "ISP-IND",
+      "origin": "ISP",
+      "destination": "IND",
+      "demand": 1.6,
+      "beforeMinutes": 273,
+      "afterMinutes": 405
+    },
+    {
+      "market": "BGR-CAK",
+      "origin": "BGR",
+      "destination": "CAK",
+      "demand": 1.5,
+      "beforeMinutes": 191,
+      "afterMinutes": 310
+    },
+    {
+      "market": "MHT-DAY",
+      "origin": "MHT",
+      "destination": "DAY",
+      "demand": 1.5,
+      "beforeMinutes": 193,
+      "afterMinutes": 233
+    },
+    {
+      "market": "ISP-CMH",
+      "origin": "ISP",
+      "destination": "CMH",
+      "demand": 1.2,
+      "beforeMinutes": 268,
+      "afterMinutes": 400
+    },
+    {
+      "market": "ISP-DAL",
+      "origin": "ISP",
+      "destination": "DAL",
+      "demand": 1.2,
+      "beforeMinutes": 369,
+      "afterMinutes": 485
+    },
+    {
+      "market": "MHT-MSN",
+      "origin": "MHT",
+      "destination": "MSN",
+      "demand": 1.2,
+      "beforeMinutes": 305,
+      "afterMinutes": 345
+    },
+    {
+      "market": "ISP-PIT",
+      "origin": "ISP",
+      "destination": "PIT",
+      "demand": 1.1,
+      "beforeMinutes": 261,
+      "afterMinutes": 337
+    },
+    {
+      "market": "ISP-SDF",
+      "origin": "ISP",
+      "destination": "SDF",
+      "demand": 1.1,
+      "beforeMinutes": 283,
+      "afterMinutes": 415
+    },
+    {
+      "market": "MHT-ELP",
+      "origin": "MHT",
+      "destination": "ELP",
+      "demand": 1,
+      "beforeMinutes": 636,
+      "afterMinutes": 676
+    },
+    {
+      "market": "MHT-ECP",
+      "origin": "MHT",
+      "destination": "ECP",
+      "demand": 0.9,
+      "beforeMinutes": 481,
+      "afterMinutes": 521
+    },
+    {
+      "market": "MDT-BDL",
+      "origin": "MDT",
+      "destination": "BDL",
+      "demand": 0.8,
+      "beforeMinutes": 319,
+      "afterMinutes": 327
+    },
+    {
+      "market": "MHT-TLH",
+      "origin": "MHT",
+      "destination": "TLH",
+      "demand": 0.8,
+      "beforeMinutes": 470,
+      "afterMinutes": 510
+    },
+    {
+      "market": "MHT-AGS",
+      "origin": "MHT",
+      "destination": "AGS",
+      "demand": 0.7,
+      "beforeMinutes": 475,
+      "afterMinutes": 515
+    },
+    {
+      "market": "BGR-MDT",
+      "origin": "BGR",
+      "destination": "MDT",
+      "demand": 0.6,
+      "beforeMinutes": 177,
+      "afterMinutes": 307
+    },
+    {
+      "market": "SRQ-BGR",
+      "origin": "SRQ",
+      "destination": "BGR",
+      "demand": 0.6,
+      "beforeMinutes": 300,
+      "afterMinutes": 335
+    },
+    {
+      "market": "MHT-GNV",
+      "origin": "MHT",
+      "destination": "GNV",
+      "demand": 0.5,
+      "beforeMinutes": 457,
+      "afterMinutes": 497
+    },
+    {
+      "market": "MHT-LEX",
+      "origin": "MHT",
+      "destination": "LEX",
+      "demand": 0.5,
+      "beforeMinutes": 455,
+      "afterMinutes": 495
+    },
+    {
+      "market": "MHT-FWA",
+      "origin": "MHT",
+      "destination": "FWA",
+      "demand": 0.4,
+      "beforeMinutes": 225,
+      "afterMinutes": 265
+    },
+    {
+      "market": "MHT-SBN",
+      "origin": "MHT",
+      "destination": "SBN",
+      "demand": 0.4,
+      "beforeMinutes": 290,
+      "afterMinutes": 330
+    },
+    {
+      "market": "ABE-BGR",
+      "origin": "ABE",
+      "destination": "BGR",
+      "demand": 0.3,
+      "beforeMinutes": 175,
+      "afterMinutes": 330
+    },
+    {
+      "market": "BWI-BGR",
+      "origin": "BWI",
+      "destination": "BGR",
+      "demand": 0.3,
+      "beforeMinutes": 185,
+      "afterMinutes": 328
+    },
+    {
+      "market": "ISP-ELP",
+      "origin": "ISP",
+      "destination": "ELP",
+      "demand": 0.3,
+      "beforeMinutes": 636,
+      "afterMinutes": 768
+    },
+    {
+      "market": "ISP-GRR",
+      "origin": "ISP",
+      "destination": "GRR",
+      "demand": 0.3,
+      "beforeMinutes": 288,
+      "afterMinutes": 420
+    },
+    {
+      "market": "MHT-GPT",
+      "origin": "MHT",
+      "destination": "GPT",
+      "demand": 0.3,
+      "beforeMinutes": 508,
+      "afterMinutes": 548
+    },
+    {
+      "market": "MHT-MOB",
+      "origin": "MHT",
+      "destination": "MOB",
+      "demand": 0.3,
+      "beforeMinutes": 501,
+      "afterMinutes": 541
+    },
+    {
+      "market": "ISP-VPS",
+      "origin": "ISP",
+      "destination": "VPS",
+      "demand": 0.2,
+      "beforeMinutes": 414,
+      "afterMinutes": 619
+    },
+    {
+      "market": "MHT-BTR",
+      "origin": "MHT",
+      "destination": "BTR",
+      "demand": 0.2,
+      "beforeMinutes": 525,
+      "afterMinutes": 565
+    },
+    {
+      "market": "HPN-BGR",
+      "origin": "HPN",
+      "destination": "BGR",
+      "demand": 0.1,
+      "beforeMinutes": 184,
+      "afterMinutes": 210
+    },
+    {
+      "market": "ISP-ECP",
+      "origin": "ISP",
+      "destination": "ECP",
+      "demand": 0.1,
+      "beforeMinutes": 481,
+      "afterMinutes": 613
+    },
+    {
+      "market": "BGR-SWF",
+      "origin": "BGR",
+      "destination": "SWF",
+      "demand": 0,
+      "beforeMinutes": 204,
+      "afterMinutes": 324
+    },
+    {
+      "market": "ISP-AGS",
+      "origin": "ISP",
+      "destination": "AGS",
+      "demand": 0,
+      "beforeMinutes": 475,
+      "afterMinutes": 607
+    },
+    {
+      "market": "ISP-BGR",
+      "origin": "ISP",
+      "destination": "BGR",
+      "demand": 0,
+      "beforeMinutes": 180,
+      "afterMinutes": 215
+    },
+    {
+      "market": "ISP-BTR",
+      "origin": "ISP",
+      "destination": "BTR",
+      "demand": 0,
+      "beforeMinutes": 525,
+      "afterMinutes": 657
+    },
+    {
+      "market": "ISP-BTV",
+      "origin": "ISP",
+      "destination": "BTV",
+      "demand": 0,
+      "beforeMinutes": 152,
+      "afterMinutes": 232
+    },
+    {
+      "market": "ISP-DAY",
+      "origin": "ISP",
+      "destination": "DAY",
+      "demand": 0,
+      "beforeMinutes": 193,
+      "afterMinutes": 318
+    },
+    {
+      "market": "ISP-FWA",
+      "origin": "ISP",
+      "destination": "FWA",
+      "demand": 0,
+      "beforeMinutes": 225,
+      "afterMinutes": 357
+    },
+    {
+      "market": "ISP-GNV",
+      "origin": "ISP",
+      "destination": "GNV",
+      "demand": 0,
+      "beforeMinutes": 457,
+      "afterMinutes": 500
+    },
+    {
+      "market": "ISP-GPT",
+      "origin": "ISP",
+      "destination": "GPT",
+      "demand": 0,
+      "beforeMinutes": 508,
+      "afterMinutes": 640
+    },
+    {
+      "market": "ISP-MCN",
+      "origin": "ISP",
+      "destination": "MCN",
+      "demand": 0,
+      "beforeMinutes": 474,
+      "afterMinutes": 606
+    },
+    {
+      "market": "ISP-MLB",
+      "origin": "ISP",
+      "destination": "MLB",
+      "demand": 0,
+      "beforeMinutes": 405,
+      "afterMinutes": 539
+    },
+    {
+      "market": "ISP-MOB",
+      "origin": "ISP",
+      "destination": "MOB",
+      "demand": 0,
+      "beforeMinutes": 501,
+      "afterMinutes": 633
+    },
+    {
+      "market": "ISP-MSN",
+      "origin": "ISP",
+      "destination": "MSN",
+      "demand": 0,
+      "beforeMinutes": 305,
+      "afterMinutes": 437
+    },
+    {
+      "market": "ISP-SBN",
+      "origin": "ISP",
+      "destination": "SBN",
+      "demand": 0,
+      "beforeMinutes": 290,
+      "afterMinutes": 422
+    },
+    {
+      "market": "ISP-TLH",
+      "origin": "ISP",
+      "destination": "TLH",
+      "demand": 0,
+      "beforeMinutes": 470,
+      "afterMinutes": 602
+    },
+    {
+      "market": "MHT-MCN",
+      "origin": "MHT",
+      "destination": "MCN",
+      "demand": 0,
+      "beforeMinutes": 474,
+      "afterMinutes": 514
+    },
+    {
+      "market": "SWF-BGR",
+      "origin": "SWF",
+      "destination": "BGR",
+      "demand": 0,
+      "beforeMinutes": 170,
+      "afterMinutes": 289
+    }
+  ],
+  "weightedFaster": 33328,
+  "weightedSlower": 19055.699999999997,
+  "weightedNet": 14272.300000000003
+}
