@@ -1,0 +1,569 @@
+[
+  {
+    "name": "R167 ALB-BWI-ALB morning turn",
+    "route": 167,
+    "scope": "read-only",
+    "structural": "pass",
+    "overnight": "pass",
+    "planning": "pass",
+    "gate": "pass",
+    "operating": {
+      "checks": 25,
+      "passed": 17,
+      "failed": 0,
+      "warnings": 5,
+      "notEvaluated": 1,
+      "overridden": 2,
+      "effectiveErrorFindings": 0,
+      "effectiveWarningFindings": 149
+    },
+    "addedFlights": 2,
+    "failed": [],
+    "pass": true,
+    "overlay": {
+      "schemaVersion": "1.0.0",
+      "id": "v141-holistic-0",
+      "baseSchedule": {
+        "scheduleId": "schedule_7_v1_4_1_draft"
+      },
+      "schedule": {
+        "id": "schedule_7_v1_4_1_draft",
+        "number": 7,
+        "version": "1.4.1-draft",
+        "label": "Schedule 7 v1.4.1 draft",
+        "status": "draft",
+        "fleetCounts": {
+          "MAX9": 35,
+          "CRJ900": 45,
+          "CRJ700": 65,
+          "CRJ200": 80
+        },
+        "connectionWindowMinutes": {
+          "minimum": 30,
+          "maximum": 240
+        }
+      },
+      "removeLegs": [],
+      "retimeLegs": [
+        {
+          "legId": "ALB-SYR-CRJ200-01-IN",
+          "expectedDepartureMinute": 350,
+          "expectedArrivalMinute": 394,
+          "departureMinute": 309,
+          "arrivalMinute": 353
+        },
+        {
+          "legId": "ALB-SYR-CRJ200-02-OUT",
+          "expectedDepartureMinute": 595,
+          "expectedArrivalMinute": 639,
+          "departureMinute": 613,
+          "arrivalMinute": 657
+        },
+        {
+          "legId": "CAK-SYR-CRJ200-02-IN",
+          "expectedDepartureMinute": 680,
+          "expectedArrivalMinute": 751,
+          "departureMinute": 720,
+          "arrivalMinute": 791
+        }
+      ],
+      "insertLegs": [
+        {
+          "id": "V141-HOLISTIC-0-1",
+          "route": 167,
+          "origin": "ALB",
+          "destination": "BWI",
+          "departureMinute": 393,
+          "arrivalMinute": 463
+        },
+        {
+          "id": "V141-HOLISTIC-0-2",
+          "route": 167,
+          "origin": "BWI",
+          "destination": "ALB",
+          "departureMinute": 503,
+          "arrivalMinute": 573
+        }
+      ],
+      "bankAssignmentsToAdd": [],
+      "bankAssignmentReplacements": [
+        {
+          "legId": "CAK-SYR-CRJ200-02-IN",
+          "operation": "departure",
+          "bankId": "SYR-M12"
+        }
+      ]
+    }
+  },
+  {
+    "name": "R167 ALB-PHF-ALB with PHF B2",
+    "route": 167,
+    "scope": "read-only",
+    "structural": "pass",
+    "overnight": "pass",
+    "planning": "pass",
+    "gate": "GateCapacityError: 3 passenger touch(es) remain off-gate",
+    "operating": {
+      "checks": 25,
+      "passed": 14,
+      "failed": 3,
+      "warnings": 5,
+      "notEvaluated": 1,
+      "overridden": 2,
+      "effectiveErrorFindings": 5,
+      "effectiveWarningFindings": 149
+    },
+    "addedFlights": 2,
+    "failed": [
+      {
+        "check": "section_26_pairing_spacing",
+        "findings": [
+          {
+            "id": "PHF-ALB",
+            "message": "PHF\u2013ALB fails same-pairing spacing",
+            "evidence": {
+              "origin": "PHF",
+              "destination": "ALB",
+              "departures": [
+                545,
+                645,
+                800
+              ],
+              "gaps": [
+                {
+                  "from": 545,
+                  "to": 645,
+                  "minutes": 100
+                },
+                {
+                  "from": 645,
+                  "to": 800,
+                  "minutes": 155
+                },
+                {
+                  "from": 800,
+                  "to": 545,
+                  "minutes": 1185
+                }
+              ],
+              "targetMinutes": 112.0,
+              "allowedExceptions": 0,
+              "hubBound": false
+            }
+          }
+        ]
+      },
+      {
+        "check": "passenger_touch_on_stand",
+        "findings": [
+          {
+            "id": "PHF-323-513-558",
+            "message": "PHF claim 323 requires passenger handling on stand 1",
+            "evidence": {
+              "city": "PHF",
+              "label": "323",
+              "kind": "turn",
+              "start": 513,
+              "end": 558,
+              "stand": 1
+            }
+          },
+          {
+            "id": "PHF-528-937-982",
+            "message": "PHF claim 528 requires passenger handling on stand 2",
+            "evidence": {
+              "city": "PHF",
+              "label": "528",
+              "kind": "turn",
+              "start": 937,
+              "end": 982,
+              "stand": 2
+            }
+          },
+          {
+            "id": "PHF-722 -> 723-1235-1280",
+            "message": "PHF claim 722 -> 723 requires passenger handling on stand 1",
+            "evidence": {
+              "city": "PHF",
+              "label": "722 -> 723",
+              "kind": "ron",
+              "start": 1235,
+              "end": 1280,
+              "stand": 1
+            }
+          }
+        ]
+      },
+      {
+        "check": "fixed_physical_inventory",
+        "findings": [
+          {
+            "id": "PHF",
+            "message": "PHF cannot fit its claims into the configured physical inventory: 3 passenger touch(es) remain off-gate",
+            "evidence": {
+              "city": "PHF",
+              "requiredGates": 17,
+              "configuredGates": 16,
+              "requiredStands": 8,
+              "configuredStands": 8,
+              "strandedPassengerTouches": 3
+            }
+          }
+        ]
+      }
+    ],
+    "pass": false,
+    "overlay": {
+      "schemaVersion": "1.0.0",
+      "id": "v141-holistic-1",
+      "baseSchedule": {
+        "scheduleId": "schedule_7_v1_4_1_draft"
+      },
+      "schedule": {
+        "id": "schedule_7_v1_4_1_draft",
+        "number": 7,
+        "version": "1.4.1-draft",
+        "label": "Schedule 7 v1.4.1 draft",
+        "status": "draft",
+        "fleetCounts": {
+          "MAX9": 35,
+          "CRJ900": 45,
+          "CRJ700": 65,
+          "CRJ200": 80
+        },
+        "connectionWindowMinutes": {
+          "minimum": 30,
+          "maximum": 240
+        }
+      },
+      "removeLegs": [],
+      "retimeLegs": [
+        {
+          "legId": "ALB-SYR-CRJ200-01-IN",
+          "expectedDepartureMinute": 350,
+          "expectedArrivalMinute": 394,
+          "departureMinute": 309,
+          "arrivalMinute": 353
+        },
+        {
+          "legId": "ALB-SYR-CRJ200-02-OUT",
+          "expectedDepartureMinute": 595,
+          "expectedArrivalMinute": 639,
+          "departureMinute": 672,
+          "arrivalMinute": 716
+        },
+        {
+          "legId": "CAK-SYR-CRJ200-02-IN",
+          "expectedDepartureMinute": 680,
+          "expectedArrivalMinute": 751,
+          "departureMinute": 756,
+          "arrivalMinute": 827
+        }
+      ],
+      "insertLegs": [
+        {
+          "id": "V141-HOLISTIC-1-1",
+          "route": 167,
+          "origin": "ALB",
+          "destination": "PHF",
+          "departureMinute": 418,
+          "arrivalMinute": 505
+        },
+        {
+          "id": "V141-HOLISTIC-1-2",
+          "route": 167,
+          "origin": "PHF",
+          "destination": "ALB",
+          "departureMinute": 545,
+          "arrivalMinute": 632
+        }
+      ],
+      "bankAssignmentsToAdd": [
+        {
+          "legId": "V141-HOLISTIC-1-1",
+          "operation": "arrival",
+          "bankId": "PHF-B2"
+        },
+        {
+          "legId": "V141-HOLISTIC-1-2",
+          "operation": "departure",
+          "bankId": "PHF-B2"
+        }
+      ],
+      "bankAssignmentReplacements": [
+        {
+          "legId": "ALB-SYR-CRJ200-02-OUT",
+          "operation": "arrival",
+          "bankId": "SYR-M12"
+        },
+        {
+          "legId": "CAK-SYR-CRJ200-02-IN",
+          "operation": "departure",
+          "bankId": "SYR-M12"
+        }
+      ]
+    }
+  },
+  {
+    "name": "R108 SYR-BTV departure into M12 then BTV-PHF-SYR",
+    "route": 108,
+    "scope": "read-only",
+    "structural": "pass",
+    "overnight": "pass",
+    "planning": "pass",
+    "gate": "GateCapacityError: 3 passenger touch(es) remain off-gate",
+    "operating": {
+      "checks": 25,
+      "passed": 15,
+      "failed": 3,
+      "warnings": 5,
+      "notEvaluated": 1,
+      "overridden": 1,
+      "effectiveErrorFindings": 6,
+      "effectiveWarningFindings": 151
+    },
+    "addedFlights": 1,
+    "failed": [
+      {
+        "check": "passenger_touch_on_stand",
+        "findings": [
+          {
+            "id": "PHF-136-936-981",
+            "message": "PHF claim 136 requires passenger handling on stand 2",
+            "evidence": {
+              "city": "PHF",
+              "label": "136",
+              "kind": "turn",
+              "start": 936,
+              "end": 981,
+              "stand": 2
+            }
+          },
+          {
+            "id": "PHF-528-937-982",
+            "message": "PHF claim 528 requires passenger handling on stand 3",
+            "evidence": {
+              "city": "PHF",
+              "label": "528",
+              "kind": "turn",
+              "start": 937,
+              "end": 982,
+              "stand": 3
+            }
+          },
+          {
+            "id": "PHF-722 -> 723-1235-1280",
+            "message": "PHF claim 722 -> 723 requires passenger handling on stand 1",
+            "evidence": {
+              "city": "PHF",
+              "label": "722 -> 723",
+              "kind": "ron",
+              "start": 1235,
+              "end": 1280,
+              "stand": 1
+            }
+          }
+        ]
+      },
+      {
+        "check": "fixed_physical_inventory",
+        "findings": [
+          {
+            "id": "PHF",
+            "message": "PHF cannot fit its claims into the configured physical inventory: 3 passenger touch(es) remain off-gate",
+            "evidence": {
+              "city": "PHF",
+              "requiredGates": 17,
+              "configuredGates": 16,
+              "requiredStands": 8,
+              "configuredStands": 8,
+              "strandedPassengerTouches": 3
+            }
+          }
+        ]
+      },
+      {
+        "check": "hub_bank_alignment",
+        "findings": [
+          {
+            "id": "V114-R169-SYR-FWA-departure",
+            "message": "Departure for V114-R169-SYR-FWA falls outside bank SYR-B4",
+            "evidence": {
+              "assignment": {
+                "legId": "V114-R169-SYR-FWA",
+                "operation": "departure",
+                "bankId": "SYR-B4"
+              },
+              "minute": 875,
+              "bankWindow": [
+                795,
+                855
+              ]
+            },
+            "override": {
+              "reason": "Schedule 7 v1.1.4 tactical initiative: the 14:35 SYR-FWA return departs 20 minutes after Bank 4 to remain within SYR's fixed 16-gate inventory without weakening existing bank connections.",
+              "approvedBy": "user",
+              "expiresAfterSchedule": 7
+            }
+          },
+          {
+            "id": "V114-R122-SYR-SWF-departure",
+            "message": "Departure for V114-R122-SYR-SWF falls outside bank SYR-B6",
+            "evidence": {
+              "assignment": {
+                "legId": "V114-R122-SYR-SWF",
+                "operation": "departure",
+                "bankId": "SYR-B6"
+              },
+              "minute": 1210,
+              "bankWindow": [
+                1125,
+                1185
+              ]
+            },
+            "override": {
+              "reason": "Schedule 7 v1.1.4 tactical initiative: the 20:10 SYR-SWF return departs 25 minutes after Bank 6 to remain within SYR's fixed 16-gate inventory without weakening existing bank connections.",
+              "approvedBy": "user",
+              "expiresAfterSchedule": 7
+            }
+          },
+          {
+            "id": "V116-R149-DAY-BHM-departure",
+            "message": "Departure for V116-R149-DAY-BHM falls outside bank DAY-B1",
+            "evidence": {
+              "assignment": {
+                "legId": "V116-R149-DAY-BHM",
+                "operation": "departure",
+                "bankId": "DAY-B1"
+              },
+              "minute": 270,
+              "bankWindow": [
+                301,
+                361
+              ]
+            },
+            "override": {
+              "reason": "Schedule 7 v1.1.6 BHM morning initiative: the 04:30 DAY departure is 30 minutes before DAY Bank 1 so the aircraft can feed BHM's morning wave while remaining within fixed gate capacity at both cities.",
+              "approvedBy": "user",
+              "expiresAfterSchedule": 7
+            }
+          },
+          {
+            "id": "V116-R330-DAY-PHF-departure",
+            "message": "Departure for V116-R330-DAY-PHF falls outside bank DAY-B2",
+            "evidence": {
+              "assignment": {
+                "legId": "V116-R330-DAY-PHF",
+                "operation": "departure",
+                "bankId": "DAY-B2"
+              },
+              "minute": 411,
+              "bankWindow": [
+                425,
+                485
+              ]
+            },
+            "override": {
+              "reason": "Schedule 7 v1.1.6 PHF early-hub initiative: the user-selected 06:51 DAY departure splits the difference between a minimum turn and DAY Bank 2, producing an 08:20 PHF return with a 55-minute turn into the existing originator.",
+              "approvedBy": "user",
+              "expiresAfterSchedule": 7
+            }
+          },
+          {
+            "id": "V116-R330-DAY-PHF-arrival",
+            "message": "Arrival for V116-R330-DAY-PHF falls outside bank PHF-B2",
+            "evidence": {
+              "assignment": {
+                "legId": "V116-R330-DAY-PHF",
+                "operation": "arrival",
+                "bankId": "PHF-B2"
+              },
+              "minute": 500,
+              "bankWindow": [
+                505,
+                565
+              ]
+            },
+            "override": {
+              "reason": "Schedule 7 v1.1.6 PHF early-hub initiative: the user-selected 08:20 return arrives five minutes before PHF Bank 2 and preserves a 55-minute turn into Route 330's existing originator.",
+              "approvedBy": "user",
+              "expiresAfterSchedule": 7
+            }
+          }
+        ]
+      }
+    ],
+    "pass": false,
+    "overlay": {
+      "schemaVersion": "1.0.0",
+      "id": "v141-holistic-2",
+      "baseSchedule": {
+        "scheduleId": "schedule_7_v1_4_1_draft"
+      },
+      "schedule": {
+        "id": "schedule_7_v1_4_1_draft",
+        "number": 7,
+        "version": "1.4.1-draft",
+        "label": "Schedule 7 v1.4.1 draft",
+        "status": "draft",
+        "fleetCounts": {
+          "MAX9": 35,
+          "CRJ900": 45,
+          "CRJ700": 65,
+          "CRJ200": 80
+        },
+        "connectionWindowMinutes": {
+          "minimum": 30,
+          "maximum": 240
+        }
+      },
+      "removeLegs": [
+        {
+          "legId": "BTV-SYR-CRJ200-03-OUT",
+          "expectedRoute": 108
+        }
+      ],
+      "retimeLegs": [
+        {
+          "legId": "BTV-SYR-CRJ200-03-IN",
+          "expectedDepartureMinute": 845,
+          "expectedArrivalMinute": 897,
+          "departureMinute": 765,
+          "arrivalMinute": 817
+        }
+      ],
+      "insertLegs": [
+        {
+          "id": "V141-HOLISTIC-2-1",
+          "route": 108,
+          "origin": "BTV",
+          "destination": "PHF",
+          "departureMinute": 857,
+          "arrivalMinute": 957
+        },
+        {
+          "id": "V141-HOLISTIC-2-2",
+          "route": 108,
+          "origin": "PHF",
+          "destination": "SYR",
+          "departureMinute": 997,
+          "arrivalMinute": 1082
+        }
+      ],
+      "bankAssignmentsToAdd": [
+        {
+          "legId": "V141-HOLISTIC-2-2",
+          "operation": "arrival",
+          "bankId": "SYR-M17"
+        }
+      ],
+      "bankAssignmentReplacements": [
+        {
+          "legId": "BTV-SYR-CRJ200-03-IN",
+          "operation": "departure",
+          "bankId": "SYR-M12"
+        }
+      ]
+    }
+  }
+]
