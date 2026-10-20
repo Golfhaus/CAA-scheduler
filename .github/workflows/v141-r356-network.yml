@@ -1,0 +1,32 @@
+name: Audit R356 BDL-SYR connection-protection value
+on:
+  push:
+    branches: [schedule-7-v1.4.1-utilization-analysis]
+    paths:
+      - '.github/workflows/v141-r356-network.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -e .
+      - run: python scripts/screen_schedule_7_v1_4_1_r356_protection.py
+      - run: node scripts/audit_schedule_7_v1_4_1_r356_protection.mjs
+      - name: Archive R356 compensation network audit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f outputs/schedule_7_v1_4_1_utilization/r356_connection_protection_network.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Audit R356 connection-protection passenger impact [skip ci]"
+            git restore --worktree .
+            git clean -fd outputs/schedule_7_v1_4_1_utilization/
+            git pull --rebase origin schedule-7-v1.4.1-utilization-analysis
+            git push origin HEAD:schedule-7-v1.4.1-utilization-analysis
+          fi
