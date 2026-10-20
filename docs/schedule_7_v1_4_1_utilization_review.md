@@ -126,3 +126,12 @@ The new `r167_holistic_network.json` comparison confirms that **ALB–BTV–SYR 
 The ALB–BTV–ALB filler adds two flights, two nominal geographic coverage gains, no faster reasonable itineraries, and negligible ALB–BTV demand (0.6/day each direction). It should not be adopted merely to inflate aircraft utilization.
 
 **Decision:** Reject both as current R167 draft additions. Keep the original R167 morning ALB→SYR connectivity, and preserve BTV↔RFD on R108. Neither the accepted v1.4.0 release nor the provisional 1,266-flight v1.4.1 draft has been modified.
+
+
+## User confirmation — four-route v1.4.1 draft
+
+The user explicitly requested that changes to **R105, R107, R108 and R162** be included in the v1.4.1 draft. The saved canonical draft already contains these four changes and the supporting **R356** retiming, so there is no additional overlay to apply. The user request confirms their inclusion as the current accepted v1.4.1 working scope, but **does not authorize publication to `main`**.
+
+The saved cumulative builder applies four overlays in order: R105/R162, R107 ISP–PHF–SYR, R356 compensation, and R108 SYR–PIT–SYR. Stored native validation reports show 1,266 flights, 188 routes, 17 routing lines and zero effective operating errors. The BTV↔RFD market (30.1/30.3 underlying directional daily demand) remains a protection priority; R108's existing BTV→SYR 18:00 return is preserved.
+
+Commercial caveats for future optimization: R107 still weakens ISP→BNA (3.7 daily directional O-D) and R108 slows ORH→PGD. R167 remains unchanged. App default stays v1.4.0.
