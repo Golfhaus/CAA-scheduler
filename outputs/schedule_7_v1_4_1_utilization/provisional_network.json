@@ -938,12 +938,12 @@
       "afterMinutes": 212
     },
     {
-      "market": "BDL-PIE",
+      "market": "BDL-PGD",
       "origin": "BDL",
-      "destination": "PIE",
-      "demand": 105,
-      "beforeMinutes": 248,
-      "afterMinutes": 329
+      "destination": "PGD",
+      "demand": 70.4,
+      "beforeMinutes": 379,
+      "afterMinutes": 409
     },
     {
       "market": "ISP-PIE",
@@ -952,6 +952,14 @@
       "demand": 65.3,
       "beforeMinutes": 264,
       "afterMinutes": 272
+    },
+    {
+      "market": "BDL-BNA",
+      "origin": "BDL",
+      "destination": "BNA",
+      "demand": 36.9,
+      "beforeMinutes": 284,
+      "afterMinutes": 314
     },
     {
       "market": "ISP-PGD",
@@ -976,6 +984,14 @@
       "demand": 22.7,
       "beforeMinutes": 270,
       "afterMinutes": 300
+    },
+    {
+      "market": "BDL-CMH",
+      "origin": "BDL",
+      "destination": "CMH",
+      "demand": 21.9,
+      "beforeMinutes": 378,
+      "afterMinutes": 408
     },
     {
       "market": "PIE-BGR",
@@ -1008,6 +1024,22 @@
       "demand": 8.5,
       "beforeMinutes": 225,
       "afterMinutes": 240
+    },
+    {
+      "market": "BDL-MSN",
+      "origin": "BDL",
+      "destination": "MSN",
+      "demand": 7.7,
+      "beforeMinutes": 415,
+      "afterMinutes": 445
+    },
+    {
+      "market": "BDL-GRR",
+      "origin": "BDL",
+      "destination": "GRR",
+      "demand": 7.1,
+      "beforeMinutes": 398,
+      "afterMinutes": 428
     },
     {
       "market": "BGR-CLT",
@@ -1066,6 +1098,14 @@
       "afterMinutes": 323
     },
     {
+      "market": "BDL-SBN",
+      "origin": "BDL",
+      "destination": "SBN",
+      "demand": 2.7,
+      "beforeMinutes": 400,
+      "afterMinutes": 430
+    },
+    {
       "market": "MHT-HOU",
       "origin": "MHT",
       "destination": "HOU",
@@ -1080,6 +1120,14 @@
       "demand": 2.3,
       "beforeMinutes": 288,
       "afterMinutes": 328
+    },
+    {
+      "market": "BDL-FWA",
+      "origin": "BDL",
+      "destination": "FWA",
+      "demand": 2.1,
+      "beforeMinutes": 335,
+      "afterMinutes": 365
     },
     {
       "market": "MHT-TYS",
@@ -1467,6 +1515,6 @@
     }
   ],
   "weightedFaster": 33328,
-  "weightedSlower": 19055.699999999997,
-  "weightedNet": 14272.300000000003
+  "weightedSlower": 15014.700000000003,
+  "weightedNet": 18313.299999999996
 }
