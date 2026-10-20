@@ -1,0 +1,1317 @@
+[
+  {
+    "name": "R162_BGR",
+    "pass": true,
+    "flights": 1261,
+    "gains": [
+      {
+        "market": "BGR-PGD",
+        "origin": "BGR",
+        "destination": "PGD",
+        "demand": 5.8,
+        "beforeMinutes": 507,
+        "afterMinutes": 299
+      },
+      {
+        "market": "PGD-BGR",
+        "origin": "PGD",
+        "destination": "BGR",
+        "demand": 5.4,
+        "beforeMinutes": 495,
+        "afterMinutes": 384
+      },
+      {
+        "market": "BGR-BNA",
+        "origin": "BGR",
+        "destination": "BNA",
+        "demand": 4.7,
+        "beforeMinutes": null,
+        "afterMinutes": 389
+      },
+      {
+        "market": "BNA-BGR",
+        "origin": "BNA",
+        "destination": "BGR",
+        "demand": 4.6,
+        "beforeMinutes": 560,
+        "afterMinutes": 320
+      },
+      {
+        "market": "BGR-PHF",
+        "origin": "BGR",
+        "destination": "PHF",
+        "demand": 2.1,
+        "beforeMinutes": null,
+        "afterMinutes": 220
+      },
+      {
+        "market": "BGR-BWI",
+        "origin": "BGR",
+        "destination": "BWI",
+        "demand": 0.3,
+        "beforeMinutes": null,
+        "afterMinutes": 310
+      },
+      {
+        "market": "BGR-FWA",
+        "origin": "BGR",
+        "destination": "FWA",
+        "demand": 0.2,
+        "beforeMinutes": null,
+        "afterMinutes": 255
+      },
+      {
+        "market": "BGR-ACY",
+        "origin": "BGR",
+        "destination": "ACY",
+        "demand": 0.1,
+        "beforeMinutes": null,
+        "afterMinutes": 359
+      },
+      {
+        "market": "BGR-DAB",
+        "origin": "BGR",
+        "destination": "DAB",
+        "demand": 0.1,
+        "beforeMinutes": null,
+        "afterMinutes": 444
+      },
+      {
+        "market": "DAB-BGR",
+        "origin": "DAB",
+        "destination": "BGR",
+        "demand": 0.1,
+        "beforeMinutes": 620,
+        "afterMinutes": 363
+      }
+    ],
+    "losses": [],
+    "faster": 23,
+    "slower": 1,
+    "weightedFast": 9728.499999999998,
+    "weightedSlow": 8505,
+    "weightedNet": 1223.4999999999982,
+    "topWorse": [
+      {
+        "market": "BDL-PIE",
+        "od": 105,
+        "extra": 81,
+        "weight": 8505
+      }
+    ]
+  },
+  {
+    "name": "R105_BGR",
+    "pass": true,
+    "flights": 1261,
+    "gains": [
+      {
+        "market": "BNA-BGR",
+        "origin": "BNA",
+        "destination": "BGR",
+        "demand": 4.6,
+        "beforeMinutes": 560,
+        "afterMinutes": 250
+      },
+      {
+        "market": "DAY-BGR",
+        "origin": "DAY",
+        "destination": "BGR",
+        "demand": 0.7,
+        "beforeMinutes": 514,
+        "afterMinutes": 400
+      },
+      {
+        "market": "BGR-BWI",
+        "origin": "BGR",
+        "destination": "BWI",
+        "demand": 0.3,
+        "beforeMinutes": null,
+        "afterMinutes": 275
+      },
+      {
+        "market": "FWA-BGR",
+        "origin": "FWA",
+        "destination": "BGR",
+        "demand": 0.2,
+        "beforeMinutes": null,
+        "afterMinutes": 385
+      }
+    ],
+    "losses": [],
+    "faster": 59,
+    "slower": 39,
+    "weightedFast": 8342.6,
+    "weightedSlow": 8382.8,
+    "weightedNet": -40.19999999999891,
+    "topWorse": [
+      {
+        "market": "PIE-BGR",
+        "od": 18.8,
+        "extra": 111,
+        "weight": 2086.8
+      },
+      {
+        "market": "MHT-PGD",
+        "od": 28.9,
+        "extra": 40,
+        "weight": 1156
+      },
+      {
+        "market": "BGR-RFD",
+        "od": 8.5,
+        "extra": 130,
+        "weight": 1105
+      },
+      {
+        "market": "BGR-CLT",
+        "od": 5.5,
+        "extra": 130,
+        "weight": 715
+      },
+      {
+        "market": "SFB-BGR",
+        "od": 22.7,
+        "extra": 30,
+        "weight": 681
+      },
+      {
+        "market": "MHT-RFD",
+        "od": 13.3,
+        "extra": 40,
+        "weight": 532
+      },
+      {
+        "market": "FLL-BGR",
+        "od": 10.2,
+        "extra": 35,
+        "weight": 357
+      },
+      {
+        "market": "BGR-CAK",
+        "od": 1.5,
+        "extra": 130,
+        "weight": 195
+      },
+      {
+        "market": "CLT-BGR",
+        "od": 5.3,
+        "extra": 35,
+        "weight": 185.5
+      },
+      {
+        "market": "MHT-IND",
+        "od": 4.2,
+        "extra": 40,
+        "weight": 168
+      },
+      {
+        "market": "MHT-CMH",
+        "od": 3.6,
+        "extra": 40,
+        "weight": 144
+      },
+      {
+        "market": "MHT-BHM",
+        "od": 2.8,
+        "extra": 40,
+        "weight": 112
+      }
+    ]
+  },
+  {
+    "name": "R107_PHF",
+    "pass": true,
+    "flights": 1260,
+    "gains": [
+      {
+        "market": "ISP-BWI",
+        "origin": "ISP",
+        "destination": "BWI",
+        "demand": 18.1,
+        "beforeMinutes": null,
+        "afterMinutes": 270
+      },
+      {
+        "market": "GSP-SYR",
+        "origin": "GSP",
+        "destination": "SYR",
+        "demand": 5.8,
+        "beforeMinutes": 514,
+        "afterMinutes": 310
+      },
+      {
+        "market": "PNS-SYR",
+        "origin": "PNS",
+        "destination": "SYR",
+        "demand": 4.9,
+        "beforeMinutes": null,
+        "afterMinutes": 438
+      },
+      {
+        "market": "ISP-MSY",
+        "origin": "ISP",
+        "destination": "MSY",
+        "demand": 2.8,
+        "beforeMinutes": 379,
+        "afterMinutes": 371
+      },
+      {
+        "market": "ISP-SAV",
+        "origin": "ISP",
+        "destination": "SAV",
+        "demand": 2.2,
+        "beforeMinutes": 316,
+        "afterMinutes": 308
+      },
+      {
+        "market": "FWA-BDL",
+        "origin": "FWA",
+        "destination": "BDL",
+        "demand": 2.1,
+        "beforeMinutes": 425,
+        "afterMinutes": 239
+      },
+      {
+        "market": "ISP-DAL",
+        "origin": "ISP",
+        "destination": "DAL",
+        "demand": 1.2,
+        "beforeMinutes": 369,
+        "afterMinutes": 485
+      },
+      {
+        "market": "ISP-CAE",
+        "origin": "ISP",
+        "destination": "CAE",
+        "demand": 0,
+        "beforeMinutes": 420,
+        "afterMinutes": 305
+      }
+    ],
+    "losses": [
+      {
+        "market": "ISP-BNA",
+        "origin": "ISP",
+        "destination": "BNA",
+        "demand": 3.7,
+        "beforeMinutes": 359,
+        "afterMinutes": 447
+      },
+      {
+        "market": "MDT-BDL",
+        "origin": "MDT",
+        "destination": "BDL",
+        "demand": 0.8,
+        "beforeMinutes": 319,
+        "afterMinutes": null
+      },
+      {
+        "market": "ISP-FWA",
+        "origin": "ISP",
+        "destination": "FWA",
+        "demand": 0,
+        "beforeMinutes": 225,
+        "afterMinutes": 517
+      }
+    ],
+    "faster": 14,
+    "slower": 29,
+    "weightedFast": 11094.1,
+    "weightedSlow": 11708.100000000004,
+    "weightedNet": -614.0000000000036,
+    "topWorse": [
+      {
+        "market": "RFD-BDL",
+        "od": 105.4,
+        "extra": 80,
+        "weight": 8432
+      },
+      {
+        "market": "ISP-SFB",
+        "od": 166.7,
+        "extra": 5,
+        "weight": 833.5
+      },
+      {
+        "market": "ISP-PGD",
+        "od": 35.8,
+        "extra": 20,
+        "weight": 716
+      },
+      {
+        "market": "ISP-PIE",
+        "od": 65.3,
+        "extra": 8,
+        "weight": 522.4
+      },
+      {
+        "market": "ISP-BNA",
+        "od": 3.7,
+        "extra": 88,
+        "weight": 325.6
+      },
+      {
+        "market": "ISP-IND",
+        "od": 1.6,
+        "extra": 132,
+        "weight": 211.20000000000002
+      },
+      {
+        "market": "ISP-CMH",
+        "od": 1.2,
+        "extra": 132,
+        "weight": 158.4
+      },
+      {
+        "market": "ISP-SDF",
+        "od": 1.1,
+        "extra": 132,
+        "weight": 145.20000000000002
+      },
+      {
+        "market": "ISP-DAL",
+        "od": 1.2,
+        "extra": 116,
+        "weight": 139.2
+      },
+      {
+        "market": "ISP-PIT",
+        "od": 1.1,
+        "extra": 76,
+        "weight": 83.60000000000001
+      },
+      {
+        "market": "ISP-VPS",
+        "od": 0.2,
+        "extra": 205,
+        "weight": 41
+      },
+      {
+        "market": "ISP-ELP",
+        "od": 0.3,
+        "extra": 132,
+        "weight": 39.6
+      }
+    ]
+  },
+  {
+    "name": "R162_BGR_R105_BGR",
+    "pass": true,
+    "flights": 1263,
+    "gains": [
+      {
+        "market": "BGR-PGD",
+        "origin": "BGR",
+        "destination": "PGD",
+        "demand": 5.8,
+        "beforeMinutes": 507,
+        "afterMinutes": 299
+      },
+      {
+        "market": "PGD-BGR",
+        "origin": "PGD",
+        "destination": "BGR",
+        "demand": 5.4,
+        "beforeMinutes": 495,
+        "afterMinutes": 365
+      },
+      {
+        "market": "BGR-BNA",
+        "origin": "BGR",
+        "destination": "BNA",
+        "demand": 4.7,
+        "beforeMinutes": null,
+        "afterMinutes": 389
+      },
+      {
+        "market": "BNA-BGR",
+        "origin": "BNA",
+        "destination": "BGR",
+        "demand": 4.6,
+        "beforeMinutes": 560,
+        "afterMinutes": 250
+      },
+      {
+        "market": "BGR-PHF",
+        "origin": "BGR",
+        "destination": "PHF",
+        "demand": 2.1,
+        "beforeMinutes": null,
+        "afterMinutes": 220
+      },
+      {
+        "market": "DAY-BGR",
+        "origin": "DAY",
+        "destination": "BGR",
+        "demand": 0.7,
+        "beforeMinutes": 514,
+        "afterMinutes": 400
+      },
+      {
+        "market": "BGR-BWI",
+        "origin": "BGR",
+        "destination": "BWI",
+        "demand": 0.3,
+        "beforeMinutes": null,
+        "afterMinutes": 275
+      },
+      {
+        "market": "BGR-FWA",
+        "origin": "BGR",
+        "destination": "FWA",
+        "demand": 0.2,
+        "beforeMinutes": null,
+        "afterMinutes": 255
+      },
+      {
+        "market": "FWA-BGR",
+        "origin": "FWA",
+        "destination": "BGR",
+        "demand": 0.2,
+        "beforeMinutes": null,
+        "afterMinutes": 385
+      },
+      {
+        "market": "BGR-ACY",
+        "origin": "BGR",
+        "destination": "ACY",
+        "demand": 0.1,
+        "beforeMinutes": null,
+        "afterMinutes": 359
+      },
+      {
+        "market": "BGR-DAB",
+        "origin": "BGR",
+        "destination": "DAB",
+        "demand": 0.1,
+        "beforeMinutes": null,
+        "afterMinutes": 444
+      },
+      {
+        "market": "DAB-BGR",
+        "origin": "DAB",
+        "destination": "BGR",
+        "demand": 0.1,
+        "beforeMinutes": 620,
+        "afterMinutes": 363
+      }
+    ],
+    "losses": [],
+    "faster": 70,
+    "slower": 39,
+    "weightedFast": 15384.199999999997,
+    "weightedSlow": 14930,
+    "weightedNet": 454.1999999999971,
+    "topWorse": [
+      {
+        "market": "BDL-PIE",
+        "od": 105,
+        "extra": 81,
+        "weight": 8505
+      },
+      {
+        "market": "PIE-BGR",
+        "od": 18.8,
+        "extra": 70,
+        "weight": 1316
+      },
+      {
+        "market": "MHT-PGD",
+        "od": 28.9,
+        "extra": 40,
+        "weight": 1156
+      },
+      {
+        "market": "SFB-BGR",
+        "od": 22.7,
+        "extra": 30,
+        "weight": 681
+      },
+      {
+        "market": "BGR-CLT",
+        "od": 5.5,
+        "extra": 99,
+        "weight": 544.5
+      },
+      {
+        "market": "MHT-RFD",
+        "od": 13.3,
+        "extra": 40,
+        "weight": 532
+      },
+      {
+        "market": "FLL-BGR",
+        "od": 10.2,
+        "extra": 35,
+        "weight": 357
+      },
+      {
+        "market": "CLT-BGR",
+        "od": 5.3,
+        "extra": 35,
+        "weight": 185.5
+      },
+      {
+        "market": "BGR-CAK",
+        "od": 1.5,
+        "extra": 119,
+        "weight": 178.5
+      },
+      {
+        "market": "MHT-IND",
+        "od": 4.2,
+        "extra": 40,
+        "weight": 168
+      },
+      {
+        "market": "MHT-CMH",
+        "od": 3.6,
+        "extra": 40,
+        "weight": 144
+      },
+      {
+        "market": "BGR-RFD",
+        "od": 8.5,
+        "extra": 15,
+        "weight": 127.5
+      }
+    ]
+  },
+  {
+    "name": "R162_BGR_R107_PHF",
+    "pass": true,
+    "flights": 1262,
+    "gains": [
+      {
+        "market": "ISP-BWI",
+        "origin": "ISP",
+        "destination": "BWI",
+        "demand": 18.1,
+        "beforeMinutes": null,
+        "afterMinutes": 270
+      },
+      {
+        "market": "BGR-PGD",
+        "origin": "BGR",
+        "destination": "PGD",
+        "demand": 5.8,
+        "beforeMinutes": 507,
+        "afterMinutes": 299
+      },
+      {
+        "market": "GSP-SYR",
+        "origin": "GSP",
+        "destination": "SYR",
+        "demand": 5.8,
+        "beforeMinutes": 514,
+        "afterMinutes": 310
+      },
+      {
+        "market": "PGD-BGR",
+        "origin": "PGD",
+        "destination": "BGR",
+        "demand": 5.4,
+        "beforeMinutes": 495,
+        "afterMinutes": 384
+      },
+      {
+        "market": "PNS-SYR",
+        "origin": "PNS",
+        "destination": "SYR",
+        "demand": 4.9,
+        "beforeMinutes": null,
+        "afterMinutes": 438
+      },
+      {
+        "market": "BGR-BNA",
+        "origin": "BGR",
+        "destination": "BNA",
+        "demand": 4.7,
+        "beforeMinutes": null,
+        "afterMinutes": 389
+      },
+      {
+        "market": "BNA-BGR",
+        "origin": "BNA",
+        "destination": "BGR",
+        "demand": 4.6,
+        "beforeMinutes": 560,
+        "afterMinutes": 320
+      },
+      {
+        "market": "ISP-MSY",
+        "origin": "ISP",
+        "destination": "MSY",
+        "demand": 2.8,
+        "beforeMinutes": 379,
+        "afterMinutes": 371
+      },
+      {
+        "market": "ISP-SAV",
+        "origin": "ISP",
+        "destination": "SAV",
+        "demand": 2.2,
+        "beforeMinutes": 316,
+        "afterMinutes": 308
+      },
+      {
+        "market": "BGR-PHF",
+        "origin": "BGR",
+        "destination": "PHF",
+        "demand": 2.1,
+        "beforeMinutes": null,
+        "afterMinutes": 220
+      },
+      {
+        "market": "FWA-BDL",
+        "origin": "FWA",
+        "destination": "BDL",
+        "demand": 2.1,
+        "beforeMinutes": 425,
+        "afterMinutes": 239
+      },
+      {
+        "market": "ISP-DAL",
+        "origin": "ISP",
+        "destination": "DAL",
+        "demand": 1.2,
+        "beforeMinutes": 369,
+        "afterMinutes": 485
+      },
+      {
+        "market": "BGR-BWI",
+        "origin": "BGR",
+        "destination": "BWI",
+        "demand": 0.3,
+        "beforeMinutes": null,
+        "afterMinutes": 310
+      },
+      {
+        "market": "BGR-FWA",
+        "origin": "BGR",
+        "destination": "FWA",
+        "demand": 0.2,
+        "beforeMinutes": null,
+        "afterMinutes": 255
+      },
+      {
+        "market": "BGR-ACY",
+        "origin": "BGR",
+        "destination": "ACY",
+        "demand": 0.1,
+        "beforeMinutes": null,
+        "afterMinutes": 359
+      },
+      {
+        "market": "BGR-DAB",
+        "origin": "BGR",
+        "destination": "DAB",
+        "demand": 0.1,
+        "beforeMinutes": null,
+        "afterMinutes": 444
+      },
+      {
+        "market": "DAB-BGR",
+        "origin": "DAB",
+        "destination": "BGR",
+        "demand": 0.1,
+        "beforeMinutes": 620,
+        "afterMinutes": 363
+      },
+      {
+        "market": "ISP-CAE",
+        "origin": "ISP",
+        "destination": "CAE",
+        "demand": 0,
+        "beforeMinutes": 420,
+        "afterMinutes": 305
+      }
+    ],
+    "losses": [
+      {
+        "market": "ISP-BNA",
+        "origin": "ISP",
+        "destination": "BNA",
+        "demand": 3.7,
+        "beforeMinutes": 359,
+        "afterMinutes": 447
+      },
+      {
+        "market": "MDT-BDL",
+        "origin": "MDT",
+        "destination": "BDL",
+        "demand": 0.8,
+        "beforeMinutes": 319,
+        "afterMinutes": null
+      },
+      {
+        "market": "ISP-FWA",
+        "origin": "ISP",
+        "destination": "FWA",
+        "demand": 0,
+        "beforeMinutes": 225,
+        "afterMinutes": 517
+      }
+    ],
+    "faster": 37,
+    "slower": 30,
+    "weightedFast": 20822.59999999999,
+    "weightedSlow": 20213.1,
+    "weightedNet": 609.4999999999927,
+    "topWorse": [
+      {
+        "market": "BDL-PIE",
+        "od": 105,
+        "extra": 81,
+        "weight": 8505
+      },
+      {
+        "market": "RFD-BDL",
+        "od": 105.4,
+        "extra": 80,
+        "weight": 8432
+      },
+      {
+        "market": "ISP-SFB",
+        "od": 166.7,
+        "extra": 5,
+        "weight": 833.5
+      },
+      {
+        "market": "ISP-PGD",
+        "od": 35.8,
+        "extra": 20,
+        "weight": 716
+      },
+      {
+        "market": "ISP-PIE",
+        "od": 65.3,
+        "extra": 8,
+        "weight": 522.4
+      },
+      {
+        "market": "ISP-BNA",
+        "od": 3.7,
+        "extra": 88,
+        "weight": 325.6
+      },
+      {
+        "market": "ISP-IND",
+        "od": 1.6,
+        "extra": 132,
+        "weight": 211.20000000000002
+      },
+      {
+        "market": "ISP-CMH",
+        "od": 1.2,
+        "extra": 132,
+        "weight": 158.4
+      },
+      {
+        "market": "ISP-SDF",
+        "od": 1.1,
+        "extra": 132,
+        "weight": 145.20000000000002
+      },
+      {
+        "market": "ISP-DAL",
+        "od": 1.2,
+        "extra": 116,
+        "weight": 139.2
+      },
+      {
+        "market": "ISP-PIT",
+        "od": 1.1,
+        "extra": 76,
+        "weight": 83.60000000000001
+      },
+      {
+        "market": "ISP-VPS",
+        "od": 0.2,
+        "extra": 205,
+        "weight": 41
+      }
+    ]
+  },
+  {
+    "name": "R105_BGR_R107_PHF",
+    "pass": true,
+    "flights": 1262,
+    "gains": [
+      {
+        "market": "ISP-BWI",
+        "origin": "ISP",
+        "destination": "BWI",
+        "demand": 18.1,
+        "beforeMinutes": null,
+        "afterMinutes": 270
+      },
+      {
+        "market": "GSP-SYR",
+        "origin": "GSP",
+        "destination": "SYR",
+        "demand": 5.8,
+        "beforeMinutes": 514,
+        "afterMinutes": 310
+      },
+      {
+        "market": "PNS-SYR",
+        "origin": "PNS",
+        "destination": "SYR",
+        "demand": 4.9,
+        "beforeMinutes": null,
+        "afterMinutes": 438
+      },
+      {
+        "market": "BNA-BGR",
+        "origin": "BNA",
+        "destination": "BGR",
+        "demand": 4.6,
+        "beforeMinutes": 560,
+        "afterMinutes": 250
+      },
+      {
+        "market": "ISP-MSY",
+        "origin": "ISP",
+        "destination": "MSY",
+        "demand": 2.8,
+        "beforeMinutes": 379,
+        "afterMinutes": 371
+      },
+      {
+        "market": "ISP-SAV",
+        "origin": "ISP",
+        "destination": "SAV",
+        "demand": 2.2,
+        "beforeMinutes": 316,
+        "afterMinutes": 308
+      },
+      {
+        "market": "FWA-BDL",
+        "origin": "FWA",
+        "destination": "BDL",
+        "demand": 2.1,
+        "beforeMinutes": 425,
+        "afterMinutes": 239
+      },
+      {
+        "market": "ISP-DAL",
+        "origin": "ISP",
+        "destination": "DAL",
+        "demand": 1.2,
+        "beforeMinutes": 369,
+        "afterMinutes": 485
+      },
+      {
+        "market": "DAY-BGR",
+        "origin": "DAY",
+        "destination": "BGR",
+        "demand": 0.7,
+        "beforeMinutes": 514,
+        "afterMinutes": 400
+      },
+      {
+        "market": "BGR-BWI",
+        "origin": "BGR",
+        "destination": "BWI",
+        "demand": 0.3,
+        "beforeMinutes": null,
+        "afterMinutes": 275
+      },
+      {
+        "market": "FWA-BGR",
+        "origin": "FWA",
+        "destination": "BGR",
+        "demand": 0.2,
+        "beforeMinutes": null,
+        "afterMinutes": 385
+      },
+      {
+        "market": "ISP-CAE",
+        "origin": "ISP",
+        "destination": "CAE",
+        "demand": 0,
+        "beforeMinutes": 420,
+        "afterMinutes": 305
+      }
+    ],
+    "losses": [
+      {
+        "market": "ISP-BNA",
+        "origin": "ISP",
+        "destination": "BNA",
+        "demand": 3.7,
+        "beforeMinutes": 359,
+        "afterMinutes": 447
+      },
+      {
+        "market": "MDT-BDL",
+        "origin": "MDT",
+        "destination": "BDL",
+        "demand": 0.8,
+        "beforeMinutes": 319,
+        "afterMinutes": null
+      },
+      {
+        "market": "ISP-FWA",
+        "origin": "ISP",
+        "destination": "FWA",
+        "demand": 0,
+        "beforeMinutes": 225,
+        "afterMinutes": 517
+      }
+    ],
+    "faster": 73,
+    "slower": 67,
+    "weightedFast": 19468.699999999993,
+    "weightedSlow": 20090.899999999998,
+    "weightedNet": -622.2000000000044,
+    "topWorse": [
+      {
+        "market": "RFD-BDL",
+        "od": 105.4,
+        "extra": 80,
+        "weight": 8432
+      },
+      {
+        "market": "PIE-BGR",
+        "od": 18.8,
+        "extra": 111,
+        "weight": 2086.8
+      },
+      {
+        "market": "MHT-PGD",
+        "od": 28.9,
+        "extra": 40,
+        "weight": 1156
+      },
+      {
+        "market": "BGR-RFD",
+        "od": 8.5,
+        "extra": 130,
+        "weight": 1105
+      },
+      {
+        "market": "ISP-SFB",
+        "od": 166.7,
+        "extra": 5,
+        "weight": 833.5
+      },
+      {
+        "market": "ISP-PGD",
+        "od": 35.8,
+        "extra": 20,
+        "weight": 716
+      },
+      {
+        "market": "BGR-CLT",
+        "od": 5.5,
+        "extra": 130,
+        "weight": 715
+      },
+      {
+        "market": "SFB-BGR",
+        "od": 22.7,
+        "extra": 30,
+        "weight": 681
+      },
+      {
+        "market": "MHT-RFD",
+        "od": 13.3,
+        "extra": 40,
+        "weight": 532
+      },
+      {
+        "market": "ISP-PIE",
+        "od": 65.3,
+        "extra": 8,
+        "weight": 522.4
+      },
+      {
+        "market": "FLL-BGR",
+        "od": 10.2,
+        "extra": 35,
+        "weight": 357
+      },
+      {
+        "market": "ISP-BNA",
+        "od": 3.7,
+        "extra": 88,
+        "weight": 325.6
+      }
+    ]
+  },
+  {
+    "name": "R162_BGR_R105_BGR_R107_PHF",
+    "pass": true,
+    "flights": 1264,
+    "gains": [
+      {
+        "market": "ISP-BWI",
+        "origin": "ISP",
+        "destination": "BWI",
+        "demand": 18.1,
+        "beforeMinutes": null,
+        "afterMinutes": 270
+      },
+      {
+        "market": "BGR-PGD",
+        "origin": "BGR",
+        "destination": "PGD",
+        "demand": 5.8,
+        "beforeMinutes": 507,
+        "afterMinutes": 299
+      },
+      {
+        "market": "GSP-SYR",
+        "origin": "GSP",
+        "destination": "SYR",
+        "demand": 5.8,
+        "beforeMinutes": 514,
+        "afterMinutes": 310
+      },
+      {
+        "market": "PGD-BGR",
+        "origin": "PGD",
+        "destination": "BGR",
+        "demand": 5.4,
+        "beforeMinutes": 495,
+        "afterMinutes": 365
+      },
+      {
+        "market": "PNS-SYR",
+        "origin": "PNS",
+        "destination": "SYR",
+        "demand": 4.9,
+        "beforeMinutes": null,
+        "afterMinutes": 438
+      },
+      {
+        "market": "BGR-BNA",
+        "origin": "BGR",
+        "destination": "BNA",
+        "demand": 4.7,
+        "beforeMinutes": null,
+        "afterMinutes": 389
+      },
+      {
+        "market": "BNA-BGR",
+        "origin": "BNA",
+        "destination": "BGR",
+        "demand": 4.6,
+        "beforeMinutes": 560,
+        "afterMinutes": 250
+      },
+      {
+        "market": "ISP-MSY",
+        "origin": "ISP",
+        "destination": "MSY",
+        "demand": 2.8,
+        "beforeMinutes": 379,
+        "afterMinutes": 371
+      },
+      {
+        "market": "ISP-SAV",
+        "origin": "ISP",
+        "destination": "SAV",
+        "demand": 2.2,
+        "beforeMinutes": 316,
+        "afterMinutes": 308
+      },
+      {
+        "market": "BGR-PHF",
+        "origin": "BGR",
+        "destination": "PHF",
+        "demand": 2.1,
+        "beforeMinutes": null,
+        "afterMinutes": 220
+      },
+      {
+        "market": "FWA-BDL",
+        "origin": "FWA",
+        "destination": "BDL",
+        "demand": 2.1,
+        "beforeMinutes": 425,
+        "afterMinutes": 239
+      },
+      {
+        "market": "ISP-DAL",
+        "origin": "ISP",
+        "destination": "DAL",
+        "demand": 1.2,
+        "beforeMinutes": 369,
+        "afterMinutes": 485
+      },
+      {
+        "market": "DAY-BGR",
+        "origin": "DAY",
+        "destination": "BGR",
+        "demand": 0.7,
+        "beforeMinutes": 514,
+        "afterMinutes": 400
+      },
+      {
+        "market": "BGR-BWI",
+        "origin": "BGR",
+        "destination": "BWI",
+        "demand": 0.3,
+        "beforeMinutes": null,
+        "afterMinutes": 275
+      },
+      {
+        "market": "BGR-FWA",
+        "origin": "BGR",
+        "destination": "FWA",
+        "demand": 0.2,
+        "beforeMinutes": null,
+        "afterMinutes": 255
+      },
+      {
+        "market": "FWA-BGR",
+        "origin": "FWA",
+        "destination": "BGR",
+        "demand": 0.2,
+        "beforeMinutes": null,
+        "afterMinutes": 385
+      },
+      {
+        "market": "BGR-ACY",
+        "origin": "BGR",
+        "destination": "ACY",
+        "demand": 0.1,
+        "beforeMinutes": null,
+        "afterMinutes": 359
+      },
+      {
+        "market": "BGR-DAB",
+        "origin": "BGR",
+        "destination": "DAB",
+        "demand": 0.1,
+        "beforeMinutes": null,
+        "afterMinutes": 444
+      },
+      {
+        "market": "DAB-BGR",
+        "origin": "DAB",
+        "destination": "BGR",
+        "demand": 0.1,
+        "beforeMinutes": 620,
+        "afterMinutes": 363
+      },
+      {
+        "market": "ISP-CAE",
+        "origin": "ISP",
+        "destination": "CAE",
+        "demand": 0,
+        "beforeMinutes": 420,
+        "afterMinutes": 305
+      }
+    ],
+    "losses": [
+      {
+        "market": "ISP-BNA",
+        "origin": "ISP",
+        "destination": "BNA",
+        "demand": 3.7,
+        "beforeMinutes": 359,
+        "afterMinutes": 447
+      },
+      {
+        "market": "MDT-BDL",
+        "origin": "MDT",
+        "destination": "BDL",
+        "demand": 0.8,
+        "beforeMinutes": 319,
+        "afterMinutes": null
+      },
+      {
+        "market": "ISP-FWA",
+        "origin": "ISP",
+        "destination": "FWA",
+        "demand": 0,
+        "beforeMinutes": 225,
+        "afterMinutes": 517
+      }
+    ],
+    "faster": 84,
+    "slower": 67,
+    "weightedFast": 26478.299999999992,
+    "weightedSlow": 26638.1,
+    "weightedNet": -159.80000000000655,
+    "topWorse": [
+      {
+        "market": "BDL-PIE",
+        "od": 105,
+        "extra": 81,
+        "weight": 8505
+      },
+      {
+        "market": "RFD-BDL",
+        "od": 105.4,
+        "extra": 80,
+        "weight": 8432
+      },
+      {
+        "market": "PIE-BGR",
+        "od": 18.8,
+        "extra": 70,
+        "weight": 1316
+      },
+      {
+        "market": "MHT-PGD",
+        "od": 28.9,
+        "extra": 40,
+        "weight": 1156
+      },
+      {
+        "market": "ISP-SFB",
+        "od": 166.7,
+        "extra": 5,
+        "weight": 833.5
+      },
+      {
+        "market": "ISP-PGD",
+        "od": 35.8,
+        "extra": 20,
+        "weight": 716
+      },
+      {
+        "market": "SFB-BGR",
+        "od": 22.7,
+        "extra": 30,
+        "weight": 681
+      },
+      {
+        "market": "BGR-CLT",
+        "od": 5.5,
+        "extra": 99,
+        "weight": 544.5
+      },
+      {
+        "market": "MHT-RFD",
+        "od": 13.3,
+        "extra": 40,
+        "weight": 532
+      },
+      {
+        "market": "ISP-PIE",
+        "od": 65.3,
+        "extra": 8,
+        "weight": 522.4
+      },
+      {
+        "market": "FLL-BGR",
+        "od": 10.2,
+        "extra": 35,
+        "weight": 357
+      },
+      {
+        "market": "ISP-BNA",
+        "od": 3.7,
+        "extra": 88,
+        "weight": 325.6
+      }
+    ]
+  }
+]
