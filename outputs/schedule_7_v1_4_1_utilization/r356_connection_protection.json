@@ -1,0 +1,52 @@
+{
+  "scope": "read only, unreleased R356 compensation proposal",
+  "structure": "pass",
+  "overnight": "pass",
+  "planning": "pass",
+  "gate": "pass",
+  "operating": {
+    "checks": 25,
+    "passed": 17,
+    "failed": 0,
+    "warnings": 5,
+    "notEvaluated": 1,
+    "overridden": 2,
+    "effectiveErrorFindings": 0,
+    "effectiveWarningFindings": 150
+  },
+  "failed": [],
+  "pass": true,
+  "overlay": {
+    "schemaVersion": "1.0.0",
+    "id": "v141-R356-BDL-PIE-connection-protection",
+    "baseSchedule": {
+      "scheduleId": "schedule_7_v1_4_1_draft"
+    },
+    "schedule": {
+      "id": "schedule_7_v1_4_1_draft",
+      "number": 7,
+      "version": "1.4.1-draft",
+      "label": "Schedule 7 v1.4.1 draft",
+      "status": "draft",
+      "fleetCounts": {
+        "MAX9": 35,
+        "CRJ900": 45,
+        "CRJ700": 65,
+        "CRJ200": 80
+      },
+      "connectionWindowMinutes": {
+        "minimum": 30,
+        "maximum": 240
+      }
+    },
+    "retimeLegs": [
+      {
+        "legId": "V131-NE-R356-3-BDL-SYR",
+        "expectedDepartureMinute": 635,
+        "expectedArrivalMinute": 689,
+        "departureMinute": 605,
+        "arrivalMinute": 659
+      }
+    ]
+  }
+}
