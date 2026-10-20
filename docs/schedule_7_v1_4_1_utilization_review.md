@@ -83,3 +83,20 @@ A new R108 restructuring has been provisionally incorporated in the unpublished 
 - The newly screened R167 ALB→BWI→SYR alternative passed native checks but lost ALB→BNA (30.8/day), ALB→PIT (6.4/day), and ALB→FWA (0.7/day), with a strongly unfavorable weighted itinerary effect. It is **not integrated**. Another R108 ORH→SYR→PHF→SYR option failed physical PHF gate inventory; ROC failed ROC inventory and market spacing.
 
 The R108 change is **provisional, not a publication authorization**. The accepted web default remains v1.4.0. Future effort should focus on preserving/mitigating the slower R108 ORH→PGD journey and finding commercially stronger R167 morning options rather than adding low-demand flying solely for utilization.
+
+## October 20 continuation — BTV–RFD demand and R167 holistic test
+
+The pinned `data/reference/airport_od_matrix_consolidated_v2.csv` shows **BTV→RFD 30.1** and **RFD→BTV 30.3** underlying daily directional O-D. Both exceed the user-defined threshold of 15. Preserve this connection as an optimization priority. The current provisional R108 keeps flight BTV→SYR at 18:00–18:52; it preserves the BTV→RFD reasonable path, although the inverse RFD→BTV fastest connection slows by approximately 15 minutes.
+
+The last saved provisional 1,266-flight draft was recovered and validated. A follow-up R167 screening used an earlier 05:09 SYR→ALB originator to create capacity for demand-relevant **ALB–BWI–ALB** and **ALB–PIT–ALB** morning returns, with a subsequent SYR M12 departure to CAK. Both variants pass all native structural, overnight, planning, operating and fixed-inventory checks; each adds two flights.
+
+Commercial itinerary comparisons against the 1,266-flight provisional draft:
+
+| R167 variant | Reasonable market gains | Losses | Faster | Slower | O-D-weighted planning score |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| ALB–BWI–ALB | 0 | 1 | 19 | 17 | -1,222 |
+| ALB–PIT–ALB | 0 | 1 | 9 | 13 | -2,005 |
+
+Both lose DAB→CAK as a reasonable path (4.0 underlying daily directional O-D) and delay high-demand ALB/SFB and PIE/CAK markets. The ALB–BWI market itself has 21.5/22.5 underlying directional O-D, but it does not offset the observed systemwide travel-time penalties at the tested banks. **Neither R167 option is approved or integrated.** Evidence: `outputs/schedule_7_v1_4_1_utilization/r167_followup_native.json` and `r167_followup_network.json`.
+
+Next: preserve the accepted-to-provisional R108 morning SYR–PIT turn and BTV–RFD network coverage; concentrate further R167 testing on preserving existing ALB and CAK bank connections instead of simply extending flying. R107's residual ISP→BNA loss and R108's ORH→PGD delay remain commercial review items, not hard operating errors.
