@@ -117,3 +117,12 @@ The read-only R167 ALB hold screen tested four additional possibilities on that 
 Evidence: `outputs/schedule_7_v1_4_1_utilization/r167_holistic_native.json` and `scripts/screen_schedule_7_v1_4_1_r167_holistic.py`. The comparative passenger-network audit is `scripts/audit_schedule_7_v1_4_1_r167_holistic_network.mjs` and its output `r167_holistic_network.json`.
 
 **Governance:** No additional route changes have been incorporated in the provisional 1,266-flight draft; published `main` remains v1.4.0.
+
+
+### Completed passenger audit of the resumed R167 screens
+
+The new `r167_holistic_network.json` comparison confirms that **ALB–BTV–SYR is not commercially suitable** despite its clean physical validation. Against the 1,266-flight draft it gains one reasonable directional market but loses **ALB→BNA (30.8/day), ALB→PIT (6.4/day), and ALB→FWA (0.7/day)**; only one fastest itinerary improves while seven worsen. The relative demand-weighted score is **−7,080 passenger-minutes**. Significant slowdowns include ALB→PIE (43.2/day, +68 minutes) and ALB→SFB (137/day, +15 minutes).
+
+The ALB–BTV–ALB filler adds two flights, two nominal geographic coverage gains, no faster reasonable itineraries, and negligible ALB–BTV demand (0.6/day each direction). It should not be adopted merely to inflate aircraft utilization.
+
+**Decision:** Reject both as current R167 draft additions. Keep the original R167 morning ALB→SYR connectivity, and preserve BTV↔RFD on R108. Neither the accepted v1.4.0 release nor the provisional 1,266-flight v1.4.1 draft has been modified.
