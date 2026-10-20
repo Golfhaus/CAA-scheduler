@@ -1,0 +1,39 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "schedule-7-v1.4.1-provisional-r356-bdl-pie-connection-repair",
+  "baseSchedule": {
+    "scheduleId": "schedule_7_v1_4_1_draft"
+  },
+  "schedule": {
+    "id": "schedule_7_v1_4_1_draft",
+    "number": 7,
+    "version": "1.4.1-draft",
+    "label": "Schedule 7 v1.4.1 draft",
+    "status": "draft",
+    "fleetCounts": {
+      "MAX9": 35,
+      "CRJ900": 45,
+      "CRJ700": 65,
+      "CRJ200": 80
+    },
+    "connectionWindowMinutes": {
+      "minimum": 30,
+      "maximum": 240
+    }
+  },
+  "retimeLegs": [
+    {
+      "legId": "V131-NE-R356-3-BDL-SYR",
+      "expectedDepartureMinute": 635,
+      "expectedArrivalMinute": 689,
+      "departureMinute": 605,
+      "arrivalMinute": 659
+    }
+  ],
+  "review": {
+    "status": "provisional, unaccepted release",
+    "reason": "Restore BDL-PIE fastest journey by 81 minutes, positive demand-weighted passenger-minutes",
+    "tradeoff": "7 BDL-origin itineraries 30 minutes slower each, no geographically reasonable market coverage loss",
+    "audit": "outputs/schedule_7_v1_4_1_utilization/r356_connection_protection_network.json"
+  }
+}
