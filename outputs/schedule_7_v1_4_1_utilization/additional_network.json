@@ -1,0 +1,134 @@
+[
+  {
+    "name": "R167 ALB-BTV-ALB inserted during morning ALB hold",
+    "addedFlights": 2,
+    "gains": [
+      {
+        "market": "ALB-BTV",
+        "origin": "ALB",
+        "destination": "BTV",
+        "demand": 0.6,
+        "beforeMinutes": null,
+        "afterMinutes": 40
+      },
+      {
+        "market": "BTV-ALB",
+        "origin": "BTV",
+        "destination": "ALB",
+        "demand": 0.6,
+        "beforeMinutes": null,
+        "afterMinutes": 40
+      }
+    ],
+    "losses": [],
+    "faster": 0,
+    "slower": 0,
+    "weightedNet": 0,
+    "worst": []
+  },
+  {
+    "name": "R108 BTV-ROC-SYR instead of BTV-SYR",
+    "addedFlights": 1,
+    "gains": [
+      {
+        "market": "ROC-MDT",
+        "origin": "ROC",
+        "destination": "MDT",
+        "demand": 0.3,
+        "beforeMinutes": null,
+        "afterMinutes": 190
+      }
+    ],
+    "losses": [
+      {
+        "market": "BTV-MDT",
+        "origin": "BTV",
+        "destination": "MDT",
+        "demand": 0.8,
+        "beforeMinutes": 152,
+        "afterMinutes": null
+      }
+    ],
+    "faster": 2,
+    "slower": 1,
+    "weightedNet": -820,
+    "worst": [
+      {
+        "market": "BTV-RFD",
+        "od": 30.1,
+        "extraMinutes": 76,
+        "weighted": 2287.6
+      }
+    ]
+  },
+  {
+    "name": "R108 BTV-BUF-SYR instead of BTV-SYR",
+    "addedFlights": 1,
+    "gains": [
+      {
+        "market": "BUF-MDT",
+        "origin": "BUF",
+        "destination": "MDT",
+        "demand": 0.6,
+        "beforeMinutes": null,
+        "afterMinutes": 153
+      }
+    ],
+    "losses": [
+      {
+        "market": "BTV-MDT",
+        "origin": "BTV",
+        "destination": "MDT",
+        "demand": 0.8,
+        "beforeMinutes": 152,
+        "afterMinutes": null
+      }
+    ],
+    "faster": 1,
+    "slower": 1,
+    "weightedNet": -2230.6,
+    "worst": [
+      {
+        "market": "BTV-RFD",
+        "od": 30.1,
+        "extraMinutes": 76,
+        "weighted": 2287.6
+      }
+    ]
+  },
+  {
+    "name": "R108 BTV-PWM-SYR instead of BTV-SYR",
+    "addedFlights": 1,
+    "gains": [
+      {
+        "market": "BTV-PWM",
+        "origin": "BTV",
+        "destination": "PWM",
+        "demand": 0.6,
+        "beforeMinutes": null,
+        "afterMinutes": 55
+      }
+    ],
+    "losses": [
+      {
+        "market": "BTV-MDT",
+        "origin": "BTV",
+        "destination": "MDT",
+        "demand": 0.8,
+        "beforeMinutes": 152,
+        "afterMinutes": null
+      }
+    ],
+    "faster": 2,
+    "slower": 1,
+    "weightedNet": -2217.7,
+    "worst": [
+      {
+        "market": "BTV-RFD",
+        "od": 30.1,
+        "extraMinutes": 76,
+        "weighted": 2287.6
+      }
+    ]
+  }
+]
