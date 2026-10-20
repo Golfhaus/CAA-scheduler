@@ -1,0 +1,164 @@
+[
+  {
+    "name": "R108 ORH-PHF-SYR morning connector",
+    "pass": false
+  },
+  {
+    "name": "R167 ALB-BWI-SYR morning connector",
+    "pass": true,
+    "addedFlights": 1,
+    "gains": [],
+    "losses": [
+      {
+        "market": "ALB-BNA",
+        "origin": "ALB",
+        "destination": "BNA",
+        "demand": 30.8,
+        "beforeMinutes": 324,
+        "afterMinutes": 382
+      },
+      {
+        "market": "ALB-PIT",
+        "origin": "ALB",
+        "destination": "PIT",
+        "demand": 6.4,
+        "beforeMinutes": 149,
+        "afterMinutes": null
+      },
+      {
+        "market": "ALB-FWA",
+        "origin": "ALB",
+        "destination": "FWA",
+        "demand": 0.7,
+        "beforeMinutes": 375,
+        "afterMinutes": 515
+      }
+    ],
+    "faster": 2,
+    "slower": 7,
+    "weightedNet": -4413.9,
+    "topSlower": [
+      {
+        "market": "ALB-PIE",
+        "demand": 43.2,
+        "delay": 68,
+        "weight": 2937.6000000000004
+      },
+      {
+        "market": "ALB-SFB",
+        "demand": 137,
+        "delay": 15,
+        "weight": 2055
+      },
+      {
+        "market": "ALB-BNA",
+        "demand": 30.8,
+        "delay": 58,
+        "weight": 1786.4
+      },
+      {
+        "market": "ALB-SRQ",
+        "demand": 28.8,
+        "delay": 7,
+        "weight": 201.6
+      },
+      {
+        "market": "ALB-FWA",
+        "demand": 0.7,
+        "delay": 140,
+        "weight": 98
+      },
+      {
+        "market": "ALB-BUF",
+        "demand": 0.9,
+        "delay": 1,
+        "weight": 0.9
+      },
+      {
+        "market": "ALB-ROC",
+        "demand": 0.4,
+        "delay": 1,
+        "weight": 0.4
+      }
+    ]
+  },
+  {
+    "name": "R167 ALB-BWI-SYR later morning connector",
+    "pass": true,
+    "addedFlights": 1,
+    "gains": [],
+    "losses": [
+      {
+        "market": "ALB-BNA",
+        "origin": "ALB",
+        "destination": "BNA",
+        "demand": 30.8,
+        "beforeMinutes": 324,
+        "afterMinutes": 382
+      },
+      {
+        "market": "ALB-PIT",
+        "origin": "ALB",
+        "destination": "PIT",
+        "demand": 6.4,
+        "beforeMinutes": 149,
+        "afterMinutes": null
+      },
+      {
+        "market": "ALB-FWA",
+        "origin": "ALB",
+        "destination": "FWA",
+        "demand": 0.7,
+        "beforeMinutes": 375,
+        "afterMinutes": 515
+      }
+    ],
+    "faster": 2,
+    "slower": 7,
+    "weightedNet": -4413.9,
+    "topSlower": [
+      {
+        "market": "ALB-PIE",
+        "demand": 43.2,
+        "delay": 68,
+        "weight": 2937.6000000000004
+      },
+      {
+        "market": "ALB-SFB",
+        "demand": 137,
+        "delay": 15,
+        "weight": 2055
+      },
+      {
+        "market": "ALB-BNA",
+        "demand": 30.8,
+        "delay": 58,
+        "weight": 1786.4
+      },
+      {
+        "market": "ALB-SRQ",
+        "demand": 28.8,
+        "delay": 7,
+        "weight": 201.6
+      },
+      {
+        "market": "ALB-FWA",
+        "demand": 0.7,
+        "delay": 140,
+        "weight": 98
+      },
+      {
+        "market": "ALB-BUF",
+        "demand": 0.9,
+        "delay": 1,
+        "weight": 0.9
+      },
+      {
+        "market": "ALB-ROC",
+        "demand": 0.4,
+        "delay": 1,
+        "weight": 0.4
+      }
+    ]
+  }
+]

@@ -1,0 +1,463 @@
+[
+  {
+    "name": "R108 ORH-PHF-SYR morning connector",
+    "route": 108,
+    "status": "read-only",
+    "structure": "pass",
+    "overnight": "pass",
+    "planning": "pass",
+    "gate": "pass",
+    "operating": {
+      "checks": 25,
+      "passed": 16,
+      "failed": 2,
+      "warnings": 5,
+      "notEvaluated": 1,
+      "overridden": 1,
+      "effectiveErrorFindings": 2,
+      "effectiveWarningFindings": 147
+    },
+    "deltaFlights": 1,
+    "failures": [
+      {
+        "check": "section_26_pairing_spacing",
+        "findings": [
+          {
+            "id": "PHF-SYR",
+            "message": "PHF\u2013SYR fails same-pairing spacing",
+            "evidence": {
+              "origin": "PHF",
+              "destination": "SYR",
+              "departures": [
+                270,
+                415,
+                555,
+                729,
+                743,
+                925
+              ],
+              "gaps": [
+                {
+                  "from": 270,
+                  "to": 415,
+                  "minutes": 145
+                },
+                {
+                  "from": 415,
+                  "to": 555,
+                  "minutes": 140
+                },
+                {
+                  "from": 555,
+                  "to": 729,
+                  "minutes": 174
+                },
+                {
+                  "from": 729,
+                  "to": 743,
+                  "minutes": 14
+                },
+                {
+                  "from": 743,
+                  "to": 925,
+                  "minutes": 182
+                },
+                {
+                  "from": 925,
+                  "to": 270,
+                  "minutes": 785
+                }
+              ],
+              "targetMinutes": 30.0,
+              "allowedExceptions": 0,
+              "hubBound": true
+            }
+          }
+        ]
+      },
+      {
+        "check": "tiered_service_minimums",
+        "findings": [
+          {
+            "id": "ATW",
+            "message": "ATW does not satisfy its percentile-tier service envelope",
+            "evidence": {
+              "city": "ATW",
+              "percentile": 31.0,
+              "totalFlights": 14,
+              "hubOrFocusFlights": 14,
+              "minimumFlights": 6,
+              "connectedHubs": [
+                "BHM",
+                "DAY",
+                "MCI"
+              ],
+              "hubCountCap": 2
+            },
+            "override": {
+              "reason": "Schedule 7 v1.1.3 BHM focus-city initiative: ATW-BHM is deliberate focus-city feed for Florida Peninsula connectivity.",
+              "approvedBy": "user",
+              "expiresAfterSchedule": 7
+            }
+          },
+          {
+            "id": "BHM",
+            "message": "BHM does not satisfy its percentile-tier service envelope",
+            "evidence": {
+              "city": "BHM",
+              "percentile": 64.0,
+              "totalFlights": 114,
+              "hubOrFocusFlights": 114,
+              "minimumFlights": 6,
+              "connectedHubs": [
+                "DAY",
+                "JAX",
+                "MCI",
+                "PHF"
+              ],
+              "hubCountCap": 2
+            },
+            "override": {
+              "reason": "Schedule 7 v1.1.0 PHF north-south initiative: PHF is a geographically reasonable additional hub and the added service passes downstream feasibility checks.",
+              "approvedBy": "user",
+              "expiresAfterSchedule": 7
+            }
+          },
+          {
+            "id": "BWI",
+            "message": "BWI does not satisfy its percentile-tier service envelope",
+            "evidence": {
+              "city": "BWI",
+              "percentile": 94.0,
+              "totalFlights": 34,
+              "hubOrFocusFlights": 28,
+              "minimumFlights": 8,
+              "connectedHubs": [
+                "BHM",
+                "DAY",
+                "JAX",
+                "MCI",
+                "PHF",
+                "SYR"
+              ],
+              "hubCountCap": 4
+            },
+            "override": {
+              "reason": "Schedule 7 v1.1.0 PHF north-south initiative: the BWI-BHM-PHF triangles are geographically reasonable and pass downstream feasibility checks.",
+              "approvedBy": "user",
+              "expiresAfterSchedule": 7
+            }
+          },
+          {
+            "id": "CAK",
+            "message": "CAK does not satisfy its percentile-tier service envelope",
+            "evidence": {
+              "city": "CAK",
+              "percentile": 81.0,
+              "totalFlights": 18,
+              "hubOrFocusFlights": 18,
+              "minimumFlights": 8,
+              "connectedHubs": [
+                "BHM",
+                "DAY",
+                "MCI",
+                "SYR"
+              ],
+              "hubCountCap": 3
+            },
+            "override": {
+              "reason": "User-authorized v1.3.3 BHM north-south mini-bank: geographically suitable additional focus-city connectivity without changing physical, frequency, bank or curfew rules.",
+              "approvedBy": "user",
+              "expiresAfterSchedule": 7
+            }
+          },
+          {
+            "id": "CHS",
+            "message": "CHS does not satisfy its percentile-tier service envelope",
+            "evidence": {
+              "city": "CHS",
+              "percentile": 79.0,
+              "totalFlights": 20,
+              "hubOrFocusFlights": 18,
+              "minimumFlights": 8,
+              "connectedHubs": [
+                "BHM",
+                "DAY",
+                "JAX",
+                "PHF"
+              ],
+              "hubCountCap": 3
+            },
+            "override": {
+              "reason": "User-authorized v1.3.3 BHM north-south mini-bank: geographically suitable additional focus-city connectivity without changing physical, frequency, bank or curfew rules.",
+              "approvedBy": "user",
+              "expiresAfterSchedule": 7
+            }
+          }
+        ]
+      }
+    ],
+    "pass": false,
+    "overlay": {
+      "schemaVersion": "1.0.0",
+      "id": "v141-holistic-morning-0",
+      "baseSchedule": {
+        "scheduleId": "schedule_7_v1_4_1_draft"
+      },
+      "schedule": {
+        "id": "schedule_7_v1_4_1_draft",
+        "number": 7,
+        "version": "1.4.1-draft",
+        "label": "Schedule 7 v1.4.1 draft",
+        "status": "draft",
+        "fleetCounts": {
+          "MAX9": 35,
+          "CRJ900": 45,
+          "CRJ700": 65,
+          "CRJ200": 80
+        },
+        "connectionWindowMinutes": {
+          "minimum": 30,
+          "maximum": 240
+        }
+      },
+      "removeLegs": [
+        {
+          "legId": "ORH-SYR-CRJ200-02-OUT",
+          "expectedRoute": 108
+        }
+      ],
+      "insertLegs": [
+        {
+          "id": "V141-R108-HOLISTIC-0-1",
+          "route": 108,
+          "origin": "ORH",
+          "destination": "PHF",
+          "departureMinute": 613,
+          "arrivalMinute": 703
+        },
+        {
+          "id": "V141-R108-HOLISTIC-0-2",
+          "route": 108,
+          "origin": "PHF",
+          "destination": "SYR",
+          "departureMinute": 743,
+          "arrivalMinute": 828
+        }
+      ],
+      "bankAssignmentsToAdd": [
+        {
+          "legId": "V141-R108-HOLISTIC-0-1",
+          "operation": "arrival",
+          "bankId": "PHF-B3"
+        },
+        {
+          "legId": "V141-R108-HOLISTIC-0-2",
+          "operation": "departure",
+          "bankId": "PHF-M12-V141"
+        },
+        {
+          "legId": "V141-R108-HOLISTIC-0-2",
+          "operation": "arrival",
+          "bankId": "SYR-B4"
+        }
+      ],
+      "retimeLegs": [
+        {
+          "legId": "BTV-SYR-CRJ200-03-IN",
+          "expectedDepartureMinute": 845,
+          "expectedArrivalMinute": 897,
+          "departureMinute": 885,
+          "arrivalMinute": 937
+        }
+      ],
+      "bankAssignmentReplacements": [
+        {
+          "legId": "BTV-SYR-CRJ200-03-IN",
+          "operation": "departure",
+          "bankId": "SYR-M15"
+        }
+      ]
+    }
+  },
+  {
+    "name": "R167 ALB-BWI-SYR morning connector",
+    "route": 167,
+    "status": "read-only",
+    "structure": "pass",
+    "overnight": "pass",
+    "planning": "pass",
+    "gate": "pass",
+    "operating": {
+      "checks": 25,
+      "passed": 17,
+      "failed": 0,
+      "warnings": 5,
+      "notEvaluated": 1,
+      "overridden": 2,
+      "effectiveErrorFindings": 0,
+      "effectiveWarningFindings": 148
+    },
+    "deltaFlights": 1,
+    "failures": [],
+    "pass": true,
+    "overlay": {
+      "schemaVersion": "1.0.0",
+      "id": "v141-holistic-morning-1",
+      "baseSchedule": {
+        "scheduleId": "schedule_7_v1_4_1_draft"
+      },
+      "schedule": {
+        "id": "schedule_7_v1_4_1_draft",
+        "number": 7,
+        "version": "1.4.1-draft",
+        "label": "Schedule 7 v1.4.1 draft",
+        "status": "draft",
+        "fleetCounts": {
+          "MAX9": 35,
+          "CRJ900": 45,
+          "CRJ700": 65,
+          "CRJ200": 80
+        },
+        "connectionWindowMinutes": {
+          "minimum": 30,
+          "maximum": 240
+        }
+      },
+      "removeLegs": [
+        {
+          "legId": "ALB-SYR-CRJ200-02-OUT",
+          "expectedRoute": 167
+        }
+      ],
+      "insertLegs": [
+        {
+          "id": "V141-R167-HOLISTIC-1-1",
+          "route": 167,
+          "origin": "ALB",
+          "destination": "BWI",
+          "departureMinute": 434,
+          "arrivalMinute": 504
+        },
+        {
+          "id": "V141-R167-HOLISTIC-1-2",
+          "route": 167,
+          "origin": "BWI",
+          "destination": "SYR",
+          "departureMinute": 544,
+          "arrivalMinute": 609
+        }
+      ],
+      "bankAssignmentsToAdd": [
+        {
+          "legId": "V141-R167-HOLISTIC-1-2",
+          "operation": "arrival",
+          "bankId": "SYR-M10-V141"
+        }
+      ],
+      "retimeLegs": [],
+      "bankAssignmentReplacements": [],
+      "hubBanksToAdd": [
+        {
+          "id": "SYR-M10-V141",
+          "hub": "SYR",
+          "startMinute": 585,
+          "endMinute": 645
+        }
+      ],
+      "hubBankCountOverrides": {
+        "SYR": 12
+      }
+    }
+  },
+  {
+    "name": "R167 ALB-BWI-SYR later morning connector",
+    "route": 167,
+    "status": "read-only",
+    "structure": "pass",
+    "overnight": "pass",
+    "planning": "pass",
+    "gate": "pass",
+    "operating": {
+      "checks": 25,
+      "passed": 17,
+      "failed": 0,
+      "warnings": 5,
+      "notEvaluated": 1,
+      "overridden": 2,
+      "effectiveErrorFindings": 0,
+      "effectiveWarningFindings": 148
+    },
+    "deltaFlights": 1,
+    "failures": [],
+    "pass": true,
+    "overlay": {
+      "schemaVersion": "1.0.0",
+      "id": "v141-holistic-morning-2",
+      "baseSchedule": {
+        "scheduleId": "schedule_7_v1_4_1_draft"
+      },
+      "schedule": {
+        "id": "schedule_7_v1_4_1_draft",
+        "number": 7,
+        "version": "1.4.1-draft",
+        "label": "Schedule 7 v1.4.1 draft",
+        "status": "draft",
+        "fleetCounts": {
+          "MAX9": 35,
+          "CRJ900": 45,
+          "CRJ700": 65,
+          "CRJ200": 80
+        },
+        "connectionWindowMinutes": {
+          "minimum": 30,
+          "maximum": 240
+        }
+      },
+      "removeLegs": [
+        {
+          "legId": "ALB-SYR-CRJ200-02-OUT",
+          "expectedRoute": 167
+        }
+      ],
+      "insertLegs": [
+        {
+          "id": "V141-R167-HOLISTIC-2-1",
+          "route": 167,
+          "origin": "ALB",
+          "destination": "BWI",
+          "departureMinute": 445,
+          "arrivalMinute": 515
+        },
+        {
+          "id": "V141-R167-HOLISTIC-2-2",
+          "route": 167,
+          "origin": "BWI",
+          "destination": "SYR",
+          "departureMinute": 555,
+          "arrivalMinute": 620
+        }
+      ],
+      "bankAssignmentsToAdd": [
+        {
+          "legId": "V141-R167-HOLISTIC-2-2",
+          "operation": "arrival",
+          "bankId": "SYR-M10-V141"
+        }
+      ],
+      "retimeLegs": [],
+      "bankAssignmentReplacements": [],
+      "hubBanksToAdd": [
+        {
+          "id": "SYR-M10-V141",
+          "hub": "SYR",
+          "startMinute": 585,
+          "endMinute": 645
+        }
+      ],
+      "hubBankCountOverrides": {
+        "SYR": 12
+      }
+    }
+  }
+]
