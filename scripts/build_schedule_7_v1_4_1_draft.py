@@ -37,7 +37,7 @@ assert new["operatingPolicy"]["hubBankCounts"]["PHF"]==base["operatingPolicy"]["
 assert any(x["id"]=="PHF-M12-V141" for x in new["hubBanks"])
 assert {b["id"] for b in new["hubBanks"] if b["hub"]=="SYR"}>={"SYR-M09","SYR-M12"}
 assert max(l["day"] for l in new["legs"])<=13
-assert {x["flight"] for x in base["legs"]}.issubset({x["flight"] for x in new["legs"]})
+assert {x["flight"] for x in base["legs"]}-{x["flight"] for x in new["legs"]}=={1893}  # ISP-SYR replaced by ISP-PHF-SYR
 s=validate_schedule(new);n=validate_overnight_turns(new);o=validate_operating_rules(new)
 p=reconstruct_planning_snapshot(new,demand_data_version="bts-db1c-6mo-jul2025-apr2026-v7")
 pv=validate_planning_snapshot(p,new)
