@@ -1,0 +1,32 @@
+name: Package and verify Schedule 7 v1.4.1
+on:
+  push:
+    branches: [release/schedule-7-v1.4.1-clean]
+permissions:
+  contents: write
+jobs:
+  publish-candidate:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Build deterministic approved draft
+        run: python scripts/build_schedule_7_v1_4_1_draft.py
+      - name: Package release and update current-release fixtures
+        run: python scripts/prepare_schedule_7_v1_4_1_release.py
+      - name: Run complete latest-only regression
+        run: bash scripts/run_latest_regression.sh
+      - name: Check web build
+        run: python -m caa_scheduler build-web --output dist
+      - name: Commit verified release artifacts
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/schedules/schedule_7_v1_4_1/ data/schedules/schedule_7_v1_4_1_draft/ config/optimizations/schedule_7_v1_4_1_release.json web/schedules.json README.md tests/test_latest_schedule_release.py tests/test_latest_service_gains.py
+          git commit -m "Package and verify released Schedule 7 v1.4.1 [skip ci]"
+          git push
