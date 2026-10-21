@@ -49,3 +49,21 @@ Run 39685967057, `scripts/v143_crj700_holistic_retime_screen.py`, on the full 1,
 - **R319** moving SYR→PHF #1951 earlier to 11:30–12:15 causes PHF fixed-gate/stand errors and network bank misalignments. No accepted change.
 
 **Conclusion:** The highest-value next step is *coupled* flight reassignment/rebuild of R303 and R313, not standalone retiming. Do not incorporate the isolated R303/R316/R339 timing shifts into the canonical yet: they merely transfer idle time and could disrupt existing high-demand connections. Any paired change must produce net additional scheduled flying and pass whole-network coverage and bank regressions.
+
+
+## Detailed R303/R313 construction findings (continued)
+
+**R303: concrete additional round trips are physically possible, but commercial losses matter.** Moving PNS→MCI flight #1346 from 16:10 to **13:20–15:25**, reassigning its MCI arrival from B9 to B7, allows the following zero-error, structural/overnight/gate-valid extensions before the preserved MCI→PNS 19:50 terminator:
+- MCI–OMA–MCI 16:25–18:45 (100 additional flying minutes) or 16:35–18:55;
+- MCI–DSM–MCI 16:25–18:55 (110 additional flying minutes).
+Source: `scripts/v143_r303_mci_turn_screen.py` GitHub Actions run 39689048972.
+
+Independent geographic reasonable itinerary audit: the OMA alternative yields six new reasonable markets, 27 faster and **six slower**; specifically PNS→RFD (59.7 O-D/day) +5min, PNS→DAL (43.3/day) +6min, and smaller PNS markets slower. More inclusive audit also loses PNS→PIE direct eligibility (23.2 O-D/day; revised shortest +90min) and worsens PNS→RDU (18.1/day) substantially. DSM alternative yields five new reasonable markets, 17 faster and **six slower**, also harming PNS→RFD and PNS→DAL and PNS→PIE nongeographic service. **Decision: do not yet incorporate R303 into the accepted v1.4.3 canonical**. Need a coordinated replacement PNS feeder or a return departure closer to the original that preserves high-demand PNS connections. See `scripts/v143_r303_commercial_audit.mjs`, workflow `v143-r303-commercial.yml`.
+
+**R313: legal early CLT–JAX turn found.** Replace long early CLT stand with CLT→JAX **07:02–08:13**, JAX→CLT **08:53–10:04**, and move the existing CLT→PHF #1379 from 09:50 to **10:50–11:56** (PHF-M12-V141 arrival bank). Preserves BDL originator, all MSY/PHF flying, and SAV terminator. All native structural, overnight, fixed gate, and operating checks **pass with zero effective errors** (GitHub Actions run 39689486666), two added CRJ700 legs. Candidate should be judged by commercial tradeoffs, not physical feasibility alone.
+
+The R313 JAX-only passenger audit finds 2 geographic reasonable coverage gains, 11 faster and **two slower** with no lost reasonable markets. The nontrivial adverse market is CLT→AVP (11.9 O-D/day) 173→254m (+81), because PHF→AVP #1745 departs 11:35 before rebuilt #1379 reaches PHF at 11:56. Major improved markets include MSY→CLT 256→224m (75.2/day), EYW→CLT 316→279m (17.8/day), VPS→CLT 241→186m (15.8/day), ECP→CLT 301→254m (13.1/day). Source: `scripts/v143_r313_jax_commercial.mjs`, GitHub Actions run 39689688204.
+
+**Attempt to repair CLT→AVP by moving #1745 PHF→AVP 55min later**: its new 12:30→13:38 timing, with PHF-M12 arrival/departure assignments and a 47min AVP turn, passes structural, gates, overnight and operating validation with **zero effective errors** after correcting pair IDs (run 39690219314). But the whole-network audit then finds **10 slower directional markets**, including SFB→AVP 218→273m (29.5 O-D/day) and RFD→AVP 218→273m (16.2/day), outweighing the narrow CLT→AVP recovery. **Reject this coupled AVP retiming** (run 39690285454). The unmodified JAX-only concept is the better tradeoff but still merits explicit loss review.
+
+**Governance and next:** preserve the accepted 1,286-flight v1.4.3 canonical unchanged. R303 OMA/DSM and R313 JAX candidates are reproducible **experimental analyses**, not accepted additions. Further reconstruct specific PNS hub feeds or find a second aircraft for CLT→AVP restoration without delaying the widely connected PHF→AVP flight. Study R316 next, with its movable BNA hold and AH line relationship to R313. No main publication authorized.
