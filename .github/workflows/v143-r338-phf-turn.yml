@@ -1,0 +1,14 @@
+name: v1.4.3 R338 PHF extension alternative
+on:
+  pull_request:
+    branches: [main]
+jobs:
+  screen:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install -e .
+      - run: python scripts/v143_r338_phf_turn_screen.py
