@@ -33,3 +33,12 @@ R303 PNS→MCI early retimes with extra OMA or DSM flying are gate- and structur
 ## Next gate
 
 Compare marginal network outcomes for the gate-valid R345 options. Select the best meaningful-demand connection gains, then construct a cumulative candidate with exactly two more R345 legs and check all native rules, planning snapshot and benchmark vs v1.4.3's 1,286-flight draft. Continue R338's coupled flight-exchange analysis after checking PHF→SAV retiming screen. Do not publish any change to main.
+
+
+## Subsequent screens
+
+**R338 timing results** — `scripts/v143_r338_sav_hold_retime.py`, GitHub Actions run 39691928626: PHF→SAV #1493 can depart **14:30, 15:00, 15:30, 16:00, 16:30 or 17:00** with structural, overnight, gate and operating pass; PHF stand/SAV stand lengths change respectively 77/244, 107/214, 137/184, 167/154, 197/124 and 227/94 min. A 14:00 departure violates PHF–SAV pairing spacing; a 17:30 departure violates PHF hub bank alignment. **14:30** is the useful early-shift option, opening 244 minutes at SAV ahead of the fixed 20:00 SAV→JAX departure. Screen additional SAV short turns there before accepting the underlying retime; marginal passenger loss must also be checked.
+
+**R345 native gate screening** — `scripts/v143_r345_clt_turn_screen.py`, run 39691750365: native-pass CLT roundtrips to AVL, CAE, GSO, GSP, ROA, TRI, TYS across 13:47–14:25 departures, preserving the 17:10 CLT→PHF continuation. Flight estimates range 80–110 total minutes. CLT–TYS–CLT **14:00–16:30** has the largest local O-D among screened options (15.5 daily two-way); all other passing options have smaller local O-D. Later inactive FAY lookup caused that discovery script to terminate with nonzero status *after* these passing results; do not claim the entire screening workflow passed. The individually printed PASS results are valid isolated check outcomes. Marginal passenger ranking is run separately using `scripts/v143_r345_commercial_screen.mjs`.
+
+**Gate for inclusion:** Do not insert R338 or R345 changes into accepted canonical until independent cumulative physical/gate/operating validations and full passenger audit pass, in addition to locally plausible turns. No further fleet aircraft or airport gates are authorized.
