@@ -4,7 +4,11 @@ from caa_scheduler.operating_validation import validate_operating_rules
 from caa_scheduler.gate_export import export_gate_schedule
 src=pathlib.Path("scripts/v142_release_candidate.py").read_text()
 exec(src.split("struct=validate_schedule(s)")[0],globals())
-dep=[900,1020,1135,1310]
+dep=[895,1010,1125,1320]
+# Advance R705 BNA-MCI #1080 ten minutes; stay inside MCI-B10.
+retime=next(l for l in s['legs'] if l['flight']==1080)
+retime['departureMinute']-=10;retime['arrivalMinute']-=10
+retime['departure']=clock(retime['departureMinute']);retime['arrival']=clock(retime['arrivalMinute'])
 for l,d in zip([x for x in s["legs"] if x["route"]==359],dep):
  l["departureMinute"]=d;l["arrivalMinute"]=d+75;l["departure"]=clock(d);l["arrival"]=clock(d+75)
 report=validate_operating_rules(s)
