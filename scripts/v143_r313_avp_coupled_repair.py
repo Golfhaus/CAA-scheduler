@@ -27,4 +27,4 @@ for shift in (55,60,65):
  op=validate_operating_rules(s)
  try:export_gate_schedule(s);gate=True
  except Exception as e:gate=str(e)
- print(json.dumps({"shift":shift,"gate":gate,"errors":op["summary"]["effectiveErrorFindings"],"structural":validate_schedule(s)["status"],"structuralFindings":str(validate_schedule(s))[:1800],"overnight":validate_overnight_turns(s)["status"],"failed":[{"check":c["id"],"ids":[f["id"] for f in c["findings"] if "override" not in f][:8]} for c in op["checks"] if c["status"]=="fail"]}),flush=True)
+ print(json.dumps({"shift":shift,"gate":gate,"errors":op["summary"]["effectiveErrorFindings"],"structural":validate_schedule(s)["status"],"structuralFindings":[x for x in validate_schedule(s)["checks"] if x["status"]=="fail"],"overnight":validate_overnight_turns(s)["status"],"failed":[{"check":c["id"],"ids":[f["id"] for f in c["findings"] if "override" not in f][:8]} for c in op["checks"] if c["status"]=="fail"]}),flush=True)
