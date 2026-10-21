@@ -1,5 +1,7 @@
 name: Schedule 7 v1.4.2 tactical feasibility
 on:
+  pull_request:
+    branches: [main]
   push:
     branches: [analysis/schedule-7-v1.4.2-connection-gaps]
 jobs:
