@@ -1,18 +1,6 @@
 name: Prepare and verify Schedule 7 v1.3.2 release
+# Completed release: run only when deliberately reproducing its package.
 on:
-  push:
-    branches: [schedule-7-v1.3.2-maintenance-draft]
-    paths:
-      - '.github/workflows/v132-publish-package.yml'
-      - 'scripts/prepare_schedule_7_v1_3_2_release.py'
-      - 'docs/schedule_7_v1_3_2_release.md'
-      - 'src/caa_scheduler/optimization_release.py'
-      - 'tests/test_latest_schedule_release.py'
-      - 'tests/test_latest_service_gains.py'
-      - 'tests/test_operating_validation.py'
-      - 'tests/test_opportunity_analysis.mjs'
-      - 'tests/test_routing_details.mjs'
-      - 'tests/test_web_console.mjs'
   workflow_dispatch:
 permissions:
   contents: write

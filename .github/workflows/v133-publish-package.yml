@@ -1,9 +1,6 @@
 name: Package and verify Schedule 7 v1.3.3 release
+# Completed release: run only when deliberately reproducing its package.
 on:
-  push:
-    branches: [schedule-7-v1.3.3-bhm-mini-banks]
-    paths:
-      - '.github/workflows/v133-publish-package.yml'
   workflow_dispatch:
 permissions:
   contents: write

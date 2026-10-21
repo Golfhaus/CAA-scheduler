@@ -1,9 +1,6 @@
 name: Prepare and verify Schedule 7 v1.4.0 release
+# Completed release: run only when deliberately reproducing its package.
 on:
-  push:
-    branches: [schedule-7-v1.4.0-utilization-analysis]
-    paths:
-      - '.github/workflows/v140-publish-package.yml'
   workflow_dispatch:
 permissions:
   contents: write

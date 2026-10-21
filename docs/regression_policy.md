@@ -25,6 +25,21 @@ workflow now runs latest-only checks and no longer runs automatically for
 major-version tags.
 
 
+## Publication workflow
+
+Deploy Pages runs the current-release regression command in a required
+`validate` job for the same commit being published. The site `build` job
+requires validation to succeed, and `deploy` requires the build to succeed.
+Validation failures therefore leave the existing website in place. The build
+uses a fresh checkout so generated validation outputs cannot alter the
+published snapshot. This gate applies to both pushes to `main` and manual
+Pages deployments.
+
+The completed v1.3.2, v1.3.3, v1.4.0 and v1.4.1 release-packaging workflows
+are manual-only historical tools. They no longer run on ordinary pull-request
+updates or pushes. CI remains automatic for pushes and pull requests.
+
+
 ## Known v1.3.1 maintenance defect during v1.3.2 review
 
 The corrected validator must report exactly AC/AO/AQ as never reaching a
