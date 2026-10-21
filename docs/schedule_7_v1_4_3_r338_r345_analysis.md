@@ -42,3 +42,13 @@ Compare marginal network outcomes for the gate-valid R345 options. Select the be
 **R345 native gate screening** — `scripts/v143_r345_clt_turn_screen.py`, run 39691750365: native-pass CLT roundtrips to AVL, CAE, GSO, GSP, ROA, TRI, TYS across 13:47–14:25 departures, preserving the 17:10 CLT→PHF continuation. Flight estimates range 80–110 total minutes. CLT–TYS–CLT **14:00–16:30** has the largest local O-D among screened options (15.5 daily two-way); all other passing options have smaller local O-D. Later inactive FAY lookup caused that discovery script to terminate with nonzero status *after* these passing results; do not claim the entire screening workflow passed. The individually printed PASS results are valid isolated check outcomes. Marginal passenger ranking is run separately using `scripts/v143_r345_commercial_screen.mjs`.
 
 **Gate for inclusion:** Do not insert R338 or R345 changes into accepted canonical until independent cumulative physical/gate/operating validations and full passenger audit pass, in addition to locally plausible turns. No further fleet aircraft or airport gates are authorized.
+
+
+## R345 commercial verdict
+
+Marginal network screen against the retained 1,286-flight draft, run 39692013743:
+- CLT–TYS–CLT: 110 flying minutes, two new geographically reasonable direct directionals, **0 improved connecting journeys**, underlying CLT↔TYS O-D only 7.8 + 7.7 = 15.5/day.
+- CLT–GSO: 90m, two new direct directionals, zero improved connections, 7.5/day two-way local O-D.
+- CLT–GSP: 80m, 7.4/day local O-D; CLT–AVL: 90m, 4.9/day; CLT–CAE: 90m, 4.8/day. None generates additional faster reasonable connecting journeys.
+
+**Conclusion:** Every native-pass simple CLT side turn is too low-demand for a dedicated CRJ700 flight pair unless there are other commercial reasons. Do not add the short turns simply for utilization. Explore a *full rebuild* of R345 or reassignment of the incumbent SYR→CLT / CLT→PHF leg to permit a longer and higher-demand flight pairing. This determination is based on real passenger audit, not an assumption that gate feasibility equals commercial value.
