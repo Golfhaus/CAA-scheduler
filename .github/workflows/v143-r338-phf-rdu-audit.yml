@@ -1,0 +1,10 @@
+name: v1.4.3 R338 PHF RDU passenger audit
+on:
+  pull_request:
+    branches: [main]
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: node scripts/v143_r338_phf_rdu_commercial.mjs
