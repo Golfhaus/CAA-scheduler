@@ -34,4 +34,4 @@ for shift in (18,20,22,25):
   if gate and structure=="pass" and op["summary"]["effectiveErrorFindings"]==0 and validate_overnight_turns(s)["status"]=="pass":
    print(json.dumps({"destination":dest,"advance":shift,"CLTdep":clk(dep),"CLTback":clk(back),"blockMinutes":block*2,"status":"PASS"}),flush=True)
   else:
-   print(json.dumps({"destination":dest,"advance":shift,"gate":gate,"structure":structure,"errors":op["summary"]["effectiveErrorFindings"],"checks":[c["id"] for c in op["checks"] if c["status"]=="fail"]}),flush=True)
+   print(json.dumps({"destination":dest,"advance":shift,"gate":gate,"structure":structure,"errors":op["summary"]["effectiveErrorFindings"],"checks":[{"id":c["id"],"findings":[f["id"] for f in c["findings"] if "override" not in f][:6]} for c in op["checks"] if c["status"]=="fail"]}),flush=True)
