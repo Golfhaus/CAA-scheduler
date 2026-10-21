@@ -1,0 +1,65 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "schedule-7-v1.4.1-release",
+  "sourceScheduleId": "schedule_7_v1_4_0",
+  "baseCanonical": "data/schedules/schedule_7_v1_4_1_draft/canonical_schedule.json",
+  "baseCanonicalSha256": "1b507130efb7f44bd5f81802ef21a773eb314a73d3a410528a679e6242c7fc33",
+  "overlays": [],
+  "overlaySha256": {},
+  "outputDirectory": "data/schedules/schedule_7_v1_4_1",
+  "rejoinAvoidableTows": true,
+  "dropWorkingDraftProvenance": true,
+  "demandDataVersion": "bts-db1c-6mo-jul2025-apr2026-v7",
+  "schedule": {
+    "id": "schedule_7_v1_4_1",
+    "number": 7,
+    "version": "1.4.1",
+    "label": "Schedule 7, Version 1.4.1",
+    "status": "released"
+  },
+  "patchScope": {
+    "kind": "crj200_utilization_syr_reorganization",
+    "timetableChanged": true,
+    "routingChanged": true,
+    "description": "Approved R105 BGR, R162 morning BGR, R107 ISP-PHF-SYR and R108 SYR-PIT-SYR optimization; supporting R356 BDL-SYR timing."
+  },
+  "connectionAudit": {
+    "hub": "SYR",
+    "groups": {
+      "northeast": [
+        "BTV",
+        "HPN",
+        "MHT",
+        "PWM",
+        "ALB",
+        "ISP",
+        "BDL"
+      ],
+      "other": [
+        "PIT",
+        "CAK",
+        "BUF",
+        "ORH",
+        "PHF",
+        "BGR",
+        "ROC"
+      ]
+    }
+  },
+  "connectionScopeDecision": {
+    "status": "approved",
+    "approvedBy": "user",
+    "date": "2026-10-20",
+    "userInstruction": "Proceed as you understand the situation. Discard anything experimental or not tied to a published schedule.",
+    "acceptedDraftSha256": "1b507130efb7f44bd5f81802ef21a773eb314a73d3a410528a679e6242c7fc33",
+    "review": "R105, R107, R108 and R162 accepted with R356 supporting retiming; R106/R167 unchanged. BTV-RFD preserved. Discard rejected R167 alternatives. ISP-BNA and ORH-PGD commercial tradeoffs documented."
+  },
+  "expectedRelease": {
+    "legs": 1266,
+    "routes": 188,
+    "lines": 17,
+    "effectiveOperatingErrors": 0,
+    "hardStopFailures": 0,
+    "overnightTurnFailures": 0
+  }
+}
