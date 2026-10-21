@@ -28,6 +28,4 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data/schedules/schedule_7_v1_4_2/ data/schedules/schedule_7_v1_4_2_draft/ data/schedules/schedule_7_v1_4_2_r177_candidate/ config/optimizations/schedule_7_v1_4_2_release.json web/schedules.json README.md tests/
           git commit -m "Package validated Schedule 7 v1.4.2 release [skip ci]"
-          git fetch origin release/schedule-7-v1.4.2-clean
-          git rebase origin/release/schedule-7-v1.4.2-clean
           git push origin HEAD:release/schedule-7-v1.4.2-clean
