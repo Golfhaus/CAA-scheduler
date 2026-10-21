@@ -1,0 +1,13 @@
+name: Schedule 7 v1.4.2 connectivity screen
+on:
+  push:
+    branches: [analysis/schedule-7-v1.4.2-connection-gaps]
+jobs:
+  screen:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node scripts/v142_connection_screen.mjs
