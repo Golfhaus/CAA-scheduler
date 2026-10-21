@@ -52,3 +52,20 @@ Marginal network screen against the retained 1,286-flight draft, run 39692013743
 - CLT–GSP: 80m, 7.4/day local O-D; CLT–AVL: 90m, 4.9/day; CLT–CAE: 90m, 4.8/day. None generates additional faster reasonable connecting journeys.
 
 **Conclusion:** Every native-pass simple CLT side turn is too low-demand for a dedicated CRJ700 flight pair unless there are other commercial reasons. Do not add the short turns simply for utilization. Explore a *full rebuild* of R345 or reassignment of the incumbent SYR→CLT / CLT→PHF leg to permit a longer and higher-demand flight pairing. This determination is based on real passenger audit, not an assumption that gate feasibility equals commercial value.
+
+
+## Coordinated rebuild continuation — passenger results
+
+Native R338 SAV insertion screen, `scripts/v143_r338_sav_turn_screen.py`, GitHub Actions run 39692312109, found valid gate/overnight/structure/operating outcomes after shifting PHF→SAV #1493 to 14:30–15:56 and operating:
+- SAV–CHS–SAV, 16:45–18:55 (or 17:00–19:10), 90 additional flight minutes;
+- SAV–ILM–SAV, 16:45–19:15, 110 flight minutes;
+- SAV–CAE–SAV, 16:45–19:15, 110 flight minutes.
+All preserve subsequent SAV–JAX 20:00 departure with required turnaround.
+
+**Commercial screen rejects the SAV insertions as currently configured.** `scripts/v143_r338_sav_commercial_screen.mjs`, run 39693568206, for SAV–CHS turn: **2 reasonable coverage gains, 4 losses, 7 faster, 10 slower**. BDL→SAV (22.6 O-D/day) rises **296→415m**, HPN→SAV (10.4/day) **320→426m**, and SYR/ALB/ROC→SAV also worsen. SAV–ILM creates no additional reasonable coverage gains while retaining the same losses; SAV–CAE local two-way O-D is ~1.0/day. The PHF–SAV schedule shift breaks established Northeast arrivals to SAV; new SAV turns cannot justify those losses. **Do not add the earlier #1493 shift or these trips to canonical.**
+
+Opposite attempt: move PHF→SAV to **17:00–18:26** and use the enlarged PHF hold. Native screen `scripts/v143_r338_phf_turn_screen.py`, run 39693680099, found **PHF–RDU–PHF 13:53–16:13** physically valid with 100 added flight minutes and no native operating errors. Commercial screen `scripts/v143_r338_phf_rdu_commercial.mjs`, run 39693829184, returned **1 gained reasonable connection, 0 lost, 11 faster, 12 slower**. BNA→RDU improves **317→188m**, BWI→RDU **227→138m**, but BDL→SAV worsens **296→341m**, HPN→SAV **320→365m**, and more Northeast→SAV markets deteriorate. **Do not automatically accept** despite meaningful RDU improvements; original PHF→SAV feeds are valuable.
+
+Together these screens demonstrate R338 must be rebuilt with **a replacement Northeast→SAV feed**, a second SAV arrival near the previous 17:41 bank, or a donor aircraft-day serving the displaced destinations. The priority is protecting BDL/HPN/ALB/SYR/ROC→SAV while enabling R338's additional turn; no isolated #1493 retiming satisfies that.
+
+R345 previously proved that local CLT out-and-backs are physically feasible but demand poor. A substantial route reconstruction needs a donor for existing SYR→CLT #1306 and/or CLT→PHF #1382 before freeing a larger flying block. The accepted 1,286-flight v1.4.3 draft remains unchanged on its development branch.
