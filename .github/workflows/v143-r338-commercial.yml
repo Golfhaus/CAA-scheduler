@@ -1,0 +1,10 @@
+name: v1.4.3 R338 SAV commercial screen
+on:
+  pull_request:
+    branches: [main]
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: node scripts/v143_r338_sav_commercial_screen.mjs
