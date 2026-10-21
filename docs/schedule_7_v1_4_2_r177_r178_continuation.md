@@ -17,3 +17,12 @@ The additional 10th day of CRJ700 line AH preserves structural and overnight con
 GitHub Actions run 39581901703 exposed the RDU `tiered_service_minimums` finding: RDU is at the 90th percentile, has 28 flights and 22 hub/focus flights after the proposed SYR addition, but **five connected hubs (DAY, JAX, MCI, PHF, SYR)** against a **four-hub cap**. Thus the candidate is **not** blocked by too few departures; it would violate the permitted count of distinct hubs. Adding flights or a bank will not resolve this. Do **not** issue a policy override. The options are to replace existing RDU service to one of DAY/JAX/MCI/PHF with SYR, change the proposed one-stop connection to use an already connected permitted hub, or find a policy-compliant network reconstruction. Any removed hub pairing must be audited for lost reasonable coverage and high-demand connections.
 
 The -50-minute HVN-SYR 08:55–09:51, SYR-RDU 10:50–12:20, RDU-SYR 13:15–14:45 screen passes structural and physical gates and resolves the original SYR bank alignment when HVN arrival is reassigned to SYR-M09, new outbound to SYR-B3, and new return to SYR-M15. It is still **not a valid release candidate** because of RDU's four-hub cap.
+
+
+## Actual combined tactical + R177 passenger-network audit
+
+GitHub Actions run 39582235653 passed and rebuilt `data/schedules/schedule_7_v1_4_2_r177_candidate/` in CI (not published to main). The candidate contains **1,268 flights / 189 routes**, retaining all prior v1.4.1 services plus the two MCI tactical retimings and R177. Full native structural/overnight/planning/gate/operating validation passed; **zero effective operating errors**.
+
+Independent comparison with published v1.4.1 on geographically reasonable directional coverage: **18 new reasonable markets, zero lost, 46 faster fastest reasonable journeys, zero slower**. GRR→SRQ improves from two stops / 468 min to one stop / 370 min; SRQ→GRR improves from two stops / 408 min to one stop / 243 min. Additional high-demand market gains include SRQ→IND (67.5/day O-D), BNA→SRQ (45.7), and both directions of SBN↔SRQ (~22/day each). These numbers are relative to v1.4.1, and are *not* summed with earlier individual audit results.
+
+**Disposition:** R177 should now be treated as a validated unpublished v1.4.2 candidate, not merely a conceptual turn. One CRJ200 spare is implied by extending line AF 11→12 days, but the user-approved spare pool should not be decremented on the released schedule until the eventual release decision.
