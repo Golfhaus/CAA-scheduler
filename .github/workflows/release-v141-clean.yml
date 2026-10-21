@@ -2,8 +2,6 @@ name: Package and verify Schedule 7 v1.4.1
 on:
   pull_request:
     branches: [main]
-  push:
-    branches: [release/schedule-7-v1.4.1-clean]
 permissions:
   contents: write
 jobs:
@@ -34,4 +32,6 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data/schedules/schedule_7_v1_4_1/ data/schedules/schedule_7_v1_4_1_draft/ config/optimizations/schedule_7_v1_4_1_release.json web/schedules.json README.md tests/test_latest_schedule_release.py tests/test_latest_service_gains.py tests/test_opportunity_analysis.mjs tests/test_routing_details.mjs tests/test_web_console.mjs
           git commit -m "Package and verify released Schedule 7 v1.4.1 [skip ci]"
-          git push
+          git fetch origin release/schedule-7-v1.4.1-clean
+          git rebase origin/release/schedule-7-v1.4.1-clean
+          git push origin HEAD:release/schedule-7-v1.4.1-clean
