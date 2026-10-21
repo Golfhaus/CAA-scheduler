@@ -20,7 +20,7 @@ def report(s,label):
  try:export_gate_schedule(s);g="pass"
  except Exception as e:g=str(e)
  a=[(c["id"],f["id"]) for c in v["checks"] for f in c["findings"] if "override" not in f]
- print(json.dumps(dict(case=label,structural=validate_schedule(s)["status"],gates=g,errors=v["summary"]["effectiveErrorFindings"],new=[list(x) for x in a if x[1].startswith("V142-") or x[1].startswith("HVN-SYR-CRJ200-02-OUT") or x[1]=="RDU"]),flush=True)
+ print(json.dumps(dict(case=label,structural=validate_schedule(s)["status"],gates=g,errors=v["summary"]["effectiveErrorFindings"],new=[list(x) for x in a if x[1].startswith("V142-") or x[1].startswith("HVN-SYR-CRJ200-02-OUT") or x[1]=="RDU"])),flush=True)
  return s
 s=add(base,"DAY","AF",6,177,[("DAY","SRQ",600,745),("SRQ","DAY",790,935)])
 s["bankAssignments"] += [{"legId":"V142-DAY-0","operation":"departure","bankId":"DAY-B3"},{"legId":"V142-DAY-1","operation":"arrival","bankId":"DAY-B6"}]
