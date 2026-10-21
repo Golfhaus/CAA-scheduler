@@ -8,3 +8,4 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: python scripts/v143_five_crj700_holds.py
+      - run: python scripts/v143_crj700_demand_hold_screen.py
