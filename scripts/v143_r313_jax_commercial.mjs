@@ -9,6 +9,7 @@ old.departureMinute=650;old.arrivalMinute=716;old.departure="10:50";old.arrival=
 for(const [i,o,d,t,u] of [[0,"CLT","JAX",422,493],[1,"JAX","CLT",533,604]]){
  after.legs.push({id:"V143-R313-JAX-"+i,route:313,line:"AH",day:2,flight:3200+i,origin:o,destination:d,departureMinute:t,arrivalMinute:u,departure:String(Math.floor(t/60)).padStart(2,"0")+":"+String(t%60).padStart(2,"0"),arrival:String(Math.floor(u/60)).padStart(2,"0")+":"+String(u%60).padStart(2,"0")});
 }
+const avp=after.legs.find(l=>l.flight===1745); avp.departureMinute+=55; avp.arrivalMinute+=55; avp.departure="12:30"; avp.arrival="13:38";
 const a=buildServiceAnalysis(baseline,od,buildItineraries),b=buildServiceAnalysis(after,od,buildItineraries);
 for(const reasonable of [true,false]){
  const v=compareServiceAnalyses(a,b,reasonable);
