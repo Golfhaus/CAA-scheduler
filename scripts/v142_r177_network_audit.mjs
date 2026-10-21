@@ -1,0 +1,11 @@
+import {readFileSync} from "node:fs";
+import {buildItineraries} from "../web/app.mjs";
+import {parseAirportDemand,buildServiceAnalysis,compareServiceAnalyses,coverageView} from "../web/opportunity-analysis.mjs";
+const root="data/schedules/";
+const before=JSON.parse(readFileSync(root+"schedule_7_v1_4_1/canonical_schedule.json"));
+const after=JSON.parse(readFileSync(root+"schedule_7_v1_4_2_r177_candidate/canonical_schedule.json"));
+const demand=parseAirportDemand(readFileSync("data/reference/airport_od_matrix_consolidated_v2.csv","utf8"));
+const a=buildServiceAnalysis(before,demand,buildItineraries);
+const b=buildServiceAnalysis(after,demand,buildItineraries);
+const audit=compareServiceAnalyses(a,b,true);
+console.log(JSON.stringify({candidate:"tactical plus R177",flights:after.legs.length,counts:Object.fromEntries(["gained","lost","faster","slower"].map(k=>[k,audit[k].length])),gains:audit.gained,losses:audit.lost,highDemandSlower:audit.slower.filter(x=>x.demand>=15).slice(0,20),grrSrq:["GRR-SRQ","SRQ-GRR"].map(x=>({market:x,before:coverageView(a.records.get(x),true).stops,after:coverageView(b.records.get(x),true).stops}))},null,2));
