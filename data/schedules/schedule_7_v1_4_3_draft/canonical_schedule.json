@@ -6409,6 +6409,16 @@
       "legId": "V143-R178-BDL-SYR-7",
       "operation": "arrival",
       "bankId": "SYR-M17"
+    },
+    {
+      "legId": "V143-R178-SYR-BDL-8",
+      "operation": "departure",
+      "bankId": "SYR-B6"
+    },
+    {
+      "legId": "V143-R178-BDL-SYR-9",
+      "operation": "arrival",
+      "bankId": "SYR-B7"
     }
   ],
   "cities": [
@@ -29173,14 +29183,46 @@
       "arrival": "17:55"
     },
     {
-      "id": "V143-R359-BNA-FLL-8",
+      "id": "V143-R178-SYR-BDL-8",
+      "route": 178,
+      "line": "AC",
+      "day": 9,
+      "fleet": "CRJ200",
+      "sequenceWithinRoute": 7,
+      "pairing": 489,
+      "flight": 2291,
+      "origin": "SYR",
+      "destination": "BDL",
+      "departureMinute": 1170,
+      "arrivalMinute": 1220,
+      "departure": "19:30",
+      "arrival": "20:20"
+    },
+    {
+      "id": "V143-R178-BDL-SYR-9",
+      "route": 178,
+      "line": "AC",
+      "day": 9,
+      "fleet": "CRJ200",
+      "sequenceWithinRoute": 8,
+      "pairing": 487,
+      "flight": 2292,
+      "origin": "BDL",
+      "destination": "SYR",
+      "departureMinute": 1260,
+      "arrivalMinute": 1310,
+      "departure": "21:00",
+      "arrival": "21:50"
+    },
+    {
+      "id": "V143-R359-BNA-FLL-10",
       "route": 359,
       "line": "AH",
       "day": 6,
       "fleet": "CRJ700",
       "sequenceWithinRoute": 1,
-      "pairing": 948,
-      "flight": 2291,
+      "pairing": 950,
+      "flight": 2293,
       "origin": "BNA",
       "destination": "FLL",
       "departureMinute": 360,
@@ -29189,14 +29231,14 @@
       "arrival": "09:05"
     },
     {
-      "id": "V143-R359-FLL-BNA-9",
+      "id": "V143-R359-FLL-BNA-11",
       "route": 359,
       "line": "AH",
       "day": 6,
       "fleet": "CRJ700",
       "sequenceWithinRoute": 2,
-      "pairing": 949,
-      "flight": 2292,
+      "pairing": 951,
+      "flight": 2294,
       "origin": "FLL",
       "destination": "BNA",
       "departureMinute": 590,
@@ -29205,14 +29247,14 @@
       "arrival": "10:55"
     },
     {
-      "id": "V143-R359-BNA-DAL-10",
+      "id": "V143-R359-BNA-DAL-12",
       "route": 359,
       "line": "AH",
       "day": 6,
       "fleet": "CRJ700",
       "sequenceWithinRoute": 3,
-      "pairing": 950,
-      "flight": 2293,
+      "pairing": 952,
+      "flight": 2295,
       "origin": "BNA",
       "destination": "DAL",
       "departureMinute": 780,
@@ -29221,14 +29263,14 @@
       "arrival": "14:45"
     },
     {
-      "id": "V143-R359-DAL-BNA-11",
+      "id": "V143-R359-DAL-BNA-13",
       "route": 359,
       "line": "AH",
       "day": 6,
       "fleet": "CRJ700",
       "sequenceWithinRoute": 4,
-      "pairing": 951,
-      "flight": 2294,
+      "pairing": 953,
+      "flight": 2296,
       "origin": "DAL",
       "destination": "BNA",
       "departureMinute": 930,
