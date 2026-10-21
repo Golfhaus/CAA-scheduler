@@ -1,0 +1,31 @@
+name: Schedule 7 v1.4.2 tactical feasibility
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [analysis/schedule-7-v1.4.2-connection-gaps]
+jobs:
+  screen:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install -e .
+      - run: python scripts/build_schedule_7_v1_4_2_r177_candidate.py
+      - run: python scripts/v142_release_candidate.py
+      - run: node scripts/v142_r178_network_impact.mjs
+      - run: node scripts/v142_r177_network_audit.mjs
+      - run: python scripts/v142_bank_assignment_screen.py
+      - run: python scripts/v142_incremental_validation.py
+      - run: python scripts/v142_cyclic_day_screen.py
+      - run: python scripts/v142_syr_coordinated_screen.py
+      - run: python scripts/v142_gate_offset_screen.py
+      - run: python scripts/v142_concept_native_screen.py
+      - run: python scripts/v142_hold_fitter.py
+      - run: python scripts/v142_tactical_screen.py
+      - run: python scripts/build_schedule_7_v1_4_2_draft.py
+      - run: node scripts/audit_v142_tactical_network.mjs
+      - run: node scripts/v142_connection_screen.mjs
+      - run: node scripts/v142_three_aircraft_concept.mjs
