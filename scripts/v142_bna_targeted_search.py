@@ -18,15 +18,15 @@ def retime(leg,dep):
  leg["departure"]=clock(dep);leg["arrival"]=clock(leg["arrivalMinute"])
 rng=random.Random(342)
 best=(999,None)
-for i in range(1300):
+for i in range(2600):
  # Target earlier R512 turn to clear BNA gate or move to later time; also target
  # one BNA-BHM ECP connector and return for next-day BNA R317.
- a=rng.randrange(1050,1261,10)
- b=rng.randrange(1300,1411,10)
+ a=rng.randrange(1040,1211,5)
+ b=rng.randrange(1300,1411,5)
  if b-(a+75)<40:continue
  retime(pair[0],a);retime(pair[1],b)
  # Try original R512 or limited timing changes in a valid 40-min turn pair.
- move=rng.choice([-35,-25,-15,0,15,25,35])
+ move=rng.choice([-55,-45,-35,-25,-15,0,15,25,35])
  retime(r512[0],1080+move);retime(r512[1],1180+move)
  try:
   export_gate_schedule(s);n=0
