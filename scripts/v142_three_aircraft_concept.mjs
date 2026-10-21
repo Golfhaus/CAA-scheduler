@@ -9,7 +9,7 @@ const plans=[
  ["BHM","BNA",815,890],["BNA","BHM",930,1005],
  ["BHM","BNA",1045,1120],["BNA","BHM",1160,1235],
  ["BHM","BNA",1315,1390]]},
- {name:"BHM-RDU-HVN",fleet:"CRJ700",legs:[["BHM","RDU",670,810],["RDU","BHM",850,870]]},
+ {name:"SYR-RDU-HVN",fleet:"CRJ700",legs:[["SYR","RDU",680,770],["RDU","SYR",810,900]]},
  {name:"DAY-SRQ-GRR",fleet:"CRJ700",legs:[["DAY","SRQ",600,745],["SRQ","DAY",790,935]]}
 ];
 const before=buildServiceAnalysis(base,od,buildItineraries);
