@@ -8,17 +8,19 @@ const original=buildServiceAnalysis(base,demand,buildItineraries);
 const protectedMarkets=[];
 for(const [market,record] of original.records){
  if((record.demand??0)<=marketThreshold)continue;
- const stops=coverageView(record,true).stops;
- if(stops!==1 && stops!==0)continue;
- protectedMarkets.push({market,demand:record.demand,baselineStops:stops});
+ for(const reasonable of [true,false]){
+  const stops=coverageView(record,reasonable).stops;
+  if(stops!==1 && stops!==0)continue;
+  protectedMarkets.push({market,demand:record.demand,baselineStops:stops,reasonable});
+ }
 }
 export function auditRebuild(candidate){
  const after=buildServiceAnalysis(candidate,demand,buildItineraries);
  const losses=[];
- for(const {market,demand,baselineStops} of protectedMarkets){
+ for(const {market,demand,baselineStops,reasonable} of protectedMarkets){
   const r=after.records.get(market);
-  const stops=coverageView(r,true).stops;
-  if(stops===null || stops>1)losses.push({market,demand,baselineStops,newStops:stops,reason:"one-stop-or-nonstop-coverage-lost"});
+  const stops=coverageView(r,reasonable).stops;
+  if(stops===null || stops>1)losses.push({market,demand,baselineStops,newStops:stops,reasonable,reason:"one-stop-or-nonstop-coverage-lost"});
  }
  return {protectedMarketCount:protectedMarkets.length,protectedMarketLosses:losses.length,losses};
 }
