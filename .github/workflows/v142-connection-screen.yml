@@ -17,3 +17,4 @@ jobs:
       - run: python scripts/build_schedule_7_v1_4_2_draft.py
       - run: node scripts/audit_v142_tactical_network.mjs
       - run: node scripts/v142_connection_screen.mjs
+      - run: node scripts/v142_three_aircraft_concept.mjs
