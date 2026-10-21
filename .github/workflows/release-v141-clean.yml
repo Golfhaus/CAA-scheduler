@@ -1,7 +1,7 @@
 name: Package and verify Schedule 7 v1.4.1
+# Completed release: run only when deliberately reproducing its package.
 on:
-  pull_request:
-    branches: [main]
+  workflow_dispatch:
 permissions:
   contents: write
 jobs:
