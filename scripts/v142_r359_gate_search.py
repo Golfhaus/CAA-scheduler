@@ -48,4 +48,22 @@ for i in range(550):
  if n==0:
   successes.append(d)
   if len(successes)>=5:break
+
+# Concentrate on +/-30min of the best found global pattern.
+for i in range(2500):
+ center=best[1] or (900,1050,1210,1350)
+ d=tuple(center[j]+rng.choice(range(-30,31,5)) for j in range(4))
+ n=test(d)
+ if n is None:continue
+ if n<best[0]:
+  best=(n,d);print(json.dumps({"localTrial":i,"bestGateMisses":n,"departures":d}),flush=True)
+ if n==0:
+  successes.append(d)
+  if len(successes)>=5:break
+if best[1]:
+ test(best[1])
+ from caa_scheduler.operating_validation import validate_operating_rules
+ rep=validate_operating_rules(s)
+ print(json.dumps({"bestFindings":{c["id"]:[{"id":f["id"],"evidence":f.get("evidence",{})} for f in c["findings"]] for c in rep["checks"] if c["id"] in ("passenger_touch_on_stand","fixed_physical_inventory")}},default=str),flush=True)
 print(json.dumps({"best":best,"successes":successes}),flush=True)
+
