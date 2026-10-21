@@ -22,9 +22,9 @@ class TwoDayGrowthTests(unittest.TestCase):
         cls.candidate = CANONICAL
 
     def test_released_sequence_and_consolidated_lines(self):
-        self.assertIn(SCHEDULE_ID, {"schedule_7_v1_3_1", "schedule_7_v1_3_2", "schedule_7_v1_3_3", "schedule_7_v1_4_0"})
+        self.assertIn(SCHEDULE_ID, {"schedule_7_v1_3_1", "schedule_7_v1_3_2", "schedule_7_v1_3_3", "schedule_7_v1_4_0", "schedule_7_v1_4_1"})
         self.assertEqual(self.candidate["schedule"]["status"], "released")
-        self.assertEqual(len(self.candidate["legs"]), {"schedule_7_v1_3_1": 1214, "schedule_7_v1_3_2": 1229, "schedule_7_v1_3_3": 1253, "schedule_7_v1_4_0": 1259}[SCHEDULE_ID])
+        self.assertEqual(len(self.candidate["legs"]), {"schedule_7_v1_3_1": 1214, "schedule_7_v1_3_2": 1229, "schedule_7_v1_3_3": 1253, "schedule_7_v1_4_0": 1259, "schedule_7_v1_4_1": 1266}[SCHEDULE_ID])
         new = sorted((l for l in self.candidate["legs"] if l["id"].startswith("V120-2MAX-")),
                      key=lambda l: l["flight"])
         self.assertEqual([l["flight"] for l in new], list(range(2083, 2099)))
@@ -40,7 +40,7 @@ class TwoDayGrowthTests(unittest.TestCase):
             ("13:22", "14:09"), ("14:49", "15:36"), ("16:16", "18:05"), ("18:47", "19:35")])
         self.assertTrue(all((l["fleet"], l["line"], l["route"], l["day"]) ==
                             ("MAX9", "B", 703 + i // 8, 9 + i // 8) for i, l in enumerate(new)))
-        for fleet, expected in (("MAX9", {"A": 12, "B": 12}), ("CRJ900", {"AB": 10, "AG": 11 if SCHEDULE_ID in {"schedule_7_v1_3_3", "schedule_7_v1_4_0"} else 9, "AJ": 9})):
+        for fleet, expected in (("MAX9", {"A": 12, "B": 12}), ("CRJ900", {"AB": 10, "AG": 11 if SCHEDULE_ID in {"schedule_7_v1_3_3", "schedule_7_v1_4_0", "schedule_7_v1_4_1"} else 9, "AJ": 9})):
             days = {(l["line"], l["day"]) for l in self.candidate["legs"] if l["fleet"] == fleet}
             self.assertEqual(Counter(line for line, _ in days), expected)
         self.assertEqual(self.candidate["schedule"]["fleetCounts"]["MAX9"], 35)

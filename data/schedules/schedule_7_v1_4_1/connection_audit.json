@@ -1,0 +1,4120 @@
+{
+  "schemaVersion": "1.0.0",
+  "scheduleId": "schedule_7_v1_4_1",
+  "hub": "SYR",
+  "connectionWindowMinutes": {
+    "minimum": 30,
+    "maximum": 240
+  },
+  "groups": {
+    "northeast": [
+      "BTV",
+      "HPN",
+      "MHT",
+      "PWM",
+      "ALB",
+      "ISP",
+      "BDL"
+    ],
+    "other": [
+      "PIT",
+      "CAK",
+      "BUF",
+      "ORH",
+      "PHF",
+      "BGR",
+      "ROC"
+    ]
+  },
+  "summary": {
+    "targetCities": 14,
+    "directRoundTripCities": 14,
+    "directionalPairs": 98,
+    "connectedDirectionalPairs": 98,
+    "missingDirectionalPairs": 0,
+    "connectionCoverage": 1.0,
+    "bySourceGroup": {
+      "northeast": {
+        "directionalPairs": 49,
+        "connectedDirectionalPairs": 49,
+        "missingDirectionalPairs": 0
+      },
+      "other": {
+        "directionalPairs": 49,
+        "connectedDirectionalPairs": 49,
+        "missingDirectionalPairs": 0
+      }
+    }
+  },
+  "directCoverage": [
+    {
+      "city": "BTV",
+      "group": "northeast",
+      "toHubLegs": 5,
+      "fromHubLegs": 5,
+      "roundTripCovered": true
+    },
+    {
+      "city": "HPN",
+      "group": "northeast",
+      "toHubLegs": 4,
+      "fromHubLegs": 4,
+      "roundTripCovered": true
+    },
+    {
+      "city": "MHT",
+      "group": "northeast",
+      "toHubLegs": 3,
+      "fromHubLegs": 3,
+      "roundTripCovered": true
+    },
+    {
+      "city": "PWM",
+      "group": "northeast",
+      "toHubLegs": 4,
+      "fromHubLegs": 4,
+      "roundTripCovered": true
+    },
+    {
+      "city": "ALB",
+      "group": "northeast",
+      "toHubLegs": 4,
+      "fromHubLegs": 4,
+      "roundTripCovered": true
+    },
+    {
+      "city": "ISP",
+      "group": "northeast",
+      "toHubLegs": 2,
+      "fromHubLegs": 3,
+      "roundTripCovered": true
+    },
+    {
+      "city": "BDL",
+      "group": "northeast",
+      "toHubLegs": 3,
+      "fromHubLegs": 3,
+      "roundTripCovered": true
+    },
+    {
+      "city": "PIT",
+      "group": "other",
+      "toHubLegs": 4,
+      "fromHubLegs": 4,
+      "roundTripCovered": true
+    },
+    {
+      "city": "CAK",
+      "group": "other",
+      "toHubLegs": 4,
+      "fromHubLegs": 4,
+      "roundTripCovered": true
+    },
+    {
+      "city": "BUF",
+      "group": "other",
+      "toHubLegs": 5,
+      "fromHubLegs": 5,
+      "roundTripCovered": true
+    },
+    {
+      "city": "ORH",
+      "group": "other",
+      "toHubLegs": 3,
+      "fromHubLegs": 3,
+      "roundTripCovered": true
+    },
+    {
+      "city": "PHF",
+      "group": "other",
+      "toHubLegs": 5,
+      "fromHubLegs": 4,
+      "roundTripCovered": true
+    },
+    {
+      "city": "BGR",
+      "group": "other",
+      "toHubLegs": 4,
+      "fromHubLegs": 4,
+      "roundTripCovered": true
+    },
+    {
+      "city": "ROC",
+      "group": "other",
+      "toHubLegs": 4,
+      "fromHubLegs": 4,
+      "roundTripCovered": true
+    }
+  ],
+  "directionalPairs": [
+    {
+      "source": "BTV",
+      "sourceGroup": "northeast",
+      "destination": "PIT",
+      "destinationGroup": "other",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V140-R106-LATE-0-1",
+          "inboundFlight": 2263,
+          "hubArrival": "21:49",
+          "outboundLegId": "V115-R321-SYR-PIT",
+          "outboundFlight": 2041,
+          "hubDeparture": "22:25",
+          "waitMinutes": 36
+        },
+        {
+          "inboundLegId": "V125-HOLDS-R318-2-BTV-SYR",
+          "inboundFlight": 2190,
+          "hubArrival": "10:40",
+          "outboundLegId": "V121-R147-1-SYR-PIT",
+          "outboundFlight": 2111,
+          "hubDeparture": "11:18",
+          "waitMinutes": 38
+        },
+        {
+          "inboundLegId": "BTV-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1829,
+          "hubArrival": "15:00",
+          "outboundLegId": "PIT-SYR-CRJ200-01-IN",
+          "outboundFlight": 1608,
+          "hubDeparture": "15:40",
+          "waitMinutes": 40
+        },
+        {
+          "inboundLegId": "V125-HOLDS-R318-2-BTV-SYR",
+          "inboundFlight": 2190,
+          "hubArrival": "10:40",
+          "outboundLegId": "V141-R108-BANK-1-1",
+          "outboundFlight": 2275,
+          "hubDeparture": "11:55",
+          "waitMinutes": 75
+        },
+        {
+          "inboundLegId": "BTV-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1828,
+          "hubArrival": "07:52",
+          "outboundLegId": "V121-R147-1-SYR-PIT",
+          "outboundFlight": 2111,
+          "hubDeparture": "11:18",
+          "waitMinutes": 206
+        },
+        {
+          "inboundLegId": "BTV-SYR-CRJ200-03-OUT",
+          "inboundFlight": 1830,
+          "hubArrival": "18:52",
+          "outboundLegId": "V115-R321-SYR-PIT",
+          "outboundFlight": 2041,
+          "hubDeparture": "22:25",
+          "waitMinutes": 213
+        }
+      ]
+    },
+    {
+      "source": "BTV",
+      "sourceGroup": "northeast",
+      "destination": "CAK",
+      "destinationGroup": "other",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V125-HOLDS-R318-2-BTV-SYR",
+          "inboundFlight": 2190,
+          "hubArrival": "10:40",
+          "outboundLegId": "CAK-SYR-CRJ200-02-IN",
+          "outboundFlight": 1672,
+          "hubDeparture": "11:20",
+          "waitMinutes": 40
+        },
+        {
+          "inboundLegId": "BTV-SYR-CRJ200-03-OUT",
+          "inboundFlight": 1830,
+          "hubArrival": "18:52",
+          "outboundLegId": "CAK-SYR-CRJ200-01-IN",
+          "outboundFlight": 1674,
+          "hubDeparture": "19:35",
+          "waitMinutes": 43
+        },
+        {
+          "inboundLegId": "BTV-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1829,
+          "hubArrival": "15:00",
+          "outboundLegId": "CAK-SYR-CRJ200-03-IN",
+          "outboundFlight": 1673,
+          "hubDeparture": "16:50",
+          "waitMinutes": 110
+        },
+        {
+          "inboundLegId": "BTV-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1828,
+          "hubArrival": "07:52",
+          "outboundLegId": "CAK-SYR-CRJ200-02-IN",
+          "outboundFlight": 1672,
+          "hubDeparture": "11:20",
+          "waitMinutes": 208
+        }
+      ]
+    },
+    {
+      "source": "BTV",
+      "sourceGroup": "northeast",
+      "destination": "BUF",
+      "destinationGroup": "other",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V140-R106-LATE-0-1",
+          "inboundFlight": 2263,
+          "hubArrival": "21:49",
+          "outboundLegId": "V115-R306-SYR-BUF",
+          "outboundFlight": 2045,
+          "hubDeparture": "22:22",
+          "waitMinutes": 33
+        },
+        {
+          "inboundLegId": "V125-HOLDS-R318-2-BTV-SYR",
+          "inboundFlight": 2190,
+          "hubArrival": "10:40",
+          "outboundLegId": "V123-R145-3-SYR-BUF",
+          "outboundFlight": 2143,
+          "hubDeparture": "11:18",
+          "waitMinutes": 38
+        },
+        {
+          "inboundLegId": "BTV-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1828,
+          "hubArrival": "07:52",
+          "outboundLegId": "BUF-SYR-CRJ200-01-IN",
+          "outboundFlight": 1687,
+          "hubDeparture": "08:40",
+          "waitMinutes": 48
+        },
+        {
+          "inboundLegId": "BTV-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1829,
+          "hubArrival": "15:00",
+          "outboundLegId": "BUF-SYR-CRJ200-02-IN",
+          "outboundFlight": 1688,
+          "hubDeparture": "16:55",
+          "waitMinutes": 115
+        },
+        {
+          "inboundLegId": "BTV-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1829,
+          "hubArrival": "15:00",
+          "outboundLegId": "V115-R144-SYR-BUF",
+          "outboundFlight": 2050,
+          "hubDeparture": "18:10",
+          "waitMinutes": 190
+        },
+        {
+          "inboundLegId": "BTV-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1828,
+          "hubArrival": "07:52",
+          "outboundLegId": "V123-R145-3-SYR-BUF",
+          "outboundFlight": 2143,
+          "hubDeparture": "11:18",
+          "waitMinutes": 206
+        },
+        {
+          "inboundLegId": "BTV-SYR-CRJ200-03-OUT",
+          "inboundFlight": 1830,
+          "hubArrival": "18:52",
+          "outboundLegId": "V115-R306-SYR-BUF",
+          "outboundFlight": 2045,
+          "hubDeparture": "22:22",
+          "waitMinutes": 210
+        }
+      ]
+    },
+    {
+      "source": "BTV",
+      "sourceGroup": "northeast",
+      "destination": "ORH",
+      "destinationGroup": "other",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V140-R106-LATE-0-1",
+          "inboundFlight": 2263,
+          "hubArrival": "21:49",
+          "outboundLegId": "V115-R515-SYR-ORH",
+          "outboundFlight": 2047,
+          "hubDeparture": "22:26",
+          "waitMinutes": 37
+        },
+        {
+          "inboundLegId": "BTV-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1828,
+          "hubArrival": "07:52",
+          "outboundLegId": "ORH-SYR-CRJ200-02-IN",
+          "outboundFlight": 1881,
+          "hubDeparture": "08:35",
+          "waitMinutes": 43
+        },
+        {
+          "inboundLegId": "BTV-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1829,
+          "hubArrival": "15:00",
+          "outboundLegId": "ORH-SYR-CRJ200-01-IN",
+          "outboundFlight": 1882,
+          "hubDeparture": "18:10",
+          "waitMinutes": 190
+        },
+        {
+          "inboundLegId": "BTV-SYR-CRJ200-03-OUT",
+          "inboundFlight": 1830,
+          "hubArrival": "18:52",
+          "outboundLegId": "V115-R515-SYR-ORH",
+          "outboundFlight": 2047,
+          "hubDeparture": "22:26",
+          "waitMinutes": 214
+        }
+      ]
+    },
+    {
+      "source": "BTV",
+      "sourceGroup": "northeast",
+      "destination": "PHF",
+      "destinationGroup": "other",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "BTV-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1829,
+          "hubArrival": "15:00",
+          "outboundLegId": "PHF-SYR-CRJ200-02-IN",
+          "outboundFlight": 1512,
+          "hubDeparture": "16:50",
+          "waitMinutes": 110
+        },
+        {
+          "inboundLegId": "V125-HOLDS-R318-2-BTV-SYR",
+          "inboundFlight": 2190,
+          "hubArrival": "10:40",
+          "outboundLegId": "V112-R323-SYR-PHF-01",
+          "outboundFlight": 1951,
+          "hubDeparture": "13:15",
+          "waitMinutes": 155
+        },
+        {
+          "inboundLegId": "V125-HOLDS-R318-2-BTV-SYR",
+          "inboundFlight": 2190,
+          "hubArrival": "10:40",
+          "outboundLegId": "PHF-SYR-CRJ200-01-IN",
+          "outboundFlight": 1511,
+          "hubDeparture": "14:10",
+          "waitMinutes": 210
+        }
+      ]
+    },
+    {
+      "source": "BTV",
+      "sourceGroup": "northeast",
+      "destination": "BGR",
+      "destinationGroup": "other",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "BTV-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1828,
+          "hubArrival": "07:52",
+          "outboundLegId": "V141-R162-SCREEN-6-1",
+          "outboundFlight": 2269,
+          "hubDeparture": "09:50",
+          "waitMinutes": 118
+        },
+        {
+          "inboundLegId": "BTV-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1829,
+          "hubArrival": "15:00",
+          "outboundLegId": "BGR-SYR-CRJ200-01-IN",
+          "outboundFlight": 1774,
+          "hubDeparture": "17:25",
+          "waitMinutes": 145
+        },
+        {
+          "inboundLegId": "V125-HOLDS-R318-2-BTV-SYR",
+          "inboundFlight": 2190,
+          "hubArrival": "10:40",
+          "outboundLegId": "BGR-SYR-CRJ200-02-IN",
+          "outboundFlight": 1773,
+          "hubDeparture": "13:25",
+          "waitMinutes": 165
+        },
+        {
+          "inboundLegId": "BTV-SYR-CRJ200-03-OUT",
+          "inboundFlight": 1830,
+          "hubArrival": "18:52",
+          "outboundLegId": "V141-R105-EXTRA-2-2",
+          "outboundFlight": 2272,
+          "hubDeparture": "22:10",
+          "waitMinutes": 198
+        }
+      ]
+    },
+    {
+      "source": "BTV",
+      "sourceGroup": "northeast",
+      "destination": "ROC",
+      "destinationGroup": "other",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V125-HOLDS-R318-2-BTV-SYR",
+          "inboundFlight": 2190,
+          "hubArrival": "10:40",
+          "outboundLegId": "ROC-SYR-CRJ200-02-IN",
+          "outboundFlight": 1708,
+          "hubDeparture": "11:20",
+          "waitMinutes": 40
+        },
+        {
+          "inboundLegId": "BTV-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1828,
+          "hubArrival": "07:52",
+          "outboundLegId": "ROC-SYR-CRJ200-01-IN",
+          "outboundFlight": 1707,
+          "hubDeparture": "08:35",
+          "waitMinutes": 43
+        },
+        {
+          "inboundLegId": "BTV-SYR-CRJ200-03-OUT",
+          "inboundFlight": 1830,
+          "hubArrival": "18:52",
+          "outboundLegId": "V115-R165-SYR-ROC",
+          "outboundFlight": 2039,
+          "hubDeparture": "19:36",
+          "waitMinutes": 44
+        },
+        {
+          "inboundLegId": "BTV-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1828,
+          "hubArrival": "07:52",
+          "outboundLegId": "ROC-SYR-CRJ200-02-IN",
+          "outboundFlight": 1708,
+          "hubDeparture": "11:20",
+          "waitMinutes": 208
+        }
+      ]
+    },
+    {
+      "source": "HPN",
+      "sourceGroup": "northeast",
+      "destination": "PIT",
+      "destinationGroup": "other",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V125-HOLDS-R161-2-HPN-SYR",
+          "inboundFlight": 2192,
+          "hubArrival": "10:30",
+          "outboundLegId": "V121-R147-1-SYR-PIT",
+          "outboundFlight": 2111,
+          "hubDeparture": "11:18",
+          "waitMinutes": 48
+        },
+        {
+          "inboundLegId": "V125-HOLDS-R161-2-HPN-SYR",
+          "inboundFlight": 2192,
+          "hubArrival": "10:30",
+          "outboundLegId": "V141-R108-BANK-1-1",
+          "outboundFlight": 2275,
+          "hubDeparture": "11:55",
+          "waitMinutes": 85
+        },
+        {
+          "inboundLegId": "HPN-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1854,
+          "hubArrival": "13:15",
+          "outboundLegId": "PIT-SYR-CRJ200-01-IN",
+          "outboundFlight": 1608,
+          "hubDeparture": "15:40",
+          "waitMinutes": 145
+        }
+      ]
+    },
+    {
+      "source": "HPN",
+      "sourceGroup": "northeast",
+      "destination": "CAK",
+      "destinationGroup": "other",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "HPN-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1855,
+          "hubArrival": "16:09",
+          "outboundLegId": "CAK-SYR-CRJ200-03-IN",
+          "outboundFlight": 1673,
+          "hubDeparture": "16:50",
+          "waitMinutes": 41
+        },
+        {
+          "inboundLegId": "V125-HOLDS-R161-2-HPN-SYR",
+          "inboundFlight": 2192,
+          "hubArrival": "10:30",
+          "outboundLegId": "CAK-SYR-CRJ200-02-IN",
+          "outboundFlight": 1672,
+          "hubDeparture": "11:20",
+          "waitMinutes": 50
+        },
+        {
+          "inboundLegId": "HPN-SYR-CRJ200-03-OUT",
+          "inboundFlight": 1856,
+          "hubArrival": "17:30",
+          "outboundLegId": "CAK-SYR-CRJ200-01-IN",
+          "outboundFlight": 1674,
+          "hubDeparture": "19:35",
+          "waitMinutes": 125
+        },
+        {
+          "inboundLegId": "HPN-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1855,
+          "hubArrival": "16:09",
+          "outboundLegId": "CAK-SYR-CRJ200-01-IN",
+          "outboundFlight": 1674,
+          "hubDeparture": "19:35",
+          "waitMinutes": 206
+        },
+        {
+          "inboundLegId": "HPN-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1854,
+          "hubArrival": "13:15",
+          "outboundLegId": "CAK-SYR-CRJ200-03-IN",
+          "outboundFlight": 1673,
+          "hubDeparture": "16:50",
+          "waitMinutes": 215
+        }
+      ]
+    },
+    {
+      "source": "HPN",
+      "sourceGroup": "northeast",
+      "destination": "BUF",
+      "destinationGroup": "other",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "HPN-SYR-CRJ200-03-OUT",
+          "inboundFlight": 1856,
+          "hubArrival": "17:30",
+          "outboundLegId": "V115-R144-SYR-BUF",
+          "outboundFlight": 2050,
+          "hubDeparture": "18:10",
+          "waitMinutes": 40
+        },
+        {
+          "inboundLegId": "HPN-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1855,
+          "hubArrival": "16:09",
+          "outboundLegId": "BUF-SYR-CRJ200-02-IN",
+          "outboundFlight": 1688,
+          "hubDeparture": "16:55",
+          "waitMinutes": 46
+        },
+        {
+          "inboundLegId": "V125-HOLDS-R161-2-HPN-SYR",
+          "inboundFlight": 2192,
+          "hubArrival": "10:30",
+          "outboundLegId": "V123-R145-3-SYR-BUF",
+          "outboundFlight": 2143,
+          "hubDeparture": "11:18",
+          "waitMinutes": 48
+        },
+        {
+          "inboundLegId": "HPN-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1855,
+          "hubArrival": "16:09",
+          "outboundLegId": "V115-R144-SYR-BUF",
+          "outboundFlight": 2050,
+          "hubDeparture": "18:10",
+          "waitMinutes": 121
+        },
+        {
+          "inboundLegId": "HPN-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1854,
+          "hubArrival": "13:15",
+          "outboundLegId": "BUF-SYR-CRJ200-02-IN",
+          "outboundFlight": 1688,
+          "hubDeparture": "16:55",
+          "waitMinutes": 220
+        }
+      ]
+    },
+    {
+      "source": "HPN",
+      "sourceGroup": "northeast",
+      "destination": "ORH",
+      "destinationGroup": "other",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "HPN-SYR-CRJ200-03-OUT",
+          "inboundFlight": 1856,
+          "hubArrival": "17:30",
+          "outboundLegId": "ORH-SYR-CRJ200-01-IN",
+          "outboundFlight": 1882,
+          "hubDeparture": "18:10",
+          "waitMinutes": 40
+        },
+        {
+          "inboundLegId": "HPN-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1855,
+          "hubArrival": "16:09",
+          "outboundLegId": "ORH-SYR-CRJ200-01-IN",
+          "outboundFlight": 1882,
+          "hubDeparture": "18:10",
+          "waitMinutes": 121
+        }
+      ]
+    },
+    {
+      "source": "HPN",
+      "sourceGroup": "northeast",
+      "destination": "PHF",
+      "destinationGroup": "other",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "HPN-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1855,
+          "hubArrival": "16:09",
+          "outboundLegId": "PHF-SYR-CRJ200-02-IN",
+          "outboundFlight": 1512,
+          "hubDeparture": "16:50",
+          "waitMinutes": 41
+        },
+        {
+          "inboundLegId": "HPN-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1854,
+          "hubArrival": "13:15",
+          "outboundLegId": "PHF-SYR-CRJ200-01-IN",
+          "outboundFlight": 1511,
+          "hubDeparture": "14:10",
+          "waitMinutes": 55
+        },
+        {
+          "inboundLegId": "V125-HOLDS-R161-2-HPN-SYR",
+          "inboundFlight": 2192,
+          "hubArrival": "10:30",
+          "outboundLegId": "V112-R323-SYR-PHF-01",
+          "outboundFlight": 1951,
+          "hubDeparture": "13:15",
+          "waitMinutes": 165
+        },
+        {
+          "inboundLegId": "HPN-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1854,
+          "hubArrival": "13:15",
+          "outboundLegId": "PHF-SYR-CRJ200-02-IN",
+          "outboundFlight": 1512,
+          "hubDeparture": "16:50",
+          "waitMinutes": 215
+        },
+        {
+          "inboundLegId": "V125-HOLDS-R161-2-HPN-SYR",
+          "inboundFlight": 2192,
+          "hubArrival": "10:30",
+          "outboundLegId": "PHF-SYR-CRJ200-01-IN",
+          "outboundFlight": 1511,
+          "hubDeparture": "14:10",
+          "waitMinutes": 220
+        }
+      ]
+    },
+    {
+      "source": "HPN",
+      "sourceGroup": "northeast",
+      "destination": "BGR",
+      "destinationGroup": "other",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "HPN-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1855,
+          "hubArrival": "16:09",
+          "outboundLegId": "BGR-SYR-CRJ200-01-IN",
+          "outboundFlight": 1774,
+          "hubDeparture": "17:25",
+          "waitMinutes": 76
+        },
+        {
+          "inboundLegId": "V125-HOLDS-R161-2-HPN-SYR",
+          "inboundFlight": 2192,
+          "hubArrival": "10:30",
+          "outboundLegId": "BGR-SYR-CRJ200-02-IN",
+          "outboundFlight": 1773,
+          "hubDeparture": "13:25",
+          "waitMinutes": 175
+        }
+      ]
+    },
+    {
+      "source": "HPN",
+      "sourceGroup": "northeast",
+      "destination": "ROC",
+      "destinationGroup": "other",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V125-HOLDS-R161-2-HPN-SYR",
+          "inboundFlight": 2192,
+          "hubArrival": "10:30",
+          "outboundLegId": "ROC-SYR-CRJ200-02-IN",
+          "outboundFlight": 1708,
+          "hubDeparture": "11:20",
+          "waitMinutes": 50
+        },
+        {
+          "inboundLegId": "HPN-SYR-CRJ200-03-OUT",
+          "inboundFlight": 1856,
+          "hubArrival": "17:30",
+          "outboundLegId": "V115-R165-SYR-ROC",
+          "outboundFlight": 2039,
+          "hubDeparture": "19:36",
+          "waitMinutes": 126
+        },
+        {
+          "inboundLegId": "HPN-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1855,
+          "hubArrival": "16:09",
+          "outboundLegId": "V115-R165-SYR-ROC",
+          "outboundFlight": 2039,
+          "hubDeparture": "19:36",
+          "waitMinutes": 207
+        }
+      ]
+    },
+    {
+      "source": "MHT",
+      "sourceGroup": "northeast",
+      "destination": "PIT",
+      "destinationGroup": "other",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "MHT-SYR-CRJ200-03-OUT",
+          "inboundFlight": 1840,
+          "hubArrival": "15:00",
+          "outboundLegId": "PIT-SYR-CRJ200-01-IN",
+          "outboundFlight": 1608,
+          "hubDeparture": "15:40",
+          "waitMinutes": 40
+        },
+        {
+          "inboundLegId": "MHT-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1839,
+          "hubArrival": "12:45",
+          "outboundLegId": "PIT-SYR-CRJ200-01-IN",
+          "outboundFlight": 1608,
+          "hubDeparture": "15:40",
+          "waitMinutes": 175
+        },
+        {
+          "inboundLegId": "MHT-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1838,
+          "hubArrival": "07:55",
+          "outboundLegId": "V121-R147-1-SYR-PIT",
+          "outboundFlight": 2111,
+          "hubDeparture": "11:18",
+          "waitMinutes": 203
+        },
+        {
+          "inboundLegId": "MHT-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1838,
+          "hubArrival": "07:55",
+          "outboundLegId": "V141-R108-BANK-1-1",
+          "outboundFlight": 2275,
+          "hubDeparture": "11:55",
+          "waitMinutes": 240
+        }
+      ]
+    },
+    {
+      "source": "MHT",
+      "sourceGroup": "northeast",
+      "destination": "CAK",
+      "destinationGroup": "other",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "MHT-SYR-CRJ200-03-OUT",
+          "inboundFlight": 1840,
+          "hubArrival": "15:00",
+          "outboundLegId": "CAK-SYR-CRJ200-03-IN",
+          "outboundFlight": 1673,
+          "hubDeparture": "16:50",
+          "waitMinutes": 110
+        },
+        {
+          "inboundLegId": "MHT-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1838,
+          "hubArrival": "07:55",
+          "outboundLegId": "CAK-SYR-CRJ200-02-IN",
+          "outboundFlight": 1672,
+          "hubDeparture": "11:20",
+          "waitMinutes": 205
+        }
+      ]
+    },
+    {
+      "source": "MHT",
+      "sourceGroup": "northeast",
+      "destination": "BUF",
+      "destinationGroup": "other",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "MHT-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1838,
+          "hubArrival": "07:55",
+          "outboundLegId": "BUF-SYR-CRJ200-01-IN",
+          "outboundFlight": 1687,
+          "hubDeparture": "08:40",
+          "waitMinutes": 45
+        },
+        {
+          "inboundLegId": "MHT-SYR-CRJ200-03-OUT",
+          "inboundFlight": 1840,
+          "hubArrival": "15:00",
+          "outboundLegId": "BUF-SYR-CRJ200-02-IN",
+          "outboundFlight": 1688,
+          "hubDeparture": "16:55",
+          "waitMinutes": 115
+        },
+        {
+          "inboundLegId": "MHT-SYR-CRJ200-03-OUT",
+          "inboundFlight": 1840,
+          "hubArrival": "15:00",
+          "outboundLegId": "V115-R144-SYR-BUF",
+          "outboundFlight": 2050,
+          "hubDeparture": "18:10",
+          "waitMinutes": 190
+        },
+        {
+          "inboundLegId": "MHT-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1838,
+          "hubArrival": "07:55",
+          "outboundLegId": "V123-R145-3-SYR-BUF",
+          "outboundFlight": 2143,
+          "hubDeparture": "11:18",
+          "waitMinutes": 203
+        }
+      ]
+    },
+    {
+      "source": "MHT",
+      "sourceGroup": "northeast",
+      "destination": "ORH",
+      "destinationGroup": "other",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "MHT-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1838,
+          "hubArrival": "07:55",
+          "outboundLegId": "ORH-SYR-CRJ200-02-IN",
+          "outboundFlight": 1881,
+          "hubDeparture": "08:35",
+          "waitMinutes": 40
+        },
+        {
+          "inboundLegId": "MHT-SYR-CRJ200-03-OUT",
+          "inboundFlight": 1840,
+          "hubArrival": "15:00",
+          "outboundLegId": "ORH-SYR-CRJ200-01-IN",
+          "outboundFlight": 1882,
+          "hubDeparture": "18:10",
+          "waitMinutes": 190
+        }
+      ]
+    },
+    {
+      "source": "MHT",
+      "sourceGroup": "northeast",
+      "destination": "PHF",
+      "destinationGroup": "other",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "MHT-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1839,
+          "hubArrival": "12:45",
+          "outboundLegId": "V112-R323-SYR-PHF-01",
+          "outboundFlight": 1951,
+          "hubDeparture": "13:15",
+          "waitMinutes": 30
+        },
+        {
+          "inboundLegId": "MHT-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1839,
+          "hubArrival": "12:45",
+          "outboundLegId": "PHF-SYR-CRJ200-01-IN",
+          "outboundFlight": 1511,
+          "hubDeparture": "14:10",
+          "waitMinutes": 85
+        },
+        {
+          "inboundLegId": "MHT-SYR-CRJ200-03-OUT",
+          "inboundFlight": 1840,
+          "hubArrival": "15:00",
+          "outboundLegId": "PHF-SYR-CRJ200-02-IN",
+          "outboundFlight": 1512,
+          "hubDeparture": "16:50",
+          "waitMinutes": 110
+        }
+      ]
+    },
+    {
+      "source": "MHT",
+      "sourceGroup": "northeast",
+      "destination": "BGR",
+      "destinationGroup": "other",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "MHT-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1839,
+          "hubArrival": "12:45",
+          "outboundLegId": "BGR-SYR-CRJ200-02-IN",
+          "outboundFlight": 1773,
+          "hubDeparture": "13:25",
+          "waitMinutes": 40
+        },
+        {
+          "inboundLegId": "MHT-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1838,
+          "hubArrival": "07:55",
+          "outboundLegId": "V141-R162-SCREEN-6-1",
+          "outboundFlight": 2269,
+          "hubDeparture": "09:50",
+          "waitMinutes": 115
+        },
+        {
+          "inboundLegId": "MHT-SYR-CRJ200-03-OUT",
+          "inboundFlight": 1840,
+          "hubArrival": "15:00",
+          "outboundLegId": "BGR-SYR-CRJ200-01-IN",
+          "outboundFlight": 1774,
+          "hubDeparture": "17:25",
+          "waitMinutes": 145
+        }
+      ]
+    },
+    {
+      "source": "MHT",
+      "sourceGroup": "northeast",
+      "destination": "ROC",
+      "destinationGroup": "other",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "MHT-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1838,
+          "hubArrival": "07:55",
+          "outboundLegId": "ROC-SYR-CRJ200-01-IN",
+          "outboundFlight": 1707,
+          "hubDeparture": "08:35",
+          "waitMinutes": 40
+        },
+        {
+          "inboundLegId": "MHT-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1838,
+          "hubArrival": "07:55",
+          "outboundLegId": "ROC-SYR-CRJ200-02-IN",
+          "outboundFlight": 1708,
+          "hubDeparture": "11:20",
+          "waitMinutes": 205
+        }
+      ]
+    },
+    {
+      "source": "PWM",
+      "sourceGroup": "northeast",
+      "destination": "PIT",
+      "destinationGroup": "other",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "PWM-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1703,
+          "hubArrival": "10:38",
+          "outboundLegId": "V121-R147-1-SYR-PIT",
+          "outboundFlight": 2111,
+          "hubDeparture": "11:18",
+          "waitMinutes": 40
+        },
+        {
+          "inboundLegId": "PWM-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1703,
+          "hubArrival": "10:38",
+          "outboundLegId": "V141-R108-BANK-1-1",
+          "outboundFlight": 2275,
+          "hubDeparture": "11:55",
+          "waitMinutes": 77
+        }
+      ]
+    },
+    {
+      "source": "PWM",
+      "sourceGroup": "northeast",
+      "destination": "CAK",
+      "destinationGroup": "other",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "PWM-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1702,
+          "hubArrival": "05:38",
+          "outboundLegId": "V133-BHM-530-1-SYR-CAK",
+          "outboundFlight": 2245,
+          "hubDeparture": "06:08",
+          "waitMinutes": 30
+        },
+        {
+          "inboundLegId": "PWM-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1703,
+          "hubArrival": "10:38",
+          "outboundLegId": "CAK-SYR-CRJ200-02-IN",
+          "outboundFlight": 1672,
+          "hubDeparture": "11:20",
+          "waitMinutes": 42
+        },
+        {
+          "inboundLegId": "PWM-SYR-CRJ200-03-OUT",
+          "inboundFlight": 1704,
+          "hubArrival": "16:08",
+          "outboundLegId": "CAK-SYR-CRJ200-03-IN",
+          "outboundFlight": 1673,
+          "hubDeparture": "16:50",
+          "waitMinutes": 42
+        },
+        {
+          "inboundLegId": "V115-R144-PWM-SYR",
+          "inboundFlight": 2049,
+          "hubArrival": "17:30",
+          "outboundLegId": "CAK-SYR-CRJ200-01-IN",
+          "outboundFlight": 1674,
+          "hubDeparture": "19:35",
+          "waitMinutes": 125
+        },
+        {
+          "inboundLegId": "PWM-SYR-CRJ200-03-OUT",
+          "inboundFlight": 1704,
+          "hubArrival": "16:08",
+          "outboundLegId": "CAK-SYR-CRJ200-01-IN",
+          "outboundFlight": 1674,
+          "hubDeparture": "19:35",
+          "waitMinutes": 207
+        }
+      ]
+    },
+    {
+      "source": "PWM",
+      "sourceGroup": "northeast",
+      "destination": "BUF",
+      "destinationGroup": "other",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "PWM-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1703,
+          "hubArrival": "10:38",
+          "outboundLegId": "V123-R145-3-SYR-BUF",
+          "outboundFlight": 2143,
+          "hubDeparture": "11:18",
+          "waitMinutes": 40
+        },
+        {
+          "inboundLegId": "V115-R144-PWM-SYR",
+          "inboundFlight": 2049,
+          "hubArrival": "17:30",
+          "outboundLegId": "V115-R144-SYR-BUF",
+          "outboundFlight": 2050,
+          "hubDeparture": "18:10",
+          "waitMinutes": 40
+        },
+        {
+          "inboundLegId": "PWM-SYR-CRJ200-03-OUT",
+          "inboundFlight": 1704,
+          "hubArrival": "16:08",
+          "outboundLegId": "BUF-SYR-CRJ200-02-IN",
+          "outboundFlight": 1688,
+          "hubDeparture": "16:55",
+          "waitMinutes": 47
+        },
+        {
+          "inboundLegId": "PWM-SYR-CRJ200-03-OUT",
+          "inboundFlight": 1704,
+          "hubArrival": "16:08",
+          "outboundLegId": "V115-R144-SYR-BUF",
+          "outboundFlight": 2050,
+          "hubDeparture": "18:10",
+          "waitMinutes": 122
+        },
+        {
+          "inboundLegId": "PWM-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1702,
+          "hubArrival": "05:38",
+          "outboundLegId": "BUF-SYR-CRJ200-01-IN",
+          "outboundFlight": 1687,
+          "hubDeparture": "08:40",
+          "waitMinutes": 182
+        }
+      ]
+    },
+    {
+      "source": "PWM",
+      "sourceGroup": "northeast",
+      "destination": "ORH",
+      "destinationGroup": "other",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V115-R144-PWM-SYR",
+          "inboundFlight": 2049,
+          "hubArrival": "17:30",
+          "outboundLegId": "ORH-SYR-CRJ200-01-IN",
+          "outboundFlight": 1882,
+          "hubDeparture": "18:10",
+          "waitMinutes": 40
+        },
+        {
+          "inboundLegId": "PWM-SYR-CRJ200-03-OUT",
+          "inboundFlight": 1704,
+          "hubArrival": "16:08",
+          "outboundLegId": "ORH-SYR-CRJ200-01-IN",
+          "outboundFlight": 1882,
+          "hubDeparture": "18:10",
+          "waitMinutes": 122
+        },
+        {
+          "inboundLegId": "PWM-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1702,
+          "hubArrival": "05:38",
+          "outboundLegId": "ORH-SYR-CRJ200-02-IN",
+          "outboundFlight": 1881,
+          "hubDeparture": "08:35",
+          "waitMinutes": 177
+        }
+      ]
+    },
+    {
+      "source": "PWM",
+      "sourceGroup": "northeast",
+      "destination": "PHF",
+      "destinationGroup": "other",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "PWM-SYR-CRJ200-03-OUT",
+          "inboundFlight": 1704,
+          "hubArrival": "16:08",
+          "outboundLegId": "PHF-SYR-CRJ200-02-IN",
+          "outboundFlight": 1512,
+          "hubDeparture": "16:50",
+          "waitMinutes": 42
+        },
+        {
+          "inboundLegId": "PWM-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1702,
+          "hubArrival": "05:38",
+          "outboundLegId": "V116-R338-SYR-PHF",
+          "outboundFlight": 2080,
+          "hubDeparture": "07:02",
+          "waitMinutes": 84
+        },
+        {
+          "inboundLegId": "PWM-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1703,
+          "hubArrival": "10:38",
+          "outboundLegId": "V112-R323-SYR-PHF-01",
+          "outboundFlight": 1951,
+          "hubDeparture": "13:15",
+          "waitMinutes": 157
+        },
+        {
+          "inboundLegId": "PWM-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1703,
+          "hubArrival": "10:38",
+          "outboundLegId": "PHF-SYR-CRJ200-01-IN",
+          "outboundFlight": 1511,
+          "hubDeparture": "14:10",
+          "waitMinutes": 212
+        }
+      ]
+    },
+    {
+      "source": "PWM",
+      "sourceGroup": "northeast",
+      "destination": "BGR",
+      "destinationGroup": "other",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "PWM-SYR-CRJ200-03-OUT",
+          "inboundFlight": 1704,
+          "hubArrival": "16:08",
+          "outboundLegId": "BGR-SYR-CRJ200-01-IN",
+          "outboundFlight": 1774,
+          "hubDeparture": "17:25",
+          "waitMinutes": 77
+        },
+        {
+          "inboundLegId": "PWM-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1703,
+          "hubArrival": "10:38",
+          "outboundLegId": "BGR-SYR-CRJ200-02-IN",
+          "outboundFlight": 1773,
+          "hubDeparture": "13:25",
+          "waitMinutes": 167
+        }
+      ]
+    },
+    {
+      "source": "PWM",
+      "sourceGroup": "northeast",
+      "destination": "ROC",
+      "destinationGroup": "other",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "PWM-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1703,
+          "hubArrival": "10:38",
+          "outboundLegId": "ROC-SYR-CRJ200-02-IN",
+          "outboundFlight": 1708,
+          "hubDeparture": "11:20",
+          "waitMinutes": 42
+        },
+        {
+          "inboundLegId": "V115-R144-PWM-SYR",
+          "inboundFlight": 2049,
+          "hubArrival": "17:30",
+          "outboundLegId": "V115-R165-SYR-ROC",
+          "outboundFlight": 2039,
+          "hubDeparture": "19:36",
+          "waitMinutes": 126
+        },
+        {
+          "inboundLegId": "PWM-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1702,
+          "hubArrival": "05:38",
+          "outboundLegId": "ROC-SYR-CRJ200-01-IN",
+          "outboundFlight": 1707,
+          "hubDeparture": "08:35",
+          "waitMinutes": 177
+        },
+        {
+          "inboundLegId": "PWM-SYR-CRJ200-03-OUT",
+          "inboundFlight": 1704,
+          "hubArrival": "16:08",
+          "outboundLegId": "V115-R165-SYR-ROC",
+          "outboundFlight": 2039,
+          "hubDeparture": "19:36",
+          "waitMinutes": 208
+        }
+      ]
+    },
+    {
+      "source": "ALB",
+      "sourceGroup": "northeast",
+      "destination": "PIT",
+      "destinationGroup": "other",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "ALB-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1754,
+          "hubArrival": "10:39",
+          "outboundLegId": "V121-R147-1-SYR-PIT",
+          "outboundFlight": 2111,
+          "hubDeparture": "11:18",
+          "waitMinutes": 39
+        },
+        {
+          "inboundLegId": "ALB-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1754,
+          "hubArrival": "10:39",
+          "outboundLegId": "V141-R108-BANK-1-1",
+          "outboundFlight": 2275,
+          "hubDeparture": "11:55",
+          "waitMinutes": 76
+        }
+      ]
+    },
+    {
+      "source": "ALB",
+      "sourceGroup": "northeast",
+      "destination": "CAK",
+      "destinationGroup": "other",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "ALB-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1754,
+          "hubArrival": "10:39",
+          "outboundLegId": "CAK-SYR-CRJ200-02-IN",
+          "outboundFlight": 1672,
+          "hubDeparture": "11:20",
+          "waitMinutes": 41
+        },
+        {
+          "inboundLegId": "ALB-SYR-CRJ200-03-OUT",
+          "inboundFlight": 1755,
+          "hubArrival": "16:09",
+          "outboundLegId": "CAK-SYR-CRJ200-03-IN",
+          "outboundFlight": 1673,
+          "hubDeparture": "16:50",
+          "waitMinutes": 41
+        },
+        {
+          "inboundLegId": "ALB-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1753,
+          "hubArrival": "05:14",
+          "outboundLegId": "V133-BHM-530-1-SYR-CAK",
+          "outboundFlight": 2245,
+          "hubDeparture": "06:08",
+          "waitMinutes": 54
+        },
+        {
+          "inboundLegId": "ALB-SYR-CRJ200-04-OUT",
+          "inboundFlight": 1756,
+          "hubArrival": "17:30",
+          "outboundLegId": "CAK-SYR-CRJ200-01-IN",
+          "outboundFlight": 1674,
+          "hubDeparture": "19:35",
+          "waitMinutes": 125
+        },
+        {
+          "inboundLegId": "ALB-SYR-CRJ200-03-OUT",
+          "inboundFlight": 1755,
+          "hubArrival": "16:09",
+          "outboundLegId": "CAK-SYR-CRJ200-01-IN",
+          "outboundFlight": 1674,
+          "hubDeparture": "19:35",
+          "waitMinutes": 206
+        }
+      ]
+    },
+    {
+      "source": "ALB",
+      "sourceGroup": "northeast",
+      "destination": "BUF",
+      "destinationGroup": "other",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "ALB-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1754,
+          "hubArrival": "10:39",
+          "outboundLegId": "V123-R145-3-SYR-BUF",
+          "outboundFlight": 2143,
+          "hubDeparture": "11:18",
+          "waitMinutes": 39
+        },
+        {
+          "inboundLegId": "ALB-SYR-CRJ200-04-OUT",
+          "inboundFlight": 1756,
+          "hubArrival": "17:30",
+          "outboundLegId": "V115-R144-SYR-BUF",
+          "outboundFlight": 2050,
+          "hubDeparture": "18:10",
+          "waitMinutes": 40
+        },
+        {
+          "inboundLegId": "ALB-SYR-CRJ200-03-OUT",
+          "inboundFlight": 1755,
+          "hubArrival": "16:09",
+          "outboundLegId": "BUF-SYR-CRJ200-02-IN",
+          "outboundFlight": 1688,
+          "hubDeparture": "16:55",
+          "waitMinutes": 46
+        },
+        {
+          "inboundLegId": "ALB-SYR-CRJ200-03-OUT",
+          "inboundFlight": 1755,
+          "hubArrival": "16:09",
+          "outboundLegId": "V115-R144-SYR-BUF",
+          "outboundFlight": 2050,
+          "hubDeparture": "18:10",
+          "waitMinutes": 121
+        },
+        {
+          "inboundLegId": "ALB-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1753,
+          "hubArrival": "05:14",
+          "outboundLegId": "BUF-SYR-CRJ200-01-IN",
+          "outboundFlight": 1687,
+          "hubDeparture": "08:40",
+          "waitMinutes": 206
+        }
+      ]
+    },
+    {
+      "source": "ALB",
+      "sourceGroup": "northeast",
+      "destination": "ORH",
+      "destinationGroup": "other",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "ALB-SYR-CRJ200-04-OUT",
+          "inboundFlight": 1756,
+          "hubArrival": "17:30",
+          "outboundLegId": "ORH-SYR-CRJ200-01-IN",
+          "outboundFlight": 1882,
+          "hubDeparture": "18:10",
+          "waitMinutes": 40
+        },
+        {
+          "inboundLegId": "ALB-SYR-CRJ200-03-OUT",
+          "inboundFlight": 1755,
+          "hubArrival": "16:09",
+          "outboundLegId": "ORH-SYR-CRJ200-01-IN",
+          "outboundFlight": 1882,
+          "hubDeparture": "18:10",
+          "waitMinutes": 121
+        },
+        {
+          "inboundLegId": "ALB-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1753,
+          "hubArrival": "05:14",
+          "outboundLegId": "ORH-SYR-CRJ200-02-IN",
+          "outboundFlight": 1881,
+          "hubDeparture": "08:35",
+          "waitMinutes": 201
+        }
+      ]
+    },
+    {
+      "source": "ALB",
+      "sourceGroup": "northeast",
+      "destination": "PHF",
+      "destinationGroup": "other",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "ALB-SYR-CRJ200-03-OUT",
+          "inboundFlight": 1755,
+          "hubArrival": "16:09",
+          "outboundLegId": "PHF-SYR-CRJ200-02-IN",
+          "outboundFlight": 1512,
+          "hubDeparture": "16:50",
+          "waitMinutes": 41
+        },
+        {
+          "inboundLegId": "ALB-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1753,
+          "hubArrival": "05:14",
+          "outboundLegId": "V116-R338-SYR-PHF",
+          "outboundFlight": 2080,
+          "hubDeparture": "07:02",
+          "waitMinutes": 108
+        },
+        {
+          "inboundLegId": "ALB-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1754,
+          "hubArrival": "10:39",
+          "outboundLegId": "V112-R323-SYR-PHF-01",
+          "outboundFlight": 1951,
+          "hubDeparture": "13:15",
+          "waitMinutes": 156
+        },
+        {
+          "inboundLegId": "ALB-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1754,
+          "hubArrival": "10:39",
+          "outboundLegId": "PHF-SYR-CRJ200-01-IN",
+          "outboundFlight": 1511,
+          "hubDeparture": "14:10",
+          "waitMinutes": 211
+        }
+      ]
+    },
+    {
+      "source": "ALB",
+      "sourceGroup": "northeast",
+      "destination": "BGR",
+      "destinationGroup": "other",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "ALB-SYR-CRJ200-03-OUT",
+          "inboundFlight": 1755,
+          "hubArrival": "16:09",
+          "outboundLegId": "BGR-SYR-CRJ200-01-IN",
+          "outboundFlight": 1774,
+          "hubDeparture": "17:25",
+          "waitMinutes": 76
+        },
+        {
+          "inboundLegId": "ALB-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1754,
+          "hubArrival": "10:39",
+          "outboundLegId": "BGR-SYR-CRJ200-02-IN",
+          "outboundFlight": 1773,
+          "hubDeparture": "13:25",
+          "waitMinutes": 166
+        }
+      ]
+    },
+    {
+      "source": "ALB",
+      "sourceGroup": "northeast",
+      "destination": "ROC",
+      "destinationGroup": "other",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "ALB-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1754,
+          "hubArrival": "10:39",
+          "outboundLegId": "ROC-SYR-CRJ200-02-IN",
+          "outboundFlight": 1708,
+          "hubDeparture": "11:20",
+          "waitMinutes": 41
+        },
+        {
+          "inboundLegId": "ALB-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1753,
+          "hubArrival": "05:14",
+          "outboundLegId": "V124-R4-R125-1-SYR-ROC",
+          "outboundFlight": 2167,
+          "hubDeparture": "05:56",
+          "waitMinutes": 42
+        },
+        {
+          "inboundLegId": "ALB-SYR-CRJ200-04-OUT",
+          "inboundFlight": 1756,
+          "hubArrival": "17:30",
+          "outboundLegId": "V115-R165-SYR-ROC",
+          "outboundFlight": 2039,
+          "hubDeparture": "19:36",
+          "waitMinutes": 126
+        },
+        {
+          "inboundLegId": "ALB-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1753,
+          "hubArrival": "05:14",
+          "outboundLegId": "ROC-SYR-CRJ200-01-IN",
+          "outboundFlight": 1707,
+          "hubDeparture": "08:35",
+          "waitMinutes": 201
+        },
+        {
+          "inboundLegId": "ALB-SYR-CRJ200-03-OUT",
+          "inboundFlight": 1755,
+          "hubArrival": "16:09",
+          "outboundLegId": "V115-R165-SYR-ROC",
+          "outboundFlight": 2039,
+          "hubDeparture": "19:36",
+          "waitMinutes": 207
+        }
+      ]
+    },
+    {
+      "source": "ISP",
+      "sourceGroup": "northeast",
+      "destination": "PIT",
+      "destinationGroup": "other",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "ISP-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1892,
+          "hubArrival": "07:45",
+          "outboundLegId": "V121-R147-1-SYR-PIT",
+          "outboundFlight": 2111,
+          "hubDeparture": "11:18",
+          "waitMinutes": 213
+        }
+      ]
+    },
+    {
+      "source": "ISP",
+      "sourceGroup": "northeast",
+      "destination": "CAK",
+      "destinationGroup": "other",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "ISP-SYR-CRJ200-03-OUT",
+          "inboundFlight": 1894,
+          "hubArrival": "16:08",
+          "outboundLegId": "CAK-SYR-CRJ200-03-IN",
+          "outboundFlight": 1673,
+          "hubDeparture": "16:50",
+          "waitMinutes": 42
+        },
+        {
+          "inboundLegId": "ISP-SYR-CRJ200-03-OUT",
+          "inboundFlight": 1894,
+          "hubArrival": "16:08",
+          "outboundLegId": "CAK-SYR-CRJ200-01-IN",
+          "outboundFlight": 1674,
+          "hubDeparture": "19:35",
+          "waitMinutes": 207
+        },
+        {
+          "inboundLegId": "ISP-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1892,
+          "hubArrival": "07:45",
+          "outboundLegId": "CAK-SYR-CRJ200-02-IN",
+          "outboundFlight": 1672,
+          "hubDeparture": "11:20",
+          "waitMinutes": 215
+        }
+      ]
+    },
+    {
+      "source": "ISP",
+      "sourceGroup": "northeast",
+      "destination": "BUF",
+      "destinationGroup": "other",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "ISP-SYR-CRJ200-03-OUT",
+          "inboundFlight": 1894,
+          "hubArrival": "16:08",
+          "outboundLegId": "BUF-SYR-CRJ200-02-IN",
+          "outboundFlight": 1688,
+          "hubDeparture": "16:55",
+          "waitMinutes": 47
+        },
+        {
+          "inboundLegId": "ISP-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1892,
+          "hubArrival": "07:45",
+          "outboundLegId": "BUF-SYR-CRJ200-01-IN",
+          "outboundFlight": 1687,
+          "hubDeparture": "08:40",
+          "waitMinutes": 55
+        },
+        {
+          "inboundLegId": "ISP-SYR-CRJ200-03-OUT",
+          "inboundFlight": 1894,
+          "hubArrival": "16:08",
+          "outboundLegId": "V115-R144-SYR-BUF",
+          "outboundFlight": 2050,
+          "hubDeparture": "18:10",
+          "waitMinutes": 122
+        },
+        {
+          "inboundLegId": "ISP-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1892,
+          "hubArrival": "07:45",
+          "outboundLegId": "V123-R145-3-SYR-BUF",
+          "outboundFlight": 2143,
+          "hubDeparture": "11:18",
+          "waitMinutes": 213
+        }
+      ]
+    },
+    {
+      "source": "ISP",
+      "sourceGroup": "northeast",
+      "destination": "ORH",
+      "destinationGroup": "other",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "ISP-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1892,
+          "hubArrival": "07:45",
+          "outboundLegId": "ORH-SYR-CRJ200-02-IN",
+          "outboundFlight": 1881,
+          "hubDeparture": "08:35",
+          "waitMinutes": 50
+        },
+        {
+          "inboundLegId": "ISP-SYR-CRJ200-03-OUT",
+          "inboundFlight": 1894,
+          "hubArrival": "16:08",
+          "outboundLegId": "ORH-SYR-CRJ200-01-IN",
+          "outboundFlight": 1882,
+          "hubDeparture": "18:10",
+          "waitMinutes": 122
+        }
+      ]
+    },
+    {
+      "source": "ISP",
+      "sourceGroup": "northeast",
+      "destination": "PHF",
+      "destinationGroup": "other",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "ISP-SYR-CRJ200-03-OUT",
+          "inboundFlight": 1894,
+          "hubArrival": "16:08",
+          "outboundLegId": "PHF-SYR-CRJ200-02-IN",
+          "outboundFlight": 1512,
+          "hubDeparture": "16:50",
+          "waitMinutes": 42
+        }
+      ]
+    },
+    {
+      "source": "ISP",
+      "sourceGroup": "northeast",
+      "destination": "BGR",
+      "destinationGroup": "other",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "ISP-SYR-CRJ200-03-OUT",
+          "inboundFlight": 1894,
+          "hubArrival": "16:08",
+          "outboundLegId": "BGR-SYR-CRJ200-01-IN",
+          "outboundFlight": 1774,
+          "hubDeparture": "17:25",
+          "waitMinutes": 77
+        },
+        {
+          "inboundLegId": "ISP-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1892,
+          "hubArrival": "07:45",
+          "outboundLegId": "V141-R162-SCREEN-6-1",
+          "outboundFlight": 2269,
+          "hubDeparture": "09:50",
+          "waitMinutes": 125
+        }
+      ]
+    },
+    {
+      "source": "ISP",
+      "sourceGroup": "northeast",
+      "destination": "ROC",
+      "destinationGroup": "other",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "ISP-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1892,
+          "hubArrival": "07:45",
+          "outboundLegId": "ROC-SYR-CRJ200-01-IN",
+          "outboundFlight": 1707,
+          "hubDeparture": "08:35",
+          "waitMinutes": 50
+        },
+        {
+          "inboundLegId": "ISP-SYR-CRJ200-03-OUT",
+          "inboundFlight": 1894,
+          "hubArrival": "16:08",
+          "outboundLegId": "V115-R165-SYR-ROC",
+          "outboundFlight": 2039,
+          "hubDeparture": "19:36",
+          "waitMinutes": 208
+        },
+        {
+          "inboundLegId": "ISP-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1892,
+          "hubArrival": "07:45",
+          "outboundLegId": "ROC-SYR-CRJ200-02-IN",
+          "outboundFlight": 1708,
+          "hubDeparture": "11:20",
+          "waitMinutes": 215
+        }
+      ]
+    },
+    {
+      "source": "BDL",
+      "sourceGroup": "northeast",
+      "destination": "PIT",
+      "destinationGroup": "other",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V131-NE-R356-3-BDL-SYR",
+          "inboundFlight": 2209,
+          "hubArrival": "10:59",
+          "outboundLegId": "V141-R108-BANK-1-1",
+          "outboundFlight": 2275,
+          "hubDeparture": "11:55",
+          "waitMinutes": 56
+        },
+        {
+          "inboundLegId": "V121-R123-2-BDL-SYR",
+          "inboundFlight": 2102,
+          "hubArrival": "09:10",
+          "outboundLegId": "V121-R147-1-SYR-PIT",
+          "outboundFlight": 2111,
+          "hubDeparture": "11:18",
+          "waitMinutes": 128
+        },
+        {
+          "inboundLegId": "V121-R123-2-BDL-SYR",
+          "inboundFlight": 2102,
+          "hubArrival": "09:10",
+          "outboundLegId": "V141-R108-BANK-1-1",
+          "outboundFlight": 2275,
+          "hubDeparture": "11:55",
+          "waitMinutes": 165
+        },
+        {
+          "inboundLegId": "BDL-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1791,
+          "hubArrival": "18:54",
+          "outboundLegId": "V115-R321-SYR-PIT",
+          "outboundFlight": 2041,
+          "hubDeparture": "22:25",
+          "waitMinutes": 211
+        }
+      ]
+    },
+    {
+      "source": "BDL",
+      "sourceGroup": "northeast",
+      "destination": "CAK",
+      "destinationGroup": "other",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "BDL-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1791,
+          "hubArrival": "18:54",
+          "outboundLegId": "CAK-SYR-CRJ200-01-IN",
+          "outboundFlight": 1674,
+          "hubDeparture": "19:35",
+          "waitMinutes": 41
+        },
+        {
+          "inboundLegId": "V121-R123-2-BDL-SYR",
+          "inboundFlight": 2102,
+          "hubArrival": "09:10",
+          "outboundLegId": "CAK-SYR-CRJ200-02-IN",
+          "outboundFlight": 1672,
+          "hubDeparture": "11:20",
+          "waitMinutes": 130
+        }
+      ]
+    },
+    {
+      "source": "BDL",
+      "sourceGroup": "northeast",
+      "destination": "BUF",
+      "destinationGroup": "other",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V121-R123-2-BDL-SYR",
+          "inboundFlight": 2102,
+          "hubArrival": "09:10",
+          "outboundLegId": "V123-R145-3-SYR-BUF",
+          "outboundFlight": 2143,
+          "hubDeparture": "11:18",
+          "waitMinutes": 128
+        },
+        {
+          "inboundLegId": "BDL-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1791,
+          "hubArrival": "18:54",
+          "outboundLegId": "V115-R306-SYR-BUF",
+          "outboundFlight": 2045,
+          "hubDeparture": "22:22",
+          "waitMinutes": 208
+        }
+      ]
+    },
+    {
+      "source": "BDL",
+      "sourceGroup": "northeast",
+      "destination": "ORH",
+      "destinationGroup": "other",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "BDL-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1791,
+          "hubArrival": "18:54",
+          "outboundLegId": "V115-R515-SYR-ORH",
+          "outboundFlight": 2047,
+          "hubDeparture": "22:26",
+          "waitMinutes": 212
+        }
+      ]
+    },
+    {
+      "source": "BDL",
+      "sourceGroup": "northeast",
+      "destination": "PHF",
+      "destinationGroup": "other",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V131-NE-R356-3-BDL-SYR",
+          "inboundFlight": 2209,
+          "hubArrival": "10:59",
+          "outboundLegId": "V112-R323-SYR-PHF-01",
+          "outboundFlight": 1951,
+          "hubDeparture": "13:15",
+          "waitMinutes": 136
+        },
+        {
+          "inboundLegId": "V131-NE-R356-3-BDL-SYR",
+          "inboundFlight": 2209,
+          "hubArrival": "10:59",
+          "outboundLegId": "PHF-SYR-CRJ200-01-IN",
+          "outboundFlight": 1511,
+          "hubDeparture": "14:10",
+          "waitMinutes": 191
+        }
+      ]
+    },
+    {
+      "source": "BDL",
+      "sourceGroup": "northeast",
+      "destination": "BGR",
+      "destinationGroup": "other",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V121-R123-2-BDL-SYR",
+          "inboundFlight": 2102,
+          "hubArrival": "09:10",
+          "outboundLegId": "V141-R162-SCREEN-6-1",
+          "outboundFlight": 2269,
+          "hubDeparture": "09:50",
+          "waitMinutes": 40
+        },
+        {
+          "inboundLegId": "V131-NE-R356-3-BDL-SYR",
+          "inboundFlight": 2209,
+          "hubArrival": "10:59",
+          "outboundLegId": "BGR-SYR-CRJ200-02-IN",
+          "outboundFlight": 1773,
+          "hubDeparture": "13:25",
+          "waitMinutes": 146
+        },
+        {
+          "inboundLegId": "BDL-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1791,
+          "hubArrival": "18:54",
+          "outboundLegId": "V141-R105-EXTRA-2-2",
+          "outboundFlight": 2272,
+          "hubDeparture": "22:10",
+          "waitMinutes": 196
+        }
+      ]
+    },
+    {
+      "source": "BDL",
+      "sourceGroup": "northeast",
+      "destination": "ROC",
+      "destinationGroup": "other",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "BDL-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1791,
+          "hubArrival": "18:54",
+          "outboundLegId": "V115-R165-SYR-ROC",
+          "outboundFlight": 2039,
+          "hubDeparture": "19:36",
+          "waitMinutes": 42
+        },
+        {
+          "inboundLegId": "V121-R123-2-BDL-SYR",
+          "inboundFlight": 2102,
+          "hubArrival": "09:10",
+          "outboundLegId": "ROC-SYR-CRJ200-02-IN",
+          "outboundFlight": 1708,
+          "hubDeparture": "11:20",
+          "waitMinutes": 130
+        }
+      ]
+    },
+    {
+      "source": "PIT",
+      "sourceGroup": "other",
+      "destination": "BTV",
+      "destinationGroup": "northeast",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V141-R108-BANK-1-2",
+          "inboundFlight": 2276,
+          "hubArrival": "14:47",
+          "outboundLegId": "BTV-SYR-CRJ200-03-IN",
+          "outboundFlight": 1826,
+          "hubDeparture": "15:27",
+          "waitMinutes": 40
+        },
+        {
+          "inboundLegId": "PIT-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1607,
+          "hubArrival": "10:38",
+          "outboundLegId": "BTV-SYR-CRJ200-02-IN",
+          "outboundFlight": 1825,
+          "hubDeparture": "11:20",
+          "waitMinutes": 42
+        },
+        {
+          "inboundLegId": "V121-R147-2-PIT-SYR",
+          "inboundFlight": 2112,
+          "hubArrival": "14:10",
+          "outboundLegId": "BTV-SYR-CRJ200-03-IN",
+          "outboundFlight": 1826,
+          "hubDeparture": "15:27",
+          "waitMinutes": 77
+        },
+        {
+          "inboundLegId": "V115-R322-PIT-SYR",
+          "inboundFlight": 2042,
+          "hubArrival": "05:36",
+          "outboundLegId": "V125-HOLDS-R318-1-SYR-BTV",
+          "outboundFlight": 2189,
+          "hubDeparture": "07:45",
+          "waitMinutes": 129
+        },
+        {
+          "inboundLegId": "V141-R108-BANK-1-2",
+          "inboundFlight": 2276,
+          "hubArrival": "14:47",
+          "outboundLegId": "BTV-SYR-CRJ200-01-IN",
+          "outboundFlight": 1827,
+          "hubDeparture": "18:10",
+          "waitMinutes": 203
+        },
+        {
+          "inboundLegId": "V121-R147-2-PIT-SYR",
+          "inboundFlight": 2112,
+          "hubArrival": "14:10",
+          "outboundLegId": "BTV-SYR-CRJ200-01-IN",
+          "outboundFlight": 1827,
+          "hubDeparture": "18:10",
+          "waitMinutes": 240
+        }
+      ]
+    },
+    {
+      "source": "PIT",
+      "sourceGroup": "other",
+      "destination": "HPN",
+      "destinationGroup": "northeast",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "PIT-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1607,
+          "hubArrival": "10:38",
+          "outboundLegId": "HPN-SYR-CRJ200-02-IN",
+          "outboundFlight": 1852,
+          "hubDeparture": "11:20",
+          "waitMinutes": 42
+        },
+        {
+          "inboundLegId": "V115-R322-PIT-SYR",
+          "inboundFlight": 2042,
+          "hubArrival": "05:36",
+          "outboundLegId": "V125-HOLDS-R161-1-SYR-HPN",
+          "outboundFlight": 2191,
+          "hubDeparture": "07:45",
+          "waitMinutes": 129
+        },
+        {
+          "inboundLegId": "V115-R322-PIT-SYR",
+          "inboundFlight": 2042,
+          "hubArrival": "05:36",
+          "outboundLegId": "HPN-SYR-CRJ200-01-IN",
+          "outboundFlight": 1851,
+          "hubDeparture": "08:35",
+          "waitMinutes": 179
+        },
+        {
+          "inboundLegId": "PIT-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1607,
+          "hubArrival": "10:38",
+          "outboundLegId": "HPN-SYR-CRJ200-03-IN",
+          "outboundFlight": 1853,
+          "hubDeparture": "13:55",
+          "waitMinutes": 197
+        }
+      ]
+    },
+    {
+      "source": "PIT",
+      "sourceGroup": "other",
+      "destination": "MHT",
+      "destinationGroup": "northeast",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "PIT-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1607,
+          "hubArrival": "10:38",
+          "outboundLegId": "MHT-SYR-CRJ200-03-IN",
+          "outboundFlight": 1836,
+          "hubDeparture": "11:25",
+          "waitMinutes": 47
+        },
+        {
+          "inboundLegId": "V115-R322-PIT-SYR",
+          "inboundFlight": 2042,
+          "hubArrival": "05:36",
+          "outboundLegId": "MHT-SYR-CRJ200-02-IN",
+          "outboundFlight": 1835,
+          "hubDeparture": "08:35",
+          "waitMinutes": 179
+        }
+      ]
+    },
+    {
+      "source": "PIT",
+      "sourceGroup": "other",
+      "destination": "PWM",
+      "destinationGroup": "northeast",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V141-R108-BANK-1-2",
+          "inboundFlight": 2276,
+          "hubArrival": "14:47",
+          "outboundLegId": "PWM-SYR-CRJ200-01-IN",
+          "outboundFlight": 1701,
+          "hubDeparture": "15:40",
+          "waitMinutes": 53
+        },
+        {
+          "inboundLegId": "V121-R147-2-PIT-SYR",
+          "inboundFlight": 2112,
+          "hubArrival": "14:10",
+          "outboundLegId": "PWM-SYR-CRJ200-01-IN",
+          "outboundFlight": 1701,
+          "hubDeparture": "15:40",
+          "waitMinutes": 90
+        },
+        {
+          "inboundLegId": "V115-R322-PIT-SYR",
+          "inboundFlight": 2042,
+          "hubArrival": "05:36",
+          "outboundLegId": "PWM-SYR-CRJ200-02-IN",
+          "outboundFlight": 1699,
+          "hubDeparture": "08:25",
+          "waitMinutes": 169
+        },
+        {
+          "inboundLegId": "PIT-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1607,
+          "hubArrival": "10:38",
+          "outboundLegId": "PWM-SYR-CRJ200-03-IN",
+          "outboundFlight": 1700,
+          "hubDeparture": "14:05",
+          "waitMinutes": 207
+        }
+      ]
+    },
+    {
+      "source": "PIT",
+      "sourceGroup": "other",
+      "destination": "ALB",
+      "destinationGroup": "northeast",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V141-R108-BANK-1-2",
+          "inboundFlight": 2276,
+          "hubArrival": "14:47",
+          "outboundLegId": "ALB-SYR-CRJ200-04-IN",
+          "outboundFlight": 1752,
+          "hubDeparture": "16:45",
+          "waitMinutes": 118
+        },
+        {
+          "inboundLegId": "V121-R147-2-PIT-SYR",
+          "inboundFlight": 2112,
+          "hubArrival": "14:10",
+          "outboundLegId": "ALB-SYR-CRJ200-04-IN",
+          "outboundFlight": 1752,
+          "hubDeparture": "16:45",
+          "waitMinutes": 155
+        },
+        {
+          "inboundLegId": "V115-R322-PIT-SYR",
+          "inboundFlight": 2042,
+          "hubArrival": "05:36",
+          "outboundLegId": "ALB-SYR-CRJ200-02-IN",
+          "outboundFlight": 1750,
+          "hubDeparture": "08:35",
+          "waitMinutes": 179
+        },
+        {
+          "inboundLegId": "PIT-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1607,
+          "hubArrival": "10:38",
+          "outboundLegId": "ALB-SYR-CRJ200-03-IN",
+          "outboundFlight": 1751,
+          "hubDeparture": "14:10",
+          "waitMinutes": 212
+        }
+      ]
+    },
+    {
+      "source": "PIT",
+      "sourceGroup": "other",
+      "destination": "ISP",
+      "destinationGroup": "northeast",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "PIT-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1607,
+          "hubArrival": "10:38",
+          "outboundLegId": "ISP-SYR-CRJ200-03-IN",
+          "outboundFlight": 1890,
+          "hubDeparture": "11:25",
+          "waitMinutes": 47
+        },
+        {
+          "inboundLegId": "V115-R322-PIT-SYR",
+          "inboundFlight": 2042,
+          "hubArrival": "05:36",
+          "outboundLegId": "ISP-SYR-CRJ200-02-IN",
+          "outboundFlight": 1889,
+          "hubDeparture": "08:35",
+          "waitMinutes": 179
+        }
+      ]
+    },
+    {
+      "source": "PIT",
+      "sourceGroup": "other",
+      "destination": "BDL",
+      "destinationGroup": "northeast",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V115-R322-PIT-SYR",
+          "inboundFlight": 2042,
+          "hubArrival": "05:36",
+          "outboundLegId": "V131-NE-R356-2-SYR-BDL",
+          "outboundFlight": 2208,
+          "hubDeparture": "08:25",
+          "waitMinutes": 169
+        },
+        {
+          "inboundLegId": "PIT-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1607,
+          "hubArrival": "10:38",
+          "outboundLegId": "BDL-SYR-CRJ200-01-IN",
+          "outboundFlight": 1792,
+          "hubDeparture": "14:13",
+          "waitMinutes": 215
+        }
+      ]
+    },
+    {
+      "source": "CAK",
+      "sourceGroup": "other",
+      "destination": "BTV",
+      "destinationGroup": "northeast",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V133-BHM-530-6-CAK-SYR",
+          "inboundFlight": 2250,
+          "hubArrival": "21:30",
+          "outboundLegId": "V140-R106-LATE-0-2",
+          "outboundFlight": 2264,
+          "hubDeparture": "22:29",
+          "waitMinutes": 59
+        },
+        {
+          "inboundLegId": "CAK-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1670,
+          "hubArrival": "16:06",
+          "outboundLegId": "BTV-SYR-CRJ200-01-IN",
+          "outboundFlight": 1827,
+          "hubDeparture": "18:10",
+          "waitMinutes": 124
+        },
+        {
+          "inboundLegId": "CAK-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1669,
+          "hubArrival": "07:51",
+          "outboundLegId": "BTV-SYR-CRJ200-02-IN",
+          "outboundFlight": 1825,
+          "hubDeparture": "11:20",
+          "waitMinutes": 209
+        },
+        {
+          "inboundLegId": "CAK-SYR-CRJ200-03-OUT",
+          "inboundFlight": 1671,
+          "hubArrival": "18:56",
+          "outboundLegId": "V140-R106-LATE-0-2",
+          "outboundFlight": 2264,
+          "hubDeparture": "22:29",
+          "waitMinutes": 213
+        }
+      ]
+    },
+    {
+      "source": "CAK",
+      "sourceGroup": "other",
+      "destination": "HPN",
+      "destinationGroup": "northeast",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "CAK-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1669,
+          "hubArrival": "07:51",
+          "outboundLegId": "HPN-SYR-CRJ200-01-IN",
+          "outboundFlight": 1851,
+          "hubDeparture": "08:35",
+          "waitMinutes": 44
+        },
+        {
+          "inboundLegId": "CAK-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1669,
+          "hubArrival": "07:51",
+          "outboundLegId": "HPN-SYR-CRJ200-02-IN",
+          "outboundFlight": 1852,
+          "hubDeparture": "11:20",
+          "waitMinutes": 209
+        }
+      ]
+    },
+    {
+      "source": "CAK",
+      "sourceGroup": "other",
+      "destination": "MHT",
+      "destinationGroup": "northeast",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "CAK-SYR-CRJ200-03-OUT",
+          "inboundFlight": 1671,
+          "hubArrival": "18:56",
+          "outboundLegId": "MHT-SYR-CRJ200-01-IN",
+          "outboundFlight": 1837,
+          "hubDeparture": "19:35",
+          "waitMinutes": 39
+        },
+        {
+          "inboundLegId": "CAK-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1669,
+          "hubArrival": "07:51",
+          "outboundLegId": "MHT-SYR-CRJ200-02-IN",
+          "outboundFlight": 1835,
+          "hubDeparture": "08:35",
+          "waitMinutes": 44
+        },
+        {
+          "inboundLegId": "CAK-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1670,
+          "hubArrival": "16:06",
+          "outboundLegId": "MHT-SYR-CRJ200-01-IN",
+          "outboundFlight": 1837,
+          "hubDeparture": "19:35",
+          "waitMinutes": 209
+        },
+        {
+          "inboundLegId": "CAK-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1669,
+          "hubArrival": "07:51",
+          "outboundLegId": "MHT-SYR-CRJ200-03-IN",
+          "outboundFlight": 1836,
+          "hubDeparture": "11:25",
+          "waitMinutes": 214
+        }
+      ]
+    },
+    {
+      "source": "CAK",
+      "sourceGroup": "other",
+      "destination": "PWM",
+      "destinationGroup": "northeast",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "CAK-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1669,
+          "hubArrival": "07:51",
+          "outboundLegId": "PWM-SYR-CRJ200-02-IN",
+          "outboundFlight": 1699,
+          "hubDeparture": "08:25",
+          "waitMinutes": 34
+        },
+        {
+          "inboundLegId": "V133-BHM-530-6-CAK-SYR",
+          "inboundFlight": 2250,
+          "hubArrival": "21:30",
+          "outboundLegId": "V115-R144-SYR-PWM",
+          "outboundFlight": 2052,
+          "hubDeparture": "22:20",
+          "waitMinutes": 50
+        },
+        {
+          "inboundLegId": "CAK-SYR-CRJ200-03-OUT",
+          "inboundFlight": 1671,
+          "hubArrival": "18:56",
+          "outboundLegId": "V115-R144-SYR-PWM",
+          "outboundFlight": 2052,
+          "hubDeparture": "22:20",
+          "waitMinutes": 204
+        }
+      ]
+    },
+    {
+      "source": "CAK",
+      "sourceGroup": "other",
+      "destination": "ALB",
+      "destinationGroup": "northeast",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "CAK-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1670,
+          "hubArrival": "16:06",
+          "outboundLegId": "ALB-SYR-CRJ200-04-IN",
+          "outboundFlight": 1752,
+          "hubDeparture": "16:45",
+          "waitMinutes": 39
+        },
+        {
+          "inboundLegId": "CAK-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1669,
+          "hubArrival": "07:51",
+          "outboundLegId": "ALB-SYR-CRJ200-02-IN",
+          "outboundFlight": 1750,
+          "hubDeparture": "08:35",
+          "waitMinutes": 44
+        }
+      ]
+    },
+    {
+      "source": "CAK",
+      "sourceGroup": "other",
+      "destination": "ISP",
+      "destinationGroup": "northeast",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "CAK-SYR-CRJ200-03-OUT",
+          "inboundFlight": 1671,
+          "hubArrival": "18:56",
+          "outboundLegId": "ISP-SYR-CRJ200-01-IN",
+          "outboundFlight": 1891,
+          "hubDeparture": "19:35",
+          "waitMinutes": 39
+        },
+        {
+          "inboundLegId": "CAK-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1669,
+          "hubArrival": "07:51",
+          "outboundLegId": "ISP-SYR-CRJ200-02-IN",
+          "outboundFlight": 1889,
+          "hubDeparture": "08:35",
+          "waitMinutes": 44
+        },
+        {
+          "inboundLegId": "CAK-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1670,
+          "hubArrival": "16:06",
+          "outboundLegId": "ISP-SYR-CRJ200-01-IN",
+          "outboundFlight": 1891,
+          "hubDeparture": "19:35",
+          "waitMinutes": 209
+        },
+        {
+          "inboundLegId": "CAK-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1669,
+          "hubArrival": "07:51",
+          "outboundLegId": "ISP-SYR-CRJ200-03-IN",
+          "outboundFlight": 1890,
+          "hubDeparture": "11:25",
+          "waitMinutes": 214
+        }
+      ]
+    },
+    {
+      "source": "CAK",
+      "sourceGroup": "other",
+      "destination": "BDL",
+      "destinationGroup": "northeast",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "CAK-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1669,
+          "hubArrival": "07:51",
+          "outboundLegId": "V131-NE-R356-2-SYR-BDL",
+          "outboundFlight": 2208,
+          "hubDeparture": "08:25",
+          "waitMinutes": 34
+        }
+      ]
+    },
+    {
+      "source": "BUF",
+      "sourceGroup": "other",
+      "destination": "BTV",
+      "destinationGroup": "northeast",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "BUF-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1686,
+          "hubArrival": "10:41",
+          "outboundLegId": "BTV-SYR-CRJ200-02-IN",
+          "outboundFlight": 1825,
+          "hubDeparture": "11:20",
+          "waitMinutes": 39
+        },
+        {
+          "inboundLegId": "V115-R144-BUF-SYR",
+          "inboundFlight": 2051,
+          "hubArrival": "21:37",
+          "outboundLegId": "V140-R106-LATE-0-2",
+          "outboundFlight": 2264,
+          "hubDeparture": "22:29",
+          "waitMinutes": 52
+        },
+        {
+          "inboundLegId": "V123-R145-4-BUF-SYR",
+          "inboundFlight": 2144,
+          "hubArrival": "13:30",
+          "outboundLegId": "BTV-SYR-CRJ200-03-IN",
+          "outboundFlight": 1826,
+          "hubDeparture": "15:27",
+          "waitMinutes": 117
+        },
+        {
+          "inboundLegId": "V115-R307-BUF-SYR",
+          "inboundFlight": 2046,
+          "hubArrival": "05:17",
+          "outboundLegId": "V125-HOLDS-R318-1-SYR-BTV",
+          "outboundFlight": 2189,
+          "hubDeparture": "07:45",
+          "waitMinutes": 148
+        },
+        {
+          "inboundLegId": "BUF-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1685,
+          "hubArrival": "07:51",
+          "outboundLegId": "BTV-SYR-CRJ200-02-IN",
+          "outboundFlight": 1825,
+          "hubDeparture": "11:20",
+          "waitMinutes": 209
+        }
+      ]
+    },
+    {
+      "source": "BUF",
+      "sourceGroup": "other",
+      "destination": "HPN",
+      "destinationGroup": "northeast",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "BUF-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1686,
+          "hubArrival": "10:41",
+          "outboundLegId": "HPN-SYR-CRJ200-02-IN",
+          "outboundFlight": 1852,
+          "hubDeparture": "11:20",
+          "waitMinutes": 39
+        },
+        {
+          "inboundLegId": "BUF-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1685,
+          "hubArrival": "07:51",
+          "outboundLegId": "HPN-SYR-CRJ200-01-IN",
+          "outboundFlight": 1851,
+          "hubDeparture": "08:35",
+          "waitMinutes": 44
+        },
+        {
+          "inboundLegId": "V115-R307-BUF-SYR",
+          "inboundFlight": 2046,
+          "hubArrival": "05:17",
+          "outboundLegId": "V125-HOLDS-R161-1-SYR-HPN",
+          "outboundFlight": 2191,
+          "hubDeparture": "07:45",
+          "waitMinutes": 148
+        },
+        {
+          "inboundLegId": "BUF-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1686,
+          "hubArrival": "10:41",
+          "outboundLegId": "HPN-SYR-CRJ200-03-IN",
+          "outboundFlight": 1853,
+          "hubDeparture": "13:55",
+          "waitMinutes": 194
+        },
+        {
+          "inboundLegId": "V115-R307-BUF-SYR",
+          "inboundFlight": 2046,
+          "hubArrival": "05:17",
+          "outboundLegId": "HPN-SYR-CRJ200-01-IN",
+          "outboundFlight": 1851,
+          "hubDeparture": "08:35",
+          "waitMinutes": 198
+        },
+        {
+          "inboundLegId": "BUF-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1685,
+          "hubArrival": "07:51",
+          "outboundLegId": "HPN-SYR-CRJ200-02-IN",
+          "outboundFlight": 1852,
+          "hubDeparture": "11:20",
+          "waitMinutes": 209
+        }
+      ]
+    },
+    {
+      "source": "BUF",
+      "sourceGroup": "other",
+      "destination": "MHT",
+      "destinationGroup": "northeast",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "BUF-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1685,
+          "hubArrival": "07:51",
+          "outboundLegId": "MHT-SYR-CRJ200-02-IN",
+          "outboundFlight": 1835,
+          "hubDeparture": "08:35",
+          "waitMinutes": 44
+        },
+        {
+          "inboundLegId": "BUF-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1686,
+          "hubArrival": "10:41",
+          "outboundLegId": "MHT-SYR-CRJ200-03-IN",
+          "outboundFlight": 1836,
+          "hubDeparture": "11:25",
+          "waitMinutes": 44
+        },
+        {
+          "inboundLegId": "V115-R307-BUF-SYR",
+          "inboundFlight": 2046,
+          "hubArrival": "05:17",
+          "outboundLegId": "MHT-SYR-CRJ200-02-IN",
+          "outboundFlight": 1835,
+          "hubDeparture": "08:35",
+          "waitMinutes": 198
+        },
+        {
+          "inboundLegId": "BUF-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1685,
+          "hubArrival": "07:51",
+          "outboundLegId": "MHT-SYR-CRJ200-03-IN",
+          "outboundFlight": 1836,
+          "hubDeparture": "11:25",
+          "waitMinutes": 214
+        }
+      ]
+    },
+    {
+      "source": "BUF",
+      "sourceGroup": "other",
+      "destination": "PWM",
+      "destinationGroup": "northeast",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "BUF-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1685,
+          "hubArrival": "07:51",
+          "outboundLegId": "PWM-SYR-CRJ200-02-IN",
+          "outboundFlight": 1699,
+          "hubDeparture": "08:25",
+          "waitMinutes": 34
+        },
+        {
+          "inboundLegId": "V123-R145-4-BUF-SYR",
+          "inboundFlight": 2144,
+          "hubArrival": "13:30",
+          "outboundLegId": "PWM-SYR-CRJ200-03-IN",
+          "outboundFlight": 1700,
+          "hubDeparture": "14:05",
+          "waitMinutes": 35
+        },
+        {
+          "inboundLegId": "V115-R144-BUF-SYR",
+          "inboundFlight": 2051,
+          "hubArrival": "21:37",
+          "outboundLegId": "V115-R144-SYR-PWM",
+          "outboundFlight": 2052,
+          "hubDeparture": "22:20",
+          "waitMinutes": 43
+        },
+        {
+          "inboundLegId": "V123-R145-4-BUF-SYR",
+          "inboundFlight": 2144,
+          "hubArrival": "13:30",
+          "outboundLegId": "PWM-SYR-CRJ200-01-IN",
+          "outboundFlight": 1701,
+          "hubDeparture": "15:40",
+          "waitMinutes": 130
+        },
+        {
+          "inboundLegId": "V115-R307-BUF-SYR",
+          "inboundFlight": 2046,
+          "hubArrival": "05:17",
+          "outboundLegId": "PWM-SYR-CRJ200-02-IN",
+          "outboundFlight": 1699,
+          "hubDeparture": "08:25",
+          "waitMinutes": 188
+        },
+        {
+          "inboundLegId": "BUF-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1686,
+          "hubArrival": "10:41",
+          "outboundLegId": "PWM-SYR-CRJ200-03-IN",
+          "outboundFlight": 1700,
+          "hubDeparture": "14:05",
+          "waitMinutes": 204
+        }
+      ]
+    },
+    {
+      "source": "BUF",
+      "sourceGroup": "other",
+      "destination": "ALB",
+      "destinationGroup": "northeast",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V115-R307-BUF-SYR",
+          "inboundFlight": 2046,
+          "hubArrival": "05:17",
+          "outboundLegId": "ALB-SYR-CRJ200-01-IN",
+          "outboundFlight": 1749,
+          "hubDeparture": "05:50",
+          "waitMinutes": 33
+        },
+        {
+          "inboundLegId": "V123-R145-4-BUF-SYR",
+          "inboundFlight": 2144,
+          "hubArrival": "13:30",
+          "outboundLegId": "ALB-SYR-CRJ200-03-IN",
+          "outboundFlight": 1751,
+          "hubDeparture": "14:10",
+          "waitMinutes": 40
+        },
+        {
+          "inboundLegId": "BUF-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1685,
+          "hubArrival": "07:51",
+          "outboundLegId": "ALB-SYR-CRJ200-02-IN",
+          "outboundFlight": 1750,
+          "hubDeparture": "08:35",
+          "waitMinutes": 44
+        },
+        {
+          "inboundLegId": "V123-R145-4-BUF-SYR",
+          "inboundFlight": 2144,
+          "hubArrival": "13:30",
+          "outboundLegId": "ALB-SYR-CRJ200-04-IN",
+          "outboundFlight": 1752,
+          "hubDeparture": "16:45",
+          "waitMinutes": 195
+        },
+        {
+          "inboundLegId": "V115-R307-BUF-SYR",
+          "inboundFlight": 2046,
+          "hubArrival": "05:17",
+          "outboundLegId": "ALB-SYR-CRJ200-02-IN",
+          "outboundFlight": 1750,
+          "hubDeparture": "08:35",
+          "waitMinutes": 198
+        },
+        {
+          "inboundLegId": "BUF-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1686,
+          "hubArrival": "10:41",
+          "outboundLegId": "ALB-SYR-CRJ200-03-IN",
+          "outboundFlight": 1751,
+          "hubDeparture": "14:10",
+          "waitMinutes": 209
+        }
+      ]
+    },
+    {
+      "source": "BUF",
+      "sourceGroup": "other",
+      "destination": "ISP",
+      "destinationGroup": "northeast",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "BUF-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1685,
+          "hubArrival": "07:51",
+          "outboundLegId": "ISP-SYR-CRJ200-02-IN",
+          "outboundFlight": 1889,
+          "hubDeparture": "08:35",
+          "waitMinutes": 44
+        },
+        {
+          "inboundLegId": "BUF-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1686,
+          "hubArrival": "10:41",
+          "outboundLegId": "ISP-SYR-CRJ200-03-IN",
+          "outboundFlight": 1890,
+          "hubDeparture": "11:25",
+          "waitMinutes": 44
+        },
+        {
+          "inboundLegId": "V115-R307-BUF-SYR",
+          "inboundFlight": 2046,
+          "hubArrival": "05:17",
+          "outboundLegId": "ISP-SYR-CRJ200-02-IN",
+          "outboundFlight": 1889,
+          "hubDeparture": "08:35",
+          "waitMinutes": 198
+        },
+        {
+          "inboundLegId": "BUF-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1685,
+          "hubArrival": "07:51",
+          "outboundLegId": "ISP-SYR-CRJ200-03-IN",
+          "outboundFlight": 1890,
+          "hubDeparture": "11:25",
+          "waitMinutes": 214
+        }
+      ]
+    },
+    {
+      "source": "BUF",
+      "sourceGroup": "other",
+      "destination": "BDL",
+      "destinationGroup": "northeast",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "BUF-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1685,
+          "hubArrival": "07:51",
+          "outboundLegId": "V131-NE-R356-2-SYR-BDL",
+          "outboundFlight": 2208,
+          "hubDeparture": "08:25",
+          "waitMinutes": 34
+        },
+        {
+          "inboundLegId": "V115-R307-BUF-SYR",
+          "inboundFlight": 2046,
+          "hubArrival": "05:17",
+          "outboundLegId": "V121-R123-1-SYR-BDL",
+          "outboundFlight": 2101,
+          "hubDeparture": "05:59",
+          "waitMinutes": 42
+        },
+        {
+          "inboundLegId": "V123-R145-4-BUF-SYR",
+          "inboundFlight": 2144,
+          "hubArrival": "13:30",
+          "outboundLegId": "BDL-SYR-CRJ200-01-IN",
+          "outboundFlight": 1792,
+          "hubDeparture": "14:13",
+          "waitMinutes": 43
+        },
+        {
+          "inboundLegId": "V115-R307-BUF-SYR",
+          "inboundFlight": 2046,
+          "hubArrival": "05:17",
+          "outboundLegId": "V131-NE-R356-2-SYR-BDL",
+          "outboundFlight": 2208,
+          "hubDeparture": "08:25",
+          "waitMinutes": 188
+        },
+        {
+          "inboundLegId": "BUF-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1686,
+          "hubArrival": "10:41",
+          "outboundLegId": "BDL-SYR-CRJ200-01-IN",
+          "outboundFlight": 1792,
+          "hubDeparture": "14:13",
+          "waitMinutes": 212
+        }
+      ]
+    },
+    {
+      "source": "ORH",
+      "sourceGroup": "other",
+      "destination": "BTV",
+      "destinationGroup": "northeast",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V115-R516-ORH-SYR",
+          "inboundFlight": 2048,
+          "hubArrival": "05:28",
+          "outboundLegId": "V125-HOLDS-R318-1-SYR-BTV",
+          "outboundFlight": 2189,
+          "hubDeparture": "07:45",
+          "waitMinutes": 137
+        },
+        {
+          "inboundLegId": "ORH-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1883,
+          "hubArrival": "07:53",
+          "outboundLegId": "BTV-SYR-CRJ200-02-IN",
+          "outboundFlight": 1825,
+          "hubDeparture": "11:20",
+          "waitMinutes": 207
+        }
+      ]
+    },
+    {
+      "source": "ORH",
+      "sourceGroup": "other",
+      "destination": "HPN",
+      "destinationGroup": "northeast",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "ORH-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1883,
+          "hubArrival": "07:53",
+          "outboundLegId": "HPN-SYR-CRJ200-01-IN",
+          "outboundFlight": 1851,
+          "hubDeparture": "08:35",
+          "waitMinutes": 42
+        },
+        {
+          "inboundLegId": "V115-R516-ORH-SYR",
+          "inboundFlight": 2048,
+          "hubArrival": "05:28",
+          "outboundLegId": "V125-HOLDS-R161-1-SYR-HPN",
+          "outboundFlight": 2191,
+          "hubDeparture": "07:45",
+          "waitMinutes": 137
+        },
+        {
+          "inboundLegId": "ORH-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1884,
+          "hubArrival": "11:11",
+          "outboundLegId": "HPN-SYR-CRJ200-03-IN",
+          "outboundFlight": 1853,
+          "hubDeparture": "13:55",
+          "waitMinutes": 164
+        },
+        {
+          "inboundLegId": "V115-R516-ORH-SYR",
+          "inboundFlight": 2048,
+          "hubArrival": "05:28",
+          "outboundLegId": "HPN-SYR-CRJ200-01-IN",
+          "outboundFlight": 1851,
+          "hubDeparture": "08:35",
+          "waitMinutes": 187
+        },
+        {
+          "inboundLegId": "ORH-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1883,
+          "hubArrival": "07:53",
+          "outboundLegId": "HPN-SYR-CRJ200-02-IN",
+          "outboundFlight": 1852,
+          "hubDeparture": "11:20",
+          "waitMinutes": 207
+        }
+      ]
+    },
+    {
+      "source": "ORH",
+      "sourceGroup": "other",
+      "destination": "MHT",
+      "destinationGroup": "northeast",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "ORH-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1883,
+          "hubArrival": "07:53",
+          "outboundLegId": "MHT-SYR-CRJ200-02-IN",
+          "outboundFlight": 1835,
+          "hubDeparture": "08:35",
+          "waitMinutes": 42
+        },
+        {
+          "inboundLegId": "V115-R516-ORH-SYR",
+          "inboundFlight": 2048,
+          "hubArrival": "05:28",
+          "outboundLegId": "MHT-SYR-CRJ200-02-IN",
+          "outboundFlight": 1835,
+          "hubDeparture": "08:35",
+          "waitMinutes": 187
+        },
+        {
+          "inboundLegId": "ORH-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1883,
+          "hubArrival": "07:53",
+          "outboundLegId": "MHT-SYR-CRJ200-03-IN",
+          "outboundFlight": 1836,
+          "hubDeparture": "11:25",
+          "waitMinutes": 212
+        }
+      ]
+    },
+    {
+      "source": "ORH",
+      "sourceGroup": "other",
+      "destination": "PWM",
+      "destinationGroup": "northeast",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "ORH-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1883,
+          "hubArrival": "07:53",
+          "outboundLegId": "PWM-SYR-CRJ200-02-IN",
+          "outboundFlight": 1699,
+          "hubDeparture": "08:25",
+          "waitMinutes": 32
+        },
+        {
+          "inboundLegId": "ORH-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1884,
+          "hubArrival": "11:11",
+          "outboundLegId": "PWM-SYR-CRJ200-03-IN",
+          "outboundFlight": 1700,
+          "hubDeparture": "14:05",
+          "waitMinutes": 174
+        },
+        {
+          "inboundLegId": "V115-R516-ORH-SYR",
+          "inboundFlight": 2048,
+          "hubArrival": "05:28",
+          "outboundLegId": "PWM-SYR-CRJ200-02-IN",
+          "outboundFlight": 1699,
+          "hubDeparture": "08:25",
+          "waitMinutes": 177
+        }
+      ]
+    },
+    {
+      "source": "ORH",
+      "sourceGroup": "other",
+      "destination": "ALB",
+      "destinationGroup": "northeast",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "ORH-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1883,
+          "hubArrival": "07:53",
+          "outboundLegId": "ALB-SYR-CRJ200-02-IN",
+          "outboundFlight": 1750,
+          "hubDeparture": "08:35",
+          "waitMinutes": 42
+        },
+        {
+          "inboundLegId": "ORH-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1884,
+          "hubArrival": "11:11",
+          "outboundLegId": "ALB-SYR-CRJ200-03-IN",
+          "outboundFlight": 1751,
+          "hubDeparture": "14:10",
+          "waitMinutes": 179
+        },
+        {
+          "inboundLegId": "V115-R516-ORH-SYR",
+          "inboundFlight": 2048,
+          "hubArrival": "05:28",
+          "outboundLegId": "ALB-SYR-CRJ200-02-IN",
+          "outboundFlight": 1750,
+          "hubDeparture": "08:35",
+          "waitMinutes": 187
+        }
+      ]
+    },
+    {
+      "source": "ORH",
+      "sourceGroup": "other",
+      "destination": "ISP",
+      "destinationGroup": "northeast",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "ORH-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1883,
+          "hubArrival": "07:53",
+          "outboundLegId": "ISP-SYR-CRJ200-02-IN",
+          "outboundFlight": 1889,
+          "hubDeparture": "08:35",
+          "waitMinutes": 42
+        },
+        {
+          "inboundLegId": "V115-R516-ORH-SYR",
+          "inboundFlight": 2048,
+          "hubArrival": "05:28",
+          "outboundLegId": "ISP-SYR-CRJ200-02-IN",
+          "outboundFlight": 1889,
+          "hubDeparture": "08:35",
+          "waitMinutes": 187
+        },
+        {
+          "inboundLegId": "ORH-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1883,
+          "hubArrival": "07:53",
+          "outboundLegId": "ISP-SYR-CRJ200-03-IN",
+          "outboundFlight": 1890,
+          "hubDeparture": "11:25",
+          "waitMinutes": 212
+        }
+      ]
+    },
+    {
+      "source": "ORH",
+      "sourceGroup": "other",
+      "destination": "BDL",
+      "destinationGroup": "northeast",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V115-R516-ORH-SYR",
+          "inboundFlight": 2048,
+          "hubArrival": "05:28",
+          "outboundLegId": "V121-R123-1-SYR-BDL",
+          "outboundFlight": 2101,
+          "hubDeparture": "05:59",
+          "waitMinutes": 31
+        },
+        {
+          "inboundLegId": "ORH-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1883,
+          "hubArrival": "07:53",
+          "outboundLegId": "V131-NE-R356-2-SYR-BDL",
+          "outboundFlight": 2208,
+          "hubDeparture": "08:25",
+          "waitMinutes": 32
+        },
+        {
+          "inboundLegId": "V115-R516-ORH-SYR",
+          "inboundFlight": 2048,
+          "hubArrival": "05:28",
+          "outboundLegId": "V131-NE-R356-2-SYR-BDL",
+          "outboundFlight": 2208,
+          "hubDeparture": "08:25",
+          "waitMinutes": 177
+        },
+        {
+          "inboundLegId": "ORH-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1884,
+          "hubArrival": "11:11",
+          "outboundLegId": "BDL-SYR-CRJ200-01-IN",
+          "outboundFlight": 1792,
+          "hubDeparture": "14:13",
+          "waitMinutes": 182
+        }
+      ]
+    },
+    {
+      "source": "PHF",
+      "sourceGroup": "other",
+      "destination": "BTV",
+      "destinationGroup": "northeast",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "PHF-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1514,
+          "hubArrival": "10:40",
+          "outboundLegId": "BTV-SYR-CRJ200-02-IN",
+          "outboundFlight": 1825,
+          "hubDeparture": "11:20",
+          "waitMinutes": 40
+        },
+        {
+          "inboundLegId": "V112-R323-PHF-SYR-01",
+          "inboundFlight": 1952,
+          "hubArrival": "16:50",
+          "outboundLegId": "BTV-SYR-CRJ200-01-IN",
+          "outboundFlight": 1827,
+          "hubDeparture": "18:10",
+          "waitMinutes": 80
+        },
+        {
+          "inboundLegId": "V116-R338-PHF-SYR",
+          "inboundFlight": 2079,
+          "hubArrival": "05:53",
+          "outboundLegId": "V125-HOLDS-R318-1-SYR-BTV",
+          "outboundFlight": 2189,
+          "hubDeparture": "07:45",
+          "waitMinutes": 112
+        },
+        {
+          "inboundLegId": "V141-R107-PHF-SYR-1",
+          "inboundFlight": 2274,
+          "hubArrival": "13:33",
+          "outboundLegId": "BTV-SYR-CRJ200-03-IN",
+          "outboundFlight": 1826,
+          "hubDeparture": "15:27",
+          "waitMinutes": 114
+        },
+        {
+          "inboundLegId": "PHF-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1513,
+          "hubArrival": "08:20",
+          "outboundLegId": "BTV-SYR-CRJ200-02-IN",
+          "outboundFlight": 1825,
+          "hubDeparture": "11:20",
+          "waitMinutes": 180
+        }
+      ]
+    },
+    {
+      "source": "PHF",
+      "sourceGroup": "other",
+      "destination": "HPN",
+      "destinationGroup": "northeast",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "PHF-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1514,
+          "hubArrival": "10:40",
+          "outboundLegId": "HPN-SYR-CRJ200-02-IN",
+          "outboundFlight": 1852,
+          "hubDeparture": "11:20",
+          "waitMinutes": 40
+        },
+        {
+          "inboundLegId": "V116-R338-PHF-SYR",
+          "inboundFlight": 2079,
+          "hubArrival": "05:53",
+          "outboundLegId": "V125-HOLDS-R161-1-SYR-HPN",
+          "outboundFlight": 2191,
+          "hubDeparture": "07:45",
+          "waitMinutes": 112
+        },
+        {
+          "inboundLegId": "V116-R338-PHF-SYR",
+          "inboundFlight": 2079,
+          "hubArrival": "05:53",
+          "outboundLegId": "HPN-SYR-CRJ200-01-IN",
+          "outboundFlight": 1851,
+          "hubDeparture": "08:35",
+          "waitMinutes": 162
+        },
+        {
+          "inboundLegId": "PHF-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1513,
+          "hubArrival": "08:20",
+          "outboundLegId": "HPN-SYR-CRJ200-02-IN",
+          "outboundFlight": 1852,
+          "hubDeparture": "11:20",
+          "waitMinutes": 180
+        },
+        {
+          "inboundLegId": "PHF-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1514,
+          "hubArrival": "10:40",
+          "outboundLegId": "HPN-SYR-CRJ200-03-IN",
+          "outboundFlight": 1853,
+          "hubDeparture": "13:55",
+          "waitMinutes": 195
+        }
+      ]
+    },
+    {
+      "source": "PHF",
+      "sourceGroup": "other",
+      "destination": "MHT",
+      "destinationGroup": "northeast",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "PHF-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1514,
+          "hubArrival": "10:40",
+          "outboundLegId": "MHT-SYR-CRJ200-03-IN",
+          "outboundFlight": 1836,
+          "hubDeparture": "11:25",
+          "waitMinutes": 45
+        },
+        {
+          "inboundLegId": "V116-R338-PHF-SYR",
+          "inboundFlight": 2079,
+          "hubArrival": "05:53",
+          "outboundLegId": "MHT-SYR-CRJ200-02-IN",
+          "outboundFlight": 1835,
+          "hubDeparture": "08:35",
+          "waitMinutes": 162
+        },
+        {
+          "inboundLegId": "V112-R323-PHF-SYR-01",
+          "inboundFlight": 1952,
+          "hubArrival": "16:50",
+          "outboundLegId": "MHT-SYR-CRJ200-01-IN",
+          "outboundFlight": 1837,
+          "hubDeparture": "19:35",
+          "waitMinutes": 165
+        },
+        {
+          "inboundLegId": "PHF-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1513,
+          "hubArrival": "08:20",
+          "outboundLegId": "MHT-SYR-CRJ200-03-IN",
+          "outboundFlight": 1836,
+          "hubDeparture": "11:25",
+          "waitMinutes": 185
+        }
+      ]
+    },
+    {
+      "source": "PHF",
+      "sourceGroup": "other",
+      "destination": "PWM",
+      "destinationGroup": "northeast",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V141-R107-PHF-SYR-1",
+          "inboundFlight": 2274,
+          "hubArrival": "13:33",
+          "outboundLegId": "PWM-SYR-CRJ200-03-IN",
+          "outboundFlight": 1700,
+          "hubDeparture": "14:05",
+          "waitMinutes": 32
+        },
+        {
+          "inboundLegId": "V141-R107-PHF-SYR-1",
+          "inboundFlight": 2274,
+          "hubArrival": "13:33",
+          "outboundLegId": "PWM-SYR-CRJ200-01-IN",
+          "outboundFlight": 1701,
+          "hubDeparture": "15:40",
+          "waitMinutes": 127
+        },
+        {
+          "inboundLegId": "V116-R338-PHF-SYR",
+          "inboundFlight": 2079,
+          "hubArrival": "05:53",
+          "outboundLegId": "PWM-SYR-CRJ200-02-IN",
+          "outboundFlight": 1699,
+          "hubDeparture": "08:25",
+          "waitMinutes": 152
+        },
+        {
+          "inboundLegId": "PHF-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1514,
+          "hubArrival": "10:40",
+          "outboundLegId": "PWM-SYR-CRJ200-03-IN",
+          "outboundFlight": 1700,
+          "hubDeparture": "14:05",
+          "waitMinutes": 205
+        }
+      ]
+    },
+    {
+      "source": "PHF",
+      "sourceGroup": "other",
+      "destination": "ALB",
+      "destinationGroup": "northeast",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V141-R107-PHF-SYR-1",
+          "inboundFlight": 2274,
+          "hubArrival": "13:33",
+          "outboundLegId": "ALB-SYR-CRJ200-03-IN",
+          "outboundFlight": 1751,
+          "hubDeparture": "14:10",
+          "waitMinutes": 37
+        },
+        {
+          "inboundLegId": "V116-R338-PHF-SYR",
+          "inboundFlight": 2079,
+          "hubArrival": "05:53",
+          "outboundLegId": "ALB-SYR-CRJ200-02-IN",
+          "outboundFlight": 1750,
+          "hubDeparture": "08:35",
+          "waitMinutes": 162
+        },
+        {
+          "inboundLegId": "V141-R107-PHF-SYR-1",
+          "inboundFlight": 2274,
+          "hubArrival": "13:33",
+          "outboundLegId": "ALB-SYR-CRJ200-04-IN",
+          "outboundFlight": 1752,
+          "hubDeparture": "16:45",
+          "waitMinutes": 192
+        },
+        {
+          "inboundLegId": "PHF-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1514,
+          "hubArrival": "10:40",
+          "outboundLegId": "ALB-SYR-CRJ200-03-IN",
+          "outboundFlight": 1751,
+          "hubDeparture": "14:10",
+          "waitMinutes": 210
+        }
+      ]
+    },
+    {
+      "source": "PHF",
+      "sourceGroup": "other",
+      "destination": "ISP",
+      "destinationGroup": "northeast",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "PHF-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1514,
+          "hubArrival": "10:40",
+          "outboundLegId": "ISP-SYR-CRJ200-03-IN",
+          "outboundFlight": 1890,
+          "hubDeparture": "11:25",
+          "waitMinutes": 45
+        },
+        {
+          "inboundLegId": "V116-R338-PHF-SYR",
+          "inboundFlight": 2079,
+          "hubArrival": "05:53",
+          "outboundLegId": "ISP-SYR-CRJ200-02-IN",
+          "outboundFlight": 1889,
+          "hubDeparture": "08:35",
+          "waitMinutes": 162
+        },
+        {
+          "inboundLegId": "V112-R323-PHF-SYR-01",
+          "inboundFlight": 1952,
+          "hubArrival": "16:50",
+          "outboundLegId": "ISP-SYR-CRJ200-01-IN",
+          "outboundFlight": 1891,
+          "hubDeparture": "19:35",
+          "waitMinutes": 165
+        },
+        {
+          "inboundLegId": "PHF-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1513,
+          "hubArrival": "08:20",
+          "outboundLegId": "ISP-SYR-CRJ200-03-IN",
+          "outboundFlight": 1890,
+          "hubDeparture": "11:25",
+          "waitMinutes": 185
+        }
+      ]
+    },
+    {
+      "source": "PHF",
+      "sourceGroup": "other",
+      "destination": "BDL",
+      "destinationGroup": "northeast",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V141-R107-PHF-SYR-1",
+          "inboundFlight": 2274,
+          "hubArrival": "13:33",
+          "outboundLegId": "BDL-SYR-CRJ200-01-IN",
+          "outboundFlight": 1792,
+          "hubDeparture": "14:13",
+          "waitMinutes": 40
+        },
+        {
+          "inboundLegId": "V116-R338-PHF-SYR",
+          "inboundFlight": 2079,
+          "hubArrival": "05:53",
+          "outboundLegId": "V131-NE-R356-2-SYR-BDL",
+          "outboundFlight": 2208,
+          "hubDeparture": "08:25",
+          "waitMinutes": 152
+        },
+        {
+          "inboundLegId": "PHF-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1514,
+          "hubArrival": "10:40",
+          "outboundLegId": "BDL-SYR-CRJ200-01-IN",
+          "outboundFlight": 1792,
+          "hubDeparture": "14:13",
+          "waitMinutes": 213
+        }
+      ]
+    },
+    {
+      "source": "BGR",
+      "sourceGroup": "other",
+      "destination": "BTV",
+      "destinationGroup": "northeast",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V141-R105-EXTRA-2-1",
+          "inboundFlight": 2271,
+          "hubArrival": "21:30",
+          "outboundLegId": "V140-R106-LATE-0-2",
+          "outboundFlight": 2264,
+          "hubDeparture": "22:29",
+          "waitMinutes": 59
+        },
+        {
+          "inboundLegId": "BGR-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1776,
+          "hubArrival": "16:45",
+          "outboundLegId": "BTV-SYR-CRJ200-01-IN",
+          "outboundFlight": 1827,
+          "hubDeparture": "18:10",
+          "waitMinutes": 85
+        },
+        {
+          "inboundLegId": "V141-R162-SCREEN-6-2",
+          "inboundFlight": 2270,
+          "hubArrival": "13:15",
+          "outboundLegId": "BTV-SYR-CRJ200-03-IN",
+          "outboundFlight": 1826,
+          "hubDeparture": "15:27",
+          "waitMinutes": 132
+        },
+        {
+          "inboundLegId": "BGR-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1775,
+          "hubArrival": "07:55",
+          "outboundLegId": "BTV-SYR-CRJ200-02-IN",
+          "outboundFlight": 1825,
+          "hubDeparture": "11:20",
+          "waitMinutes": 205
+        }
+      ]
+    },
+    {
+      "source": "BGR",
+      "sourceGroup": "other",
+      "destination": "HPN",
+      "destinationGroup": "northeast",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "BGR-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1775,
+          "hubArrival": "07:55",
+          "outboundLegId": "HPN-SYR-CRJ200-01-IN",
+          "outboundFlight": 1851,
+          "hubDeparture": "08:35",
+          "waitMinutes": 40
+        },
+        {
+          "inboundLegId": "V141-R162-SCREEN-6-2",
+          "inboundFlight": 2270,
+          "hubArrival": "13:15",
+          "outboundLegId": "HPN-SYR-CRJ200-03-IN",
+          "outboundFlight": 1853,
+          "hubDeparture": "13:55",
+          "waitMinutes": 40
+        },
+        {
+          "inboundLegId": "BGR-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1775,
+          "hubArrival": "07:55",
+          "outboundLegId": "HPN-SYR-CRJ200-02-IN",
+          "outboundFlight": 1852,
+          "hubDeparture": "11:20",
+          "waitMinutes": 205
+        }
+      ]
+    },
+    {
+      "source": "BGR",
+      "sourceGroup": "other",
+      "destination": "MHT",
+      "destinationGroup": "northeast",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "BGR-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1775,
+          "hubArrival": "07:55",
+          "outboundLegId": "MHT-SYR-CRJ200-02-IN",
+          "outboundFlight": 1835,
+          "hubDeparture": "08:35",
+          "waitMinutes": 40
+        },
+        {
+          "inboundLegId": "BGR-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1776,
+          "hubArrival": "16:45",
+          "outboundLegId": "MHT-SYR-CRJ200-01-IN",
+          "outboundFlight": 1837,
+          "hubDeparture": "19:35",
+          "waitMinutes": 170
+        },
+        {
+          "inboundLegId": "BGR-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1775,
+          "hubArrival": "07:55",
+          "outboundLegId": "MHT-SYR-CRJ200-03-IN",
+          "outboundFlight": 1836,
+          "hubDeparture": "11:25",
+          "waitMinutes": 210
+        }
+      ]
+    },
+    {
+      "source": "BGR",
+      "sourceGroup": "other",
+      "destination": "PWM",
+      "destinationGroup": "northeast",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "BGR-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1775,
+          "hubArrival": "07:55",
+          "outboundLegId": "PWM-SYR-CRJ200-02-IN",
+          "outboundFlight": 1699,
+          "hubDeparture": "08:25",
+          "waitMinutes": 30
+        },
+        {
+          "inboundLegId": "V141-R162-SCREEN-6-2",
+          "inboundFlight": 2270,
+          "hubArrival": "13:15",
+          "outboundLegId": "PWM-SYR-CRJ200-03-IN",
+          "outboundFlight": 1700,
+          "hubDeparture": "14:05",
+          "waitMinutes": 50
+        },
+        {
+          "inboundLegId": "V141-R105-EXTRA-2-1",
+          "inboundFlight": 2271,
+          "hubArrival": "21:30",
+          "outboundLegId": "V115-R144-SYR-PWM",
+          "outboundFlight": 2052,
+          "hubDeparture": "22:20",
+          "waitMinutes": 50
+        },
+        {
+          "inboundLegId": "V141-R162-SCREEN-6-2",
+          "inboundFlight": 2270,
+          "hubArrival": "13:15",
+          "outboundLegId": "PWM-SYR-CRJ200-01-IN",
+          "outboundFlight": 1701,
+          "hubDeparture": "15:40",
+          "waitMinutes": 145
+        }
+      ]
+    },
+    {
+      "source": "BGR",
+      "sourceGroup": "other",
+      "destination": "ALB",
+      "destinationGroup": "northeast",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "BGR-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1775,
+          "hubArrival": "07:55",
+          "outboundLegId": "ALB-SYR-CRJ200-02-IN",
+          "outboundFlight": 1750,
+          "hubDeparture": "08:35",
+          "waitMinutes": 40
+        },
+        {
+          "inboundLegId": "V141-R162-SCREEN-6-2",
+          "inboundFlight": 2270,
+          "hubArrival": "13:15",
+          "outboundLegId": "ALB-SYR-CRJ200-03-IN",
+          "outboundFlight": 1751,
+          "hubDeparture": "14:10",
+          "waitMinutes": 55
+        },
+        {
+          "inboundLegId": "V141-R162-SCREEN-6-2",
+          "inboundFlight": 2270,
+          "hubArrival": "13:15",
+          "outboundLegId": "ALB-SYR-CRJ200-04-IN",
+          "outboundFlight": 1752,
+          "hubDeparture": "16:45",
+          "waitMinutes": 210
+        }
+      ]
+    },
+    {
+      "source": "BGR",
+      "sourceGroup": "other",
+      "destination": "ISP",
+      "destinationGroup": "northeast",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "BGR-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1775,
+          "hubArrival": "07:55",
+          "outboundLegId": "ISP-SYR-CRJ200-02-IN",
+          "outboundFlight": 1889,
+          "hubDeparture": "08:35",
+          "waitMinutes": 40
+        },
+        {
+          "inboundLegId": "BGR-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1776,
+          "hubArrival": "16:45",
+          "outboundLegId": "ISP-SYR-CRJ200-01-IN",
+          "outboundFlight": 1891,
+          "hubDeparture": "19:35",
+          "waitMinutes": 170
+        },
+        {
+          "inboundLegId": "BGR-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1775,
+          "hubArrival": "07:55",
+          "outboundLegId": "ISP-SYR-CRJ200-03-IN",
+          "outboundFlight": 1890,
+          "hubDeparture": "11:25",
+          "waitMinutes": 210
+        }
+      ]
+    },
+    {
+      "source": "BGR",
+      "sourceGroup": "other",
+      "destination": "BDL",
+      "destinationGroup": "northeast",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "BGR-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1775,
+          "hubArrival": "07:55",
+          "outboundLegId": "V131-NE-R356-2-SYR-BDL",
+          "outboundFlight": 2208,
+          "hubDeparture": "08:25",
+          "waitMinutes": 30
+        },
+        {
+          "inboundLegId": "V141-R162-SCREEN-6-2",
+          "inboundFlight": 2270,
+          "hubArrival": "13:15",
+          "outboundLegId": "BDL-SYR-CRJ200-01-IN",
+          "outboundFlight": 1792,
+          "hubDeparture": "14:13",
+          "waitMinutes": 58
+        }
+      ]
+    },
+    {
+      "source": "ROC",
+      "sourceGroup": "other",
+      "destination": "BTV",
+      "destinationGroup": "northeast",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V115-R165-ROC-SYR",
+          "inboundFlight": 2040,
+          "hubArrival": "21:34",
+          "outboundLegId": "V140-R106-LATE-0-2",
+          "outboundFlight": 2264,
+          "hubDeparture": "22:29",
+          "waitMinutes": 55
+        },
+        {
+          "inboundLegId": "ROC-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1706,
+          "hubArrival": "13:24",
+          "outboundLegId": "BTV-SYR-CRJ200-03-IN",
+          "outboundFlight": 1826,
+          "hubDeparture": "15:27",
+          "waitMinutes": 123
+        },
+        {
+          "inboundLegId": "ROC-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1705,
+          "hubArrival": "05:09",
+          "outboundLegId": "V125-HOLDS-R318-1-SYR-BTV",
+          "outboundFlight": 2189,
+          "hubDeparture": "07:45",
+          "waitMinutes": 156
+        },
+        {
+          "inboundLegId": "V124-R4-R125-2-ROC-SYR",
+          "inboundFlight": 2168,
+          "hubArrival": "07:54",
+          "outboundLegId": "BTV-SYR-CRJ200-02-IN",
+          "outboundFlight": 1825,
+          "hubDeparture": "11:20",
+          "waitMinutes": 206
+        }
+      ]
+    },
+    {
+      "source": "ROC",
+      "sourceGroup": "other",
+      "destination": "HPN",
+      "destinationGroup": "northeast",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "ROC-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1706,
+          "hubArrival": "13:24",
+          "outboundLegId": "HPN-SYR-CRJ200-03-IN",
+          "outboundFlight": 1853,
+          "hubDeparture": "13:55",
+          "waitMinutes": 31
+        },
+        {
+          "inboundLegId": "V124-R4-R125-2-ROC-SYR",
+          "inboundFlight": 2168,
+          "hubArrival": "07:54",
+          "outboundLegId": "HPN-SYR-CRJ200-01-IN",
+          "outboundFlight": 1851,
+          "hubDeparture": "08:35",
+          "waitMinutes": 41
+        },
+        {
+          "inboundLegId": "ROC-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1705,
+          "hubArrival": "05:09",
+          "outboundLegId": "V125-HOLDS-R161-1-SYR-HPN",
+          "outboundFlight": 2191,
+          "hubDeparture": "07:45",
+          "waitMinutes": 156
+        },
+        {
+          "inboundLegId": "ROC-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1705,
+          "hubArrival": "05:09",
+          "outboundLegId": "HPN-SYR-CRJ200-01-IN",
+          "outboundFlight": 1851,
+          "hubDeparture": "08:35",
+          "waitMinutes": 206
+        },
+        {
+          "inboundLegId": "V124-R4-R125-2-ROC-SYR",
+          "inboundFlight": 2168,
+          "hubArrival": "07:54",
+          "outboundLegId": "HPN-SYR-CRJ200-02-IN",
+          "outboundFlight": 1852,
+          "hubDeparture": "11:20",
+          "waitMinutes": 206
+        }
+      ]
+    },
+    {
+      "source": "ROC",
+      "sourceGroup": "other",
+      "destination": "MHT",
+      "destinationGroup": "northeast",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V124-R4-R125-2-ROC-SYR",
+          "inboundFlight": 2168,
+          "hubArrival": "07:54",
+          "outboundLegId": "MHT-SYR-CRJ200-02-IN",
+          "outboundFlight": 1835,
+          "hubDeparture": "08:35",
+          "waitMinutes": 41
+        },
+        {
+          "inboundLegId": "ROC-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1705,
+          "hubArrival": "05:09",
+          "outboundLegId": "MHT-SYR-CRJ200-02-IN",
+          "outboundFlight": 1835,
+          "hubDeparture": "08:35",
+          "waitMinutes": 206
+        },
+        {
+          "inboundLegId": "V124-R4-R125-2-ROC-SYR",
+          "inboundFlight": 2168,
+          "hubArrival": "07:54",
+          "outboundLegId": "MHT-SYR-CRJ200-03-IN",
+          "outboundFlight": 1836,
+          "hubDeparture": "11:25",
+          "waitMinutes": 211
+        }
+      ]
+    },
+    {
+      "source": "ROC",
+      "sourceGroup": "other",
+      "destination": "PWM",
+      "destinationGroup": "northeast",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V124-R4-R125-2-ROC-SYR",
+          "inboundFlight": 2168,
+          "hubArrival": "07:54",
+          "outboundLegId": "PWM-SYR-CRJ200-02-IN",
+          "outboundFlight": 1699,
+          "hubDeparture": "08:25",
+          "waitMinutes": 31
+        },
+        {
+          "inboundLegId": "ROC-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1706,
+          "hubArrival": "13:24",
+          "outboundLegId": "PWM-SYR-CRJ200-03-IN",
+          "outboundFlight": 1700,
+          "hubDeparture": "14:05",
+          "waitMinutes": 41
+        },
+        {
+          "inboundLegId": "V115-R165-ROC-SYR",
+          "inboundFlight": 2040,
+          "hubArrival": "21:34",
+          "outboundLegId": "V115-R144-SYR-PWM",
+          "outboundFlight": 2052,
+          "hubDeparture": "22:20",
+          "waitMinutes": 46
+        },
+        {
+          "inboundLegId": "ROC-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1706,
+          "hubArrival": "13:24",
+          "outboundLegId": "PWM-SYR-CRJ200-01-IN",
+          "outboundFlight": 1701,
+          "hubDeparture": "15:40",
+          "waitMinutes": 136
+        },
+        {
+          "inboundLegId": "ROC-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1705,
+          "hubArrival": "05:09",
+          "outboundLegId": "PWM-SYR-CRJ200-02-IN",
+          "outboundFlight": 1699,
+          "hubDeparture": "08:25",
+          "waitMinutes": 196
+        }
+      ]
+    },
+    {
+      "source": "ROC",
+      "sourceGroup": "other",
+      "destination": "ALB",
+      "destinationGroup": "northeast",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "ROC-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1705,
+          "hubArrival": "05:09",
+          "outboundLegId": "ALB-SYR-CRJ200-01-IN",
+          "outboundFlight": 1749,
+          "hubDeparture": "05:50",
+          "waitMinutes": 41
+        },
+        {
+          "inboundLegId": "V124-R4-R125-2-ROC-SYR",
+          "inboundFlight": 2168,
+          "hubArrival": "07:54",
+          "outboundLegId": "ALB-SYR-CRJ200-02-IN",
+          "outboundFlight": 1750,
+          "hubDeparture": "08:35",
+          "waitMinutes": 41
+        },
+        {
+          "inboundLegId": "ROC-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1706,
+          "hubArrival": "13:24",
+          "outboundLegId": "ALB-SYR-CRJ200-03-IN",
+          "outboundFlight": 1751,
+          "hubDeparture": "14:10",
+          "waitMinutes": 46
+        },
+        {
+          "inboundLegId": "ROC-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1706,
+          "hubArrival": "13:24",
+          "outboundLegId": "ALB-SYR-CRJ200-04-IN",
+          "outboundFlight": 1752,
+          "hubDeparture": "16:45",
+          "waitMinutes": 201
+        },
+        {
+          "inboundLegId": "ROC-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1705,
+          "hubArrival": "05:09",
+          "outboundLegId": "ALB-SYR-CRJ200-02-IN",
+          "outboundFlight": 1750,
+          "hubDeparture": "08:35",
+          "waitMinutes": 206
+        }
+      ]
+    },
+    {
+      "source": "ROC",
+      "sourceGroup": "other",
+      "destination": "ISP",
+      "destinationGroup": "northeast",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V124-R4-R125-2-ROC-SYR",
+          "inboundFlight": 2168,
+          "hubArrival": "07:54",
+          "outboundLegId": "ISP-SYR-CRJ200-02-IN",
+          "outboundFlight": 1889,
+          "hubDeparture": "08:35",
+          "waitMinutes": 41
+        },
+        {
+          "inboundLegId": "ROC-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1705,
+          "hubArrival": "05:09",
+          "outboundLegId": "ISP-SYR-CRJ200-02-IN",
+          "outboundFlight": 1889,
+          "hubDeparture": "08:35",
+          "waitMinutes": 206
+        },
+        {
+          "inboundLegId": "V124-R4-R125-2-ROC-SYR",
+          "inboundFlight": 2168,
+          "hubArrival": "07:54",
+          "outboundLegId": "ISP-SYR-CRJ200-03-IN",
+          "outboundFlight": 1890,
+          "hubDeparture": "11:25",
+          "waitMinutes": 211
+        }
+      ]
+    },
+    {
+      "source": "ROC",
+      "sourceGroup": "other",
+      "destination": "BDL",
+      "destinationGroup": "northeast",
+      "status": "connected",
+      "options": [
+        {
+          "inboundLegId": "V124-R4-R125-2-ROC-SYR",
+          "inboundFlight": 2168,
+          "hubArrival": "07:54",
+          "outboundLegId": "V131-NE-R356-2-SYR-BDL",
+          "outboundFlight": 2208,
+          "hubDeparture": "08:25",
+          "waitMinutes": 31
+        },
+        {
+          "inboundLegId": "ROC-SYR-CRJ200-02-OUT",
+          "inboundFlight": 1706,
+          "hubArrival": "13:24",
+          "outboundLegId": "BDL-SYR-CRJ200-01-IN",
+          "outboundFlight": 1792,
+          "hubDeparture": "14:13",
+          "waitMinutes": 49
+        },
+        {
+          "inboundLegId": "ROC-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1705,
+          "hubArrival": "05:09",
+          "outboundLegId": "V121-R123-1-SYR-BDL",
+          "outboundFlight": 2101,
+          "hubDeparture": "05:59",
+          "waitMinutes": 50
+        },
+        {
+          "inboundLegId": "ROC-SYR-CRJ200-01-OUT",
+          "inboundFlight": 1705,
+          "hubArrival": "05:09",
+          "outboundLegId": "V131-NE-R356-2-SYR-BDL",
+          "outboundFlight": 2208,
+          "hubDeparture": "08:25",
+          "waitMinutes": 196
+        }
+      ]
+    }
+  ]
+}

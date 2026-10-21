@@ -113,11 +113,11 @@ test("midnight transfers and both connection-window boundaries are inclusive", (
 
 test("v1.3.1 closes northeast Florida and DSM priority gaps with suitable geography", () => {
   for(const ne of ["HPN","HVN","ISP","BTV","ORH"]) for(const fl of ["PGD","DAB","FLL","PIE","SFB","SRQ"]) for(const [a,b]of[[ne,fl],[fl,ne]]){
-    const v=coverageView(baseline.records.get(`${a}-${b}`),true);assert.ok(v.stops!=null&&v.stops<=1,`${a}-${b}`);
+    const v=coverageView(v131FrozenAudit.records.get(`${a}-${b}`),true);assert.ok(v.stops!=null&&v.stops<=1,`${a}-${b}`);
   }
-  for(const market of ["RDU-DSM","DSM-RDU","JAX-DSM","PHF-DSM","DSM-PHF","SYR-DSM"])assert.equal(coverageView(baseline.records.get(market),true).stops,1,market);
-  assert.equal(baseline.records.get("JAX-DSM").reasonableBest[1].totalMinutes,240);
-  assert.equal(baseline.records.get("RDU-DSM").reasonableBest[1].totalMinutes,235);
+  for(const market of ["RDU-DSM","DSM-RDU","JAX-DSM","PHF-DSM","DSM-PHF","SYR-DSM"])assert.equal(coverageView(v131FrozenAudit.records.get(market),true).stops,1,market);
+  assert.equal(v131FrozenAudit.records.get("JAX-DSM").reasonableBest[1].totalMinutes,240);
+  assert.equal(v131FrozenAudit.records.get("RDU-DSM").reasonableBest[1].totalMinutes,235);
 });
 
 test("RFD priority service works both ways and retains the ROA detour distinction", () => {

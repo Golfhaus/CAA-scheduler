@@ -84,7 +84,7 @@ class LatestScheduleReleaseTests(unittest.TestCase):
             )
             self.assertEqual(report["status"], "released")
             self.assertEqual(report["scheduleId"], LATEST_SCHEDULE_ID)
-            self.assertEqual(report["summary"]["legs"], {"schedule_7_v1_3_1": 1214, "schedule_7_v1_3_2": 1229, "schedule_7_v1_3_3": 1253, "schedule_7_v1_4_0": 1259}[LATEST_SCHEDULE_ID])
+            self.assertEqual(report["summary"]["legs"], {"schedule_7_v1_3_1": 1214, "schedule_7_v1_3_2": 1229, "schedule_7_v1_3_3": 1253, "schedule_7_v1_4_0": 1259, "schedule_7_v1_4_1": 1266}[LATEST_SCHEDULE_ID])
             self.assertEqual(report["summary"]["effectiveOperatingErrors"], 0)
             self.assertEqual(report["summary"]["hardStopFailures"], 0)
             self.assertEqual(report["summary"]["overnightTurnFailures"], 0)
