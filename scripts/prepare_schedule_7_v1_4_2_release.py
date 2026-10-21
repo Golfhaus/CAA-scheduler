@@ -71,7 +71,10 @@ for rel in ("tests/test_latest_schedule_release.py","tests/test_latest_service_g
  data=data.replace('"schedule_7_v1_4_1": 1266}', '"schedule_7_v1_4_1": 1266, "schedule_7_v1_4_2": 1272}')
  data=data.replace('"schedule_7_v1_4_1"}', '"schedule_7_v1_4_1", "schedule_7_v1_4_2"}')
  data=data.replace('"schedule_7_v1_4_1" else 9', '"schedule_7_v1_4_1", "schedule_7_v1_4_2"} else 9')
- if rel.endswith("test_latest_service_gains.py"):\n  data=data.replace('(15, 3061)', '(18, 5875) if SCHEDULE_ID == "schedule_7_v1_4_2" else (15, 3061)')\n path.write_text(data)\npath=ROOT/"tests/test_routing_details.mjs"
+ if rel.endswith("test_latest_service_gains.py"):
+  data=data.replace('(15, 3061)', '(18, 5875) if SCHEDULE_ID == "schedule_7_v1_4_2" else (15, 3061)')
+ path.write_text(data)
+path=ROOT/"tests/test_routing_details.mjs"
 data=path.read_text().replace('entry.id === "schedule_7_v1_4_1" ||', 'entry.id === "schedule_7_v1_4_2" || entry.id === "schedule_7_v1_4_1" ||')
 path.write_text(data)
 path=ROOT/"tests/test_web_console.mjs"
