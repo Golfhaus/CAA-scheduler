@@ -13,13 +13,15 @@ for l,t in zip(new[:2],[1210,1330]):
 for n,t in [(1235,1045),(1236,1145)]:
  l=next(l for l in s["legs"] if l["flight"]==n);shift=t-l["departureMinute"]
  l["departureMinute"]=t;l["arrivalMinute"]+=shift;l["departure"]=clock(t);l["arrival"]=clock(l["arrivalMinute"])
-for d1077 in (875,870,865,860):
+for d1077 in (884,):
  for d1080 in (1016,1010,1005):
   c=__import__("copy").deepcopy(s)
   for n,t in [(1077,d1077),(1080,d1080)]:
    l=next(l for l in c["legs"] if l["flight"]==n);shift=t-l["departureMinute"]
    l["departureMinute"]=t;l["arrivalMinute"]+=shift;l["departure"]=clock(t);l["arrival"]=clock(l["arrivalMinute"])
-  # Bank assignments will need appropriate bank for new MCI arrival
+  for assignment in c['bankAssignments']:
+   if assignment['legId']==next(l['id'] for l in c['legs'] if l['flight']==1080) and assignment['operation']=='arrival':assignment['bankId']='MCI-B9'
+  # MCI arrival is now within the earlier B9 bank
   op=validate_operating_rules(c)
   try:export_gate_schedule(c);gate=True
   except Exception as e:gate=str(e)
