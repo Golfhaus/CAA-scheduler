@@ -18,6 +18,8 @@ legs=[
  (178,"SYR","CHS",310,430),(178,"CHS","SYR",470,590),
  # R178 connects RDU to the Hartford corridor via Syracuse
  (178,"SYR","BDL",930,980),(178,"BDL","SYR",1025,1075),
+ # Second BDL turn improves evening BWI and RFD onward connections.
+ (178,"SYR","BDL",1170,1220),(178,"BDL","SYR",1260,1310),
  # R359 first high-demand return from BNA, then a second before BHM night bank
  (359,"BNA","FLL",360,545),(359,"FLL","BNA",590,655),
  (359,"BNA","DAL",780,885),(359,"DAL","BNA",930,1035)
