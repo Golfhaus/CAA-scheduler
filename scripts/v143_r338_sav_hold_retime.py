@@ -16,4 +16,4 @@ for dep in (840,870,900,930,960,990,1020,1050):
  op=validate_operating_rules(s)
  try:export_gate_schedule(s);gate=True
  except Exception:gate=False
- print(json.dumps({"dep":clk(dep),"PHFhold":dep-793,"SAVhold":1200-(dep+86),"gate":gate,"errors":op["summary"]["effectiveErrorFindings"],"structure":validate_schedule(s)["status"],"overnight":validate_overnight_turns(s)["status"],"failed":[(c["id"],[f["id"] for f in c["findings"] if "override" not in f][:3]) for c in op["checks"] if c["status"]=="fail"]]}),flush=True)
+ print(json.dumps({"dep":clk(dep),"PHFhold":dep-793,"SAVhold":1200-(dep+86),"gate":gate,"errors":op["summary"]["effectiveErrorFindings"],"structure":validate_schedule(s)["status"],"overnight":validate_overnight_turns(s)["status"],"failed":[(c["id"],[f["id"] for f in c["findings"] if "override" not in f][:3]) for c in op["checks"] if c["status"]=="fail"]}),flush=True)
