@@ -1,0 +1,10 @@
+name: v1.4.3 R313 JAX commercial screening
+on:
+  pull_request:
+    branches: [main]
+jobs:
+  commercial:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: node scripts/v143_r313_jax_commercial.mjs
