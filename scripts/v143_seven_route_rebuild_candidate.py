@@ -37,6 +37,11 @@ retime(1379,650,"PHF-M12-V141")
 add(313,[("CLT","JAX",422,493),("JAX","CLT",533,604)])
 # 338: use PHF stand for PHF-RDU round trip while preserving evening SAV-JAX.
 retime(1493,1020)
+# Move this PHF departure from the former B5 bank to M5 at 17:00.
+sav=next(l for l in s['legs'] if l['flight']==1493)
+for assignment in s['bankAssignments']:
+ if assignment['legId']==sav['id'] and assignment['operation']=='departure':
+  assignment['bankId']='PHF-M5'
 add(338,[("PHF","RDU",833,883),("RDU","PHF",923,973)])
 # 303,316,319,339,345: original schedules preserved for follow-up line reconstruction.
 s["schedule"].update(id="schedule_7_v1_4_3_rebuild_candidate",version="1.4.3-rebuild-draft",label="Schedule 7 v1.4.3 seven-route rebuild candidate",status="draft")
