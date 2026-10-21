@@ -36,3 +36,7 @@ for shift in (-35,-40,-46,-50):
   bank="SYR-M09" if l["arrivalMinute"]<=595 else "SYR-B3"
   sy["bankAssignments"] += [{"legId":l["id"],"operation":"arrival","bankId":bank},{"legId":"V142-SYR-0","operation":"departure","bankId":"SYR-B3"},{"legId":"V142-SYR-1","operation":"arrival","bankId":"SYR-M15"}]
   report(sy,f"SYR-{shift}-{return_arr}")
+  if shift==-50 and return_arr==885:
+   detail=validate_operating_rules(sy)
+   check=next(x for x in detail["checks"] if x["id"]=="tiered_service_minimums")
+   print(json.dumps({"RDU_service_rule":[x for x in check["findings"] if x["id"]=="RDU"]},indent=2),flush=True)
