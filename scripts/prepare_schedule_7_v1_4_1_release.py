@@ -72,4 +72,30 @@ for relative in ("tests/test_latest_schedule_release.py","tests/test_latest_serv
   data=data.replace('"schedule_7_v1_4_0"}','"schedule_7_v1_4_0", "schedule_7_v1_4_1"}')
   data=data.replace('SCHEDULE_ID in {"schedule_7_v1_3_3", "schedule_7_v1_4_0"}','SCHEDULE_ID in {"schedule_7_v1_3_3", "schedule_7_v1_4_0", "schedule_7_v1_4_1"}')
  path.write_text(data)
+
+# Refresh JS tests for the latest release while keeping historical v1.3.1
+# network assertions bound to their explicitly pinned historical fixture.
+path=ROOT/"tests/test_opportunity_analysis.mjs"
+data=path.read_text()
+needle='test("v1.3.1 closes northeast Florida and DSM priority gaps with suitable geography", () => {'
+assert needle in data
+start=data.index(needle)
+end=data.index('\ntest(',start+len(needle))
+section=data[start:end].replace('baseline.records','v131FrozenAudit.records')
+data=data[:start]+section+data[end:]
+path.write_text(data)
+path=ROOT/"tests/test_routing_details.mjs"
+data=path.read_text()
+data=data.replace('entry.id === "schedule_7_v1_4_0" ||', 'entry.id === "schedule_7_v1_4_1" || entry.id === "schedule_7_v1_4_0" ||')
+path.write_text(data)
+path=ROOT/"tests/test_web_console.mjs"
+data=path.read_text()
+data=data.replace('flights: latest.id === "schedule_7_v1_4_0" ?', 'flights: latest.id === "schedule_7_v1_4_1" ? 1266 : latest.id === "schedule_7_v1_4_0" ?')
+data=data.replace('routes: latest.id === "schedule_7_v1_4_0" ||', 'routes: latest.id === "schedule_7_v1_4_1" || latest.id === "schedule_7_v1_4_0" ||')
+data=data.replace('lines: latest.id === "schedule_7_v1_4_0" ||', 'lines: latest.id === "schedule_7_v1_4_1" || latest.id === "schedule_7_v1_4_0" ||')
+data=data.replace('markets: latest.id === "schedule_7_v1_4_0" ?', 'markets: latest.id === "schedule_7_v1_4_1" ? 594 : latest.id === "schedule_7_v1_4_0" ?')
+data=data.replace('CRJ700: latest.id === "schedule_7_v1_4_0" ||', 'CRJ700: latest.id === "schedule_7_v1_4_1" || latest.id === "schedule_7_v1_4_0" ||')
+data=data.replace('CRJ900: latest.id === "schedule_7_v1_4_0" ||', 'CRJ900: latest.id === "schedule_7_v1_4_1" || latest.id === "schedule_7_v1_4_0" ||')
+path.write_text(data)
+
 print(json.dumps({"release":name,"summary":release["summary"],"default":manifest["defaultScheduleId"]},indent=2))
