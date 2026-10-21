@@ -1,0 +1,16 @@
+name: Schedule 7 v1.4.3 cumulative candidate check
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [analysis/schedule-7-v1.4.3-utilization]
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install -e .
+      - run: python scripts/build_schedule_7_v1_4_3_candidate.py
