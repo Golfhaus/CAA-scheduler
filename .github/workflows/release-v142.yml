@@ -1,0 +1,31 @@
+name: Package and verify Schedule 7 v1.4.2
+on:
+  pull_request:
+    branches: [main]
+permissions:
+  contents: write
+jobs:
+  publish-candidate:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+          ref: release/schedule-7-v1.4.2-clean
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install -e .
+      - run: python scripts/build_schedule_7_v1_4_2_r177_candidate.py
+      - run: python scripts/v142_release_candidate.py
+      - run: python scripts/prepare_schedule_7_v1_4_2_release.py
+      - run: bash scripts/run_latest_regression.sh
+      - run: python -m caa_scheduler build-web --output dist
+      - name: Commit verified release artifacts
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/schedules/schedule_7_v1_4_2/ data/schedules/schedule_7_v1_4_2_draft/ data/schedules/schedule_7_v1_4_2_r177_candidate/ config/optimizations/schedule_7_v1_4_2_release.json web/schedules.json README.md tests/
+          git commit -m "Package validated Schedule 7 v1.4.2 release [skip ci]"
+          git push origin HEAD:release/schedule-7-v1.4.2-clean

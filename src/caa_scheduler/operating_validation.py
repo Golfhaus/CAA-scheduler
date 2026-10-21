@@ -942,7 +942,7 @@ def validate_operating_rules(canonical: dict[str, Any]) -> dict[str, Any]:
             )
         )
     else:
-        tier_findings = _validate_tiered_service(cities, legs, hubs, focus_cities)
+        tier_findings = _validate_tiered_service(cities, legs, hubs, focus_cities, policy)
         checks.append(
             _check(
                 "tiered_service_minimums",
@@ -1034,6 +1034,7 @@ def _validate_tiered_service(
     legs: list[dict[str, Any]],
     hubs: set[str],
     focus_cities: set[str],
+    policy: dict[str, Any],
 ) -> list[dict[str, Any]]:
     findings = []
     touches = Counter(code for leg in legs for code in (leg["origin"], leg["destination"]))
@@ -1062,7 +1063,7 @@ def _validate_tiered_service(
             if city["code"] in (origin, destination)
             and (origin in hubs | focus_cities or destination in hubs | focus_cities)
         )
-        if hub_touches < minimum or len(connected) > cap:
+        if hub_touches < minimum or (policy.get("hubCountCeilingEnabled", True) and len(connected) > cap):
             findings.append(
                 _finding(
                     city["code"],

@@ -67,7 +67,7 @@ test("routing selector identifies every current route by number, day, line and f
   const options = routingDetailOptions(canonical);
   assert.equal(options.length, new Set(canonical.legs.map((leg) => leg.route)).size);
   assert.equal(new Set(options.map((option) => option.id)).size, options.length);
-  assert.deepEqual(options.find((option) => option.id === "323"), {id: "323", route: 323, line: "AK", day: entry.id === "schedule_7_v1_4_1" || entry.id === "schedule_7_v1_4_0" || entry.id === "schedule_7_v1_3_3" ? 6 : entry.id === "schedule_7_v1_3_2" ? 6 : 3, fleet: "CRJ700"});
+  assert.deepEqual(options.find((option) => option.id === "323"), {id: "323", route: 323, line: "AK", day: entry.id === "schedule_7_v1_4_2" || entry.id === "schedule_7_v1_4_1" || entry.id === "schedule_7_v1_4_0" || entry.id === "schedule_7_v1_3_3" ? 6 : entry.id === "schedule_7_v1_3_2" ? 6 : 3, fleet: "CRJ700"});
   assert.ok(options.every((option, index) => !index || Number(options[index - 1].route) < Number(option.route)));
   assert.equal(buildRoutingDetails(canonical, gates, "missing"), null);
 });
@@ -89,7 +89,7 @@ test("flight geometry uses one time zone while tooltips retain local clocks and 
 test("ground blocks use actual positions and correctly align overnight handoffs without flight overlap", () => {
   const detail = buildRoutingDetails(canonical, gates, 308);
   const startGate = detail.blocks.find((block) => block.role === "originator");
-  assert.deepEqual([startGate.city, startGate.kind, startGate.row, startGate.start, startGate.end], ["CHS", "gate", entry.id === "schedule_7_v1_4_1" || entry.id === "schedule_7_v1_4_0" || entry.id === "schedule_7_v1_3_3" ? 2 : 1, 180, 440]);
+  assert.deepEqual([startGate.city, startGate.kind, startGate.row, startGate.start, startGate.end], ["CHS", "gate", entry.id === "schedule_7_v1_4_2" || entry.id === "schedule_7_v1_4_1" || entry.id === "schedule_7_v1_4_0" || entry.id === "schedule_7_v1_3_3" ? 2 : 1, 180, 440]);
   const stand = detail.blocks.find((block) => block.kind === "stand");
   assert.deepEqual([stand.city, stand.row, stand.start, stand.end], ["CLT", 1, 1603, 1620]);
   assert.match(stand.title, /CLT.*Stand 1/);

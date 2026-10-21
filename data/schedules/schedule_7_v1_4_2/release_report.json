@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "1.0.0",
+  "scheduleId": "schedule_7_v1_4_2",
+  "status": "released",
+  "sourceScheduleId": "schedule_7_v1_4_1",
+  "overlayIds": [],
+  "summary": {
+    "legs": 1272,
+    "routes": 191,
+    "lines": 17,
+    "effectiveOperatingErrors": 0,
+    "hardStopFailures": 0,
+    "overnightTurnFailures": 0,
+    "directRoundTripCities": 14,
+    "connectedDirectionalPairs": 98,
+    "standClaims": 18,
+    "standMinutes": 5875,
+    "hubStandClaims": 1,
+    "hubStandMinutes": 691
+  },
+  "validation": {
+    "structural": "pass",
+    "operating": "review",
+    "overnightTurns": "pass",
+    "planningReconstruction": "pass"
+  },
+  "connectionFinding": "14/14 target cities have direct SYR round trips, and 98/98 directional cross-group pairs meet the configured connection window.",
+  "connectionScopeDecision": {
+    "status": "approved",
+    "approvedBy": "user",
+    "date": "2026-10-20",
+    "userInstruction": "Add all suggested route changes and additions to the 1.4.2 draft. Remove the ceiling on number of hubs a destination can serve for the remainder of schedule 7. Validate and publish 1.4.2 to main.",
+    "acceptedDraftSha256": "ffb66c9c1899de8c31632f13be2ed1986631055728204f4cbe485d55893ed88c",
+    "review": "R105, R107, R108 and R162 accepted with R356 supporting retiming; R106/R167 unchanged. BTV-RFD preserved. Discard rejected R167 alternatives. ISP-BNA and ORH-PGD commercial tradeoffs documented."
+  },
+  "patchScope": {
+    "kind": "connection_improvements_five_markets",
+    "timetableChanged": true,
+    "routingChanged": true,
+    "description": "Approved v1.4.2 tactical BLV-HOU and OMA-BNA MCI retimings; R177 DAY-SRQ, R178 SYR-RDU, R359 BNA-BHM, R512 BLV-BNA retime and R705 BNA-MCI B9 bank correction; schedule 7 only hub ceiling disabled."
+  },
+  "artifacts": [
+    "canonical_schedule.json",
+    "connection_audit.json",
+    "gates.json",
+    "operating_validation_report.json",
+    "overnight_turn_validation.json",
+    "planning_snapshot.json",
+    "planning_validation_report.json",
+    "timetable.json",
+    "validation_report.json"
+  ]
+}

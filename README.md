@@ -2,6 +2,13 @@
 
 ## Latest published release
 
+**Schedule 7 v1.4.2**, published October 21, 2026, is the application default: **1,272 flights, 191 routes and 17 routing lines**, with zero effective operating errors. New R177 DAY–SRQ, R178 SYR–RDU and R359 BNA–BHM, with MCI, BLV–BNA and hub-bank retimings. Hub-count ceiling disabled for Schedule 7 only. See [v1.4.2 release notes](docs/schedule_7_v1_4_2_release.md) and [canonical schedule](data/schedules/schedule_7_v1_4_2/canonical_schedule.json).
+
+## Historical v1.4.1 and earlier releases
+
+
+## Latest published release
+
 **Schedule 7 v1.4.1**, published October 20, 2026, is the application default: **1,266 flights, 188 routes and 17 routing lines**, with zero effective operating errors. Improvements to R105, R107, R108 and R162, with supporting R356 timing; R106 and R167 are unchanged. See [v1.4.1 release notes](docs/schedule_7_v1_4_1_release.md) and [canonical schedule](data/schedules/schedule_7_v1_4_1/canonical_schedule.json).
 
 ## Historical v1.4.0 and earlier releases

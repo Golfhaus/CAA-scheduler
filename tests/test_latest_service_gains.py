@@ -22,9 +22,9 @@ class TwoDayGrowthTests(unittest.TestCase):
         cls.candidate = CANONICAL
 
     def test_released_sequence_and_consolidated_lines(self):
-        self.assertIn(SCHEDULE_ID, {"schedule_7_v1_3_1", "schedule_7_v1_3_2", "schedule_7_v1_3_3", "schedule_7_v1_4_0", "schedule_7_v1_4_1"})
+        self.assertIn(SCHEDULE_ID, {"schedule_7_v1_3_1", "schedule_7_v1_3_2", "schedule_7_v1_3_3", "schedule_7_v1_4_0", "schedule_7_v1_4_1", "schedule_7_v1_4_2"})
         self.assertEqual(self.candidate["schedule"]["status"], "released")
-        self.assertEqual(len(self.candidate["legs"]), {"schedule_7_v1_3_1": 1214, "schedule_7_v1_3_2": 1229, "schedule_7_v1_3_3": 1253, "schedule_7_v1_4_0": 1259, "schedule_7_v1_4_1": 1266}[SCHEDULE_ID])
+        self.assertEqual(len(self.candidate["legs"]), {"schedule_7_v1_3_1": 1214, "schedule_7_v1_3_2": 1229, "schedule_7_v1_3_3": 1253, "schedule_7_v1_4_0": 1259, "schedule_7_v1_4_1": 1266, "schedule_7_v1_4_2": 1272}[SCHEDULE_ID])
         new = sorted((l for l in self.candidate["legs"] if l["id"].startswith("V120-2MAX-")),
                      key=lambda l: l["flight"])
         self.assertEqual([l["flight"] for l in new], list(range(2083, 2099)))
@@ -40,7 +40,7 @@ class TwoDayGrowthTests(unittest.TestCase):
             ("13:22", "14:09"), ("14:49", "15:36"), ("16:16", "18:05"), ("18:47", "19:35")])
         self.assertTrue(all((l["fleet"], l["line"], l["route"], l["day"]) ==
                             ("MAX9", "B", 703 + i // 8, 9 + i // 8) for i, l in enumerate(new)))
-        for fleet, expected in (("MAX9", {"A": 12, "B": 12}), ("CRJ900", {"AB": 10, "AG": 11 if SCHEDULE_ID in {"schedule_7_v1_3_3", "schedule_7_v1_4_0", "schedule_7_v1_4_1"} else 9, "AJ": 9})):
+        for fleet, expected in (("MAX9", {"A": 12, "B": 12}), ("CRJ900", {"AB": 10, "AG": 11 if SCHEDULE_ID in {"schedule_7_v1_3_3", "schedule_7_v1_4_0", "schedule_7_v1_4_1", "schedule_7_v1_4_2"} else 9, "AJ": 9})):
             days = {(l["line"], l["day"]) for l in self.candidate["legs"] if l["fleet"] == fleet}
             self.assertEqual(Counter(line for line, _ in days), expected)
         self.assertEqual(self.candidate["schedule"]["fleetCounts"]["MAX9"], 35)
@@ -74,7 +74,7 @@ class TwoDayGrowthTests(unittest.TestCase):
         self.assertFalse(any(f["evidence"]["line"] in {"A", "B"} for f in counts["findings"]))
         for schedule in (self.candidate,):
             stands = [p for city in export_gate_schedule(schedule)["cities"] for p in city["claims"] if p["rowType"] == "stand"]
-            self.assertEqual((len(stands), sum(p["end"] - p["start"] for p in stands)), (15, 3061))
+            self.assertEqual((len(stands), sum(p["end"] - p["start"] for p in stands)), (18, 5875) if SCHEDULE_ID == "schedule_7_v1_4_2" else (15, 3061))
 
     def test_two_stop_middle_leg_is_counted_once_and_demand_reconciles(self):
         screen = TwoStopScreen(self.candidate)
