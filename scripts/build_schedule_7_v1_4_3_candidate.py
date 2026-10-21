@@ -15,6 +15,7 @@ legs=[
  (177,"DAY","CMH",450,485),(177,"CMH","DAY",525,560),
  # R177 evening utilization, resumes 40 minutes after SRQ-DAY arrives
  (177,"DAY","SFB",975,1100),(177,"SFB","DAY",1145,1270),
+ (178,"SYR","CHS",310,430),(178,"CHS","SYR",470,590),
  # R178 connects RDU to the Hartford corridor via Syracuse
  (178,"SYR","BDL",930,980),(178,"BDL","SYR",1025,1075),
  # R359 first high-demand return from BNA, then a second before BHM night bank
