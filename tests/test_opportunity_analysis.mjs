@@ -10,6 +10,8 @@ const demand = parseAirportDemand(await readFile(new URL("../data/reference/airp
 const baseline = buildServiceAnalysis(canonical, demand, buildItineraries);
 const v131Canonical = JSON.parse(await readFile(new URL("../data/schedules/schedule_7_v1_3_1/canonical_schedule.json", import.meta.url), "utf8"));
 const v131FrozenAudit = buildServiceAnalysis(v131Canonical, demand, buildItineraries);
+const v141Canonical = JSON.parse(await readFile(new URL("../data/schedules/schedule_7_v1_4_1/canonical_schedule.json", import.meta.url), "utf8"));
+const v141FrozenAudit = buildServiceAnalysis(v141Canonical, demand, buildItineraries);
 test("shared hub filtering matches any checked hub and treats None as no shared hubs", () => {
   assert.equal(sharedHubsMatch(["JAX", "PHF"], new Set(["JAX"])), true);
   assert.equal(sharedHubsMatch(["MCI"], new Set(["JAX", "MCI"])), true);
@@ -54,23 +56,24 @@ test("demand parser preserves directionality, zero, quoted metadata and missing-
 
 test("completed repairs disappear from near-misses and remaining repairs retain aircraft screening", () => {
   for (const market of ["BLV-SFB", "MKE-SFB", "PGD-CAK", "DAL-PNS", "VPS-BWI", "RDU-SGF", "PIT-BHM"]) {
-    assert.equal(baseline.nearMisses.some((r) => r.market === market), false);
-    assert.equal(coverageView(baseline.records.get(market)).stops, 1);
+    assert.equal(v141FrozenAudit.nearMisses.some((r) => r.market === market), false);
+    assert.equal(coverageView(v141FrozenAudit.records.get(market)).stops, 1);
   }
-  const hou = baseline.nearMisses.find((r) => r.market === "BLV-HOU");
+  const hou = v141FrozenAudit.nearMisses.find((r) => r.market === "BLV-HOU");
   assert.equal(hou.adjustment, 6); assert.equal(hou.preferred.flight, 1357); assert.equal(hou.preferred.shift, 6);
   assert.match(hou.options[0].screen.issues.join(" "), /34 min/);
 });
 
 test("preview finds gains and slower-one-stop distinction without mutating the original schedule", () => {
-  const original = JSON.stringify(canonical);
-  const after = buildServiceAnalysis(retime(1357, 6), demand, buildItineraries);
-  const impact = compareServiceAnalyses(baseline, after);
+  const original = JSON.stringify(v141Canonical);
+  const candidate = structuredClone(v141Canonical); const changed = candidate.legs.find((l) => l.flight === 1357); changed.departureMinute += 6; changed.arrivalMinute += 6; changed.departure = "10:31"; changed.arrival = "11:35";
+  const after = buildServiceAnalysis(candidate, demand, buildItineraries);
+  const impact = compareServiceAnalyses(v141FrozenAudit, after);
   assert.equal(impact.lostPaths, 0); assert.deepEqual(impact.lost, []); assert.deepEqual(impact.slower, []);
   assert.ok(impact.gained.some((r) => r.market === "BLV-HOU"));
-  const mke = baseline.records.get("MKE-SFB");
+  const mke = v141FrozenAudit.records.get("MKE-SFB");
   assert.equal(mke.best[1].totalMinutes, 477); assert.equal(mke.best[2].totalMinutes, 310);
-  assert.equal(JSON.stringify(canonical), original);
+  assert.equal(JSON.stringify(v141Canonical), original);
 });
 
 test("R307 DAY service creates useful one-stop coverage and preserves the fast Dallas journey", () => {

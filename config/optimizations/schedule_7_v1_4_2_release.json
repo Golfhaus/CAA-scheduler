@@ -1,0 +1,65 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "schedule-7-v1.4.2-release",
+  "sourceScheduleId": "schedule_7_v1_4_1",
+  "baseCanonical": "data/schedules/schedule_7_v1_4_2_draft/canonical_schedule.json",
+  "baseCanonicalSha256": "ffb66c9c1899de8c31632f13be2ed1986631055728204f4cbe485d55893ed88c",
+  "overlays": [],
+  "overlaySha256": {},
+  "outputDirectory": "data/schedules/schedule_7_v1_4_2",
+  "rejoinAvoidableTows": true,
+  "dropWorkingDraftProvenance": true,
+  "demandDataVersion": "bts-db1c-6mo-jul2025-apr2026-v7",
+  "schedule": {
+    "id": "schedule_7_v1_4_2",
+    "number": 7,
+    "version": "1.4.2",
+    "label": "Schedule 7, Version 1.4.2",
+    "status": "released"
+  },
+  "patchScope": {
+    "kind": "connection_improvements_five_markets",
+    "timetableChanged": true,
+    "routingChanged": true,
+    "description": "Approved v1.4.2 tactical BLV-HOU and OMA-BNA MCI retimings; R177 DAY-SRQ, R178 SYR-RDU, R359 BNA-BHM, R512 BLV-BNA retime and R705 BNA-MCI B9 bank correction; schedule 7 only hub ceiling disabled."
+  },
+  "connectionAudit": {
+    "hub": "SYR",
+    "groups": {
+      "northeast": [
+        "BTV",
+        "HPN",
+        "MHT",
+        "PWM",
+        "ALB",
+        "ISP",
+        "BDL"
+      ],
+      "other": [
+        "PIT",
+        "CAK",
+        "BUF",
+        "ORH",
+        "PHF",
+        "BGR",
+        "ROC"
+      ]
+    }
+  },
+  "connectionScopeDecision": {
+    "status": "approved",
+    "approvedBy": "user",
+    "date": "2026-10-20",
+    "userInstruction": "Add all suggested route changes and additions to the 1.4.2 draft. Remove the ceiling on number of hubs a destination can serve for the remainder of schedule 7. Validate and publish 1.4.2 to main.",
+    "acceptedDraftSha256": "ffb66c9c1899de8c31632f13be2ed1986631055728204f4cbe485d55893ed88c",
+    "review": "R105, R107, R108 and R162 accepted with R356 supporting retiming; R106/R167 unchanged. BTV-RFD preserved. Discard rejected R167 alternatives. ISP-BNA and ORH-PGD commercial tradeoffs documented."
+  },
+  "expectedRelease": {
+    "legs": 1272,
+    "routes": 191,
+    "lines": 17,
+    "effectiveOperatingErrors": 0,
+    "hardStopFailures": 0,
+    "overnightTurnFailures": 0
+  }
+}
