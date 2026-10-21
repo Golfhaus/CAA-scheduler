@@ -1,0 +1,54 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "schedule-7-v1.4.2-tactical-mci-connection-candidates",
+  "baseSchedule": {
+    "scheduleId": "schedule_7_v1_4_1"
+  },
+  "schedule": {
+    "id": "schedule_7_v1_4_2_draft",
+    "number": 7,
+    "version": "1.4.2-draft",
+    "label": "Schedule 7 v1.4.2 draft",
+    "status": "draft",
+    "fleetCounts": {
+      "MAX9": 35,
+      "CRJ900": 45,
+      "CRJ700": 65,
+      "CRJ200": 80
+    },
+    "connectionWindowMinutes": {
+      "minimum": 30,
+      "maximum": 240
+    }
+  },
+  "retimeLegs": [
+    {
+      "legId": "BLV-MCI-CRJ700-01-OUT",
+      "expectedDepartureMinute": 625,
+      "expectedArrivalMinute": 689,
+      "departureMinute": 631,
+      "arrivalMinute": 695
+    },
+    {
+      "legId": "GATE-RELIEF-MCI-BNA-MAX9-01-OUT",
+      "expectedDepartureMinute": 895,
+      "expectedArrivalMinute": 984,
+      "departureMinute": 884,
+      "arrivalMinute": 973
+    }
+  ],
+  "review": {
+    "status": "screen only; not yet validated or approved for integration",
+    "marketGains": [
+      "BLV-HOU one-stop via MCI 240min layover",
+      "OMA-BNA one-stop via MCI 240min layover"
+    ],
+    "remaining": [
+      "HOU-BLV",
+      "BNA-OMA",
+      "HVN-RDU",
+      "BNA-ECP",
+      "GRR-SRQ"
+    ]
+  }
+}
