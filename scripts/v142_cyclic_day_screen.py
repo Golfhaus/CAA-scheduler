@@ -36,7 +36,7 @@ def scenario(label,line,after,route,fleet,legs):
 
 candidates=[
  ("BNA","AH",5,359,"CRJ700",[("BNA","BHM",690,765),("BHM","BNA",815,890),("BNA","BHM",930,1005),("BHM","BNA",1045,1120),("BNA","BHM",1160,1235),("BHM","BNA",1315,1390)]),
- ("DAY","AF",6,174,"CRJ200",[("DAY","SRQ",600,745),("SRQ","DAY",790,935)]),
- ("SYR","AC",8,174,"CRJ200",[("SYR","RDU",650,740),("RDU","SYR",780,870)])
+ ("DAY","AF",6,177,"CRJ200",[("DAY","SRQ",600,745),("SRQ","DAY",790,935)]),
+ ("SYR","AC",8,178,"CRJ200",[("SYR","RDU",650,740),("RDU","SYR",780,870)])
 ]
 for args in candidates:scenario(*args)
