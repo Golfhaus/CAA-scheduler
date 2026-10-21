@@ -39,3 +39,11 @@ GitHub Actions run **39695610829** tested the combined R313 JAX and R338 RDU exp
 - Separate R303 earlier BHM→MCI originator exploration `scripts/v143_r303_early_originator.py`, run **39695402977**, produced no full native-pass candidate across examined SGF/OMA/DSM/TUL mini-turn combinations. R303 PNS inbound afternoon bank remains a protected network constraint.
 
 Further R345 high-demand exploration: the original short CLT–TYS/AVL/GSP rounds yielded negligible connecting gains, but CLT–BWI has ~235.8 combined daily O-D and CLT–PIT ~98.5. `scripts/v143_r345_bwi_coordinated.py` now tests advancing JAX→SYR and SYR→CLT ~18–25 minutes to free a long enough CLT–BWI/CLT–PIT turn **without moving PHF→GSP**; native screening results pending as of report update.
+
+## R345 high-demand CLT opportunity identified
+
+Broadening the demand screen beyond the previous low-demand local CLT loops reveals **CLT↔BWI 235.8 daily two-way O-D passengers**, CLT↔PIT 98.5 and CLT↔JAX 80.9. R345 currently has SYR→CLT arriving 13:07 and CLT→PHF departing 17:10, with no permitted disruption to aircraft line endpoints.
+
+The first CLT–BWI/CLT–PIT technical insertion screen advances JAX→SYR and SYR→CLT by 18–25 minutes, creating room for two new 70-minute legs (based on preliminary block assumption) within CLT before the original PHF departure. **Gates and structural/overnight continuity pass, but SYR hub-bank alignment fails**: moving original #1408's SYR arrival earlier than 10:30 exits the SYR-B3 inbound window beginning at 10:30. Thus these earlier-departure options are **not valid** as tested; no service accepted. Native test `scripts/v143_r345_bwi_coordinated.py`, run 39696225077.
+
+Revised `scripts/v143_r345_bwi_bank_fit.py` preserves SYR-B3 by moving #1408 only 6–8min earlier, #1306 8–10min earlier, and examining 62–66min CLT–BWI flight blocks. **Requires validation both for real block feasibility and fixed airport gates**; user-authorized retiming sacrifices still cannot violate bank/turn limits or >8 passenger one-stop protections. This is a more compelling potential reassembly than low-demand CLT–TYS/GSP/AVL excursions.
