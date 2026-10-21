@@ -17,7 +17,7 @@ for shift in (55,60,65):
  for a in s["bankAssignments"]:
   if a["legId"]==avp["id"] and a["operation"]=="departure":a["bankId"]="PHF-M12-V141"
  for i,(o,d,dep,arr) in enumerate([("CLT","JAX",422,493),("JAX","CLT",533,604)]):
-  l={**old,"id":f"V143-R313-JAX-{i}","flight":3300+i,"origin":o,"destination":d,"departureMinute":dep,"arrivalMinute":arr,"departure":clock(dep),"arrival":clock(arr),"sequenceWithinRoute":i+2}
+  l={**old,"id":f"V143-R313-JAX-{i}","flight":3300+i,"pairing":3300+i,"origin":o,"destination":d,"departureMinute":dep,"arrivalMinute":arr,"departure":clock(dep),"arrival":clock(arr),"sequenceWithinRoute":i+2}
   s["legs"].append(l)
   for city,op,minute in [(o,"departure",dep),(d,"arrival",arr)]:
    if city not in s["operatingPolicy"]["hubs"]:continue
