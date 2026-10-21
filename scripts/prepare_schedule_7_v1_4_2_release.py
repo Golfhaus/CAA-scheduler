@@ -82,10 +82,26 @@ data=path.read_text()
 data=data.replace('flights: latest.id === "schedule_7_v1_4_1" ?', 'flights: latest.id === "schedule_7_v1_4_2" ? 1272 : latest.id === "schedule_7_v1_4_1" ?')
 data=data.replace('routes: latest.id === "schedule_7_v1_4_1" ||', 'routes: latest.id === "schedule_7_v1_4_2" ? 191 : latest.id === "schedule_7_v1_4_1" ||')
 data=data.replace('lines: latest.id === "schedule_7_v1_4_1" ||', 'lines: latest.id === "schedule_7_v1_4_2" || latest.id === "schedule_7_v1_4_1" ||')
-data=data.replace('markets: latest.id === "schedule_7_v1_4_1" ?', 'markets: latest.id === "schedule_7_v1_4_2" ? 597 : latest.id === "schedule_7_v1_4_1" ?')
+data=data.replace('markets: latest.id === "schedule_7_v1_4_1" ?', 'markets: latest.id === "schedule_7_v1_4_2" ? 600 : latest.id === "schedule_7_v1_4_1" ?')
 data=data.replace('CRJ700: latest.id === "schedule_7_v1_4_1" ||', 'CRJ700: latest.id === "schedule_7_v1_4_2" ? 59 : latest.id === "schedule_7_v1_4_1" ||')
 data=data.replace('CRJ900: latest.id === "schedule_7_v1_4_1" ||', 'CRJ900: latest.id === "schedule_7_v1_4_2" || latest.id === "schedule_7_v1_4_1" ||')
 data=data.replace('CRJ200: 76,', 'CRJ200: latest.id === "schedule_7_v1_4_2" ? 78 : 76,')
+path.write_text(data)
+# Historical v1.4.1 near-miss and tactical-preview assertions are not valid
+# against the new published v1.4.2, which already includes the six-minute fix.
+path=ROOT/"tests/test_opportunity_analysis.mjs"
+data=path.read_text()
+marker='const v131FrozenAudit = buildServiceAnalysis(v131Canonical, demand, buildItineraries);'
+data=data.replace(marker,marker+'\nconst v141Canonical = JSON.parse(await readFile(new URL("../data/schedules/schedule_7_v1_4_1/canonical_schedule.json", import.meta.url), "utf8"));\nconst v141FrozenAudit = buildServiceAnalysis(v141Canonical, demand, buildItineraries);')
+start=data.index('test("completed repairs disappear from near-misses')
+end=data.index('test("R307 DAY service creates',start)
+chunk=data[start:end]
+chunk=chunk.replace('baseline.nearMisses','v141FrozenAudit.nearMisses').replace('baseline.records','v141FrozenAudit.records')
+chunk=chunk.replace('const original = JSON.stringify(canonical);','const original = JSON.stringify(v141Canonical);')
+chunk=chunk.replace('const after = buildServiceAnalysis(retime(1357, 6), demand, buildItineraries);','const candidate = structuredClone(v141Canonical); const changed = candidate.legs.find((l) => l.flight === 1357); changed.departureMinute += 6; changed.arrivalMinute += 6; changed.departure = "10:31"; changed.arrival = "11:35";\n  const after = buildServiceAnalysis(candidate, demand, buildItineraries);')
+chunk=chunk.replace('compareServiceAnalyses(baseline, after)','compareServiceAnalyses(v141FrozenAudit, after)')
+chunk=chunk.replace('JSON.stringify(canonical), original','JSON.stringify(v141Canonical), original')
+data=data[:start]+chunk+data[end:]
 path.write_text(data)
 
 print(json.dumps({"release":name,"summary":release["summary"],"default":manifest["defaultScheduleId"]},indent=2))
