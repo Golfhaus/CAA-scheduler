@@ -36,3 +36,16 @@ At strict bookend turn assumptions, a new two-leg side excursion needs 40 minute
 - Full canonical reconstruction, gate assignment and native validation for swaps are **not yet done**. This document is a shortlist and identified hold anatomy, not a claim that specific rebuilds have passed.
 
 Next screening priority: R313 and R303, followed by R316, R339, R319; measure cost of transferring a specific leg/pair as well as the resulting freed minutes, rather than ranking idle time alone.
+
+
+## Native hold relocation screen — first results
+
+Run 39685967057, `scripts/v143_crj700_holistic_retime_screen.py`, on the full 1,286-flight v1.4.3 draft.
+
+- **R303** advancing #1346 PNS→MCI from 16:10 to 13:20, 13:30, 14:00, 14:30 or 15:00 **passes physical gates, route structure and overnight continuity** but fails only arrival bank alignment. #1346 currently assigned MCI-B9 (18:05–19:05). At 14:30 departure it would arrive MCI 16:35, inside MCI-B8 (16:25–17:25). Reassign that arrival to B8, run network impact, then examine resulting 16:35–19:50 MCI hold (195m) for productive replacement flying. It does NOT by itself add utilization.
+- **R316** advancing #1294 BNA→PHF from 17:23 to 15:00–16:30 **passes physical gates, structure and overnight**; fails only PHF arrival bank alignment. Original PHF-B7 is 20:05–21:05. At 15:30 departure, expected PHF arrival is 18:12 in PHF-B6 (17:45–18:45), generating a 163m PHF wait ahead of #1292 PHF→BNA at 20:55. Reassign to B6 and audit connection losses before any swap; moving a stand alone does not create new flying.
+- **R339** moving #2068 BHM→SAV from 07:45 to **05:50 or 06:15** passes all native checks without a bank change, but shifts the idle period to SAV. That city has relatively few candidate aircraft exchanges, so defer any retiming until productive follow-on legs are proven. Moves to 06:40/07:00 cause BHM gate inventory violations.
+- **R313** moving CLT→PHF #1379 earlier than 08:30 causes PHF gate congestion and CLT–PHF spacing errors. At 08:30 gates pass but pairing spacing and bank alignment still fail. No accepted change.
+- **R319** moving SYR→PHF #1951 earlier to 11:30–12:15 causes PHF fixed-gate/stand errors and network bank misalignments. No accepted change.
+
+**Conclusion:** The highest-value next step is *coupled* flight reassignment/rebuild of R303 and R313, not standalone retiming. Do not incorporate the isolated R303/R316/R339 timing shifts into the canonical yet: they merely transfer idle time and could disrupt existing high-demand connections. Any paired change must produce net additional scheduled flying and pass whole-network coverage and bank regressions.
