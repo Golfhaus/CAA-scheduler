@@ -33,11 +33,23 @@ for x in s["bankAssignments"]:
 r178=add_day("AC",8,178,"CRJ200",[("SYR","RDU",650,740),("RDU","SYR",795,885)],"R178")
 s["bankAssignments"] += [dict(legId=r178[0]["id"],operation="departure",bankId="SYR-B3"),dict(legId=r178[1]["id"],operation="arrival",bankId="SYR-M15")]
 # Try slim four-leg R359: preserves BNA->OMA, BNA->ECP, ECP->BNA.
-times=[("BNA","BHM",930,1005),("BHM","BNA",1045,1120),("BNA","BHM",1160,1235),("BHM","BNA",1315,1390)]
+times=[("BNA","BHM",1210,1285),("BHM","BNA",1330,1405)]
 if len(sys.argv)>1:
  vals=[int(x) for x in sys.argv[1].split(",")]
  if len(vals)==4:times=[(a,b,t+vals[i],u+vals[i]) for i,(a,b,t,u) in enumerate(times)]
 r359=add_day("AH",5,359,"CRJ700",times,"R359")
+# Relieve BNA gates and protect BLV connections; advance R512 35 min.
+for number,minute in ((1235,1045),(1236,1145),(1080,1016)):
+ leg=next(l for l in s["legs"] if l["flight"]==number)
+ shift=minute-leg["departureMinute"]
+ leg["departureMinute"]=minute;leg["arrivalMinute"]+=shift
+ leg["departure"]=clock(minute);leg["arrival"]=clock(leg["arrivalMinute"])
+# Assign BNA-MCI #1080 MCI arrival to earlier bank B9 for MCI-OMA #1636.
+target=next(l for l in s["legs"] if l["flight"]==1080)
+for assignment in s["bankAssignments"]:
+ if assignment["legId"]==target["id"] and assignment["operation"]=="arrival":
+  assignment["bankId"]="MCI-B9"
+
 struct=validate_schedule(s);overnight=validate_overnight_turns(s);operating=validate_operating_rules(s)
 try:gates=export_gate_schedule(s);gate_status="pass"
 except Exception as e:gates=None;gate_status=str(e)
