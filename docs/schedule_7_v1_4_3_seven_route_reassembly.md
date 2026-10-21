@@ -28,3 +28,14 @@ All seven may be reorganized jointly, but aircraft-day endpoints must remain con
 ## Current status
 
 Native and protected one-stop CI: `.github/workflows/v143-rebuild-passenger-gate.yml`. Early R303 alternate: `.github/workflows/v143-r303-early-originator.yml`. Their job completion status must be examined before an acceptance decision. Do not merge PR #46 or update `web/schedules.json` as part of this reconnaissance phase. The original 1,286-leg canonical in `data/schedules/schedule_7_v1_4_3_draft` remains the working acceptance checkpoint.
+
+## Reassembly validation results
+
+GitHub Actions run **39695610829** tested the combined R313 JAX and R338 RDU experimental extension, **1,290 flights / 191 routes** (four additional flights over the preserved 1,286-flight draft), no extra aircraft:
+- Native structural PASS, overnight PASS, fixed gates PASS, planning PASS, **zero effective operating errors** after correction of R338 PHF→SAV #1493 departure bank to PHF-M5.
+- `scripts/v143_rebuild_guard.mjs` checks **3,519 directional-market/model combinations** (>8 daily O-D; geographically reasonable and unrestricted), **zero losses of one-stop-or-better coverage**.
+- Whole-network itinerary audit `scripts/v143_seven_route_rebuild_audit.mjs`, run **39695957909**, records geographically reasonable markets: **3 gained, 0 lost, 22 faster, 14 slower**. Unrestricted model: 6 gained, 0 lost, 30 faster, 17 slower. Representative faster trips: BNA→RDU 317→188min (122.4 O-D/day), BWI→RDU 227→138 (57.8), PVD→RDU 284→173 (42.2), MSY→CLT 256→224 (75.2). Representative slower trips *with stop count preserved*: BDL→SAV 296→341 (22.6), CLT→AVP 173→254 (11.9), HPN→SAV 320→365 (10.4). This is permissible under user's stated floor, not consequence-free.
+- This candidate remains **experimental**, not promoted to saved v1.4.3 draft, pending further seven-route holistic improvement and independent release regressions.
+- Separate R303 earlier BHM→MCI originator exploration `scripts/v143_r303_early_originator.py`, run **39695402977**, produced no full native-pass candidate across examined SGF/OMA/DSM/TUL mini-turn combinations. R303 PNS inbound afternoon bank remains a protected network constraint.
+
+Further R345 high-demand exploration: the original short CLT–TYS/AVL/GSP rounds yielded negligible connecting gains, but CLT–BWI has ~235.8 combined daily O-D and CLT–PIT ~98.5. `scripts/v143_r345_bwi_coordinated.py` now tests advancing JAX→SYR and SYR→CLT ~18–25 minutes to free a long enough CLT–BWI/CLT–PIT turn **without moving PHF→GSP**; native screening results pending as of report update.
