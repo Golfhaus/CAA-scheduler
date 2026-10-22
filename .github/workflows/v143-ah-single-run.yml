@@ -1,9 +1,5 @@
 name: v1.4.3 AH reassignment single-run diagnostic
 on:
-  push:
-    branches: [analysis/schedule-7-v1.4.3-utilization]
-    paths:
-      - scripts/v143_ah_pair_exchange_screen.py
   workflow_dispatch:
 jobs:
   screen:
