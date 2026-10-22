@@ -1,7 +1,7 @@
 name: v1.4.3 BWI bank-safe R345 aircraft rebuild
+# Research workflow: manually triggered only.
 on:
-  pull_request:
-    branches: [main]
+  workflow_dispatch:
 jobs:
   screen:
     runs-on: ubuntu-latest

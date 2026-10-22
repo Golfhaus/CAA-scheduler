@@ -1,7 +1,7 @@
 name: v1.4.3 R338 SAV turn native screen
+# Research workflow: manually triggered only.
 on:
-  pull_request:
-    branches: [main]
+  workflow_dispatch:
 jobs:
   check:
     runs-on: ubuntu-latest
