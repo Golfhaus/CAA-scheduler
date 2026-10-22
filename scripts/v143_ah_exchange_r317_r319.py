@@ -29,4 +29,4 @@ for phfout in (990,1000,1010):
   validation=validate_operating_rules(s)
   try:export_gate_schedule(s);gate="pass"
   except Exception as e:gate=str(e)
-  print(json.dumps({"PHFstart":clk(phfout),"RFDstart":clk(rfdout),"gate":gate,"structure":validate_schedule(s)["status"],"overnight":validate_overnight_turns(s)["status"],"errors":validation["summary"]["effectiveErrorFindings"],"failed":[{"id":c["id"],"sample":[f["id"] for f in c["findings"] if "override" not in f][:6]} for c in validation["checks"] if c["status"]=="fail"]]}),flush=True)
+  print(json.dumps({"PHFstart":clk(phfout),"RFDstart":clk(rfdout),"gate":gate,"structure":validate_schedule(s)["status"],"overnight":validate_overnight_turns(s)["status"],"errors":validation["summary"]["effectiveErrorFindings"],"failed":[{"id":c["id"],"sample":[f["id"] for f in c["findings"] if "override" not in f][:6]} for c in validation["checks"] if c["status"]=="fail"]}),flush=True)
