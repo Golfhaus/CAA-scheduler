@@ -9,8 +9,8 @@ from caa_scheduler.operating_validation import validate_operating_rules,validate
 from caa_scheduler.gate_export import export_gate_schedule
 s0=json.loads(Path("data/schedules/schedule_7_v1_4_3_draft/canonical_schedule.json").read_text())
 def clock(t):return f"{t//60%24:02d}:{t%60:02d}"
-for phf_start in (330,340,350):
- for phf_return_departure in (455,475):
+for phf_start in (380,390,400):
+ for phf_return_departure in (510,525,540):
   for btv_start in (750,795):
    phf_arrive=phf_start+85
    phf_return_arrive=phf_return_departure+85
