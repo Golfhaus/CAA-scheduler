@@ -7,6 +7,7 @@ from caa_scheduler.gate_export import export_gate_schedule
 s0=json.loads(Path("data/schedules/schedule_7_v1_4_3_draft/canonical_schedule.json").read_text())
 # Move a complete SYR-PHF-SYR turn from R319 to R316's SYR hold, while testing
 # how R319 can retain its SYR origin and onward BWI/ABE service.
+print("R316_SYR_HOLD_MINUTES",123,"R319_PHF_ROUNDTRIP_MINUTES",215,"EXCEEDS_AVAILABLE_HOLD",True,flush=True)
 for first in (675,690,705):
  s=copy.deepcopy(s0)
  moved=[l for l in s["legs"] if l["flight"] in (1951,1952)]
@@ -22,4 +23,4 @@ for first in (675,690,705):
  try:export_gate_schedule(s);gate=True
  except Exception as e:gate=str(e)
  v=validate_schedule(s)
- print(json.dumps({"first":first,"structural":v["status"],"gates":gate,"operatingErrors":o["summary"]["effectiveErrorFindings"],"failed":[{"id":c["id"],"findings":[f["id"] for f in c["findings"] if "override" not in f][:5]} for c in o["checks"] if c["status"]=="fail"]]}),flush=True)
+ print(json.dumps({"first":first,"structural":v["status"],"gates":gate,"operatingErrors":o["summary"]["effectiveErrorFindings"],"failed":[{"id":c["id"],"findings":[f["id"] for f in c["findings"] if "override" not in f][:5]} for c in o["checks"] if c["status"]=="fail"]}),flush=True)
