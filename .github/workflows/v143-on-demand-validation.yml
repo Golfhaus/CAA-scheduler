@@ -22,3 +22,8 @@ jobs:
         run: node scripts/v143_rebuild_guard.mjs data/schedules/schedule_7_v1_4_3_rebuild_candidate/canonical_schedule.json
       - name: Audit improvements and timing concessions
         run: node scripts/v143_seven_route_rebuild_audit.mjs
+      - name: Validate reciprocal AH R317/R319 exchange on experimental candidate
+        run: |
+          python scripts/v143_cumulative_ah_exchange.py
+          node scripts/v143_rebuild_guard.mjs data/schedules/schedule_7_v1_4_3_ah_exchange_candidate/canonical_schedule.json
+          node scripts/v143_ah_exchange_commercial_audit.mjs
