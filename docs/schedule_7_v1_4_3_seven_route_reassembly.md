@@ -88,3 +88,18 @@ Next targeted reconstruction:
 4. **AS**: preserve R345 CLT-BWI proposed connection with separately verified 65-minute block before merging it into any accepted candidate.
 
 A move is rejected if either native hard-operating validation fails or any >8-pax directional market loses all 0/1-stop paths; timing-only deterioration can be traded transparently. Manual checks are required when a new candidate is actually ready, not on every code edit.
+
+
+## Continued AH swap development — October 22
+
+The 34 v1.4.3 research workflow files were verified as manually triggered and routine development-branch pushes were excluded from `.github/workflows/ci.yml`. PR #46 stays closed; accepted and experimental canonical files are unchanged.
+
+A scan of existing 407 physical out-and-back pairs against 16 holds on the seven focus routes showed no **unmodified, same-line** pair would fit directly in another current hold with 40-minute turns on both sides. Therefore further optimization must alter adjacent timings and/or exchange pairs across aircraft-days.
+
+Developed a more promising *reciprocal* flight-pair exchange on neighboring **AH line days 8 and 9**, rather than the prior R317/R319 exchange that severely delayed HVN→RFD:
+- R318 (PIT→SRQ, AH day 8) would receive R319's SYR→PHF #1951 and PHF→SYR #1952 in its early Syracuse gap before existing SYR→SRQ 11:20.
+- R319 (SRQ→ABE, AH day 9) would receive R318's SYR→BTV #2189 and BTV→SYR #2190 in its SYR midday gap before existing SYR→BWI 18:55.
+- Both route endpoints and their day-to-day aircraft handoffs remain *planned* unchanged; flight numbers, market flying and fleet size are conserved, with no proposed new flights in this first reciprocal swap.
+- Mechanical screening of exact flight station order and minimum 40-minute aircraft turns found **14 candidate clock combinations**. One example: R318 SYR→PHF 06:20–07:45 and PHF→SYR 08:30–09:55; R319 SYR→BTV 12:30–13:22 and BTV→SYR 14:07–14:59.
+- `scripts/v143_ah_btv_phf_swap.py` reproduces the alternatives with full structural, overnight, airport gate and operating checks, and writes a separate candidate **only on a full native pass**. `.github/workflows/v143-ah-btv-phf-swap.yml` is strictly `workflow_dispatch` and additionally invokes the >8-pax market guard if the candidate is produced.
+- **This is a queued-for-manual-validation proposal, not a validated swap.** The automatic GitHub runs remain disabled to prevent another flood of email. A successful native check is required before a network effect comparison and before accepting anything into v1.4.3.
