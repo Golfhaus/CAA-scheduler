@@ -1,9 +1,7 @@
 name: Verify Schedule 7 v1.4.2 complete candidate
+# Historical v1.4.2 workflow: run manually only.
 on:
-  pull_request:
-    branches: [main]
-  push:
-    branches: [release/schedule-7-v1.4.2-clean]
+  workflow_dispatch:
 jobs:
   verify:
     runs-on: ubuntu-latest
