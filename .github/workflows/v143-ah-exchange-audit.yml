@@ -1,0 +1,16 @@
+name: v1.4.3 AH exchange commercial audit
+on:
+  pull_request:
+    branches: [main]
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install -e .
+      - run: python scripts/v143_seven_route_rebuild_candidate.py
+      - run: python scripts/v143_cumulative_ah_exchange.py
+      - run: node scripts/v143_ah_exchange_commercial_audit.mjs
