@@ -1,7 +1,7 @@
 name: v1.4.3 R313 and AVP coupled repair
+# Research workflow: manually triggered only.
 on:
-  pull_request:
-    branches: [main]
+  workflow_dispatch:
 jobs:
   verify:
     runs-on: ubuntu-latest

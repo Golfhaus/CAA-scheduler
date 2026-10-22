@@ -1,7 +1,7 @@
 name: v1.4.3 R316 PHF reconstruction
+# Research workflow: manually triggered only.
 on:
-  pull_request:
-    branches: [main]
+  workflow_dispatch:
 jobs:
   screen:
     runs-on: ubuntu-latest

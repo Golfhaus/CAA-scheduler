@@ -1,7 +1,7 @@
 name: v1.4.3 R313 JAX commercial screening
+# Research workflow: manually triggered only.
 on:
-  pull_request:
-    branches: [main]
+  workflow_dispatch:
 jobs:
   commercial:
     runs-on: ubuntu-latest
