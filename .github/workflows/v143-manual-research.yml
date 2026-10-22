@@ -1,0 +1,53 @@
+name: Schedule 7 v1.4.3 manual research validation
+# Deliberately manual. Development branch stays separate from the published app.
+on:
+  workflow_dispatch:
+    inputs:
+      analysis:
+        description: "Choose which research validation to run"
+        required: true
+        type: choice
+        default: rebuild
+        options:
+          - baseline
+          - rebuild
+          - ah-reassignment
+          - r345-bwi
+permissions:
+  contents: read
+concurrency:
+  group: caa-v143-manual-validation
+  cancel-in-progress: false
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: analysis/schedule-7-v1.4.3-utilization
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install scheduler dependencies
+        run: python -m pip install -e .
+      - name: Check retained 1,286-flight draft
+        if: inputs.analysis == 'baseline'
+        run: |
+          python scripts/build_schedule_7_v1_4_3_candidate.py
+          node scripts/v143_cumulative_passenger_audit.mjs
+          node scripts/v143_utilization_delta.mjs
+      - name: Check experimental reconstruction and protected coverage
+        if: inputs.analysis == 'rebuild'
+        run: |
+          python scripts/v143_seven_route_rebuild_candidate.py
+          node scripts/v143_rebuild_guard.mjs data/schedules/schedule_7_v1_4_3_rebuild_candidate/canonical_schedule.json
+          node scripts/v143_seven_route_rebuild_audit.mjs
+      - name: Test AH reassignments
+        if: inputs.analysis == 'ah-reassignment'
+        run: |
+          python scripts/v143_ah_pair_exchange_screen.py
+      - name: Test R345 bank-safe Baltimore turn
+        if: inputs.analysis == 'r345-bwi'
+        run: |
+          python scripts/v143_r345_bwi_bank_fit.py
