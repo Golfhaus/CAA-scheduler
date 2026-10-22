@@ -1,7 +1,7 @@
 name: Package and verify Schedule 7 v1.4.2
+# Historical Schedule 7 v1.4.2 workflow: manually triggered only.
 on:
-  pull_request:
-    branches: [main]
+  workflow_dispatch:
 permissions:
   contents: write
 jobs:
