@@ -1,7 +1,7 @@
 name: v1.4.3 seven-route rebuild hard passenger coverage gate
+# Research workflow: run manually; no push or pull_request triggers.
 on:
-  pull_request:
-    branches: [main]
+  workflow_dispatch:
 jobs:
   check:
     runs-on: ubuntu-latest

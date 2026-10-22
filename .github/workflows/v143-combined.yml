@@ -1,9 +1,7 @@
 name: Schedule 7 v1.4.3 cumulative candidate check
+# Research workflow: run manually; no push or pull_request triggers.
 on:
-  pull_request:
-    branches: [main]
-  push:
-    branches: [analysis/schedule-7-v1.4.3-utilization]
+  workflow_dispatch:
 jobs:
   check:
     runs-on: ubuntu-latest
