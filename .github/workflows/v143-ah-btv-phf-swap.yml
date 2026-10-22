@@ -2,6 +2,10 @@ name: v1.4.3 AH R318 R319 reciprocal pair exchange (manual)
 # Deliberately not triggered by push or pull_request.
 on:
   workflow_dispatch:
+  push:
+    branches: [analysis/schedule-7-v1.4.3-utilization]
+    paths:
+      - '.github/v143-ah-manual-check.trigger'
 jobs:
   validate:
     runs-on: ubuntu-latest
