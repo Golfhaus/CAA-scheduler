@@ -1,0 +1,24 @@
+name: v1.4.3 On-Demand Candidate Validation
+# Deliberately manual: no push, pull_request, or schedule release triggers.
+on:
+  workflow_dispatch:
+jobs:
+  candidate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install scheduler
+        run: python -m pip install -e .
+      - name: Validate preserved 1286-flight draft and original passenger impacts
+        run: |
+          python scripts/build_schedule_7_v1_4_3_candidate.py
+          node scripts/v143_cumulative_passenger_audit.mjs
+      - name: Build and validate experimental 1292-flight candidate
+        run: python scripts/v143_seven_route_rebuild_candidate.py
+      - name: Enforce above-eight-pax one-stop service floor
+        run: node scripts/v143_rebuild_guard.mjs data/schedules/schedule_7_v1_4_3_rebuild_candidate/canonical_schedule.json
+      - name: Audit improvements and timing concessions
+        run: node scripts/v143_seven_route_rebuild_audit.mjs
