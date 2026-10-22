@@ -1,0 +1,16 @@
+name: v1.4.3 AH R318 R319 reciprocal pair exchange (manual)
+# Deliberately not triggered by push or pull_request.
+on:
+  workflow_dispatch:
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install -e .
+      - run: python scripts/v143_ah_btv_phf_swap.py
+      - name: Enforce all directional markets above eight passengers per day
+        run: node scripts/v143_rebuild_guard.mjs data/schedules/schedule_7_v1_4_3_ah_btv_phf_swap_candidate/canonical_schedule.json
