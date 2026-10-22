@@ -1,7 +1,7 @@
 name: v1.4.3 AH cross-day R317 R319 exchange
+# Research workflow: manually triggered only.
 on:
-  pull_request:
-    branches: [main]
+  workflow_dispatch:
 jobs:
   feasibility:
     runs-on: ubuntu-latest

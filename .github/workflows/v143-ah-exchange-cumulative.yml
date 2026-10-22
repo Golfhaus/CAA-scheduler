@@ -1,7 +1,7 @@
 name: v1.4.3 cumulative AH reassignment passenger guard
+# Research workflow: manually triggered only.
 on:
-  pull_request:
-    branches: [main]
+  workflow_dispatch:
 jobs:
   verify:
     runs-on: ubuntu-latest

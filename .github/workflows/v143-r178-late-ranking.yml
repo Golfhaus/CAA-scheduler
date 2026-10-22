@@ -1,7 +1,7 @@
 name: v1.4.3 late R178 marginal passenger ranking
+# Research workflow: manually triggered only.
 on:
-  pull_request:
-    branches: [main]
+  workflow_dispatch:
 jobs:
   ranking:
     runs-on: ubuntu-latest

@@ -1,7 +1,7 @@
 name: v1.4.3 CRJ700 strategic hold relocation
+# Research workflow: manually triggered only.
 on:
-  pull_request:
-    branches: [main]
+  workflow_dispatch:
 jobs:
   test:
     runs-on: ubuntu-latest
