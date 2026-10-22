@@ -43,7 +43,15 @@ for assignment in s['bankAssignments']:
  if assignment['legId']==sav['id'] and assignment['operation']=='departure':
   assignment['bankId']='PHF-M5'
 add(338,[("PHF","RDU",833,883),("RDU","PHF",923,973)])
-# 303,316,319,339,345: original schedules preserved for follow-up line reconstruction.
+# R345 bank-safe upstream retimings preserve existing CLT-PHF continuation.
+for number,shift in ((1408,8),(1306,10)):
+ leg=next(l for l in s["legs"] if l["flight"]==number)
+ leg["departureMinute"]-=shift
+ leg["arrivalMinute"]-=shift
+ leg["departure"]=clk(leg["departureMinute"])
+ leg["arrival"]=clk(leg["arrivalMinute"])
+add(345,[("CLT","BWI",817,882),("BWI","CLT",922,987)])
+# 303,316,319,339 remain unchanged pending productive reassembly.
 s["schedule"].update(id="schedule_7_v1_4_3_rebuild_candidate",version="1.4.3-rebuild-draft",label="Schedule 7 v1.4.3 seven-route rebuild candidate",status="draft")
 checks={"structural":validate_schedule(s),"overnight":validate_overnight_turns(s),"operating":validate_operating_rules(s)}
 try:gates=export_gate_schedule(s);gate="pass"
