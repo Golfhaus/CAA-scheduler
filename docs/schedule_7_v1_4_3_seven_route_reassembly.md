@@ -67,3 +67,24 @@ Following the R345 CLT–BWI addition, the 1,292-flight staged builder passes al
 - Although legal under the user's explicit >8-pax stop-count guard, this swap **does not create any additional flights**, and only reallocates CRJ700 utilization from AH day 7 R317 to AH day 9 R319. The 90–159-minute deterioration for HVN–RFD is too large to assume commercial acceptance without further reciprocal improvements. **Do not promote exchange automatically**. Save it as tested experimental alternative; the more attractive next exchange should free aircraft time for an actual additional flight while preserving demand.
 - The upstream 1,292-flight candidate (R313 JAX, R338 RDU, R345 BWI) remains separate and native/coverage-valid. The original accepted 1,286-flight v1.4.3 canonical remains the hard revert point; no changes on main.
 
+
+
+## October 22 resumption — workflow suppression and next reassembly screen
+
+The user approved resuming development after excessive GitHub notification traffic. Development PR #46 remains **closed but unmerged** and its head branch remains the primary store of all v1.4.3 files. Audited all **34 v1.4.3 research workflow definitions**: each now uses `workflow_dispatch`, not automatic pull-request/push triggers. Historical release workflows on this branch are manual. Routine `ci.yml` push events have been scoped to `main` only, preventing each research-branch commit from invoking another routine CI run. None of this touches production `main`. Research workflows remain available for deliberately selected checks, with manual workflow configuration and scripts preserved.
+
+Current state protected:
+- Published v1.4.2 remains default on `main`.
+- Accepted reproducible v1.4.3 draft is **1,286 flights**; never alter it in-place.
+- Separate `scripts/v143_seven_route_rebuild_candidate.py` builds **1,292-flight** native- and >8-passenger coverage-valid R313/R338/R345 concept.
+- `scripts/v143_cumulative_ah_exchange.py` documents another 1,292-flight *zero-net-flight* R317/R319 pair exchange, operationally valid but commercially mixed. Retain for fallback, do not promote automatically.
+
+**Direct exchange feasibility screen performed on the current 1,286-flight schedule**: enumerated 407 existing, same-day two-leg out-and-back pairings with a ground turn <=180m and segment length <=480m. Compared every pairing to the 16 interior holds >=90m across the seven user-target routes, requiring same starting station and same aircraft line as well as 40-minute turns before/after the transferred pair (80m slack). **No intact pair is feasible in a target hold.** This is only a *necessary-window check* and not an impossibility proof for comprehensive line rebuilds or retimed flight exchanges. It confirms that a productive cross-route transfer requires retiming adjacent legs, replacing another flight pair, and/or changing the placement of the turn across days.
+
+Next targeted reconstruction:
+1. **AH**: evaluate R313/R316/R319 together, and adjacent AH days R317/R318 if needed to preserve cyclic aircraft continuity. Aim to free a single long bank-compatible window, rather than shifting the R317 RFD pair to R319 without adding utilization; review HVN↔RFD timing losses in the previous experiment.
+2. **AK**: R338/R339 adjacent SAV handoff and the PHF-SAV #1493 16:15 flight's Northeast-bank protection are constraints for any flight replacement.
+3. **AA**: protect PNS→MCI #1346 near the existing inbound connections; R303 early-return options produced meaningful PNS penalties. Rebuild with bank coverage replacement, not just advancing it.
+4. **AS**: preserve R345 CLT-BWI proposed connection with separately verified 65-minute block before merging it into any accepted candidate.
+
+A move is rejected if either native hard-operating validation fails or any >8-pax directional market loses all 0/1-stop paths; timing-only deterioration can be traded transparently. Manual checks are required when a new candidate is actually ready, not on every code edit.
