@@ -9,7 +9,7 @@ from caa_scheduler.gate_export import export_gate_schedule
 base=json.loads(Path("data/schedules/schedule_7_v1_4_3_draft/canonical_schedule.json").read_text())
 def clk(n):return f"{n//60%24:02d}:{n%60:02d}"
 # Source pairs: R317 #2103 #2104, R319 #1951 #1952.
-for phfout in (990,1000,1010):
+for phfout in (1030,1050,1070,1090):
  for rfdout in (720,730,740):
   s=copy.deepcopy(base)
   specs=[(2103,319,rfdout,54),(2104,319,rfdout+114,174),(1951,317,phfout,85),(1952,317,phfout+125,85)]
