@@ -2,6 +2,7 @@ name: Package and verify Schedule 7 v1.4.2
 # Historical v1.4.2 workflow: run manually only.
 on:
   workflow_dispatch:
+
 permissions:
   contents: write
 jobs:
