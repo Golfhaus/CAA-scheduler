@@ -1,9 +1,7 @@
 name: One-shot AK line cross-day SAV/JAX transfer check
+# Research test is manual-only to prevent notification storms.
 on:
-  push:
-    branches: [analysis/schedule-7-v1.4.3-utilization]
-    paths:
-      - scripts/v143_ak_crossday_reassignment.py
+  workflow_dispatch:
 jobs:
   verify:
     runs-on: ubuntu-latest
