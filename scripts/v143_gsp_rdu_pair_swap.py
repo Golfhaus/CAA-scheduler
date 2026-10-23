@@ -1,5 +1,7 @@
 """Test a genuine R338/R345 cross-line PHF-GSP / PHF-RDU flight-pair exchange.
 
+This experiment retains the 1,286-flight accepted draft and the independent 1,292-flight builder.
+
 Inputs: preserved 1286-flight v1.4.3 draft and separately staged R313/R338/R345
 1292-flight experimental reconstruction. Does not alter the accepted draft.
 """
