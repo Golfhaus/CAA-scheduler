@@ -1,12 +1,7 @@
 name: Targeted v1.4.3 GSP RDU cross-line swap validation
+# Manual-only research validation; no automatic PR or push notifications.
 on:
-  pull_request:
-    branches: [validation/v143-ak-as-pair-swap]
-    paths:
-      - scripts/v143_gsp_rdu_pair_swap.py
-      - scripts/v143_seven_route_rebuild_candidate.py
-      - scripts/v143_rebuild_guard.mjs
-      - .github/workflows/v143-targeted-gsp-rdu-swap.yml
+  workflow_dispatch:
 jobs:
   verify:
     runs-on: ubuntu-latest
