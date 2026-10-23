@@ -1,0 +1,20 @@
+name: Targeted v1.4.3 GSP RDU cross-line swap validation
+on:
+  pull_request:
+    branches: [validation/v143-ak-as-pair-swap]
+    paths:
+      - scripts/v143_gsp_rdu_pair_swap.py
+      - scripts/v143_seven_route_rebuild_candidate.py
+      - scripts/v143_rebuild_guard.mjs
+      - .github/workflows/v143-targeted-gsp-rdu-swap.yml
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install -e .
+      - run: python scripts/v143_gsp_rdu_pair_swap.py
+      - run: node scripts/v143_rebuild_guard.mjs data/schedules/schedule_7_v1_4_3_gsp_rdu_swap_candidate/canonical_schedule.json
