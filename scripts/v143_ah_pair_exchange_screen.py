@@ -24,3 +24,4 @@ for first in (675,690,705):
  except Exception as e:gate=str(e)
  v=validate_schedule(s)
  print(json.dumps({"first":first,"structural":v["status"],"gates":gate,"operatingErrors":o["summary"]["effectiveErrorFindings"],"failed":[{"id":c["id"],"findings":[f["id"] for f in c["findings"] if "override" not in f][:5]} for c in o["checks"] if c["status"]=="fail"]}),flush=True)
+\n# This screen is deliberately diagnostic: no candidate is accepted unless full line continuity and passenger safeguards pass.\n
