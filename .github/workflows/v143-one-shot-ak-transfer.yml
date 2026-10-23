@@ -1,0 +1,17 @@
+name: One-shot AK line cross-day SAV/JAX transfer check
+on:
+  push:
+    branches: [analysis/schedule-7-v1.4.3-utilization]
+    paths:
+      - scripts/v143_ak_crossday_reassignment.py
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install -e .
+      - run: python scripts/v143_ak_crossday_reassignment.py
+      - run: node scripts/v143_rebuild_guard.mjs data/schedules/schedule_7_v1_4_3_ak_transfer_candidate/canonical_schedule.json
