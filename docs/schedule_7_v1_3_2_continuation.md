@@ -1,5 +1,7 @@
 # v1.3.2 continuation — October 16, 2026
 
+> Historical development checkpoint. Status and default-version statements below describe the draft stage. See the [v1.3.2 release notes](schedule_7_v1_3_2_release.md) for the published package.
+
 ## Approved R144
 
 The user approved integrating the previously reviewed R144 eight-sector solution. It retains JAN–MCI, MCI–OKC, OKC–MCI, MCI–SHV; inserts JAN–JAX–JAN (04:30 CT departure) and MCI–BNA–MCI in the evening. Existing review: [R144 review](schedule_7_v1_3_2_r144_review.md).

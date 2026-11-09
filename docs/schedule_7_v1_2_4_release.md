@@ -43,7 +43,7 @@ The release's PHF connection report measures whole-timetable one-stop coverage b
 
 The latest-only regression suite passes **49 checks (13 Python, 36 JavaScript)** against v1.2.4. It verifies exact approved additions and retimings, route reconstruction, bank/policy changes, every artifact's release reproduction, gates, overnight continuity, planning, two-stop demand accounting and the web UI helpers. Older released schedules are not regression tested. The static app build contains **14 selectable schedules and 145 data files**, with v1.2.4 as the default.
 
-Authoritative configuration: `config/optimizations/schedule_7_v1_2_4.json`. Replay: `config/optimizations/schedule_7_v1_2_4_accepted_rounds_1_5.json` applied to pinned released v1.2.3. Final package: `data/schedules/schedule_7_v1_2_4/`. The package's flying exactly matches the accepted 1,170-flight draft; release metadata and provenance are regenerated. Future work must start from this **released v1.2.4 canonical**, not an earlier draft or analysis snapshot.
+Authoritative configuration: `config/optimizations/schedule_7_v1_2_4.json`. Replay: `config/optimizations/schedule_7_v1_2_4_accepted_rounds_1_5.json` applied to pinned released v1.2.3. Final package: `data/schedules/schedule_7_v1_2_4/`. The package's flying exactly matches the accepted 1,170-flight draft; release metadata and provenance are regenerated. The **released v1.2.4 canonical** is the reference for reproducing this release. For current schedule work, use the canonical in the [README's current release section](../README.md#current-published-release).
 
 ```bash
 PYTHONPATH=src python -m caa_scheduler build-optimization-release config/optimizations/schedule_7_v1_2_4.json

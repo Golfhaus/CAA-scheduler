@@ -1,6 +1,6 @@
 # Schedule 7 v1.3.3 release — October 18, 2026
 
-**Approved by user for publication to main.** Release supersedes Schedule 7 v1.3.2 as default.
+**Approved by user for publication to main.** Published October 18, 2026, when it replaced Schedule 7 v1.3.2 as the application default.
 
 ## Scope
 - v1.3.2 base: 1,229 flights, 184 routes, 17 routing lines.

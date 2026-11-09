@@ -1,5 +1,7 @@
 # Schedule 7 v1.3.2 cumulative draft
 
+> Historical development checkpoint. Status and default-version statements below describe the draft stage. See the [v1.3.2 release notes](schedule_7_v1_3_2_release.md) for the published package.
+
 Updated October 16, 2026. Unpublished: main and the app default remain v1.3.1. The cumulative canonical now includes all nine selected overlays and contains **1,229 flights / 184 routes / 17 lines**. The earlier five-round checkpoint remains reproducible through `--five-round-only` for historical regressions.
 
 ## Accepted changes

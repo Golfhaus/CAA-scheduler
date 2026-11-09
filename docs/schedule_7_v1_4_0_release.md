@@ -1,6 +1,6 @@
 # Schedule 7 v1.4.0 release — October 19, 2026
 
-The user authorized publication to `main` after review of the accepted 1,259-flight v1.4.0 draft. The application defaults to v1.4.0 upon merge.
+The user authorized publication to `main` after review of the accepted 1,259-flight v1.4.0 draft. v1.4.0 became the application default when it was published on October 19, 2026.
 
 ## Summary
 
@@ -28,11 +28,11 @@ Against the intermediate 1,257-flight v1.4.0 draft containing only R106 and R110
 
 Audit: `outputs/schedule_7_v1_4_0_utilization/syr_selective_network.json`, scenario `positive_four_plus_R160`. Demand sizes are directional underlying market averages, not forecast airline boardings.
 
-## Deterministic reproduction and regression
+## Original v1.4.0 release procedure
 
 1. `python scripts/build_schedule_7_v1_4_0_draft.py` builds the exact accepted cumulative draft from the released v1.3.3 canonical and three accepted overlays.
 2. `python scripts/prepare_schedule_7_v1_4_0_release.py` prepares validated release assets and changes the web manifest default to `schedule_7_v1_4_0`.
 3. `bash scripts/run_latest_regression.sh` checks the released current default.
 4. `python -m caa_scheduler build-web --output dist` packages the app default and artifacts.
 
-This procedure must succeed on the candidate branch before merge. The previous version stays archived for reference; regressions are latest-only.
+This was the pre-merge procedure for v1.4.0. See the [regression policy](regression_policy.md) for current release checks.

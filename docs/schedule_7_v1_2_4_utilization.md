@@ -1,6 +1,6 @@
 # Schedule 7 v1.2.4 — working draft
 
-> Release update, October 10, 2026: accepted work below is published as v1.2.4. See [release notes](schedule_7_v1_2_4_release.md). Draft-stage status statements and source-route references below are historical. Start future work from the released v1.2.4 canonical.
+> Release update, October 10, 2026: accepted work below is published as v1.2.4. See [release notes](schedule_7_v1_2_4_release.md). Draft-stage status statements and source-route references below are historical. Use the released v1.2.4 canonical to reproduce that release.
 
 **Unpublished.** Routes 350, 126 and 308 are implemented at the user's instruction. Subsequent approved work adds the 115/116/117 JAX/XNA overnight changes and 517/518 PHF–GNV overnight/originator service, described in `docs/schedule_7_v1_2_4_gnv.md`. Route 518's original four flights retain their clocks. The subsequently approved 125 SYR–ROC morning turn and 157 OMA–BHM evening turn are also implemented; see `docs/schedule_7_v1_2_4_extensions.md`. Route 304 is retained. The revised source-route 337/345 PHF–MCI exchange is now implemented with a 00:01 local arrival cutoff; see `docs/schedule_7_v1_2_4_midnight_swap.md`. Main and the live app remain on v1.2.3. Work is saved on `codex/v1.2.4-utilization`.
 

@@ -1,6 +1,6 @@
 # Schedule 7 v1.3.1
 
-Published October 13, 2026 following the user's instruction to publish the complete accepted draft. The app defaults to **v1.3.1: 1,214 flights, 184 routes and 19 routing lines**. The released flight list matches accepted draft commit `7a86b782bc415fd2574a19ab317a37b72f1c27e8` exactly. Relative to v1.3.0, it adds 22 flights and changes 15 existing clocks while retaining every original flight ID, market, pairing and aircraft type.
+Published October 13, 2026 following the user's instruction to publish the complete accepted draft. At publication, the app default was **v1.3.1: 1,214 flights, 184 routes and 19 routing lines**. The released flight list matches accepted draft commit `7a86b782bc415fd2574a19ab317a37b72f1c27e8` exactly. Relative to v1.3.0, it adds 22 flights and changes 15 existing clocks while retaining every original flight ID, market, pairing and aircraft type.
 
 ## RFD connections and MAX9 utilization
 

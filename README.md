@@ -1,47 +1,38 @@
 # CAA Scheduler
 
-## Latest published release
+CAA Scheduler is the migration target for Coastal American Airways schedule construction. It moves the durable schedule state and deterministic processing out of an LLM conversation and into version-controlled code and data.
 
-**Schedule 7 v1.4.2**, published October 21, 2026, is the application default: **1,272 flights, 191 routes and 17 routing lines**, with zero effective operating errors. New R177 DAY–SRQ, R178 SYR–RDU and R359 BNA–BHM, with MCI, BLV–BNA and hub-bank retimings. Hub-count ceiling disabled for Schedule 7 only. See [v1.4.2 release notes](docs/schedule_7_v1_4_2_release.md) and [canonical schedule](data/schedules/schedule_7_v1_4_2/canonical_schedule.json).
+## Current published release
 
-## Historical v1.4.1 and earlier releases
+**Schedule 7 v1.4.2**, published October 21, 2026, is the application default. It contains **1,272 flights, 191 routes and 17 routing lines** and recorded zero effective operating errors. New R177 DAY–SRQ, R178 SYR–RDU and R359 BNA–BHM, with MCI, BLV–BNA and hub-bank retimings. Hub-count ceiling disabled for Schedule 7 only. See [v1.4.2 release notes](docs/schedule_7_v1_4_2_release.md) and [canonical schedule](data/schedules/schedule_7_v1_4_2/canonical_schedule.json).
 
+For current Schedule 7 work, start from the released canonical above on `main`. The [web schedule manifest](web/schedules.json) records the application default.
 
-## Latest published release
+## Release history
 
-**Schedule 7 v1.4.1**, published October 20, 2026, is the application default: **1,266 flights, 188 routes and 17 routing lines**, with zero effective operating errors. Improvements to R105, R107, R108 and R162, with supporting R356 timing; R106 and R167 are unchanged. See [v1.4.1 release notes](docs/schedule_7_v1_4_1_release.md) and [canonical schedule](data/schedules/schedule_7_v1_4_1/canonical_schedule.json).
+Earlier releases and development checkpoints are retained for reference.
 
-## Historical v1.4.0 and earlier releases
+### Schedule 7 v1.4.1
 
+**Schedule 7 v1.4.1** became the application default on October 20, 2026, with **1,266 flights, 188 routes and 17 routing lines** and zero effective operating errors. Improvements to R105, R107, R108 and R162, with supporting R356 timing; R106 and R167 are unchanged. See [v1.4.1 release notes](docs/schedule_7_v1_4_1_release.md) and [canonical schedule](data/schedules/schedule_7_v1_4_1/canonical_schedule.json).
 
-## Latest published release
+### Schedule 7 v1.4.0
 
-**Schedule 7 v1.4.0**, published October 19, 2026, is the application default: **1,259 flights, 188 routes and 17 routing lines**, with zero effective operating errors. New CRJ200 utilization includes R106, R110 and R160 extensions and two selective SYR mini-banks (M15/M17). Logical DAY-M0 supports the approved R110 evening turn. See [v1.4.0 release notes](docs/schedule_7_v1_4_0_release.md) and [canonical schedule](data/schedules/schedule_7_v1_4_0/canonical_schedule.json).
+**Schedule 7 v1.4.0** became the application default on October 19, 2026, with **1,259 flights, 188 routes and 17 routing lines** and zero effective operating errors. New CRJ200 utilization includes R106, R110 and R160 extensions and two selective SYR mini-banks (M15/M17). Logical DAY-M0 supports the approved R110 evening turn. See [v1.4.0 release notes](docs/schedule_7_v1_4_0_release.md) and [canonical schedule](data/schedules/schedule_7_v1_4_0/canonical_schedule.json).
 
-## Historical v1.3.3 and earlier releases
+### Schedule 7 v1.3.3
 
+**Schedule 7 v1.3.3** became the application default on October 18, 2026, with **1,253 flights, 188 routes, 17 routing lines** and zero effective operating errors. Adds approved R514 PIE–MCI and the BHM north–south mini-banks on R529, R530, R357 and R358. The four mini-bank routes are integrated into longer aircraft lines (maximum 13 days). See [v1.3.3 release notes](docs/schedule_7_v1_3_3_release.md) and [canonical schedule](data/schedules/schedule_7_v1_3_3/canonical_schedule.json).
 
-## Latest published release
+### Schedule 7 v1.3.2
 
-**Schedule 7 v1.3.3** (October 18, 2026) is the application default: **1,253 flights, 188 routes, 17 routing lines**, with zero effective operating errors. Adds approved R514 PIE–MCI and the BHM north–south mini-banks on R529, R530, R357 and R358. The four mini-bank routes are integrated into longer aircraft lines (maximum 13 days). See [v1.3.3 release notes](docs/schedule_7_v1_3_3_release.md) and [canonical schedule](data/schedules/schedule_7_v1_3_3/canonical_schedule.json).
-
-## Historical v1.3.2 and older releases
-
-
-## Latest published release
-
-The app defaults to **Schedule 7 v1.3.2**, released October 16, 2026, with **1,229 flights, 184 routes and 17 routing lines**. The release fixes the cyclic maintenance/RON validation problem and incorporates the reviewed R501, R175, R125, R111, R312, R144, R146, R158 and R176 improvements. Physical inventory and fleet use are unchanged, with zero effective operating errors.
+**Schedule 7 v1.3.2** became the application default on October 16, 2026, with **1,229 flights, 184 routes and 17 routing lines**. The release fixes the cyclic maintenance/RON validation problem and incorporates the reviewed R501, R175, R125, R111, R312, R144, R146, R158 and R176 improvements. Physical inventory and fleet use are unchanged, with zero effective operating errors.
 
 The full network comparison against v1.3.1 finds 60 geographically reasonable direct/one-stop coverage gains and five reviewed losses, plus 154 improved and 155 slower fastest journeys. See [v1.3.2 release notes](docs/schedule_7_v1_3_2_release.md) for commercial tradeoffs, validations, and reproduction; see [released canonical](data/schedules/schedule_7_v1_3_2/canonical_schedule.json).
 
-## Historical v1.3.1 release and v1.3.2 development notes
+### Schedule 7 v1.3.1
 
-
-CAA Scheduler is the migration target for Coastal American Airways schedule construction. It moves the durable schedule state and deterministic processing out of an LLM conversation and into version-controlled code and data.
-
-## Latest published release
-
-The app defaults to **Schedule 7 v1.3.1**, published October 13, 2026, with
+**Schedule 7 v1.3.1** became the application default on October 13, 2026, with
 **1,214 flights across 184 routes and 19 routing lines**. The release adds
 R724's RFD–JAX/MCI MAX9 day, northeast PGD/DAB one-stop service via SYR,
 and DSM afternoon service with a later RFD turn. It uses one additional MAX9
@@ -53,23 +44,25 @@ connection losses and journey-time costs from the SYR changes are documented.
 See the [v1.3.1 release notes](docs/schedule_7_v1_3_1_release.md) for flying,
 demand evidence, network tradeoffs and reproduction. The
 [released canonical](data/schedules/schedule_7_v1_3_1/canonical_schedule.json)
-is the starting point for future work, and the
+preserves the published schedule, and the
 [release configuration](config/optimizations/schedule_7_v1_3_1_release.json)
-reproduces the published package. Earlier releases and planning snapshots remain
-historical references; routine regression targets only v1.3.1.
+reproduces that release package.
 
-## Maintenance correction in development
+### v1.3.2 maintenance development history
+
+This section records the draft checkpoints that preceded the published
+[v1.3.2 release](docs/schedule_7_v1_3_2_release.md).
 
 The v1.3.1 stored zero-error report predates a discovered repeating-line RON
-validation defect. The corrected validator identifies **AC, AO and AQ** as
+validation defect. The corrected validator identified **AC, AO and AQ** as
 never reaching an eligible MX-base overnight; their short cycle lengths do not
-make the absence finite. The [unpublished v1.3.2 repair](docs/schedule_7_v1_3_2_maintenance.md)
+make the absence finite. The [maintenance-only v1.3.2 draft](docs/schedule_7_v1_3_2_maintenance.md)
 preserves all 1,214 flights and aircraft requirements, consolidates AO/AQ into
 compliant rotations, and corrects AC with two flight retimings. It passes the
 corrected checks, with AM's standing one-day grace explicitly reported.
 The cumulative v1.3.2 draft also includes the accepted [R501 RFD replacement](docs/schedule_7_v1_3_2_r501_review.md): retain ABE–MYR, reduce the longest sit to 2h27 and replace the CHS turn with a second RFD round trip. That removes the CHS nonstop pair, with one-stop alternatives retained.
 The accepted [R175 PWM–BWI turn](docs/schedule_7_v1_3_2_r175_review.md) adds three hours of CRJ200 flying with no extra aircraft and reduces its longest hold to 1h26. The accepted [R125 PVD–BWI turn](docs/schedule_7_v1_3_2_r125_review.md) adds 2h26 of flying with unchanged R125 clocks; a two-minute R346 adjustment fits BWI gates. The cumulative draft contains 1,218 flights.
-The app default remains v1.3.1 until separate release approval.
+The app continued to default to v1.3.1 during these draft checkpoints.
 
 ## Milestone 0.7 — planning foundation
 
@@ -232,8 +225,8 @@ If Python preflight fails, blank-start planning is requested, or an airport addi
 ## Migration engine boundary (Milestone 0.7.10)
 
 This section records the historical migration planning proposal and engine
-baseline. Use the released v1.3.0 canonical linked above for current schedule
-work.
+baseline. For current schedule work, use the canonical linked under
+[Current published release](#current-published-release).
 
 Milestone 0.7.10 adds construction-time Section 2.6 pairing spacing to the strict, auditable planning, demand, bank, topology-repair, exact-materialization, and canonicalization pipeline. Python reconstructs the historical plan, processes the complete pinned 105-city demand data, reproduces all 100 non-hub qualifications, and applies the current percentile-tier service caps before frequency allocation. Aircraft quantities still come only from each schedule's build configuration; no fleet count is inferred from policy or silently added by repair.
 

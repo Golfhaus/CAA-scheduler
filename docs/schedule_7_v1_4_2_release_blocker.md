@@ -1,6 +1,6 @@
-# Schedule 7 v1.4.2 release gate (October 21, 2026)
+# Historical Schedule 7 v1.4.2 candidate blocker (October 21, 2026)
 
-**Status: BLOCKED — DO NOT MERGE/PUBLISH.** User explicitly authorized release only after validation, including all route changes. The candidate source and Schedule 7-specific policy implementation are preserved here. The live default remains v1.4.1.
+**Historical checkpoint.** The 1,274-flight candidate described here was blocked by gate conflicts. v1.4.1 was the application default at that checkpoint. The final 1,272-flight package subsequently passed the release gate and became the application default on October 21, 2026. See the [published v1.4.2 release notes](schedule_7_v1_4_2_release.md).
 
 ## Authorized policy
 `operatingPolicy.hubCountCeilingEnabled=false` is intended **only for Schedule 7 v1.4.2 and later Schedule 7 variants**. The validator defaults to true when the flag is absent, preserving the existing ceiling for Schedule 8 and other schedules. Flight-count floors and all physical/gate/curfew rules are untouched. The standing instructions template should not be globally amended for Schedule 8.
@@ -12,9 +12,9 @@
 - R359 BNA–BHM flying as a CRJ700 AH additional day to improve BNA–ECP and BNA–OMA connections. Multiple six-, four-, and two-flight patterns were screened. All patterns tested have physical inventory/gate conflicts at BNA and/or BHM without altering fixed capacities.
 
 ## Cumulative blocker
-Full cumulative 4-leg R359 candidate check in GitHub Actions run 39602425646: **1,274 legs, 191 routes, 17 lines; structural and overnight pass; six effective operating errors** concentrated in `passenger_touch_on_stand` and `fixed_physical_inventory` at BHM/BNA. A gate-optimized pattern reached **one remaining BNA gate error**, but did not pass. Later alternative timing screens also failed fixed BHM/BNA capacity. Zero-error release cannot be certified; do not update `web/schedules.json` or merge to main.
+Full cumulative 4-leg R359 candidate check in GitHub Actions run 39602425646: **1,274 legs, 191 routes, 17 lines; structural and overnight pass; six effective operating errors** concentrated in `passenger_touch_on_stand` and `fixed_physical_inventory` at BHM/BNA. A gate-optimized pattern reached **one remaining BNA gate error**, but did not pass. Later alternative timing screens also failed fixed BHM/BNA capacity. These findings blocked publication of this candidate.
 
-## Construction next steps
-Reconstruct existing BNA/BHM flight occupations, particularly R512 BNA turn 19:00–19:40, R129/R705 and BNA RONs, rather than loosening airport gate counts. A narrower R359 service plus BNA–MCI retime #1080 for BNA–OMA is viable commercially but has also not passed native gates. Include passenger-itinerary comparisons and all latest regressions once a clean canonical candidate is achieved.
+## Follow-up proposed at the checkpoint
+The proposed follow-up was to reconstruct existing BNA/BHM flight occupations, particularly the R512 BNA turn at 19:00–19:40, R129/R705 and BNA RONs, within fixed gate counts. A narrower R359 service plus BNA–MCI retime #1080 for BNA–OMA was commercially viable and still needed to clear native gate checks. The review called for passenger-itinerary comparisons and latest-release regression after a clean canonical candidate was available.
 
 Development scripts and passenger studies remain in nonmergeable analysis PR #43, not in this clean release branch.

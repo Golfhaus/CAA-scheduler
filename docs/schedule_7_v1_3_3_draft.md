@@ -1,5 +1,7 @@
 # Schedule 7 v1.3.3 working draft — PIE connecting-service initiative
 
+> Historical development checkpoint. Status and default-version statements below describe the draft stage. See the [v1.3.3 release notes](schedule_7_v1_3_3_release.md) for the published package.
+
 **Unpublished, proposal under review.** Based on the published 1,229-flight Schedule 7 v1.3.2. No changes to `main`, released v1.3.2, or the web application's default.
 
 ## What the baseline audit actually found
