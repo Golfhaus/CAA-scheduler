@@ -2,7 +2,7 @@
 
 Released October 2, 2026 on the user's instruction to implement the proposals
 on Routes 701, 123, 321, 129, 118, 323, 147, 151, 508 and 131 and publish
-them to main. The app defaults to `schedule_7_v1_2_1`.
+them to main. At publication, the app default was `schedule_7_v1_2_1`.
 
 The release adds ten daily round trips (20 flights), reaching 1,116 flights,
 181 routes and 20 lines. Existing aircraft and rotation positions are used;

@@ -1,5 +1,7 @@
 # Schedule 7 v1.4.0 utilization review
 
+> Historical development checkpoint. Status and default-version statements below describe the draft stage. See the [v1.4.0 release notes](schedule_7_v1_4_0_release.md) for the published package.
+
 Status: unpublished; released app default remains v1.3.3.
 
 ## Accepted draft

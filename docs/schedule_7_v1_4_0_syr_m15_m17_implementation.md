@@ -1,5 +1,7 @@
 # Schedule 7 v1.4.0 — accepted selective Syracuse mini-banks and R160 extension
 
+> Historical development checkpoint. Status and default-version statements below describe the draft stage. See the [v1.4.0 release notes](schedule_7_v1_4_0_release.md) for the published package.
+
 **Unpublished working draft.** User authorized incorporation on October 19, 2026. The published `main` default remains v1.3.3.
 
 ## Accepted scope

@@ -1,5 +1,7 @@
 # Schedule 7 v1.3.3 — BHM four-aircraft mini-bank draft
 
+> Historical development checkpoint. Status and default-version statements below describe the draft stage. See the [v1.3.3 release notes](schedule_7_v1_3_3_release.md) for the published package.
+
 **Unpublished.** This work was developed separately from the user-approved R514 PIE–MCI change. No edits were made to released `main` or to the immutable pre-BHM checkpoint.
 
 ## Revert point and branches

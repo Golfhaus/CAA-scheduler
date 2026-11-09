@@ -1,7 +1,7 @@
 # Schedule 7 v1.2.0
 
 Released October 1, 2026 on the user's instruction to publish the approved
-cumulative changes to the app. The app defaults to `schedule_7_v1_2_0`.
+cumulative changes to the app. At publication, the app default was `schedule_7_v1_2_0`.
 
 The release has 1,096 flights, 181 routes and 20 lines. CRJ900 operates three
 closed lines (AB 10 days, AG 9, AJ 9). MAX9 operates A 13 days and B 10,

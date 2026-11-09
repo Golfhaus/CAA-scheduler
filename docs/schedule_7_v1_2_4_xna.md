@@ -1,6 +1,6 @@
 # Schedule 7 v1.2.4 — 116/117 XNA overnight review
 
-> Release update, October 10, 2026: accepted work below is published as v1.2.4. See [release notes](schedule_7_v1_2_4_release.md). Draft-stage status statements and source-route references below are historical. Start future work from the released v1.2.4 canonical.
+> Release update, October 10, 2026: accepted work below is published as v1.2.4. See [release notes](schedule_7_v1_2_4_release.md). Draft-stage status statements and source-route references below are historical. Use the released v1.2.4 canonical to reproduce that release.
 
 > Follow-up: the user authorized replacing GNV's lost overnight with PHF service. The fully validated combined plan is now implemented in the unpublished draft. Route 517 terminates in GNV, Route 518 originates GNV–PHF, and 115/116/117 adopt the JAX/XNA plan. See `docs/schedule_7_v1_2_4_gnv.md`. The analysis below records the earlier round-two finding and uses its preserved 1158-flight snapshot.
 

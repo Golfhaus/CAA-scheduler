@@ -1,19 +1,19 @@
-# Schedule 7 v1.2 handoff
+# Historical Schedule 7 v1.2 handoff
 
-> Current release, October 10, 2026: **v1.2.4** is the app default. Read `docs/schedule_7_v1_2_4_release.md` and `docs/regression_policy.md` first. Start future work from `data/schedules/schedule_7_v1_2_4/canonical_schedule.json` on main. Earlier baseline statements below are historical.
+> This handoff records v1.2 development. [v1.2.4](schedule_7_v1_2_4_release.md) became the app default on October 10, 2026. For current work, use the canonical in the [README's current release section](../README.md#current-published-release) and follow the [regression policy](regression_policy.md).
 
 > Release update, October 1, 2026: the approved cumulative changes are now
 > published as v1.2.0. See `schedule_7_v1_2_0_release.md` and
-> `regression_policy.md` for current release and testing policy. The
+> `regression_policy.md` for release and testing policy. The
 > feasibility/default statements below describe the original draft stage.
 
 
-This document is the starting context for Schedule 7 v1.2 work. It records the
-current released baseline, durable decisions made during the v1.1.x series,
+This document records the starting context for Schedule 7 v1.2 work,
+including the original released baseline, durable decisions made during the v1.1.x series,
 the optimization tactics that proved useful, and the expected development and
-release workflow. Read it before proposing or implementing v1.2 changes.
+release workflow used for v1.2 changes.
 
-## Authoritative baseline
+## Original v1.2 development baseline
 
 - Repository: `Golfhaus/CAA-scheduler`
 - Branch to start from: current remote `main`

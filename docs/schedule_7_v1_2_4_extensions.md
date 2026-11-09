@@ -1,6 +1,6 @@
 # Schedule 7 v1.2.4 — Routes 304, 125 and 157 extension review
 
-> Release update, October 10, 2026: accepted work below is published as v1.2.4. See [release notes](schedule_7_v1_2_4_release.md). Draft-stage status statements and source-route references below are historical. Start future work from the released v1.2.4 canonical.
+> Release update, October 10, 2026: accepted work below is published as v1.2.4. See [release notes](schedule_7_v1_2_4_release.md). Draft-stage status statements and source-route references below are historical. Use the released v1.2.4 canonical to reproduce that release.
 
 Status: **approved and implemented in the unpublished v1.2.4 draft** following the instruction “Add the suggested additions from the last few messages to 1.2.4.” At round-four acceptance the working draft had **1,168 flights**. Round five subsequently added the approved PHF–MCI exchange, bringing it to **1,170**; see `docs/schedule_7_v1_2_4_midnight_swap.md`. Route 304 remains unchanged; main remains v1.2.3.
 

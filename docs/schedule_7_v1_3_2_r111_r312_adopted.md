@@ -1,5 +1,7 @@
 # R111 PIE turn and R312 PHF-bank return — adopted in v1.3.2 draft
 
+> Historical development checkpoint. Status and default-version statements below describe the draft stage. See the [v1.3.2 release notes](schedule_7_v1_3_2_release.md) for the published package.
+
 Accepted October 15, 2026: “Add the original R111 and this modified R312 extension to the draft.” Publication is not authorized. Main and the app default remain v1.3.1.
 
 ## Accepted flights

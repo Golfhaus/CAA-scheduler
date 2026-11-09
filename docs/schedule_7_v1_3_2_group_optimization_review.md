@@ -1,5 +1,7 @@
 # Schedule 7 v1.3.2 — low-utilization CRJ200 group review
 
+> Historical development checkpoint. Status and default-version statements below describe the draft stage. See the [v1.3.2 release notes](schedule_7_v1_3_2_release.md) for the published package.
+
 Updated October 16, 2026. **Working draft only. Do not publish.**
 
 ## Scope and objective

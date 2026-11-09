@@ -1,6 +1,6 @@
 # Schedule 7 v1.3.0
 
-Published October 12, 2026 following explicit approval of the buffered R307 PIT–DAY–PIT round trip and release of the complete accepted draft. The app defaults to **v1.3.0: 1,192 flights, 181 routes and 19 routing lines**. Compared with v1.2.5, two flights are added and seven existing flights are retimed. Fleet inventory, aircraft-days, roster, demand v7, bank windows, policies and physical gates/stands are unchanged.
+Published October 12, 2026 following explicit approval of the buffered R307 PIT–DAY–PIT round trip and release of the complete accepted draft. At publication, the app default was **v1.3.0: 1,192 flights, 181 routes and 19 routing lines**. Compared with v1.2.5, two flights are added and seven existing flights are retimed. Fleet inventory, aircraft-days, roster, demand v7, bank windows, policies and physical gates/stands are unchanged.
 
 ## R307 aircraft utilization
 

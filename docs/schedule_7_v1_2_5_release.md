@@ -1,6 +1,6 @@
 # Schedule 7 v1.2.5
 
-Published October 11, 2026, following the user's authorization to add the four ROD extensions and publish the complete draft to the app's main branch. The app defaults to **v1.2.5: 1,190 flights, 181 routes and 19 lines**. Compared with v1.2.4, this includes 20 additional flights and 16 retimed original flights. Fleet inventory, aircraft-days and physical gates/stands are unchanged.
+Published October 11, 2026, following the user's authorization to add the four ROD extensions and publish the complete draft to the app's main branch. At publication, the app default was **v1.2.5: 1,190 flights, 181 routes and 19 lines**. Compared with v1.2.4, this includes 20 additional flights and 16 retimed original flights. Fleet inventory, aircraft-days and physical gates/stands are unchanged.
 
 ## Added flying
 
@@ -53,4 +53,4 @@ bash scripts/run_latest_regression.sh
 PYTHONPATH=src python -m caa_scheduler build-web --output dist
 ```
 
-The release configuration applies the accepted cumulative rounds 1–3 overlay directly to pinned v1.2.4. The accepted draft's source hashes, exact cumulative/sequential replay, joint demand and connection tradeoffs are verified by `python scripts/build_schedule_7_v1_2_5_draft.py`. Immutable round-one and round-two checkpoints keep the historical proposal comparisons reproducible. Routine regression targets the app's latest default, v1.2.5; earlier released versions are historical references.
+The release configuration applies the accepted cumulative rounds 1–3 overlay directly to pinned v1.2.4. The accepted draft's source hashes, exact cumulative/sequential replay, joint demand and connection tradeoffs are verified by `python scripts/build_schedule_7_v1_2_5_draft.py`. Immutable round-one and round-two checkpoints keep the historical proposal comparisons reproducible. At publication, routine regression targeted v1.2.5. See the [regression policy](regression_policy.md) for how current releases are tested.
